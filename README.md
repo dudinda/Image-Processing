@@ -42,7 +42,22 @@ The application was developed as the R&D work. It consists of 3 modules: RGB fil
 
 <p> Thus, one may conclude that normal distribution represents better result regarding uniform distribution on a group of underexposed images.</p>
 
+***
 
+</p>To test the operation of this system, computer equipment was used with the following
+technical characteristics: processor IntelCore i5 - 3450, 3.10 GHz, processor capacity
+- x64, RAM - 12 GB. The results are presented as an average of 10 tests for a frame of
+size 1920x1680:</p>
+<ol>
+    <li>Grayscale filter: ~0.0282 seconds per frame</li>
+    <li>Inversion filter:  ~0.0277 seconds per frame</li>
+    <li>Binary filter: ~0.0713 seconds per frame</li>
+<li>Histogramt transformation using the specified distribution: ~ 0.0344 seconds per
+    frame</li>
+    <li>Image processing with matrix filter of radius 3: ~0.246 seconds per frame</li>
+    <li>Image processing with matrix filter of radius 5: ~0.597 seconds per frame</li>
+    <li>Image processing with matrix filter of radius 9: ~1.81 seconds per frame</li>
+    </ol>
 
 
 
