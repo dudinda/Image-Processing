@@ -52,7 +52,7 @@ size 1920x1680:</p>
     <li>Grayscale filter: ~0.0282 seconds per frame</li>
     <li>Inversion filter:  ~0.0277 seconds per frame</li>
     <li>Binary filter: ~0.0713 seconds per frame</li>
-<li>Histogramt transformation using the specified distribution: ~ 0.0344 seconds per
+<li>Histogram transformation using the specified distribution: ~0.0344 seconds per
     frame</li>
     <li>Image processing with matrix filter of radius 3: ~0.246 seconds per frame</li>
     <li>Image processing with matrix filter of radius 5: ~0.597 seconds per frame</li>
