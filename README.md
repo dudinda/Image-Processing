@@ -7,7 +7,7 @@ The application was developed as the R&D work. It consists of 3 modules: RGB fil
 
 <p align="center">
     <img src="https://i.imgur.com/68lt7aP.png" width="600" height = "400" alt="application window">
-    <p align="center">Fig. 1 = Main window.</p>
+    <p align="center">Fig. 1 - Main window.</p>
 </p>
 
 <p> Initially for experimental purposes was chosen a group of underexposed images. </p>
@@ -37,7 +37,7 @@ The application was developed as the R&D work. It consists of 3 modules: RGB fil
 
 <p align="center">
     <img src="https://i.imgur.com/OhGb6lI.png" alt="application window">
-     <p align="center">Fig. 5 = Using a definition of conditional variance on 16 intervals of relative luminance.</p>
+     <p align="center">Fig. 5 - Using a definition of conditional variance on 16 intervals of relative luminance.</p>
 </p>
 
 <p> Thus, one may conclude that normal distribution represents better result regarding uniform distribution on a group of underexposed images.</p>
