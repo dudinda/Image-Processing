@@ -45,7 +45,7 @@ The application was developed as the R&D work. It consists of 3 modules: RGB fil
 ***
 
 </p>To test the operation of this system, computer equipment was used with the following
-technical characteristics: processor IntelCore i5 - 3450, 3.10 GHz, processor capacity
+technical characteristics: processor IntelCore i5 - 3450, 3.10 GHz, instruction set
 - x64, RAM - 12 GB. The results are presented as an average of 10 tests for a frame of
 size 1920x1680:</p>
 <ol>
