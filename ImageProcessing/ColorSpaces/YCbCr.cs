@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ImageProcessing.ColorSpaces
 {
@@ -23,11 +19,9 @@ namespace ImageProcessing.ColorSpaces
             var Cbbitmap = new Bitmap(bitmap.Width, bitmap.Height);
             var Crbitmap = new Bitmap(bitmap.Width, bitmap.Height);
 
-
             var YbitmapData = Ybitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             var CbbitmapData = Cbbitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             var CrbitmapData = Crbitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-
 
             unsafe
             {
@@ -62,10 +56,7 @@ namespace ImageProcessing.ColorSpaces
             Ybitmap.UnlockBits(YbitmapData);
             Cbbitmap.UnlockBits(CbbitmapData);
             Crbitmap.UnlockBits(CrbitmapData);
-
-            
-
-
+        
             return new List<Bitmap>() { Ybitmap, Cbbitmap, Crbitmap };
         }
 

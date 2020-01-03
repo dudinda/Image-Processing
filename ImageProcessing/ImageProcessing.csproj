@@ -60,9 +60,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AForge.Video.FFMPEG">
-      <HintPath>..\packages\AForge.Video.2.2.5\lib\AForge.Video.FFMPEG.dll</HintPath>
-    </Reference>
     <Reference Include="MathNet.Numerics, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MathNet.Numerics.4.4.0\lib\net40\MathNet.Numerics.dll</HintPath>
       <Private>True</Private>
@@ -116,58 +113,65 @@
     <Compile Include="ColorSpaces\IConvert.cs" />
     <Compile Include="ColorSpaces\YCbCr.cs" />
     <Compile Include="ConvolutionFilters\Abstract\AbstractConvolutionFilter.cs" />
-    <Compile Include="ConvolutionFilters\Abstract\Blur\Box Blur\BoxBlur3x3.cs" />
-    <Compile Include="ConvolutionFilters\Abstract\Blur\Box Blur\BoxBlur5x5.cs" />
-    <Compile Include="ConvolutionFilters\Abstract\Blur\Motion Blur\MotionBlur9x9.cs" />
+    <Compile Include="ConvolutionFilters\Abstract\Blur\BoxBlur\BoxBlur3x3.cs" />
+    <Compile Include="ConvolutionFilters\Abstract\Blur\BoxBlur\BoxBlur5x5.cs" />
+    <Compile Include="ConvolutionFilters\Abstract\Blur\MotionBlur\MotionBlur9x9.cs" />
     <Compile Include="ConvolutionFilters\BitmapConvolutionFilter.cs" />
-    <Compile Include="ConvolutionFilters\Edge Detection\Gaussian Operator\GaussianOperator3x3.cs" />
-    <Compile Include="ConvolutionFilters\Edge Detection\Gaussian Operator\GaussianOperator5x5.cs" />
-    <Compile Include="ConvolutionFilters\Edge Detection\Laplacian Operator\LaplacianOperator3x3.cs" />
-    <Compile Include="ConvolutionFilters\Edge Detection\Laplacian Operator\LaplacianOperator5x5.cs" />
-    <Compile Include="ConvolutionFilters\Edge Detection\Sobel Operator\SobelOperatorHorizontal.cs" />
-    <Compile Include="ConvolutionFilters\Abstract\Blur\Gaussian Blur\GaussianBlur5x5 .cs" />
-    <Compile Include="ConvolutionFilters\Abstract\Blur\Gaussian Blur\GaussianBlur3x3.cs" />
-    <Compile Include="ConvolutionFilters\Edge Detection\Sobel Operator\SobelOperatorVertical.cs" />
+    <Compile Include="ConvolutionFilters\EdgeDetection\GaussianOperator\GaussianOperator3x3.cs" />
+    <Compile Include="ConvolutionFilters\EdgeDetection\GaussianOperator\GaussianOperator5x5.cs" />
+    <Compile Include="ConvolutionFilters\EdgeDetection\LaplacianOperator\LaplacianOperator3x3.cs" />
+    <Compile Include="ConvolutionFilters\EdgeDetection\LaplacianOperator\LaplacianOperator5x5.cs" />
+    <Compile Include="ConvolutionFilters\EdgeDetection\SobelOperator\SobelOperatorHorizontal.cs" />
+    <Compile Include="ConvolutionFilters\Abstract\Blur\GaussianBlur\GaussianBlur5x5 .cs" />
+    <Compile Include="ConvolutionFilters\Abstract\Blur\GaussianBlur\GaussianBlur3x3.cs" />
+    <Compile Include="ConvolutionFilters\EdgeDetection\SobelOperator\SobelOperatorVertical.cs" />
     <Compile Include="ConvolutionFilters\Emboss\Emboss3x3.cs" />
     <Compile Include="ConvolutionFilters\Sharpen\Sharpen3x3.cs" />
     <Compile Include="Distributions\DistributionContext.cs" />
     <Compile Include="Distributions\Abstract\IDistribution.cs" />
-    <Compile Include="Distributions\One - Parameter Distributions\ExponentialDistribution.cs" />
-    <Compile Include="Distributions\One - Parameter Distributions\RayleighDistribution.cs" />
-    <Compile Include="Distributions\Two - Parameter Distributions\CauchyDistribution.cs" />
-    <Compile Include="Distributions\Two - Parameter Distributions\LaplaceDistribution.cs" />
-    <Compile Include="Distributions\Two - Parameter Distributions\NormalDistribution.cs" />
-    <Compile Include="Distributions\Two - Parameter Distributions\UniformDistribution.cs" />
-    <Compile Include="Distributions\Two - Parameter Distributions\ParabolaDistribution.cs" />
-    <Compile Include="Distributions\Two - Parameter Distributions\WeibullDistribution.cs" />
-    <Compile Include="FilterFactory.cs" />
-    <Compile Include="Histogram.cs">
+    <Compile Include="Distributions\OneParameterDistributions\ExponentialDistribution.cs" />
+    <Compile Include="Distributions\OneParameterDistributions\RayleighDistribution.cs" />
+    <Compile Include="Distributions\TwoParameterDistributions\CauchyDistribution.cs" />
+    <Compile Include="Distributions\TwoParameterDistributions\LaplaceDistribution.cs" />
+    <Compile Include="Distributions\TwoParameterDistributions\NormalDistribution.cs" />
+    <Compile Include="Distributions\TwoParameterDistributions\UniformDistribution.cs" />
+    <Compile Include="Distributions\TwoParameterDistributions\ParabolaDistribution.cs" />
+    <Compile Include="Distributions\TwoParameterDistributions\WeibullDistribution.cs" />
+    <Compile Include="Enum\ConvolutionFilter.cs" />
+    <Compile Include="Enum\Distribution.cs" />
+    <Compile Include="Enum\RGBColor.cs" />
+    <Compile Include="Enum\RGBFilter.cs" />
+    <Compile Include="Factory\Abstract\IBaseFactory.cs" />
+    <Compile Include="Factory\BaseFactory.cs" />
+    <Compile Include="RGBFilter\Abstract\IRGBFilter.cs" />
+    <Compile Include="RGBFilter\FilterFactory.cs" />
+    <Compile Include="Form\Histogram.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Histogram.Designer.cs">
+    <Compile Include="Form\Histogram.Designer.cs">
       <DependentUpon>Histogram.cs</DependentUpon>
     </Compile>
-    <Compile Include="Main.cs">
+    <Compile Include="Form\Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main.Designer.cs">
+    <Compile Include="Form\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QualityMeasure.cs">
+    <Compile Include="Form\QualityMeasure.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="QualityMeasure.Designer.cs">
+    <Compile Include="Form\QualityMeasure.Designer.cs">
       <DependentUpon>QualityMeasure.cs</DependentUpon>
     </Compile>
     <Compile Include="Utility\BitmapStack\Abstract\IBitmapStack.cs" />
     <Compile Include="Utility\BitmapStack\BitmapStack.cs" />
     <Compile Include="Utility\Utility.cs" />
-    <EmbeddedResource Include="Histogram.resx">
+    <EmbeddedResource Include="Form\Histogram.resx">
       <DependentUpon>Histogram.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main.resx">
+    <EmbeddedResource Include="Form\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -180,10 +184,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="QualityMeasure.resx">
+    <EmbeddedResource Include="Form\QualityMeasure.resx">
       <DependentUpon>QualityMeasure.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

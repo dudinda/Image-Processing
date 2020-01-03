@@ -1,12 +1,12 @@
-﻿using System.Drawing;
+﻿using ImageProcessing.Distributions.Abstract;
+
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
-using ImageProcessing.Distributions.Abstract;
 using System;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
-using ImageProcessing.Distributions.Two___Parameter_Distributions;
-using ImageProcessing.Distributions.One___Parameter_Distributions;
+
 
 namespace ImageProcessing
 {
@@ -16,19 +16,12 @@ namespace ImageProcessing
 
         public static Bitmap Distribute(this Bitmap bitmap, IDistribution distribution)
         {
-            //получить частоты 
             var frequencies = GetFrequencies(bitmap);
-
-            //получить дифференциальную функцию распределения
             var pmf         = GetPMF(frequencies, bitmap.Width * bitmap.Height);
-
-            //получить интегральную функцию распределения
             var cdf         = GetCDF(pmf);
 
-
-            //получить новые значения пикселей, в соответствии с выбранным распределением
+            //get new pixel values, according to a selected distribution
             var newPixels = Transform(cdf, distribution);
-
 
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                                             ImageLockMode.ReadWrite,
@@ -37,19 +30,18 @@ namespace ImageProcessing
             var options = new ParallelOptions();
             options.MaxDegreeOfParallelism = Environment.ProcessorCount;
 
-
             var size = bitmap.Size;
 
             unsafe
             { 
                 Parallel.For(0, size.Height, options, y =>
                 {
-                    //получить адрес строки
+                    //get a start address
                     var ptr = (byte*)bitmapData.Scan0.ToPointer() + y * bitmapData.Stride;
 
                     for (int x = 0; x < size.Width; ++x, ptr += 4)
                     {
-                        //получить значение пикселя из преобразованного квантильной функций массива значений
+                        //get a new pixel value, transofrming by quantile
                         ptr[0] = ptr[1] = ptr[2] = newPixels[ptr[0]];
                     }
                 });
@@ -58,7 +50,6 @@ namespace ImageProcessing
             bitmap.UnlockBits(bitmapData);
 
             return bitmap;
-
         }
 
         public static double GetExpectation(double[] pmf)
@@ -138,7 +129,6 @@ namespace ImageProcessing
             
             for(var i = x1; i <= x2; ++i)
             {
-
                 uvalue += frequencies[i] * ((i - mean) * (i - mean));
                 lvalue += frequencies[i];
             }
@@ -148,9 +138,7 @@ namespace ImageProcessing
 
 
         public static int[] GetFrequencies(Bitmap bitmap)
-        {
-           
-
+        {          
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), 
                                              ImageLockMode.ReadWrite,
                                              PixelFormat.Format24bppRgb);
@@ -159,7 +147,6 @@ namespace ImageProcessing
 
             unsafe
             {
-
                 var size = bitmap.Size;
 
                 var options = new ParallelOptions();
@@ -169,10 +156,9 @@ namespace ImageProcessing
 
                 var bag = new ConcurrentBag<int[]>();
 
-                //взять N частичных массивов частот
+                //get N partial frequency arrays
                 Parallel.For<int[]>(0, size.Height, options, () => new int[256], (y, state, subarray) =>
                 {
-                    //получить адрес строки
                     var ptr = startPtr + y * bitmapData.Stride;
 
                     for (int x = 0; x < size.Width; ++x, ptr += 3)
@@ -184,7 +170,7 @@ namespace ImageProcessing
                 },
                 (part) => bag.Add(part));
 
-                //получить суммарные частоты
+                //get summary frequencies
                 foreach (var subarray in bag)
                 {
                     for (int i = 0; i < 256; ++i)
@@ -194,13 +180,11 @@ namespace ImageProcessing
                 }         
             }
 
-
             bitmap.UnlockBits(bitmapData);
 
             return frequencies;
         }
 
-        //построить интегральную функцию распределения
         public static double[] GetCDF(double[] pmf)
         {
             var cdf = pmf.Clone() as double[];
@@ -213,8 +197,6 @@ namespace ImageProcessing
             return cdf;
         }
 
-        //построить дифференциальную функцию распределения
-        //нормализовав частоты, относительно разрешения изображения
         public static double[] GetPMF(int[] frequencies, double resolution)
         {
             return frequencies.AsParallel().Select(x => (double)x / resolution).ToArray();
@@ -244,19 +226,16 @@ namespace ImageProcessing
         {
             var result = new byte[256];
 
-            //преобразовать квантильной функцией массив значений
-            //от 0 до 255
+            //transform an array by quantile function
             for (int index = 0; index < 256; ++index)
             {
                 var pixel = distribution.Quantile(cdf[index]);
                     
-                //если значение превышает 255
                 if (pixel > 255)
                 {
                     pixel = 255;
                 }
 
-                //если меньше 0
                 if (pixel < 0)
                 {
                     pixel = 0;

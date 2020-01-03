@@ -229,13 +229,10 @@ namespace ImageProcessing.Utility
 
             var resolution = bitmap.Width * bitmap.Height;
 
-
-
             var random = new Random();
 
             unsafe
             {
-
                 var startPtr = (byte*)bitmapData.Scan0.ToPointer();
 
                 byte R, G, B;
@@ -244,7 +241,6 @@ namespace ImageProcessing.Utility
    
                 for (var index = resolution - 1; index > 1; --index, ptr += 3)
                 {
-
                     var newPtr = startPtr + random.Next(index) * 3;
 
                     B = ptr[0];
@@ -260,8 +256,6 @@ namespace ImageProcessing.Utility
                     newPtr[2] = R;
 
                 }
-
-
             }
 
             bitmap.UnlockBits(bitmapData);

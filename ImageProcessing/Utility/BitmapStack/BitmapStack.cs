@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using ImageProcessing.Utility.BitmapStack.Abstract;
 
 namespace ImageProcessing.Utility.BitmapStack
@@ -9,9 +10,7 @@ namespace ImageProcessing.Utility.BitmapStack
     {
         private List<T> bmpStack = new List<T>();
 
-
         public bool Any() => bmpStack.Any();
-
         public T Pop()
         {
             try
@@ -24,9 +23,7 @@ namespace ImageProcessing.Utility.BitmapStack
             }
             catch (ArgumentOutOfRangeException)
             {
-                //если произошел выброс исключения ArgumentOutOfRangeException
-                //перевыбросить исключение, указав, что на стеке более нет элементов
-                throw new InvalidOperationException("Стек пуст");
+                throw new InvalidOperationException("Stack is empty.");
             }
         }
 
@@ -48,7 +45,7 @@ namespace ImageProcessing.Utility.BitmapStack
             }
             catch (ArgumentNullException)
             {
-                throw new IndexOutOfRangeException("Стек пуст");
+                throw new IndexOutOfRangeException("Stack is empty.");
             }
 
         }

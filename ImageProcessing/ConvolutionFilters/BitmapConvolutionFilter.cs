@@ -1,5 +1,6 @@
-﻿using System.Drawing;
-using ImageProcessing.ConvulationFilters;
+﻿using ImageProcessing.ConvulationFilters;
+
+using System.Drawing;
 using System.Threading.Tasks;
 using System;
 
@@ -8,7 +9,6 @@ namespace ImageProcessing.ConvolutionFilters
     //ptr[0] - B, ptr[1] - G, ptr[2] - R, ptr[3] - A
     public static class BitmapConvolutionFilter
     {
-        //поставить ограничение на классы, наследуемые только от AbstractConvolutionFilter
         public static Bitmap ConvolutionFilter<T>(this Bitmap source, T filter) where T : AbstractConvolutionFilter
         {
 
@@ -42,18 +42,18 @@ namespace ImageProcessing.ConvolutionFilters
 
                 Parallel.For(kernelOffset, size.Height - kernelOffset, options, y =>
                 {
-                    //получить адрес новой строки, учитывая смещение матрицы свертки
+                    //get an address of a new line, considering a kernel offset
                     var sourcePtr      = sourceStartPtr      + y * sourceBitmapData.Stride + kernelOffset * 3;
                     var destinationPtr = destinationStartPtr + y * sourceBitmapData.Stride + kernelOffset * 3;
 
-                    //аккумуляторы компонентов R, G, B
+                    //accumulators of components R, G, B
                     double R, G, B;
-                    //указатель, получающий адреса элементов в радиусе матрицы свертки
+                    //a pointer, getting addresses of elements in a radius of a convolution
                     byte* elementPtr = null;
 
                     for (int x = kernelOffset; x < size.Width - kernelOffset; ++x, sourcePtr += 3, destinationPtr += 3)
                     {
-                        //выставить аккумуляторы в 0
+                        //set accumulators to 0
                         R = 0;
                         G = 0;
                         B = 0;
@@ -62,10 +62,10 @@ namespace ImageProcessing.ConvolutionFilters
                         {
                             for (int kernelColumn = -kernelOffset; kernelColumn <= kernelOffset; ++kernelColumn)
                             {
-                                //получить адрес текущего элемента
+                                //get address of a current element
                                 elementPtr = sourcePtr + kernelColumn * 3 + kernelRow * sourceBitmapData.Stride;
 
-                                //выполнить суммирование
+                                //sum
                                 B += elementPtr[0] * filter.Kernel[kernelRow + kernelOffset, kernelColumn + kernelOffset];
 
 
@@ -78,7 +78,7 @@ namespace ImageProcessing.ConvolutionFilters
                             }
                         }
 
-                        //домножить каждый компонент на соответсвующий каждому ядру множитель
+                        //multiply each component by the kernel factor
                         B = B * filter.Factor + filter.Bias;
                         G = G * filter.Factor + filter.Bias;
                         R = R * filter.Factor + filter.Bias;
