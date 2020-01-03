@@ -1,4 +1,5 @@
-﻿using ImageProcessing.ConvolutionFilters.Blur.BoxBlur;
+﻿using ImageProcessing.Common.Enum;
+using ImageProcessing.ConvolutionFilters.Blur.BoxBlur;
 using ImageProcessing.ConvolutionFilters.Blur.MotionBlur;
 using ImageProcessing.ConvolutionFilters.EdgeDetection;
 using ImageProcessing.ConvolutionFilters.EdgeDetection.GaussianOperator;
@@ -8,7 +9,6 @@ using ImageProcessing.ConvolutionFilters.GaussianBlur3x3;
 using ImageProcessing.ConvolutionFilters.GaussianBlur5x5;
 using ImageProcessing.ConvolutionFilters.Sharpen;
 using ImageProcessing.ConvulationFilters;
-using ImageProcessing.Enum;
 using ImageProcessing.Factory.Abstract;
 
 using System;

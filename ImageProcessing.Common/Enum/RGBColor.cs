@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ImageProcessing.Enum
+namespace ImageProcessing.Common.Enum
 {
     [Flags]
     public enum RGBColors

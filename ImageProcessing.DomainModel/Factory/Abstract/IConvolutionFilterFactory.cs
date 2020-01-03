@@ -1,9 +1,5 @@
-﻿using ImageProcessing.ConvulationFilters;
-using ImageProcessing.Enum;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using ImageProcessing.Common.Enum;
+using ImageProcessing.ConvulationFilters;
 
 namespace ImageProcessing.Factory.Abstract
 {

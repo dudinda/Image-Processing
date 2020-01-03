@@ -1,8 +1,8 @@
-﻿using ImageProcessing.Enum;
+﻿using ImageProcessing.Common.Enum;
 
 using System;
 
-namespace ImageProcessing.Attributes
+namespace ImageProcessing.Common.Attributes
 {
     [AttributeUsage(System.AttributeTargets.Class)]
     public class ColorAttribute : Attribute

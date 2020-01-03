@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 
-namespace ImageProcessing.Enum
+namespace ImageProcessing.Common.Enum
 {
     public enum Distribution
     {

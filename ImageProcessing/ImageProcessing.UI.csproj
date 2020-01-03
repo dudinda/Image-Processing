@@ -113,91 +113,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\ColorAttribute.cs" />
     <Compile Include="ColorSpaces\IConvert.cs" />
     <Compile Include="ColorSpaces\YCbCr.cs" />
-    <Compile Include="ConvolutionFilters\Abstract\AbstractConvolutionFilter.cs" />
-    <Compile Include="ConvolutionFilters\Blur\BoxBlur\BoxBlur3x3.cs" />
-    <Compile Include="ConvolutionFilters\Blur\BoxBlur\BoxBlur5x5.cs" />
-    <Compile Include="ConvolutionFilters\Blur\MotionBlur\MotionBlur9x9.cs" />
-    <Compile Include="ConvolutionFilters\BitmapConvolutionFilter.cs" />
-    <Compile Include="ConvolutionFilters\EdgeDetection\GaussianOperator\GaussianOperator3x3.cs" />
-    <Compile Include="ConvolutionFilters\EdgeDetection\GaussianOperator\GaussianOperator5x5.cs" />
-    <Compile Include="ConvolutionFilters\EdgeDetection\LaplacianOperator\LaplacianOperator3x3.cs" />
-    <Compile Include="ConvolutionFilters\EdgeDetection\LaplacianOperator\LaplacianOperator5x5.cs" />
-    <Compile Include="ConvolutionFilters\EdgeDetection\SobelOperator\SobelOperatorHorizontal.cs" />
-    <Compile Include="ConvolutionFilters\Blur\GaussianBlur\GaussianBlur5x5 .cs" />
-    <Compile Include="ConvolutionFilters\Blur\GaussianBlur\GaussianBlur3x3.cs" />
-    <Compile Include="ConvolutionFilters\EdgeDetection\SobelOperator\SobelOperatorVertical.cs" />
-    <Compile Include="ConvolutionFilters\Emboss\Emboss3x3.cs" />
-    <Compile Include="ConvolutionFilters\GaussianBlur\GaussianBlur3x3.cs" />
-    <Compile Include="ConvolutionFilters\Sharpen\Sharpen3x3.cs" />
-    <Compile Include="Distributions\DistributionContext.cs" />
-    <Compile Include="Distributions\Abstract\IDistribution.cs" />
-    <Compile Include="Distributions\OneParameterDistributions\ExponentialDistribution.cs" />
-    <Compile Include="Distributions\OneParameterDistributions\RayleighDistribution.cs" />
-    <Compile Include="Distributions\TwoParameterDistributions\CauchyDistribution.cs" />
-    <Compile Include="Distributions\TwoParameterDistributions\LaplaceDistribution.cs" />
-    <Compile Include="Distributions\TwoParameterDistributions\NormalDistribution.cs" />
-    <Compile Include="Distributions\TwoParameterDistributions\UniformDistribution.cs" />
-    <Compile Include="Distributions\OneParameterDistributions\ParabolaDistribution.cs" />
-    <Compile Include="Distributions\TwoParameterDistributions\WeibullDistribution.cs" />
-    <Compile Include="Enum\ConvolutionFilter.cs" />
-    <Compile Include="Enum\Distribution.cs" />
-    <Compile Include="Enum\RGBColor.cs" />
-    <Compile Include="Enum\RGBFilter.cs" />
-    <Compile Include="Extensions\TypeExtensions\TypeExtension.cs" />
-    <Compile Include="Factory\Abstract\IBaseFactory.cs" />
-    <Compile Include="Factory\Abstract\IConvolutionFilterFactory.cs" />
-    <Compile Include="Factory\Abstract\IDistributionFactory.cs" />
-    <Compile Include="Factory\Abstract\IRGBFiltersFactory.cs" />
-    <Compile Include="Factory\BaseFactory.cs" />
-    <Compile Include="Factory\ConvolutionFilterFactory.cs" />
-    <Compile Include="Factory\DistributionFactory.cs" />
-    <Compile Include="Factory\RGBFiltersFactory.cs" />
-    <Compile Include="RGBFilters\Abstract\IColor.cs" />
-    <Compile Include="RGBFilters\Abstract\IRGBFilter.cs" />
-    <Compile Include="RGBFilters\Binary\BinaryFilter.cs" />
-    <Compile Include="RGBFilters\Color\ColorFilter.cs" />
-    <Compile Include="RGBFilters\Color\Colors\BColor.cs" />
-    <Compile Include="RGBFilters\Color\Colors\BGColor.cs" />
-    <Compile Include="RGBFilters\Color\Colors\GColor.cs" />
-    <Compile Include="RGBFilters\Color\Colors\RBColor.cs" />
-    <Compile Include="RGBFilters\Color\Colors\RColor.cs" />
-    <Compile Include="RGBFilters\Color\Colors\RGBColor.cs" />
-    <Compile Include="RGBFilters\Color\Colors\RGColor.cs" />
-    <Compile Include="obj\Form\Histogram.cs">
+    <Compile Include="Form\Histogram.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="obj\Form\Histogram.Designer.cs">
+    <Compile Include="Form\Histogram.Designer.cs">
       <DependentUpon>Histogram.cs</DependentUpon>
     </Compile>
-    <Compile Include="obj\Form\Main.cs">
+    <Compile Include="Form\Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="obj\Form\Main.Designer.cs">
+    <Compile Include="Form\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="obj\Form\QualityMeasure.cs">
+    <Compile Include="Form\QualityMeasure.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="obj\Form\QualityMeasure.Designer.cs">
+    <Compile Include="Form\QualityMeasure.Designer.cs">
       <DependentUpon>QualityMeasure.cs</DependentUpon>
     </Compile>
-    <Compile Include="RGBFilters\Grayscale\GrayscaleFilter.cs" />
-    <Compile Include="RGBFilters\Inversion\InversionFilter.cs" />
-    <Compile Include="Services\Abstract\IConvolutionFilterService.cs" />
-    <Compile Include="Services\Abstract\IDistributionService.cs" />
-    <Compile Include="Services\Abstract\IRGBFilterService.cs" />
     <Compile Include="Utility\BitmapStack\Abstract\IBitmapStack.cs" />
     <Compile Include="Utility\BitmapStack\BitmapStack.cs" />
     <Compile Include="Utility\Utility.cs" />
-    <EmbeddedResource Include="obj\Form\Histogram.resx">
+    <EmbeddedResource Include="Form\Histogram.resx">
       <DependentUpon>Histogram.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="obj\Form\Main.resx">
+    <EmbeddedResource Include="Form\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -210,7 +154,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="obj\Form\QualityMeasure.resx">
+    <EmbeddedResource Include="Form\QualityMeasure.resx">
       <DependentUpon>QualityMeasure.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -229,7 +173,9 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="obj\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">

@@ -4,14 +4,13 @@ using System.Linq;
 
 using ImageProcessing.Factory.Abstract;
 using ImageProcessing.RGBFilters.Abstract;
-using ImageProcessing.Enum;
 using ImageProcessing.RGBFilters.Binary;
 using ImageProcessing.RGBFilters.Grayscale;
 using ImageProcessing.RGBFilters.Inversion;
 using ImageProcessing.RGBFilters.Color;
-using ImageProcessing.Extensions.TypeExtensions;
-using ImageProcessing.Attributes;
-
+using ImageProcessing.Common.Enum;
+using ImageProcessing.Common.Extensions.TypeExtensions;
+using ImageProcessing.Common.Attributes;
 
 namespace ImageProcessing.Factory.RGBFilters
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace ImageProcessing.Extensions.TypeExtensions
+namespace ImageProcessing.Common.Extensions.TypeExtensions
 {
     public static class TypeExtension
     {
