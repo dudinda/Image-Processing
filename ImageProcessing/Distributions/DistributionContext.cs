@@ -7,7 +7,6 @@ using System;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
 
-
 namespace ImageProcessing
 {
     //ptr[0] - B, ptr[1] - G, ptr[2] - R

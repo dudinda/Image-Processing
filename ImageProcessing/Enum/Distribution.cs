@@ -11,7 +11,7 @@ namespace ImageProcessing.Enum
         [Description("1 - λ")]
         Exponential = 0,
 
-        [Description("1 - ")]
+        [Description("1 - σ")]
         Rayleigh    = 1,
 
         [Description("")]

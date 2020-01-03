@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace ImageProcessing.RGBFilter.Abstract
+namespace ImageProcessing.RGBFilters.Abstract
 {
     public interface IRGBFilter
     {

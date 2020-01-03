@@ -6,14 +6,14 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
 {
     class RayleighDistribution : IDistribution
     {
+        private readonly double _sigma;
         public RayleighDistribution(double sigma)
         {
-            this.sigma = sigma;
+            _sigma = sigma;
         }
-        private double sigma { get; set; }
         public string Name { get; } = "Rayleigh Distribution";
-        public double GetMean() => sigma * Math.Sqrt(Math.PI / 2);
-        public double GetVariance() => (2 - Math.PI / 2) * sigma * sigma;
+        public double GetMean() => _sigma * Math.Sqrt(Math.PI / 2);
+        public double GetVariance() => (2 - Math.PI / 2) * _sigma * _sigma;
         public double Quantile(double p)
         {
             if(p >= 1)

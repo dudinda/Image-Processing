@@ -1,4 +1,4 @@
-﻿namespace ImageProcessing.RGBFilter.Abstract
+﻿namespace ImageProcessing.RGBFilters.Abstract
 {
     public interface IColor
     {

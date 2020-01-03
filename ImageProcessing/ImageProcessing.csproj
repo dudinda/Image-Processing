@@ -117,19 +117,20 @@
     <Compile Include="ColorSpaces\IConvert.cs" />
     <Compile Include="ColorSpaces\YCbCr.cs" />
     <Compile Include="ConvolutionFilters\Abstract\AbstractConvolutionFilter.cs" />
-    <Compile Include="ConvolutionFilters\Abstract\Blur\BoxBlur\BoxBlur3x3.cs" />
-    <Compile Include="ConvolutionFilters\Abstract\Blur\BoxBlur\BoxBlur5x5.cs" />
-    <Compile Include="ConvolutionFilters\Abstract\Blur\MotionBlur\MotionBlur9x9.cs" />
+    <Compile Include="ConvolutionFilters\Blur\BoxBlur\BoxBlur3x3.cs" />
+    <Compile Include="ConvolutionFilters\Blur\BoxBlur\BoxBlur5x5.cs" />
+    <Compile Include="ConvolutionFilters\Blur\MotionBlur\MotionBlur9x9.cs" />
     <Compile Include="ConvolutionFilters\BitmapConvolutionFilter.cs" />
     <Compile Include="ConvolutionFilters\EdgeDetection\GaussianOperator\GaussianOperator3x3.cs" />
     <Compile Include="ConvolutionFilters\EdgeDetection\GaussianOperator\GaussianOperator5x5.cs" />
     <Compile Include="ConvolutionFilters\EdgeDetection\LaplacianOperator\LaplacianOperator3x3.cs" />
     <Compile Include="ConvolutionFilters\EdgeDetection\LaplacianOperator\LaplacianOperator5x5.cs" />
     <Compile Include="ConvolutionFilters\EdgeDetection\SobelOperator\SobelOperatorHorizontal.cs" />
-    <Compile Include="ConvolutionFilters\Abstract\Blur\GaussianBlur\GaussianBlur5x5 .cs" />
-    <Compile Include="ConvolutionFilters\Abstract\Blur\GaussianBlur\GaussianBlur3x3.cs" />
+    <Compile Include="ConvolutionFilters\Blur\GaussianBlur\GaussianBlur5x5 .cs" />
+    <Compile Include="ConvolutionFilters\Blur\GaussianBlur\GaussianBlur3x3.cs" />
     <Compile Include="ConvolutionFilters\EdgeDetection\SobelOperator\SobelOperatorVertical.cs" />
     <Compile Include="ConvolutionFilters\Emboss\Emboss3x3.cs" />
+    <Compile Include="ConvolutionFilters\GaussianBlur\GaussianBlur3x3.cs" />
     <Compile Include="ConvolutionFilters\Sharpen\Sharpen3x3.cs" />
     <Compile Include="Distributions\DistributionContext.cs" />
     <Compile Include="Distributions\Abstract\IDistribution.cs" />
@@ -139,63 +140,64 @@
     <Compile Include="Distributions\TwoParameterDistributions\LaplaceDistribution.cs" />
     <Compile Include="Distributions\TwoParameterDistributions\NormalDistribution.cs" />
     <Compile Include="Distributions\TwoParameterDistributions\UniformDistribution.cs" />
-    <Compile Include="Distributions\TwoParameterDistributions\ParabolaDistribution.cs" />
+    <Compile Include="Distributions\OneParameterDistributions\ParabolaDistribution.cs" />
     <Compile Include="Distributions\TwoParameterDistributions\WeibullDistribution.cs" />
     <Compile Include="Enum\ConvolutionFilter.cs" />
     <Compile Include="Enum\Distribution.cs" />
     <Compile Include="Enum\RGBColor.cs" />
     <Compile Include="Enum\RGBFilter.cs" />
+    <Compile Include="Extensions\TypeExtensions\TypeExtension.cs" />
     <Compile Include="Factory\Abstract\IBaseFactory.cs" />
     <Compile Include="Factory\Abstract\IConvolutionFilterFactory.cs" />
     <Compile Include="Factory\Abstract\IDistributionFactory.cs" />
-    <Compile Include="Factory\Abstract\IRGBFilterFactory.cs" />
+    <Compile Include="Factory\Abstract\IRGBFiltersFactory.cs" />
     <Compile Include="Factory\BaseFactory.cs" />
     <Compile Include="Factory\ConvolutionFilterFactory.cs" />
     <Compile Include="Factory\DistributionFactory.cs" />
-    <Compile Include="Factory\RGBFilterFactory.cs" />
-    <Compile Include="RGBFilter\Abstract\IColor.cs" />
-    <Compile Include="RGBFilter\Abstract\IRGBFilter.cs" />
-    <Compile Include="RGBFilter\BinaryFilter.cs" />
-    <Compile Include="RGBFilter\Color\ColorFilter.cs" />
-    <Compile Include="RGBFilter\Color\Colors\BColor.cs" />
-    <Compile Include="RGBFilter\Color\Colors\BGColor.cs" />
-    <Compile Include="RGBFilter\Color\Colors\GColor.cs" />
-    <Compile Include="RGBFilter\Color\Colors\RBColor.cs" />
-    <Compile Include="RGBFilter\Color\Colors\RColor.cs" />
-    <Compile Include="RGBFilter\Color\Colors\RGBColor.cs" />
-    <Compile Include="RGBFilter\Color\Colors\RGColor.cs" />
-    <Compile Include="Form\Histogram.cs">
+    <Compile Include="Factory\RGBFiltersFactory.cs" />
+    <Compile Include="RGBFilters\Abstract\IColor.cs" />
+    <Compile Include="RGBFilters\Abstract\IRGBFilter.cs" />
+    <Compile Include="RGBFilters\Binary\BinaryFilter.cs" />
+    <Compile Include="RGBFilters\Color\ColorFilter.cs" />
+    <Compile Include="RGBFilters\Color\Colors\BColor.cs" />
+    <Compile Include="RGBFilters\Color\Colors\BGColor.cs" />
+    <Compile Include="RGBFilters\Color\Colors\GColor.cs" />
+    <Compile Include="RGBFilters\Color\Colors\RBColor.cs" />
+    <Compile Include="RGBFilters\Color\Colors\RColor.cs" />
+    <Compile Include="RGBFilters\Color\Colors\RGBColor.cs" />
+    <Compile Include="RGBFilters\Color\Colors\RGColor.cs" />
+    <Compile Include="obj\Form\Histogram.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\Histogram.Designer.cs">
+    <Compile Include="obj\Form\Histogram.Designer.cs">
       <DependentUpon>Histogram.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form\Main.cs">
+    <Compile Include="obj\Form\Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\Main.Designer.cs">
+    <Compile Include="obj\Form\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Form\QualityMeasure.cs">
+    <Compile Include="obj\Form\QualityMeasure.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\QualityMeasure.Designer.cs">
+    <Compile Include="obj\Form\QualityMeasure.Designer.cs">
       <DependentUpon>QualityMeasure.cs</DependentUpon>
     </Compile>
-    <Compile Include="RGBFilter\GrayscaleFilter.cs" />
-    <Compile Include="RGBFilter\InversionFilter.cs" />
+    <Compile Include="RGBFilters\Grayscale\GrayscaleFilter.cs" />
+    <Compile Include="RGBFilters\Inversion\InversionFilter.cs" />
     <Compile Include="Services\Abstract\IConvolutionFilterService.cs" />
     <Compile Include="Services\Abstract\IDistributionService.cs" />
     <Compile Include="Services\Abstract\IRGBFilterService.cs" />
     <Compile Include="Utility\BitmapStack\Abstract\IBitmapStack.cs" />
     <Compile Include="Utility\BitmapStack\BitmapStack.cs" />
     <Compile Include="Utility\Utility.cs" />
-    <EmbeddedResource Include="Form\Histogram.resx">
+    <EmbeddedResource Include="obj\Form\Histogram.resx">
       <DependentUpon>Histogram.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\Main.resx">
+    <EmbeddedResource Include="obj\Form\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -208,7 +210,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Form\QualityMeasure.resx">
+    <EmbeddedResource Include="obj\Form\QualityMeasure.resx">
       <DependentUpon>QualityMeasure.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

@@ -1,10 +1,10 @@
 ﻿using ImageProcessing.Attributes;
 using ImageProcessing.Enum;
-using ImageProcessing.RGBFilter.Abstract;
+using ImageProcessing.RGBFilters.Abstract;
 
 using System;
 
-namespace ImageProcessing.RGBFilter.ColorFilter.Colors
+namespace ImageProcessing.RGBFilters.ColorFilter.Colors
 {
     [Color(RGBColors.Red | RGBColors.Green)]
     public class RGColor : IColor

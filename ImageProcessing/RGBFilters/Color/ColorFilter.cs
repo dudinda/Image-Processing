@@ -1,19 +1,26 @@
-﻿using ImageProcessing.RGBFilter.Abstract;
+﻿using ImageProcessing.Enum;
+using ImageProcessing.RGBFilters.Abstract;
 
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
-namespace ImageProcessing.RGBFilter
+namespace ImageProcessing.RGBFilters.Color
 {
-    public class GrayscaleFilter : IRGBFilter
+    public class ColorFilter : IRGBFilter
     {
+        IColor _filter;
+        public ColorFilter(IColor filter)
+        {
+            _filter = filter;
+        }
+
         public Bitmap Filter(Bitmap bitmap)
         {
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                                                           ImageLockMode.ReadWrite,
-                                                           PixelFormat.Format24bppRgb);
+                                                         ImageLockMode.ReadWrite,
+                                                         PixelFormat.Format24bppRgb);
 
             var size = bitmap.Size;
 
@@ -31,10 +38,9 @@ namespace ImageProcessing.RGBFilter
 
                     for (int x = 0; x < size.Width; ++x, ptr += 3)
                     {
-                        ptr[0] = ptr[1] = ptr[2] = (byte)(0.299 * ptr[2] +
-                                                          0.587 * ptr[1] +
-                                                          0.114 * ptr[0]);
+                        _filter.SetPixelColor(ptr);
                     }
+
                 });
             }
 

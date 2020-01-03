@@ -9,18 +9,18 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
     class NormalDistribution : IDistribution
     {
 
-        private double mu { get; set; }
-        private double sigma { get; set; }
+        private readonly double _mu;
+        private readonly double _sigma;
 
         public NormalDistribution(double mu, double sigma)
         {
-            this.mu    = mu;
-            this.sigma = sigma;
+            _mu    = mu;
+            _sigma = sigma;
         }
 
         public string Name { get; } = "Normal Distribution";
-        public double GetMean() => mu;
-        public double GetVariance() => sigma * sigma;
-        public double Quantile(double p) => mu + sigma * Math.Sqrt(2) * SpecialFunctions.ErfInv(2 * p - 1);           
+        public double GetMean() => _mu;
+        public double GetVariance() => _sigma * _sigma;
+        public double Quantile(double p) => _mu + _sigma * Math.Sqrt(2) * SpecialFunctions.ErfInv(2 * p - 1);           
     }
 }

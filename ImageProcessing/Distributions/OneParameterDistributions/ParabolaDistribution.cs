@@ -2,21 +2,21 @@
 
 using ImageProcessing.Distributions.Abstract;
 
-namespace ImageProcessing.Distributions.TwoParameterDistributions
+namespace ImageProcessing.Distributions.OneParameterDistributions
 {
     class ParabolaDistribution : IDistribution
     {
-        private double k { get; set; }
+        private readonly double _k;
 
         public ParabolaDistribution(double k)
         {
-            this.k = k;
+            _k = k;
         }
 
         public string Name { get; } = "Parabola distribution";
         public double Quantile(double p)
         {
-            return k * (1 - Math.Pow(1 - p, 0.3));
+            return _k * (1 - Math.Pow(1 - p, 0.3));
         }
         public double GetMean()
         {

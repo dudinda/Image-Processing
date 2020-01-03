@@ -1,4 +1,4 @@
-﻿using ImageProcessing.RGBFilter.Abstract;
+﻿using ImageProcessing.RGBFilters.Abstract;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImageProcessing.RGBFilter
+namespace ImageProcessing.RGBFilters.Binary
 {
     public class BinaryFilter : IRGBFilter
     {

@@ -1,11 +1,11 @@
-﻿using ImageProcessing.RGBFilter.Abstract;
+﻿using ImageProcessing.RGBFilters.Abstract;
 
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
-namespace ImageProcessing.RGBFilter
+namespace ImageProcessing.RGBFilters.Inversion
 {
     public class InversionFilter : IRGBFilter
     {
