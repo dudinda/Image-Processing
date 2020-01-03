@@ -23,54 +23,14 @@ namespace ImageProcessing.Factory
 {
     public class BaseFactory : IBaseFactory
     {
-        public AbstractConvolutionFilter GetConvolutionFilter(ConvolutionFilter filter)
+        public IConvolutionFilterFactory GetConvolutionFilterFactory()
         {
-            switch(filter)
-            {
-                case ConvolutionFilter.BoxBlur3x3:
-                    return new BoxBlur3x3();
-                case ConvolutionFilter.BoxBlur5x5:
-                    return new BoxBlur5x5();
-                case ConvolutionFilter.Emboss3x3:
-                    return new Emboss3x3();
-                case ConvolutionFilter.GaussianBlur3x3:
-                    return new GaussianBlur3x3();
-                case ConvolutionFilter.GaussianBlur5x5:
-                    return new GaussianBlur5x5();
-                case ConvolutionFilter.GaussianOperator3x3:
-                    return new GaussianOperator3x3();
-                case ConvolutionFilter.GaussianOperator5x5:
-                    return new GaussianOperator5x5();
-                case ConvolutionFilter.LaplacianOperator3x3:
-                    return new LaplacianOperator3x3();
-                case ConvolutionFilter.LaplacianOperator5x5:
-                    return new LaplacianOperator5x5();
-                case ConvolutionFilter.MotionBlur9x9:
-                    return new MotionBlur9x9();
-                case ConvolutionFilter.Sharpen3x3:
-                    return new Sharpen3x3();
-                case ConvolutionFilter.SobelOperatorHorizontal:
-                    return new SobelOperatorHorizontal();
-                case ConvolutionFilter.SobelOperatorVertical:
-                    return new SobelOperatorVertical();
-            }
-
-            throw new ArgumentException();
+            return new ConvolutionFilterFactory();
         }
 
-        public IDistribution GetDistribution(Distribution distribution)
+        public IDistributionFactory GetDistributionFactory()
         {
-            switch(distribution) {
-                case Distribution.Cauchy:
-                    return new CauchyDistribution();
-                case Distribution.Exponential:
-                    return new ExponentialDistribution();
-                case Distribution.Laplace:
-                    return new LaplaceDistribution();
-
-            }
-
-            throw new ArgumentException();
+            return new DistributionFactory();
         }
 
         public IRGBFilter GetFilter()
