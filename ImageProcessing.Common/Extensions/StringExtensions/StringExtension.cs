@@ -1,11 +1,14 @@
 ﻿using System.Drawing.Imaging;
 
+using ImageProcessing.Common.Extensions.EnumExtensions;
+
 namespace ImageProcessing.Common.Extensions.StringExtensions
 {
     public static class StringExtension
     {
         public static ImageFormat GetImageFormat(this string ext)
         {
+
             switch(ext)
             {
                 case ".jpeg":

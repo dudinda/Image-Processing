@@ -1,13 +1,12 @@
 ﻿using ImageProcessing.Common.Enums;
 using ImageProcessing.Distributions.Abstract;
 using ImageProcessing.Distributions.OneParameterDistributions;
-using ImageProcessing.Factory.Abstract;
 using ImageProcessing.Common.Extensions.EnumExtensions;
 using ImageProcessing.DomainModel.Factory.Filters.Interface;
 
 using System;
 
-namespace ImageProcessing.Factory
+namespace ImageProcessing.Factory.Filters.Distribution
 {
     public class DistributionFactory : IDistributionFactory
     {

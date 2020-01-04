@@ -4,8 +4,8 @@ using System.Text;
 
 namespace ImageProcessing.DomainModel.Factory.Filters.Interface
 {
-    public interface IFilterFactory<out T>
+    public interface IFilterFactory<out TFilter>
     {
-        T GetFilter(string name);
+        TFilter GetFilter(string name);
     }
 }

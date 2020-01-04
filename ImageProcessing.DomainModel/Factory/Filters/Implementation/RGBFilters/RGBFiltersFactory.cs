@@ -2,7 +2,6 @@
 using System;
 using System.Linq;
 
-using ImageProcessing.Factory.Abstract;
 using ImageProcessing.RGBFilters.Abstract;
 using ImageProcessing.RGBFilters.Binary;
 using ImageProcessing.RGBFilters.Grayscale;
@@ -14,7 +13,7 @@ using ImageProcessing.Common.Attributes;
 using ImageProcessing.Common.Extensions.EnumExtensions;
 using ImageProcessing.DomainModel.Factory.Filters.Interface;
 
-namespace ImageProcessing.Factory.RGBFilters
+namespace ImageProcessing.Factory.Filters.RGBFilters
 {
     public class RGBFiltersFactory : IRGBFiltersFactory
     {

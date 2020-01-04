@@ -6,5 +6,7 @@
         double GetMean();
         double GetVariance();
         double Quantile(double p);
+
+        void SetParameters((int, int) parms);
     }
 }

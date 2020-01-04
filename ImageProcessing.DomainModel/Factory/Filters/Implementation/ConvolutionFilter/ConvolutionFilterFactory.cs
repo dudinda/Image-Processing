@@ -14,7 +14,7 @@ using ImageProcessing.DomainModel.Factory.Filters.Interface;
 
 using System;
 
-namespace ImageProcessing.Factory
+namespace ImageProcessing.Factory.Filters.Convolution
 {
     public class ConvolutionFilterFactory : IConvolutionFilterFactory
     {

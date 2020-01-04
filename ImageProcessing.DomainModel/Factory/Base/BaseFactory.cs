@@ -1,8 +1,7 @@
-﻿using ImageProcessing.Factory.Abstract;
-using ImageProcessing.Factory.RGBFilters;
+﻿using ImageProcessing.Factory.RGBFilters;
 using ImageProcessing.DomainModel.Factory.Filters.Interface;
 
-namespace ImageProcessing.Factory
+namespace ImageProcessing.Factory.Base
 {
     public class BaseFactory : IBaseFactory
     {

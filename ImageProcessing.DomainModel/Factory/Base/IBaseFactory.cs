@@ -1,6 +1,6 @@
 ﻿using ImageProcessing.DomainModel.Factory.Filters.Interface;
 
-namespace ImageProcessing.Factory.Abstract
+namespace ImageProcessing.Factory.Base
 {
     public interface IBaseFactory
     {
