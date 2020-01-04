@@ -21,7 +21,7 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
                 return 0;
             }
 
-            return sigma* Math.Sqrt(-2 * Math.Log(1 - p));
+            return _sigma * Math.Sqrt(-2 * Math.Log(1 - p));
         }
     }
 }

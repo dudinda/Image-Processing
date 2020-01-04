@@ -4,15 +4,13 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System;
 
-namespace ImageProcessing.ConvolutionFilters
+namespace ImageProcessing.DomainModel.Services.ConvolutionFilter
 {
     //ptr[0] - B, ptr[1] - G, ptr[2] - R, ptr[3] - A
-    public static class BitmapConvolutionFilter
+    public class ConvolutionFilterService : IConvolutionFilterService
     {
-        public static Bitmap ConvolutionFilter<T>(this Bitmap source, T filter) where T : AbstractConvolutionFilter
+        public Bitmap Convolution(Bitmap source, AbstractConvolutionFilter filter) 
         {
-
-
             var destination = new Bitmap(source);
 
             var sourceBitmapData = source.LockBits(new Rectangle(0, 0, source.Width, source.Height),
@@ -29,16 +27,13 @@ namespace ImageProcessing.ConvolutionFilters
             {
                 var sourceStartPtr      = (byte*)sourceBitmapData.Scan0.ToPointer();
                 var destinationStartPtr = (byte*)destinationBitmapData.Scan0.ToPointer();
-
-                var options = new ParallelOptions();
-                options.MaxDegreeOfParallelism = Environment.ProcessorCount;
-
-
+                
                 var kernelOffset = (byte)((filter.Kernel.GetLength(1) - 1) / 2);
 
-              
-
-               
+                var options = new ParallelOptions()
+                {
+                    MaxDegreeOfParallelism = Environment.ProcessorCount
+                };
 
                 Parallel.For(kernelOffset, size.Height - kernelOffset, options, y =>
                 {
@@ -67,17 +62,10 @@ namespace ImageProcessing.ConvolutionFilters
 
                                 //sum
                                 B += elementPtr[0] * filter.Kernel[kernelRow + kernelOffset, kernelColumn + kernelOffset];
-
-
                                 G += elementPtr[1] * filter.Kernel[kernelRow + kernelOffset, kernelColumn + kernelOffset];
-
-
                                 R += elementPtr[2] * filter.Kernel[kernelRow + kernelOffset, kernelColumn + kernelOffset];
-
-
                             }
                         }
-
                         //multiply each component by the kernel factor
                         B = B * filter.Factor + filter.Bias;
                         G = G * filter.Factor + filter.Bias;
@@ -95,11 +83,8 @@ namespace ImageProcessing.ConvolutionFilters
                         destinationPtr[0] = (byte)B;
                         destinationPtr[1] = (byte)G;
                         destinationPtr[2] = (byte)R;
-
-                    }
-                    
-                });
-                
+                    }                   
+                });          
             }
 
             source.UnlockBits(sourceBitmapData);
@@ -107,6 +92,5 @@ namespace ImageProcessing.ConvolutionFilters
 
             return destination;
         }
-
     }
 }

@@ -2,15 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ImageProcessing.Common\ImageProcessing.Common.csproj" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Factory\Interface\" />
-    <Folder Include="Factory\Implementation\" />
+    <ProjectReference Include="..\ImageProcessing.Common\ImageProcessing.Common.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,13 +7,12 @@ using System;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
 
-namespace ImageProcessing
+namespace ImageProcessing.DomainModel.Services.Distribution
 {
     //ptr[0] - B, ptr[1] - G, ptr[2] - R
-    public static class DistributionContext
+    public class DistributionService : IDistributionService
     {
-
-        public static Bitmap Distribute(this Bitmap bitmap, IDistribution distribution)
+        public Bitmap Distribute(Bitmap bitmap, IDistribution distribution)
         {
             var frequencies = GetFrequencies(bitmap);
             var pmf         = GetPMF(frequencies, bitmap.Width * bitmap.Height);

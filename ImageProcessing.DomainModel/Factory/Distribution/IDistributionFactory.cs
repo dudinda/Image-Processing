@@ -1,10 +1,9 @@
 ﻿using ImageProcessing.Distributions.Abstract;
-using ImageProcessing.Enum;
 
 namespace ImageProcessing.Factory.Abstract
 {
     public interface IDistributionFactory
     {
-        IDistribution GetDistribution(Distribution distribution, (int, int ) parms );
+        IDistribution GetDistribution(Common.Enum.Distribution distribution, (int, int ) parms );
     }
 }

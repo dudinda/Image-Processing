@@ -1,6 +1,4 @@
-﻿using ImageProcessing.Attributes;
-using ImageProcessing.Enum;
-using ImageProcessing.RGBFilters.Abstract;
+﻿using ImageProcessing.RGBFilters.Abstract;
 
 using System;
 

@@ -7,8 +7,8 @@
     <ProjectGuid>{48A8A9B5-6F5B-474C-9A8A-1CBD1F646CEC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ImageProcessing</RootNamespace>
-    <AssemblyName>ImageProcessing</AssemblyName>
+    <RootNamespace>ImageProcessing.UI</RootNamespace>
+    <AssemblyName>ImageProcessing.UI</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

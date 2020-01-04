@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Drawing;
-using System.Drawing.Imaging;
+
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -33,51 +32,7 @@ namespace ImageProcessing.Utility
 
         }
 
-        public static Bitmap Normalize(Bitmap src)
-        {
-            var max = Max(src);
-            var min = Min(src);
-            var newMax = 255;
-            var newMin = 0;
-
-            var divisor = (double)(newMax - newMin) / (double)(max - min);
-
-            var bitmapData = src.LockBits(new Rectangle(0, 0, src.Width, src.Height),
-                                                       ImageLockMode.ReadWrite,
-                                                       PixelFormat.Format24bppRgb);
-
-            var size = src.Size;
-
-            var options = new ParallelOptions();
-            options.MaxDegreeOfParallelism = Environment.ProcessorCount;
-
-
-            unsafe
-            {
-                var startPtr = (byte*)bitmapData.Scan0.ToPointer();
-
-                Parallel.For(0, size.Height, options, y =>
-                {
-                    //получить адрес строки
-                    var ptr = startPtr + y * bitmapData.Stride;
-
-                    for (int x = 0; x < size.Width; ++x, ptr += 3)
-                    {
-                        ptr[0] = (byte)(((ptr[0] - min) * divisor) + newMin);
-                        ptr[1] = (byte)(((ptr[1] - min) * divisor) + newMin);
-                        ptr[2] = (byte)(((ptr[2] - min) * divisor) + newMin);
-                    }
-                });
-            }
-
-
-
-            src.UnlockBits(bitmapData);
-
-            return src;
-
-        }
-
+      
         private static int Max(Bitmap src)
         {
             var result = new Bitmap(src);
