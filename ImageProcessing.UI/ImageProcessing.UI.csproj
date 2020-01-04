@@ -113,8 +113,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColorSpaces\IConvert.cs" />
-    <Compile Include="ColorSpaces\YCbCr.cs" />
     <Compile Include="Form\Histogram.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,9 +133,6 @@
     <Compile Include="Form\QualityMeasure.Designer.cs">
       <DependentUpon>QualityMeasure.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utility\BitmapStack\Abstract\IBitmapStack.cs" />
-    <Compile Include="Utility\BitmapStack\BitmapStack.cs" />
-    <Compile Include="Utility\Utility.cs" />
     <EmbeddedResource Include="Form\Histogram.resx">
       <DependentUpon>Histogram.cs</DependentUpon>
     </EmbeddedResource>
