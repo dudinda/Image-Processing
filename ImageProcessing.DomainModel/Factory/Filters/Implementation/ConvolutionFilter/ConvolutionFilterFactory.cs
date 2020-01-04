@@ -1,4 +1,4 @@
-﻿using ImageProcessing.Common.Enum;
+﻿using ImageProcessing.Common.Enums;
 using ImageProcessing.ConvolutionFilters.Blur.BoxBlur;
 using ImageProcessing.ConvolutionFilters.Blur.MotionBlur;
 using ImageProcessing.ConvolutionFilters.EdgeDetection;
@@ -9,18 +9,18 @@ using ImageProcessing.ConvolutionFilters.GaussianBlur3x3;
 using ImageProcessing.ConvolutionFilters.GaussianBlur5x5;
 using ImageProcessing.ConvolutionFilters.Sharpen;
 using ImageProcessing.ConvulationFilters;
-using ImageProcessing.Factory.Abstract;
+using ImageProcessing.Common.Extensions.EnumExtensions;
+using ImageProcessing.DomainModel.Factory.Filters.Interface;
 
 using System;
-
 
 namespace ImageProcessing.Factory
 {
     public class ConvolutionFilterFactory : IConvolutionFilterFactory
     {
-        public AbstractConvolutionFilter GetConvolutionFilter(ConvolutionFilter filter)
+        public AbstractConvolutionFilter GetFilter(string filter)
         {
-            switch (filter)
+            switch (filter.GetEnumValueByName<ConvolutionFilter>())
             {
                 case ConvolutionFilter.BoxBlur3x3:
                     return new BoxBlur3x3();

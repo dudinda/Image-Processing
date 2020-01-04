@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace ImageProcessing.Common.Enum
+namespace ImageProcessing.Common.Enums
 {
     public enum ImageExtension
     {

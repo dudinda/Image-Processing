@@ -8,17 +8,19 @@ using ImageProcessing.RGBFilters.Binary;
 using ImageProcessing.RGBFilters.Grayscale;
 using ImageProcessing.RGBFilters.Inversion;
 using ImageProcessing.RGBFilters.Color;
-using ImageProcessing.Common.Enum;
+using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.TypeExtensions;
 using ImageProcessing.Common.Attributes;
+using ImageProcessing.Common.Extensions.EnumExtensions;
+using ImageProcessing.DomainModel.Factory.Filters.Interface;
 
 namespace ImageProcessing.Factory.RGBFilters
 {
     public class RGBFiltersFactory : IRGBFiltersFactory
     {
-        public IRGBFilter GetFilter(RGBFilter filter)
+        public IRGBFilter GetFilter(string filter)
         {
-            switch(filter)
+            switch(filter.GetEnumValueByName<RGBFilter>())
             {
                 case RGBFilter.Binary:
                     return new BinaryFilter();

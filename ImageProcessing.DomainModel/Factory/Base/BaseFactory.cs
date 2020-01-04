@@ -1,5 +1,6 @@
 ﻿using ImageProcessing.Factory.Abstract;
 using ImageProcessing.Factory.RGBFilters;
+using ImageProcessing.DomainModel.Factory.Filters.Interface;
 
 namespace ImageProcessing.Factory
 {

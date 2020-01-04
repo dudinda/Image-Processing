@@ -1,4 +1,6 @@
-﻿namespace ImageProcessing.Factory.Abstract
+﻿using ImageProcessing.DomainModel.Factory.Filters.Interface;
+
+namespace ImageProcessing.Factory.Abstract
 {
     public interface IBaseFactory
     {
