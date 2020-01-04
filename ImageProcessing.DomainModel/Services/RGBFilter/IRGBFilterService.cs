@@ -1,6 +1,8 @@
-﻿using System.Drawing;
+﻿using ImageProcessing.RGBFilters.Abstract;
 
-namespace ImageProcessing.Services.Abstract
+using System.Drawing;
+
+namespace ImageProcessing.DomainModel.Services.RGBFilter
 {
     public interface IRGBFilterService
     {

@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Base\" />
+    <ProjectReference Include="..\ImageProcessing.Common\ImageProcessing.Common.csproj" />
+    <ProjectReference Include="..\ImageProcessing.DomainModel\ImageProcessing.DomainModel.csproj" />
   </ItemGroup>
 
 </Project>

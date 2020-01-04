@@ -4,7 +4,7 @@ using System;
 
 namespace ImageProcessing.Common.Attributes
 {
-    [AttributeUsage(System.AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class)]
     public class ColorAttribute : Attribute
     {
         public RGBColors Color { get; }

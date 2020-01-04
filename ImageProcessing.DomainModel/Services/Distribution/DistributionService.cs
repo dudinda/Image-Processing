@@ -239,7 +239,6 @@ namespace ImageProcessing.DomainModel.Services.Distribution
                     pixel = 0;
                 }
 
-                //округлить до целого, назначить соответствующий элемент
                 result[index] = Convert.ToByte(pixel);
             }
 

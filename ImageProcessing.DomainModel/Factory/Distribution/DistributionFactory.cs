@@ -9,7 +9,7 @@ namespace ImageProcessing.Factory
 {
     public class DistributionFactory : IDistributionFactory
     {
-        IDistribution GetDistribution(Distribution distribution, (int, int) parms) 
+        public IDistribution GetDistribution(Distribution distribution, (int, int) parms) 
         {
             switch (distribution)
             {

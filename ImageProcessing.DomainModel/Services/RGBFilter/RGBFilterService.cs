@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Drawing;
+using ImageProcessing.RGBFilters.Abstract;
 
-namespace ImageProcessing.DomainModel.Services
+namespace ImageProcessing.DomainModel.Services.RGBFilter
 {
-    class RGBFilterService
+    public class RGBFilterService : IRGBFilterService
     {
+        public Bitmap Filter(Bitmap source, IRGBFilter filter)
+        {
+            return filter.Filter(source);
+        }
     }
 }
