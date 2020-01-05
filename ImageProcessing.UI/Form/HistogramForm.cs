@@ -1,11 +1,14 @@
-﻿using MetroFramework.Forms;
+﻿using ImageProcessing.Presentation.Views.Histogram;
+
+using MetroFramework.Forms;
+
 using System.Drawing;
 
 namespace ImageProcessing
 {
-    public partial class Histogram : MetroForm
+    public partial class HistogramForm : MetroForm, IHistogramView
     {
-        public Histogram()
+        public HistogramForm()
         {
             InitializeComponent();
             Freq.ChartAreas[0].AxisX.Minimum = 0;

@@ -1,5 +1,7 @@
-﻿using ImageProcessing.Factory.RGBFilters;
-using ImageProcessing.DomainModel.Factory.Filters.Interface;
+﻿using ImageProcessing.DomainModel.Factory.Filters.Interface;
+using ImageProcessing.Factory.Filters.Convolution;
+using ImageProcessing.Factory.Filters.Distribution;
+using ImageProcessing.Factory.Filters.RGBFilters;
 
 namespace ImageProcessing.Factory.Base
 {

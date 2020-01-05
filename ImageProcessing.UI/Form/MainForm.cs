@@ -4,28 +4,21 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using ImageProcessing.ConvolutionFilters;
-using ImageProcessing.ConvolutionFilters.Blur.BoxBlur;
-using ImageProcessing.ConvolutionFilters.Blur.MotionBlur;
-using ImageProcessing.ConvolutionFilters.EdgeDetection;
-using ImageProcessing.ConvolutionFilters.Emboss;
-using ImageProcessing.ConvolutionFilters.GaussianBlur3x3;
-using ImageProcessing.ConvolutionFilters.GaussianBlur5x5;
-using ImageProcessing.ConvolutionFilters.Sharpen;
-using ImageProcessing.Distributions.TwoParameterDistributions;
-using ImageProcessing.Distributions.OneParameterDistributions;
-using ImageProcessing.Utility;
-using ImageProcessing.Utility.BitmapStack.Abstract;
 using ImageProcessing.Utility.BitmapStack;
-using ImageProcessing.ConvolutionFilters.EdgeDetection.SobelOperator;
-using ImageProcessing.ConvolutionFilters.EdgeDetection.GaussianOperator;
+using ImageProcessing.Presentation.Views.Main;
 
 using MetroFramework.Forms;
 
 namespace ImageProcessing
 {
-    public partial class Main : MetroForm
+    public partial class MainForm : MetroForm, IMainView
     {
+        private readonly ApplicationContext _context;
+
+        public double FirstParameter { get { return Convert.ToDouble(FirstParam.Text); } }
+        public double SecondParameter { get { return Convert.ToDouble(SecondParam.Text); } }
+        public Bitmap SrcImage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Bitmap DstImage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         private IBitmapStack<Bitmap> shapes = new BitmapStack<Bitmap>();
         private BitmapStack<Bitmap> view = new BitmapStack<Bitmap>();
@@ -43,6 +36,9 @@ namespace ImageProcessing
         private double srcImageFactor = 1.0;
         private double dstImageFactor = 1.0;
 
+        public event Action ApplyConvolutionFilter;
+        public event Action ApplyRGBFilter;
+        public event Action ApplyHistogramTransformation;
 
         private async void OpenFileClick(object sender, EventArgs e)
         {
@@ -663,7 +659,7 @@ namespace ImageProcessing
                 return;
             }
 
-            var histogram = new Histogram();
+            var histogram = new HistogramForm();
             histogram.Show();
             histogram.BuildHistogram(new Bitmap(dstImage));
 
@@ -679,7 +675,7 @@ namespace ImageProcessing
                     return;
                 }
 
-                var histogram = new Histogram();
+                var histogram = new HistogramForm();
                 histogram.Show();
                 histogram.BuildHistogram(new Bitmap(srcImage));
             }
@@ -690,7 +686,7 @@ namespace ImageProcessing
                     return;
                 }
 
-                var histogram = new Histogram();
+                var histogram = new HistogramForm();
                 histogram.Show();
                 histogram.BuildHistogram(new Bitmap(dstImage));
             }
@@ -1087,7 +1083,7 @@ namespace ImageProcessing
                     return;
                 }
 
-                var histogram = new Histogram();
+                var histogram = new HistogramForm();
                 histogram.Show();
                 histogram.BuildCDF(new Bitmap(srcImage));
             }
@@ -1098,7 +1094,7 @@ namespace ImageProcessing
                     return;
                 }
 
-                var histogram = new Histogram();
+                var histogram = new HistogramForm();
                 histogram.Show();
                 histogram.BuildCDF(new Bitmap(dstImage));
             }
@@ -1120,7 +1116,7 @@ namespace ImageProcessing
                     return;
                 }
 
-                var histogram = new QualityMeasure(srcImage);
+                var histogram = new QualityMeasureForm(srcImage);
                 histogram.Show();
                 histogram.BuildHistogram();
             }
@@ -1128,7 +1124,7 @@ namespace ImageProcessing
             {
                 if (view.Any())
                 {
-                    var histogram = new QualityMeasure(view);
+                    var histogram = new QualityMeasureForm(view);
                     histogram.Show();
                     histogram.BuildHistogram();
                 }
@@ -1140,7 +1136,7 @@ namespace ImageProcessing
                     return;
                 }
 
-                var histogram = new QualityMeasure(dstImage);
+                var histogram = new QualityMeasureForm(dstImage);
                 histogram.Show();
                 histogram.BuildHistogram();
             }

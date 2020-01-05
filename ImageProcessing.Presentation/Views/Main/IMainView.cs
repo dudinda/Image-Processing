@@ -6,6 +6,8 @@ namespace ImageProcessing.Presentation.Views.Main
 {
     public interface IMainView : IView
     {
+        double FirstParameter { get; }
+        double SecondParameter { get; }
 
         Bitmap SrcImage { get; set; }
         Bitmap DstImage { get; set; }

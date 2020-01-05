@@ -34,8 +34,8 @@ namespace ImageProcessing.Presentation.Presenters
             _distributionFactory      = baseFactory.GetDistributionFactory();
             _rgbFiltersFactory        = baseFactory.GetRGBFilterFactory();
 
-            View.ApplyConvolutionFilter += () => ApplyConvolutionFilter(null);
-            View.ApplyRGBFilter += () => ApplyRGBFilter(null);
+            View.ApplyConvolutionFilter       += () => ApplyConvolutionFilter(null);
+            View.ApplyRGBFilter               += () => ApplyRGBFilter(null);
             View.ApplyHistogramTransformation += () => ApplyHistogramTransformation(null);
 
         }

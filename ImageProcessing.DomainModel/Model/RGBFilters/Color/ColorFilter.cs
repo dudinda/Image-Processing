@@ -1,5 +1,4 @@
-﻿using ImageProcessing.Enum;
-using ImageProcessing.RGBFilters.Abstract;
+﻿using ImageProcessing.RGBFilters.Abstract;
 
 using System;
 using System.Drawing;

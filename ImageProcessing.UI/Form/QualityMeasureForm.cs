@@ -1,16 +1,18 @@
-﻿using ImageProcessing.Utility.BitmapStack;
+﻿using ImageProcessing.Presentation.Views.QualityMeasure;
+using ImageProcessing.Utility.BitmapStack;
+
 using MetroFramework.Forms;
-using System;
+
 using System.Collections.Generic;
 using System.Drawing;
 
 namespace ImageProcessing
 {
-    public partial class QualityMeasure : MetroForm
+    public partial class QualityMeasureForm : MetroForm, IQualityMeasureView
     {
         private List<Bitmap> list = new List<Bitmap>();
 
-        public QualityMeasure(BitmapStack<Bitmap> stack = null)
+        public QualityMeasureForm(BitmapStack<Bitmap> stack = null)
         {
             InitializeComponent();
 
@@ -29,7 +31,7 @@ namespace ImageProcessing
             }
         }
 
-        public QualityMeasure(Bitmap bmp)
+        public QualityMeasureForm(Bitmap bmp)
         {
             InitializeComponent();
 

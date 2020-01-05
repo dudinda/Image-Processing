@@ -1,4 +1,4 @@
-﻿using ImageProcessing.Common.Enum;
+﻿using ImageProcessing.Common.Enums;
 
 using System;
 

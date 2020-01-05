@@ -1,22 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ImageProcessing.Common.Utility.LightInjectAdapter;
+using ImageProcessing.DomainModel.Services.ConvolutionFilter;
+using ImageProcessing.DomainModel.Services.Distribution;
+using ImageProcessing.DomainModel.Services.RGBFilter;
+using ImageProcessing.Factory.Base;
+using ImageProcessing.Presentation.AppController;
+using ImageProcessing.Presentation.Presenters;
+using ImageProcessing.Presentation.Views.Histogram;
+using ImageProcessing.Presentation.Views.Main;
+using ImageProcessing.Presentation.Views.QualityMeasure;
+
+using System;
 using System.Windows.Forms;
 
 namespace ImageProcessing
 {
-    static class Program
+    
+
+    internal static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
+        public static readonly ApplicationContext Context = new ApplicationContext();
+
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main());
+
+            var controller = new AppController(new LightInjectAdapter())
+                .RegisterView<IMainView, MainForm>()
+                .RegisterView<IHistogramView, HistogramForm>()
+                .RegisterView<IQualityMeasureView, QualityMeasureForm>()
+                .RegisterService<IBaseFactory, BaseFactory>()
+                .RegisterService<IConvolutionFilterService, ConvolutionFilterService>()
+                .RegisterService<IDistributionService, DistributionService>()
+                .RegisterService<IRGBFilterService, RGBFilterService>()
+                .RegisterInstance(new ApplicationContext());
+
+            controller.Run<MainPresenter>();
         }
     }
 }

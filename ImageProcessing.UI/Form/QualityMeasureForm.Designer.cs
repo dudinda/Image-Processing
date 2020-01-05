@@ -1,6 +1,6 @@
 ﻿namespace ImageProcessing
 {
-    partial class QualityMeasure
+    partial class QualityMeasureForm
     {
         /// <summary>
         /// Required designer variable.
