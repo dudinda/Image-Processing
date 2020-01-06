@@ -25,10 +25,12 @@ namespace ImageProcessing.Presentation.Views.Main
         event Action SaveImage;
         event Action OpenImage;
         event Action<string> ApplyConvolutionFilter;
+        event Action<string, (double, double)> ApplyHistogramTransformation;
         event Action<string> ApplyRGBFilter;
         event Action<RGBColor> ApplyRGBColorFilter;
-        event Action<string, (double, double)> ApplyHistogramTransformation;
         event Action Shuffle;
+        event Action GetRandomVariableInfo;
+        event Action UndoLast;
         event Action BuildPmf;
         event Action BuildCdf;
         event Action BuildLuminanceIntervals;
