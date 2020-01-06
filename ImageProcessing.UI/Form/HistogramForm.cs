@@ -1,55 +1,38 @@
 ﻿using ImageProcessing.Presentation.Views.Histogram;
 
 using MetroFramework.Forms;
-
+using System;
 using System.Drawing;
+using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace ImageProcessing
 {
     public partial class HistogramForm : MetroForm, IHistogramView
     {
-        public HistogramForm()
+        private readonly ApplicationContext _context;
+
+        public HistogramForm(ApplicationContext context)
         {
+            _context = context;
             InitializeComponent();
             Freq.ChartAreas[0].AxisX.Minimum = 0;
             Freq.ChartAreas[0].AxisX.Maximum = 255;
             Freq.ChartAreas[0].AxisX.Interval = 50;
         }
 
-        public void BuildHistogram(Bitmap bitmap)
+        public Chart GetChart { get { return Freq; } }
+        public new void Show()
         {
-            Freq.ChartAreas[0].AxisY.MaximumAutoSize = true;
-            var frequencies = DistributionContext.GetFrequencies(bitmap);
-            var pmf = DistributionContext.GetPMF(frequencies, bitmap.Width * bitmap.Height);
-
-            Init("PMF", pmf);
-
-            for(int graylevel = 0; graylevel < 256; ++graylevel)
-            {
-                    Freq.Series["p(x)"].Points.AddXY(graylevel, pmf[graylevel]);
-            }
-
-
+            _context.MainForm = this;
+            Application.Run(_context);
         }
 
-        public void BuildCDF(Bitmap bitmap)
-        {
 
-            Freq.ChartAreas[0].AxisY.Maximum = 1;
-            var frequencies = DistributionContext.GetFrequencies(bitmap);
-            var pmf = DistributionContext.GetPMF(frequencies, bitmap.Width * bitmap.Height);
-            var cdf = DistributionContext.GetCDF(pmf);
-
-            Init("CDF", pmf);
-
-            for (int graylevel = 0; graylevel < 256; ++graylevel)
-            {
-                Freq.Series["F(x)"].Points.AddXY(graylevel, cdf[graylevel]);
-            }
-
-           
-        }
-
+        public event Action<Bitmap> BuildHistogram;
+        public event Action<Bitmap> BuildCDF;
+      
+        /*
         public void Init(string text, double[] pmf)
         {
             
@@ -69,6 +52,6 @@ namespace ImageProcessing
             Freq.Legends["Legend1"].CustomItems[1].Name += string.Format($" = {DistributionContext.GetStandardDeviation(pmf).ToString()}");
         }
        
-        
+        */
     }
 }

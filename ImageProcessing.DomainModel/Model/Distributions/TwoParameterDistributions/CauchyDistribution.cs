@@ -6,18 +6,30 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
 {
     class CauchyDistribution : IDistribution
     {
-        private readonly double _x0;
-        private readonly double _gamma;
+        private double _x0;
+        private double _gamma;
 
+        public CauchyDistribution()
+        {
+
+        }
         public CauchyDistribution(double x0, double gamma)
         {
             _x0    = x0;
             _gamma = gamma;
         }
 
-        public string Name { get; } = "Cauchy Distribution";
+        public double FirstParameter { get { return _x0; } }
+        public double SecondParameter { get { return _gamma; } }
+
         public double GetMean() => double.NaN;
         public double GetVariance() => double.PositiveInfinity;
         public double Quantile(double p) => _x0 + _gamma * Math.Tan(Math.PI * (p - 0.5));
+
+        public void SetParams((double, double) parms)
+        {
+            _x0    = parms.Item1;
+            _gamma = parms.Item2;
+        }
     }
 }

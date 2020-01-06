@@ -8,6 +8,7 @@ using ImageProcessing.Utility.BitmapStack;
 using ImageProcessing.Presentation.Views.Main;
 
 using MetroFramework.Forms;
+using ImageProcessing.RGBFilters.ColorFilter.Colors;
 
 namespace ImageProcessing
 {
@@ -17,231 +18,69 @@ namespace ImageProcessing
 
         public double FirstParameter { get { return Convert.ToDouble(FirstParam.Text); } }
         public double SecondParameter { get { return Convert.ToDouble(SecondParam.Text); } }
-        public Bitmap SrcImage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Bitmap DstImage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Bitmap SrcImage { get { return new Bitmap(Src.Image); } set { Src.Image = value; } }
+        public Bitmap DstImage { get { return new Bitmap(Dst.Image); } set { Dst.Image = value; } }
 
-        private IBitmapStack<Bitmap> shapes = new BitmapStack<Bitmap>();
-        private BitmapStack<Bitmap> view = new BitmapStack<Bitmap>();
+        public bool SrcIsNull { get { return Src.Image is null; } }
+        public bool DstIsNull { get { return Dst.Image is null; } }
 
-        public Main()
+        public string Path { get { return PathToImage.Text; } set { PathToImage.Text = value; } }
+        public (double, double) Parameters
         {
+            get { return (Convert.ToDouble(FirstParam.Text), Convert.ToDouble(SecondParam.Text));  }
+        }
+
+        public event Action SaveImage;
+        public event Action OpenImage;
+        public event Action<string> ApplyConvolutionFilter;
+        public event Action<string, (double, double)> ApplyHistogramTransformation;
+        public event Action<string> ApplyRGBFilter;
+        public event Action<RGBColor> ApplyRGBColorFilter;
+        public event Action Shuffle;
+        public event Action BuildPmf;
+        public event Action BuildCdf;
+        public event Action BuildLuminanceIntervals;
+     
+        public MainForm(ApplicationContext context)
+        {
+            _context = context;
+
             InitializeComponent();
+
             Src.SizeMode = PictureBoxSizeMode.AutoSize;
             Dst.SizeMode = PictureBoxSizeMode.AutoSize;
+
             splitContainer1.BringToFront();
         }
 
-        private Bitmap srcImage = null;
-        private Bitmap dstImage = null;
-        private double srcImageFactor = 1.0;
-        private double dstImageFactor = 1.0;
-
-        public event Action ApplyConvolutionFilter;
-        public event Action ApplyRGBFilter;
-        public event Action ApplyHistogramTransformation;
-
-        private async void OpenFileClick(object sender, EventArgs e)
+        public new void Show()
         {
-
-            var openFileDialog = new OpenFileDialog();
-
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-
-
-
-            openFileDialog.Filter = "BMP Files (*.bmp)|*.bmp|"    +
-                                    "JPEG Files (*.jpeg)|*.jpeg|" +
-                                    "PNG Files (*.png)|*.png|"    +
-                                    "JPG Files (*.jpg)|*.jpg|"    +
-                                    "GIF Files (*.gif)|*.gif|"    +
-                                    "All Files (*.*)|*.*";
-
-
-          
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-
-                srcImage = await Task.Factory.StartNew(() => {
-                    
-                    using (var stream = File.OpenRead(openFileDialog.FileName))
-                    {
-                        return new Bitmap(Image.FromStream(stream));
-                    }
-
-                });
-
-                PathToImage.Text = openFileDialog.FileName;
-
-            }
-
-            InitSrcFactor();
-            Src.Image = srcImage;
-
+            _context.MainForm = this;
+            base.Show();
         }
 
-        private async void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void InvokeWithTwoParameters<T1, T2>(Action<T1, T2> action, T1 first, T2 second)
+        => action?.Invoke(first, second);
+        private void InvokeWithParameter<T>(Action<T> action, T parameter)
+        => action?.Invoke(parameter);
+        private void Invoke(Action action)
+         => action?.Invoke();
+
+        public void InitSrcImageZoom()
         {
-            if (CheckFirstImage())
-            {
-                return;
-            }
-
-            var bmpToSave = new Bitmap(srcImage);
-
-            await Task.Factory.StartNew(() =>
-            {
-                //получить выбранное с помощью фильтров расширение
-                var extension = Path.GetExtension(PathToImage.Text);
-
-                //сохранить изображение с выбранным расширением
-                bmpToSave.Save(PathToImage.Text, extension.GetImageFormat());
-            });
+            throw new NotImplementedException();
         }
 
-
-        private async void SaveAsClick(object sender, EventArgs e)
+        public void InitDstImageZoom()
         {
-            if (CheckFirstImage())
-            {
-                return;
-            }
-
-            var saveFileDialog = new SaveFileDialog();
-
-            saveFileDialog.Filter = "BMP Files (*.bmp)|*.bmp|"    +
-                                    "JPEG Files (*.jpeg)|*.jpeg|" +
-                                    "PNG Files (*.png)|*.png|"    +
-                                    "JPG Files (*.jpg)|*.jpg|"    +
-                                    "GIF Files (*.gif)|*.gif|"    +
-                                    "All Files (*.*)|*.*";
-
-
-            var bmpToSave = new Bitmap(srcImage);
-       
-
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-               
-                await Task.Factory.StartNew(() =>
-                {
-                    //получить выбранное с помощью фильтров расширение
-                    var extension = Path.GetExtension(saveFileDialog.FileName);
-
-                    //сохранить изображение с выбранным расширением
-                    bmpToSave.Save(saveFileDialog.FileName, extension.GetImageFormat());
-                });
-               
-            }
+            throw new NotImplementedException();
         }
 
 
 
 
-        private async void InversionFilterClick(object sender, EventArgs e)
-        {
-            if (CheckFirstImage())
-            {
-                return;
-            }
-       
-            Dst.Image = await Task.Factory.StartNew(() =>
-            {
-                return FilterFactory.Inversion(new Bitmap(srcImage));
-            });
-
-            InitDstFactor();
-            dstImage = new Bitmap(Dst.Image);
-
-        }
-
-        private async void ColorFilterRedClick(object sender, EventArgs e)
-        {
-            if (CheckFirstImage())
-            {
-                return;
-            }
-   
-            Dst.Image = await Task.Factory.StartNew(() =>
-            {
-                return FilterFactory.ColorFilter(new Bitmap(srcImage), FilterFactory.Filter.RED);
-            });
-
-            InitDstFactor();
-            dstImage = new Bitmap(Dst.Image);
-        }
-
-        private async void ColorFilterGreenClick(object sender, EventArgs e)
-        {
-            if (CheckFirstImage())
-            {
-                return;
-            }
-
-            Dst.Image = await Task.Factory.StartNew(() =>
-            {
-                return FilterFactory.ColorFilter(new Bitmap(srcImage), FilterFactory.Filter.GREEN);
-            });
-
-            InitDstFactor();
-            dstImage = new Bitmap(Dst.Image);
-        }
-
-        private async void ColorFilterBlueClick(object sender, EventArgs e)
-        {
-
-            if (CheckFirstImage())
-            {
-                return;
-            }
-     
-            Dst.Image = await Task.Factory.StartNew(() =>
-            {
-                return FilterFactory.ColorFilter(new Bitmap(srcImage), FilterFactory.Filter.BLUE);
-            });
-
-            InitDstFactor();
-            dstImage = new Bitmap(Dst.Image);
-
-        }
-    
-        private async void GrayScaleFilterClick(object sender, EventArgs e)
-        {
-
-            if (CheckFirstImage())
-            {
-                return;
-            }
-
-            Dst.Image = await Task.Factory.StartNew(() =>
-            {
-                return FilterFactory.GrayScale(new Bitmap(srcImage));
-            });
-
-            InitDstFactor();
-            dstImage = new Bitmap(Dst.Image);
-
-
-        }
-
-        private async void BinaryFilterClick(object sender, EventArgs e)
-        {
-            if (CheckFirstImage())
-            {
-                return;
-            }
-
-    
-            Dst.Image = await Task.Factory.StartNew(() =>
-            {
-                return FilterFactory.BinaryImage(new Bitmap(srcImage));
-            });
-
-            InitDstFactor();
-            dstImage = new Bitmap(Dst.Image);
-
-        }
-
+        /*
+      
         private async void UniformDistributionClick(object sender, EventArgs e)
         {
             if (CheckFirstImage())
@@ -256,7 +95,7 @@ namespace ImageProcessing
 
             Dst.Image = await Task.Factory.StartNew(() =>
             {
-            
+
                 var a = Convert.ToDouble(FirstParam.Text);
                 var b = Convert.ToDouble(SecondParam.Text);
 
@@ -265,7 +104,7 @@ namespace ImageProcessing
             });
 
             InitDstFactor();
-      
+
             dstImage = new Bitmap(Dst.Image);
             dstImage.Tag = "Uniform";
 
@@ -288,7 +127,7 @@ namespace ImageProcessing
                 var x0 = Convert.ToDouble(FirstParam.Text);
                 var gamma = Convert.ToDouble(SecondParam.Text);
 
-               return new Bitmap(srcImage).Distribute(new CauchyDistribution(x0, gamma));
+                return new Bitmap(srcImage).Distribute(new CauchyDistribution(x0, gamma));
             });
 
             InitDstFactor();
@@ -307,7 +146,7 @@ namespace ImageProcessing
             {
                 return;
             }
-          
+
             Dst.Image = await Task.Factory.StartNew(() =>
             {
                 var mu = Convert.ToDouble(FirstParam.Text);
@@ -387,7 +226,7 @@ namespace ImageProcessing
             Dst.Image = await Task.Factory.StartNew(() =>
             {
                 var lambda = Convert.ToDouble(FirstParam.Text);
-                var k      = Convert.ToDouble(SecondParam.Text);
+                var k = Convert.ToDouble(SecondParam.Text);
 
                 return new Bitmap(srcImage).Distribute(new WeibullDistribution(lambda, k));
             });
@@ -413,7 +252,7 @@ namespace ImageProcessing
             Dst.Image = await Task.Factory.StartNew(() =>
             {
                 var mu = Convert.ToDouble(FirstParam.Text);
-                var b  = Convert.ToDouble(SecondParam.Text);
+                var b = Convert.ToDouble(SecondParam.Text);
 
                 return new Bitmap(srcImage).Distribute(new LaplaceDistribution(mu, b));
             });
@@ -475,186 +314,10 @@ namespace ImageProcessing
         }
 
 
-        private async void LaplacianOperator3x3Click(object sender, EventArgs e)
-        {
-            if (CheckFirstImage())
-            {
-                return;
-            }
-
-            Dst.Image = await Task.Factory.StartNew(() =>
-            {
-                return new Bitmap(srcImage).ConvolutionFilter(new LaplacianOperator3x3());
-            });
-
-            InitDstFactor();
-            dstImage = new Bitmap(Dst.Image);
-        }
-
-        private async void LaplacianOperator5x5Click(object sender, EventArgs e)
-        {
-            if (CheckFirstImage())
-            {
-                return;
-            }
-
-            Dst.Image = await Task.Factory.StartNew(() =>
-            {
-                return new Bitmap(srcImage).ConvolutionFilter(new LaplacianOperator5x5());
-            });
-
-            InitDstFactor();
-            dstImage = new Bitmap(Dst.Image);
-        }
-
-
-        private async void Sharpen3x3Click(object sender, EventArgs e)
-        {
-            if (CheckFirstImage())
-            {
-                return;
-            }
-
-            Dst.Image = await Task.Factory.StartNew(() =>
-            {
-                return new Bitmap(srcImage).ConvolutionFilter(new Sharpen3x3());
-            });
-
-            InitDstFactor();
-            dstImage = new Bitmap(Dst.Image);
-        }
-
-
-        private async void BoxBlur3x3Click(object sender, EventArgs e)
-        {
-
-            if (CheckFirstImage())
-            {
-                return;
-            }
-
-            Dst.Image = await Task.Factory.StartNew(() =>
-            {
-                return new Bitmap(srcImage).ConvolutionFilter(new BoxBlur3x3());
-            });
-
-            InitDstFactor();
-            dstImage = new Bitmap(Dst.Image);
-        }
-
-        private async void BoxBlur5x5Click(object sender, EventArgs e)
-        {
-            if(CheckFirstImage())
-            {
-                return;
-            }
-
-            Dst.Image = await Task.Factory.StartNew(() =>
-            {
-                return new Bitmap(srcImage).ConvolutionFilter(new BoxBlur5x5());
-            });
-
-            InitDstFactor();
-            dstImage = new Bitmap(Dst.Image);
-        }
-
-        private async void GaussianBlur3x3Click(object sender, EventArgs e)
-        {
-            if(CheckFirstImage())
-            {
-                return;
-            }
- 
-            Dst.Image = await Task.Factory.StartNew(() =>
-            {
-                return new Bitmap(srcImage).ConvolutionFilter(new GaussianBlur3x3());
-            });
-
-            InitDstFactor();
-            dstImage = new Bitmap(Dst.Image);
-        }
-    
-        private async void GaussianBlur5x5Click(object sender, EventArgs e)
-        {
-            if(CheckFirstImage())
-            {
-                return;
-            }
- 
-            Dst.Image = await Task.Factory.StartNew(() =>
-            {
-                return new Bitmap(srcImage).ConvolutionFilter(new GaussianBlur5x5());
-            });
-
-            InitDstFactor();
-            dstImage = new Bitmap(Dst.Image);
-        }
-
-        private async void LaplacianOfGaussianClick(object sender, EventArgs e)
-        {
-            if(CheckFirstImage())
-            {
-                return;
-            }
-
-            var laplacian = await Task.Factory.StartNew(() =>
-            {
-                return new Bitmap(srcImage).ConvolutionFilter(new LaplacianOperator5x5());
-            });
-
-            Dst.Image = await Task.Factory.StartNew(() =>
-            {
-                return new Bitmap(laplacian).ConvolutionFilter(new GaussianOperator5x5());
-            });
-
-            InitDstFactor();
-            dstImage = new Bitmap(Dst.Image);
-        }
-
-        private async void SobelOperatoHorizontalFilterClick(object sender, EventArgs e)
-        {
-
-        }
-
-        private async void EmbossFilter3x3Click(object sender, EventArgs e)
-        {
-            if(CheckFirstImage())
-            {
-                return;
-            }
-
-            Dst.Image = await Task.Factory.StartNew(() =>
-            {
-                return new Bitmap(srcImage).ConvolutionFilter(new Emboss3x3());
-            });
-
-            InitDstFactor();
-            dstImage = new Bitmap(Dst.Image);
-        }
-
-        private async void MotionBlurFilter9x9Click(object sender, EventArgs e)
-        {
-
-            if (CheckFirstImage())
-            {
-                return;
-            }
-
-            Dst.Image = await Task.Factory.StartNew(() =>
-            {
-                return new Bitmap(srcImage).ConvolutionFilter(new MotionBlur9x9());
-            });
-
-            InitDstFactor();
-            dstImage = new Bitmap(Dst.Image);
-        }
-
-
-
         private void BuildDstHistogramClick(object sender, EventArgs e)
         {
 
-            if(CheckSecondImage())
+            if (CheckSecondImage())
             {
                 return;
             }
@@ -710,13 +373,13 @@ namespace ImageProcessing
             InitSrcFactor();
 
             srcImage = dstImage;
-            
+
         }
 
         private async void UndoBtnClick(object sender, EventArgs e)
         {
 
-            if(CheckFirstImage())
+            if (CheckFirstImage())
             {
                 return;
             }
@@ -742,14 +405,14 @@ namespace ImageProcessing
         private bool CheckFirstParam()
         {
             //если не введен первый параметр
-            if(String.IsNullOrWhiteSpace(FirstParam.Text) || FirstParam.Text.Equals("-"))
+            if (String.IsNullOrWhiteSpace(FirstParam.Text) || FirstParam.Text.Equals("-"))
             {
                 return true;
             }
 
             double result;
 
-            if(!double.TryParse(FirstParam.Text, out result))
+            if (!double.TryParse(FirstParam.Text, out result))
             {
                 return true;
             }
@@ -779,37 +442,13 @@ namespace ImageProcessing
             return false;
         }
 
-        private bool CheckFirstImage()
-        {
-            if(Src.Image == null)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-
-        private bool CheckSecondImage()
-        {
-            if(Dst.Image == null)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
         private void AcceptOnlyDigits(object sender, KeyPressEventArgs e)
         {
 
             var box = ((ToolStripTextBox)(sender));
 
-
-
             if (!box.Text.Contains("-"))
             {
-                //исключить постановку плавающей точки вначале 
                 if (e.KeyChar == ',' && box.SelectionStart == 0)
                 {
                     e.Handled = true;
@@ -818,7 +457,6 @@ namespace ImageProcessing
             }
             else
             {
-                //исключить постановку плавающей точки вначале и после знака отрицания
                 if (e.KeyChar == ',' && (box.SelectionStart == 0 || box.SelectionStart == 1))
                 {
                     e.Handled = true;
@@ -1059,14 +697,14 @@ namespace ImageProcessing
         }
 
 
-        private void InitDstFactor()
+        private void InitDstImageZoom()
         {
             dstImageFactor = 1.0;
             ZoomInDstBtn.ToolTipText = "100%";
             ZoomOutDstBtn.ToolTipText = "100%";
         }
 
-        private void InitSrcFactor()
+        private void InitSrcImageZoom()
         {
             srcImageFactor = 1.0;
             ZoomInSrcBtn.ToolTipText = "100%";
@@ -1293,6 +931,6 @@ namespace ImageProcessing
 
                 ToolTip.Show(srcsderivation, this, new Point(rect.Left, rect.Bottom));
             }
-        }
+        }*/
     }
 }

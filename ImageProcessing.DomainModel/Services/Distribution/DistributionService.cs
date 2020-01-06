@@ -15,8 +15,8 @@ namespace ImageProcessing.DomainModel.Services.Distribution
         public Bitmap Distribute(Bitmap bitmap, IDistribution distribution)
         {
             var frequencies = GetFrequencies(bitmap);
-            var pmf         = GetPMF(frequencies, bitmap.Width * bitmap.Height);
-            var cdf         = GetCDF(pmf);
+            var pmf = GetPMF(frequencies, bitmap.Width * bitmap.Height);
+            var cdf = GetCDF(pmf);
 
             //get new pixel values, according to a selected distribution
             var newPixels = Transform(cdf, distribution);
@@ -25,8 +25,10 @@ namespace ImageProcessing.DomainModel.Services.Distribution
                                             ImageLockMode.ReadWrite,
                                             PixelFormat.Format32bppRgb);
 
-            var options = new ParallelOptions();
-            options.MaxDegreeOfParallelism = Environment.ProcessorCount;
+            var options = new ParallelOptions()
+            {
+                MaxDegreeOfParallelism = Environment.ProcessorCount
+            };
 
             var size = bitmap.Size;
 
@@ -39,7 +41,7 @@ namespace ImageProcessing.DomainModel.Services.Distribution
 
                     for (int x = 0; x < size.Width; ++x, ptr += 4)
                     {
-                        //get a new pixel value, transofrming by quantile
+                        //get a new pixel value, transofrming by a quantile
                         ptr[0] = ptr[1] = ptr[2] = newPixels[ptr[0]];
                     }
                 });
@@ -50,7 +52,7 @@ namespace ImageProcessing.DomainModel.Services.Distribution
             return bitmap;
         }
 
-        public static double GetExpectation(double[] pmf)
+        public double GetExpectation(double[] pmf)
         {
             var total = 0.0;
 
@@ -62,7 +64,7 @@ namespace ImageProcessing.DomainModel.Services.Distribution
             return total;
         }
 
-        public static double GetExpectation(Bitmap bitmap)
+        public double GetExpectation(Bitmap bitmap)
         {
             var frequencies = GetFrequencies(bitmap);
             var pmf = GetPMF(frequencies, bitmap.Width * bitmap.Height);
@@ -70,7 +72,7 @@ namespace ImageProcessing.DomainModel.Services.Distribution
             return GetExpectation(pmf);
         }
 
-        public static double GetVariance(double[] pmf)
+        public double GetVariance(double[] pmf)
         {
             var total = 0.0;
             var mean = GetExpectation(pmf);
@@ -83,7 +85,7 @@ namespace ImageProcessing.DomainModel.Services.Distribution
             return total;
         }
 
-        public static double GetVariance(Bitmap bitmap)
+        public double GetVariance(Bitmap bitmap)
         {
             var frequencies = GetFrequencies(bitmap);
             var pmf = GetPMF(frequencies, bitmap.Width * bitmap.Height);
@@ -91,12 +93,12 @@ namespace ImageProcessing.DomainModel.Services.Distribution
             return GetVariance(pmf);
         }
 
-        public static double GetStandardDeviation(double[] pmf)
+        public double GetStandardDeviation(double[] pmf)
         {
             return Math.Sqrt(GetVariance(pmf));
         }
 
-        public static double GetStandardDeviation(Bitmap bitmap)
+        public double GetStandardDeviation(Bitmap bitmap)
         {
             var frequencies = GetFrequencies(bitmap);
             var pmf = GetPMF(frequencies, bitmap.Width * bitmap.Height);
@@ -104,7 +106,7 @@ namespace ImageProcessing.DomainModel.Services.Distribution
             return Math.Sqrt(GetVariance(pmf));
         }
 
-        public static double GetConditionalExpectation(int x1, int x2, double[] pmf)
+        public double GetConditionalExpectation(int x1, int x2, double[] pmf)
         {
             var uvalue = 0.0;
             var lvalue = 0.0;
@@ -118,7 +120,7 @@ namespace ImageProcessing.DomainModel.Services.Distribution
             return uvalue / lvalue;
         }
 
-        public static double GetConditionalVariance(int x1, int x2, double[] frequencies)
+        public double GetConditionalVariance(int x1, int x2, double[] frequencies)
         {
             var mean = GetConditionalExpectation(x1, x2, frequencies);
 
@@ -135,7 +137,7 @@ namespace ImageProcessing.DomainModel.Services.Distribution
         }
 
 
-        public static int[] GetFrequencies(Bitmap bitmap)
+        public int[] GetFrequencies(Bitmap bitmap)
         {          
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), 
                                              ImageLockMode.ReadWrite,
@@ -183,7 +185,7 @@ namespace ImageProcessing.DomainModel.Services.Distribution
             return frequencies;
         }
 
-        public static double[] GetCDF(double[] pmf)
+        public double[] GetCDF(double[] pmf)
         {
             var cdf = pmf.Clone() as double[];
 
@@ -195,12 +197,12 @@ namespace ImageProcessing.DomainModel.Services.Distribution
             return cdf;
         }
 
-        public static double[] GetPMF(int[] frequencies, double resolution)
+        public double[] GetPMF(int[] frequencies, double resolution)
         {
             return frequencies.AsParallel().Select(x => (double)x / resolution).ToArray();
         }
 
-        public static double GetEntropy(Bitmap bmp)
+        public double GetEntropy(Bitmap bmp)
         {
             var entropy = 0.0;
 
@@ -220,11 +222,11 @@ namespace ImageProcessing.DomainModel.Services.Distribution
         }
 
 
-        private static byte[] Transform(double[] cdf, IDistribution distribution)
+        private byte[] Transform(double[] cdf, IDistribution distribution)
         {
             var result = new byte[256];
 
-            //transform an array by quantile function
+            //transform an array by a quantile function
             for (int index = 0; index < 256; ++index)
             {
                 var pixel = distribution.Quantile(cdf[index]);

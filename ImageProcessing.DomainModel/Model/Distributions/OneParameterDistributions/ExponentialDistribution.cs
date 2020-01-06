@@ -6,12 +6,19 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
 {
     class ExponentialDistribution : IDistribution
     {
-        private readonly double _lambda;
+        private double _lambda;
+        public ExponentialDistribution()
+        {
+
+        }
         public ExponentialDistribution(double lambda)
         {
            _lambda = lambda;
-        }     
-        public string Name { get; } = "Exponential Distribution";
+        }
+
+        public double FirstParameter { get { return _lambda; } }
+        public double SecondParameter => throw new NotImplementedException();
+
         public double GetMean() => 1 / _lambda;
         public double GetVariance() => 1 / (_lambda * _lambda);
         public double Quantile(double p) {
@@ -22,6 +29,11 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
             }
             return -Math.Log(1 - p) / _lambda;
 
+        }
+
+        public void SetParams((double, double) parms)
+        {
+            _lambda = parms.Item1;
         }
     }
 }

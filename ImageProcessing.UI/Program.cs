@@ -14,8 +14,6 @@ using System.Windows.Forms;
 
 namespace ImageProcessing
 {
-    
-
     internal static class Program
     {
         public static readonly ApplicationContext Context = new ApplicationContext();

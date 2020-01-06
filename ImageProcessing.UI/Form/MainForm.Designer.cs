@@ -1,4 +1,6 @@
-﻿namespace ImageProcessing
+﻿using System.Windows.Forms;
+
+namespace ImageProcessing
 {
     partial class MainForm
     {
@@ -29,7 +31,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -138,7 +140,6 @@
             this.menuStrip1.Size = new System.Drawing.Size(715, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
@@ -156,7 +157,7 @@
             this.openToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.openToolStripMenuItem1.Size = new System.Drawing.Size(186, 22);
             this.openToolStripMenuItem1.Text = "Open";
-            this.openToolStripMenuItem1.Click += new System.EventHandler(this.OpenFileClick);
+            this.openToolStripMenuItem1.Click += (sender, args) => Invoke(OpenImage);
             // 
             // saveToolStripMenuItem
             // 
@@ -164,7 +165,7 @@
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.saveToolStripMenuItem.Text = "Save";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            this.saveToolStripMenuItem.Click += (sender, args) => Invoke(SaveImage);
             // 
             // saveAsToolStripMenuItem
             // 
@@ -173,7 +174,7 @@
             | System.Windows.Forms.Keys.S)));
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
-            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsClick);
+            this.saveAsToolStripMenuItem.Click += (sender, args) => Invoke(SaveImage);
             // 
             // Filters
             // 
@@ -192,7 +193,7 @@
             this.InverseFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Q)));
             this.InverseFilter.Size = new System.Drawing.Size(172, 22);
             this.InverseFilter.Text = "Inversion";
-            this.InverseFilter.Click += new System.EventHandler(this.InversionFilterClick);
+            this.InverseFilter.Click += (sender, args) => InvokeWithParameter<string>(ApplyRGBFilter, ((ToolStripMenuItem)sender).Tag.ToString());
             // 
             // GrayScaleFilter
             // 
@@ -200,7 +201,7 @@
             this.GrayScaleFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.W)));
             this.GrayScaleFilter.Size = new System.Drawing.Size(172, 22);
             this.GrayScaleFilter.Text = "GrayScale";
-            this.GrayScaleFilter.Click += new System.EventHandler(this.GrayScaleFilterClick);
+            this.GrayScaleFilter.Click += (sender, args) => InvokeWithParameter<string>(ApplyRGBFilter, ((ToolStripMenuItem)sender).Tag.ToString());
             // 
             // BinaryFilter
             // 
@@ -208,7 +209,7 @@
             this.BinaryFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
             this.BinaryFilter.Size = new System.Drawing.Size(172, 22);
             this.BinaryFilter.Text = "Binary";
-            this.BinaryFilter.Click += new System.EventHandler(this.BinaryFilterClick);
+            this.BinaryFilter.Click += (sender, args) => InvokeWithParameter<string>(ApplyRGBFilter, ((ToolStripMenuItem)sender).Tag.ToString());
             // 
             // ColorFilter
             // 
@@ -227,7 +228,7 @@
             this.ColorFilterRed.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
             this.ColorFilterRed.Size = new System.Drawing.Size(147, 22);
             this.ColorFilterRed.Text = "Red";
-            this.ColorFilterRed.Click += new System.EventHandler(this.ColorFilterRedClick);
+          //  this.ColorFilterRed.Click += new System.EventHandler(this.ColorFilterRedClick);
             // 
             // ColorFilterGreen
             // 
@@ -235,7 +236,7 @@
             this.ColorFilterGreen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
             this.ColorFilterGreen.Size = new System.Drawing.Size(147, 22);
             this.ColorFilterGreen.Text = "Green";
-            this.ColorFilterGreen.Click += new System.EventHandler(this.ColorFilterGreenClick);
+        //    this.ColorFilterGreen.Click += new System.EventHandler(this.ColorFilterGreenClick);
             // 
             // ColorFilterBlue
             // 
@@ -243,7 +244,7 @@
             this.ColorFilterBlue.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
             this.ColorFilterBlue.Size = new System.Drawing.Size(147, 22);
             this.ColorFilterBlue.Text = "Blue";
-            this.ColorFilterBlue.Click += new System.EventHandler(this.ColorFilterBlueClick);
+    //        this.ColorFilterBlue.Click += new System.EventHandler(this.ColorFilterBlueClick);
             // 
             // Distributions
             // 
@@ -268,14 +269,16 @@
             this.ExponentialDistribution.Name = "ExponentialDistribution";
             this.ExponentialDistribution.Size = new System.Drawing.Size(135, 22);
             this.ExponentialDistribution.Text = "Exponential";
-            this.ExponentialDistribution.Click += new System.EventHandler(this.ExponentialDistributionClick);
+            this.ExponentialDistribution.Click += (sender, args) => 
+            InvokeWithTwoParameters<string, (double, double)>(ApplyHistogramTransformation, ((ToolStripMenuItem)sender).Tag.ToString(), this.Parameters);
             // 
             // RayleighDistribution
             // 
             this.RayleighDistribution.Name = "RayleighDistribution";
             this.RayleighDistribution.Size = new System.Drawing.Size(135, 22);
             this.RayleighDistribution.Text = "Rayleigh";
-            this.RayleighDistribution.Click += new System.EventHandler(this.RayleighDistributionClick);
+            this.RayleighDistribution.Click += (sender, args) =>
+            InvokeWithTwoParameters<string, (double, double)>(ApplyHistogramTransformation, ((ToolStripMenuItem)sender).Tag.ToString(), this.Parameters);
             // 
             // TwoParameterDistributions
             // 
@@ -295,42 +298,48 @@
             this.UniformDistribution.Name = "UniformDistribution";
             this.UniformDistribution.Size = new System.Drawing.Size(120, 22);
             this.UniformDistribution.Text = "Uniform";
-            this.UniformDistribution.Click += new System.EventHandler(this.UniformDistributionClick);
+            this.UniformDistribution.Click += (sender, args) =>
+            InvokeWithTwoParameters<string, (double, double)>(ApplyHistogramTransformation, ((ToolStripMenuItem)sender).Tag.ToString(), this.Parameters);
             // 
             // CauchyDistribution
             // 
             this.CauchyDistribution.Name = "CauchyDistribution";
             this.CauchyDistribution.Size = new System.Drawing.Size(120, 22);
             this.CauchyDistribution.Text = "Cauchy";
-            this.CauchyDistribution.Click += new System.EventHandler(this.CauchyDistributionClick);
+            this.CauchyDistribution.Click += (sender, args) =>
+            InvokeWithTwoParameters<string, (double, double)>(ApplyHistogramTransformation, ((ToolStripMenuItem)sender).Tag.ToString(), this.Parameters);
             // 
             // WeibullDistribution
             // 
             this.WeibullDistribution.Name = "WeibullDistribution";
             this.WeibullDistribution.Size = new System.Drawing.Size(120, 22);
             this.WeibullDistribution.Text = "Weibull";
-            this.WeibullDistribution.Click += new System.EventHandler(this.WeibullDistributionClick);
+            this.WeibullDistribution.Click += (sender, args) =>
+            InvokeWithTwoParameters<string, (double, double)>(ApplyHistogramTransformation, ((ToolStripMenuItem)sender).Tag.ToString(), this.Parameters);
             // 
             // LaplaceDistribution
             // 
             this.LaplaceDistribution.Name = "LaplaceDistribution";
             this.LaplaceDistribution.Size = new System.Drawing.Size(120, 22);
             this.LaplaceDistribution.Text = "Laplace";
-            this.LaplaceDistribution.Click += new System.EventHandler(this.LaplacianDistributionClick);
+            this.LaplaceDistribution.Click += (sender, args) =>
+            InvokeWithTwoParameters<string, (double, double)>(ApplyHistogramTransformation, ((ToolStripMenuItem)sender).Tag.ToString(), this.Parameters);
             // 
             // NormalDistribution
             // 
             this.NormalDistribution.Name = "NormalDistribution";
             this.NormalDistribution.Size = new System.Drawing.Size(120, 22);
             this.NormalDistribution.Text = "Normal";
-            this.NormalDistribution.Click += new System.EventHandler(this.NormalDistributionClick);
+            this.NormalDistribution.Click += (sender, args) =>
+            InvokeWithTwoParameters<string, (double, double)>(ApplyHistogramTransformation, ((ToolStripMenuItem)sender).Tag.ToString(), this.Parameters);
             // 
             // ParabolaDistribution
             // 
             this.ParabolaDistribution.Name = "ParabolaDistribution";
             this.ParabolaDistribution.Size = new System.Drawing.Size(120, 22);
             this.ParabolaDistribution.Text = "Parabola";
-            this.ParabolaDistribution.Click += new System.EventHandler(this.ParabolaDistributionClick);
+            this.ParabolaDistribution.Click += (sender, args) =>
+            InvokeWithTwoParameters<string, (double, double)>(ApplyHistogramTransformation, ((ToolStripMenuItem)sender).Tag.ToString(), this.Parameters);
             // 
             // ConvolutionFilters
             // 
@@ -367,28 +376,27 @@
             this.LaplacianOperator3x3.Name = "LaplacianOperator3x3";
             this.LaplacianOperator3x3.Size = new System.Drawing.Size(135, 22);
             this.LaplacianOperator3x3.Text = "3 x 3";
-            this.LaplacianOperator3x3.Click += new System.EventHandler(this.LaplacianOperator3x3Click);
+            this.LaplacianOperator3x3.Click += (sender, args) => InvokeWithParameter<string>(ApplyConvolutionFilter, ((ToolStripMenuItem)sender).Tag.ToString());
             // 
             // LaplacianOperator5x5
             // 
             this.LaplacianOperator5x5.Name = "LaplacianOperator5x5";
             this.LaplacianOperator5x5.Size = new System.Drawing.Size(135, 22);
             this.LaplacianOperator5x5.Text = "5 x 5";
-            this.LaplacianOperator5x5.Click += new System.EventHandler(this.LaplacianOperator5x5Click);
-            // 
+            this.LaplacianOperator5x5.Click += (sender, args) => InvokeWithParameter<string>(ApplyConvolutionFilter, ((ToolStripMenuItem)sender).Tag.ToString());
             // LaplacianOfGaussianOperator
             // 
             this.LaplacianOfGaussianOperator.Name = "LaplacianOfGaussianOperator";
             this.LaplacianOfGaussianOperator.Size = new System.Drawing.Size(135, 22);
             this.LaplacianOfGaussianOperator.Text = "of Gaussian";
-            this.LaplacianOfGaussianOperator.Click += new System.EventHandler(this.LaplacianOfGaussianClick);
+            this.LaplacianOfGaussianOperator.Click += (sender, args) => InvokeWithParameter<string>(ApplyConvolutionFilter, ((ToolStripMenuItem)sender).Tag.ToString());
             // 
             // SobelOperator
             // 
             this.SobelOperator.Name = "SobelOperator";
             this.SobelOperator.Size = new System.Drawing.Size(174, 22);
             this.SobelOperator.Text = "Sobel Operator";
-            this.SobelOperator.Click += new System.EventHandler(this.SobelOperatorHorizontalClick);
+          //  this.SobelOperator.Click += new System.EventHandler(this.SobelOperatorHorizontalClick);
             // 
             // BlurFilter
             // 
@@ -414,14 +422,14 @@
             this.BoxBlur3x3.Name = "BoxBlur3x3";
             this.BoxBlur3x3.Size = new System.Drawing.Size(97, 22);
             this.BoxBlur3x3.Text = "3 x 3";
-            this.BoxBlur3x3.Click += new System.EventHandler(this.BoxBlur3x3Click);
+            this.BoxBlur3x3.Click += (sender, args) => InvokeWithParameter<string>(ApplyConvolutionFilter, ((ToolStripMenuItem)sender).Tag.ToString());
             // 
             // BoxBlur5x5
             // 
             this.BoxBlur5x5.Name = "BoxBlur5x5";
             this.BoxBlur5x5.Size = new System.Drawing.Size(97, 22);
             this.BoxBlur5x5.Text = "5 x 5";
-            this.BoxBlur5x5.Click += new System.EventHandler(this.BoxBlur5x5Click);
+            this.BoxBlur5x5.Click += (sender, args) => InvokeWithParameter<string>(ApplyConvolutionFilter, ((ToolStripMenuItem)sender).Tag.ToString());
             // 
             // GaussianBlur
             // 
@@ -437,14 +445,14 @@
             this.GaussianBlur3x3.Name = "GaussianBlur3x3";
             this.GaussianBlur3x3.Size = new System.Drawing.Size(97, 22);
             this.GaussianBlur3x3.Text = "3 x 3";
-            this.GaussianBlur3x3.Click += new System.EventHandler(this.GaussianBlur3x3Click);
+            this.GaussianBlur3x3.Click += (sender, args) => InvokeWithParameter<string>(ApplyConvolutionFilter, ((ToolStripMenuItem)sender).Tag.ToString());
             // 
             // GaussianBlur5x5
             // 
             this.GaussianBlur5x5.Name = "GaussianBlur5x5";
             this.GaussianBlur5x5.Size = new System.Drawing.Size(97, 22);
             this.GaussianBlur5x5.Text = "5 x 5";
-            this.GaussianBlur5x5.Click += new System.EventHandler(this.GaussianBlur5x5Click);
+            this.GaussianBlur5x5.Click += (sender, args) => InvokeWithParameter<string>(ApplyConvolutionFilter, ((ToolStripMenuItem)sender).Tag.ToString());
             // 
             // MotionBlur
             // 
@@ -459,7 +467,7 @@
             this.MotionBlur9x9.Name = "MotionBlur9x9";
             this.MotionBlur9x9.Size = new System.Drawing.Size(97, 22);
             this.MotionBlur9x9.Text = "9 x 9";
-            this.MotionBlur9x9.Click += new System.EventHandler(this.MotionBlurFilter9x9Click);
+            this.MotionBlur9x9.Click += (sender, args) => InvokeWithParameter<string>(ApplyConvolutionFilter, ((ToolStripMenuItem)sender).Tag.ToString());
             // 
             // EmbossFilter
             // 
@@ -474,7 +482,7 @@
             this.Emboss3x3.Name = "Emboss3x3";
             this.Emboss3x3.Size = new System.Drawing.Size(97, 22);
             this.Emboss3x3.Text = "3 x 3";
-            this.Emboss3x3.Click += new System.EventHandler(this.EmbossFilter3x3Click);
+            this.Emboss3x3.Click += (sender, args) => InvokeWithParameter<string>(ApplyConvolutionFilter, ((ToolStripMenuItem)sender).Tag.ToString());
             // 
             // SharpenFilter
             // 
@@ -489,7 +497,7 @@
             this.Sharpen3x3.Name = "Sharpen3x3";
             this.Sharpen3x3.Size = new System.Drawing.Size(97, 22);
             this.Sharpen3x3.Text = "3 x 3";
-            this.Sharpen3x3.Click += new System.EventHandler(this.Sharpen3x3Click);
+            this.Sharpen3x3.Click += (sender, args) => InvokeWithParameter<string>(ApplyConvolutionFilter, ((ToolStripMenuItem)sender).Tag.ToString());
             // 
             // miniToolStrip
             // 
@@ -545,8 +553,8 @@
             // 
             this.FirstParam.Name = "FirstParam";
             this.FirstParam.Size = new System.Drawing.Size(75, 25);
-            this.FirstParam.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AcceptOnlyDigits);
-            this.FirstParam.TextChanged += new System.EventHandler(this.CheckOverflow);
+        //    this.FirstParam.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AcceptOnlyDigits);
+        //    this.FirstParam.TextChanged += new System.EventHandler(this.CheckOverflow);
             // 
             // SecondParamLabel
             // 
@@ -559,8 +567,8 @@
             // 
             this.SecondParam.Name = "SecondParam";
             this.SecondParam.Size = new System.Drawing.Size(75, 25);
-            this.SecondParam.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AcceptOnlyDigits);
-            this.SecondParam.TextChanged += new System.EventHandler(this.CheckOverflow);
+      //      this.SecondParam.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AcceptOnlyDigits);
+        //    this.SecondParam.TextChanged += new System.EventHandler(this.CheckOverflow);
             // 
             // pmf
             // 
@@ -571,7 +579,7 @@
             this.pmf.Name = "pmf";
             this.pmf.Size = new System.Drawing.Size(37, 22);
             this.pmf.ToolTipText = "Гистограмма исходного изображения";
-            this.pmf.Click += new System.EventHandler(this.BuildSrcHistogramClick);
+            //this.pmf.Click += new System.EventHandler(this.BuildSrcHistogramClick);
             // 
             // cdf
             // 
@@ -582,7 +590,7 @@
             this.cdf.Name = "cdf";
             this.cdf.Size = new System.Drawing.Size(41, 22);
             this.cdf.Text = "toolStripButton8";
-            this.cdf.Click += new System.EventHandler(this.toolStripButton8_Click);
+            //this.cdf.Click += new System.EventHandler(this.toolStripButton8_Click);
             // 
             // change
             // 
@@ -592,7 +600,7 @@
             this.change.Name = "change";
             this.change.Size = new System.Drawing.Size(23, 22);
             this.change.ToolTipText = "Заменить исходное изображение";
-            this.change.Click += new System.EventHandler(this.ChangeSrcImageClick);
+         //   this.change.Click += new System.EventHandler(this.ChangeSrcImageClick);
             // 
             // toolStripButton1
             // 
@@ -602,7 +610,7 @@
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton1.Text = "toolStripButton1";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+           // this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // undo
             // 
@@ -612,7 +620,7 @@
             this.undo.Name = "undo";
             this.undo.Size = new System.Drawing.Size(23, 22);
             this.undo.ToolTipText = "Назад";
-            this.undo.Click += new System.EventHandler(this.UndoBtnClick);
+         //   this.undo.Click += new System.EventHandler(this.UndoBtnClick);
             // 
             // PathToImage
             // 
@@ -629,7 +637,7 @@
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Name = "toolStripButton5";
             this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
+           // this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
             // toolStripButton7
             // 
@@ -639,7 +647,7 @@
             this.toolStripButton7.Name = "toolStripButton7";
             this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton7.Text = "Shuffle";
-            this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_ClickAsync);
+  //          this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_ClickAsync);
             // 
             // ZoomInSrcBtn
             // 
@@ -650,7 +658,7 @@
             this.ZoomInSrcBtn.Size = new System.Drawing.Size(23, 22);
             this.ZoomInSrcBtn.Text = "toolStripButton8";
             this.ZoomInSrcBtn.ToolTipText = "100%";
-            this.ZoomInSrcBtn.Click += new System.EventHandler(this.ZoomInSrc);
+          //  this.ZoomInSrcBtn.Click += new System.EventHandler(this.ZoomInSrc);
             // 
             // ZoomOutSrcBtn
             // 
@@ -661,7 +669,7 @@
             this.ZoomOutSrcBtn.Size = new System.Drawing.Size(23, 22);
             this.ZoomOutSrcBtn.Text = "toolStripButton9";
             this.ZoomOutSrcBtn.ToolTipText = "100%";
-            this.ZoomOutSrcBtn.Click += new System.EventHandler(this.ZoomOutSrc);
+         //   this.ZoomOutSrcBtn.Click += new System.EventHandler(this.ZoomOutSrc);
             // 
             // ZoomInDstBtn
             // 
@@ -672,7 +680,7 @@
             this.ZoomInDstBtn.Size = new System.Drawing.Size(23, 22);
             this.ZoomInDstBtn.Text = "toolStripButton10";
             this.ZoomInDstBtn.ToolTipText = "100%";
-            this.ZoomInDstBtn.Click += new System.EventHandler(this.ZoomInDst);
+         //   this.ZoomInDstBtn.Click += new System.EventHandler(this.ZoomInDst);
             // 
             // ZoomOutDstBtn
             // 
@@ -683,7 +691,7 @@
             this.ZoomOutDstBtn.Size = new System.Drawing.Size(23, 22);
             this.ZoomOutDstBtn.Text = "toolStripButton11";
             this.ZoomOutDstBtn.ToolTipText = "100%";
-            this.ZoomOutDstBtn.Click += new System.EventHandler(this.ZoomOutDst);
+        //    this.ZoomOutDstBtn.Click += new System.EventHandler(this.ZoomOutDst);
             // 
             // toolStripButton11
             // 
@@ -693,7 +701,7 @@
             this.toolStripButton11.Name = "toolStripButton11";
             this.toolStripButton11.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton11.Text = "toolStripButton11";
-            this.toolStripButton11.Click += new System.EventHandler(this.toolStripButton11_Click);
+          //  this.toolStripButton11.Click += new System.EventHandler(this.toolStripButton11_Click);
             // 
             // compare
             // 
@@ -703,7 +711,7 @@
             this.compare.Name = "compare";
             this.compare.Size = new System.Drawing.Size(23, 22);
             this.compare.Text = "toolStripButton1";
-            this.compare.Click += new System.EventHandler(this.compare_Click);
+        //    this.compare.Click += new System.EventHandler(this.compare_Click);
             // 
             // Src
             // 
@@ -753,7 +761,7 @@
             this.Expectation.Name = "Expectation";
             this.Expectation.Size = new System.Drawing.Size(41, 22);
             this.Expectation.Text = "toolStripButton2";
-            this.Expectation.Click += new System.EventHandler(this.Expectation_Click);
+          //  this.Expectation.Click += new System.EventHandler(this.Expectation_Click);
             // 
             // Variance
             // 
@@ -764,7 +772,7 @@
             this.Variance.Name = "Variance";
             this.Variance.Size = new System.Drawing.Size(56, 22);
             this.Variance.Text = "toolStripButton2";
-            this.Variance.Click += new System.EventHandler(this.Variance_Click);
+          //  this.Variance.Click += new System.EventHandler(this.Variance_Click);
             // 
             // sderivation
             // 
@@ -775,7 +783,7 @@
             this.sderivation.Name = "sderivation";
             this.sderivation.Size = new System.Drawing.Size(23, 22);
             this.sderivation.Text = "toolStripButton2";
-            this.sderivation.Click += new System.EventHandler(this.sderivation_Click);
+            //this.sderivation.Click += new System.EventHandler(this.sderivation_Click);
             // 
             // Main
             // 

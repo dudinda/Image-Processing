@@ -10,7 +10,7 @@ namespace ImageProcessing.Common.Extensions.TypeExtensions
             Func<TAttribute, TValue> valueSelector) where TAttribute : Attribute
         {
 
-            if (valueSelector == null)
+            if (valueSelector is null)
             {
                 throw new ArgumentNullException(nameof(valueSelector));
             }

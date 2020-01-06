@@ -6,14 +6,21 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
 {
     class ParabolaDistribution : IDistribution
     {
-        private readonly double _k;
+        private double _k;
+
+        public ParabolaDistribution()
+        {
+
+        }
 
         public ParabolaDistribution(double k)
         {
             _k = k;
         }
 
-        public string Name { get; } = "Parabola distribution";
+        public double FirstParameter { get { return _k; } }
+        public double SecondParameter => throw new NotImplementedException();
+
         public double Quantile(double p)
         {
             return _k * (1 - Math.Pow(1 - p, 0.3));
@@ -25,6 +32,11 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
         public double GetVariance()
         {
             throw new NotImplementedException();
+        }
+
+        public void SetParams((double, double) parms)
+        {
+            _k = parms.Item1;
         }
     }
 }
