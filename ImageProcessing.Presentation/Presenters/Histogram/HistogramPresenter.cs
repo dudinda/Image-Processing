@@ -10,6 +10,7 @@ namespace ImageProcessing.Presentation.Presenters
     public class HistogramPresenter : BasePresenter<IHistogramView, Bitmap>
     {
         private readonly IDistributionService _distributionService;
+
         private Bitmap _src;
         public HistogramPresenter(IAppController controller, 
                                   IHistogramView view, 
@@ -40,8 +41,6 @@ namespace ImageProcessing.Presentation.Presenters
             {
                 chart.Series["p(x)"].Points.AddXY(graylevel, pmf[graylevel]);
             }
-
-
         }
 
         private void BuildCDF(Bitmap bitmap)

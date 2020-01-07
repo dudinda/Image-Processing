@@ -1,4 +1,4 @@
-﻿namespace ImageProcessing
+﻿namespace ImageProcessing.Form.Histogram
 {
     partial class HistogramForm
     {

@@ -1,4 +1,4 @@
-﻿using ImageProcessing.RGBFilters.Abstract;
+﻿using ImageProcessing.RGBFilters.Interface;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -50,20 +50,19 @@ namespace ImageProcessing.RGBFilters.Binary
 
                 Parallel.For(0, size.Height, options, y =>
                 {
-                    //получить адрес строки
                     var ptr = startPtr + y * bitmapData.Stride;
 
                     for (int x = 0; x < size.Width; ++x, ptr += 3)
                     {
                         brightness = 0.299 * ptr[2] + 0.587 * ptr[1] + 0.114 * ptr[0];
 
-                        //если яркость больше средней 
-                        //назначить белый
+                        //if relative luminance greater or equal than average
+                        //set it to white
                         if (brightness >= average)
                         {
                             ptr[0] = ptr[1] = ptr[2] = 255;
                         }
-                        //иначен назначить черный
+                        //else to black
                         else
                         {
                             ptr[0] = ptr[1] = ptr[2] = 0;

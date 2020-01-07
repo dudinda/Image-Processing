@@ -18,8 +18,8 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
             _b = b;
         }
 
-        public double FirstParameter { get { return _a; } }
-        public double SecondParameter { get { return _b; } }
+        public double FirstParameter => _a;
+        public double SecondParameter => _b;
 
         public double GetMean() => (_a + _b) / 2;
         public double GetVariance() => (_b - _a) * (_b - _a) / 12;

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace ImageProcessing
+namespace ImageProcessing.Form.Main
 {
     partial class MainForm
     {
@@ -31,15 +31,14 @@ namespace ImageProcessing
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenFile = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveFile = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveFileAs = new System.Windows.Forms.ToolStripMenuItem();
-            this.Filters = new System.Windows.Forms.ToolStripMenuItem();
+            this.FiltersMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.InversionFilter = new System.Windows.Forms.ToolStripMenuItem();
             this.GrayscaleFilter = new System.Windows.Forms.ToolStripMenuItem();
             this.BinaryFilter = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,7 +46,7 @@ namespace ImageProcessing
             this.ColorFilterRed = new System.Windows.Forms.ToolStripMenuItem();
             this.ColorFilterGreen = new System.Windows.Forms.ToolStripMenuItem();
             this.ColorFilterBlue = new System.Windows.Forms.ToolStripMenuItem();
-            this.Distributions = new System.Windows.Forms.ToolStripMenuItem();
+            this.DistributionsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.OneParameterDistributions = new System.Windows.Forms.ToolStripMenuItem();
             this.ExponentialDistribution = new System.Windows.Forms.ToolStripMenuItem();
             this.RayleighDistribution = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,7 +57,7 @@ namespace ImageProcessing
             this.LaplaceDistribution = new System.Windows.Forms.ToolStripMenuItem();
             this.NormalDistribution = new System.Windows.Forms.ToolStripMenuItem();
             this.ParabolaDistribution = new System.Windows.Forms.ToolStripMenuItem();
-            this.ConvolutionFilters = new System.Windows.Forms.ToolStripMenuItem();
+            this.ConvolutionFiltersMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.EdgeDetectionFilter = new System.Windows.Forms.ToolStripMenuItem();
             this.LaplacianOperator = new System.Windows.Forms.ToolStripMenuItem();
             this.LaplacianOperator3x3 = new System.Windows.Forms.ToolStripMenuItem();
@@ -89,8 +88,8 @@ namespace ImageProcessing
             this.Expectation = new System.Windows.Forms.ToolStripButton();
             this.Variance = new System.Windows.Forms.ToolStripButton();
             this.StandardDeviation = new System.Windows.Forms.ToolStripButton();
-            this.change = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.ReplaceSrcByDst = new System.Windows.Forms.ToolStripButton();
+            this.ReplaceDstBySrc = new System.Windows.Forms.ToolStripButton();
             this.Undo = new System.Windows.Forms.ToolStripButton();
             this.PathToImage = new System.Windows.Forms.ToolStripLabel();
             this.Entropy = new System.Windows.Forms.ToolStripButton();
@@ -99,19 +98,19 @@ namespace ImageProcessing
             this.ZoomOutSrcBtn = new System.Windows.Forms.ToolStripButton();
             this.ZoomInDstBtn = new System.Windows.Forms.ToolStripButton();
             this.ZoomOutDstBtn = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
-            this.compare = new System.Windows.Forms.ToolStripButton();
-            this.Src = new System.Windows.Forms.PictureBox();
+            this.IntervalLuminanceHistogram = new System.Windows.Forms.ToolStripButton();
+            this.AddDstToLuminanceHistogram = new System.Windows.Forms.ToolStripButton();
             this.ImageContainer = new System.Windows.Forms.SplitContainer();
+            this.Src = new System.Windows.Forms.PictureBox();
             this.Dst = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.MenuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Src)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImageContainer)).BeginInit();
             this.ImageContainer.Panel1.SuspendLayout();
             this.ImageContainer.Panel2.SuspendLayout();
             this.ImageContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Src)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dst)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,25 +130,25 @@ namespace ImageProcessing
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.Filters,
-            this.Distributions,
-            this.ConvolutionFilters});
+            this.FileMenu,
+            this.FiltersMenu,
+            this.ConvolutionFiltersMenu,
+            this.DistributionsMenu});
             this.menuStrip1.Location = new System.Drawing.Point(20, 60);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(715, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // fileToolStripMenuItem
+            // FileMenu
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OpenFile,
             this.SaveFile,
             this.SaveFileAs});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
+            this.FileMenu.Name = "FileMenu";
+            this.FileMenu.Size = new System.Drawing.Size(37, 20);
+            this.FileMenu.Text = "File";
             // 
             // OpenFile
             // 
@@ -173,36 +172,39 @@ namespace ImageProcessing
             this.SaveFileAs.Size = new System.Drawing.Size(186, 22);
             this.SaveFileAs.Text = "Save As";
             // 
-            // Filters
+            // FiltersMenu
             // 
-            this.Filters.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FiltersMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.InversionFilter,
             this.GrayscaleFilter,
             this.BinaryFilter,
             this.ColorFilter});
-            this.Filters.Name = "Filters";
-            this.Filters.Size = new System.Drawing.Size(50, 20);
-            this.Filters.Text = "Filters";
+            this.FiltersMenu.Name = "FiltersMenu";
+            this.FiltersMenu.Size = new System.Drawing.Size(50, 20);
+            this.FiltersMenu.Text = "Filters";
             // 
             // InversionFilter
             // 
             this.InversionFilter.Name = "InversionFilter";
             this.InversionFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Q)));
-            this.InversionFilter.Size = new System.Drawing.Size(172, 22);
+            this.InversionFilter.Size = new System.Drawing.Size(180, 22);
+            this.InversionFilter.Tag = "Inversion";
             this.InversionFilter.Text = "Inversion";
             // 
             // GrayscaleFilter
             // 
             this.GrayscaleFilter.Name = "GrayscaleFilter";
             this.GrayscaleFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.W)));
-            this.GrayscaleFilter.Size = new System.Drawing.Size(172, 22);
+            this.GrayscaleFilter.Size = new System.Drawing.Size(180, 22);
+            this.GrayscaleFilter.Tag = "Grayscale";
             this.GrayscaleFilter.Text = "GrayScale";
             // 
             // BinaryFilter
             // 
             this.BinaryFilter.Name = "BinaryFilter";
             this.BinaryFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
-            this.BinaryFilter.Size = new System.Drawing.Size(172, 22);
+            this.BinaryFilter.Size = new System.Drawing.Size(180, 22);
+            this.BinaryFilter.Tag = "Binary";
             this.BinaryFilter.Text = "Binary";
             // 
             // ColorFilter
@@ -213,38 +215,38 @@ namespace ImageProcessing
             this.ColorFilterBlue});
             this.ColorFilter.Name = "ColorFilter";
             this.ColorFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.R)));
-            this.ColorFilter.Size = new System.Drawing.Size(172, 22);
+            this.ColorFilter.Size = new System.Drawing.Size(180, 22);
             this.ColorFilter.Text = "Color filters";
             // 
             // ColorFilterRed
             // 
             this.ColorFilterRed.Name = "ColorFilterRed";
             this.ColorFilterRed.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.ColorFilterRed.Size = new System.Drawing.Size(147, 22);
+            this.ColorFilterRed.Size = new System.Drawing.Size(180, 22);
             this.ColorFilterRed.Text = "Red";
             // 
             // ColorFilterGreen
             // 
             this.ColorFilterGreen.Name = "ColorFilterGreen";
             this.ColorFilterGreen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.ColorFilterGreen.Size = new System.Drawing.Size(147, 22);
+            this.ColorFilterGreen.Size = new System.Drawing.Size(180, 22);
             this.ColorFilterGreen.Text = "Green";
             // 
             // ColorFilterBlue
             // 
             this.ColorFilterBlue.Name = "ColorFilterBlue";
             this.ColorFilterBlue.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
-            this.ColorFilterBlue.Size = new System.Drawing.Size(147, 22);
+            this.ColorFilterBlue.Size = new System.Drawing.Size(180, 22);
             this.ColorFilterBlue.Text = "Blue";
             // 
-            // Distributions
+            // DistributionsMenu
             // 
-            this.Distributions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DistributionsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OneParameterDistributions,
             this.TwoParameterDistributions});
-            this.Distributions.Name = "Distributions";
-            this.Distributions.Size = new System.Drawing.Size(86, 20);
-            this.Distributions.Text = "Distributions";
+            this.DistributionsMenu.Name = "DistributionsMenu";
+            this.DistributionsMenu.Size = new System.Drawing.Size(86, 20);
+            this.DistributionsMenu.Text = "Distributions";
             // 
             // OneParameterDistributions
             // 
@@ -252,19 +254,21 @@ namespace ImageProcessing
             this.ExponentialDistribution,
             this.RayleighDistribution});
             this.OneParameterDistributions.Name = "OneParameterDistributions";
-            this.OneParameterDistributions.Size = new System.Drawing.Size(155, 22);
+            this.OneParameterDistributions.Size = new System.Drawing.Size(180, 22);
             this.OneParameterDistributions.Text = "One-parameter";
             // 
             // ExponentialDistribution
             // 
             this.ExponentialDistribution.Name = "ExponentialDistribution";
-            this.ExponentialDistribution.Size = new System.Drawing.Size(136, 22);
+            this.ExponentialDistribution.Size = new System.Drawing.Size(180, 22);
+            this.ExponentialDistribution.Tag = "Exponential";
             this.ExponentialDistribution.Text = "Exponential";
             // 
             // RayleighDistribution
             // 
             this.RayleighDistribution.Name = "RayleighDistribution";
-            this.RayleighDistribution.Size = new System.Drawing.Size(136, 22);
+            this.RayleighDistribution.Size = new System.Drawing.Size(180, 22);
+            this.RayleighDistribution.Tag = "Rayleigh";
             this.RayleighDistribution.Text = "Rayleigh";
             // 
             // TwoParameterDistributions
@@ -277,55 +281,61 @@ namespace ImageProcessing
             this.NormalDistribution,
             this.ParabolaDistribution});
             this.TwoParameterDistributions.Name = "TwoParameterDistributions";
-            this.TwoParameterDistributions.Size = new System.Drawing.Size(155, 22);
+            this.TwoParameterDistributions.Size = new System.Drawing.Size(180, 22);
             this.TwoParameterDistributions.Text = "Two-parameter";
             // 
             // UniformDistribution
             // 
             this.UniformDistribution.Name = "UniformDistribution";
-            this.UniformDistribution.Size = new System.Drawing.Size(120, 22);
+            this.UniformDistribution.Size = new System.Drawing.Size(180, 22);
+            this.UniformDistribution.Tag = "Uniform";
             this.UniformDistribution.Text = "Uniform";
             // 
             // CauchyDistribution
             // 
             this.CauchyDistribution.Name = "CauchyDistribution";
-            this.CauchyDistribution.Size = new System.Drawing.Size(120, 22);
+            this.CauchyDistribution.Size = new System.Drawing.Size(180, 22);
+            this.CauchyDistribution.Tag = "Cauchy";
             this.CauchyDistribution.Text = "Cauchy";
             // 
             // WeibullDistribution
             // 
             this.WeibullDistribution.Name = "WeibullDistribution";
-            this.WeibullDistribution.Size = new System.Drawing.Size(120, 22);
+            this.WeibullDistribution.Size = new System.Drawing.Size(180, 22);
+            this.WeibullDistribution.Tag = "Weibull";
             this.WeibullDistribution.Text = "Weibull";
             // 
             // LaplaceDistribution
             // 
             this.LaplaceDistribution.Name = "LaplaceDistribution";
-            this.LaplaceDistribution.Size = new System.Drawing.Size(120, 22);
+            this.LaplaceDistribution.Size = new System.Drawing.Size(180, 22);
+            this.LaplaceDistribution.Tag = "Laplace";
             this.LaplaceDistribution.Text = "Laplace";
             // 
             // NormalDistribution
             // 
             this.NormalDistribution.Name = "NormalDistribution";
-            this.NormalDistribution.Size = new System.Drawing.Size(120, 22);
+            this.NormalDistribution.Size = new System.Drawing.Size(180, 22);
+            this.NormalDistribution.Tag = "Normal";
             this.NormalDistribution.Text = "Normal";
             // 
             // ParabolaDistribution
             // 
             this.ParabolaDistribution.Name = "ParabolaDistribution";
-            this.ParabolaDistribution.Size = new System.Drawing.Size(120, 22);
+            this.ParabolaDistribution.Size = new System.Drawing.Size(180, 22);
+            this.ParabolaDistribution.Tag = "Parabola";
             this.ParabolaDistribution.Text = "Parabola";
             // 
-            // ConvolutionFilters
+            // ConvolutionFiltersMenu
             // 
-            this.ConvolutionFilters.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ConvolutionFiltersMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.EdgeDetectionFilter,
             this.BlurFilter,
             this.EmbossFilter,
             this.SharpenFilter});
-            this.ConvolutionFilters.Name = "ConvolutionFilters";
-            this.ConvolutionFilters.Size = new System.Drawing.Size(119, 20);
-            this.ConvolutionFilters.Text = "Convolution Filters";
+            this.ConvolutionFiltersMenu.Name = "ConvolutionFiltersMenu";
+            this.ConvolutionFiltersMenu.Size = new System.Drawing.Size(119, 20);
+            this.ConvolutionFiltersMenu.Text = "Convolution Filters";
             // 
             // EdgeDetectionFilter
             // 
@@ -333,7 +343,7 @@ namespace ImageProcessing
             this.LaplacianOperator,
             this.SobelOperator});
             this.EdgeDetectionFilter.Name = "EdgeDetectionFilter";
-            this.EdgeDetectionFilter.Size = new System.Drawing.Size(154, 22);
+            this.EdgeDetectionFilter.Size = new System.Drawing.Size(180, 22);
             this.EdgeDetectionFilter.Text = "Edge Detection";
             // 
             // LaplacianOperator
@@ -343,31 +353,34 @@ namespace ImageProcessing
             this.LaplacianOperator5x5,
             this.LaplacianOfGaussianOperator});
             this.LaplacianOperator.Name = "LaplacianOperator";
-            this.LaplacianOperator.Size = new System.Drawing.Size(174, 22);
+            this.LaplacianOperator.Size = new System.Drawing.Size(180, 22);
             this.LaplacianOperator.Text = "Laplacian Operator";
             // 
             // LaplacianOperator3x3
             // 
             this.LaplacianOperator3x3.Name = "LaplacianOperator3x3";
-            this.LaplacianOperator3x3.Size = new System.Drawing.Size(135, 22);
+            this.LaplacianOperator3x3.Size = new System.Drawing.Size(180, 22);
+            this.LaplacianOperator3x3.Tag = "LaplacianOperator3x3";
             this.LaplacianOperator3x3.Text = "3 x 3";
             // 
             // LaplacianOperator5x5
             // 
             this.LaplacianOperator5x5.Name = "LaplacianOperator5x5";
-            this.LaplacianOperator5x5.Size = new System.Drawing.Size(135, 22);
+            this.LaplacianOperator5x5.Size = new System.Drawing.Size(180, 22);
+            this.LaplacianOperator5x5.Tag = "LaplacianOperator5x5";
             this.LaplacianOperator5x5.Text = "5 x 5";
             // 
             // LaplacianOfGaussianOperator
             // 
             this.LaplacianOfGaussianOperator.Name = "LaplacianOfGaussianOperator";
-            this.LaplacianOfGaussianOperator.Size = new System.Drawing.Size(135, 22);
+            this.LaplacianOfGaussianOperator.Size = new System.Drawing.Size(180, 22);
+            this.LaplacianOfGaussianOperator.Tag = "LoGOperator ";
             this.LaplacianOfGaussianOperator.Text = "of Gaussian";
             // 
             // SobelOperator
             // 
             this.SobelOperator.Name = "SobelOperator";
-            this.SobelOperator.Size = new System.Drawing.Size(174, 22);
+            this.SobelOperator.Size = new System.Drawing.Size(180, 22);
             this.SobelOperator.Text = "Sobel Operator";
             // 
             // BlurFilter
@@ -377,7 +390,7 @@ namespace ImageProcessing
             this.GaussianBlur,
             this.MotionBlur});
             this.BlurFilter.Name = "BlurFilter";
-            this.BlurFilter.Size = new System.Drawing.Size(154, 22);
+            this.BlurFilter.Size = new System.Drawing.Size(180, 22);
             this.BlurFilter.Text = "Blur";
             // 
             // BoxBlur
@@ -386,19 +399,21 @@ namespace ImageProcessing
             this.BoxBlur3x3,
             this.BoxBlur5x5});
             this.BoxBlur.Name = "BoxBlur";
-            this.BoxBlur.Size = new System.Drawing.Size(145, 22);
+            this.BoxBlur.Size = new System.Drawing.Size(180, 22);
             this.BoxBlur.Text = "Box Blur";
             // 
             // BoxBlur3x3
             // 
             this.BoxBlur3x3.Name = "BoxBlur3x3";
-            this.BoxBlur3x3.Size = new System.Drawing.Size(98, 22);
+            this.BoxBlur3x3.Size = new System.Drawing.Size(180, 22);
+            this.BoxBlur3x3.Tag = "BoxBlur3x3";
             this.BoxBlur3x3.Text = "3 x 3";
             // 
             // BoxBlur5x5
             // 
             this.BoxBlur5x5.Name = "BoxBlur5x5";
-            this.BoxBlur5x5.Size = new System.Drawing.Size(98, 22);
+            this.BoxBlur5x5.Size = new System.Drawing.Size(180, 22);
+            this.BoxBlur5x5.Tag = "BoxBlur5x5";
             this.BoxBlur5x5.Text = "5 x 5";
             // 
             // GaussianBlur
@@ -407,19 +422,21 @@ namespace ImageProcessing
             this.GaussianBlur3x3,
             this.GaussianBlur5x5});
             this.GaussianBlur.Name = "GaussianBlur";
-            this.GaussianBlur.Size = new System.Drawing.Size(145, 22);
+            this.GaussianBlur.Size = new System.Drawing.Size(180, 22);
             this.GaussianBlur.Text = "Gaussian Blur";
             // 
             // GaussianBlur3x3
             // 
             this.GaussianBlur3x3.Name = "GaussianBlur3x3";
-            this.GaussianBlur3x3.Size = new System.Drawing.Size(98, 22);
+            this.GaussianBlur3x3.Size = new System.Drawing.Size(180, 22);
+            this.GaussianBlur3x3.Tag = "GaussianBlur3x3";
             this.GaussianBlur3x3.Text = "3 x 3";
             // 
             // GaussianBlur5x5
             // 
             this.GaussianBlur5x5.Name = "GaussianBlur5x5";
-            this.GaussianBlur5x5.Size = new System.Drawing.Size(98, 22);
+            this.GaussianBlur5x5.Size = new System.Drawing.Size(180, 22);
+            this.GaussianBlur5x5.Tag = "GaussianBlur5x5";
             this.GaussianBlur5x5.Text = "5 x 5";
             // 
             // MotionBlur
@@ -427,13 +444,14 @@ namespace ImageProcessing
             this.MotionBlur.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MotionBlur9x9});
             this.MotionBlur.Name = "MotionBlur";
-            this.MotionBlur.Size = new System.Drawing.Size(145, 22);
+            this.MotionBlur.Size = new System.Drawing.Size(180, 22);
             this.MotionBlur.Text = "Motion Blur";
             // 
             // MotionBlur9x9
             // 
             this.MotionBlur9x9.Name = "MotionBlur9x9";
-            this.MotionBlur9x9.Size = new System.Drawing.Size(98, 22);
+            this.MotionBlur9x9.Size = new System.Drawing.Size(180, 22);
+            this.MotionBlur9x9.Tag = "MotionBlur9x9";
             this.MotionBlur9x9.Text = "9 x 9";
             // 
             // EmbossFilter
@@ -441,13 +459,14 @@ namespace ImageProcessing
             this.EmbossFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Emboss3x3});
             this.EmbossFilter.Name = "EmbossFilter";
-            this.EmbossFilter.Size = new System.Drawing.Size(154, 22);
+            this.EmbossFilter.Size = new System.Drawing.Size(180, 22);
             this.EmbossFilter.Text = "Emboss";
             // 
             // Emboss3x3
             // 
             this.Emboss3x3.Name = "Emboss3x3";
-            this.Emboss3x3.Size = new System.Drawing.Size(98, 22);
+            this.Emboss3x3.Size = new System.Drawing.Size(180, 22);
+            this.Emboss3x3.Tag = "Emboss3x3";
             this.Emboss3x3.Text = "3 x 3";
             // 
             // SharpenFilter
@@ -455,13 +474,14 @@ namespace ImageProcessing
             this.SharpenFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Sharpen3x3});
             this.SharpenFilter.Name = "SharpenFilter";
-            this.SharpenFilter.Size = new System.Drawing.Size(154, 22);
+            this.SharpenFilter.Size = new System.Drawing.Size(180, 22);
             this.SharpenFilter.Text = "Sharpen";
             // 
             // Sharpen3x3
             // 
             this.Sharpen3x3.Name = "Sharpen3x3";
-            this.Sharpen3x3.Size = new System.Drawing.Size(98, 22);
+            this.Sharpen3x3.Size = new System.Drawing.Size(180, 22);
+            this.Sharpen3x3.Tag = "Sharpen3x3";
             this.Sharpen3x3.Text = "3 x 3";
             // 
             // miniToolStrip
@@ -488,8 +508,8 @@ namespace ImageProcessing
             this.Expectation,
             this.Variance,
             this.StandardDeviation,
-            this.change,
-            this.toolStripButton1,
+            this.ReplaceSrcByDst,
+            this.ReplaceDstBySrc,
             this.Undo,
             this.PathToImage,
             this.Entropy,
@@ -498,8 +518,8 @@ namespace ImageProcessing
             this.ZoomOutSrcBtn,
             this.ZoomInDstBtn,
             this.ZoomOutDstBtn,
-            this.toolStripButton11,
-            this.compare});
+            this.IntervalLuminanceHistogram,
+            this.AddDstToLuminanceHistogram});
             this.MenuStrip.Location = new System.Drawing.Point(20, 84);
             this.MenuStrip.Name = "MenuStrip";
             this.MenuStrip.Size = new System.Drawing.Size(715, 25);
@@ -509,10 +529,11 @@ namespace ImageProcessing
             // 
             // FirstParamLabel
             // 
-            this.FirstParamLabel.Image = ((System.Drawing.Image)(resources.GetObject("FirstParamLabel.Image")));
+            this.FirstParamLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.FirstParamLabel.Image = global::ImageProcessing.UI.Properties.Resources.FirstParamLabel_Image;
             this.FirstParamLabel.Name = "FirstParamLabel";
             this.FirstParamLabel.Size = new System.Drawing.Size(16, 22);
-            this.FirstParamLabel.ToolTipText = "Первый параметр ";
+            this.FirstParamLabel.ToolTipText = "First parameter";
             // 
             // FirstParam
             // 
@@ -522,7 +543,7 @@ namespace ImageProcessing
             // 
             // SecondParamLabel
             // 
-            this.SecondParamLabel.Image = ((System.Drawing.Image)(resources.GetObject("SecondParamLabel.Image")));
+            this.SecondParamLabel.Image = global::ImageProcessing.UI.Properties.Resources.SecondParamLabel_Image;
             this.SecondParamLabel.Name = "SecondParamLabel";
             this.SecondParamLabel.Size = new System.Drawing.Size(16, 22);
             this.SecondParamLabel.ToolTipText = "Второй параметр";
@@ -536,27 +557,27 @@ namespace ImageProcessing
             // PMF
             // 
             this.PMF.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.PMF.Image = ((System.Drawing.Image)(resources.GetObject("PMF.Image")));
+            this.PMF.Image = global::ImageProcessing.UI.Properties.Resources.PMF_Image;
             this.PMF.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.PMF.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.PMF.Name = "PMF";
             this.PMF.Size = new System.Drawing.Size(37, 22);
-            this.PMF.ToolTipText = "Гистограмма исходного изображения";
+            this.PMF.ToolTipText = "PMF of the image";
             // 
             // CDF
             // 
             this.CDF.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.CDF.Image = ((System.Drawing.Image)(resources.GetObject("CDF.Image")));
+            this.CDF.Image = global::ImageProcessing.UI.Properties.Resources.CDF_Image;
             this.CDF.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.CDF.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.CDF.Name = "CDF";
             this.CDF.Size = new System.Drawing.Size(41, 22);
-            this.CDF.Text = "toolStripButton8";
+            this.CDF.ToolTipText = "CDF of the image";
             // 
             // Expectation
             // 
             this.Expectation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Expectation.Image = ((System.Drawing.Image)(resources.GetObject("Expectation.Image")));
+            this.Expectation.Image = global::ImageProcessing.UI.Properties.Resources.Expectation_Image;
             this.Expectation.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.Expectation.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Expectation.Name = "Expectation";
@@ -567,7 +588,7 @@ namespace ImageProcessing
             // Variance
             // 
             this.Variance.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Variance.Image = ((System.Drawing.Image)(resources.GetObject("Variance.Image")));
+            this.Variance.Image = global::ImageProcessing.UI.Properties.Resources.Variance_Image;
             this.Variance.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.Variance.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Variance.Name = "Variance";
@@ -578,7 +599,7 @@ namespace ImageProcessing
             // StandardDeviation
             // 
             this.StandardDeviation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.StandardDeviation.Image = ((System.Drawing.Image)(resources.GetObject("StandardDeviation.Image")));
+            this.StandardDeviation.Image = global::ImageProcessing.UI.Properties.Resources.StandardDeviation_Image;
             this.StandardDeviation.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.StandardDeviation.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.StandardDeviation.Name = "StandardDeviation";
@@ -586,32 +607,33 @@ namespace ImageProcessing
             this.StandardDeviation.Text = "StandardDeviation";
             this.StandardDeviation.ToolTipText = "StandardDeviation";
             // 
-            // change
+            // ReplaceSrcByDst
             // 
-            this.change.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.change.Image = ((System.Drawing.Image)(resources.GetObject("change.Image")));
-            this.change.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.change.Name = "change";
-            this.change.Size = new System.Drawing.Size(23, 22);
-            this.change.ToolTipText = "Заменить исходное изображение";
+            this.ReplaceSrcByDst.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ReplaceSrcByDst.Image = global::ImageProcessing.UI.Properties.Resources.change_Image;
+            this.ReplaceSrcByDst.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ReplaceSrcByDst.Name = "ReplaceSrcByDst";
+            this.ReplaceSrcByDst.Size = new System.Drawing.Size(23, 22);
+            this.ReplaceSrcByDst.ToolTipText = "Replace source by destination";
             // 
-            // toolStripButton1
+            // ReplaceDstBySrc
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
+            this.ReplaceDstBySrc.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ReplaceDstBySrc.Image = global::ImageProcessing.UI.Properties.Resources.toolStripButton1_Image;
+            this.ReplaceDstBySrc.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ReplaceDstBySrc.Name = "ReplaceDstBySrc";
+            this.ReplaceDstBySrc.Size = new System.Drawing.Size(23, 22);
+            this.ReplaceDstBySrc.Text = "toolStripButton1";
+            this.ReplaceDstBySrc.ToolTipText = "Replace destination by source";
             // 
             // Undo
             // 
             this.Undo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Undo.Image = ((System.Drawing.Image)(resources.GetObject("Undo.Image")));
+            this.Undo.Image = global::ImageProcessing.UI.Properties.Resources.Undo_Image;
             this.Undo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Undo.Name = "Undo";
             this.Undo.Size = new System.Drawing.Size(23, 22);
-            this.Undo.ToolTipText = "Undo";
+            this.Undo.ToolTipText = "Undo last transformation";
             // 
             // PathToImage
             // 
@@ -622,26 +644,28 @@ namespace ImageProcessing
             // Entropy
             // 
             this.Entropy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Entropy.Image = ((System.Drawing.Image)(resources.GetObject("Entropy.Image")));
+            this.Entropy.Image = global::ImageProcessing.UI.Properties.Resources.Entropy_Image;
             this.Entropy.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.Entropy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.Entropy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Entropy.Name = "Entropy";
             this.Entropy.Size = new System.Drawing.Size(23, 22);
+            this.Entropy.ToolTipText = "Entropy of the image";
             // 
             // ShuffleSrc
             // 
             this.ShuffleSrc.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ShuffleSrc.Image = ((System.Drawing.Image)(resources.GetObject("ShuffleSrc.Image")));
+            this.ShuffleSrc.Image = global::ImageProcessing.UI.Properties.Resources.ShuffleSrc_Image;
             this.ShuffleSrc.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ShuffleSrc.Name = "ShuffleSrc";
             this.ShuffleSrc.Size = new System.Drawing.Size(23, 22);
             this.ShuffleSrc.Text = "Shuffle";
+            this.ShuffleSrc.ToolTipText = "Shuffle pixels of a source image";
             // 
             // ZoomInSrcBtn
             // 
             this.ZoomInSrcBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ZoomInSrcBtn.Image = ((System.Drawing.Image)(resources.GetObject("ZoomInSrcBtn.Image")));
+            this.ZoomInSrcBtn.Image = global::ImageProcessing.UI.Properties.Resources.ZoomInDstBtn_Image;
             this.ZoomInSrcBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ZoomInSrcBtn.Name = "ZoomInSrcBtn";
             this.ZoomInSrcBtn.Size = new System.Drawing.Size(23, 22);
@@ -651,7 +675,7 @@ namespace ImageProcessing
             // ZoomOutSrcBtn
             // 
             this.ZoomOutSrcBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ZoomOutSrcBtn.Image = ((System.Drawing.Image)(resources.GetObject("ZoomOutSrcBtn.Image")));
+            this.ZoomOutSrcBtn.Image = global::ImageProcessing.UI.Properties.Resources.ZoomOutDstBtn_Image;
             this.ZoomOutSrcBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ZoomOutSrcBtn.Name = "ZoomOutSrcBtn";
             this.ZoomOutSrcBtn.Size = new System.Drawing.Size(23, 22);
@@ -661,7 +685,7 @@ namespace ImageProcessing
             // ZoomInDstBtn
             // 
             this.ZoomInDstBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ZoomInDstBtn.Image = ((System.Drawing.Image)(resources.GetObject("ZoomInDstBtn.Image")));
+            this.ZoomInDstBtn.Image = global::ImageProcessing.UI.Properties.Resources.ZoomInDstBtn_Image;
             this.ZoomInDstBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ZoomInDstBtn.Name = "ZoomInDstBtn";
             this.ZoomInDstBtn.Size = new System.Drawing.Size(23, 22);
@@ -671,40 +695,32 @@ namespace ImageProcessing
             // ZoomOutDstBtn
             // 
             this.ZoomOutDstBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ZoomOutDstBtn.Image = ((System.Drawing.Image)(resources.GetObject("ZoomOutDstBtn.Image")));
+            this.ZoomOutDstBtn.Image = global::ImageProcessing.UI.Properties.Resources.ZoomOutSrcBtn_Image;
             this.ZoomOutDstBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ZoomOutDstBtn.Name = "ZoomOutDstBtn";
             this.ZoomOutDstBtn.Size = new System.Drawing.Size(23, 22);
             this.ZoomOutDstBtn.Text = "toolStripButton11";
             this.ZoomOutDstBtn.ToolTipText = "100%";
             // 
-            // toolStripButton11
+            // IntervalLuminanceHistogram
             // 
-            this.toolStripButton11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton11.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton11.Image")));
-            this.toolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton11.Name = "toolStripButton11";
-            this.toolStripButton11.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton11.Text = "toolStripButton11";
+            this.IntervalLuminanceHistogram.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.IntervalLuminanceHistogram.Image = global::ImageProcessing.UI.Properties.Resources.toolStripButton11_Image;
+            this.IntervalLuminanceHistogram.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.IntervalLuminanceHistogram.Name = "IntervalLuminanceHistogram";
+            this.IntervalLuminanceHistogram.Size = new System.Drawing.Size(23, 22);
+            this.IntervalLuminanceHistogram.Text = "toolStripButton11";
+            this.IntervalLuminanceHistogram.ToolTipText = "Build an interval luminance histogram";
             // 
-            // compare
+            // AddDstToLuminanceHistogram
             // 
-            this.compare.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.compare.Image = ((System.Drawing.Image)(resources.GetObject("compare.Image")));
-            this.compare.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.compare.Name = "compare";
-            this.compare.Size = new System.Drawing.Size(23, 22);
-            this.compare.Text = "toolStripButton1";
-            // 
-            // Src
-            // 
-            this.Src.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Src.Location = new System.Drawing.Point(3, 3);
-            this.Src.Name = "Src";
-            this.Src.Size = new System.Drawing.Size(160, 132);
-            this.Src.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.Src.TabIndex = 2;
-            this.Src.TabStop = false;
+            this.AddDstToLuminanceHistogram.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.AddDstToLuminanceHistogram.Image = global::ImageProcessing.UI.Properties.Resources.compare_Image;
+            this.AddDstToLuminanceHistogram.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AddDstToLuminanceHistogram.Name = "AddDstToLuminanceHistogram";
+            this.AddDstToLuminanceHistogram.Size = new System.Drawing.Size(23, 22);
+            this.AddDstToLuminanceHistogram.Text = "toolStripButton1";
+            this.AddDstToLuminanceHistogram.ToolTipText = "Add destination image, transformed by destribution to luminance histogram";
             // 
             // ImageContainer
             // 
@@ -725,6 +741,16 @@ namespace ImageProcessing
             this.ImageContainer.SplitterDistance = 389;
             this.ImageContainer.TabIndex = 9;
             // 
+            // Src
+            // 
+            this.Src.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Src.Location = new System.Drawing.Point(3, 3);
+            this.Src.Name = "Src";
+            this.Src.Size = new System.Drawing.Size(160, 132);
+            this.Src.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.Src.TabIndex = 2;
+            this.Src.TabStop = false;
+            // 
             // Dst
             // 
             this.Dst.Cursor = System.Windows.Forms.Cursors.Default;
@@ -743,7 +769,6 @@ namespace ImageProcessing
             this.Controls.Add(this.ImageContainer);
             this.Controls.Add(this.MenuStrip);
             this.Controls.Add(this.menuStrip1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Image Processing";
@@ -752,13 +777,13 @@ namespace ImageProcessing
             this.menuStrip1.PerformLayout();
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Src)).EndInit();
             this.ImageContainer.Panel1.ResumeLayout(false);
             this.ImageContainer.Panel1.PerformLayout();
             this.ImageContainer.Panel2.ResumeLayout(false);
             this.ImageContainer.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ImageContainer)).EndInit();
             this.ImageContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Src)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dst)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -770,10 +795,10 @@ namespace ImageProcessing
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem FileMenu;
         private System.Windows.Forms.ToolStripMenuItem OpenFile;
         private System.Windows.Forms.ToolStripMenuItem SaveFileAs;
-        private System.Windows.Forms.ToolStripMenuItem Filters;
+        private System.Windows.Forms.ToolStripMenuItem FiltersMenu;
         private System.Windows.Forms.ToolStripMenuItem InversionFilter;
         private System.Windows.Forms.ToolStripMenuItem GrayscaleFilter;
         private System.Windows.Forms.ToolStripMenuItem BinaryFilter;
@@ -781,7 +806,7 @@ namespace ImageProcessing
         private System.Windows.Forms.ToolStripMenuItem ColorFilterRed;
         private System.Windows.Forms.ToolStripMenuItem ColorFilterGreen;
         private System.Windows.Forms.ToolStripMenuItem ColorFilterBlue;
-        private System.Windows.Forms.ToolStripMenuItem Distributions;
+        private System.Windows.Forms.ToolStripMenuItem DistributionsMenu;
         private System.Windows.Forms.ToolStripMenuItem OneParameterDistributions;
         private System.Windows.Forms.ToolStripMenuItem ExponentialDistribution;
         private System.Windows.Forms.ToolStripMenuItem RayleighDistribution;
@@ -789,7 +814,7 @@ namespace ImageProcessing
         private System.Windows.Forms.ToolStripMenuItem UniformDistribution;
         private System.Windows.Forms.ToolStripMenuItem CauchyDistribution;
         private System.Windows.Forms.ToolStripMenuItem WeibullDistribution;
-        private System.Windows.Forms.ToolStripMenuItem ConvolutionFilters;
+        private System.Windows.Forms.ToolStripMenuItem ConvolutionFiltersMenu;
         private System.Windows.Forms.ToolStripMenuItem EdgeDetectionFilter;
         private System.Windows.Forms.ToolStripMenuItem LaplacianOperator;
         private System.Windows.Forms.ToolStripMenuItem LaplacianOperator3x3;
@@ -820,7 +845,7 @@ namespace ImageProcessing
         private System.Windows.Forms.PictureBox Src;
         private System.Windows.Forms.SplitContainer ImageContainer;
         private System.Windows.Forms.PictureBox Dst;
-        private System.Windows.Forms.ToolStripButton change;
+        private System.Windows.Forms.ToolStripButton ReplaceSrcByDst;
         private System.Windows.Forms.ToolStripButton Undo;
         private System.Windows.Forms.ToolStripLabel FirstParamLabel;
         private System.Windows.Forms.ToolStripLabel SecondParamLabel;
@@ -832,9 +857,9 @@ namespace ImageProcessing
         private System.Windows.Forms.ToolStripButton ZoomInDstBtn;
         private System.Windows.Forms.ToolStripButton ZoomOutDstBtn;
         private System.Windows.Forms.ToolStripButton CDF;
-        private System.Windows.Forms.ToolStripButton toolStripButton11;
-        private System.Windows.Forms.ToolStripButton compare;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton IntervalLuminanceHistogram;
+        private System.Windows.Forms.ToolStripButton AddDstToLuminanceHistogram;
+        private System.Windows.Forms.ToolStripButton ReplaceDstBySrc;
         private System.Windows.Forms.ToolStripMenuItem SaveFile;
         private System.Windows.Forms.ToolStripButton Expectation;
         private System.Windows.Forms.ToolStripButton Variance;

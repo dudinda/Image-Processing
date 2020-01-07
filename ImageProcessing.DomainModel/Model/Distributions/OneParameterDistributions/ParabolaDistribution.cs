@@ -18,7 +18,7 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
             _k = k;
         }
 
-        public double FirstParameter { get { return _k; } }
+        public double FirstParameter => _k;
         public double SecondParameter => throw new NotImplementedException();
 
         public double Quantile(double p)

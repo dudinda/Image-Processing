@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
-using ImageProcessing.RGBFilters.Abstract;
+
+using ImageProcessing.RGBFilters.Interface;
 
 namespace ImageProcessing.DomainModel.Services.RGBFilter
 {

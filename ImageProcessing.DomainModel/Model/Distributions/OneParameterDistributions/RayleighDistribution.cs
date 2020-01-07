@@ -17,7 +17,7 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
             _sigma = sigma;
         }
 
-        public double FirstParameter { get { return _sigma; } }
+        public double FirstParameter => _sigma;
         public double SecondParameter => throw new NotImplementedException();
 
         public double GetMean() => _sigma * Math.Sqrt(Math.PI / 2);

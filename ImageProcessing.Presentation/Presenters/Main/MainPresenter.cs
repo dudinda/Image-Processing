@@ -47,13 +47,12 @@ namespace ImageProcessing.Presentation.Presenters
             View.ApplyConvolutionFilter       += (filter) => ApplyConvolutionFilter(filter);
             View.ApplyRGBFilter               += (filter) => ApplyRGBFilter(filter);
             View.ApplyHistogramTransformation += (distribution, parms) => ApplyHistogramTransformation(distribution, parms);
-            View.SaveImage += () => SaveImage();
-            View.OpenImage += () => OpenImage(View.Path);
-            View.Shuffle   += () => Shuffle();
+            View.SaveImage                    += () => SaveImage();
+            View.OpenImage                    += () => OpenImage(View.Path);
+            View.Shuffle                      += () => Shuffle();
 
         }
 
-      
         private async void OpenImage(string fileName)
         {
             var openFileDialog = new OpenFileDialog()
@@ -83,7 +82,6 @@ namespace ImageProcessing.Presentation.Presenters
             View.SrcImage = openResult;
         }
 
-
         private async void SaveImage()
         {
             var saveFileDialog = new SaveFileDialog()
@@ -104,7 +102,6 @@ namespace ImageProcessing.Presentation.Presenters
             }
         }
 
-
         private async void ApplyConvolutionFilter(string filterName)
         {
             if (View.SrcIsNull) { return; }
@@ -115,7 +112,6 @@ namespace ImageProcessing.Presentation.Presenters
             View.InitDstImageZoom();
         }
 
-
         private async void ApplyRGBFilter(string filterName)
         {
             if (View.SrcIsNull) { return; }
@@ -125,7 +121,6 @@ namespace ImageProcessing.Presentation.Presenters
             View.DstImage = await Task.Run(() => _rgbFilterService.Filter(View.SrcImage, filter));
             View.InitDstImageZoom();
         }
-
 
         private async void ApplyHistogramTransformation(string filterName, (string, string) parms)
         {

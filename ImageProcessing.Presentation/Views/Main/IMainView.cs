@@ -10,18 +10,6 @@ namespace ImageProcessing.Presentation.Views.Main
 {
     public interface IMainView : IView
     {
-        (string, string) Parameters { get; }
-
-        string Path { get; set; }
-        Bitmap SrcImage { get; set; }
-        Bitmap DstImage { get; set; }
-
-        bool SrcIsNull { get; }
-        bool DstIsNull { get; }
-
-        void InitSrcImageZoom();
-        void InitDstImageZoom();
-
         event Action SaveImage;
         event Action OpenImage;
         event Action<string> ApplyConvolutionFilter;
@@ -34,5 +22,16 @@ namespace ImageProcessing.Presentation.Views.Main
         event Action BuildPmf;
         event Action BuildCdf;
         event Action BuildLuminanceIntervals;
+
+        (string, string) Parameters { get; }
+        string Path { get; set; }
+        Bitmap SrcImage { get; set; }
+        Bitmap DstImage { get; set; }
+        bool SrcIsNull { get; }
+        bool DstIsNull { get; }
+
+        void InitSrcImageZoom();
+        void InitDstImageZoom();
+
     }
 }

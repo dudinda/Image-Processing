@@ -21,7 +21,6 @@ namespace ImageProcessing.Presentation.Presenters
             _distributionService = distibutionService;
         }
 
-
         public override void Run(Bitmap argument)
         {
             _src = argument;

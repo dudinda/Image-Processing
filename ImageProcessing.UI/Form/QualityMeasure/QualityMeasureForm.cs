@@ -8,7 +8,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
-namespace ImageProcessing
+namespace ImageProcessing.Form.QualityMeasure
 {
     public partial class QualityMeasureForm : MetroForm, IQualityMeasureView
     {
@@ -22,15 +22,15 @@ namespace ImageProcessing
         
         }
 
-        public Chart GetChart { get { return Histogram; } }
+        public event Action<Bitmap> BuildHistogram;
+
+        public Chart GetChart => Histogram;
+
         public new void Show()
         {
             _context.MainForm = this;
             Application.Run(_context);
         }
-
-
-        public event Action<Bitmap> BuildHistogram;
 
         private void SetHistogram()
         {

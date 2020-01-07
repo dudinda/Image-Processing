@@ -7,32 +7,11 @@ using ImageProcessing.RGBFilters.ColorFilter.Colors;
 
 using MetroFramework.Forms;
 
-namespace ImageProcessing
+namespace ImageProcessing.Form.Main
 {
     public partial class MainForm : MetroForm, IMainView
     {
         private readonly ApplicationContext _context;
-
-        public Bitmap SrcImage { get { return new Bitmap(Src.Image); } set { Src.Image = value; } }
-        public Bitmap DstImage { get { return new Bitmap(Dst.Image); } set { Dst.Image = value; } }
-
-        public bool SrcIsNull => Src.Image is null; 
-        public bool DstIsNull => Dst.Image is null; 
-        public string Path { get { return PathToImage.Text; } set { PathToImage.Text = value; } }
-        public (string, string) Parameters => (FirstParam.Text, SecondParam.Text); 
-
-        public event Action SaveImage;
-        public event Action OpenImage;
-        public event Action<string> ApplyConvolutionFilter;
-        public event Action<string, (string, string)> ApplyHistogramTransformation;
-        public event Action<string> ApplyRGBFilter;
-        public event Action<RGBColor> ApplyRGBColorFilter;
-        public event Action Shuffle;
-        public event Action<Keys> GetRandomVariableInfo;
-        public event Action UndoLast;
-        public event Action BuildPmf;
-        public event Action BuildCdf;
-        public event Action BuildLuminanceIntervals;
      
         public MainForm(ApplicationContext context)
         {
@@ -47,27 +26,40 @@ namespace ImageProcessing
             ImageContainer.BringToFront();
         }
 
+        public event Action SaveImage;
+        public event Action OpenImage;
+        public event Action<string> ApplyConvolutionFilter;
+        public event Action<string, (string, string)> ApplyHistogramTransformation;
+        public event Action<string> ApplyRGBFilter;
+        public event Action<RGBColor> ApplyRGBColorFilter;
+        public event Action Shuffle;
+        public event Action<Keys> GetRandomVariableInfo;
+        public event Action UndoLast;
+        public event Action BuildPmf;
+        public event Action BuildCdf;
+        public event Action BuildLuminanceIntervals;
+
+        public Bitmap SrcImage { get { return new Bitmap(Src.Image); } set { Src.Image = value; } }
+        public Bitmap DstImage { get { return new Bitmap(Dst.Image); } set { Dst.Image = value; } }
+        public bool SrcIsNull => Src.Image is null;
+        public bool DstIsNull => Dst.Image is null;
+        public string Path { get { return PathToImage.Text; } set { PathToImage.Text = value; } }
+        public (string, string) Parameters => (FirstParam.Text, SecondParam.Text);
+
         public new void Show()
         {
             _context.MainForm = this;
-            base.Show();
+            Application.Run(_context);
         }
-
-        private void InvokeWithTwoParameters<T1, T2>(Action<T1, T2> action, T1 first, T2 second)
-        => action?.Invoke(first, second);
-        private void InvokeWithParameter<T>(Action<T> action, T parameter)
-        => action?.Invoke(parameter);
-        private void Invoke(Action action)
-        => action?.Invoke();
 
         public void InitSrcImageZoom()
         {
-            throw new NotImplementedException();
+           // throw new NotImplementedException();
         }
 
         public void InitDstImageZoom()
         {
-            throw new NotImplementedException();
+           // throw new NotImplementedException();
         }
 
         private void Bind()
@@ -225,5 +217,12 @@ namespace ImageProcessing
                 =>
             InvokeWithTwoParameters(ApplyHistogramTransformation, (string)WeibullDistribution.Tag, Parameters);
         }
+
+        private void InvokeWithTwoParameters<T1, T2>(Action<T1, T2> action, T1 first, T2 second)
+        => action?.Invoke(first, second);
+        private void InvokeWithParameter<T>(Action<T> action, T parameter)
+        => action?.Invoke(parameter);
+        private void Invoke(Action action)
+        => action?.Invoke();
     }
 }

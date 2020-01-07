@@ -1,6 +1,6 @@
 ﻿using ImageProcessing.Common.Attributes;
 using ImageProcessing.Common.Enums;
-using ImageProcessing.RGBFilters.Abstract;
+using ImageProcessing.RGBFilters.Interface;
 
 namespace ImageProcessing.RGBFilters.ColorFilter.Colors
 {

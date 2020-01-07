@@ -6,9 +6,6 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
 {
     class WeibullDistribution : IDistribution
     {
-        public double FirstParameter { get { return _lambda; } }
-        public double SecondParameter { get { return _k; } }
-
         private double _lambda;
         private double _k;
 
@@ -23,16 +20,11 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
             _k      = k;
         }
 
-        public string Name { get; } = "Weibull Distribution";
+        public double FirstParameter => _lambda;
+        public double SecondParameter => _k;
 
-        public double GetMean()
-        {
-            throw new NotImplementedException();
-        }  
-        public double GetVariance()
-        {
-            throw new NotImplementedException();
-        }
+        public double GetMean() => throw new NotImplementedException();
+        public double GetVariance() => throw new NotImplementedException();
         public double Quantile(double p) => _lambda * Math.Pow(-Math.Log(1 - p), 1.0 / _k);
 
         public void SetParams((double, double) parms)

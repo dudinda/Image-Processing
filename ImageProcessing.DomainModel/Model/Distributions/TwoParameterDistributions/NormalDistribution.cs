@@ -21,8 +21,9 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
             _sigma = sigma;
         }
 
-        public double FirstParameter { get { return _mu; } }
-        public double SecondParameter { get { return _sigma; } }
+        public double FirstParameter => _mu;
+        public double SecondParameter => _sigma;
+
         public double GetMean() => _mu;
         public double GetVariance() => _sigma * _sigma;
         public double Quantile(double p) => _mu + _sigma * Math.Sqrt(2) * SpecialFunctions.ErfInv(2 * p - 1);

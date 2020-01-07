@@ -8,9 +8,9 @@ namespace ImageProcessing.Presentation.Views.Histogram
 {
     public interface IHistogramView : IView
     {
-        Chart GetChart { get; }
-
         event Action<Bitmap> BuildHistogram;
         event Action<Bitmap> BuildCDF;
+
+        Chart GetChart { get; }
     }
 }

@@ -11,9 +11,10 @@
         GaussianOperator5x5     = 6,
         LaplacianOperator3x3    = 7,
         LaplacianOperator5x5    = 8,
-        SobelOperatorHorizontal = 9,
-        SobelOperatorVertical   = 10,
-        Emboss3x3               = 11,
-        Sharpen3x3              = 12
+        LoGOperator             = 9,
+        SobelOperatorHorizontal = 10,
+        SobelOperatorVertical   = 11,
+        Emboss3x3               = 12,
+        Sharpen3x3              = 13
     }
 }

@@ -1,4 +1,4 @@
-﻿using ImageProcessing.RGBFilters.Abstract;
+﻿using ImageProcessing.RGBFilters.Interface;
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Attributes;
 

@@ -136,7 +136,6 @@ namespace ImageProcessing.DomainModel.Services.Distribution
             return uvalue / lvalue;
         }
 
-
         public int[] GetFrequencies(Bitmap bitmap)
         {          
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), 

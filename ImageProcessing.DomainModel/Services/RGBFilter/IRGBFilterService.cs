@@ -1,4 +1,4 @@
-﻿using ImageProcessing.RGBFilters.Abstract;
+﻿using ImageProcessing.RGBFilters.Interface;
 
 using System.Drawing;
 

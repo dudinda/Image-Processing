@@ -19,8 +19,8 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
             _gamma = gamma;
         }
 
-        public double FirstParameter { get { return _x0; } }
-        public double SecondParameter { get { return _gamma; } }
+        public double FirstParameter => _x0;
+        public double SecondParameter => _gamma;
 
         public double GetMean() => double.NaN;
         public double GetVariance() => double.PositiveInfinity;

@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
-namespace ImageProcessing
+namespace ImageProcessing.Form.Histogram
 {
     public partial class HistogramForm : MetroForm, IHistogramView
     {
@@ -21,16 +21,17 @@ namespace ImageProcessing
             Freq.ChartAreas[0].AxisX.Interval = 50;
         }
 
-        public Chart GetChart { get { return Freq; } }
+        public event Action<Bitmap> BuildHistogram;
+        public event Action<Bitmap> BuildCDF;
+
+        public Chart GetChart => Freq;
+
         public new void Show()
         {
             _context.MainForm = this;
             Application.Run(_context);
         }
 
-
-        public event Action<Bitmap> BuildHistogram;
-        public event Action<Bitmap> BuildCDF;
       
         /*
         public void Init(string text, double[] pmf)

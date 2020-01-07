@@ -1,4 +1,4 @@
-﻿namespace ImageProcessing
+﻿namespace ImageProcessing.Form.QualityMeasure
 {
     partial class QualityMeasureForm
     {

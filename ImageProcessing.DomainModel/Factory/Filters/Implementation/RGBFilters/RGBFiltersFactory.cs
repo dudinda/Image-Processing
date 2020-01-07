@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-using ImageProcessing.RGBFilters.Abstract;
+using ImageProcessing.RGBFilters.Interface;
 using ImageProcessing.RGBFilters.Binary;
 using ImageProcessing.RGBFilters.Grayscale;
 using ImageProcessing.RGBFilters.Inversion;

@@ -16,7 +16,7 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
            _lambda = lambda;
         }
 
-        public double FirstParameter { get { return _lambda; } }
+        public double FirstParameter => _lambda;
         public double SecondParameter => throw new NotImplementedException();
 
         public double GetMean() => 1 / _lambda;
