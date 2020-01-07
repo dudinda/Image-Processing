@@ -1,6 +1,5 @@
-﻿using System.Drawing.Imaging;
-
-using ImageProcessing.Common.Extensions.EnumExtensions;
+﻿using System.ComponentModel;
+using System.Drawing.Imaging;
 
 namespace ImageProcessing.Common.Extensions.StringExtensions
 {
@@ -32,6 +31,21 @@ namespace ImageProcessing.Common.Extensions.StringExtensions
             }
 
             return ImageFormat.Wmf;
+        }
+
+        public static bool TryParse<T>(this string input, out T value)
+        {
+            var converter = TypeDescriptor.GetConverter(typeof(T));
+            try
+            {
+                value = (T)converter.ConvertFromString(input);
+                return true;
+            }
+            catch
+            {
+                value = default(T);
+                return false;
+            }
         }
     }
 }

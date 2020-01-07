@@ -8,12 +8,14 @@ using ImageProcessing.Factory.Base;
 using ImageProcessing.DomainModel.Factory.Filters.Interface;
 using ImageProcessing.Common.Extensions.StringExtensions;
 using ImageProcessing.Common.Extensions.BitmapExtensions;
+using ImageProcessing.Common.Extensions.TupleExtensions;
 
 using System.Drawing;
 using System.Windows.Forms;
 using System.Threading.Tasks;
 using System.IO;
 using System;
+using System.Configuration;
 
 namespace ImageProcessing.Presentation.Presenters
 {
@@ -58,12 +60,7 @@ namespace ImageProcessing.Presentation.Presenters
             {
 
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal),
-                Filter = "BMP Files (*.bmp)|*.bmp|"    +
-                         "JPEG Files (*.jpeg)|*.jpeg|" +
-                         "PNG Files (*.png)|*.png|"    +
-                         "JPG Files (*.jpg)|*.jpg|"    +
-                         "GIF Files (*.gif)|*.gif|"    +
-                         "All Files (*.*)|*.*"
+                Filter = ConfigurationManager.AppSettings["Filters"]
             };
 
             Bitmap openResult = null;
@@ -91,13 +88,7 @@ namespace ImageProcessing.Presentation.Presenters
         {
             var saveFileDialog = new SaveFileDialog()
             {
-
-                Filter = "BMP Files (*.bmp)|*.bmp|"    +
-                         "JPEG Files (*.jpeg)|*.jpeg|" +
-                         "PNG Files (*.png)|*.png|"    +
-                         "JPG Files (*.jpg)|*.jpg|"    +
-                         "GIF Files (*.gif)|*.gif|"    +
-                         "All Files (*.*)|*.*"
+               Filter = ConfigurationManager.AppSettings["Filters"]
             };
 
             var bmpToSave = new Bitmap(View.SrcImage);
@@ -116,7 +107,7 @@ namespace ImageProcessing.Presentation.Presenters
 
         private async void ApplyConvolutionFilter(string filterName)
         {
-            if (View.SrcIsNull) return;
+            if (View.SrcIsNull) { return; }
 
             var filter = _convolutionFilterFactory.GetFilter(filterName);
 
@@ -127,7 +118,7 @@ namespace ImageProcessing.Presentation.Presenters
 
         private async void ApplyRGBFilter(string filterName)
         {
-            if (View.SrcIsNull) return;
+            if (View.SrcIsNull) { return; }
 
             var filter = _rgbFiltersFactory.GetFilter(filterName);
 
@@ -139,11 +130,11 @@ namespace ImageProcessing.Presentation.Presenters
         private async void ApplyHistogramTransformation(string filterName, (string, string) parms)
         {
 
-            if (!TryParseParms(parms, out var result)) {
+            if (!parms.TryParse<double, double>(out var result)) {
                 return;
             }
 
-            if (View.SrcIsNull) return;
+            if (View.SrcIsNull) { return; }
 
             var filter = _distributionFactory.GetFilter(filterName);
                 filter.SetParams(result);
@@ -154,30 +145,11 @@ namespace ImageProcessing.Presentation.Presenters
 
         private async void Shuffle()
         {
-            if (View.SrcIsNull) return;
+            if (View.SrcIsNull) { return; }
 
             View.DstImage = await Task.Run(() => View.SrcImage.Shuffle());
             View.InitDstImageZoom();
         }
-
-        private bool TryParseParms((string, string) input, out (double, double) output)
-        {
-            if (!double.TryParse(input.Item1, out var first))
-            {
-                output = default;
-                return false;
-            }
-
-            if (!double.TryParse(input.Item2, out var second))
-            {
-                output = default;
-                return false;
-            }
-
-            output = (first, second);
-
-            return true;
-        }
-
+    
     }
 }
