@@ -8,18 +8,13 @@ namespace ImageProcessing.Factory.Base
     public class BaseFactory : IBaseFactory
     {
         public IConvolutionFilterFactory GetConvolutionFilterFactory()
-        {
-            return new ConvolutionFilterFactory();
-        }
-
+            => new ConvolutionFilterFactory();
+        
         public IDistributionFactory GetDistributionFactory()
-        {
-            return new DistributionFactory();
-        }
-
+            => new DistributionFactory();
+        
         public IRGBFiltersFactory GetRGBFilterFactory()
-        {
-            return new RGBFiltersFactory();
-        }
+            => new RGBFiltersFactory();
+        
     }
 }

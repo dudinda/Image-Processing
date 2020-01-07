@@ -2,16 +2,12 @@
 
 namespace ImageProcessing.Distributions.TwoParameterDistributions
 {
-    class UniformDistribution : IDistribution
+    public class UniformDistribution : IDistribution
     {
         private double _a;
         private double _b;
 
-        public UniformDistribution()
-        {
-
-        }
-
+        public UniformDistribution() { }
         public UniformDistribution(double a, double b)
         {
             _a = a;

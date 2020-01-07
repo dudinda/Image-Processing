@@ -4,13 +4,11 @@ using ImageProcessing.Distributions.Abstract;
 
 namespace ImageProcessing.Distributions.OneParameterDistributions
 {
-    class ExponentialDistribution : IDistribution
+    public class ExponentialDistribution : IDistribution
     {
         private double _lambda;
-        public ExponentialDistribution()
-        {
 
-        }
+        public ExponentialDistribution() { }
         public ExponentialDistribution(double lambda)
         {
            _lambda = lambda;

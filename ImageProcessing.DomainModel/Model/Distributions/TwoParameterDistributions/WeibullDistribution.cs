@@ -4,16 +4,12 @@ using ImageProcessing.Distributions.Abstract;
 
 namespace ImageProcessing.Distributions.TwoParameterDistributions
 {
-    class WeibullDistribution : IDistribution
+    public class WeibullDistribution : IDistribution
     {
         private double _lambda;
         private double _k;
 
-        public WeibullDistribution()
-        {
-
-        }
-
+        public WeibullDistribution() { }
         public WeibullDistribution(double lambda, double k)
         {
             _lambda = lambda;

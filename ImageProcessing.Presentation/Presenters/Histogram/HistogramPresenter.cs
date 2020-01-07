@@ -12,14 +12,12 @@ namespace ImageProcessing.Presentation.Presenters
         private readonly IDistributionService _distributionService;
 
         private Bitmap _src;
+
         public HistogramPresenter(IAppController controller, 
                                   IHistogramView view, 
                                   IDistributionService distibutionService) : base(controller, view)
         {
             _distributionService = distibutionService;
-
-            View.BuildCDF       += (bmp) => BuildCDF(_src);
-            View.BuildHistogram += (bmp) => BuildHistogram(_src);
         }
 
         public override void Run(Bitmap argument)

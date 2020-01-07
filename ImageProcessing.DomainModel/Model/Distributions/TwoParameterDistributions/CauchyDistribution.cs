@@ -4,15 +4,12 @@ using ImageProcessing.Distributions.Abstract;
 
 namespace ImageProcessing.Distributions.TwoParameterDistributions
 {
-    class CauchyDistribution : IDistribution
+    public class CauchyDistribution : IDistribution
     {
         private double _x0;
         private double _gamma;
 
-        public CauchyDistribution()
-        {
-
-        }
+        public CauchyDistribution() { }
         public CauchyDistribution(double x0, double gamma)
         {
             _x0    = x0;

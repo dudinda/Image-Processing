@@ -13,7 +13,6 @@ namespace ImageProcessing.Common.Extensions.TupleExtensions
             where TOut2 : struct
                                                           
         {
-
             if (input.Item1.TryParse<TOut1>(out var first))
             {
                 output = default;

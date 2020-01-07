@@ -48,7 +48,7 @@ namespace ImageProcessing.Presentation.Presenters
             View.ApplyRGBFilter               += (filter) => ApplyRGBFilter(filter);
             View.ApplyHistogramTransformation += (distribution, parms) => ApplyHistogramTransformation(distribution, parms);
             View.SaveImage                    += () => SaveImage();
-            View.OpenImage                    += () => OpenImage(View.Path);
+            View.OpenImage                    += (filename) => OpenImage(filename);
             View.Shuffle                      += () => Shuffle();
 
         }
@@ -57,7 +57,6 @@ namespace ImageProcessing.Presentation.Presenters
         {
             var openFileDialog = new OpenFileDialog()
             {
-
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal),
                 Filter = ConfigurationManager.AppSettings["Filters"]
             };

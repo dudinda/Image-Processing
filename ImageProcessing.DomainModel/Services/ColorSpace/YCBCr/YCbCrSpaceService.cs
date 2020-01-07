@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 
 namespace ImageProcessing.ColorSpaces
 {
-    class YCbCr : IConvert
+    public class YCbCrSpaceSerivce : IConvert
     {
         public List<Bitmap> FromRGB(Bitmap bitmap)
         {

@@ -4,14 +4,11 @@ using ImageProcessing.Distributions.Abstract;
 
 namespace ImageProcessing.Distributions.OneParameterDistributions
 {
-    class RayleighDistribution : IDistribution
+    public class RayleighDistribution : IDistribution
     {
         private double _sigma;
 
-        public RayleighDistribution()
-        {
-
-        }
+        public RayleighDistribution() { }
         public RayleighDistribution(double sigma)
         {
             _sigma = sigma;

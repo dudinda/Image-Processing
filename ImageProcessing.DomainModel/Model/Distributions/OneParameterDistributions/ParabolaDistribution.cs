@@ -4,15 +4,11 @@ using ImageProcessing.Distributions.Abstract;
 
 namespace ImageProcessing.Distributions.OneParameterDistributions
 {
-    class ParabolaDistribution : IDistribution
+    public class ParabolaDistribution : IDistribution
     {
         private double _k;
 
-        public ParabolaDistribution()
-        {
-
-        }
-
+        public ParabolaDistribution() { }
         public ParabolaDistribution(double k)
         {
             _k = k;

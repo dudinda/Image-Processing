@@ -4,15 +4,12 @@ using ImageProcessing.Distributions.Abstract;
 
 namespace ImageProcessing.Distributions.TwoParameterDistributions
 {
-    class LaplaceDistribution : IDistribution
+    public class LaplaceDistribution : IDistribution
     {
         private double _mu;
         private double _b;
 
-        public LaplaceDistribution()
-        {
-
-        }
+        public LaplaceDistribution() { }
         public LaplaceDistribution(double mu, double b)
         {
             _mu = mu;

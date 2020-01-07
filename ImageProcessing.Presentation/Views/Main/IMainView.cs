@@ -11,7 +11,7 @@ namespace ImageProcessing.Presentation.Views.Main
     public interface IMainView : IView
     {
         event Action SaveImage;
-        event Action OpenImage;
+        event Action<string> OpenImage;
         event Action<string> ApplyConvolutionFilter;
         event Action<string, (string, string)> ApplyHistogramTransformation;
         event Action<string> ApplyRGBFilter;

@@ -6,15 +6,12 @@ using MathNet.Numerics;
 
 namespace ImageProcessing.Distributions.TwoParameterDistributions
 {
-    class NormalDistribution : IDistribution
+    public class NormalDistribution : IDistribution
     {
         private double _mu;
         private double _sigma;
 
-        public NormalDistribution()
-        {
-
-        }
+        public NormalDistribution() { }
         public NormalDistribution(double mu, double sigma)
         {
             _mu    = mu;

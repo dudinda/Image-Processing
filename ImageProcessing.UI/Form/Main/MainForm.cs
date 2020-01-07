@@ -27,7 +27,7 @@ namespace ImageProcessing.Form.Main
         }
 
         public event Action SaveImage;
-        public event Action OpenImage;
+        public event Action<string> OpenImage;
         public event Action<string> ApplyConvolutionFilter;
         public event Action<string, (string, string)> ApplyHistogramTransformation;
         public event Action<string> ApplyRGBFilter;

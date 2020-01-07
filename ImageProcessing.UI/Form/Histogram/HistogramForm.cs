@@ -1,10 +1,11 @@
-﻿using ImageProcessing.Presentation.Views.Histogram;
-
-using MetroFramework.Forms;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+
+using ImageProcessing.Presentation.Views.Histogram;
+
+using MetroFramework.Forms;
 
 namespace ImageProcessing.Form.Histogram
 {

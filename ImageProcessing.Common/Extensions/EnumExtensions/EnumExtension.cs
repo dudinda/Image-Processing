@@ -5,10 +5,9 @@ namespace ImageProcessing.Common.Extensions.EnumExtensions
 {
     public static class EnumExtension
     {
-        public static T GetEnumValueByName<T>(this string value) {
-            return (T)Enum.Parse(typeof(T), value);
-        }
-
+        public static T GetEnumValueByName<T>(this string value)
+            => (T)Enum.Parse(typeof(T), value);
+        
         public static T GetValueFromDescription<T>(this string description)
         {
             var type = typeof(T);

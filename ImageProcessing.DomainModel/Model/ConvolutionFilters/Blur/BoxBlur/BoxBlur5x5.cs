@@ -2,15 +2,17 @@
 
 namespace ImageProcessing.ConvolutionFilters.Blur.BoxBlur
 {
-    class BoxBlur5x5 : AbstractConvolutionFilter
+    public class BoxBlur5x5 : AbstractConvolutionFilter
     {
-        public override double Bias { get; } = 0.0;
-        public override double Factor { get; } = 1.0 / 25.0;
-        public override string FilterName { get; } = "Box Blur 5 x 5";
-        public override double[,] Kernel { get; } = new double[,] { {1, 1, 1, 1, 1 },
-                                                                    {1, 1, 1, 1, 1 },
-                                                                    {1, 1, 1, 1, 1 },
-                                                                    {1, 1, 1, 1, 1 },
-                                                                    {1, 1, 1, 1, 1 } };
+        public override double Bias => 0.0;
+        public override double Factor => 1.0 / 25.0;
+        public override string FilterName => "Box Blur 5 x 5";
+        public override double[,] Kernel 
+            =>
+            new double[,] { {1, 1, 1, 1, 1 },
+                            {1, 1, 1, 1, 1 },
+                            {1, 1, 1, 1, 1 },
+                            {1, 1, 1, 1, 1 },
+                            {1, 1, 1, 1, 1 } };
     }   
 }

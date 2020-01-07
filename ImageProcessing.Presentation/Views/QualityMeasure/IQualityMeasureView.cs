@@ -7,8 +7,6 @@ namespace ImageProcessing.Presentation.Views.QualityMeasure
 {
     public interface IQualityMeasureView : IView
     {
-        event Action<Bitmap> BuildHistogram;
-
         Chart GetChart { get; }
     }
 }

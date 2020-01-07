@@ -15,10 +15,7 @@ namespace ImageProcessing.Presentation.Presenters.Base.Abstract
             View       = view;
         }
 
-        public void Run()
-        {
-            View.Show();
-        }
+        public void Run() => View.Show();
     }
 
     public abstract class BasePresenter<TView, TArg> : IPresenter<TArg>

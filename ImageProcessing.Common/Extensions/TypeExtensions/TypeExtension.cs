@@ -27,9 +27,6 @@ namespace ImageProcessing.Common.Extensions.TypeExtensions
         }
 
         public static bool HasAttribute<TAttribute>(this Type type) where TAttribute : Attribute
-        {
-            return type.IsDefined(typeof(TAttribute), false);
-        }
-
+            => type.IsDefined(typeof(TAttribute), false);
     }
 }

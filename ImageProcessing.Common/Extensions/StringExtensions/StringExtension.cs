@@ -7,7 +7,6 @@ namespace ImageProcessing.Common.Extensions.StringExtensions
     {
         public static ImageFormat GetImageFormat(this string ext)
         {
-
             switch(ext)
             {
                 case ".jpeg":

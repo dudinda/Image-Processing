@@ -153,7 +153,6 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
 
             unsafe
             {
-
                 var options = new ParallelOptions()
                 {
                     MaxDegreeOfParallelism = Environment.ProcessorCount

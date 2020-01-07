@@ -22,8 +22,6 @@ namespace ImageProcessing.Form.QualityMeasure
         
         }
 
-        public event Action<Bitmap> BuildHistogram;
-
         public Chart GetChart => Histogram;
 
         public new void Show()
