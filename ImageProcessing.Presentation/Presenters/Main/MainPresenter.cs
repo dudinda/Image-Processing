@@ -51,6 +51,7 @@ namespace ImageProcessing.Presentation.Presenters
 
         }
 
+      
         private async void OpenImage(string fileName)
         {
             var openFileDialog = new OpenFileDialog()
@@ -135,12 +136,17 @@ namespace ImageProcessing.Presentation.Presenters
         }
 
 
-        private async void ApplyHistogramTransformation(string filterName, (double, double) parms)
+        private async void ApplyHistogramTransformation(string filterName, (string, string) parms)
         {
+
+            if (!TryParseParms(parms, out var result)) {
+                return;
+            }
+
             if (View.SrcIsNull) return;
 
             var filter = _distributionFactory.GetFilter(filterName);
-                filter.SetParams(parms);
+                filter.SetParams(result);
 
             View.DstImage = await Task.Run(() => _distributionService.Distribute(View.SrcImage, filter));
             View.InitDstImageZoom();
@@ -152,6 +158,25 @@ namespace ImageProcessing.Presentation.Presenters
 
             View.DstImage = await Task.Run(() => View.SrcImage.Shuffle());
             View.InitDstImageZoom();
+        }
+
+        private bool TryParseParms((string, string) input, out (double, double) output)
+        {
+            if (!double.TryParse(input.Item1, out var first))
+            {
+                output = default;
+                return false;
+            }
+
+            if (!double.TryParse(input.Item2, out var second))
+            {
+                output = default;
+                return false;
+            }
+
+            output = (first, second);
+
+            return true;
         }
 
     }

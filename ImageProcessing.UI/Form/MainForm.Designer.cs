@@ -102,16 +102,16 @@ namespace ImageProcessing
             this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
             this.compare = new System.Windows.Forms.ToolStripButton();
             this.Src = new System.Windows.Forms.PictureBox();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.ImageContainer = new System.Windows.Forms.SplitContainer();
             this.Dst = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Src)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ImageContainer)).BeginInit();
+            this.ImageContainer.Panel1.SuspendLayout();
+            this.ImageContainer.Panel2.SuspendLayout();
+            this.ImageContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Dst)).BeginInit();
             this.SuspendLayout();
             // 
@@ -188,21 +188,21 @@ namespace ImageProcessing
             // 
             this.InversionFilter.Name = "InversionFilter";
             this.InversionFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Q)));
-            this.InversionFilter.Size = new System.Drawing.Size(180, 22);
+            this.InversionFilter.Size = new System.Drawing.Size(172, 22);
             this.InversionFilter.Text = "Inversion";
             // 
             // GrayscaleFilter
             // 
             this.GrayscaleFilter.Name = "GrayscaleFilter";
             this.GrayscaleFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.W)));
-            this.GrayscaleFilter.Size = new System.Drawing.Size(180, 22);
+            this.GrayscaleFilter.Size = new System.Drawing.Size(172, 22);
             this.GrayscaleFilter.Text = "GrayScale";
             // 
             // BinaryFilter
             // 
             this.BinaryFilter.Name = "BinaryFilter";
             this.BinaryFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
-            this.BinaryFilter.Size = new System.Drawing.Size(180, 22);
+            this.BinaryFilter.Size = new System.Drawing.Size(172, 22);
             this.BinaryFilter.Text = "Binary";
             // 
             // ColorFilter
@@ -213,7 +213,7 @@ namespace ImageProcessing
             this.ColorFilterBlue});
             this.ColorFilter.Name = "ColorFilter";
             this.ColorFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.R)));
-            this.ColorFilter.Size = new System.Drawing.Size(180, 22);
+            this.ColorFilter.Size = new System.Drawing.Size(172, 22);
             this.ColorFilter.Text = "Color filters";
             // 
             // ColorFilterRed
@@ -252,19 +252,19 @@ namespace ImageProcessing
             this.ExponentialDistribution,
             this.RayleighDistribution});
             this.OneParameterDistributions.Name = "OneParameterDistributions";
-            this.OneParameterDistributions.Size = new System.Drawing.Size(180, 22);
+            this.OneParameterDistributions.Size = new System.Drawing.Size(155, 22);
             this.OneParameterDistributions.Text = "One-parameter";
             // 
             // ExponentialDistribution
             // 
             this.ExponentialDistribution.Name = "ExponentialDistribution";
-            this.ExponentialDistribution.Size = new System.Drawing.Size(180, 22);
+            this.ExponentialDistribution.Size = new System.Drawing.Size(136, 22);
             this.ExponentialDistribution.Text = "Exponential";
             // 
             // RayleighDistribution
             // 
             this.RayleighDistribution.Name = "RayleighDistribution";
-            this.RayleighDistribution.Size = new System.Drawing.Size(180, 22);
+            this.RayleighDistribution.Size = new System.Drawing.Size(136, 22);
             this.RayleighDistribution.Text = "Rayleigh";
             // 
             // TwoParameterDistributions
@@ -277,7 +277,7 @@ namespace ImageProcessing
             this.NormalDistribution,
             this.ParabolaDistribution});
             this.TwoParameterDistributions.Name = "TwoParameterDistributions";
-            this.TwoParameterDistributions.Size = new System.Drawing.Size(180, 22);
+            this.TwoParameterDistributions.Size = new System.Drawing.Size(155, 22);
             this.TwoParameterDistributions.Text = "Two-parameter";
             // 
             // UniformDistribution
@@ -333,7 +333,7 @@ namespace ImageProcessing
             this.LaplacianOperator,
             this.SobelOperator});
             this.EdgeDetectionFilter.Name = "EdgeDetectionFilter";
-            this.EdgeDetectionFilter.Size = new System.Drawing.Size(180, 22);
+            this.EdgeDetectionFilter.Size = new System.Drawing.Size(154, 22);
             this.EdgeDetectionFilter.Text = "Edge Detection";
             // 
             // LaplacianOperator
@@ -343,31 +343,31 @@ namespace ImageProcessing
             this.LaplacianOperator5x5,
             this.LaplacianOfGaussianOperator});
             this.LaplacianOperator.Name = "LaplacianOperator";
-            this.LaplacianOperator.Size = new System.Drawing.Size(180, 22);
+            this.LaplacianOperator.Size = new System.Drawing.Size(174, 22);
             this.LaplacianOperator.Text = "Laplacian Operator";
             // 
             // LaplacianOperator3x3
             // 
             this.LaplacianOperator3x3.Name = "LaplacianOperator3x3";
-            this.LaplacianOperator3x3.Size = new System.Drawing.Size(180, 22);
+            this.LaplacianOperator3x3.Size = new System.Drawing.Size(135, 22);
             this.LaplacianOperator3x3.Text = "3 x 3";
             // 
             // LaplacianOperator5x5
             // 
             this.LaplacianOperator5x5.Name = "LaplacianOperator5x5";
-            this.LaplacianOperator5x5.Size = new System.Drawing.Size(180, 22);
+            this.LaplacianOperator5x5.Size = new System.Drawing.Size(135, 22);
             this.LaplacianOperator5x5.Text = "5 x 5";
             // 
             // LaplacianOfGaussianOperator
             // 
             this.LaplacianOfGaussianOperator.Name = "LaplacianOfGaussianOperator";
-            this.LaplacianOfGaussianOperator.Size = new System.Drawing.Size(180, 22);
+            this.LaplacianOfGaussianOperator.Size = new System.Drawing.Size(135, 22);
             this.LaplacianOfGaussianOperator.Text = "of Gaussian";
             // 
             // SobelOperator
             // 
             this.SobelOperator.Name = "SobelOperator";
-            this.SobelOperator.Size = new System.Drawing.Size(180, 22);
+            this.SobelOperator.Size = new System.Drawing.Size(174, 22);
             this.SobelOperator.Text = "Sobel Operator";
             // 
             // BlurFilter
@@ -377,7 +377,7 @@ namespace ImageProcessing
             this.GaussianBlur,
             this.MotionBlur});
             this.BlurFilter.Name = "BlurFilter";
-            this.BlurFilter.Size = new System.Drawing.Size(180, 22);
+            this.BlurFilter.Size = new System.Drawing.Size(154, 22);
             this.BlurFilter.Text = "Blur";
             // 
             // BoxBlur
@@ -386,19 +386,19 @@ namespace ImageProcessing
             this.BoxBlur3x3,
             this.BoxBlur5x5});
             this.BoxBlur.Name = "BoxBlur";
-            this.BoxBlur.Size = new System.Drawing.Size(180, 22);
+            this.BoxBlur.Size = new System.Drawing.Size(145, 22);
             this.BoxBlur.Text = "Box Blur";
             // 
             // BoxBlur3x3
             // 
             this.BoxBlur3x3.Name = "BoxBlur3x3";
-            this.BoxBlur3x3.Size = new System.Drawing.Size(180, 22);
+            this.BoxBlur3x3.Size = new System.Drawing.Size(98, 22);
             this.BoxBlur3x3.Text = "3 x 3";
             // 
             // BoxBlur5x5
             // 
             this.BoxBlur5x5.Name = "BoxBlur5x5";
-            this.BoxBlur5x5.Size = new System.Drawing.Size(180, 22);
+            this.BoxBlur5x5.Size = new System.Drawing.Size(98, 22);
             this.BoxBlur5x5.Text = "5 x 5";
             // 
             // GaussianBlur
@@ -407,19 +407,19 @@ namespace ImageProcessing
             this.GaussianBlur3x3,
             this.GaussianBlur5x5});
             this.GaussianBlur.Name = "GaussianBlur";
-            this.GaussianBlur.Size = new System.Drawing.Size(180, 22);
+            this.GaussianBlur.Size = new System.Drawing.Size(145, 22);
             this.GaussianBlur.Text = "Gaussian Blur";
             // 
             // GaussianBlur3x3
             // 
             this.GaussianBlur3x3.Name = "GaussianBlur3x3";
-            this.GaussianBlur3x3.Size = new System.Drawing.Size(180, 22);
+            this.GaussianBlur3x3.Size = new System.Drawing.Size(98, 22);
             this.GaussianBlur3x3.Text = "3 x 3";
             // 
             // GaussianBlur5x5
             // 
             this.GaussianBlur5x5.Name = "GaussianBlur5x5";
-            this.GaussianBlur5x5.Size = new System.Drawing.Size(180, 22);
+            this.GaussianBlur5x5.Size = new System.Drawing.Size(98, 22);
             this.GaussianBlur5x5.Text = "5 x 5";
             // 
             // MotionBlur
@@ -427,13 +427,13 @@ namespace ImageProcessing
             this.MotionBlur.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MotionBlur9x9});
             this.MotionBlur.Name = "MotionBlur";
-            this.MotionBlur.Size = new System.Drawing.Size(180, 22);
+            this.MotionBlur.Size = new System.Drawing.Size(145, 22);
             this.MotionBlur.Text = "Motion Blur";
             // 
             // MotionBlur9x9
             // 
             this.MotionBlur9x9.Name = "MotionBlur9x9";
-            this.MotionBlur9x9.Size = new System.Drawing.Size(180, 22);
+            this.MotionBlur9x9.Size = new System.Drawing.Size(98, 22);
             this.MotionBlur9x9.Text = "9 x 9";
             // 
             // EmbossFilter
@@ -441,13 +441,13 @@ namespace ImageProcessing
             this.EmbossFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Emboss3x3});
             this.EmbossFilter.Name = "EmbossFilter";
-            this.EmbossFilter.Size = new System.Drawing.Size(180, 22);
+            this.EmbossFilter.Size = new System.Drawing.Size(154, 22);
             this.EmbossFilter.Text = "Emboss";
             // 
             // Emboss3x3
             // 
             this.Emboss3x3.Name = "Emboss3x3";
-            this.Emboss3x3.Size = new System.Drawing.Size(180, 22);
+            this.Emboss3x3.Size = new System.Drawing.Size(98, 22);
             this.Emboss3x3.Text = "3 x 3";
             // 
             // SharpenFilter
@@ -455,13 +455,13 @@ namespace ImageProcessing
             this.SharpenFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Sharpen3x3});
             this.SharpenFilter.Name = "SharpenFilter";
-            this.SharpenFilter.Size = new System.Drawing.Size(180, 22);
+            this.SharpenFilter.Size = new System.Drawing.Size(154, 22);
             this.SharpenFilter.Text = "Sharpen";
             // 
             // Sharpen3x3
             // 
             this.Sharpen3x3.Name = "Sharpen3x3";
-            this.Sharpen3x3.Size = new System.Drawing.Size(180, 22);
+            this.Sharpen3x3.Size = new System.Drawing.Size(98, 22);
             this.Sharpen3x3.Text = "3 x 3";
             // 
             // miniToolStrip
@@ -706,24 +706,24 @@ namespace ImageProcessing
             this.Src.TabIndex = 2;
             this.Src.TabStop = false;
             // 
-            // splitContainer1
+            // ImageContainer
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(20, 109);
-            this.splitContainer1.Name = "splitContainer1";
+            this.ImageContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ImageContainer.Location = new System.Drawing.Point(20, 109);
+            this.ImageContainer.Name = "ImageContainer";
             // 
-            // splitContainer1.Panel1
+            // ImageContainer.Panel1
             // 
-            this.splitContainer1.Panel1.AutoScroll = true;
-            this.splitContainer1.Panel1.Controls.Add(this.Src);
+            this.ImageContainer.Panel1.AutoScroll = true;
+            this.ImageContainer.Panel1.Controls.Add(this.Src);
             // 
-            // splitContainer1.Panel2
+            // ImageContainer.Panel2
             // 
-            this.splitContainer1.Panel2.AutoScroll = true;
-            this.splitContainer1.Panel2.Controls.Add(this.Dst);
-            this.splitContainer1.Size = new System.Drawing.Size(715, 372);
-            this.splitContainer1.SplitterDistance = 389;
-            this.splitContainer1.TabIndex = 9;
+            this.ImageContainer.Panel2.AutoScroll = true;
+            this.ImageContainer.Panel2.Controls.Add(this.Dst);
+            this.ImageContainer.Size = new System.Drawing.Size(715, 372);
+            this.ImageContainer.SplitterDistance = 389;
+            this.ImageContainer.TabIndex = 9;
             // 
             // Dst
             // 
@@ -740,7 +740,7 @@ namespace ImageProcessing
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(755, 501);
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.ImageContainer);
             this.Controls.Add(this.MenuStrip);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -753,12 +753,12 @@ namespace ImageProcessing
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Src)).EndInit();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
+            this.ImageContainer.Panel1.ResumeLayout(false);
+            this.ImageContainer.Panel1.PerformLayout();
+            this.ImageContainer.Panel2.ResumeLayout(false);
+            this.ImageContainer.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ImageContainer)).EndInit();
+            this.ImageContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Dst)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -818,7 +818,7 @@ namespace ImageProcessing
         private System.Windows.Forms.ToolStripTextBox SecondParam;
         private System.Windows.Forms.ToolStripButton PMF;
         private System.Windows.Forms.PictureBox Src;
-        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer ImageContainer;
         private System.Windows.Forms.PictureBox Dst;
         private System.Windows.Forms.ToolStripButton change;
         private System.Windows.Forms.ToolStripButton Undo;

@@ -1,14 +1,16 @@
-﻿using ImageProcessing.Presentation.Views.Base;
+﻿
 using System.Drawing;
+using System.Windows.Forms;
 using System;
+
 using ImageProcessing.RGBFilters.ColorFilter.Colors;
+using ImageProcessing.Presentation.Views.Base;
 
 namespace ImageProcessing.Presentation.Views.Main
 {
     public interface IMainView : IView
     {
-        double FirstParameter { get; }
-        double SecondParameter { get; }
+        (string, string) Parameters { get; }
 
         string Path { get; set; }
         Bitmap SrcImage { get; set; }
@@ -20,16 +22,14 @@ namespace ImageProcessing.Presentation.Views.Main
         void InitSrcImageZoom();
         void InitDstImageZoom();
 
-        (double, double) Parameters { get; }
-
         event Action SaveImage;
         event Action OpenImage;
         event Action<string> ApplyConvolutionFilter;
-        event Action<string, (double, double)> ApplyHistogramTransformation;
+        event Action<string, (string, string)> ApplyHistogramTransformation;
         event Action<string> ApplyRGBFilter;
         event Action<RGBColor> ApplyRGBColorFilter;
         event Action Shuffle;
-        event Action GetRandomVariableInfo;
+        event Action<Keys> GetRandomVariableInfo;
         event Action UndoLast;
         event Action BuildPmf;
         event Action BuildCdf;
