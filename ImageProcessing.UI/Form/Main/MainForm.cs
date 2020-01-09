@@ -19,10 +19,6 @@ namespace ImageProcessing.Form.Main
 
             InitializeComponent();
             Bind();
-
-            Src.SizeMode = PictureBoxSizeMode.AutoSize;
-            Dst.SizeMode = PictureBoxSizeMode.AutoSize;
-
             ImageContainer.BringToFront();
         }
 
@@ -39,11 +35,20 @@ namespace ImageProcessing.Form.Main
         public event Action BuildCdf;
         public event Action BuildLuminanceIntervals;
 
-        public Bitmap SrcImage { get { return new Bitmap(Src.Image); } set { Src.Image = value; } }
-        public Bitmap DstImage { get { return new Bitmap(Dst.Image); } set { Dst.Image = value; } }
+        public Bitmap SrcImage { 
+            get => new Bitmap(Src.Image);
+            set => Src.Image = value;
+        }  
+        public Bitmap DstImage { 
+            get => new Bitmap(Dst.Image);  
+            set => Dst.Image = value; 
+        }
+        public string Path { 
+            get => PathToImage.Text; 
+            set => PathToImage.Text = value;
+        }
         public bool SrcIsNull => Src.Image is null;
         public bool DstIsNull => Dst.Image is null;
-        public string Path { get { return PathToImage.Text; } set { PathToImage.Text = value; } }
         public (string, string) Parameters => (FirstParam.Text, SecondParam.Text);
 
         public new void Show()
@@ -62,6 +67,14 @@ namespace ImageProcessing.Form.Main
            // throw new NotImplementedException();
         }
 
+        public void ShowError(string error)
+        {
+            ErrorTooltip.Show(error, this, Cursor.Position.X, Cursor.Position.Y);
+        }
+
+        /// <summary>
+        /// Bind the main window event handlers
+        /// </summary>
         private void Bind()
         {
             BindFileMenu();
@@ -71,156 +84,129 @@ namespace ImageProcessing.Form.Main
             BindDistributions();
         }
 
+        /// <summary>
+        /// Bind event handlers for a file menu
+        /// </summary>
         private void BindFileMenu()
         {
             OpenFile.Click += (sender, args)
-               =>
-            Invoke(OpenImage);
+               => Invoke(OpenImage);
 
             SaveFile.Click += (sender, args)
-                =>
-            Invoke(SaveImage);
+                => Invoke(SaveImage);
 
             SaveFileAs.Click += (sender, args)
-                =>
-            Invoke(SaveImage);
+                => Invoke(SaveImage);
         }
 
+        /// <summary>
+        /// Bind event handlers for a toolbar menu
+        /// </summary>
         private void BindToolbar()
         {          
             ShuffleSrc.Click += (sender, args)
-                =>
-            Invoke(Shuffle);
+                => Invoke(Shuffle);
 
             PMF.Click += (sender, args)
-                =>
-            Invoke(BuildPmf);
+                => Invoke(BuildPmf);
 
             CDF.Click += (sender, args)
-                =>
-            Invoke(BuildCdf);
+                => Invoke(BuildCdf);
 
             Expectation.Click += (sender, args)
-                =>
-            InvokeWithParameter(GetRandomVariableInfo, Control.ModifierKeys);
+                => Invoke(GetRandomVariableInfo, Control.ModifierKeys);
 
             Variance.Click += (sender, args)
-                =>
-              InvokeWithParameter(GetRandomVariableInfo, Control.ModifierKeys);
+                => Invoke(GetRandomVariableInfo, Control.ModifierKeys);
 
             StandardDeviation.Click += (sender, args)
-                =>
-            InvokeWithParameter(GetRandomVariableInfo, Control.ModifierKeys);
+                => Invoke(GetRandomVariableInfo, Control.ModifierKeys);
 
             Entropy.Click += (sender, args)
-                =>
-             InvokeWithParameter(GetRandomVariableInfo, Control.ModifierKeys);
+                => Invoke(GetRandomVariableInfo, Control.ModifierKeys);
 
             Undo.Click += (sender, args)
-                =>
-            Invoke(UndoLast);
+                => Invoke(UndoLast);
         }
 
         private void BindConvolutionFilters()
         {
             GaussianBlur3x3.Click += (sender, args)
-                =>
-            Invoke(ApplyConvolutionFilter, GaussianBlur3x3.Tag);
+                => Invoke(ApplyConvolutionFilter, GaussianBlur3x3.Tag);
 
             GaussianBlur5x5.Click += (sender, args)
-                =>
-            Invoke(ApplyConvolutionFilter, GaussianBlur5x5.Tag);
+                => Invoke(ApplyConvolutionFilter, GaussianBlur5x5.Tag);
 
             BoxBlur3x3.Click += (sender, args)
-                =>
-            Invoke(ApplyConvolutionFilter, BoxBlur3x3.Tag);
+                => Invoke(ApplyConvolutionFilter, BoxBlur3x3.Tag);
 
             BoxBlur5x5.Click += (sender, args)
-                =>
-            Invoke(ApplyConvolutionFilter, BoxBlur5x5.Tag);
+                => Invoke(ApplyConvolutionFilter, BoxBlur5x5.Tag);
 
             MotionBlur9x9.Click += (sender, args)
-                =>
-            Invoke(ApplyConvolutionFilter, MotionBlur9x9.Tag);
+                => Invoke(ApplyConvolutionFilter, MotionBlur9x9.Tag);
 
             LaplacianOfGaussianOperator.Click += (sender, args)
-                =>
-            Invoke(ApplyConvolutionFilter, LaplacianOfGaussianOperator.Tag);
+                => Invoke(ApplyConvolutionFilter, LaplacianOfGaussianOperator.Tag);
 
             LaplacianOperator5x5.Click += (sender, args)
-                =>
-            Invoke(ApplyConvolutionFilter, LaplacianOperator5x5.Tag);
+                => Invoke(ApplyConvolutionFilter, LaplacianOperator5x5.Tag);
 
             LaplacianOperator3x3.Click += (sender, args)
-                =>
-            Invoke(ApplyConvolutionFilter, LaplacianOperator3x3.Tag);
+                => Invoke(ApplyConvolutionFilter, LaplacianOperator3x3.Tag);
 
             Emboss3x3.Click += (sender, args)
-                =>
-            Invoke(ApplyConvolutionFilter, Emboss3x3.Tag);
+                => Invoke(ApplyConvolutionFilter, Emboss3x3.Tag);
 
             Sharpen3x3.Click += (sender, args)
-                =>
-            Invoke(ApplyConvolutionFilter, Sharpen3x3.Tag);
+                => Invoke(ApplyConvolutionFilter, Sharpen3x3.Tag);
 
             SobelOperator.Click += (sender, args)
-                =>
-            Invoke(ApplyConvolutionFilter, SobelOperator.Tag);
+                => Invoke(ApplyConvolutionFilter, SobelOperator.Tag);
         }
 
         private void BindRGBFilters()
         {
             InversionFilter.Click += (sender, args)
-                =>
-            InvokeWithParameter(ApplyRGBFilter, (string)InversionFilter.Tag);
+                => Invoke(ApplyRGBFilter, (string)InversionFilter.Tag);
 
             BinaryFilter.Click += (sender, args)
-             =>
-            InvokeWithParameter(ApplyRGBFilter, (string)BinaryFilter.Tag);
+                => Invoke(ApplyRGBFilter, (string)BinaryFilter.Tag);
 
             GrayscaleFilter.Click += (sender, args)
-             =>
-            InvokeWithParameter(ApplyRGBFilter, (string)GrayscaleFilter.Tag);
+                => Invoke(ApplyRGBFilter, (string)GrayscaleFilter.Tag);
         }
 
         private void BindDistributions()
         {
             ExponentialDistribution.Click += (sender, args)
-                => 
-            InvokeWithTwoParameters(ApplyHistogramTransformation, (string)ExponentialDistribution.Tag, Parameters);
+                => Invoke(ApplyHistogramTransformation, (string)ExponentialDistribution.Tag, Parameters);
 
             ParabolaDistribution.Click += (sender, args)
-                =>
-            InvokeWithTwoParameters(ApplyHistogramTransformation, (string)ParabolaDistribution.Tag, Parameters);
+                => Invoke(ApplyHistogramTransformation, (string)ParabolaDistribution.Tag, Parameters);
 
             RayleighDistribution.Click += (sender, args) 
-                =>
-            InvokeWithTwoParameters(ApplyHistogramTransformation, (string)RayleighDistribution.Tag, Parameters);
+                => Invoke(ApplyHistogramTransformation, (string)RayleighDistribution.Tag, Parameters);
 
             CauchyDistribution.Click += (sender, args)
-                =>
-            InvokeWithTwoParameters(ApplyHistogramTransformation, (string)CauchyDistribution.Tag, Parameters);
+                => Invoke(ApplyHistogramTransformation, (string)CauchyDistribution.Tag, Parameters);
 
             LaplaceDistribution.Click += (sender, args)
-                =>
-            InvokeWithTwoParameters(ApplyHistogramTransformation, (string)LaplaceDistribution.Tag, Parameters);
+                => Invoke(ApplyHistogramTransformation, (string)LaplaceDistribution.Tag, Parameters);
 
             NormalDistribution.Click += (sender, args) 
-                =>
-            InvokeWithTwoParameters(ApplyHistogramTransformation, (string)NormalDistribution.Tag, Parameters);
+                => Invoke(ApplyHistogramTransformation, (string)NormalDistribution.Tag, Parameters);
 
             UniformDistribution.Click += (sender, args)
-                =>
-            InvokeWithTwoParameters(ApplyHistogramTransformation, (string)UniformDistribution.Tag, Parameters);
+                => Invoke(ApplyHistogramTransformation, (string)UniformDistribution.Tag, Parameters);
 
             WeibullDistribution.Click += (sender, args) 
-                =>
-            InvokeWithTwoParameters(ApplyHistogramTransformation, (string)WeibullDistribution.Tag, Parameters);
+                => Invoke(ApplyHistogramTransformation, (string)WeibullDistribution.Tag, Parameters);
         }
 
-        private void InvokeWithTwoParameters<T1, T2>(Action<T1, T2> action, T1 first, T2 second)
+        private void Invoke<T1, T2>(Action<T1, T2> action, T1 first, T2 second)
         => action?.Invoke(first, second);
-        private void InvokeWithParameter<T>(Action<T> action, T parameter)
+        private void Invoke<T>(Action<T> action, T parameter)
         => action?.Invoke(parameter);
         private void Invoke(Action action)
         => action?.Invoke();

@@ -12,8 +12,8 @@ namespace ImageProcessing.RGBFilters.Grayscale
         public Bitmap Filter(Bitmap bitmap)
         {
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                                                           ImageLockMode.ReadWrite,
-                                                           PixelFormat.Format24bppRgb);
+                                             ImageLockMode.ReadWrite,
+                                             PixelFormat.Format24bppRgb);
 
             var size = bitmap.Size;
 

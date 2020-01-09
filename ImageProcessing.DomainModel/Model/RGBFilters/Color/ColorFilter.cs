@@ -1,9 +1,9 @@
-﻿using ImageProcessing.RGBFilters.Interface;
-
-using System;
+﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
+
+using ImageProcessing.RGBFilters.Interface;
 
 namespace ImageProcessing.RGBFilters.Color
 {
@@ -18,8 +18,8 @@ namespace ImageProcessing.RGBFilters.Color
         public Bitmap Filter(Bitmap bitmap)
         {
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                                                         ImageLockMode.ReadWrite,
-                                                         PixelFormat.Format24bppRgb);
+                                             ImageLockMode.ReadWrite,
+                                             PixelFormat.Format24bppRgb);
 
             var size = bitmap.Size;
 

@@ -7,8 +7,16 @@ using System.Collections.Concurrent;
 
 namespace ImageProcessing.Common.Extensions.BitmapExtensions
 {
+    /// <summary>
+    /// Extension methods for a <c>Bitmap</c> class
+    /// </summary>
     public static class BitmapExtension
     {
+        /// <summary>
+        /// Perfom the Fisher–Yates shuffle on a selected bitmap
+        /// </summary>
+        /// <param name="bitmap">Source bitmap</param>
+        /// <returns>The shuffled bitmap</returns>
         public static Bitmap Shuffle(this Bitmap bitmap)
         {
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),

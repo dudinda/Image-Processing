@@ -33,7 +33,7 @@ namespace ImageProcessing.Form.Main
             this.components = new System.ComponentModel.Container();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.FileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenFile = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,17 +46,6 @@ namespace ImageProcessing.Form.Main
             this.ColorFilterRed = new System.Windows.Forms.ToolStripMenuItem();
             this.ColorFilterGreen = new System.Windows.Forms.ToolStripMenuItem();
             this.ColorFilterBlue = new System.Windows.Forms.ToolStripMenuItem();
-            this.DistributionsMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.OneParameterDistributions = new System.Windows.Forms.ToolStripMenuItem();
-            this.ExponentialDistribution = new System.Windows.Forms.ToolStripMenuItem();
-            this.RayleighDistribution = new System.Windows.Forms.ToolStripMenuItem();
-            this.TwoParameterDistributions = new System.Windows.Forms.ToolStripMenuItem();
-            this.UniformDistribution = new System.Windows.Forms.ToolStripMenuItem();
-            this.CauchyDistribution = new System.Windows.Forms.ToolStripMenuItem();
-            this.WeibullDistribution = new System.Windows.Forms.ToolStripMenuItem();
-            this.LaplaceDistribution = new System.Windows.Forms.ToolStripMenuItem();
-            this.NormalDistribution = new System.Windows.Forms.ToolStripMenuItem();
-            this.ParabolaDistribution = new System.Windows.Forms.ToolStripMenuItem();
             this.ConvolutionFiltersMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.EdgeDetectionFilter = new System.Windows.Forms.ToolStripMenuItem();
             this.LaplacianOperator = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,8 +66,19 @@ namespace ImageProcessing.Form.Main
             this.Emboss3x3 = new System.Windows.Forms.ToolStripMenuItem();
             this.SharpenFilter = new System.Windows.Forms.ToolStripMenuItem();
             this.Sharpen3x3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.DistributionsMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.OneParameterDistributions = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExponentialDistribution = new System.Windows.Forms.ToolStripMenuItem();
+            this.RayleighDistribution = new System.Windows.Forms.ToolStripMenuItem();
+            this.TwoParameterDistributions = new System.Windows.Forms.ToolStripMenuItem();
+            this.UniformDistribution = new System.Windows.Forms.ToolStripMenuItem();
+            this.CauchyDistribution = new System.Windows.Forms.ToolStripMenuItem();
+            this.WeibullDistribution = new System.Windows.Forms.ToolStripMenuItem();
+            this.LaplaceDistribution = new System.Windows.Forms.ToolStripMenuItem();
+            this.NormalDistribution = new System.Windows.Forms.ToolStripMenuItem();
+            this.ParabolaDistribution = new System.Windows.Forms.ToolStripMenuItem();
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
-            this.MenuStrip = new System.Windows.Forms.ToolStrip();
+            this.ToolBarMenu = new System.Windows.Forms.ToolStrip();
             this.FirstParamLabel = new System.Windows.Forms.ToolStripLabel();
             this.FirstParam = new System.Windows.Forms.ToolStripTextBox();
             this.SecondParamLabel = new System.Windows.Forms.ToolStripLabel();
@@ -103,9 +103,10 @@ namespace ImageProcessing.Form.Main
             this.ImageContainer = new System.Windows.Forms.SplitContainer();
             this.Src = new System.Windows.Forms.PictureBox();
             this.Dst = new System.Windows.Forms.PictureBox();
+            this.ErrorTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStrip1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
-            this.MenuStrip.SuspendLayout();
+            this.MainMenu.SuspendLayout();
+            this.ToolBarMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ImageContainer)).BeginInit();
             this.ImageContainer.Panel1.SuspendLayout();
             this.ImageContainer.Panel2.SuspendLayout();
@@ -127,18 +128,18 @@ namespace ImageProcessing.Form.Main
             this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
-            // menuStrip1
+            // MainMenu
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileMenu,
             this.FiltersMenu,
             this.ConvolutionFiltersMenu,
             this.DistributionsMenu});
-            this.menuStrip1.Location = new System.Drawing.Point(20, 60);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(715, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
+            this.MainMenu.Location = new System.Drawing.Point(20, 60);
+            this.MainMenu.Name = "MainMenu";
+            this.MainMenu.Size = new System.Drawing.Size(715, 24);
+            this.MainMenu.TabIndex = 1;
+            this.MainMenu.Text = "menuStrip1";
             // 
             // FileMenu
             // 
@@ -187,7 +188,7 @@ namespace ImageProcessing.Form.Main
             // 
             this.InversionFilter.Name = "InversionFilter";
             this.InversionFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Q)));
-            this.InversionFilter.Size = new System.Drawing.Size(180, 22);
+            this.InversionFilter.Size = new System.Drawing.Size(172, 22);
             this.InversionFilter.Tag = "Inversion";
             this.InversionFilter.Text = "Inversion";
             // 
@@ -195,7 +196,7 @@ namespace ImageProcessing.Form.Main
             // 
             this.GrayscaleFilter.Name = "GrayscaleFilter";
             this.GrayscaleFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.W)));
-            this.GrayscaleFilter.Size = new System.Drawing.Size(180, 22);
+            this.GrayscaleFilter.Size = new System.Drawing.Size(172, 22);
             this.GrayscaleFilter.Tag = "Grayscale";
             this.GrayscaleFilter.Text = "GrayScale";
             // 
@@ -203,7 +204,7 @@ namespace ImageProcessing.Form.Main
             // 
             this.BinaryFilter.Name = "BinaryFilter";
             this.BinaryFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
-            this.BinaryFilter.Size = new System.Drawing.Size(180, 22);
+            this.BinaryFilter.Size = new System.Drawing.Size(172, 22);
             this.BinaryFilter.Tag = "Binary";
             this.BinaryFilter.Text = "Binary";
             // 
@@ -215,116 +216,29 @@ namespace ImageProcessing.Form.Main
             this.ColorFilterBlue});
             this.ColorFilter.Name = "ColorFilter";
             this.ColorFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.R)));
-            this.ColorFilter.Size = new System.Drawing.Size(180, 22);
+            this.ColorFilter.Size = new System.Drawing.Size(172, 22);
             this.ColorFilter.Text = "Color filters";
             // 
             // ColorFilterRed
             // 
             this.ColorFilterRed.Name = "ColorFilterRed";
             this.ColorFilterRed.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.ColorFilterRed.Size = new System.Drawing.Size(180, 22);
+            this.ColorFilterRed.Size = new System.Drawing.Size(147, 22);
             this.ColorFilterRed.Text = "Red";
             // 
             // ColorFilterGreen
             // 
             this.ColorFilterGreen.Name = "ColorFilterGreen";
             this.ColorFilterGreen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.ColorFilterGreen.Size = new System.Drawing.Size(180, 22);
+            this.ColorFilterGreen.Size = new System.Drawing.Size(147, 22);
             this.ColorFilterGreen.Text = "Green";
             // 
             // ColorFilterBlue
             // 
             this.ColorFilterBlue.Name = "ColorFilterBlue";
             this.ColorFilterBlue.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
-            this.ColorFilterBlue.Size = new System.Drawing.Size(180, 22);
+            this.ColorFilterBlue.Size = new System.Drawing.Size(147, 22);
             this.ColorFilterBlue.Text = "Blue";
-            // 
-            // DistributionsMenu
-            // 
-            this.DistributionsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.OneParameterDistributions,
-            this.TwoParameterDistributions});
-            this.DistributionsMenu.Name = "DistributionsMenu";
-            this.DistributionsMenu.Size = new System.Drawing.Size(86, 20);
-            this.DistributionsMenu.Text = "Distributions";
-            // 
-            // OneParameterDistributions
-            // 
-            this.OneParameterDistributions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ExponentialDistribution,
-            this.RayleighDistribution});
-            this.OneParameterDistributions.Name = "OneParameterDistributions";
-            this.OneParameterDistributions.Size = new System.Drawing.Size(180, 22);
-            this.OneParameterDistributions.Text = "One-parameter";
-            // 
-            // ExponentialDistribution
-            // 
-            this.ExponentialDistribution.Name = "ExponentialDistribution";
-            this.ExponentialDistribution.Size = new System.Drawing.Size(180, 22);
-            this.ExponentialDistribution.Tag = "Exponential";
-            this.ExponentialDistribution.Text = "Exponential";
-            // 
-            // RayleighDistribution
-            // 
-            this.RayleighDistribution.Name = "RayleighDistribution";
-            this.RayleighDistribution.Size = new System.Drawing.Size(180, 22);
-            this.RayleighDistribution.Tag = "Rayleigh";
-            this.RayleighDistribution.Text = "Rayleigh";
-            // 
-            // TwoParameterDistributions
-            // 
-            this.TwoParameterDistributions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.UniformDistribution,
-            this.CauchyDistribution,
-            this.WeibullDistribution,
-            this.LaplaceDistribution,
-            this.NormalDistribution,
-            this.ParabolaDistribution});
-            this.TwoParameterDistributions.Name = "TwoParameterDistributions";
-            this.TwoParameterDistributions.Size = new System.Drawing.Size(180, 22);
-            this.TwoParameterDistributions.Text = "Two-parameter";
-            // 
-            // UniformDistribution
-            // 
-            this.UniformDistribution.Name = "UniformDistribution";
-            this.UniformDistribution.Size = new System.Drawing.Size(180, 22);
-            this.UniformDistribution.Tag = "Uniform";
-            this.UniformDistribution.Text = "Uniform";
-            // 
-            // CauchyDistribution
-            // 
-            this.CauchyDistribution.Name = "CauchyDistribution";
-            this.CauchyDistribution.Size = new System.Drawing.Size(180, 22);
-            this.CauchyDistribution.Tag = "Cauchy";
-            this.CauchyDistribution.Text = "Cauchy";
-            // 
-            // WeibullDistribution
-            // 
-            this.WeibullDistribution.Name = "WeibullDistribution";
-            this.WeibullDistribution.Size = new System.Drawing.Size(180, 22);
-            this.WeibullDistribution.Tag = "Weibull";
-            this.WeibullDistribution.Text = "Weibull";
-            // 
-            // LaplaceDistribution
-            // 
-            this.LaplaceDistribution.Name = "LaplaceDistribution";
-            this.LaplaceDistribution.Size = new System.Drawing.Size(180, 22);
-            this.LaplaceDistribution.Tag = "Laplace";
-            this.LaplaceDistribution.Text = "Laplace";
-            // 
-            // NormalDistribution
-            // 
-            this.NormalDistribution.Name = "NormalDistribution";
-            this.NormalDistribution.Size = new System.Drawing.Size(180, 22);
-            this.NormalDistribution.Tag = "Normal";
-            this.NormalDistribution.Text = "Normal";
-            // 
-            // ParabolaDistribution
-            // 
-            this.ParabolaDistribution.Name = "ParabolaDistribution";
-            this.ParabolaDistribution.Size = new System.Drawing.Size(180, 22);
-            this.ParabolaDistribution.Tag = "Parabola";
-            this.ParabolaDistribution.Text = "Parabola";
             // 
             // ConvolutionFiltersMenu
             // 
@@ -343,7 +257,7 @@ namespace ImageProcessing.Form.Main
             this.LaplacianOperator,
             this.SobelOperator});
             this.EdgeDetectionFilter.Name = "EdgeDetectionFilter";
-            this.EdgeDetectionFilter.Size = new System.Drawing.Size(180, 22);
+            this.EdgeDetectionFilter.Size = new System.Drawing.Size(154, 22);
             this.EdgeDetectionFilter.Text = "Edge Detection";
             // 
             // LaplacianOperator
@@ -353,34 +267,34 @@ namespace ImageProcessing.Form.Main
             this.LaplacianOperator5x5,
             this.LaplacianOfGaussianOperator});
             this.LaplacianOperator.Name = "LaplacianOperator";
-            this.LaplacianOperator.Size = new System.Drawing.Size(180, 22);
+            this.LaplacianOperator.Size = new System.Drawing.Size(174, 22);
             this.LaplacianOperator.Text = "Laplacian Operator";
             // 
             // LaplacianOperator3x3
             // 
             this.LaplacianOperator3x3.Name = "LaplacianOperator3x3";
-            this.LaplacianOperator3x3.Size = new System.Drawing.Size(180, 22);
+            this.LaplacianOperator3x3.Size = new System.Drawing.Size(135, 22);
             this.LaplacianOperator3x3.Tag = "LaplacianOperator3x3";
             this.LaplacianOperator3x3.Text = "3 x 3";
             // 
             // LaplacianOperator5x5
             // 
             this.LaplacianOperator5x5.Name = "LaplacianOperator5x5";
-            this.LaplacianOperator5x5.Size = new System.Drawing.Size(180, 22);
+            this.LaplacianOperator5x5.Size = new System.Drawing.Size(135, 22);
             this.LaplacianOperator5x5.Tag = "LaplacianOperator5x5";
             this.LaplacianOperator5x5.Text = "5 x 5";
             // 
             // LaplacianOfGaussianOperator
             // 
             this.LaplacianOfGaussianOperator.Name = "LaplacianOfGaussianOperator";
-            this.LaplacianOfGaussianOperator.Size = new System.Drawing.Size(180, 22);
+            this.LaplacianOfGaussianOperator.Size = new System.Drawing.Size(135, 22);
             this.LaplacianOfGaussianOperator.Tag = "LoGOperator ";
             this.LaplacianOfGaussianOperator.Text = "of Gaussian";
             // 
             // SobelOperator
             // 
             this.SobelOperator.Name = "SobelOperator";
-            this.SobelOperator.Size = new System.Drawing.Size(180, 22);
+            this.SobelOperator.Size = new System.Drawing.Size(174, 22);
             this.SobelOperator.Text = "Sobel Operator";
             // 
             // BlurFilter
@@ -390,7 +304,7 @@ namespace ImageProcessing.Form.Main
             this.GaussianBlur,
             this.MotionBlur});
             this.BlurFilter.Name = "BlurFilter";
-            this.BlurFilter.Size = new System.Drawing.Size(180, 22);
+            this.BlurFilter.Size = new System.Drawing.Size(154, 22);
             this.BlurFilter.Text = "Blur";
             // 
             // BoxBlur
@@ -399,20 +313,20 @@ namespace ImageProcessing.Form.Main
             this.BoxBlur3x3,
             this.BoxBlur5x5});
             this.BoxBlur.Name = "BoxBlur";
-            this.BoxBlur.Size = new System.Drawing.Size(180, 22);
+            this.BoxBlur.Size = new System.Drawing.Size(145, 22);
             this.BoxBlur.Text = "Box Blur";
             // 
             // BoxBlur3x3
             // 
             this.BoxBlur3x3.Name = "BoxBlur3x3";
-            this.BoxBlur3x3.Size = new System.Drawing.Size(180, 22);
+            this.BoxBlur3x3.Size = new System.Drawing.Size(98, 22);
             this.BoxBlur3x3.Tag = "BoxBlur3x3";
             this.BoxBlur3x3.Text = "3 x 3";
             // 
             // BoxBlur5x5
             // 
             this.BoxBlur5x5.Name = "BoxBlur5x5";
-            this.BoxBlur5x5.Size = new System.Drawing.Size(180, 22);
+            this.BoxBlur5x5.Size = new System.Drawing.Size(98, 22);
             this.BoxBlur5x5.Tag = "BoxBlur5x5";
             this.BoxBlur5x5.Text = "5 x 5";
             // 
@@ -422,20 +336,20 @@ namespace ImageProcessing.Form.Main
             this.GaussianBlur3x3,
             this.GaussianBlur5x5});
             this.GaussianBlur.Name = "GaussianBlur";
-            this.GaussianBlur.Size = new System.Drawing.Size(180, 22);
+            this.GaussianBlur.Size = new System.Drawing.Size(145, 22);
             this.GaussianBlur.Text = "Gaussian Blur";
             // 
             // GaussianBlur3x3
             // 
             this.GaussianBlur3x3.Name = "GaussianBlur3x3";
-            this.GaussianBlur3x3.Size = new System.Drawing.Size(180, 22);
+            this.GaussianBlur3x3.Size = new System.Drawing.Size(98, 22);
             this.GaussianBlur3x3.Tag = "GaussianBlur3x3";
             this.GaussianBlur3x3.Text = "3 x 3";
             // 
             // GaussianBlur5x5
             // 
             this.GaussianBlur5x5.Name = "GaussianBlur5x5";
-            this.GaussianBlur5x5.Size = new System.Drawing.Size(180, 22);
+            this.GaussianBlur5x5.Size = new System.Drawing.Size(98, 22);
             this.GaussianBlur5x5.Tag = "GaussianBlur5x5";
             this.GaussianBlur5x5.Text = "5 x 5";
             // 
@@ -444,13 +358,13 @@ namespace ImageProcessing.Form.Main
             this.MotionBlur.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MotionBlur9x9});
             this.MotionBlur.Name = "MotionBlur";
-            this.MotionBlur.Size = new System.Drawing.Size(180, 22);
+            this.MotionBlur.Size = new System.Drawing.Size(145, 22);
             this.MotionBlur.Text = "Motion Blur";
             // 
             // MotionBlur9x9
             // 
             this.MotionBlur9x9.Name = "MotionBlur9x9";
-            this.MotionBlur9x9.Size = new System.Drawing.Size(180, 22);
+            this.MotionBlur9x9.Size = new System.Drawing.Size(98, 22);
             this.MotionBlur9x9.Tag = "MotionBlur9x9";
             this.MotionBlur9x9.Text = "9 x 9";
             // 
@@ -459,13 +373,13 @@ namespace ImageProcessing.Form.Main
             this.EmbossFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Emboss3x3});
             this.EmbossFilter.Name = "EmbossFilter";
-            this.EmbossFilter.Size = new System.Drawing.Size(180, 22);
+            this.EmbossFilter.Size = new System.Drawing.Size(154, 22);
             this.EmbossFilter.Text = "Emboss";
             // 
             // Emboss3x3
             // 
             this.Emboss3x3.Name = "Emboss3x3";
-            this.Emboss3x3.Size = new System.Drawing.Size(180, 22);
+            this.Emboss3x3.Size = new System.Drawing.Size(98, 22);
             this.Emboss3x3.Tag = "Emboss3x3";
             this.Emboss3x3.Text = "3 x 3";
             // 
@@ -474,15 +388,102 @@ namespace ImageProcessing.Form.Main
             this.SharpenFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Sharpen3x3});
             this.SharpenFilter.Name = "SharpenFilter";
-            this.SharpenFilter.Size = new System.Drawing.Size(180, 22);
+            this.SharpenFilter.Size = new System.Drawing.Size(154, 22);
             this.SharpenFilter.Text = "Sharpen";
             // 
             // Sharpen3x3
             // 
             this.Sharpen3x3.Name = "Sharpen3x3";
-            this.Sharpen3x3.Size = new System.Drawing.Size(180, 22);
+            this.Sharpen3x3.Size = new System.Drawing.Size(98, 22);
             this.Sharpen3x3.Tag = "Sharpen3x3";
             this.Sharpen3x3.Text = "3 x 3";
+            // 
+            // DistributionsMenu
+            // 
+            this.DistributionsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.OneParameterDistributions,
+            this.TwoParameterDistributions});
+            this.DistributionsMenu.Name = "DistributionsMenu";
+            this.DistributionsMenu.Size = new System.Drawing.Size(86, 20);
+            this.DistributionsMenu.Text = "Distributions";
+            // 
+            // OneParameterDistributions
+            // 
+            this.OneParameterDistributions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ExponentialDistribution,
+            this.RayleighDistribution});
+            this.OneParameterDistributions.Name = "OneParameterDistributions";
+            this.OneParameterDistributions.Size = new System.Drawing.Size(155, 22);
+            this.OneParameterDistributions.Text = "One-parameter";
+            // 
+            // ExponentialDistribution
+            // 
+            this.ExponentialDistribution.Name = "ExponentialDistribution";
+            this.ExponentialDistribution.Size = new System.Drawing.Size(136, 22);
+            this.ExponentialDistribution.Tag = "Exponential";
+            this.ExponentialDistribution.Text = "Exponential";
+            // 
+            // RayleighDistribution
+            // 
+            this.RayleighDistribution.Name = "RayleighDistribution";
+            this.RayleighDistribution.Size = new System.Drawing.Size(136, 22);
+            this.RayleighDistribution.Tag = "Rayleigh";
+            this.RayleighDistribution.Text = "Rayleigh";
+            // 
+            // TwoParameterDistributions
+            // 
+            this.TwoParameterDistributions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.UniformDistribution,
+            this.CauchyDistribution,
+            this.WeibullDistribution,
+            this.LaplaceDistribution,
+            this.NormalDistribution,
+            this.ParabolaDistribution});
+            this.TwoParameterDistributions.Name = "TwoParameterDistributions";
+            this.TwoParameterDistributions.Size = new System.Drawing.Size(155, 22);
+            this.TwoParameterDistributions.Text = "Two-parameter";
+            // 
+            // UniformDistribution
+            // 
+            this.UniformDistribution.Name = "UniformDistribution";
+            this.UniformDistribution.Size = new System.Drawing.Size(120, 22);
+            this.UniformDistribution.Tag = "Uniform";
+            this.UniformDistribution.Text = "Uniform";
+            // 
+            // CauchyDistribution
+            // 
+            this.CauchyDistribution.Name = "CauchyDistribution";
+            this.CauchyDistribution.Size = new System.Drawing.Size(120, 22);
+            this.CauchyDistribution.Tag = "Cauchy";
+            this.CauchyDistribution.Text = "Cauchy";
+            // 
+            // WeibullDistribution
+            // 
+            this.WeibullDistribution.Name = "WeibullDistribution";
+            this.WeibullDistribution.Size = new System.Drawing.Size(120, 22);
+            this.WeibullDistribution.Tag = "Weibull";
+            this.WeibullDistribution.Text = "Weibull";
+            // 
+            // LaplaceDistribution
+            // 
+            this.LaplaceDistribution.Name = "LaplaceDistribution";
+            this.LaplaceDistribution.Size = new System.Drawing.Size(120, 22);
+            this.LaplaceDistribution.Tag = "Laplace";
+            this.LaplaceDistribution.Text = "Laplace";
+            // 
+            // NormalDistribution
+            // 
+            this.NormalDistribution.Name = "NormalDistribution";
+            this.NormalDistribution.Size = new System.Drawing.Size(120, 22);
+            this.NormalDistribution.Tag = "Normal";
+            this.NormalDistribution.Text = "Normal";
+            // 
+            // ParabolaDistribution
+            // 
+            this.ParabolaDistribution.Name = "ParabolaDistribution";
+            this.ParabolaDistribution.Size = new System.Drawing.Size(120, 22);
+            this.ParabolaDistribution.Tag = "Parabola";
+            this.ParabolaDistribution.Text = "Parabola";
             // 
             // miniToolStrip
             // 
@@ -496,9 +497,9 @@ namespace ImageProcessing.Form.Main
             this.miniToolStrip.Stretch = true;
             this.miniToolStrip.TabIndex = 1;
             // 
-            // MenuStrip
+            // ToolBarMenu
             // 
-            this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolBarMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FirstParamLabel,
             this.FirstParam,
             this.SecondParamLabel,
@@ -520,12 +521,12 @@ namespace ImageProcessing.Form.Main
             this.ZoomOutDstBtn,
             this.IntervalLuminanceHistogram,
             this.AddDstToLuminanceHistogram});
-            this.MenuStrip.Location = new System.Drawing.Point(20, 84);
-            this.MenuStrip.Name = "MenuStrip";
-            this.MenuStrip.Size = new System.Drawing.Size(715, 25);
-            this.MenuStrip.Stretch = true;
-            this.MenuStrip.TabIndex = 5;
-            this.MenuStrip.Text = "toolStrip1";
+            this.ToolBarMenu.Location = new System.Drawing.Point(20, 84);
+            this.ToolBarMenu.Name = "ToolBarMenu";
+            this.ToolBarMenu.Size = new System.Drawing.Size(715, 25);
+            this.ToolBarMenu.Stretch = true;
+            this.ToolBarMenu.TabIndex = 5;
+            this.ToolBarMenu.Text = "toolStrip1";
             // 
             // FirstParamLabel
             // 
@@ -767,16 +768,16 @@ namespace ImageProcessing.Form.Main
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(755, 501);
             this.Controls.Add(this.ImageContainer);
-            this.Controls.Add(this.MenuStrip);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.ToolBarMenu);
+            this.Controls.Add(this.MainMenu);
+            this.MainMenuStrip = this.MainMenu;
             this.Name = "MainForm";
             this.Text = "Image Processing";
             this.contextMenuStrip1.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.MenuStrip.ResumeLayout(false);
-            this.MenuStrip.PerformLayout();
+            this.MainMenu.ResumeLayout(false);
+            this.MainMenu.PerformLayout();
+            this.ToolBarMenu.ResumeLayout(false);
+            this.ToolBarMenu.PerformLayout();
             this.ImageContainer.Panel1.ResumeLayout(false);
             this.ImageContainer.Panel1.PerformLayout();
             this.ImageContainer.Panel2.ResumeLayout(false);
@@ -794,7 +795,7 @@ namespace ImageProcessing.Form.Main
 
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip MainMenu;
         private System.Windows.Forms.ToolStripMenuItem FileMenu;
         private System.Windows.Forms.ToolStripMenuItem OpenFile;
         private System.Windows.Forms.ToolStripMenuItem SaveFileAs;
@@ -838,7 +839,7 @@ namespace ImageProcessing.Form.Main
         private System.Windows.Forms.ToolStripMenuItem NormalDistribution;
         private System.Windows.Forms.ToolStripMenuItem ParabolaDistribution;
         private System.Windows.Forms.ToolStrip miniToolStrip;
-        private System.Windows.Forms.ToolStrip MenuStrip;
+        private System.Windows.Forms.ToolStrip ToolBarMenu;
         private System.Windows.Forms.ToolStripTextBox FirstParam;
         private System.Windows.Forms.ToolStripTextBox SecondParam;
         private System.Windows.Forms.ToolStripButton PMF;
@@ -864,6 +865,7 @@ namespace ImageProcessing.Form.Main
         private System.Windows.Forms.ToolStripButton Expectation;
         private System.Windows.Forms.ToolStripButton Variance;
         private System.Windows.Forms.ToolStripButton StandardDeviation;
+        private ToolTip ErrorTooltip;
     }
 }
 

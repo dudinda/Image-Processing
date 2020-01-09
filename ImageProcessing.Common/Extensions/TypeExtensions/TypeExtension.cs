@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace ImageProcessing.Common.Extensions.TypeExtensions
 {
+    /// <summary>
+    /// Extension methods for a <c>Type</c> class
+    /// </summary>
     public static class TypeExtension
     {
         public static TValue GetAttributeValue<TAttribute, TValue>(

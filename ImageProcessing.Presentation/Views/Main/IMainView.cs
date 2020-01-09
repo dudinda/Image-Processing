@@ -30,6 +30,7 @@ namespace ImageProcessing.Presentation.Views.Main
         bool SrcIsNull { get; }
         bool DstIsNull { get; }
 
+        void ShowError(string message);
         void InitSrcImageZoom();
         void InitDstImageZoom();
 

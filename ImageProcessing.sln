@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageProcessing.DomainModel
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageProcessing.Presentation", "ImageProcessing.Presentation\ImageProcessing.Presentation.csproj", "{50B927BB-7836-4437-BCB1-3003A7BFF729}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing.UI", "ImageProcessing.UI\ImageProcessing.UI.csproj", "{48A8A9B5-6F5B-474C-9A8A-1CBD1F646CEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageProcessing.UI", "ImageProcessing.UI\ImageProcessing.UI.csproj", "{48A8A9B5-6F5B-474C-9A8A-1CBD1F646CEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing.Tests", "ImageProcessing.Tests\ImageProcessing.Tests.csproj", "{8EC2495B-C648-468B-B0C3-2CD6375B3AEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,14 @@ Global
 		{48A8A9B5-6F5B-474C-9A8A-1CBD1F646CEC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{48A8A9B5-6F5B-474C-9A8A-1CBD1F646CEC}.Release|x86.ActiveCfg = Release|Any CPU
 		{48A8A9B5-6F5B-474C-9A8A-1CBD1F646CEC}.Release|x86.Build.0 = Release|Any CPU
+		{8EC2495B-C648-468B-B0C3-2CD6375B3AEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EC2495B-C648-468B-B0C3-2CD6375B3AEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EC2495B-C648-468B-B0C3-2CD6375B3AEB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8EC2495B-C648-468B-B0C3-2CD6375B3AEB}.Debug|x86.Build.0 = Debug|Any CPU
+		{8EC2495B-C648-468B-B0C3-2CD6375B3AEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EC2495B-C648-468B-B0C3-2CD6375B3AEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EC2495B-C648-468B-B0C3-2CD6375B3AEB}.Release|x86.ActiveCfg = Release|Any CPU
+		{8EC2495B-C648-468B-B0C3-2CD6375B3AEB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

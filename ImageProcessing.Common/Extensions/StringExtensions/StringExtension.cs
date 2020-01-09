@@ -3,6 +3,9 @@ using System.Drawing.Imaging;
 
 namespace ImageProcessing.Common.Extensions.StringExtensions
 {
+    /// <summary>
+    /// Extension methods for a <c>String</c> class
+    /// </summary>
     public static class StringExtension
     {
         public static ImageFormat GetImageFormat(this string ext)

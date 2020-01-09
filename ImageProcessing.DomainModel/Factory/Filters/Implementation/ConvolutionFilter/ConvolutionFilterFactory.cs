@@ -1,18 +1,17 @@
 ﻿using ImageProcessing.Common.Enums;
 using ImageProcessing.ConvolutionFilters.Blur.BoxBlur;
 using ImageProcessing.ConvolutionFilters.Blur.MotionBlur;
+using System;
+
+using ImageProcessing.ConvolutionFilters.GaussianBlur;
 using ImageProcessing.ConvolutionFilters.EdgeDetection;
 using ImageProcessing.ConvolutionFilters.EdgeDetection.GaussianOperator;
 using ImageProcessing.ConvolutionFilters.EdgeDetection.SobelOperator;
 using ImageProcessing.ConvolutionFilters.Emboss;
-using ImageProcessing.ConvolutionFilters.GaussianBlur3x3;
-using ImageProcessing.ConvolutionFilters.GaussianBlur5x5;
 using ImageProcessing.ConvolutionFilters.Sharpen;
 using ImageProcessing.ConvulationFilters;
 using ImageProcessing.Common.Extensions.EnumExtensions;
 using ImageProcessing.DomainModel.Factory.Filters.Interface;
-
-using System;
 
 namespace ImageProcessing.Factory.Filters.Convolution
 {

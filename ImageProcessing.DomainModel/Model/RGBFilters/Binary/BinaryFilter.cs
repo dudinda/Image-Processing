@@ -15,8 +15,8 @@ namespace ImageProcessing.RGBFilters.Binary
         public Bitmap Filter(Bitmap bitmap)
         {
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                                                          ImageLockMode.ReadWrite,
-                                                          PixelFormat.Format24bppRgb);
+                                             ImageLockMode.ReadWrite,
+                                             PixelFormat.Format24bppRgb);
 
             var brightness = 0.0;
 

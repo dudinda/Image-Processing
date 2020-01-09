@@ -31,15 +31,8 @@ namespace ImageProcessing.Presentation.Presenters
 
         public MainPresenter(IAppController controller,
                              IMainView view,
-                             IConvolutionFilterService convolutionFilterService,
-                             IDistributionService distributionService,
-                             IRGBFilterService rgbFilterService,
                              IBaseFactory baseFactory) : base(controller, view)
         {
-            _convolutionFilterService = convolutionFilterService;
-            _distributionService      = distributionService;
-            _rgbFilterService         = rgbFilterService;
-
             _convolutionFilterFactory = baseFactory.GetConvolutionFilterFactory();
             _distributionFactory      = baseFactory.GetDistributionFactory();
             _rgbFiltersFactory        = baseFactory.GetRGBFilterFactory();
@@ -55,94 +48,132 @@ namespace ImageProcessing.Presentation.Presenters
 
         private async void OpenImage(string fileName)
         {
-            var openFileDialog = new OpenFileDialog()
+            try
             {
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal),
-                Filter = ConfigurationManager.AppSettings["Filters"]
-            };
+                var openFileDialog = new OpenFileDialog()
+                {
+                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal),
+                    Filter = ConfigurationManager.AppSettings["Filters"]
+                };
 
-            Bitmap openResult = null;
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                openResult = await Task.Run(() => {
-
-                    using (var stream = File.OpenRead(openFileDialog.FileName))
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    View.SrcImage = await Task.Run(() =>
                     {
-                        return new Bitmap(Image.FromStream(stream));
-                    }
+                        using (var stream = File.OpenRead(openFileDialog.FileName))
+                        {
+                            return new Bitmap(Image.FromStream(stream));
+                        }
 
-                });
-
-                View.Path = openFileDialog.FileName;
+                    });
+                    View.InitSrcImageZoom();
+                    View.Path = openFileDialog.FileName;
+                }            
             }
-
-            View.InitSrcImageZoom();
-            View.SrcImage = openResult;
+            catch
+            {
+                View.ShowError("Error while opening the file.");
+            }
         }
 
         private async void SaveImage()
         {
-            var saveFileDialog = new SaveFileDialog()
+            try
             {
-               Filter = ConfigurationManager.AppSettings["Filters"]
-            };
-
-            var bmpToSave = new Bitmap(View.SrcImage);
-
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                await Task.Run(() =>
+                var saveFileDialog = new SaveFileDialog()
                 {
-                    var extension = Path.GetExtension(saveFileDialog.FileName);
+                    Filter = ConfigurationManager.AppSettings["Filters"]
+                };
 
-                    bmpToSave.Save(saveFileDialog.FileName, extension.GetImageFormat());
-                });
+                var bmpToSave = new Bitmap(View.SrcImage);
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    await Task.Run(() =>
+                    {
+                        var extension = Path.GetExtension(saveFileDialog.FileName);
+
+                        bmpToSave.Save(saveFileDialog.FileName, extension.GetImageFormat());
+                    });
+                }
+            }
+            catch
+            {
+                View.ShowError("Error while saving the file.");
             }
         }
 
         private async void ApplyConvolutionFilter(string filterName)
         {
-            if (View.SrcIsNull) { return; }
+            try
+            {
+                if (View.SrcIsNull) { return; }
 
-            var filter = _convolutionFilterFactory.GetFilter(filterName);
+                var filter = _convolutionFilterFactory.GetFilter(filterName);
 
-            View.DstImage = await Task.Run(() => _convolutionFilterService.Convolution(View.SrcImage, filter));
-            View.InitDstImageZoom();
+                View.DstImage = await Task.Run(() => _convolutionFilterService.Convolution(View.SrcImage, filter));
+                View.InitDstImageZoom();
+            }
+            catch(Exception ex)
+            {
+                View.ShowError("Error while applying a convolution filter.");
+            }
         }
 
         private async void ApplyRGBFilter(string filterName)
         {
-            if (View.SrcIsNull) { return; }
+            try
+            {
+                if (View.SrcIsNull) { return; }
 
-            var filter = _rgbFiltersFactory.GetFilter(filterName);
+                var filter = _rgbFiltersFactory.GetFilter(filterName);
 
-            View.DstImage = await Task.Run(() => _rgbFilterService.Filter(View.SrcImage, filter));
-            View.InitDstImageZoom();
+                View.DstImage = await Task.Run(() => _rgbFilterService.Filter(View.SrcImage, filter));
+                View.InitDstImageZoom();
+            }
+            catch(Exception ex)
+            {
+                View.ShowError("Error while applying RGB filter.");
+            }
         }
 
         private async void ApplyHistogramTransformation(string filterName, (string, string) parms)
         {
+            try
+            {
+                if (View.SrcIsNull) { return; }
 
-            if (!parms.TryParse<double, double>(out var result)) {
-                return;
-            }
+                var filter = _distributionFactory.GetFilter(filterName);
 
-            if (View.SrcIsNull) { return; }
+                if (!parms.TryParse<double, double>(out var result))
+                {
+                    return;
+                }
 
-            var filter = _distributionFactory.GetFilter(filterName);
                 filter.SetParams(result);
 
-            View.DstImage = await Task.Run(() => _distributionService.Distribute(View.SrcImage, filter));
-            View.InitDstImageZoom();
+                View.DstImage = await Task.Run(() => _distributionService.Distribute(View.SrcImage, filter));
+                View.InitDstImageZoom();
+            }
+            catch(Exception ex)
+            {
+                View.ShowError("Error while applying histogram transformation.");
+            }
         }
 
         private async void Shuffle()
         {
-            if (View.SrcIsNull) { return; }
+            try
+            {
+                if (View.SrcIsNull) { return; }
 
-            View.DstImage = await Task.Run(() => View.SrcImage.Shuffle());
-            View.InitDstImageZoom();
+                View.DstImage = await Task.Run(() => View.SrcImage.Shuffle());
+                View.InitDstImageZoom();
+            }
+            catch(Exception ex)
+            {
+                View.ShowError("Error while shuffling the image.");
+            }
         }
     
     }

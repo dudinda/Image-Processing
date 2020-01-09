@@ -1,10 +1,10 @@
-﻿using ImageProcessing.Common.Enums;
+﻿using System;
+
+using ImageProcessing.Common.Enums;
 using ImageProcessing.Distributions.Abstract;
 using ImageProcessing.Distributions.OneParameterDistributions;
 using ImageProcessing.Common.Extensions.EnumExtensions;
 using ImageProcessing.DomainModel.Factory.Filters.Interface;
-
-using System;
 using ImageProcessing.Distributions.TwoParameterDistributions;
 
 namespace ImageProcessing.Factory.Filters.Distributions

@@ -1,11 +1,13 @@
 ﻿namespace ImageProcessing.Common.Enums
 {
-    public enum RandomVariableValues
+    public enum RandomVariableAction
     {
-        Expectation            = 0,
-        Variance               = 1,
-        Entropy                = 2,
-        ConditionalExpectation = 3,
-        ConditionalVariance    = 4
+        GetExpectation            = 0,
+        GetVariance               = 1,
+        GetEntropy                = 2,
+        GetConditionalExpectation = 3,
+        GetConditionalVariance    = 4,
+        GetPMF                    = 5,
+        GetCDF                    = 6
     }
 }
