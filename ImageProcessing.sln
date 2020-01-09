@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageProcessing.UI", "Image
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing.Tests", "ImageProcessing.Tests\ImageProcessing.Tests.csproj", "{8EC2495B-C648-468B-B0C3-2CD6375B3AEB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{990D16A1-E568-465E-9132-A3D7F79D7D8A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{47BB7C23-37CA-4C94-B2DB-5DB61C3DB38E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +68,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B006986D-3EC3-48A7-8F59-EDC39A8907B4} = {990D16A1-E568-465E-9132-A3D7F79D7D8A}
+		{9479B67A-57C2-45AB-83ED-0340315CA063} = {990D16A1-E568-465E-9132-A3D7F79D7D8A}
+		{50B927BB-7836-4437-BCB1-3003A7BFF729} = {990D16A1-E568-465E-9132-A3D7F79D7D8A}
+		{48A8A9B5-6F5B-474C-9A8A-1CBD1F646CEC} = {990D16A1-E568-465E-9132-A3D7F79D7D8A}
+		{8EC2495B-C648-468B-B0C3-2CD6375B3AEB} = {47BB7C23-37CA-4C94-B2DB-5DB61C3DB38E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C4D00CEC-14A8-44F9-AD38-3244EF30D239}
