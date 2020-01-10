@@ -9,6 +9,11 @@ namespace ImageProcessing.Common.Enums
     public enum RGBColors
     {
         /// <summary>
+        /// Channel isn't selected
+        /// </summary>
+        Unknown = 0,
+
+        /// <summary>
         /// Red channel
         /// </summary>
         Red   = 1 << 0,

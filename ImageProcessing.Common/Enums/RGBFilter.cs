@@ -11,7 +11,7 @@
         Grayscale = 0,
 
         /// <summary>
-        /// Color filter by a channel
+        /// Filter by color channel
         /// </summary>
         Color     = 1,
 

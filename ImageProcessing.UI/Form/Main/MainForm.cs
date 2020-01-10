@@ -22,12 +22,13 @@ namespace ImageProcessing.Form.Main
             ImageContainer.BringToFront();
         }
 
+        public event Action SaveImageAs;
         public event Action SaveImage;
-        public event Action<string> OpenImage;
+        public event Action OpenImage;
         public event Action<string> ApplyConvolutionFilter;
         public event Action<string, (string, string)> ApplyHistogramTransformation;
         public event Action<string> ApplyRGBFilter;
-        public event Action<RGBColor> ApplyRGBColorFilter;
+        public event Action<string> ApplyRGBColorFilter;
         public event Action Shuffle;
         public event Action<Keys> GetRandomVariableInfo;
         public event Action UndoLast;
@@ -47,6 +48,23 @@ namespace ImageProcessing.Form.Main
             get => PathToImage.Text; 
             set => PathToImage.Text = value;
         }
+
+        public bool IsGreenChannelChecked
+        {
+            get => ColorFilterGreen.Checked;
+            set => ColorFilterGreen.Checked = value;
+        }
+        public bool IsRedChannelChecked
+        {
+            get => ColorFilterRed.Checked;
+            set => ColorFilterRed.Checked = value;
+        }
+        public bool IsBlueChannelChecked
+        {
+            get => ColorFilterBlue.Checked;
+            set => ColorFilterBlue.Checked = value;
+        }
+
         public bool SrcIsNull => Src.Image is null;
         public bool DstIsNull => Dst.Image is null;
         public (string, string) Parameters => (FirstParam.Text, SecondParam.Text);
@@ -68,9 +86,8 @@ namespace ImageProcessing.Form.Main
         }
 
         public void ShowError(string error)
-        {
-            ErrorTooltip.Show(error, this, Cursor.Position.X, Cursor.Position.Y);
-        }
+            => ErrorTooltip.Show(error, this, Cursor.Position.X, Cursor.Position.Y);
+        
 
         /// <summary>
         /// Bind the main window event handlers
@@ -132,37 +149,37 @@ namespace ImageProcessing.Form.Main
         private void BindConvolutionFilters()
         {
             GaussianBlur3x3.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, GaussianBlur3x3.Tag);
+                => Invoke(ApplyConvolutionFilter, (string)GaussianBlur3x3.Tag);
 
             GaussianBlur5x5.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, GaussianBlur5x5.Tag);
+                => Invoke(ApplyConvolutionFilter, (string)GaussianBlur5x5.Tag);
 
             BoxBlur3x3.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, BoxBlur3x3.Tag);
+                => Invoke(ApplyConvolutionFilter, (string)BoxBlur3x3.Tag);
 
             BoxBlur5x5.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, BoxBlur5x5.Tag);
+                => Invoke(ApplyConvolutionFilter, (string)BoxBlur5x5.Tag);
 
             MotionBlur9x9.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, MotionBlur9x9.Tag);
+                => Invoke(ApplyConvolutionFilter, (string)MotionBlur9x9.Tag);
 
             LaplacianOfGaussianOperator.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, LaplacianOfGaussianOperator.Tag);
+                => Invoke(ApplyConvolutionFilter, (string)LaplacianOfGaussianOperator.Tag);
 
             LaplacianOperator5x5.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, LaplacianOperator5x5.Tag);
+                => Invoke(ApplyConvolutionFilter, (string)LaplacianOperator5x5.Tag);
 
             LaplacianOperator3x3.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, LaplacianOperator3x3.Tag);
+                => Invoke(ApplyConvolutionFilter, (string)LaplacianOperator3x3.Tag);
 
             Emboss3x3.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, Emboss3x3.Tag);
+                => Invoke(ApplyConvolutionFilter, (string)Emboss3x3.Tag);
 
             Sharpen3x3.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, Sharpen3x3.Tag);
+                => Invoke(ApplyConvolutionFilter, (string)Sharpen3x3.Tag);
 
             SobelOperator.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, SobelOperator.Tag);
+                => Invoke(ApplyConvolutionFilter, (string)SobelOperator.Tag);
         }
 
         private void BindRGBFilters()
@@ -175,6 +192,15 @@ namespace ImageProcessing.Form.Main
 
             GrayscaleFilter.Click += (sender, args)
                 => Invoke(ApplyRGBFilter, (string)GrayscaleFilter.Tag);
+
+            ColorFilterBlue.Click += (sender, args)
+                => Invoke(ApplyRGBColorFilter, (string)ColorFilterBlue.Tag);
+
+            ColorFilterRed.Click += (sender, args)
+                => Invoke(ApplyRGBColorFilter, (string)ColorFilterRed.Tag);
+
+            ColorFilterGreen.Click += (sender, args)
+                => Invoke(ApplyRGBColorFilter, (string)ColorFilterGreen.Tag);
         }
 
         private void BindDistributions()

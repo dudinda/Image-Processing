@@ -11,24 +11,30 @@ namespace ImageProcessing.Presentation.Views.Main
     public interface IMainView : IView
     {
         event Action SaveImage;
-        event Action<string> OpenImage;
-        event Action<string> ApplyConvolutionFilter;
-        event Action<string, (string, string)> ApplyHistogramTransformation;
-        event Action<string> ApplyRGBFilter;
-        event Action<RGBColor> ApplyRGBColorFilter;
+        event Action SaveImageAs;
+        event Action OpenImage;
         event Action Shuffle;
-        event Action<Keys> GetRandomVariableInfo;
         event Action UndoLast;
         event Action BuildPmf;
         event Action BuildCdf;
         event Action BuildLuminanceIntervals;
+        event Action<string> ApplyConvolutionFilter;
+        event Action<string, (string, string)> ApplyHistogramTransformation;
+        event Action<string> ApplyRGBFilter;
+        event Action<string> ApplyRGBColorFilter;
+        event Action<Keys> GetRandomVariableInfo;
+
 
         (string, string) Parameters { get; }
+        bool SrcIsNull { get; }
+        bool DstIsNull { get; }
+
         string Path { get; set; }
         Bitmap SrcImage { get; set; }
         Bitmap DstImage { get; set; }
-        bool SrcIsNull { get; }
-        bool DstIsNull { get; }
+        bool IsGreenChannelChecked { get; set; }
+        bool IsRedChannelChecked { get; set; }
+        bool IsBlueChannelChecked { get; set; }
 
         void ShowError(string message);
         void InitSrcImageZoom();

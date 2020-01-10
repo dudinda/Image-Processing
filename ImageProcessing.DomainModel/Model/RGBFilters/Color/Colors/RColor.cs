@@ -11,7 +11,6 @@ namespace ImageProcessing.RGBFilters.ColorFilter.Colors
         {
             ptr[0] = 0;
             ptr[1] = 0;
-            ptr[2] = 255;
         }
     }
 }

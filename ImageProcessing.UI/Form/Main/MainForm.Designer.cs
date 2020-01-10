@@ -33,7 +33,7 @@ namespace ImageProcessing.Form.Main
             this.components = new System.ComponentModel.Container();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MainMenu = new System.Windows.Forms.MenuStrip();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.FileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenFile = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,7 +105,7 @@ namespace ImageProcessing.Form.Main
             this.Dst = new System.Windows.Forms.PictureBox();
             this.ErrorTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStrip1.SuspendLayout();
-            this.MainMenu.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.ToolBarMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ImageContainer)).BeginInit();
             this.ImageContainer.Panel1.SuspendLayout();
@@ -128,18 +128,18 @@ namespace ImageProcessing.Form.Main
             this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
-            // MainMenu
+            // menuStrip1
             // 
-            this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileMenu,
             this.FiltersMenu,
             this.ConvolutionFiltersMenu,
             this.DistributionsMenu});
-            this.MainMenu.Location = new System.Drawing.Point(20, 60);
-            this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Size = new System.Drawing.Size(715, 24);
-            this.MainMenu.TabIndex = 1;
-            this.MainMenu.Text = "menuStrip1";
+            this.menuStrip1.Location = new System.Drawing.Point(20, 60);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(715, 24);
+            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.Text = "menuStrip1";
             // 
             // FileMenu
             // 
@@ -188,7 +188,7 @@ namespace ImageProcessing.Form.Main
             // 
             this.InversionFilter.Name = "InversionFilter";
             this.InversionFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Q)));
-            this.InversionFilter.Size = new System.Drawing.Size(172, 22);
+            this.InversionFilter.Size = new System.Drawing.Size(180, 22);
             this.InversionFilter.Tag = "Inversion";
             this.InversionFilter.Text = "Inversion";
             // 
@@ -196,7 +196,7 @@ namespace ImageProcessing.Form.Main
             // 
             this.GrayscaleFilter.Name = "GrayscaleFilter";
             this.GrayscaleFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.W)));
-            this.GrayscaleFilter.Size = new System.Drawing.Size(172, 22);
+            this.GrayscaleFilter.Size = new System.Drawing.Size(180, 22);
             this.GrayscaleFilter.Tag = "Grayscale";
             this.GrayscaleFilter.Text = "GrayScale";
             // 
@@ -204,7 +204,7 @@ namespace ImageProcessing.Form.Main
             // 
             this.BinaryFilter.Name = "BinaryFilter";
             this.BinaryFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
-            this.BinaryFilter.Size = new System.Drawing.Size(172, 22);
+            this.BinaryFilter.Size = new System.Drawing.Size(180, 22);
             this.BinaryFilter.Tag = "Binary";
             this.BinaryFilter.Text = "Binary";
             // 
@@ -216,28 +216,31 @@ namespace ImageProcessing.Form.Main
             this.ColorFilterBlue});
             this.ColorFilter.Name = "ColorFilter";
             this.ColorFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.R)));
-            this.ColorFilter.Size = new System.Drawing.Size(172, 22);
+            this.ColorFilter.Size = new System.Drawing.Size(180, 22);
             this.ColorFilter.Text = "Color filters";
             // 
             // ColorFilterRed
             // 
             this.ColorFilterRed.Name = "ColorFilterRed";
             this.ColorFilterRed.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.ColorFilterRed.Size = new System.Drawing.Size(147, 22);
+            this.ColorFilterRed.Size = new System.Drawing.Size(180, 22);
+            this.ColorFilterRed.Tag = "Red";
             this.ColorFilterRed.Text = "Red";
             // 
             // ColorFilterGreen
             // 
             this.ColorFilterGreen.Name = "ColorFilterGreen";
             this.ColorFilterGreen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.ColorFilterGreen.Size = new System.Drawing.Size(147, 22);
+            this.ColorFilterGreen.Size = new System.Drawing.Size(180, 22);
+            this.ColorFilterGreen.Tag = "Green";
             this.ColorFilterGreen.Text = "Green";
             // 
             // ColorFilterBlue
             // 
             this.ColorFilterBlue.Name = "ColorFilterBlue";
             this.ColorFilterBlue.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
-            this.ColorFilterBlue.Size = new System.Drawing.Size(147, 22);
+            this.ColorFilterBlue.Size = new System.Drawing.Size(180, 22);
+            this.ColorFilterBlue.Tag = "Blue";
             this.ColorFilterBlue.Text = "Blue";
             // 
             // ConvolutionFiltersMenu
@@ -769,13 +772,13 @@ namespace ImageProcessing.Form.Main
             this.ClientSize = new System.Drawing.Size(755, 501);
             this.Controls.Add(this.ImageContainer);
             this.Controls.Add(this.ToolBarMenu);
-            this.Controls.Add(this.MainMenu);
-            this.MainMenuStrip = this.MainMenu;
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Image Processing";
             this.contextMenuStrip1.ResumeLayout(false);
-            this.MainMenu.ResumeLayout(false);
-            this.MainMenu.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ToolBarMenu.ResumeLayout(false);
             this.ToolBarMenu.PerformLayout();
             this.ImageContainer.Panel1.ResumeLayout(false);
@@ -795,7 +798,7 @@ namespace ImageProcessing.Form.Main
 
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.MenuStrip MainMenu;
+        private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem FileMenu;
         private System.Windows.Forms.ToolStripMenuItem OpenFile;
         private System.Windows.Forms.ToolStripMenuItem SaveFileAs;

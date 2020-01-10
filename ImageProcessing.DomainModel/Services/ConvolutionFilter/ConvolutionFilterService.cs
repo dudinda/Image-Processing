@@ -1,8 +1,9 @@
-﻿using ImageProcessing.ConvulationFilters;
-
-using System.Drawing;
+﻿using System.Drawing;
 using System.Threading.Tasks;
 using System;
+using System.Drawing.Imaging;
+
+using ImageProcessing.ConvulationFilters;
 
 namespace ImageProcessing.DomainModel.Services.ConvolutionFilter
 {
@@ -14,12 +15,12 @@ namespace ImageProcessing.DomainModel.Services.ConvolutionFilter
             var destination = new Bitmap(source);
 
             var sourceBitmapData = source.LockBits(new Rectangle(0, 0, source.Width, source.Height),
-                                                   System.Drawing.Imaging.ImageLockMode.ReadOnly,
-                                                   System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                                                   ImageLockMode.ReadOnly,
+                                                   PixelFormat.Format24bppRgb);
 
             var destinationBitmapData = destination.LockBits(new Rectangle(0, 0, source.Width, source.Height),
-                                                             System.Drawing.Imaging.ImageLockMode.WriteOnly,
-                                                             System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                                                             ImageLockMode.WriteOnly,
+                                                             PixelFormat.Format24bppRgb);
 
             var size = source.Size;
 

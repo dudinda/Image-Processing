@@ -5,11 +5,6 @@ using ImageProcessing.DomainModel.Services.ConvolutionFilter;
 using ImageProcessing.DomainModel.Services.Distribution;
 using ImageProcessing.DomainModel.Services.RGBFilter;
 using ImageProcessing.Factory.Base;
-using ImageProcessing.DomainModel.Factory.Filters.Interface;
-using ImageProcessing.Common.Extensions.StringExtensions;
-using ImageProcessing.Common.Extensions.BitmapExtensions;
-using ImageProcessing.Common.Extensions.TupleExtensions;
-
 using System.Drawing;
 using System.Windows.Forms;
 using System.Threading.Tasks;
@@ -17,10 +12,19 @@ using System.IO;
 using System;
 using System.Configuration;
 
+using ImageProcessing.Common.Enums;
+using ImageProcessing.Common.Extensions.EnumExtensions;
+using ImageProcessing.DomainModel.Factory.Filters.Interface;
+using ImageProcessing.Common.Extensions.StringExtensions;
+using ImageProcessing.Common.Extensions.BitmapExtensions;
+using ImageProcessing.Common.Extensions.TupleExtensions;
+
 namespace ImageProcessing.Presentation.Presenters
 {
     public class MainPresenter : BasePresenter<IMainView>
     {
+        private static readonly SemaphoreLocker _locker = new SemaphoreLocker();
+
         private readonly IConvolutionFilterService _convolutionFilterService;
         private readonly IDistributionService _distributionService;
         private readonly IRGBFilterService _rgbFilterService;
@@ -31,22 +35,30 @@ namespace ImageProcessing.Presentation.Presenters
 
         public MainPresenter(IAppController controller,
                              IMainView view,
-                             IBaseFactory baseFactory) : base(controller, view)
+                             IBaseFactory baseFactory,
+                             IConvolutionFilterService convolutionFilterService,
+                             IDistributionService distributionService,
+                             IRGBFilterService rgbFilterService) : base(controller, view)
         {
             _convolutionFilterFactory = baseFactory.GetConvolutionFilterFactory();
             _distributionFactory      = baseFactory.GetDistributionFactory();
             _rgbFiltersFactory        = baseFactory.GetRGBFilterFactory();
 
+            _convolutionFilterService = convolutionFilterService;
+            _rgbFilterService         = rgbFilterService;
+            _distributionService      = distributionService;
+
             View.ApplyConvolutionFilter       += (filter) => ApplyConvolutionFilter(filter);
             View.ApplyRGBFilter               += (filter) => ApplyRGBFilter(filter);
+            View.ApplyRGBColorFilter          += (filter) => ApplyColorFilter(filter);
             View.ApplyHistogramTransformation += (distribution, parms) => ApplyHistogramTransformation(distribution, parms);
             View.SaveImage                    += () => SaveImage();
-            View.OpenImage                    += (filename) => OpenImage(filename);
+            View.SaveImageAs                  += () => SaveImageAs();
+            View.OpenImage                    += () => OpenImage();
             View.Shuffle                      += () => Shuffle();
-
         }
 
-        private async void OpenImage(string fileName)
+        private async void OpenImage()
         {
             try
             {
@@ -73,6 +85,33 @@ namespace ImageProcessing.Presentation.Presenters
             catch
             {
                 View.ShowError("Error while opening the file.");
+            }
+        }
+
+        private async void SaveImageAs()
+        {
+            try
+            {
+                var saveFileDialog = new SaveFileDialog()
+                {
+                    Filter = ConfigurationManager.AppSettings["Filters"]
+                };
+
+                var bmpToSave = new Bitmap(View.SrcImage);
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    await Task.Run(() =>
+                    {
+                        var extension = Path.GetExtension(saveFileDialog.FileName);
+
+                        bmpToSave.Save(saveFileDialog.FileName, extension.GetImageFormat());
+                    });
+                }
+            }
+            catch
+            {
+                View.ShowError("Error while saving the file.");
             }
         }
 
@@ -107,14 +146,17 @@ namespace ImageProcessing.Presentation.Presenters
         {
             try
             {
-                if (View.SrcIsNull) { return; }
+                if (View.SrcIsNull) return; 
 
                 var filter = _convolutionFilterFactory.GetFilter(filterName);
+             
+                View.DstImage = await _locker.LockAsync(
+                    () => _convolutionFilterService.Convolution(new Bitmap(View.SrcImage), filter)
+                );
 
-                View.DstImage = await Task.Run(() => _convolutionFilterService.Convolution(View.SrcImage, filter));
                 View.InitDstImageZoom();
             }
-            catch(Exception ex)
+            catch 
             {
                 View.ShowError("Error while applying a convolution filter.");
             }
@@ -124,38 +166,99 @@ namespace ImageProcessing.Presentation.Presenters
         {
             try
             {
-                if (View.SrcIsNull) { return; }
+                if (View.SrcIsNull) return; 
 
                 var filter = _rgbFiltersFactory.GetFilter(filterName);
 
-                View.DstImage = await Task.Run(() => _rgbFilterService.Filter(View.SrcImage, filter));
+                View.DstImage = View.DstImage = await _locker.LockAsync(
+                    () => _rgbFilterService.Filter(new Bitmap(View.SrcImage), filter)
+                );
+
                 View.InitDstImageZoom();
             }
-            catch(Exception ex)
+            catch
             {
                 View.ShowError("Error while applying RGB filter.");
             }
         }
 
+        private async void ApplyColorFilter(string filterName)
+        {
+            try
+            {
+                if (View.SrcIsNull) return;
+
+                RGBColors result = default;
+
+                switch (filterName.GetEnumValueByName<RGBColors>())
+                {
+                    case RGBColors.Red:
+                        View.IsRedChannelChecked = !View.IsRedChannelChecked;
+                        break;
+                    case RGBColors.Blue:
+                        View.IsBlueChannelChecked = !View.IsBlueChannelChecked;
+                        break;
+                    case RGBColors.Green:
+                        View.IsGreenChannelChecked = !View.IsGreenChannelChecked;
+                        break;
+                }
+
+                if (View.IsRedChannelChecked)
+                {
+                    result |= RGBColors.Red;
+                }
+
+                if (View.IsGreenChannelChecked)
+                {
+                    result |= RGBColors.Green;
+                }
+
+                if (View.IsBlueChannelChecked)
+                {
+                    result |= RGBColors.Blue;
+                }
+
+                if (result == RGBColors.Unknown)
+                {
+                    View.DstImage = View.SrcImage;
+                    return;
+                }
+
+                var filter = _rgbFiltersFactory.GetColorFilter(result);
+
+                View.DstImage =   View.DstImage = await _locker.LockAsync(
+                    () => filter.Filter(new Bitmap(View.SrcImage))
+                );
+
+                View.InitDstImageZoom();
+
+            }
+            catch
+            {
+                View.ShowError("Error while applying the filter by RGB channel.");
+            }
+        }  
+
         private async void ApplyHistogramTransformation(string filterName, (string, string) parms)
         {
             try
             {
-                if (View.SrcIsNull) { return; }
+                if (View.SrcIsNull) return; 
 
                 var filter = _distributionFactory.GetFilter(filterName);
 
                 if (!parms.TryParse<double, double>(out var result))
-                {
                     return;
-                }
 
                 filter.SetParams(result);
 
-                View.DstImage = await Task.Run(() => _distributionService.Distribute(View.SrcImage, filter));
+                View.DstImage = View.DstImage = await _locker.LockAsync(
+                    () => _distributionService.Distribute(new Bitmap(View.SrcImage), filter)
+                );
+
                 View.InitDstImageZoom();
             }
-            catch(Exception ex)
+            catch
             {
                 View.ShowError("Error while applying histogram transformation.");
             }
@@ -165,12 +268,15 @@ namespace ImageProcessing.Presentation.Presenters
         {
             try
             {
-                if (View.SrcIsNull) { return; }
+                if (View.SrcIsNull) return; 
 
-                View.DstImage = await Task.Run(() => View.SrcImage.Shuffle());
+                View.DstImage = View.DstImage = await _locker.LockAsync(
+                   () => new Bitmap(View.SrcImage).Shuffle()
+                );
+
                 View.InitDstImageZoom();
             }
-            catch(Exception ex)
+            catch
             {
                 View.ShowError("Error while shuffling the image.");
             }

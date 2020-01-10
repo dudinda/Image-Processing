@@ -1,6 +1,6 @@
-﻿using ImageProcessing.ConvulationFilters;
+﻿using System.Drawing;
 
-using System.Drawing;
+using ImageProcessing.ConvulationFilters;
 
 namespace ImageProcessing.DomainModel.Services.ConvolutionFilter
 {

@@ -29,9 +29,11 @@ namespace ImageProcessing.Presentation.Presenters
         private void BuildHistogram(Bitmap bitmap)
         {
             var chart = View.GetChart;
+
             chart.ChartAreas[0].AxisY.MaximumAutoSize = 100;
+
             var frequencies = _distributionService.GetFrequencies(bitmap);
-            var pmf = _distributionService.GetPMF(frequencies, bitmap.Width * bitmap.Height);
+            var pmf         = _distributionService.GetPMF(frequencies, bitmap.Width * bitmap.Height);
 
             //Init("PMF", pmf);
 
@@ -44,10 +46,12 @@ namespace ImageProcessing.Presentation.Presenters
         private void BuildCDF(Bitmap bitmap)
         {
             var chart = View.GetChart;
+
             chart.ChartAreas[0].AxisY.Maximum = 1;
+
             var frequencies = _distributionService.GetFrequencies(bitmap);
-            var pmf = _distributionService.GetPMF(frequencies, bitmap.Width * bitmap.Height);
-            var cdf = _distributionService.GetCDF(pmf);
+            var pmf         = _distributionService.GetPMF(frequencies, bitmap.Width * bitmap.Height);
+            var cdf         = _distributionService.GetCDF(pmf);
 
           //  Init("CDF", pmf);
 

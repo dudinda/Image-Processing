@@ -10,7 +10,6 @@ namespace ImageProcessing.RGBFilters.ColorFilter.Colors
         public unsafe void SetPixelColor(byte* ptr)
         {
             ptr[0] = 0;
-            ptr[1] = 255;
             ptr[2] = 0;
         }
     }
