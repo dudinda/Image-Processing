@@ -57,16 +57,6 @@ namespace ImageProcessing.Form.Main
             Application.Run(_context);
         }
 
-        public void InitSrcImageZoom()
-        {
-           // throw new NotImplementedException();
-        }
-
-        public void InitDstImageZoom()
-        {
-           // throw new NotImplementedException();
-        }
-
         public void ShowError(string error)
             => ErrorTooltip.Show(error, this, Cursor.Position.X, Cursor.Position.Y);
 

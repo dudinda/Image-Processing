@@ -1,27 +1,27 @@
 ﻿namespace ImageProcessing.Common.Enums
 {
     /// <summary>
-    /// Filters based on RGB color space
+    /// Filters based on the RGB color space.
     /// </summary>
     public enum RGBFilter
     {
         /// <summary>
-        /// Grayscale filter
+        /// Grayscale filter.
         /// </summary>
         Grayscale = 0,
 
         /// <summary>
-        /// Filter by color channel
+        /// Filter by a color channel.
         /// </summary>
         Color     = 1,
 
         /// <summary>
-        /// Inversion filter
+        /// Inversion filter.
         /// </summary>
         Inversion = 2,
 
         /// <summary>
-        /// Binary filter
+        /// Binary filter.
         /// </summary>
         Binary    = 3
     }

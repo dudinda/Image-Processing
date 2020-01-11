@@ -3,7 +3,7 @@
 namespace ImageProcessing.Common.Enums
 {
     /// <summary>
-    /// Enum, representing an extension of an image 
+    /// The enum, representing an extension of an image .
     /// </summary>
     public enum ImageExtension
     {
