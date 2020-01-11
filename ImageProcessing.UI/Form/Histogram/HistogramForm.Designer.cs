@@ -34,13 +34,15 @@
             System.Windows.Forms.DataVisualization.Charting.LegendItem legendItem2 = new System.Windows.Forms.DataVisualization.Charting.LegendItem();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HistogramForm));
             this.Freq = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.Freq)).BeginInit();
             this.SuspendLayout();
             // 
             // Freq
             // 
+            chartArea1.AxisX.Interval = 50D;
+            chartArea1.AxisX.Maximum = 255D;
+            chartArea1.AxisX.Minimum = 0D;
             chartArea1.Name = "ChartArea1";
             this.Freq.ChartAreas.Add(chartArea1);
             this.Freq.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -69,14 +71,13 @@
             this.Freq.TabIndex = 0;
             this.Freq.Text = "chart1";
             // 
-            // Histogram
+            // HistogramForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(575, 497);
             this.Controls.Add(this.Freq);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Histogram";
+            this.Name = "HistogramForm";
             this.Text = "Histogram";
             ((System.ComponentModel.ISupportInitialize)(this.Freq)).EndInit();
             this.ResumeLayout(false);

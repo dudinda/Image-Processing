@@ -194,6 +194,12 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
             return minima;
         }
 
+        /// <summary>
+        /// The gradient magnitude of an image
+        /// </summary>
+        /// <param name="xDerivative">An image processed by vertical sobel operator</param>
+        /// <param name="yDerivative">An image processed by horizontal sobel operator</param>
+        /// <returns>An image processed by the Sobel operator</returns>
         public static Bitmap Magnitude(Bitmap xDerivative, Bitmap yDerivative)
         {
             var result = new Bitmap(xDerivative.Width, xDerivative.Height);
@@ -225,7 +231,6 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
 
                 Parallel.For(0, size.Height, options, y =>
                 {
-                    //получить адрес строки
                     var resultPtr = resultStartPtr + y * resultData.Stride;
                     var xDerivativePtr = xDerivativeStartPtr + y * xDerivativeData.Stride;
                     var yDerivativePtr = yDerivativeStartPtr + y * yDerivativeData.Stride;

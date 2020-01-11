@@ -1,4 +1,5 @@
-﻿using ImageProcessing.Common.Utility.LightInjectAdapter;
+﻿using ImageProcessing.Common.Adapters.LightInject;
+using ImageProcessing.Core.AppController.Implementation;
 using ImageProcessing.DomainModel.Services.ConvolutionFilter;
 using ImageProcessing.DomainModel.Services.Distribution;
 using ImageProcessing.DomainModel.Services.RGBFilter;
@@ -6,7 +7,6 @@ using ImageProcessing.Factory.Base;
 using ImageProcessing.Form.Histogram;
 using ImageProcessing.Form.Main;
 using ImageProcessing.Form.QualityMeasure;
-using ImageProcessing.Presentation.AppController;
 using ImageProcessing.Presentation.Presenters;
 using ImageProcessing.Presentation.Views.Histogram;
 using ImageProcessing.Presentation.Views.Main;

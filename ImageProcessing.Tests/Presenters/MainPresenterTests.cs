@@ -1,10 +1,11 @@
-﻿using ImageProcessing.Factory.Base;
-using ImageProcessing.Presentation.AppController;
+﻿using ImageProcessing.Core.AppController.Interface;
+using ImageProcessing.Factory.Base;
 using ImageProcessing.Presentation.Presenters;
 using ImageProcessing.Presentation.Views.Main;
+
 using NSubstitute;
 using NUnit.Framework;
-using System;
+
 
 namespace ImageProcessing.Tests.Presenters
 {
@@ -23,8 +24,8 @@ namespace ImageProcessing.Tests.Presenters
             _baseFactory = Substitute.For<IBaseFactory>();
             _view        = Substitute.For<IMainView>();
 
-            _presenter = new MainPresenter(_controller, _view, _baseFactory);
-            _presenter.Run();
+         //   _presenter = new MainPresenter(_controller, _view, _baseFactory);
+          //  _presenter.Run();
         }
 
         [TestCase("BoxBlur3x3", "GaussianBlur3x3")]

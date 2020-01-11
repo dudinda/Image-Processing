@@ -11,26 +11,16 @@ namespace ImageProcessing.Form.Histogram
 {
     public partial class HistogramForm : MetroForm, IHistogramView
     {
-        private readonly ApplicationContext _context;
-
-        public HistogramForm(ApplicationContext context)
+        public HistogramForm()
         {
-            _context = context;
             InitializeComponent();
-            Freq.ChartAreas[0].AxisX.Minimum = 0;
-            Freq.ChartAreas[0].AxisX.Maximum = 255;
-            Freq.ChartAreas[0].AxisX.Interval = 50;
         }
-
-        public event Action<Bitmap> BuildHistogram;
-        public event Action<Bitmap> BuildCDF;
 
         public Chart GetChart => Freq;
 
         public new void Show()
         {
-            _context.MainForm = this;
-            Application.Run(_context);
+            ShowDialog();
         }
 
       

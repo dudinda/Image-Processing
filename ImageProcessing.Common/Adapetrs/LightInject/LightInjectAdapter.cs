@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-using ImageProcessing.Common.Utility.Container;
+using ImageProcessing.Core.Container;
 
 using LightInject;
 
-namespace ImageProcessing.Common.Utility.LightInjectAdapter
+namespace ImageProcessing.Common.Adapters.LightInject
 {
     public class LightInjectAdapter : IContainer
     {

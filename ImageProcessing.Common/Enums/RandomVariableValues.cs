@@ -2,12 +2,12 @@
 {
     public enum RandomVariableAction
     {
-        GetExpectation            = 0,
-        GetVariance               = 1,
-        GetEntropy                = 2,
-        GetConditionalExpectation = 3,
-        GetConditionalVariance    = 4,
-        GetPMF                    = 5,
-        GetCDF                    = 6
+        Expectation            = 0,
+        Variance               = 1,
+        Entropy                = 2,
+        ConditionalExpectation = 3,
+        ConditionalVariance    = 4,
+        PMF                    = 5,
+        CDF                    = 6
     }
 }

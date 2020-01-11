@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using ImageProcessing.Presentation.Views.Main;
-using ImageProcessing.RGBFilters.ColorFilter.Colors;
 
 using MetroFramework.Forms;
 
@@ -12,7 +11,7 @@ namespace ImageProcessing.Form.Main
     public partial class MainForm : MetroForm, IMainView
     {
         private readonly ApplicationContext _context;
-     
+
         public MainForm(ApplicationContext context)
         {
             _context = context;
@@ -31,36 +30,32 @@ namespace ImageProcessing.Form.Main
         public event Action<string> ApplyRGBColorFilter;
         public event Action Shuffle;
         public event Action<Keys> GetRandomVariableInfo;
+        public event Action<Keys> BuildPmf;
+        public event Action<Keys> BuildCdf;
         public event Action UndoLast;
-        public event Action BuildPmf;
-        public event Action BuildCdf;
         public event Action BuildLuminanceIntervals;
 
-        public Bitmap SrcImage { 
-            get => new Bitmap(Src.Image);
+        public Image SrcImage { 
+            get => Src.Image;
             set => Src.Image = value;
         }  
-        public Bitmap DstImage { 
-            get => new Bitmap(Dst.Image);  
+        public Image DstImage { 
+            get => Dst.Image;  
             set => Dst.Image = value; 
         }
         public string Path { 
             get => PathToImage.Text; 
             set => PathToImage.Text = value;
         }
-
-        public bool IsGreenChannelChecked
-        {
+        public bool IsGreenChannelChecked {
             get => ColorFilterGreen.Checked;
             set => ColorFilterGreen.Checked = value;
         }
-        public bool IsRedChannelChecked
-        {
+        public bool IsRedChannelChecked {
             get => ColorFilterRed.Checked;
             set => ColorFilterRed.Checked = value;
         }
-        public bool IsBlueChannelChecked
-        {
+        public bool IsBlueChannelChecked {
             get => ColorFilterBlue.Checked;
             set => ColorFilterBlue.Checked = value;
         }
@@ -125,10 +120,10 @@ namespace ImageProcessing.Form.Main
                 => Invoke(Shuffle);
 
             PMF.Click += (sender, args)
-                => Invoke(BuildPmf);
+                => Invoke(BuildPmf, Control.ModifierKeys);
 
             CDF.Click += (sender, args)
-                => Invoke(BuildCdf);
+                => Invoke(BuildCdf, Control.ModifierKeys);
 
             Expectation.Click += (sender, args)
                 => Invoke(GetRandomVariableInfo, Control.ModifierKeys);
@@ -146,6 +141,9 @@ namespace ImageProcessing.Form.Main
                 => Invoke(UndoLast);
         }
 
+        /// <summary>
+        /// Bind event handlers for a convolution menu
+        /// </summary>
         private void BindConvolutionFilters()
         {
             GaussianBlur3x3.Click += (sender, args)
@@ -182,6 +180,9 @@ namespace ImageProcessing.Form.Main
                 => Invoke(ApplyConvolutionFilter, (string)SobelOperator.Tag);
         }
 
+        /// <summary>
+        /// Bind event handlers for a rgb filters menu
+        /// </summary>
         private void BindRGBFilters()
         {
             InversionFilter.Click += (sender, args)
@@ -203,6 +204,9 @@ namespace ImageProcessing.Form.Main
                 => Invoke(ApplyRGBColorFilter, (string)ColorFilterGreen.Tag);
         }
 
+        /// <summary>
+        /// Bind event handlers for a histogram transformation menu
+        /// </summary>
         private void BindDistributions()
         {
             ExponentialDistribution.Click += (sender, args)

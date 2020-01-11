@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-public class SemaphoreLocker
+public class AsyncLocker
 {
     private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
 

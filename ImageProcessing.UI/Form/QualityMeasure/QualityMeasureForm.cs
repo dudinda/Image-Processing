@@ -12,22 +12,17 @@ namespace ImageProcessing.Form.QualityMeasure
 {
     public partial class QualityMeasureForm : MetroForm, IQualityMeasureView
     {
-        private readonly ApplicationContext _context;
-
-        public QualityMeasureForm(ApplicationContext context)
+        public QualityMeasureForm()
         {
-            _context = context;
             InitializeComponent();
-            SetHistogram();
-        
+            SetHistogram();     
         }
 
         public Chart GetChart => Histogram;
 
         public new void Show()
         {
-            _context.MainForm = this;
-            Application.Run(_context);
+            ShowDialog();
         }
 
         private void SetHistogram()
