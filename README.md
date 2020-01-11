@@ -1,4 +1,4 @@
-# Image-Processing
+# Image Processing
 Image filtration and contrast optimization.
 
 <p>
