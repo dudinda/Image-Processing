@@ -31,9 +31,7 @@ namespace ImageProcessing.Form.Main
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.FileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenFile = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -97,55 +95,40 @@ namespace ImageProcessing.Form.Main
             this.IntervalLuminanceHistogram = new System.Windows.Forms.ToolStripButton();
             this.AddDstToLuminanceHistogram = new System.Windows.Forms.ToolStripButton();
             this.ImageContainer = new System.Windows.Forms.SplitContainer();
-            this.Src = new System.Windows.Forms.PictureBox();
-            this.Dst = new System.Windows.Forms.PictureBox();
-            this.ErrorTooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.TrackBarDstPanel = new System.Windows.Forms.Panel();
-            this.TrackBarSrcPanel = new System.Windows.Forms.Panel();
-            this.PictureBoxDstPanel = new System.Windows.Forms.Panel();
             this.PictureBoxSrcPanel = new System.Windows.Forms.Panel();
-            this.metroTrackBar1 = new MetroFramework.Controls.MetroTrackBar();
-            this.SrcTrackBar = new MetroFramework.Controls.MetroTrackBar();
-            this.contextMenuStrip1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.Src = new System.Windows.Forms.PictureBox();
+            this.TrackBarSrcPanel = new System.Windows.Forms.Panel();
+            this.SrcZoomTrackBar = new MetroFramework.Controls.MetroTrackBar();
+            this.PictureBoxDstPanel = new System.Windows.Forms.Panel();
+            this.Dst = new System.Windows.Forms.PictureBox();
+            this.TrackBarDstPanel = new System.Windows.Forms.Panel();
+            this.DstZoomTrackBar = new MetroFramework.Controls.MetroTrackBar();
+            this.ErrorTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.MainMenu.SuspendLayout();
             this.ToolBarMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ImageContainer)).BeginInit();
             this.ImageContainer.Panel1.SuspendLayout();
             this.ImageContainer.Panel2.SuspendLayout();
             this.ImageContainer.SuspendLayout();
+            this.PictureBoxSrcPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Src)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Dst)).BeginInit();
-            this.TrackBarDstPanel.SuspendLayout();
             this.TrackBarSrcPanel.SuspendLayout();
             this.PictureBoxDstPanel.SuspendLayout();
-            this.PictureBoxSrcPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Dst)).BeginInit();
+            this.TrackBarDstPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // contextMenuStrip1
+            // MainMenu
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(104, 26);
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.openToolStripMenuItem.Text = "Open";
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileMenu,
             this.FiltersMenu,
             this.ConvolutionFiltersMenu,
             this.DistributionsMenu});
-            this.menuStrip1.Location = new System.Drawing.Point(20, 60);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(715, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
+            this.MainMenu.Location = new System.Drawing.Point(20, 60);
+            this.MainMenu.Name = "MainMenu";
+            this.MainMenu.Size = new System.Drawing.Size(715, 24);
+            this.MainMenu.TabIndex = 1;
             // 
             // FileMenu
             // 
@@ -543,6 +526,7 @@ namespace ImageProcessing.Form.Main
             // 
             // FirstParam
             // 
+            this.FirstParam.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.FirstParam.Name = "FirstParam";
             this.FirstParam.Size = new System.Drawing.Size(75, 25);
             // 
@@ -555,6 +539,7 @@ namespace ImageProcessing.Form.Main
             // 
             // SecondParam
             // 
+            this.SecondParam.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.SecondParam.Name = "SecondParam";
             this.SecondParam.Size = new System.Drawing.Size(75, 25);
             // 
@@ -618,6 +603,7 @@ namespace ImageProcessing.Form.Main
             this.ReplaceSrcByDst.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ReplaceSrcByDst.Name = "ReplaceSrcByDst";
             this.ReplaceSrcByDst.Size = new System.Drawing.Size(23, 22);
+            this.ReplaceSrcByDst.Tag = "ReplaceSource";
             this.ReplaceSrcByDst.ToolTipText = "Replace source by destination";
             // 
             // ReplaceDstBySrc
@@ -627,7 +613,7 @@ namespace ImageProcessing.Form.Main
             this.ReplaceDstBySrc.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ReplaceDstBySrc.Name = "ReplaceDstBySrc";
             this.ReplaceDstBySrc.Size = new System.Drawing.Size(23, 22);
-            this.ReplaceDstBySrc.Text = "toolStripButton1";
+            this.ReplaceDstBySrc.Tag = "ReplaceDestination";
             this.ReplaceDstBySrc.ToolTipText = "Replace destination by source";
             // 
             // Undo
@@ -701,16 +687,25 @@ namespace ImageProcessing.Form.Main
             // 
             // ImageContainer.Panel2
             // 
+            this.ImageContainer.Panel2.AutoScroll = true;
             this.ImageContainer.Panel2.Controls.Add(this.PictureBoxDstPanel);
             this.ImageContainer.Panel2.Controls.Add(this.TrackBarDstPanel);
             this.ImageContainer.Size = new System.Drawing.Size(715, 372);
             this.ImageContainer.SplitterDistance = 389;
             this.ImageContainer.TabIndex = 9;
             // 
+            // PictureBoxSrcPanel
+            // 
+            this.PictureBoxSrcPanel.AutoScroll = true;
+            this.PictureBoxSrcPanel.Controls.Add(this.Src);
+            this.PictureBoxSrcPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PictureBoxSrcPanel.Location = new System.Drawing.Point(0, 0);
+            this.PictureBoxSrcPanel.Name = "PictureBoxSrcPanel";
+            this.PictureBoxSrcPanel.Size = new System.Drawing.Size(389, 338);
+            this.PictureBoxSrcPanel.TabIndex = 4;
+            // 
             // Src
             // 
-            this.Src.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.Src.Cursor = System.Windows.Forms.Cursors.Default;
             this.Src.Location = new System.Drawing.Point(3, 3);
             this.Src.Name = "Src";
@@ -719,35 +714,26 @@ namespace ImageProcessing.Form.Main
             this.Src.TabIndex = 2;
             this.Src.TabStop = false;
             // 
-            // Dst
-            // 
-            this.Dst.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Dst.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Dst.Location = new System.Drawing.Point(3, 3);
-            this.Dst.Name = "Dst";
-            this.Dst.Size = new System.Drawing.Size(160, 132);
-            this.Dst.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.Dst.TabIndex = 3;
-            this.Dst.TabStop = false;
-            // 
-            // TrackBarDstPanel
-            // 
-            this.TrackBarDstPanel.Controls.Add(this.metroTrackBar1);
-            this.TrackBarDstPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TrackBarDstPanel.Location = new System.Drawing.Point(0, 338);
-            this.TrackBarDstPanel.Name = "TrackBarDstPanel";
-            this.TrackBarDstPanel.Size = new System.Drawing.Size(322, 34);
-            this.TrackBarDstPanel.TabIndex = 4;
-            // 
             // TrackBarSrcPanel
             // 
-            this.TrackBarSrcPanel.Controls.Add(this.SrcTrackBar);
+            this.TrackBarSrcPanel.Controls.Add(this.SrcZoomTrackBar);
             this.TrackBarSrcPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.TrackBarSrcPanel.Location = new System.Drawing.Point(0, 338);
             this.TrackBarSrcPanel.Name = "TrackBarSrcPanel";
             this.TrackBarSrcPanel.Size = new System.Drawing.Size(389, 34);
             this.TrackBarSrcPanel.TabIndex = 3;
+            // 
+            // SrcZoomTrackBar
+            // 
+            this.SrcZoomTrackBar.BackColor = System.Drawing.Color.Transparent;
+            this.SrcZoomTrackBar.CausesValidation = false;
+            this.SrcZoomTrackBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SrcZoomTrackBar.Location = new System.Drawing.Point(0, 0);
+            this.SrcZoomTrackBar.Minimum = -100;
+            this.SrcZoomTrackBar.Name = "SrcZoomTrackBar";
+            this.SrcZoomTrackBar.Size = new System.Drawing.Size(389, 34);
+            this.SrcZoomTrackBar.TabIndex = 0;
+            this.SrcZoomTrackBar.Value = 0;
             // 
             // PictureBoxDstPanel
             // 
@@ -759,34 +745,37 @@ namespace ImageProcessing.Form.Main
             this.PictureBoxDstPanel.Size = new System.Drawing.Size(322, 338);
             this.PictureBoxDstPanel.TabIndex = 5;
             // 
-            // PictureBoxSrcPanel
+            // Dst
             // 
-            this.PictureBoxSrcPanel.AutoSize = true;
-            this.PictureBoxSrcPanel.Controls.Add(this.Src);
-            this.PictureBoxSrcPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PictureBoxSrcPanel.Location = new System.Drawing.Point(0, 0);
-            this.PictureBoxSrcPanel.Name = "PictureBoxSrcPanel";
-            this.PictureBoxSrcPanel.Size = new System.Drawing.Size(389, 338);
-            this.PictureBoxSrcPanel.TabIndex = 4;
+            this.Dst.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Dst.Location = new System.Drawing.Point(3, 3);
+            this.Dst.Name = "Dst";
+            this.Dst.Size = new System.Drawing.Size(160, 132);
+            this.Dst.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.Dst.TabIndex = 3;
+            this.Dst.TabStop = false;
             // 
-            // metroTrackBar1
+            // TrackBarDstPanel
             // 
-            this.metroTrackBar1.BackColor = System.Drawing.Color.Transparent;
-            this.metroTrackBar1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.metroTrackBar1.Location = new System.Drawing.Point(0, 0);
-            this.metroTrackBar1.Name = "metroTrackBar1";
-            this.metroTrackBar1.Size = new System.Drawing.Size(322, 34);
-            this.metroTrackBar1.TabIndex = 0;
-            this.metroTrackBar1.Text = "metroTrackBar1";
+            this.TrackBarDstPanel.Controls.Add(this.DstZoomTrackBar);
+            this.TrackBarDstPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.TrackBarDstPanel.Location = new System.Drawing.Point(0, 338);
+            this.TrackBarDstPanel.Name = "TrackBarDstPanel";
+            this.TrackBarDstPanel.Size = new System.Drawing.Size(322, 34);
+            this.TrackBarDstPanel.TabIndex = 4;
             // 
-            // SrcTrackBar
+            // DstZoomTrackBar
             // 
-            this.SrcTrackBar.BackColor = System.Drawing.Color.Transparent;
-            this.SrcTrackBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SrcTrackBar.Location = new System.Drawing.Point(0, 0);
-            this.SrcTrackBar.Name = "SrcTrackBar";
-            this.SrcTrackBar.Size = new System.Drawing.Size(389, 34);
-            this.SrcTrackBar.TabIndex = 0;
+            this.DstZoomTrackBar.BackColor = System.Drawing.Color.Transparent;
+            this.DstZoomTrackBar.CausesValidation = false;
+            this.DstZoomTrackBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DstZoomTrackBar.Location = new System.Drawing.Point(0, 0);
+            this.DstZoomTrackBar.Minimum = -100;
+            this.DstZoomTrackBar.Name = "DstZoomTrackBar";
+            this.DstZoomTrackBar.Size = new System.Drawing.Size(322, 34);
+            this.DstZoomTrackBar.TabIndex = 0;
+            this.DstZoomTrackBar.Text = "metroTrackBar1";
+            this.DstZoomTrackBar.Value = 0;
             // 
             // MainForm
             // 
@@ -795,38 +784,33 @@ namespace ImageProcessing.Form.Main
             this.ClientSize = new System.Drawing.Size(755, 501);
             this.Controls.Add(this.ImageContainer);
             this.Controls.Add(this.ToolBarMenu);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.MainMenu);
+            this.MainMenuStrip = this.MainMenu;
             this.Name = "MainForm";
             this.Text = "Image Processing";
-            this.contextMenuStrip1.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.MainMenu.ResumeLayout(false);
+            this.MainMenu.PerformLayout();
             this.ToolBarMenu.ResumeLayout(false);
             this.ToolBarMenu.PerformLayout();
             this.ImageContainer.Panel1.ResumeLayout(false);
-            this.ImageContainer.Panel1.PerformLayout();
             this.ImageContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ImageContainer)).EndInit();
             this.ImageContainer.ResumeLayout(false);
+            this.PictureBoxSrcPanel.ResumeLayout(false);
+            this.PictureBoxSrcPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Src)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Dst)).EndInit();
-            this.TrackBarDstPanel.ResumeLayout(false);
             this.TrackBarSrcPanel.ResumeLayout(false);
             this.PictureBoxDstPanel.ResumeLayout(false);
             this.PictureBoxDstPanel.PerformLayout();
-            this.PictureBoxSrcPanel.ResumeLayout(false);
-            this.PictureBoxSrcPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Dst)).EndInit();
+            this.TrackBarDstPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip MainMenu;
         private System.Windows.Forms.ToolStripMenuItem FileMenu;
         private System.Windows.Forms.ToolStripMenuItem OpenFile;
         private System.Windows.Forms.ToolStripMenuItem SaveFileAs;
@@ -895,10 +879,10 @@ namespace ImageProcessing.Form.Main
         private ToolTip ErrorTooltip;
         private Panel PictureBoxSrcPanel;
         private Panel TrackBarSrcPanel;
-        private MetroFramework.Controls.MetroTrackBar SrcTrackBar;
+        private MetroFramework.Controls.MetroTrackBar SrcZoomTrackBar;
         private Panel PictureBoxDstPanel;
         private Panel TrackBarDstPanel;
-        private MetroFramework.Controls.MetroTrackBar metroTrackBar1;
+        private MetroFramework.Controls.MetroTrackBar DstZoomTrackBar;
     }
 }
 

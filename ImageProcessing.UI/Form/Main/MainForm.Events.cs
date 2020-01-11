@@ -12,10 +12,11 @@ namespace ImageProcessing.Form.Main
         public event Action<string, (string, string)> ApplyHistogramTransformation;
         public event Action<string> ApplyRGBFilter;
         public event Action<string> ApplyRGBColorFilter;
+        public event Action<string> ReplaceImage;
+        public event Action<string> BuildPmf;
+        public event Action<string> BuildCdf;
         public event Action Shuffle;
         public event Action<Keys> GetRandomVariableInfo;
-        public event Action<Keys> BuildPmf;
-        public event Action<Keys> BuildCdf;
         public event Action UndoLast;
         public event Action BuildLuminanceIntervals;
 
@@ -75,6 +76,12 @@ namespace ImageProcessing.Form.Main
 
             Undo.Click += (sender, args)
                 => Invoke(UndoLast);
+
+            ReplaceSrcByDst.Click += (sernder, args)
+                => Invoke(ReplaceImage, (string)ReplaceSrcByDst.Tag);
+
+            ReplaceDstBySrc.Click += (sernder, args)
+                => Invoke(ReplaceImage, (string)ReplaceDstBySrc.Tag);
         }
 
         /// <summary>
@@ -168,6 +175,29 @@ namespace ImageProcessing.Form.Main
 
             WeibullDistribution.Click += (sender, args)
                 => Invoke(ApplyHistogramTransformation, (string)WeibullDistribution.Tag, Parameters);
+        }
+
+        /// <summary>
+        /// Provides the binder for tool strip buttons
+        /// </summary>
+        /// <param name="msg">A Windows message</param>
+        /// <param name="keyData">The pressed key</param>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch(keyData)
+            {
+                case (Keys.Left  | Keys.Control):
+                    Invoke(ReplaceImage, (string)ReplaceSrcByDst.Tag);
+                    return true;
+                case (Keys.Right | Keys.Control):
+                    Invoke(ReplaceImage, (string)ReplaceDstBySrc.Tag);
+                    return true;
+                case (Keys.Q):
+                    //Invoke(, "Source");
+                    return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void Invoke<T1, T2>(Action<T1, T2> action, T1 first, T2 second)

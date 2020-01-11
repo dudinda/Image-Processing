@@ -38,6 +38,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
             View.Shuffle += () 
                 => Shuffle();
 
+            View.ReplaceImage += (image) 
+                => Replace(image);
+
         }
     }
 }

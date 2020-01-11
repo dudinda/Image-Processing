@@ -18,8 +18,9 @@ namespace ImageProcessing.Presentation.Views.Main
         event Action<string, (string, string)> ApplyHistogramTransformation;
         event Action<string> ApplyRGBFilter;
         event Action<string> ApplyRGBColorFilter;
-        event Action<Keys> BuildPmf;
-        event Action<Keys> BuildCdf;
+        event Action<string> ReplaceImage;
+        event Action<string> BuildPmf;
+        event Action<string> BuildCdf;
         event Action<Keys> GetRandomVariableInfo;
 
 

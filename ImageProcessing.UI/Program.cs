@@ -7,7 +7,7 @@ using ImageProcessing.Factory.Base;
 using ImageProcessing.Form.Histogram;
 using ImageProcessing.Form.Main;
 using ImageProcessing.Form.QualityMeasure;
-using ImageProcessing.Presentation.Presenters;
+using ImageProcessing.Presentation.Presenters.Main;
 using ImageProcessing.Presentation.Views.Histogram;
 using ImageProcessing.Presentation.Views.Main;
 using ImageProcessing.Presentation.Views.QualityMeasure;

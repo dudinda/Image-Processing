@@ -149,7 +149,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 var filter = _rgbFiltersFactory.GetFilter(filterName);
 
-                View.DstImage = View.DstImage = await _locker.LockAsync(
+                View.DstImage = await _locker.LockAsync(
                     () => _rgbFilterService.Filter(new Bitmap(View.SrcImage), filter)
                 );
             }
@@ -171,30 +171,18 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 {
                     case RGBColors.Red:
                         View.IsRedChannelChecked = !View.IsRedChannelChecked;
+                        if(View.IsRedChannelChecked) result |= RGBColors.Red;
                         break;
                     case RGBColors.Blue:
                         View.IsBlueChannelChecked = !View.IsBlueChannelChecked;
+                        if(View.IsBlueChannelChecked) result |= RGBColors.Blue;
                         break;
                     case RGBColors.Green:
                         View.IsGreenChannelChecked = !View.IsGreenChannelChecked;
-                        break;
+                        if(View.IsGreenChannelChecked) result |= RGBColors.Green;
+                        break;    
                 }
-
-                if (View.IsRedChannelChecked)
-                {
-                    result |= RGBColors.Red;
-                }
-
-                if (View.IsGreenChannelChecked)
-                {
-                    result |= RGBColors.Green;
-                }
-
-                if (View.IsBlueChannelChecked)
-                {
-                    result |= RGBColors.Blue;
-                }
-
+      
                 if (result == RGBColors.Unknown)
                 {
                     View.DstImage = View.SrcImage;
@@ -203,7 +191,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 var filter = _rgbFiltersFactory.GetColorFilter(result);
 
-                View.DstImage =   View.DstImage = await _locker.LockAsync(
+                View.DstImage = await _locker.LockAsync(
                     () => filter.Filter(new Bitmap(View.SrcImage))
                 );
             }
@@ -226,7 +214,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 filter.SetParams(result);
 
-                View.DstImage = View.DstImage = await _locker.LockAsync(
+                View.DstImage  = await _locker.LockAsync(
                     () => _distributionService.Distribute(new Bitmap(View.SrcImage), filter)
                 );
             }
@@ -242,7 +230,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             {
                 if (View.SrcIsNull) return; 
 
-                View.DstImage = View.DstImage = await _locker.LockAsync(
+                View.DstImage = await _locker.LockAsync(
                    () => new Bitmap(View.SrcImage).Shuffle()
                 );
             }
@@ -252,37 +240,70 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private void BuildPMF(Keys key)
+        private void BuildPMF(string target)
         {
-            if (key.Equals(Keys.Alt) && !View.DstIsNull)
+            switch (target.GetEnumValueByName<ImageContainer>())
             {
-                Controller.Run<HistogramPresenter, HistogramViewModel>(
-                    new HistogramViewModel(new Bitmap(View.SrcImage), RandomVariableAction.PMF)
-                );
+                case ImageContainer.Source:
+                    if (View.SrcIsNull) return;
+                    Controller.Run<HistogramPresenter, HistogramViewModel>(
+                        new HistogramViewModel(new Bitmap(View.SrcImage), RandomVariableAction.PMF)
+                    );
+                    break;
 
-                return;
+                case ImageContainer.Destination:
+                    if (View.DstIsNull) return;
+                    Controller.Run<HistogramPresenter, HistogramViewModel>(
+                        new HistogramViewModel(new Bitmap(View.DstImage), RandomVariableAction.PMF)
+                    );
+                    break;
+
             }
-
-            Controller.Run<HistogramPresenter, HistogramViewModel>(
-                new HistogramViewModel(new Bitmap(View.SrcImage), RandomVariableAction.PMF)
-            );
         }
 
-
-        private void BuildCDF(Keys key)
+        private void BuildCDF(string target)
         {
-            if (key.Equals(Keys.Alt) && !View.DstIsNull)
+            switch (target.GetEnumValueByName<ImageContainer>())
             {
-                Controller.Run<HistogramPresenter, HistogramViewModel>(
-                    new HistogramViewModel(new Bitmap(View.SrcImage), RandomVariableAction.CDF)
-                );
+                case ImageContainer.Source:
+                    if (View.SrcIsNull) return;
+                    Controller.Run<HistogramPresenter, HistogramViewModel>(
+                        new HistogramViewModel(new Bitmap(View.SrcImage), RandomVariableAction.CDF)
+                    );
+                    break;
 
-                return;
+                case ImageContainer.Destination:
+                    if (View.DstIsNull) return;
+                    Controller.Run<HistogramPresenter, HistogramViewModel>(
+                        new HistogramViewModel(new Bitmap(View.DstImage), RandomVariableAction.CDF)
+                    );
+                    break;
+
             }
+        }
 
-            Controller.Run<HistogramPresenter, HistogramViewModel>(
-                new HistogramViewModel(new Bitmap(View.SrcImage), RandomVariableAction.CDF)
-            );
+        private void Replace(string target)
+        {
+            try
+            {
+                switch(target.GetEnumValueByName<ImageContainer>())
+                {
+                    case ImageContainer.Source:
+                        if (View.DstIsNull) return;
+                        View.SrcImage = View.DstImage;
+                        break;
+                    case ImageContainer.Destination:
+                        if (View.SrcIsNull) return;
+                        View.DstImage = View.SrcImage;
+                        break;
+                }
+
+                throw new ArgumentException();
+            }
+            catch
+            {
+                View.ShowError("Error while replacing the image.");
+            }
         }
     }
 }
