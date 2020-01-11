@@ -1,6 +1,4 @@
-﻿using ImageProcessing.Presentation.Presenters.Base.Abstract;
-using ImageProcessing.Presentation.Views.Main;
-using ImageProcessing.Presentation.AppController;
+﻿using ImageProcessing.Presentation.Views.Main;
 using ImageProcessing.DomainModel.Services.ConvolutionFilter;
 using ImageProcessing.DomainModel.Services.Distribution;
 using ImageProcessing.DomainModel.Services.RGBFilter;
@@ -18,12 +16,15 @@ using ImageProcessing.DomainModel.Factory.Filters.Interface;
 using ImageProcessing.Common.Extensions.StringExtensions;
 using ImageProcessing.Common.Extensions.BitmapExtensions;
 using ImageProcessing.Common.Extensions.TupleExtensions;
+using ImageProcessing.Presentation.ViewModel.Histogram;
+using ImageProcessing.Core.AppController.Interface;
+using ImageProcessing.Core.Presenter.Abstract;
 
 namespace ImageProcessing.Presentation.Presenters
 {
     public class MainPresenter : BasePresenter<IMainView>
     {
-        private static readonly SemaphoreLocker _locker = new SemaphoreLocker();
+        private static readonly AsyncLocker _locker = new AsyncLocker();
 
         private readonly IConvolutionFilterService _convolutionFilterService;
         private readonly IDistributionService _distributionService;
@@ -56,6 +57,7 @@ namespace ImageProcessing.Presentation.Presenters
             View.SaveImageAs                  += () => SaveImageAs();
             View.OpenImage                    += () => OpenImage();
             View.Shuffle                      += () => Shuffle();
+            View.BuildPmf                     += (modifier) => BuildHistogram(modifier);
         }
 
         private async void OpenImage()
@@ -281,6 +283,38 @@ namespace ImageProcessing.Presentation.Presenters
                 View.ShowError("Error while shuffling the image.");
             }
         }
-    
+
+        private void BuildHistogram(Keys key)
+        {
+            if (key.Equals(Keys.Alt) && !View.DstIsNull)
+            {
+                Controller.Run<HistogramPresenter, HistogramViewModel>(
+                    new HistogramViewModel(new Bitmap(View.SrcImage), RandomVariableAction.PMF)
+                );
+
+                return;
+            }
+
+            Controller.Run<HistogramPresenter, HistogramViewModel>(
+                new HistogramViewModel(new Bitmap(View.SrcImage), RandomVariableAction.PMF)
+            );
+        }
+
+
+        private async void BuildCDF(Keys key)
+        {
+            if (key.Equals(Keys.Alt) && !View.DstIsNull)
+            {
+                Controller.Run<HistogramPresenter, HistogramViewModel>(
+                    new HistogramViewModel(new Bitmap(View.SrcImage), RandomVariableAction.CDF)
+                );
+
+                return;
+            }
+
+            Controller.Run<HistogramPresenter, HistogramViewModel>(
+                new HistogramViewModel(new Bitmap(View.SrcImage), RandomVariableAction.CDF)
+            );
+        }
     }
 }

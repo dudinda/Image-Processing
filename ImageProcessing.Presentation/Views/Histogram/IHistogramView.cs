@@ -1,8 +1,6 @@
-﻿using ImageProcessing.Presentation.Views.Base;
+﻿using System.Windows.Forms.DataVisualization.Charting;
 
-using System;
-using System.Drawing;
-using System.Windows.Forms.DataVisualization.Charting;
+using ImageProcessing.Core.View;
 
 namespace ImageProcessing.Presentation.Views.Histogram
 {

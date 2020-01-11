@@ -1,17 +1,17 @@
-﻿using ImageProcessing.Presentation.Presenters.Base.Abstract;
-using ImageProcessing.Presentation.Views.Histogram;
-using ImageProcessing.Presentation.AppController;
-using ImageProcessing.DomainModel.Services.Distribution;
+﻿using System.Drawing;
 
-using System.Drawing;
+using ImageProcessing.Presentation.Views.Histogram;
+using ImageProcessing.DomainModel.Services.Distribution;
+using ImageProcessing.Presentation.ViewModel.Histogram;
+using ImageProcessing.Common.Enums;
+using ImageProcessing.Core.AppController.Interface;
+using ImageProcessing.Core.Presenter.Abstract;
 
 namespace ImageProcessing.Presentation.Presenters
 {
-    public class HistogramPresenter : BasePresenter<IHistogramView, Bitmap>
+    public class HistogramPresenter : BasePresenter<IHistogramView, HistogramViewModel>
     {
         private readonly IDistributionService _distributionService;
-
-        private Bitmap _src;
 
         public HistogramPresenter(IAppController controller, 
                                   IHistogramView view, 
@@ -20,9 +20,18 @@ namespace ImageProcessing.Presentation.Presenters
             _distributionService = distibutionService;
         }
 
-        public override void Run(Bitmap argument)
+        public override void Run(HistogramViewModel argument)
         {
-            _src = argument;
+            switch(argument.Mode)
+            {
+                case RandomVariableAction.PMF:
+                    BuildHistogram(argument.Source);
+                    break;
+                case RandomVariableAction.CDF:
+                    BuildCDF(argument.Source);
+                    break;
+            }
+
             View.Show();
         }
 

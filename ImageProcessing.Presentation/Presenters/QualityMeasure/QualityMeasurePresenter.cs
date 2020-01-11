@@ -1,10 +1,11 @@
-﻿using ImageProcessing.Presentation.Presenters.Base.Abstract;
-using ImageProcessing.Presentation.Views.QualityMeasure;
-using ImageProcessing.Presentation.AppController;
+﻿using ImageProcessing.Presentation.Views.QualityMeasure;
 using ImageProcessing.DomainModel.Services.Distribution;
+using ImageProcessing.Core.Presenter.Abstract;
+using ImageProcessing.Core.AppController.Interface;
 
 using System.Drawing;
 using System.Collections.Generic;
+
 
 namespace ImageProcessing.Presentation.Presenters
 {

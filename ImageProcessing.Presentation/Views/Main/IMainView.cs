@@ -1,10 +1,8 @@
-﻿
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 using System;
 
-using ImageProcessing.RGBFilters.ColorFilter.Colors;
-using ImageProcessing.Presentation.Views.Base;
+using ImageProcessing.Core.View;
 
 namespace ImageProcessing.Presentation.Views.Main
 {
@@ -15,13 +13,13 @@ namespace ImageProcessing.Presentation.Views.Main
         event Action OpenImage;
         event Action Shuffle;
         event Action UndoLast;
-        event Action BuildPmf;
-        event Action BuildCdf;
         event Action BuildLuminanceIntervals;
         event Action<string> ApplyConvolutionFilter;
         event Action<string, (string, string)> ApplyHistogramTransformation;
         event Action<string> ApplyRGBFilter;
         event Action<string> ApplyRGBColorFilter;
+        event Action<Keys> BuildPmf;
+        event Action<Keys> BuildCdf;
         event Action<Keys> GetRandomVariableInfo;
 
 
@@ -30,8 +28,8 @@ namespace ImageProcessing.Presentation.Views.Main
         bool DstIsNull { get; }
 
         string Path { get; set; }
-        Bitmap SrcImage { get; set; }
-        Bitmap DstImage { get; set; }
+        Image SrcImage { get; set; }
+        Image DstImage { get; set; }
         bool IsGreenChannelChecked { get; set; }
         bool IsRedChannelChecked { get; set; }
         bool IsBlueChannelChecked { get; set; }
