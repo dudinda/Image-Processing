@@ -27,7 +27,7 @@ namespace ImageProcessing.Presentation.Views.Main
         bool SrcIsNull { get; }
         bool DstIsNull { get; }
 
-        string Path { get; set; }
+        string PathToFile { get; set; }
         Image SrcImage { get; set; }
         Image DstImage { get; set; }
         bool IsGreenChannelChecked { get; set; }
@@ -35,8 +35,6 @@ namespace ImageProcessing.Presentation.Views.Main
         bool IsBlueChannelChecked { get; set; }
 
         void ShowError(string message);
-        void InitSrcImageZoom();
-        void InitDstImageZoom();
 
     }
 }

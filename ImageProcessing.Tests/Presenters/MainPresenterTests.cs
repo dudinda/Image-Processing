@@ -1,6 +1,6 @@
 ﻿using ImageProcessing.Core.AppController.Interface;
 using ImageProcessing.Factory.Base;
-using ImageProcessing.Presentation.Presenters;
+using ImageProcessing.Presentation.Presenters.Main;
 using ImageProcessing.Presentation.Views.Main;
 
 using NSubstitute;

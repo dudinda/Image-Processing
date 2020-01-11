@@ -32,9 +32,9 @@ namespace ImageProcessing.Presentation.Presenters
         {
             var chart = View.GetChart;
             var list = new List<Bitmap>();
+
             for (var step = 0; step < list.Count; ++step)
             {
-
                 var bitmap = list[step];
 
                 var frequencies = _distributionService.GetFrequencies(bitmap);
@@ -42,11 +42,11 @@ namespace ImageProcessing.Presentation.Presenters
                 var pmf = _distributionService.GetPMF(frequencies, bitmap.Width * bitmap.Height);
 
                 var variance = new List<double>();
-                var names = new List<string>();
+                var names    = new List<string>();
 
                 for (int graylevel = 0; graylevel < 255; graylevel += 15)
                 {
-                    names.Add(string.Format($"{graylevel}-{graylevel + 15}"));
+                    names.Add($"{graylevel}-{graylevel + 15}");
                     variance.Add(_distributionService.GetConditionalVariance(graylevel, graylevel + 15, pmf));
                 }
 

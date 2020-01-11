@@ -22,4 +22,21 @@ public class AsyncLocker
             _semaphore.Release();
         }
     }
+
+    public async Task LockAsync(Action worker)
+    {
+        await _semaphore.WaitAsync();
+        try
+        {
+            await Task.Run(() => worker());
+        }
+        catch
+        {
+            throw;
+        }
+        finally
+        {
+            _semaphore.Release();
+        }
+    }
 }

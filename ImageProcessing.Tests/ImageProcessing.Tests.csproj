@@ -69,6 +69,10 @@
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ImageProcessing.Core\ImageProcessing.Core.csproj">
+      <Project>{428AFBED-2F16-43A5-A9A4-474E8ACC5FD0}</Project>
+      <Name>ImageProcessing.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ImageProcessing.DomainModel\ImageProcessing.DomainModel.csproj">
       <Project>{9479B67A-57C2-45AB-83ED-0340315CA063}</Project>
       <Name>ImageProcessing.DomainModel</Name>

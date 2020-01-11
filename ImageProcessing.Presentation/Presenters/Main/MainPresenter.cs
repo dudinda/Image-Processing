@@ -1,15 +1,15 @@
-﻿using ImageProcessing.Presentation.Views.Main;
-using ImageProcessing.DomainModel.Services.ConvolutionFilter;
-using ImageProcessing.DomainModel.Services.Distribution;
-using ImageProcessing.DomainModel.Services.RGBFilter;
-using ImageProcessing.Factory.Base;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 using System.Threading.Tasks;
 using System.IO;
 using System;
 using System.Configuration;
 
+using ImageProcessing.Presentation.Views.Main;
+using ImageProcessing.DomainModel.Services.ConvolutionFilter;
+using ImageProcessing.DomainModel.Services.Distribution;
+using ImageProcessing.DomainModel.Services.RGBFilter;
+using ImageProcessing.Factory.Base;
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.EnumExtensions;
 using ImageProcessing.DomainModel.Factory.Filters.Interface;
@@ -20,9 +20,9 @@ using ImageProcessing.Presentation.ViewModel.Histogram;
 using ImageProcessing.Core.AppController.Interface;
 using ImageProcessing.Core.Presenter.Abstract;
 
-namespace ImageProcessing.Presentation.Presenters
+namespace ImageProcessing.Presentation.Presenters.Main
 {
-    public class MainPresenter : BasePresenter<IMainView>
+    public partial class MainPresenter : BasePresenter<IMainView>
     {
         private static readonly AsyncLocker _locker = new AsyncLocker();
 
@@ -49,15 +49,7 @@ namespace ImageProcessing.Presentation.Presenters
             _rgbFilterService         = rgbFilterService;
             _distributionService      = distributionService;
 
-            View.ApplyConvolutionFilter       += (filter) => ApplyConvolutionFilter(filter);
-            View.ApplyRGBFilter               += (filter) => ApplyRGBFilter(filter);
-            View.ApplyRGBColorFilter          += (filter) => ApplyColorFilter(filter);
-            View.ApplyHistogramTransformation += (distribution, parms) => ApplyHistogramTransformation(distribution, parms);
-            View.SaveImage                    += () => SaveImage();
-            View.SaveImageAs                  += () => SaveImageAs();
-            View.OpenImage                    += () => OpenImage();
-            View.Shuffle                      += () => Shuffle();
-            View.BuildPmf                     += (modifier) => BuildHistogram(modifier);
+            Bind();
         }
 
         private async void OpenImage()
@@ -80,8 +72,7 @@ namespace ImageProcessing.Presentation.Presenters
                         }
 
                     });
-                    View.InitSrcImageZoom();
-                    View.Path = openFileDialog.FileName;
+                    View.PathToFile = openFileDialog.FileName;
                 }            
             }
             catch
@@ -98,15 +89,13 @@ namespace ImageProcessing.Presentation.Presenters
                 {
                     Filter = ConfigurationManager.AppSettings["Filters"]
                 };
-
-                var bmpToSave = new Bitmap(View.SrcImage);
-
+               
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    await Task.Run(() =>
+                    await _locker.LockAsync(() =>
                     {
+                        var bmpToSave = new Bitmap(View.SrcImage);
                         var extension = Path.GetExtension(saveFileDialog.FileName);
-
                         bmpToSave.Save(saveFileDialog.FileName, extension.GetImageFormat());
                     });
                 }
@@ -121,22 +110,12 @@ namespace ImageProcessing.Presentation.Presenters
         {
             try
             {
-                var saveFileDialog = new SaveFileDialog()
+                await _locker.LockAsync(() =>
                 {
-                    Filter = ConfigurationManager.AppSettings["Filters"]
-                };
-
-                var bmpToSave = new Bitmap(View.SrcImage);
-
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    await Task.Run(() =>
-                    {
-                        var extension = Path.GetExtension(saveFileDialog.FileName);
-
-                        bmpToSave.Save(saveFileDialog.FileName, extension.GetImageFormat());
-                    });
-                }
+                    var bmpToSave = new Bitmap(View.SrcImage);
+                    var extension = Path.GetExtension(View.PathToFile);
+                    bmpToSave.Save(View.PathToFile, extension.GetImageFormat());
+                });            
             }
             catch
             {
@@ -155,8 +134,6 @@ namespace ImageProcessing.Presentation.Presenters
                 View.DstImage = await _locker.LockAsync(
                     () => _convolutionFilterService.Convolution(new Bitmap(View.SrcImage), filter)
                 );
-
-                View.InitDstImageZoom();
             }
             catch 
             {
@@ -175,8 +152,6 @@ namespace ImageProcessing.Presentation.Presenters
                 View.DstImage = View.DstImage = await _locker.LockAsync(
                     () => _rgbFilterService.Filter(new Bitmap(View.SrcImage), filter)
                 );
-
-                View.InitDstImageZoom();
             }
             catch
             {
@@ -231,9 +206,6 @@ namespace ImageProcessing.Presentation.Presenters
                 View.DstImage =   View.DstImage = await _locker.LockAsync(
                     () => filter.Filter(new Bitmap(View.SrcImage))
                 );
-
-                View.InitDstImageZoom();
-
             }
             catch
             {
@@ -257,8 +229,6 @@ namespace ImageProcessing.Presentation.Presenters
                 View.DstImage = View.DstImage = await _locker.LockAsync(
                     () => _distributionService.Distribute(new Bitmap(View.SrcImage), filter)
                 );
-
-                View.InitDstImageZoom();
             }
             catch
             {
@@ -275,8 +245,6 @@ namespace ImageProcessing.Presentation.Presenters
                 View.DstImage = View.DstImage = await _locker.LockAsync(
                    () => new Bitmap(View.SrcImage).Shuffle()
                 );
-
-                View.InitDstImageZoom();
             }
             catch
             {
@@ -284,7 +252,7 @@ namespace ImageProcessing.Presentation.Presenters
             }
         }
 
-        private void BuildHistogram(Keys key)
+        private void BuildPMF(Keys key)
         {
             if (key.Equals(Keys.Alt) && !View.DstIsNull)
             {
@@ -301,7 +269,7 @@ namespace ImageProcessing.Presentation.Presenters
         }
 
 
-        private async void BuildCDF(Keys key)
+        private void BuildCDF(Keys key)
         {
             if (key.Equals(Keys.Alt) && !View.DstIsNull)
             {
