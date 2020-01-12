@@ -13,7 +13,7 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
     public static class BitmapExtension
     {
         /// <summary>
-        /// Perfom the Fisher–Yates shuffle on a selected bitmap
+        /// Perform the Fisher–Yates shuffle on a selected bitmap
         /// </summary>
         /// <param name="bitmap">Source bitmap</param>
         /// <returns>The shuffled bitmap</returns>

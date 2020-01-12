@@ -23,7 +23,7 @@ namespace ImageProcessing.Utility.BitmapStack
             }
             catch (ArgumentOutOfRangeException)
             {
-                throw new InvalidOperationException("Stack is empty.");
+                throw new InvalidOperationException("The stack is empty.");
             }
         }
 
@@ -45,7 +45,7 @@ namespace ImageProcessing.Utility.BitmapStack
             }
             catch (ArgumentNullException)
             {
-                throw new IndexOutOfRangeException("Stack is empty.");
+                throw new IndexOutOfRangeException("The stack is empty.");
             }
 
         }
