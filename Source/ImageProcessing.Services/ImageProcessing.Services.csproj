@@ -6,6 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="DistributionServices/BitmapLuminanceDistribution/Implementation/BitmapLuminanceDistributionService.Implementation.cs">
+      <DependentUpon>BitmapLuminanceDistributionService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DistributionServices/Distribution/Implementation/DistributionService.Implementation.cs">
+      <DependentUpon>DistributionService.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  
+  <ItemGroup>
     <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
 
