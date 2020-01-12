@@ -2,7 +2,7 @@
 
 using ImageProcessing.ConvulationFilters;
 
-namespace ImageProcessing.Services.ConvolutionFilter
+namespace ImageProcessing.Services.ConvolutionFilterServices.Interface
 {
     public interface IConvolutionFilterService
     {

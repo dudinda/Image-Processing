@@ -2,23 +2,20 @@
 using System.Collections.Concurrent;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
 using System.Threading.Tasks;
 
 using ImageProcessing.Distributions.Abstract;
 
-namespace ImageProcessing.Services.Distribution
+namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Implementation
 {
-    public partial class DistributionService
+    public partial class BitmapLuminanceDistributionService
     {
-        private Bitmap DistributeImpl(Bitmap bitmap, IDistribution distribution)
+        private Bitmap TransformToImpl(Bitmap bitmap, IDistribution distribution)
         {
-            var frequencies = GetFrequenciesImpl(bitmap);
-            var pmf = GetPMFImpl(frequencies, bitmap.Width * bitmap.Height);
-            var cdf = GetCDFImpl(pmf);
+            var cdf = GetCDFImpl(bitmap);
 
             //get new pixel values, according to a selected distribution
-            var newPixels = Transform(cdf, distribution);
+            var newPixels = TransformImpl(cdf, distribution);
 
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                                              ImageLockMode.ReadWrite,
@@ -51,88 +48,35 @@ namespace ImageProcessing.Services.Distribution
             return bitmap;
         }
 
-        private double GetExpectationImpl(double[] pmf)
+        private double[] GetPMFImpl(Bitmap bitmap)
         {
-            var total = 0.0;
+            var frequencies = GetFrequenciesImpl(bitmap);
 
-            for (var i = 0; i < 256; ++i)
-            {
-                total += pmf[i] * i;
-            }
+            return base.GetPMF(frequencies, Convert.ToUInt32(bitmap.Width * bitmap.Height));
+        }
 
-            return total;
+        private double[] GetCDFImpl(Bitmap bitmap)
+        {
+            return base.GetCDF(GetPMFImpl(bitmap));
         }
 
         private double GetExpectationImpl(Bitmap bitmap)
         {
             var frequencies = GetFrequencies(bitmap);
-            var pmf         = GetPMF(frequencies, bitmap.Width * bitmap.Height);
 
-            return GetExpectation(pmf);
-        }
+            var pmf = base.GetPMFImpl(frequencies, Convert.ToUInt32(bitmap.Width * bitmap.Height));
 
-        private double GetVarianceImpl(double[] pmf)
-        {
-            var total = 0.0;
-
-            var mean = GetExpectationImpl(pmf);
-
-            for (var i = 0; i < 256; ++i)
-            {
-                total += pmf[i] * (i - mean) * (i - mean);
-            }
-
-            return total;
+            return base.GetExpectation(pmf);
         }
 
         private double GetVarianceImpl(Bitmap bitmap)
         {
-            var frequencies = GetFrequencies(bitmap);
-            var pmf         = GetPMF(frequencies, bitmap.Width * bitmap.Height);
+            var frequencies = GetFrequenciesImpl(bitmap);
 
-            return GetVarianceImpl(pmf);
+            var pmf = base.GetPMF(frequencies, Convert.ToUInt32(bitmap.Width * bitmap.Height));
+
+            return base.GetVariance(pmf);
         }
-
-        private double GetStandardDeviationImpl(double[] pmf)
-        {
-            return Math.Sqrt(GetVarianceImpl(pmf));
-        }
-
-        private double GetStandardDeviationImpl(Bitmap bitmap)
-        {
-            return Math.Sqrt(GetVarianceImpl(bitmap));
-        }
-
-        private double GetConditionalExpectationImpl(int x1, int x2, double[] pmf)
-        {
-            var uvalue = 0.0;
-            var lvalue = 0.0;
-
-            for (var i = x1; i <= x2; ++i)
-            {
-                uvalue += (i * pmf[i]);
-                lvalue += pmf[i];
-            }
-
-            return uvalue / lvalue;
-        }
-
-        private double GetConditionalVarianceImpl(int x1, int x2, double[] frequencies)
-        {
-            var mean = GetConditionalExpectationImpl(x1, x2, frequencies);
-
-            var uvalue = 0.0;
-            var lvalue = 0.0;
-
-            for (var i = x1; i <= x2; ++i)
-            {
-                uvalue += frequencies[i] * ((i - mean) * (i - mean));
-                lvalue += frequencies[i];
-            }
-
-            return uvalue / lvalue;
-        }
-
 
         private int[] GetFrequenciesImpl(Bitmap bitmap)
         {
@@ -182,42 +126,32 @@ namespace ImageProcessing.Services.Distribution
             return frequencies;
         }
 
-        private double[] GetCDFImpl(double[] pmf)
-        {
-            var cdf = pmf.Clone() as double[];
-
-            for (int x = 1; x < cdf.Length; ++x)
-            {
-                cdf[x] += cdf[x - 1];
-            }
-
-            return cdf;
-        }
-
-        private double[] GetPMFImpl(int[] frequencies, double resolution)
-        {
-            return frequencies.AsParallel().Select(x => (double)x / resolution).ToArray();
-        }
-
         private double GetEntropyImpl(Bitmap bmp)
         {
-            var entropy = 0.0;
+            var pmf = base.GetPMF(GetFrequencies(bmp), Convert.ToUInt32(bmp.Height * bmp.Width));
 
-            var resolution = bmp.Height * bmp.Width;
+            return base.GetEntropy(pmf);
 
-            var pmf = GetPMF(GetFrequencies(bmp), resolution);
-
-            for (var index = 0; index < 256; ++index)
-            {
-                if (pmf[index] > Double.Epsilon)
-                {
-                    entropy += (pmf[index] * Math.Log(pmf[index], 2));
-                }
-            }
-
-            return -entropy;
         }
 
+        private double GetStandardDeviationImpl(Bitmap bitmap)
+        {
+            return Math.Sqrt(GetVarianceImpl(bitmap));
+        }
+
+        private double GetConditionalExpectationImpl((int x1, int x2) interval, Bitmap bitmap)
+        {
+            var pmf = GetPMFImpl(bitmap);
+
+            return base.GetConditionalExpectation(interval, pmf);
+        }
+
+        private double GetConditionalVarianceImpl((int x1, int x2) interval, Bitmap bitmap)
+        {
+            var pmf = GetPMFImpl(bitmap);
+
+            return base.GetConditionalVarianceImpl(interval, pmf);
+        }
 
         private byte[] TransformImpl(double[] cdf, IDistribution distribution)
         {

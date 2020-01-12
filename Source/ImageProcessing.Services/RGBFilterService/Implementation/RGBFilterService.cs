@@ -2,8 +2,9 @@
 using System.Drawing;
 
 using ImageProcessing.RGBFilters.Interface;
+using ImageProcessing.Services.RGBFilterService.Interface;
 
-namespace ImageProcessing.Services.RGBFilter
+namespace ImageProcessing.Services.RGBFilterService.Implementation
 {
     public class RGBFilterService : IRGBFilterService
     {

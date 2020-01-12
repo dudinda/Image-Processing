@@ -2,7 +2,7 @@
 
 using System.Drawing;
 
-namespace ImageProcessing.Services.RGBFilter
+namespace ImageProcessing.Services.RGBFilterService.Interface
 {
     public interface IRGBFilterService
     {

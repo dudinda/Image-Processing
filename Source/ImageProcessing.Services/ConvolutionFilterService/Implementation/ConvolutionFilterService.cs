@@ -4,8 +4,9 @@ using System;
 using System.Drawing.Imaging;
 
 using ImageProcessing.ConvulationFilters;
+using ImageProcessing.Services.ConvolutionFilterServices.Interface;
 
-namespace ImageProcessing.Services.ConvolutionFilter
+namespace ImageProcessing.Services.ConvolutionFilterServices.Implementation
 {
     //ptr[0] - B, ptr[1] - G, ptr[2] - R, ptr[3] - A
     public class ConvolutionFilterService : IConvolutionFilterService
