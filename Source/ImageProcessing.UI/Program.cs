@@ -11,9 +11,14 @@ using ImageProcessing.Presentation.Presenters.Main;
 using ImageProcessing.Presentation.Views.Histogram;
 using ImageProcessing.Presentation.Views.Main;
 using ImageProcessing.Presentation.Views.QualityMeasure;
-using ImageProcessing.Services.ConvolutionFilter;
-using ImageProcessing.Services.Distribution;
-using ImageProcessing.Services.RGBFilter;
+using ImageProcessing.Services.ConvolutionFilterServices.Implementation;
+using ImageProcessing.Services.ConvolutionFilterServices.Interface;
+using ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Implementation;
+using ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Interface;
+using ImageProcessing.Services.DistributionServices.Distribution.Implementation;
+using ImageProcessing.Services.DistributionServices.Distribution.Interface;
+using ImageProcessing.Services.RGBFilterService.Implementation;
+using ImageProcessing.Services.RGBFilterService.Interface;
 
 namespace ImageProcessing
 {
@@ -34,6 +39,7 @@ namespace ImageProcessing
                 .RegisterService<IBaseFactory, BaseFactory>()
                 .RegisterService<IConvolutionFilterService, ConvolutionFilterService>()
                 .RegisterService<IDistributionService, DistributionService>()
+                .RegisterService<IBitmapLuminanceDistributionService, BitmapLuminanceDistributionService>()
                 .RegisterService<IRGBFilterService, RGBFilterService>()
                 .RegisterInstance(new ApplicationContext());
 

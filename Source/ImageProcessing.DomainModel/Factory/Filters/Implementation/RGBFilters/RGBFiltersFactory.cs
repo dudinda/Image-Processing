@@ -27,9 +27,9 @@ namespace ImageProcessing.Factory.Filters.RGBFilters
                     return new GrayscaleFilter();
                 case RGBFilter.Inversion:
                     return new InversionFilter();
-            }
 
-            throw new ArgumentException();
+                default: throw new NotSupportedException(nameof(filter));
+            }
         }
 
         public IRGBFilter GetColorFilter(RGBColors color)

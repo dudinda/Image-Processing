@@ -31,9 +31,9 @@ namespace ImageProcessing.Factory.Filters.Distributions
                     return new UniformDistribution();
                 case Distribution.Weibull:
                     return new WeibullDistribution();
-            }
 
-            throw new ArgumentException();
+                default: throw new NotSupportedException(nameof(distribution));
+            }
         }
     }
 }

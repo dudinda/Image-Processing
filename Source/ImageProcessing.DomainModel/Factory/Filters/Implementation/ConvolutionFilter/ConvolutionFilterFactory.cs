@@ -47,9 +47,10 @@ namespace ImageProcessing.Factory.Filters.Convolution
                     return new SobelOperatorHorizontal();
                 case ConvolutionFilter.SobelOperatorVertical:
                     return new SobelOperatorVertical();
+
+                default: throw new NotSupportedException(nameof(filter));
             }
 
-            throw new NotSupportedException(nameof(filter));
         }
     }
 }

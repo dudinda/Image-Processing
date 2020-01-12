@@ -6,30 +6,38 @@ using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.AppController.Interface;
 using ImageProcessing.Core.Presenter.Abstract;
 using ImageProcessing.Services.Distribution;
+using System;
 
 namespace ImageProcessing.Presentation.Presenters
 {
     public class HistogramPresenter : BasePresenter<IHistogramView, HistogramViewModel>
     {
-        private readonly IDistributionService _distributionService;
+        private readonly IBitmapLuminanceDistributionService _distributionService;
 
         public HistogramPresenter(IAppController controller, 
                                   IHistogramView view, 
-                                  IDistributionService distibutionService) : base(controller, view)
+                                  IBitmapLuminanceDistributionService distibutionService) : base(controller, view)
         {
             _distributionService = distibutionService;
         }
 
-        public override void Run(HistogramViewModel argument)
+        public override void Run(HistogramViewModel vm)
         {
-            switch(argument.Mode)
+            if(vm is null)
+            {
+                throw new ArgumentNullException(nameof(vm));
+            }
+
+            switch(vm.Mode)
             {
                 case RandomVariableAction.PMF:
-                    BuildHistogram(argument.Source);
+                    BuildHistogram(vm.Source);
                     break;
                 case RandomVariableAction.CDF:
-                    BuildCDF(argument.Source);
+                    BuildCDF(vm.Source);
                     break;
+
+                default: throw new NotSupportedException();
             }
 
             View.Show();
@@ -41,8 +49,7 @@ namespace ImageProcessing.Presentation.Presenters
 
             chart.ChartAreas[0].AxisY.MaximumAutoSize = 100;
 
-            var frequencies = _distributionService.GetFrequencies(bitmap);
-            var pmf         = _distributionService.GetPMF(frequencies, bitmap.Width * bitmap.Height);
+            var pmf = _distributionService.GetPMF(bitmap);
 
             //Init("PMF", pmf);
 
@@ -58,9 +65,7 @@ namespace ImageProcessing.Presentation.Presenters
 
             chart.ChartAreas[0].AxisY.Maximum = 1;
 
-            var frequencies = _distributionService.GetFrequencies(bitmap);
-            var pmf         = _distributionService.GetPMF(frequencies, bitmap.Width * bitmap.Height);
-            var cdf         = _distributionService.GetCDF(pmf);
+            var cdf = _distributionService.GetCDF(bitmap);
 
           //  Init("CDF", pmf);
 

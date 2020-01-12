@@ -16,9 +16,9 @@ using ImageProcessing.Common.Extensions.TupleExtensions;
 using ImageProcessing.Presentation.ViewModel.Histogram;
 using ImageProcessing.Core.AppController.Interface;
 using ImageProcessing.Core.Presenter.Abstract;
-using ImageProcessing.Services.ConvolutionFilter;
-using ImageProcessing.Services.Distribution;
-using ImageProcessing.Services.RGBFilter;
+using ImageProcessing.Services.RGBFilterService.Interface;
+using ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Interface;
+using ImageProcessing.Services.ConvolutionFilterServices.Interface;
 
 namespace ImageProcessing.Presentation.Presenters.Main
 {
@@ -27,7 +27,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
         private static readonly AsyncLocker _locker = new AsyncLocker();
 
         private readonly IConvolutionFilterService _convolutionFilterService;
-        private readonly IDistributionService _distributionService;
+        private readonly IBitmapLuminanceDistributionService _distributionService;
         private readonly IRGBFilterService _rgbFilterService;
 
         private readonly IConvolutionFilterFactory _convolutionFilterFactory;
@@ -38,7 +38,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                              IMainView view,
                              IBaseFactory baseFactory,
                              IConvolutionFilterService convolutionFilterService,
-                             IDistributionService distributionService,
+                             IBitmapLuminanceDistributionService distributionService,
                              IRGBFilterService rgbFilterService) : base(controller, view)
         {
 
@@ -89,8 +89,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
         {
             try
             {
-                using (var dialog = new SaveFileDialog()) {
-
+                using (var dialog = new SaveFileDialog())
+                {
                     dialog.Filter = ConfigurationManager.AppSettings["Filters"];
 
                     if (dialog.ShowDialog() == DialogResult.OK)
@@ -186,7 +186,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     case RGBColors.Green:
                         View.IsGreenChannelChecked = !View.IsGreenChannelChecked;
                         if(View.IsGreenChannelChecked) result |= RGBColors.Green;
-                        break;    
+                        break;
+
+                    default: throw new NotSupportedException(nameof(filterName));
                 }
       
                 if (result == RGBColors.Unknown)
@@ -221,7 +223,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 filter.SetParams(result);
 
                 View.DstImage  = await _locker.LockAsync(
-                    () => _distributionService.Distribute(new Bitmap(View.SrcImage), filter)
+                    () => _distributionService.TransformTo(new Bitmap(View.SrcImage), filter)
                 ).ConfigureAwait(true);
             }
             catch
@@ -247,44 +249,58 @@ namespace ImageProcessing.Presentation.Presenters.Main
         }
 
         private void BuildPMF(string target)
-        {
-            switch (target.GetEnumValueByName<ImageContainer>())
+        { 
+            try
             {
-                case ImageContainer.Source:
-                    if (View.SrcIsNull) return;
-                    Controller.Run<HistogramPresenter, HistogramViewModel>(
-                        new HistogramViewModel(new Bitmap(View.SrcImage), RandomVariableAction.PMF)
-                    );
-                    break;
+                switch (target.GetEnumValueByName<ImageContainer>())
+                {
+                    case ImageContainer.Source:
+                        if (View.SrcIsNull) return;
+                        Controller.Run<HistogramPresenter, HistogramViewModel>(
+                            new HistogramViewModel(new Bitmap(View.SrcImage), RandomVariableAction.PMF)
+                        );
+                        break;
 
-                case ImageContainer.Destination:
-                    if (View.DstIsNull) return;
-                    Controller.Run<HistogramPresenter, HistogramViewModel>(
-                        new HistogramViewModel(new Bitmap(View.DstImage), RandomVariableAction.PMF)
-                    );
-                    break;
-
+                    case ImageContainer.Destination:
+                        if (View.DstIsNull) return;
+                        Controller.Run<HistogramPresenter, HistogramViewModel>(
+                            new HistogramViewModel(new Bitmap(View.DstImage), RandomVariableAction.PMF)
+                        );
+                        break;
+                }
+            }
+            catch
+            {
+                View.ShowError("Error while buiding the PMF of the image.");
             }
         }
 
         private void BuildCDF(string target)
         {
-            switch (target.GetEnumValueByName<ImageContainer>())
+            try
             {
-                case ImageContainer.Source:
-                    if (View.SrcIsNull) return;
-                    Controller.Run<HistogramPresenter, HistogramViewModel>(
-                        new HistogramViewModel(new Bitmap(View.SrcImage), RandomVariableAction.CDF)
-                    );
-                    break;
+                switch (target.GetEnumValueByName<ImageContainer>())
+                {
+                    case ImageContainer.Source:
+                        if (View.SrcIsNull) return;
+                        Controller.Run<HistogramPresenter, HistogramViewModel>(
+                            new HistogramViewModel(new Bitmap(View.SrcImage), RandomVariableAction.CDF)
+                        );
+                        break;
 
-                case ImageContainer.Destination:
-                    if (View.DstIsNull) return;
-                    Controller.Run<HistogramPresenter, HistogramViewModel>(
-                        new HistogramViewModel(new Bitmap(View.DstImage), RandomVariableAction.CDF)
-                    );
-                    break;
+                    case ImageContainer.Destination:
+                        if (View.DstIsNull) return;
+                        Controller.Run<HistogramPresenter, HistogramViewModel>(
+                            new HistogramViewModel(new Bitmap(View.DstImage), RandomVariableAction.CDF)
+                        );
+                        break;
 
+                    default: throw new NotSupportedException(nameof(target));
+                }
+            }
+            catch
+            {
+                View.ShowError("Error while buiding the CDF of the image.");
             }
         }
 
@@ -303,9 +319,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
                         if (View.SrcIsNull) return;
                         View.DstImage = View.SrcImage;
                         break;
-                }
 
-                throw new ArgumentException(nameof(target));
+                    default: throw new NotSupportedException(nameof(target));
+                }
             }
             catch
             {
