@@ -26,6 +26,7 @@
     <ProjectReference Include="..\ImageProcessing.Core\ImageProcessing.Core.csproj" />
     <ProjectReference Include="..\ImageProcessing.DomainModel\ImageProcessing.DomainModel.csproj" />
     <ProjectReference Include="..\ImageProcessing.Presentation\ImageProcessing.Presentation.csproj" />
+    <ProjectReference Include="..\ImageProcessing.Services\ImageProcessing.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
