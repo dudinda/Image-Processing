@@ -38,7 +38,7 @@ namespace ImageProcessing
                 .RegisterView<IQualityMeasureView, QualityMeasureForm>()
                 .RegisterService<IBaseFactory, BaseFactory>()
                 .RegisterService<IConvolutionFilterService, ConvolutionFilterService>()
-                .RegisterService<IDistributionService, DistributionService>()
+                .RegisterService<IDistributionService, RandomVariableDistributionService>()
                 .RegisterService<IBitmapLuminanceDistributionService, BitmapLuminanceDistributionService>()
                 .RegisterService<IRGBFilterService, RGBFilterService>()
                 .RegisterInstance(new ApplicationContext());

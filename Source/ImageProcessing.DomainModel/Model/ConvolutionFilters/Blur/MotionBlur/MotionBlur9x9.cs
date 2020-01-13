@@ -1,4 +1,4 @@
-﻿using ImageProcessing.ConvulationFilters;
+﻿using ImageProcessing.Core.Model.Convolution;
 
 namespace ImageProcessing.ConvolutionFilters.Blur.MotionBlur
 {

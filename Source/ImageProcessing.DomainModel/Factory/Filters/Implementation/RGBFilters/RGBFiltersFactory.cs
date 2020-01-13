@@ -1,17 +1,17 @@
-﻿using System.Reflection;
-using System;
+﻿using System;
 using System.Linq;
+using System.Reflection;
 
-using ImageProcessing.RGBFilters.Interface;
+using ImageProcessing.Common.Attributes;
+using ImageProcessing.Common.Enums;
+using ImageProcessing.Common.Extensions.EnumExtensions;
+using ImageProcessing.Common.Extensions.TypeExtensions;
+using ImageProcessing.Core.Factory.RGBFilters;
+using ImageProcessing.Core.Model.RGBFilters;
 using ImageProcessing.RGBFilters.Binary;
+using ImageProcessing.RGBFilters.Color;
 using ImageProcessing.RGBFilters.Grayscale;
 using ImageProcessing.RGBFilters.Inversion;
-using ImageProcessing.RGBFilters.Color;
-using ImageProcessing.Common.Enums;
-using ImageProcessing.Common.Extensions.TypeExtensions;
-using ImageProcessing.Common.Attributes;
-using ImageProcessing.Common.Extensions.EnumExtensions;
-using ImageProcessing.DomainModel.Factory.Filters.Interface;
 
 namespace ImageProcessing.Factory.Filters.RGBFilters
 {

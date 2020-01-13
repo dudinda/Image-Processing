@@ -1,24 +1,26 @@
-﻿using System.Drawing;
-using System.Windows.Forms;
-using System.Threading.Tasks;
-using System.IO;
-using System;
+﻿using System;
 using System.Configuration;
+using System.Drawing;
+using System.IO;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
-using ImageProcessing.Presentation.Views.Main;
-using ImageProcessing.Factory.Base;
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Common.Extensions.EnumExtensions;
-using ImageProcessing.DomainModel.Factory.Filters.Interface;
-using ImageProcessing.Common.Extensions.StringExtensions;
 using ImageProcessing.Common.Extensions.BitmapExtensions;
+using ImageProcessing.Common.Extensions.EnumExtensions;
+using ImageProcessing.Common.Extensions.StringExtensions;
 using ImageProcessing.Common.Extensions.TupleExtensions;
-using ImageProcessing.Presentation.ViewModel.Histogram;
-using ImageProcessing.Core.AppController.Interface;
+using ImageProcessing.Core.Controller.Interface;
+using ImageProcessing.Core.Factory.Base;
+using ImageProcessing.Core.Factory.Convolution;
+using ImageProcessing.Core.Factory.Distribution;
+using ImageProcessing.Core.Factory.RGBFilters;
 using ImageProcessing.Core.Presenter.Abstract;
-using ImageProcessing.Services.RGBFilterService.Interface;
-using ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Interface;
+using ImageProcessing.Presentation.ViewModel.Histogram;
+using ImageProcessing.Presentation.Views.Main;
 using ImageProcessing.Services.ConvolutionFilterServices.Interface;
+using ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Interface;
+using ImageProcessing.Services.RGBFilterService.Interface;
 
 namespace ImageProcessing.Presentation.Presenters.Main
 {

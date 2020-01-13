@@ -1,6 +1,6 @@
 ﻿using System;
 
-using ImageProcessing.Distributions.Abstract;
+using ImageProcessing.Core.Model.Distribution;
 
 using MathNet.Numerics;
 

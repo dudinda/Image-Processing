@@ -1,4 +1,7 @@
-﻿using ImageProcessing.DomainModel.Factory.Filters.Interface;
+﻿using ImageProcessing.Core.Factory.Base;
+using ImageProcessing.Core.Factory.Convolution;
+using ImageProcessing.Core.Factory.Distribution;
+using ImageProcessing.Core.Factory.RGBFilters;
 using ImageProcessing.Factory.Filters.Convolution;
 using ImageProcessing.Factory.Filters.Distributions;
 using ImageProcessing.Factory.Filters.RGBFilters;

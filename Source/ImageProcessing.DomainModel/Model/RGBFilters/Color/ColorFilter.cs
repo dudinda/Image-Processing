@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
-using ImageProcessing.RGBFilters.Interface;
+using ImageProcessing.Core.Model.RGBFilters;
 
 namespace ImageProcessing.RGBFilters.Color
 {

@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using ImageProcessing.Core.Service.ColorSpace;
 
 namespace ImageProcessing.ColorSpaces
 {
+    
     public class YCbCrSpaceSerivce : IConvert
     {
-        public List<Bitmap> FromRGB(Bitmap bitmap)
+        public IList<Bitmap> From(Bitmap bitmap)
         {
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
 
@@ -60,7 +62,7 @@ namespace ImageProcessing.ColorSpaces
             return new List<Bitmap>() { Ybitmap, Cbbitmap, Crbitmap };
         }
 
-        public Bitmap ToRGB(List<Bitmap> components)
+        public Bitmap To(IList<Bitmap> components)
         {
 
             var bitmap = new Bitmap(components[0].Width, components[0].Height);

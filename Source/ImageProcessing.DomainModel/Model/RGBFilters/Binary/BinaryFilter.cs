@@ -1,12 +1,11 @@
-﻿using ImageProcessing.RGBFilters.Interface;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+
+using ImageProcessing.Core.Model.RGBFilters;
 
 namespace ImageProcessing.RGBFilters.Binary
 {

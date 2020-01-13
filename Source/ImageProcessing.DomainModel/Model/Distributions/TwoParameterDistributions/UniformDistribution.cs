@@ -1,4 +1,4 @@
-﻿using ImageProcessing.Distributions.Abstract;
+﻿using ImageProcessing.Core.Model.Distribution;
 
 namespace ImageProcessing.Distributions.TwoParameterDistributions
 {

@@ -1,9 +1,9 @@
-﻿using System.Drawing;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Drawing;
 
-using ImageProcessing.Presentation.Views.QualityMeasure;
+using ImageProcessing.Core.Controller.Interface;
 using ImageProcessing.Core.Presenter.Abstract;
-using ImageProcessing.Core.AppController.Interface;
+using ImageProcessing.Presentation.Views.QualityMeasure;
 using ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Interface;
 
 namespace ImageProcessing.Presentation.Presenters

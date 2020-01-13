@@ -1,12 +1,12 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
-using ImageProcessing.Presentation.Views.Histogram;
-using ImageProcessing.Presentation.ViewModel.Histogram;
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Core.AppController.Interface;
+using ImageProcessing.Core.Controller.Interface;
 using ImageProcessing.Core.Presenter.Abstract;
-using ImageProcessing.Services.Distribution;
-using System;
+using ImageProcessing.Presentation.ViewModel.Histogram;
+using ImageProcessing.Presentation.Views.Histogram;
+using ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Interface;
 
 namespace ImageProcessing.Presentation.Presenters
 {

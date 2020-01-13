@@ -1,5 +1,5 @@
-﻿using ImageProcessing.Core.View;
-using ImageProcessing.Core.AppController.Interface;
+﻿using ImageProcessing.Core.Controller.Interface;
+using ImageProcessing.Core.View;
 
 namespace ImageProcessing.Core.Presenter.Abstract
 {
