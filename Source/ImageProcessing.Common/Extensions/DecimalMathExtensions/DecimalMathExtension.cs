@@ -40,5 +40,20 @@ namespace ImageProcessing.Common.Extensions.DecimalMathExtensions
         public static decimal Sin(this decimal value, decimal precision = DecimalMath.Epsilon)
             => DecimalMath.Sin(value, precision);
 
+        public static decimal Cot(this decimal value, decimal precision = DecimalMath.Epsilon)
+            => DecimalMath.Cot(value, precision);
+
+        public static decimal Cosh(this decimal value, decimal precision = DecimalMath.Epsilon)
+            => DecimalMath.Cosh(value, precision);
+
+        public static decimal Sinh(this decimal value, decimal precision = DecimalMath.Epsilon)
+            => DecimalMath.Sinh(value, precision);
+
+        public static decimal Tanh(this decimal value, decimal precision = DecimalMath.Epsilon)
+            => DecimalMath.Sinh(value, precision);
+
+        public static decimal Coth(this decimal value, decimal precision = DecimalMath.Epsilon)
+            => DecimalMath.Coth(value, precision);
+
     }
 }

@@ -7,7 +7,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
     public static class DecimalMath
     {
         public const decimal E = 2.718281828459M;
-        public const decimal Epsilon = 0.0000000000001M;
+        public const decimal Epsilon = 1.0E-20M;
         public const decimal PI = 3.14159265359M;
 
         public static decimal PositiveInfinity
@@ -15,7 +15,6 @@ namespace ImageProcessing.Common.Utility.DecimalMath
             get
             {
                 var zero = 0;
-
                 return 1 / zero;
             }
         }
@@ -76,7 +75,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         public static decimal Exp(decimal x, decimal precision = Epsilon)
         {
             var total = 1.0M;
-            var result = x;
+            var result = total;
 
             for (var k = 1; Abs(total) > Epsilon; ++k)
             {
@@ -90,7 +89,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         public static decimal Sin(decimal x, decimal precision = Epsilon)
         {
             var total = 1.0M;
-            var result = x;
+            var result = total;
 
             for (var k = 1; Abs(total) > Epsilon; ++k)
             {
@@ -104,16 +103,42 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         public static decimal Cos(decimal x, decimal precision = Epsilon)
         {
             var total = 1.0M;
-            var result = x;
+            var result = total;
 
             for (var k = 1; Abs(total) > Epsilon; ++k)
             {
-                total = total * -x * x / ((2 * k + 2) * (2 * k + 3));
+                total = total * -x * x / ((2 * k + 1) * (2 * k + 2));
                 result += total;
             }
 
             return result;
         }
+
+        public static decimal Cosh(decimal x, decimal precision = Epsilon)
+        {
+            return (Exp(x, precision) + Exp(-x, precision)) / 2.0M;
+        }
+
+        public static decimal Sinh(decimal x, decimal precision = Epsilon)
+        {
+            return (Exp(x, precision) - Exp(-x, precision)) / 2.0M;
+        }
+
+        public static decimal Tanh(decimal x, decimal precision = Epsilon)
+        {
+            return Sinh(x, precision) / Cosh(x, precision);
+        }
+
+        public static decimal Coth(decimal x, decimal precision = Epsilon)
+        {
+            return 1.0M / Tanh(x, precision);
+        }
+
+        public static decimal Cot(decimal x, decimal precision = Epsilon)
+        {
+            return 1.0M / Tan(x, precision);
+        }
+
 
 
         public static decimal Tan(decimal x, decimal precision = Epsilon)
@@ -192,6 +217,11 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         public static decimal Floor(decimal value)
         {
             var result = value - (value % 1);
+
+            if(result == value)
+            {
+                return value;
+            }
 
             if(value < 0)
             {
