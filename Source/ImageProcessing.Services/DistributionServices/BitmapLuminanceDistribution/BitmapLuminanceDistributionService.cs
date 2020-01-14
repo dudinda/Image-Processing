@@ -24,7 +24,7 @@ namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribut
             return TransformTo(bitmap, distribution);
         }
 
-        public double GetExpectation(Bitmap bitmap)
+        public decimal GetExpectation(Bitmap bitmap)
         {
             if (bitmap is null)
             {
@@ -34,7 +34,7 @@ namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribut
             return GetExpectationImpl(bitmap);
         }
 
-        public double GetVariance(Bitmap bitmap)
+        public decimal GetVariance(Bitmap bitmap)
         {
             if (bitmap is null)
             {
@@ -44,7 +44,7 @@ namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribut
             return GetVarianceImpl(bitmap);
         }
 
-        public double GetStandardDeviation(Bitmap bitmap)
+        public decimal GetStandardDeviation(Bitmap bitmap)
         {
             if (bitmap is null)
             {
@@ -54,7 +54,7 @@ namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribut
             return GetStandardDeviationImpl(bitmap);
         }
 
-        public double GetConditionalExpectation((int x1, int x2) interval, Bitmap bitmap)
+        public decimal GetConditionalExpectation((int x1, int x2) interval, Bitmap bitmap)
         {
             if (bitmap is null)
             {
@@ -64,7 +64,7 @@ namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribut
             return GetConditionalExpectationImpl(interval, bitmap);
         }
 
-        public double GetConditionalVariance((int x1, int x2) interval, Bitmap bitmap)
+        public decimal GetConditionalVariance((int x1, int x2) interval, Bitmap bitmap)
         {
             if (bitmap is null)
             {
@@ -84,7 +84,7 @@ namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribut
             return GetFrequenciesImpl(bitmap);
         }
 
-        public double[] GetCDF(Bitmap bitmap)
+        public decimal[] GetCDF(Bitmap bitmap)
         {
             if (bitmap is null)
             {
@@ -94,7 +94,7 @@ namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribut
             return GetCDFImpl(bitmap);
         }
 
-        public double[] GetPMF(Bitmap bitmap)
+        public decimal[] GetPMF(Bitmap bitmap)
         {
             if (bitmap is null)
             {
@@ -104,7 +104,7 @@ namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribut
             return GetPMFImpl(bitmap);
         }
 
-        public double GetEntropy(Bitmap bmp)
+        public decimal GetEntropy(Bitmap bmp)
         {
             if (bmp is null)
             {

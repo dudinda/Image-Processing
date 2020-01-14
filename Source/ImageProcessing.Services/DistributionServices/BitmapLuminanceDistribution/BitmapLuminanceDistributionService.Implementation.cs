@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
-
+using ImageProcessing.Common.Extensions.DecimalMathExtensions;
 using ImageProcessing.Core.Model.Distribution;
 
 namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Implementation
@@ -48,32 +48,32 @@ namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribut
             return bitmap;
         }
 
-        private double[] GetPMFImpl(Bitmap bitmap)
+        private decimal[] GetPMFImpl(Bitmap bitmap)
         {
             var frequencies = GetFrequenciesImpl(bitmap);
 
-            return base.GetPMF(frequencies, Convert.ToUInt32(bitmap.Width * bitmap.Height));
+            return base.GetPMF(frequencies);
         }
 
-        private double[] GetCDFImpl(Bitmap bitmap)
+        private decimal[] GetCDFImpl(Bitmap bitmap)
         {
             return base.GetCDF(GetPMFImpl(bitmap));
         }
 
-        private double GetExpectationImpl(Bitmap bitmap)
+        private decimal GetExpectationImpl(Bitmap bitmap)
         {
             var frequencies = GetFrequencies(bitmap);
 
-            var pmf = base.GetPMFImpl(frequencies, Convert.ToUInt32(bitmap.Width * bitmap.Height));
+            var pmf = base.GetPMFImpl(frequencies);
 
             return base.GetExpectation(pmf);
         }
 
-        private double GetVarianceImpl(Bitmap bitmap)
+        private decimal GetVarianceImpl(Bitmap bitmap)
         {
             var frequencies = GetFrequenciesImpl(bitmap);
 
-            var pmf = base.GetPMF(frequencies, Convert.ToUInt32(bitmap.Width * bitmap.Height));
+            var pmf = base.GetPMF(frequencies);
 
             return base.GetVariance(pmf);
         }
@@ -126,34 +126,34 @@ namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribut
             return frequencies;
         }
 
-        private double GetEntropyImpl(Bitmap bmp)
+        private decimal GetEntropyImpl(Bitmap bmp)
         {
-            var pmf = base.GetPMF(GetFrequencies(bmp), Convert.ToUInt32(bmp.Height * bmp.Width));
+            var pmf = base.GetPMF(GetFrequencies(bmp));
 
             return base.GetEntropy(pmf);
 
         }
 
-        private double GetStandardDeviationImpl(Bitmap bitmap)
+        private decimal GetStandardDeviationImpl(Bitmap bitmap)
         {
-            return Math.Sqrt(GetVarianceImpl(bitmap));
+            return GetVarianceImpl(bitmap).Sqrt();
         }
 
-        private double GetConditionalExpectationImpl((int x1, int x2) interval, Bitmap bitmap)
+        private decimal GetConditionalExpectationImpl((int x1, int x2) interval, Bitmap bitmap)
         {
             var pmf = GetPMFImpl(bitmap);
 
             return base.GetConditionalExpectation(interval, pmf);
         }
 
-        private double GetConditionalVarianceImpl((int x1, int x2) interval, Bitmap bitmap)
+        private decimal GetConditionalVarianceImpl((int x1, int x2) interval, Bitmap bitmap)
         {
             var pmf = GetPMFImpl(bitmap);
 
             return base.GetConditionalVarianceImpl(interval, pmf);
         }
 
-        private byte[] TransformImpl(double[] cdf, IDistribution distribution)
+        private byte[] TransformImpl(decimal[] cdf, IDistribution distribution)
         {
             var result = new byte[256];
 

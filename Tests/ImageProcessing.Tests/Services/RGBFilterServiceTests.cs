@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.Factory.RGBFilters;
 using ImageProcessing.Services.RGBFilterService.Interface;
+
 using NSubstitute;
+
 using NUnit.Framework;
 
 namespace ImageProcessing.Tests.Services

@@ -36,7 +36,7 @@ namespace ImageProcessing.Presentation.Presenters
             {
                 var bitmap = list[step];
 
-                var variance = new List<double>();
+                var variance = new List<decimal>();
                 var names    = new List<string>();
 
                 for (int graylevel = 0; graylevel < 255; graylevel += 15)

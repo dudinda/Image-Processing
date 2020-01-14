@@ -13,6 +13,16 @@ namespace ImageProcessing.Services.ConvolutionFilterServices.Implementation
     {
         public Bitmap Convolution(Bitmap source, AbstractConvolutionFilter filter) 
         {
+            if(source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if(filter is null)
+            {
+                throw new ArgumentNullException(nameof(filter));
+            }
+
             var destination = new Bitmap(source);
 
             var sourceBitmapData = source.LockBits(new Rectangle(0, 0, source.Width, source.Height),

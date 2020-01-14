@@ -219,7 +219,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 var filter = _distributionFactory.GetFilter(filterName);
 
-                if (!parms.TryParse<double, double>(out var result))
+                if (!parms.TryParse<decimal, decimal>(out var result))
                     return;
 
                 filter.SetParams(result);

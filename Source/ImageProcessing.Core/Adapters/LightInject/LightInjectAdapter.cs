@@ -5,7 +5,7 @@ using ImageProcessing.Core.Container;
 
 using LightInject;
 
-namespace ImageProcessing.Common.Adapters.LightInject
+namespace ImageProcessing.Core.Adapters.LightInject
 {
     public class LightInjectAdapter : IContainer
     {

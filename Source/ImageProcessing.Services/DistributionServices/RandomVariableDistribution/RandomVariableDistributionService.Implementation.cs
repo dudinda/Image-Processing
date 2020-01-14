@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Linq;
-
+using ImageProcessing.Common.Extensions.DecimalMathExtensions;
 using ImageProcessing.Core.Model.Distribution;
 
 namespace ImageProcessing.Services.DistributionServices.RandomVariableDistribution.Implementation
 {
     public partial class RandomVariableDistributionService
     {
-        protected double GetExpectationImpl(double[] pmf)
+        protected decimal GetExpectationImpl(decimal[] pmf)
         {
-            var total = 0.0;
+            var total = 0.0M;
 
             for (var i = 0; i < 256; ++i)
             {
@@ -19,9 +19,9 @@ namespace ImageProcessing.Services.DistributionServices.RandomVariableDistributi
             return total;
         }
 
-        protected double GetVarianceImpl(double[] pmf)
+        protected decimal GetVarianceImpl(decimal[] pmf)
         {
-            var total = 0.0;
+            var total = 0.0M;
 
             var mean = GetExpectationImpl(pmf);
 
@@ -33,15 +33,15 @@ namespace ImageProcessing.Services.DistributionServices.RandomVariableDistributi
             return total;
         }
 
-        protected double GetStandardDeviationImpl(double[] pmf)
+        protected decimal GetStandardDeviationImpl(decimal[] pmf)
         {
-            return Math.Sqrt(GetVarianceImpl(pmf));
+            return GetVarianceImpl(pmf).Sqrt();
         }
 
-        protected double GetConditionalExpectationImpl((int x1, int x2) interval, double[] pmf)
+        protected decimal GetConditionalExpectationImpl((int x1, int x2) interval, decimal[] pmf)
         {
-            var uvalue = 0.0;
-            var lvalue = 0.0;
+            var uvalue = 0.0M;
+            var lvalue = 0.0M;
 
             for (var i = interval.x1; i <= interval.x2; ++i)
             {
@@ -52,12 +52,12 @@ namespace ImageProcessing.Services.DistributionServices.RandomVariableDistributi
             return uvalue / lvalue;
         }
 
-        protected double GetConditionalVarianceImpl((int x1, int x2) interval, double[] pmf)
+        protected decimal GetConditionalVarianceImpl((int x1, int x2) interval, decimal[] pmf)
         {
             var mean = GetConditionalExpectationImpl(interval, pmf);
 
-            var uvalue = 0.0;
-            var lvalue = 0.0;
+            var uvalue = 0.0M;
+            var lvalue = 0.0M;
 
             for (var i = interval.x1; i <= interval.x2; ++i)
             {
@@ -68,14 +68,16 @@ namespace ImageProcessing.Services.DistributionServices.RandomVariableDistributi
             return uvalue / lvalue;
         }
 
-        protected double[] GetPMFImpl(int[] frequencies, uint total)
+        protected decimal[] GetPMFImpl(int[] frequencies)
         {
-            return frequencies.AsParallel().Select(x => (double)x / (double)total).ToArray();
+            var total = (decimal)frequencies.Sum();
+
+            return frequencies.AsParallel().Select(x => (decimal)x / total).ToArray();
         }
 
-        protected double[] GetCDFImpl(double[] pmf)
+        protected decimal[] GetCDFImpl(decimal[] pmf)
         {
-            var cdf = pmf.Clone() as double[];
+            var cdf = pmf.Clone() as decimal[];
 
             for (int x = 1; x < cdf.Length; ++x)
             {
@@ -85,24 +87,21 @@ namespace ImageProcessing.Services.DistributionServices.RandomVariableDistributi
             return cdf;
         }
 
-        protected double GetEntropyImpl(double[] pmf)
+        protected decimal GetEntropyImpl(decimal[] pmf)
         {
-            var entropy = 0.0;
+            var entropy = 0.0M;
 
             for (var index = 0; index < 256; ++index)
             {
-                if (pmf[index] > Double.Epsilon)
-                {
-                    entropy += (pmf[index] * Math.Log(pmf[index], 2));
-                }
+                entropy += (pmf[index] * pmf[index].Log(2));
             }
 
             return -entropy;
         }
 
-        private double[] TransformToImpl(double[] cdf, IDistribution distribution)
+        private decimal[] TransformToImpl(decimal[] cdf, IDistribution distribution)
         {
-            var result = new double[cdf.Length];
+            var result = new decimal[cdf.Length];
 
             //transform an array by a quantile function
             for (int index = 0; index < cdf.Length; ++index)

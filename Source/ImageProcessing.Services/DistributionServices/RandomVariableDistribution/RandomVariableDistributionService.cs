@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Linq;
 using ImageProcessing.Core.Model.Distribution;
 using ImageProcessing.Services.DistributionServices.Distribution.Interface;
 
@@ -8,7 +8,7 @@ namespace ImageProcessing.Services.DistributionServices.RandomVariableDistributi
     //ptr[0] - B, ptr[1] - G, ptr[2] - R
     public partial class RandomVariableDistributionService : IRandomVariableDistributionService
     {
-        public double[] TransformTo(double[] cdf, IDistribution distribution)
+        public decimal[] TransformTo(decimal[] cdf, IDistribution distribution)
         {
             if(cdf is null)
             {
@@ -25,81 +25,152 @@ namespace ImageProcessing.Services.DistributionServices.RandomVariableDistributi
         }
 
 
-        public double GetExpectation(double[] pmf)
+        public decimal GetExpectation(decimal[] pmf)
         {
             if (pmf is null)
             {
                 throw new ArgumentNullException(nameof(pmf));
             }
 
+            if(pmf.Any(value => value < 0))
+            {
+                throw new ArgumentException("Probability mass function is always positive.");
+            }
+
+            if(!pmf.Sum().Equals(1))
+            {
+                throw new ArgumentException("The pmf must be normalized.");
+            }
+
             return GetExpectationImpl(pmf);
         }
 
-        public double GetVariance(double[] pmf)
+        public decimal GetVariance(decimal[] pmf)
         {
             if(pmf is null)
             {
                 throw new ArgumentNullException(nameof(pmf));
+            }
+
+            if (pmf.Any(value => value < 0))
+            {
+                throw new ArgumentException("Probability mass function is always positive.");
+            }
+
+            if (!pmf.Sum().Equals(1))
+            {
+                throw new ArgumentException("The pmf must be normalized.");
             }
 
             return GetVarianceImpl(pmf);
         }
 
-        public double GetStandardDeviation(double[] pmf)
+        public decimal GetStandardDeviation(decimal[] pmf)
         {
             if(pmf is null)
             {
                 throw new ArgumentNullException(nameof(pmf));
             }
 
+            if (pmf.Any(value => value < 0))
+            {
+                throw new ArgumentException("Probability mass function is always positive.");
+            }
+
+            if (!pmf.Sum().Equals(1))
+            {
+                throw new ArgumentException("The pmf must be normalized.");
+            }
+
             return GetStandardDeviationImpl(pmf);
         }
 
-        public double GetConditionalExpectation((int x1, int x2) interval, double[] pmf)
+        public decimal GetConditionalExpectation((int x1, int x2) interval, decimal[] pmf)
         {
            if(pmf is null)
             {
                 throw new ArgumentNullException(nameof(pmf));
             }
 
+            if (pmf.Any(value => value < 0))
+            {
+                throw new ArgumentException("Probability mass function is always positive.");
+            }
+
+            if (!pmf.Sum().Equals(1))
+            {
+                throw new ArgumentException("The pmf must be normalized.");
+            }
+
             return GetConditionalExpectationImpl(interval, pmf);
         }
 
-        public double GetConditionalVariance((int x1, int x2) interval, double[] frequencies)
+        public decimal GetConditionalVariance((int x1, int x2) interval, decimal[] frequencies)
         {
             if(frequencies is null)
             {
                 throw new ArgumentNullException(nameof(frequencies));
+            }
+
+            if (frequencies.Any(value => value < 0))
+            {
+                throw new ArgumentException("Frequencies are always positive.");
             }
 
             return GetConditionalVarianceImpl(interval, frequencies);
         }
 
-        public double[] GetCDF(double[] pmf)
+        public decimal[] GetCDF(decimal[] pmf)
         {
             if(pmf is null)
             {
                 throw new ArgumentNullException(nameof(pmf));
             }
 
+            if (pmf.Any(value => value < 0))
+            {
+                throw new ArgumentException("Probability mass function is always positive.");
+            }
+
+            if (!pmf.Sum().Equals(1))
+            {
+                throw new ArgumentException("The pmf must be normalized.");
+            }
+
             return GetCDFImpl(pmf);
         }
 
-        public double[] GetPMF(int[] frequencies, uint total)
+        public decimal[] GetPMF(int[] frequencies)
         {
             if(frequencies is null)
             {
                 throw new ArgumentNullException(nameof(frequencies));
             }
 
-            return GetPMFImpl(frequencies, total);
+            if (frequencies.Any(value => value < 0))
+            {
+                throw new ArgumentException("Frequencies are always positive.");
+            }
+
+
+            return GetPMFImpl(frequencies);
         }
 
-        public double GetEntropy(double[] pmf)
+        public decimal GetEntropy(decimal[] pmf)
         {
             if(pmf is null)
             {
                 throw new ArgumentNullException(nameof(pmf));
+            }
+
+            if (pmf.Any(value => value < 0))
+            {
+                throw new ArgumentException("Probability mass function is always positive.");
+            }
+
+            if (!pmf.Sum().Equals(1))
+            {
+                throw new ArgumentException("The pmf must be normalized.");
             }
 
             return GetEntropyImpl(pmf);

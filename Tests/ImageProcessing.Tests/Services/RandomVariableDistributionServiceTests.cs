@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using ImageProcessing.Services.DistributionServices.Distribution.Interface;
+
 using NSubstitute;
+
 using NUnit.Framework;
 
 namespace ImageProcessing.Tests.Services
@@ -43,10 +42,19 @@ namespace ImageProcessing.Tests.Services
         }
 
         [Test]
-        [TestCase(new decimal[] { 0.1M, 0.2M, 0.3M, 0.4M }, TestOf = typeof(decimal[]))]
-        public void ServiceGetVarianceReturnsNonNegativeValue(decimal[] pmf)
+        public void ServiceGetVarianceReturnsNonNegativeValue()
         {
+            var pmf = new decimal[] { 0.1M, 0.2M, 0.3M, 0.4M };
+
             Assert.That(() => _distributionService.GetVariance(pmf) >= 0);
+        }
+
+        [Test]
+        public void ServiceThrowsIfPmfIsNotNormalized()
+        {
+            var pmf = new decimal[] { 0.1M, 0.201M, 0.3M, 0.4M };
+
+            Assert.Throws<ArgumentException>(() => _distributionService.GetVariance(pmf));
         }
 
 

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 
-using ImageProcessing.Common.Adapters.LightInject;
-using ImageProcessing.Core.AppController.Implementation;
+using ImageProcessing.Core.Adapters.LightInject;
+using ImageProcessing.Core.Controller.Implementation;
+using ImageProcessing.Core.Factory.Base;
 using ImageProcessing.Factory.Base;
 using ImageProcessing.Form.Histogram;
 using ImageProcessing.Form.Main;
@@ -15,8 +16,8 @@ using ImageProcessing.Services.ConvolutionFilterServices.Implementation;
 using ImageProcessing.Services.ConvolutionFilterServices.Interface;
 using ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Implementation;
 using ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Interface;
-using ImageProcessing.Services.DistributionServices.Distribution.Implementation;
 using ImageProcessing.Services.DistributionServices.Distribution.Interface;
+using ImageProcessing.Services.DistributionServices.RandomVariableDistribution.Implementation;
 using ImageProcessing.Services.RGBFilterService.Implementation;
 using ImageProcessing.Services.RGBFilterService.Interface;
 
@@ -24,10 +25,10 @@ namespace ImageProcessing
 {
     internal static class Program
     {
-        public static readonly ApplicationContext Context = new ApplicationContext();
+        internal static readonly ApplicationContext _context = new ApplicationContext();
 
         [STAThread]
-        private static void Main()
+        internal static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -38,10 +39,10 @@ namespace ImageProcessing
                 .RegisterView<IQualityMeasureView, QualityMeasureForm>()
                 .RegisterService<IBaseFactory, BaseFactory>()
                 .RegisterService<IConvolutionFilterService, ConvolutionFilterService>()
-                .RegisterService<IDistributionService, RandomVariableDistributionService>()
+                .RegisterService<IRandomVariableDistributionService, RandomVariableDistributionService>()
                 .RegisterService<IBitmapLuminanceDistributionService, BitmapLuminanceDistributionService>()
                 .RegisterService<IRGBFilterService, RGBFilterService>()
-                .RegisterInstance(new ApplicationContext());
+                .RegisterInstance(_context);
 
             controller.Run<MainPresenter>();
         }
