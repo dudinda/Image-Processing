@@ -1,5 +1,5 @@
 ﻿using System;
-
+using ImageProcessing.Common.Utility.DecimalMath;
 using ImageProcessing.Core.Model.Distribution;
 
 using MathNet.Numerics;
@@ -8,24 +8,26 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
 {
     public class NormalDistribution : IDistribution
     {
-        private double _mu;
-        private double _sigma;
+        private decimal _mu;
+        private decimal _sigma;
 
         public NormalDistribution() { }
-        public NormalDistribution(double mu, double sigma)
+        public NormalDistribution(decimal mu, decimal sigma)
         {
             _mu    = mu;
             _sigma = sigma;
         }
 
-        public double FirstParameter => _mu;
-        public double SecondParameter => _sigma;
+        public decimal FirstParameter => _mu;
+        public decimal SecondParameter => _sigma;
 
-        public double GetMean() => _mu;
-        public double GetVariance() => _sigma * _sigma;
-        public double Quantile(double p) => _mu + _sigma * Math.Sqrt(2) * SpecialFunctions.ErfInv(2 * p - 1);
+        public decimal GetMean() => _mu;
+        public decimal GetVariance() => _sigma * _sigma;
+        public decimal Quantile(decimal p) => 
+            _mu + _sigma * DecimalMath.Sqrt(2) * 
+            (decimal)SpecialFunctions.ErfInv(Convert.ToDouble(2 * p - 1));
 
-        public void SetParams((double, double) parms)
+        public void SetParams((decimal, decimal) parms)
         {
             _mu    = parms.Item1;
             _sigma = parms.Item2;

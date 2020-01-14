@@ -8,13 +8,13 @@ namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribut
     {
         Bitmap TransformTo(Bitmap bitmap, IDistribution distribution);
         int[] GetFrequencies(Bitmap bitmap);
-        double GetExpectation(Bitmap bitmap);
-        double GetVariance(Bitmap bitmap);
-        double[] GetCDF(Bitmap bitmap);
-        double GetEntropy(Bitmap bitmap);
-        double[] GetPMF(Bitmap bitmap);
-        double GetStandardDeviation(Bitmap bitmap);
-        double GetConditionalExpectation((int x1, int x2) interval, Bitmap bitmap);
-        double GetConditionalVariance((int x1, int x2) interval, Bitmap bitmap);
+        decimal GetExpectation(Bitmap bitmap);
+        decimal GetVariance(Bitmap bitmap);
+        decimal[] GetCDF(Bitmap bitmap);
+        decimal GetEntropy(Bitmap bitmap);
+        decimal[] GetPMF(Bitmap bitmap);
+        decimal GetStandardDeviation(Bitmap bitmap);
+        decimal GetConditionalExpectation((int x1, int x2) interval, Bitmap bitmap);
+        decimal GetConditionalVariance((int x1, int x2) interval, Bitmap bitmap);
     }
 }

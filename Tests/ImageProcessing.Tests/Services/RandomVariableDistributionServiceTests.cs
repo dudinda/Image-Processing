@@ -1,0 +1,54 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ImageProcessing.Services.DistributionServices.Distribution.Interface;
+using NSubstitute;
+using NUnit.Framework;
+
+namespace ImageProcessing.Tests.Services
+{
+    [TestFixture]
+    internal class RandomVariableDistributionServiceTests
+    {
+        private IRandomVariableDistributionService _distributionService;
+        private Image _image;
+        
+        [SetUp]
+        public void SetUp()
+        {
+            _distributionService = Substitute.For<IRandomVariableDistributionService>();
+            _image = Substitute.For<Image>();
+        }
+
+        [Test]
+        public void ServiceGetCDFThrowsArgumentNullExceptionIfPmfArrayIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => _distributionService.GetCDF(null));
+        }
+
+        [Test]
+        public void ServiceGetVarianceThrowsArgumentNullExceptionIfPmfArrayIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => _distributionService.GetVariance(null));
+        }
+
+
+        [Test]
+        public void ServiceGetPMFThrowsArgumentNullExceptionIfFrequenciesArrayIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => _distributionService.GetPMF(null));
+        }
+
+        [Test]
+        [TestCase(new decimal[] { 0.1M, 0.2M, 0.3M, 0.4M }, TestOf = typeof(decimal[]))]
+        public void ServiceGetVarianceReturnsNonNegativeValue(decimal[] pmf)
+        {
+            Assert.That(() => _distributionService.GetVariance(pmf) >= 0);
+        }
+
+
+    }
+}

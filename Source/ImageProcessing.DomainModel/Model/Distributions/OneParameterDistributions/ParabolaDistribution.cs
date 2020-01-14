@@ -1,36 +1,36 @@
 ﻿using System;
-
+using ImageProcessing.Common.Utility.DecimalMath;
 using ImageProcessing.Core.Model.Distribution;
 
 namespace ImageProcessing.Distributions.OneParameterDistributions
 {
     public class ParabolaDistribution : IDistribution
     {
-        private double _k;
+        private decimal _k;
 
         public ParabolaDistribution() { }
-        public ParabolaDistribution(double k)
+        public ParabolaDistribution(decimal k)
         {
             _k = k;
         }
 
-        public double FirstParameter => _k;
-        public double SecondParameter => throw new NotImplementedException();
+        public decimal FirstParameter => _k;
+        public decimal SecondParameter => throw new NotImplementedException();
 
-        public double Quantile(double p)
+        public decimal Quantile(decimal p)
         {
-            return _k * (1 - Math.Pow(1 - p, 0.3));
+            return _k * (1M - DecimalMath.Pow(1M - p, 0.3M));
         }
-        public double GetMean()
+        public decimal GetMean()
         {
             throw new NotImplementedException();
         }
-        public double GetVariance()
+        public decimal GetVariance()
         {
             throw new NotImplementedException();
         }
 
-        public void SetParams((double, double) parms)
+        public void SetParams((decimal, decimal) parms)
         {
             _k = parms.Item1;
         }

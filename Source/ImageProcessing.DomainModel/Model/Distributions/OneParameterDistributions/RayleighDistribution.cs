@@ -1,35 +1,35 @@
 ﻿using System;
-
+using ImageProcessing.Common.Utility.DecimalMath;
 using ImageProcessing.Core.Model.Distribution;
 
 namespace ImageProcessing.Distributions.OneParameterDistributions
 {
     public class RayleighDistribution : IDistribution
     {
-        private double _sigma;
+        private decimal _sigma;
 
         public RayleighDistribution() { }
-        public RayleighDistribution(double sigma)
+        public RayleighDistribution(decimal sigma)
         {
             _sigma = sigma;
         }
 
-        public double FirstParameter => _sigma;
-        public double SecondParameter => throw new NotImplementedException();
+        public decimal FirstParameter => _sigma;
+        public decimal SecondParameter => throw new NotImplementedException();
 
-        public double GetMean() => _sigma * Math.Sqrt(Math.PI / 2);
-        public double GetVariance() => (2 - Math.PI / 2) * _sigma * _sigma;
-        public double Quantile(double p)
+        public decimal GetMean() => _sigma * DecimalMath.Sqrt(DecimalMath.PI / 2M);
+        public decimal GetVariance() => (2M - DecimalMath.PI / 2M) * _sigma * _sigma;
+        public decimal Quantile(decimal p)
         {
             if(p >= 1)
             {
                 return 0;
             }
 
-            return _sigma * Math.Sqrt(-2 * Math.Log(1 - p));
+            return _sigma * DecimalMath.Sqrt(-2M * DecimalMath.Log(1M - p));
         }
 
-        public void SetParams((double, double) parms)
+        public void SetParams((decimal, decimal) parms)
         {
             _sigma = parms.Item1;
         }

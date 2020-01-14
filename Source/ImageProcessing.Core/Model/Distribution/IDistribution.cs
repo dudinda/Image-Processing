@@ -2,11 +2,11 @@
 {
     public interface IDistribution
     {
-        double FirstParameter { get; }
-        double SecondParameter { get; }
-        double GetMean();
-        double GetVariance();
-        double Quantile(double p);
-        void SetParams((double, double) parms);
+        decimal FirstParameter { get; }
+        decimal SecondParameter { get; }
+        decimal GetMean();
+        decimal GetVariance();
+        decimal Quantile(decimal p);
+        void SetParams((decimal, decimal) parms);
     }
 }
