@@ -149,7 +149,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
    
             if (Abs(E - lbase) > precision)
             {
-                return Log(lbase, E) * Integrate(Integration.Trapezoidal, (t) => 1M / t, (1M, x));
+                return Integrate(Integration.Trapezoidal, (t) => 1M / t, (1M, x)) / Log(lbase);
             }
 
             return Integrate(Integration.Trapezoidal, (t) => 1M / t, (1M, x));
