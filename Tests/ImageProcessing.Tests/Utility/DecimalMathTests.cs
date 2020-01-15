@@ -51,20 +51,23 @@ namespace ImageProcessing.Tests.Utility
         }
 
         [Test]
-        [TestCase(2.63)]
-        [TestCase(351.000001)]
-        [TestCase(0.00000001)]
-        [TestCase(0.230001)]
+        [TestCase(-2.63)]
+        [TestCase(-351.000001)]
+        [TestCase(-0.00000001)]
+        [TestCase(-0.230001)]
         public void CeilFunctionNegativeTest(decimal value)
         {
-            Assert.AreEqual(value.Ceil(), -2);
+            Assert.AreEqual(value.Ceil(), Math.Ceiling(value));
         }
 
         [Test]
         [TestCase(2.63)]
+        [TestCase(351.000001)]
+        [TestCase(0.00000001)]
+        [TestCase(0.230001)]
         public void CeilFunctionPositiveTest(decimal value)
         {
-            Assert.AreEqual(value.Ceil(), 3);
+            Assert.AreEqual(value.Ceil(), Math.Ceiling(value));
         }
 
         [Test]
@@ -186,6 +189,79 @@ namespace ImageProcessing.Tests.Utility
             cmpVal = Convert.ToDecimal(Math.Sign(value) * Math.PI / 2 - Math.Atan(value));
 
             Assert.That((target - cmpVal).Abs(), Is.LessThan(0.0001M));
+        }
+
+
+        [Test]
+        [TestCase(0)]
+        [TestCase(0.0000000001)]
+        [TestCase(1)]
+        [TestCase(100)]
+        [TestCase(100000000)]
+        [TestCase(-0.0000000001)]
+        [TestCase(-1)]
+        [TestCase(-100)]
+        [TestCase(-100000000)]
+        public void SinhTests(double value)
+        {
+            var target = DecimalMath.Sinh(Convert.ToDecimal(value));
+            var cmpVal = Convert.ToDecimal(Math.Sinh(value));
+
+            Assert.That((target - cmpVal).Abs(), Is.LessThan(0.00000001M));
+        }
+
+        [Test]
+        [TestCase(0)]
+        [TestCase(0.0000000001)]
+        [TestCase(1)]
+        [TestCase(100)]
+        [TestCase(100000000)]
+        [TestCase(-0.0000000001)]
+        [TestCase(-1)]
+        [TestCase(-100)]
+        [TestCase(-100000000)]
+        public void CoshTests(double value)
+        {
+            var target = DecimalMath.Cosh(Convert.ToDecimal(value));
+            var cmpVal = Convert.ToDecimal(Math.Cosh(value));
+
+            Assert.That((target - cmpVal).Abs(), Is.LessThan(0.00000001M));
+        }
+
+        [Test]
+        [TestCase(0)]
+        [TestCase(0.0000000001)]
+        [TestCase(1)]
+        [TestCase(100)]
+        [TestCase(100000000)]
+        [TestCase(-0.0000000001)]
+        [TestCase(-1)]
+        [TestCase(-100)]
+        [TestCase(-100000000)]
+        public void TanhTests(double value)
+        {
+            var target = DecimalMath.Tanh(Convert.ToDecimal(value));
+            var cmpVal = Convert.ToDecimal(Math.Tanh(value));
+
+            Assert.That((target - cmpVal).Abs(), Is.LessThan(0.00000001M));
+        }
+
+        [Test]
+        [TestCase(0)]
+        [TestCase(0.0000000001)]
+        [TestCase(1)]
+        [TestCase(100)]
+        [TestCase(100000000)]
+        [TestCase(-0.0000000001)]
+        [TestCase(-1)]
+        [TestCase(-100)]
+        [TestCase(-100000000)]
+        public void CothTests(double value)
+        {
+            var target = DecimalMath.Coth(Convert.ToDecimal(value));
+            var cmpVal = Convert.ToDecimal(1 / Math.Tanh(value));
+
+            Assert.That((target - cmpVal).Abs(), Is.LessThan(0.000001M));
         }
 
 
