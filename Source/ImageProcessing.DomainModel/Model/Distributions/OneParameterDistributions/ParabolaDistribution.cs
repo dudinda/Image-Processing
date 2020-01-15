@@ -8,12 +8,6 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
     {
         private decimal _k;
 
-        public ParabolaDistribution() { }
-        public ParabolaDistribution(decimal k)
-        {
-            _k = k;
-        }
-
         public decimal FirstParameter => _k;
         public decimal SecondParameter => throw new NotImplementedException();
 
@@ -30,9 +24,10 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
             throw new NotImplementedException();
         }
 
-        public void SetParams((decimal, decimal) parms)
+        public IDistribution SetParams((decimal, decimal) parms)
         {
             _k = parms.Item1;
+            return this;
         }
     }
 }

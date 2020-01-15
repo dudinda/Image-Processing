@@ -1,8 +1,9 @@
 ﻿using System;
+
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.DecimalMathExtensions;
 using ImageProcessing.Common.Utility.DecimalMath;
-using NSubstitute.ExceptionExtensions;
+
 using NUnit.Framework;
 
 namespace ImageProcessing.Tests.Utility
@@ -135,6 +136,7 @@ namespace ImageProcessing.Tests.Utility
             Assert.That(() => DecimalMath.Integrate(Integration.Trapezoidal, (x) => 1 / x, interval, 10000), Throws.TypeOf<ArithmeticException>());
             Assert.That(() => DecimalMath.Integrate(Integration.Trapezoidal, (x) => 1 / (1 - x), interval, 10000), Throws.TypeOf<ArithmeticException>());
             Assert.That(() => DecimalMath.Integrate(Integration.Trapezoidal, (x) => 1 / (x * x - 1), interval, 10000), Throws.TypeOf<ArithmeticException>());
+            Assert.That(() => DecimalMath.Integrate(Integration.Trapezoidal, (x) => 1 / (x * x - 1.0M / 2.0M), interval, 10000), Throws.TypeOf<ArithmeticException>());
         }
 
         [Test]
@@ -159,7 +161,7 @@ namespace ImageProcessing.Tests.Utility
         [TestCase(567, 123)]
         [TestCase(0.245, 0.001)]
         [TestCase(Math.E * Math.E, Math.E)]
-        [TestCase(2512, 0.5)]
+        [TestCase(1500, 0.5)]
         public void LogSmallNumbersTest(double value, double lbase)
         {
             var target = DecimalMath.Log(Convert.ToDecimal(value), Convert.ToDecimal(lbase));

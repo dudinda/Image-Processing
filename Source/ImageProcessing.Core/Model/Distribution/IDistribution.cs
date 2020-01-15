@@ -7,6 +7,6 @@
         decimal GetMean();
         decimal GetVariance();
         decimal Quantile(decimal p);
-        void SetParams((decimal, decimal) parms);
+        IDistribution SetParams((decimal, decimal) parms);
     }
 }

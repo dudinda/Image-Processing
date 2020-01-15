@@ -8,12 +8,6 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
     {
         private decimal _sigma;
 
-        public RayleighDistribution() { }
-        public RayleighDistribution(decimal sigma)
-        {
-            _sigma = sigma;
-        }
-
         public decimal FirstParameter => _sigma;
         public decimal SecondParameter => throw new NotImplementedException();
 
@@ -21,17 +15,15 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
         public decimal GetVariance() => (2M - DecimalMath.PI / 2M) * _sigma * _sigma;
         public decimal Quantile(decimal p)
         {
-            if(p >= 1)
-            {
-                return 0;
-            }
+            if(p >= 1) return 0;
 
             return _sigma * DecimalMath.Sqrt(-2M * DecimalMath.Log(1M - p));
         }
 
-        public void SetParams((decimal, decimal) parms)
+        public IDistribution SetParams((decimal, decimal) parms)
         {
             _sigma = parms.Item1;
+            return this;
         }
     }
 }

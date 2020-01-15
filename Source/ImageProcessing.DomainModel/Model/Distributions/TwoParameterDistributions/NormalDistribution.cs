@@ -11,13 +11,6 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
         private decimal _mu;
         private decimal _sigma;
 
-        public NormalDistribution() { }
-        public NormalDistribution(decimal mu, decimal sigma)
-        {
-            _mu    = mu;
-            _sigma = sigma;
-        }
-
         public decimal FirstParameter => _mu;
         public decimal SecondParameter => _sigma;
 
@@ -27,10 +20,11 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
             _mu + _sigma * DecimalMath.Sqrt(2) * 
             (decimal)SpecialFunctions.ErfInv(Convert.ToDouble(2 * p - 1));
 
-        public void SetParams((decimal, decimal) parms)
+        public IDistribution SetParams((decimal, decimal) parms)
         {
             _mu    = parms.Item1;
             _sigma = parms.Item2;
+            return this;
         }
     }
 }

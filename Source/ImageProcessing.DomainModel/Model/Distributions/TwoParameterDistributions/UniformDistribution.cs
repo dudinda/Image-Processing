@@ -7,13 +7,6 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
         private decimal _a;
         private decimal _b;
 
-        public UniformDistribution() { }
-        public UniformDistribution(decimal a, decimal b)
-        {
-            _a = a;
-            _b = b;
-        }
-
         public decimal FirstParameter => _a;
         public decimal SecondParameter => _b;
 
@@ -21,10 +14,11 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
         public decimal GetVariance() => (_b - _a) * (_b - _a) / 12;
         public decimal Quantile(decimal p) => _a + p * (_b - _a);
 
-        public void SetParams((decimal, decimal) parms)
+        public IDistribution SetParams((decimal, decimal) parms)
         {
             _a = parms.Item1;
             _b = parms.Item2;
+            return this;
         }
     }
 }

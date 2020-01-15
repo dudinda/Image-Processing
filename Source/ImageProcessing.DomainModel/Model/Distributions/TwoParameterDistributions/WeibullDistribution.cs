@@ -10,13 +10,6 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
         private decimal _lambda;
         private decimal _k;
 
-        public WeibullDistribution() { }
-        public WeibullDistribution(decimal lambda, decimal k)
-        {
-            _lambda = lambda;
-            _k      = k;
-        }
-
         public decimal FirstParameter => _lambda;
         public decimal SecondParameter => _k;
 
@@ -24,10 +17,11 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
         public decimal GetVariance() => throw new NotImplementedException();
         public decimal Quantile(decimal p) => _lambda * -(DecimalMath.Log(1 - p).Pow(1.0M / _k));
 
-        public void SetParams((decimal, decimal) parms)
+        public IDistribution SetParams((decimal, decimal) parms)
         {
             _lambda = parms.Item1;
             _k      = parms.Item2;
+            return this;
         }
     }
 }

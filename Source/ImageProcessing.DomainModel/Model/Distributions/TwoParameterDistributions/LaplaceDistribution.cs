@@ -9,13 +9,6 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
         private decimal _mu;
         private decimal _b;
 
-        public LaplaceDistribution() { }
-        public LaplaceDistribution(decimal mu, decimal b)
-        {
-            _mu = mu;
-            _b  = b;
-        }
-
         public decimal FirstParameter => _mu;
         public decimal SecondParameter => _b;
 
@@ -26,10 +19,11 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
             DecimalMath.Sign(p - 0.5M) *
             DecimalMath.Log(1 - 2 * DecimalMath.Abs(p - 0.5M));
 
-        public void SetParams((decimal, decimal) parms)
+        public IDistribution SetParams((decimal, decimal) parms)
         {
             _mu = parms.Item1;
             _b  = parms.Item2;
+            return this;
         }
     }
 }
