@@ -58,5 +58,11 @@ namespace ImageProcessing.Common.Extensions.DecimalMathExtensions
         public static decimal Mod(this decimal value, decimal mod)
             => DecimalMath.Mod(value, mod);
 
+        public static decimal Atan(this decimal value, decimal precision = DecimalMath.Epsilon)
+            => DecimalMath.Atan(value);
+
+        public static decimal Acot(this decimal value, decimal precision = DecimalMath.Epsilon)
+            => DecimalMath.Acot(value);
+
     }
 }

@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ImageProcessing.Common.Enums;
 
 namespace ImageProcessing.Common.Utility.DecimalMath
 {
     public static class DecimalMath
     {
-        public const decimal E = 2.718281828459M;
+        public const decimal E = 2.71828182845905M;
         public const decimal Epsilon = 1.0E-20M;
-        public const decimal PI = 3.14159265359M;
+        public const decimal PI = 3.14159265358979323846M;
 
 
 
@@ -132,11 +133,11 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         }
 
         /// <summary>
-        /// Repsresent log(x) = log(base) * integral dt/t from 1 to x
-        /// </summary>
-        public static decimal Log(decimal value, decimal lbase = E, decimal precision = Epsilon)
+        /// Repsresent log(x) = integral series[1/(t + 1)]dt from 0 to x - 1 / log(base)
+         /// </summary>
+        public static decimal Log(decimal x, decimal lbase = E, decimal precision = Epsilon)
         {
-            if(value < 0)
+            if(x < 0)
             {
                 throw new ArgumentException("The value must be a positive real number");
             }
@@ -145,47 +146,62 @@ namespace ImageProcessing.Common.Utility.DecimalMath
             {
                 throw new ArgumentException("A logarithm base must be in (0, 1) U (1, +inf)");
             }
-
+   
             if (Abs(E - lbase) > precision)
             {
-                return Log(lbase, E) * Integrate((x) => 1M / x, (1M, value), 10000);
+                return Log(lbase, E) * Integrate(Integration.Trapezoidal, (t) => 1M / t, (1M, x));
             }
 
-            return Integrate((x) => 1M / x, (1M, value), 10000);
+            return Integrate(Integration.Trapezoidal, (t) => 1M / t, (1M, x));
+    
 
         }
 
+        public static decimal Atan(decimal x, decimal precision = Epsilon)
+        {
+            return Integrate(Integration.Trapezoidal, (t) => 1M / (1 + t * t), (0.0M, x), 40000);
+        }
+
+        public static decimal Acot(decimal x, decimal precision = Epsilon)
+        {
+            var sign = Sign(x);
+
+            if(Abs(x) < Abs(precision) && x != 0) {
+                return sign * PI / 2.0M;
+            }
+
+            if (x == 0.0M) return PI / 2.0M;
+
+            return sign * PI / 2.0M -  Atan(x, precision);
+        }
+
         /// <summary>
-        /// Integrate function f(x) from a to b using trapezoidal rule
+        /// Integrate a real valued function f(x)
         /// </summary>
-        /// <param name="f"></param>
-        /// <param name="b"></param>
-        /// <param name="a"></param>
-        /// <param name="steps"></param>
-        /// <returns></returns>
-        public static decimal Integrate(Func<decimal, decimal> f, (decimal x1, decimal x2) interval, int N)
+        /// <param name="f">A function of real variable</param>
+        /// <param name="b">The end of an interval</param>
+        /// <param name="a">The start of an interval</param>
+        /// <param name="steps">Number of iterations</param>
+        public static decimal Integrate(Integration method, Func<decimal, decimal> f, (decimal x1, decimal x2) interval, int N = 20000)
         {
             try
             {
-                var b = interval.x2;
-                var a = interval.x1;
+                if (interval.x1 == interval.x2) return 0.0M;
 
-                var h = (b - a) / N;
-                var res = (f(a) + f(b)) / 2;
-
-                for (int i = 1; i < N; i++)
+               switch(method)
                 {
-                    res += f(a + i * h);
-                }
+                    case Integration.Trapezoidal:
+                        return Trapezoidal(f, interval, N);
 
-                return h * res;
+                    default: throw new NotImplementedException();
+                }
             }
             catch
             {
                 throw new ArithmeticException("The function has a singularity point at [a, b]");
             }
         }
-
+        
         public static decimal Ceil(decimal value)
         {
             if(value % 1 != 0)
@@ -217,6 +233,21 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         public static decimal Mod(decimal value, decimal mod)
         {
             return value - mod * Floor(value / mod);
+        }
+        private static decimal Trapezoidal(Func<decimal, decimal> f, (decimal x1, decimal x2) interval, int N = 20000)
+        {
+            var b = interval.x2;
+            var a = interval.x1;
+
+            var h = (b - a) / N;
+            var res = (f(a) + f(b)) / 2.0M;
+
+            for (var k = 1; k < N; ++k)
+            {
+                res += f(a + k * h);
+            }
+
+            return h * res;
         }
     }
 }
