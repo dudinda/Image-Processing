@@ -1,5 +1,5 @@
 ﻿using System;
-
+using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.DecimalMathExtensions;
 using ImageProcessing.Common.Utility.DecimalMath;
 using NSubstitute.ExceptionExtensions;
@@ -125,13 +125,13 @@ namespace ImageProcessing.Tests.Utility
 
         [Test]
         [TestCase(0, 1)]
-        public void ThrowIfIntegralDoesntConverge(int a, int b)
+        public void ThrowIfIntegralDoesntConvergeTrapezoidalMethod(int a, int b)
         {
             var interval = (Convert.ToDecimal(a), Convert.ToDecimal(b));
 
-            Assert.That(() => DecimalMath.Integrate( (x) => 1 / x, interval, 10000), Throws.TypeOf<ArithmeticException>());
-            Assert.That(() => DecimalMath.Integrate((x) => 1 / (1 - x), interval, 10000), Throws.TypeOf<ArithmeticException>());
-            Assert.That(() => DecimalMath.Integrate((x) => 1 / (x * x - 1), interval, 10000), Throws.TypeOf<ArithmeticException>());
+            Assert.That(() => DecimalMath.Integrate(Integration.Trapezoidal, (x) => 1 / x, interval, 10000), Throws.TypeOf<ArithmeticException>());
+            Assert.That(() => DecimalMath.Integrate(Integration.Trapezoidal, (x) => 1 / (1 - x), interval, 10000), Throws.TypeOf<ArithmeticException>());
+            Assert.That(() => DecimalMath.Integrate(Integration.Trapezoidal, (x) => 1 / (x * x - 1), interval, 10000), Throws.TypeOf<ArithmeticException>());
         }
 
         [Test]
@@ -149,5 +149,45 @@ namespace ImageProcessing.Tests.Utility
 
             Assert.That((target - cmpVal).Abs(), Is.LessThan(0.0000001M));
         }
+
+
+        [Test]
+        [TestCase(1.25, 5)]
+        [TestCase(567, 123)]
+        [TestCase(0.245, 0.001)]
+        [TestCase(Math.E * Math.E, Math.E)]
+        [TestCase(2512, 0.5)]
+        public void LogSmallNumbersTest(double value, double lbase)
+        {
+            var target = DecimalMath.Log(Convert.ToDecimal(value), Convert.ToDecimal(lbase));
+            var cmpVal = Convert.ToDecimal(Math.Log(value, lbase));
+
+            Assert.That((target - cmpVal).Abs(), Is.LessThan(0.001M));
+        }
+
+
+        [Test]
+        [TestCase(0)]
+        [TestCase(0.0000000001)]
+        [TestCase(-100)]
+        [TestCase(Math.PI * Math.E)]   
+        [TestCase(-0.0000000001)]
+        [TestCase(-25)]
+        [TestCase(-189)]
+        [TestCase(100)]
+        public void AtanAndAcotSmallNumbersTest(double value)
+        {
+            var target = DecimalMath.Atan(Convert.ToDecimal(value));
+            var cmpVal = Convert.ToDecimal(Math.Atan(value));
+
+            Assert.That((target - cmpVal).Abs(), Is.LessThan(0.0001M));
+
+            target = DecimalMath.Acot(Convert.ToDecimal(value));
+            cmpVal = Convert.ToDecimal(Math.Atan(1.0 / value));
+
+            Assert.That((target - cmpVal).Abs(), Is.LessThan(0.0001M));
+        }
+
+
     }
 }
