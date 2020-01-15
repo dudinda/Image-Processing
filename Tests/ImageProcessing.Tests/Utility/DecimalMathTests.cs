@@ -183,7 +183,7 @@ namespace ImageProcessing.Tests.Utility
             Assert.That((target - cmpVal).Abs(), Is.LessThan(0.0001M));
 
             target = DecimalMath.Acot(Convert.ToDecimal(value));
-            cmpVal = Convert.ToDecimal(Math.Atan(1.0 / value));
+            cmpVal = Convert.ToDecimal(Math.Sign(value) * Math.PI / 2 - Math.Atan(value));
 
             Assert.That((target - cmpVal).Abs(), Is.LessThan(0.0001M));
         }
