@@ -10,24 +10,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         public const decimal Epsilon = 1.0E-20M;
         public const decimal PI = 3.14159265359M;
 
-        public static decimal PositiveInfinity
-        {
-            get
-            {
-                var zero = 0;
-                return 1 / zero;
-            }
-        }
 
-
-        public static decimal NegativeInfinity
-        {
-            get
-            {
-                var zero = 0;
-                return -1 / zero;
-            }
-        }
 
         public static decimal Sqrt(decimal value, decimal precision = Epsilon)
         {

@@ -19,7 +19,7 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
         public decimal FirstParameter => _x0;
         public decimal SecondParameter => _gamma;
         public decimal GetMean() => throw new NotImplementedException();
-        public decimal GetVariance() => DecimalMath.PositiveInfinity;
+        public decimal GetVariance() => throw new ArithmeticException("+inf");
         public decimal Quantile(decimal p) => _x0 + _gamma * DecimalMath.Tan(DecimalMath.PI * (p - 0.5M));
 
         public void SetParams((decimal, decimal) parms)

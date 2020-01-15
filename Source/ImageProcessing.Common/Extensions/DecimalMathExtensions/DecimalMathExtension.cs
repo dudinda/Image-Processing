@@ -55,5 +55,8 @@ namespace ImageProcessing.Common.Extensions.DecimalMathExtensions
         public static decimal Coth(this decimal value, decimal precision = DecimalMath.Epsilon)
             => DecimalMath.Coth(value, precision);
 
+        public static decimal Mod(this decimal value, decimal mod)
+            => DecimalMath.Mod(value, mod);
+
     }
 }
