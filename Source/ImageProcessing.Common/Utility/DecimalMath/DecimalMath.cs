@@ -72,9 +72,12 @@ namespace ImageProcessing.Common.Utility.DecimalMath
                 throw new ArgumentException("The value must be a positive real number");
             }
 
-            var expPower = power * Log(value, precision: precision);
+            checked
+            {
+                var expPower = power * Log(value, precision: precision);
 
-            return Exp(expPower);
+                return Exp(expPower);
+            }
         }
 
         /// <summary>
@@ -242,18 +245,6 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         }
 
         /// <summary>
-        /// Evaluate atan(x) with a specified precision
-        /// </summary>
-        /// <param name="x">The argument</param>
-        /// <param name="precision">An error</param>
-        public static decimal Atan(decimal x, decimal precision = Epsilon)
-        {
-            if (x == 0) return 0;
-                 
-            return Integrate(Integration.Trapezoidal, (t) => 1M / (1 + t * t), (0.0M, x), 40000);
-        }
-
-        /// <summary>
         /// Evaluate arcctg(x) with a specified precision
         /// </summary>
         /// <param name="x">The argument</param>
@@ -269,7 +260,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
 
             if (x == 0.0M) return PI / 2.0M;
 
-            return sign * PI / 2.0M -  Atan(x, precision);
+            return sign * PI / 2.0M -  Atan(x);
         }
 
         /// <summary>
@@ -375,9 +366,9 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         {
             if (x == 0) return 0;
 
-            if (x > 0) return AtanImpl(x);
+            if (x > 0) return AtanReduce(x);
 
-            return -AtanImpl(-x);
+            return -AtanReduce(-x);
         }
 
         /// <summary>
