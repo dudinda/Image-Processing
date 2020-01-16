@@ -1,4 +1,5 @@
-﻿using ImageProcessing.Core.Model.Distribution;
+﻿using ImageProcessing.Common.Enums;
+using ImageProcessing.Core.Model.Distribution;
 
 namespace ImageProcessing.Distributions.TwoParameterDistributions
 {
@@ -7,6 +8,7 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
         private decimal _a;
         private decimal _b;
 
+        public string Name => nameof(Distribution.Uniform);
         public decimal FirstParameter => _a;
         public decimal SecondParameter => _b;
 

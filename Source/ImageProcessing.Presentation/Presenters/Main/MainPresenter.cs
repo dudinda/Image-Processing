@@ -227,6 +227,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 View.DstImage  = await _locker.LockAsync(
                     () => _distributionService.TransformTo(new Bitmap(View.SrcImage), filter)
                 ).ConfigureAwait(true);
+
+                View.DstImage.Tag = filter.Name;
             }
             catch
             {

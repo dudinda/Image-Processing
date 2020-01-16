@@ -1,4 +1,6 @@
 ﻿using System;
+
+using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Utility.DecimalMath;
 using ImageProcessing.Core.Model.Distribution;
 
@@ -9,6 +11,7 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
         private decimal _x0;
         private decimal _gamma;
 
+        public string Name => nameof(Distribution.Cauchy);
         public decimal FirstParameter => _x0;
         public decimal SecondParameter => _gamma;
         public decimal GetMean() => throw new NotImplementedException();

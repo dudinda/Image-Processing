@@ -1,4 +1,4 @@
-﻿using System;
+﻿using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Utility.DecimalMath;
 using ImageProcessing.Core.Model.Distribution;
 
@@ -9,6 +9,7 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
         private decimal _mu;
         private decimal _b;
 
+        public string Name => nameof(Distribution.Laplace);
         public decimal FirstParameter => _mu;
         public decimal SecondParameter => _b;
 

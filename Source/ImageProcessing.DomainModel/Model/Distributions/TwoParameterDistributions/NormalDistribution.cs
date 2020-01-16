@@ -1,4 +1,6 @@
 ﻿using System;
+
+using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Utility.DecimalMath;
 using ImageProcessing.Core.Model.Distribution;
 
@@ -11,6 +13,7 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
         private decimal _mu;
         private decimal _sigma;
 
+        public string Name => nameof(Distribution.Normal);
         public decimal FirstParameter => _mu;
         public decimal SecondParameter => _sigma;
 

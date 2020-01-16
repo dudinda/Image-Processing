@@ -2,6 +2,7 @@
 {
     public interface IDistribution
     {
+        string Name { get; }
         decimal FirstParameter { get; }
         decimal SecondParameter { get; }
         decimal GetMean();

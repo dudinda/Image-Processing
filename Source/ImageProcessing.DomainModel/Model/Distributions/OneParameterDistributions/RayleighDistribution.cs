@@ -1,4 +1,6 @@
 ﻿using System;
+
+using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Utility.DecimalMath;
 using ImageProcessing.Core.Model.Distribution;
 
@@ -8,6 +10,7 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
     {
         private decimal _sigma;
 
+        public string Name => nameof(Distribution.Rayleigh);
         public decimal FirstParameter => _sigma;
         public decimal SecondParameter => throw new NotImplementedException();
 

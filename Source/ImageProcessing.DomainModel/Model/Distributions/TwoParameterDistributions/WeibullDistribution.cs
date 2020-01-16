@@ -1,4 +1,6 @@
 ﻿using System;
+
+using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.DecimalMathExtensions;
 using ImageProcessing.Common.Utility.DecimalMath;
 using ImageProcessing.Core.Model.Distribution;
@@ -10,6 +12,7 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
         private decimal _lambda;
         private decimal _k;
 
+        public string Name => nameof(Distribution.Weibull);
         public decimal FirstParameter => _lambda;
         public decimal SecondParameter => _k;
 
