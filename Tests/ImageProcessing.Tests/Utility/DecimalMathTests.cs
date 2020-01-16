@@ -170,12 +170,12 @@ namespace ImageProcessing.Tests.Utility
 
         [TestCase(0)]
         [TestCase(0.0000000001)]
-        [TestCase(-10)]
+        [TestCase(-100)]
         [TestCase(Math.PI * Math.E)]   
         [TestCase(-0.0000000001)]
         [TestCase(-5)]
         [TestCase(-9)]
-        [TestCase(10)]
+        [TestCase(100)]
         public void AtanAndAcotSmallNumbersTest(double value)
         {
             var target = DecimalMath.Atan(Convert.ToDecimal(value));
@@ -255,20 +255,20 @@ namespace ImageProcessing.Tests.Utility
             Assert.That((target - cmpVal).Abs(), Is.LessThan(0.00000001M));
         }
 
-        [Test]
+
         [TestCase(0)]
-        [TestCase(0.0000000001)]
+        [TestCase(0.1)]
         [TestCase(1)]
-        [TestCase(100)]
-        [TestCase(100000000)]
-        [TestCase(-0.0000000001)]
+        [TestCase(10)]
+        [TestCase(5)]
+        [TestCase(-0.001)]
         [TestCase(-1)]
-        [TestCase(-100)]
-        [TestCase(-100000000)]
+        [TestCase(-10)]
+        [TestCase(-5)]
         public void CothTests(double value)
         {
             var target = DecimalMath.Coth(Convert.ToDecimal(value));
-            var cmpVal = Convert.ToDecimal(1 / Math.Tanh(value));
+            var cmpVal = Convert.ToDecimal(1.0 / Math.Tanh(value));
 
             Assert.That((target - cmpVal).Abs(), Is.LessThan(0.000001M));
         }
