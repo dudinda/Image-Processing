@@ -17,8 +17,8 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <summary>
         /// Evaluate sqrt(x) with a specified precision
         /// </summary>
-        /// <param name="x">The argument</param>
-        ///         /// <param name="precision">An error</param>
+        /// <param name="x">An argument of a function</param>
+        /// <param name="precision">A error</param>
         public static decimal Sqrt(decimal value, decimal precision = Epsilon)
         {
             if (value < 0)
@@ -41,7 +41,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <summary>
         /// Evaluate sgn(x)
         /// </summary>
-        /// <param name="x">The argument</param>
+        /// <param name="x">An argument of a function</param>
         public static decimal Sign(decimal x)
         {
             if (x == 0) return 0;
@@ -53,7 +53,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <summary>
         /// Evaluate |x|
         /// </summary>
-        /// <param name="x">The argument</param>
+        /// <param name="x">An argument of a function</param>
         public static decimal Abs(decimal x)
         {
             return x >= 0 ? x : -x;
@@ -62,9 +62,9 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <summary>
         /// Evaluate x ** power with a specified precision
         /// </summary>
-        /// <param name="x">The argument</param>
-        /// <param name="power">The power</param>
-        /// <param name="precision">An error</param>
+        /// <param name="x">An argument of a function</param>
+        /// <param name="power">A power</param>
+        /// <param name="precision">A error</param>
         public static decimal Pow(decimal value, decimal power, decimal precision = Epsilon)
         {
             if(value < 0)
@@ -74,17 +74,15 @@ namespace ImageProcessing.Common.Utility.DecimalMath
 
             checked
             {
-                var expPower = power * Log(value, precision: precision);
-
-                return Exp(expPower);
+                return Exp(power * Log(value, precision: precision));
             }
         }
 
         /// <summary>
         /// Evaluate exp(x) with a specified precision
         /// </summary>
-        /// <param name="x">The argument</param>
-        /// <param name="precision">An error</param>
+        /// <param name="x">An argument of a function</param>
+        /// <param name="precision">A error</param>
         public static decimal Exp(decimal x, decimal precision = Epsilon)
         {
             var total = 1.0M;
@@ -105,8 +103,8 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <summary>
         /// Evaluate sin(x) with a specified precision
         /// </summary>
-        /// <param name="x">The argument</param>
-        /// <param name="precision">An error</param>
+        /// <param name="x">An argument of a function</param>
+        /// <param name="precision">A error</param>
         public static decimal Sin(decimal x, decimal precision = Epsilon)
         {
             x = Mod(x, 2.0M * PI);
@@ -126,8 +124,8 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <summary>
         /// Evaluate cos(x) with a specified precision
         /// </summary>
-        /// <param name="x">The argument</param>
-        /// <param name="precision">An error</param>
+        /// <param name="x">An argument of a function</param>
+        /// <param name="precision">A error</param>
         public static decimal Cos(decimal x, decimal precision = Epsilon)
         {
             x = Mod(x, 2 * PI);
@@ -147,18 +145,21 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <summary>
         /// Evaluate cosh(x) with a specified precision
         /// </summary>
-        /// <param name="x">The argument</param>
-        /// <param name="precision">An error</param>
+        /// <param name="x">An argument of a function</param>
+        /// <param name="precision">A error</param>
         public static decimal Cosh(decimal x, decimal precision = Epsilon)
         {
-            return (Exp(x, precision) + Exp(-x, precision)) / 2.0M;
+            checked
+            {
+                return (Exp(x, precision) + Exp(-x, precision)) / 2.0M;
+            }
         }
 
         /// <summary>
         /// Evaluate sinh(x) with a specified precision
         /// </summary>
-        /// <param name="x">The argument</param>
-        /// <param name="precision">An error</param>
+        /// <param name="x">An argument of a function</param>
+        /// <param name="precision">A error</param>
         public static decimal Sinh(decimal x, decimal precision = Epsilon)
         {
             checked
@@ -190,8 +191,8 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <summary>
         /// Evaluate cot(x) with a specified precision
         /// </summary>
-        /// <param name="x">The argument</param>
-        /// <param name="precision">An error</param>
+        /// <param name="x">An argument of a function</param>
+        /// <param name="precision">A error</param>
         public static decimal Cot(decimal x, decimal precision = Epsilon)
         {
             return 1.0M / Tan(x, precision);
@@ -200,11 +201,23 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <summary>
         /// Evaluate tan(x) with a specified precision
         /// </summary>
-        /// <param name="x">The argument</param>
-        /// <param name="precision">An error</param>
+        /// <param name="x">An argument of a function</param>
+        /// <param name="precision">A error</param>
         public static decimal Tan(decimal x, decimal precision = Epsilon)
         {
             x = Mod(x, PI);
+
+            var error = Abs(Abs(x) - PI / 2.0M);
+
+            //x infinitely small to -+PI over 2
+            if(error < precision )
+            {
+                switch(Sign(x))
+                {
+                    case -1: throw new ArgumentException("-inf");
+                    case  1: throw new ArgumentException("+inf");
+                }
+            } 
 
             return Sin(x) / Cos(x);
         }
@@ -212,8 +225,8 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <summary>
         /// Evaluate log(x) based on Borchardt's algorithm 
         /// </summary>
-        /// <param name="x">The argument</param>
-        /// <param name="precision">An error</param>
+        /// <param name="x">An argument of a function</param>
+        /// <param name="precision">A error</param>
         public static decimal Log(decimal x, decimal lbase = E, decimal precision = Epsilon)
         {
             if(x < 0)
@@ -228,7 +241,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
    
             if (Abs(E - lbase) > precision)
             {
-                return Integrate(Integration.Trapezoidal, (t) => 1M / t, (1M, x)) / Log(lbase);
+                return Log(x) / Log(lbase);
             }
 
             var a0 = (1.0M + x) / 2.0M;
@@ -247,13 +260,13 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <summary>
         /// Evaluate arcctg(x) with a specified precision
         /// </summary>
-        /// <param name="x">The argument</param>
-        /// <param name="precision">An error</param>
+        /// <param name="x">An argument of a function</param>
+        /// <param name="precision">A error</param>
         public static decimal Acot(decimal x, decimal precision = Epsilon)
         {
             var sign = Sign(x);
 
-            //the infinite small x near 0
+            //x infinitely close to zero
             if(Abs(x) < Abs(precision) && x != 0) {
                 return sign * PI / 2.0M;
             }
@@ -263,37 +276,12 @@ namespace ImageProcessing.Common.Utility.DecimalMath
             return sign * PI / 2.0M -  Atan(x);
         }
 
-        /// <summary>
-        /// Integrate a real valued function f(x)
-        /// </summary>
-        /// <param name="f">A function of real variable</param>
-        /// <param name="b">The end of an interval</param>
-        /// <param name="a">The start of an interval</param>
-        /// <param name="steps">The number of iterations</param>
-        public static decimal Integrate(Integration method, Func<decimal, decimal> f, (decimal x1, decimal x2) interval, int N = 20000)
-        {
-            try
-            {
-                if (interval.x1 == interval.x2) return 0.0M;
-
-               switch(method)
-                {
-                    case Integration.Trapezoidal:
-                        return Trapezoidal(f, interval, N);
-
-                    default: throw new NotImplementedException();
-                }
-            }
-            catch
-            {
-                throw new ArithmeticException("The function has a singularity point at [a, b]");
-            }
-        }
+       
 
         /// <summary>
         /// Evaluate ceil(x) 
         /// </summary>
-        /// <param name="x">The argument</param>
+        /// <param name="x">An argument of a function</param>
         public static decimal Ceil(decimal x)
         {
             checked
@@ -309,7 +297,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <summary>
         /// Evaluate floor(x) 
         /// </summary>
-        /// <param name="x">The argument</param>
+        /// <param name="x">An argument of a function</param>
         public static decimal Floor(decimal x)
         {
             var result = x - (x % 1);
@@ -345,7 +333,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
                 var b = NextInt32(random);
                 var c = random.Next(0x204FCE5E);
 
-                sample = new Decimal(a, b, c, false, 28);
+                sample = new decimal(a, b, c, false, 28);
             }
 
             return sample;
@@ -356,11 +344,11 @@ namespace ImageProcessing.Common.Utility.DecimalMath
             var nextDecimalSample = NextDecimal(random);
             return b * nextDecimalSample + a * (1 - nextDecimalSample);
         }
-      
+
         /// <summary>
         /// Evaluate atan(x)
         /// </summary>
-        /// <param name="x">The argument</param>
+        /// <param name="x">An argument of a function</param>
 
         public static decimal Atan(decimal x)
         {
@@ -372,7 +360,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         }
 
         /// <summary>
-        /// Fused multiply - add
+        /// Fused multiply - add decimal
         /// </summary>
         public static decimal Fmad(decimal x, decimal y, decimal z)
         {
@@ -385,75 +373,39 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <summary>
         /// Evaluate x mod b as x - b floor(x/b)
         /// </summary>
-        /// <param name="x">The argument</param>
+        /// <param name="x">An argument of a function</param>
         /// <param name="mod"></param>
         /// <returns></returns>
         public static decimal Mod(decimal x, decimal mod)
         {
-            return x - mod * Floor(x / mod);
-        }
-        private static decimal Trapezoidal(Func<decimal, decimal> f, (decimal x1, decimal x2) interval, int N = 20000)
-        {
-            var b = interval.x2;
-            var a = interval.x1;
-
             checked
             {
-                var h = (b - a) / N;
-                var res = (f(a) + f(b)) / 2.0M;
-
-                for (var k = 1; k < N; ++k)
-                {
-                    res += f(a + k * h);
-                }
-
-                return h * res;
-            }
-        }
-
-       private static decimal MonteCarlo(Func<decimal, decimal> f, (decimal x1, decimal x2) interval, int N = 40000)
-        {
-            var b = interval.x2;
-            var a = interval.x1;
-
-            var generator = new Random(DateTime.UtcNow.Second);
-            var result = 0.0M;
-
-            var coef = (b - a) / N;
-
-            checked
-            {
-                for (var k = 0; k < N; ++k)
-                {
-                    result += f(NextDecimal(generator, a, b));
-                }
-
-                return coef * result;
+                return x - mod * Floor(x / mod);
             }
         }
 
         /// <summary>
         /// Approximate Atan in the range [0, 0.66]
         /// </summary>
-        /// <param name="x">The argument</param>
+        /// <param name="x">An argument of a function</param>
         private static decimal AtanImpl(decimal x)
         {
-            var P0 = -8.750608600031904122785e-01M;
-            var P1 = -1.615753718733365076637e+01M;
-            var P2 = -7.500855792314704667340e+01M;
-            var P3 = -1.228866684490136173410e+02M;
-            var P4 = -6.485021904942025371773e+01M;
+            var p0 = -8.750608600031904122785e-01M;
+            var p1 = -1.615753718733365076637e+01M;
+            var p2 = -7.500855792314704667340e+01M;
+            var p3 = -1.228866684490136173410e+02M;
+            var p4 = -6.485021904942025371773e+01M;
 
-            var Q0 = +2.485846490142306297962e+01M;
-            var Q1 = +1.650270098316988542046e+02M;
-            var Q2 = +4.328810604912902668951e+02M;
-            var Q3 = +4.853903996359136964868e+02M;
-            var Q4 = +1.945506571482613964425e+02M;
+            var q0 = +2.485846490142306297962e+01M;
+            var q1 = +1.650270098316988542046e+02M;
+            var q2 = +4.328810604912902668951e+02M;
+            var q3 = +4.853903996359136964868e+02M;
+            var q4 = +1.945506571482613964425e+02M;
 
             var z = x * x;
 
-            z = z * Fmad(Fmad(Fmad(Fmad(P0, z, P1), z, P2), z, P3), z, P4) /
-                    Fmad(Fmad(Fmad(Fmad(z + Q0, z, Q1), z, Q2), z, Q3), z, Q4);
+            z = z * Fmad(Fmad(Fmad(Fmad(p0, z, p1), z, p2), z, p3), z, p4) /
+                    Fmad(Fmad(Fmad(Fmad(z + q0, z, q1), z, q2), z, q3), z, q4);
 
             return Fmad(x, z, x);
 
@@ -462,7 +414,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <summary>
         /// Reduce a positive argument to the [0, 0.66] 
         /// </summary>
-        /// <param name="x">The argument</param>
+        /// <param name="x">An argument of a function to be reduced</param>
         private static decimal AtanReduce(decimal x)
         {
 
