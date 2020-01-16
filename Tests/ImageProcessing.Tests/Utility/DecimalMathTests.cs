@@ -278,6 +278,40 @@ namespace ImageProcessing.Tests.Utility
             Assert.That((target.Tanh() - cmpVal).Abs(), Is.LessThan(0.00000001M));
         }
 
+        [TestCase(0)]
+        public void SignIdentityTest(double value)
+        {
+            var target = Convert.ToDecimal(value);
+
+            Assert.That(DecimalMath.Sign(target), Is.EqualTo(0));
+            Assert.That(target.Sign(), Is.EqualTo(0));
+        }
+
+        [TestCase(1)]
+        [TestCase(0.000000000000001)]
+        [TestCase(0.00001)]
+        [TestCase(100)]
+        [TestCase(10000000000000)]
+        public void SignPositiveValueTest(double value)
+        {
+            var target = Convert.ToDecimal(value);
+
+            Assert.That(DecimalMath.Sign(target), Is.EqualTo(1));
+            Assert.That(target.Sign(), Is.EqualTo(1));
+        }
+
+        [TestCase(-1)]
+        [TestCase(-0.000000000000001)]
+        [TestCase(-0.00001)]
+        [TestCase(-100)]
+        [TestCase(-10000000000000)]
+        public void SignNegativeValueTest(double value)
+        {
+            var target = Convert.ToDecimal(value);
+
+            Assert.That(DecimalMath.Sign(target), Is.EqualTo(-1));
+            Assert.That(target.Sign(), Is.EqualTo(-1));
+        }
 
         [TestCase(0)]
         [TestCase(0.1)]
