@@ -139,7 +139,7 @@ namespace ImageProcessing.Tests.Utility
             Assert.That(() => DecimalMath.Integrate(Integration.Trapezoidal, (x) => 1 / (x * x - 1.0M / 2.0M), interval, 10000), Throws.TypeOf<ArithmeticException>());
         }
 
-        [Test]
+
         [TestCase(3 * Math.PI / 2)]
         [TestCase(Math.PI / 2)]
         [TestCase(Math.PI)]
@@ -155,8 +155,6 @@ namespace ImageProcessing.Tests.Utility
             Assert.That((target - cmpVal).Abs(), Is.LessThan(0.0000001M));
         }
 
-
-        [Test]
         [TestCase(1.25, 5)]
         [TestCase(567, 123)]
         [TestCase(0.245, 0.001)]
@@ -170,8 +168,6 @@ namespace ImageProcessing.Tests.Utility
             Assert.That((target - cmpVal).Abs(), Is.LessThan(0.001M));
         }
 
-
-        [Test]
         [TestCase(0)]
         [TestCase(0.0000000001)]
         [TestCase(-100)]
@@ -190,11 +186,24 @@ namespace ImageProcessing.Tests.Utility
             target = DecimalMath.Acot(Convert.ToDecimal(value));
             cmpVal = Convert.ToDecimal(Math.Sign(value) * Math.PI / 2 - Math.Atan(value));
 
-            Assert.That((target - cmpVal).Abs(), Is.LessThan(0.0001M));
+            Assert.That((target - cmpVal).Abs(), Is.LessThan(0.001M));
         }
 
+        [TestCase(0)]
+        [TestCase(0.0000000001)]
+        [TestCase(0.25)]
+        [TestCase(1125123)]
+        [TestCase(100)]
+        [TestCase(231.24125)]
+        [TestCase(100000000)]
+        public void SqrtTests(double value)
+        {
+            var target = DecimalMath.Sqrt(Convert.ToDecimal(value));
+            var cmpVal = Convert.ToDecimal(Math.Sqrt(value));
 
-        [Test]
+            Assert.That((target - cmpVal).Abs(), Is.LessThan(0.00000001M));
+        }
+
         [TestCase(0)]
         [TestCase(0.0000000001)]
         [TestCase(1)]
@@ -212,7 +221,6 @@ namespace ImageProcessing.Tests.Utility
             Assert.That((target - cmpVal).Abs(), Is.LessThan(0.00000001M));
         }
 
-        [Test]
         [TestCase(0)]
         [TestCase(0.0000000001)]
         [TestCase(1)]

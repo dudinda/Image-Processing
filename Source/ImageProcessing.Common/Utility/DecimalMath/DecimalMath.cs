@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+
 using ImageProcessing.Common.Enums;
 
 namespace ImageProcessing.Common.Utility.DecimalMath
@@ -30,7 +29,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
             var x = value;
             var y = 1M;
 
-            while (x - y > precision)
+            while (Abs(x - y) > precision)
             {
                 x = (x + y) / 2;
                 y = value / x;
@@ -198,7 +197,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         }
 
         /// <summary>
-        /// Evaluate log(x) as integral dt/t from 1 to x / log(base)
+        /// Evaluate log(x) based on Borchardt's algorithm 
         /// </summary>
         /// <param name="x">The argument</param>
         /// <param name="precision">An error</param>
@@ -219,9 +218,17 @@ namespace ImageProcessing.Common.Utility.DecimalMath
                 return Integrate(Integration.Trapezoidal, (t) => 1M / t, (1M, x)) / Log(lbase);
             }
 
-            return Integrate(Integration.Trapezoidal, (t) => 1M / t, (1M, x));
-    
+            var a0 = (1.0M + x) / 2.0M;
+            var b0 = Sqrt(x);
 
+                
+            while (Abs(a0 - b0) > precision)
+            {
+                a0 = (a0 + b0) / 2.0M;
+                b0 = Sqrt(a0 * b0);
+            }
+
+            return 2 * (x - 1) / (a0 + b0);
         }
 
         /// <summary>
@@ -317,6 +324,58 @@ namespace ImageProcessing.Common.Utility.DecimalMath
             return result;
         }
 
+        public static int NextInt32(Random random)
+        {
+            var firstBits = random.Next(0, 1 << 4) << 28;
+            var lastBits  = random.Next(0, 1 << 28);
+
+            return firstBits | lastBits;
+        }
+
+        public static decimal NextDecimal(Random random)
+        {
+            var sample = 1m;
+           
+            while (sample >= 1)
+            {
+                var a = NextInt32(random);
+                var b = NextInt32(random);
+                var c = random.Next(0x204FCE5E);
+
+                sample = new Decimal(a, b, c, false, 28);
+            }
+
+            return sample;
+        }
+
+        public static decimal NextDecimal(Random random, decimal a, decimal b)
+        {
+            var nextDecimalSample = NextDecimal(random);
+            return b * nextDecimalSample + a * (1 - nextDecimalSample);
+        }
+      
+        /// <summary>
+        /// Evaluate atan(x)
+        /// </summary>
+        /// <param name="x">The argument</param>
+
+        public static decimal Atan(decimal x)
+        {
+            if (x == 0) return 0;
+
+            if (x > 0) return AtanImpl(x);
+
+            return -AtanImpl(-x);
+        }
+
+        /// <summary>
+        /// Fused multiply - add
+        /// </summary>
+        public static decimal Fmad(decimal x, decimal y, decimal z)
+        {
+            return (x * y) + z;
+        }
+
         /// <summary>
         /// Evaluate x mod b as x - b floor(x/b)
         /// </summary>
@@ -341,6 +400,74 @@ namespace ImageProcessing.Common.Utility.DecimalMath
             }
 
             return h * res;
+        }
+
+       private static decimal MonteCarlo(Func<decimal, decimal> f, (decimal x1, decimal x2) interval, int N = 40000)
+        {
+            var b = interval.x2;
+            var a = interval.x1;
+
+            var generator = new Random(DateTime.UtcNow.Second);
+            var result = 0.0M;
+            var coef = (b - a) / N;
+
+            for(var k = 0; k < N; ++k)
+            {
+                result += f(NextDecimal(generator, a, b));
+            }
+
+            return coef * result;
+        }
+
+        /// <summary>
+        /// Approximate Atan in the range [0, 0.66]
+        /// </summary>
+        /// <param name="x">The argument</param>
+        private static decimal AtanImpl(decimal x)
+        {
+            var P0 = -8.750608600031904122785e-01M;
+            var P1 = -1.615753718733365076637e+01M;
+            var P2 = -7.500855792314704667340e+01M;
+            var P3 = -1.228866684490136173410e+02M;
+            var P4 = -6.485021904942025371773e+01M;
+
+            var Q0 = +2.485846490142306297962e+01M;
+            var Q1 = +1.650270098316988542046e+02M;
+            var Q2 = +4.328810604912902668951e+02M;
+            var Q3 = +4.853903996359136964868e+02M;
+            var Q4 = +1.945506571482613964425e+02M;
+
+            var z = x * x;
+
+            z = z * Fmad(Fmad(Fmad(Fmad(P0, z, P1), z, P2), z, P3), z, P4) /
+                    Fmad(Fmad(Fmad(Fmad(z + Q0, z, Q1), z, Q2), z, Q3), z, Q4);
+
+            return Fmad(x, z, x);
+
+        }
+
+        /// <summary>
+        /// Reduce a positive argument to the [0, 0.66] 
+        /// </summary>
+        /// <param name="x">The argument</param>
+        private static decimal AtanReduce(decimal x)
+        {
+
+            var bits = 6.123233995736765886130e-17M; // pi/2 = PIO2 + Morebits
+
+            var tan3PiOver8 = 2.41421356237309504880M;     // tan(3*pi/8)
+
+            if (x <= 0.66M)
+            {
+                return Atan(x);
+            }
+
+            if (x > tan3PiOver8)
+            {
+                return PI - Atan(1.0M / x) + bits;
+            }
+
+            return PI / 4.0M + Atan((x - 1.0M) / (x + 1.0M)) + 0.5M * bits;
         }
     }
 }

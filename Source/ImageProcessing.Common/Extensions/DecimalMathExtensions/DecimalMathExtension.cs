@@ -64,5 +64,14 @@ namespace ImageProcessing.Common.Extensions.DecimalMathExtensions
         public static decimal Acot(this decimal value, decimal precision = DecimalMath.Epsilon)
             => DecimalMath.Acot(value);
 
+        public static int NextInt32(this Random random)
+            => DecimalMath.NextInt32(random);
+
+        public static decimal NextDecimal(this Random random)
+            => DecimalMath.NextDecimal(random);
+
+        public static decimal NextDecimal(this Random random, decimal minValue, decimal maxValue)
+            => DecimalMath.NextDecimal(random, minValue, maxValue);
+
     }
 }
