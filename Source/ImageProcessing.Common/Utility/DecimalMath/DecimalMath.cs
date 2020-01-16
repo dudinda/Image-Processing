@@ -87,10 +87,13 @@ namespace ImageProcessing.Common.Utility.DecimalMath
             var total = 1.0M;
             var result = total;
 
-            for (var k = 1; Abs(total) > Epsilon; ++k)
+            checked
             {
-                total = total * x / k;
-                result += total;
+                for (var k = 1; Abs(total) > Epsilon; ++k)
+                {
+                    total = total * x / k;
+                    result += total;
+                }
             }
 
             return result;
@@ -103,12 +106,14 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <param name="precision">An error</param>
         public static decimal Sin(decimal x, decimal precision = Epsilon)
         {
-            var total = 1.0M;
+            x = Mod(x, 2.0M * PI);
+
+            var total = x;
             var result = total;
 
-            for (var k = 1; Abs(total) > Epsilon; ++k)
+            for (var k = 0; Abs(total) > Epsilon; ++k)
             {
-                total = total *  - x * x / ((2 * k + 2) * (2 * k + 3));
+                total = -total *  x * x / ((2.0M * k + 2.0M) * (2.0M * k + 3.0M));
                 result += total;
             }
 
@@ -122,10 +127,12 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <param name="precision">An error</param>
         public static decimal Cos(decimal x, decimal precision = Epsilon)
         {
+            x = Mod(x, 2 * PI);
+
             var total = 1.0M;
             var result = total;
 
-            for (var k = 1; Abs(total) > Epsilon; ++k)
+            for (var k = 0; Abs(total) > Epsilon; ++k)
             {
                 total = total * -x * x / ((2 * k + 1) * (2 * k + 2));
                 result += total;
@@ -151,7 +158,10 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <param name="precision">An error</param>
         public static decimal Sinh(decimal x, decimal precision = Epsilon)
         {
-            return (Exp(x, precision) - Exp(-x, precision)) / 2.0M;
+            checked
+            {
+                return (Exp(x, precision) - Exp(-x, precision)) / 2.0M;
+            }
         }
 
         /// <summary>
@@ -295,11 +305,13 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <param name="x">The argument</param>
         public static decimal Ceil(decimal x)
         {
-            if(x % 1 != 0)
+            checked
             {
-                return Floor(x) + 1;
+                if (x % 1 != 0)
+                {
+                    return Floor(x) + 1;
+                }
             }
-
             return x;
         }
 
@@ -373,7 +385,10 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// </summary>
         public static decimal Fmad(decimal x, decimal y, decimal z)
         {
-            return (x * y) + z;
+            checked
+            {
+                return (x * y) + z;
+            }
         }
 
         /// <summary>
@@ -391,15 +406,18 @@ namespace ImageProcessing.Common.Utility.DecimalMath
             var b = interval.x2;
             var a = interval.x1;
 
-            var h = (b - a) / N;
-            var res = (f(a) + f(b)) / 2.0M;
-
-            for (var k = 1; k < N; ++k)
+            checked
             {
-                res += f(a + k * h);
-            }
+                var h = (b - a) / N;
+                var res = (f(a) + f(b)) / 2.0M;
 
-            return h * res;
+                for (var k = 1; k < N; ++k)
+                {
+                    res += f(a + k * h);
+                }
+
+                return h * res;
+            }
         }
 
        private static decimal MonteCarlo(Func<decimal, decimal> f, (decimal x1, decimal x2) interval, int N = 40000)
@@ -409,14 +427,18 @@ namespace ImageProcessing.Common.Utility.DecimalMath
 
             var generator = new Random(DateTime.UtcNow.Second);
             var result = 0.0M;
+
             var coef = (b - a) / N;
 
-            for(var k = 0; k < N; ++k)
+            checked
             {
-                result += f(NextDecimal(generator, a, b));
-            }
+                for (var k = 0; k < N; ++k)
+                {
+                    result += f(NextDecimal(generator, a, b));
+                }
 
-            return coef * result;
+                return coef * result;
+            }
         }
 
         /// <summary>
@@ -453,21 +475,21 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         private static decimal AtanReduce(decimal x)
         {
 
-            var bits = 6.123233995736765886130e-17M; // pi/2 = PIO2 + Morebits
+            var bits = 6.123233995736765886130e-17M; // pi/2 = PIO2 + bits
 
             var tan3PiOver8 = 2.41421356237309504880M;     // tan(3*pi/8)
 
             if (x <= 0.66M)
             {
-                return Atan(x);
+                return AtanImpl(x);
             }
 
             if (x > tan3PiOver8)
             {
-                return PI - Atan(1.0M / x) + bits;
+                return PI / 2.0M - AtanImpl(1.0M / x) + bits;
             }
 
-            return PI / 4.0M + Atan((x - 1.0M) / (x + 1.0M)) + 0.5M * bits;
+            return PI / 4.0M + AtanImpl((x - 1.0M) / (x + 1.0M)) + 0.5M * bits;
         }
     }
 }
