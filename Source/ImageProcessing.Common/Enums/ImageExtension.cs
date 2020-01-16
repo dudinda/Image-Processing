@@ -8,51 +8,56 @@ namespace ImageProcessing.Common.Enums
     public enum ImageExtension
     {
         /// <summary>
+        /// An unknown image extension
+        /// </summary>
+        Unknown =  0,
+
+        /// <summary>
         /// .Jpeg
         /// </summary>
         [Description(".jpeg")]
-        Jpeg      = 0,
+        Jpeg      = 1,
 
         /// <summary>
         /// .Bmp
         /// </summary>
         [Description(".bmp")]
-        Bmp       = 1,
+        Bmp       = 2,
 
         /// <summary>
         /// .Emf
         /// </summary>
         [Description(".emf")]
-        Emf       = 2,
+        Emf       = 3,
 
         /// <summary>
         /// .Exif
         /// </summary>
         [Description(".exif")]
-        Exif      = 3,
+        Exif      = 4,
 
         /// <summary>
         /// .Gif
         /// </summary>
         [Description(".gif")]
-        Gif       = 4,
+        Gif       = 5,
 
         /// <summary>
         /// .Icon
         /// </summary>
         [Description(".icon")]
-        Icon      = 5,
+        Icon      = 6,
 
         /// <summary>
         /// .MemoryBmp
         /// </summary>
         [Description(".memorybmp")]
-        MemoryBmp = 6,
+        MemoryBmp = 7,
 
         /// <summary>
         /// .Tiff
         /// </summary>
         [Description(".tiff")]
-        Tiff      = 7
+        Tiff      = 8
     }
 }

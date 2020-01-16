@@ -6,23 +6,28 @@
     public enum RGBFilter
     {
         /// <summary>
+        /// An unknown filter
+        /// </summary>
+        Unknown = 0,
+
+        /// <summary>
         /// Grayscale filter.
         /// </summary>
-        Grayscale = 0,
+        Grayscale = 1,
 
         /// <summary>
         /// Filter by a color channel.
         /// </summary>
-        Color     = 1,
+        Color     = 2,
 
         /// <summary>
         /// Inversion filter.
         /// </summary>
-        Inversion = 2,
+        Inversion = 3,
 
         /// <summary>
         /// Binary filter.
         /// </summary>
-        Binary    = 3
+        Binary    = 4
     }
 }
