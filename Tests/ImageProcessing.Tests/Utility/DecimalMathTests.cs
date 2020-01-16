@@ -110,7 +110,7 @@ namespace ImageProcessing.Tests.Utility
             var target = DecimalMath.Cos(Convert.ToDecimal(value));
             var cmpVal = Convert.ToDecimal(Math.Cos(value));
 
-            Assert.That((target - cmpVal).Abs(), Is.LessThan(0.0000001M));       
+            Assert.That((target - cmpVal).Abs(), Is.LessThan(0.00001M));       
         }
 
         [Test]
@@ -170,12 +170,12 @@ namespace ImageProcessing.Tests.Utility
 
         [TestCase(0)]
         [TestCase(0.0000000001)]
-        [TestCase(-100)]
+        [TestCase(-10)]
         [TestCase(Math.PI * Math.E)]   
         [TestCase(-0.0000000001)]
-        [TestCase(-25)]
-        [TestCase(-189)]
-        [TestCase(100)]
+        [TestCase(-5)]
+        [TestCase(-9)]
+        [TestCase(10)]
         public void AtanAndAcotSmallNumbersTest(double value)
         {
             var target = DecimalMath.Atan(Convert.ToDecimal(value));
@@ -205,14 +205,14 @@ namespace ImageProcessing.Tests.Utility
         }
 
         [TestCase(0)]
-        [TestCase(0.0000000001)]
+        [TestCase(0.1)]
         [TestCase(1)]
-        [TestCase(100)]
-        [TestCase(100000000)]
-        [TestCase(-0.0000000001)]
+        [TestCase(10)]
+        [TestCase(5)]
+        [TestCase(-0.001)]
         [TestCase(-1)]
-        [TestCase(-100)]
-        [TestCase(-100000000)]
+        [TestCase(-10)]
+        [TestCase(-5)]
         public void SinhTests(double value)
         {
             var target = DecimalMath.Sinh(Convert.ToDecimal(value));
@@ -222,14 +222,14 @@ namespace ImageProcessing.Tests.Utility
         }
 
         [TestCase(0)]
-        [TestCase(0.0000000001)]
+        [TestCase(0.1)]
         [TestCase(1)]
-        [TestCase(100)]
-        [TestCase(100000000)]
-        [TestCase(-0.0000000001)]
+        [TestCase(10)]
+        [TestCase(5)]
+        [TestCase(-0.001)]
         [TestCase(-1)]
-        [TestCase(-100)]
-        [TestCase(-100000000)]
+        [TestCase(-10)]
+        [TestCase(-5)]
         public void CoshTests(double value)
         {
             var target = DecimalMath.Cosh(Convert.ToDecimal(value));
@@ -238,16 +238,15 @@ namespace ImageProcessing.Tests.Utility
             Assert.That((target - cmpVal).Abs(), Is.LessThan(0.00000001M));
         }
 
-        [Test]
         [TestCase(0)]
-        [TestCase(0.0000000001)]
+        [TestCase(0.1)]
         [TestCase(1)]
-        [TestCase(100)]
-        [TestCase(100000000)]
-        [TestCase(-0.0000000001)]
+        [TestCase(10)]
+        [TestCase(5)]
+        [TestCase(-0.001)]
         [TestCase(-1)]
-        [TestCase(-100)]
-        [TestCase(-100000000)]
+        [TestCase(-10)]
+        [TestCase(-5)]
         public void TanhTests(double value)
         {
             var target = DecimalMath.Tanh(Convert.ToDecimal(value));
