@@ -35,7 +35,7 @@ namespace ImageProcessing.Common.Extensions.DecimalMathExtensions
             => DecimalMath.Exp(power, precision);
         
         public static decimal Tan(this decimal value, decimal precision = DecimalMath.Epsilon)
-         => DecimalMath.Tan(value, precision);
+            => DecimalMath.Tan(value, precision);
 
         public static decimal Cos(this decimal value, decimal precision = DecimalMath.Epsilon)
             => DecimalMath.Cos(value, precision);
@@ -59,7 +59,7 @@ namespace ImageProcessing.Common.Extensions.DecimalMathExtensions
             => DecimalMath.Arccos(value);
 
         public static decimal Cosh(this decimal value, decimal precision = DecimalMath.Epsilon)
-       => DecimalMath.Cosh(value, precision);
+            => DecimalMath.Cosh(value, precision);
 
         public static decimal Sinh(this decimal value, decimal precision = DecimalMath.Epsilon)
             => DecimalMath.Sinh(value, precision);
@@ -71,7 +71,7 @@ namespace ImageProcessing.Common.Extensions.DecimalMathExtensions
             => DecimalMath.Coth(value, precision);
 
         public static decimal Arcosh(this decimal value, decimal precision = DecimalMath.Epsilon)
-       => DecimalMath.Arcosh(value, precision);
+            => DecimalMath.Arcosh(value, precision);
 
         public static decimal Arsinh(this decimal value, decimal precision = DecimalMath.Epsilon)
             => DecimalMath.Arsinh(value, precision);

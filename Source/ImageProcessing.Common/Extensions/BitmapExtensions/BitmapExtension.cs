@@ -106,15 +106,11 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
                 });
             }
 
-
-
             src.UnlockBits(bitmapData);
 
             return src;
-
         }
     
-
         private static int Max(Bitmap src)
         {
             var result = new Bitmap(src);
@@ -127,7 +123,6 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
 
             unsafe
             {
-
                 var options = new ParallelOptions();
                 options.MaxDegreeOfParallelism = Environment.ProcessorCount;
 
@@ -224,16 +219,16 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
             var result = new Bitmap(xDerivative.Width, xDerivative.Height);
 
             var xDerivativeData = xDerivative.LockBits(new Rectangle(0, 0, result.Width, result.Height),
-                                                       System.Drawing.Imaging.ImageLockMode.ReadOnly,
-                                                       System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                                                       ImageLockMode.ReadOnly,
+                                                       PixelFormat.Format24bppRgb);
 
             var yDerivativeData = yDerivative.LockBits(new Rectangle(0, 0, result.Width, result.Height),
-                                                       System.Drawing.Imaging.ImageLockMode.ReadOnly,
-                                                       System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                                                       ImageLockMode.ReadOnly,
+                                                       PixelFormat.Format24bppRgb);
 
             var resultData = result.LockBits(new Rectangle(0, 0, result.Width, result.Height),
-                                                          System.Drawing.Imaging.ImageLockMode.WriteOnly,
-                                                          System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                                                          ImageLockMode.WriteOnly,
+                                                          PixelFormat.Format24bppRgb);
 
             var size = result.Size;
 
@@ -272,7 +267,6 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
                 yDerivative.UnlockBits(yDerivativeData);
 
                 return result;
-
             }
 
         }
