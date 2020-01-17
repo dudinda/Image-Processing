@@ -133,7 +133,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
         {
             try
             {
-                if (View.SrcIsNull) return; 
+                if (View.SrcIsNull) 
+                    return; 
 
                 var filter = _convolutionFilterFactory.GetFilter(filterName);
              
@@ -151,7 +152,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
         {
             try
             {
-                if (View.SrcIsNull) return; 
+                if (View.SrcIsNull) 
+                    return; 
 
                 var filter = _rgbFiltersFactory.GetFilter(filterName);
 
@@ -169,7 +171,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
         {
             try
             {
-                if (View.SrcIsNull) return;
+                if (View.SrcIsNull) 
+                    return;
 
                 RGBColors result = default;
 
@@ -215,7 +218,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
         {
             try
             {
-                if (View.SrcIsNull) return; 
+                if (View.SrcIsNull) 
+                    return; 
 
                 var filter = _distributionFactory.GetFilter(filterName);
 

@@ -33,6 +33,7 @@ namespace ImageProcessing.Presentation.Presenters
                 case RandomVariableAction.PMF:
                     BuildHistogram(vm.Source);
                     break;
+
                 case RandomVariableAction.CDF:
                     BuildCDF(vm.Source);
                     break;

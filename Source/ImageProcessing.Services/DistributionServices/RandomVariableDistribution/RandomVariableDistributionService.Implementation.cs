@@ -1,5 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
+
 using ImageProcessing.Common.Extensions.DecimalMathExtensions;
 using ImageProcessing.Core.Model.Distribution;
 

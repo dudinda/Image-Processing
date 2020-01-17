@@ -1,6 +1,15 @@
-﻿namespace ImageProcessing.Presentation.ViewModel.QualityMeasure
+﻿using System.Drawing;
+
+namespace ImageProcessing.Presentation.ViewModel.QualityMeasure
 {
-    class QualityMeasureViewModel
+    public class QualityMeasureViewModel
     {
+        public QualityMeasureViewModel(Bitmap bitmap)
+        {
+            Bitmap = bitmap;
+        }
+
+        public Bitmap Bitmap { get; }
+
     }
 }

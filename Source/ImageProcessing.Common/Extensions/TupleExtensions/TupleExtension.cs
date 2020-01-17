@@ -7,7 +7,7 @@ using System.Text;
 namespace ImageProcessing.Common.Extensions.TupleExtensions
 {
     /// <summary>
-    /// Extension methods for a <c>ValueTuple</c> class
+    /// Extension methods for <see cref="ValueTuple{string}{string}"> class
     /// </summary>
     public static class TupleExtension
     {

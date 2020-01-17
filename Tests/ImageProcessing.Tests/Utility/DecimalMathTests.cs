@@ -197,12 +197,12 @@ namespace ImageProcessing.Tests.Utility
         [TestCase(100)]
         public void AtanAndAcotSmallNumbersTest(double value)
         {
-            var target = DecimalMath.Atan(Convert.ToDecimal(value));
+            var target = DecimalMath.Arctan(Convert.ToDecimal(value));
             var cmpVal = Convert.ToDecimal(Math.Atan(value));
 
             Assert.That((target - cmpVal).Abs(), Is.LessThan(0.0001M));
 
-            target = DecimalMath.Acot(Convert.ToDecimal(value));
+            target = DecimalMath.Arccot(Convert.ToDecimal(value));
             cmpVal = Convert.ToDecimal(Math.Sign(value == 0 ? 1 : value) * Math.PI / 2 - Math.Atan(value));
 
             Assert.That((target - cmpVal).Abs(), Is.LessThan(0.001M));

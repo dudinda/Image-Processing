@@ -4,7 +4,7 @@ using System.ComponentModel;
 namespace ImageProcessing.Common.Extensions.EnumExtensions
 {
     /// <summary>
-    /// Extension methods for a <c>enum</c> value.
+    /// Extension methods for <see cref="enum"> value.
     /// </summary>
     public static class EnumExtension
     {

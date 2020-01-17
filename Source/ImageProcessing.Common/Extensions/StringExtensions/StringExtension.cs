@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 namespace ImageProcessing.Common.Extensions.StringExtensions
 {
     /// <summary>
-    /// Extension methods for a <c>String</c> class
+    /// Extension methods for <see cref="string"> class
     /// </summary>
     public static class StringExtension
     {

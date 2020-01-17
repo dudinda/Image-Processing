@@ -9,7 +9,7 @@ namespace ImageProcessing.Presentation.ViewModel.Histogram
         public HistogramViewModel(Bitmap source, RandomVariableAction mode)
         {
             Source = source;
-            Mode = mode;
+            Mode   = mode;
         }
 
         public Bitmap Source { get; }

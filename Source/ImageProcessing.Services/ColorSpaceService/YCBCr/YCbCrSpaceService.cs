@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+
 using ImageProcessing.Core.Service.ColorSpace;
 
 namespace ImageProcessing.ColorSpaces
 {
-    
+
     public class YCbCrSpaceSerivce : IConvert
     {
         public IList<Bitmap> From(Bitmap bitmap)

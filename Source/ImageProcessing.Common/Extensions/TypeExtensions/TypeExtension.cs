@@ -4,7 +4,7 @@ using System.Linq;
 namespace ImageProcessing.Common.Extensions.TypeExtensions
 {
     /// <summary>
-    /// Extension methods for a <c>Type</c> class
+    /// Extension methods for <see cref="Type"> class
     /// </summary>
     public static class TypeExtension
     {

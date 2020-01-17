@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ImageProcessing.Common.Utility.DecimalMath;
+﻿using ImageProcessing.Common.Utility.DecimalMath;
 
 namespace ImageProcessing.Common.Extensions.DecimalMathExtensions
 {
+    /// <summary>
+    /// Extension methods for <see cref="DecimalMath"> class
+    /// </summary>
     public static class DecimalMathExtension
     {      
         public static decimal Abs(this decimal value)

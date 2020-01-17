@@ -1,21 +1,21 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Concurrent;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Linq;
 using System.Threading.Tasks;
-using System.Collections.Concurrent;
 
 namespace ImageProcessing.Common.Extensions.BitmapExtensions
 {
     /// <summary>
-    /// Extension methods for a <c>Bitmap</c> class
+    /// Extension methods for <see cref="Bitmap"> class
     /// </summary>
     public static class BitmapExtension
     {
         /// <summary>
         /// Perform the Fisher–Yates shuffle on a selected bitmap
         /// </summary>
-        /// <param name="bitmap">Source bitmap</param>
+        /// <param name="bitmap">A bitmap</param>
         /// <returns>The shuffled bitmap</returns>
         public static Bitmap Shuffle(this Bitmap bitmap)
         {
@@ -131,12 +131,12 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
                 var options = new ParallelOptions();
                 options.MaxDegreeOfParallelism = Environment.ProcessorCount;
 
-                //получить указатель на начало изображения
+                //get a pointer to the start of an image
                 var startPtr = (byte*)resultData.Scan0.ToPointer();
 
                 var bag = new ConcurrentBag<byte>();
 
-                //взять N частичных сумм
+                //take N partial sums
                 Parallel.For<byte>(0, size.Height, options, () => 0, (y, state, max) =>
                 {
                     var ptr = startPtr + y * resultData.Stride;
@@ -176,12 +176,10 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
                     MaxDegreeOfParallelism = Environment.ProcessorCount
                 };
 
-                //получить указатель на начало изображения
                 var startPtr = (byte*)resultData.Scan0.ToPointer();
 
                 var bag = new ConcurrentBag<byte>();
 
-                //взять N частичных сумм
                 Parallel.For<byte>(0, size.Height, options, () => 255, (y, state, min) =>
                 {
                     var ptr = startPtr + y * resultData.Stride;

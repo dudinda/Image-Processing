@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+
 using ImageProcessing.Core.Model.Distribution;
 using ImageProcessing.Services.DistributionServices.Distribution.Interface;
 
@@ -23,7 +24,6 @@ namespace ImageProcessing.Services.DistributionServices.RandomVariableDistributi
             //get new pixel values, according to a selected distribution
             return TransformToImpl(cdf, distribution);
         }
-
 
         public decimal GetExpectation(decimal[] pmf)
         {

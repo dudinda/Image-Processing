@@ -1,7 +1,4 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
+﻿using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.Presentation.Views.Histogram;
 

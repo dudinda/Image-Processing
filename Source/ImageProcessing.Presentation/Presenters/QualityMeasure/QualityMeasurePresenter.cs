@@ -3,12 +3,13 @@ using System.Drawing;
 
 using ImageProcessing.Core.Controller.Interface;
 using ImageProcessing.Core.Presenter.Abstract;
+using ImageProcessing.Presentation.ViewModel.QualityMeasure;
 using ImageProcessing.Presentation.Views.QualityMeasure;
 using ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Interface;
 
 namespace ImageProcessing.Presentation.Presenters
 {
-    public class QualityMeasurePresenter : BasePresenter<IQualityMeasureView, Bitmap>
+    public class QualityMeasurePresenter : BasePresenter<IQualityMeasureView, QualityMeasureViewModel>
     {
         private readonly IBitmapLuminanceDistributionService _distributionService;
 
@@ -21,9 +22,10 @@ namespace ImageProcessing.Presentation.Presenters
             _distributionService = distibutionService;
         }
 
-        public override void Run(Bitmap argument)
+        public override void Run(QualityMeasureViewModel vm)
         {
-            _src = argument;
+            _src = vm.Bitmap;
+
             View.Show();
         }
 
