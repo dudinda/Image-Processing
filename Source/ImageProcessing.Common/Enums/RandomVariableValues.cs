@@ -1,13 +1,48 @@
 ﻿namespace ImageProcessing.Common.Enums
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum RandomVariableAction
     {
-        Expectation            = 0,
-        Variance               = 1,
-        Entropy                = 2,
-        ConditionalExpectation = 3,
-        ConditionalVariance    = 4,
-        PMF                    = 5,
-        CDF                    = 6
+        /// <summary>
+        /// 
+        /// </summary>
+        Unknown                = 0,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        Expectation            = 1,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        Variance               = 2,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        Entropy                = 3,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        ConditionalExpectation = 4,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        ConditionalVariance    = 5,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        PMF                    = 6,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        CDF                    = 7
     }
 }
