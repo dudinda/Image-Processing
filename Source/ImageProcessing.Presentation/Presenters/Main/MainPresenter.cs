@@ -75,7 +75,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                                 return new Bitmap(Image.FromStream(stream));
                             }
 
-                        }).ConfigureAwait(false);
+                        }).ConfigureAwait(true);
 
                         View.PathToFile = dialog.FileName;
                     }
