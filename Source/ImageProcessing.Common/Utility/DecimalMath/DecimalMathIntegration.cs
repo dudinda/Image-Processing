@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Common.Extensions.DecimalMathExtensions;
+using ImageProcessing.Common.Extensions.RandomExtensions;
 
 namespace ImageProcessing.Common.Utility.DecimalMath
 {
@@ -37,7 +36,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
             }
         }
 
-        private static decimal Trapezoidal(Func<decimal, decimal> f, (decimal x1, decimal x2) interval, int N = 20000)
+        private static decimal Trapezoidal(Func<decimal, decimal> f, (decimal x1, decimal x2) interval, int N = 40000)
         {
             var b = interval.x2;
             var a = interval.x1;
