@@ -173,6 +173,11 @@ namespace ImageProcessing.Common.Utility.DecimalMath
                 throw new ArgumentException("The value must be a positive real number");
             }
 
+            if(x < Epsilon)
+            {
+                throw new ArgumentException("-inf");
+            }
+
             if(lbase <= 0 || lbase == 1)
             {
                 throw new ArgumentException("A logarithm base must be in (0, 1) U (1, +inf)");
@@ -233,7 +238,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <param name="precision">A error</param>
         public static decimal Cos(decimal x, decimal precision = Epsilon)
         {
-            x = Mod(x, 2 * PI);
+            x = Mod(x, 2.0M * PI);
 
             var total = 1.0M;
             var result = total;
@@ -429,6 +434,18 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <param name="precision">A error</param>
         public static decimal Coth(decimal x, decimal precision = Epsilon)
         {
+            var error = Abs(Abs(x) - 0);
+
+            //x infinitely small to 0
+            if (error < precision)
+            {
+                switch (Sign(x))
+                {
+                    case -1: throw new ArgumentException("-inf");
+                    case 1: throw new ArgumentException("+inf");
+                }
+            }
+
             return 1.0M / Tanh(x, precision);
         }
 
@@ -447,7 +464,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
                 throw new ArgumentException("NaN");
             }
 
-            return Log(x + Sqrt(x * x - 1), precision: precision);
+            return Log(x + Sqrt(x * x - 1, precision), precision: precision);
         }
 
         /// <summary>
@@ -456,7 +473,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <param name="x">An argument of the function</param>
         public static decimal Arsinh(decimal x, decimal precision = Epsilon)
         {
-            return Log(x + Sqrt(x * x + 1), precision: precision);
+            return Log(x + Sqrt(x * x + 1, precision), precision: precision);
         }
 
         /// <summary>
@@ -479,12 +496,12 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <param name="x">An argument of the function</param>
         public static decimal Arcoth(decimal x, decimal precision = Epsilon)
         {
-            if (Abs(x) >= 1)
+            if (Abs(x) <= 1)
             {
                 throw new ArgumentException("NaN");
             }
 
-            return 0.5M * Log((1.0M + x) / (1.0M - x), precision: precision);
+            return 0.5M * Log((x + 1.0M) / (x - 1.0M), precision: precision);
         }
 
         #endregion
