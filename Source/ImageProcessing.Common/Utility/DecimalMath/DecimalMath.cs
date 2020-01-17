@@ -1,7 +1,5 @@
 ﻿using System;
 
-using ImageProcessing.Common.Enums;
-
 namespace ImageProcessing.Common.Utility.DecimalMath
 {
     /// <summary>
@@ -13,11 +11,95 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         public const decimal E = 2.71828182845905M;
         public const decimal Epsilon = 1.0E-20M;
         public const decimal PI = 3.14159265358979323846M;
+      
+        /// <summary>
+        /// Evaluate sgn(x)
+        /// </summary>
+        /// <param name="x">An argument of the function</param>
+        public static decimal Sign(decimal x)
+        {
+            if (x == 0) return 0;
+
+            return x > 0 ? 1 : -1;
+        }
+     
+        /// <summary>
+        /// Evaluate |x|
+        /// </summary>
+        /// <param name="x">An argument of the function</param>
+        public static decimal Abs(decimal x)
+        {
+            return x >= 0 ? x : -x;
+        }
+
+        /// <summary>
+        /// Fused multiply - add decimal
+        /// </summary>
+        public static decimal Fmad(decimal x, decimal y, decimal z)
+        {
+            checked
+            {
+                return (x * y) + z;
+            }
+        }
+
+        /// <summary>
+        /// Evaluate ceil(x) 
+        /// </summary>
+        /// <param name="x">An argument of a function</param>
+        public static decimal Ceil(decimal x)
+        {
+            checked
+            {
+                if (x % 1 != 0)
+                {
+                    return Floor(x) + 1;
+                }
+            }
+            return x;
+        }
+
+        /// <summary>
+        /// Evaluate floor(x) 
+        /// </summary>
+        /// <param name="x">An argument of the function</param>
+        public static decimal Floor(decimal x)
+        {
+            var result = x - (x % 1);
+
+            if (result == x)
+            {
+                return x;
+            }
+
+            if (x < 0)
+            {
+                return result - 1;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Evaluate x mod b as x - b floor(x/b)
+        /// </summary>
+        /// <param name="x">An argument of the function</param>
+        /// <param name="mod"></param>
+        /// <returns></returns>
+        public static decimal Mod(decimal x, decimal mod)
+        {
+            checked
+            {
+                return x - mod * Floor(x / mod);
+            }
+        }
+
+        #region Log and exp functions
 
         /// <summary>
         /// Evaluate sqrt(x) with a specified precision
         /// </summary>
-        /// <param name="x">An argument of a function</param>
+        /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
         public static decimal Sqrt(decimal value, decimal precision = Epsilon)
         {
@@ -39,30 +121,9 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         }
 
         /// <summary>
-        /// Evaluate sgn(x)
-        /// </summary>
-        /// <param name="x">An argument of a function</param>
-        public static decimal Sign(decimal x)
-        {
-            if (x == 0) return 0;
-
-            return x > 0 ? 1 : -1;
-        }
-
-
-        /// <summary>
-        /// Evaluate |x|
-        /// </summary>
-        /// <param name="x">An argument of a function</param>
-        public static decimal Abs(decimal x)
-        {
-            return x >= 0 ? x : -x;
-        }
-
-        /// <summary>
         /// Evaluate x ** power with a specified precision
         /// </summary>
-        /// <param name="x">An argument of a function</param>
+        /// <param name="x">An argument of the function</param>
         /// <param name="power">A power</param>
         /// <param name="precision">A error</param>
         public static decimal Pow(decimal value, decimal power, decimal precision = Epsilon)
@@ -81,7 +142,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <summary>
         /// Evaluate exp(x) with a specified precision
         /// </summary>
-        /// <param name="x">An argument of a function</param>
+        /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
         public static decimal Exp(decimal x, decimal precision = Epsilon)
         {
@@ -99,133 +160,11 @@ namespace ImageProcessing.Common.Utility.DecimalMath
 
             return result;
         }
-
+    
         /// <summary>
-        /// Evaluate sin(x) with a specified precision
+        /// Evaluate log(x) based on Arithmetic-Geometric Mean (Borchardt's algorithm) 
         /// </summary>
-        /// <param name="x">An argument of a function</param>
-        /// <param name="precision">A error</param>
-        public static decimal Sin(decimal x, decimal precision = Epsilon)
-        {
-            x = Mod(x, 2.0M * PI);
-
-            var total = x;
-            var result = total;
-
-            for (var k = 0; Abs(total) > Epsilon; ++k)
-            {
-                total = -total *  x * x / ((2.0M * k + 2.0M) * (2.0M * k + 3.0M));
-                result += total;
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Evaluate cos(x) with a specified precision
-        /// </summary>
-        /// <param name="x">An argument of a function</param>
-        /// <param name="precision">A error</param>
-        public static decimal Cos(decimal x, decimal precision = Epsilon)
-        {
-            x = Mod(x, 2 * PI);
-
-            var total = 1.0M;
-            var result = total;
-
-            for (var k = 0; Abs(total) > Epsilon; ++k)
-            {
-                total = total * -x * x / ((2 * k + 1) * (2 * k + 2));
-                result += total;
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Evaluate cosh(x) with a specified precision
-        /// </summary>
-        /// <param name="x">An argument of a function</param>
-        /// <param name="precision">A error</param>
-        public static decimal Cosh(decimal x, decimal precision = Epsilon)
-        {
-            checked
-            {
-                return (Exp(x, precision) + Exp(-x, precision)) / 2.0M;
-            }
-        }
-
-        /// <summary>
-        /// Evaluate sinh(x) with a specified precision
-        /// </summary>
-        /// <param name="x">An argument of a function</param>
-        /// <param name="precision">A error</param>
-        public static decimal Sinh(decimal x, decimal precision = Epsilon)
-        {
-            checked
-            {
-                return (Exp(x, precision) - Exp(-x, precision)) / 2.0M;
-            }
-        }
-
-        /// <summary>
-        /// Evaluate tanh(x) with a specified precision
-        /// </summary>
-        /// <param name="x">The argument</param>
-        /// <param name="precision">An error</param>
-        public static decimal Tanh(decimal x, decimal precision = Epsilon)
-        {
-            return Sinh(x, precision) / Cosh(x, precision);
-        }
-
-        /// <summary>
-        /// Evaluate coth(x) with a specified precision
-        /// </summary>
-        /// <param name="x">The argument</param>
-        /// <param name="precision">An error</param>
-        public static decimal Coth(decimal x, decimal precision = Epsilon)
-        {
-            return 1.0M / Tanh(x, precision);
-        }
-
-        /// <summary>
-        /// Evaluate cot(x) with a specified precision
-        /// </summary>
-        /// <param name="x">An argument of a function</param>
-        /// <param name="precision">A error</param>
-        public static decimal Cot(decimal x, decimal precision = Epsilon)
-        {
-            return 1.0M / Tan(x, precision);
-        }
-
-        /// <summary>
-        /// Evaluate tan(x) with a specified precision
-        /// </summary>
-        /// <param name="x">An argument of a function</param>
-        /// <param name="precision">A error</param>
-        public static decimal Tan(decimal x, decimal precision = Epsilon)
-        {
-            x = Mod(x, PI);
-
-            var error = Abs(Abs(x) - PI / 2.0M);
-
-            //x infinitely small to -+PI over 2
-            if(error < precision )
-            {
-                switch(Sign(x))
-                {
-                    case -1: throw new ArgumentException("-inf");
-                    case  1: throw new ArgumentException("+inf");
-                }
-            } 
-
-            return Sin(x) / Cos(x);
-        }
-
-        /// <summary>
-        /// Evaluate log(x) based on Borchardt's algorithm 
-        /// </summary>
-        /// <param name="x">An argument of a function</param>
+        /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
         public static decimal Log(decimal x, decimal lbase = E, decimal precision = Epsilon)
         {
@@ -237,6 +176,11 @@ namespace ImageProcessing.Common.Utility.DecimalMath
             if(lbase <= 0 || lbase == 1)
             {
                 throw new ArgumentException("A logarithm base must be in (0, 1) U (1, +inf)");
+            }
+
+            if(x == 1.0M)
+            {
+                return 0;
             }
    
             if (Abs(E - lbase) > precision)
@@ -257,138 +201,141 @@ namespace ImageProcessing.Common.Utility.DecimalMath
             return 2 * (x - 1) / (a0 + b0);
         }
 
-        /// <summary>
-        /// Evaluate arcctg(x) with a specified precision
-        /// </summary>
-        /// <param name="x">An argument of a function</param>
-        /// <param name="precision">A error</param>
-        public static decimal Acot(decimal x, decimal precision = Epsilon)
-        {
-            var sign = Sign(x);
-
-            //x infinitely close to zero
-            if(Abs(x) < Abs(precision) && x != 0) {
-                return sign * PI / 2.0M;
-            }
-
-            if (x == 0.0M) return PI / 2.0M;
-
-            return sign * PI / 2.0M -  Atan(x);
-        }
-
+        #endregion
        
+        #region Trigonometric functions
 
         /// <summary>
-        /// Evaluate ceil(x) 
+        /// Evaluate sin(x) with a specified precision
         /// </summary>
-        /// <param name="x">An argument of a function</param>
-        public static decimal Ceil(decimal x)
+        /// <param name="x">An argument of the function</param>
+        /// <param name="precision">A error</param>
+        public static decimal Sin(decimal x, decimal precision = Epsilon)
         {
-            checked
-            {
-                if (x % 1 != 0)
-                {
-                    return Floor(x) + 1;
-                }
-            }
-            return x;
-        }
+            x = Mod(x, 2.0M * PI);
 
-        /// <summary>
-        /// Evaluate floor(x) 
-        /// </summary>
-        /// <param name="x">An argument of a function</param>
-        public static decimal Floor(decimal x)
-        {
-            var result = x - (x % 1);
+            var total = x;
+            var result = total;
 
-            if(result == x)
+            for (var k = 0; Abs(total) > Epsilon; ++k)
             {
-                return x;
-            }
-
-            if(x < 0)
-            {
-                return result - 1;
+                total = -total * x * x / ((2.0M * k + 2.0M) * (2.0M * k + 3.0M));
+                result += total;
             }
 
             return result;
         }
 
-        public static int NextInt32(Random random)
+        /// <summary>
+        /// Evaluate cos(x) with a specified precision
+        /// </summary>
+        /// <param name="x">An argument of the function</param>
+        /// <param name="precision">A error</param>
+        public static decimal Cos(decimal x, decimal precision = Epsilon)
         {
-            var firstBits = random.Next(0, 1 << 4) << 28;
-            var lastBits  = random.Next(0, 1 << 28);
+            x = Mod(x, 2 * PI);
 
-            return firstBits | lastBits;
-        }
+            var total = 1.0M;
+            var result = total;
 
-        public static decimal NextDecimal(Random random)
-        {
-            var sample = 1m;
-           
-            while (sample >= 1)
+            for (var k = 0; Abs(total) > Epsilon; ++k)
             {
-                var a = NextInt32(random);
-                var b = NextInt32(random);
-                var c = random.Next(0x204FCE5E);
-
-                sample = new decimal(a, b, c, false, 28);
+                total = total * -x * x / ((2 * k + 1) * (2 * k + 2));
+                result += total;
             }
 
-            return sample;
+            return result;
         }
 
-        public static decimal NextDecimal(Random random, decimal a, decimal b)
+        /// <summary>
+        /// Evaluate cot(x) with a specified precision
+        /// </summary>
+        /// <param name="x">An argument of the function</param>
+        /// <param name="precision">A error</param>
+        public static decimal Cot(decimal x, decimal precision = Epsilon)
         {
-            var nextDecimalSample = NextDecimal(random);
-            return b * nextDecimalSample + a * (1 - nextDecimalSample);
+            return 1.0M / Tan(x, precision);
         }
+
+        /// <summary>
+        /// Evaluate tan(x) with a specified precision
+        /// </summary>
+        /// <param name="x">An argument of the function</param>
+        /// <param name="precision">A error</param>
+        public static decimal Tan(decimal x, decimal precision = Epsilon)
+        {
+            x = Mod(x, PI);
+
+            var error = Abs(Abs(x) - PI / 2.0M);
+
+            //x infinitely small to -+PI over 2
+            if (error < precision)
+            {
+                switch (Sign(x))
+                {
+                    case -1: throw new ArgumentException("-inf");
+                    case 1: throw new ArgumentException("+inf");
+                }
+            }
+
+            return Sin(x) / Cos(x);
+        }
+
+        #endregion
+
+        #region Inverse trigonometric functions
 
         /// <summary>
         /// Evaluate atan(x)
         /// </summary>
-        /// <param name="x">An argument of a function</param>
+        /// <param name="x">An argument of the function</param>
 
-        public static decimal Atan(decimal x)
+        public static decimal Arctan(decimal x)
         {
             if (x == 0) return 0;
 
-            if (x > 0) return AtanReduce(x);
+            if (x > 0) return ArctanReduce(x);
 
-            return -AtanReduce(-x);
+            return -ArctanReduce(-x);
         }
 
         /// <summary>
-        /// Fused multiply - add decimal
+        /// Evaluate arccot(x) with a specified precision
         /// </summary>
-        public static decimal Fmad(decimal x, decimal y, decimal z)
+        /// <param name="x">An argument of the function</param>
+        public static decimal Arccot(decimal x)
         {
-            checked
-            {
-                return (x * y) + z;
-            }
+            return Sign(x) * PI / 2.0M - Arctan(x);
         }
 
         /// <summary>
-        /// Evaluate x mod b as x - b floor(x/b)
+        /// Evaluate arcsin(x) with a specified precision
         /// </summary>
-        /// <param name="x">An argument of a function</param>
-        /// <param name="mod"></param>
-        /// <returns></returns>
-        public static decimal Mod(decimal x, decimal mod)
+        /// <param name="x">An argument of the function</param>
+        public static decimal Arcsin(decimal x)
         {
-            checked
+            if (Abs(x) > 1)
             {
-                return x - mod * Floor(x / mod);
+                throw new ArgumentException("NaN");
             }
+
+            return Arctan(x / Sqrt(1.0M - x * x));
         }
 
         /// <summary>
-        /// Approximate Atan in the range [0, 0.66]
+        /// Evaluate arccos(x) with a specified precision
         /// </summary>
-        /// <param name="x">An argument of a function</param>
-        private static decimal AtanImpl(decimal x)
+        /// <param name="x">An argument of the function</param>
+        public static decimal Arccos(decimal x)
+        {
+            return PI / 2.0M - Arcsin(x);
+        }
+
+        /// <summary>
+        /// Approximate atan(x) in the range [0, 0.66]
+        /// </summary>
+        /// <param name="x">An argument of the function</param>
+        private static decimal ArctanImpl(decimal x)
         {
             var p0 = -8.750608600031904122785e-01M;
             var p1 = -1.615753718733365076637e+01M;
@@ -415,7 +362,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// Reduce a positive argument to the [0, 0.66] 
         /// </summary>
         /// <param name="x">An argument of a function to be reduced</param>
-        private static decimal AtanReduce(decimal x)
+        private static decimal ArctanReduce(decimal x)
         {
 
             var bits = 6.123233995736765886130e-17M; // pi/2 = PIO2 + bits
@@ -424,15 +371,122 @@ namespace ImageProcessing.Common.Utility.DecimalMath
 
             if (x <= 0.66M)
             {
-                return AtanImpl(x);
+                return ArctanImpl(x);
             }
 
             if (x > tan3PiOver8)
             {
-                return PI / 2.0M - AtanImpl(1.0M / x) + bits;
+                return PI / 2.0M - ArctanImpl(1.0M / x) + bits;
             }
 
-            return PI / 4.0M + AtanImpl((x - 1.0M) / (x + 1.0M)) + 0.5M * bits;
+            return PI / 4.0M + ArctanImpl((x - 1.0M) / (x + 1.0M)) + 0.5M * bits;
         }
+
+        #endregion
+
+        #region Hyberbolic functions
+
+        /// <summary>
+        /// Evaluate cosh(x) with a specified precision
+        /// </summary>
+        /// <param name="x">An argument of the function</param>
+        /// <param name="precision">A error</param>
+        public static decimal Cosh(decimal x, decimal precision = Epsilon)
+        {
+            checked
+            {
+                return (Exp(x, precision) + Exp(-x, precision)) / 2.0M;
+            }
+        }
+
+        /// <summary>
+        /// Evaluate sinh(x) with a specified precision
+        /// </summary>
+        /// <param name="x">An argument of the function</param>
+        /// <param name="precision">A error</param>
+        public static decimal Sinh(decimal x, decimal precision = Epsilon)
+        {
+            checked
+            {
+                return (Exp(x, precision) - Exp(-x, precision)) / 2.0M;
+            }
+        }
+
+        /// <summary>
+        /// Evaluate tanh(x) with a specified precision
+        /// </summary>
+        /// <param name="x">An argument of the function</param>
+        /// <param name="precision">A error</param>
+        public static decimal Tanh(decimal x, decimal precision = Epsilon)
+        {
+            return Sinh(x, precision) / Cosh(x, precision);
+        }
+
+        /// <summary>
+        /// Evaluate coth(x) with a specified precision
+        /// </summary>
+        /// <param name="x">An argument of the function</param>
+        /// <param name="precision">A error</param>
+        public static decimal Coth(decimal x, decimal precision = Epsilon)
+        {
+            return 1.0M / Tanh(x, precision);
+        }
+
+        #endregion
+
+        #region Inverse hyperbolic functions
+
+        /// <summary>
+        /// Evaluate arcosh(x) with a specified precision
+        /// </summary>
+        /// <param name="x">An argument of the function</param>
+        public static decimal Arcosh(decimal x, decimal precision = Epsilon)
+        {
+            if (x < 1)
+            {
+                throw new ArgumentException("NaN");
+            }
+
+            return Log(x + Sqrt(x * x - 1), precision: precision);
+        }
+
+        /// <summary>
+        /// Evaluate arsinh(x) with a specified precision
+        /// </summary>
+        /// <param name="x">An argument of the function</param>
+        public static decimal Arsinh(decimal x, decimal precision = Epsilon)
+        {
+            return Log(x + Sqrt(x * x + 1), precision: precision);
+        }
+
+        /// <summary>
+        /// Evaluate artanh(x) with a specified precision
+        /// </summary>
+        /// <param name="x">An argument of the function</param>
+        public static decimal Artanh(decimal x, decimal precision = Epsilon)
+        {
+            if (Abs(x) >= 1)
+            {
+                throw new ArgumentException("NaN");
+            }
+
+            return 0.5M * Log((1.0M + x) / (1.0M - x), precision: precision);
+        }
+
+        /// <summary>
+        /// Evaluate arcoth(x) with a specified precision
+        /// </summary>
+        /// <param name="x">An argument of the function</param>
+        public static decimal Arcoth(decimal x, decimal precision = Epsilon)
+        {
+            if (Abs(x) >= 1)
+            {
+                throw new ArgumentException("NaN");
+            }
+
+            return 0.5M * Log((1.0M + x) / (1.0M - x), precision: precision);
+        }
+
+        #endregion
     }
 }
