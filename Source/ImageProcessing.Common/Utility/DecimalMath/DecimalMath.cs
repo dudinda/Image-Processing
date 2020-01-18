@@ -4,7 +4,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
 {
     /// <summary>
     /// The class contains functions of a real variable,
-    /// where each argument is represented as <c>decimal</c>
+    /// where each argument is represented as <see cref="decimal">
     /// </summary>
     public static class DecimalMath
     {

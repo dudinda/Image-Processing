@@ -60,7 +60,8 @@ namespace ImageProcessing.Common.Utility.DecimalMath
             var b = interval.x2;
             var a = interval.x1;
 
-            var generator = new Random(DateTime.UtcNow.Second);
+            var generator = new Random(Guid.NewGuid().GetHashCode());
+
             var result = 0.0M;
 
             var coef = (b - a) / N;

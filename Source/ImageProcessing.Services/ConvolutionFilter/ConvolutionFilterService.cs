@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
+using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Model.Convolution;
 using ImageProcessing.Services.ConvolutionFilterServices.Interface;
 
@@ -13,15 +14,8 @@ namespace ImageProcessing.Services.ConvolutionFilterServices.Implementation
     {
         public Bitmap Convolution(Bitmap source, AbstractConvolutionFilter filter) 
         {
-            if(source is null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-
-            if(filter is null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
+            Requires.IsNotNull(source, nameof(source));
+            Requires.IsNotNull(filter, nameof(filter));
 
             var destination = new Bitmap(source);
 

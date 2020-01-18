@@ -28,6 +28,11 @@ namespace ImageProcessing.Common.Extensions.RandomExtensions
             return sample;
         }
 
+        public static decimal NextDecimal(this Random random, decimal max)
+        {
+            return NextDecimal(random, decimal.Zero, max);
+        }
+
         public static decimal NextDecimal(this Random random, decimal min, decimal max)
         {
             var nextDecimalSample = NextDecimal(random);

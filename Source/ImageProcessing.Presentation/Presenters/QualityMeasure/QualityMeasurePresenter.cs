@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 
+using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Controller.Interface;
 using ImageProcessing.Core.Presenter.Abstract;
 using ImageProcessing.Presentation.ViewModel.QualityMeasure;
@@ -19,11 +20,16 @@ namespace ImageProcessing.Presentation.Presenters
                                        IQualityMeasureView view, 
                                        IBitmapLuminanceDistributionService distibutionService) : base(controller, view)
         {
-            _distributionService = distibutionService;
+            Requires.IsNotNull(controller, nameof(controller));
+            Requires.IsNotNull(view, nameof(view));
+
+            _distributionService = Requires.IsNotNull(distibutionService, nameof(distibutionService));
         }
 
         public override void Run(QualityMeasureViewModel vm)
         {
+            Requires.IsNotNull(vm, nameof(vm));
+
             _src = vm.Bitmap;
 
             View.Show();

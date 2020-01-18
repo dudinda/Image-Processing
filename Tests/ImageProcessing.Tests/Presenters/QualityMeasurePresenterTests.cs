@@ -1,6 +1,9 @@
-﻿namespace ImageProcessing.Tests.Presenters
+﻿using NUnit.Framework;
+
+namespace ImageProcessing.Tests.Presenters
 {
-    class QualityMeasurePresenterTests
+    [TestFixture]
+    public class QualityMeasurePresenterTests
     {
     }
 }

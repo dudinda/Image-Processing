@@ -115,8 +115,8 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
         {
             var result = new Bitmap(src);
             var resultData = result.LockBits(new Rectangle(0, 0, result.Width, result.Height),
-                                                         System.Drawing.Imaging.ImageLockMode.WriteOnly,
-                                                         System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                                                           ImageLockMode.WriteOnly,
+                                                           PixelFormat.Format24bppRgb);
 
             var size = result.Size;
             var maxima = 0;
@@ -158,8 +158,8 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
         {
             var result = new Bitmap(src);
             var resultData = result.LockBits(new Rectangle(0, 0, result.Width, result.Height),
-                                                         System.Drawing.Imaging.ImageLockMode.WriteOnly,
-                                                         System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                                                           ImageLockMode.WriteOnly,
+                                                           PixelFormat.Format24bppRgb);
 
             var size = result.Size;
             var minima = 0;
@@ -227,8 +227,8 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
                                                        PixelFormat.Format24bppRgb);
 
             var resultData = result.LockBits(new Rectangle(0, 0, result.Width, result.Height),
-                                                          ImageLockMode.WriteOnly,
-                                                          PixelFormat.Format24bppRgb);
+                                                           ImageLockMode.WriteOnly,
+                                                           PixelFormat.Format24bppRgb);
 
             var size = result.Size;
 

@@ -3,7 +3,7 @@
     /// <summary>
     /// 
     /// </summary>
-    public enum RandomVariableAction
+    public enum RandomVariable
     {
         /// <summary>
         /// 

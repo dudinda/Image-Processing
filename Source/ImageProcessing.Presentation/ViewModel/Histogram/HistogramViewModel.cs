@@ -6,13 +6,13 @@ namespace ImageProcessing.Presentation.ViewModel.Histogram
 {
     public class HistogramViewModel
     {
-        public HistogramViewModel(Bitmap source, RandomVariableAction mode)
+        public HistogramViewModel(Bitmap source, RandomVariable mode)
         {
             Source = source;
             Mode   = mode;
         }
 
         public Bitmap Source { get; }
-        public RandomVariableAction Mode { get; }
+        public RandomVariable Mode { get; }
     }
 }

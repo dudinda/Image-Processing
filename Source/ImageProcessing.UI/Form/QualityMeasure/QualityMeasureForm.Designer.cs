@@ -50,15 +50,14 @@
             this.Histogram.Series.Add(series1);
             this.Histogram.Size = new System.Drawing.Size(491, 387);
             this.Histogram.TabIndex = 1;
-            this.Histogram.Text = "chart1";
             // 
-            // QualityMeasure
+            // QualityMeasureForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(531, 467);
             this.Controls.Add(this.Histogram);
-            this.Name = "QualityMeasure";
+            this.Name = "QualityMeasureForm";
             this.Text = "QualityMeasure";
             ((System.ComponentModel.ISupportInitialize)(this.Histogram)).EndInit();
             this.ResumeLayout(false);
