@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-
+using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.View;
 
 namespace ImageProcessing.Presentation.Views.Main
@@ -19,16 +19,12 @@ namespace ImageProcessing.Presentation.Views.Main
         event Action<string> ApplyRGBFilter;
         event Action<string> ApplyRGBColorFilter;
         event Action<string> ReplaceImage;
-        event Action<string> BuildPmf;
-        event Action<string> BuildCdf;
+        event Action<string, string> BuildPMF;
+        event Action<string, string> BuildCDF;
         event Action<string> Zoom;
         event Action<Keys> GetRandomVariableInfo;
         
         (string, string) Parameters { get; }
-        bool SrcIsNull { get; }
-        bool DstIsNull { get; }
-        Size SourceFactorZoom { get; }
-        Size DestinationFactorZoom { get; }
 
         string PathToFile { get; set; }
         Image SrcImage { get; set; }
@@ -38,10 +34,16 @@ namespace ImageProcessing.Presentation.Views.Main
         bool IsGreenChannelChecked { get; set; }
         bool IsRedChannelChecked { get; set; }
         bool IsBlueChannelChecked { get; set; }
-        Size SourceSize { get; set; }
-        Size DestinationSize { get; set; }
-    
+
         void ShowError(string message);
+        Image GetImageCopy(ImageContainer container);
+        void SetImageCopy(ImageContainer container, Image copy);
+        Image GetImage(ImageContainer container);
+        void SetImage(ImageContainer container, Image image);
+        bool ImageIsNull(ImageContainer container);
+        void ResetTrackBar(ImageContainer container, Size size);
+        Size GetZoomFactor(ImageContainer container);
+        Size GetImageCopySize(ImageContainer container);
 
     }
 }

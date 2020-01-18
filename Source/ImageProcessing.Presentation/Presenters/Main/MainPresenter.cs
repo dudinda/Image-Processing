@@ -52,9 +52,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
             _distributionFactory      = baseFactory.GetDistributionFactory();
             _rgbFiltersFactory        = baseFactory.GetRGBFilterFactory();
 
-            _convolutionFilterService  = Requires.IsNotNull(convolutionFilterService, nameof(convolutionFilterService));
-            _rgbFilterService          = Requires.IsNotNull(rgbFilterService, nameof(rgbFilterService));
-            _distributionService       = Requires.IsNotNull(distributionService, nameof(distributionService)); ;
+            _convolutionFilterService = Requires.IsNotNull(convolutionFilterService, nameof(convolutionFilterService));
+            _rgbFilterService         = Requires.IsNotNull(rgbFilterService, nameof(rgbFilterService));
+            _distributionService      = Requires.IsNotNull(distributionService, nameof(distributionService)); ;
 
             Bind();
         }
@@ -74,14 +74,15 @@ namespace ImageProcessing.Presentation.Presenters.Main
                         {
                             using (var stream = File.OpenRead(dialog.FileName))
                             {
-                                return new Bitmap(Image.FromStream(stream));
+                                View.SrcImageCopy = new Bitmap(Image.FromStream(stream));
                             }
 
+                            View.ResetTrackBar(ImageContainer.Source, View.SrcImageCopy.Size);
+       
+                            return new Bitmap(View.SrcImageCopy);
                         }).ConfigureAwait(true);
 
                         View.PathToFile = dialog.FileName;
-                        View.SrcImageCopy = (Image)View.SrcImage.Clone();
-                        View.SourceSize = View.SrcImageCopy.Size;
                         
                     }
                 }
@@ -107,7 +108,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             var bmpToSave = new Bitmap(View.SrcImage);
                             var extension = Path.GetExtension(dialog.FileName);
                             bmpToSave.Save(dialog.FileName, extension.GetImageFormat());
-                        }).ConfigureAwait(true);
+
+                        }).ConfigureAwait(false);
                     }
                 }
             }
@@ -126,7 +128,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     var bmpToSave = new Bitmap(View.SrcImage);
                     var extension = Path.GetExtension(View.PathToFile);
                     bmpToSave.Save(View.PathToFile, extension.GetImageFormat());
-                }).ConfigureAwait(true);            
+
+                }).ConfigureAwait(false);            
             }
             catch
             {
@@ -140,14 +143,21 @@ namespace ImageProcessing.Presentation.Presenters.Main
             {
                 Requires.IsNotNull(filterName, nameof(filterName));
 
-                if (View.SrcIsNull) 
+                if (View.ImageIsNull(ImageContainer.Source)) 
                     return; 
 
                 var filter = _convolutionFilterFactory.GetFilter(filterName);
              
                 View.DstImage = await _locker.LockAsync(
-                    () => _convolutionFilterService.Convolution(new Bitmap(View.SrcImage), filter)
-                ).ConfigureAwait(true);
+                    () =>
+                    {
+                        View.DstImageCopy = _convolutionFilterService
+                        .Convolution(
+                            new Bitmap(View.GetImage(ImageContainer.Source)), filter
+                            );
+
+                        return new Bitmap(View.DstImageCopy);
+                    }).ConfigureAwait(true);
             }
             catch 
             {
@@ -161,14 +171,17 @@ namespace ImageProcessing.Presentation.Presenters.Main
             {
                 Requires.IsNotNull(filterName, nameof(filterName));
 
-                if (View.SrcIsNull) 
+                if (View.ImageIsNull(ImageContainer.Source)) 
                     return; 
 
                 var filter = _rgbFiltersFactory.GetFilter(filterName);
 
                 View.DstImage = await _locker.LockAsync(
-                    () => _rgbFilterService.Filter(new Bitmap(View.SrcImage), filter)
-                ).ConfigureAwait(true);
+                    () =>
+                    {
+                        View.DstImageCopy = _rgbFilterService.Filter(new Bitmap(View.SrcImage), filter);
+                        return new Bitmap(View.DstImageCopy);
+                    }).ConfigureAwait(true);
             }
             catch
             {
@@ -182,7 +195,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             {
                 Requires.IsNotNull(filterName, nameof(filterName));
 
-                if (View.SrcIsNull) 
+                if (View.ImageIsNull(ImageContainer.Source)) 
                     return;
 
                 RGBColors result = default;
@@ -213,11 +226,15 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     return;
                 }
 
-                var filter = _rgbFiltersFactory.GetColorFilter(result);
-
                 View.DstImage = await _locker.LockAsync(
-                    () => filter.Filter(new Bitmap(View.SrcImage))
-                ).ConfigureAwait(true);
+                    () =>
+                    {
+                        View.DstImageCopy = _rgbFiltersFactory
+                        .GetColorFilter(result)
+                        .Filter(new Bitmap(View.SrcImage));
+
+                        return new Bitmap(View.DstImageCopy);
+                    }).ConfigureAwait(true);
             }
             catch
             {
@@ -229,21 +246,26 @@ namespace ImageProcessing.Presentation.Presenters.Main
         {
             try
             {
-                if (View.SrcIsNull) 
+                if (View.ImageIsNull(ImageContainer.Source))  
                     return; 
 
-                var filter = _distributionFactory.GetFilter(filterName);
+                if (parms.TryParse<decimal, decimal>(out var result))
+                {
+                    var filter = _distributionFactory
+                        .GetFilter(filterName)
+                        .SetParams(result);
 
-                if (!parms.TryParse<decimal, decimal>(out var result))
-                    return;
+                    View.DstImage = await _locker.LockAsync(
+                        () =>
+                        {
+                            View.DstImageCopy = _distributionService.TransformTo(new Bitmap(View.SrcImage), filter);
+                            View.ResetTrackBar(ImageContainer.Destination, View.DstImageCopy.Size);
+                            return new Bitmap(View.DstImageCopy);
+                        }
+                    ).ConfigureAwait(true);
 
-                filter.SetParams(result);
-
-                View.DstImage  = await _locker.LockAsync(
-                    () => _distributionService.TransformTo(new Bitmap(View.SrcImage), filter)
-                ).ConfigureAwait(true);
-
-                View.DstImage.Tag = filter.Name;
+                    View.DstImage.Tag = filter.Name;
+                }
             }
             catch
             {
@@ -255,11 +277,15 @@ namespace ImageProcessing.Presentation.Presenters.Main
         {
             try
             {
-                if (View.SrcIsNull) return; 
+                if (View.ImageIsNull(ImageContainer.Source)) return; 
 
                 View.DstImage = await _locker.LockAsync(
-                   () => new Bitmap(View.SrcImage).Shuffle()
-                ).ConfigureAwait(true);
+                   () => 
+                   {
+                       View.DstImageCopy = new Bitmap(View.SrcImage).Shuffle();
+
+                       return new Bitmap(View.DstImageCopy);
+                   }).ConfigureAwait(true);
             }
             catch
             {
@@ -267,86 +293,52 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private void BuildPMF(string target)
-        {          
+        private void BuildFunction(string containerType, string functionType)
+        {
             try
             {
-                Requires.IsNotNull(target, nameof(target));
+                Requires.IsNotNull(containerType, nameof(containerType));
+                Requires.IsNotNull(functionType, nameof(functionType));
+                var function  = functionType.GetEnumValueByName<RandomVariable>();
+                var container = containerType.GetEnumValueByName<ImageContainer>();
 
-                switch (target.GetEnumValueByName<ImageContainer>())
+                if (!View.ImageIsNull(container))
                 {
-                    case ImageContainer.Source:
-                        if (View.SrcIsNull) return;
-                        Controller.Run<HistogramPresenter, HistogramViewModel>(
-                            new HistogramViewModel(new Bitmap(View.SrcImage), RandomVariable.PMF)
-                        );
-                        break;
-
-                    case ImageContainer.Destination:
-                        if (View.DstIsNull) return;
-                        Controller.Run<HistogramPresenter, HistogramViewModel>(
-                            new HistogramViewModel(new Bitmap(View.DstImage), RandomVariable.PMF)
-                        );
-                        break;
+                    Controller.Run<HistogramPresenter, HistogramViewModel>(
+                        new HistogramViewModel(new Bitmap(View.GetImage(container)), function)
+                    );
                 }
             }
             catch
             {
-                View.ShowError("Error while buiding the PMF of the image.");
+                View.ShowError($"Error while buiding the plot.");
             }
         }
-
-        private void BuildCDF(string target)
-        {          
+     
+        private async void Replace(string container)
+        {
             try
             {
-                Requires.IsNotNull(target, nameof(target));
+                Requires.IsNotNull(container, nameof(container));
 
-                switch (target.GetEnumValueByName<ImageContainer>())
+                var source = container.GetEnumValueByName<ImageContainer>();
+
+                var target = source == ImageContainer.Source ?
+                    ImageContainer.Destination : ImageContainer.Source;
+
+                if (View.ImageIsNull(source)) return;
+         
+                var result = await _locker.LockAsync(() =>
                 {
-                    case ImageContainer.Source:
-                        if (View.SrcIsNull) return;
-                        Controller.Run<HistogramPresenter, HistogramViewModel>(
-                            new HistogramViewModel(new Bitmap(View.SrcImage), RandomVariable.CDF)
-                        );
-                        break;
+                    View.SetImageCopy(source, (Image)View.GetImage(target).Clone());
+                    View.ResetTrackBar(source, View.GetImageCopySize(target));
 
-                    case ImageContainer.Destination:
-                        if (View.DstIsNull) return;
-                        Controller.Run<HistogramPresenter, HistogramViewModel>(
-                            new HistogramViewModel(new Bitmap(View.DstImage), RandomVariable.CDF)
-                        );
-                        break;
+                    return new Bitmap(View.GetImageCopy(source));
+                }).ConfigureAwait(true);
 
-                    default: throw new NotSupportedException(nameof(target));
-                }
-            }
-            catch
-            {
-                View.ShowError("Error while buiding the CDF of the image.");
-            }
-        }
+                View.SetImage(source, result);
 
-        private void Replace(string target)
-        {      
-            try
-            {
-                Requires.IsNotNull(target, nameof(target));
 
-                switch (target.GetEnumValueByName<ImageContainer>())
-                {
-                    case ImageContainer.Source:
-                        if (View.DstIsNull) return;
-                        View.SrcImage = View.DstImage;
-                        break;
-
-                    case ImageContainer.Destination:
-                        if (View.SrcIsNull) return;
-                        View.DstImage = View.SrcImage;
-                        break;
-
-                    default: throw new NotSupportedException(nameof(target));
-                }
             }
             catch
             {
@@ -354,26 +346,21 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private void Zoom(string target)
+        private async void Zoom(string target)
         {
             try
             {
                 Requires.IsNotNull(target, nameof(target));
 
-                switch (target.GetEnumValueByName<ImageContainer>())
-                {
-                    case ImageContainer.Source:
-                        if (View.SrcIsNull) return;
-                        View.SrcImage = new Bitmap(View.SrcImageCopy, View.SourceFactorZoom);
-                        break;
+                var container = target.GetEnumValueByName<ImageContainer>();
 
-                    case ImageContainer.Destination:
-                        if (View.DstIsNull) return;
-                        View.DstImage = new Bitmap(View.DstImageCopy, View.DestinationFactorZoom);
-                        break;
+                if (!View.ImageIsNull(container)) {
+                    var result = await _locker.LockAsync(
+                        () => new Bitmap(View.GetImageCopy(container), View.GetZoomFactor(container))
+                        ).ConfigureAwait(true);
 
-                    default: throw new NotSupportedException(nameof(target));
-                }
+                    View.SetImage(container, result);
+                }              
             }
             catch
             {

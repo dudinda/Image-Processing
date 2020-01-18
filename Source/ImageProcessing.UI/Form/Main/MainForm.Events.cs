@@ -13,8 +13,8 @@ namespace ImageProcessing.Form.Main
         public event Action<string>? ApplyRGBFilter;
         public event Action<string>? ApplyRGBColorFilter;
         public event Action<string>? ReplaceImage;
-        public event Action<string>? BuildPmf;
-        public event Action<string>? BuildCdf;
+        public event Action<string, string>? BuildPMF;
+        public event Action<string, string>? BuildCDF;
         public event Action<string>? Zoom;
         public event Action? Shuffle;
         public event Action<Keys>? GetRandomVariableInfo;
@@ -48,11 +48,11 @@ namespace ImageProcessing.Form.Main
             SaveFileAs.Click += (sender, args)
                 => Invoke(SaveImageAs);
 
-            SrcZoom.ValueChanged += (secnder, args)
-                => Invoke(Zoom, (string)SrcZoom.Tag);
+            SrcZoom.MouseUp += (secnder, args)
+                => Invoke(Zoom, (string)Src.Tag);
 
-            DstZoom.ValueChanged += (secnder, args)
-                => Invoke(Zoom, (string)DstZoom.Tag);
+            DstZoom.MouseUp += (secnder, args)
+                => Invoke(Zoom, (string)Dst.Tag);
         }
 
         /// <summary>
@@ -64,31 +64,31 @@ namespace ImageProcessing.Form.Main
                 => Invoke(Shuffle);
 
             PMF.Click += (sender, args)
-                => Invoke(BuildPmf, Control.ModifierKeys);
+                => Invoke(BuildPMF, (string)Src.Tag, (string)PMF.Tag);
 
             CDF.Click += (sender, args)
-                => Invoke(BuildCdf, Control.ModifierKeys);
+                => Invoke(BuildCDF, (string)Dst.Tag, (string)CDF.Tag);
 
             Expectation.Click += (sender, args)
-                => Invoke(GetRandomVariableInfo, Control.ModifierKeys);
+                => Invoke(GetRandomVariableInfo);
 
             Variance.Click += (sender, args)
-                => Invoke(GetRandomVariableInfo, Control.ModifierKeys);
+                => Invoke(GetRandomVariableInfo);
 
             StandardDeviation.Click += (sender, args)
-                => Invoke(GetRandomVariableInfo, Control.ModifierKeys);
+                => Invoke(GetRandomVariableInfo);
 
             Entropy.Click += (sender, args)
-                => Invoke(GetRandomVariableInfo, Control.ModifierKeys);
+                => Invoke(GetRandomVariableInfo);
 
             Undo.Click += (sender, args)
                 => Invoke(UndoLast);
 
             ReplaceSrcByDst.Click += (sernder, args)
-                => Invoke(ReplaceImage, (string)ReplaceSrcByDst.Tag);
+                => Invoke(ReplaceImage, (string)Src.Tag);
 
             ReplaceDstBySrc.Click += (sernder, args)
-                => Invoke(ReplaceImage, (string)ReplaceDstBySrc.Tag);
+                => Invoke(ReplaceImage, (string)Dst.Tag);
         }
 
         /// <summary>
@@ -194,15 +194,16 @@ namespace ImageProcessing.Form.Main
             switch(keyData)
             {
                 case (Keys.Left  | Keys.Control):
-                    Invoke(ReplaceImage, (string)ReplaceSrcByDst.Tag);
+                    Invoke(ReplaceImage, (string)Src.Tag);
                     return true;
                 case (Keys.Right | Keys.Control):
-                    Invoke(ReplaceImage, (string)ReplaceDstBySrc.Tag);
+                    Invoke(ReplaceImage, (string)Dst.Tag);
                     return true;
                 case (Keys.Q):
                     //Invoke(, "Source");
                     return true;
-                    case(Keys.Add)
+                case (Keys.Add):
+                    return true;
             }
 
             return base.ProcessCmdKey(ref msg, keyData);

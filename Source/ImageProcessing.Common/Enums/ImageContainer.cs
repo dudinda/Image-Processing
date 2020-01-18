@@ -5,7 +5,7 @@
         /// <summary>
         /// An unknown value
         /// </summary>
-        Unknown = 0,
+        Unknown     = 0,
 
         /// <summary>
         /// The left-hand image in the container

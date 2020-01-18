@@ -94,7 +94,7 @@ namespace ImageProcessing.Form.Main
             this.ShuffleSrc = new System.Windows.Forms.ToolStripButton();
             this.IntervalLuminanceHistogram = new System.Windows.Forms.ToolStripButton();
             this.AddDstToLuminanceHistogram = new System.Windows.Forms.ToolStripButton();
-            this.ImageContainer = new System.Windows.Forms.SplitContainer();
+            this.Container = new System.Windows.Forms.SplitContainer();
             this.PictureBoxSrcPanel = new System.Windows.Forms.Panel();
             this.Src = new System.Windows.Forms.PictureBox();
             this.TrackBarSrcPanel = new System.Windows.Forms.Panel();
@@ -106,10 +106,10 @@ namespace ImageProcessing.Form.Main
             this.ErrorTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.MainMenu.SuspendLayout();
             this.ToolBarMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ImageContainer)).BeginInit();
-            this.ImageContainer.Panel1.SuspendLayout();
-            this.ImageContainer.Panel2.SuspendLayout();
-            this.ImageContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Container)).BeginInit();
+            this.Container.Panel1.SuspendLayout();
+            this.Container.Panel2.SuspendLayout();
+            this.Container.SuspendLayout();
             this.PictureBoxSrcPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Src)).BeginInit();
             this.TrackBarSrcPanel.SuspendLayout();
@@ -551,6 +551,7 @@ namespace ImageProcessing.Form.Main
             this.PMF.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.PMF.Name = "PMF";
             this.PMF.Size = new System.Drawing.Size(37, 22);
+            this.PMF.Tag = "PMF";
             this.PMF.ToolTipText = "PMF of the image";
             // 
             // CDF
@@ -561,6 +562,7 @@ namespace ImageProcessing.Form.Main
             this.CDF.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.CDF.Name = "CDF";
             this.CDF.Size = new System.Drawing.Size(41, 22);
+            this.CDF.Tag = "CDF";
             this.CDF.ToolTipText = "CDF of the image";
             // 
             // Expectation
@@ -672,27 +674,27 @@ namespace ImageProcessing.Form.Main
             this.AddDstToLuminanceHistogram.Text = "toolStripButton1";
             this.AddDstToLuminanceHistogram.ToolTipText = "Add destination image, transformed by destribution to luminance histogram";
             // 
-            // ImageContainer
+            // Container
             // 
-            this.ImageContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ImageContainer.Location = new System.Drawing.Point(20, 109);
-            this.ImageContainer.Name = "ImageContainer";
+            this.Container.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Container.Location = new System.Drawing.Point(20, 109);
+            this.Container.Name = "Container";
             // 
-            // ImageContainer.Panel1
+            // Container.Panel1
             // 
-            this.ImageContainer.Panel1.AllowDrop = true;
-            this.ImageContainer.Panel1.AutoScroll = true;
-            this.ImageContainer.Panel1.Controls.Add(this.PictureBoxSrcPanel);
-            this.ImageContainer.Panel1.Controls.Add(this.TrackBarSrcPanel);
+            this.Container.Panel1.AllowDrop = true;
+            this.Container.Panel1.AutoScroll = true;
+            this.Container.Panel1.Controls.Add(this.PictureBoxSrcPanel);
+            this.Container.Panel1.Controls.Add(this.TrackBarSrcPanel);
             // 
-            // ImageContainer.Panel2
+            // Container.Panel2
             // 
-            this.ImageContainer.Panel2.AutoScroll = true;
-            this.ImageContainer.Panel2.Controls.Add(this.PictureBoxDstPanel);
-            this.ImageContainer.Panel2.Controls.Add(this.TrackBarDstPanel);
-            this.ImageContainer.Size = new System.Drawing.Size(715, 372);
-            this.ImageContainer.SplitterDistance = 389;
-            this.ImageContainer.TabIndex = 9;
+            this.Container.Panel2.AutoScroll = true;
+            this.Container.Panel2.Controls.Add(this.PictureBoxDstPanel);
+            this.Container.Panel2.Controls.Add(this.TrackBarDstPanel);
+            this.Container.Size = new System.Drawing.Size(715, 372);
+            this.Container.SplitterDistance = 389;
+            this.Container.TabIndex = 9;
             // 
             // PictureBoxSrcPanel
             // 
@@ -713,6 +715,7 @@ namespace ImageProcessing.Form.Main
             this.Src.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.Src.TabIndex = 2;
             this.Src.TabStop = false;
+            this.Src.Tag = "Source";
             // 
             // TrackBarSrcPanel
             // 
@@ -735,6 +738,7 @@ namespace ImageProcessing.Form.Main
             this.SrcZoom.Size = new System.Drawing.Size(389, 34);
             this.SrcZoom.TabIndex = 0;
             this.SrcZoom.Tag = "Source";
+            this.SrcZoom.TrackBarValue = 0;
             this.SrcZoom.Value = 0;
             // 
             // PictureBoxDstPanel
@@ -756,6 +760,7 @@ namespace ImageProcessing.Form.Main
             this.Dst.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.Dst.TabIndex = 3;
             this.Dst.TabStop = false;
+            this.Dst.Tag = "Destination";
             // 
             // TrackBarDstPanel
             // 
@@ -778,6 +783,7 @@ namespace ImageProcessing.Form.Main
             this.DstZoom.Size = new System.Drawing.Size(322, 34);
             this.DstZoom.TabIndex = 0;
             this.DstZoom.Tag = "Destination";
+            this.DstZoom.TrackBarValue = 0;
             this.DstZoom.Value = 0;
             // 
             // MainForm
@@ -785,7 +791,7 @@ namespace ImageProcessing.Form.Main
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(755, 501);
-            this.Controls.Add(this.ImageContainer);
+            this.Controls.Add(this.Container);
             this.Controls.Add(this.ToolBarMenu);
             this.Controls.Add(this.MainMenu);
             this.MainMenuStrip = this.MainMenu;
@@ -795,10 +801,10 @@ namespace ImageProcessing.Form.Main
             this.MainMenu.PerformLayout();
             this.ToolBarMenu.ResumeLayout(false);
             this.ToolBarMenu.PerformLayout();
-            this.ImageContainer.Panel1.ResumeLayout(false);
-            this.ImageContainer.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ImageContainer)).EndInit();
-            this.ImageContainer.ResumeLayout(false);
+            this.Container.Panel1.ResumeLayout(false);
+            this.Container.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Container)).EndInit();
+            this.Container.ResumeLayout(false);
             this.PictureBoxSrcPanel.ResumeLayout(false);
             this.PictureBoxSrcPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Src)).EndInit();
@@ -862,7 +868,7 @@ namespace ImageProcessing.Form.Main
         private System.Windows.Forms.ToolStripTextBox SecondParam;
         private System.Windows.Forms.ToolStripButton PMF;
         private System.Windows.Forms.PictureBox Src;
-        private System.Windows.Forms.SplitContainer ImageContainer;
+        private System.Windows.Forms.SplitContainer Container;
         private System.Windows.Forms.PictureBox Dst;
         private System.Windows.Forms.ToolStripButton ReplaceSrcByDst;
         private System.Windows.Forms.ToolStripButton Undo;

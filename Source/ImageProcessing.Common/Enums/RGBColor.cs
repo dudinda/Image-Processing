@@ -16,16 +16,16 @@ namespace ImageProcessing.Common.Enums
         /// <summary>
         /// The red channel.
         /// </summary>
-        Red   = 1 << 0,
+        Red     = 1 << 0,
 
         /// <summary>
         ///The green channel. 
         /// </summary>
-        Green = 1 << 1,
+        Green    = 1 << 1,
 
         /// <summary>
         /// The blue channel.
         /// </summary>
-        Blue  = 1 << 2
+        Blue     = 1 << 2
     }
 }

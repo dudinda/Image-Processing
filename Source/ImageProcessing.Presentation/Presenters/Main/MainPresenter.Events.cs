@@ -8,14 +8,14 @@ namespace ImageProcessing.Presentation.Presenters.Main
     {
         private void Bind()
         {
-            View.Zoom += (modifier)
-                => Zoom(modifier);
+            View.Zoom += (container)
+                => Zoom(container);
 
-            View.BuildPmf += (modifier) 
-                => BuildPMF(modifier);
+            View.BuildPMF += (container, function)
+                 => BuildFunction(container, function);
 
-            View.BuildCdf += (modifier) 
-                => BuildCDF(modifier);
+            View.BuildCDF += (container, function) 
+                => BuildFunction(container, function);
 
             View.ApplyConvolutionFilter += (filter) 
                 => ApplyConvolutionFilter(filter);

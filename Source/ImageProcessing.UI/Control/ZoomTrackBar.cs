@@ -10,16 +10,22 @@ namespace ImageProcessing.UI.Control
         public Size OriginalSize { get; set; }
 
         public double Factor
-            => Convert.ToDouble(base.Value) / Convert.ToDouble(base.Maximum - base.Minimum);  
-        
+            => Convert.ToDouble(base.Value) /
+               Convert.ToDouble(base.Maximum - base.Minimum);  
+
+        public int TrackBarValue { 
+            get => base.Value;
+            set => base.Value = value;
+        }
+      
         public Size FactorSize
         {
             get
             {
                 var scale = Factor;
 
-                return new Size(OriginalSize.Width - Convert.ToInt32(OriginalSize.Width * scale), 
-                                OriginalSize.Height- Convert.ToInt32(OriginalSize.Height * scale) );
+                return new Size(OriginalSize.Width  + Convert.ToInt32(OriginalSize.Width * scale), 
+                                OriginalSize.Height + Convert.ToInt32(OriginalSize.Height * scale) );
             }
         } 
     }
