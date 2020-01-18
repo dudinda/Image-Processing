@@ -2,6 +2,7 @@
 using System.Drawing;
 
 using ImageProcessing.Common.Enums;
+using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Controller.Interface;
 using ImageProcessing.Core.Presenter.Abstract;
 using ImageProcessing.Presentation.ViewModel.Histogram;
@@ -18,23 +19,23 @@ namespace ImageProcessing.Presentation.Presenters
                                   IHistogramView view, 
                                   IBitmapLuminanceDistributionService distibutionService) : base(controller, view)
         {
-            _distributionService = distibutionService;
+            Requires.IsNotNull(controller, nameof(controller));
+            Requires.IsNotNull(view, nameof(view));
+
+            _distributionService = Requires.IsNotNull(distibutionService, nameof(distibutionService));
         }
 
         public override void Run(HistogramViewModel vm)
         {
-            if(vm is null)
-            {
-                throw new ArgumentNullException(nameof(vm));
-            }
+            Requires.IsNotNull(vm, nameof(vm));
 
             switch(vm.Mode)
             {
-                case RandomVariableAction.PMF:
-                    BuildHistogram(vm.Source);
+                case RandomVariable.PMF:
+                    BuildPMF(vm.Source);
                     break;
 
-                case RandomVariableAction.CDF:
+                case RandomVariable.CDF:
                     BuildCDF(vm.Source);
                     break;
 
@@ -44,8 +45,10 @@ namespace ImageProcessing.Presentation.Presenters
             View.Show();
         }
 
-        private void BuildHistogram(Bitmap bitmap)
+        private void BuildPMF(Bitmap bitmap)
         {
+            Requires.IsNotNull(bitmap, nameof(bitmap));
+
             var chart = View.GetChart;
 
             chart.ChartAreas[0].AxisY.MaximumAutoSize = 100;
@@ -62,6 +65,8 @@ namespace ImageProcessing.Presentation.Presenters
 
         private void BuildCDF(Bitmap bitmap)
         {
+            Requires.IsNotNull(bitmap, nameof(bitmap));
+
             var chart = View.GetChart;
 
             chart.ChartAreas[0].AxisY.Maximum = 1;

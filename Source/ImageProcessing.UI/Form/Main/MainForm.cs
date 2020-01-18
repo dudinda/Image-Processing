@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
-
+using ImageProcessing.Common.Helpers;
 using ImageProcessing.Presentation.Views.Main;
 
 using MetroFramework.Forms;
@@ -13,13 +13,15 @@ namespace ImageProcessing.Form.Main
 
         public MainForm(ApplicationContext context)
         {
-            _context = context;
+            _context = Requires.IsNotNull(context, nameof(context));
 
             InitializeComponent();
             Bind();
             ImageContainer.BringToFront();
         }
-    
+
+        public Image SrcImageCopy { get; set; }
+        public Image DstImageCopy { get; set; }
         public Image SrcImage { 
             get => Src.Image;
             set => Src.Image = value;
@@ -44,12 +46,23 @@ namespace ImageProcessing.Form.Main
             get => ColorFilterBlue.Checked;
             set => ColorFilterBlue.Checked = value;
         }
+        public Size SourceSize {
+            get => SrcZoom.OriginalSize;
+            set => SrcZoom.OriginalSize = value;
+        }
+        public Size DestinationSize
+        {
+            get => DstZoom.OriginalSize;
+            set => DstZoom.OriginalSize = value;
+        }
 
+        public Size SourceFactorZoom => SrcZoom.FactorSize;
+        public Size DestinationFactorZoom => DstZoom.FactorSize;
         public bool SrcIsNull => Src.Image is null;
         public bool DstIsNull => Dst.Image is null;
         public (string, string) Parameters
             => (FirstParam.Text, SecondParam.Text);
-
+    
         public new void Show()
         {
             _context.MainForm = this;

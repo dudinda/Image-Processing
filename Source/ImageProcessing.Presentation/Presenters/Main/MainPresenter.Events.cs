@@ -8,6 +8,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
     {
         private void Bind()
         {
+            View.Zoom += (modifier)
+                => Zoom(modifier);
+
             View.BuildPmf += (modifier) 
                 => BuildPMF(modifier);
 

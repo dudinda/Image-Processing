@@ -10,6 +10,7 @@ using ImageProcessing.Common.Extensions.BitmapExtensions;
 using ImageProcessing.Common.Extensions.EnumExtensions;
 using ImageProcessing.Common.Extensions.StringExtensions;
 using ImageProcessing.Common.Extensions.TupleExtensions;
+using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Controller.Interface;
 using ImageProcessing.Core.Factory.Base;
 using ImageProcessing.Core.Factory.Convolution;
@@ -43,16 +44,17 @@ namespace ImageProcessing.Presentation.Presenters.Main
                              IBitmapLuminanceDistributionService distributionService,
                              IRGBFilterService rgbFilterService) : base(controller, view)
         {
-
-            if(baseFactory is null)  throw new ArgumentNullException(nameof(baseFactory));
-
+            Requires.IsNotNull(controller, nameof(controller));
+            Requires.IsNotNull(view, nameof(view));
+            Requires.IsNotNull(baseFactory, nameof(baseFactory));
+                              
             _convolutionFilterFactory = baseFactory.GetConvolutionFilterFactory();
             _distributionFactory      = baseFactory.GetDistributionFactory();
             _rgbFiltersFactory        = baseFactory.GetRGBFilterFactory();
 
-            _convolutionFilterService = convolutionFilterService;
-            _rgbFilterService         = rgbFilterService;
-            _distributionService      = distributionService;
+            _convolutionFilterService  = Requires.IsNotNull(convolutionFilterService, nameof(convolutionFilterService));
+            _rgbFilterService          = Requires.IsNotNull(rgbFilterService, nameof(rgbFilterService));
+            _distributionService       = Requires.IsNotNull(distributionService, nameof(distributionService)); ;
 
             Bind();
         }
@@ -78,6 +80,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
                         }).ConfigureAwait(true);
 
                         View.PathToFile = dialog.FileName;
+                        View.SrcImageCopy = (Image)View.SrcImage.Clone();
+                        View.SourceSize = View.SrcImageCopy.Size;
+                        
                     }
                 }
             }
@@ -133,6 +138,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
         {
             try
             {
+                Requires.IsNotNull(filterName, nameof(filterName));
+
                 if (View.SrcIsNull) 
                     return; 
 
@@ -152,6 +159,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
         {
             try
             {
+                Requires.IsNotNull(filterName, nameof(filterName));
+
                 if (View.SrcIsNull) 
                     return; 
 
@@ -171,6 +180,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
         {
             try
             {
+                Requires.IsNotNull(filterName, nameof(filterName));
+
                 if (View.SrcIsNull) 
                     return;
 
@@ -257,22 +268,24 @@ namespace ImageProcessing.Presentation.Presenters.Main
         }
 
         private void BuildPMF(string target)
-        { 
+        {          
             try
             {
+                Requires.IsNotNull(target, nameof(target));
+
                 switch (target.GetEnumValueByName<ImageContainer>())
                 {
                     case ImageContainer.Source:
                         if (View.SrcIsNull) return;
                         Controller.Run<HistogramPresenter, HistogramViewModel>(
-                            new HistogramViewModel(new Bitmap(View.SrcImage), RandomVariableAction.PMF)
+                            new HistogramViewModel(new Bitmap(View.SrcImage), RandomVariable.PMF)
                         );
                         break;
 
                     case ImageContainer.Destination:
                         if (View.DstIsNull) return;
                         Controller.Run<HistogramPresenter, HistogramViewModel>(
-                            new HistogramViewModel(new Bitmap(View.DstImage), RandomVariableAction.PMF)
+                            new HistogramViewModel(new Bitmap(View.DstImage), RandomVariable.PMF)
                         );
                         break;
                 }
@@ -284,22 +297,24 @@ namespace ImageProcessing.Presentation.Presenters.Main
         }
 
         private void BuildCDF(string target)
-        {
+        {          
             try
             {
+                Requires.IsNotNull(target, nameof(target));
+
                 switch (target.GetEnumValueByName<ImageContainer>())
                 {
                     case ImageContainer.Source:
                         if (View.SrcIsNull) return;
                         Controller.Run<HistogramPresenter, HistogramViewModel>(
-                            new HistogramViewModel(new Bitmap(View.SrcImage), RandomVariableAction.CDF)
+                            new HistogramViewModel(new Bitmap(View.SrcImage), RandomVariable.CDF)
                         );
                         break;
 
                     case ImageContainer.Destination:
                         if (View.DstIsNull) return;
                         Controller.Run<HistogramPresenter, HistogramViewModel>(
-                            new HistogramViewModel(new Bitmap(View.DstImage), RandomVariableAction.CDF)
+                            new HistogramViewModel(new Bitmap(View.DstImage), RandomVariable.CDF)
                         );
                         break;
 
@@ -313,10 +328,12 @@ namespace ImageProcessing.Presentation.Presenters.Main
         }
 
         private void Replace(string target)
-        {
+        {      
             try
             {
-                switch(target.GetEnumValueByName<ImageContainer>())
+                Requires.IsNotNull(target, nameof(target));
+
+                switch (target.GetEnumValueByName<ImageContainer>())
                 {
                     case ImageContainer.Source:
                         if (View.DstIsNull) return;
@@ -334,6 +351,33 @@ namespace ImageProcessing.Presentation.Presenters.Main
             catch
             {
                 View.ShowError("Error while replacing the image.");
+            }
+        }
+
+        private void Zoom(string target)
+        {
+            try
+            {
+                Requires.IsNotNull(target, nameof(target));
+
+                switch (target.GetEnumValueByName<ImageContainer>())
+                {
+                    case ImageContainer.Source:
+                        if (View.SrcIsNull) return;
+                        View.SrcImage = new Bitmap(View.SrcImageCopy, View.SourceFactorZoom);
+                        break;
+
+                    case ImageContainer.Destination:
+                        if (View.DstIsNull) return;
+                        View.DstImage = new Bitmap(View.DstImageCopy, View.DestinationFactorZoom);
+                        break;
+
+                    default: throw new NotSupportedException(nameof(target));
+                }
+            }
+            catch
+            {
+                View.ShowError("Error while zooming the image.");
             }
         }
     }

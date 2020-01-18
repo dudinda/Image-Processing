@@ -15,6 +15,7 @@ namespace ImageProcessing.Form.Main
         public event Action<string>? ReplaceImage;
         public event Action<string>? BuildPmf;
         public event Action<string>? BuildCdf;
+        public event Action<string>? Zoom;
         public event Action? Shuffle;
         public event Action<Keys>? GetRandomVariableInfo;
         public event Action? UndoLast;
@@ -46,6 +47,12 @@ namespace ImageProcessing.Form.Main
 
             SaveFileAs.Click += (sender, args)
                 => Invoke(SaveImageAs);
+
+            SrcZoom.ValueChanged += (secnder, args)
+                => Invoke(Zoom, (string)SrcZoom.Tag);
+
+            DstZoom.ValueChanged += (secnder, args)
+                => Invoke(Zoom, (string)DstZoom.Tag);
         }
 
         /// <summary>
@@ -195,6 +202,7 @@ namespace ImageProcessing.Form.Main
                 case (Keys.Q):
                     //Invoke(, "Source");
                     return true;
+                    case(Keys.Add)
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
