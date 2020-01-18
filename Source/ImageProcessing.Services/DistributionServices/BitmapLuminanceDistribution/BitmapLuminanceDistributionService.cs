@@ -14,7 +14,7 @@ namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribut
             Requires.IsNotNull(bitmap, nameof(bitmap));
             Requires.IsNotNull(distribution, nameof(distribution));
 
-            return TransformTo(bitmap, distribution);
+            return TransformToImpl(bitmap, distribution);
         }
 
         public decimal GetExpectation(Bitmap bitmap)
