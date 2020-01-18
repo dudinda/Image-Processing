@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Drawing.Imaging;
 
 namespace ImageProcessing.Common.Extensions.StringExtensions
@@ -30,9 +31,11 @@ namespace ImageProcessing.Common.Extensions.StringExtensions
                     return ImageFormat.MemoryBmp;
                 case ".tiff":
                     return ImageFormat.Tiff;
-            }
+                case ".wmf":
+                    return ImageFormat.Wmf;
 
-            return ImageFormat.Wmf;
+                default: throw new NotImplementedException(nameof(ext));
+            }
         }
 
         public static bool TryParse<T>(this string input, out T value)

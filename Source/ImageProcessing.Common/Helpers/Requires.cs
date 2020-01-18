@@ -18,7 +18,7 @@ namespace ImageProcessing.Common.Helpers
         
         public static void IsTrue(Func<bool> isTrue, string errorMessage)
         {
-           IsNotNull(isTrue, nameof(isTrue));
+            IsNotNull(isTrue, nameof(isTrue));
 
             if(!isTrue())
             {
