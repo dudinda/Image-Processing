@@ -97,7 +97,6 @@ namespace ImageProcessing.Tests.Utility
             Assert.That((target.Exp() - cmpVal).Abs(), Is.LessThan(0.0000001M));
         }
 
-
         [Test]
         public void ModuloTest()
         {
@@ -131,7 +130,6 @@ namespace ImageProcessing.Tests.Utility
             Assert.That(() => DecimalMathIntegration.Integrate(Integration.Trapezoidal, (x) => 1 / (x * x - 1.0M / 2.0M), interval, 10000), Throws.TypeOf<ArithmeticException>());
         }
 
-
         [TestCase(1.25, 5)]
         [TestCase(567, 123)]
         [TestCase(0.245, 0.001)]
@@ -146,8 +144,6 @@ namespace ImageProcessing.Tests.Utility
             Assert.That((DecimalMath.Log(target, logbase) - cmpVal).Abs(), Is.LessThan(0.00000001M));
             Assert.That((target.Log(logbase) - cmpVal).Abs(), Is.LessThan(0.00000001M));
         }
-
-   
 
         [TestCase(0)]
         [TestCase(0.0000000001)]
@@ -199,9 +195,6 @@ namespace ImageProcessing.Tests.Utility
             Assert.That(DecimalMath.Sign(target), Is.EqualTo(-1));
             Assert.That(target.Sign(), Is.EqualTo(-1));
         }
-
-
-
 
         #region Trigonometric functions tests
 
@@ -279,6 +272,88 @@ namespace ImageProcessing.Tests.Utility
 
             Assert.That((DecimalMath.Sin(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
             Assert.That((target.Sin() - cmpVal).Abs(), Is.LessThan(0.0000001M));
+        }
+
+
+        [TestCase(Math.PI)]
+        [TestCase(2 * Math.PI)]
+        [TestCase(Math.PI / 3)]
+        [TestCase(Math.PI / 4)]
+        [TestCase(Math.PI / 6)]
+        [TestCase(-Math.PI)]
+        [TestCase(-2 * Math.PI)]
+        [TestCase(-Math.PI / 3)]
+        [TestCase(-Math.PI / 4)]
+        [TestCase(-Math.PI / 6)]
+        public void TangentTableValuesTest(double value)
+        {
+            var target = Convert.ToDecimal(value);
+            var cmpVal = Convert.ToDecimal(Math.Tan(value));
+
+            Assert.That((DecimalMath.Tan(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
+            Assert.That((target.Tan() - cmpVal).Abs(), Is.LessThan(0.0000001M));
+        }
+
+        [TestCase(100000000000000)]
+        [TestCase(1000.125123123123)]
+        [TestCase(1000000000.0000000000007)]
+        [TestCase(0.000000000000010)]
+        [TestCase(0.1000412412512400)]
+        [TestCase(0.999999231241241123231)]
+        [TestCase(0)]
+        [TestCase(-100000000000000)]
+        [TestCase(-1000.125123123123)]
+        [TestCase(-1000000000.0000000000007)]
+        [TestCase(-0.000000000000010)]
+        [TestCase(-0.1000412412512400)]
+        [TestCase(-0.999999231241241123231)]
+        public void TangentTest(double value)
+        {
+            var target = Convert.ToDecimal(value);
+            var cmpVal = Convert.ToDecimal(Math.Tan(value));
+
+            Assert.That((DecimalMath.Tan(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
+            Assert.That((target.Tan() - cmpVal).Abs(), Is.LessThan(0.0000001M));
+        }
+
+
+        [TestCase(Math.PI / 2)]
+        [TestCase(Math.PI / 3)]
+        [TestCase(Math.PI / 4)]
+        [TestCase(Math.PI / 6)]
+        [TestCase(-Math.PI / 2)]
+        [TestCase(-Math.PI / 3)]
+        [TestCase(-Math.PI / 4)]
+        [TestCase(-Math.PI / 6)]
+        public void CotangentTableValuesTest(double value)
+        {
+            var target = Convert.ToDecimal(value);
+            var cmpVal = Convert.ToDecimal(1.0 / Math.Tan(value));
+
+            Assert.That((DecimalMath.Cot(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
+            Assert.That((target.Cot() - cmpVal).Abs(), Is.LessThan(0.0000001M));
+        }
+
+        [TestCase(100000000000000)]
+        [TestCase(1000.125123123123)]
+        [TestCase(1000000000.0000000000007)]
+        [TestCase(0.000000000000010)]
+        [TestCase(0.1000412412512400)]
+        [TestCase(0.999999231241241123231)]
+        [TestCase(-100000000000000)]
+        [TestCase(-1000.125123123123)]
+        [TestCase(-1000000000.0000000000007)]
+        [TestCase(-0.000000000000010)]
+        [TestCase(-0.1000412412512400)]
+        [TestCase(-0.999999231241241123231)]
+
+        public void CotangentTest(double value)
+        {
+            var target = Convert.ToDecimal(value);
+            var cmpVal = Convert.ToDecimal(1.0 / Math.Tan(value));
+
+            Assert.That((DecimalMath.Cot(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
+            Assert.That((target.Cot() - cmpVal).Abs(), Is.LessThan(0.0000001M));
         }
 
         #endregion
