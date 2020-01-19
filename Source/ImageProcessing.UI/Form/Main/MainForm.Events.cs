@@ -185,7 +185,7 @@ namespace ImageProcessing.Form.Main
         }
 
         /// <summary>
-        /// Provides the binder for tool strip buttons
+        /// Provides the binder for tool strip buttons and zoom trackbars
         /// </summary>
         /// <param name="msg">A Windows message</param>
         /// <param name="keyData">The pressed key</param>
@@ -194,12 +194,22 @@ namespace ImageProcessing.Form.Main
             switch(keyData)
             {
                 case (Keys.Right):
-                    Invoke(ReplaceImage, (string)Src.Tag);
+                    Invoke(ReplaceImage, Src.Tag);
                     return true;
                 case (Keys.Left):   
-                    Invoke(ReplaceImage, (string)Dst.Tag);
+                    Invoke(ReplaceImage, Dst.Tag);
                     return true;
-                case (Keys.Add):
+                case (Keys.Q):
+                    Invoke(BuildPMF, Src.Tag, PMF.Tag);
+                    return true;
+                case (Keys.Q | Keys.Control):
+                    Invoke(BuildPMF, Dst.Tag, PMF.Tag);
+                    return true;
+                case (Keys.W):
+                    Invoke(BuildCDF, Src.Tag, CDF.Tag);
+                    return true;
+                case (Keys.W | Keys.Control):
+                    Invoke(BuildCDF, Dst.Tag, CDF.Tag);
                     return true;
             }
 

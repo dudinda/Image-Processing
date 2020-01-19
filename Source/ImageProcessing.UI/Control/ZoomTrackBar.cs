@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+
 using MetroFramework.Controls;
 
 namespace ImageProcessing.UI.Control
@@ -29,8 +30,25 @@ namespace ImageProcessing.UI.Control
             }
         }
 
+        protected override void OnMouseWheel(MouseEventArgs e)
+        {
+            if(e.Delta > 0)
+            {
+                base.Value = base.Value + 10 > Maximum ?
+                       Maximum : base.Value + 10;
+            }
+
+            if(e.Delta < 0)
+            {
+                base.Value = base.Value - 10 < Minimum ?
+                       Minimum : base.Value - 10;
+            }
+
+            base.OnMouseWheel(e);
+        }
+
         /// <summary>
-        /// onPreviewKeyDown
+        /// OnPreviewKeyDown
         /// </summary>
         /// <param name="e"></param>
         protected override void OnPreviewKeyDown(PreviewKeyDownEventArgs e)
