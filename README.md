@@ -6,7 +6,8 @@ The application was developed as the R&D work. It consists of 3 modules: RGB fil
 <p>The original purpose was to research the possible advantages of grayscale images' contrast optimization using normal distribution regarding uniform distribution. Two parameters such as expectation and std allowing to control relative luminance and contrast, respectively.</p>
 
 <p align="center">
-    <img src="https://i.imgur.com/68lt7aP.png" width="600" height = "400" alt="application window">
+    
+    <img src="https://i.imgur.com/lB5qQNq.png" width="600" height = "400" alt="application window">
     <p align="center">Fig. 1 - Main window.</p>
 </p>
 
