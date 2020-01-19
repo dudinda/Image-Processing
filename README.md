@@ -35,7 +35,7 @@ Image filtration and contrast optimization.
 <p> Splitting the interval [0, 255] to 16 subintervals we may now use the definition above. Since we define contrast as statistical scattering, the definition of conditional variance may show the level of contrast on each specified interval.</p>
 
 <p align="center">
-    <img src="https://i.imgur.com/lo3uMty.png" alt="application window">
+    <img src="https://i.imgur.com/OhGb6lI.png" alt="application window">
      <p align="center">Fig. 5 - Using a definition of conditional variance on 16 intervals of relative luminance.</p>
 </p>
 
