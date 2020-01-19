@@ -147,10 +147,12 @@ namespace ImageProcessing.Form.Main
             switch(container)
             {
                 case ImageContainer.Source:
-                    SrcZoom.OriginalSize = size;
+                    SrcZoom.OriginalSize  = size;
+                    SrcZoom.TrackBarValue = 0;
                     break;
                 case ImageContainer.Destination:
-                    DstZoom.OriginalSize = size;
+                    DstZoom.OriginalSize  = size;
+                    DstZoom.TrackBarValue = 0;
                     break;
 
                 default: throw new NotSupportedException(nameof(container));

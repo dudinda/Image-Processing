@@ -156,6 +156,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             new Bitmap(View.GetImage(ImageContainer.Source)), filter
                             );
 
+                        View.ResetTrackBar(ImageContainer.Destination, View.DstImageCopy.Size);
+
                         return new Bitmap(View.DstImageCopy);
                     }).ConfigureAwait(true);
             }
@@ -180,6 +182,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     () =>
                     {
                         View.DstImageCopy = _rgbFilterService.Filter(new Bitmap(View.SrcImage), filter);
+                        View.ResetTrackBar(ImageContainer.Destination, View.DstImageCopy.Size);
+
                         return new Bitmap(View.DstImageCopy);
                     }).ConfigureAwait(true);
             }
@@ -232,6 +236,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                         View.DstImageCopy = _rgbFiltersFactory
                         .GetColorFilter(result)
                         .Filter(new Bitmap(View.SrcImage));
+                        View.ResetTrackBar(ImageContainer.Destination, View.DstImageCopy.Size);
 
                         return new Bitmap(View.DstImageCopy);
                     }).ConfigureAwait(true);
@@ -283,6 +288,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                    () => 
                    {
                        View.DstImageCopy = new Bitmap(View.SrcImage).Shuffle();
+                       View.ResetTrackBar(ImageContainer.Destination, View.DstImageCopy.Size);
 
                        return new Bitmap(View.DstImageCopy);
                    }).ConfigureAwait(true);
@@ -330,9 +336,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
          
                 var result = await _locker.LockAsync(() =>
                 {
-                    View.SetImageCopy(source, (Image)View.GetImage(target).Clone());
+                    View.SetImageCopy(source, (Image)View.GetImageCopy(target).Clone());
                     View.ResetTrackBar(source, View.GetImageCopySize(target));
-
+                    
                     return new Bitmap(View.GetImageCopy(source));
                 }).ConfigureAwait(true);
 
