@@ -32,7 +32,7 @@ namespace ImageProcessing.Factory.Filters.Distributions
                 case Distribution.Weibull:
                     return new WeibullDistribution();
 
-                default: throw new NotSupportedException(nameof(distribution));
+                default: throw new NotSupportedException(distribution);
             }
         }
     }

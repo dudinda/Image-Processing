@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using ImageProcessing.Common.Extensions.DecimalMathExtensions;
 
 namespace ImageProcessing.Common.Utility.DecimalMath
 {
@@ -8,6 +7,11 @@ namespace ImageProcessing.Common.Utility.DecimalMath
     {
         public static decimal ErfInv(decimal x)
         {
+            if(x.Abs() >= 1)
+            {
+                throw new ArgumentException("NaN");
+            }
+
             decimal  p;
             var w = -DecimalMath.Log((1.0M - x) * (1.0M + x));
 

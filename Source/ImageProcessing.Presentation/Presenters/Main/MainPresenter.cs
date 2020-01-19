@@ -130,7 +130,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     var extension = Path.GetExtension(View.PathToFile);
                     bmpToSave.Save(View.PathToFile, extension.GetImageFormat());
 
-                }).ConfigureAwait(false);            
+                }).ConfigureAwait(true);            
             }
             catch
             {
@@ -194,7 +194,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
             catch
             {
-                View.ShowError("Error while applying RGB filter.");
+                View.ShowError("Error while applying an RGB filter.");
             }
         }
 
@@ -282,7 +282,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
             catch
             {
-                View.ShowError("Error while applying histogram transformation.");
+                View.ShowError("Error while applying a histogram transformation.");
             }
         }
 

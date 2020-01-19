@@ -34,7 +34,7 @@ namespace ImageProcessing.Common.Extensions.StringExtensions
                 case ".wmf":
                     return ImageFormat.Wmf;
 
-                default: throw new NotImplementedException(nameof(ext));
+                default: throw new NotImplementedException(ext);
             }
         }
 
