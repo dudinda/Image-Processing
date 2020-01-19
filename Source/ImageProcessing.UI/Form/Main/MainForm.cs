@@ -142,17 +142,32 @@ namespace ImageProcessing.Form.Main
             }
         }
 
-        public void ResetTrackBar(ImageContainer container, Size size)
+        public void ResetTrackBarValue(ImageContainer container, int value)
+        {
+            switch (container)
+            {
+                case ImageContainer.Source:
+                    SrcZoom.TrackBarValue = 0;
+                    SrcZoom.Focus();
+                    break;
+                case ImageContainer.Destination:
+                    DstZoom.TrackBarValue = 0;
+                    DstZoom.Focus();
+                    break;
+
+                default: throw new NotSupportedException(nameof(container));
+            }
+        }
+
+        public void SetTrackBarSize(ImageContainer container, Size size)
         {
             switch(container)
             {
                 case ImageContainer.Source:
                     SrcZoom.OriginalSize  = size;
-                    SrcZoom.TrackBarValue = 0;
                     break;
                 case ImageContainer.Destination:
                     DstZoom.OriginalSize  = size;
-                    DstZoom.TrackBarValue = 0;
                     break;
 
                 default: throw new NotSupportedException(nameof(container));

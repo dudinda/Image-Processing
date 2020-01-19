@@ -77,11 +77,12 @@ namespace ImageProcessing.Presentation.Presenters.Main
                                 View.SrcImageCopy = new Bitmap(Image.FromStream(stream));
                             }
 
-                            View.ResetTrackBar(ImageContainer.Source, View.SrcImageCopy.Size);
+                            View.SetTrackBarSize(ImageContainer.Source, View.SrcImageCopy.Size);
        
                             return new Bitmap(View.SrcImageCopy);
                         }).ConfigureAwait(true);
 
+                        View.ResetTrackBarValue(ImageContainer.Source, 0);
                         View.PathToFile = dialog.FileName;
                         
                     }
@@ -156,10 +157,12 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             new Bitmap(View.GetImage(ImageContainer.Source)), filter
                             );
 
-                        View.ResetTrackBar(ImageContainer.Destination, View.DstImageCopy.Size);
+                        View.SetTrackBarSize(ImageContainer.Destination, View.DstImageCopy.Size);
 
                         return new Bitmap(View.DstImageCopy);
                     }).ConfigureAwait(true);
+
+                View.ResetTrackBarValue(ImageContainer.Destination, 0);
             }
             catch 
             {
@@ -182,10 +185,12 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     () =>
                     {
                         View.DstImageCopy = _rgbFilterService.Filter(new Bitmap(View.SrcImage), filter);
-                        View.ResetTrackBar(ImageContainer.Destination, View.DstImageCopy.Size);
+                        View.SetTrackBarSize(ImageContainer.Destination, View.DstImageCopy.Size);
 
                         return new Bitmap(View.DstImageCopy);
                     }).ConfigureAwait(true);
+
+                View.ResetTrackBarValue(ImageContainer.Destination, 0);
             }
             catch
             {
@@ -236,10 +241,12 @@ namespace ImageProcessing.Presentation.Presenters.Main
                         View.DstImageCopy = _rgbFiltersFactory
                         .GetColorFilter(result)
                         .Filter(new Bitmap(View.SrcImage));
-                        View.ResetTrackBar(ImageContainer.Destination, View.DstImageCopy.Size);
+                        View.SetTrackBarSize(ImageContainer.Destination, View.DstImageCopy.Size);
 
                         return new Bitmap(View.DstImageCopy);
                     }).ConfigureAwait(true);
+
+                View.ResetTrackBarValue(ImageContainer.Destination, 0);
             }
             catch
             {
@@ -264,11 +271,12 @@ namespace ImageProcessing.Presentation.Presenters.Main
                         () =>
                         {
                             View.DstImageCopy = _distributionService.TransformTo(new Bitmap(View.SrcImage), filter);
-                            View.ResetTrackBar(ImageContainer.Destination, View.DstImageCopy.Size);
+                            View.SetTrackBarSize(ImageContainer.Destination, View.DstImageCopy.Size);
                             return new Bitmap(View.DstImageCopy);
                         }
                     ).ConfigureAwait(true);
 
+                    View.ResetTrackBarValue(ImageContainer.Destination, 0);
                     View.DstImage.Tag = filter.Name;
                 }
             }
@@ -288,10 +296,12 @@ namespace ImageProcessing.Presentation.Presenters.Main
                    () => 
                    {
                        View.DstImageCopy = new Bitmap(View.SrcImage).Shuffle();
-                       View.ResetTrackBar(ImageContainer.Destination, View.DstImageCopy.Size);
+                       View.SetTrackBarSize(ImageContainer.Destination, View.DstImageCopy.Size);
 
                        return new Bitmap(View.DstImageCopy);
                    }).ConfigureAwait(true);
+
+                View.ResetTrackBarValue(ImageContainer.Destination, 0);
             }
             catch
             {
@@ -321,28 +331,28 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
      
-        private async void Replace(string container)
+        private async void Replace(string replaceFrom)
         {
             try
             {
-                Requires.IsNotNull(container, nameof(container));
+                Requires.IsNotNull(replaceFrom, nameof(replaceFrom));
 
-                var source = container.GetEnumValueByName<ImageContainer>();
+                var source = replaceFrom.GetEnumValueByName<ImageContainer>();
 
                 var target = source == ImageContainer.Source ?
                     ImageContainer.Destination : ImageContainer.Source;
-
+                
                 if (View.ImageIsNull(source)) return;
          
                 var result = await _locker.LockAsync(() =>
                 {
-                    View.SetImageCopy(source, (Image)View.GetImageCopy(target).Clone());
-                    View.ResetTrackBar(source, View.GetImageCopySize(target));
+                    View.SetImageCopy(target, (Image)View.GetImageCopy(source).Clone());
+                    View.SetTrackBarSize(target, View.GetImageCopySize(source));
                     
-                    return new Bitmap(View.GetImageCopy(source));
+                    return new Bitmap(View.GetImageCopy(target));
                 }).ConfigureAwait(true);
-
-                View.SetImage(source, result);
+                View.ResetTrackBarValue(target, 0);
+                View.SetImage(target, result);
 
 
             }

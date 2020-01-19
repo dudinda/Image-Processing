@@ -48,10 +48,10 @@ namespace ImageProcessing.Form.Main
             SaveFileAs.Click += (sender, args)
                 => Invoke(SaveImageAs);
 
-            SrcZoom.MouseUp += (secnder, args)
+            SrcZoom.ValueChanged += (secnder, args)
                 => Invoke(Zoom, (string)Src.Tag);
 
-            DstZoom.MouseUp += (secnder, args)
+            DstZoom.ValueChanged += (secnder, args)
                 => Invoke(Zoom, (string)Dst.Tag);
         }
 
@@ -85,10 +85,10 @@ namespace ImageProcessing.Form.Main
                 => Invoke(UndoLast);
 
             ReplaceSrcByDst.Click += (sernder, args)
-                => Invoke(ReplaceImage, (string)Src.Tag);
+                => Invoke(ReplaceImage, (string)Dst.Tag);
 
             ReplaceDstBySrc.Click += (sernder, args)
-                => Invoke(ReplaceImage, (string)Dst.Tag);
+                => Invoke(ReplaceImage, (string)Src.Tag);
         }
 
         /// <summary>
@@ -193,14 +193,11 @@ namespace ImageProcessing.Form.Main
         {
             switch(keyData)
             {
-                case (Keys.Left  | Keys.Control):
+                case (Keys.Right):
                     Invoke(ReplaceImage, (string)Src.Tag);
                     return true;
-                case (Keys.Right | Keys.Control):
+                case (Keys.Left):   
                     Invoke(ReplaceImage, (string)Dst.Tag);
-                    return true;
-                case (Keys.Q):
-                    //Invoke(, "Source");
                     return true;
                 case (Keys.Add):
                     return true;

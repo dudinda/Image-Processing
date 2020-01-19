@@ -41,7 +41,8 @@ namespace ImageProcessing.Presentation.Views.Main
         Image GetImage(ImageContainer container);
         void SetImage(ImageContainer container, Image image);
         bool ImageIsNull(ImageContainer container);
-        void ResetTrackBar(ImageContainer container, Size size);
+        void ResetTrackBarValue(ImageContainer container, int value);
+        void SetTrackBarSize(ImageContainer container, Size size);
         Size GetZoomFactor(ImageContainer container);
         Size GetImageCopySize(ImageContainer container);
 

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Drawing;
-
+using System.Windows.Forms;
 using MetroFramework.Controls;
 
 namespace ImageProcessing.UI.Control
@@ -27,6 +27,61 @@ namespace ImageProcessing.UI.Control
                 return new Size(OriginalSize.Width  + Convert.ToInt32(OriginalSize.Width * scale), 
                                 OriginalSize.Height + Convert.ToInt32(OriginalSize.Height * scale) );
             }
-        } 
+        }
+
+        /// <summary>
+        /// onPreviewKeyDown
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnPreviewKeyDown(PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Add:
+                    base.Value  = base.Value + 50 > Maximum ?
+                        Maximum : base.Value + 50;
+                    e.IsInputKey = true;
+                    break;
+                case Keys.Subtract:
+                    base.Value  = base.Value - 50 < Minimum ?
+                        Minimum : base.Value - 50;
+                    e.IsInputKey = true;
+                    break;
+
+            }
+        }
+
+        /// <summary>
+        /// onKeyDown
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Right:
+                case Keys.Left:
+                    e.Handled = true;
+                    break;
+
+            }
+        }
+
+        /// <summary>
+        /// onKeyUp
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Right:
+                case Keys.Left:
+                    e.Handled = true;
+                    break;
+
+            }
+        }
+
     }
 }
