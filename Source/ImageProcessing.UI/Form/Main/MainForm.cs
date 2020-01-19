@@ -4,6 +4,7 @@ using System.Windows.Forms;
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Helpers;
+using ImageProcessing.Common.Interop;
 using ImageProcessing.Presentation.Views.Main;
 
 using MetroFramework.Forms;
@@ -188,7 +189,7 @@ namespace ImageProcessing.Form.Main
         }
 
         public void ShowError(string error)
-            => ErrorTooltip.Show(error, this, Cursor.Position.X, Cursor.Position.Y);
+            => ErrorTooltip.Show(error, this, CursorPosition.GetCursorPosition());
 
     }
 }
