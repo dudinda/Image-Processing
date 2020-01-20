@@ -55,7 +55,7 @@ namespace ImageProcessing.Presentation.Presenters
 
             var pmf = _distributionService.GetPMF(bitmap);
 
-            //Init("PMF", pmf);
+            View.Init(RandomVariable.PMF);
 
             for (int graylevel = 0; graylevel < 256; ++graylevel)
             {
@@ -73,7 +73,7 @@ namespace ImageProcessing.Presentation.Presenters
 
             var cdf = _distributionService.GetCDF(bitmap);
 
-          //  Init("CDF", pmf);
+            View.Init(RandomVariable.CDF);
 
             for (int graylevel = 0; graylevel < 256; ++graylevel)
             {

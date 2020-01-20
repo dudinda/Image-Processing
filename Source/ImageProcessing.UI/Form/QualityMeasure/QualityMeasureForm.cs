@@ -18,7 +18,8 @@ namespace ImageProcessing.Form.QualityMeasure
 
         public new void Show()
         {
-            ShowDialog();
+            Focus();
+            base.Show();
         }
 
         private void SetHistogram()
