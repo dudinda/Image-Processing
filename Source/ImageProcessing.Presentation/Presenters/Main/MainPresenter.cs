@@ -209,7 +209,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 var color = filterName.GetEnumValueByName<RGBColors>();
 
-                var result = View.SetColor(color);
+                var result = View.GetSelectedColors(color);
       
                 if (result is default(RGBColors))
                 {

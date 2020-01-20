@@ -188,29 +188,30 @@ namespace ImageProcessing.Form.Main
             }
         }
 
-        public RGBColors SetColor(RGBColors color)
+        public RGBColors GetSelectedColors(RGBColors color)
         {
             var result = default(RGBColors);
 
             switch (color)
             {
                 case RGBColors.Red:
-                    IsRedChannelChecked = !IsRedChannelChecked;
-                    if(IsRedChannelChecked) result |= RGBColors.Red;
+                    IsRedChannelChecked = !IsRedChannelChecked;               
                     break;
 
                 case RGBColors.Blue:
                     IsBlueChannelChecked = !IsBlueChannelChecked;
-                    if (IsBlueChannelChecked) result |= RGBColors.Blue;
                     break;
 
                 case RGBColors.Green:
-                    IsGreenChannelChecked = !IsGreenChannelChecked;
-                    if (IsGreenChannelChecked) result |= RGBColors.Green;
+                    IsGreenChannelChecked = !IsGreenChannelChecked;              
                     break;
 
                 default:throw new NotSupportedException(nameof(color));
             }
+
+            if (IsRedChannelChecked)   result |= RGBColors.Red;
+            if (IsBlueChannelChecked)  result |= RGBColors.Blue;
+            if (IsGreenChannelChecked) result |= RGBColors.Green;
 
             return result;
         } 

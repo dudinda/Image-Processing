@@ -35,7 +35,7 @@ namespace ImageProcessing.Presentation.Views.Main
         bool IsRedChannelChecked { get; set; }
         bool IsBlueChannelChecked { get; set; }
 
-        RGBColors SetColor(RGBColors color);
+        RGBColors GetSelectedColors(RGBColors color);
         void ShowInfo(string info);
         void ShowError(string message);
         Image GetImageCopy(ImageContainer container);
