@@ -59,7 +59,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             Bind();
         }
 
-        private async void OpenImage()
+        private async Task OpenImage()
         {
             try
             {
@@ -94,7 +94,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private async void SaveImageAs()
+        private async Task SaveImageAs()
         {
             try
             {
@@ -110,7 +110,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             var extension = Path.GetExtension(dialog.FileName);
                             bmpToSave.Save(dialog.FileName, extension.GetImageFormat());
 
-                        }).ConfigureAwait(false);
+                        }).ConfigureAwait(true);
                     }
                 }
             }
@@ -120,7 +120,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private async void SaveImage()
+        private async Task SaveImage()
         {
             try
             {
@@ -138,7 +138,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private async void ApplyConvolutionFilter(string filterName)
+        private async Task ApplyConvolutionFilter(string filterName)
         {
             try
             {
@@ -170,7 +170,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private async void ApplyRGBFilter(string filterName)
+        private async Task ApplyRGBFilter(string filterName)
         {
             try
             {
@@ -198,7 +198,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private async void ApplyColorFilter(string filterName)
+        private async Task ApplyColorFilter(string filterName)
         {
             try
             {
@@ -207,29 +207,11 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 if (View.ImageIsNull(ImageContainer.Source)) 
                     return;
 
-                RGBColors result = default;
+                var color = filterName.GetEnumValueByName<RGBColors>();
 
-                switch (filterName.GetEnumValueByName<RGBColors>())
-                {
-                    case RGBColors.Red:
-                        View.IsRedChannelChecked = !View.IsRedChannelChecked;
-                        if(View.IsRedChannelChecked) result |= RGBColors.Red;
-                        break;
-
-                    case RGBColors.Blue:
-                        View.IsBlueChannelChecked = !View.IsBlueChannelChecked;
-                        if(View.IsBlueChannelChecked) result |= RGBColors.Blue;
-                        break;
-
-                    case RGBColors.Green:
-                        View.IsGreenChannelChecked = !View.IsGreenChannelChecked;
-                        if(View.IsGreenChannelChecked) result |= RGBColors.Green;
-                        break;
-
-                    default: throw new NotSupportedException(nameof(filterName));
-                }
+                var result = View.SetColor(color);
       
-                if (result == RGBColors.Unknown)
+                if (result is default(RGBColors))
                 {
                     View.DstImage = View.SrcImage;
                     return;
@@ -241,6 +223,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                         View.DstImageCopy = _rgbFiltersFactory
                         .GetColorFilter(result)
                         .Filter(new Bitmap(View.SrcImage));
+
                         View.SetTrackBarSize(ImageContainer.Destination, View.DstImageCopy.Size);
 
                         return new Bitmap(View.DstImageCopy);
@@ -254,7 +237,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }  
 
-        private async void ApplyHistogramTransformation(string filterName, (string, string) parms)
+        private async Task ApplyHistogramTransformation(string filterName, (string, string) parms)
         {
             try
             {
@@ -286,7 +269,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private async void Shuffle()
+        private async Task Shuffle()
         {
             try
             {
@@ -331,7 +314,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
      
-        private async void Replace(string replaceFrom)
+        private async Task Replace(string replaceFrom)
         {
             try
             {
@@ -362,7 +345,40 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private async void Zoom(string target)
+        private async Task GetRandomVariableInfo(string action)
+        {
+            try
+            {
+                Requires.IsNotNull(action, nameof(action));
+
+                await _locker.LockAsync(() =>
+                {
+                    var image = new Bitmap(View.SrcImageCopy);
+
+                    switch(action.GetEnumValueByName<RandomVariable>())
+                    {
+                        case RandomVariable.Expectation:
+                            View.ShowInfo(_distributionService.GetExpectation(image).ToString());
+                            break;
+                        case RandomVariable.Variance:
+                            View.ShowInfo(_distributionService.GetVariance(image).ToString());
+                            break;
+                        case RandomVariable.StandardDeviation:
+                            View.ShowInfo(_distributionService.GetStandardDeviation(image).ToString());
+                            break;
+                        case RandomVariable.Entropy:
+                            View.ShowInfo(_distributionService.GetEntropy(image).ToString());
+                            break;
+                    }
+                }).ConfigureAwait(true);
+            }
+            catch
+            {
+
+            }
+        }
+
+        private async Task Zoom(string target)
         {
             try
             {

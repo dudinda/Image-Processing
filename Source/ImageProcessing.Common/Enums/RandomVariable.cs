@@ -23,26 +23,31 @@
         /// <summary>
         /// 
         /// </summary>
-        Entropy                = 3,
+        StandardDeviation      = 3,
 
         /// <summary>
         /// 
         /// </summary>
-        ConditionalExpectation = 4,
+        Entropy                = 5,
 
         /// <summary>
         /// 
         /// </summary>
-        ConditionalVariance    = 5,
+        ConditionalExpectation = 6,
 
         /// <summary>
         /// 
         /// </summary>
-        PMF                    = 6,
+        ConditionalVariance    = 7,
 
         /// <summary>
         /// 
         /// </summary>
-        CDF                    = 7
+        PMF                    = 8,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        CDF                    = 9
     }
 }
