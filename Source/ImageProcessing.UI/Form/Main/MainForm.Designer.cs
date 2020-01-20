@@ -98,12 +98,13 @@ namespace ImageProcessing.Form.Main
             this.PictureBoxSrcPanel = new System.Windows.Forms.Panel();
             this.Src = new System.Windows.Forms.PictureBox();
             this.TrackBarSrcPanel = new System.Windows.Forms.Panel();
+            this.SrcZoom = new ImageProcessing.UI.Control.ZoomTrackBar();
             this.PictureBoxDstPanel = new System.Windows.Forms.Panel();
             this.Dst = new System.Windows.Forms.PictureBox();
             this.TrackBarDstPanel = new System.Windows.Forms.Panel();
-            this.ErrorTooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.SrcZoom = new ImageProcessing.UI.Control.ZoomTrackBar();
             this.DstZoom = new ImageProcessing.UI.Control.ZoomTrackBar();
+            this.ErrorTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.RandomVariableInfo = new MetroFramework.Components.MetroToolTip();
             this.MainMenu.SuspendLayout();
             this.ToolBarMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Container)).BeginInit();
@@ -726,6 +727,21 @@ namespace ImageProcessing.Form.Main
             this.TrackBarSrcPanel.Size = new System.Drawing.Size(389, 34);
             this.TrackBarSrcPanel.TabIndex = 3;
             // 
+            // SrcZoom
+            // 
+            this.SrcZoom.BackColor = System.Drawing.Color.Transparent;
+            this.SrcZoom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SrcZoom.Location = new System.Drawing.Point(0, 0);
+            this.SrcZoom.Maximum = 200;
+            this.SrcZoom.Minimum = -200;
+            this.SrcZoom.Name = "SrcZoom";
+            this.SrcZoom.OriginalSize = new System.Drawing.Size(0, 0);
+            this.SrcZoom.Size = new System.Drawing.Size(389, 34);
+            this.SrcZoom.TabIndex = 0;
+            this.SrcZoom.Tag = "Source";
+            this.SrcZoom.TrackBarValue = 0;
+            this.SrcZoom.Value = 0;
+            // 
             // PictureBoxDstPanel
             // 
             this.PictureBoxDstPanel.AutoScroll = true;
@@ -756,21 +772,6 @@ namespace ImageProcessing.Form.Main
             this.TrackBarDstPanel.Size = new System.Drawing.Size(322, 34);
             this.TrackBarDstPanel.TabIndex = 4;
             // 
-            // SrcZoom
-            // 
-            this.SrcZoom.BackColor = System.Drawing.Color.Transparent;
-            this.SrcZoom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SrcZoom.Location = new System.Drawing.Point(0, 0);
-            this.SrcZoom.Maximum = 200;
-            this.SrcZoom.Minimum = -200;
-            this.SrcZoom.Name = "SrcZoom";
-            this.SrcZoom.OriginalSize = new System.Drawing.Size(0, 0);
-            this.SrcZoom.Size = new System.Drawing.Size(389, 34);
-            this.SrcZoom.TabIndex = 0;
-            this.SrcZoom.Tag = "Source";
-            this.SrcZoom.TrackBarValue = 0;
-            this.SrcZoom.Value = 0;
-            // 
             // DstZoom
             // 
             this.DstZoom.BackColor = System.Drawing.Color.Transparent;
@@ -785,6 +786,12 @@ namespace ImageProcessing.Form.Main
             this.DstZoom.Tag = "Destination";
             this.DstZoom.TrackBarValue = 0;
             this.DstZoom.Value = 0;
+            // 
+            // RandomVariableInfo
+            // 
+            this.RandomVariableInfo.Style = MetroFramework.MetroColorStyle.Blue;
+            this.RandomVariableInfo.StyleManager = null;
+            this.RandomVariableInfo.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
             // MainForm
             // 
@@ -892,6 +899,7 @@ namespace ImageProcessing.Form.Main
         private Panel TrackBarDstPanel;
         private UI.Control.ZoomTrackBar SrcZoom;
         private UI.Control.ZoomTrackBar DstZoom;
+        private MetroFramework.Components.MetroToolTip RandomVariableInfo;
     }
 }
 
