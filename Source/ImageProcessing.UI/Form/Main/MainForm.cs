@@ -143,16 +143,16 @@ namespace ImageProcessing.Form.Main
             }
         }
 
-        public void ResetTrackBarValue(ImageContainer container, int value)
+        public void ResetTrackBarValue(ImageContainer container, int value = 0)
         {
             switch (container)
             {
                 case ImageContainer.Source:
-                    SrcZoom.TrackBarValue = 0;
+                    SrcZoom.TrackBarValue = value;
                     SrcZoom.Focus();
                     break;
                 case ImageContainer.Destination:
-                    DstZoom.TrackBarValue = 0;
+                    DstZoom.TrackBarValue = value;
                     DstZoom.Focus();
                     break;
 

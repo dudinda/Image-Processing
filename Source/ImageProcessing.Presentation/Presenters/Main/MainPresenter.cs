@@ -82,7 +82,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             return new Bitmap(View.SrcImageCopy);
                         }).ConfigureAwait(true);
 
-                        View.ResetTrackBarValue(ImageContainer.Source, 0);
+                        View.ResetTrackBarValue(ImageContainer.Source);
                         View.PathToFile = dialog.FileName;
                         
                     }
@@ -162,7 +162,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                         return new Bitmap(View.DstImageCopy);
                     }).ConfigureAwait(true);
 
-                View.ResetTrackBarValue(ImageContainer.Destination, 0);
+                View.ResetTrackBarValue(ImageContainer.Destination);
             }
             catch 
             {
@@ -190,7 +190,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                         return new Bitmap(View.DstImageCopy);
                     }).ConfigureAwait(true);
 
-                View.ResetTrackBarValue(ImageContainer.Destination, 0);
+                View.ResetTrackBarValue(ImageContainer.Destination);
             }
             catch
             {
@@ -229,7 +229,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                         return new Bitmap(View.DstImageCopy);
                     }).ConfigureAwait(true);
 
-                View.ResetTrackBarValue(ImageContainer.Destination, 0);
+                View.ResetTrackBarValue(ImageContainer.Destination);
             }
             catch
             {
@@ -259,7 +259,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                         }
                     ).ConfigureAwait(true);
 
-                    View.ResetTrackBarValue(ImageContainer.Destination, 0);
+                    View.ResetTrackBarValue(ImageContainer.Destination);
                     View.DstImage.Tag = filter.Name;
                 }
             }
@@ -284,7 +284,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                        return new Bitmap(View.DstImageCopy);
                    }).ConfigureAwait(true);
 
-                View.ResetTrackBarValue(ImageContainer.Destination, 0);
+                View.ResetTrackBarValue(ImageContainer.Destination);
             }
             catch
             {
@@ -334,10 +334,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     
                     return new Bitmap(View.GetImageCopy(target));
                 }).ConfigureAwait(true);
-                View.ResetTrackBarValue(target, 0);
+
+                View.ResetTrackBarValue(target);
                 View.SetImage(target, result);
-
-
             }
             catch
             {
