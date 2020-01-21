@@ -14,12 +14,24 @@ namespace ImageProcessing.Common.Extensions.EnumExtensions
         /// <typeparam name="T">An enumerated type.</typeparam>
         /// <param name="value">The source value.</param>
         /// <returns></returns>
-        public static T GetEnumValueByName<T>(this string value)
-            => (T)Enum.Parse(typeof(T), value);
-        
-        public static T GetValueFromDescription<T>(this string description)
+        public static TEnum GetEnumValueByName<TEnum>(this string value)
+            where TEnum : struct
+            => (TEnum)Enum.Parse(typeof(TEnum), value);
+
+
+        public static string GetDescription<TEnum>(this TEnum value) 
+            where TEnum : struct
         {
-            var type = typeof(T);
+            var type = value.GetType();
+            var memInfo = type.GetMember(value.ToString());
+            var attributes = memInfo[0].GetCustomAttributes(typeof(TEnum), false);
+            return (attributes.Length > 0) ? ((TEnum)attributes[0]).ToString() : null;
+        }
+
+        public static TEnum GetValueFromDescription<TEnum>(this string description)
+            where TEnum : struct
+        {
+            var type = typeof(TEnum);
 
             if (!type.IsEnum)
             {
@@ -35,14 +47,14 @@ namespace ImageProcessing.Common.Extensions.EnumExtensions
                 {
                     if (attribute.Description == description)
                     {
-                        return (T)field.GetValue(null);
+                        return (TEnum)field.GetValue(null);
                     }
                 }
                 else
                 {
                     if (field.Name == description)
                     {
-                        return (T)field.GetValue(null);
+                        return (TEnum)field.GetValue(null);
                     }
                 }
             }

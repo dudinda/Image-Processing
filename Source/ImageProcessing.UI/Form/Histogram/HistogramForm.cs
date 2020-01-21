@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.Common.Enums;
+using ImageProcessing.Common.Extensions.EnumExtensions;
 using ImageProcessing.Presentation.Views.Histogram;
 
 using MetroFramework.Forms;
@@ -13,9 +14,8 @@ namespace ImageProcessing.Form.Histogram
     {
         private readonly ApplicationContext _context;
 
-        public HistogramForm(ApplicationContext context)
+        public HistogramForm()
         {
-            _context = context;
             InitializeComponent();
         }
 
@@ -29,17 +29,19 @@ namespace ImageProcessing.Form.Histogram
   
         public void Init(RandomVariable action)
         {
-            switch(action)
+            var pmf = RandomVariable.PMF.GetDescription();
+            var cdf = RandomVariable.CDF.GetDescription();
+            switch (action)
             {
-                case RandomVariable.PMF:
-                    Text = "F(x)";
-                    Freq.Series["F(x)"].IsVisibleInLegend = true;
-                    Freq.Series["p(x)"].IsVisibleInLegend = false;
-                    break;
                 case RandomVariable.CDF:
-                    Text = "p(x)";
-                    Freq.Series["p(x)"].IsVisibleInLegend = true;
-                    Freq.Series["F(x)"].IsVisibleInLegend = false;
+                    Text = cdf;
+                    Freq.Series[cdf].IsVisibleInLegend = true;
+                    Freq.Series[pmf].IsVisibleInLegend = false;
+                    break;
+                case RandomVariable.PMF:
+                    Text = pmf;
+                    Freq.Series[pmf].IsVisibleInLegend = true;
+                    Freq.Series[cdf].IsVisibleInLegend = false;
                     break;
 
                 default: throw new NotSupportedException(nameof(action));

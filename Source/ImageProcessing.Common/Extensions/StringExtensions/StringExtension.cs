@@ -38,17 +38,18 @@ namespace ImageProcessing.Common.Extensions.StringExtensions
             }
         }
 
-        public static bool TryParse<T>(this string input, out T value)
+        public static bool TryParse<TValue>(this string input, out TValue value)
+            where TValue : struct
         {
-            var converter = TypeDescriptor.GetConverter(typeof(T));
+            var converter = TypeDescriptor.GetConverter(typeof(TValue));
             try
             {
-                value = (T)converter.ConvertFromString(input);
+                value = (TValue)converter.ConvertFromString(input);
                 return true;
             }
             catch
             {
-                value = default(T);
+                value = default(TValue);
                 return false;
             }
         }

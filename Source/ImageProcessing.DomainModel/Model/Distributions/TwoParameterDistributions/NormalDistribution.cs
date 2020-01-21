@@ -21,7 +21,7 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
         public decimal GetVariance() => _sigma * _sigma;
         public decimal Quantile(decimal p) => 
             _mu + _sigma * DecimalMath.Sqrt(2) * 
-            (decimal)SpecialFunctions.ErfInv(Convert.ToDouble(2 * p - 1));
+           DecimalMathSpecial.ErfInv(2 * p - 1);
 
         public IDistribution SetParams((decimal, decimal) parms)
         {

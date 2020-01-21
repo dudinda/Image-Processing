@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+
 using ImageProcessing.Common.Extensions.DecimalMathExtensions;
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Common.Utility.DecimalMath;

@@ -30,21 +30,28 @@ namespace ImageProcessing
         [STAThread]
         internal static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            try
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
 
-            var controller = new AppController(new LightInjectAdapter())
-                .RegisterView<IMainView, MainForm>()
-                .RegisterView<IHistogramView, HistogramForm>()
-                .RegisterView<IQualityMeasureView, QualityMeasureForm>()
-                .RegisterService<IBaseFactory, BaseFactory>()
-                .RegisterService<IConvolutionFilterService, ConvolutionFilterService>()
-                .RegisterService<IRandomVariableDistributionService, RandomVariableDistributionService>()
-                .RegisterService<IBitmapLuminanceDistributionService, BitmapLuminanceDistributionService>()
-                .RegisterService<IRGBFilterService, RGBFilterService>()
-                .RegisterInstance(_context);
+                var controller = new AppController(new LightInjectAdapter())
+                    .RegisterView<IMainView, MainForm>()
+                    .RegisterView<IHistogramView, HistogramForm>()
+                    .RegisterView<IQualityMeasureView, QualityMeasureForm>()
+                    .RegisterService<IBaseFactory, BaseFactory>()
+                    .RegisterService<IConvolutionFilterService, ConvolutionFilterService>()
+                    .RegisterService<IRandomVariableDistributionService, RandomVariableDistributionService>()
+                    .RegisterService<IBitmapLuminanceDistributionService, BitmapLuminanceDistributionService>()
+                    .RegisterService<IRGBFilterService, RGBFilterService>()
+                    .RegisterInstance(_context);
 
-            controller.Run<MainPresenter>();
+                controller.Run<MainPresenter>();
+            }
+            catch
+            {
+                _context.Dispose();
+            }
         }
     }
 }

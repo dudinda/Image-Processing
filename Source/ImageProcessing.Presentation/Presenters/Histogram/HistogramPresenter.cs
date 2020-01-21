@@ -2,6 +2,7 @@
 using System.Drawing;
 
 using ImageProcessing.Common.Enums;
+using ImageProcessing.Common.Extensions.EnumExtensions;
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Controller.Interface;
 using ImageProcessing.Core.Presenter.Abstract;
@@ -59,7 +60,8 @@ namespace ImageProcessing.Presentation.Presenters
 
             for (int graylevel = 0; graylevel < 256; ++graylevel)
             {
-                chart.Series["p(x)"].Points.AddXY(graylevel, pmf[graylevel]);
+                chart.Series[RandomVariable.PMF.GetDescription()]
+                     .Points.AddXY(graylevel, pmf[graylevel]);
             }
         }
 
@@ -77,7 +79,8 @@ namespace ImageProcessing.Presentation.Presenters
 
             for (int graylevel = 0; graylevel < 256; ++graylevel)
             {
-                chart.Series["F(x)"].Points.AddXY(graylevel, cdf[graylevel]);
+                chart.Series[RandomVariable.CDF.GetDescription()]
+                     .Points.AddXY(graylevel, cdf[graylevel]);
             }
         }
     }

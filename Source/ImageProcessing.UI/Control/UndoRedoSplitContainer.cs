@@ -8,7 +8,7 @@ namespace ImageProcessing.UI.Control
 {
     public class UndoRedoSplitContainer : SplitContainer
     {
-        public BitmapStack<(Bitmap changed, ImageContainer from)> Undo { get; set; }
-        public BitmapStack<(Bitmap returned, ImageContainer to)> Redo { get; set; }
+        public FixedStack<(Bitmap changed, ImageContainer from)> Undo { get; }
+        public FixedStack<(Bitmap returned, ImageContainer to)> Redo { get; }
     }
 }

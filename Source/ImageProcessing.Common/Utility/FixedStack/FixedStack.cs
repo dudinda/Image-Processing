@@ -6,11 +6,18 @@ using ImageProcessing.Utility.BitmapStack.Abstract;
 
 namespace ImageProcessing.Utility.BitmapStack
 {
-    public class BitmapStack<T> : IBitmapStack<T>
+    public class FixedStack<T> : IFixedStack<T>
     {
         private List<T> bmpStack = new List<T>();
+        private int _size;
+
+        public FixedStack(int size)
+        {
+            _size = size;
+        }
 
         public bool Any() => bmpStack.Any();
+
         public T Pop()
         {
             try

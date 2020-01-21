@@ -1,6 +1,6 @@
 ﻿namespace ImageProcessing.Utility.BitmapStack.Abstract
 {
-    interface IBitmapStack<T>
+    public interface IFixedStack<T>
     {
         bool Any();
         T Pop();
