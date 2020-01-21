@@ -92,8 +92,6 @@ namespace ImageProcessing.Form.Main
             this.PathToImage = new System.Windows.Forms.ToolStripLabel();
             this.Entropy = new System.Windows.Forms.ToolStripButton();
             this.ShuffleSrc = new System.Windows.Forms.ToolStripButton();
-            this.IntervalLuminanceHistogram = new System.Windows.Forms.ToolStripButton();
-            this.AddDstToLuminanceHistogram = new System.Windows.Forms.ToolStripButton();
             this.Container = new System.Windows.Forms.SplitContainer();
             this.PictureBoxSrcPanel = new System.Windows.Forms.Panel();
             this.Src = new System.Windows.Forms.PictureBox();
@@ -105,6 +103,7 @@ namespace ImageProcessing.Form.Main
             this.DstZoom = new ImageProcessing.UI.Control.ZoomTrackBar();
             this.ErrorTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.RandomVariableInfo = new MetroFramework.Components.MetroToolTip();
+            this.appendProcessedBitmapToolStripButton1 = new ImageProcessing.UI.Control.AppendProcessedBitmapToolStripButton();
             this.MainMenu.SuspendLayout();
             this.ToolBarMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Container)).BeginInit();
@@ -508,14 +507,12 @@ namespace ImageProcessing.Form.Main
             this.PathToImage,
             this.Entropy,
             this.ShuffleSrc,
-            this.IntervalLuminanceHistogram,
-            this.AddDstToLuminanceHistogram});
+            this.appendProcessedBitmapToolStripButton1});
             this.ToolBarMenu.Location = new System.Drawing.Point(20, 84);
             this.ToolBarMenu.Name = "ToolBarMenu";
             this.ToolBarMenu.Size = new System.Drawing.Size(715, 25);
             this.ToolBarMenu.Stretch = true;
             this.ToolBarMenu.TabIndex = 5;
-            this.ToolBarMenu.Text = "toolStrip1";
             // 
             // FirstParamLabel
             // 
@@ -655,26 +652,6 @@ namespace ImageProcessing.Form.Main
             this.ShuffleSrc.Text = "Shuffle";
             this.ShuffleSrc.ToolTipText = "Shuffle pixels of a source image";
             // 
-            // IntervalLuminanceHistogram
-            // 
-            this.IntervalLuminanceHistogram.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.IntervalLuminanceHistogram.Image = global::ImageProcessing.UI.Properties.Resources.toolStripButton11_Image;
-            this.IntervalLuminanceHistogram.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.IntervalLuminanceHistogram.Name = "IntervalLuminanceHistogram";
-            this.IntervalLuminanceHistogram.Size = new System.Drawing.Size(23, 22);
-            this.IntervalLuminanceHistogram.Text = "toolStripButton11";
-            this.IntervalLuminanceHistogram.ToolTipText = "Build an interval luminance histogram";
-            // 
-            // AddDstToLuminanceHistogram
-            // 
-            this.AddDstToLuminanceHistogram.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.AddDstToLuminanceHistogram.Image = global::ImageProcessing.UI.Properties.Resources.compare_Image;
-            this.AddDstToLuminanceHistogram.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.AddDstToLuminanceHistogram.Name = "AddDstToLuminanceHistogram";
-            this.AddDstToLuminanceHistogram.Size = new System.Drawing.Size(23, 22);
-            this.AddDstToLuminanceHistogram.Text = "toolStripButton1";
-            this.AddDstToLuminanceHistogram.ToolTipText = "Add destination image, transformed by destribution to luminance histogram";
-            // 
             // Container
             // 
             this.Container.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -793,6 +770,14 @@ namespace ImageProcessing.Form.Main
             this.RandomVariableInfo.StyleManager = null;
             this.RandomVariableInfo.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
+            // appendProcessedBitmapToolStripButton1
+            // 
+            this.appendProcessedBitmapToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.appendProcessedBitmapToolStripButton1.Image = global::ImageProcessing.UI.Properties.Resources.toolStripButton11_Image;
+            this.appendProcessedBitmapToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.appendProcessedBitmapToolStripButton1.Name = "appendProcessedBitmapToolStripButton1";
+            this.appendProcessedBitmapToolStripButton1.Size = new System.Drawing.Size(23, 22);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -885,8 +870,6 @@ namespace ImageProcessing.Form.Main
         private System.Windows.Forms.ToolStripButton Entropy;
         private System.Windows.Forms.ToolStripButton ShuffleSrc;
         private System.Windows.Forms.ToolStripButton CDF;
-        private System.Windows.Forms.ToolStripButton IntervalLuminanceHistogram;
-        private System.Windows.Forms.ToolStripButton AddDstToLuminanceHistogram;
         private System.Windows.Forms.ToolStripButton ReplaceDstBySrc;
         private System.Windows.Forms.ToolStripMenuItem SaveFile;
         private System.Windows.Forms.ToolStripButton Expectation;
@@ -900,6 +883,7 @@ namespace ImageProcessing.Form.Main
         private UI.Control.ZoomTrackBar SrcZoom;
         private UI.Control.ZoomTrackBar DstZoom;
         private MetroFramework.Components.MetroToolTip RandomVariableInfo;
+        private UI.Control.AppendProcessedBitmapToolStripButton appendProcessedBitmapToolStripButton1;
     }
 }
 

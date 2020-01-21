@@ -47,6 +47,7 @@ namespace ImageProcessing.Presentation.Views.Main
         void SetTrackBarSize(ImageContainer container, Size size);
         Size GetZoomFactor(ImageContainer container);
         Size GetImageCopySize(ImageContainer container);
+        void SetCursor(CursorType cursor);
 
     }
 }

@@ -23,7 +23,7 @@ namespace ImageProcessing.Form.Main
             Bind();
             Container.BringToFront();
         }
-
+    
         public Image SrcImageCopy { get; set; }
         public Image DstImageCopy { get; set; }
 
@@ -206,7 +206,7 @@ namespace ImageProcessing.Form.Main
                     IsGreenChannelChecked = !IsGreenChannelChecked;              
                     break;
 
-                default:throw new NotSupportedException(nameof(color));
+                default: throw new NotSupportedException(nameof(color));
             }
 
             if (IsRedChannelChecked)   result |= RGBColors.Red;
@@ -215,6 +215,21 @@ namespace ImageProcessing.Form.Main
 
             return result;
         } 
+
+        public void SetCursor(CursorType cursor)
+        {
+            switch(cursor)
+            {
+                case CursorType.Default:
+                    Application.UseWaitCursor = false;
+                    break;
+                case CursorType.WaitCursor:
+                    Application.UseWaitCursor = true;
+                    break;
+
+                default: throw new NotImplementedException(nameof(cursor));
+            }
+        }
 
         public void ShowInfo(string info)
             => RandomVariableInfo.Show(info, this, CursorPosition.GetCursorPosition());

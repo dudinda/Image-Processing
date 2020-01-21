@@ -62,7 +62,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
         private async Task OpenImage()
         {
             try
-            {
+            {           
                 using (var dialog = new OpenFileDialog())
                 {
                     dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
@@ -70,6 +70,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     if (dialog.ShowDialog() == DialogResult.OK)
                     {
+                        View.SetCursor(CursorType.WaitCursor);
                         View.SrcImage = await Task.Run(() =>
                         {
                             using (var stream = File.OpenRead(dialog.FileName))
@@ -81,7 +82,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
        
                             return new Bitmap(View.SrcImageCopy);
                         }).ConfigureAwait(true);
-
+                        View.SetCursor(CursorType.Default);
                         View.ResetTrackBarValue(ImageContainer.Source);
                         View.PathToFile = dialog.FileName;
                         
@@ -104,6 +105,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     if (dialog.ShowDialog() == DialogResult.OK)
                     {
+                        View.SetCursor(CursorType.WaitCursor);
                         await _locker.LockAsync(() =>
                         {
                             var bmpToSave = new Bitmap(View.SrcImage);
@@ -111,6 +113,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             bmpToSave.Save(dialog.FileName, extension.GetImageFormat());
 
                         }).ConfigureAwait(true);
+                        View.SetCursor(CursorType.Default);
                     }
                 }
             }
@@ -124,13 +127,15 @@ namespace ImageProcessing.Presentation.Presenters.Main
         {
             try
             {
+                View.SetCursor(CursorType.WaitCursor);
                 await _locker.LockAsync(() =>
                 {
                     var bmpToSave = new Bitmap(View.SrcImage);
                     var extension = Path.GetExtension(View.PathToFile);
                     bmpToSave.Save(View.PathToFile, extension.GetImageFormat());
 
-                }).ConfigureAwait(true);            
+                }).ConfigureAwait(true);
+                View.SetCursor(CursorType.Default);
             }
             catch
             {
@@ -148,20 +153,19 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     return; 
 
                 var filter = _convolutionFilterFactory.GetFilter(filterName);
-             
-                View.DstImage = await _locker.LockAsync(
-                    () =>
-                    {
-                        View.DstImageCopy = _convolutionFilterService
-                        .Convolution(
-                            new Bitmap(View.GetImage(ImageContainer.Source)), filter
-                            );
+                View.SetCursor(CursorType.WaitCursor);
+                View.DstImage = await _locker.LockAsync(() =>
+                {
+                    View.DstImageCopy = _convolutionFilterService
+                    .Convolution(
+                        new Bitmap(View.GetImage(ImageContainer.Source)), filter
+                        );
 
-                        View.SetTrackBarSize(ImageContainer.Destination, View.DstImageCopy.Size);
+                    View.SetTrackBarSize(ImageContainer.Destination, View.DstImageCopy.Size);
 
-                        return new Bitmap(View.DstImageCopy);
-                    }).ConfigureAwait(true);
-
+                    return new Bitmap(View.DstImageCopy);
+                }).ConfigureAwait(true);
+                View.SetCursor(CursorType.Default);
                 View.ResetTrackBarValue(ImageContainer.Destination);
             }
             catch 
@@ -180,16 +184,15 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     return; 
 
                 var filter = _rgbFiltersFactory.GetFilter(filterName);
+                View.SetCursor(CursorType.WaitCursor);
+                View.DstImage = await _locker.LockAsync(() =>
+                {
+                    View.DstImageCopy = _rgbFilterService.Filter(new Bitmap(View.SrcImage), filter);
+                    View.SetTrackBarSize(ImageContainer.Destination, View.DstImageCopy.Size);
 
-                View.DstImage = await _locker.LockAsync(
-                    () =>
-                    {
-                        View.DstImageCopy = _rgbFilterService.Filter(new Bitmap(View.SrcImage), filter);
-                        View.SetTrackBarSize(ImageContainer.Destination, View.DstImageCopy.Size);
-
-                        return new Bitmap(View.DstImageCopy);
-                    }).ConfigureAwait(true);
-
+                    return new Bitmap(View.DstImageCopy);
+                }).ConfigureAwait(true);
+                View.SetCursor(CursorType.Default);
                 View.ResetTrackBarValue(ImageContainer.Destination);
             }
             catch
@@ -217,6 +220,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     return;
                 }
 
+                View.SetCursor(CursorType.WaitCursor);
                 View.DstImage = await _locker.LockAsync(
                     () =>
                     {
@@ -228,7 +232,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                         return new Bitmap(View.DstImageCopy);
                     }).ConfigureAwait(true);
-
+                View.SetCursor(CursorType.Default);
                 View.ResetTrackBarValue(ImageContainer.Destination);
             }
             catch
@@ -250,6 +254,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                         .GetFilter(filterName)
                         .SetParams(result);
 
+                    View.SetCursor(CursorType.WaitCursor);
                     View.DstImage = await _locker.LockAsync(
                         () =>
                         {
@@ -258,7 +263,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             return new Bitmap(View.DstImageCopy);
                         }
                     ).ConfigureAwait(true);
-
+                    View.SetCursor(CursorType.Default);
                     View.ResetTrackBarValue(ImageContainer.Destination);
                     View.DstImage.Tag = filter.Name;
                 }
@@ -273,8 +278,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
         {
             try
             {
-                if (View.ImageIsNull(ImageContainer.Source)) return; 
+                if (View.ImageIsNull(ImageContainer.Source)) return;
 
+                View.SetCursor(CursorType.WaitCursor);
                 View.DstImage = await _locker.LockAsync(
                    () => 
                    {
@@ -283,7 +289,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                        return new Bitmap(View.DstImageCopy);
                    }).ConfigureAwait(true);
-
+                View.SetCursor(CursorType.Default);
                 View.ResetTrackBarValue(ImageContainer.Destination);
             }
             catch
@@ -326,7 +332,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     ImageContainer.Destination : ImageContainer.Source;
                 
                 if (View.ImageIsNull(source)) return;
-         
+
+                View.SetCursor(CursorType.WaitCursor);
                 var result = await _locker.LockAsync(() =>
                 {
                     View.SetImageCopy(target, (Image)View.GetImageCopy(source).Clone());
@@ -334,7 +341,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     
                     return new Bitmap(View.GetImageCopy(target));
                 }).ConfigureAwait(true);
-
+                View.SetCursor(CursorType.Default);
                 View.ResetTrackBarValue(target);
                 View.SetImage(target, result);
             }
@@ -350,6 +357,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             {
                 Requires.IsNotNull(action, nameof(action));
 
+                View.SetCursor(CursorType.WaitCursor);
                 await _locker.LockAsync(() =>
                 {
                     var image = new Bitmap(View.SrcImageCopy);
@@ -370,6 +378,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             break;
                     }
                 }).ConfigureAwait(true);
+                View.SetCursor(CursorType.Default);
             }
             catch
             {
@@ -386,10 +395,11 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 var container = target.GetEnumValueByName<ImageContainer>();
 
                 if (!View.ImageIsNull(container)) {
+                    View.SetCursor(CursorType.WaitCursor);
                     var result = await _locker.LockAsync(
                         () => new Bitmap(View.GetImageCopy(container), View.GetZoomFactor(container))
                         ).ConfigureAwait(true);
-
+                    View.SetCursor(CursorType.Default);
                     View.SetImage(container, result);
                 }              
             }
