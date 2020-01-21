@@ -11,7 +11,8 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         public const decimal E = 2.71828182845905M;
         public const decimal Epsilon = 1.0E-20M;
         public const decimal PI = 3.14159265358979323846M;
-      
+        public const decimal Euler = 0.57721566490153286060M;
+
         /// <summary>
         /// Evaluate sgn(x)
         /// </summary>
@@ -151,7 +152,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
 
             checked
             {
-                for (var k = 1; Abs(total) > Epsilon; ++k)
+                for (var k = 1; Abs(total) > precision; ++k)
                 {
                     total = total * x / k;
                     result += total;
@@ -222,9 +223,9 @@ namespace ImageProcessing.Common.Utility.DecimalMath
             var total = x;
             var result = total;
 
-            for (var k = 0; Abs(total) > Epsilon; ++k)
+            for (var k = 0; Abs(total) > precision; ++k)
             {
-                total = -total * x * x / ((2.0M * k + 2.0M) * (2.0M * k + 3.0M));
+                total = -total * x * x / Fmad(k, Fmad(4, k, 10), 6);
                 result += total;
             }
 
@@ -243,9 +244,9 @@ namespace ImageProcessing.Common.Utility.DecimalMath
             var total = 1.0M;
             var result = total;
 
-            for (var k = 0; Abs(total) > Epsilon; ++k)
+            for (var k = 0; Abs(total) > precision; ++k)
             {
-                total = total * -x * x / ((2 * k + 1) * (2 * k + 2));
+                total = total * -x * x / Fmad(k, Fmad(4, k, 6), 2);
                 result += total;
             }
 

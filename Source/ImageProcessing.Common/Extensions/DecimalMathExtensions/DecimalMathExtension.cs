@@ -28,7 +28,7 @@ namespace ImageProcessing.Common.Extensions.DecimalMathExtensions
         public static decimal Log(this decimal value, decimal lbase = DecimalMath.E, decimal precision = DecimalMath.Epsilon)
             => DecimalMath.Log(value, lbase, precision);
 
-        public static decimal Pow(this decimal value, decimal power)
+        public static decimal Pow(this decimal value, decimal power, decimal precision = DecimalMath.Epsilon)
             => DecimalMath.Pow(value, power);
 
         public static decimal Exp(this decimal power, decimal precision = DecimalMath.Epsilon)
@@ -45,18 +45,6 @@ namespace ImageProcessing.Common.Extensions.DecimalMathExtensions
 
         public static decimal Cot(this decimal value, decimal precision = DecimalMath.Epsilon)
             => DecimalMath.Cot(value, precision);
-
-        public static decimal Arctan(this decimal value, decimal precision = DecimalMath.Epsilon)
-            => DecimalMath.Arctan(value);
-
-        public static decimal Arccot(this decimal value, decimal precision = DecimalMath.Epsilon)
-            => DecimalMath.Arccot(value);
-
-        public static decimal Arcsin(this decimal value)
-            => DecimalMath.Arcsin(value);
-
-        public static decimal Arccos(this decimal value)
-            => DecimalMath.Arccos(value);
 
         public static decimal Cosh(this decimal value, decimal precision = DecimalMath.Epsilon)
             => DecimalMath.Cosh(value, precision);
@@ -81,6 +69,18 @@ namespace ImageProcessing.Common.Extensions.DecimalMathExtensions
 
         public static decimal Arcoth(this decimal value, decimal precision = DecimalMath.Epsilon)
             => DecimalMath.Arcoth(value, precision);
+
+        public static decimal Arctan(this decimal value)
+           => DecimalMath.Arctan(value);
+
+        public static decimal Arccot(this decimal value)
+            => DecimalMath.Arccot(value);
+
+        public static decimal Arcsin(this decimal value)
+            => DecimalMath.Arcsin(value);
+
+        public static decimal Arccos(this decimal value)
+            => DecimalMath.Arccos(value);
 
     }
 }
