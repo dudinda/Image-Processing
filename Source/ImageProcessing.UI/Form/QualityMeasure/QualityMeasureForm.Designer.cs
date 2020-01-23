@@ -37,6 +37,9 @@
             // 
             // Histogram
             // 
+            chartArea1.AxisX.Interval = 1D;
+            chartArea1.AxisX.IsLabelAutoFit = false;
+            chartArea1.AxisX.LabelStyle.Angle = 90;
             chartArea1.Name = "ChartArea1";
             this.Histogram.ChartAreas.Add(chartArea1);
             this.Histogram.Dock = System.Windows.Forms.DockStyle.Fill;

@@ -25,9 +25,6 @@ namespace ImageProcessing.Form.QualityMeasure
         private void SetHistogram()
         {
             Histogram.Series.Clear();
-            Histogram.ChartAreas[0].AxisX.Interval = 1;
-            Histogram.ChartAreas[0].AxisX.IsLabelAutoFit = false;
-            Histogram.ChartAreas[0].AxisX.LabelStyle.Angle = 90;
         }
 
     }

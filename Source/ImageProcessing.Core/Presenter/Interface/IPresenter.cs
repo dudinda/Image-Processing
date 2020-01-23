@@ -5,9 +5,9 @@
         void Run();
     }
 
-    public interface IPresenter<in TArg>
+    public interface IPresenter<in TViewModel>
     {
-        void Run(TArg argument);
+        void Run(TViewModel argument);
     }
 
 }

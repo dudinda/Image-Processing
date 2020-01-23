@@ -6,6 +6,6 @@ namespace ImageProcessing.Services.ConvolutionFilterServices.Interface
 {
     public interface IConvolutionFilterService
     {
-        Bitmap Convolution(Bitmap source, AbstractConvolutionFilter filter);
+        Image Convolution(Bitmap source, AbstractConvolutionFilter filter);
     }
 }
