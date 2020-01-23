@@ -61,19 +61,7 @@ namespace ImageProcessing.Form.Main
             Application.Run(_context);
         }
 
-        public Size GetZoomFactor(ImageContainer container)
-        {
-            switch (container)
-            {
-                case ImageContainer.Source:
-                    return SrcZoom.FactorSize;
-                case ImageContainer.Destination:
-                    return DstZoom.FactorSize;
-
-                default: throw new NotSupportedException(nameof(container));
-            }
-        }
-
+    
         public bool ImageIsNull(ImageContainer container)
         {
             switch(container)
@@ -96,6 +84,21 @@ namespace ImageProcessing.Form.Main
                     break;
                 case ImageContainer.Destination:
                     DstImageCopy = copy;
+                    break;
+
+                default: throw new NotSupportedException(nameof(container));
+            }
+        }
+
+        public void Refresh(ImageContainer container)
+        {
+            switch (container)
+            {
+                case ImageContainer.Source:
+                    Src.Refresh();
+                    break;
+                case ImageContainer.Destination:
+                    Dst.Refresh();
                     break;
 
                 default: throw new NotSupportedException(nameof(container));
@@ -143,16 +146,18 @@ namespace ImageProcessing.Form.Main
             }
         }
 
-        public void ResetTrackBarValue(ImageContainer container, int value = 0)
+        public void ResetTrackBarValue(ImageContainer container, int value = 0, bool isEnabled = true)
         {
             switch (container)
             {
                 case ImageContainer.Source:
                     SrcZoom.TrackBarValue = value;
+                    SrcZoom.Enabled = isEnabled;
                     SrcZoom.Focus();
                     break;
                 case ImageContainer.Destination:
                     DstZoom.TrackBarValue = value;
+                    DstZoom.Enabled = isEnabled;
                     DstZoom.Focus();
                     break;
 
@@ -160,29 +165,29 @@ namespace ImageProcessing.Form.Main
             }
         }
 
-        public void SetTrackBarSize(ImageContainer container, Size size)
+        public Image ZoomImage(ImageContainer container)
         {
             switch(container)
             {
                 case ImageContainer.Source:
-                    SrcZoom.OriginalSize  = size;
-                    break;
+                    return SrcZoom.Zoom();
                 case ImageContainer.Destination:
-                    DstZoom.OriginalSize  = size;
-                    break;
+                    return DstZoom.Zoom();
 
                 default: throw new NotSupportedException(nameof(container));
             }
         }
 
-        public Size GetImageCopySize(ImageContainer container)
+        public void SetImageToZoom(ImageContainer container, Image image)
         {
             switch(container)
             {
                 case ImageContainer.Source:
-                    return SrcImageCopy.Size;
+                    SrcZoom.ImageToZoom = image;
+                    break;
                 case ImageContainer.Destination:
-                    return DstImageCopy.Size;
+                    DstZoom.ImageToZoom = image;
+                    break;
 
                 default: throw new NotSupportedException(nameof(container));
             }
@@ -226,16 +231,17 @@ namespace ImageProcessing.Form.Main
                 case CursorType.WaitCursor:
                     Application.UseWaitCursor = true;
                     break;
-
+                   
                 default: throw new NotImplementedException(nameof(cursor));
+       
             }
         }
 
         public void ShowInfo(string info)
-            => RandomVariableInfo.Show(info, this, CursorPosition.GetCursorPosition());
+            => RandomVariableInfo.Show(info, this, PointToClient(CursorPosition.GetCursorPosition()), 2000);
 
         public void ShowError(string error)
-            => ErrorTooltip.Show(error, this, CursorPosition.GetCursorPosition());
+            => ErrorTooltip.Show(error, this, PointToClient(CursorPosition.GetCursorPosition()), 2000);
 
     }
 }

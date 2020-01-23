@@ -2,34 +2,53 @@
 using System.Drawing;
 using System.Windows.Forms;
 
+using ImageProcessing.Common.Extensions.BitmapExtensions;
+
 using MetroFramework.Controls;
 
 namespace ImageProcessing.UI.Control
 {
     public class ZoomTrackBar : MetroTrackBar
     {
-        public Size OriginalSize { get; set; }
+        private Image _image;
 
-        public double Factor
-            => Convert.ToDouble(base.Value) /
-               Convert.ToDouble(base.Maximum - base.Minimum);  
+        private double _factor
+           => Convert.ToDouble(base.Value) /
+              Convert.ToDouble(base.Maximum - base.Minimum);
 
+        private Size _originalSize;
+
+        private Size _factorSize
+        {
+            get
+            {
+                var scale = _factor;
+
+                return new Size(_originalSize.Width + Convert.ToInt32(_originalSize.Width * scale),
+                                _originalSize.Height + Convert.ToInt32(_originalSize.Height * scale));
+            }
+        }
+
+        public Image ImageToZoom {
+            get 
+            {
+                return _image;
+            } 
+            set
+            {
+                _image = value;
+                _originalSize = _image.Size;
+            }
+        }
+ 
         public int TrackBarValue { 
             get => base.Value;
             set => base.Value = value;
         }
-      
-        public Size FactorSize
-        {
-            get
-            {
-                var scale = Factor;
 
-                return new Size(OriginalSize.Width  + Convert.ToInt32(OriginalSize.Width * scale), 
-                                OriginalSize.Height + Convert.ToInt32(OriginalSize.Height * scale) );
-            }
-        }
-
+        public Image Zoom()
+            => ImageToZoom.ResizeImage(_factorSize);
+        
         protected override void OnMouseWheel(MouseEventArgs e)
         {
             if(e.Delta > 0)
@@ -79,6 +98,7 @@ namespace ImageProcessing.UI.Control
             {
                 case Keys.Right:
                 case Keys.Left:
+                case Keys.RButton:
                     e.Handled = true;
                     break;
 

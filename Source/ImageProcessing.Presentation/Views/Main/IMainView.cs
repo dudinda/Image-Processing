@@ -19,11 +19,12 @@ namespace ImageProcessing.Presentation.Views.Main
         event Action<string> ApplyRGBFilter;
         event Action<string> ApplyRGBColorFilter;
         event Action<string> ReplaceImage;
+        event Action<string> Zoom;
         event Action<string, string> BuildPMF;
         event Action<string, string> BuildCDF;
-        event Action<string> Zoom;
-        event Action<Keys> GetRandomVariableInfo;
-        
+        event Action<string, string> GetRandomVariableInfo;
+      
+
         (string, string) Parameters { get; }
 
         string PathToFile { get; set; }
@@ -43,11 +44,11 @@ namespace ImageProcessing.Presentation.Views.Main
         Image GetImage(ImageContainer container);
         void SetImage(ImageContainer container, Image image);
         bool ImageIsNull(ImageContainer container);
-        void ResetTrackBarValue(ImageContainer container, int value = 0);
-        void SetTrackBarSize(ImageContainer container, Size size);
-        Size GetZoomFactor(ImageContainer container);
-        Size GetImageCopySize(ImageContainer container);
+        void ResetTrackBarValue(ImageContainer container, int value = 0, bool isEnabled = true);
+        Image ZoomImage(ImageContainer container);
+        void SetImageToZoom(ImageContainer container, Image image);
         void SetCursor(CursorType cursor);
 
+        void Refresh(ImageContainer container);
     }
 }

@@ -15,9 +15,9 @@ namespace ImageProcessing.Form.Main
         public event Action<string>? ReplaceImage;
         public event Action<string, string>? BuildPMF;
         public event Action<string, string>? BuildCDF;
+        public event Action<string, string>? GetRandomVariableInfo;
         public event Action<string>? Zoom;
-        public event Action? Shuffle;
-        public event Action<Keys>? GetRandomVariableInfo;
+        public event Action? Shuffle;    
         public event Action? UndoLast;
         public event Action? BuildLuminanceIntervals;
 
@@ -49,10 +49,10 @@ namespace ImageProcessing.Form.Main
                 => Invoke(SaveImageAs);
 
             SrcZoom.ValueChanged += (secnder, args)
-                => Invoke(Zoom, (string)Src.Tag);
+                => Invoke(Zoom, Src.Tag);
 
             DstZoom.ValueChanged += (secnder, args)
-                => Invoke(Zoom, (string)Dst.Tag);
+                => Invoke(Zoom, Dst.Tag);
         }
 
         /// <summary>
@@ -64,31 +64,31 @@ namespace ImageProcessing.Form.Main
                 => Invoke(Shuffle);
 
             PMF.Click += (sender, args)
-                => Invoke(BuildPMF, (string)Src.Tag, (string)PMF.Tag);
+                => Invoke(BuildPMF, Src.Tag, PMF.Tag);
 
             CDF.Click += (sender, args)
-                => Invoke(BuildCDF, (string)Dst.Tag, (string)CDF.Tag);
+                => Invoke(BuildCDF, Src.Tag, CDF.Tag);
 
             Expectation.Click += (sender, args)
-                => Invoke(GetRandomVariableInfo);
+                => Invoke(GetRandomVariableInfo, Src.Tag, Expectation.Tag);
 
             Variance.Click += (sender, args)
-                => Invoke(GetRandomVariableInfo);
+                => Invoke(GetRandomVariableInfo, Src.Tag, Variance.Tag);
 
             StandardDeviation.Click += (sender, args)
-                => Invoke(GetRandomVariableInfo);
+                => Invoke(GetRandomVariableInfo, Src.Tag, StandardDeviation.Tag);
 
             Entropy.Click += (sender, args)
-                => Invoke(GetRandomVariableInfo);
+                => Invoke(GetRandomVariableInfo, Src.Tag, Entropy.Tag);
 
             Undo.Click += (sender, args)
                 => Invoke(UndoLast);
 
             ReplaceSrcByDst.Click += (sernder, args)
-                => Invoke(ReplaceImage, (string)Dst.Tag);
+                => Invoke(ReplaceImage, Dst.Tag);
 
             ReplaceDstBySrc.Click += (sernder, args)
-                => Invoke(ReplaceImage, (string)Src.Tag);
+                => Invoke(ReplaceImage, Src.Tag);
         }
 
         /// <summary>
@@ -97,37 +97,37 @@ namespace ImageProcessing.Form.Main
         private void BindConvolutionFilters()
         {
             GaussianBlur3x3.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, (string)GaussianBlur3x3.Tag);
+                => Invoke(ApplyConvolutionFilter, GaussianBlur3x3.Tag);
 
             GaussianBlur5x5.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, (string)GaussianBlur5x5.Tag);
+                => Invoke(ApplyConvolutionFilter, GaussianBlur5x5.Tag);
 
             BoxBlur3x3.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, (string)BoxBlur3x3.Tag);
+                => Invoke(ApplyConvolutionFilter, BoxBlur3x3.Tag);
 
             BoxBlur5x5.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, (string)BoxBlur5x5.Tag);
+                => Invoke(ApplyConvolutionFilter, BoxBlur5x5.Tag);
 
             MotionBlur9x9.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, (string)MotionBlur9x9.Tag);
+                => Invoke(ApplyConvolutionFilter, MotionBlur9x9.Tag);
 
             LaplacianOfGaussianOperator.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, (string)LaplacianOfGaussianOperator.Tag);
+                => Invoke(ApplyConvolutionFilter, LaplacianOfGaussianOperator.Tag);
 
             LaplacianOperator5x5.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, (string)LaplacianOperator5x5.Tag);
+                => Invoke(ApplyConvolutionFilter, LaplacianOperator5x5.Tag);
 
             LaplacianOperator3x3.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, (string)LaplacianOperator3x3.Tag);
+                => Invoke(ApplyConvolutionFilter, LaplacianOperator3x3.Tag);
 
             Emboss3x3.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, (string)Emboss3x3.Tag);
+                => Invoke(ApplyConvolutionFilter, Emboss3x3.Tag);
 
             Sharpen3x3.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, (string)Sharpen3x3.Tag);
+                => Invoke(ApplyConvolutionFilter, Sharpen3x3.Tag);
 
             SobelOperator.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, (string)SobelOperator.Tag);
+                => Invoke(ApplyConvolutionFilter, SobelOperator.Tag);
         }
 
         /// <summary>
@@ -136,22 +136,22 @@ namespace ImageProcessing.Form.Main
         private void BindRGBFilters()
         {
             InversionFilter.Click += (sender, args)
-                => Invoke(ApplyRGBFilter, (string)InversionFilter.Tag);
+                => Invoke(ApplyRGBFilter, InversionFilter.Tag);
 
             BinaryFilter.Click += (sender, args)
-                => Invoke(ApplyRGBFilter, (string)BinaryFilter.Tag);
+                => Invoke(ApplyRGBFilter, BinaryFilter.Tag);
 
             GrayscaleFilter.Click += (sender, args)
-                => Invoke(ApplyRGBFilter, (string)GrayscaleFilter.Tag);
+                => Invoke(ApplyRGBFilter, GrayscaleFilter.Tag);
 
             ColorFilterBlue.Click += (sender, args)
-                => Invoke(ApplyRGBColorFilter, (string)ColorFilterBlue.Tag);
+                => Invoke(ApplyRGBColorFilter, ColorFilterBlue.Tag);
 
             ColorFilterRed.Click += (sender, args)
-                => Invoke(ApplyRGBColorFilter, (string)ColorFilterRed.Tag);
+                => Invoke(ApplyRGBColorFilter, ColorFilterRed.Tag);
 
             ColorFilterGreen.Click += (sender, args)
-                => Invoke(ApplyRGBColorFilter, (string)ColorFilterGreen.Tag);
+                => Invoke(ApplyRGBColorFilter, ColorFilterGreen.Tag);
         }
 
         /// <summary>
@@ -160,28 +160,28 @@ namespace ImageProcessing.Form.Main
         private void BindDistributions()
         {
             ExponentialDistribution.Click += (sender, args)
-                => Invoke(ApplyHistogramTransformation, (string)ExponentialDistribution.Tag, Parameters);
+                => Invoke(ApplyHistogramTransformation, ExponentialDistribution.Tag, Parameters);
 
             ParabolaDistribution.Click += (sender, args)
-                => Invoke(ApplyHistogramTransformation, (string)ParabolaDistribution.Tag, Parameters);
+                => Invoke(ApplyHistogramTransformation, ParabolaDistribution.Tag, Parameters);
 
             RayleighDistribution.Click += (sender, args)
-                => Invoke(ApplyHistogramTransformation, (string)RayleighDistribution.Tag, Parameters);
+                => Invoke(ApplyHistogramTransformation, RayleighDistribution.Tag, Parameters);
 
             CauchyDistribution.Click += (sender, args)
-                => Invoke(ApplyHistogramTransformation, (string)CauchyDistribution.Tag, Parameters);
+                => Invoke(ApplyHistogramTransformation, CauchyDistribution.Tag, Parameters);
 
             LaplaceDistribution.Click += (sender, args)
-                => Invoke(ApplyHistogramTransformation, (string)LaplaceDistribution.Tag, Parameters);
+                => Invoke(ApplyHistogramTransformation, LaplaceDistribution.Tag, Parameters);
 
             NormalDistribution.Click += (sender, args)
-                => Invoke(ApplyHistogramTransformation, (string)NormalDistribution.Tag, Parameters);
+                => Invoke(ApplyHistogramTransformation, NormalDistribution.Tag, Parameters);
 
             UniformDistribution.Click += (sender, args)
-                => Invoke(ApplyHistogramTransformation, (string)UniformDistribution.Tag, Parameters);
+                => Invoke(ApplyHistogramTransformation, UniformDistribution.Tag, Parameters);
 
             WeibullDistribution.Click += (sender, args)
-                => Invoke(ApplyHistogramTransformation, (string)WeibullDistribution.Tag, Parameters);
+                => Invoke(ApplyHistogramTransformation, WeibullDistribution.Tag, Parameters);
         }
 
         /// <summary>
@@ -215,12 +215,5 @@ namespace ImageProcessing.Form.Main
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
-
-        private void Invoke<T1, T2>(Action<T1, T2>? action, T1 first, T2 second)
-            => action?.Invoke(first, second);
-        private void Invoke<T>(Action<T>? action, T parameter)
-            => action?.Invoke(parameter);
-        private void Invoke(Action? action)
-            => action?.Invoke();
     }
 }

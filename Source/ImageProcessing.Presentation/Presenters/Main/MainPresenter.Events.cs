@@ -44,6 +44,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
             View.ReplaceImage += (image) 
                 => Replace(image);
 
+            View.GetRandomVariableInfo += (container, action)
+                => GetRandomVariableInfo(container, action);
+
         }
     }
 }
