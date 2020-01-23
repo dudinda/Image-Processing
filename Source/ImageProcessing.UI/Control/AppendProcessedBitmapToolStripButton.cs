@@ -7,16 +7,16 @@ namespace ImageProcessing.UI.Control
 {
     public class AppendProcessedBitmapToolStripButton : ToolStripButton
     {
-        public Queue<Bitmap> Queue { get; } = new Queue<Bitmap>();
+        private readonly Queue<Bitmap> _queue = new Queue<Bitmap>();
 
         public bool IsQueued(Bitmap bitmap)
-            => Queue.Any(bmp => bmp.Tag.Equals(bitmap.Tag));
+            => _queue.Any(bmp => bmp.Tag.Equals(bitmap.Tag));
 
         public bool Add(Bitmap bitmap)
         {
             if(!IsQueued(bitmap))
             {
-                Queue.Enqueue(bitmap);
+                _queue.Enqueue(bitmap);
                 return true;
             }
 
@@ -26,7 +26,7 @@ namespace ImageProcessing.UI.Control
 
         public void Reset()
         {
-            Queue.Clear();
+            _queue.Clear();
         }
         
 
