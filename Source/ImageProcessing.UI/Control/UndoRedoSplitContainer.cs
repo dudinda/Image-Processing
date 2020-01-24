@@ -17,29 +17,44 @@ namespace ImageProcessing.UI.Control
             _redo = new FixedStack<(Bitmap returned, ImageContainer to)>(10);
         }
 
+        public void Add((Bitmap, ImageContainer) action)
+        {
+            lock (_undo)
+            {
+                _undo.Push(action);
+            }
+        }
+
 
         public (Bitmap, ImageContainer)? Undo()
         {
-            if (!_undo.Any())
+            lock (_undo)
             {
-                return null;
+
+                if (!_undo.Any())
+                {
+                    return null;
+                }
+
+                _redo.Push(_undo.Pop());
+
+                return _redo.Peek();
             }
-
-            _redo.Push(_undo.Pop());
-
-            return _redo.Peek();
         }
 
         public (Bitmap, ImageContainer)? Redo()
         {
-            if(!_redo.Any())
+            lock (_redo)
             {
-                return null;
+                if (!_redo.Any())
+                {
+                    return null;
+                }
+
+                _undo.Push(_redo.Pop());
+
+                return _undo.Peek();
             }
-
-            _undo.Push(_redo.Pop());
-
-            return _undo.Peek();
         }
 
     }

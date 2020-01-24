@@ -192,6 +192,20 @@
         DqFN85MM+FIAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="Redo_Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA7DAAAOwwHHb6hkAAABpElE
+        QVQ4T6XVvSvFURzH8YukiELKYJNFsliYyOKpSIz+AguFPAwsbBKTUWLAjsIok6REKRPykAzEgDy8P+ee
+        c53fr9/vXuVTr3K+v3vO7+E8SEQkG+3YwDU+8IR9DKMYf04FdvGdxj16kDFVuITreIcVTGMBh/iCrn1i
+        ALEpxBn043dMIB9+stCIc7hBOxCZWbjBOlWwyUEfakwrmVIcQ7/XNy5CIOV4hX4wqYKXPOhJxkzrN/o8
+        L1CfIRX8DEIXbhB+zbgBFfdWJ9DnSGULujBnWsGkG7Aa6qeJ0upIxc1st2kFk25APdUD1LdVBZc3qFhn
+        WsGUITxgLZqsC6jvjG03IHZAPd0eNKC/PJqh1aA+Yf2IfGVtv2WoPqpCKJpZfyBZgpmcTVvwJ2Ucqi0i
+        MIM2uqH2uhvsCAUw0RZS8RZu2dRjDbmmFR3trlM8olIFF39hT6lgE/Vk4WjptCT/DMbfel0q/DdRh0Pq
+        m9joiXU46JtrP2dM+PjSubcKHV/z8I+vbWhiMkZbaAdu0Ci6US/+HN25Deu4gv4FPOMAIyhBTBKJH5R9
+        h41RNVVPAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="SecondParamLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6

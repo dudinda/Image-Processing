@@ -36,12 +36,12 @@ namespace ImageProcessing.Presentation.Views.Main
         bool IsRedChannelChecked { get; set; }
         bool IsBlueChannelChecked { get; set; }
 
+        void AddToUndoContainer((Bitmap changed, ImageContainer from) action);
         RGBColors GetSelectedColors(RGBColors color);
         void ShowInfo(string info);
         void ShowError(string message);
         Image GetImageCopy(ImageContainer container);
         void SetImageCopy(ImageContainer container, Image copy);
-        Image GetImage(ImageContainer container);
         void SetImage(ImageContainer container, Image image);
         bool ImageIsNull(ImageContainer container);
         void ResetTrackBarValue(ImageContainer container, int value = 0, bool isEnabled = true);

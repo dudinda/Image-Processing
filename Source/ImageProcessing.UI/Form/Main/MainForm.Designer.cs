@@ -92,30 +92,31 @@ namespace ImageProcessing.Form.Main
             this.PathToImage = new System.Windows.Forms.ToolStripLabel();
             this.Entropy = new System.Windows.Forms.ToolStripButton();
             this.ShuffleSrc = new System.Windows.Forms.ToolStripButton();
-            this.Container = new System.Windows.Forms.SplitContainer();
+            this.appendProcessedBitmapToolStripButton1 = new ImageProcessing.UI.Control.AppendProcessedBitmapToolStripButton();
             this.PictureBoxSrcPanel = new System.Windows.Forms.Panel();
             this.Src = new System.Windows.Forms.PictureBox();
             this.TrackBarSrcPanel = new System.Windows.Forms.Panel();
+            this.SrcZoom = new ImageProcessing.UI.Control.ZoomTrackBar();
             this.PictureBoxDstPanel = new System.Windows.Forms.Panel();
             this.Dst = new System.Windows.Forms.PictureBox();
             this.TrackBarDstPanel = new System.Windows.Forms.Panel();
+            this.DstZoom = new ImageProcessing.UI.Control.ZoomTrackBar();
             this.ErrorTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.RandomVariableInfo = new MetroFramework.Components.MetroToolTip();
-            this.SrcZoom = new ImageProcessing.UI.Control.ZoomTrackBar();
-            this.DstZoom = new ImageProcessing.UI.Control.ZoomTrackBar();
-            this.appendProcessedBitmapToolStripButton1 = new ImageProcessing.UI.Control.AppendProcessedBitmapToolStripButton();
+            this.Container = new ImageProcessing.UI.Control.UndoRedoSplitContainer();
+            this.Redo = new System.Windows.Forms.ToolStripButton();
             this.MainMenu.SuspendLayout();
             this.ToolBarMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Container)).BeginInit();
-            this.Container.Panel1.SuspendLayout();
-            this.Container.Panel2.SuspendLayout();
-            this.Container.SuspendLayout();
             this.PictureBoxSrcPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Src)).BeginInit();
             this.TrackBarSrcPanel.SuspendLayout();
             this.PictureBoxDstPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Dst)).BeginInit();
             this.TrackBarDstPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Container)).BeginInit();
+            this.Container.Panel1.SuspendLayout();
+            this.Container.Panel2.SuspendLayout();
+            this.Container.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainMenu
@@ -501,11 +502,12 @@ namespace ImageProcessing.Form.Main
             this.Expectation,
             this.Variance,
             this.StandardDeviation,
+            this.Entropy,
+            this.Undo,
+            this.Redo,
             this.ReplaceSrcByDst,
             this.ReplaceDstBySrc,
-            this.Undo,
             this.PathToImage,
-            this.Entropy,
             this.ShuffleSrc,
             this.appendProcessedBitmapToolStripButton1});
             this.ToolBarMenu.Location = new System.Drawing.Point(20, 84);
@@ -572,7 +574,6 @@ namespace ImageProcessing.Form.Main
             this.Expectation.Name = "Expectation";
             this.Expectation.Size = new System.Drawing.Size(41, 22);
             this.Expectation.Tag = "Expectation";
-            this.Expectation.Text = "Expectation";
             this.Expectation.ToolTipText = "Expected value";
             // 
             // Variance
@@ -584,7 +585,6 @@ namespace ImageProcessing.Form.Main
             this.Variance.Name = "Variance";
             this.Variance.Size = new System.Drawing.Size(56, 22);
             this.Variance.Tag = "Variance";
-            this.Variance.Text = "toolStripButton2";
             this.Variance.ToolTipText = "Variance";
             // 
             // StandardDeviation
@@ -622,6 +622,7 @@ namespace ImageProcessing.Form.Main
             // Undo
             // 
             this.Undo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Undo.Enabled = false;
             this.Undo.Image = global::ImageProcessing.UI.Properties.Resources.Undo_Image;
             this.Undo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Undo.Name = "Undo";
@@ -656,27 +657,13 @@ namespace ImageProcessing.Form.Main
             this.ShuffleSrc.Text = "Shuffle";
             this.ShuffleSrc.ToolTipText = "Shuffle pixels of a source image";
             // 
-            // Container
+            // appendProcessedBitmapToolStripButton1
             // 
-            this.Container.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Container.Location = new System.Drawing.Point(20, 109);
-            this.Container.Name = "Container";
-            // 
-            // Container.Panel1
-            // 
-            this.Container.Panel1.AllowDrop = true;
-            this.Container.Panel1.AutoScroll = true;
-            this.Container.Panel1.Controls.Add(this.PictureBoxSrcPanel);
-            this.Container.Panel1.Controls.Add(this.TrackBarSrcPanel);
-            // 
-            // Container.Panel2
-            // 
-            this.Container.Panel2.AutoScroll = true;
-            this.Container.Panel2.Controls.Add(this.PictureBoxDstPanel);
-            this.Container.Panel2.Controls.Add(this.TrackBarDstPanel);
-            this.Container.Size = new System.Drawing.Size(715, 372);
-            this.Container.SplitterDistance = 389;
-            this.Container.TabIndex = 9;
+            this.appendProcessedBitmapToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.appendProcessedBitmapToolStripButton1.Image = global::ImageProcessing.UI.Properties.Resources.toolStripButton11_Image;
+            this.appendProcessedBitmapToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.appendProcessedBitmapToolStripButton1.Name = "appendProcessedBitmapToolStripButton1";
+            this.appendProcessedBitmapToolStripButton1.Size = new System.Drawing.Size(23, 22);
             // 
             // PictureBoxSrcPanel
             // 
@@ -685,7 +672,7 @@ namespace ImageProcessing.Form.Main
             this.PictureBoxSrcPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PictureBoxSrcPanel.Location = new System.Drawing.Point(0, 0);
             this.PictureBoxSrcPanel.Name = "PictureBoxSrcPanel";
-            this.PictureBoxSrcPanel.Size = new System.Drawing.Size(389, 338);
+            this.PictureBoxSrcPanel.Size = new System.Drawing.Size(360, 372);
             this.PictureBoxSrcPanel.TabIndex = 4;
             // 
             // Src
@@ -705,8 +692,23 @@ namespace ImageProcessing.Form.Main
             this.TrackBarSrcPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.TrackBarSrcPanel.Location = new System.Drawing.Point(0, 338);
             this.TrackBarSrcPanel.Name = "TrackBarSrcPanel";
-            this.TrackBarSrcPanel.Size = new System.Drawing.Size(389, 34);
+            this.TrackBarSrcPanel.Size = new System.Drawing.Size(360, 34);
             this.TrackBarSrcPanel.TabIndex = 3;
+            // 
+            // SrcZoom
+            // 
+            this.SrcZoom.BackColor = System.Drawing.Color.Transparent;
+            this.SrcZoom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.SrcZoom.Enabled = false;
+            this.SrcZoom.Location = new System.Drawing.Point(0, 6);
+            this.SrcZoom.Maximum = 200;
+            this.SrcZoom.Minimum = -200;
+            this.SrcZoom.Name = "SrcZoom";
+            this.SrcZoom.Size = new System.Drawing.Size(360, 28);
+            this.SrcZoom.TabIndex = 0;
+            this.SrcZoom.Tag = "Source";
+            this.SrcZoom.TrackBarValue = 0;
+            this.SrcZoom.Value = 0;
             // 
             // PictureBoxDstPanel
             // 
@@ -715,7 +717,7 @@ namespace ImageProcessing.Form.Main
             this.PictureBoxDstPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PictureBoxDstPanel.Location = new System.Drawing.Point(0, 0);
             this.PictureBoxDstPanel.Name = "PictureBoxDstPanel";
-            this.PictureBoxDstPanel.Size = new System.Drawing.Size(322, 338);
+            this.PictureBoxDstPanel.Size = new System.Drawing.Size(351, 338);
             this.PictureBoxDstPanel.TabIndex = 5;
             // 
             // Dst
@@ -735,29 +737,8 @@ namespace ImageProcessing.Form.Main
             this.TrackBarDstPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.TrackBarDstPanel.Location = new System.Drawing.Point(0, 338);
             this.TrackBarDstPanel.Name = "TrackBarDstPanel";
-            this.TrackBarDstPanel.Size = new System.Drawing.Size(322, 34);
+            this.TrackBarDstPanel.Size = new System.Drawing.Size(351, 34);
             this.TrackBarDstPanel.TabIndex = 4;
-            // 
-            // RandomVariableInfo
-            // 
-            this.RandomVariableInfo.Style = MetroFramework.MetroColorStyle.Blue;
-            this.RandomVariableInfo.StyleManager = null;
-            this.RandomVariableInfo.Theme = MetroFramework.MetroThemeStyle.Light;
-            // 
-            // SrcZoom
-            // 
-            this.SrcZoom.BackColor = System.Drawing.Color.Transparent;
-            this.SrcZoom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SrcZoom.Enabled = false;
-            this.SrcZoom.Location = new System.Drawing.Point(0, 0);
-            this.SrcZoom.Maximum = 200;
-            this.SrcZoom.Minimum = -200;
-            this.SrcZoom.Name = "SrcZoom";
-            this.SrcZoom.Size = new System.Drawing.Size(389, 34);
-            this.SrcZoom.TabIndex = 0;
-            this.SrcZoom.Tag = "Source";
-            this.SrcZoom.TrackBarValue = 0;
-            this.SrcZoom.Value = 0;
             // 
             // DstZoom
             // 
@@ -768,19 +749,46 @@ namespace ImageProcessing.Form.Main
             this.DstZoom.Maximum = 200;
             this.DstZoom.Minimum = -200;
             this.DstZoom.Name = "DstZoom";
-            this.DstZoom.Size = new System.Drawing.Size(322, 34);
+            this.DstZoom.Size = new System.Drawing.Size(351, 34);
             this.DstZoom.TabIndex = 0;
             this.DstZoom.Tag = "Destination";
             this.DstZoom.TrackBarValue = 0;
             this.DstZoom.Value = 0;
             // 
-            // appendProcessedBitmapToolStripButton1
+            // RandomVariableInfo
             // 
-            this.appendProcessedBitmapToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.appendProcessedBitmapToolStripButton1.Image = global::ImageProcessing.UI.Properties.Resources.toolStripButton11_Image;
-            this.appendProcessedBitmapToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.appendProcessedBitmapToolStripButton1.Name = "appendProcessedBitmapToolStripButton1";
-            this.appendProcessedBitmapToolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.RandomVariableInfo.Style = MetroFramework.MetroColorStyle.Blue;
+            this.RandomVariableInfo.StyleManager = null;
+            this.RandomVariableInfo.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
+            // Container
+            // 
+            this.Container.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Container.Location = new System.Drawing.Point(20, 109);
+            this.Container.Name = "Container";
+            // 
+            // Container.Panel1
+            // 
+            this.Container.Panel1.Controls.Add(this.TrackBarSrcPanel);
+            this.Container.Panel1.Controls.Add(this.PictureBoxSrcPanel);
+            // 
+            // Container.Panel2
+            // 
+            this.Container.Panel2.Controls.Add(this.PictureBoxDstPanel);
+            this.Container.Panel2.Controls.Add(this.TrackBarDstPanel);
+            this.Container.Size = new System.Drawing.Size(715, 372);
+            this.Container.SplitterDistance = 360;
+            this.Container.TabIndex = 10;
+            // 
+            // Redo
+            // 
+            this.Redo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Redo.Enabled = false;
+            this.Redo.Image = global::ImageProcessing.UI.Properties.Resources.Redo_Image;
+            this.Redo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Redo.Name = "Redo";
+            this.Redo.Size = new System.Drawing.Size(23, 22);
+            this.Redo.ToolTipText = "Redo last transformation";
             // 
             // MainForm
             // 
@@ -797,10 +805,6 @@ namespace ImageProcessing.Form.Main
             this.MainMenu.PerformLayout();
             this.ToolBarMenu.ResumeLayout(false);
             this.ToolBarMenu.PerformLayout();
-            this.Container.Panel1.ResumeLayout(false);
-            this.Container.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Container)).EndInit();
-            this.Container.ResumeLayout(false);
             this.PictureBoxSrcPanel.ResumeLayout(false);
             this.PictureBoxSrcPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Src)).EndInit();
@@ -809,6 +813,10 @@ namespace ImageProcessing.Form.Main
             this.PictureBoxDstPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Dst)).EndInit();
             this.TrackBarDstPanel.ResumeLayout(false);
+            this.Container.Panel1.ResumeLayout(false);
+            this.Container.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Container)).EndInit();
+            this.Container.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -864,7 +872,6 @@ namespace ImageProcessing.Form.Main
         private System.Windows.Forms.ToolStripTextBox SecondParam;
         private System.Windows.Forms.ToolStripButton PMF;
         private System.Windows.Forms.PictureBox Src;
-        private System.Windows.Forms.SplitContainer Container;
         private System.Windows.Forms.PictureBox Dst;
         private System.Windows.Forms.ToolStripButton ReplaceSrcByDst;
         private System.Windows.Forms.ToolStripButton Undo;
@@ -888,6 +895,8 @@ namespace ImageProcessing.Form.Main
         private UI.Control.ZoomTrackBar DstZoom;
         private MetroFramework.Components.MetroToolTip RandomVariableInfo;
         private UI.Control.AppendProcessedBitmapToolStripButton appendProcessedBitmapToolStripButton1;
+        private UI.Control.UndoRedoSplitContainer Container;
+        private ToolStripButton Redo;
     }
 }
 

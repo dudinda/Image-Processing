@@ -48,11 +48,17 @@ namespace ImageProcessing.Form.Main
             SaveFileAs.Click += (sender, args)
                 => Invoke(SaveImageAs);
 
-            SrcZoom.ValueChanged += (secnder, args)
+            SrcZoom.MouseMove += (secnder, args)
                 => Invoke(Zoom, Src.Tag);
 
-            DstZoom.ValueChanged += (secnder, args)
+            SrcZoom.KeyPress += (secnder, args)
+                 => Invoke(Zoom, Src.Tag);
+
+            DstZoom.MouseMove += (secnder, args)
                 => Invoke(Zoom, Dst.Tag);
+
+            DstZoom.KeyPress += (secnder, args)
+              => Invoke(Zoom, Dst.Tag);
         }
 
         /// <summary>

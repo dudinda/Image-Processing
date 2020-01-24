@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -29,6 +30,7 @@ namespace ImageProcessing.UI.Control
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Image ImageToZoom {
             get 
             {
@@ -88,6 +90,7 @@ namespace ImageProcessing.UI.Control
             }
         }
 
+ 
         /// <summary>
         /// onKeyDown
         /// </summary>

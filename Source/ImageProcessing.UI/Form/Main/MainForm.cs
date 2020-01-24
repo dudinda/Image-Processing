@@ -21,7 +21,6 @@ namespace ImageProcessing.Form.Main
 
             InitializeComponent();
             Bind();
-            Container.BringToFront();
         }
     
         public Image SrcImageCopy { get; set; }
@@ -90,6 +89,36 @@ namespace ImageProcessing.Form.Main
             }
         }
 
+        public void AddToUndoContainer((Bitmap changed, ImageContainer from) action)
+        {
+            Undo.Enabled = true;
+            Container.Add(action);
+        }
+
+        public (Bitmap changed, ImageContainer from)? UndoAction()
+        {
+            var result = Container.Undo();
+
+            if (result is null)
+            {
+                Undo.Enabled = false;
+            }
+
+            return result;
+        }
+
+        public (Bitmap changed, ImageContainer from)? RedoAction()
+        {
+            var result = Container.Redo();
+
+            if (result is null)
+            {
+                Redo.Enabled = false;
+            }
+
+            return result;
+        }
+
         public void Refresh(ImageContainer container)
         {
             switch (container)
@@ -118,28 +147,15 @@ namespace ImageProcessing.Form.Main
             }
         }
 
-        public Image GetImage(ImageContainer container)
-        {
-            switch(container)
-            {
-                case ImageContainer.Source:
-                    return Src.Image;
-                case ImageContainer.Destination:
-                    return Dst.Image;
-
-                default: throw new NotSupportedException(nameof(container));
-            }
-        }
-
         public void SetImage(ImageContainer container, Image image)
         {
             switch (container)
             {
                 case ImageContainer.Source:
-                    Src.Image = image;
+                    SrcImage = image;
                     break;
                 case ImageContainer.Destination:
-                    Dst.Image = image;
+                    DstImage = image;
                     break;
 
                 default: throw new NotSupportedException(nameof(container));
