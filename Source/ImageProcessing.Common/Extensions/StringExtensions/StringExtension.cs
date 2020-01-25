@@ -2,6 +2,9 @@
 using System.ComponentModel;
 using System.Drawing.Imaging;
 
+using ImageProcessing.Common.Enums;
+using ImageProcessing.Common.Extensions.EnumExtensions;
+
 namespace ImageProcessing.Common.Extensions.StringExtensions
 {
     /// <summary>
@@ -11,27 +14,29 @@ namespace ImageProcessing.Common.Extensions.StringExtensions
     {
         public static ImageFormat GetImageFormat(this string ext)
         {
-            switch(ext)
+            var extension = ext.GetValueFromDescription<ImageExtension>();
+
+            switch(extension)
             {
-                case ".jpeg":
+                case ImageExtension.Jpeg:
                     return ImageFormat.Jpeg;
-                case ".bmp":
+                case ImageExtension.Bmp:
                     return ImageFormat.Bmp;
-                case ".png":
+                case ImageExtension.Png:
                     return ImageFormat.Png;
-                case ".emf":
+                case ImageExtension.Emf:
                     return ImageFormat.Emf;
-                case ".exif":
+                case ImageExtension.Exif:
                     return ImageFormat.Exif;
-                case ".gif":
+                case ImageExtension.Gif:
                     return ImageFormat.Gif;
-                case ".icon":
+                case ImageExtension.Icon:
                     return ImageFormat.Icon;
-                case ".memorybmp":
+                case ImageExtension.MemoryBmp:
                     return ImageFormat.MemoryBmp;
-                case ".tiff":
+                case ImageExtension.Tiff:
                     return ImageFormat.Tiff;
-                case ".wmf":
+                case ImageExtension.Wmf:
                     return ImageFormat.Wmf;
 
                 default: throw new NotImplementedException(ext);
