@@ -8,10 +8,10 @@ namespace ImageProcessing.Common.Enums
     public enum RandomVariable
     {
         /// <summary>
-        /// Unknown characteristic
+        /// An unknown characteristic
         /// </summary>
         [Description("NaN")]
-        Unknown = 0,
+        Unknown                = 0,
 
         /// <summary>
         /// E[X]
@@ -29,7 +29,7 @@ namespace ImageProcessing.Common.Enums
         /// σ
         /// </summary>
         [Description("σ")]
-        StandardDeviation = 3,
+        StandardDeviation      = 3,
 
         /// <summary>
         /// H(x)

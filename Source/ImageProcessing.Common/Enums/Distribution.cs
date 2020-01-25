@@ -8,7 +8,7 @@ namespace ImageProcessing.Common.Enums
     public enum Distribution
     {
         /// <summary>
-        /// Unknown distribution
+        /// An unknown distribution
         /// </summary>
         Unknown = 0,
 

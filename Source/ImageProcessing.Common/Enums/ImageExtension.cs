@@ -58,6 +58,20 @@ namespace ImageProcessing.Common.Enums
         /// .Tiff
         /// </summary>
         [Description(".tiff")]
-        Tiff      = 8
+        Tiff      = 8,
+
+        /// <summary>
+        /// .Wmf
+        /// </summary>
+        [Description(".wmf")]
+        Wmf = 9,
+
+        /// <summary>
+        /// .Png
+        /// </summary>
+        [Description(".png")]
+        Png = 10
+
+
     }
 }
