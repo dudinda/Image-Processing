@@ -50,22 +50,22 @@ namespace ImageProcessing.UI.Control
 
         public Image Zoom()
             => ImageToZoom.ResizeImage(_factorSize);
-        
+
+
+        protected override void OnMouseEnter(EventArgs e)
+            => Focus();
+
         protected override void OnMouseWheel(MouseEventArgs e)
         {
             if(e.Delta > 0)
             {
-                base.Value = base.Value + 10 > Maximum ?
-                       Maximum : base.Value + 10;
+                base.Value = Math.Min(base.Value + 10, Maximum);
             }
 
             if(e.Delta < 0)
             {
-                base.Value = base.Value - 10 < Minimum ?
-                       Minimum : base.Value - 10;
+                base.Value = Math.Max(base.Value - 10, Minimum);
             }
-
-            base.OnMouseWheel(e);
         }
 
         /// <summary>
@@ -77,16 +77,13 @@ namespace ImageProcessing.UI.Control
             switch (e.KeyCode)
             {
                 case Keys.Add:
-                    base.Value  = base.Value + 50 > Maximum ?
-                        Maximum : base.Value + 50;
+                    base.Value = Math.Min(base.Value + 50, Maximum);
                     e.IsInputKey = true;
                     break;
                 case Keys.Subtract:
-                    base.Value  = base.Value - 50 < Minimum ?
-                        Minimum : base.Value - 50;
+                    base.Value = Math.Max(base.Value - 50, Minimum);
                     e.IsInputKey = true;
                     break;
-
             }
         }
 
@@ -104,7 +101,6 @@ namespace ImageProcessing.UI.Control
                 case Keys.RButton:
                     e.Handled = true;
                     break;
-
             }
         }
 
@@ -120,7 +116,6 @@ namespace ImageProcessing.UI.Control
                 case Keys.Left:
                     e.Handled = true;
                     break;
-
             }
         }
 
