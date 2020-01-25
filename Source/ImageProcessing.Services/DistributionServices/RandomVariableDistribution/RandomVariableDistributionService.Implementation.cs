@@ -70,7 +70,7 @@ namespace ImageProcessing.Services.DistributionServices.RandomVariableDistributi
 
         protected decimal[] GetPMFImpl(int[] frequencies)
         {
-            var total = (decimal)frequencies.Sum();
+            var total = frequencies.Sum();
 
             return frequencies.AsParallel().Select(x => (decimal)x / total).ToArray();
         }

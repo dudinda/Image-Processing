@@ -5,6 +5,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading.Tasks;
 
+using ImageProcessing.Common.Extensions.BitmapExtensions;
 using ImageProcessing.Core.Model.RGBFilters;
 
 namespace ImageProcessing.RGBFilters.Binary
@@ -20,10 +21,10 @@ namespace ImageProcessing.RGBFilters.Binary
 
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                                              ImageLockMode.ReadWrite,
-                                             PixelFormat.Format24bppRgb);
+                                             bitmap.PixelFormat);
 
             var brightness = 0.0;
-
+            var ptrStep = bitmap.GetBitsPerPixel() / 8;
             var size = bitmap.Size;
 
             unsafe
@@ -36,16 +37,16 @@ namespace ImageProcessing.RGBFilters.Binary
                 var bag = new ConcurrentBag<double>();
 
                 //get N luminance partial sums
-                Parallel.For<double>(0, size.Height, options, () => 0.0, (y, state, subtotal) =>
+                Parallel.For<double>(0, size.Height, options, () => 0.0, (y, state, partial) =>
                 {
                     var ptr = startPtr + y * bitmapData.Stride;
 
-                    for (int x = 0; x < size.Width; ++x, ptr += 3)
+                    for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
-                        subtotal += 0.299 * ptr[2] + 0.587 * ptr[1] + 0.114 * ptr[0];
+                        partial += 0.299 * ptr[2] + 0.587 * ptr[1] + 0.114 * ptr[0];
                     }
 
-                    return subtotal;
+                    return partial;
                 },
                 (x) => bag.Add(x));
 
@@ -56,7 +57,7 @@ namespace ImageProcessing.RGBFilters.Binary
                 {
                     var ptr = startPtr + y * bitmapData.Stride;
 
-                    for (int x = 0; x < size.Width; ++x, ptr += 3)
+                    for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
                         brightness = 0.299 * ptr[2] + 0.587 * ptr[1] + 0.114 * ptr[0];
 

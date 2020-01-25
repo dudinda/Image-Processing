@@ -20,7 +20,7 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
         /// <returns>The shuffled bitmap</returns>
         public static Bitmap Shuffle(this Bitmap bitmap)
         {
-            if(bitmap is null)
+            if (bitmap is null)
             {
                 throw new ArgumentNullException(nameof(bitmap));
             }
@@ -68,7 +68,7 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
 
         public static Bitmap Normalize(Bitmap src)
         {
-            if(src is null)
+            if (src is null)
             {
                 throw new ArgumentNullException(nameof(src));
             }
@@ -86,7 +86,8 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
 
             var size = src.Size;
 
-            var options = new ParallelOptions() {
+            var options = new ParallelOptions()
+            {
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
@@ -111,7 +112,7 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
 
             return src;
         }
-    
+
         private static int Max(Bitmap src)
         {
             var result = new Bitmap(src);
@@ -207,7 +208,7 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
         public static Bitmap Magnitude(Bitmap xDerivative, Bitmap yDerivative)
         {
 
-            if(xDerivative is null)
+            if (xDerivative is null)
             {
                 throw new ArgumentNullException(nameof(xDerivative));
             }
@@ -273,7 +274,7 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
         }
 
         /// <summary>
-        /// Resize the image to the specified width and height.
+        /// Resize an image to a specified width and height.
         /// </summary>
         /// <param name="image">The image to resize.</param>
         /// <param name="width">The width to resize to.</param>
@@ -304,5 +305,30 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
             return destImage;
         }
 
+        /// <summary>
+        /// Get a number of bits per pixel of a selected image
+        /// </summary>
+        /// <param name="bmp"></param>
+        /// <returns></returns>
+        public static byte GetBitsPerPixel(this Bitmap bmp)
+        {
+            switch (bmp.PixelFormat)
+            {
+                case PixelFormat.Format8bppIndexed:
+                    return 8;
+
+                case PixelFormat.Format24bppRgb:
+                    return 24;
+
+                case PixelFormat.Format32bppArgb:
+                case PixelFormat.Format32bppPArgb:
+                case PixelFormat.Format32bppRgb:
+                    return 32;
+
+                default:
+                    throw new NotSupportedException("Only 8, 24 and 32 bit images are supported");
+
+            }
+        }
     }
 }

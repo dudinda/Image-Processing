@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
+using ImageProcessing.Common.Extensions.BitmapExtensions;
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Model.Convolution;
 using ImageProcessing.Services.ConvolutionFilterServices.Interface;
@@ -21,14 +22,14 @@ namespace ImageProcessing.Services.ConvolutionFilterServices.Implementation
 
             var sourceBitmapData = source.LockBits(new Rectangle(0, 0, source.Width, source.Height),
                                                    ImageLockMode.ReadOnly,
-                                                   PixelFormat.Format24bppRgb);
+                                                   source.PixelFormat);
 
             var destinationBitmapData = destination.LockBits(new Rectangle(0, 0, source.Width, source.Height),
                                                              ImageLockMode.WriteOnly,
-                                                             PixelFormat.Format24bppRgb);
+                                                             destination.PixelFormat);
 
             var size = source.Size;
-
+            var ptrStep = source.GetBitsPerPixel() / 8;
             unsafe
             {
                 var sourceStartPtr      = (byte*)sourceBitmapData.Scan0.ToPointer();
@@ -38,21 +39,21 @@ namespace ImageProcessing.Services.ConvolutionFilterServices.Implementation
 
                 var options = new ParallelOptions()
                 {
-                    MaxDegreeOfParallelism = Environment.ProcessorCount
+                    MaxDegreeOfParallelism = Environment.ProcessorCount - 2
                 };
 
                 Parallel.For(kernelOffset, size.Height - kernelOffset, options, y =>
                 {
                     //get an address of a new line, considering a kernel offset
-                    var sourcePtr      = sourceStartPtr      + y * sourceBitmapData.Stride + kernelOffset * 3;
-                    var destinationPtr = destinationStartPtr + y * sourceBitmapData.Stride + kernelOffset * 3;
+                    var sourcePtr      = sourceStartPtr      + y * sourceBitmapData.Stride + kernelOffset * ptrStep;
+                    var destinationPtr = destinationStartPtr + y * sourceBitmapData.Stride + kernelOffset * ptrStep;
 
                     //accumulators of components R, G, B
                     double R, G, B;
                     //a pointer, getting addresses of elements in a radius of a convolution
                     byte* elementPtr = null;
 
-                    for (int x = kernelOffset; x < size.Width - kernelOffset; ++x, sourcePtr += 3, destinationPtr += 3)
+                    for (int x = kernelOffset; x < size.Width - kernelOffset; ++x, sourcePtr += ptrStep, destinationPtr += ptrStep)
                     {
                         //set accumulators to 0
                         R = 0;
@@ -64,7 +65,7 @@ namespace ImageProcessing.Services.ConvolutionFilterServices.Implementation
                             for (int kernelColumn = -kernelOffset; kernelColumn <= kernelOffset; ++kernelColumn)
                             {
                                 //get address of a current element
-                                elementPtr = sourcePtr + kernelColumn * 3 + kernelRow * sourceBitmapData.Stride;
+                                elementPtr = sourcePtr + kernelColumn * ptrStep + kernelRow * sourceBitmapData.Stride;
 
                                 //sum
                                 B += elementPtr[0] * filter.Kernel[kernelRow + kernelOffset, kernelColumn + kernelOffset];

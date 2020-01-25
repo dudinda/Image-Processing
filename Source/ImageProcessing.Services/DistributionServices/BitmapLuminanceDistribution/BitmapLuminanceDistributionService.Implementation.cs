@@ -3,7 +3,10 @@ using System.Collections.Concurrent;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
+
+using ImageProcessing.Common.Extensions.BitmapExtensions;
 using ImageProcessing.Common.Extensions.DecimalMathExtensions;
+using ImageProcessing.Common.Utility.DecimalMath;
 using ImageProcessing.Core.Model.Distribution;
 
 namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Implementation
@@ -19,13 +22,13 @@ namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribut
 
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                                              ImageLockMode.ReadWrite,
-                                             PixelFormat.Format32bppRgb);
+                                             bitmap.PixelFormat);
 
             var options = new ParallelOptions()
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
-
+            var ptrStep = bitmap.GetBitsPerPixel() / 8;
             var size = bitmap.Size;
 
             unsafe
@@ -35,7 +38,7 @@ namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribut
                     //get a start address
                     var ptr = (byte*)bitmapData.Scan0.ToPointer() + y * bitmapData.Stride;
 
-                    for (int x = 0; x < size.Width; ++x, ptr += 4)
+                    for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
                         //get a new pixel value, transofrming by a quantile
                         ptr[0] = ptr[1] = ptr[2] = newPixels[ptr[0]];
@@ -82,10 +85,10 @@ namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribut
         {
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                                             ImageLockMode.ReadWrite,
-                                            PixelFormat.Format24bppRgb);
+                                            bitmap.PixelFormat);
 
             var frequencies = new int[256];
-
+            var ptrStep = bitmap.GetBitsPerPixel() / 8;
             unsafe
             {
                 var size = bitmap.Size;
@@ -102,7 +105,7 @@ namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribut
                 {
                     var ptr = startPtr + y * bitmapData.Stride;
 
-                    for (int x = 0; x < size.Width; ++x, ptr += 3)
+                    for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
                         subarray[ptr[0]]++;
                     }
@@ -160,6 +163,8 @@ namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribut
             //transform an array by a quantile function
             for (int index = 0; index < 256; ++index)
             {
+                cdf[index] = cdf[index] >= 1 ? cdf[index] - DecimalMath.Epsilon : cdf[index];
+
                 var pixel = distribution.Quantile(cdf[index]);
 
                 if (pixel > 255)

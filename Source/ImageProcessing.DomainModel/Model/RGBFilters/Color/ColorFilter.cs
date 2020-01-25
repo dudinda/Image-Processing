@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
+using ImageProcessing.Common.Extensions.BitmapExtensions;
 using ImageProcessing.Core.Model.RGBFilters;
 
 namespace ImageProcessing.RGBFilters.Color
@@ -24,10 +25,10 @@ namespace ImageProcessing.RGBFilters.Color
 
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                                              ImageLockMode.ReadWrite,
-                                             PixelFormat.Format24bppRgb);
+                                             bitmap.PixelFormat);
 
             var size = bitmap.Size;
-
+            var ptrStep = bitmap.GetBitsPerPixel() / 8;
             var options = new ParallelOptions();
             options.MaxDegreeOfParallelism = Environment.ProcessorCount;
 
@@ -40,7 +41,7 @@ namespace ImageProcessing.RGBFilters.Color
                     //get the address of a row
                     var ptr = startPtr + y * bitmapData.Stride;
 
-                    for (int x = 0; x < size.Width; ++x, ptr += 3)
+                    for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
                         _filter.SetPixelColor(ptr);
                     }

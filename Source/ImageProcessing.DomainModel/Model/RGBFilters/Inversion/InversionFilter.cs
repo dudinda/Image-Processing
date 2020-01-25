@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
+using ImageProcessing.Common.Extensions.BitmapExtensions;
 using ImageProcessing.Core.Model.RGBFilters;
 
 namespace ImageProcessing.RGBFilters.Inversion
@@ -18,9 +19,9 @@ namespace ImageProcessing.RGBFilters.Inversion
 
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                                              ImageLockMode.ReadWrite,
-                                             PixelFormat.Format24bppRgb);
+                                             bitmap.PixelFormat);
             var size = bitmap.Size;
-
+            var ptrStep = bitmap.GetBitsPerPixel() / 8;
             var options = new ParallelOptions();
             options.MaxDegreeOfParallelism = Environment.ProcessorCount;
 
@@ -33,7 +34,7 @@ namespace ImageProcessing.RGBFilters.Inversion
                     //get the address of a row
                     var ptr = startPtr + y * bitmapData.Stride;
 
-                    for (int x = 0; x < size.Width; ++x, ptr += 3)
+                    for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
                         ptr[0] = (byte)(255 - ptr[0]);
                         ptr[1] = (byte)(255 - ptr[1]);
