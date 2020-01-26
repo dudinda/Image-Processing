@@ -9,7 +9,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
     public static class DecimalMath
     {
         public const decimal E = 2.71828182845905M;
-        public const decimal Epsilon = 1.0E-20M;
+        public const decimal Epsilon = 1.0E-26M;
         public const decimal PI = 3.14159265358979323846M;
         public const decimal Euler = 0.57721566490153286060M;
 
@@ -174,7 +174,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
                 throw new ArgumentException("The value must be a positive real number");
             }
 
-            if(x < Epsilon)
+            if(x == 0)
             {
                 throw new ArgumentException("-inf");
             }
@@ -435,15 +435,13 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <param name="precision">A error</param>
         public static decimal Coth(decimal x, decimal precision = Epsilon)
         {
-            var error = Abs(Abs(x) - 0);
-
             //x infinitely small to 0
-            if (error < precision)
+            if (Abs(x) < precision)
             {
                 switch (Sign(x))
                 {
                     case -1: throw new ArgumentException("-inf");
-                    case 1: throw new ArgumentException("+inf");
+                    case  1: throw new ArgumentException("+inf");
                 }
             }
 
