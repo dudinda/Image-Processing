@@ -13,6 +13,7 @@ namespace ImageProcessing.UI.Control
     {
         private Image _image;
 
+        private readonly object _sync = new object();
         private double _factor
            => Convert.ToDouble(base.Value) /
               Convert.ToDouble(base.Maximum - base.Minimum);
@@ -38,8 +39,11 @@ namespace ImageProcessing.UI.Control
             } 
             set
             {
-                _image = value;
-                _originalSize = _image.Size;
+                lock (_sync)
+                {
+                    _image = value;
+                    _originalSize = _image.Size;
+                }
             }
         }
  
