@@ -22,48 +22,54 @@ namespace ImageProcessing.Form.Main
             InitializeComponent();
             Bind();
         }
-    
+
         public Image SrcImageCopy { get; set; }
         public Image DstImageCopy { get; set; }
 
-        public Image SrcImage { 
+        public Image SrcImage
+        {
             get => Src.Image;
             set => Src.Image = value;
-        }  
-        public Image DstImage { 
-            get => Dst.Image;  
-            set => Dst.Image = value; 
         }
-        public string PathToFile { 
-            get => PathToImage.Text; 
+        public Image DstImage
+        {
+            get => Dst.Image;
+            set => Dst.Image = value;
+        }
+        public string PathToFile
+        {
+            get => PathToImage.Text;
             set => PathToImage.Text = value;
         }
-        public bool IsGreenChannelChecked {
+        public bool IsGreenChannelChecked
+        {
             get => ColorFilterGreen.Checked;
             set => ColorFilterGreen.Checked = value;
         }
-        public bool IsRedChannelChecked {
+        public bool IsRedChannelChecked
+        {
             get => ColorFilterRed.Checked;
             set => ColorFilterRed.Checked = value;
         }
-        public bool IsBlueChannelChecked {
+        public bool IsBlueChannelChecked
+        {
             get => ColorFilterBlue.Checked;
             set => ColorFilterBlue.Checked = value;
         }
 
         public (string, string) Parameters
             => (FirstParam.Text, SecondParam.Text);
-    
+
         public new void Show()
         {
             _context.MainForm = this;
             Application.Run(_context);
         }
 
-    
+
         public bool ImageIsNull(ImageContainer container)
         {
-            switch(container)
+            switch (container)
             {
                 case ImageContainer.Source:
                     return Src.Image is null;
@@ -91,32 +97,17 @@ namespace ImageProcessing.Form.Main
 
         public void AddToUndoContainer((Bitmap changed, ImageContainer from) action)
         {
-            Undo.Enabled = true;
             Container.Add(action);
         }
 
         public (Bitmap changed, ImageContainer from)? UndoAction()
         {
-            var result = Container.Undo();
-
-            if (result is null)
-            {
-                Undo.Enabled = false;
-            }
-
-            return result;
+            return Container.Undo();
         }
 
         public (Bitmap changed, ImageContainer from)? RedoAction()
         {
-            var result = Container.Redo();
-
-            if (result is null)
-            {
-                Redo.Enabled = false;
-            }
-
-            return result;
+            return Container.Redo();
         }
 
         public void Refresh(ImageContainer container)
@@ -183,7 +174,7 @@ namespace ImageProcessing.Form.Main
 
         public Image ZoomImage(ImageContainer container)
         {
-            switch(container)
+            switch (container)
             {
                 case ImageContainer.Source:
                     return SrcZoom.Zoom();
@@ -196,7 +187,7 @@ namespace ImageProcessing.Form.Main
 
         public void SetImageToZoom(ImageContainer container, Image image)
         {
-            switch(container)
+            switch (container)
             {
                 case ImageContainer.Source:
                     SrcZoom.ImageToZoom = image;
@@ -216,7 +207,7 @@ namespace ImageProcessing.Form.Main
             switch (color)
             {
                 case RGBColors.Red:
-                    IsRedChannelChecked = !IsRedChannelChecked;               
+                    IsRedChannelChecked = !IsRedChannelChecked;
                     break;
 
                 case RGBColors.Blue:
@@ -224,22 +215,22 @@ namespace ImageProcessing.Form.Main
                     break;
 
                 case RGBColors.Green:
-                    IsGreenChannelChecked = !IsGreenChannelChecked;              
+                    IsGreenChannelChecked = !IsGreenChannelChecked;
                     break;
 
                 default: throw new NotSupportedException(nameof(color));
             }
 
-            if (IsRedChannelChecked)   result |= RGBColors.Red;
-            if (IsBlueChannelChecked)  result |= RGBColors.Blue;
+            if (IsRedChannelChecked) result |= RGBColors.Red;
+            if (IsBlueChannelChecked) result |= RGBColors.Blue;
             if (IsGreenChannelChecked) result |= RGBColors.Green;
 
             return result;
-        } 
+        }
 
         public void SetCursor(CursorType cursor)
         {
-            switch(cursor)
+            switch (cursor)
             {
                 case CursorType.Default:
                     Application.UseWaitCursor = false;
@@ -247,9 +238,9 @@ namespace ImageProcessing.Form.Main
                 case CursorType.WaitCursor:
                     Application.UseWaitCursor = true;
                     break;
-                   
+
                 default: throw new NotImplementedException(nameof(cursor));
-       
+
             }
         }
 

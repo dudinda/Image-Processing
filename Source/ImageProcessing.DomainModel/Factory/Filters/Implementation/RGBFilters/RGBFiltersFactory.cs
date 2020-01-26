@@ -6,6 +6,7 @@ using ImageProcessing.Common.Attributes;
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.EnumExtensions;
 using ImageProcessing.Common.Extensions.TypeExtensions;
+using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Factory.RGBFilters;
 using ImageProcessing.Core.Model.RGBFilters;
 using ImageProcessing.RGBFilters.Binary;
@@ -19,7 +20,9 @@ namespace ImageProcessing.Factory.Filters.RGBFilters
     {
         public IRGBFilter GetFilter(string filter)
         {
-            switch(filter.GetEnumValueByName<RGBFilter>())
+            Requires.IsNotNull(filter, nameof(filter));
+
+            switch (filter.GetEnumValueByName<RGBFilter>())
             {
                 case RGBFilter.Binary:
                     return new BinaryFilter();

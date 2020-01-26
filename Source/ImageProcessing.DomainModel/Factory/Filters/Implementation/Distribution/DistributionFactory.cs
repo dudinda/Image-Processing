@@ -2,6 +2,7 @@
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.EnumExtensions;
+using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Factory.Distribution;
 using ImageProcessing.Core.Model.Distribution;
 using ImageProcessing.Distributions.OneParameterDistributions;
@@ -13,6 +14,8 @@ namespace ImageProcessing.Factory.Filters.Distributions
     {
         public IDistribution GetFilter(string distribution) 
         {
+            Requires.IsNotNull(distribution, nameof(distribution));
+
             switch (distribution.GetEnumValueByName<Distribution>())
             {
                 case Distribution.Exponential:

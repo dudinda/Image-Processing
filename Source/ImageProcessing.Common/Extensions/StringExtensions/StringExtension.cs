@@ -12,6 +12,11 @@ namespace ImageProcessing.Common.Extensions.StringExtensions
     /// </summary>
     public static class StringExtension
     {
+        /// <summary>
+        /// Get a bitmap extension
+        /// </summary>
+        /// <param name="ext"></param>
+        /// <returns></returns>
         public static ImageFormat GetImageFormat(this string ext)
         {
             var extension = ext.GetValueFromDescription<ImageExtension>();

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using ImageProcessing.Common.Extensions.BitmapExtensions;
+using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Model.RGBFilters;
 
 namespace ImageProcessing.RGBFilters.Binary
@@ -14,10 +15,7 @@ namespace ImageProcessing.RGBFilters.Binary
     {
         public Bitmap Filter(Bitmap bitmap)
         {
-            if(bitmap is null)
-            {
-                throw new ArgumentNullException(nameof(bitmap));
-            }
+            Requires.IsNotNull(bitmap, nameof(bitmap));
 
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                                              ImageLockMode.ReadWrite,
@@ -26,12 +24,13 @@ namespace ImageProcessing.RGBFilters.Binary
             var brightness = 0.0;
             var ptrStep = bitmap.GetBitsPerPixel() / 8;
             var size = bitmap.Size;
+            var options = new ParallelOptions()
+            {
+                MaxDegreeOfParallelism = Environment.ProcessorCount
+            };
 
             unsafe
             {
-                var options = new ParallelOptions();
-                options.MaxDegreeOfParallelism = Environment.ProcessorCount;
-
                 var startPtr = (byte*)bitmapData.Scan0.ToPointer();
 
                 var bag = new ConcurrentBag<double>();

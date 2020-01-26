@@ -4,6 +4,7 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 using ImageProcessing.Common.Extensions.BitmapExtensions;
+using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Model.RGBFilters;
 
 namespace ImageProcessing.RGBFilters.Grayscale
@@ -12,10 +13,7 @@ namespace ImageProcessing.RGBFilters.Grayscale
     {
         public Bitmap Filter(Bitmap bitmap)
         {
-            if(bitmap is null)
-            {
-                throw new ArgumentNullException(nameof(bitmap));
-            }
+            Requires.IsNotNull(bitmap, nameof(bitmap));
 
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                                              ImageLockMode.ReadWrite,
@@ -23,8 +21,10 @@ namespace ImageProcessing.RGBFilters.Grayscale
 
             var size = bitmap.Size;
             var ptrStep = bitmap.GetBitsPerPixel() / 8;
-            var options = new ParallelOptions();
-            options.MaxDegreeOfParallelism = Environment.ProcessorCount;
+            var options = new ParallelOptions()
+            {
+                MaxDegreeOfParallelism = Environment.ProcessorCount
+            };
 
             unsafe
             {

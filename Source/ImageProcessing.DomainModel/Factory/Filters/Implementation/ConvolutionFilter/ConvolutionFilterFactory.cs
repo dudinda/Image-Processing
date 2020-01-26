@@ -2,6 +2,7 @@
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.EnumExtensions;
+using ImageProcessing.Common.Helpers;
 using ImageProcessing.ConvolutionFilters.Blur.BoxBlur;
 using ImageProcessing.ConvolutionFilters.Blur.MotionBlur;
 using ImageProcessing.ConvolutionFilters.EdgeDetection;
@@ -19,6 +20,8 @@ namespace ImageProcessing.Factory.Filters.Convolution
     {
         public AbstractConvolutionFilter GetFilter(string filter)
         {
+            Requires.IsNotNull(filter, nameof(filter));
+
             switch (filter.GetEnumValueByName<ConvolutionFilter>())
             {
                 case ConvolutionFilter.BoxBlur3x3:

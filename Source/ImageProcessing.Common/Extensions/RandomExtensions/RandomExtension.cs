@@ -14,7 +14,7 @@ namespace ImageProcessing.Common.Extensions.RandomExtensions
 
         public static decimal NextDecimal(this Random random)
         {
-            var sample = 1m;
+            var sample = 1M;
 
             while (sample >= 1)
             {
