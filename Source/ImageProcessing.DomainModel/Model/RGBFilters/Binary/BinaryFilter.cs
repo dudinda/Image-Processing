@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading.Tasks;
-
+using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.BitmapExtensions;
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Model.RGBFilters;
@@ -21,7 +21,7 @@ namespace ImageProcessing.RGBFilters.Binary
                                              ImageLockMode.ReadWrite,
                                              bitmap.PixelFormat);
 
-            var brightness = 0.0;
+            var luminance = 0.0;
             var ptrStep = bitmap.GetBitsPerPixel() / 8;
             var size = bitmap.Size;
             var options = new ParallelOptions()
@@ -42,7 +42,7 @@ namespace ImageProcessing.RGBFilters.Binary
 
                     for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
-                        partial += 0.299 * ptr[2] + 0.587 * ptr[1] + 0.114 * ptr[0];
+                        partial += Recommendation.GetLumaCoefficients((ptr[2], ptr[1], ptr[0]), Luma.Rec709);
                     }
 
                     return partial;
@@ -58,11 +58,11 @@ namespace ImageProcessing.RGBFilters.Binary
 
                     for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
-                        brightness = 0.299 * ptr[2] + 0.587 * ptr[1] + 0.114 * ptr[0];
+                        luminance = Recommendation.GetLumaCoefficients((ptr[2], ptr[1], ptr[0]), Luma.Rec709);
 
                         //if relative luminance greater or equal than average
                         //set it to white
-                        if (brightness >= average)
+                        if (luminance >= average)
                         {
                             ptr[0] = ptr[1] = ptr[2] = 255;
                         }

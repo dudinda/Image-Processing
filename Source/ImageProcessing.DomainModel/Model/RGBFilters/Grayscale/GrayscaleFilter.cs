@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
-
+using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.BitmapExtensions;
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Model.RGBFilters;
@@ -37,9 +37,7 @@ namespace ImageProcessing.RGBFilters.Grayscale
 
                     for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
-                        ptr[0] = ptr[1] = ptr[2] = (byte)(0.299 * ptr[2] +
-                                                          0.587 * ptr[1] +
-                                                          0.114 * ptr[0]);
+                        ptr[0] = ptr[1] = ptr[2] = (byte)Recommendation.GetLumaCoefficients((ptr[2], ptr[1], ptr[0]), Luma.Rec709);
                     }
                 });
             }
