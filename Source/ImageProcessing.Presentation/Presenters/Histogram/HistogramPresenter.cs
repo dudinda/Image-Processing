@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.EnumExtensions;
@@ -51,11 +52,9 @@ namespace ImageProcessing.Presentation.Presenters
             Requires.IsNotNull(bitmap, nameof(bitmap));
 
             var chart = View.GetChart;
-
-            chart.ChartAreas[0].AxisY.MaximumAutoSize = 100;
-
+          
             var pmf = _distributionService.GetPMF(bitmap);
-
+            chart.ChartAreas[0].AxisY.Maximum = (double)pmf.Max();
             View.Init(RandomVariable.PMF);
 
             for (int graylevel = 0; graylevel < 256; ++graylevel)
