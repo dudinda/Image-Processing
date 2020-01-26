@@ -134,6 +134,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
         {
             try
             {
+                if (View.ImageIsNull(ImageContainer.Source)) return;
+
                 View.SetCursor(CursorType.WaitCursor);
 
                 await OperationLocker.Get().LockOperation(() =>
@@ -165,7 +167,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
 
-                OperationPool.Get().Add(() =>
+                OperationPipeline.Instance.Register(() =>
                 {
                     var filteredResult = _convolutionFilterService.Convolution(new Bitmap(copy), filter);
                     View.DstImageCopy = (Bitmap)filteredResult.Clone();
@@ -175,14 +177,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     return (Bitmap)filteredResult.Clone();
                 });
 
-                await UpdateImage(ImageContainer.Destination).ConfigureAwait(true);
-
-                if (OperationPool.Get().IsEmpty)
-                {
-                    View.SetCursor(CursorType.Default);
-                }
-
-
+                await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
             }
             catch 
             {
@@ -203,7 +198,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
 
-                OperationPool.Get().Add(() =>  
+                OperationPipeline.Instance.Register(() =>  
                 {
                     var filteredResult = _rgbFilterService.Filter(new Bitmap(copy), filter);
                     View.DstImageCopy = new Bitmap(filteredResult);
@@ -213,13 +208,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     return (Bitmap)filteredResult.Clone();
                 });
 
-                await UpdateImage(ImageContainer.Destination).ConfigureAwait(true);
-
-                if (OperationPool.Get().IsEmpty)
-                {
-                    View.SetCursor(CursorType.Default);
-                }
-
+                await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
             }
             catch
             {
@@ -248,7 +237,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
 
-                OperationPool.Get().Add(() =>
+                OperationPipeline.Instance.Register(() =>
                 {
                     var filterResult =  _rgbFiltersFactory.GetColorFilter(result).Filter(new Bitmap(View.SrcImageCopy));
                     View.DstImageCopy = new Bitmap(filterResult);
@@ -258,16 +247,11 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     return (Bitmap)View.DstImageCopy.Clone();
                 });
 
-                await UpdateImage(ImageContainer.Destination).ConfigureAwait(true);
-
-                if (OperationPool.Get().IsEmpty)
-                {
-                    View.SetCursor(CursorType.Default);
-                }
+                await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
             }
-            catch
+            catch(Exception ex)
             {
-                View.ShowError("Error while applying the filter by RGB channel.");
+                View.ShowError($"Error {ex.Message}");
             }
         }  
 
@@ -287,7 +271,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
 
-                    OperationPool.Get().Add(() =>
+                    OperationPipeline.Instance.Register(() =>
                     {
                         var filterResult = _distributionService.TransformTo(new Bitmap(copy), filter);
                         View.DstImageCopy = new Bitmap(filterResult);
@@ -297,12 +281,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                         return (Bitmap)View.DstImageCopy.Clone();
                     });
 
-                    await UpdateImage(ImageContainer.Destination).ConfigureAwait(true);
-
-                    if (OperationPool.Get().IsEmpty)
-                    {
-                        View.SetCursor(CursorType.Default);
-                    }
+                    await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
 
                     View.DstImage.Tag = filter.Name;
                 }
@@ -323,7 +302,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
 
-                OperationPool.Get().Add(() =>
+                OperationPipeline.Instance.Register(() =>
                 {
                     var filteredResult = new Bitmap(copy).Shuffle();
                     View.DstImageCopy = (Bitmap)filteredResult.Clone();
@@ -333,12 +312,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     return (Bitmap)View.DstImageCopy.Clone();
                 });
 
-                await UpdateImage(ImageContainer.Destination).ConfigureAwait(true);
-
-                if (OperationPool.Get().IsEmpty)
-                {
-                    View.SetCursor(CursorType.Default);
-                }
+                await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);   
             }
             catch
             {
@@ -386,7 +360,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 var copy = await GetImageCopy(source).ConfigureAwait(true);
 
-                OperationPool.Get().Add(() =>
+                OperationPipeline.Instance.Register(() =>
                 {
                     View.SetImageCopy(target, new Bitmap(copy));
                     View.SetImageToZoom(target, new Bitmap(View.GetImageCopy(target)));
@@ -395,12 +369,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     return (Bitmap)View.GetImageCopy(target).Clone();
                 });
 
-                await UpdateImage(target).ConfigureAwait(true);
-
-                if (OperationPool.Get().IsEmpty)
-                {
-                    View.SetCursor(CursorType.Default);
-                }
+                await UpdateContainer(target).ConfigureAwait(true);
             }
             catch
             {
@@ -478,17 +447,22 @@ namespace ImageProcessing.Presentation.Presenters.Main
         {
             return await OperationLocker.Get().LockOperation(() =>
                   new Bitmap(View.GetImageCopy(container))
-            ).ConfigureAwait(false);
+            ).ConfigureAwait(true);
         }
 
-        private async Task UpdateImage(ImageContainer container)
+        private async Task UpdateContainer(ImageContainer container)
         {
-            var result = await OperationPool.Get()
+            var result = await OperationPipeline.Instance
                           .GetFirstCompleted().ConfigureAwait(true);
 
             View.SetImage(container, result);
             View.Refresh(container);
             View.ResetTrackBarValue(container);
+
+            if (OperationPipeline.Instance.IsEmpty)
+            {
+                View.SetCursor(CursorType.Default);
+            }
         }
     }
 }
