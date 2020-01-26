@@ -33,7 +33,7 @@ namespace ImageProcessing.Presentation.Code.Singletons
             task.Start();
         }
 
-        public async Task<Bitmap> GetFirstCompleted()
+        public async Task<Bitmap> GetCompleted()
         {
             if (IsEmpty) return null;
 

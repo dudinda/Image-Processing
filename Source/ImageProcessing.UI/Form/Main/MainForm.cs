@@ -144,9 +144,11 @@ namespace ImageProcessing.Form.Main
             {
                 case ImageContainer.Source:
                     SrcImage = image;
+                    Undo.Enabled = true;
                     break;
                 case ImageContainer.Destination:
                     DstImage = image;
+                    Undo.Enabled = true;
                     break;
 
                 default: throw new NotSupportedException(nameof(container));
@@ -221,8 +223,8 @@ namespace ImageProcessing.Form.Main
                 default: throw new NotSupportedException(nameof(color));
             }
 
-            if (IsRedChannelChecked) result |= RGBColors.Red;
-            if (IsBlueChannelChecked) result |= RGBColors.Blue;
+            if (IsRedChannelChecked)   result |= RGBColors.Red;
+            if (IsBlueChannelChecked)  result |= RGBColors.Blue;
             if (IsGreenChannelChecked) result |= RGBColors.Green;
 
             return result;

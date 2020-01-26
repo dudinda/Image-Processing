@@ -12,14 +12,17 @@ namespace ImageProcessing.Form.Histogram
 {
     public partial class HistogramForm : MetroForm, IHistogramView
     {
-        private readonly ApplicationContext _context;
-
         public HistogramForm()
         {
             InitializeComponent();
         }
 
         public Chart GetChart => Freq;
+        public double YAxisMaximum 
+        { 
+            get => Freq.ChartAreas[0].AxisY.Maximum; 
+            set => Freq.ChartAreas[0].AxisY.Maximum = value;    
+        }
 
         public new void Show()
         {

@@ -8,6 +8,7 @@ namespace ImageProcessing.Presentation.Views.Histogram
     public interface IHistogramView : IView
     {
         Chart GetChart { get; }
+        double YAxisMaximum { get; set; }
 
         void Init(RandomVariable action);
     }

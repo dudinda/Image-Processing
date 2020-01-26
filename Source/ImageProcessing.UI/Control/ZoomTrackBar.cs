@@ -55,7 +55,6 @@ namespace ImageProcessing.UI.Control
         public Image Zoom()
             => ImageToZoom.ResizeImage(_factorSize);
 
-
         protected override void OnMouseEnter(EventArgs e)
             => Focus();
 

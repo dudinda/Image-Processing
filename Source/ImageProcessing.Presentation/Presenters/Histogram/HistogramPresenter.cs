@@ -31,55 +31,39 @@ namespace ImageProcessing.Presentation.Presenters
         {
             Requires.IsNotNull(vm, nameof(vm));
 
-            switch(vm.Mode)
-            {
-                case RandomVariable.PMF:
-                    BuildPMF(vm.Source);
-                    break;
-
-                case RandomVariable.CDF:
-                    BuildCDF(vm.Source);
-                    break;
-
-                default: throw new NotSupportedException();
-            }
+            Build(vm.Source, vm.Mode);
 
             View.Show();
         }
 
-        private void BuildPMF(Bitmap bitmap)
+        private void Build(Bitmap bitmap, RandomVariable function)
         {
             Requires.IsNotNull(bitmap, nameof(bitmap));
 
             var chart = View.GetChart;
-          
-            var pmf = _distributionService.GetPMF(bitmap);
-            chart.ChartAreas[0].AxisY.Maximum = (double)pmf.Max();
-            View.Init(RandomVariable.PMF);
 
-            for (int graylevel = 0; graylevel < 256; ++graylevel)
+            decimal[] yValues;
+
+            switch(function)
             {
-                chart.Series[RandomVariable.PMF.GetDescription()]
-                     .Points.AddXY(graylevel, pmf[graylevel]);
+                case RandomVariable.PMF:
+                    yValues = _distributionService.GetPMF(bitmap);
+                    View.YAxisMaximum = (double)yValues.Max();
+                    break;
+                case RandomVariable.CDF:
+                    yValues = _distributionService.GetCDF(bitmap);
+                    View.YAxisMaximum = 1;
+                    break;
+
+                default: throw new InvalidOperationException(nameof(function));
             }
-        }
-
-        private void BuildCDF(Bitmap bitmap)
-        {
-            Requires.IsNotNull(bitmap, nameof(bitmap));
-
-            var chart = View.GetChart;
-
-            chart.ChartAreas[0].AxisY.Maximum = 1;
-
-            var cdf = _distributionService.GetCDF(bitmap);
-
-            View.Init(RandomVariable.CDF);
+           
+            View.Init(function);
 
             for (int graylevel = 0; graylevel < 256; ++graylevel)
             {
-                chart.Series[RandomVariable.CDF.GetDescription()]
-                     .Points.AddXY(graylevel, cdf[graylevel]);
+                chart.Series[function.GetDescription()]
+                     .Points.AddXY(graylevel, yValues[graylevel]);
             }
         }
     }

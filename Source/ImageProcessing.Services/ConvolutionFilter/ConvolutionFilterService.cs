@@ -64,7 +64,7 @@ namespace ImageProcessing.Services.ConvolutionFilterServices.Implementation
                         {
                             for (int kernelColumn = -kernelOffset; kernelColumn <= kernelOffset; ++kernelColumn)
                             {
-                                //get address of a current element
+                                //get the address of a current element
                                 elementPtr = sourcePtr + kernelColumn * ptrStep + kernelRow * sourceBitmapData.Stride;
 
                                 //sum

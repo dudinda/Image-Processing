@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.BitmapExtensions;
 using ImageProcessing.Common.Extensions.EnumExtensions;
+using ImageProcessing.Common.Extensions.FuncExtensions;
 using ImageProcessing.Common.Extensions.StringExtensions;
 using ImageProcessing.Common.Extensions.TupleExtensions;
 using ImageProcessing.Common.Helpers;
@@ -102,7 +103,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
         {
             try
             {
-                if (View.ImageIsNull(ImageContainer.Source)) return;
+                if (View.ImageIsNull(ImageContainer.Source)) { return; }
 
                 using (var dialog = new SaveFileDialog())
                 {
@@ -134,7 +135,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
         {
             try
             {
-                if (View.ImageIsNull(ImageContainer.Source)) return;
+                if (View.ImageIsNull(ImageContainer.Source)) { return; }
 
                 View.SetCursor(CursorType.WaitCursor);
 
@@ -160,24 +161,23 @@ namespace ImageProcessing.Presentation.Presenters.Main
             {
                 Requires.IsNotNull(filterName, nameof(filterName));
 
-                if (View.ImageIsNull(ImageContainer.Source)) return; 
-
-                var filter = _convolutionFilterFactory.GetFilter(filterName);
-                View.SetCursor(CursorType.WaitCursor);
-
-                var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
-
-                OperationPipeline.Instance.Register(() =>
+                if (!View.ImageIsNull(ImageContainer.Source))
                 {
-                    var filteredResult = _convolutionFilterService.Convolution(new Bitmap(copy), filter);
-                    View.DstImageCopy = (Bitmap)filteredResult.Clone();
-                    View.AddToUndoContainer((new Bitmap(copy), ImageContainer.Source));
-                    View.SetImageToZoom(ImageContainer.Destination, new Bitmap(filteredResult));
+                    View.SetCursor(CursorType.WaitCursor);
 
-                    return (Bitmap)filteredResult.Clone();
-                });
+                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
 
-                await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
+                    OperationPipeline.Instance.Register(() =>
+                    {
+                        return copy.Process(_convolutionFilterFactory.GetFilter(filterName), _convolutionFilterService.Convolution)
+                               .Process(() => View.SetImageCopy(ImageContainer.Destination, (Bitmap)copy.Clone()))
+                               .Process(() => View.AddToUndoContainer((new Bitmap(copy), ImageContainer.Source)))
+                               .Process(() => View.SetImageToZoom(ImageContainer.Destination, new Bitmap(copy)))
+                               .Process((arg) => (Bitmap)arg.Clone());
+                    });
+
+                    await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
+                }
             }
             catch 
             {
@@ -191,24 +191,23 @@ namespace ImageProcessing.Presentation.Presenters.Main
             {
                 Requires.IsNotNull(filterName, nameof(filterName));
 
-                if (View.ImageIsNull(ImageContainer.Source)) return; 
-
-                var filter = _rgbFiltersFactory.GetFilter(filterName);
-                View.SetCursor(CursorType.WaitCursor);
-
-                var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
-
-                OperationPipeline.Instance.Register(() =>  
+                if (!View.ImageIsNull(ImageContainer.Source))
                 {
-                    var filteredResult = _rgbFilterService.Filter(new Bitmap(copy), filter);
-                    View.DstImageCopy = new Bitmap(filteredResult);
-                    View.SetImageToZoom(ImageContainer.Destination, new Bitmap(filteredResult));
-                    View.AddToUndoContainer((new Bitmap(copy), ImageContainer.Source));
+                    View.SetCursor(CursorType.WaitCursor);
 
-                    return (Bitmap)filteredResult.Clone();
-                });
+                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
 
-                await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
+                    OperationPipeline.Instance.Register(() =>
+                    {
+                        return copy.Process(_rgbFiltersFactory.GetFilter(filterName), _rgbFilterService.Filter)
+                                   .Process(() => View.DstImageCopy = new Bitmap(copy))
+                                   .Process(() => View.SetImageToZoom(ImageContainer.Destination, new Bitmap(copy)))
+                                   .Process(() => View.AddToUndoContainer((new Bitmap(copy), ImageContainer.Source)))
+                                   .Process((arg) => (Bitmap)arg.Clone());
+                    });
+
+                    await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
+                }
             }
             catch
             {
@@ -222,7 +221,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             {
                 Requires.IsNotNull(filterName, nameof(filterName));
 
-                if (View.ImageIsNull(ImageContainer.Source)) return;
+                if (View.ImageIsNull(ImageContainer.Source)) { return; }
 
                 var color = filterName.GetEnumValueByName<RGBColors>();
                 var result = View.GetSelectedColors(color);
@@ -259,7 +258,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
         {
             try
             {
-                if (View.ImageIsNull(ImageContainer.Source)) return; 
+                if (View.ImageIsNull(ImageContainer.Source)) { return; } 
 
                 if (parms.TryParse<decimal, decimal>(out var result))
                 {
@@ -273,12 +272,11 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     OperationPipeline.Instance.Register(() =>
                     {
-                        var filterResult = _distributionService.TransformTo(new Bitmap(copy), filter);
-                        View.DstImageCopy = new Bitmap(filterResult);
-                        View.SetImageToZoom(ImageContainer.Destination, new Bitmap(filterResult));
-                        View.AddToUndoContainer((new Bitmap(copy), ImageContainer.Source));
-
-                        return (Bitmap)View.DstImageCopy.Clone();
+                        return copy.Process(filter, _distributionService.TransformTo)
+                                   .Process(() => View.DstImageCopy = new Bitmap(copy))
+                                   .Process(() => View.SetImageToZoom(ImageContainer.Destination, new Bitmap(copy)))
+                                   .Process(() => View.AddToUndoContainer((new Bitmap(copy), ImageContainer.Source)))
+                                   .Process((arg) => (Bitmap)arg.Clone());
                     });
 
                     await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
@@ -296,23 +294,24 @@ namespace ImageProcessing.Presentation.Presenters.Main
         {
             try
             {
-                if (View.ImageIsNull(ImageContainer.Source)) return;
-
-                View.SetCursor(CursorType.WaitCursor);
-
-                var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
-
-                OperationPipeline.Instance.Register(() =>
+                if (!View.ImageIsNull(ImageContainer.Source))
                 {
-                    var filteredResult = new Bitmap(copy).Shuffle();
-                    View.DstImageCopy = (Bitmap)filteredResult.Clone();
-                    View.SetImageToZoom(ImageContainer.Destination, new Bitmap(filteredResult));
-                    View.AddToUndoContainer((new Bitmap(copy), ImageContainer.Source));
 
-                    return (Bitmap)View.DstImageCopy.Clone();
-                });
+                    View.SetCursor(CursorType.WaitCursor);
 
-                await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);   
+                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
+
+                    OperationPipeline.Instance.Register(() =>
+                    {
+                        return copy.Shuffle()
+                                   .Process(() => View.DstImageCopy = new Bitmap(copy))
+                                   .Process(() => View.SetImageToZoom(ImageContainer.Destination, new Bitmap(copy)))
+                                   .Process(() => View.AddToUndoContainer((new Bitmap(copy), ImageContainer.Source)))
+                                   .Process((arg) => (Bitmap)arg.Clone());
+                    });
+
+                    await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
+                }
             }
             catch
             {
@@ -354,22 +353,23 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 var target = source == ImageContainer.Source ?
                     ImageContainer.Destination : ImageContainer.Source;
 
-                if (View.ImageIsNull(source)) return;
-
-                View.SetCursor(CursorType.WaitCursor);
-
-                var copy = await GetImageCopy(source).ConfigureAwait(true);
-
-                OperationPipeline.Instance.Register(() =>
+                if (!View.ImageIsNull(source))
                 {
-                    View.SetImageCopy(target, new Bitmap(copy));
-                    View.SetImageToZoom(target, new Bitmap(View.GetImageCopy(target)));
-                    View.AddToUndoContainer((new Bitmap(copy), source));
 
-                    return (Bitmap)View.GetImageCopy(target).Clone();
-                });
+                    View.SetCursor(CursorType.WaitCursor);
 
-                await UpdateContainer(target).ConfigureAwait(true);
+                    var copy = await GetImageCopy(source).ConfigureAwait(true);
+
+                    OperationPipeline.Instance.Register(() =>
+                    {
+                        return copy.Process(() => View.SetImageCopy(target, new Bitmap(copy)))
+                                   .Process(() => View.SetImageToZoom(target, new Bitmap(View.GetImageCopy(target))))
+                                   .Process(() => View.AddToUndoContainer((new Bitmap(copy), source)))
+                                   .Process((arg) => (Bitmap)View.GetImageCopy(target).Clone());
+                    });
+
+                    await UpdateContainer(target).ConfigureAwait(true);
+                }
             }
             catch
             {
@@ -453,7 +453,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
         private async Task UpdateContainer(ImageContainer container)
         {
             var result = await OperationPipeline.Instance
-                          .GetFirstCompleted().ConfigureAwait(true);
+                          .GetCompleted().ConfigureAwait(true);
 
             View.SetImage(container, result);
             View.Refresh(container);
