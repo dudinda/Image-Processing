@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,53 +9,68 @@ namespace ImageProcessing.Utility.BitmapStack
 {
     public class FixedStack<T> : IFixedStack<T>
     {
-        private List<T> bmpStack = new List<T>();
-        private int _size;
+        private readonly List<T> _stack = new List<T>();
+        private readonly int _size;
 
         public FixedStack(int size)
         {
             _size = size;
         }
 
-        public bool Any() => bmpStack.Any();
+        public bool Any()
+        {
+            lock (_stack)
+            {
+               return _stack.Any();
+            }
+        }
 
         public T Pop()
         {
-            try
+            lock (_stack)
             {
-                var result = bmpStack.First();
+                try
+                {
 
-                bmpStack.RemoveAt(0);
+                    var result = _stack.First();
 
-                return result;
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                throw new InvalidOperationException("The stack is empty.");
+                    _stack.RemoveAt(0);
+
+                    return result;
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    throw new InvalidOperationException("The stack is empty.");
+                }
             }
         }
 
         public void Push(T bmp)
         {
-            if (bmpStack.Count.Equals(10))
+            lock (_stack)
             {
-                bmpStack.Remove(bmpStack.Last());
-            }
+                if (_stack.Count.Equals(10))
+                {
+                    _stack.Remove(_stack.Last());
+                }
 
-            bmpStack.Insert(0, bmp);
+                _stack.Insert(0, bmp);
+            }
         }
 
         public T Peek()
         {
-            try
+            lock (_stack)
             {
-                return bmpStack.FirstOrDefault();
+                try
+                {
+                    return _stack.First();
+                }
+                catch (InvalidOperationException)
+                {
+                    throw new IndexOutOfRangeException("The stack is empty.");
+                }
             }
-            catch (ArgumentNullException)
-            {
-                throw new IndexOutOfRangeException("The stack is empty.");
-            }
-
         }
     }
 }
