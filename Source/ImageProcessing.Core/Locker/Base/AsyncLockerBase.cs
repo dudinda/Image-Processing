@@ -2,7 +2,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-public class AsyncLocker
+using ImageProcessing.Core.Locker.Interface;
+
+public abstract class AsyncLockerBase : IAsyncLocker
 {
     private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
 

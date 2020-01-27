@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using LightInject;
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.BitmapExtensions;
 using ImageProcessing.Common.Extensions.EnumExtensions;
@@ -17,6 +17,7 @@ using ImageProcessing.Core.Factory.Base;
 using ImageProcessing.Core.Factory.Convolution;
 using ImageProcessing.Core.Factory.Distribution;
 using ImageProcessing.Core.Factory.RGBFilters;
+using ImageProcessing.Core.Locker.Interface;
 using ImageProcessing.Core.Presenter.Abstract;
 using ImageProcessing.Presentation.Code.Singletons;
 using ImageProcessing.Presentation.ViewModel.Histogram;
@@ -38,12 +39,21 @@ namespace ImageProcessing.Presentation.Presenters.Main
         private readonly IDistributionFactory _distributionFactory;
         private readonly IRGBFiltersFactory _rgbFiltersFactory;
 
+        private readonly IAsyncLocker _zoomLocker;
+        private readonly IAsyncLocker _operationLocker;
+        
         public MainPresenter(IAppController controller,
                              IMainView view,
                              IBaseFactory baseFactory,
                              IConvolutionFilterService convolutionFilterService,
                              IBitmapLuminanceDistributionService distributionService,
-                             IRGBFilterService rgbFilterService) : base(controller, view)
+                             IRGBFilterService rgbFilterService,
+
+                             [Inject("ZoomLocker")]
+                             IAsyncLocker zoomLocker,
+
+                             [Inject("OperationLocker")]
+                             IAsyncLocker operationLocker) : base(controller, view)
         {
             Requires.IsNotNull(controller, nameof(controller));
             Requires.IsNotNull(view, nameof(view));
@@ -56,6 +66,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
             _convolutionFilterService = Requires.IsNotNull(convolutionFilterService, nameof(convolutionFilterService));
             _rgbFilterService         = Requires.IsNotNull(rgbFilterService, nameof(rgbFilterService));
             _distributionService      = Requires.IsNotNull(distributionService, nameof(distributionService)); ;
+
+            _zoomLocker               = Requires.IsNotNull(zoomLocker, nameof(zoomLocker));
+            _operationLocker          = Requires.IsNotNull(operationLocker, nameof(operationLocker));
 
             Bind();
         }
@@ -113,7 +126,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     {
                         View.SetCursor(CursorType.WaitCursor);
                         
-                        await OperationLocker.Get().LockOperation(() =>
+                        await _operationLocker.LockAsync(() =>
                         {
                             var extension = Path.GetExtension(dialog.FileName);
 
@@ -139,7 +152,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 View.SetCursor(CursorType.WaitCursor);
 
-                await OperationLocker.Get().LockOperation(() =>
+                await _operationLocker.LockAsync(() =>
                 {
                     var extension = Path.GetExtension(View.PathToFile);
 
@@ -428,7 +441,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 if (!View.ImageIsNull(container)) {
       
-                    var image = await ZoomLocker.Get().LockZoom(() =>
+                    var image = await _zoomLocker.LockAsync(() =>
                         View.ZoomImage(container)            
                     ).ConfigureAwait(true);
 
@@ -445,7 +458,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
         private async Task<Bitmap> GetImageCopy(ImageContainer container)
         {
-            return await OperationLocker.Get().LockOperation(() =>
+            return await _operationLocker.LockAsync(() =>
                   new Bitmap(View.GetImageCopy(container))
             ).ConfigureAwait(true);
         }

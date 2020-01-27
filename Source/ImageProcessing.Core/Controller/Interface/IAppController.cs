@@ -14,6 +14,14 @@ namespace ImageProcessing.Core.Controller.Interface
         IAppController RegisterService<TService, TImplementation>()
             where TImplementation : class, TService;
 
+        IAppController RegisterSingletonService<TService, TImplementation>()
+          where TImplementation : class, TService;
+
+        IAppController RegisterNamedSingletonService<TService, TImplementation>(string name)
+          where TImplementation : class, TService;
+
+        IAppController EnableAnnotatedConstructorInjection();
+
         void Run<TPresenter>()
             where TPresenter : class, IPresenter;
 

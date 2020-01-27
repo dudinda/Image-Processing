@@ -43,6 +43,26 @@ namespace ImageProcessing.Core.Controller.Implementation
             return this;
         }
 
+        public IAppController RegisterSingletonService<TModel, TImplementation>()
+            where TImplementation : class, TModel
+        {
+            _container.RegisterSingleton<TModel, TImplementation>();
+            return this;
+        }
+
+        public IAppController EnableAnnotatedConstructorInjection()
+        {
+            _container.EnableAnnotatedConstructorInjection();
+            return this;
+        }
+
+        public IAppController RegisterNamedSingletonService<TModel, TImplementation>(string name)
+           where TImplementation : class, TModel
+        {
+            _container.RegisterSingleton<TModel, TImplementation>(name);
+            return this;
+        }
+
         public void Run<TPresenter>() where TPresenter : class, IPresenter
         {
             if (!_container.IsRegistered<TPresenter>())

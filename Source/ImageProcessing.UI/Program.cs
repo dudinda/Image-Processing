@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using ImageProcessing.Core.Adapters.LightInject;
 using ImageProcessing.Core.Controller.Implementation;
 using ImageProcessing.Core.Factory.Base;
+using ImageProcessing.Core.Locker.Interface;
 using ImageProcessing.Factory.Base;
 using ImageProcessing.Form.Histogram;
 using ImageProcessing.Form.Main;
@@ -18,6 +19,8 @@ using ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.
 using ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Interface;
 using ImageProcessing.Services.DistributionServices.Distribution.Interface;
 using ImageProcessing.Services.DistributionServices.RandomVariableDistribution.Implementation;
+using ImageProcessing.Services.LockerService.Operation;
+using ImageProcessing.Services.LockerService.Zoom;
 using ImageProcessing.Services.RGBFilterService.Implementation;
 using ImageProcessing.Services.RGBFilterService.Interface;
 
@@ -44,6 +47,9 @@ namespace ImageProcessing
                     .RegisterService<IRandomVariableDistributionService, RandomVariableDistributionService>()
                     .RegisterService<IBitmapLuminanceDistributionService, BitmapLuminanceDistributionService>()
                     .RegisterService<IRGBFilterService, RGBFilterService>()
+                    .EnableAnnotatedConstructorInjection()
+                    .RegisterNamedSingletonService<IAsyncLocker, ZoomAsyncLocker>("ZoomLocker")
+                    .RegisterNamedSingletonService<IAsyncLocker, OperationAsyncLocker>("OperationLocker")
                     .RegisterInstance(_context);
 
                 controller.Run<MainPresenter>();
