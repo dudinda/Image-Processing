@@ -15,8 +15,11 @@ namespace ImageProcessing.Common.Utility.DecimalMath
 
         public static decimal Ei(decimal x)
         {
-            var total = Euler + Log(Abs(x)) + x;
-            var result = total;
+            var result = Euler + Log(Abs(x));
+            var total = x;
+
+            result += total;
+
             for (var k = 0; Abs(total) > Epsilon; ++k)
             {
                 total = total * x * k
@@ -29,8 +32,10 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         }
         public static decimal Ci(decimal x)
         {
-            var total = Euler + Log(x) - x * x / 4;
-            var result = total;
+            var result = Euler + Log(x);
+            var total = -x * x / 4;
+
+            result += total;
 
             for (var k = 1; Abs(total) > Epsilon; ++k)
             {

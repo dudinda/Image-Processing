@@ -25,6 +25,51 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         }
      
         /// <summary>
+        /// Evaluate max{x, y}
+        /// </summary>
+        /// <param name="x">The left-hand value</param>
+        /// <param name="y">The right-hand value</param>
+        public static decimal Max(decimal x, decimal y)
+        {
+            return x > y ? x : y;
+        }
+
+        /// <summary>
+        /// Evaluate min{x, y}
+        /// </summary>
+        /// <param name="x">The left-hand value</param>
+        /// <param name="y">The right-hand value</param>
+        public static decimal Min(decimal x, decimal y)
+        {
+            return x < y ? x : y;
+        }
+
+        /// <summary>
+        /// Evaluate hypot(x, y)
+        /// </summary>
+        /// <param name="x">The left-hand value</param>
+        /// <param name="y">The right-hand value</param>
+        public static decimal Hypot(decimal x, decimal y)
+        {
+
+            if (x > y)
+            {
+                return Abs(x) * Sqrt(1 + (y / x) * (y / x));
+            }
+
+            if (x < y)
+            {
+                return Abs(y) * Sqrt((x / y) * (x / y) + 1);
+            }
+
+            checked
+            {
+                //x = y
+                return Abs(x) * Sqrt(2);
+            }
+        }
+
+        /// <summary>
         /// Evaluate |x|
         /// </summary>
         /// <param name="x">An argument of the function</param>
@@ -106,7 +151,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         {
             if (value < 0)
             {
-                throw new ArgumentException("The value must be real.");
+                throw new ArgumentException("The value must be positive real.");
             }
 
             var x = value;
@@ -280,7 +325,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
                 switch (Sign(x))
                 {
                     case -1: throw new ArgumentException("-inf");
-                    case 1: throw new ArgumentException("+inf");
+                    case  1: throw new ArgumentException("+inf");
                 }
             }
 
