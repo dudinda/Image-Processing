@@ -13,7 +13,7 @@ namespace ImageProcessing.Common.Helpers
 
             return instance;
         }
-        
+
         public static void IsTrue(Func<bool> isTrue, string errorMessage)
         {
             IsNotNull(isTrue, nameof(isTrue));

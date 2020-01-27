@@ -42,7 +42,7 @@ namespace ImageProcessing.RGBFilters.Binary
 
                     for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
-                        partial += Recommendation.GetLumaCoefficients((ptr[2], ptr[1], ptr[0]), Luma.Rec709);
+                        partial += (byte)(ptr[2], ptr[1], ptr[0]).GetLumaCoefficients(Luma.Rec709);
                     }
 
                     return partial;
@@ -58,7 +58,7 @@ namespace ImageProcessing.RGBFilters.Binary
 
                     for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
-                        luminance = Recommendation.GetLumaCoefficients((ptr[2], ptr[1], ptr[0]), Luma.Rec709);
+                        luminance = (byte)(ptr[2], ptr[1], ptr[0]).GetLumaCoefficients(Luma.Rec709);
 
                         //if relative luminance greater or equal than average
                         //set it to white

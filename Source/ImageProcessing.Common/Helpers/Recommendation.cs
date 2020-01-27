@@ -7,6 +7,10 @@ namespace ImageProcessing.Common.Helpers
 {
     public static class Recommendation
     {
+
+        public static double GetLumaCoefficients(this (byte R, byte G, byte B) pixel, Luma rec)
+            => GetLumaCoefficients(((double)pixel.R, (double)pixel.B, (double)pixel.G), rec);
+
         /// <summary>
         /// Evaluate relative luminance using a specified recommendation
         /// </summary>
