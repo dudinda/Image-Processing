@@ -3,7 +3,7 @@ using ImageProcessing.Core.EventAggregator.Interface.BaseEventArgs;
 
 namespace ImageProcessing.DomainModel.EventArgs
 {
-    public class FileDialogEventArgs : BaseEventArgs<FileDialogAction>
+    public class FileDialogEventArgs : IBaseEventArgs<FileDialogAction>
     {
         public FileDialogEventArgs(FileDialogAction arg)
         {

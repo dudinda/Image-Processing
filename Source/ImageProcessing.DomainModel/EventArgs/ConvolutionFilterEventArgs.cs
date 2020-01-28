@@ -6,7 +6,7 @@ using ImageProcessing.Core.EventAggregator.Interface.BaseEventArgs;
 
 namespace ImageProcessing.DomainModel.EventArgs
 {
-    public class ConvolutionFilterEventArgs : BaseEventArgs<ConvolutionFilter>
+    public class ConvolutionFilterEventArgs : IBaseEventArgs<ConvolutionFilter>
     {
         public ConvolutionFilterEventArgs(ConvolutionFilter arg)
         {

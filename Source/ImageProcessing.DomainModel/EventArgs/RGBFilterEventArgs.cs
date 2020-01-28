@@ -3,7 +3,7 @@ using ImageProcessing.Core.EventAggregator.Interface.BaseEventArgs;
 
 namespace ImageProcessing.DomainModel.EventArgs
 {
-    public class RGBFilterEventArgs : BaseEventArgs<RGBFilter>
+    public class RGBFilterEventArgs : IBaseEventArgs<RGBFilter>
     {
         public RGBFilterEventArgs(RGBFilter arg)
         {

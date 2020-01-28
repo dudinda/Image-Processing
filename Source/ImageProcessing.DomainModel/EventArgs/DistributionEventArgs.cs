@@ -4,7 +4,7 @@ using ImageProcessing.Core.EventAggregator.Interface.BaseEventArgs;
 
 namespace ImageProcessing.DomainModel.EventArgs
 {
-    public class DistributionEventArgs : BaseEventArgs<Distribution>
+    public class DistributionEventArgs : IBaseEventArgs<Distribution>
     {
         public DistributionEventArgs(Distribution arg, (string, string) parameters)
         {

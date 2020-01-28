@@ -3,7 +3,7 @@ using ImageProcessing.Core.EventAggregator.Interface.BaseEventArgs;
 
 namespace ImageProcessing.DomainModel.EventArgs
 {
-    public class ToolbarActionEventArgs : BaseEventArgs<ToolbarAction>
+    public class ToolbarActionEventArgs : IBaseEventArgs<ToolbarAction>
     {
         public ToolbarActionEventArgs(ToolbarAction arg)
         {

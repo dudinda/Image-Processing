@@ -6,7 +6,7 @@ using ImageProcessing.Core.EventAggregator.Interface.BaseEventArgs;
 
 namespace ImageProcessing.DomainModel.EventArgs
 {
-    public class ImageContainerEventArgs : BaseEventArgs<ImageContainer>
+    public class ImageContainerEventArgs : IBaseEventArgs<ImageContainer>
     {
         public ImageContainerEventArgs(ImageContainer arg)
         {
