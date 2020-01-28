@@ -1,7 +1,7 @@
 ﻿using ImageProcessing.Core.Factory.Base;
-using ImageProcessing.Core.Factory.Convolution;
-using ImageProcessing.Core.Factory.Distribution;
-using ImageProcessing.Core.Factory.RGBFilters;
+using ImageProcessing.Core.Factory.ConvolutionFactory;
+using ImageProcessing.Core.Factory.DistributionFactory;
+using ImageProcessing.Core.Factory.RGBFiltersFactory;
 using ImageProcessing.Factory.Filters.Convolution;
 using ImageProcessing.Factory.Filters.Distributions;
 using ImageProcessing.Factory.Filters.RGBFilters;

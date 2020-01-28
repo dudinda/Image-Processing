@@ -1,8 +1,6 @@
 ﻿using System;
 
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Common.Extensions.EnumExtensions;
-using ImageProcessing.Common.Helpers;
 using ImageProcessing.ConvolutionFilters.Blur.BoxBlur;
 using ImageProcessing.ConvolutionFilters.Blur.MotionBlur;
 using ImageProcessing.ConvolutionFilters.EdgeDetection;
@@ -11,18 +9,17 @@ using ImageProcessing.ConvolutionFilters.EdgeDetection.SobelOperator;
 using ImageProcessing.ConvolutionFilters.Emboss;
 using ImageProcessing.ConvolutionFilters.GaussianBlur;
 using ImageProcessing.ConvolutionFilters.Sharpen;
-using ImageProcessing.Core.Factory.Convolution;
+using ImageProcessing.Core.Factory.ConvolutionFactory;
 using ImageProcessing.Core.Model.Convolution;
 
 namespace ImageProcessing.Factory.Filters.Convolution
 {
     public class ConvolutionFilterFactory : IConvolutionFilterFactory
     {
-        public AbstractConvolutionFilter GetFilter(string filter)
+        public AbstractConvolutionFilter GetFilter(ConvolutionFilter filter)
         {
-            Requires.IsNotNull(filter, nameof(filter));
 
-            switch (filter.GetEnumValueByName<ConvolutionFilter>())
+            switch (filter)
             {
                 case ConvolutionFilter.BoxBlur3x3:
                     return new BoxBlur3x3();
@@ -51,7 +48,7 @@ namespace ImageProcessing.Factory.Filters.Convolution
                 case ConvolutionFilter.SobelOperatorVertical:
                     return new SobelOperatorVertical();
 
-                default: throw new NotSupportedException(filter);
+                default: throw new NotSupportedException(nameof(filter));
             }
 
 

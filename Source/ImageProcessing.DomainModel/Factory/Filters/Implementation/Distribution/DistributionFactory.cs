@@ -1,9 +1,7 @@
 ﻿using System;
 
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Common.Extensions.EnumExtensions;
-using ImageProcessing.Common.Helpers;
-using ImageProcessing.Core.Factory.Distribution;
+using ImageProcessing.Core.Factory.DistributionFactory;
 using ImageProcessing.Core.Model.Distribution;
 using ImageProcessing.Distributions.OneParameterDistributions;
 using ImageProcessing.Distributions.TwoParameterDistributions;
@@ -12,11 +10,9 @@ namespace ImageProcessing.Factory.Filters.Distributions
 {
     public class DistributionFactory : IDistributionFactory
     {
-        public IDistribution GetFilter(string distribution) 
+        public IDistribution GetFilter(Distribution distribution) 
         {
-            Requires.IsNotNull(distribution, nameof(distribution));
-
-            switch (distribution.GetEnumValueByName<Distribution>())
+            switch (distribution)
             {
                 case Distribution.Exponential:
                     return new ExponentialDistribution();
@@ -35,7 +31,7 @@ namespace ImageProcessing.Factory.Filters.Distributions
                 case Distribution.Weibull:
                     return new WeibullDistribution();
 
-                default: throw new NotSupportedException(distribution);
+                default: throw new NotSupportedException(nameof(distribution));
             }
         }
     }

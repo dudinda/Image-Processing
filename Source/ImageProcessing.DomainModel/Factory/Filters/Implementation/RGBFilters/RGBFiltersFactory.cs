@@ -4,10 +4,8 @@ using System.Reflection;
 
 using ImageProcessing.Common.Attributes;
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Common.Extensions.EnumExtensions;
 using ImageProcessing.Common.Extensions.TypeExtensions;
-using ImageProcessing.Common.Helpers;
-using ImageProcessing.Core.Factory.RGBFilters;
+using ImageProcessing.Core.Factory.RGBFiltersFactory;
 using ImageProcessing.Core.Model.RGBFilters;
 using ImageProcessing.RGBFilters.Binary;
 using ImageProcessing.RGBFilters.Color;
@@ -18,11 +16,9 @@ namespace ImageProcessing.Factory.Filters.RGBFilters
 {
     public class RGBFiltersFactory : IRGBFiltersFactory
     {
-        public IRGBFilter GetFilter(string filter)
+        public IRGBFilter GetFilter(RGBFilter filter)
         {
-            Requires.IsNotNull(filter, nameof(filter));
-
-            switch (filter.GetEnumValueByName<RGBFilter>())
+            switch (filter)
             {
                 case RGBFilter.Binary:
                     return new BinaryFilter();
@@ -31,7 +27,7 @@ namespace ImageProcessing.Factory.Filters.RGBFilters
                 case RGBFilter.Inversion:
                     return new InversionFilter();
 
-                default: throw new NotSupportedException(filter);
+                default: throw new NotSupportedException(nameof(filter));
             }
         }
 
