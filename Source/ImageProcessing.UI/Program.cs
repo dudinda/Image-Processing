@@ -3,6 +3,8 @@ using System.Windows.Forms;
 
 using ImageProcessing.Core.Adapters.LightInject;
 using ImageProcessing.Core.Controller.Implementation;
+using ImageProcessing.Core.EventAggregator.Implementation;
+using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Factory.Base;
 using ImageProcessing.Core.Locker.Interface;
 using ImageProcessing.Factory.Base;
@@ -50,6 +52,7 @@ namespace ImageProcessing
                     .EnableAnnotatedConstructorInjection()
                     .RegisterNamedSingletonService<IAsyncLocker, ZoomAsyncLocker>("ZoomLocker")
                     .RegisterNamedSingletonService<IAsyncLocker, OperationAsyncLocker>("OperationLocker")
+                    .RegisterSingletonService<IEventAggregator, EventAggregator>()
                     .RegisterInstance(_context);
 
                 controller.Run<MainPresenter>();
