@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using LightInject;
+
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.BitmapExtensions;
 using ImageProcessing.Common.Extensions.EnumExtensions;
@@ -13,10 +13,11 @@ using ImageProcessing.Common.Extensions.StringExtensions;
 using ImageProcessing.Common.Extensions.TupleExtensions;
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Controller.Interface;
+using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Factory.Base;
-using ImageProcessing.Core.Factory.Convolution;
-using ImageProcessing.Core.Factory.Distribution;
-using ImageProcessing.Core.Factory.RGBFilters;
+using ImageProcessing.Core.Factory.ConvolutionFactory;
+using ImageProcessing.Core.Factory.DistributionFactory;
+using ImageProcessing.Core.Factory.RGBFiltersFactory;
 using ImageProcessing.Core.Locker.Interface;
 using ImageProcessing.Core.Presenter.Abstract;
 using ImageProcessing.Presentation.Code.Singletons;
@@ -25,6 +26,8 @@ using ImageProcessing.Presentation.Views.Main;
 using ImageProcessing.Services.ConvolutionFilterServices.Interface;
 using ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Interface;
 using ImageProcessing.Services.RGBFilterService.Interface;
+
+using LightInject;
 
 namespace ImageProcessing.Presentation.Presenters.Main
 {
@@ -39,6 +42,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
         private readonly IDistributionFactory _distributionFactory;
         private readonly IRGBFiltersFactory _rgbFiltersFactory;
 
+        private readonly IEventAggregator _eventAggregator;
+
         private readonly IAsyncLocker _zoomLocker;
         private readonly IAsyncLocker _operationLocker;
         
@@ -48,6 +53,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                              IConvolutionFilterService convolutionFilterService,
                              IBitmapLuminanceDistributionService distributionService,
                              IRGBFilterService rgbFilterService,
+                             IEventAggregator eventAggregator,
 
                              [Inject("ZoomLocker")]
                              IAsyncLocker zoomLocker,
@@ -67,10 +73,12 @@ namespace ImageProcessing.Presentation.Presenters.Main
             _rgbFilterService         = Requires.IsNotNull(rgbFilterService, nameof(rgbFilterService));
             _distributionService      = Requires.IsNotNull(distributionService, nameof(distributionService)); ;
 
+            _eventAggregator          = Requires.IsNotNull(eventAggregator, nameof(eventAggregator));
+
             _zoomLocker               = Requires.IsNotNull(zoomLocker, nameof(zoomLocker));
             _operationLocker          = Requires.IsNotNull(operationLocker, nameof(operationLocker));
 
-            Bind();
+            _eventAggregator.Subscribe(this);
         }
 
         private async Task OpenImage()
@@ -168,12 +176,10 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private async Task ApplyConvolutionFilter(string filterName)
+        private async Task ApplyConvolutionFilter(ConvolutionFilter filter)
         {
             try
             {
-                Requires.IsNotNull(filterName, nameof(filterName));
-
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
                     View.SetCursor(CursorType.WaitCursor);
@@ -182,11 +188,11 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     OperationPipeline.Instance.Register(() =>
                     {
-                        return copy.Process(_convolutionFilterFactory.GetFilter(filterName), _convolutionFilterService.Convolution)
-                               .Process(() => View.SetImageCopy(ImageContainer.Destination, (Bitmap)copy.Clone()))
-                               .Process(() => View.AddToUndoContainer((new Bitmap(copy), ImageContainer.Source)))
-                               .Process(() => View.SetImageToZoom(ImageContainer.Destination, new Bitmap(copy)))
-                               .Process((arg) => (Bitmap)arg.Clone());
+                        return copy.Process(_convolutionFilterFactory.GetFilter(filter), _convolutionFilterService.Convolution)
+                                   .Process(() => View.SetImageCopy(ImageContainer.Destination, (Bitmap)copy.Clone()))
+                                   .Process(() => View.AddToUndoContainer((new Bitmap(copy), ImageContainer.Source)))
+                                   .Process(() => View.SetImageToZoom(ImageContainer.Destination, new Bitmap(copy)))
+                                   .Process((arg) => (Bitmap)arg.Clone());
                     });
 
                     await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
@@ -198,12 +204,10 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private async Task ApplyRGBFilter(string filterName)
+        private async Task ApplyRGBFilter(RGBFilter filter)
         {
             try
             {
-                Requires.IsNotNull(filterName, nameof(filterName));
-
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
                     View.SetCursor(CursorType.WaitCursor);
@@ -212,7 +216,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     OperationPipeline.Instance.Register(() =>
                     {
-                        return copy.Process(_rgbFiltersFactory.GetFilter(filterName), _rgbFilterService.Filter)
+                        return copy.Process(_rgbFiltersFactory.GetFilter(filter), _rgbFilterService.Filter)
                                    .Process(() => View.DstImageCopy = new Bitmap(copy))
                                    .Process(() => View.SetImageToZoom(ImageContainer.Destination, new Bitmap(copy)))
                                    .Process(() => View.AddToUndoContainer((new Bitmap(copy), ImageContainer.Source)))
@@ -228,16 +232,14 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private async Task ApplyColorFilter(string filterName)
+        private async Task ApplyColorFilter(RGBColors filter)
         {
             try
             {
-                Requires.IsNotNull(filterName, nameof(filterName));
 
                 if (View.ImageIsNull(ImageContainer.Source)) { return; }
 
-                var color = filterName.GetEnumValueByName<RGBColors>();
-                var result = View.GetSelectedColors(color);
+                var result = View.GetSelectedColors(filter);
       
                 if (result is default(RGBColors))
                 {
@@ -265,19 +267,17 @@ namespace ImageProcessing.Presentation.Presenters.Main
             {
                 View.ShowError($"Error {ex.Message}");
             }
-        }  
+        }
 
-        private async Task ApplyHistogramTransformation(string filterName, (string, string) parms)
+        private async Task ApplyHistogramTransformation(Distribution distribution, (decimal, decimal) parms)
         {
             try
             {
-                if (View.ImageIsNull(ImageContainer.Source)) { return; } 
-
-                if (parms.TryParse<decimal, decimal>(out var result))
+                if (!View.ImageIsNull(ImageContainer.Source))
                 {
                     var filter = _distributionFactory
-                        .GetFilter(filterName)
-                        .SetParams(result);
+                        .GetFilter(distribution)
+                        .SetParams(parms);
 
                     View.SetCursor(CursorType.WaitCursor);
 
@@ -296,6 +296,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     View.DstImage.Tag = filter.Name;
                 }
+
             }
             catch
             {
@@ -332,20 +333,14 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private void BuildFunction(string containerType, string functionType)
+        private void BuildFunction(ImageContainer container, RandomVariable action)
         {
             try
             {
-                Requires.IsNotNull(containerType, nameof(containerType));
-                Requires.IsNotNull(functionType, nameof(functionType));
-
-                var function  = functionType.GetEnumValueByName<RandomVariable>();
-                var container = containerType.GetEnumValueByName<ImageContainer>();
-
                 if (!View.ImageIsNull(container))
                 {
                     Controller.Run<HistogramPresenter, HistogramViewModel>(
-                        new HistogramViewModel(new Bitmap(View.GetImageCopy(container)), function)
+                        new HistogramViewModel(new Bitmap(View.GetImageCopy(container)), action)
                     );
                 }
             }
@@ -355,33 +350,28 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
      
-        private async Task Replace(string replaceFrom)
+        private async Task Replace(ImageContainer replaceFrom)
         {
             try
             {
-                Requires.IsNotNull(replaceFrom, nameof(replaceFrom));
-
-                var source = replaceFrom.GetEnumValueByName<ImageContainer>();
-
-                var target = source == ImageContainer.Source ?
-                    ImageContainer.Destination : ImageContainer.Source;
-
-                if (!View.ImageIsNull(source))
+                if (!View.ImageIsNull(replaceFrom))
                 {
+                    var replaceTo = replaceFrom == ImageContainer.Source ?
+                      ImageContainer.Destination : ImageContainer.Source;
 
                     View.SetCursor(CursorType.WaitCursor);
 
-                    var copy = await GetImageCopy(source).ConfigureAwait(true);
+                    var copy = await GetImageCopy(replaceFrom).ConfigureAwait(true);
 
                     OperationPipeline.Instance.Register(() =>
                     {
-                        return copy.Process(() => View.SetImageCopy(target, new Bitmap(copy)))
-                                   .Process(() => View.SetImageToZoom(target, new Bitmap(View.GetImageCopy(target))))
-                                   .Process(() => View.AddToUndoContainer((new Bitmap(copy), source)))
-                                   .Process((arg) => (Bitmap)View.GetImageCopy(target).Clone());
+                        return copy.Process(() => View.SetImageCopy(replaceTo, new Bitmap(copy)))
+                                   .Process(() => View.SetImageToZoom(replaceTo, new Bitmap(View.GetImageCopy(replaceTo))))
+                                   .Process(() => View.AddToUndoContainer((new Bitmap(copy), replaceFrom)))
+                                   .Process((arg) => (Bitmap)View.GetImageCopy(replaceTo).Clone());
                     });
 
-                    await UpdateContainer(target).ConfigureAwait(true);
+                    await UpdateContainer(replaceTo).ConfigureAwait(true);
                 }
             }
             catch
@@ -390,40 +380,35 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private async Task GetRandomVariableInfo(string containerType, string actionType)
+        private async Task GetRandomVariableInfo(ImageContainer container, RandomVariable action)
         {
             try
             {
-                Requires.IsNotNull(actionType, nameof(actionType));
-                Requires.IsNotNull(containerType, nameof(containerType));
 
-                var container = containerType.GetEnumValueByName<ImageContainer>();
-                var action = actionType.GetEnumValueByName<RandomVariable>();
-
-                if (View.ImageIsNull(container)) return;
-
-
-                var copy = await GetImageCopy(ImageContainer.Source);
-
-                var result = await Task.Run(() =>
+                if (!View.ImageIsNull(container))
                 {
-                    switch(action)
+                    var copy = await GetImageCopy(ImageContainer.Source);
+
+                    var result = await Task.Run(() =>
                     {
-                        case RandomVariable.Expectation:
-                            return _distributionService.GetExpectation(copy).ToString();
-                        case RandomVariable.Variance:
-                            return _distributionService.GetVariance(copy).ToString();
-                        case RandomVariable.StandardDeviation:
-                            return _distributionService.GetStandardDeviation(copy).ToString();
-                        case RandomVariable.Entropy:
-                            return _distributionService.GetEntropy(copy).ToString();
-                    }
+                        switch (action)
+                        {
+                            case RandomVariable.Expectation:
+                                return _distributionService.GetExpectation(copy).ToString();
+                            case RandomVariable.Variance:
+                                return _distributionService.GetVariance(copy).ToString();
+                            case RandomVariable.StandardDeviation:
+                                return _distributionService.GetStandardDeviation(copy).ToString();
+                            case RandomVariable.Entropy:
+                                return _distributionService.GetEntropy(copy).ToString();
+                        }
 
-                    throw new NotImplementedException(nameof(action));
+                        throw new NotImplementedException(nameof(action));
 
-                }).ConfigureAwait(true);
+                    }).ConfigureAwait(true);
 
-                View.ShowInfo(result);
+                    View.ShowInfo(result);
+                }
             }
             catch
             {
@@ -431,14 +416,10 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private async Task Zoom(string target)
+        private async Task Zoom(ImageContainer container)
         {
             try
             {
-                Requires.IsNotNull(target, nameof(target));
-
-                var container = target.GetEnumValueByName<ImageContainer>();
-
                 if (!View.ImageIsNull(container)) {
       
                     var image = await _zoomLocker.LockAsync(() =>

@@ -8,23 +8,6 @@ namespace ImageProcessing.Presentation.Views.Main
 {
     public interface IMainView : IView
     {
-        event Action SaveImage;
-        event Action SaveImageAs;
-        event Action OpenImage;
-        event Action Shuffle;
-        event Action UndoLast;
-        event Action BuildLuminanceIntervals;
-        event Action<string> ApplyConvolutionFilter;
-        event Action<string, (string, string)> ApplyHistogramTransformation;
-        event Action<string> ApplyRGBFilter;
-        event Action<string> ApplyRGBColorFilter;
-        event Action<string> ReplaceImage;
-        event Action<string> Zoom;
-        event Action<string, string> BuildPMF;
-        event Action<string, string> BuildCDF;
-        event Action<string, string> GetRandomVariableInfo;
-      
-
         (string, string) Parameters { get; }
 
         string PathToFile { get; set; }

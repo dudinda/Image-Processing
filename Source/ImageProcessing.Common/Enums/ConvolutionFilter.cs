@@ -78,6 +78,11 @@
         /// <summary>
         /// The Sharpen operator with a kernel size 3x3.
         /// </summary>
-        Sharpen3x3              = 13
+        Sharpen3x3              = 13,
+
+        /// <summary>
+        /// The Sobel operator with a kernel size 3x3
+        /// </summary>
+        SobelOperator3x3           = 14
     }
 }

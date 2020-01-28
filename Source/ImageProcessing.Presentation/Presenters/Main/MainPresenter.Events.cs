@@ -1,52 +1,96 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using ImageProcessing.Common.Enums;
+using ImageProcessing.Core.EventAggregator.Interface.Subscriber;
+using ImageProcessing.DomainModel.EventArgs;
 
 namespace ImageProcessing.Presentation.Presenters.Main
 {
-    partial class MainPresenter
+    partial class MainPresenter : ISubscriber<ConvolutionFilterEventArgs>,
+                                  ISubscriber<RGBFilterEventArgs>, 
+                                  ISubscriber<RGBColorFilterEventArgs>,
+                                  ISubscriber<DistributionEventArgs>,
+                                  ISubscriber<ImageContainerEventArgs>,
+                                  ISubscriber<FileDialogEventArgs>,
+                                  ISubscriber<ToolbarActionEventArgs>,
+                                  ISubscriber<RandomVariableEventArgs>
     {
-        private void Bind()
+        public void OnEventHandler(ConvolutionFilterEventArgs e)
         {
-            View.Zoom += (container)
-                => Zoom(container);
+            ApplyConvolutionFilter(e.Arg);
+        }
 
-            View.BuildPMF += (container, function)
-                 => BuildFunction(container, function);
+        public void OnEventHandler(RGBFilterEventArgs e)
+        {
+            ApplyRGBFilter(e.Arg);
+        }
 
-            View.BuildCDF += (container, function) 
-                => BuildFunction(container, function);
+        public void OnEventHandler(RGBColorFilterEventArgs e)
+        {
+            ApplyColorFilter(e.Arg);
+        }
 
-            View.ApplyConvolutionFilter += (filter) 
-                => ApplyConvolutionFilter(filter);
+        public void OnEventHandler(DistributionEventArgs e)
+        {
+            ApplyHistogramTransformation(e.Arg, e.Parameters);
+        }
 
-            View.ApplyRGBFilter += (filter) 
-                => ApplyRGBFilter(filter);
+        public void OnEventHandler(ImageContainerEventArgs e)
+        {
+            Replace(e.Arg);
+        }
 
-            View.ApplyRGBColorFilter += (filter) 
-                => ApplyColorFilter(filter);
+        public void OnEventHandler(FileDialogEventArgs e)
+        {
+            switch(e.Arg)
+            {
+                case FileDialogAction.Open:
+                    OpenImage();
+                    break;
+                case FileDialogAction.Save:
+                    SaveImage();
+                    break;
+                case FileDialogAction.SaveAs:
+                    SaveImageAs();
+                    break;
 
-            View.ApplyHistogramTransformation += (distribution, parms)
-                => ApplyHistogramTransformation(distribution, parms);
+                default: throw new NotImplementedException(nameof(e.Arg));
+            }
+        }
 
-            View.SaveImage += ()
-                => SaveImage();
+        public void OnEventHandler(ToolbarActionEventArgs e)
+        {
+            switch(e.Arg)
+            {
+                case ToolbarAction.Shuffle:
+                    Shuffle();
+                    break;
+                case ToolbarAction.Undo:
+                    break;
+                case ToolbarAction.Redo:
+                    break;
+                    
+                default: throw new NotImplementedException(nameof(e.Arg));
+            }
+        }
 
-            View.SaveImageAs += () 
-                => SaveImageAs();
+        public void OnEventHandler(RandomVariableEventArgs e)
+        {
+            switch(e.Action)
+            {
+                case RandomVariable.CDF:
+                case RandomVariable.PMF:
+                    BuildFunction(e.Arg, e.Action);
+                    break;
 
-            View.OpenImage += () 
-                => OpenImage();
+                case RandomVariable.Expectation:
+                case RandomVariable.Entropy:
+                case RandomVariable.StandardDeviation:
+                case RandomVariable.Variance:
+                    GetRandomVariableInfo(e.Arg, e.Action);
+                    break;
 
-            View.Shuffle += () 
-                => Shuffle();
-
-            View.ReplaceImage += (image) 
-                => Replace(image);
-
-            View.GetRandomVariableInfo += (container, action)
-                => GetRandomVariableInfo(container, action);
-
+                default: throw new NotImplementedException(nameof(e.Action));
+            }
         }
     }
 }

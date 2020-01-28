@@ -1,29 +1,14 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+
+using ImageProcessing.Common.Enums;
+using ImageProcessing.DomainModel.EventArgs;
 
 namespace ImageProcessing.Form.Main
 {
     partial class MainForm
     {
-        public event Action? SaveImageAs;
-        public event Action? SaveImage;
-        public event Action? OpenImage;
-        public event Action<string>? ApplyConvolutionFilter;
-        public event Action<string, (string, string)>? ApplyHistogramTransformation;
-        public event Action<string>? ApplyRGBFilter;
-        public event Action<string>? ApplyRGBColorFilter;
-        public event Action<string>? ReplaceImage;
-        public event Action<string, string>? BuildPMF;
-        public event Action<string, string>? BuildCDF;
-        public event Action<string, string>? GetRandomVariableInfo;
-        public event Action<string>? Zoom;
-        public event Action? Shuffle;    
-        public event Action? UndoLast;
-        public event Action? BuildLuminanceIntervals;
-
-
         /// <summary>
-        /// Bind the main window event handlers
+        /// Publish the main window event handlers
         /// </summary>
         private void Bind()
         {
@@ -35,159 +20,166 @@ namespace ImageProcessing.Form.Main
         }
 
         /// <summary>
-        /// Bind event handlers for a file menu
+        /// Publish event handlers for a file menu
         /// </summary>
         private void BindFileMenu()
         {
+
+            Src.MouseWheel += (sender, args)
+           => _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Source));
+
+            Dst.MouseWheel += (sender, args)
+              => _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Destination));
+
             OpenFile.Click += (sender, args)
-               => Invoke(OpenImage);
+         => _eventAggregator.Publish(new FileDialogEventArgs(FileDialogAction.Open));
 
             SaveFile.Click += (sender, args)
-                => Invoke(SaveImage);
+                 => _eventAggregator.Publish(new FileDialogEventArgs(FileDialogAction.Save));
 
             SaveFileAs.Click += (sender, args)
-                => Invoke(SaveImageAs);
+            => _eventAggregator.Publish(new FileDialogEventArgs(FileDialogAction.SaveAs));
 
-            SrcZoom.MouseMove += (secnder, args)
-                => Invoke(Zoom, Src.Tag);
+            SrcZoom.MouseUp += (secnder, args)
+             => _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Source));
 
             SrcZoom.KeyPress += (secnder, args)
-                 => Invoke(Zoom, Src.Tag);
+              => _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Source));
 
-            DstZoom.MouseMove += (secnder, args)
-                => Invoke(Zoom, Dst.Tag);
+            DstZoom.MouseWheel += (sender, args)
+              => _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Destination));
+
+            DstZoom.MouseUp += (sender, args)
+              => _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Destination));
 
             DstZoom.KeyPress += (secnder, args)
-              => Invoke(Zoom, Dst.Tag);
+              => _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Destination));
         }
 
         /// <summary>
-        /// Bind event handlers for a toolbar menu
+        /// Publish event handlers for a toolbar menu
         /// </summary>
         private void BindToolbar()
         {
             ShuffleSrc.Click += (sender, args)
-                => Invoke(Shuffle);
+                      => _eventAggregator.Publish(new ToolbarActionEventArgs(ToolbarAction.Shuffle));
 
             PMF.Click += (sender, args)
-                => Invoke(BuildPMF, Src.Tag, PMF.Tag);
+                => _eventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.PMF, ImageContainer.Source));
 
             CDF.Click += (sender, args)
-                => Invoke(BuildCDF, Src.Tag, CDF.Tag);
+               => _eventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.CDF, ImageContainer.Source));
 
             Expectation.Click += (sender, args)
-                => Invoke(GetRandomVariableInfo, Src.Tag, Expectation.Tag);
+                  => _eventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.Expectation, ImageContainer.Source));
 
             Variance.Click += (sender, args)
-                => Invoke(GetRandomVariableInfo, Src.Tag, Variance.Tag);
+             => _eventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.Variance, ImageContainer.Source));
 
             StandardDeviation.Click += (sender, args)
-                => Invoke(GetRandomVariableInfo, Src.Tag, StandardDeviation.Tag);
+               => _eventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.StandardDeviation, ImageContainer.Source));
 
             Entropy.Click += (sender, args)
-                => Invoke(GetRandomVariableInfo, Src.Tag, Entropy.Tag);
-
-            Undo.Click += (sender, args)
-                => Invoke(UndoLast);
+               => _eventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.Entropy, ImageContainer.Source));
 
             ReplaceSrcByDst.Click += (sernder, args)
-                => Invoke(ReplaceImage, Dst.Tag);
+                => _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Destination));
 
             ReplaceDstBySrc.Click += (sernder, args)
-                => Invoke(ReplaceImage, Src.Tag);
+                 => _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Source));
         }
 
         /// <summary>
-        /// Bind event handlers for a convolution menu
+        /// Publish event handlers for a convolution menu
         /// </summary>
         private void BindConvolutionFilters()
         {
             GaussianBlur3x3.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, GaussianBlur3x3.Tag);
+                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.GaussianBlur3x3));
 
             GaussianBlur5x5.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, GaussianBlur5x5.Tag);
+                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.GaussianBlur5x5));
 
             BoxBlur3x3.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, BoxBlur3x3.Tag);
+                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.BoxBlur3x3));
 
             BoxBlur5x5.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, BoxBlur5x5.Tag);
+                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.BoxBlur5x5));
 
             MotionBlur9x9.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, MotionBlur9x9.Tag);
+                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.MotionBlur9x9));
 
             LaplacianOfGaussianOperator.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, LaplacianOfGaussianOperator.Tag);
+                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.LoGOperator));
 
             LaplacianOperator5x5.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, LaplacianOperator5x5.Tag);
+                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.LaplacianOperator5x5));
 
             LaplacianOperator3x3.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, LaplacianOperator3x3.Tag);
+                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.LaplacianOperator3x3));
 
             Emboss3x3.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, Emboss3x3.Tag);
+                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.Emboss3x3));
 
             Sharpen3x3.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, Sharpen3x3.Tag);
+                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.Sharpen3x3));
 
             SobelOperator.Click += (sender, args)
-                => Invoke(ApplyConvolutionFilter, SobelOperator.Tag);
+                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.SobelOperator3x3));
         }
 
         /// <summary>
-        /// Bind event handlers for a rgb filters menu
+        /// Publish event handlers for a rgb filters menu
         /// </summary>
         private void BindRGBFilters()
         {
             InversionFilter.Click += (sender, args)
-                => Invoke(ApplyRGBFilter, InversionFilter.Tag);
+                    => _eventAggregator.Publish(new RGBFilterEventArgs(RGBFilter.Inversion));
 
             BinaryFilter.Click += (sender, args)
-                => Invoke(ApplyRGBFilter, BinaryFilter.Tag);
+                  => _eventAggregator.Publish(new RGBFilterEventArgs(RGBFilter.Binary));
 
             GrayscaleFilter.Click += (sender, args)
-                => Invoke(ApplyRGBFilter, GrayscaleFilter.Tag);
+               => _eventAggregator.Publish(new RGBFilterEventArgs(RGBFilter.Grayscale));
 
             ColorFilterBlue.Click += (sender, args)
-                => Invoke(ApplyRGBColorFilter, ColorFilterBlue.Tag);
+                => _eventAggregator.Publish(new RGBColorFilterEventArgs(RGBColors.Blue));
 
             ColorFilterRed.Click += (sender, args)
-                => Invoke(ApplyRGBColorFilter, ColorFilterRed.Tag);
+                 => _eventAggregator.Publish(new RGBColorFilterEventArgs(RGBColors.Red));
 
             ColorFilterGreen.Click += (sender, args)
-                => Invoke(ApplyRGBColorFilter, ColorFilterGreen.Tag);
+                 => _eventAggregator.Publish(new RGBColorFilterEventArgs(RGBColors.Green));
         }
 
         /// <summary>
-        /// Bind event handlers for a histogram transformation menu
+        /// Publish event handlers for a histogram transformation menu
         /// </summary>
         private void BindDistributions()
         {
             ExponentialDistribution.Click += (sender, args)
-                => Invoke(ApplyHistogramTransformation, ExponentialDistribution.Tag, Parameters);
+                => _eventAggregator.Publish(new DistributionEventArgs(Distribution.Exponential, Parameters));
 
             ParabolaDistribution.Click += (sender, args)
-                => Invoke(ApplyHistogramTransformation, ParabolaDistribution.Tag, Parameters);
+                => _eventAggregator.Publish(new DistributionEventArgs(Distribution.Parabola, Parameters));
 
             RayleighDistribution.Click += (sender, args)
-                => Invoke(ApplyHistogramTransformation, RayleighDistribution.Tag, Parameters);
+                 => _eventAggregator.Publish(new DistributionEventArgs(Distribution.Rayleigh, Parameters));
 
             CauchyDistribution.Click += (sender, args)
-                => Invoke(ApplyHistogramTransformation, CauchyDistribution.Tag, Parameters);
+                   => _eventAggregator.Publish(new DistributionEventArgs(Distribution.Cauchy, Parameters));
 
             LaplaceDistribution.Click += (sender, args)
-                => Invoke(ApplyHistogramTransformation, LaplaceDistribution.Tag, Parameters);
+              => _eventAggregator.Publish(new DistributionEventArgs(Distribution.Laplace, Parameters));
 
             NormalDistribution.Click += (sender, args)
-                => Invoke(ApplyHistogramTransformation, NormalDistribution.Tag, Parameters);
+                 => _eventAggregator.Publish(new DistributionEventArgs(Distribution.Normal, Parameters));
 
             UniformDistribution.Click += (sender, args)
-                => Invoke(ApplyHistogramTransformation, UniformDistribution.Tag, Parameters);
+                => _eventAggregator.Publish(new DistributionEventArgs(Distribution.Uniform, Parameters));
 
             WeibullDistribution.Click += (sender, args)
-                => Invoke(ApplyHistogramTransformation, WeibullDistribution.Tag, Parameters);
+                   => _eventAggregator.Publish(new DistributionEventArgs(Distribution.Weibull, Parameters));
         }
 
         /// <summary>
@@ -197,29 +189,29 @@ namespace ImageProcessing.Form.Main
         /// <param name="keyData">The pressed key</param>
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            switch(keyData)
+            switch (keyData)
             {
                 case (Keys.Right):
-                    Invoke(ReplaceImage, Src.Tag);
+                    _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Source));
                     return true;
-                case (Keys.Left):   
-                    Invoke(ReplaceImage, Dst.Tag);
+                case (Keys.Left):
+                    _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Destination));
                     return true;
                 case (Keys.Q):
-                    Invoke(BuildPMF, Src.Tag, PMF.Tag);
+                   _eventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.PMF, ImageContainer.Source));
                     return true;
                 case (Keys.Q | Keys.Control):
-                    Invoke(BuildPMF, Dst.Tag, PMF.Tag);
+                   _eventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.PMF, ImageContainer.Destination));
                     return true;
                 case (Keys.W):
-                    Invoke(BuildCDF, Src.Tag, CDF.Tag);
+                   _eventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.CDF, ImageContainer.Source));
                     return true;
                 case (Keys.W | Keys.Control):
-                    Invoke(BuildCDF, Dst.Tag, CDF.Tag);
+                   _eventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.CDF, ImageContainer.Destination));
                     return true;
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
-    }
+   }
 }
