@@ -1,7 +1,7 @@
 ﻿namespace ImageProcessing.Core.Factory.Filter
 {
-    public interface IFilterFactory<out TFilter>
+    public interface IFilterFactory<out TFilter, in TEnum>
     {
-        TFilter GetFilter(string name);
+        TFilter GetFilter(TEnum filter);
     }
 }

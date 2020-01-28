@@ -1,13 +1,13 @@
-﻿using ImageProcessing.Core.Factory.Filter;
+﻿using ImageProcessing.Common.Enums;
+using ImageProcessing.Core.Factory.Filter;
 using ImageProcessing.Core.Model.Convolution;
 
-namespace ImageProcessing.Core.Factory.Convolution
+namespace ImageProcessing.Core.Factory.ConvolutionFactory
 {
     /// <summary>
-    /// Interface that Convol methods are required to implement.
+    /// Interface that ConvolutionFactory methods are required to implement.
     /// </summary>
-    /// <seealso cref="BaseFactory"/>
-    public interface IConvolutionFilterFactory : IFilterFactory<AbstractConvolutionFilter>
+    public interface IConvolutionFilterFactory : IFilterFactory<AbstractConvolutionFilter, ConvolutionFilter>
     {
 
     }

@@ -1,6 +1,6 @@
-﻿using ImageProcessing.Core.Factory.Convolution;
-using ImageProcessing.Core.Factory.Distribution;
-using ImageProcessing.Core.Factory.RGBFilters;
+﻿using ImageProcessing.Core.Factory.ConvolutionFactory;
+using ImageProcessing.Core.Factory.DistributionFactory;
+using ImageProcessing.Core.Factory.RGBFiltersFactory;
 
 namespace ImageProcessing.Core.Factory.Base
 {
