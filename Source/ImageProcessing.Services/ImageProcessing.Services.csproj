@@ -13,7 +13,6 @@
   <ItemGroup>
     <ProjectReference Include="..\ImageProcessing.DecimalMath\ImageProcessing.DecimalMath.csproj" />
     <ProjectReference Include="..\ImageProcessing.DomainModel\ImageProcessing.DomainModel.csproj" />
-    <ProjectReference Include="..\ImageProcessing.DomainModel\ImageProcessing.DomainModel.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,10 +22,6 @@
     <Compile Update="DistributionServices\RandomVariableDistribution\RandomVariableDistributionService.Implementation.cs">
       <DependentUpon>DistributionService.cs</DependentUpon>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="PipelineService\" />
   </ItemGroup>
 
 </Project>
