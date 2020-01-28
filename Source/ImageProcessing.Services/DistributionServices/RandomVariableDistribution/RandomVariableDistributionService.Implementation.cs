@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-using ImageProcessing.Common.Extensions.DecimalMathExtensions;
+using ImageProcessing.Common.Extensions.DecimalMathRealExtensions;
 using ImageProcessing.Core.Model.Distribution;
 
 namespace ImageProcessing.Services.DistributionServices.RandomVariableDistribution.Implementation

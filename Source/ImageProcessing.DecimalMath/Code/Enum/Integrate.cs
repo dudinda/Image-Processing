@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ImageProcessing.Common.Enums
+﻿namespace ImageProcessing.DecimalMath.Code.Enums
 {
-    public enum Integration
+    public enum Integrate
     {
         /// <summary>
         /// An unknown integration method

@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 
-using ImageProcessing.Common.Extensions.DecimalMathExtensions;
+using ImageProcessing.Common.Extensions.DecimalMathRealExtensions;
 using ImageProcessing.Common.Helpers;
-using ImageProcessing.Common.Utility.DecimalMath;
 using ImageProcessing.Core.Model.Distribution;
+using ImageProcessing.DecimalMath.Real;
 using ImageProcessing.Services.DistributionServices.Distribution.Interface;
 
 namespace ImageProcessing.Services.DistributionServices.RandomVariableDistribution.Implementation
@@ -29,7 +29,7 @@ namespace ImageProcessing.Services.DistributionServices.RandomVariableDistributi
                 "Probability mass function is always positive.");
 
             Requires.IsTrue(
-                () => (pmf.Sum() - 1.0M).Abs() < DecimalMath.Epsilon,
+                () => (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
                 "The pmf must be normalized.");
 
             return GetExpectationImpl(pmf);
@@ -44,7 +44,7 @@ namespace ImageProcessing.Services.DistributionServices.RandomVariableDistributi
                 "Probability mass function is always positive.");
 
             Requires.IsTrue(
-                () => (pmf.Sum() - 1.0M).Abs() < DecimalMath.Epsilon,
+                () => (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
                 "The pmf must be normalized.");
 
             return GetVarianceImpl(pmf);
@@ -59,7 +59,7 @@ namespace ImageProcessing.Services.DistributionServices.RandomVariableDistributi
                 "Probability mass function is always positive.");
 
             Requires.IsTrue(
-                () => (pmf.Sum() - 1.0M).Abs() < DecimalMath.Epsilon,
+                () => (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
                 "The pmf must be normalized.");
 
             return GetStandardDeviationImpl(pmf);
@@ -74,7 +74,7 @@ namespace ImageProcessing.Services.DistributionServices.RandomVariableDistributi
                 "Probability mass function is always positive.");
 
             Requires.IsTrue(
-                () => (pmf.Sum() - 1.0M).Abs() < DecimalMath.Epsilon,
+                () => (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
                 "The pmf must be normalized.");
 
             return GetConditionalExpectationImpl(interval, pmf);
@@ -101,7 +101,7 @@ namespace ImageProcessing.Services.DistributionServices.RandomVariableDistributi
                 "Probability mass function is always positive.");
 
             Requires.IsTrue(
-                () => (pmf.Sum() - 1.0M).Abs() < DecimalMath.Epsilon,
+                () => (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
                 "The pmf must be normalized.");
 
             return GetCDFImpl(pmf);
@@ -127,7 +127,7 @@ namespace ImageProcessing.Services.DistributionServices.RandomVariableDistributi
                 "Probability mass function is always positive.");
 
             Requires.IsTrue(
-                () => (pmf.Sum() - 1.0M).Abs() < DecimalMath.Epsilon,
+                () => (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
                 "The pmf must be normalized.");
 
             return GetEntropyImpl(pmf);

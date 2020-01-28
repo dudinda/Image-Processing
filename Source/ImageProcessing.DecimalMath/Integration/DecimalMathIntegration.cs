@@ -1,9 +1,9 @@
 ﻿using System;
 
-using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.RandomExtensions;
+using ImageProcessing.DecimalMath.Code.Enums;
 
-namespace ImageProcessing.Common.Utility.DecimalMath
+namespace ImageProcessing.DecimalMath.Integration
 {
     public static class DecimalMathIntegration
     {
@@ -14,7 +14,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
         /// <param name="b">The end of an interval</param>
         /// <param name="a">The start of an interval</param>
         /// <param name="steps">A number of iterations</param>
-        public static decimal Integrate(Integration method, Func<decimal, decimal> f, (decimal x1, decimal x2) interval, int N = 40000)
+        public static decimal Integration(Integrate method, Func<decimal, decimal> f, (decimal x1, decimal x2) interval, int N = 40000)
         {
             try
             {
@@ -22,9 +22,9 @@ namespace ImageProcessing.Common.Utility.DecimalMath
 
                 switch (method)
                 {
-                    case Integration.Trapezoidal:
+                    case Integrate.Trapezoidal:
                         return Trapezoidal(f, interval, N);
-                    case Integration.MonteCarlo:
+                    case Integrate.MonteCarlo:
                         return MonteCarlo(f, interval, N);
 
                     default: throw new NotImplementedException();

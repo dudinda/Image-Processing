@@ -1,8 +1,8 @@
 ﻿using System;
 
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Common.Utility.DecimalMath;
 using ImageProcessing.Core.Model.Distribution;
+using ImageProcessing.DecimalMath.Real;
 
 namespace ImageProcessing.Distributions.OneParameterDistributions
 {
@@ -16,7 +16,7 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
 
         public decimal Quantile(decimal p)
         {
-            return _k * (1M - DecimalMath.Pow(1M - p, 0.3M));
+            return _k * (1M - DecimalMathReal.Pow(1M - p, 0.3M));
         }
         public decimal GetMean()
         {

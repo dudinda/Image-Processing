@@ -1,10 +1,8 @@
-﻿using System;
-
+﻿
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Common.Utility.DecimalMath;
 using ImageProcessing.Core.Model.Distribution;
-
-using MathNet.Numerics;
+using ImageProcessing.DecimalMath.Real;
+using ImageProcessing.DecimalMath.Special;
 
 namespace ImageProcessing.Distributions.TwoParameterDistributions
 {
@@ -20,7 +18,7 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
         public decimal GetMean() => _mu;
         public decimal GetVariance() => _sigma * _sigma;
         public decimal Quantile(decimal p) => 
-            _mu + _sigma * DecimalMath.Sqrt(2) * 
+            _mu + _sigma * DecimalMathReal.Sqrt(2) * 
            DecimalMathSpecial.ErfInv(2 * p - 1);
 
         public IDistribution SetParams((decimal, decimal) parms)

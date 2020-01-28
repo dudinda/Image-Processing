@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace ImageProcessing.Common.Utility.DecimalMath
+namespace ImageProcessing.DecimalMath.Real
 {
     /// <summary>
     /// The class contains functions of a real variable,
     /// where each argument is represented as <see cref="decimal">
     /// </summary>
-    public static class DecimalMath
+    public static class DecimalMathReal
     {
         public const decimal E = 2.71828182845905M;
         public const decimal Epsilon = 1.0E-26M;

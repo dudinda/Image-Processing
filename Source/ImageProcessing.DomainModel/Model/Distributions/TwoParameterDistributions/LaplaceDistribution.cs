@@ -1,6 +1,6 @@
 ﻿using ImageProcessing.Common.Enums;
-using ImageProcessing.Common.Utility.DecimalMath;
 using ImageProcessing.Core.Model.Distribution;
+using ImageProcessing.DecimalMath.Real;
 
 namespace ImageProcessing.Distributions.TwoParameterDistributions
 {
@@ -15,10 +15,10 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
 
         public decimal GetMean() => _mu;
         public decimal GetVariance() => 2 * _b * _b;
-        public decimal Quantile(decimal p) 
-            => _mu + _b * 
-            DecimalMath.Sign(p - 0.5M) *
-            DecimalMath.Log(1 - 2 * DecimalMath.Abs(p - 0.5M));
+        public decimal Quantile(decimal p)
+            => _mu + _b *
+            DecimalMathReal.Sign(p - 0.5M) *
+            DecimalMathReal.Log(1 - 2 * DecimalMathReal.Abs(p - 0.5M));
 
         public IDistribution SetParams((decimal, decimal) parms)
         {

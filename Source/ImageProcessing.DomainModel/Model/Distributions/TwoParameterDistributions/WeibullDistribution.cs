@@ -1,9 +1,9 @@
 ﻿using System;
 
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Common.Extensions.DecimalMathExtensions;
-using ImageProcessing.Common.Utility.DecimalMath;
+using ImageProcessing.Common.Extensions.DecimalMathRealExtensions;
 using ImageProcessing.Core.Model.Distribution;
+using ImageProcessing.DecimalMath.Real;
 
 namespace ImageProcessing.Distributions.TwoParameterDistributions
 {
@@ -18,7 +18,7 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
 
         public decimal GetMean() => throw new NotImplementedException();
         public decimal GetVariance() => throw new NotImplementedException();
-        public decimal Quantile(decimal p) => _lambda * -(DecimalMath.Log(1 - p).Pow(1.0M / _k));
+        public decimal Quantile(decimal p) => _lambda * -(DecimalMathReal.Log(1 - p).Pow(1.0M / _k));
 
         public IDistribution SetParams((decimal, decimal) parms)
         {

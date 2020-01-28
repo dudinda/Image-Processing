@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ImageProcessing.DecimalMath\ImageProcessing.DecimalMath.csproj" />
     <ProjectReference Include="..\ImageProcessing.DomainModel\ImageProcessing.DomainModel.csproj" />
     <ProjectReference Include="..\ImageProcessing.DomainModel\ImageProcessing.DomainModel.csproj" />
   </ItemGroup>

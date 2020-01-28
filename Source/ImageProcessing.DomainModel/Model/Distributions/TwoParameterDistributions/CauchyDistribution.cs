@@ -3,6 +3,7 @@
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Utility.DecimalMath;
 using ImageProcessing.Core.Model.Distribution;
+using ImageProcessing.DecimalMath.Real;
 
 namespace ImageProcessing.Distributions.TwoParameterDistributions
 {
@@ -16,7 +17,7 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
         public decimal SecondParameter => _gamma;
         public decimal GetMean() => throw new NotImplementedException();
         public decimal GetVariance() => throw new ArithmeticException("+inf");
-        public decimal Quantile(decimal p) => _x0 + _gamma * DecimalMath.Tan(DecimalMath.PI * (p - 0.5M));
+        public decimal Quantile(decimal p) => _x0 + _gamma * DecimalMathReal.Tan(DecimalMathReal.PI * (p - 0.5M));
 
         public IDistribution SetParams((decimal, decimal) parms)
         {

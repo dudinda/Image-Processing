@@ -5,9 +5,9 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 using ImageProcessing.Common.Extensions.BitmapExtensions;
-using ImageProcessing.Common.Extensions.DecimalMathExtensions;
-using ImageProcessing.Common.Utility.DecimalMath;
+using ImageProcessing.Common.Extensions.DecimalMathRealExtensions;
 using ImageProcessing.Core.Model.Distribution;
+using ImageProcessing.DecimalMath.Real;
 
 namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Implementation
 {
@@ -163,7 +163,7 @@ namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribut
             //transform an array by a quantile function
             for (int index = 0; index < 256; ++index)
             {
-                cdf[index] = cdf[index] >= 1 ? cdf[index] - DecimalMath.Epsilon : cdf[index];
+                cdf[index] = cdf[index] >= 1 ? cdf[index] - DecimalMathReal.Epsilon : cdf[index];
 
                 var pixel = distribution.Quantile(cdf[index]);
 

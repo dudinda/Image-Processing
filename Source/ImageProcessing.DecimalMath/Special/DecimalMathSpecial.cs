@@ -1,10 +1,10 @@
 ﻿using System;
 
-using ImageProcessing.Common.Extensions.DecimalMathExtensions;
+using ImageProcessing.Common.Extensions.DecimalMathRealExtensions;
 
-using static ImageProcessing.Common.Utility.DecimalMath.DecimalMath;
+using static ImageProcessing.DecimalMath.Real.DecimalMathReal;
 
-namespace ImageProcessing.Common.Utility.DecimalMath
+namespace ImageProcessing.DecimalMath.Special
 {
     public static class DecimalMathSpecial
     {
@@ -72,7 +72,7 @@ namespace ImageProcessing.Common.Utility.DecimalMath
             }
 
             decimal  p;
-            var w = -DecimalMath.Log((1.0M - x) * (1.0M + x));
+            var w = -Log((1.0M - x) * (1.0M + x));
 
             if (w < 5.000000M)
             {

@@ -1,8 +1,8 @@
 ﻿using System;
 
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Common.Utility.DecimalMath;
 using ImageProcessing.Core.Model.Distribution;
+using ImageProcessing.DecimalMath.Real;
 
 namespace ImageProcessing.Distributions.OneParameterDistributions
 {
@@ -20,7 +20,7 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
 
             if (p >= 1) return 0;
      
-            return -DecimalMath.Log(1 - p) / _lambda;
+            return -DecimalMathReal.Log(1 - p) / _lambda;
         }
 
         public IDistribution SetParams((decimal, decimal) parms)
