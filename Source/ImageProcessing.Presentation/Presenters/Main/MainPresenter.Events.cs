@@ -15,29 +15,20 @@ namespace ImageProcessing.Presentation.Presenters.Main
                                   ISubscriber<RandomVariableEventArgs>
     {
         public void OnEventHandler(ConvolutionFilterEventArgs e)
-        {
-            ApplyConvolutionFilter(e.Arg);
-        }
+            => ApplyConvolutionFilter(e.Arg);
 
         public void OnEventHandler(RGBFilterEventArgs e)
-        {
-            ApplyRGBFilter(e.Arg);
-        }
+            => ApplyRGBFilter(e.Arg);
 
         public void OnEventHandler(RGBColorFilterEventArgs e)
-        {
-            ApplyColorFilter(e.Arg);
-        }
+            => ApplyColorFilter(e.Arg);
 
         public void OnEventHandler(DistributionEventArgs e)
-        {
-            ApplyHistogramTransformation(e.Arg, e.Parameters);
-        }
+            => ApplyHistogramTransformation(e.Arg, e.Parameters);
 
         public void OnEventHandler(ImageContainerEventArgs e)
-        {
-            Replace(e.Arg);
-        }
+            => Replace(e.Arg);
+        
 
         public void OnEventHandler(FileDialogEventArgs e)
         {
