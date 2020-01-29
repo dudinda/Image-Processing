@@ -1,4 +1,4 @@
-﻿namespace ImageProcessing.Utility.BitmapStack.Abstract
+﻿namespace ImageProcessing.Utility.FixedStack.Interface
 {
     public interface IFixedStack<T>
     {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using ImageProcessing.Utility.BitmapStack.Abstract;
+using ImageProcessing.Utility.FixedStack.Interface;
 
-namespace ImageProcessing.Utility.BitmapStack
+namespace ImageProcessing.Utility.FixedStack.Implementation
 {
     public class FixedStack<T> : IFixedStack<T>
     {
