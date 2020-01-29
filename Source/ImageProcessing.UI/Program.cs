@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 using ImageProcessing.Core.Adapters.LightInject;
@@ -7,6 +8,8 @@ using ImageProcessing.Core.EventAggregator.Implementation;
 using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Factory.Base;
 using ImageProcessing.Core.Locker.Interface;
+using ImageProcessing.Core.Pipeline.AwaitablePipeline.Implementation;
+using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Factory.Base;
 using ImageProcessing.Form.Histogram;
 using ImageProcessing.Form.Main;
@@ -53,6 +56,7 @@ namespace ImageProcessing
                     .RegisterNamedSingletonService<IAsyncLocker, ZoomAsyncLocker>("ZoomLocker")
                     .RegisterNamedSingletonService<IAsyncLocker, OperationAsyncLocker>("OperationLocker")
                     .RegisterSingletonService<IEventAggregator, EventAggregator>()
+                    .RegisterSingletonService<IAwaitablePipeline<Bitmap>, AwaitablePipeline<Bitmap>>()
                     .RegisterInstance(_context);
 
                 controller.Run<MainPresenter>();
