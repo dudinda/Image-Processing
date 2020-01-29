@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ImageProcessing.Common\ImageProcessing.Common.csproj" />
-    <ProjectReference Include="..\Source\ImageProcessing.Common\ImageProcessing.Common.csproj" />
   </ItemGroup>
 
 </Project>

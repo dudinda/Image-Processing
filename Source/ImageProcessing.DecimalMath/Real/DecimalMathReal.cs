@@ -51,7 +51,6 @@ namespace ImageProcessing.DecimalMath.Real
         /// <param name="y">The right-hand value</param>
         public static decimal Hypot(decimal x, decimal y)
         {
-
             if (x > y)
             {
                 return Abs(x) * Sqrt(1 + (y / x) * (y / x));
@@ -60,6 +59,11 @@ namespace ImageProcessing.DecimalMath.Real
             if (x < y)
             {
                 return Abs(y) * Sqrt((x / y) * (x / y) + 1);
+            }
+
+            if (x == 0 && y == 0)
+            {
+                return 0;
             }
 
             checked
@@ -155,11 +159,11 @@ namespace ImageProcessing.DecimalMath.Real
             }
 
             var x = value;
-            var y = 1M;
+            var y = 1.0M;
 
             while (Abs(x - y) > precision)
             {
-                x = (x + y) / 2;
+                x = (x + y) * 0.5M;
                 y = value / x;
             }
 
@@ -239,13 +243,13 @@ namespace ImageProcessing.DecimalMath.Real
                 return Log(x) / Log(lbase);
             }
 
-            var a0 = (1.0M + x) / 2.0M;
+            var a0 = (1.0M + x) * 0.5M;
             var b0 = Sqrt(x);
 
                 
             while (Abs(a0 - b0) > precision)
             {
-                a0 = (a0 + b0) / 2.0M;
+                a0 = (a0 + b0) * 0.5M;
                 b0 = Sqrt(a0 * b0);
             }
 
@@ -317,7 +321,7 @@ namespace ImageProcessing.DecimalMath.Real
         {
             x = Mod(x, PI);
 
-            var error = Abs(Abs(x) - PI / 2.0M);
+            var error = Abs(Abs(x) - PI * 0.5M);
 
             //x infinitely small to -+PI over 2
             if (error < precision)
@@ -356,7 +360,7 @@ namespace ImageProcessing.DecimalMath.Real
         /// <param name="x">An argument of the function</param>
         public static decimal Arccot(decimal x)
         {
-            return Sign(x) * PI / 2.0M - Arctan(x);
+            return Sign(x) * PI * 0.5M - Arctan(x);
         }
 
         /// <summary>
@@ -379,7 +383,7 @@ namespace ImageProcessing.DecimalMath.Real
         /// <param name="x">An argument of the function</param>
         public static decimal Arccos(decimal x)
         {
-            return PI / 2.0M - Arcsin(x);
+            return PI * 0.5M - Arcsin(x);
         }
 
         /// <summary>
@@ -427,10 +431,10 @@ namespace ImageProcessing.DecimalMath.Real
 
             if (x > tan3PiOver8)
             {
-                return PI / 2.0M - ArctanImpl(1.0M / x) + bits;
+                return PI * 0.5M - ArctanImpl(1.0M / x) + bits;
             }
 
-            return PI / 4.0M + ArctanImpl((x - 1.0M) / (x + 1.0M)) + 0.5M * bits;
+            return PI * 0.25M + ArctanImpl((x - 1.0M) / (x + 1.0M)) + 0.5M * bits;
         }
 
         #endregion
@@ -444,9 +448,17 @@ namespace ImageProcessing.DecimalMath.Real
         /// <param name="precision">A error</param>
         public static decimal Cosh(decimal x, decimal precision = Epsilon)
         {
+            x = Abs(x);
+            //|cosh(x) - (e ** x) / 2| < 3.8 * 10 ** -10 for all x > 21
+            if(x > 21)
+            {
+                return Exp(x, precision) * 0.5M;
+            }
+
             checked
             {
-                return (Exp(x, precision) + Exp(-x, precision)) / 2.0M;
+                var exp = Exp(x, precision);
+                return (exp +  1.0M / exp ) * 0.5M;
             }
         }
 
@@ -457,9 +469,18 @@ namespace ImageProcessing.DecimalMath.Real
         /// <param name="precision">A error</param>
         public static decimal Sinh(decimal x, decimal precision = Epsilon)
         {
+            var sign = Sign(x);
+
+            var result = Exp(Abs(x), precision);
+            //||sinh(x)| - (e ** x) / 2| < 3.8 * 10 ** -10 for all x > 21
+            if (x > 21)
+            {
+                return sign * result * 0.5M;
+            }
+
             checked
             {
-                return (Exp(x, precision) - Exp(-x, precision)) / 2.0M;
+                return sign * (result - 1.0M / result) *  0.5M;
             }
         }
 
