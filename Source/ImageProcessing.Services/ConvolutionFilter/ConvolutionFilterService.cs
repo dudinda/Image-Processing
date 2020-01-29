@@ -13,7 +13,7 @@ namespace ImageProcessing.Services.ConvolutionFilterServices.Implementation
     //ptr[0] - B, ptr[1] - G, ptr[2] - R, ptr[3] - A
     public class ConvolutionFilterService : IConvolutionFilterService
     {
-        public Image Convolution(Bitmap source, AbstractConvolutionFilter filter) 
+        public Bitmap Convolution(Bitmap source, AbstractConvolutionFilter filter) 
         {
             Requires.IsNotNull(source, nameof(source));
             Requires.IsNotNull(filter, nameof(filter));

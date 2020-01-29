@@ -1,7 +1,6 @@
 ﻿using System;
 
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Common.Utility.DecimalMath;
 using ImageProcessing.Core.Model.Distribution;
 using ImageProcessing.DecimalMath.Real;
 

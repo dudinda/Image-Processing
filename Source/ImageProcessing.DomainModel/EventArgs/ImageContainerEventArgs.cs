@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ImageProcessing.Common.Enums;
-using ImageProcessing.Core.EventAggregator.Interface.BaseEventArgs;
+﻿using ImageProcessing.Common.Enums;
+using ImageProcessing.Core.EventAggregator.Interface.EventArgs;
 
 namespace ImageProcessing.DomainModel.EventArgs
 {
