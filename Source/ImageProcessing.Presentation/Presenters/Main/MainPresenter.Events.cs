@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.EventAggregator.Interface.Subscriber;
 using ImageProcessing.DomainModel.EventArgs;
@@ -14,46 +16,46 @@ namespace ImageProcessing.Presentation.Presenters.Main
                                   ISubscriber<ToolbarActionEventArgs>,
                                   ISubscriber<RandomVariableEventArgs>
     {
-        public void OnEventHandler(ConvolutionFilterEventArgs e)
-            => ApplyConvolutionFilter(e.Arg);
+        public async Task OnEventHandler(ConvolutionFilterEventArgs e)
+            => await ApplyConvolutionFilter(e.Arg).ConfigureAwait(true);
 
-        public void OnEventHandler(RGBFilterEventArgs e)
-            => ApplyRGBFilter(e.Arg);
+        public async Task OnEventHandler(RGBFilterEventArgs e)
+            => await ApplyRGBFilter(e.Arg).ConfigureAwait(true);
 
-        public void OnEventHandler(RGBColorFilterEventArgs e)
-            => ApplyColorFilter(e.Arg);
+        public async Task OnEventHandler(RGBColorFilterEventArgs e)
+            => await ApplyColorFilter(e.Arg).ConfigureAwait(true);
 
-        public void OnEventHandler(DistributionEventArgs e)
-            => ApplyHistogramTransformation(e.Arg, e.Parameters);
+        public async Task OnEventHandler(DistributionEventArgs e)
+            => await ApplyHistogramTransformation(e.Arg, e.Parameters).ConfigureAwait(true);
 
-        public void OnEventHandler(ImageContainerEventArgs e)
-            => Replace(e.Arg);
+        public async Task OnEventHandler(ImageContainerEventArgs e)
+            => await Replace(e.Arg).ConfigureAwait(true);
         
 
-        public void OnEventHandler(FileDialogEventArgs e)
+        public async Task OnEventHandler(FileDialogEventArgs e)
         {
             switch(e.Arg)
             {
                 case FileDialogAction.Open:
-                    OpenImage();
+                    await OpenImage().ConfigureAwait(true);
                     break;
                 case FileDialogAction.Save:
-                    SaveImage();
+                    await SaveImage().ConfigureAwait(true);
                     break;
                 case FileDialogAction.SaveAs:
-                    SaveImageAs();
+                    await SaveImageAs().ConfigureAwait(true);
                     break;
 
                 default: throw new NotImplementedException(nameof(e.Arg));
             }
         }
 
-        public void OnEventHandler(ToolbarActionEventArgs e)
+        public async Task OnEventHandler(ToolbarActionEventArgs e)
         {
             switch(e.Arg)
             {
                 case ToolbarAction.Shuffle:
-                    Shuffle();
+                    await Shuffle().ConfigureAwait(true);
                     break;
                 case ToolbarAction.Undo:
                     break;
@@ -64,7 +66,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        public void OnEventHandler(RandomVariableEventArgs e)
+        public async Task OnEventHandler(RandomVariableEventArgs e)
         {
             switch(e.Action)
             {
@@ -77,7 +79,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 case RandomVariable.Entropy:
                 case RandomVariable.StandardDeviation:
                 case RandomVariable.Variance:
-                    GetRandomVariableInfo(e.Arg, e.Action);
+                    await GetRandomVariableInfo(e.Arg, e.Action);
                     break;
 
                 default: throw new NotImplementedException(nameof(e.Action));
