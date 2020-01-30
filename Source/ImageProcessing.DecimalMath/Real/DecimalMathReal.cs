@@ -101,11 +101,12 @@ namespace ImageProcessing.DecimalMath.Real
         {
             checked
             {
-                if (x % 1 != 0)
+                if (Frac(x) != 0)
                 {
                     return Floor(x) + 1;
                 }
             }
+
             return x;
         }
 
@@ -115,7 +116,7 @@ namespace ImageProcessing.DecimalMath.Real
         /// <param name="x">An argument of the function</param>
         public static decimal Floor(decimal x)
         {
-            var result = x - (x % 1);
+            var result = x - Frac(x);
 
             if (result == x)
             {
@@ -128,6 +129,15 @@ namespace ImageProcessing.DecimalMath.Real
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Evaluate {x}
+        /// </summary>
+        /// <param name="x">An argument of the function</param>
+        public static decimal Frac(decimal x)
+        {
+            return x % 1;
         }
 
         /// <summary>
