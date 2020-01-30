@@ -3,7 +3,8 @@ using System.Collections.Concurrent;
 
 namespace ImageProcessing.Core.Pipeline
 {
-    public class PipelineBlock<TOutput> : IPipelineBlock<TOutput> where TOutput : class
+    public class PipelineBlock<TOutput> : IPipelineBlock<TOutput> 
+        where TOutput : class
     {
         private readonly ConcurrentQueue<Func<object, object>> _block = new ConcurrentQueue<Func<object, object>>();
 
@@ -17,11 +18,11 @@ namespace ImageProcessing.Core.Pipeline
 
         public TOutput Process()
         {
-            object result = null;
+            object result = _item as object;
 
             while(_block.TryDequeue(out var function))
             {
-                result = function(_item as object);
+                result = function(result);
             }
 
             return result as TOutput;
