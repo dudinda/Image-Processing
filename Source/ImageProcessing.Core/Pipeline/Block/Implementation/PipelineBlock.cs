@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Concurrent;
 
-namespace ImageProcessing.Core.Pipeline
+using ImageProcessing.Core.Pipeline.BlockItem.Implementation;
+using ImageProcessing.Core.Pipeline.BlockItem.Interface;
+
+namespace ImageProcessing.Core.Pipeline.Block.Implementation
 {
     public class PipelineBlock<TOutput> : IPipelineBlock<TOutput> 
         where TOutput : class
     {
-        private readonly ConcurrentQueue<Func<object, object>> _block = new ConcurrentQueue<Func<object, object>>();
+        private readonly ConcurrentQueue<IItem> _block = new ConcurrentQueue<IItem>();
 
         private TOutput _item;
 
@@ -18,20 +21,30 @@ namespace ImageProcessing.Core.Pipeline
 
         public TOutput Process()
         {
-            object result = _item as object;
+            var result = _item as object;
+
+            var firstArg = _item.GetType();
 
             while(_block.TryDequeue(out var function))
             {
-                result = function(result);
+                if (function.InputType.IsAssignableFrom(firstArg))
+                {
+                    firstArg = function.OutputType;
+                    result = function.Execute(result);
+                }
+                else
+                {
+                    throw new ArgumentException();
+                }
             }
 
             return result as TOutput;
             
         }
 
-        public void Add<TStepIn, TStepOut>(Func<TStepIn, TStepOut> step)
+        public void Add<TIn, TOut>(Func<TIn, TOut> step)
         {
-            _block.Enqueue(result => step.Invoke((TStepIn)(object)result));
+            _block.Enqueue(new Item(result => step.Invoke((TIn)(object)result), typeof(TIn), typeof(TOut)));
         }
     }
 }
