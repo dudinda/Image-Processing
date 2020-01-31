@@ -40,20 +40,23 @@ namespace ImageProcessing.Form.Main
             SaveFileAs.Click += (sender, args)
                 => _eventAggregator.Publish(new FileDialogEventArgs(FileDialogAction.SaveAs));
 
+            SrcZoom.MouseWheel += (secnder, args)
+                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Source));
+
             SrcZoom.MouseUp += (secnder, args)
-                => _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Source));
+                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Source));
 
             SrcZoom.KeyPress += (secnder, args)
-                => _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Source));
+                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Source));
 
             DstZoom.MouseWheel += (sender, args)
-                => _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Destination));
+                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Destination));
 
             DstZoom.MouseUp += (sender, args)
-                => _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Destination));
+                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Destination));
 
             DstZoom.KeyPress += (secnder, args)
-                => _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Destination));
+                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Destination));
         }
 
         /// <summary>

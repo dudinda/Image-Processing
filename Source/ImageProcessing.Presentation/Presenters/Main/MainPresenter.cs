@@ -74,7 +74,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
             _distributionService      = Requires.IsNotNull(distributionService, nameof(distributionService)); ;
 
             _eventAggregator          = Requires.IsNotNull(eventAggregator, nameof(eventAggregator));
-            _pipeline = pipeline;
+            _pipeline                 = Requires.IsNotNull(pipeline, nameof(pipeline));
+
             _zoomLocker               = Requires.IsNotNull(zoomLocker, nameof(zoomLocker));
             _operationLocker          = Requires.IsNotNull(operationLocker, nameof(operationLocker));
 

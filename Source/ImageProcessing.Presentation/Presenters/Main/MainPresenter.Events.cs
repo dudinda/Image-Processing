@@ -14,7 +14,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
                                   ISubscriber<ImageContainerEventArgs>,
                                   ISubscriber<FileDialogEventArgs>,
                                   ISubscriber<ToolbarActionEventArgs>,
-                                  ISubscriber<RandomVariableEventArgs>
+                                  ISubscriber<RandomVariableEventArgs>,
+                                  ISubscriber<ZoomEventArgs>
     {
         public async Task OnEventHandler(ConvolutionFilterEventArgs e)
             => await ApplyConvolutionFilter(e.Arg).ConfigureAwait(true);
@@ -30,8 +31,10 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
         public async Task OnEventHandler(ImageContainerEventArgs e)
             => await Replace(e.Arg).ConfigureAwait(true);
-        
 
+        public async Task OnEventHandler(ZoomEventArgs e)
+            => await Zoom(e.Arg).ConfigureAwait(true);
+        
         public async Task OnEventHandler(FileDialogEventArgs e)
         {
             switch(e.Arg)
@@ -58,7 +61,6 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     await Shuffle().ConfigureAwait(true);
                     break;
                 case ToolbarAction.Undo:
-                    break;
                 case ToolbarAction.Redo:
                     break;
                     
