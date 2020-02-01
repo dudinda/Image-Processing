@@ -19,6 +19,7 @@ using ImageProcessing.Core.Locker.Interface;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Core.Pipeline.Block.Implementation;
 using ImageProcessing.Core.Presenter.Abstract;
+using ImageProcessing.DomainModel.EventArgs;
 using ImageProcessing.Presentation.ViewModel.Histogram;
 using ImageProcessing.Presentation.Views.Main;
 using ImageProcessing.Services.ConvolutionFilterServices.Interface;
@@ -177,10 +178,12 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private async Task ApplyConvolutionFilter(ConvolutionFilter filter)
+        private async Task ApplyConvolutionFilter(ConvolutionFilterEventArgs e)
         {
             try
             {
+                Requires.IsNotNull(e, nameof(e));
+
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
                     View.SetCursor(CursorType.WaitCursor);
@@ -188,7 +191,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
                     var block = new PipelineBlock<Bitmap>(copy);
 
-                    var operation = _convolutionFilterFactory.GetFilter(filter);
+                    var operation = _convolutionFilterFactory.GetFilter(e.Arg);
 
                     block.Add<Bitmap, Bitmap>((cpy) => _convolutionFilterService.Convolution(cpy, operation));
 
@@ -197,8 +200,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
                         View.SetImageCopy(ImageContainer.Destination, new Bitmap(image));
                         View.AddToUndoContainer((new Bitmap(image), ImageContainer.Source));
                         View.SetImageToZoom(ImageContainer.Destination, new Bitmap(image));
-                        return (Bitmap)View.GetImageCopy(ImageContainer.Destination).Clone();
 
+                        return (Bitmap)View.GetImageCopy(ImageContainer.Destination).Clone();
                     });
 
                     _pipeline.Register(block);
@@ -206,16 +209,22 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
                 }
             }
-            catch 
+            catch (OperationCanceledException cancelEx)
+            {
+                View.ShowError("The operation has been canceled.");
+            }
+            catch(Exception ex) 
             {
                 View.ShowError("Error while applying a convolution filter.");
             }
         }
 
-        private async Task ApplyRGBFilter(RGBFilter filter)
+        private async Task ApplyRGBFilter(RGBFilterEventArgs e)
         {
             try
             {
+                Requires.IsNotNull(e, nameof(e));
+
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
                     View.SetCursor(CursorType.WaitCursor);
@@ -224,7 +233,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     var block = new PipelineBlock<Bitmap>(copy);
 
-                    var operation = _rgbFiltersFactory.GetFilter(filter);
+                    var operation = _rgbFiltersFactory.GetFilter(e.Arg);
 
                     block.Add<Bitmap, Bitmap>((bmp) => _rgbFilterService.Filter(bmp, operation));
 
@@ -242,20 +251,25 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
                 }
             }
-            catch
+            catch (OperationCanceledException cancelEx)
+            {
+                View.ShowError("The operation has been canceled.");
+            }
+            catch (Exception ex)
             {
                 View.ShowError("Error while applying an RGB filter.");
             }
         }
 
-        private async Task ApplyColorFilter(RGBColors filter)
+        private async Task ApplyColorFilter(RGBColorFilterEventArgs e)
         {
             try
             {
+                Requires.IsNotNull(e, nameof(e));
 
                 if (View.ImageIsNull(ImageContainer.Source)) { return; }
 
-                var result = View.GetSelectedColors(filter);
+                var result = View.GetSelectedColors(e.Arg);
       
                 if (result is default(RGBColors))
                 {
@@ -286,21 +300,27 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
             }
+            catch(OperationCanceledException cancelEx)
+            {
+                View.ShowError("The operation has been canceled.");
+            }
             catch(Exception ex)
             {
                 View.ShowError($"Error {ex.Message}");
             }
         }
 
-        private async Task ApplyHistogramTransformation(Distribution distribution, (decimal, decimal) parms)
+        private async Task ApplyHistogramTransformation(DistributionEventArgs e)
         {
             try
             {
+                Requires.IsNotNull(e, nameof(e));
+
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
                     var filter = _distributionFactory
-                        .GetFilter(distribution)
-                        .SetParams(parms);
+                        .GetFilter(e.Arg)
+                        .SetParams(e.Parameters);
 
                     View.SetCursor(CursorType.WaitCursor);
 
@@ -327,7 +347,11 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 }
 
             }
-            catch
+            catch(OperationCanceledException cancelEx)
+            {
+                View.ShowError("The operation has been canceled.");
+            }
+            catch(Exception ex)
             {
                 View.ShowError("Error while applying a histogram transformation.");
             }
@@ -368,27 +392,33 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private void BuildFunction(ImageContainer container, RandomVariable action)
+        private void BuildFunction(RandomVariableEventArgs e)
         {
             try
             {
-                if (!View.ImageIsNull(container))
+                Requires.IsNotNull(e, nameof(e));
+
+                if (!View.ImageIsNull(e.Arg))
                 {
                     Controller.Run<HistogramPresenter, HistogramViewModel>(
-                        new HistogramViewModel(new Bitmap(View.GetImageCopy(container)), action)
+                        new HistogramViewModel(new Bitmap(View.GetImageCopy(e.Arg)), e.Action)
                     );
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 View.ShowError($"Error while buiding the plot.");
             }
         }
      
-        private async Task Replace(ImageContainer replaceFrom)
+        private async Task Replace(ImageContainerEventArgs e)
         {
             try
             {
+                Requires.IsNotNull(e, nameof(e));
+
+                var replaceFrom = e.Arg;
+
                 if (!View.ImageIsNull(replaceFrom))
                 {
                     var replaceTo = replaceFrom == ImageContainer.Source ?
@@ -414,24 +444,31 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     await UpdateContainer(replaceTo).ConfigureAwait(true);
                 }
             }
-            catch
+            catch (OperationCanceledException cancelEx)
+            {
+                View.ShowError("The operation has been canceled.");
+            }
+            catch(Exception ex)
             {
                 View.ShowError("Error while replacing the image.");
             }
         }
 
-        private async Task GetRandomVariableInfo(ImageContainer container, RandomVariable action)
+        private async Task GetRandomVariableInfo(RandomVariableEventArgs e)
         {
             try
             {
+                Requires.IsNotNull(e, nameof(e));
+
+                var container = e.Arg;
 
                 if (!View.ImageIsNull(container))
                 {
-                    var copy = await GetImageCopy(ImageContainer.Source);
+                    var copy = await GetImageCopy(container);
 
                     var result = await Task.Run(() =>
                     {
-                        switch (action)
+                        switch (e.Action)
                         {
                             case RandomVariable.Expectation:
                                 return _distributionService.GetExpectation(copy).ToString();
@@ -443,23 +480,27 @@ namespace ImageProcessing.Presentation.Presenters.Main
                                 return _distributionService.GetEntropy(copy).ToString();
                         }
 
-                        throw new NotImplementedException(nameof(action));
+                        throw new NotImplementedException(nameof(e.Action));
 
                     }).ConfigureAwait(true);
 
                     View.ShowInfo(result);
                 }
             }
-            catch
+            catch (Exception ex)
             {
-
+                View.ShowError($"Error while getting the information about {nameof(e.Action).ToLower()}.");
             }
         }
 
-        private async Task Zoom(ImageContainer container)
+        private async Task Zoom(ZoomEventArgs e)
         {
             try
             {
+                Requires.IsNotNull(e, nameof(e));
+
+                var container = e.Arg;
+
                 if (!View.ImageIsNull(container)) {
       
                     var image = await _zoomLocker.LockAsync(() =>

@@ -18,22 +18,22 @@ namespace ImageProcessing.Presentation.Presenters.Main
                                   ISubscriber<ZoomEventArgs>
     {
         public async Task OnEventHandler(ConvolutionFilterEventArgs e)
-            => await ApplyConvolutionFilter(e.Arg).ConfigureAwait(true);
+            => await ApplyConvolutionFilter(e).ConfigureAwait(true);
 
         public async Task OnEventHandler(RGBFilterEventArgs e)
-            => await ApplyRGBFilter(e.Arg).ConfigureAwait(true);
+            => await ApplyRGBFilter(e).ConfigureAwait(true);
 
         public async Task OnEventHandler(RGBColorFilterEventArgs e)
-            => await ApplyColorFilter(e.Arg).ConfigureAwait(true);
+            => await ApplyColorFilter(e).ConfigureAwait(true);
 
         public async Task OnEventHandler(DistributionEventArgs e)
-            => await ApplyHistogramTransformation(e.Arg, e.Parameters).ConfigureAwait(true);
+            => await ApplyHistogramTransformation(e).ConfigureAwait(true);
 
         public async Task OnEventHandler(ImageContainerEventArgs e)
-            => await Replace(e.Arg).ConfigureAwait(true);
+            => await Replace(e).ConfigureAwait(true);
 
         public async Task OnEventHandler(ZoomEventArgs e)
-            => await Zoom(e.Arg).ConfigureAwait(true);
+            => await Zoom(e).ConfigureAwait(true);
         
         public async Task OnEventHandler(FileDialogEventArgs e)
         {
@@ -74,14 +74,14 @@ namespace ImageProcessing.Presentation.Presenters.Main
             {
                 case RandomVariable.CDF:
                 case RandomVariable.PMF:
-                    BuildFunction(e.Arg, e.Action);
+                    BuildFunction(e);
                     break;
 
                 case RandomVariable.Expectation:
                 case RandomVariable.Entropy:
                 case RandomVariable.StandardDeviation:
                 case RandomVariable.Variance:
-                    await GetRandomVariableInfo(e.Arg, e.Action);
+                    await GetRandomVariableInfo(e);
                     break;
 
                 default: throw new NotImplementedException(nameof(e.Action));
