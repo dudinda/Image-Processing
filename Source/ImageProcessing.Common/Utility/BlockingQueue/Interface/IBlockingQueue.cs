@@ -9,5 +9,6 @@ namespace ImageProcessing.Common.Utility.BlockingQueue.Interface
         bool TryEnqueue(T item);
         bool TryDequeue(out T value);
         void Close();
+        bool Any();
     }
 }

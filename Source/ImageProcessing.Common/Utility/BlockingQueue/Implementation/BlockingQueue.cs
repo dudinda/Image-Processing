@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace ImageProcessing.Common.Utility.BlockingQueue.Implementation
@@ -69,6 +70,15 @@ namespace ImageProcessing.Common.Utility.BlockingQueue.Implementation
                 return true;
             }
         }
+
+        public bool Any()
+        {
+            lock(_queue)
+            {
+                return _queue.Any();
+            }
+        }
+
         public void Close()
         {
             lock (_queue)
