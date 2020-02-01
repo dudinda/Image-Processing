@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
-
+using System.Threading;
 using ImageProcessing.Core.Pipeline.BlockItem.Implementation;
 using ImageProcessing.Core.Pipeline.BlockItem.Interface;
 
@@ -19,7 +19,7 @@ namespace ImageProcessing.Core.Pipeline.Block.Implementation
             _item = item;
         }
 
-        public TOutput Process()
+        public TOutput Process(CancellationToken _token)
         {
             var result = _item as object;
 
@@ -27,6 +27,8 @@ namespace ImageProcessing.Core.Pipeline.Block.Implementation
 
             while(_block.TryDequeue(out var function))
             {
+                _token.ThrowIfCancellationRequested();
+                
                 if (function.InputType.IsAssignableFrom(firstArg))
                 {
                     firstArg = function.OutputType;
@@ -34,12 +36,11 @@ namespace ImageProcessing.Core.Pipeline.Block.Implementation
                 }
                 else
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Function output - input types don't match in the pipeline block.");
                 }
             }
 
-            return result as TOutput;
-            
+            return result as TOutput;          
         }
 
         public void Add<TIn, TOut>(Func<TIn, TOut> step)

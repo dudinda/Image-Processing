@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace ImageProcessing.Core.Pipeline
 {
@@ -7,6 +8,6 @@ namespace ImageProcessing.Core.Pipeline
 
         void Add<TStepIn, TStepOut>(Func<TStepIn, TStepOut> stepFunc);
 
-        TOutput Process();
+        TOutput Process(CancellationToken token);
     }
 }
