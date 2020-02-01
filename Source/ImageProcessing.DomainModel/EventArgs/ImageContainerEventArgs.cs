@@ -10,6 +10,9 @@ namespace ImageProcessing.DomainModel.EventArgs
             Arg = arg;
         }
 
+        /// <summary>
+        /// <see cref="ImageContainer"/>
+        /// </summary>
         public ImageContainer Arg { get; }
     }
 }

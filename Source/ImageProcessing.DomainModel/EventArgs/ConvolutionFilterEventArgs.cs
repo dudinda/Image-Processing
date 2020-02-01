@@ -9,6 +9,10 @@ namespace ImageProcessing.DomainModel.EventArgs
         {
             Arg = arg;
         }
+
+        /// <summary>
+        /// <see cref="ConvolutionFilter"/>
+        /// </summary>
         public ConvolutionFilter Arg { get; }
     }
 }

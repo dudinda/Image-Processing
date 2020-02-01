@@ -16,6 +16,9 @@ namespace ImageProcessing.DomainModel.EventArgs
             }
         }
 
+        /// <summary>
+        /// <see cref="Distribution"/>
+        /// </summary>
         public Distribution Arg { get; }
         public (decimal, decimal) Parameters { get; private set; }
     }

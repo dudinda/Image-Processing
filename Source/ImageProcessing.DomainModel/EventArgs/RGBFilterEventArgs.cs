@@ -10,6 +10,9 @@ namespace ImageProcessing.DomainModel.EventArgs
             Arg = arg;
         }
 
+        /// <summary>
+        /// <see cref="RGBFilter"/>
+        /// </summary>
         public RGBFilter Arg { get; }
 
     }

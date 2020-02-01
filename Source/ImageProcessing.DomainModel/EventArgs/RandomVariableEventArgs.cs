@@ -9,6 +9,9 @@ namespace ImageProcessing.DomainModel.EventArgs
             Action = action;
         }
 
+        /// <summary>
+        /// <see cref="RandomVariable"/>
+        /// </summary>
         public RandomVariable Action { get; }
     }
 }

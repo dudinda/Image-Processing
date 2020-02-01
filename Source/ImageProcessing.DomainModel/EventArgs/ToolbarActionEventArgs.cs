@@ -9,6 +9,9 @@ namespace ImageProcessing.DomainModel.EventArgs
         {
             Arg = arg;
         }
+        /// <summary>
+        /// <see cref="ToolbarAction"/>
+        /// </summary>
         public ToolbarAction Arg { get; }
     }
 }
