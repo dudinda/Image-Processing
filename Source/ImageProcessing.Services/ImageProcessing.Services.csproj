@@ -16,10 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="DistributionServices\BitmapLuminanceDistribution\BitmapLuminanceDistributionService.Implementation.cs">
-      <DependentUpon>BitmapLuminanceDistributionService.cs</DependentUpon>
-    </Compile>
-    <Compile Update="DistributionServices\RandomVariableDistribution\RandomVariableDistributionService.Implementation.cs">
+    <Compile Update="DistributionServices\RandomVariableDistribution\Abstract\RandomVariableDistributionService.Implementation.cs">
       <DependentUpon>DistributionService.cs</DependentUpon>
     </Compile>
   </ItemGroup>

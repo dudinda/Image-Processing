@@ -5,11 +5,12 @@ using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Model.Distribution;
 using ImageProcessing.DecimalMath.Real;
 using ImageProcessing.Services.DistributionServices.Distribution.Interface;
+using ImageProcessing.Services.DistributionServices.RandomVariableDistribution.Abstract;
 
-namespace ImageProcessing.Services.DistributionServices.RandomVariableDistribution.Implementation
+namespace ImageProcessing.Services.DistributionServices.RandomVariableDistribution
 {
     //ptr[0] - B, ptr[1] - G, ptr[2] - R
-    public partial class RandomVariableDistributionService : IRandomVariableDistributionService
+    public class RandomVariableDistributionService : RandomVariableDistributionServiceImplementation, IRandomVariableDistributionService
     {
         public decimal[] TransformTo(decimal[] cdf, IDistribution distribution)
         {

@@ -3,9 +3,9 @@
 using ImageProcessing.Common.Extensions.DecimalMathRealExtensions;
 using ImageProcessing.Core.Model.Distribution;
 
-namespace ImageProcessing.Services.DistributionServices.RandomVariableDistribution.Implementation
+namespace ImageProcessing.Services.DistributionServices.RandomVariableDistribution.Abstract
 {
-    public partial class RandomVariableDistributionService
+    public abstract class RandomVariableDistributionServiceImplementation
     {
         protected decimal GetExpectationImpl(decimal[] pmf)
         {
@@ -99,7 +99,7 @@ namespace ImageProcessing.Services.DistributionServices.RandomVariableDistributi
             return -entropy;
         }
 
-        private decimal[] TransformToImpl(decimal[] cdf, IDistribution distribution)
+        protected decimal[] TransformToImpl(decimal[] cdf, IDistribution distribution)
         {
             var result = new decimal[cdf.Length];
 

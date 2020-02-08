@@ -2,12 +2,12 @@
 
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Model.Distribution;
+using ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Abstract;
 using ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Interface;
-using ImageProcessing.Services.DistributionServices.RandomVariableDistribution.Implementation;
 
-namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Implementation
+namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution
 {
-    public partial class BitmapLuminanceDistributionService : RandomVariableDistributionService, IBitmapLuminanceDistributionService
+    public class BitmapLuminanceDistributionService : BitmapLuminanceDistributionServiceImplementation, IBitmapLuminanceDistributionService
     {
         public Bitmap TransformTo(Bitmap bitmap, IDistribution distribution)
         {
