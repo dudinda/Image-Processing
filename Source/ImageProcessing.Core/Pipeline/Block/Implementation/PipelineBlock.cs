@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Threading;
+
 using ImageProcessing.Core.Pipeline.BlockItem.Implementation;
 using ImageProcessing.Core.Pipeline.BlockItem.Interface;
 
