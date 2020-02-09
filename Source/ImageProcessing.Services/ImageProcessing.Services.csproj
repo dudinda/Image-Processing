@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="DistributionServices\RandomVariableDistribution\Abstract\RandomVariableDistributionService.Implementation.cs">
+    <Compile Update="Distribution\RandomVariableDistribution\Abstract\RandomVariableDistributionService.Implementation.cs">
       <DependentUpon>DistributionService.cs</DependentUpon>
     </Compile>
   </ItemGroup>

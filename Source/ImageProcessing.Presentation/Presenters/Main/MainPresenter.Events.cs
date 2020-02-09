@@ -15,7 +15,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
                                   ISubscriber<FileDialogEventArgs>,
                                   ISubscriber<ToolbarActionEventArgs>,
                                   ISubscriber<RandomVariableEventArgs>,
-                                  ISubscriber<ZoomEventArgs>
+                                  ISubscriber<ZoomEventArgs>,
+                                  ISubscriber<CloseFormEventArgs>
     {
         public async Task OnEventHandler(ConvolutionFilterEventArgs e)
             => await ApplyConvolutionFilter(e).ConfigureAwait(true);
@@ -34,6 +35,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
         public async Task OnEventHandler(ZoomEventArgs e)
             => await Zoom(e).ConfigureAwait(true);
+
+        public async Task OnEventHandler(CloseFormEventArgs e)
+            => CloseForm();
         
         public async Task OnEventHandler(FileDialogEventArgs e)
         {

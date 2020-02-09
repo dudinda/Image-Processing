@@ -19,6 +19,7 @@ using ImageProcessing.Core.Locker.Interface;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Core.Pipeline.Block.Implementation;
 using ImageProcessing.Core.Presenter.Abstract;
+using ImageProcessing.Core.Service.STATask;
 using ImageProcessing.DomainModel.EventArgs;
 using ImageProcessing.Presentation.ViewModel.Histogram;
 using ImageProcessing.Presentation.Views.Main;
@@ -36,6 +37,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
         private readonly IConvolutionFilterService _convolutionFilterService;
         private readonly IBitmapLuminanceDistributionService _distributionService;
         private readonly IRGBFilterService _rgbFilterService;
+        private readonly ISTATaskService _staTaskService;
 
         private readonly IConvolutionFilterFactory _convolutionFilterFactory;
         private readonly IDistributionFactory _distributionFactory;
@@ -43,15 +45,16 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
         private readonly IEventAggregator _eventAggregator;
         private readonly IAwaitablePipeline<Bitmap> _pipeline;
-
+  
         private readonly IAsyncLocker _zoomLocker;
         private readonly IAsyncLocker _operationLocker;
-        
+
         public MainPresenter(IAppController controller,
                              IMainView view,
                              IBaseFactory baseFactory,
                              IConvolutionFilterService convolutionFilterService,
                              IBitmapLuminanceDistributionService distributionService,
+                             ISTATaskService staTaskService,
                              IRGBFilterService rgbFilterService,
                              IEventAggregator eventAggregator,
                              IAwaitablePipeline<Bitmap> pipeline,
@@ -70,6 +73,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             _distributionFactory      = baseFactory.GetDistributionFactory();
             _rgbFiltersFactory        = baseFactory.GetRGBFilterFactory();
 
+            _staTaskService           = Requires.IsNotNull(staTaskService, nameof(staTaskService));
             _convolutionFilterService = Requires.IsNotNull(convolutionFilterService, nameof(convolutionFilterService));
             _rgbFilterService         = Requires.IsNotNull(rgbFilterService, nameof(rgbFilterService));
             _distributionService      = Requires.IsNotNull(distributionService, nameof(distributionService)); ;
@@ -86,34 +90,51 @@ namespace ImageProcessing.Presentation.Presenters.Main
         private async Task OpenImage()
         {
             try
-            {           
-                using (var dialog = new OpenFileDialog())
+            {
+                var openResult = await _staTaskService.StartSTATask<Task<Bitmap>>(() =>
                 {
-                    dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                    dialog.Filter = ConfigurationManager.AppSettings["Filters"];
-
-                    if (dialog.ShowDialog() == DialogResult.OK)
+                    using (var dialog = new OpenFileDialog())
                     {
-                        View.SetCursor(CursorType.WaitCursor);
+                        dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                        dialog.Filter = ConfigurationManager.AppSettings["Filters"];
 
-                        View.SrcImage = await Task.Run(() =>
+                        if (dialog.ShowDialog() == DialogResult.OK)
                         {
-                            using (var stream = File.OpenRead(dialog.FileName))
+                            View.PathToFile = dialog.FileName;
+
+                            return Task.Run(() =>
                             {
-                                View.SrcImageCopy = new Bitmap(Image.FromStream(stream));
-                            }
+                                using (var stream = File.OpenRead(dialog.FileName))
+                                {
+                                    return new Bitmap(Image.FromStream(stream));
+                                }
+                            });
+                        }
 
-                            View.SetImageToZoom(ImageContainer.Source, new Bitmap(View.SrcImageCopy));
-       
-                            return (Bitmap)View.SrcImageCopy.Clone();
-                        }).ConfigureAwait(true);
-
-                        View.Refresh(ImageContainer.Destination);
-                        View.SetCursor(CursorType.Default);
-                        View.ResetTrackBarValue(ImageContainer.Source);
-                        View.PathToFile = dialog.FileName;
-                        
+                        return Task.FromResult<Bitmap>(null);
                     }
+                }).ConfigureAwait(true);
+
+                var result = await openResult.ConfigureAwait(true);
+
+                if (result != null)
+                {
+                    View.SetCursor(CursorType.WaitCursor);
+
+                    var block = new PipelineBlock<Bitmap>(result);
+
+                    block.Add<Bitmap, Bitmap>((bmp) =>
+                    {
+                        View.SrcImageCopy = new Bitmap(bmp);
+                        View.SetImageToZoom(ImageContainer.Source, new Bitmap(bmp));
+                        View.AddToUndoContainer((new Bitmap(bmp), ImageContainer.Source));
+                        return (Bitmap)View.GetImageCopy(ImageContainer.Source).Clone();
+                    });
+
+                    _pipeline.Register(block);
+
+                    await UpdateContainer(ImageContainer.Source).ConfigureAwait(true);
+
                 }
             }
             catch
@@ -158,19 +179,21 @@ namespace ImageProcessing.Presentation.Presenters.Main
         {
             try
             {
-                if (View.ImageIsNull(ImageContainer.Source)) { return; }
-
-                View.SetCursor(CursorType.WaitCursor);
-
-                await _operationLocker.LockAsync(() =>
+                if (!View.ImageIsNull(ImageContainer.Source))
                 {
-                    var extension = Path.GetExtension(View.PathToFile);
 
-                    new Bitmap(View.SrcImageCopy)
-                    .Save(View.PathToFile, extension.GetImageFormat());
-                }).ConfigureAwait(true);
+                    View.SetCursor(CursorType.WaitCursor);
 
-                View.SetCursor(CursorType.Default);
+                    await _operationLocker.LockAsync(() =>
+                    {
+                        var extension = Path.GetExtension(View.PathToFile);
+
+                        new Bitmap(View.SrcImageCopy)
+                        .Save(View.PathToFile, extension.GetImageFormat());
+                    }).ConfigureAwait(true);
+
+                    View.SetCursor(CursorType.Default);
+                }
             }
             catch
             {
@@ -533,7 +556,15 @@ namespace ImageProcessing.Presentation.Presenters.Main
             View.Refresh(container);
             View.ResetTrackBarValue(container);
 
-          
+            if(!_pipeline.Any())
+            {
+                View.SetCursor(CursorType.Default);
+            }       
+        }
+
+        private void CloseForm()
+        {
+            _staTaskService.Dispose();
         }
     }
 }

@@ -55,8 +55,11 @@ namespace ImageProcessing.Form.Main
             DstZoom.MouseUp += (sender, args)
                 => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Destination));
 
-            DstZoom.KeyPress += (secnder, args)
+            DstZoom.KeyPress += (sender, args)
                 => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Destination));
+
+            FormClosing += (sender, args)
+                => _eventAggregator.Publish(new CloseFormEventArgs());
         }
 
         /// <summary>

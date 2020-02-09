@@ -10,6 +10,7 @@ using ImageProcessing.Core.Factory.Base;
 using ImageProcessing.Core.Locker.Interface;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Implementation;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
+using ImageProcessing.Core.Service.STATask;
 using ImageProcessing.Factory.Base;
 using ImageProcessing.Form.Histogram;
 using ImageProcessing.Form.Main;
@@ -28,6 +29,7 @@ using ImageProcessing.Services.LockerService.Operation;
 using ImageProcessing.Services.LockerService.Zoom;
 using ImageProcessing.Services.RGBFilterService.Implementation;
 using ImageProcessing.Services.RGBFilterService.Interface;
+using ImageProcessing.Services.STATask;
 
 namespace ImageProcessing
 {
@@ -57,6 +59,7 @@ namespace ImageProcessing
                     .RegisterNamedSingletonService<IAsyncLocker, OperationAsyncLocker>("OperationLocker")
                     .RegisterSingletonService<IEventAggregator, EventAggregator>()
                     .RegisterSingletonService<IAwaitablePipeline<Bitmap>, AwaitablePipeline<Bitmap>>()
+                    .RegisterSingletonService<ISTATaskService, STATaskService>()
                     .RegisterInstance(_context);
 
                 controller.Run<MainPresenter>();
