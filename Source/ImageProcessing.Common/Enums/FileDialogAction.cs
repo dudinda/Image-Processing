@@ -24,6 +24,11 @@ namespace ImageProcessing.Common.Enums
         /// <summary>
         /// Save file as dialog
         /// </summary>
-        SaveAs  = 3
+        SaveAs  = 3,
+        
+        /// <summary>
+        /// Color dialog 
+        /// </summary>
+        Color   = 4
     }
 }
