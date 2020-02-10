@@ -147,26 +147,30 @@ namespace ImageProcessing.Presentation.Presenters.Main
         {
             try
             {
-                if (View.ImageIsNull(ImageContainer.Source)) { return; }
-
-                using (var dialog = new SaveFileDialog())
+                if (!View.ImageIsNull(ImageContainer.Source))
                 {
-                    dialog.Filter = ConfigurationManager.AppSettings["Filters"];
-
-                    if (dialog.ShowDialog() == DialogResult.OK)
+                    var saveAsModalTask = await _staTaskService.StartSTATask<Task>(() =>
                     {
-                        View.SetCursor(CursorType.WaitCursor);
-                        
-                        await _operationLocker.LockAsync(() =>
+                        using (var dialog = new SaveFileDialog())
                         {
-                            var extension = Path.GetExtension(dialog.FileName);
+                            dialog.Filter = ConfigurationManager.AppSettings["Filters"];
 
-                            new Bitmap(View.SrcImageCopy)
-                            .Save(dialog.FileName, extension.GetImageFormat());
-                        }).ConfigureAwait(true);
+                            if (dialog.ShowDialog() == DialogResult.OK)
+                            {
+                                return _operationLocker.LockAsync(() =>
+                                {
+                                    var extension = Path.GetExtension(dialog.FileName);
 
-                        View.SetCursor(CursorType.Default);
-                    }
+                                    new Bitmap(View.SrcImageCopy)
+                                    .Save(dialog.FileName, extension.GetImageFormat());
+                                });
+                            }
+
+                            return Task.FromResult<object>(null);
+                        }
+                    }).ConfigureAwait(false);
+
+                    await saveAsModalTask.ConfigureAwait(true);
                 }
             }
             catch
@@ -181,9 +185,6 @@ namespace ImageProcessing.Presentation.Presenters.Main
             {
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
-
-                    View.SetCursor(CursorType.WaitCursor);
-
                     await _operationLocker.LockAsync(() =>
                     {
                         var extension = Path.GetExtension(View.PathToFile);
@@ -191,8 +192,6 @@ namespace ImageProcessing.Presentation.Presenters.Main
                         new Bitmap(View.SrcImageCopy)
                         .Save(View.PathToFile, extension.GetImageFormat());
                     }).ConfigureAwait(true);
-
-                    View.SetCursor(CursorType.Default);
                 }
             }
             catch
@@ -564,6 +563,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
         private void CloseForm()
         {
+            
             _staTaskService.Dispose();
         }
     }
