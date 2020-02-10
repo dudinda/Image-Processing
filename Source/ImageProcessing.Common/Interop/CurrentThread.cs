@@ -1,12 +1,9 @@
-﻿using System.Runtime.InteropServices;
+﻿using ImageProcessing.Common.Interop.Api;
 
 namespace ImageProcessing.Common.Interop
 {
     public static class CurrentThread
     {
-        [DllImport("kernel32.dll")]
-        private static extern int GetCurrentThreadId();
-
-        public static int GetId() => GetCurrentThreadId();
+        public static int GetId() => UnmanagedApi.GetCurrentThreadId();
     }
 }

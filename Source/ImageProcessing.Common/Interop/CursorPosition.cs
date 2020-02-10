@@ -1,23 +1,23 @@
-﻿using System.Drawing;
-using System.Runtime.InteropServices;
+﻿using System;
+using System.Drawing;
 
-using ImageProcessing.Common.Interop.Structs;
+using ImageProcessing.Common.Interop.Api;
 
 namespace ImageProcessing.Common.Interop
 {
     public static class CursorPosition
     {      
-        [DllImport("user32.dll")]
-        internal static extern bool GetCursorPos(out LPPOINT lpPoint);
-
         /// <summary>
         /// Retrieves the cursor's position, in screen coordinates.
         /// </summary>
         public static Point GetCursorPosition()
         {
-            LPPOINT lpPoint;
-            GetCursorPos(out lpPoint);
-            return (Point)lpPoint;
+            if (UnmanagedApi.GetCursorPos(out var lpPoint))
+            {
+                return (Point)lpPoint;
+            }
+
+            throw new InvalidOperationException("Can't get the current cursor position.");
         }
     }
 }
