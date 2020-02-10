@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
+
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.BitmapExtensions;
 using ImageProcessing.Common.Helpers;

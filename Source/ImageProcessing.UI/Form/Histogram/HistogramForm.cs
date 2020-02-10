@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.Common.Enums;

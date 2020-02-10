@@ -1,5 +1,4 @@
-﻿
-using ImageProcessing.Common.Enums;
+﻿using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.Model.Distribution;
 using ImageProcessing.DecimalMath.Real;
 using ImageProcessing.DecimalMath.Special;

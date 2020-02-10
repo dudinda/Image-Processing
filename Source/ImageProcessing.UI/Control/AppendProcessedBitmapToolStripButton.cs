@@ -1,5 +1,4 @@
 ﻿using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -27,9 +26,7 @@ namespace ImageProcessing.UI.Control
 
         public void Reset()
         {
-          //  _queue.Clear();
-        }
-        
-
+            
+        }   
     }
 }

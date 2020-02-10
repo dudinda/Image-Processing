@@ -1,6 +1,6 @@
-﻿using ImageProcessing.Common.Enums;
+﻿using System;
 
-using System;
+using ImageProcessing.Common.Enums;
 
 namespace ImageProcessing.Common.Attributes
 {

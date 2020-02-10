@@ -2,7 +2,7 @@
 using System.Drawing;
 
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Core.Factory.RGBFilters;
+using ImageProcessing.Core.Factory.RGBFiltersFactory;
 using ImageProcessing.Services.RGBFilterService.Interface;
 
 using NSubstitute;
@@ -26,7 +26,7 @@ namespace ImageProcessing.Tests.Services
         [TestCase(RGBFilter.Binary)]
         public void ServiceThrowsArgumentNullExceptionIfBitmapSourceIsNull(RGBFilter filterType)
         {
-            var filter = _rgbFilterFactory.GetFilter(filterType.ToString());
+            var filter = _rgbFilterFactory.GetFilter(filterType);
             Assert.Throws<ArgumentNullException>(() => _filterService.Filter(null, filter));
         }
 

@@ -1,15 +1,15 @@
 ﻿using System;
 
-using ImageProcessing.Common.Enums;
-using ImageProcessing.Common.Extensions.DecimalMathExtensions;
-using ImageProcessing.Common.Utility.DecimalMath;
+using ImageProcessing.Common.Extensions.DecimalMathRealExtensions;
+using ImageProcessing.DecimalMath.Integration;
+using ImageProcessing.DecimalMath.Real;
 
 using NUnit.Framework;
 
 namespace ImageProcessing.Tests.Utility
 {
     [TestFixture]
-    public class DecimalMathTests
+    public class DecimalMathRealTests
     {
         [TestCase(-2.63)]
         [TestCase(-351.000001)]
@@ -20,7 +20,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Floor(value));
 
-            Assert.AreEqual(DecimalMath.Floor(target), cmpVal);
+            Assert.AreEqual(DecimalMathReal.Floor(target), cmpVal);
             Assert.AreEqual(target.Floor(), cmpVal);
         }
 
@@ -33,7 +33,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Floor(value));
 
-            Assert.AreEqual(DecimalMath.Floor(target), cmpVal);
+            Assert.AreEqual(DecimalMathReal.Floor(target), cmpVal);
             Assert.AreEqual(target.Floor(), cmpVal);
         }
 
@@ -47,7 +47,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Floor(value));
 
-            Assert.AreEqual(DecimalMath.Floor(target), cmpVal);
+            Assert.AreEqual(DecimalMathReal.Floor(target), cmpVal);
             Assert.AreEqual(target.Floor(), cmpVal);
         }
 
@@ -58,7 +58,7 @@ namespace ImageProcessing.Tests.Utility
         public void CeilFunctionNegativeTest(decimal value)
         {
             Assert.AreEqual(value.Ceil(), Math.Ceiling(value));
-            Assert.AreEqual(DecimalMath.Ceil(value), Math.Ceiling(value));
+            Assert.AreEqual(DecimalMathReal.Ceil(value), Math.Ceiling(value));
         }
 
         [TestCase(2.63)]
@@ -68,7 +68,7 @@ namespace ImageProcessing.Tests.Utility
         public void CeilFunctionPositiveTest(decimal value)
         {
             Assert.AreEqual(value.Ceil(), Math.Ceiling(value));
-            Assert.AreEqual(DecimalMath.Ceil(value), Math.Ceiling(value));
+            Assert.AreEqual(DecimalMathReal.Ceil(value), Math.Ceiling(value));
         }
 
         [TestCase(2)]
@@ -79,7 +79,7 @@ namespace ImageProcessing.Tests.Utility
         public void CeilFunctionIdentityTest(decimal value)
         {
             Assert.AreEqual(value.Ceil(), value);
-            Assert.AreEqual(DecimalMath.Ceil(value), value);
+            Assert.AreEqual(DecimalMathReal.Ceil(value), value);
         }
 
         [TestCase(2)]
@@ -93,22 +93,22 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Exp(value));
 
-            Assert.That((DecimalMath.Exp(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
+            Assert.That((DecimalMathReal.Exp(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
             Assert.That((target.Exp() - cmpVal).Abs(), Is.LessThan(0.0000001M));
         }
 
         [Test]
         public void ModuloTest()
         {
-            var pi = DecimalMath.PI;
+            var pi = DecimalMathReal.PI;
 
-            Assert.AreEqual(DecimalMath.Mod(pi / 2 + 3 * pi, pi), pi / 2);
-            Assert.AreEqual(DecimalMath.Mod(pi / 2 - 3 * pi, pi), pi / 2);
-            Assert.AreEqual(DecimalMath.Mod(25M, 5M), 0.0M);
-            Assert.AreEqual(DecimalMath.Mod(-1M, 3M), 2.0M);
-            Assert.AreEqual(DecimalMath.Mod(-1.27M, 1M), 0.73M);
-            Assert.AreEqual(DecimalMath.Mod(2.000256M, 1M), 0.000256M);
-            Assert.AreEqual(DecimalMath.Mod(3.0M / 2.0M, 1.0M / 2.0M), 0);
+            Assert.AreEqual(DecimalMathReal.Mod(pi / 2 + 3 * pi, pi), pi / 2);
+            Assert.AreEqual(DecimalMathReal.Mod(pi / 2 - 3 * pi, pi), pi / 2);
+            Assert.AreEqual(DecimalMathReal.Mod(25M, 5M), 0.0M);
+            Assert.AreEqual(DecimalMathReal.Mod(-1M, 3M), 2.0M);
+            Assert.AreEqual(DecimalMathReal.Mod(-1.27M, 1M), 0.73M);
+            Assert.AreEqual(DecimalMathReal.Mod(2.000256M, 1M), 0.000256M);
+            Assert.AreEqual(DecimalMathReal.Mod(3.0M / 2.0M, 1.0M / 2.0M), 0);
 
             Assert.AreEqual((pi / 2 + 3 * pi).Mod(pi), pi / 2);
             Assert.AreEqual((pi / 2 - 3 * pi).Mod(pi), pi / 2);
@@ -124,8 +124,8 @@ namespace ImageProcessing.Tests.Utility
         {
             var interval = (Convert.ToDecimal(a), Convert.ToDecimal(b));
 
-            Assert.That(() => DecimalMathIntegration.Integrate(Integration.Trapezoidal, (x) => 1 / x, interval, 10000), Throws.TypeOf<ArithmeticException>());
-            Assert.That(() => DecimalMathIntegration.Integrate(Integration.Trapezoidal, (x) => 1 / (1 - x), interval, 10000), Throws.TypeOf<ArithmeticException>());
+            Assert.That(() => DecimalMathIntegration.Integrate(Integrate.Trapezoidal, (x) => 1 / x, interval, 10000), Throws.TypeOf<ArithmeticException>());
+            Assert.That(() => DecimalMathIntegration.Integrate(Integrate.Trapezoidal, (x) => 1 / (1 - x), interval, 10000), Throws.TypeOf<ArithmeticException>());
             Assert.That(() => DecimalMathIntegration.Integrate(Integration.Trapezoidal, (x) => 1 / (x * x - 1), interval, 10000), Throws.TypeOf<ArithmeticException>());
             Assert.That(() => DecimalMathIntegration.Integrate(Integration.Trapezoidal, (x) => 1 / (x * x - 1.0M / 2.0M), interval, 10000), Throws.TypeOf<ArithmeticException>());
         }
@@ -141,7 +141,7 @@ namespace ImageProcessing.Tests.Utility
             var logbase = Convert.ToDecimal(lbase);
             var cmpVal  = Convert.ToDecimal(Math.Log(value, lbase));
 
-            Assert.That((DecimalMath.Log(target, logbase) - cmpVal).Abs(), Is.LessThan(0.00000001M));
+            Assert.That((DecimalMathReal.Log(target, logbase) - cmpVal).Abs(), Is.LessThan(0.00000001M));
             Assert.That((target.Log(logbase) - cmpVal).Abs(), Is.LessThan(0.00000001M));
         }
 
@@ -157,7 +157,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Sqrt(value));
 
-            Assert.That((DecimalMath.Sqrt(target) - cmpVal).Abs(), Is.LessThan(0.00000001M));
+            Assert.That((DecimalMathReal.Sqrt(target) - cmpVal).Abs(), Is.LessThan(0.00000001M));
             Assert.That((target.Sqrt() - cmpVal).Abs(), Is.LessThan(0.00000001M));
         }
    
@@ -166,7 +166,7 @@ namespace ImageProcessing.Tests.Utility
         {
             var target = Convert.ToDecimal(value);
 
-            Assert.That(DecimalMath.Sign(target), Is.EqualTo(0));
+            Assert.That(DecimalMathReal.Sign(target), Is.EqualTo(0));
             Assert.That(target.Sign(), Is.EqualTo(0));
         }
 
@@ -179,7 +179,7 @@ namespace ImageProcessing.Tests.Utility
         {
             var target = Convert.ToDecimal(value);
 
-            Assert.That(DecimalMath.Sign(target), Is.EqualTo(1));
+            Assert.That(DecimalMathReal.Sign(target), Is.EqualTo(1));
             Assert.That(target.Sign(), Is.EqualTo(1));
         }
 
@@ -192,7 +192,7 @@ namespace ImageProcessing.Tests.Utility
         {
             var target = Convert.ToDecimal(value);
 
-            Assert.That(DecimalMath.Sign(target), Is.EqualTo(-1));
+            Assert.That(DecimalMathReal.Sign(target), Is.EqualTo(-1));
             Assert.That(target.Sign(), Is.EqualTo(-1));
         }
 
@@ -210,7 +210,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Cos(value));
 
-            Assert.That((DecimalMath.Cos(target) - cmpVal).Abs(), Is.LessThan(0.00001M));
+            Assert.That((DecimalMathReal.Cos(target) - cmpVal).Abs(), Is.LessThan(0.00001M));
             Assert.That((target.Cos() - cmpVal).Abs(), Is.LessThan(0.00001M));
         }
 
@@ -232,7 +232,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Cos(value));
 
-            Assert.That((DecimalMath.Cos(target) - cmpVal).Abs(), Is.LessThan(0.00001M));
+            Assert.That((DecimalMathReal.Cos(target) - cmpVal).Abs(), Is.LessThan(0.00001M));
             Assert.That((target.Cos() - cmpVal).Abs(), Is.LessThan(0.00001M));
         }
 
@@ -248,7 +248,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Cos(value));
 
-            Assert.That((DecimalMath.Sin(target) - cmpVal).Abs(), Is.LessThan(0.00001M));
+            Assert.That((DecimalMathReal.Sin(target) - cmpVal).Abs(), Is.LessThan(0.00001M));
             Assert.That((target.Sin() - cmpVal).Abs(), Is.LessThan(0.00001M));
         }
 
@@ -270,7 +270,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Sin(value));
 
-            Assert.That((DecimalMath.Sin(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
+            Assert.That((DecimalMathReal.Sin(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
             Assert.That((target.Sin() - cmpVal).Abs(), Is.LessThan(0.0000001M));
         }
 
@@ -290,7 +290,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Tan(value));
 
-            Assert.That((DecimalMath.Tan(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
+            Assert.That((DecimalMathReal.Tan(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
             Assert.That((target.Tan() - cmpVal).Abs(), Is.LessThan(0.0000001M));
         }
 
@@ -312,7 +312,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Tan(value));
 
-            Assert.That((DecimalMath.Tan(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
+            Assert.That((DecimalMathReal.Tan(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
             Assert.That((target.Tan() - cmpVal).Abs(), Is.LessThan(0.0000001M));
         }
 
@@ -330,7 +330,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(1.0 / Math.Tan(value));
 
-            Assert.That((DecimalMath.Cot(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
+            Assert.That((DecimalMathReal.Cot(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
             Assert.That((target.Cot() - cmpVal).Abs(), Is.LessThan(0.0000001M));
         }
 
@@ -352,7 +352,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(1.0 / Math.Tan(value));
 
-            Assert.That((DecimalMath.Cot(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
+            Assert.That((DecimalMathReal.Cot(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
             Assert.That((target.Cot() - cmpVal).Abs(), Is.LessThan(0.0000001M));
         }
 
@@ -374,7 +374,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Sinh(value));
 
-            Assert.That((DecimalMath.Sinh(target) - cmpVal).Abs(), Is.LessThan(0.00000001M));
+            Assert.That((DecimalMathReal.Sinh(target) - cmpVal).Abs(), Is.LessThan(0.00000001M));
             Assert.That((target.Sinh() - cmpVal).Abs(), Is.LessThan(0.00000001M));
         }
 
@@ -392,7 +392,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Cosh(value));
 
-            Assert.That((DecimalMath.Cosh(target) - cmpVal).Abs(), Is.LessThan(0.00000001M));
+            Assert.That((DecimalMathReal.Cosh(target) - cmpVal).Abs(), Is.LessThan(0.00000001M));
             Assert.That((target.Cosh() - cmpVal).Abs(), Is.LessThan(0.00000001M));
         }
 
@@ -410,7 +410,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Tanh(value));
 
-            Assert.That((DecimalMath.Tanh(target) - cmpVal).Abs(), Is.LessThan(0.00000001M));
+            Assert.That((DecimalMathReal.Tanh(target) - cmpVal).Abs(), Is.LessThan(0.00000001M));
             Assert.That((target.Tanh() - cmpVal).Abs(), Is.LessThan(0.00000001M));
         }
 
@@ -429,7 +429,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(1.0 / Math.Tanh(value));
 
-            Assert.That((DecimalMath.Coth(target) - cmpVal).Abs(), Is.LessThan(0.000001M));
+            Assert.That((DecimalMathReal.Coth(target) - cmpVal).Abs(), Is.LessThan(0.000001M));
             Assert.That((target.Coth() - cmpVal).Abs(), Is.LessThan(0.000001M));
         }
 
@@ -454,7 +454,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Log(value + Math.Sqrt(value * value + 1)));
 
-            Assert.That((DecimalMath.Arsinh(target) - cmpVal).Abs(), Is.LessThan(0.000001M));
+            Assert.That((DecimalMathReal.Arsinh(target) - cmpVal).Abs(), Is.LessThan(0.000001M));
             Assert.That((target.Arsinh() - cmpVal).Abs(), Is.LessThan(0.000001M));
         }
 
@@ -470,7 +470,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Log(value + Math.Sqrt(value * value - 1)));
 
-            Assert.That((DecimalMath.Arcosh(target) - cmpVal).Abs(), Is.LessThan(0.000001M));
+            Assert.That((DecimalMathReal.Arcosh(target) - cmpVal).Abs(), Is.LessThan(0.000001M));
             Assert.That((target.Arcosh() - cmpVal).Abs(), Is.LessThan(0.000001M));
         }
 
@@ -486,7 +486,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(0.5 * Math.Log((1.0 + value) / (1.0 - value)));
 
-            Assert.That((DecimalMath.Artanh(target) - cmpVal).Abs(), Is.LessThan(0.0001M));
+            Assert.That((DecimalMathReal.Artanh(target) - cmpVal).Abs(), Is.LessThan(0.0001M));
             Assert.That((target.Artanh() - cmpVal).Abs(), Is.LessThan(0.0001M));
         }
 
@@ -505,7 +505,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(0.5 * Math.Log((value + 1.0) / (value - 1.0)));
 
-            Assert.That((DecimalMath.Arcoth(target) - cmpVal).Abs(), Is.LessThan(0.000001M));
+            Assert.That((DecimalMathReal.Arcoth(target) - cmpVal).Abs(), Is.LessThan(0.000001M));
             Assert.That((target.Arcoth() - cmpVal).Abs(), Is.LessThan(0.000001M));
         }
 
@@ -525,7 +525,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Asin(value));
 
-            Assert.That((DecimalMath.Arcsin(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
+            Assert.That((DecimalMathReal.Arcsin(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
             Assert.That((target.Arcsin() - cmpVal).Abs(), Is.LessThan(0.0000001M));
         }
 
@@ -543,7 +543,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Acos(value));
 
-            Assert.That((DecimalMath.Arccos(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
+            Assert.That((DecimalMathReal.Arccos(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
             Assert.That((target.Arccos() - cmpVal).Abs(), Is.LessThan(0.0000001M));
         }
 
@@ -561,7 +561,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Atan(value));
 
-            Assert.That((DecimalMath.Arctan(target) - cmpVal).Abs(), Is.LessThan(0.000001M));
+            Assert.That((DecimalMathReal.Arctan(target) - cmpVal).Abs(), Is.LessThan(0.000001M));
             Assert.That((target.Arctan() - cmpVal).Abs(), Is.LessThan(0.000001M));
         }
 
@@ -578,7 +578,7 @@ namespace ImageProcessing.Tests.Utility
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Atan(1.0 / value));
 
-            Assert.That((DecimalMath.Arccot(target) - cmpVal).Abs(), Is.LessThan(0.000001M));
+            Assert.That((DecimalMathReal.Arccot(target) - cmpVal).Abs(), Is.LessThan(0.000001M));
             Assert.That((target.Arccot() - cmpVal).Abs(), Is.LessThan(0.000001M));
         }
 

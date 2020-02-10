@@ -87,6 +87,10 @@
       <Project>{AB4FB28D-B081-4279-ACD6-E0ABEC245494}</Project>
       <Name>ImageProcessing.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Source\ImageProcessing.DecimalMath\ImageProcessing.DecimalMath.csproj">
+      <Project>{ffc62fcd-eda2-49d4-8380-e07fac8eacee}</Project>
+      <Name>ImageProcessing.DecimalMath</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.Presentation\ImageProcessing.Presentation.csproj">
       <Project>{26F0D611-47D0-4222-8235-1375C45AB861}</Project>
       <Name>ImageProcessing.Presentation</Name>

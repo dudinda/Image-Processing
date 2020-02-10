@@ -1,6 +1,5 @@
 ﻿using System;
 
-using ImageProcessing.Common.Enums;
 using ImageProcessing.DecimalMath.Code.Enums;
 using ImageProcessing.DecimalMath.Integration;
 
