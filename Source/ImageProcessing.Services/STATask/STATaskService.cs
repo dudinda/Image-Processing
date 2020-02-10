@@ -11,7 +11,7 @@ namespace ImageProcessing.Services.STATask
     public class STATaskService : ISTATaskService
     { 
         /// <summary>
-        /// Contains threads' ids which hold 
+        /// Contains threads' ids which hold a modal window
         /// </summary>
         private static List<int> _pool = new List<int>();
 
@@ -22,7 +22,7 @@ namespace ImageProcessing.Services.STATask
            
             var thread = new Thread(() =>
             {
-                var id = CurentThread.GetId();
+                var id = CurrentThread.GetId();
 
                 try
                 {
@@ -59,7 +59,7 @@ namespace ImageProcessing.Services.STATask
 
             var thread = new Thread(() =>
             {
-                var id = CurentThread.GetId();
+                var id = CurrentThread.GetId();
                 try
                 {
                     _pool.Add(id);
