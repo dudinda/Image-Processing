@@ -38,7 +38,7 @@ namespace ImageProcessing.RGBFilters.Grayscale
 
                     for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
-                        ptr[0] = ptr[1] = ptr[2] = (byte)(ptr[2], ptr[1], ptr[0]).GetLumaCoefficients(Luma.Rec709);
+                        ptr[0] = ptr[1] = ptr[2] = (byte)Recommendation.GetLumaCoefficients(ptr[2], ptr[1], ptr[0], Luma.Rec709);
                     }
                 });
             }
