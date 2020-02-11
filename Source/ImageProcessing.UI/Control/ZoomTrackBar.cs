@@ -60,15 +60,17 @@ namespace ImageProcessing.UI.Control
 
         protected override void OnMouseWheel(MouseEventArgs e)
         {
-            if(e.Delta > 0)
+            if (e.Delta > 0)
             {
-                base.Value = Math.Min(base.Value + 10, Maximum);
+                base.Value = Math.Min(base.Value + 25, Maximum);
             }
 
             if(e.Delta < 0)
             {
-                base.Value = Math.Max(base.Value - 10, Minimum);
+                base.Value = Math.Max(base.Value - 25, Minimum);
             }
+
+            base.OnMouseWheel(e);
         }
 
         /// <summary>

@@ -24,13 +24,6 @@ namespace ImageProcessing.Form.Main
         /// </summary>
         private void BindFileMenu()
         {
-
-            Src.MouseWheel += (sender, args)
-                => _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Source));
-
-            Dst.MouseWheel += (sender, args)
-                => _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Destination));
-
             OpenFile.Click += (sender, args)
                 => _eventAggregator.Publish(new FileDialogEventArgs(FileDialogAction.Open));
 
@@ -39,25 +32,7 @@ namespace ImageProcessing.Form.Main
 
             SaveFileAs.Click += (sender, args)
                 => _eventAggregator.Publish(new FileDialogEventArgs(FileDialogAction.SaveAs));
-
-            SrcZoom.MouseWheel += (secnder, args)
-                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Source));
-
-            SrcZoom.MouseUp += (secnder, args)
-                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Source));
-
-            SrcZoom.KeyPress += (secnder, args)
-                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Source));
-
-            DstZoom.MouseWheel += (sender, args)
-                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Destination));
-
-            DstZoom.MouseUp += (sender, args)
-                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Destination));
-
-            DstZoom.KeyPress += (sender, args)
-                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Destination));
-
+   
             FormClosing += (sender, args)
                 => _eventAggregator.Publish(new CloseFormEventArgs());
         }
@@ -93,6 +68,24 @@ namespace ImageProcessing.Form.Main
 
             ReplaceDstBySrc.Click += (sernder, args)
                 => _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Source));
+
+            SrcZoom.MouseWheel += (sender, args)
+             => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Source));
+
+            SrcZoom.MouseUp += (secnder, args)
+                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Source));
+
+            SrcZoom.KeyPress += (secnder, args)
+                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Source));
+
+            DstZoom.MouseWheel += (sender, args)
+                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Destination));
+
+            DstZoom.MouseUp += (sender, args)
+                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Destination));
+
+            DstZoom.KeyPress += (sender, args)
+                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Destination));
         }
 
         /// <summary>

@@ -19,8 +19,9 @@ namespace ImageProcessing.Form.Main
 
         public MainForm(ApplicationContext context, IEventAggregator eventAggregator)
         {
-            _context = Requires.IsNotNull(context, nameof(context));
-            _eventAggregator = eventAggregator;
+            _context         = Requires.IsNotNull(context, nameof(context));
+            _eventAggregator = Requires.IsNotNull(eventAggregator, nameof(eventAggregator));
+            
             InitializeComponent();
             Bind();
         }
@@ -33,26 +34,31 @@ namespace ImageProcessing.Form.Main
             get => Src.Image;
             set => Src.Image = value;
         }
+
         public Image DstImage
         {
             get => Dst.Image;
             set => Dst.Image = value;
         }
+
         public string PathToFile
         {
             get => PathToImage.Text;
             set => PathToImage.Text = value;
         }
+
         public bool IsGreenChannelChecked
         {
             get => ColorFilterGreen.Checked;
             set => ColorFilterGreen.Checked = value;
         }
+
         public bool IsRedChannelChecked
         {
             get => ColorFilterRed.Checked;
             set => ColorFilterRed.Checked = value;
         }
+
         public bool IsBlueChannelChecked
         {
             get => ColorFilterBlue.Checked;
@@ -67,7 +73,6 @@ namespace ImageProcessing.Form.Main
             _context.MainForm = this;
             Application.Run(_context);
         }
-
 
         public bool ImageIsNull(ImageContainer container)
         {
