@@ -2,6 +2,7 @@
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.DomainModel.EventArgs;
+using ImageProcessing.DomainModel.EventArgs.Convolution;
 
 namespace ImageProcessing.Form.Main
 {
@@ -93,38 +94,8 @@ namespace ImageProcessing.Form.Main
         /// </summary>
         private void BindConvolutionFilters()
         {
-            GaussianBlur3x3.Click += (sender, args)
-                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.GaussianBlur3x3));
-
-            GaussianBlur5x5.Click += (sender, args)
-                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.GaussianBlur5x5));
-
-            BoxBlur3x3.Click += (sender, args)
-                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.BoxBlur3x3));
-
-            BoxBlur5x5.Click += (sender, args)
-                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.BoxBlur5x5));
-
-            MotionBlur9x9.Click += (sender, args)
-                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.MotionBlur9x9));
-
-            LaplacianOfGaussianOperator.Click += (sender, args)
-                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.LoGOperator));
-
-            LaplacianOperator5x5.Click += (sender, args)
-                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.LaplacianOperator5x5));
-
-            LaplacianOperator3x3.Click += (sender, args)
-                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.LaplacianOperator3x3));
-
-            Emboss3x3.Click += (sender, args)
-                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.Emboss3x3));
-
-            Sharpen3x3.Click += (sender, args)
-                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.Sharpen3x3));
-
-            SobelOperator.Click += (sender, args)
-                => _eventAggregator.Publish(new ConvolutionFilterEventArgs(ConvolutionFilter.SobelOperator3x3));
+            ConvolutionFiltersMenu.Click += (sender, args)
+                => _eventAggregator.Publish(new ShowConvolutionFilterPresenterEventArgs());
         }
 
         /// <summary>

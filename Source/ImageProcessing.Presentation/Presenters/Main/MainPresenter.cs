@@ -21,6 +21,9 @@ using ImageProcessing.Core.Pipeline.Block.Implementation;
 using ImageProcessing.Core.Presenter.Abstract;
 using ImageProcessing.Core.Service.STATask;
 using ImageProcessing.DomainModel.EventArgs;
+using ImageProcessing.DomainModel.EventArgs.Convolution;
+using ImageProcessing.Presentation.Presenters.Convolution;
+using ImageProcessing.Presentation.ViewModel.Convolution;
 using ImageProcessing.Presentation.ViewModel.Histogram;
 using ImageProcessing.Presentation.Views.Main;
 using ImageProcessing.Services.ConvolutionFilterServices.Interface;
@@ -68,13 +71,11 @@ namespace ImageProcessing.Presentation.Presenters.Main
             Requires.IsNotNull(controller, nameof(controller));
             Requires.IsNotNull(view, nameof(view));
             Requires.IsNotNull(baseFactory, nameof(baseFactory));
-                              
-            _convolutionFilterFactory = baseFactory.GetConvolutionFilterFactory();
+                             
             _distributionFactory      = baseFactory.GetDistributionFactory();
             _rgbFiltersFactory        = baseFactory.GetRGBFilterFactory();
 
             _staTaskService           = Requires.IsNotNull(staTaskService, nameof(staTaskService));
-            _convolutionFilterService = Requires.IsNotNull(convolutionFilterService, nameof(convolutionFilterService));
             _rgbFilterService         = Requires.IsNotNull(rgbFilterService, nameof(rgbFilterService));
             _distributionService      = Requires.IsNotNull(distributionService, nameof(distributionService)); ;
 
@@ -161,8 +162,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                                 {
                                     var extension = Path.GetExtension(dialog.FileName);
 
-                                    new Bitmap(View.SrcImageCopy)
-                                    .Save(dialog.FileName, extension.GetImageFormat());
+                                    new Bitmap(View.SrcImageCopy).Save(dialog.FileName, extension.GetImageFormat());
                                 });
                             }
 
@@ -200,7 +200,26 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private async Task ApplyConvolutionFilter(ConvolutionFilterEventArgs e)
+        private async Task ShowConvolutionFiltersMenu(ShowConvolutionFilterPresenterEventArgs e)
+        {
+            try
+            {
+                Requires.IsNotNull(e, nameof(e));
+
+                if (!View.ImageIsNull(ImageContainer.Source))
+                {
+                    Controller.Run<ConvolutionFilterPresenter, ConvolutionFilterViewModel>(
+                        new ConvolutionFilterViewModel(new Bitmap(View.GetImageCopy(ImageContainer.Source)))
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                View.ShowError($"Error while opening a convolution filters menu.");
+            }
+        }
+
+        private async Task ApplyConvolutionFilter(ApplyConvolutionFilterEventArgs e)
         {
             try
             {
@@ -210,14 +229,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 {
                     View.SetCursor(CursorType.WaitCursor);
 
-                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
-                    var block = new PipelineBlock<Bitmap>(copy);
-
-                    var operation = _convolutionFilterFactory.GetFilter(e.Arg);
-
-                    block.Add<Bitmap, Bitmap>((cpy) => _convolutionFilterService.Convolution(cpy, operation));
-
-                    block.Add<Bitmap, Bitmap>((image) =>
+                    e.Arg.Add<Bitmap, Bitmap>((image) =>
                     {
                         View.SetImageCopy(ImageContainer.Destination, new Bitmap(image));
                         View.AddToUndoContainer((new Bitmap(image), ImageContainer.Source));
@@ -226,7 +238,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                         return (Bitmap)View.GetImageCopy(ImageContainer.Destination).Clone();
                     });
 
-                    _pipeline.Register(block);
+                    _pipeline.Register(e.Arg);
 
                     await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
                 }
@@ -263,7 +275,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     {
                         View.DstImageCopy = new Bitmap(bmp);
                         View.SetImageToZoom(ImageContainer.Destination, new Bitmap(bmp));
-                        View.AddToUndoContainer((new Bitmap(copy), ImageContainer.Source));
+                        View.AddToUndoContainer((new Bitmap(bmp), ImageContainer.Source));
                         return (Bitmap)View.GetImageCopy(ImageContainer.Destination).Clone();
                     });
 
@@ -456,7 +468,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     {
                         View.SetImageCopy(replaceTo, new Bitmap(bmp));
                         View.SetImageToZoom(replaceTo, new Bitmap(bmp));
-                        View.AddToUndoContainer((new Bitmap(copy), replaceFrom));
+                        View.AddToUndoContainer((new Bitmap(bmp), replaceFrom));
 
                         return (Bitmap)View.GetImageCopy(replaceTo).Clone();
                     });
@@ -534,7 +546,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 }              
             }
             catch
-            {
+            { 
                 View.ShowError("Error while zooming the image.");
             }
         }

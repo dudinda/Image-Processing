@@ -4,10 +4,12 @@ using System.Threading.Tasks;
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.EventAggregator.Interface.Subscriber;
 using ImageProcessing.DomainModel.EventArgs;
+using ImageProcessing.DomainModel.EventArgs.Convolution;
 
 namespace ImageProcessing.Presentation.Presenters.Main
 {
-    partial class MainPresenter : ISubscriber<ConvolutionFilterEventArgs>,
+    partial class MainPresenter : ISubscriber<ApplyConvolutionFilterEventArgs>,
+                                  ISubscriber<ShowConvolutionFilterPresenterEventArgs>,
                                   ISubscriber<RGBFilterEventArgs>, 
                                   ISubscriber<RGBColorFilterEventArgs>,
                                   ISubscriber<DistributionEventArgs>,
@@ -18,9 +20,12 @@ namespace ImageProcessing.Presentation.Presenters.Main
                                   ISubscriber<ZoomEventArgs>,
                                   ISubscriber<CloseFormEventArgs>
     {
-        public async Task OnEventHandler(ConvolutionFilterEventArgs e)
+        public async Task OnEventHandler(ApplyConvolutionFilterEventArgs e)
             => await ApplyConvolutionFilter(e).ConfigureAwait(true);
 
+        public async Task OnEventHandler(ShowConvolutionFilterPresenterEventArgs e)
+            => await ShowConvolutionFiltersMenu(e).ConfigureAwait(false);
+      
         public async Task OnEventHandler(RGBFilterEventArgs e)
             => await ApplyRGBFilter(e).ConfigureAwait(true);
 

@@ -16,6 +16,7 @@ using ImageProcessing.Form.Histogram;
 using ImageProcessing.Form.Main;
 using ImageProcessing.Form.QualityMeasure;
 using ImageProcessing.Presentation.Presenters.Main;
+using ImageProcessing.Presentation.Views.Convolution;
 using ImageProcessing.Presentation.Views.Histogram;
 using ImageProcessing.Presentation.Views.Main;
 using ImageProcessing.Presentation.Views.QualityMeasure;
@@ -30,6 +31,7 @@ using ImageProcessing.Services.LockerService.Zoom;
 using ImageProcessing.Services.RGBFilterService.Implementation;
 using ImageProcessing.Services.RGBFilterService.Interface;
 using ImageProcessing.Services.STATask;
+using ImageProcessing.UI.Form.Convolution;
 
 namespace ImageProcessing
 {
@@ -48,6 +50,7 @@ namespace ImageProcessing
                 var controller = new AppController(new LightInjectAdapter())
                     .RegisterView<IMainView, MainForm>()
                     .RegisterView<IHistogramView, HistogramForm>()
+                    .RegisterView<IConvolutionFilterView, ConvolutionFilterForm>()
                     .RegisterView<IQualityMeasureView, QualityMeasureForm>()
                     .RegisterService<IBaseFactory, BaseFactory>()
                     .RegisterService<IConvolutionFilterService, ConvolutionFilterService>()
@@ -64,7 +67,7 @@ namespace ImageProcessing
 
                 controller.Run<MainPresenter>();
             }
-            catch
+            catch(Exception ex)
             {
                 _context.Dispose();
             }
