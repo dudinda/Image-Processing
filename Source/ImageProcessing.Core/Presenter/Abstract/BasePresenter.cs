@@ -15,13 +15,14 @@ namespace ImageProcessing.Core.Presenter.Abstract
             View       = view;
         }
 
-        public void Run() => View.Show();
+        public virtual void Run() => View.Show();
     }
 
     public abstract class BasePresenter<TView, TViewModel> : IPresenter<TViewModel>
         where TView : IView
     {
         protected TView View { get; private set; }
+        protected TViewModel ViewModel { get; private set; }
         protected IAppController Controller { get; private set; }
 
         protected BasePresenter(IAppController controller, TView view)
@@ -30,6 +31,10 @@ namespace ImageProcessing.Core.Presenter.Abstract
             View       = view;
         }
 
-        public abstract void Run(TViewModel argument);
+        public virtual void Run(TViewModel argument)
+        {
+            ViewModel = argument;
+            View.Show();
+        }
     }
 }

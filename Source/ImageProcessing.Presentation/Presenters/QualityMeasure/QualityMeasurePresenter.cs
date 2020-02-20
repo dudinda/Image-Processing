@@ -26,15 +26,6 @@ namespace ImageProcessing.Presentation.Presenters
             _distributionService = Requires.IsNotNull(distibutionService, nameof(distibutionService));
         }
 
-        public override void Run(QualityMeasureViewModel vm)
-        {
-            Requires.IsNotNull(vm, nameof(vm));
-
-            _src = vm.Bitmap;
-
-            View.Show();
-        }
-
         public void BuildHistogram()
         {
             var chart = View.GetChart;
