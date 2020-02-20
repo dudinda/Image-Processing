@@ -66,7 +66,7 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
         }
 
 
-        public static Bitmap Normalize(Bitmap src)
+        public static Bitmap Normalize(this Bitmap src)
         {
             if (src is null)
             {
@@ -113,7 +113,7 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
             return src;
         }
 
-        private static int Max(Bitmap src)
+        private static int Max(this Bitmap src)
         {
             var result = new Bitmap(src);
             var resultData = result.LockBits(new Rectangle(0, 0, result.Width, result.Height),
@@ -156,7 +156,7 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
             return maxima;
         }
 
-        private static int Min(Bitmap src)
+        private static int Min(this Bitmap src)
         {
             var result = new Bitmap(src);
             var resultData = result.LockBits(new Rectangle(0, 0, result.Width, result.Height),
@@ -222,15 +222,15 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
 
             var xDerivativeData = xDerivative.LockBits(new Rectangle(0, 0, result.Width, result.Height),
                                                        ImageLockMode.ReadOnly,
-                                                       PixelFormat.Format24bppRgb);
+                                                       xDerivative.PixelFormat);
 
             var yDerivativeData = yDerivative.LockBits(new Rectangle(0, 0, result.Width, result.Height),
                                                        ImageLockMode.ReadOnly,
-                                                       PixelFormat.Format24bppRgb);
+                                                       yDerivative.PixelFormat);
 
             var resultData = result.LockBits(new Rectangle(0, 0, result.Width, result.Height),
                                                            ImageLockMode.WriteOnly,
-                                                           PixelFormat.Format24bppRgb);
+                                                           result.PixelFormat);
 
             var size = result.Size;
 
