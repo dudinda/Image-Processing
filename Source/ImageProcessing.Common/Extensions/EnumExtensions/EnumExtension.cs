@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 namespace ImageProcessing.Common.Extensions.EnumExtensions
 {
@@ -14,15 +16,15 @@ namespace ImageProcessing.Common.Extensions.EnumExtensions
         /// <typeparam name="TEnum">An enumerated type.</typeparam>
         /// <param name="value">The source value.</param>
         public static TEnum GetEnumValueByName<TEnum>(this string value)
-            where TEnum : struct => (TEnum)Enum.Parse(typeof(TEnum), value);
+            where TEnum : Enum => (TEnum)Enum.Parse(typeof(TEnum), value);
 
         /// <summary>
         /// Get a description of the enum value.
         /// </summary>
         /// <typeparam name="TEnum">An enumerated type.</typeparam>
         /// <param name="value">The source value.</param>
-        public static string GetDescription<TEnum>(this TEnum value) 
-            where TEnum : struct
+        public static string GetDescription<TEnum>(this TEnum value)
+            where TEnum : Enum
         {
             var type = value.GetType();
             var memInfo = type.GetMember(value.ToString());
@@ -36,7 +38,7 @@ namespace ImageProcessing.Common.Extensions.EnumExtensions
         /// <typeparam name="TEnum">An enumerated type.</typeparam>
         /// <param name="description>The source value.</param>
         public static TEnum GetValueFromDescription<TEnum>(this string description)
-            where TEnum : struct
+            where TEnum : Enum
         {
             var type = typeof(TEnum);
 
@@ -67,6 +69,14 @@ namespace ImageProcessing.Common.Extensions.EnumExtensions
             }
 
             throw new ArgumentException("Not found.", nameof(description));
+        }
+
+        public static TEnum[] GetEnumValuesExceptDefault<TEnum>(this TEnum enumeration)
+        { 
+            return Enum.GetValues(typeof(TEnum))
+                       .Cast<TEnum>()
+                       .Where(e => !EqualityComparer<TEnum>.Default.Equals(e, default(TEnum)))
+                       .ToArray();
         }
     }
 }
