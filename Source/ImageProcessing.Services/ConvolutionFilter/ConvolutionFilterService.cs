@@ -39,7 +39,7 @@ namespace ImageProcessing.Services.ConvolutionFilterServices.Implementation
 
                 var options = new ParallelOptions()
                 {
-                    MaxDegreeOfParallelism = Environment.ProcessorCount - 2
+                    MaxDegreeOfParallelism = Environment.ProcessorCount - 1
                 };
 
                 Parallel.For(kernelOffset, size.Height - kernelOffset, options, y =>

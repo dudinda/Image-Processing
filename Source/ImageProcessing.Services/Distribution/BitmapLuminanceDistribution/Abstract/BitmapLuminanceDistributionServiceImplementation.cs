@@ -104,16 +104,16 @@ namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribut
                 var bag = new ConcurrentBag<int[]>();
 
                 //get N partial frequency arrays
-                Parallel.For<int[]>(0, size.Height, options, () => new int[256], (y, state, subarray) =>
+                Parallel.For<int[]>(0, size.Height, options, () => new int[256], (y, state, partial) =>
                 {
                     var ptr = startPtr + y * bitmapData.Stride;
 
                     for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
-                        subarray[ptr[0]]++;
+                        partial[ptr[0]]++;
                     }
 
-                    return subarray;
+                    return partial;
                 },
                 (part) => bag.Add(part));
 
@@ -164,8 +164,6 @@ namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribut
             //transform an array by a quantile function
             for (int index = 0; index < 256; ++index)
             {
-                cdf[index] = cdf[index] >= 1 ? cdf[index] - DecimalMathReal.Epsilon : cdf[index];
-
                 var pixel = distribution.Quantile(cdf[index]);
 
                 if (pixel > 255)

@@ -82,6 +82,11 @@ namespace ImageProcessing.Services.DistributionServices.RandomVariableDistributi
             for (int x = 1; x < cdf.Length; ++x)
             {
                 cdf[x] += cdf[x - 1];
+
+                if (cdf[x] > 1)
+                {
+                    cdf[x] = 1;
+                }
             }
 
             return cdf;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Model.RGBFilters;

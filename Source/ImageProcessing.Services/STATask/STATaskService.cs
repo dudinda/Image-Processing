@@ -9,11 +9,29 @@ using ImageProcessing.Core.Service.STATask;
 namespace ImageProcessing.Services.STATask
 {
     public class STATaskService : ISTATaskService
-    { 
+    {
+        private readonly int _maxNumberOfModals;
+
         /// <summary>
         /// Contains threads' ids which hold a modal window
         /// </summary>
         private static List<int> _pool = new List<int>();
+
+
+        public STATaskService() : this(4)
+        {
+
+        } 
+
+        public STATaskService(int maxNumberOfModals = 4)
+        {
+            if(maxNumberOfModals < 0)
+            {
+                throw new ArgumentException(nameof(maxNumberOfModals));
+            }
+
+            _maxNumberOfModals = maxNumberOfModals;
+        }
 
         public Task<TArg> StartSTATask<TArg>(Func<TArg> func)
             where TArg : class
@@ -41,7 +59,7 @@ namespace ImageProcessing.Services.STATask
 
             thread.SetApartmentState(ApartmentState.STA);
            
-            if(_pool.Count > 4)
+            if(_pool.Count > _maxNumberOfModals)
             {
                 tcs.SetResult(default(TArg));
                 return tcs.Task;
@@ -78,7 +96,7 @@ namespace ImageProcessing.Services.STATask
 
             thread.SetApartmentState(ApartmentState.STA);
 
-            if (_pool.Count > 4)
+            if (_pool.Count > _maxNumberOfModals)
             {
                 tcs.SetResult(null);
                 return tcs.Task;
