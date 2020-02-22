@@ -44,7 +44,7 @@ namespace ImageProcessing.Core.Pipeline.Block.Implementation
             return result as TOutput;          
         }
 
-        public PipelineBlock<TOutput>  Add<TIn, TOut>(Func<TIn, TOut> step)
+        public IPipelineBlock<TOutput>  Add<TIn, TOut>(Func<TIn, TOut> step)
         {
             _block.Enqueue(new Item(result => step.Invoke((TIn)(object)result), typeof(TIn), typeof(TOut)));
             return this;

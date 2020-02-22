@@ -117,13 +117,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     _pipeline
                         .Register(new PipelineBlock<Bitmap>(result)
-                        .Add<Bitmap, Bitmap>((bmp) =>
-                        {
-                            View.SrcImageCopy = new Bitmap(bmp);
-                            View.SetImageToZoom(ImageContainer.Source, new Bitmap(bmp));
-                            View.AddToUndoContainer((new Bitmap(bmp), ImageContainer.Source));
-                            return (Bitmap)View.GetImageCopy(ImageContainer.Source).Clone();
-                        })
+                        .Add<Bitmap, Bitmap>((bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination))
                     );
 
                     await UpdateContainer(ImageContainer.Source).ConfigureAwait(true);
@@ -224,14 +218,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     _pipeline
                         .Register(e.Arg
-                        .Add<Bitmap, Bitmap>((image) =>
-                        {
-                            View.SetImageCopy(ImageContainer.Destination, new Bitmap(image));
-                            View.AddToUndoContainer((new Bitmap(image), ImageContainer.Source));
-                            View.SetImageToZoom(ImageContainer.Destination, new Bitmap(image));
-
-                            return (Bitmap)View.GetImageCopy(ImageContainer.Destination).Clone();
-                        })
+                        .Add<Bitmap, Bitmap>((bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination))
                     );
 
                     await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
@@ -264,13 +251,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     _pipeline
                         .Register(new PipelineBlock<Bitmap>(copy)
                         .Add<Bitmap, Bitmap>((bmp) => _rgbFilterService.Filter(bmp, operation))
-                        .Add<Bitmap, Bitmap>((bmp) =>
-                        {
-                            View.DstImageCopy = new Bitmap(bmp);
-                            View.SetImageToZoom(ImageContainer.Destination, new Bitmap(bmp));
-                            View.AddToUndoContainer((new Bitmap(bmp), ImageContainer.Source));
-                            return (Bitmap)View.GetImageCopy(ImageContainer.Destination).Clone();
-                        })
+                        .Add<Bitmap, Bitmap>((bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination))
                     );
 
                     await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
@@ -312,14 +293,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 _pipeline
                     .Register(new PipelineBlock<Bitmap>(copy)
                     .Add<Bitmap, Bitmap>((bmp) => operation.Filter(bmp))
-                    .Add<Bitmap, Bitmap>((image) =>
-                    {
-                        View.SetImageCopy(ImageContainer.Destination, new Bitmap(image));
-                        View.SetImageToZoom(ImageContainer.Destination, new Bitmap(image));
-                        View.AddToUndoContainer((new Bitmap(image), ImageContainer.Source));
-
-                        return (Bitmap)View.GetImageCopy(ImageContainer.Destination).Clone();
-                    })
+                    .Add<Bitmap, Bitmap>((bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination))
                 );
 
                 await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
@@ -352,20 +326,15 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     _pipeline
                         .Register(new PipelineBlock<Bitmap>(copy)
-                        .Add<Bitmap, Bitmap>((image) => _distributionService.TransformTo(image, filter))
                         .Add<Bitmap, Bitmap>((bmp) =>
                         {
-                            View.SetImageCopy(ImageContainer.Destination, new Bitmap(bmp));
-                            View.SetImageToZoom(ImageContainer.Destination, new Bitmap(bmp));
-                            View.AddToUndoContainer((new Bitmap(copy), ImageContainer.Source));
-
-                            return (Bitmap)View.GetImageCopy(ImageContainer.Destination).Clone();
+                            bmp.Tag = filter.Name;
+                            return _distributionService.TransformTo(bmp, filter);
                         })
+                        .Add<Bitmap, Bitmap>((bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination))
                     );
-                  
-                    await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
 
-                    View.DstImage.Tag = filter.Name;
+                    await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
                 }
 
             }
@@ -393,14 +362,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     _pipeline
                         .Register(new PipelineBlock<Bitmap>(copy)
                         .Add<Bitmap, Bitmap>((bmp) => bmp.Shuffle())
-                        .Add<Bitmap, Bitmap>((bmp) =>
-                        {
-                            View.SetImageCopy(ImageContainer.Destination, new Bitmap(bmp));
-                            View.SetImageToZoom(ImageContainer.Destination, new Bitmap(bmp));
-                            View.AddToUndoContainer((new Bitmap(copy), ImageContainer.Source));
-
-                            return (Bitmap)View.GetImageCopy(ImageContainer.Destination).Clone();
-                        })
+                        .Add<Bitmap, Bitmap>((bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination))
                     );
 
                     await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
@@ -450,14 +412,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     _pipeline
                         .Register(new PipelineBlock<Bitmap>(copy)
-                        .Add<Bitmap, Bitmap>((bmp) =>
-                        {
-                            View.SetImageCopy(replaceTo, new Bitmap(bmp));
-                            View.SetImageToZoom(replaceTo, new Bitmap(bmp));
-                            View.AddToUndoContainer((new Bitmap(bmp), replaceFrom));
-
-                            return (Bitmap)View.GetImageCopy(replaceTo).Clone();
-                        })
+                        .Add<Bitmap, Bitmap>((bmp) => DefaultPipelineBlock(bmp, replaceTo))
                     );
 
                     await UpdateContainer(replaceTo).ConfigureAwait(true);
@@ -536,6 +491,15 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
+
+        private Bitmap DefaultPipelineBlock(Bitmap bmp, ImageContainer to)
+        {
+                 View.AddToUndoContainer((new Bitmap(View.GetImageCopy(to)), to));
+                 View.SetImageCopy(to, new Bitmap(bmp));
+                 View.SetImageToZoom(to, new Bitmap(bmp));
+
+                 return (Bitmap)View.GetImageCopy(to).Clone();
+        }
 
         private async Task<Bitmap> GetImageCopy(ImageContainer container)
         {
