@@ -1,8 +1,32 @@
-﻿namespace ImageProcessing.UI.Form.Convolution
+namespace ImageProcessing.UI.Form.Convolution
 { 
     public partial class ConvolutionFilterForm
     {
-        private void InitializeComponent()
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
+
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
+
+		#region Windows Form Designer generated code
+
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
         {
             this.ConvolutionFilterComboBox = new MetroFramework.Controls.MetroComboBox();
             this.Apply = new MetroFramework.Controls.MetroButton();
@@ -31,16 +55,20 @@
             // 
             // ConvolutionFilterForm
             // 
+            this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(300, 130);
             this.Controls.Add(this.Apply);
             this.Controls.Add(this.ConvolutionFilterComboBox);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ConvolutionFilterForm";
             this.Resizable = false;
             this.ResumeLayout(false);
 
         }
 
-        private MetroFramework.Controls.MetroComboBox ConvolutionFilterComboBox;
+		#endregion
+		private MetroFramework.Controls.MetroComboBox ConvolutionFilterComboBox;
         private MetroFramework.Controls.MetroButton Apply;
     }
 }
