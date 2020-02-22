@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Drawing;
 
 using ImageProcessing.Common.Helpers;
@@ -20,9 +20,6 @@ namespace ImageProcessing.Presentation.Presenters
                                        IQualityMeasureView view, 
                                        IBitmapLuminanceDistributionService distibutionService) : base(controller, view)
         {
-            Requires.IsNotNull(controller, nameof(controller));
-            Requires.IsNotNull(view, nameof(view));
-
             _distributionService = Requires.IsNotNull(distibutionService, nameof(distibutionService));
         }
 

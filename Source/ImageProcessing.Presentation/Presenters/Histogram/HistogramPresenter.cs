@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Linq;
 
@@ -21,9 +21,6 @@ namespace ImageProcessing.Presentation.Presenters
                                   IHistogramView view, 
                                   IBitmapLuminanceDistributionService distibutionService) : base(controller, view)
         {
-            Requires.IsNotNull(controller, nameof(controller));
-            Requires.IsNotNull(view, nameof(view));
-
             _distributionService = Requires.IsNotNull(distibutionService, nameof(distibutionService));
         }
 
