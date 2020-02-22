@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 
 using ImageProcessing.Common.Enums;
@@ -21,10 +21,10 @@ namespace ImageProcessing.Presentation.Presenters.Main
                                   ISubscriber<CloseFormEventArgs>
     {
         public async Task OnEventHandler(ApplyConvolutionFilterEventArgs e)
-            => await ApplyConvolutionFilter(e).ConfigureAwait(true);
+			=> await ApplyConvolutionFilter(e).ConfigureAwait(true);
 
-        public async Task OnEventHandler(ShowConvolutionFilterPresenterEventArgs e)
-            => await ShowConvolutionFiltersMenu(e).ConfigureAwait(false);
+		public async Task OnEventHandler(ShowConvolutionFilterPresenterEventArgs e)
+            => await ShowConvolutionFiltersMenu(e).ConfigureAwait(true);
       
         public async Task OnEventHandler(RGBFilterEventArgs e)
             => await ApplyRGBFilter(e).ConfigureAwait(true);

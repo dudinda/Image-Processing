@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Configuration;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.BitmapExtensions;
 using ImageProcessing.Common.Extensions.StringExtensions;
 using ImageProcessing.Common.Helpers;
+using ImageProcessing.ConvolutionFilters.GaussianBlur;
 using ImageProcessing.Core.Controller.Interface;
 using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Factory.Base;
@@ -26,6 +28,7 @@ using ImageProcessing.Presentation.Presenters.Convolution;
 using ImageProcessing.Presentation.ViewModel.Convolution;
 using ImageProcessing.Presentation.ViewModel.Histogram;
 using ImageProcessing.Presentation.Views.Main;
+using ImageProcessing.Services.ConvolutionFilterServices.Implementation;
 using ImageProcessing.Services.ConvolutionFilterServices.Interface;
 using ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Interface;
 using ImageProcessing.Services.RGBFilterService.Interface;
@@ -34,15 +37,13 @@ using LightInject;
 
 namespace ImageProcessing.Presentation.Presenters.Main
 {
-    public partial class MainPresenter : BasePresenter<IMainView>
+	public partial class MainPresenter : BasePresenter<IMainView>
     {
 
-        private readonly IConvolutionFilterService _convolutionFilterService;
         private readonly IBitmapLuminanceDistributionService _distributionService;
         private readonly IRGBFilterService _rgbFilterService;
         private readonly ISTATaskService _staTaskService;
 
-        private readonly IConvolutionFilterFactory _convolutionFilterFactory;
         private readonly IDistributionFactory _distributionFactory;
         private readonly IRGBFiltersFactory _rgbFiltersFactory;
 
@@ -55,7 +56,6 @@ namespace ImageProcessing.Presentation.Presenters.Main
         public MainPresenter(IAppController controller,
                              IMainView view,
                              IBaseFactory baseFactory,
-                             IConvolutionFilterService convolutionFilterService,
                              IBitmapLuminanceDistributionService distributionService,
                              ISTATaskService staTaskService,
                              IRGBFilterService rgbFilterService,
@@ -68,8 +68,6 @@ namespace ImageProcessing.Presentation.Presenters.Main
                              [Inject("OperationLocker")]
                              IAsyncLocker operationLocker) : base(controller, view)
         {
-            Requires.IsNotNull(controller, nameof(controller));
-            Requires.IsNotNull(view, nameof(view));
             Requires.IsNotNull(baseFactory, nameof(baseFactory));
                              
             _distributionFactory      = baseFactory.GetDistributionFactory();
@@ -91,8 +89,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
         private async Task OpenImage()
         {
             try
-            {
-                var openResult = await _staTaskService.StartSTATask<Task<Bitmap>>(() =>
+			{ 
+				var openResult = await _staTaskService.StartSTATask<Task<Bitmap>>(() =>
                 {
                     using (var dialog = new OpenFileDialog())
                     {
@@ -136,7 +134,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     await UpdateContainer(ImageContainer.Source).ConfigureAwait(true);
 
-                }
+				}
             }
             catch
             {
@@ -209,7 +207,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
                     Controller.Run<ConvolutionFilterPresenter, ConvolutionFilterViewModel>(
-                        new ConvolutionFilterViewModel(new Bitmap(View.GetImageCopy(ImageContainer.Source)))
+                        new ConvolutionFilterViewModel(new Bitmap(await GetImageCopy(ImageContainer.Source).ConfigureAwait(true)))
                     );
                 }
             }
@@ -219,7 +217,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private async Task ApplyConvolutionFilter(ApplyConvolutionFilterEventArgs e)
+        private async  Task ApplyConvolutionFilter(ApplyConvolutionFilterEventArgs e)
         {
             try
             {
@@ -229,19 +227,19 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 {
                     View.SetCursor(CursorType.WaitCursor);
 
-                    e.Arg.Add<Bitmap, Bitmap>((image) =>
-                    {
-                        View.SetImageCopy(ImageContainer.Destination, new Bitmap(image));
-                        View.AddToUndoContainer((new Bitmap(image), ImageContainer.Source));
-                        View.SetImageToZoom(ImageContainer.Destination, new Bitmap(image));
+					e.Arg.Add<Bitmap, Bitmap>((image) =>
+					{
+						View.SetImageCopy(ImageContainer.Destination, new Bitmap(image));
+						View.AddToUndoContainer((new Bitmap(image), ImageContainer.Source));
+						View.SetImageToZoom(ImageContainer.Destination, new Bitmap(image));
 
-                        return (Bitmap)View.GetImageCopy(ImageContainer.Destination).Clone();
-                    });
+						return (Bitmap)View.GetImageCopy(ImageContainer.Destination).Clone();
+					});
 
-                    _pipeline.Register(e.Arg);
+					_pipeline.Register(e.Arg);
 
-                    await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
-                }
+					await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
+				}
             }
             catch (OperationCanceledException cancelEx)
             {
@@ -426,7 +424,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private void BuildFunction(RandomVariableEventArgs e)
+        private async Task BuildFunction(RandomVariableEventArgs e)
         {
             try
             {
@@ -435,7 +433,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 if (!View.ImageIsNull(e.Arg))
                 {
                     Controller.Run<HistogramPresenter, HistogramViewModel>(
-                        new HistogramViewModel(new Bitmap(View.GetImageCopy(e.Arg)), e.Action)
+                        new HistogramViewModel(new Bitmap(await GetImageCopy(e.Arg).ConfigureAwait(true)), e.Action)
                     );
                 }
             }
