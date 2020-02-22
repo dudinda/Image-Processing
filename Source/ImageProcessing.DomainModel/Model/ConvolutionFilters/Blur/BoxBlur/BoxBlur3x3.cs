@@ -10,8 +10,7 @@ namespace ImageProcessing.ConvolutionFilters.Blur.BoxBlur
 		public override double[,] Kernel { get; }
 			=
 			new double[,] { {1, 1, 1 },
-						    {1, 1, 1 },
+							{1, 1, 1 },
 							{1, 1, 1 } };
-
 	}
 }

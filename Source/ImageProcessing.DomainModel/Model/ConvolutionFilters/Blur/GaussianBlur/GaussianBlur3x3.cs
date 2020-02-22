@@ -9,9 +9,8 @@ namespace ImageProcessing.ConvolutionFilters.GaussianBlur
 		public override string FilterName { get; } = nameof(GaussianBlur3x3);
 		public override double[,] Kernel { get; }
 			=
-		    new double[,] { {1, 2, 1 },
-						    {2, 4, 2 },
-						    {1, 2, 1 } };
+			new double[,] { {1, 2, 1 },
+							{2, 4, 2 },
+							{1, 2, 1 } };
 	};
 }
-

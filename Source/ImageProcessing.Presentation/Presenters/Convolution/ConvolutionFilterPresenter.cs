@@ -22,66 +22,66 @@ using LightInject;
 
 namespace ImageProcessing.Presentation.Presenters.Convolution
 {
-	public partial class ConvolutionFilterPresenter : BasePresenter<IConvolutionFilterView, ConvolutionFilterViewModel> 
-    {
-        private readonly IEventAggregator _eventAggregator;
-        private readonly IConvolutionFilterService _convolutionFilterService;
-        private readonly IConvolutionFilterFactory _convolutionFilterFactory;
-		private readonly IAsyncLocker _operationLocker; 
-        public ConvolutionFilterPresenter(IAppController controller,
-                                          IConvolutionFilterView view,
-                                          IConvolutionFilterService convolutionFilterService,
-                                          IBaseFactory baseFactory,
-                                          IEventAggregator eventAggregator,
+	public partial class ConvolutionFilterPresenter : BasePresenter<IConvolutionFilterView, ConvolutionFilterViewModel>
+	{
+		private readonly IEventAggregator _eventAggregator;
+		private readonly IConvolutionFilterService _convolutionFilterService;
+		private readonly IConvolutionFilterFactory _convolutionFilterFactory;
+		private readonly IAsyncLocker _operationLocker;
+		public ConvolutionFilterPresenter(IAppController controller,
+										  IConvolutionFilterView view,
+										  IConvolutionFilterService convolutionFilterService,
+										  IBaseFactory baseFactory,
+										  IEventAggregator eventAggregator,
 
 										  [Inject("OperationLocker")]
-							              IAsyncLocker operationLocker) : base(controller, view)
-        {
-            _eventAggregator          = Requires.IsNotNull(eventAggregator, nameof(eventAggregator));
-            _convolutionFilterService = Requires.IsNotNull(convolutionFilterService, nameof(convolutionFilterService));
-            _convolutionFilterFactory = Requires.IsNotNull(baseFactory, nameof(baseFactory)).GetConvolutionFilterFactory();
-			_operationLocker          = Requires.IsNotNull(operationLocker, nameof(operationLocker));
+										  IAsyncLocker operationLocker) : base(controller, view)
+		{
+			_eventAggregator = Requires.IsNotNull(eventAggregator, nameof(eventAggregator));
+			_convolutionFilterService = Requires.IsNotNull(convolutionFilterService, nameof(convolutionFilterService));
+			_convolutionFilterFactory = Requires.IsNotNull(baseFactory, nameof(baseFactory)).GetConvolutionFilterFactory();
+			_operationLocker = Requires.IsNotNull(operationLocker, nameof(operationLocker));
 
-            _eventAggregator.Subscribe(this);
-        }
+			_eventAggregator.Subscribe(this);
+		}
 
-        private async Task ApplyConvolutionFilter(ConvolutionFilterEventArgs e)
-        {
-            try
-            {
+		private async Task ApplyConvolutionFilter(ConvolutionFilterEventArgs e)
+		{
+			try
+			{
 				var copy = await _operationLocker.LockAsync(() => new Bitmap(ViewModel.Source)).ConfigureAwait(true);
 
-                var block = new PipelineBlock<Bitmap>(copy);
-                var filter = View.SelectedFilter;
+				var block = new PipelineBlock<Bitmap>(copy);
+				var filter = View.SelectedFilter;
 
-                switch(filter)
-                {
-                    case ConvolutionFilter.SobelOperator3x3:
-                        block.Add<Bitmap, Bitmap>((bmp) =>
-                        {
-                            var yDerivative = Task.Run(() => _convolutionFilterService.Convolution(bmp, new SobelOperatorHorizontal()));
-                            var xDerivative = Task.Run(() =>  _convolutionFilterService.Convolution(bmp, new SobelOperatorVertical()));
-                            return BitmapExtension.Magnitude(xDerivative.Result, yDerivative.Result);
-                        });
-                        break;
+				switch (filter)
+				{
+					case ConvolutionFilter.SobelOperator3x3:
+						block.Add<Bitmap, Bitmap>((bmp) =>
+						{
+							var yDerivative = Task.Run(() => _convolutionFilterService.Convolution(bmp, new SobelOperatorHorizontal()));
+							var xDerivative = Task.Run(() => _convolutionFilterService.Convolution(bmp, new SobelOperatorVertical()));
+							return BitmapExtension.Magnitude(xDerivative.Result, yDerivative.Result);
+						});
+						break;
 
-                    default:
-                        block.Add<Bitmap, Bitmap>((bmp) =>
-                        {
-                            return _convolutionFilterService.Convolution(bmp, _convolutionFilterFactory.GetFilter(filter));
-                        });
-                        break;
+					default:
+						block.Add<Bitmap, Bitmap>((bmp) =>
+						{
+							return _convolutionFilterService.Convolution(bmp, _convolutionFilterFactory.GetFilter(filter));
+						});
+						break;
 
-                }
+				}
 
-                _eventAggregator.Publish(new ApplyConvolutionFilterEventArgs(block));
+				_eventAggregator.Publish(new ApplyConvolutionFilterEventArgs(block));
 
-            }
-            catch
-            {
-                View.ShowError();
-            }
-        }
+			}
+			catch
+			{
+				View.ShowError();
+			}
+		}
 
-    }
+	}
 }
