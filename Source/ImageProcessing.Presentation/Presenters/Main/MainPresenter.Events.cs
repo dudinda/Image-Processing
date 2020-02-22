@@ -10,7 +10,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 {
     partial class MainPresenter : ISubscriber<ApplyConvolutionFilterEventArgs>,
                                   ISubscriber<ShowConvolutionFilterPresenterEventArgs>,
-                                  ISubscriber<RGBFilterEventArgs>, 
+                                  ISubscriber<RGBFilterEventArgs>,
                                   ISubscriber<RGBColorFilterEventArgs>,
                                   ISubscriber<DistributionEventArgs>,
                                   ISubscriber<ImageContainerEventArgs>,
@@ -21,11 +21,11 @@ namespace ImageProcessing.Presentation.Presenters.Main
                                   ISubscriber<CloseFormEventArgs>
     {
         public async Task OnEventHandler(ApplyConvolutionFilterEventArgs e)
-			=> await ApplyConvolutionFilter(e).ConfigureAwait(true);
+            => await ApplyConvolutionFilter(e).ConfigureAwait(true);
 
-		public async Task OnEventHandler(ShowConvolutionFilterPresenterEventArgs e)
+        public async Task OnEventHandler(ShowConvolutionFilterPresenterEventArgs e)
             => await ShowConvolutionFiltersMenu(e).ConfigureAwait(true);
-      
+
         public async Task OnEventHandler(RGBFilterEventArgs e)
             => await ApplyRGBFilter(e).ConfigureAwait(true);
 
@@ -43,10 +43,10 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
         public async Task OnEventHandler(CloseFormEventArgs e)
             => CloseForm();
-        
+
         public async Task OnEventHandler(FileDialogEventArgs e)
         {
-            switch(e.Arg)
+            switch (e.Arg)
             {
                 case FileDialogAction.Open:
                     await OpenImage().ConfigureAwait(true);
@@ -58,13 +58,14 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     await SaveImageAs().ConfigureAwait(true);
                     break;
 
-                default: throw new NotImplementedException(nameof(e.Arg));
+                default:
+                    throw new NotImplementedException(nameof(e.Arg));
             }
         }
 
         public async Task OnEventHandler(ToolbarActionEventArgs e)
         {
-            switch(e.Arg)
+            switch (e.Arg)
             {
                 case ToolbarAction.Shuffle:
                     await Shuffle().ConfigureAwait(true);
@@ -72,14 +73,15 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 case ToolbarAction.Undo:
                 case ToolbarAction.Redo:
                     break;
-                    
-                default: throw new NotImplementedException(nameof(e.Arg));
+
+                default:
+                    throw new NotImplementedException(nameof(e.Arg));
             }
         }
 
         public async Task OnEventHandler(RandomVariableEventArgs e)
         {
-            switch(e.Action)
+            switch (e.Action)
             {
                 case RandomVariable.CDF:
                 case RandomVariable.PMF:
@@ -93,7 +95,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     await GetRandomVariableInfo(e);
                     break;
 
-                default: throw new NotImplementedException(nameof(e.Action));
+                default:
+                    throw new NotImplementedException(nameof(e.Action));
             }
         }
     }

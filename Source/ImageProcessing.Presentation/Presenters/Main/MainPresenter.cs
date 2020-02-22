@@ -37,7 +37,7 @@ using LightInject;
 
 namespace ImageProcessing.Presentation.Presenters.Main
 {
-	public partial class MainPresenter : BasePresenter<IMainView>
+    public partial class MainPresenter : BasePresenter<IMainView>
     {
 
         private readonly IBitmapLuminanceDistributionService _distributionService;
@@ -49,7 +49,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
         private readonly IEventAggregator _eventAggregator;
         private readonly IAwaitablePipeline<Bitmap> _pipeline;
-  
+
         private readonly IAsyncLocker _zoomLocker;
         private readonly IAsyncLocker _operationLocker;
 
@@ -69,19 +69,20 @@ namespace ImageProcessing.Presentation.Presenters.Main
                              IAsyncLocker operationLocker) : base(controller, view)
         {
             Requires.IsNotNull(baseFactory, nameof(baseFactory));
-                             
-            _distributionFactory      = baseFactory.GetDistributionFactory();
-            _rgbFiltersFactory        = baseFactory.GetRGBFilterFactory();
 
-            _staTaskService           = Requires.IsNotNull(staTaskService, nameof(staTaskService));
-            _rgbFilterService         = Requires.IsNotNull(rgbFilterService, nameof(rgbFilterService));
-            _distributionService      = Requires.IsNotNull(distributionService, nameof(distributionService)); ;
+            _distributionFactory = baseFactory.GetDistributionFactory();
+            _rgbFiltersFactory = baseFactory.GetRGBFilterFactory();
 
-            _eventAggregator          = Requires.IsNotNull(eventAggregator, nameof(eventAggregator));
-            _pipeline                 = Requires.IsNotNull(pipeline, nameof(pipeline));
+            _staTaskService = Requires.IsNotNull(staTaskService, nameof(staTaskService));
+            _rgbFilterService = Requires.IsNotNull(rgbFilterService, nameof(rgbFilterService));
+            _distributionService = Requires.IsNotNull(distributionService, nameof(distributionService));
+            ;
 
-            _zoomLocker               = Requires.IsNotNull(zoomLocker, nameof(zoomLocker));
-            _operationLocker          = Requires.IsNotNull(operationLocker, nameof(operationLocker));
+            _eventAggregator = Requires.IsNotNull(eventAggregator, nameof(eventAggregator));
+            _pipeline = Requires.IsNotNull(pipeline, nameof(pipeline));
+
+            _zoomLocker = Requires.IsNotNull(zoomLocker, nameof(zoomLocker));
+            _operationLocker = Requires.IsNotNull(operationLocker, nameof(operationLocker));
 
             _eventAggregator.Subscribe(this);
         }
@@ -89,8 +90,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
         private async Task OpenImage()
         {
             try
-			{ 
-				var openResult = await _staTaskService.StartSTATask<Task<Bitmap>>(() =>
+            {
+                var openResult = await _staTaskService.StartSTATask<Task<Bitmap>>(() =>
                 {
                     using (var dialog = new OpenFileDialog())
                     {
@@ -134,7 +135,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     await UpdateContainer(ImageContainer.Source).ConfigureAwait(true);
 
-				}
+                }
             }
             catch
             {
@@ -217,7 +218,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private async  Task ApplyConvolutionFilter(ApplyConvolutionFilterEventArgs e)
+        private async Task ApplyConvolutionFilter(ApplyConvolutionFilterEventArgs e)
         {
             try
             {
@@ -227,25 +228,25 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 {
                     View.SetCursor(CursorType.WaitCursor);
 
-					e.Arg.Add<Bitmap, Bitmap>((image) =>
-					{
-						View.SetImageCopy(ImageContainer.Destination, new Bitmap(image));
-						View.AddToUndoContainer((new Bitmap(image), ImageContainer.Source));
-						View.SetImageToZoom(ImageContainer.Destination, new Bitmap(image));
+                    e.Arg.Add<Bitmap, Bitmap>((image) =>
+                    {
+                        View.SetImageCopy(ImageContainer.Destination, new Bitmap(image));
+                        View.AddToUndoContainer((new Bitmap(image), ImageContainer.Source));
+                        View.SetImageToZoom(ImageContainer.Destination, new Bitmap(image));
 
-						return (Bitmap)View.GetImageCopy(ImageContainer.Destination).Clone();
-					});
+                        return (Bitmap)View.GetImageCopy(ImageContainer.Destination).Clone();
+                    });
 
-					_pipeline.Register(e.Arg);
+                    _pipeline.Register(e.Arg);
 
-					await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
-				}
+                    await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
+                }
             }
             catch (OperationCanceledException cancelEx)
             {
                 View.ShowError("The operation has been canceled.");
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 View.ShowError("Error while applying a convolution filter.");
             }
@@ -299,10 +300,11 @@ namespace ImageProcessing.Presentation.Presenters.Main
             {
                 Requires.IsNotNull(e, nameof(e));
 
-                if (View.ImageIsNull(ImageContainer.Source)) { return; }
+                if (View.ImageIsNull(ImageContainer.Source))
+                { return; }
 
                 var result = View.GetSelectedColors(e.Arg);
-      
+
                 if (result is default(RGBColors))
                 {
                     View.DstImage = View.SrcImage;
@@ -332,11 +334,11 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
             }
-            catch(OperationCanceledException cancelEx)
+            catch (OperationCanceledException cancelEx)
             {
                 View.ShowError("The operation has been canceled.");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 View.ShowError($"Error {ex.Message}");
             }
@@ -379,11 +381,11 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 }
 
             }
-            catch(OperationCanceledException cancelEx)
+            catch (OperationCanceledException cancelEx)
             {
                 View.ShowError("The operation has been canceled.");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 View.ShowError("Error while applying a histogram transformation.");
             }
@@ -437,12 +439,12 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     );
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 View.ShowError($"Error while buiding the plot.");
             }
         }
-     
+
         private async Task Replace(ImageContainerEventArgs e)
         {
             try
@@ -480,7 +482,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             {
                 View.ShowError("The operation has been canceled.");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 View.ShowError("Error while replacing the image.");
             }
@@ -533,18 +535,19 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 var container = e.Arg;
 
-                if (!View.ImageIsNull(container)) {
-      
+                if (!View.ImageIsNull(container))
+                {
+
                     var image = await _zoomLocker.LockAsync(() =>
-                        View.ZoomImage(container)            
+                        View.ZoomImage(container)
                     ).ConfigureAwait(true);
 
                     View.SetImage(container, image);
-                    View.Refresh(container);                  
-                }              
+                    View.Refresh(container);
+                }
             }
             catch
-            { 
+            {
                 View.ShowError("Error while zooming the image.");
             }
         }
@@ -565,15 +568,14 @@ namespace ImageProcessing.Presentation.Presenters.Main
             View.Refresh(container);
             View.ResetTrackBarValue(container);
 
-            if(!_pipeline.Any())
+            if (!_pipeline.Any())
             {
                 View.SetCursor(CursorType.Default);
-            }       
+            }
         }
 
         private void CloseForm()
         {
-            
             _staTaskService.Dispose();
         }
     }

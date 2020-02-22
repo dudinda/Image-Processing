@@ -17,8 +17,8 @@ namespace ImageProcessing.Presentation.Presenters
     {
         private readonly IBitmapLuminanceDistributionService _distributionService;
 
-        public HistogramPresenter(IAppController controller, 
-                                  IHistogramView view, 
+        public HistogramPresenter(IAppController controller,
+                                  IHistogramView view,
                                   IBitmapLuminanceDistributionService distibutionService) : base(controller, view)
         {
             _distributionService = Requires.IsNotNull(distibutionService, nameof(distibutionService));
@@ -41,7 +41,7 @@ namespace ImageProcessing.Presentation.Presenters
 
             decimal[] yValues;
 
-            switch(function)
+            switch (function)
             {
                 case RandomVariable.PMF:
                     yValues = _distributionService.GetPMF(bitmap);
@@ -52,9 +52,10 @@ namespace ImageProcessing.Presentation.Presenters
                     View.YAxisMaximum = 1;
                     break;
 
-                default: throw new InvalidOperationException(nameof(function));
+                default:
+                    throw new InvalidOperationException(nameof(function));
             }
-           
+
             View.Init(function);
 
             for (int graylevel = 0; graylevel < 256; ++graylevel)
