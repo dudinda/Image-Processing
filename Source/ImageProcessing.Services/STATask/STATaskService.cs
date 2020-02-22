@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -65,7 +65,6 @@ namespace ImageProcessing.Services.STATask
                 return tcs.Task;
             }
 
-            _pool.Add(thread.ManagedThreadId);
             thread.Start();
 
             return tcs.Task;
@@ -101,8 +100,6 @@ namespace ImageProcessing.Services.STATask
                 tcs.SetResult(null);
                 return tcs.Task;
             }
-
-            _pool.Add(thread.ManagedThreadId);
 
             thread.Start();
             
