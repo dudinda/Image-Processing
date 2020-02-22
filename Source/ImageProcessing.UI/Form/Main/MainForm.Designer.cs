@@ -45,25 +45,6 @@ namespace ImageProcessing.Form.Main
             this.ColorFilterGreen = new System.Windows.Forms.ToolStripMenuItem();
             this.ColorFilterBlue = new System.Windows.Forms.ToolStripMenuItem();
             this.ConvolutionFiltersMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.EdgeDetectionFilter = new System.Windows.Forms.ToolStripMenuItem();
-            this.LaplacianOperator = new System.Windows.Forms.ToolStripMenuItem();
-            this.LaplacianOperator3x3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.LaplacianOperator5x5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.LaplacianOfGaussianOperator = new System.Windows.Forms.ToolStripMenuItem();
-            this.SobelOperator = new System.Windows.Forms.ToolStripMenuItem();
-            this.BlurFilter = new System.Windows.Forms.ToolStripMenuItem();
-            this.BoxBlur = new System.Windows.Forms.ToolStripMenuItem();
-            this.BoxBlur3x3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.BoxBlur5x5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.GaussianBlur = new System.Windows.Forms.ToolStripMenuItem();
-            this.GaussianBlur3x3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.GaussianBlur5x5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MotionBlur = new System.Windows.Forms.ToolStripMenuItem();
-            this.MotionBlur9x9 = new System.Windows.Forms.ToolStripMenuItem();
-            this.EmbossFilter = new System.Windows.Forms.ToolStripMenuItem();
-            this.Emboss3x3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.SharpenFilter = new System.Windows.Forms.ToolStripMenuItem();
-            this.Sharpen3x3 = new System.Windows.Forms.ToolStripMenuItem();
             this.DistributionsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.OneParameterDistributions = new System.Windows.Forms.ToolStripMenuItem();
             this.ExponentialDistribution = new System.Windows.Forms.ToolStripMenuItem();
@@ -127,9 +108,10 @@ namespace ImageProcessing.Form.Main
             this.FiltersMenu,
             this.ConvolutionFiltersMenu,
             this.DistributionsMenu});
-            this.MainMenu.Location = new System.Drawing.Point(27, 74);
+            this.MainMenu.Location = new System.Drawing.Point(20, 60);
             this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Size = new System.Drawing.Size(953, 28);
+            this.MainMenu.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.MainMenu.Size = new System.Drawing.Size(715, 28);
             this.MainMenu.TabIndex = 1;
             // 
             // FileMenu
@@ -236,161 +218,9 @@ namespace ImageProcessing.Form.Main
             // 
             // ConvolutionFiltersMenu
             // 
-            this.ConvolutionFiltersMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.EdgeDetectionFilter,
-            this.BlurFilter,
-            this.EmbossFilter,
-            this.SharpenFilter});
             this.ConvolutionFiltersMenu.Name = "ConvolutionFiltersMenu";
             this.ConvolutionFiltersMenu.Size = new System.Drawing.Size(146, 24);
             this.ConvolutionFiltersMenu.Text = "Convolution Filters";
-            // 
-            // EdgeDetectionFilter
-            // 
-            this.EdgeDetectionFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.LaplacianOperator,
-            this.SobelOperator});
-            this.EdgeDetectionFilter.Name = "EdgeDetectionFilter";
-            this.EdgeDetectionFilter.Size = new System.Drawing.Size(195, 26);
-            this.EdgeDetectionFilter.Text = "Edge Detection";
-            // 
-            // LaplacianOperator
-            // 
-            this.LaplacianOperator.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.LaplacianOperator3x3,
-            this.LaplacianOperator5x5,
-            this.LaplacianOfGaussianOperator});
-            this.LaplacianOperator.Name = "LaplacianOperator";
-            this.LaplacianOperator.Size = new System.Drawing.Size(219, 26);
-            this.LaplacianOperator.Text = "Laplacian Operator";
-            // 
-            // LaplacianOperator3x3
-            // 
-            this.LaplacianOperator3x3.Name = "LaplacianOperator3x3";
-            this.LaplacianOperator3x3.Size = new System.Drawing.Size(168, 26);
-            this.LaplacianOperator3x3.Tag = "LaplacianOperator3x3";
-            this.LaplacianOperator3x3.Text = "3 x 3";
-            // 
-            // LaplacianOperator5x5
-            // 
-            this.LaplacianOperator5x5.Name = "LaplacianOperator5x5";
-            this.LaplacianOperator5x5.Size = new System.Drawing.Size(168, 26);
-            this.LaplacianOperator5x5.Tag = "LaplacianOperator5x5";
-            this.LaplacianOperator5x5.Text = "5 x 5";
-            // 
-            // LaplacianOfGaussianOperator
-            // 
-            this.LaplacianOfGaussianOperator.Name = "LaplacianOfGaussianOperator";
-            this.LaplacianOfGaussianOperator.Size = new System.Drawing.Size(168, 26);
-            this.LaplacianOfGaussianOperator.Tag = "LoGOperator ";
-            this.LaplacianOfGaussianOperator.Text = "of Gaussian";
-            // 
-            // SobelOperator
-            // 
-            this.SobelOperator.Name = "SobelOperator";
-            this.SobelOperator.Size = new System.Drawing.Size(219, 26);
-            this.SobelOperator.Text = "Sobel Operator";
-            // 
-            // BlurFilter
-            // 
-            this.BlurFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.BoxBlur,
-            this.GaussianBlur,
-            this.MotionBlur});
-            this.BlurFilter.Name = "BlurFilter";
-            this.BlurFilter.Size = new System.Drawing.Size(195, 26);
-            this.BlurFilter.Text = "Blur";
-            // 
-            // BoxBlur
-            // 
-            this.BoxBlur.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.BoxBlur3x3,
-            this.BoxBlur5x5});
-            this.BoxBlur.Name = "BoxBlur";
-            this.BoxBlur.Size = new System.Drawing.Size(180, 26);
-            this.BoxBlur.Text = "Box Blur";
-            // 
-            // BoxBlur3x3
-            // 
-            this.BoxBlur3x3.Name = "BoxBlur3x3";
-            this.BoxBlur3x3.Size = new System.Drawing.Size(123, 26);
-            this.BoxBlur3x3.Tag = "BoxBlur3x3";
-            this.BoxBlur3x3.Text = "3 x 3";
-            // 
-            // BoxBlur5x5
-            // 
-            this.BoxBlur5x5.Name = "BoxBlur5x5";
-            this.BoxBlur5x5.Size = new System.Drawing.Size(123, 26);
-            this.BoxBlur5x5.Tag = "BoxBlur5x5";
-            this.BoxBlur5x5.Text = "5 x 5";
-            // 
-            // GaussianBlur
-            // 
-            this.GaussianBlur.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.GaussianBlur3x3,
-            this.GaussianBlur5x5});
-            this.GaussianBlur.Name = "GaussianBlur";
-            this.GaussianBlur.Size = new System.Drawing.Size(180, 26);
-            this.GaussianBlur.Text = "Gaussian Blur";
-            // 
-            // GaussianBlur3x3
-            // 
-            this.GaussianBlur3x3.Name = "GaussianBlur3x3";
-            this.GaussianBlur3x3.Size = new System.Drawing.Size(123, 26);
-            this.GaussianBlur3x3.Tag = "GaussianBlur3x3";
-            this.GaussianBlur3x3.Text = "3 x 3";
-            // 
-            // GaussianBlur5x5
-            // 
-            this.GaussianBlur5x5.Name = "GaussianBlur5x5";
-            this.GaussianBlur5x5.Size = new System.Drawing.Size(123, 26);
-            this.GaussianBlur5x5.Tag = "GaussianBlur5x5";
-            this.GaussianBlur5x5.Text = "5 x 5";
-            // 
-            // MotionBlur
-            // 
-            this.MotionBlur.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MotionBlur9x9});
-            this.MotionBlur.Name = "MotionBlur";
-            this.MotionBlur.Size = new System.Drawing.Size(180, 26);
-            this.MotionBlur.Text = "Motion Blur";
-            // 
-            // MotionBlur9x9
-            // 
-            this.MotionBlur9x9.Name = "MotionBlur9x9";
-            this.MotionBlur9x9.Size = new System.Drawing.Size(123, 26);
-            this.MotionBlur9x9.Tag = "MotionBlur9x9";
-            this.MotionBlur9x9.Text = "9 x 9";
-            // 
-            // EmbossFilter
-            // 
-            this.EmbossFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Emboss3x3});
-            this.EmbossFilter.Name = "EmbossFilter";
-            this.EmbossFilter.Size = new System.Drawing.Size(195, 26);
-            this.EmbossFilter.Text = "Emboss";
-            // 
-            // Emboss3x3
-            // 
-            this.Emboss3x3.Name = "Emboss3x3";
-            this.Emboss3x3.Size = new System.Drawing.Size(123, 26);
-            this.Emboss3x3.Tag = "Emboss3x3";
-            this.Emboss3x3.Text = "3 x 3";
-            // 
-            // SharpenFilter
-            // 
-            this.SharpenFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Sharpen3x3});
-            this.SharpenFilter.Name = "SharpenFilter";
-            this.SharpenFilter.Size = new System.Drawing.Size(195, 26);
-            this.SharpenFilter.Text = "Sharpen";
-            // 
-            // Sharpen3x3
-            // 
-            this.Sharpen3x3.Name = "Sharpen3x3";
-            this.Sharpen3x3.Size = new System.Drawing.Size(123, 26);
-            this.Sharpen3x3.Tag = "Sharpen3x3";
-            this.Sharpen3x3.Text = "3 x 3";
             // 
             // DistributionsMenu
             // 
@@ -513,9 +343,9 @@ namespace ImageProcessing.Form.Main
             this.PathToImage,
             this.ShuffleSrc,
             this.appendProcessedBitmapToolStripButton1});
-            this.ToolBarMenu.Location = new System.Drawing.Point(27, 102);
+            this.ToolBarMenu.Location = new System.Drawing.Point(20, 88);
             this.ToolBarMenu.Name = "ToolBarMenu";
-            this.ToolBarMenu.Size = new System.Drawing.Size(953, 27);
+            this.ToolBarMenu.Size = new System.Drawing.Size(715, 27);
             this.ToolBarMenu.Stretch = true;
             this.ToolBarMenu.TabIndex = 5;
             // 
@@ -531,7 +361,7 @@ namespace ImageProcessing.Form.Main
             // 
             this.FirstParam.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.FirstParam.Name = "FirstParam";
-            this.FirstParam.Size = new System.Drawing.Size(99, 27);
+            this.FirstParam.Size = new System.Drawing.Size(75, 27);
             // 
             // SecondParamLabel
             // 
@@ -544,7 +374,7 @@ namespace ImageProcessing.Form.Main
             // 
             this.SecondParam.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.SecondParam.Name = "SecondParam";
-            this.SecondParam.Size = new System.Drawing.Size(99, 27);
+            this.SecondParam.Size = new System.Drawing.Size(75, 27);
             // 
             // PMF
             // 
@@ -683,16 +513,14 @@ namespace ImageProcessing.Form.Main
             this.PictureBoxSrcPanel.Controls.Add(this.Src);
             this.PictureBoxSrcPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PictureBoxSrcPanel.Location = new System.Drawing.Point(0, 0);
-            this.PictureBoxSrcPanel.Margin = new System.Windows.Forms.Padding(4);
             this.PictureBoxSrcPanel.Name = "PictureBoxSrcPanel";
-            this.PictureBoxSrcPanel.Size = new System.Drawing.Size(479, 421);
+            this.PictureBoxSrcPanel.Size = new System.Drawing.Size(359, 332);
             this.PictureBoxSrcPanel.TabIndex = 4;
             // 
             // Src
             // 
             this.Src.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Src.Location = new System.Drawing.Point(4, 4);
-            this.Src.Margin = new System.Windows.Forms.Padding(4);
+            this.Src.Location = new System.Drawing.Point(3, 3);
             this.Src.Name = "Src";
             this.Src.Size = new System.Drawing.Size(160, 132);
             this.Src.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -704,10 +532,9 @@ namespace ImageProcessing.Form.Main
             // 
             this.TrackBarSrcPanel.Controls.Add(this.SrcZoom);
             this.TrackBarSrcPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TrackBarSrcPanel.Location = new System.Drawing.Point(0, 421);
-            this.TrackBarSrcPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.TrackBarSrcPanel.Location = new System.Drawing.Point(0, 332);
             this.TrackBarSrcPanel.Name = "TrackBarSrcPanel";
-            this.TrackBarSrcPanel.Size = new System.Drawing.Size(479, 42);
+            this.TrackBarSrcPanel.Size = new System.Drawing.Size(359, 34);
             this.TrackBarSrcPanel.TabIndex = 3;
             // 
             // SrcZoom
@@ -716,11 +543,10 @@ namespace ImageProcessing.Form.Main
             this.SrcZoom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SrcZoom.Enabled = false;
             this.SrcZoom.Location = new System.Drawing.Point(0, 0);
-            this.SrcZoom.Margin = new System.Windows.Forms.Padding(4);
             this.SrcZoom.Maximum = 200;
             this.SrcZoom.Minimum = -200;
             this.SrcZoom.Name = "SrcZoom";
-            this.SrcZoom.Size = new System.Drawing.Size(479, 42);
+            this.SrcZoom.Size = new System.Drawing.Size(359, 34);
             this.SrcZoom.TabIndex = 0;
             this.SrcZoom.Tag = "Source";
             this.SrcZoom.TrackBarValue = 0;
@@ -732,16 +558,14 @@ namespace ImageProcessing.Form.Main
             this.PictureBoxDstPanel.Controls.Add(this.Dst);
             this.PictureBoxDstPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PictureBoxDstPanel.Location = new System.Drawing.Point(0, 0);
-            this.PictureBoxDstPanel.Margin = new System.Windows.Forms.Padding(4);
             this.PictureBoxDstPanel.Name = "PictureBoxDstPanel";
-            this.PictureBoxDstPanel.Size = new System.Drawing.Size(469, 421);
+            this.PictureBoxDstPanel.Size = new System.Drawing.Size(352, 332);
             this.PictureBoxDstPanel.TabIndex = 5;
             // 
             // Dst
             // 
             this.Dst.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Dst.Location = new System.Drawing.Point(4, 4);
-            this.Dst.Margin = new System.Windows.Forms.Padding(4);
+            this.Dst.Location = new System.Drawing.Point(3, 3);
             this.Dst.Name = "Dst";
             this.Dst.Size = new System.Drawing.Size(160, 132);
             this.Dst.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -753,10 +577,9 @@ namespace ImageProcessing.Form.Main
             // 
             this.TrackBarDstPanel.Controls.Add(this.DstZoom);
             this.TrackBarDstPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TrackBarDstPanel.Location = new System.Drawing.Point(0, 421);
-            this.TrackBarDstPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.TrackBarDstPanel.Location = new System.Drawing.Point(0, 332);
             this.TrackBarDstPanel.Name = "TrackBarDstPanel";
-            this.TrackBarDstPanel.Size = new System.Drawing.Size(469, 42);
+            this.TrackBarDstPanel.Size = new System.Drawing.Size(352, 34);
             this.TrackBarDstPanel.TabIndex = 4;
             // 
             // DstZoom
@@ -765,11 +588,10 @@ namespace ImageProcessing.Form.Main
             this.DstZoom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DstZoom.Enabled = false;
             this.DstZoom.Location = new System.Drawing.Point(0, 0);
-            this.DstZoom.Margin = new System.Windows.Forms.Padding(4);
             this.DstZoom.Maximum = 200;
             this.DstZoom.Minimum = -200;
             this.DstZoom.Name = "DstZoom";
-            this.DstZoom.Size = new System.Drawing.Size(469, 42);
+            this.DstZoom.Size = new System.Drawing.Size(352, 34);
             this.DstZoom.TabIndex = 0;
             this.DstZoom.Tag = "Destination";
             this.DstZoom.TrackBarValue = 0;
@@ -784,8 +606,7 @@ namespace ImageProcessing.Form.Main
             // Container
             // 
             this.Container.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Container.Location = new System.Drawing.Point(27, 129);
-            this.Container.Margin = new System.Windows.Forms.Padding(4);
+            this.Container.Location = new System.Drawing.Point(20, 115);
             this.Container.Name = "Container";
             // 
             // Container.Panel1
@@ -797,23 +618,20 @@ namespace ImageProcessing.Form.Main
             // 
             this.Container.Panel2.Controls.Add(this.PictureBoxDstPanel);
             this.Container.Panel2.Controls.Add(this.TrackBarDstPanel);
-            this.Container.Size = new System.Drawing.Size(953, 463);
-            this.Container.SplitterDistance = 479;
-            this.Container.SplitterWidth = 5;
+            this.Container.Size = new System.Drawing.Size(715, 366);
+            this.Container.SplitterDistance = 359;
             this.Container.TabIndex = 10;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1007, 617);
+            this.ClientSize = new System.Drawing.Size(755, 501);
             this.Controls.Add(this.Container);
             this.Controls.Add(this.ToolBarMenu);
             this.Controls.Add(this.MainMenu);
             this.MainMenuStrip = this.MainMenu;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
-            this.Padding = new System.Windows.Forms.Padding(27, 74, 27, 25);
             this.Text = "Image Processing";
             this.MainMenu.ResumeLayout(false);
             this.MainMenu.PerformLayout();
@@ -858,25 +676,6 @@ namespace ImageProcessing.Form.Main
         private System.Windows.Forms.ToolStripMenuItem CauchyDistribution;
         private System.Windows.Forms.ToolStripMenuItem WeibullDistribution;
         private System.Windows.Forms.ToolStripMenuItem ConvolutionFiltersMenu;
-        private System.Windows.Forms.ToolStripMenuItem EdgeDetectionFilter;
-        private System.Windows.Forms.ToolStripMenuItem LaplacianOperator;
-        private System.Windows.Forms.ToolStripMenuItem LaplacianOperator3x3;
-        private System.Windows.Forms.ToolStripMenuItem LaplacianOperator5x5;
-        private System.Windows.Forms.ToolStripMenuItem BlurFilter;
-        private System.Windows.Forms.ToolStripMenuItem EmbossFilter;
-        private System.Windows.Forms.ToolStripMenuItem SobelOperator;
-        private System.Windows.Forms.ToolStripMenuItem BoxBlur;
-        private System.Windows.Forms.ToolStripMenuItem BoxBlur3x3;
-        private System.Windows.Forms.ToolStripMenuItem BoxBlur5x5;
-        private System.Windows.Forms.ToolStripMenuItem GaussianBlur;
-        private System.Windows.Forms.ToolStripMenuItem GaussianBlur3x3;
-        private System.Windows.Forms.ToolStripMenuItem GaussianBlur5x5;
-        private System.Windows.Forms.ToolStripMenuItem SharpenFilter;
-        private System.Windows.Forms.ToolStripMenuItem Sharpen3x3;
-        private System.Windows.Forms.ToolStripMenuItem LaplacianOfGaussianOperator;
-        private System.Windows.Forms.ToolStripMenuItem Emboss3x3;
-        private System.Windows.Forms.ToolStripMenuItem MotionBlur;
-        private System.Windows.Forms.ToolStripMenuItem MotionBlur9x9;
         private System.Windows.Forms.ToolStripMenuItem LaplaceDistribution;
         private System.Windows.Forms.ToolStripMenuItem NormalDistribution;
         private System.Windows.Forms.ToolStripMenuItem ParabolaDistribution;
