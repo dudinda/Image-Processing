@@ -1,14 +1,14 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 
 namespace ImageProcessing.Common.Enums
 {
     /// <summary>
-    /// Characteristics of a random variable
+    /// Specifies characteristics of a random variable
     /// </summary>
     public enum RandomVariable
     {
         /// <summary>
-        /// An unknown characteristic
+        /// An unknown characteristic.
         /// </summary>
         [Description("NaN")]
         Unknown                = 0,

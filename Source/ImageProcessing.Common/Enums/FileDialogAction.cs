@@ -1,30 +1,40 @@
-﻿namespace ImageProcessing.Common.Enums
+using System.ComponentModel;
+
+namespace ImageProcessing.Common.Enums
 {
+    /// <summary>
+    /// Specified action of the built in file dialog.
+    /// </summary>
     public enum FileDialogAction
     {
         /// <summary>
-        /// An unknown file dialog action
+        /// An unknown file dialog action.
         /// </summary>
-        Unknown = 0,
+        [Description("File dialog is not specified")]
+        Unknown              = 0,
 
         /// <summary>
-        /// Open file dialog
+        /// Open file dialog.
         /// </summary>
-        Open    = 1,
+        [Description("Open file dialog")]
+        Open                 = 1,
 
         /// <summary>
-        /// Save file dialog
+        /// Save file without dialog window.
         /// </summary>
-        Save    = 2,
+        [Description("Save file without dialog window")]
+        SaveWithoutDialog    = 2,
 
         /// <summary>
-        /// Save file as dialog
+        /// Save as file dialog.
         /// </summary>
-        SaveAs  = 3,
-        
+        [Description("Save as file dialog")]
+        SaveAs               = 3,
+
         /// <summary>
-        /// Color dialog 
+        /// Color file dialog.
         /// </summary>
-        Color   = 4
+        [Description("Color file dialog")]
+        Color                 = 4
     }
 }

@@ -1,30 +1,40 @@
-﻿namespace ImageProcessing.Common.Enums
+using System.ComponentModel;
+
+namespace ImageProcessing.Common.Enums
 {
+    /// <summary>
+    /// Specifies a toolbar action of the main window
+    /// </summary>
     public enum ToolbarAction
     {
         /// <summary>
-        /// An unknown action
+        /// An unknown action.
         /// </summary>
+        [Description("Toolbar action is not specified")]
         Unknown = 0,
 
         /// <summary>
-        /// Undo last operation
+        /// Undo last operation.
         /// </summary>
-        Undo = 1,
+        [Description("Undo last operation")]
+        Undo    = 1,
 
         /// <summary>
-        /// Redo last operation
+        /// Redo last operation.
         /// </summary>
-        Redo = 2,
+        [Description("Redo last operation")]
+        Redo    = 2,
 
         /// <summary>
-        /// Apply the F
+        /// Apply the Fisher-Yates algorithm.
         /// </summary>
+        [Description("Shuffle the source image")]
         Shuffle = 3,
 
         /// <summary>
-        /// Zoom an image
+        /// Zoom an image.
         /// </summary>
-        Zoom   = 4
+        [Description("Zoom an image")]
+        Zoom    = 4
     }
 }

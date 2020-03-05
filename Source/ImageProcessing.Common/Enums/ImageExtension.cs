@@ -1,15 +1,16 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 
 namespace ImageProcessing.Common.Enums
 {
     /// <summary>
-    /// The enum, representing an extension of an image .
+    /// Specifies an extension of an image.
     /// </summary>
     public enum ImageExtension
     {
         /// <summary>
-        /// An unknown image extension
+        /// An unknown image extension.
         /// </summary>
+        [Description("Extension is not specified")]
         Unknown =  0,
 
         /// <summary>
@@ -64,13 +65,13 @@ namespace ImageProcessing.Common.Enums
         /// .Wmf
         /// </summary>
         [Description(".wmf")]
-        Wmf = 9,
+        Wmf       = 9,
 
         /// <summary>
         /// .Png
         /// </summary>
         [Description(".png")]
-        Png = 10
+        Png       = 10
 
 
     }

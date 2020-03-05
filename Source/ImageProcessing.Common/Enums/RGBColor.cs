@@ -1,9 +1,10 @@
-﻿using System;
+using System;
+using System.ComponentModel;
 
 namespace ImageProcessing.Common.Enums
 {
     /// <summary>
-    /// The bit field, representing each channel of the RGB color space.
+    /// A bit field, representing each channel of the RGB color space.
     /// </summary>
     [Flags]
     public enum RGBColors
@@ -11,21 +12,25 @@ namespace ImageProcessing.Common.Enums
         /// <summary>
         /// The channel isn't selected.
         /// </summary>
+        [Description("Color channel is not specified")]
         Unknown = 0,
 
         /// <summary>
         /// The red channel.
         /// </summary>
-        Red     = 1 << 0,
+        [Description("Red color channel")]
+        Red      = 1 << 0,
 
         /// <summary>
         ///The green channel. 
         /// </summary>
+        [Description("Green color channel")]
         Green    = 1 << 1,
 
         /// <summary>
         /// The blue channel.
         /// </summary>
+        [Description("Blue color channel")]
         Blue     = 1 << 2
     }
 }

@@ -1,9 +1,9 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 
 namespace ImageProcessing.Common.Enums
 {
     /// <summary>
-    /// Distribution of a random variable.
+    /// Specifies a distribution of a random variable.
     /// </summary>
     public enum Distribution
     {

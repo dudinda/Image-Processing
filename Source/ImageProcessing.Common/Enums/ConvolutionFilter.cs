@@ -1,4 +1,6 @@
-﻿namespace ImageProcessing.Common.Enums
+using System.ComponentModel;
+
+namespace ImageProcessing.Common.Enums
 {
     /// <summary>
     /// Filters based on a convolution matrix.
@@ -6,83 +8,99 @@
     public enum ConvolutionFilter
     {
         /// <summary>
-        /// An unknown convolution filter
+        /// An unknown convolution filter.
         /// </summary>
-        Unknown                 = 0,
+        [Description("Operator is not specified.")]
+        Unknown                   = 0,
 
         /// <summary>
         /// The box blur filter with a kernel size 3x3.
         /// </summary>
-        BoxBlur3x3              = 1,
+        [Description("Box blur 3x3")]
+        BoxBlur3x3                 = 1,
 
         /// <summary>
         /// The box blur filter with a kernel size 5x5.
         /// </summary>
-        BoxBlur5x5              = 2,
+        [Description("Box blur 5x5")]
+        BoxBlur5x5                 = 2,
 
         /// <summary>
         /// The gaussian blur filter with a kernel size 3x3.
         /// </summary>
-        GaussianBlur3x3         = 3,
+        [Description("Gaussian blur 3x3")]
+        GaussianBlur3x3            = 3,
 
         /// <summary>
         /// The gaussian blur filter with a kernel size 5x5.
         /// </summary>
-        GaussianBlur5x5         = 4,
+        [Description("Gaussian blur 3x3")]
+        GaussianBlur5x5            = 4,
 
         /// <summary>
         /// The motion blur filter with a kernel size 9x9.
         /// </summary>
-        MotionBlur9x9           = 5,
+        [Description("Motion blur 9x9")]
+        MotionBlur9x9              = 5,
 
         /// <summary>
         /// The Gaussian operator with a kernel size 3x3.
         /// </summary>
-        GaussianOperator3x3     = 6,
+        [Description("Gaussian operator 3x3")]
+        GaussianOperator3x3        = 6,
 
         /// <summary>
-        /// The Gaussian operator with a kernel size 5x5
+        /// The Gaussian operator with a kernel size 5x5.
         /// </summary>
-        GaussianOperator5x5     = 7,
+        [Description("Gaussian operator 5x5")]
+        GaussianOperator5x5        = 7,
 
         /// <summary>
         /// The Laplacian operator with a kernel size 3x3.
         /// </summary>
-        LaplacianOperator3x3    = 8,
+        [Description("Laplacian operator 3x3")]
+        LaplacianOperator3x3       = 8,
 
         /// <summary>
         /// The Laplacian operator with a kernel size 5x5.
         /// </summary>
-        LaplacianOperator5x5    = 9,
+        [Description("Laplacian operator 5x5")]
+        LaplacianOperator5x5       = 9,
 
         /// <summary>
         /// The Laplacian of Gaussian operator with a kernel size 3x3.
         /// </summary>
-        LoGOperator             = 10,
+        [Description("Laplacian of Gaussian operator 3x3")]
+        LoGOperator3x3             = 10,
 
         /// <summary>
-        /// The horizontal Sobel operator, representing dG/dy where G is an image
+        /// The horizontal Sobel operator, representing dG/dy where G is an image.
         /// </summary>
-        SobelOperatorHorizontal = 10,
+        [Description("Sobel horizontal operator 3x3")]
+        SobelOperatorHorizontal3x3 = 11,
 
         /// <summary>
-        /// The vertical Sobel operator, representing dG/dx where G is an image
+        /// The vertical Sobel operator, representing dG/dx where G is an image.
         /// </summary>
-        SobelOperatorVertical   = 11,
+        [Description("Sobel vertical operator 3x3")]
+        SobelOperatorVertical3x3   = 12,
 
         /// <summary>
         /// The Emboss operator with a kernel size 3x3.
         /// </summary>
-        Emboss3x3               = 12,
+        [Description("Emboss operator 3x3")]
+        EmbossOperator3x3          = 13,
 
         /// <summary>
         /// The Sharpen operator with a kernel size 3x3.
         /// </summary>
-        Sharpen3x3              = 13,
+        [Description("Sharpen operator 3x3")]
+        SharpenOperator3x3         = 14,
 
         /// <summary>
-        /// The Sobel operator with a kernel size 3x3
+        /// The Sobel operator with a kernel size 3x3.
         /// </summary>
+        [Description("Sobel operator 3x3")]
         SobelOperator3x3           = 14
     }
 }

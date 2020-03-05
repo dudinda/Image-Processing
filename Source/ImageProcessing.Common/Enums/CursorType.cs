@@ -1,36 +1,47 @@
-﻿namespace ImageProcessing.Common.Enums
+using System.ComponentModel;
+
+namespace ImageProcessing.Common.Enums
 {
+    /// <summary>
+    /// Specifies the built in cursor types.
+    /// </summary>
     public enum CursorType
     {
         /// <summary>
-        /// An unknown cursor
+        /// An unknown cursor.
         /// </summary>
-        Unknown    = 0,
+        [Description("Cursor is not specified.")]
+        Unknown = 0,
 
         /// <summary>
-        /// Cursor by default
+        /// Cursor by default.
         /// </summary>
-        Default     = 1,
+        [Description("Cursor by default")]
+        Default = 1,
 
         /// <summary>
-        /// Wait cursor
+        /// Wait cursor.
         /// </summary>
-        WaitCursor = 2,
+        [Description("Wait cursor")]
+        Wait    = 2,
 
         /// <summary>
-        /// Arrow cursor
+        /// Arrow cursor.
         /// </summary>
-        Arrow      = 3,
+        [Description("Arrow cursor")]
+        Arrow   = 3,
 
         /// <summary>
-        /// Cross cursor
+        /// Cross cursor.
         /// </summary>
-        Cross      = 4,
+        [Description("Cross cursor")]
+        Cross   = 4,
 
         /// <summary>
-        /// Help cursor
+        /// Help cursor.
         /// </summary>
-        Help       = 5,
+        [Description("Help cursor")]
+        Help    = 5,
 
     }
 }
