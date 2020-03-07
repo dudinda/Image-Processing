@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -8,6 +8,7 @@ using ImageProcessing.Core.EventAggregator.Interface.Subscriber;
 
 namespace ImageProcessing.Core.EventAggregator.Implementation
 {
+    /// <inheritdoc cref="IEventAggregator"/>
     public class EventAggregator : IEventAggregator
     {
 
@@ -15,6 +16,7 @@ namespace ImageProcessing.Core.EventAggregator.Implementation
 
         private readonly object _syncRoot = new object();
 
+        /// <inheritdoc cref="IEventAggregator.Publish{TEventType}(TEventType)"/>
         public void Publish<TEventType>(TEventType publisher)
         {
             var subsriberType = typeof(ISubscriber<>).MakeGenericType(typeof(TEventType));
@@ -53,12 +55,17 @@ namespace ImageProcessing.Core.EventAggregator.Implementation
             }
         }
 
+        /// <inheritdoc cref="IEventAggregator.Subscribe(object)"/>
         public void Subscribe(object subscriber)
         {
             lock (_syncRoot)
             {
-                var subsriberTypes = subscriber.GetType().GetInterfaces()
-                                               .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ISubscriber<>));
+                var subsriberTypes = subscriber
+                    .GetType()
+                    .GetInterfaces()
+                    .Where(i => i.IsGenericType &&
+                           i.GetGenericTypeDefinition() == typeof(ISubscriber<>)
+                     );
 
                 var weakReference = new WeakReference(subscriber);
 
