@@ -4,8 +4,8 @@ using System;
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.EnumExtensions;
 using ImageProcessing.Common.Helpers;
+using ImageProcessing.Core.EventAggregator.Implementation.EventArgs.Convolution;
 using ImageProcessing.Core.EventAggregator.Interface;
-using ImageProcessing.DomainModel.EventArgs.Convolution;
 using ImageProcessing.Presentation.Views.Convolution;
 
 using MetroFramework.Forms;

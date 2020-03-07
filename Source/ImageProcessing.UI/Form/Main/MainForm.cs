@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -244,7 +244,7 @@ namespace ImageProcessing.Form.Main
                 case CursorType.Default:
                     Application.UseWaitCursor = false;
                     break;
-                case CursorType.WaitCursor:
+                case CursorType.Wait:
                     Application.UseWaitCursor = true;
                     break;
 

@@ -1,8 +1,8 @@
-﻿using System.Windows.Forms;
+using System.Windows.Forms;
 
 using ImageProcessing.Common.Enums;
-using ImageProcessing.DomainModel.EventArgs;
-using ImageProcessing.DomainModel.EventArgs.Convolution;
+using ImageProcessing.Core.EventAggregator.Implementation.EventArgs;
+using ImageProcessing.Core.EventAggregator.Implementation.EventArgs.Convolution;
 
 namespace ImageProcessing.Form.Main
 {
@@ -29,7 +29,7 @@ namespace ImageProcessing.Form.Main
                 => _eventAggregator.Publish(new FileDialogEventArgs(FileDialogAction.Open));
 
             SaveFile.Click += (sender, args)
-                => _eventAggregator.Publish(new FileDialogEventArgs(FileDialogAction.Save));
+                => _eventAggregator.Publish(new FileDialogEventArgs(FileDialogAction.SaveWithoutDialog));
 
             SaveFileAs.Click += (sender, args)
                 => _eventAggregator.Publish(new FileDialogEventArgs(FileDialogAction.SaveAs));

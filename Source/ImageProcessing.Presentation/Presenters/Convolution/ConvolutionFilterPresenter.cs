@@ -6,14 +6,13 @@ using ImageProcessing.Common.Extensions.BitmapExtensions;
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.ConvolutionFilters.EdgeDetection.SobelOperator;
 using ImageProcessing.Core.Controller.Interface;
+using ImageProcessing.Core.EventAggregator.Implementation.EventArgs.Convolution;
 using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Factory.Base;
 using ImageProcessing.Core.Factory.ConvolutionFactory;
 using ImageProcessing.Core.Locker.Interface;
 using ImageProcessing.Core.Pipeline.Block.Implementation;
 using ImageProcessing.Core.Presenter.Abstract;
-using ImageProcessing.DomainModel.EventArgs;
-using ImageProcessing.DomainModel.EventArgs.Convolution;
 using ImageProcessing.Presentation.ViewModel.Convolution;
 using ImageProcessing.Presentation.Views.Convolution;
 using ImageProcessing.Services.ConvolutionFilterServices.Interface;
@@ -22,7 +21,7 @@ using LightInject;
 
 namespace ImageProcessing.Presentation.Presenters.Convolution
 {
-	public partial class ConvolutionFilterPresenter : BasePresenter<IConvolutionFilterView, ConvolutionFilterViewModel>
+    public partial class ConvolutionFilterPresenter : BasePresenter<IConvolutionFilterView, ConvolutionFilterViewModel>
 	{
 		private readonly IEventAggregator _eventAggregator;
 		private readonly IConvolutionFilterService _convolutionFilterService;
@@ -71,11 +70,7 @@ namespace ImageProcessing.Presentation.Presenters.Convolution
 							return _convolutionFilterService.Convolution(bmp, _convolutionFilterFactory.GetFilter(filter));
 						});
 						break;
-
 				}
-
-				_eventAggregator.Publish(new ApplyConvolutionFilterEventArgs(block));
-
 			}
 			catch
 			{

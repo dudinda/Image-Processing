@@ -2,9 +2,9 @@ using System;
 using System.Threading.Tasks;
 
 using ImageProcessing.Common.Enums;
+using ImageProcessing.Core.EventAggregator.Implementation.EventArgs;
+using ImageProcessing.Core.EventAggregator.Implementation.EventArgs.Convolution;
 using ImageProcessing.Core.EventAggregator.Interface.Subscriber;
-using ImageProcessing.DomainModel.EventArgs;
-using ImageProcessing.DomainModel.EventArgs.Convolution;
 
 namespace ImageProcessing.Presentation.Presenters.Main
 {
@@ -51,7 +51,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 case FileDialogAction.Open:
                     await OpenImage().ConfigureAwait(true);
                     break;
-                case FileDialogAction.Save:
+                case FileDialogAction.SaveWithoutDialog:
                     await SaveImage().ConfigureAwait(true);
                     break;
                 case FileDialogAction.SaveAs:

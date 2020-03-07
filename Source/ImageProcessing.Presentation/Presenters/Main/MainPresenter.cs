@@ -10,6 +10,8 @@ using ImageProcessing.Common.Extensions.BitmapExtensions;
 using ImageProcessing.Common.Extensions.StringExtensions;
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Controller.Interface;
+using ImageProcessing.Core.EventAggregator.Implementation.EventArgs;
+using ImageProcessing.Core.EventAggregator.Implementation.EventArgs.Convolution;
 using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Factory.Base;
 using ImageProcessing.Core.Factory.DistributionFactory;
@@ -19,8 +21,6 @@ using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Core.Pipeline.Block.Implementation;
 using ImageProcessing.Core.Presenter.Abstract;
 using ImageProcessing.Core.Service.STATask;
-using ImageProcessing.DomainModel.EventArgs;
-using ImageProcessing.DomainModel.EventArgs.Convolution;
 using ImageProcessing.Presentation.Presenters.Convolution;
 using ImageProcessing.Presentation.ViewModel.Convolution;
 using ImageProcessing.Presentation.ViewModel.Histogram;
@@ -85,7 +85,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
         {
             try
             {
-                var openResult = await _staTaskService.StartSTATask<Task<Bitmap>>(() =>
+                var openResult = await _staTaskService.StartSTATask(() =>
                 {
                     using (var dialog = new OpenFileDialog())
                     {
@@ -113,7 +113,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 if (result != null)
                 {
-                    View.SetCursor(CursorType.WaitCursor);
+                    View.SetCursor(CursorType.Wait);
 
                     _pipeline
                         .Register(new PipelineBlock<Bitmap>(result)
@@ -136,7 +136,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             {
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
-                    var saveAsModalTask = await _staTaskService.StartSTATask<Task>(() =>
+                    var saveAsModalTask = await _staTaskService.StartSTATask(() =>
                     {
                         using (var dialog = new SaveFileDialog())
                         {
@@ -214,7 +214,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
-                    View.SetCursor(CursorType.WaitCursor);
+                    View.SetCursor(CursorType.Wait);
 
                     _pipeline
                         .Register(e.Arg
@@ -242,7 +242,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
-                    View.SetCursor(CursorType.WaitCursor);
+                    View.SetCursor(CursorType.Wait);
 
                     var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
 
@@ -284,7 +284,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     return;
                 }
 
-                View.SetCursor(CursorType.WaitCursor);
+                View.SetCursor(CursorType.Wait);
 
                 var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
 
@@ -320,7 +320,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                         .GetFilter(e.Arg)
                         .SetParams(e.Parameters);
 
-                    View.SetCursor(CursorType.WaitCursor);
+                    View.SetCursor(CursorType.Wait);
 
                     var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
 
@@ -355,7 +355,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
 
-                    View.SetCursor(CursorType.WaitCursor);
+                    View.SetCursor(CursorType.Wait);
 
                     var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
 
@@ -406,7 +406,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     var replaceTo = replaceFrom == ImageContainer.Source ?
                       ImageContainer.Destination : ImageContainer.Source;
 
-                    View.SetCursor(CursorType.WaitCursor);
+                    View.SetCursor(CursorType.Wait);
 
                     var copy = await GetImageCopy(replaceFrom).ConfigureAwait(true);
 
