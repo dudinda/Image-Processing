@@ -8,9 +8,10 @@ namespace ImageProcessing.Common.Enums
     public enum Distribution
     {
         /// <summary>
-        /// An unknown distribution
+        /// An unknown distribution.
         /// </summary>
-        Unknown = 0,
+        [Description("Distribution is not specified")]
+        Unknown     = 0,
 
         /// <summary>
         /// Exponential distribution.
