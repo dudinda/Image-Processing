@@ -1,10 +1,14 @@
-﻿using System;
+using System;
 using System.Drawing;
 
 using ImageProcessing.Common.Interop.Api;
 
 namespace ImageProcessing.Common.Interop
 {
+    /// <summary>
+    /// Provides a wrapper over the native windows kernel
+    /// method <see cref="NativeMethods.GetCursorPos(out Structs.LPPOINT)"/>
+    /// </summary>
     public static class CursorPosition
     {      
         /// <summary>
@@ -12,7 +16,7 @@ namespace ImageProcessing.Common.Interop
         /// </summary>
         public static Point GetCursorPosition()
         {
-            if (UnmanagedApi.GetCursorPos(out var lpPoint))
+            if (NativeMethods.GetCursorPos(out var lpPoint))
             {
                 return (Point)lpPoint;
             }
