@@ -1,11 +1,12 @@
 using System;
 
+using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Controller.Interface;
 using ImageProcessing.Core.View;
 
 namespace ImageProcessing.Core.Presenter.Abstract
 {
-	public abstract class BasePresenter<TView> : IPresenter
+    public abstract class BasePresenter<TView> : IPresenter
 		where TView : class, IView
 	{
 		protected TView View { get; }
@@ -13,8 +14,8 @@ namespace ImageProcessing.Core.Presenter.Abstract
 
 		protected BasePresenter(IAppController controller, TView view)
 		{
-			Controller = controller ?? throw new ArgumentNullException(nameof(controller));
-			View = view ?? throw new ArgumentNullException(nameof(view));
+			Controller = Requires.IsNotNull(controller, nameof(controller));
+			View       = Requires.IsNotNull(view, nameof(view));
 		}
 
 		public virtual void Run() => View.Show();
@@ -30,13 +31,13 @@ namespace ImageProcessing.Core.Presenter.Abstract
 
 		protected BasePresenter(IAppController controller, TView view)
 		{
-			Controller = controller ?? throw new ArgumentNullException(nameof(controller));
-			View = view ?? throw new ArgumentNullException(nameof(view));
-		}
+            Controller = Requires.IsNotNull(controller, nameof(controller));
+            View       = Requires.IsNotNull(view, nameof(view));
+        }
 
-		public virtual void Run(TViewModel argument)
+		public virtual void Run(TViewModel vm)
 		{
-			ViewModel = argument ?? throw new ArgumentNullException(nameof(argument));
+			ViewModel = Requires.IsNotNull(vm, nameof(vm));
 			View.Show();
 		}
 	}
