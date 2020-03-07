@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace ImageProcessing.DecimalMath.Real
 {
@@ -8,10 +8,13 @@ namespace ImageProcessing.DecimalMath.Real
     /// </summary>
     public static class DecimalMathReal
     {
-        public const decimal E = 2.71828182845905M;
+        public const decimal E       = 2.71828182845905M;
         public const decimal Epsilon = 1.0E-26M;
-        public const decimal PI = 3.14159265358979323846M;
-        public const decimal Euler = 0.57721566490153286060M;
+        public const decimal PI      = 3.14159265358979323846M;
+        public const decimal PiOver2 = 1.57079632679489661923M;
+        public const decimal Euler   = 0.57721566490153286060M;
+        public const decimal Sqrt2   = 1.41421356237309504880M;
+        public const decimal Ln2     = 0.69314718055994530941M;
 
         /// <summary>
         /// Evaluate sgn(x)
@@ -69,7 +72,7 @@ namespace ImageProcessing.DecimalMath.Real
             checked
             {
                 //x = y
-                return Abs(x) * Sqrt(2);
+                return Abs(x) * Sqrt2;
             }
         }
 
@@ -370,7 +373,7 @@ namespace ImageProcessing.DecimalMath.Real
         /// <param name="x">An argument of the function</param>
         public static decimal Arccot(decimal x)
         {
-            return Sign(x) * PI * 0.5M - Arctan(x);
+            return Sign(x) * PiOver2 - Arctan(x);
         }
 
         /// <summary>
@@ -393,7 +396,7 @@ namespace ImageProcessing.DecimalMath.Real
         /// <param name="x">An argument of the function</param>
         public static decimal Arccos(decimal x)
         {
-            return PI * 0.5M - Arcsin(x);
+            return PiOver2 - Arcsin(x);
         }
 
         /// <summary>
@@ -441,7 +444,7 @@ namespace ImageProcessing.DecimalMath.Real
 
             if (x > tan3PiOver8)
             {
-                return PI * 0.5M - ArctanImpl(1.0M / x) + bits;
+                return PiOver2 - ArctanImpl(1.0M / x) + bits;
             }
 
             return PI * 0.25M + ArctanImpl((x - 1.0M) / (x + 1.0M)) + 0.5M * bits;
@@ -577,6 +580,11 @@ namespace ImageProcessing.DecimalMath.Real
             }
 
             return 0.5M * Log((x + 1.0M) / (x - 1.0M), precision: precision);
+        }
+
+        public static (decimal sin, decimal cos) SinCos(decimal x)
+        {
+            return (Sin(x), Cos(x));
         }
 
         #endregion

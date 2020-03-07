@@ -1,6 +1,6 @@
-﻿namespace ImageProcessing.DecimalMath.Code.Enums
+namespace ImageProcessing.DecimalMath.Code.Enums
 {
-    public enum Integrate
+    public enum Integration
     {
         /// <summary>
         /// An unknown integration method

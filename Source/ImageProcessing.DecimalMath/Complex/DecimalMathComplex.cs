@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 
 using ImageProcessing.DecimalMath.Real;
 
@@ -10,7 +11,7 @@ namespace ImageProcessing.DecimalMath.Complex
         /// Evaluate Re(z)
         /// </summary>
         /// <param name="z">x + iy</param>
-        /// <returns></returns>
+        /// <returns>Re(z)</returns>
         public static decimal Re((decimal x, decimal y) z)
         {
             return z.x;
@@ -20,7 +21,7 @@ namespace ImageProcessing.DecimalMath.Complex
         /// Evaluate Im(z)
         /// </summary>
         /// <param name="z">x + iy</param>
-        /// <returns></returns>
+        /// <returns>Im(z)</returns>
         public static decimal Im((decimal x, decimal y) z)
         {
             return z.y;
@@ -30,20 +31,20 @@ namespace ImageProcessing.DecimalMath.Complex
         /// Evaluate conjugate of z
         /// </summary>
         /// <param name="z">x + iy</param>
-        /// <returns></returns>
+        /// <returns>conj(z)</returns>
         public static (decimal x, decimal y) Conj((decimal x, decimal y) z)
         {
-            return (z.x, -z.y);
+            return (Re(z), -Im(z));
         }
 
         /// <summary>
         /// Evaluate |z|
         /// </summary>
         /// <param name="z">x + iy</param>
-        /// <returns></returns>
+        /// <returns>|z|</returns>
         public static decimal Abs((decimal x, decimal y) z)
         {
-            return DecimalMathReal.Hypot(z.x, z.y);
+            return DecimalMathReal.Hypot(Re(z), Im(z));
         }
 
         /// <summary>
@@ -51,12 +52,12 @@ namespace ImageProcessing.DecimalMath.Complex
         /// </summary>
         /// <param name="z1">x  + iy</param>
         /// <param name="z2">x' + iy'</param>
-        /// <returns></returns>
+        /// <returns>z + z'</returns>
         public static (decimal x, decimal y) Add((decimal x, decimal y) z1, (decimal x, decimal y) z2)
         {
             checked
             {
-                return (z1.x + z2.x, z1.y + z2.y);
+                return (Re(z1) + Re(z2), Im(z1) + Im(z2));
             }
         }
 
@@ -65,12 +66,12 @@ namespace ImageProcessing.DecimalMath.Complex
         /// </summary>
         /// <param name="z1">x  + iy</param>
         /// <param name="z2">x' + iy'</param>
-        /// <returns></returns>
+        /// <returns>z - z'</returns>
         public static (decimal x, decimal y) Sub((decimal x, decimal y) z1, (decimal x, decimal y) z2)
         {
             checked
             {
-                return (z1.x - z2.x, z1.y - z2.y);
+                return (Re(z1) - Re(z2), Im(z1) - Re(z2));
             }
         }
 
@@ -79,12 +80,12 @@ namespace ImageProcessing.DecimalMath.Complex
         /// </summary>
         /// <param name="z1">x  + iy</param>
         /// <param name="z2">x' + iy'</param>
-        /// <returns></returns>
+        /// <returns>zz'</returns>
         public static (decimal x, decimal y) Mul((decimal x, decimal y) z1, (decimal x, decimal y) z2)
         {
             checked
             {
-                return ((z1.x * z2.x - z1.y * z2.y, z1.x * z2.y + z1.y * z2.x));
+                return ((Re(z1) * Re(z2) - Im(z1) * Im(z2), Re(z1) * Im(z2) + Im(z1) * Re(z2)));
             }
         }
 
@@ -93,39 +94,49 @@ namespace ImageProcessing.DecimalMath.Complex
         /// </summary>
         /// <param name="z1">x  + iy</param>
         /// <param name="z2">x' + iy'</param>
-        /// <returns></returns>
+        /// <returns>z/z'</returns>
         public static (decimal x, decimal y) Div((decimal x, decimal y) z1, (decimal x, decimal y) z2)
         {
             var numerator = Mul(z1, Conj(z2));
 
             checked
             {
-                var denominator = z2.x * z2.x + z2.y * z2.y;
+                var denominator = Re(z2) * Re(z2) + Im(z2) * Im(z2);
 
-                return (numerator.x / denominator, numerator.y / denominator);
+                return (Re(numerator) / denominator, Im(numerator) / denominator);
             }
         }
         
-
-
         /// <summary>
         /// Evaluate cos(z) as cos(x)cosh(y) - isin(x)sinh(y)
         /// </summary>
         /// <param name="z">x + iy</param>
-        /// <returns></returns>
+        /// <returns>cos(z)</returns>
         public static (decimal x, decimal y) Cos((decimal x, decimal y) z)
         {
-            return (DecimalMathReal.Cos(z.x) * DecimalMathReal.Cosh(z.y), -DecimalMathReal.Sin(z.x) * DecimalMathReal.Sinh(z.y));
+            return (DecimalMathReal.Cos(Re(z)) * DecimalMathReal.Cosh(Im(z)), -DecimalMathReal.Sin(Re(z)) * DecimalMathReal.Sinh(Im(z)));
+        }
+
+        /// <summary>
+        /// Evaluate tan(z) as sin(2x) + isinh(2y) over cos(2x) + cosh(2y)
+        /// </summary>
+        /// <param name="z">x + iy</param>
+        /// <returns></returns>
+        public static (decimal x, decimal y) Tan((decimal x, decimal y) z)
+        {
+            var denominator = DecimalMathReal.Cos(2 * Re(z)) + DecimalMathReal.Cosh(2 * Im(z));
+
+            return (DecimalMathReal.Sin(2 * Re(z)) / denominator, DecimalMathReal.Sinh(2 * Im(z)) / denominator);
         }
 
         /// <summary>
         /// Evaluate sin(z) as sin(x)cosh(y) + icos(x)sinh(y)
         /// </summary>
         /// <param name="z">x + iy</param>
-        /// <returns></returns>
+        /// <returns>sin(z)</returns>
         public static (decimal x, decimal y) Sin((decimal x, decimal y) z)
         {
-            return (DecimalMathReal.Sin(z.x) * DecimalMathReal.Cosh(z.y), DecimalMathReal.Cos(z.x) * DecimalMathReal.Sinh(z.y));
+            return (DecimalMathReal.Sin(Re(z)) * DecimalMathReal.Cosh(Im(z)), DecimalMathReal.Cos(Re(z)) * DecimalMathReal.Sinh(Im(z)));
         }
 
         /// <summary>
@@ -135,12 +146,12 @@ namespace ImageProcessing.DecimalMath.Complex
         /// <returns></returns>
         public static decimal Arg((decimal x, decimal y) z)
         {
-            if(z.x > 0 && z.y != 0)
+            if(Re(z) > 0 && Im(z) != 0)
             {
-                return 2 * DecimalMathReal.Arctan(z.y / (Abs(z) + z.x));
+                return 2 * DecimalMathReal.Arctan(Im(z) / (Abs(z) + Re(z)));
             }
 
-            if(z.x < 0 && z.y == 0 )
+            if(Re(z) < 0 && Im(z) == 0 )
             {
                 return DecimalMathReal.PI;
             }
@@ -159,6 +170,32 @@ namespace ImageProcessing.DecimalMath.Complex
         }
 
         /// <summary>
+        /// Transfrom polar form to cartesian representation.
+        /// </summary>
+        /// <param name="z">r, phi</param>
+        /// <returns>x + iy</returns>
+        public static (decimal x, decimal y) FromPolar((decimal r, decimal phi) z)
+        {
+            var (sin, cos) = DecimalMathReal.SinCos(z.phi);
+
+            return (sin * z.r, cos * z.r);
+        }
+
+        /// <summary>
+        /// Evaluate exp(z)
+        /// </summary>
+        /// <param name="z">x + iy</param>
+        /// <returns>exp(z)</returns>
+        public static (decimal x, decimal y) Exp((decimal x, decimal y) z)
+        {
+            var r          = DecimalMathReal.Exp(Re(z));
+            var (sin, cos) = DecimalMathReal.SinCos(Im(z));
+
+            return (sin * r, cos * r);
+            
+        }
+
+        /// <summary>
         /// Evaluate log(z) as log(r) + iarg(z)
         /// </summary>
         /// <param name="z">x + iy</param>
@@ -168,6 +205,30 @@ namespace ImageProcessing.DecimalMath.Complex
         public static (decimal x, decimal y) Log((decimal x, decimal y) z, decimal lbase = DecimalMathReal.E, decimal precision = DecimalMathReal.Epsilon)
         {
             return (DecimalMathReal.Log(Abs(z), lbase, precision), Arg(z));
+        }
+
+
+        /// <summary>
+        /// Evaluate z ** 1/k
+        /// </summary>
+        /// <param name="z">x + iy</param>
+        /// <param name="k">Root</param>
+        /// <returns>z ** 1/k</returns>
+        public static (decimal x, decimal y)[] KRoots((decimal x, decimal y) z, int k)
+        {
+            var list = new List<(decimal x, decimal y)>();
+            var (r, phi) = Polar(z);
+
+            var rootOfR = DecimalMathReal.Pow(r, 1 / k);
+
+            for(var n = 0; n < k; ++n)
+            {
+                var (cos, sin) = DecimalMathReal.SinCos(2 * DecimalMathReal.PI * n / k);
+
+                list.Add((rootOfR * cos, rootOfR * sin));
+            }
+
+            return list.ToArray();
         }
 
 

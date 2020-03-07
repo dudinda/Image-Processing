@@ -1,12 +1,15 @@
-﻿using ImageProcessing.DecimalMath.Real;
+using ImageProcessing.DecimalMath.Real;
 
 namespace ImageProcessing.Common.Extensions.DecimalMathRealExtensions
 {
     /// <summary>
-    /// Extension methods for <see cref="DecimalMathReal"> class
+    /// Extension methods for <see cref="DecimalMathReal">.
     /// </summary>
     public static class DecimalMathRealRealExtension
-    {      
+    {
+        /// <summary>
+        /// Evaluate |x|
+        /// </summary>
         public static decimal Abs(this decimal value)
             => DecimalMathReal.Abs(value);
 
