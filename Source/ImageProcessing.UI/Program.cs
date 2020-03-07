@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -41,28 +41,30 @@ namespace ImageProcessing
 
         [STAThread]
         internal static void Main()
-        {
+      {
             try
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
-                var controller = new AppController(new LightInjectAdapter())
+                var controller = new AppController(new LightInjectAdapter());
+
+                controller.IoC
                     .RegisterView<IMainView, MainForm>()
                     .RegisterView<IHistogramView, HistogramForm>()
                     .RegisterView<IConvolutionFilterView, ConvolutionFilterForm>()
                     .RegisterView<IQualityMeasureView, QualityMeasureForm>()
-                    .RegisterService<IBaseFactory, BaseFactory>()
-                    .RegisterService<IConvolutionFilterService, ConvolutionFilterService>()
-                    .RegisterService<IRandomVariableDistributionService, RandomVariableDistributionService>()
-                    .RegisterService<IBitmapLuminanceDistributionService, BitmapLuminanceDistributionService>()
-                    .RegisterService<IRGBFilterService, RGBFilterService>()
+                    .Register<IBaseFactory, BaseFactory>()
+                    .Register<IConvolutionFilterService, ConvolutionFilterService>()
+                    .Register<IRandomVariableDistributionService, RandomVariableDistributionService>()
+                    .Register<IBitmapLuminanceDistributionService, BitmapLuminanceDistributionService>()
+                    .Register<IRGBFilterService, RGBFilterService>()
                     .EnableAnnotatedConstructorInjection()
-                    .RegisterNamedSingletonService<IAsyncLocker, ZoomAsyncLocker>("ZoomLocker")
-                    .RegisterNamedSingletonService<IAsyncLocker, OperationAsyncLocker>("OperationLocker")
-                    .RegisterSingletonService<IEventAggregator, EventAggregator>()
-                    .RegisterSingletonService<IAwaitablePipeline<Bitmap>, AwaitablePipeline<Bitmap>>()
-                    .RegisterSingletonService<ISTATaskService, STATaskService>()
+                    .RegisterNamedSingleton<IAsyncLocker, ZoomAsyncLocker>("ZoomLocker")
+                    .RegisterNamedSingleton<IAsyncLocker, OperationAsyncLocker>("OperationLocker")
+                    .RegisterSingleton<IEventAggregator, EventAggregator>()
+                    .RegisterSingleton<IAwaitablePipeline<Bitmap>, AwaitablePipeline<Bitmap>>()
+                    .RegisterSingleton<ISTATaskService, STATaskService>()
                     .RegisterInstance(_context);
 
                 controller.Run<MainPresenter>();
