@@ -1,6 +1,6 @@
-﻿using ImageProcessing.Common.Enums;
+using ImageProcessing.Common.Enums;
 
-namespace ImageProcessing.DomainModel.EventArgs
+namespace ImageProcessing.Core.EventAggregator.Implementation.EventArgs
 {
     public class RandomVariableEventArgs : ImageContainerEventArgs
     {
@@ -9,9 +9,7 @@ namespace ImageProcessing.DomainModel.EventArgs
             Action = action;
         }
 
-        /// <summary>
-        /// <see cref="RandomVariable"/>
-        /// </summary>
+        ///<inheritdoc cref="RandomVariable"/>
         public RandomVariable Action { get; }
     }
 }

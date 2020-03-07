@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.ConvolutionFilters.Blur.BoxBlur;
@@ -14,6 +14,10 @@ using ImageProcessing.Core.Model.Convolution;
 
 namespace ImageProcessing.Factory.Filters.Convolution
 {
+    /// <summary>
+    /// Provides a factory method for all types
+    /// implementing <see cref="AbstractConvolutionFilter"/>
+    /// </summary>
     public class ConvolutionFilterFactory : IConvolutionFilterFactory
     {
         public AbstractConvolutionFilter GetFilter(ConvolutionFilter filter)
@@ -25,7 +29,7 @@ namespace ImageProcessing.Factory.Filters.Convolution
                     return new BoxBlur3x3();
                 case ConvolutionFilter.BoxBlur5x5:
                     return new BoxBlur5x5();
-                case ConvolutionFilter.Emboss3x3:
+                case ConvolutionFilter.EmbossOperator3x3:
                     return new Emboss3x3();
                 case ConvolutionFilter.GaussianBlur3x3:
                     return new GaussianBlur3x3();
@@ -41,11 +45,11 @@ namespace ImageProcessing.Factory.Filters.Convolution
                     return new LaplacianOperator5x5();
                 case ConvolutionFilter.MotionBlur9x9:
                     return new MotionBlur9x9();
-                case ConvolutionFilter.Sharpen3x3:
+                case ConvolutionFilter.SharpenOperator3x3:
                     return new Sharpen3x3();
-                case ConvolutionFilter.SobelOperatorHorizontal:
+                case ConvolutionFilter.SobelOperatorHorizontal3x3:
                     return new SobelOperatorHorizontal();
-                case ConvolutionFilter.SobelOperatorVertical:
+                case ConvolutionFilter.SobelOperatorVertical3x3:
                     return new SobelOperatorVertical();
 
                 default: throw new NotSupportedException(nameof(filter));

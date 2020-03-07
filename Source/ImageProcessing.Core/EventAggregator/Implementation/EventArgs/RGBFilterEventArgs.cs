@@ -1,7 +1,7 @@
-﻿using ImageProcessing.Common.Enums;
+using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.EventAggregator.Interface.EventArgs;
 
-namespace ImageProcessing.DomainModel.EventArgs
+namespace ImageProcessing.Core.EventAggregator.Implementation.EventArgs
 {
     public class RGBFilterEventArgs : IBaseEventArgs<RGBFilter>
     {
@@ -10,9 +10,7 @@ namespace ImageProcessing.DomainModel.EventArgs
             Arg = arg;
         }
 
-        /// <summary>
-        /// <see cref="RGBFilter"/>
-        /// </summary>
+        ///<inheritdoc cref="RGBFilter"/>
         public RGBFilter Arg { get; }
 
     }

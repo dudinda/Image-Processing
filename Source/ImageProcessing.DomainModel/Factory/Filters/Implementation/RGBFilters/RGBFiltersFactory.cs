@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 using ImageProcessing.Common.Attributes;
 using ImageProcessing.Common.Enums;
@@ -14,7 +15,7 @@ using ImageProcessing.RGBFilters.Inversion;
 
 namespace ImageProcessing.Factory.Filters.RGBFilters
 {
-    public class RGBFiltersFactory : IRGBFiltersFactory
+	public class RGBFiltersFactory : IRGBFiltersFactory
     {
         public IRGBFilter GetFilter(RGBFilter filter)
         {
@@ -31,14 +32,15 @@ namespace ImageProcessing.Factory.Filters.RGBFilters
             }
         }
 
-        public IRGBFilter GetColorFilter(RGBColors color)
+		[MethodImpl(MethodImplOptions.NoInlining)]
+		public IRGBFilter GetColorFilter(RGBColors color)
         {
             var filter = Assembly
                  .GetExecutingAssembly()
                  .GetTypes()
-                 .Where(type => type.GetInterface(nameof(IColor)) != null && type.IsClass)
-                 .Where(type => type.HasAttribute<ColorAttribute>())
-                 .Where(type => type.GetAttributeValue((ColorAttribute attr) => attr.Color == color))
+                 .Where( type => type.GetInterface(nameof(IColor)) != null && type.IsClass)
+                 .Where( type => type.HasAttribute<ColorAttribute>())
+                 .Where( type => type.GetAttributeValue((ColorAttribute attr) => attr.Color == color))
                  .Select(type => (IColor)Activator.CreateInstance(type))
                  .Single();
 

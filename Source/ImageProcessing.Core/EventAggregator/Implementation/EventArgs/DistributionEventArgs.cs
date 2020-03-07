@@ -1,8 +1,8 @@
-﻿using ImageProcessing.Common.Enums;
+using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.TupleExtensions;
 using ImageProcessing.Core.EventAggregator.Interface.EventArgs;
 
-namespace ImageProcessing.DomainModel.EventArgs
+namespace ImageProcessing.Core.EventAggregator.Implementation.EventArgs
 {
     public class DistributionEventArgs : IBaseEventArgs<Distribution>
     {
@@ -16,9 +16,7 @@ namespace ImageProcessing.DomainModel.EventArgs
             }
         }
 
-        /// <summary>
-        /// <see cref="Distribution"/>
-        /// </summary>
+        ///<inheritdoc cref="Distribution/>
         public Distribution Arg { get; }
         public (decimal, decimal) Parameters { get; private set; }
     }

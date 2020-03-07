@@ -1,7 +1,7 @@
-﻿using ImageProcessing.Common.Enums;
+using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.EventAggregator.Interface.EventArgs;
 
-namespace ImageProcessing.DomainModel.EventArgs
+namespace ImageProcessing.Core.EventAggregator.Implementation.EventArgs
 {
     public class ToolbarActionEventArgs : IBaseEventArgs<ToolbarAction>
     {
@@ -9,9 +9,8 @@ namespace ImageProcessing.DomainModel.EventArgs
         {
             Arg = arg;
         }
-        /// <summary>
-        /// <see cref="ToolbarAction"/>
-        /// </summary>
+
+        ///<inheritdoc cref="ToolbarAction"/>
         public ToolbarAction Arg { get; }
     }
 }
