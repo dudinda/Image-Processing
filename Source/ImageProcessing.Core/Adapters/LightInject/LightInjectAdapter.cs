@@ -8,7 +8,7 @@ using LightInject;
 namespace ImageProcessing.Core.Adapters.LightInject
 {
     /// <summary>
-    /// Provides access to <typeparamref name="ServiceContainer"/>
+    /// Provides access to LightInject <typeparamref name="ServiceContainer"/>
     /// via <see cref="IContainer"/>.
     /// </summary>
     public class LightInjectAdapter : IContainer
