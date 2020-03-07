@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -6,12 +6,12 @@ using System.Linq;
 namespace ImageProcessing.Common.Extensions.EnumExtensions
 {
     /// <summary>
-    /// Extension methods for a <see cref="enum"> value.
+    /// Extension methods for a <see cref="Enum"/> value.
     /// </summary>
     public static class EnumExtension
     {
         /// <summary>
-        /// Get a enum value by name.
+        /// Get a <see cref="Enum"/> value by name.
         /// </summary>
         /// <typeparam name="TEnum">An enumerated type.</typeparam>
         /// <param name="value">The source value.</param>
@@ -19,7 +19,7 @@ namespace ImageProcessing.Common.Extensions.EnumExtensions
             where TEnum : Enum => (TEnum)Enum.Parse(typeof(TEnum), value);
 
         /// <summary>
-        /// Get a description of the enum value.
+        /// Get a description of the <see cref="Enum"/> value.
         /// </summary>
         /// <typeparam name="TEnum">An enumerated type.</typeparam>
         /// <param name="value">The source value.</param>
@@ -33,7 +33,7 @@ namespace ImageProcessing.Common.Extensions.EnumExtensions
         }
 
         /// <summary>
-        /// Get a enum value from a specified description value.
+        /// Get a <see cref="Enum"/ >value from a specified description value.
         /// </summary>
         /// <typeparam name="TEnum">An enumerated type.</typeparam>
         /// <param name="description>The source value.</param>

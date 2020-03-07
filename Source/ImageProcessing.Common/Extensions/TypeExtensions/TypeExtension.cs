@@ -1,16 +1,21 @@
-﻿using System;
+using System;
 using System.Linq;
 
 namespace ImageProcessing.Common.Extensions.TypeExtensions
 {
     /// <summary>
-    /// Extension methods for <see cref="Type"> class
+    /// Extension methods for a <see cref="Type">.
     /// </summary>
     public static class TypeExtension
     {
-        public static TValue GetAttributeValue<TAttribute, TValue>(
-            this Type type,
-            Func<TAttribute, TValue> valueSelector) where TAttribute : Attribute
+        /// <summary>
+        /// Get the specified <typeparamref name="TValue"/> of an <typeparamref name="TAttribute"/> 
+        /// from <see cref="Type"/>.
+        /// <para>Where <typeparamref name="TAttribute"/> is an <see cref="Attribute"/>. </para>
+        /// </summary>
+        public static TValue GetAttributeValue<TAttribute, TValue>
+            (this Type type, Func<TAttribute, TValue> valueSelector)
+            where TAttribute : Attribute
         {
             if(type is null)
             {
@@ -33,7 +38,13 @@ namespace ImageProcessing.Common.Extensions.TypeExtensions
             return default(TValue);
         }
 
-        public static bool HasAttribute<TAttribute>(this Type type) where TAttribute : Attribute
+        /// <summary>
+        /// Check whether the specified <see cref="Type"/>
+        /// contains the <typeparamref name="TAttribute"/>.
+        /// <para>Where <typeparamref name="TAttribute"/> is an <see cref="Attribute"/>. </para>
+        /// </summary>
+        public static bool HasAttribute<TAttribute>(this Type type)
+            where TAttribute : Attribute
             => type?.IsDefined(typeof(TAttribute), false) ?? throw new ArgumentNullException(nameof(type));
     }
 }
