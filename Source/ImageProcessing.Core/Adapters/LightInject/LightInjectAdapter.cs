@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq.Expressions;
 
 using ImageProcessing.Core.Container;
@@ -7,85 +7,67 @@ using LightInject;
 
 namespace ImageProcessing.Core.Adapters.LightInject
 {
+    /// <summary>
+    /// Provides access to <typeparamref name="ServiceContainer"/>
+    /// via <see cref="IContainer"/>.
+    /// </summary>
     public class LightInjectAdapter : IContainer
     {
         private readonly ServiceContainer _container = new ServiceContainer();
 
-        /// <summary>
-        /// Registers the <c>TService</c> with the <c>TImplementation</c>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Register<TService, TImplementation>() where TImplementation : TService
             => _container.Register<TService, TImplementation>();
 
-        /// <summary>
-        /// Registers the <c>TService</c> with the <c>TImplementation</c>.
-        /// </summary>
+        /// <inheritdoc/>
         public void RegisterSingleton<TService, TImplementation>() where TImplementation : TService
             => _container.Register<TService, TImplementation>(new PerContainerLifetime());
 
-
-        /// <summary>
-        /// Registers the <c>TService</c> with the named <c>TImplementation</c>.
-        /// </summary>
+        /// <inheritdoc/>
         public void RegisterSingleton<TService, TImplementation>(string name) where TImplementation : TService
             => _container.Register<TService, TImplementation>(name, new PerContainerLifetime());
 
-        /// <summary>
-        /// Registers a concrete type of a service.
-        /// </summary>
+        /// <inheritdoc/>
         public void Register<TService>()
             => _container.Register<TService>();
 
-        /// <summary>
-        /// Registers a concrete type of a service.
-        /// </summary>
+        /// <inheritdoc/>
         public void RegisterSingleton<TService>()
             => _container.Register<TService>(new PerContainerLifetime());
 
-
-        /// <summary>
-        /// Registers the <c>TService</c> with the given instance.
-        /// </summary>
-        public void RegisterInstance<T>(T instance)
+        /// <inheritdoc/>
+        public void RegisterInstance<TService>(TService instance)
             => _container.RegisterInstance(instance);
-        
 
-        /// <summary>
-        /// Registers the TService with the factory that describes.
-        /// the dependencies of the service
-        /// </summary>
+        /// <inheritdoc/>
+        public void RegisterInstance<TService>(TService instance, string serviceName)
+            => _container.RegisterInstance(instance, serviceName: serviceName);
+
+        /// <inheritdoc/>
         public void Register<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
             => _container.Register(serviceFactory => factory);
 
-        /// <summary>
-        /// Registers the TService as singleton with the factory that describes
-        /// the dependencies of the service 
-        /// </summary>
+        /// <inheritdoc/>
         public void RegisterSingleton<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
             => _container.Register(serviceFactory => factory, new PerContainerLifetime());
 
-        /// <summary>
-        /// Registers the TService as singleton with the factory that describes
-        /// the named dependencies of the service 
-        /// </summary>
-        public void RegisterSingleton<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name)
-            => _container.Register(serviceFactory => factory, name, new PerContainerLifetime());
+        /// <inheritdoc/>
+        public void RegisterSingleton<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string serviceName)
+            => _container.Register(serviceFactory => factory, serviceName, new PerContainerLifetime());
 
-        /// <summary>
-        /// Get an instance of the given <c>TService</c> type.
-        /// </summary>
+        /// <inheritdoc/>
         public TService Resolve<TService>()
             => _container.GetInstance<TService>();
-        
 
+        /// <inheritdoc/>
         public void EnableAnnotatedConstructorInjection()
             => _container.EnableAnnotatedConstructorInjection();
 
-        /// <summary>
-        /// Returns <b>true</b> if the container can create the requested service, otherwise <b>false</b>.
-        /// </summary>
+        /// <inheritdoc/>
         public bool IsRegistered<TService>()
             => _container.CanGetInstance(typeof(TService), string.Empty);
         
     }
 }
+
+
