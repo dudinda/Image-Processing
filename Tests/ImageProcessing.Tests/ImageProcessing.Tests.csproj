@@ -104,18 +104,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Presenters\HistogramPresenterTests.cs" />
-    <Compile Include="Presenters\MainPresenterTests.cs" />
-    <Compile Include="Presenters\QualityMeasurePresenterTests.cs" />
+    <Compile Include="DecimalMath\Numerical\DecimalMathIntegrationTests.cs" />
+    <Compile Include="Presentation\Histogram\HistogramPresenterTests.cs" />
+    <Compile Include="Presentation\Main\MainPresenterTests.cs" />
+    <Compile Include="Presentation\QualityMeasure\QualityMeasurePresenterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\RandomVariableDistributionServiceTests.cs" />
     <Compile Include="Services\RGBFilterServiceTests.cs" />
-    <Compile Include="Utility\DecimalMathTests.cs" />
+    <Compile Include="DecimalMath\Real\DecimalMathTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\.editorconfig">
-      <Link>.editorconfig</Link>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +133,16 @@
       <Project>{26F0D611-47D0-4222-8235-1375C45AB861}</Project>
       <Name>ImageProcessing.Presentation</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\Extensions\" />
+    <Folder Include="Common\Helpers\" />
+    <Folder Include="Common\Utility\" />
+    <Folder Include="Core\" />
+    <Folder Include="DecimalMath\Complex\" />
+    <Folder Include="DecimalMath\Integration\" />
+    <Folder Include="DecimalMath\Special\" />
+    <Folder Include="UI\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

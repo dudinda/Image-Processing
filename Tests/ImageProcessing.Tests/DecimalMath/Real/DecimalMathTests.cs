@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 
 using ImageProcessing.Common.Extensions.DecimalMathRealExtensions;
-using ImageProcessing.DecimalMath.Integration;
+using ImageProcessing.DecimalMath.Numerical;
 using ImageProcessing.DecimalMath.Real;
 
 using NUnit.Framework;
@@ -117,17 +117,6 @@ namespace ImageProcessing.Tests.Utility
             Assert.AreEqual((-1.27M).Mod(1M), 0.73M);
             Assert.AreEqual((2.000256M).Mod(1M), 0.000256M);
             Assert.AreEqual((3.0M / 2.0M).Mod(1.0M / 2.0M), 0);
-        }
-
-        [TestCase(0, 1)]
-        public void ThrowIfIntegralDoesntConvergeTrapezoidalMethod(int a, int b)
-        {
-            var interval = (Convert.ToDecimal(a), Convert.ToDecimal(b));
-
-            Assert.That(() => DecimalMathIntegration.Integrate(Integrate.Trapezoidal, (x) => 1 / x, interval, 10000), Throws.TypeOf<ArithmeticException>());
-            Assert.That(() => DecimalMathIntegration.Integrate(Integrate.Trapezoidal, (x) => 1 / (1 - x), interval, 10000), Throws.TypeOf<ArithmeticException>());
-            Assert.That(() => DecimalMathIntegration.Integrate(Integration.Trapezoidal, (x) => 1 / (x * x - 1), interval, 10000), Throws.TypeOf<ArithmeticException>());
-            Assert.That(() => DecimalMathIntegration.Integrate(Integration.Trapezoidal, (x) => 1 / (x * x - 1.0M / 2.0M), interval, 10000), Throws.TypeOf<ArithmeticException>());
         }
 
         [TestCase(1.25, 5)]
