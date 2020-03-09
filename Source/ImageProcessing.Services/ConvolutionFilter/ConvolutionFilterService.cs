@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
@@ -13,7 +13,7 @@ namespace ImageProcessing.Services.ConvolutionFilterServices.Implementation
     //ptr[0] - B, ptr[1] - G, ptr[2] - R, ptr[3] - A
     public class ConvolutionFilterService : IConvolutionFilterService
     {
-        public Bitmap Convolution(Bitmap source, AbstractConvolutionFilter filter) 
+        public Bitmap Convolution(Bitmap source, IConvolutionFilter filter) 
         {
             Requires.IsNotNull(source, nameof(source));
             Requires.IsNotNull(filter, nameof(filter));
@@ -44,13 +44,13 @@ namespace ImageProcessing.Services.ConvolutionFilterServices.Implementation
 
                 Parallel.For(kernelOffset, size.Height - kernelOffset, options, y =>
                 {
-                    //get an address of a new line, considering a kernel offset
+                    //get the address of a new line, considering a kernel offset
                     var sourcePtr      = sourceStartPtr      + y * sourceBitmapData.Stride + kernelOffset * ptrStep;
-                    var destinationPtr = destinationStartPtr + y * sourceBitmapData.Stride + kernelOffset * ptrStep;
+                    var destinationPtr = destinationStartPtr + y * destinationBitmapData.Stride + kernelOffset * ptrStep;
 
-                    //accumulators of components R, G, B
+                    //accumulators of R, G, B components 
                     double R, G, B;
-                    //a pointer, getting addresses of elements in a radius of a convolution
+                    //a pointer, which gets addresses of elements in the radius of a convolution kernel
                     byte* elementPtr = null;
 
                     for (int x = kernelOffset; x < size.Width - kernelOffset; ++x, sourcePtr += ptrStep, destinationPtr += ptrStep)
@@ -78,18 +78,9 @@ namespace ImageProcessing.Services.ConvolutionFilterServices.Implementation
                         G = G * filter.Factor + filter.Bias;
                         R = R * filter.Factor + filter.Bias;
 
-                        if (B > 255) B = 255;
-                        else if (B < 0) B = 0;
-
-                        if (G > 255) G = 255;
-                        else if (G < 0) G = 0;
-
-                        if (R > 255) R = 255;
-                        else if (R < 0) R = 0;
-
-                        destinationPtr[0] = (byte)B;
-                        destinationPtr[1] = (byte)G;
-                        destinationPtr[2] = (byte)R;
+                        destinationPtr[0] = GetByteValue(B);
+                        destinationPtr[1] = GetByteValue(G);
+                        destinationPtr[2] = GetByteValue(R);
                     }                   
                 });          
             }
@@ -98,6 +89,20 @@ namespace ImageProcessing.Services.ConvolutionFilterServices.Implementation
             destination.UnlockBits(destinationBitmapData);
 
             return destination;
+
+            byte GetByteValue(double value)
+            {
+                if (value > 255)
+                {
+                    value = 255;
+                }
+                else if (value < 0)
+                {
+                    value = 0;
+                }
+
+                return (byte)value;
+            };
         }
     }
 }

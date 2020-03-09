@@ -7,7 +7,7 @@ namespace ImageProcessing.Core.Factory.ConvolutionFactory
     /// <summary>
     /// Interface that ConvolutionFilterFactory methods are required to implement.
     /// </summary>
-    public interface IConvolutionFilterFactory : IFilterFactory<AbstractConvolutionFilter, ConvolutionFilter>
+    public interface IConvolutionFilterFactory : IFilterFactory<IConvolutionFilter, ConvolutionFilter>
     {
 
     }
