@@ -354,7 +354,6 @@ namespace ImageProcessing.Presentation.Presenters.Main
             {
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
-
                     View.SetCursor(CursorType.Wait);
 
                     var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
@@ -490,7 +489,6 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 View.ShowError("Error while zooming the image.");
             }
         }
-
 
         private Bitmap DefaultPipelineBlock(Bitmap bmp, ImageContainer to)
         {

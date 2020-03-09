@@ -1,5 +1,4 @@
 using System;
-using System.Drawing;
 
 using ImageProcessing.Common.Utility.BitMatrix.Interface;
 
