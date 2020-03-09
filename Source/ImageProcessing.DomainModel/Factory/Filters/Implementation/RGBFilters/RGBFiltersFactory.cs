@@ -15,8 +15,17 @@ using ImageProcessing.RGBFilters.Inversion;
 
 namespace ImageProcessing.Factory.Filters.RGBFilters
 {
-	public class RGBFiltersFactory : IRGBFiltersFactory
+    /// <summary>
+    /// A factory method
+    /// where <see cref="RGBFilter"/> and <see cref="RGBColors"/> represent
+    /// enumeration for types implementing <see cref="IDistribution"/>.
+    /// </summary>
+    public class RGBFiltersFactory : IRGBFiltersFactory
     {
+        /// <summary>
+        /// Provides a factory method for all <see cref="RGBFilter"/>
+        /// implementing <see cref="IRGBFilter"/>.
+        /// </summary>
         public IRGBFilter GetFilter(RGBFilter filter)
         {
             switch (filter)
@@ -32,6 +41,10 @@ namespace ImageProcessing.Factory.Filters.RGBFilters
             }
         }
 
+        /// <summary>
+        /// Provides a factory method for all <see cref="RGBColors"/>
+        /// implementing <see cref="IRGBFilter"/>.
+        /// </summary>
 		[MethodImpl(MethodImplOptions.NoInlining)]
 		public IRGBFilter GetColorFilter(RGBColors color)
         {

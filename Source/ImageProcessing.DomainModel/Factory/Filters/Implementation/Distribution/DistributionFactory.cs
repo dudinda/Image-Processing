@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.Factory.DistributionFactory;
@@ -8,8 +8,17 @@ using ImageProcessing.Distributions.TwoParameterDistributions;
 
 namespace ImageProcessing.Factory.Filters.Distributions
 {
+    /// <summary>
+    /// Provides a factory method for all types
+    /// implementing <see cref="IDistribution"/>.
+    /// </summary>
     public class DistributionFactory : IDistributionFactory
     {
+        /// <summary>
+        /// A factory method
+        /// where <see cref="Distribution"/> represents
+        /// enumeration for types implementing <see cref="IDistribution"/>.
+        /// </summary>
         public IDistribution GetFilter(Distribution distribution) 
         {
             switch (distribution)

@@ -16,10 +16,15 @@ namespace ImageProcessing.Factory.Filters.Convolution
 {
     /// <summary>
     /// Provides a factory method for all types
-    /// implementing <see cref="IConvolutionFilter"/>
+    /// implementing <see cref="IConvolutionFilter"/>.
     /// </summary>
     public class ConvolutionFilterFactory : IConvolutionFilterFactory
     {
+        /// <summary>
+        /// A factory method
+        /// where <see cref="ConvolutionFilter"/> represents
+        /// enumeration for types implementing <see cref="IConvolutionFilter"/>.
+        /// </summary>
         public IConvolutionFilter GetFilter(ConvolutionFilter filter)
         {
             switch (filter)
@@ -53,8 +58,6 @@ namespace ImageProcessing.Factory.Filters.Convolution
 
                 default: throw new NotSupportedException(nameof(filter));
             }
-
-
         }
     }
 }
