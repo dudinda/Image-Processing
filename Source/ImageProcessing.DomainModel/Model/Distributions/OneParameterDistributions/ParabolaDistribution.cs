@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.Model.Distribution;
@@ -11,17 +11,30 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
         private decimal _k;
 
         public string Name => nameof(Distribution.Parabola);
+
         public decimal FirstParameter => _k;
+
         public decimal SecondParameter => throw new NotImplementedException();
 
-        public decimal Quantile(decimal p)
+        public bool Quantile(decimal p, out decimal quantile)
         {
-            return _k * (1M - DecimalMathReal.Pow(1M - p, 0.3M));
+            if (p < 1)
+            {
+                quantile = _k * (1M - DecimalMathReal.Pow(1M - p, 0.3M));
+
+                return true;
+            }
+
+            quantile = 0;
+
+            return false;
         }
+
         public decimal GetMean()
         {
             throw new NotImplementedException();
         }
+
         public decimal GetVariance()
         {
             throw new NotImplementedException();

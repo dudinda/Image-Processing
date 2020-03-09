@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 
 using ImageProcessing.Common.Extensions.DecimalMathRealExtensions;
 using ImageProcessing.Core.Model.Distribution;
@@ -111,7 +111,7 @@ namespace ImageProcessing.Services.DistributionServices.RandomVariableDistributi
             //transform an array by a quantile function
             for (int index = 0; index < cdf.Length; ++index)
             {
-                result[index] = distribution.Quantile(cdf[index]);
+                distribution.Quantile(cdf[index], out result[index]);
             }
 
             return result;

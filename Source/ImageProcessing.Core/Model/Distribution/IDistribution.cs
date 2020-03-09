@@ -1,4 +1,4 @@
-﻿namespace ImageProcessing.Core.Model.Distribution
+namespace ImageProcessing.Core.Model.Distribution
 {
     public interface IDistribution
     {
@@ -7,7 +7,7 @@
         decimal SecondParameter { get; }
         decimal GetMean();
         decimal GetVariance();
-        decimal Quantile(decimal p);
+        bool Quantile(decimal p, out decimal quanile);
         IDistribution SetParams((decimal, decimal) parms);
     }
 }

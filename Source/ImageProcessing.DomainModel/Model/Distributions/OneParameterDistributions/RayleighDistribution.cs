@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.Model.Distribution;
@@ -16,11 +16,18 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
 
         public decimal GetMean() => _sigma * DecimalMathReal.Sqrt(DecimalMathReal.PI / 2M);
         public decimal GetVariance() => (2M - DecimalMathReal.PI / 2M) * _sigma * _sigma;
-        public decimal Quantile(decimal p)
-        {
-            if(p >= 1) return 0;
 
-            return _sigma * DecimalMathReal.Sqrt(-2M * DecimalMathReal.Log(1M - p));
+        public bool Quantile(decimal p, out decimal quantile)
+        {
+            if (p >= 0 && p < 1)
+            {
+                quantile = _sigma * DecimalMathReal.Sqrt(-2M * DecimalMathReal.Log(1M - p));
+                return true;
+            }
+
+            quantile = 0;
+
+            return false;
         }
 
         public IDistribution SetParams((decimal, decimal) parms)

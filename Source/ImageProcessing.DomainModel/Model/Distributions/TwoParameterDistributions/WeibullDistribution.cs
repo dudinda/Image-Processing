@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.DecimalMathRealExtensions;
@@ -18,7 +18,17 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
 
         public decimal GetMean() => throw new NotImplementedException();
         public decimal GetVariance() => throw new NotImplementedException();
-        public decimal Quantile(decimal p) => _lambda * -(DecimalMathReal.Log(1 - p).Pow(1.0M / _k));
+        public bool Quantile(decimal p, out decimal quantile)
+        {
+            if (p < 1)
+            {
+                quantile = _lambda * -(DecimalMathReal.Log(1 - p).Pow(1.0M / _k));
+                return true;
+            }
+
+            quantile = 0;
+            return false;
+        } 
 
         public IDistribution SetParams((decimal, decimal) parms)
         {

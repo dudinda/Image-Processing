@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -164,16 +164,17 @@ namespace ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribut
             //transform an array by a quantile function
             for (int index = 0; index < 256; ++index)
             {
-                var pixel = distribution.Quantile(cdf[index]);
-
-                if (pixel > 255)
+                if (distribution.Quantile(cdf[index], out var pixel))
                 {
-                    pixel = 255;
-                }
+                    if (pixel > 255)
+                    {
+                        pixel = 255;
+                    }
 
-                if (pixel < 0)
-                {
-                    pixel = 0;
+                    if (pixel < 0)
+                    {
+                        pixel = 0;
+                    }
                 }
 
                 result[index] = Convert.ToByte(pixel);

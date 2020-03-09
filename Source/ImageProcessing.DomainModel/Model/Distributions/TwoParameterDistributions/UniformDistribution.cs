@@ -1,4 +1,4 @@
-﻿using ImageProcessing.Common.Enums;
+using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.Model.Distribution;
 
 namespace ImageProcessing.Distributions.TwoParameterDistributions
@@ -14,7 +14,13 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
 
         public decimal GetMean() => (_a + _b) / 2;
         public decimal GetVariance() => (_b - _a) * (_b - _a) / 12;
-        public decimal Quantile(decimal p) => _a + p * (_b - _a);
+        public bool Quantile(decimal p, out decimal quantile)
+        {
+            quantile = _a + p * (_b - _a);
+
+            return true;
+        }
+        
 
         public IDistribution SetParams((decimal, decimal) parms)
         {
