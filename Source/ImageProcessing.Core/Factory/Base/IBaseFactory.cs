@@ -1,5 +1,6 @@
-﻿using ImageProcessing.Core.Factory.ConvolutionFactory;
+using ImageProcessing.Core.Factory.ConvolutionFactory;
 using ImageProcessing.Core.Factory.DistributionFactory;
+using ImageProcessing.Core.Factory.Morphology;
 using ImageProcessing.Core.Factory.RGBFiltersFactory;
 
 namespace ImageProcessing.Core.Factory.Base
@@ -9,5 +10,6 @@ namespace ImageProcessing.Core.Factory.Base
         IDistributionFactory GetDistributionFactory();
         IConvolutionFilterFactory GetConvolutionFilterFactory();
         IRGBFiltersFactory GetRGBFilterFactory();
+        IMorphologyFactory GetMorphologyFactory();
     }
 }
