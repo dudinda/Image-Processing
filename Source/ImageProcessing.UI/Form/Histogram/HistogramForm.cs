@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.Common.Enums;
@@ -46,7 +46,7 @@ namespace ImageProcessing.Form.Histogram
                     Freq.Series[cdf].IsVisibleInLegend = false;
                     break;
 
-                default: throw new NotSupportedException(nameof(action));
+                default: throw new NotImplementedException(nameof(action));
             }                    
         }
        

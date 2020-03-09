@@ -47,7 +47,7 @@ namespace ImageProcessing.DomainModel.Factory.Filters.Implementation.Morphology
                 case MorphologyOperator.Gradient:
                     return new MorphologicalGradientOperator();
 
-                default: throw new NotSupportedException();
+                default: throw new NotImplementedException();
             }
         }
     }

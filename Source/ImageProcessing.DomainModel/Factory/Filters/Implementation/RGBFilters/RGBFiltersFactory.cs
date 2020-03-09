@@ -37,7 +37,7 @@ namespace ImageProcessing.Factory.Filters.RGBFilters
                 case RGBFilter.Inversion:
                     return new InversionFilter();
 
-                default: throw new NotSupportedException(nameof(filter));
+                default: throw new NotImplementedException(nameof(filter));
             }
         }
 

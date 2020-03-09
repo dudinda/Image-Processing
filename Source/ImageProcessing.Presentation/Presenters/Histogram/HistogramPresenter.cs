@@ -52,8 +52,7 @@ namespace ImageProcessing.Presentation.Presenters
                     View.YAxisMaximum = 1;
                     break;
 
-                default:
-                    throw new InvalidOperationException(nameof(function));
+                default: throw new NotImplementedException(nameof(function));
             }
 
             View.Init(function);

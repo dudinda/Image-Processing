@@ -56,7 +56,7 @@ namespace ImageProcessing.Factory.Filters.Convolution
                 case ConvolutionFilter.SobelOperatorVertical3x3:
                     return new SobelOperatorVertical();
 
-                default: throw new NotSupportedException(nameof(filter));
+                default: throw new NotImplementedException(nameof(filter));
             }
         }
     }
