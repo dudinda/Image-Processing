@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -256,7 +256,7 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
                         double Gx = xDerivativePtr[0];
                         double Gy = yDerivativePtr[0];
 
-                        var magnitude = Math.Abs(Gx) + Math.Abs(Gy);
+                        var magnitude = Math.Sqrt(Gx * Gx + Gy * Gy);
 
                         if (magnitude > 255) magnitude = 255;
 
@@ -325,10 +325,21 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
                 case PixelFormat.Format32bppRgb:
                     return 32;
 
-                default:
-                    throw new NotSupportedException("Only 8, 24 and 32 bit images are supported");
+                default: throw new NotSupportedException("Only 8, 24 and 32 bit images are supported.");
 
+            }              
+        }
+
+        public static Bitmap AdjustBorder(this Bitmap src, int numberOfPixels, Color borderColor)
+        {
+            var result = new Bitmap(src);
+
+            using (var g = Graphics.FromImage(result))
+            {
+                g.DrawRectangle(new Pen(borderColor, numberOfPixels), new Rectangle(0, 0, src.Width, src.Height));
             }
+
+            return result;
         }
     }
 }
