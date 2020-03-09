@@ -10,8 +10,27 @@ namespace ImageProcessing.Common.Utility.BitMatrix.Implementation
     {
         private readonly byte[] _data;
 
+        public BitMatrix(BitMatrix matrix) : this(new Size(matrix.ColumnCount, matrix.RowCount))
+        {
+            if(matrix is null)
+            {
+                throw new ArgumentNullException(nameof(matrix));
+            }
+
+            for(var row = 0; row < matrix.RowCount; ++row)
+            {
+                for(var column = 0; column < matrix.ColumnCount; ++column)
+                {
+                    this[row, column] = matrix[row, column];
+                }
+            }
+        }
+
         public BitMatrix(Size size)
         {
+            RowCount    = size.Height;
+            ColumnCount = size.Width;
+
             var bitCount  = size.Width * size.Height;
             var byteCount = bitCount >> 3;
 
