@@ -8,7 +8,7 @@ namespace ImageProcessing.Common.Helpers
 {
     public static class GenerateMorphologicalShapes
     {
-        public static BitMatrix GetShape(MorphologyShape shape, Size kernelSize, Point? anchor = null)
+        public static BitMatrix GetShape(MorphologyShape shape, (int width, int height) kernelSize, Point? anchor = null)
         {
             switch (shape)
             {
@@ -25,13 +25,13 @@ namespace ImageProcessing.Common.Helpers
             }
         }
 
-        private static BitMatrix GetRectangularKernel(Size kernelSize)
+        private static BitMatrix GetRectangularKernel((int width, int height) kernelSize)
         {
             var kernel = new BitMatrix(kernelSize);
 
-            for(var row = 0; row < kernelSize.Height; ++row)
+            for(var row = 0; row < kernelSize.height; ++row)
             {
-                for(var column = 0; column < kernelSize.Width; ++column)
+                for(var column = 0; column < kernelSize.width; ++column)
                 {
                     kernel[row, column] = true;
                 }
@@ -40,11 +40,11 @@ namespace ImageProcessing.Common.Helpers
             return kernel;
         }
 
-        private static BitMatrix GetCrossShapedKernel(Size kernelSize, Point? anchor = null)
+        private static BitMatrix GetCrossShapedKernel((int width, int height) kernelSize, Point? anchor = null)
         {
             if(anchor is null)
             {
-                anchor = new Point(kernelSize.Width / 2, kernelSize.Height / 2);
+                anchor = new Point(kernelSize.width / 2, kernelSize.height / 2);
             }
 
             var kernel = new BitMatrix(kernelSize);
@@ -52,9 +52,9 @@ namespace ImageProcessing.Common.Helpers
             var x = anchor.Value.X;
             var y = anchor.Value.Y;
 
-            for(var row = 0; row < kernelSize.Height; ++row)
+            for(var row = 0; row < kernelSize.height; ++row)
             {
-                for(var column = 0; column < kernelSize.Width; ++column)
+                for(var column = 0; column < kernelSize.width; ++column)
                 {
                     if (row == y)
                     {
@@ -73,17 +73,17 @@ namespace ImageProcessing.Common.Helpers
             return kernel;
         }
 
-        private static BitMatrix GetEllipticalKernel(Size kernelSize)
+        private static BitMatrix GetEllipticalKernel((int width, int height) kernelSize)
         {
-            var coVertex = kernelSize.Height / 2;
-            var focalDistance = kernelSize.Width / 2;
+            var coVertex = kernelSize.height / 2;
+            var focalDistance = kernelSize.width / 2;
 
             var unitsStartIndex = 0;
             var unitsEndIndex   = 0;
 
             var kernel = new BitMatrix(kernelSize);
 
-            for(var row = 0; row < kernelSize.Height; ++row)
+            for(var row = 0; row < kernelSize.height; ++row)
             {
                 var dy = Math.Abs(row - coVertex);
 
@@ -92,7 +92,7 @@ namespace ImageProcessing.Common.Helpers
                     var dx = focalDistance * Math.Sqrt(1 - dy * dy / (coVertex * coVertex));
 
                     unitsStartIndex = (int)Math.Max(focalDistance - dx, 0);
-                    unitsEndIndex   = (int)Math.Min(focalDistance + dx + 1, kernelSize.Width);
+                    unitsEndIndex   = (int)Math.Min(focalDistance + dx + 1, kernelSize.width);
                 }
 
                 for(int column = unitsStartIndex; column < unitsEndIndex; ++column)
