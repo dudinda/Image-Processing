@@ -31,7 +31,7 @@ namespace ImageProcessing.DomainModel.Model.Morphology
                                                    rvalue.PixelFormat);
 
             var resultBitmapData = result.LockBits(new Rectangle(0, 0, result.Width, result.Height),
-                                                   ImageLockMode.ReadOnly,
+                                                   ImageLockMode.WriteOnly,
                                                    result.PixelFormat);
 
             var size = result.Size;
