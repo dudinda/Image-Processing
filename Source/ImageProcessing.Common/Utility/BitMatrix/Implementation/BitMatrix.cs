@@ -8,6 +8,8 @@ namespace ImageProcessing.Common.Utility.BitMatrix.Implementation
     /// <inheritdoc cref="IBitMatrix"/>
     public class BitMatrix : IBitMatrix
     {
+        private readonly object _sync = new object();
+
         private readonly byte[] _data;
 
         public BitMatrix(BitMatrix matrix) : this(new Size(matrix.ColumnCount, matrix.RowCount))
@@ -68,7 +70,10 @@ namespace ImageProcessing.Common.Utility.BitMatrix.Implementation
 
                 pos >>= 3;
 
-                return (_data[pos] & (1 << index)) != 0;
+                lock (_sync)
+                {
+                    return (_data[pos] & (1 << index)) != 0;
+                }
             }
 
             set
@@ -88,11 +93,14 @@ namespace ImageProcessing.Common.Utility.BitMatrix.Implementation
 
                 pos >>= 3;
 
-                _data[pos] &= (byte)(~(1 << index));
-
-                if (value)
+                lock (_sync)
                 {
-                    _data[pos] |= (byte)(1 << index);
+                    _data[pos] &= (byte)(~(1 << index));
+
+                    if (value)
+                    {
+                        _data[pos] |= (byte)(1 << index);
+                    }
                 }
             }
         }
