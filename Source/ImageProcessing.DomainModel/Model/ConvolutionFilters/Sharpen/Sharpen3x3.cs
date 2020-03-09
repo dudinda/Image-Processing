@@ -2,12 +2,22 @@ using ImageProcessing.Core.Model.Convolution;
 
 namespace ImageProcessing.ConvolutionFilters.Sharpen
 {
-    public class Sharpen3x3 : AbstractConvolutionFilter
+    /// <summary>
+    /// Implements <see cref="IConvolutionFilter"/>.
+    /// </summary>
+    public class Sharpen3x3 : IConvolutionFilter
     {
-        public override double Bias { get; } = 0.0;
-        public override double Factor { get; } = 1.0;
-        public override string FilterName { get; } = nameof(Sharpen3x3);
-        public override double[,] Kernel { get; }
+        /// <inheritdoc />
+        public double Bias { get; } = 0.0;
+
+        /// <inheritdoc />
+        public double Factor { get; } = 1.0;
+
+        /// <inheritdoc />
+        public string FilterName { get; } = nameof(Sharpen3x3);
+
+        /// <inheritdoc />
+        public double[,] Kernel { get; }
             =
             new double[,] { { 0, -1,  0 },
                             {-1,  5, -1 },

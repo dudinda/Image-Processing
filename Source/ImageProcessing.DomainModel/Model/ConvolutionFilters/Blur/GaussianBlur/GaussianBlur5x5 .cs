@@ -2,12 +2,22 @@ using ImageProcessing.Core.Model.Convolution;
 
 namespace ImageProcessing.ConvolutionFilters.GaussianBlur
 {
-	public class GaussianBlur5x5 : AbstractConvolutionFilter
+    /// <summary>
+    /// Implements <see cref="IConvolutionFilter"/>.
+    /// </summary>
+	public class GaussianBlur5x5 : IConvolutionFilter
 	{
-		public override double Bias { get; } = 0.0;
-		public override double Factor { get; } = 1.0 / 159.0;
-		public override string FilterName { get; } = nameof(GaussianBlur5x5);
-		public override double[,] Kernel { get; }
+        /// <inheritdoc />
+		public double Bias { get; } = 0.0;
+
+        /// <inheritdoc />
+		public double Factor { get; } = 1.0 / 159.0;
+
+        /// <inheritdoc />
+		public string FilterName { get; } = nameof(GaussianBlur5x5);
+
+        /// <inheritdoc />
+		public double[,] Kernel { get; }
 			=
 			new double[,] { {2, 04, 05, 04, 2  },
 							{4, 09, 12, 09, 4  },

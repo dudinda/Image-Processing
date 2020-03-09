@@ -16,13 +16,12 @@ namespace ImageProcessing.Factory.Filters.Convolution
 {
     /// <summary>
     /// Provides a factory method for all types
-    /// implementing <see cref="AbstractConvolutionFilter"/>
+    /// implementing <see cref="IConvolutionFilter"/>
     /// </summary>
     public class ConvolutionFilterFactory : IConvolutionFilterFactory
     {
-        public AbstractConvolutionFilter GetFilter(ConvolutionFilter filter)
+        public IConvolutionFilter GetFilter(ConvolutionFilter filter)
         {
-
             switch (filter)
             {
                 case ConvolutionFilter.BoxBlur3x3:
