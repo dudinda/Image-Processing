@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using ImageProcessing.Common.Enums;
 
@@ -25,7 +25,7 @@ namespace ImageProcessing.Common.Helpers
                 case Luma.Rec709:
                     return GetRec709(R, G, B);
                 case Luma.Rec240:
-                    return GetRec240(R, G, B);
+                    return GetSmpte240M(R, G, B);
 
                 default: throw new InvalidOperationException(nameof(rec));
             }
@@ -44,9 +44,9 @@ namespace ImageProcessing.Common.Helpers
            => R * 0.2126 + G * 0.7152 + B * 0.0722;
 
         /// <summary>
-        /// Evaluate relative luminance by Rec. 240
+        /// Evaluate relative luminance by SMPTE 240M
         /// </summary>
-        private static double GetRec240(double R, double G, double B)
+        private static double GetSmpte240M(double R, double G, double B)
            => R * 0.212 + G * 0.701 + B * 0.087;
     }
 }

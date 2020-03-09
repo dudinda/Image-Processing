@@ -12,7 +12,8 @@ namespace ImageProcessing.Core.EventAggregator.Implementation
     public class EventAggregator : IEventAggregator
     {
 
-        private Dictionary<Type, List<WeakReference>> eventSubsribers = new Dictionary<Type, List<WeakReference>>();
+        private Dictionary<Type, List<WeakReference>> eventSubsribers
+            = new Dictionary<Type, List<WeakReference>>();
 
         private readonly object _syncRoot = new object();
 
@@ -36,7 +37,6 @@ namespace ImageProcessing.Core.EventAggregator.Implementation
                 else
                 {
                     subsribersToBeRemoved.Add(weakSubsriber);
-
                 }
             }
 
@@ -47,11 +47,8 @@ namespace ImageProcessing.Core.EventAggregator.Implementation
                     foreach (var remove in subsribersToBeRemoved)
                     {
                         subscribers.Remove(remove);
-
                     }
-
                 }
-
             }
         }
 
@@ -74,21 +71,17 @@ namespace ImageProcessing.Core.EventAggregator.Implementation
                     var subscribers = GetSubscriberList(subsriberType);
 
                     subscribers.Add(weakReference);
-
                 }
             }
         }
 
-
         private void InvokeSubscriberEvent<TEventType>(TEventType publisher, ISubscriber<TEventType> subscriber)
         {
-
             var syncContext = SynchronizationContext.Current;
 
             if (syncContext is null)
             {
                 syncContext = new SynchronizationContext();
-
             }
 
             syncContext.Post(s => subscriber.OnEventHandler(publisher), null);
