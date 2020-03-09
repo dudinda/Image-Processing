@@ -13,6 +13,7 @@ namespace ImageProcessing.Core.Controller.Implementation
     /// <inheritdoc cref="IAppController"/>
     public class AppController : IAppController
     {
+        /// <inheritdoc cref="IDependencyResolution"/>
         public IDependencyResolution IoC { get; }
 
         public AppController(IContainer container)
@@ -23,7 +24,8 @@ namespace ImageProcessing.Core.Controller.Implementation
         }
 
         /// <inheritdoc cref="IAppController.Run{TPresenter}"/>
-        public void Run<TPresenter>() where TPresenter : class, IPresenter
+        public void Run<TPresenter>()
+            where TPresenter : class, IPresenter
         {
             if (!IoC.IsRegistered<TPresenter>())
             {
@@ -35,7 +37,8 @@ namespace ImageProcessing.Core.Controller.Implementation
         }
 
         /// <inheritdoc cref="IAppController.Run{TPresenter, TViewModel}(TViewModel)"/>
-        public void Run<TPresenter, TViewModel>(TViewModel vm) where TPresenter : class, IPresenter<TViewModel>
+        public void Run<TPresenter, TViewModel>(TViewModel vm)
+            where TPresenter : class, IPresenter<TViewModel>
         {
             if (!IoC.IsRegistered<TPresenter>())
             {

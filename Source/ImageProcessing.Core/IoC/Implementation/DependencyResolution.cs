@@ -11,6 +11,7 @@ namespace ImageProcessing.Core.IoC.Implementation
     /// <inheritdoc cref="IDependencyResolution"/>
     public class DependencyResolution : IDependencyResolution
     {
+        /// <inheritdoc cref="IContainer"/>
         private readonly IContainer _container;
 
         public DependencyResolution(IContainer container)

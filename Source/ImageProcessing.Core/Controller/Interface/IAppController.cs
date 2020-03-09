@@ -20,7 +20,7 @@ namespace ImageProcessing.Core.Controller.Interface
 
         /// <summary>
         /// Run the specified <typeparamref name="TPresenter"/> with a selected <typeparamref name="TViewModel"/> .
-        /// <para>Where the <typeparamref name="TPresenter""/> is a <see cref="IPresenter{TViewModel}"/> type.</para>
+        /// <para>Where the <typeparamref name="TPresenter"/> is a <see cref="IPresenter{TViewModel}"/> type.</para>
         /// </summary>
         void Run<TPresenter, TViewModel>(TViewModel vm)
             where TPresenter : class, IPresenter<TViewModel>;

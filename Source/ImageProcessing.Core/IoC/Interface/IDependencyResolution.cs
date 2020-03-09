@@ -7,7 +7,7 @@ namespace ImageProcessing.Core.IoC.Interface
 {
     /// <summary>
     /// Provides access to the specified
-    /// Di container within the <seealso cref="AppController"/>.
+    /// DI container within the <seealso cref="AppController"/>.
     /// </summary>
     public interface IDependencyResolution
     {
