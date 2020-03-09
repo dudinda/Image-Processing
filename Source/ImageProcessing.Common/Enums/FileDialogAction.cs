@@ -3,7 +3,7 @@ using System.ComponentModel;
 namespace ImageProcessing.Common.Enums
 {
     /// <summary>
-    /// Specified action of the built in file dialog.
+    /// Specified an action of the built in file dialog.
     /// </summary>
     public enum FileDialogAction
     {
@@ -20,7 +20,7 @@ namespace ImageProcessing.Common.Enums
         Open                 = 1,
 
         /// <summary>
-        /// Save file without dialog window.
+        /// Save file operation without a dialog window.
         /// </summary>
         [Description("Save file without dialog window")]
         SaveWithoutDialog    = 2,

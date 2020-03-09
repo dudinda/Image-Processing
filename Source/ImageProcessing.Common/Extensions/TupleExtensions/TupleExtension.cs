@@ -1,27 +1,24 @@
-﻿using System;
+using System;
 
 using ImageProcessing.Common.Extensions.StringExtensions;
 
 namespace ImageProcessing.Common.Extensions.TupleExtensions
 {
     /// <summary>
-    /// Extension methods for <see cref="ValueTuple{string}{string}"> class
+    /// Extension methods for the <see cref="ValueTuple{string, string}(string string)" />.
     /// </summary>
     public static class TupleExtension
     {
         /// <summary>
-        /// 
+        /// Try to parse the specified (string, string) pair.
+        /// If the both items are successfully parsed then return <b>true</b>,
+        /// otherwise <b>false</b>.
         /// </summary>
-        /// <typeparam name="TOut1"></typeparam>
-        /// <typeparam name="TOut2"></typeparam>
-        /// <param name="input"></param>
-        /// <param name="output"></param>
-        /// <returns></returns>
         public static bool TryParse<TOut1, TOut2>(this (string, string) input, out (TOut1, TOut2) output) 
             where TOut1 : struct
             where TOut2 : struct
                                                           
-        {
+        {     
             if (!input.Item1.TryParse<TOut1>(out var first))
             {
                 output = default;

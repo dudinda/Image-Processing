@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Drawing.Imaging;
 
@@ -8,12 +8,12 @@ using ImageProcessing.Common.Extensions.EnumExtensions;
 namespace ImageProcessing.Common.Extensions.StringExtensions
 {
     /// <summary>
-    /// Extension methods for <see cref="string"> class
+    /// Extension methods for <see cref="string">.
     /// </summary>
     public static class StringExtension
     {
         /// <summary>
-        /// Get a bitmap extension
+        /// Get a <see cref="Bitmap"/> extension.
         /// </summary>
         /// <param name="ext"></param>
         /// <returns></returns>
