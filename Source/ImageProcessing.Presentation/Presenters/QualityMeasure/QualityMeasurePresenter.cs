@@ -3,6 +3,7 @@ using System.Drawing;
 
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Controller.Interface;
+using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Core.Presenter.Abstract;
 using ImageProcessing.Presentation.ViewModel.QualityMeasure;
 using ImageProcessing.Presentation.Views.QualityMeasure;
@@ -14,11 +15,11 @@ namespace ImageProcessing.Presentation.Presenters
     {
         private readonly IBitmapLuminanceDistributionService _distributionService;
 
-        private Bitmap _src;
-
         public QualityMeasurePresenter(IAppController controller, 
-                                       IQualityMeasureView view, 
-                                       IBitmapLuminanceDistributionService distibutionService) : base(controller, view)
+                                       IQualityMeasureView view,
+                                       IAwaitablePipeline pipeline,
+                                       IBitmapLuminanceDistributionService distibutionService
+            ) : base(controller, view, pipeline) 
         {
             _distributionService = Requires.IsNotNull(distibutionService, nameof(distibutionService));
         }

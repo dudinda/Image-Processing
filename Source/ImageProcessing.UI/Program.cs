@@ -63,7 +63,7 @@ namespace ImageProcessing
                     .RegisterNamedSingleton<IAsyncLocker, ZoomAsyncLocker>("ZoomLocker")
                     .RegisterNamedSingleton<IAsyncLocker, OperationAsyncLocker>("OperationLocker")
                     .RegisterSingleton<IEventAggregator, EventAggregator>()
-                    .RegisterSingleton<IAwaitablePipeline<Bitmap>, AwaitablePipeline<Bitmap>>()
+                    .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
                     .RegisterSingleton<ISTATaskService, STATaskService>()
                     .RegisterInstance(_context);
 

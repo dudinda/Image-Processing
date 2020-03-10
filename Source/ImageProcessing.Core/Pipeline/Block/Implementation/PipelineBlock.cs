@@ -7,24 +7,24 @@ using ImageProcessing.Core.Pipeline.BlockItem.Interface;
 
 namespace ImageProcessing.Core.Pipeline.Block.Implementation
 {
-    public class PipelineBlock<TOutput> : IPipelineBlock<TOutput> 
-        where TOutput : class
+    public class PipelineBlock : IPipelineBlock
     {
         private readonly ConcurrentQueue<IItem> _block = new ConcurrentQueue<IItem>();
 
-        private TOutput _item;
+        private object _item;
+        private Type _itemType;
 
-
-        public PipelineBlock(TOutput item)
+        public PipelineBlock(object item)
         {
             _item = item;
+            _itemType = item.GetType();
         }
 
-        public TOutput Process(CancellationToken _token)
+        public object Process(CancellationToken _token)
         {
-            var result = _item as object;
+            var result = _item;
 
-            var firstArg = _item.GetType();
+            var firstArg = _itemType;
 
             while(_block.TryDequeue(out var function))
             {
@@ -41,10 +41,10 @@ namespace ImageProcessing.Core.Pipeline.Block.Implementation
                 }
             }
 
-            return result as TOutput;          
+            return result;          
         }
 
-        public IPipelineBlock<TOutput> Add<TIn, TOut>(Func<TIn, TOut> step)
+        public IPipelineBlock Add<TIn, TOut>(Func<TIn, TOut> step)
         {
             _block.Enqueue(new Item(result => step.Invoke((TIn)(object)result), typeof(TIn), typeof(TOut)));
             return this;

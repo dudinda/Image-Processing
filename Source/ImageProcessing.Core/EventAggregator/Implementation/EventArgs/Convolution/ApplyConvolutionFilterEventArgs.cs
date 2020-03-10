@@ -6,14 +6,14 @@ using ImageProcessing.Core.Pipeline.Block.Implementation;
 
 namespace ImageProcessing.Core.EventAggregator.Implementation.EventArgs.Convolution
 {
-    public class ApplyConvolutionFilterEventArgs : IBaseEventArgs<PipelineBlock<Bitmap>>
+    public class ApplyConvolutionFilterEventArgs : IBaseEventArgs<PipelineBlock>
     {
-        public ApplyConvolutionFilterEventArgs(PipelineBlock<Bitmap> arg)
+        public ApplyConvolutionFilterEventArgs(PipelineBlock arg)
         {
             Arg = arg;
         }
 
         ///<inheritdoc cref="PipelineBlock{Bitmap}"/>
-        public PipelineBlock<Bitmap> Arg { get; }
+        public PipelineBlock Arg { get; }
     }
 }

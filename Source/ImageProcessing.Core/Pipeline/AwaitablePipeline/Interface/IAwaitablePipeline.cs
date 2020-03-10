@@ -1,11 +1,11 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 
 namespace ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface
 {
-    public interface IAwaitablePipeline<TOutput>
+    public interface IAwaitablePipeline
     {
-        bool Register(IPipelineBlock<TOutput> block);
+        bool Register(IPipelineBlock block);
         bool Any();
-        Task<TOutput> AwaitResult();
+        Task<object> AwaitResult();
     }
 }

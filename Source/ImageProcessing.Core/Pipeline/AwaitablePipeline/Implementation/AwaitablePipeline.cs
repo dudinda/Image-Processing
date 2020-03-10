@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -7,18 +7,18 @@ using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 
 namespace ImageProcessing.Core.Pipeline.AwaitablePipeline.Implementation
 {
-    public class AwaitablePipeline<TOutput> : IAwaitablePipeline<TOutput>, IDisposable
+    public class AwaitablePipeline : IAwaitablePipeline, IDisposable
     {
-        private readonly BlockingQueue<Task<TOutput>> _queue
-           = new BlockingQueue<Task<TOutput>>(64);
+        private readonly BlockingQueue<Task<object>> _queue
+           = new BlockingQueue<Task<object>>(64);
 
 
         private readonly CancellationTokenSource _source 
             = new CancellationTokenSource();
 
-        public bool Register(IPipelineBlock<TOutput> output)
+        public bool Register(IPipelineBlock output)
         {
-            var task = new Task<TOutput>(() => output.Process(_source.Token), _source.Token);
+            var task = new Task<object>(() => output.Process(_source.Token), _source.Token);
             
             if (_queue.TryEnqueue(task))
             {
@@ -27,10 +27,9 @@ namespace ImageProcessing.Core.Pipeline.AwaitablePipeline.Implementation
             }
 
             return false;
-
         }
 
-        public async Task<TOutput> AwaitResult()
+        public async Task<object> AwaitResult()
         {
             if (_queue.TryDequeue(out var task))
             {

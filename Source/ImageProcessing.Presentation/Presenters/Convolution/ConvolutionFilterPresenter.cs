@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 using System.Threading.Tasks;
 
@@ -11,6 +12,7 @@ using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Factory.Base;
 using ImageProcessing.Core.Factory.ConvolutionFactory;
 using ImageProcessing.Core.Locker.Interface;
+using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Core.Pipeline.Block.Implementation;
 using ImageProcessing.Core.Presenter.Abstract;
 using ImageProcessing.Presentation.ViewModel.Convolution;
@@ -29,17 +31,19 @@ namespace ImageProcessing.Presentation.Presenters.Convolution
 		private readonly IAsyncLocker _operationLocker;
 		public ConvolutionFilterPresenter(IAppController controller,
 										  IConvolutionFilterView view,
+                                          IAwaitablePipeline pipeline,
 										  IConvolutionFilterService convolutionFilterService,
 										  IBaseFactory baseFactory,
 										  IEventAggregator eventAggregator,
 
 										  [Inject("OperationLocker")]
-										  IAsyncLocker operationLocker) : base(controller, view)
+										  IAsyncLocker operationLocker
+            ) : base(controller, view, pipeline)
 		{
-			_eventAggregator = Requires.IsNotNull(eventAggregator, nameof(eventAggregator));
+			_eventAggregator          = Requires.IsNotNull(eventAggregator, nameof(eventAggregator));
 			_convolutionFilterService = Requires.IsNotNull(convolutionFilterService, nameof(convolutionFilterService));
 			_convolutionFilterFactory = Requires.IsNotNull(baseFactory, nameof(baseFactory)).GetConvolutionFilterFactory();
-			_operationLocker = Requires.IsNotNull(operationLocker, nameof(operationLocker));
+			_operationLocker          = Requires.IsNotNull(operationLocker, nameof(operationLocker));
 
 			_eventAggregator.Subscribe(this);
 		}
@@ -50,7 +54,7 @@ namespace ImageProcessing.Presentation.Presenters.Convolution
 			{
 				var copy = await _operationLocker.LockAsync(() => new Bitmap(ViewModel.Source)).ConfigureAwait(true);
 
-				var block = new PipelineBlock<Bitmap>(copy);
+				var block = new PipelineBlock(copy);
 				var filter = View.SelectedFilter;
 
 				switch (filter)
@@ -71,8 +75,10 @@ namespace ImageProcessing.Presentation.Presenters.Convolution
 						});
 						break;
 				}
+
+                _eventAggregator.Publish(new ApplyConvolutionFilterEventArgs(block));
 			}
-			catch
+			catch(Exception ex)
 			{
 				View.ShowError();
 			}
