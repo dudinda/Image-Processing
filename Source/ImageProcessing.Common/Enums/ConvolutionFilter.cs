@@ -101,6 +101,6 @@ namespace ImageProcessing.Common.Enums
         /// The Sobel operator with a kernel size 3x3.
         /// </summary>
         [Description("Sobel operator 3x3")]
-        SobelOperator3x3           = 14
+        SobelOperator3x3           = 15
     }
 }
