@@ -5,6 +5,7 @@ using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.Adapters.LightInject;
 using ImageProcessing.Core.Container;
 using ImageProcessing.Core.Controller.Implementation;
+using ImageProcessing.Core.Controller.Interface;
 using ImageProcessing.Core.EventAggregator.Implementation;
 using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Factory.Base;
@@ -36,38 +37,11 @@ using ImageProcessing.UI.Form.Convolution;
 
 namespace ImageProcessing.UI
 {
-    internal class Startup 
+    internal static class Startup 
     {
-        private static Startup _instance;
-        private static object _sync = new object();
+        private static IAppController _controller;
 
-        private AppController _controller;
-        
-        private Startup()
-        {
-
-        }
-
-        internal static Startup App
-        {
-            get
-            {
-                if (_instance is null)
-                { 
-                    lock (_sync)
-                    {
-                        if (_instance is null)
-                        {
-                            _instance = new Startup();
-                        }
-                    }
-                }
-
-                return _instance;
-            }
-        }
-       
-        internal Startup Build(Container container)
+        internal static void Build(Container container)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -92,8 +66,6 @@ namespace ImageProcessing.UI
                 .RegisterSingleton<ISTATaskService, STATaskService>()
                 .RegisterInstance(new ApplicationContext());
 
-            return this;
-
             IContainer GetContainerAdapter(Container adapter)
             {
                 switch (adapter)
@@ -106,9 +78,14 @@ namespace ImageProcessing.UI
             };
         }
 
-        internal void Run()
+        internal static void Run()
         {
-            _controller.Run<MainPresenter>();
+            if (_controller != null)
+            {
+                _controller.Run<MainPresenter>();
+            }
+
+            throw new InvalidOperationException("The application is not built.");
         }
     }
 }
