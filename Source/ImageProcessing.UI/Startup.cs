@@ -64,7 +64,7 @@ namespace ImageProcessing.UI
                 .RegisterSingleton<IEventAggregator, EventAggregator>()
                 .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
                 .RegisterSingleton<ISTATaskService, STATaskService>()
-                .RegisterInstance(new ApplicationContext());
+                .RegisterSingleton<ApplicationContext>();
 
             IContainer GetContainerAdapter(Container adapter)
             {
@@ -80,12 +80,12 @@ namespace ImageProcessing.UI
 
         internal static void Run()
         {
-            if (_controller != null)
+            if (_controller is null)
             {
-                _controller.Run<MainPresenter>();
+                throw new InvalidOperationException("The application is not built.");
             }
 
-            throw new InvalidOperationException("The application is not built.");
+            _controller.Run<MainPresenter>();
         }
     }
 }
