@@ -43,7 +43,6 @@ namespace ImageProcessing.Presentation.Presenters.Main
         private readonly IRGBFiltersFactory _rgbFiltersFactory;
 
         private readonly IEventAggregator _eventAggregator;
-        private readonly IAwaitablePipeline<Bitmap> _pipeline;
 
         private readonly IAsyncLocker _zoomLocker;
         private readonly IAsyncLocker _operationLocker;
@@ -55,13 +54,14 @@ namespace ImageProcessing.Presentation.Presenters.Main
                              ISTATaskService staTaskService,
                              IRGBFilterService rgbFilterService,
                              IEventAggregator eventAggregator,
-                             IAwaitablePipeline<Bitmap> pipeline,
+                             IAwaitablePipeline pipeline,
 
                              [Inject("ZoomLocker")]
                              IAsyncLocker zoomLocker,
 
                              [Inject("OperationLocker")]
-                             IAsyncLocker operationLocker) : base(controller, view)
+                             IAsyncLocker operationLocker
+            ) : base(controller, view, pipeline)
         {
             Requires.IsNotNull(baseFactory, nameof(baseFactory));
 
@@ -73,7 +73,6 @@ namespace ImageProcessing.Presentation.Presenters.Main
             _distributionService = Requires.IsNotNull(distributionService, nameof(distributionService));
             
             _eventAggregator   = Requires.IsNotNull(eventAggregator, nameof(eventAggregator));
-            _pipeline          = Requires.IsNotNull(pipeline, nameof(pipeline));
 
             _zoomLocker      = Requires.IsNotNull(zoomLocker, nameof(zoomLocker));
             _operationLocker = Requires.IsNotNull(operationLocker, nameof(operationLocker));
@@ -115,16 +114,16 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 {
                     View.SetCursor(CursorType.Wait);
 
-                    _pipeline
-                        .Register(new PipelineBlock<Bitmap>(result)
-                        .Add<Bitmap, Bitmap>((bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination))
+                    Pipeline
+                        .Register(new PipelineBlock(result)
+                        .Add<Bitmap, Bitmap>((bmp) => DefaultPipelineBlock(bmp, ImageContainer.Source))
                     );
 
                     await UpdateContainer(ImageContainer.Source).ConfigureAwait(true);
 
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 View.ShowError("Error while opening the file.");
             }
@@ -159,7 +158,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     await saveAsModalTask.ConfigureAwait(true);
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 View.ShowError("Error while saving the file.");
             }
@@ -181,7 +180,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     }).ConfigureAwait(true);
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 View.ShowError("Error while saving the file.");
             }
@@ -216,7 +215,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 {
                     View.SetCursor(CursorType.Wait);
 
-                    _pipeline
+                    Pipeline
                         .Register(e.Arg
                         .Add<Bitmap, Bitmap>((bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination))
                     );
@@ -248,8 +247,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     var operation = _rgbFiltersFactory.GetFilter(e.Arg);
 
-                    _pipeline
-                        .Register(new PipelineBlock<Bitmap>(copy)
+                    Pipeline
+                        .Register(new PipelineBlock(copy)
                         .Add<Bitmap, Bitmap>((bmp) => _rgbFilterService.Filter(bmp, operation))
                         .Add<Bitmap, Bitmap>((bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination))
                     );
@@ -290,8 +289,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 var operation = _rgbFiltersFactory.GetColorFilter(result);
 
-                _pipeline
-                    .Register(new PipelineBlock<Bitmap>(copy)
+                Pipeline
+                    .Register(new PipelineBlock(copy)
                     .Add<Bitmap, Bitmap>((bmp) => operation.Filter(bmp))
                     .Add<Bitmap, Bitmap>((bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination))
                 );
@@ -324,8 +323,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
 
-                    _pipeline
-                        .Register(new PipelineBlock<Bitmap>(copy)
+                    Pipeline
+                        .Register(new PipelineBlock(copy)
                         .Add<Bitmap, Bitmap>((bmp) =>
                         {
                             bmp.Tag = filter.Name;
@@ -358,8 +357,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
 
-                    _pipeline
-                        .Register(new PipelineBlock<Bitmap>(copy)
+                    Pipeline
+                        .Register(new PipelineBlock(copy)
                         .Add<Bitmap, Bitmap>((bmp) => bmp.Shuffle())
                         .Add<Bitmap, Bitmap>((bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination))
                     );
@@ -409,8 +408,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     var copy = await GetImageCopy(replaceFrom).ConfigureAwait(true);
 
-                    _pipeline
-                        .Register(new PipelineBlock<Bitmap>(copy)
+                    Pipeline
+                        .Register(new PipelineBlock(copy)
                         .Add<Bitmap, Bitmap>((bmp) => DefaultPipelineBlock(bmp, replaceTo))
                     );
 
@@ -492,11 +491,11 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
         private Bitmap DefaultPipelineBlock(Bitmap bmp, ImageContainer to)
         {
-                 View.AddToUndoContainer((new Bitmap(View.GetImageCopy(to)), to));
-                 View.SetImageCopy(to, new Bitmap(bmp));
-                 View.SetImageToZoom(to, new Bitmap(bmp));
+            View.SetImageCopy(to, new Bitmap(bmp));
+            View.AddToUndoContainer((new Bitmap(View.GetImageCopy(to)), to));
+            View.SetImageToZoom(to, new Bitmap(bmp));
 
-                 return (Bitmap)View.GetImageCopy(to).Clone();
+            return (Bitmap)View.GetImageCopy(to).Clone();
         }
 
         private async Task<Bitmap> GetImageCopy(ImageContainer container)
@@ -508,13 +507,13 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
         private async Task UpdateContainer(ImageContainer container)
         {
-            var result = await _pipeline.AwaitResult().ConfigureAwait(true);
+            var result = await Pipeline.AwaitResult().ConfigureAwait(true);
 
-            View.SetImage(container, result);
+            View.SetImage(container, (Bitmap)result);
             View.Refresh(container);
             View.ResetTrackBarValue(container);
 
-            if (!_pipeline.Any())
+            if (!Pipeline.Any())
             {
                 View.SetCursor(CursorType.Default);
             }
