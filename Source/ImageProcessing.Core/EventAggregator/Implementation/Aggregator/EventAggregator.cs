@@ -11,7 +11,6 @@ namespace ImageProcessing.Core.EventAggregator.Implementation
     /// <inheritdoc cref="IEventAggregator"/>
     public class EventAggregator : IEventAggregator
     {
-
         private Dictionary<Type, List<WeakReference>> eventSubsribers
             = new Dictionary<Type, List<WeakReference>>();
 
@@ -30,9 +29,7 @@ namespace ImageProcessing.Core.EventAggregator.Implementation
             {
                 if (weakSubsriber.IsAlive)
                 {
-                    var subscriber = (ISubscriber<TEventType>)weakSubsriber.Target;
-
-                    InvokeSubscriberEvent<TEventType>(publisher, subscriber);
+                    InvokeSubscriberEvent(publisher, (ISubscriber<TEventType>)weakSubsriber.Target);
                 }
                 else
                 {
@@ -89,11 +86,9 @@ namespace ImageProcessing.Core.EventAggregator.Implementation
 
         private List<WeakReference> GetSubscriberList(Type subsriberType)
         {
-            List<WeakReference> subsribersList = null;
-
             lock (_syncRoot)
             {
-                var isFound = eventSubsribers.TryGetValue(subsriberType, out subsribersList);
+                var isFound = eventSubsribers.TryGetValue(subsriberType, out var subsribersList);
 
                 if (!isFound)
                 {
@@ -101,9 +96,9 @@ namespace ImageProcessing.Core.EventAggregator.Implementation
 
                     eventSubsribers.Add(subsriberType, subsribersList);
                 }
-            }
 
-            return subsribersList;
+                return subsribersList;
+            }
         }
     }
 }
