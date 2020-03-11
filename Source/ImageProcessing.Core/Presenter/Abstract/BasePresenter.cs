@@ -1,6 +1,7 @@
 
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Controller.Interface;
+using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Core.View;
 
@@ -12,13 +13,18 @@ namespace ImageProcessing.Core.Presenter.Abstract
 		protected TView View { get; }
 		protected IAppController Controller { get; }
         protected IAwaitablePipeline Pipeline { get; }
+        protected IEventAggregator EventAggregator { get; }
 
-		protected BasePresenter(IAppController controller, TView view, IAwaitablePipeline pipeline)
+		protected BasePresenter(IAppController controller,
+                                TView view,
+                                IAwaitablePipeline pipeline,
+                                IEventAggregator eventAggregator)
 		{
-			Controller = Requires.IsNotNull(controller, nameof(controller));
-			View       = Requires.IsNotNull(view, nameof(view));
-            Pipeline   = Requires.IsNotNull(pipeline, nameof(pipeline));
-		}
+			Controller      = Requires.IsNotNull(controller, nameof(controller));
+			View            = Requires.IsNotNull(view, nameof(view));
+            Pipeline        = Requires.IsNotNull(pipeline, nameof(pipeline));
+            EventAggregator = Requires.IsNotNull(eventAggregator, nameof(eventAggregator));
+        }
 
 		public virtual void Run() => View.Show();
 	}
@@ -31,12 +37,17 @@ namespace ImageProcessing.Core.Presenter.Abstract
 		protected IAppController Controller { get; }
         protected IAwaitablePipeline Pipeline { get; }
         protected TViewModel ViewModel { get; private set; }
-       
-        protected BasePresenter(IAppController controller, TView view, IAwaitablePipeline pipeline)
+        protected IEventAggregator EventAggregator { get; }
+
+        protected BasePresenter(IAppController controller,
+                                TView view,
+                                IAwaitablePipeline pipeline,
+                                IEventAggregator eventAggregator)
 		{
-            Controller = Requires.IsNotNull(controller, nameof(controller));
-            View       = Requires.IsNotNull(view, nameof(view));
-            Pipeline   = Requires.IsNotNull(pipeline, nameof(pipeline));
+            Controller      = Requires.IsNotNull(controller, nameof(controller));
+            View            = Requires.IsNotNull(view, nameof(view));
+            Pipeline        = Requires.IsNotNull(pipeline, nameof(pipeline));
+            EventAggregator = Requires.IsNotNull(eventAggregator, nameof(eventAggregator));
         }
 
 		public virtual void Run(TViewModel vm)

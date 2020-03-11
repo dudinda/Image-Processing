@@ -3,6 +3,7 @@ using System.Drawing;
 
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Controller.Interface;
+using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Core.Presenter.Abstract;
 using ImageProcessing.Presentation.ViewModel.QualityMeasure;
@@ -18,8 +19,9 @@ namespace ImageProcessing.Presentation.Presenters
         public QualityMeasurePresenter(IAppController controller, 
                                        IQualityMeasureView view,
                                        IAwaitablePipeline pipeline,
+                                       IEventAggregator eventAggregator,
                                        IBitmapLuminanceDistributionService distibutionService
-            ) : base(controller, view, pipeline) 
+            ) : base(controller, view, pipeline, eventAggregator) 
         {
             _distributionService = Requires.IsNotNull(distibutionService, nameof(distibutionService));
         }

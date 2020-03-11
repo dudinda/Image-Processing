@@ -20,7 +20,7 @@ namespace ImageProcessing.UI.Form.Convolution
             var values = default(ConvolutionFilter).GetEnumValuesExceptDefault();
             ConvolutionFilterComboBox.Items.AddRange(Array.ConvertAll(values, item => (object)item));
             ConvolutionFilterComboBox.SelectedIndex = 0;
-   
+
             Bind();
         }
 

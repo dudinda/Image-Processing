@@ -61,7 +61,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                              [Inject("OperationLocker")]
                              IAsyncLocker operationLocker
-            ) : base(controller, view, pipeline)
+            ) : base(controller, view, pipeline, eventAggregator)
         {
             Requires.IsNotNull(baseFactory, nameof(baseFactory));
 
@@ -72,12 +72,10 @@ namespace ImageProcessing.Presentation.Presenters.Main
             _rgbFilterService    = Requires.IsNotNull(rgbFilterService, nameof(rgbFilterService));
             _distributionService = Requires.IsNotNull(distributionService, nameof(distributionService));
             
-            _eventAggregator   = Requires.IsNotNull(eventAggregator, nameof(eventAggregator));
-
             _zoomLocker      = Requires.IsNotNull(zoomLocker, nameof(zoomLocker));
             _operationLocker = Requires.IsNotNull(operationLocker, nameof(operationLocker));
 
-            _eventAggregator.Subscribe(this);
+            EventAggregator.Subscribe(this);
         }
 
         private async Task OpenImage()

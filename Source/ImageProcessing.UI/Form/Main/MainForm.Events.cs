@@ -13,6 +13,8 @@ namespace ImageProcessing.Form.Main
         /// </summary>
         private void Bind()
         {
+            EventAggregator.Subscribe(this);
+
             BindFileMenu();
             BindToolbar();
             BindConvolutionFilters();
