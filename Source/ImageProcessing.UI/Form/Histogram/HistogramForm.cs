@@ -3,15 +3,16 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.EnumExtensions;
+using ImageProcessing.Core.EventAggregator.Interface;
+using ImageProcessing.Form.Base;
 using ImageProcessing.Presentation.Views.Histogram;
-
-using MetroFramework.Forms;
 
 namespace ImageProcessing.Form.Histogram
 {
-    public partial class HistogramForm : MetroForm, IHistogramView
+    public partial class HistogramForm : BaseForm, IHistogramView
     {
-        public HistogramForm()
+        public HistogramForm(IEventAggregator eventAggregator)
+            : base(eventAggregator)
         {
             InitializeComponent();
         }

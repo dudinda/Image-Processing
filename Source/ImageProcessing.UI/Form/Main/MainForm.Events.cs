@@ -26,16 +26,16 @@ namespace ImageProcessing.Form.Main
         private void BindFileMenu()
         {
             OpenFile.Click += (sender, args)
-                => _eventAggregator.Publish(new FileDialogEventArgs(FileDialogAction.Open));
+                => EventAggregator.Publish(new FileDialogEventArgs(FileDialogAction.Open));
 
             SaveFile.Click += (sender, args)
-                => _eventAggregator.Publish(new FileDialogEventArgs(FileDialogAction.SaveWithoutDialog));
+                => EventAggregator.Publish(new FileDialogEventArgs(FileDialogAction.SaveWithoutDialog));
 
             SaveFileAs.Click += (sender, args)
-                => _eventAggregator.Publish(new FileDialogEventArgs(FileDialogAction.SaveAs));
+                => EventAggregator.Publish(new FileDialogEventArgs(FileDialogAction.SaveAs));
    
             FormClosing += (sender, args)
-                => _eventAggregator.Publish(new CloseFormEventArgs());
+                => EventAggregator.Publish(new CloseFormEventArgs());
         }
 
         /// <summary>
@@ -44,49 +44,49 @@ namespace ImageProcessing.Form.Main
         private void BindToolbar()
         {
             ShuffleSrc.Click += (sender, args)
-                => _eventAggregator.Publish(new ToolbarActionEventArgs(ToolbarAction.Shuffle));
+                => EventAggregator.Publish(new ToolbarActionEventArgs(ToolbarAction.Shuffle));
 
             PMF.Click += (sender, args)
-                => _eventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.PMF, ImageContainer.Source));
+                => EventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.PMF, ImageContainer.Source));
 
             CDF.Click += (sender, args)
-                => _eventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.CDF, ImageContainer.Source));
+                => EventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.CDF, ImageContainer.Source));
 
             Expectation.Click += (sender, args)
-                => _eventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.Expectation, ImageContainer.Source));
+                => EventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.Expectation, ImageContainer.Source));
 
             Variance.Click += (sender, args)
-                => _eventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.Variance, ImageContainer.Source));
+                => EventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.Variance, ImageContainer.Source));
 
             StandardDeviation.Click += (sender, args)
-                => _eventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.StandardDeviation, ImageContainer.Source));
+                => EventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.StandardDeviation, ImageContainer.Source));
 
             Entropy.Click += (sender, args)
-                => _eventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.Entropy, ImageContainer.Source));
+                => EventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.Entropy, ImageContainer.Source));
 
             ReplaceSrcByDst.Click += (sernder, args)
-                => _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Destination));
+                => EventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Destination));
 
             ReplaceDstBySrc.Click += (sernder, args)
-                => _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Source));
+                => EventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Source));
 
             SrcZoom.MouseWheel += (sender, args)
-             => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Source));
+             => EventAggregator.Publish(new ZoomEventArgs(ImageContainer.Source));
 
             SrcZoom.MouseUp += (secnder, args)
-                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Source));
+                => EventAggregator.Publish(new ZoomEventArgs(ImageContainer.Source));
 
             SrcZoom.KeyPress += (secnder, args)
-                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Source));
+                => EventAggregator.Publish(new ZoomEventArgs(ImageContainer.Source));
 
             DstZoom.MouseWheel += (sender, args)
-                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Destination));
+                => EventAggregator.Publish(new ZoomEventArgs(ImageContainer.Destination));
 
             DstZoom.MouseUp += (sender, args)
-                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Destination));
+                => EventAggregator.Publish(new ZoomEventArgs(ImageContainer.Destination));
 
             DstZoom.KeyPress += (sender, args)
-                => _eventAggregator.Publish(new ZoomEventArgs(ImageContainer.Destination));
+                => EventAggregator.Publish(new ZoomEventArgs(ImageContainer.Destination));
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace ImageProcessing.Form.Main
         private void BindConvolutionFilters()
         {
             ConvolutionFiltersMenu.Click += (sender, args)
-                => _eventAggregator.Publish(new ShowConvolutionFilterPresenterEventArgs());
+                => EventAggregator.Publish(new ShowConvolutionFilterPresenterEventArgs());
         }
 
         /// <summary>
@@ -104,22 +104,22 @@ namespace ImageProcessing.Form.Main
         private void BindRGBFilters()
         {
             InversionFilter.Click += (sender, args)
-                => _eventAggregator.Publish(new RGBFilterEventArgs(RGBFilter.Inversion));
+                => EventAggregator.Publish(new RGBFilterEventArgs(RGBFilter.Inversion));
 
             BinaryFilter.Click += (sender, args)
-                => _eventAggregator.Publish(new RGBFilterEventArgs(RGBFilter.Binary));
+                => EventAggregator.Publish(new RGBFilterEventArgs(RGBFilter.Binary));
 
             GrayscaleFilter.Click += (sender, args)
-                => _eventAggregator.Publish(new RGBFilterEventArgs(RGBFilter.Grayscale));
+                => EventAggregator.Publish(new RGBFilterEventArgs(RGBFilter.Grayscale));
 
             ColorFilterBlue.Click += (sender, args)
-                => _eventAggregator.Publish(new RGBColorFilterEventArgs(RGBColors.Blue));
+                => EventAggregator.Publish(new RGBColorFilterEventArgs(RGBColors.Blue));
 
             ColorFilterRed.Click += (sender, args)
-                => _eventAggregator.Publish(new RGBColorFilterEventArgs(RGBColors.Red));
+                => EventAggregator.Publish(new RGBColorFilterEventArgs(RGBColors.Red));
 
             ColorFilterGreen.Click += (sender, args)
-                => _eventAggregator.Publish(new RGBColorFilterEventArgs(RGBColors.Green));
+                => EventAggregator.Publish(new RGBColorFilterEventArgs(RGBColors.Green));
         }
 
         /// <summary>
@@ -128,28 +128,28 @@ namespace ImageProcessing.Form.Main
         private void BindDistributions()
         {
             ExponentialDistribution.Click += (sender, args)
-                => _eventAggregator.Publish(new DistributionEventArgs(Distribution.Exponential, Parameters));
+                => EventAggregator.Publish(new DistributionEventArgs(Distribution.Exponential, Parameters));
 
             ParabolaDistribution.Click += (sender, args)
-                => _eventAggregator.Publish(new DistributionEventArgs(Distribution.Parabola, Parameters));
+                => EventAggregator.Publish(new DistributionEventArgs(Distribution.Parabola, Parameters));
 
             RayleighDistribution.Click += (sender, args)
-                => _eventAggregator.Publish(new DistributionEventArgs(Distribution.Rayleigh, Parameters));
+                => EventAggregator.Publish(new DistributionEventArgs(Distribution.Rayleigh, Parameters));
 
             CauchyDistribution.Click += (sender, args)
-                => _eventAggregator.Publish(new DistributionEventArgs(Distribution.Cauchy, Parameters));
+                => EventAggregator.Publish(new DistributionEventArgs(Distribution.Cauchy, Parameters));
 
             LaplaceDistribution.Click += (sender, args)
-                => _eventAggregator.Publish(new DistributionEventArgs(Distribution.Laplace, Parameters));
+                => EventAggregator.Publish(new DistributionEventArgs(Distribution.Laplace, Parameters));
 
             NormalDistribution.Click += (sender, args)
-                => _eventAggregator.Publish(new DistributionEventArgs(Distribution.Normal, Parameters));
+                => EventAggregator.Publish(new DistributionEventArgs(Distribution.Normal, Parameters));
 
             UniformDistribution.Click += (sender, args)
-                => _eventAggregator.Publish(new DistributionEventArgs(Distribution.Uniform, Parameters));
+                => EventAggregator.Publish(new DistributionEventArgs(Distribution.Uniform, Parameters));
 
             WeibullDistribution.Click += (sender, args)
-                => _eventAggregator.Publish(new DistributionEventArgs(Distribution.Weibull, Parameters));
+                => EventAggregator.Publish(new DistributionEventArgs(Distribution.Weibull, Parameters));
         }
 
         /// <summary>
@@ -162,22 +162,22 @@ namespace ImageProcessing.Form.Main
             switch (keyData)
             {
                 case (Keys.Right):
-                    _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Source));
+                    EventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Source));
                     return true;
                 case (Keys.Left):
-                    _eventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Destination));
+                    EventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Destination));
                     return true;
                 case (Keys.Q):
-                    _eventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.PMF, ImageContainer.Source));
+                    EventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.PMF, ImageContainer.Source));
                     return true;
                 case (Keys.Q | Keys.Control):
-                    _eventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.PMF, ImageContainer.Destination));
+                    EventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.PMF, ImageContainer.Destination));
                     return true;
                 case (Keys.W):
-                    _eventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.CDF, ImageContainer.Source));
+                    EventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.CDF, ImageContainer.Source));
                     return true;
                 case (Keys.W | Keys.Control):
-                    _eventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.CDF, ImageContainer.Destination));
+                    EventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.CDF, ImageContainer.Destination));
                     return true;
             }
 

@@ -3,25 +3,19 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Common.Helpers;
 using ImageProcessing.Common.Interop;
 using ImageProcessing.Core.EventAggregator.Interface;
+using ImageProcessing.Form.Base;
 using ImageProcessing.Presentation.Views.Main;
-
-using MetroFramework.Forms;
 
 namespace ImageProcessing.Form.Main
 {
-    public partial class MainForm : MetroForm, IMainView
+    public partial class MainForm : BaseMainForm, IMainView
     {
-        private readonly ApplicationContext _context;
-        private readonly IEventAggregator _eventAggregator;
-
-        public MainForm(ApplicationContext context, IEventAggregator eventAggregator)
+        public MainForm(ApplicationContext context,
+                        IEventAggregator eventAggregator)
+            : base(context, eventAggregator)
         {
-            _context         = Requires.IsNotNull(context, nameof(context));
-            _eventAggregator = Requires.IsNotNull(eventAggregator, nameof(eventAggregator));
-            
             InitializeComponent();
             Bind();
         }
@@ -70,8 +64,8 @@ namespace ImageProcessing.Form.Main
 
         public new void Show()
         {
-            _context.MainForm = this;
-            Application.Run(_context);
+            Context.MainForm = this;
+            Application.Run(Context);
         }
 
         public bool ImageIsNull(ImageContainer container)

@@ -1,14 +1,15 @@
-﻿using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting;
 
+using ImageProcessing.Core.EventAggregator.Interface;
+using ImageProcessing.Form.Base;
 using ImageProcessing.Presentation.Views.QualityMeasure;
-
-using MetroFramework.Forms;
 
 namespace ImageProcessing.Form.QualityMeasure
 {
-    public partial class QualityMeasureForm : MetroForm, IQualityMeasureView
+    public partial class QualityMeasureForm : BaseForm, IQualityMeasureView
     {
-        public QualityMeasureForm()
+        public QualityMeasureForm(IEventAggregator eventAggregator)
+            : base(eventAggregator)
         {
             InitializeComponent();
             SetHistogram();     
