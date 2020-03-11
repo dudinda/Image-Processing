@@ -9,12 +9,27 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
         private decimal _mu;
         private decimal _b;
 
+        public LaplaceDistribution()
+        {
+
+        }
+
+        public LaplaceDistribution(decimal mu, decimal b)
+        {
+            _mu = mu;
+            _b = b;
+        }
+
         public string Name => nameof(Distribution.Laplace);
+
         public decimal FirstParameter => _mu;
+
         public decimal SecondParameter => _b;
 
         public decimal GetMean() => _mu;
+
         public decimal GetVariance() => 2 * _b * _b;
+
         public bool Quantile(decimal p, out decimal quantile)
         {
             if(p > 0 && p < 1)
@@ -29,7 +44,6 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
             return false;
         }
            
-
         public IDistribution SetParams((decimal, decimal) parms)
         {
             _mu = parms.Item1;

@@ -10,11 +10,21 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
     {
         private decimal _k;
 
+        public ParabolaDistribution()
+        {
+
+        }
+
+        public ParabolaDistribution(decimal k)
+        {
+            _k = k;
+        }
+
         public string Name => nameof(Distribution.Parabola);
 
         public decimal FirstParameter => _k;
 
-        public decimal SecondParameter => throw new NotImplementedException();
+        public decimal SecondParameter => throw new NotSupportedException();
 
         public bool Quantile(decimal p, out decimal quantile)
         {

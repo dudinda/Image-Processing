@@ -10,12 +10,27 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
         private decimal _mu;
         private decimal _sigma;
 
+        public NormalDistribution()
+        {
+
+        }
+
+        public NormalDistribution(decimal mu, decimal sigma)
+        {
+            _mu = mu;
+            _sigma = sigma;
+        }
+
         public string Name => nameof(Distribution.Normal);
+
         public decimal FirstParameter => _mu;
+
         public decimal SecondParameter => _sigma;
 
         public decimal GetMean() => _mu;
+
         public decimal GetVariance() => _sigma * _sigma;
+
         public bool Quantile(decimal p, out decimal quantile)
         {
             if (DecimalMathReal.Abs(p) < 1)

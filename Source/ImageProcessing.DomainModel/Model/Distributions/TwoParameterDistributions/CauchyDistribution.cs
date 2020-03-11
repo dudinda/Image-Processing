@@ -11,11 +11,27 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
         private decimal _x0;
         private decimal _gamma;
 
+        public CauchyDistribution()
+        {
+
+        }
+
+        public CauchyDistribution(decimal x0, decimal gamma)
+        {
+            _x0    = x0;
+            _gamma = gamma;
+        }
+
         public string Name => nameof(Distribution.Cauchy);
+
         public decimal FirstParameter => _x0;
+
         public decimal SecondParameter => _gamma;
+
         public decimal GetMean() => throw new NotImplementedException("NaN");
+
         public decimal GetVariance() => throw new ArithmeticException("NaN");
+
         public bool Quantile(decimal p, out decimal quantile)
         {
             if(p > 0 && p < 1)

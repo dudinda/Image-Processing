@@ -10,9 +10,19 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
     {
         private decimal _sigma;
 
+        public RayleighDistribution()
+        {
+
+        }
+
+        public RayleighDistribution(decimal sigma)
+        {
+            _sigma = sigma;
+        }
+
         public string Name => nameof(Distribution.Rayleigh);
         public decimal FirstParameter => _sigma;
-        public decimal SecondParameter => throw new NotImplementedException();
+        public decimal SecondParameter => throw new NotSupportedException();
 
         public decimal GetMean() => _sigma * DecimalMathReal.Sqrt(DecimalMathReal.PI / 2M);
         public decimal GetVariance() => (2M - DecimalMathReal.PI / 2M) * _sigma * _sigma;

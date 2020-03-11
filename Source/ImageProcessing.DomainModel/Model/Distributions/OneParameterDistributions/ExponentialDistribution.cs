@@ -10,11 +10,21 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
     {
         private decimal _lambda;
 
+        public ExponentialDistribution()
+        {
+
+        }
+
+        public ExponentialDistribution(decimal lambda)
+        {
+            _lambda = lambda;
+        }
+
         public string Name => nameof(Distribution.Exponential);
 
         public decimal FirstParameter => _lambda;
 
-        public decimal SecondParameter => throw new NotImplementedException();
+        public decimal SecondParameter => throw new NotSupportedException();
 
         public decimal GetMean() => 1 / _lambda;
 

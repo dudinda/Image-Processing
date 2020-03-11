@@ -11,10 +11,11 @@ namespace ImageProcessing.Core.EventAggregator.Implementation
     /// <inheritdoc cref="IEventAggregator"/>
     public class EventAggregator : IEventAggregator
     {
+        private readonly object _syncRoot = new object();
+
         private Dictionary<Type, List<WeakReference>> eventSubsribers
             = new Dictionary<Type, List<WeakReference>>();
 
-        private readonly object _syncRoot = new object();
 
         /// <inheritdoc cref="IEventAggregator.Publish{TEventType}(TEventType)"/>
         public void Publish<TEventType>(TEventType publisher)

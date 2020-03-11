@@ -8,12 +8,27 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
         private decimal _a;
         private decimal _b;
 
+        public UniformDistribution()
+        {
+
+        }
+
+        public UniformDistribution(decimal b, decimal a)
+        {
+            _b = b;
+            _a = a;
+        }
+
         public string Name => nameof(Distribution.Uniform);
+
         public decimal FirstParameter => _a;
+
         public decimal SecondParameter => _b;
 
         public decimal GetMean() => (_a + _b) / 2;
+
         public decimal GetVariance() => (_b - _a) * (_b - _a) / 12;
+
         public bool Quantile(decimal p, out decimal quantile)
         {
             quantile = _a + p * (_b - _a);
@@ -21,7 +36,6 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
             return true;
         }
         
-
         public IDistribution SetParams((decimal, decimal) parms)
         {
             _a = parms.Item1;
