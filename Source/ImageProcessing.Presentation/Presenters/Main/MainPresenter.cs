@@ -114,8 +114,10 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     Pipeline
                         .Register(new PipelineBlock(result)
-                        .Add<Bitmap, Bitmap>((bmp) => DefaultPipelineBlock(bmp, ImageContainer.Source))
-                    );
+                            .Add<Bitmap, Bitmap>(
+                                (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Source)
+                             )
+                         );
 
                     await UpdateContainer(ImageContainer.Source).ConfigureAwait(true);
 
@@ -193,7 +195,11 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
                     Controller.Run<ConvolutionFilterPresenter, ConvolutionFilterViewModel>(
-                        new ConvolutionFilterViewModel(new Bitmap(await GetImageCopy(ImageContainer.Source).ConfigureAwait(true)))
+                        new ConvolutionFilterViewModel(
+                            new Bitmap(
+                                await GetImageCopy(ImageContainer.Source).ConfigureAwait(true)
+                            )
+                        )
                     );
                 }
             }
@@ -215,8 +221,10 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     Pipeline
                         .Register(e.Arg
-                        .Add<Bitmap, Bitmap>((bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination))
-                    );
+                            .Add<Bitmap, Bitmap>(
+                                (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
+                            )
+                        );
 
                     await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
                 }
@@ -247,9 +255,13 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     Pipeline
                         .Register(new PipelineBlock(copy)
-                        .Add<Bitmap, Bitmap>((bmp) => _rgbFilterService.Filter(bmp, operation))
-                        .Add<Bitmap, Bitmap>((bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination))
-                    );
+                            .Add<Bitmap, Bitmap>(
+                                (bmp) => _rgbFilterService.Filter(bmp, operation)
+                            )
+                            .Add<Bitmap, Bitmap>(
+                                (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
+                            )
+                        );
 
                     await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
                 }
@@ -289,9 +301,13 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 Pipeline
                     .Register(new PipelineBlock(copy)
-                    .Add<Bitmap, Bitmap>((bmp) => operation.Filter(bmp))
-                    .Add<Bitmap, Bitmap>((bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination))
-                );
+                        .Add<Bitmap, Bitmap>(
+                            (bmp) => operation.Filter(bmp)
+                        )
+                        .Add<Bitmap, Bitmap>(
+                            (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
+                        )
+                    );
 
                 await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
             }
@@ -323,13 +339,16 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     Pipeline
                         .Register(new PipelineBlock(copy)
-                        .Add<Bitmap, Bitmap>((bmp) =>
-                        {
-                            bmp.Tag = filter.Name;
-                            return _distributionService.TransformTo(bmp, filter);
-                        })
-                        .Add<Bitmap, Bitmap>((bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination))
-                    );
+                            .Add<Bitmap, Bitmap>(
+                                (bmp) =>
+                                {
+                                    bmp.Tag = filter.Name;
+                                    return _distributionService.TransformTo(bmp, filter);
+                                 })
+                            .Add<Bitmap, Bitmap>(
+                                (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
+                            )
+                        );
 
                     await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
                 }
@@ -357,9 +376,13 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     Pipeline
                         .Register(new PipelineBlock(copy)
-                        .Add<Bitmap, Bitmap>((bmp) => bmp.Shuffle())
-                        .Add<Bitmap, Bitmap>((bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination))
-                    );
+                            .Add<Bitmap, Bitmap>(
+                                (bmp) => bmp.Shuffle()
+                            )
+                            .Add<Bitmap, Bitmap>(
+                                (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
+                            )
+                        );
 
                     await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
                 }
@@ -379,7 +402,11 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 if (!View.ImageIsNull(e.Arg))
                 {
                     Controller.Run<HistogramPresenter, HistogramViewModel>(
-                        new HistogramViewModel(new Bitmap(await GetImageCopy(e.Arg).ConfigureAwait(true)), e.Action)
+                        new HistogramViewModel(
+                            new Bitmap(
+                                await GetImageCopy(e.Arg).ConfigureAwait(true)
+                            ),
+                        e.Action)
                     );
                 }
             }
@@ -408,8 +435,10 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     Pipeline
                         .Register(new PipelineBlock(copy)
-                        .Add<Bitmap, Bitmap>((bmp) => DefaultPipelineBlock(bmp, replaceTo))
-                    );
+                            .Add<Bitmap, Bitmap>(
+                                (bmp) => DefaultPipelineBlock(bmp, replaceTo)
+                            )
+                        );
 
                     await UpdateContainer(replaceTo).ConfigureAwait(true);
                 }

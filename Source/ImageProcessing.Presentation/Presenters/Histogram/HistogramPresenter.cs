@@ -44,21 +44,7 @@ namespace ImageProcessing.Presentation.Presenters
 
             var chart = View.GetChart;
 
-            decimal[] yValues;
-
-            switch (function)
-            {
-                case RandomVariable.PMF:
-                    yValues = _distributionService.GetPMF(bitmap);
-                    View.YAxisMaximum = (double)yValues.Max();
-                    break;
-                case RandomVariable.CDF:
-                    yValues = _distributionService.GetCDF(bitmap);
-                    View.YAxisMaximum = 1;
-                    break;
-
-                default: throw new NotImplementedException(nameof(function));
-            }
+            GetFunction(out var yValues);
 
             View.Init(function);
 
@@ -66,6 +52,23 @@ namespace ImageProcessing.Presentation.Presenters
             {
                 chart.Series[function.GetDescription()]
                      .Points.AddXY(graylevel, yValues[graylevel]);
+            }
+
+            void GetFunction(out decimal[] values)
+            {
+                switch (function)
+                {
+                    case RandomVariable.PMF:
+                        values = _distributionService.GetPMF(bitmap);
+                        View.YAxisMaximum = (double)yValues.Max();
+                        break;
+                    case RandomVariable.CDF:
+                        values = _distributionService.GetCDF(bitmap);
+                        View.YAxisMaximum = 1;
+                        break;
+
+                    default: throw new NotImplementedException(nameof(function));
+                }
             }
         }
     }
