@@ -97,7 +97,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             {
                                 using (var stream = File.OpenRead(dialog.FileName))
                                 {
-                                    return new Bitmap(Image.FromStream(stream));
+                                    return new Bitmap(
+                                        Image.FromStream(stream)
+                                    );
                                 }
                             });
                         }
@@ -145,9 +147,11 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             {
                                 return _operationLocker.LockAsync(() =>
                                 {
-                                    var extension = Path.GetExtension(dialog.FileName);
-
-                                    new Bitmap(View.SrcImageCopy).Save(dialog.FileName, extension.GetImageFormat());
+                                    new Bitmap(View.SrcImageCopy).Save(
+                                        dialog.FileName,
+                                        Path.GetExtension(dialog.FileName)
+                                            .GetImageFormat()
+                                      );
                                 });
                             }
 
@@ -172,11 +176,11 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 {
                     await _operationLocker.LockAsync(() =>
                     {
-                        var extension = Path.GetExtension(View.PathToFile);
-
-                        new Bitmap(View.SrcImageCopy)
-                        .Save(View.PathToFile, extension.GetImageFormat());
-
+                        new Bitmap(View.SrcImageCopy).Save(
+                            View.PathToFile,
+                            Path.GetExtension(View.PathToFile)
+                                .GetImageFormat()
+                        );
                     }).ConfigureAwait(true);
                 }
             }
@@ -197,7 +201,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     Controller.Run<ConvolutionFilterPresenter, ConvolutionFilterViewModel>(
                         new ConvolutionFilterViewModel(
                             new Bitmap(
-                                await GetImageCopy(ImageContainer.Source).ConfigureAwait(true)
+                                await GetImageCopy(
+                                    ImageContainer.Source
+                                ).ConfigureAwait(true)
                             )
                         )
                     );
@@ -226,7 +232,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             )
                         );
 
-                    await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
+                    await UpdateContainer(
+                        ImageContainer.Destination
+                    ).ConfigureAwait(true);
                 }
             }
             catch (OperationCanceledException cancelEx)
@@ -249,7 +257,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 {
                     View.SetCursor(CursorType.Wait);
 
-                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
+                    var copy = await GetImageCopy(
+                        ImageContainer.Source
+                    ).ConfigureAwait(true);
 
                     var operation = _rgbFiltersFactory.GetFilter(e.Arg);
 
@@ -263,7 +273,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             )
                         );
 
-                    await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
+                    await UpdateContainer(
+                        ImageContainer.Destination
+                    ).ConfigureAwait(true);
                 }
             }
             catch (OperationCanceledException cancelEx)
@@ -282,34 +294,38 @@ namespace ImageProcessing.Presentation.Presenters.Main
             {
                 Requires.IsNotNull(e, nameof(e));
 
-                if (View.ImageIsNull(ImageContainer.Source))
-                { return; }
-
-                var result = View.GetSelectedColors(e.Arg);
-
-                if (result is default(RGBColors))
+                if (!View.ImageIsNull(ImageContainer.Source))
                 {
-                    View.DstImage = View.SrcImage;
-                    return;
+                    var result = View.GetSelectedColors(e.Arg);
+
+                    if (result is default(RGBColors))
+                    {
+                        View.DstImage = View.SrcImage;
+                        return;
+                    }
+
+                    View.SetCursor(CursorType.Wait);
+
+                    var copy = await GetImageCopy(
+                        ImageContainer.Source
+                    ).ConfigureAwait(true);
+
+                    var operation = _rgbFiltersFactory.GetColorFilter(result);
+
+                    Pipeline
+                        .Register(new PipelineBlock(copy)
+                            .Add<Bitmap, Bitmap>(
+                                (bmp) => operation.Filter(bmp)
+                            )
+                            .Add<Bitmap, Bitmap>(
+                                (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
+                            )
+                        );
+
+                    await UpdateContainer(
+                        ImageContainer.Destination
+                    ).ConfigureAwait(true);
                 }
-
-                View.SetCursor(CursorType.Wait);
-
-                var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
-
-                var operation = _rgbFiltersFactory.GetColorFilter(result);
-
-                Pipeline
-                    .Register(new PipelineBlock(copy)
-                        .Add<Bitmap, Bitmap>(
-                            (bmp) => operation.Filter(bmp)
-                        )
-                        .Add<Bitmap, Bitmap>(
-                            (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
-                        )
-                    );
-
-                await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
             }
             catch (OperationCanceledException cancelEx)
             {
@@ -335,7 +351,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                     View.SetCursor(CursorType.Wait);
 
-                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
+                    var copy = await GetImageCopy(
+                        ImageContainer.Source
+                    ).ConfigureAwait(true);
 
                     Pipeline
                         .Register(new PipelineBlock(copy)
@@ -350,7 +368,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             )
                         );
 
-                    await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
+                    await UpdateContainer(
+                        ImageContainer.Destination
+                    ).ConfigureAwait(true);
                 }
 
             }
@@ -384,7 +404,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             )
                         );
 
-                    await UpdateContainer(ImageContainer.Destination).ConfigureAwait(true);
+                    await UpdateContainer(
+                        ImageContainer.Destination
+                    ).ConfigureAwait(true);
                 }
             }
             catch
@@ -404,7 +426,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     Controller.Run<HistogramPresenter, HistogramViewModel>(
                         new HistogramViewModel(
                             new Bitmap(
-                                await GetImageCopy(e.Arg).ConfigureAwait(true)
+                                await GetImageCopy(
+                                    e.Arg
+                                ).ConfigureAwait(true)
                             ),
                         e.Action)
                     );
@@ -440,7 +464,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             )
                         );
 
-                    await UpdateContainer(replaceTo).ConfigureAwait(true);
+                    await UpdateContainer(
+                        replaceTo
+                    ).ConfigureAwait(true);
                 }
             }
             catch (OperationCanceledException cancelEx)
