@@ -48,5 +48,11 @@ namespace ImageProcessing.Core.Controller.Implementation
             var presenter = IoC.Resolve<TPresenter>();
             presenter.Run(vm);
         }
+
+        public void Exit<TContext>()
+            where TContext : IDisposable
+        {
+            IoC.Resolve<TContext>().Dispose();
+        }
     }
 }

@@ -10,8 +10,15 @@ namespace ImageProcessing
         [STAThread]
         internal static void Main()
         {
-            Startup.Build(Container.LightInject);
-            Startup.Run();
+            try
+            {
+                Startup.Build(Container.LightInject);
+                Startup.Run();
+            }
+            catch(Exception ex)
+            {
+                Startup.Exit();
+            }
         }
     }
 }

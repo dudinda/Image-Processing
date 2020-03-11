@@ -1,6 +1,8 @@
+using System;
+
+using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.IoC.Interface;
 using ImageProcessing.Core.Presenter;
-using ImageProcessing.Core.View;
 
 namespace ImageProcessing.Core.Controller.Interface
 {
@@ -24,6 +26,10 @@ namespace ImageProcessing.Core.Controller.Interface
         /// </summary>
         void Run<TPresenter, TViewModel>(TViewModel vm)
             where TPresenter : class, IPresenter<TViewModel>;
+
+
+        void Exit<TContext>()
+            where TContext : IDisposable;
 
     }
 }

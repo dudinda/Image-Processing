@@ -49,7 +49,8 @@ namespace ImageProcessing.UI
             _controller = new AppController(GetContainerAdapter(container));
 
             _controller.IoC
-                .RegisterView<IMainView, MainForm>()
+                .RegisterSingleton<ApplicationContext>()
+                .Register<IMainView, MainForm>()
                 .RegisterView<IHistogramView, HistogramForm>()
                 .RegisterView<IConvolutionFilterView, ConvolutionFilterForm>()
                 .RegisterView<IQualityMeasureView, QualityMeasureForm>()
@@ -63,8 +64,8 @@ namespace ImageProcessing.UI
                 .RegisterNamedSingleton<IAsyncLocker, OperationAsyncLocker>("OperationLocker")
                 .RegisterSingleton<IEventAggregator, EventAggregator>()
                 .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
-                .RegisterSingleton<ISTATaskService, STATaskService>()
-                .RegisterSingleton<ApplicationContext>();
+                .RegisterSingleton<ISTATaskService, STATaskService>();
+                
 
             IContainer GetContainerAdapter(Container adapter)
             {
@@ -86,6 +87,16 @@ namespace ImageProcessing.UI
             }
 
             _controller.Run<MainPresenter>();
+        }
+
+        internal static void Exit()
+        {
+            if (_controller is null)
+            {
+                throw new InvalidOperationException("The application is not built.");
+            }
+
+            _controller.Exit<ApplicationContext>();
         }
     }
 }
