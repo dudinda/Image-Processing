@@ -2,14 +2,16 @@ using System;
 
 using ImageProcessing.Common.Utility.BitMatrix.Interface;
 
-namespace ImageProcessing.Common.Utility.BitMatrix.Implementation
+namespace ImageProcessing.Common.Utility.BitMatrix.Implementation.Safe
 {
     /// <inheritdoc cref="IBitMatrix"/>
-    public class BitMatrix : IBitMatrix
+    public class BitMatrixSafe : IBitMatrix
     {
+        private readonly object _sync = new object();
+
         private readonly byte[] _data;
 
-        public BitMatrix((int width, int height) size)
+        public BitMatrixSafe((int width, int height) size)
         {
             RowCount    = size.width;
             ColumnCount = size.height;
@@ -46,13 +48,15 @@ namespace ImageProcessing.Common.Utility.BitMatrix.Implementation
                     throw new ArgumentOutOfRangeException(nameof(columnIndex));
                 }
 
-                var pos = rowIndex * ColumnCount + columnIndex;
+                var pos   = rowIndex * ColumnCount + columnIndex;
                 var index = pos % 8;
 
                 pos >>= 3;
 
-                return (_data[pos] & (1 << index)) != 0;
-
+                lock (_sync)
+                {
+                    return (_data[pos] & (1 << index)) != 0;
+                }
             }
 
             set
@@ -72,11 +76,14 @@ namespace ImageProcessing.Common.Utility.BitMatrix.Implementation
 
                 pos >>= 3;
 
-                _data[pos] &= (byte)(~(1 << index));
-
-                if (value)
+                lock (_sync)
                 {
-                    _data[pos] |= (byte)(1 << index);
+                    _data[pos] &= (byte)(~(1 << index));
+
+                    if (value)
+                    {
+                        _data[pos] |= (byte)(1 << index);
+                    }
                 }
             }
         }
