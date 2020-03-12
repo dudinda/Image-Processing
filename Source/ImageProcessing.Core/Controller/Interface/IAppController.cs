@@ -8,9 +8,10 @@ namespace ImageProcessing.Core.Controller.Interface
 {
     /// <summary>
     /// Represents the access point to the specified DI container,
-    /// resolving 
+    /// resolving dependencies via <see cref="IoC"/>.
     /// Further, controls the flow of application,
-    /// by providing the <see cref="Run{TPresenter}" method.
+    /// by providing the <see cref="Run{TPresenter}"
+    /// and <see cref="Exit{TContext}"/> methods.
     /// </summary>
     public interface IAppController
     {

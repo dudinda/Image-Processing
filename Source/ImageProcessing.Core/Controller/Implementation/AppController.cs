@@ -17,7 +17,9 @@ namespace ImageProcessing.Core.Controller.Implementation
 
         public AppController(IContainer container)
         {
-            IoC = new DependencyResolution(Requires.IsNotNull(container, nameof(container)));
+            IoC = new DependencyResolution(
+                Requires.IsNotNull(container, nameof(container))
+            );
 
             IoC.RegisterInstance<IAppController>(this);
         }
