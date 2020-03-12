@@ -56,14 +56,14 @@ namespace ImageProcessing.Presentation.Presenters.Convolution
                      ).ConfigureAwait(true);
 
                 EventAggregator.Publish(
-                    new ApplyConvolutionFilterEventArgs(GetBlock(View.SelectedFilter))
+                    new ApplyConvolutionFilterEventArgs(GetBlock())
                 );
 
-                IPipelineBlock GetBlock(ConvolutionFilter filter)
+                IPipelineBlock GetBlock()
                 {
                     var block = new PipelineBlock(copy);
 
-                    switch (filter)
+                    switch (View.SelectedFilter)
                     {
                         case ConvolutionFilter.BoxBlur3x3:
                         case ConvolutionFilter.BoxBlur5x5:

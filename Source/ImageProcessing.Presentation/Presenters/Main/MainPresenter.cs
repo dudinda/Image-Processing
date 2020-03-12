@@ -121,7 +121,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                              )
                          );
 
-                    await UpdateContainer(ImageContainer.Source).ConfigureAwait(true);
+                    await Render(ImageContainer.Source).ConfigureAwait(true);
 
                 }
             }
@@ -232,7 +232,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             )
                         );
 
-                    await UpdateContainer(
+                    await Render(
                         ImageContainer.Destination
                     ).ConfigureAwait(true);
                 }
@@ -273,7 +273,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             )
                         );
 
-                    await UpdateContainer(
+                    await Render(
                         ImageContainer.Destination
                     ).ConfigureAwait(true);
                 }
@@ -322,7 +322,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             )
                         );
 
-                    await UpdateContainer(
+                    await Render(
                         ImageContainer.Destination
                     ).ConfigureAwait(true);
                 }
@@ -368,7 +368,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             )
                         );
 
-                    await UpdateContainer(
+                    await Render(
                         ImageContainer.Destination
                     ).ConfigureAwait(true);
                 }
@@ -404,7 +404,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             )
                         );
 
-                    await UpdateContainer(
+                    await Render(
                         ImageContainer.Destination
                     ).ConfigureAwait(true);
                 }
@@ -446,26 +446,23 @@ namespace ImageProcessing.Presentation.Presenters.Main
             {
                 Requires.IsNotNull(e, nameof(e));
 
-                var replaceFrom = e.Arg;
+                GetDestination(out var container);
 
-                if (!View.ImageIsNull(replaceFrom))
+                if (!View.ImageIsNull(container.From))
                 {
-                    var replaceTo = replaceFrom == ImageContainer.Source ?
-                      ImageContainer.Destination : ImageContainer.Source;
-
                     View.SetCursor(CursorType.Wait);
 
-                    var copy = await GetImageCopy(replaceFrom).ConfigureAwait(true);
+                    var copy = await GetImageCopy(container.From).ConfigureAwait(true);
 
                     Pipeline
                         .Register(new PipelineBlock(copy)
                             .Add<Bitmap, Bitmap>(
-                                (bmp) => DefaultPipelineBlock(bmp, replaceTo)
+                                (bmp) => DefaultPipelineBlock(bmp, container.To)
                             )
                         );
 
-                    await UpdateContainer(
-                        replaceTo
+                    await Render(
+                        container.To
                     ).ConfigureAwait(true);
                 }
             }
@@ -477,6 +474,21 @@ namespace ImageProcessing.Presentation.Presenters.Main
             {
                 View.ShowError("Error while replacing the image.");
             }
+
+            void GetDestination(out (ImageContainer To, ImageContainer From) container)
+            {
+                switch (e.Arg)
+                {
+                    case ImageContainer.Source:
+                        container = (ImageContainer.Destination, ImageContainer.Source);
+                        break;
+                    case ImageContainer.Destination:
+                        container = (ImageContainer.Source, ImageContainer.Destination);
+                        break;
+
+                    default: throw new NotImplementedException(nameof(e.Arg));
+                }
+            };
         }
 
         private async Task GetRandomVariableInfo(RandomVariableEventArgs e)
@@ -558,7 +570,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             ).ConfigureAwait(true);
         }
 
-        private async Task UpdateContainer(ImageContainer container)
+        private async Task Render(ImageContainer container)
         {
             var result = await Pipeline.AwaitResult().ConfigureAwait(true);
 

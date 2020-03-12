@@ -67,9 +67,9 @@ namespace ImageProcessing.UI
                 .RegisterSingleton<ISTATaskService, STATaskService>();
                 
 
-            IContainer GetContainerAdapter(Container adapter)
+            IContainer GetContainerAdapter()
             {
-                switch (adapter)
+                switch (container)
                 {
                     case Container.LightInject:
                         return new LightInjectAdapter();
