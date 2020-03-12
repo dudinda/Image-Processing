@@ -1,11 +1,13 @@
 using System;
 
 using ImageProcessing.Common.Enums;
+using ImageProcessing.Common.Extensions.StringExtensions;
 using ImageProcessing.Core.Model.Distribution;
 using ImageProcessing.DecimalMath.Real;
 
 namespace ImageProcessing.Distributions.OneParameterDistributions
 {
+    /// <inheritdoc/>
     public class ParabolaDistribution : IDistribution
     {
         private decimal _k;
@@ -20,12 +22,16 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
             _k = k;
         }
 
+        /// <inheritdoc/>
         public string Name => nameof(Distribution.Parabola);
 
+        /// <inheritdoc/>
         public decimal FirstParameter => _k;
 
+        /// <inheritdoc/>
         public decimal SecondParameter => throw new NotSupportedException();
 
+        /// <inheritdoc/>
         public bool Quantile(decimal p, out decimal quantile)
         {
             if (p < 1)
@@ -40,19 +46,26 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
             return false;
         }
 
+        /// <inheritdoc/>
         public decimal GetMean()
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
         public decimal GetVariance()
         {
             throw new NotImplementedException();
         }
 
-        public IDistribution SetParams((decimal, decimal) parms)
+        /// <inheritdoc/>
+        public IDistribution SetParams((string First, string Second) parms)
         {
-            _k = parms.Item1;
+            if(!parms.First.TryParse(out _k))
+            {
+                throw new ArgumentException(nameof(parms.First));
+            }
+
             return this;
         }
     }

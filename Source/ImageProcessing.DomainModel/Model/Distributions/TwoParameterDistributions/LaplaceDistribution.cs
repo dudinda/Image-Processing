@@ -1,9 +1,12 @@
+using System;
 using ImageProcessing.Common.Enums;
+using ImageProcessing.Common.Extensions.StringExtensions;
 using ImageProcessing.Core.Model.Distribution;
 using ImageProcessing.DecimalMath.Real;
 
 namespace ImageProcessing.Distributions.TwoParameterDistributions
 {
+    /// <inheritdoc/>
     public class LaplaceDistribution : IDistribution
     {
         private decimal _mu;
@@ -20,16 +23,22 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
             _b = b;
         }
 
+        /// <inheritdoc/>
         public string Name => nameof(Distribution.Laplace);
 
+        /// <inheritdoc/>
         public decimal FirstParameter => _mu;
 
+        /// <inheritdoc/>
         public decimal SecondParameter => _b;
 
+        /// <inheritdoc/>
         public decimal GetMean() => _mu;
 
+        /// <inheritdoc/>
         public decimal GetVariance() => 2 * _b * _b;
 
+        /// <inheritdoc/>
         public bool Quantile(decimal p, out decimal quantile)
         {
             if(p > 0 && p < 1)
@@ -43,11 +52,20 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
 
             return false;
         }
-           
-        public IDistribution SetParams((decimal, decimal) parms)
+
+        /// <inheritdoc/>
+        public IDistribution SetParams((string First, string Second) parms)
         {
-            _mu = parms.Item1;
-            _b  = parms.Item2;
+            if(!parms.First.TryParse(out _mu))
+            {
+                throw new ArgumentException(nameof(parms.First));
+            }
+
+            if(!parms.Second.TryParse(out _b))
+            {
+                throw new ArgumentException(nameof(parms.Second));
+            }
+
             return this;
         }
     }

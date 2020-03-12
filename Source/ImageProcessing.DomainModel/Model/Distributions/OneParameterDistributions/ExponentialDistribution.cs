@@ -1,11 +1,13 @@
 using System;
 
 using ImageProcessing.Common.Enums;
+using ImageProcessing.Common.Extensions.StringExtensions;
 using ImageProcessing.Core.Model.Distribution;
 using ImageProcessing.DecimalMath.Real;
 
 namespace ImageProcessing.Distributions.OneParameterDistributions
 {
+    /// <inheritdoc/>
     public class ExponentialDistribution : IDistribution
     {
         private decimal _lambda;
@@ -20,16 +22,22 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
             _lambda = lambda;
         }
 
+        /// <inheritdoc/>
         public string Name => nameof(Distribution.Exponential);
 
+        /// <inheritdoc/>
         public decimal FirstParameter => _lambda;
 
+        /// <inheritdoc/>
         public decimal SecondParameter => throw new NotSupportedException();
 
+        /// <inheritdoc/>
         public decimal GetMean() => 1 / _lambda;
 
+        /// <inheritdoc/>
         public decimal GetVariance() => 1 / (_lambda * _lambda);
 
+        /// <inheritdoc/>
         public bool Quantile(decimal p, out decimal quantile)
         {
             if (p < 1)
@@ -44,9 +52,14 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
             return false;
         }
 
-        public IDistribution SetParams((decimal, decimal) parms)
+        /// <inheritdoc/>
+        public IDistribution SetParams((string First, string Second) parms)
         {
-            _lambda = parms.Item1;
+            if(!parms.First.TryParse(out _lambda))
+            {
+                throw new ArgumentException(nameof(parms.First));
+            }
+
             return this;
         }
     }

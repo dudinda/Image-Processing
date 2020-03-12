@@ -1,4 +1,4 @@
-﻿using System.Collections.Concurrent;
+using System.Collections.Concurrent;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -26,7 +26,10 @@ namespace ImageProcessing.UI.Control
 
         public void Reset()
         {
-            
+            while(_queue.TryDequeue(out var result))
+            {
+
+            }
         }   
     }
 }

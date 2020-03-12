@@ -86,7 +86,10 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 {
                     using (var dialog = new OpenFileDialog())
                     {
-                        dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                        dialog.InitialDirectory = Environment.GetFolderPath(
+                            Environment.SpecialFolder.Personal 
+                        );
+
                         dialog.Filter = ConfigurationManager.AppSettings["Filters"];
 
                         if (dialog.ShowDialog() == DialogResult.OK)
@@ -121,7 +124,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
                              )
                          );
 
-                    await Render(ImageContainer.Source).ConfigureAwait(true);
+                    await Render(
+                        ImageContainer.Source
+                    ).ConfigureAwait(true);
 
                 }
             }
@@ -147,11 +152,13 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             {
                                 return _operationLocker.LockAsync(() =>
                                 {
-                                    new Bitmap(View.SrcImageCopy).Save(
-                                        dialog.FileName,
-                                        Path.GetExtension(dialog.FileName)
-                                            .GetImageFormat()
-                                      );
+                                    new Bitmap(View.SrcImageCopy)
+                                        .Save(
+                                            dialog.FileName,
+                                            Path.GetExtension(
+                                                dialog.FileName
+                                        ).GetImageFormat()
+                                    );
                                 });
                             }
 
@@ -176,10 +183,12 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 {
                     await _operationLocker.LockAsync(() =>
                     {
-                        new Bitmap(View.SrcImageCopy).Save(
-                            View.PathToFile,
-                            Path.GetExtension(View.PathToFile)
-                                .GetImageFormat()
+                        new Bitmap(View.SrcImageCopy)
+                            .Save(
+                                View.PathToFile,
+                                Path.GetExtension(
+                                    View.PathToFile
+                            ).GetImageFormat()
                         );
                     }).ConfigureAwait(true);
                 }
@@ -261,7 +270,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
                         ImageContainer.Source
                     ).ConfigureAwait(true);
 
-                    var operation = _rgbFiltersFactory.GetFilter(e.Arg);
+                    var operation = _rgbFiltersFactory
+                        .GetFilter(e.Arg);
 
                     Pipeline
                         .Register(new PipelineBlock(copy)
@@ -298,33 +308,31 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 {
                     var result = View.GetSelectedColors(e.Arg);
 
-                    if (result is default(RGBColors))
+                    if (!IsDefault(result))
                     {
-                        View.DstImage = View.SrcImage;
-                        return;
+                        View.SetCursor(CursorType.Wait);
+
+                        var copy = await GetImageCopy(
+                            ImageContainer.Source
+                        ).ConfigureAwait(true);
+
+                        var operation = _rgbFiltersFactory
+                            .GetColorFilter(result);
+
+                        Pipeline
+                            .Register(new PipelineBlock(copy)
+                                .Add<Bitmap, Bitmap>(
+                                    (bmp) => operation.Filter(bmp)
+                                )
+                                .Add<Bitmap, Bitmap>(
+                                    (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
+                                )
+                            );
+
+                        await Render(
+                            ImageContainer.Destination
+                        ).ConfigureAwait(true);
                     }
-
-                    View.SetCursor(CursorType.Wait);
-
-                    var copy = await GetImageCopy(
-                        ImageContainer.Source
-                    ).ConfigureAwait(true);
-
-                    var operation = _rgbFiltersFactory.GetColorFilter(result);
-
-                    Pipeline
-                        .Register(new PipelineBlock(copy)
-                            .Add<Bitmap, Bitmap>(
-                                (bmp) => operation.Filter(bmp)
-                            )
-                            .Add<Bitmap, Bitmap>(
-                                (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
-                            )
-                        );
-
-                    await Render(
-                        ImageContainer.Destination
-                    ).ConfigureAwait(true);
                 }
             }
             catch (OperationCanceledException cancelEx)
@@ -333,8 +341,20 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
             catch (Exception ex)
             {
-                View.ShowError($"Error {ex.Message}");
+                View.ShowError($"Error while applying a filter by the color channel.");
             }
+
+            bool IsDefault(RGBColors color)
+            {
+                if(color is default(RGBColors))
+                {
+                    View.DstImage = View.SrcImage;
+
+                    return true;
+                }
+
+                return false;
+            };
         }
 
         private async Task ApplyHistogramTransformation(DistributionEventArgs e)
@@ -358,11 +378,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     Pipeline
                         .Register(new PipelineBlock(copy)
                             .Add<Bitmap, Bitmap>(
-                                (bmp) =>
-                                {
-                                    bmp.Tag = filter.Name;
-                                    return _distributionService.TransformTo(bmp, filter);
-                                 })
+                                (bmp) => Transform(bmp)
+                            )                     
                             .Add<Bitmap, Bitmap>(
                                 (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
                             )
@@ -371,6 +388,16 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     await Render(
                         ImageContainer.Destination
                     ).ConfigureAwait(true);
+
+                    Bitmap Transform(Bitmap bmp)
+                    {
+                        var result = _distributionService
+                            .TransformTo(bmp, filter);
+
+                        View.AddToQualityMeasureContainer(result, filter.Name);
+
+                        return new Bitmap(result);
+                    };
                 }
 
             }
@@ -381,7 +408,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             catch (Exception ex)
             {
                 View.ShowError("Error while applying a histogram transformation.");
-            }
+            }      
         }
 
         private async Task Shuffle()
@@ -392,7 +419,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 {
                     View.SetCursor(CursorType.Wait);
 
-                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
+                    var copy = await GetImageCopy(
+                        ImageContainer.Source
+                    ).ConfigureAwait(true);
 
                     Pipeline
                         .Register(new PipelineBlock(copy)
@@ -452,7 +481,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 {
                     View.SetCursor(CursorType.Wait);
 
-                    var copy = await GetImageCopy(container.From).ConfigureAwait(true);
+                    var copy = await GetImageCopy(
+                        container.From
+                    ).ConfigureAwait(true);
 
                     Pipeline
                         .Register(new PipelineBlock(copy)
@@ -501,7 +532,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 if (!View.ImageIsNull(container))
                 {
-                    var copy = await GetImageCopy(container);
+                    var copy = await GetImageCopy(
+                        container
+                    ).ConfigureAwait(true);
 
                     var result = await Task.Run(() =>
                     {
@@ -526,7 +559,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
             catch (Exception ex)
             {
-                View.ShowError($"Error while getting the information about {nameof(e.Action).ToLower()}.");
+                View.ShowError($"Error while getting the information about {e.Action.ToString().ToLower()}.");
             }
         }
 
@@ -557,7 +590,11 @@ namespace ImageProcessing.Presentation.Presenters.Main
         private Bitmap DefaultPipelineBlock(Bitmap bmp, ImageContainer to)
         {
             View.SetImageCopy(to, new Bitmap(bmp));
-            View.AddToUndoContainer((new Bitmap(View.GetImageCopy(to)), to));
+
+            View.AddToUndoContainer(
+                (new Bitmap(View.GetImageCopy(to)), to)
+            );
+
             View.SetImageToZoom(to, new Bitmap(bmp));
 
             return (Bitmap)View.GetImageCopy(to).Clone();
@@ -566,13 +603,17 @@ namespace ImageProcessing.Presentation.Presenters.Main
         private async Task<Bitmap> GetImageCopy(ImageContainer container)
         {
             return await _operationLocker.LockAsync(() =>
-                  new Bitmap(View.GetImageCopy(container))
+                  new Bitmap(
+                      View.GetImageCopy(container)
+                  )
             ).ConfigureAwait(true);
         }
 
         private async Task Render(ImageContainer container)
         {
-            var result = await Pipeline.AwaitResult().ConfigureAwait(true);
+            var result = await Pipeline
+                .AwaitResult()
+                .ConfigureAwait(true);
 
             View.SetImage(container, (Bitmap)result);
             View.Refresh(container);

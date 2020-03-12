@@ -1,11 +1,13 @@
 using System;
 
 using ImageProcessing.Common.Enums;
+using ImageProcessing.Common.Extensions.StringExtensions;
 using ImageProcessing.Core.Model.Distribution;
 using ImageProcessing.DecimalMath.Real;
 
 namespace ImageProcessing.Distributions.OneParameterDistributions
 {
+    /// <inheritdoc/>
     public class RayleighDistribution : IDistribution
     {
         private decimal _sigma;
@@ -20,13 +22,22 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
             _sigma = sigma;
         }
 
+        /// <inheritdoc/>
         public string Name => nameof(Distribution.Rayleigh);
+
+        /// <inheritdoc/>
         public decimal FirstParameter => _sigma;
+
+        /// <inheritdoc/>
         public decimal SecondParameter => throw new NotSupportedException();
 
-        public decimal GetMean() => _sigma * DecimalMathReal.Sqrt(DecimalMathReal.PI / 2M);
-        public decimal GetVariance() => (2M - DecimalMathReal.PI / 2M) * _sigma * _sigma;
+        /// <inheritdoc/>
+        public decimal GetMean() => _sigma * DecimalMathReal.Sqrt(DecimalMathReal.PiOver2);
 
+        /// <inheritdoc/>
+        public decimal GetVariance() => (2M - DecimalMathReal.PiOver2) * _sigma * _sigma;
+
+        /// <inheritdoc/>
         public bool Quantile(decimal p, out decimal quantile)
         {
             if (p >= 0 && p < 1)
@@ -40,9 +51,14 @@ namespace ImageProcessing.Distributions.OneParameterDistributions
             return false;
         }
 
-        public IDistribution SetParams((decimal, decimal) parms)
+        /// <inheritdoc/>
+        public IDistribution SetParams((string First, string Second) parms)
         {
-            _sigma = parms.Item1;
+            if (!parms.First.TryParse(out _sigma))
+            {
+                throw new ArgumentException(nameof(parms.First));
+            }
+   
             return this;
         }
     }

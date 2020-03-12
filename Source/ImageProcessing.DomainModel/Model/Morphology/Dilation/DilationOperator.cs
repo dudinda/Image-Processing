@@ -47,6 +47,7 @@ namespace ImageProcessing.DomainModel.Model.Morphology
                     MaxDegreeOfParallelism = Environment.ProcessorCount - 1
                 };
 
+
                 Parallel.For(kernelOffset, size.Height - kernelOffset, options, y =>
                 {
                     //get the address of a new line, considering a kernel offset

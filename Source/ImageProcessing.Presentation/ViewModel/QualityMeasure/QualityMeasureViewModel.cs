@@ -1,15 +1,16 @@
-﻿using System.Drawing;
+using System.Collections.Concurrent;
+using System.Drawing;
 
 namespace ImageProcessing.Presentation.ViewModel.QualityMeasure
 {
     public class QualityMeasureViewModel
     {
-        public QualityMeasureViewModel(Bitmap bitmap)
+        public QualityMeasureViewModel(ConcurrentQueue<Bitmap> queue)
         {
-            Bitmap = bitmap;
+            Queue = queue;
         }
 
-        public Bitmap Bitmap { get; }
+        public ConcurrentQueue<Bitmap> Queue { get; }
 
     }
 }

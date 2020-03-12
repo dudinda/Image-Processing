@@ -1,11 +1,13 @@
 using System;
 
 using ImageProcessing.Common.Enums;
+using ImageProcessing.Common.Extensions.StringExtensions;
 using ImageProcessing.Core.Model.Distribution;
 using ImageProcessing.DecimalMath.Real;
 
 namespace ImageProcessing.Distributions.TwoParameterDistributions
 {
+    /// <inheritdoc/>
     public class CauchyDistribution : IDistribution
     {
         private decimal _x0;
@@ -22,16 +24,22 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
             _gamma = gamma;
         }
 
+        /// <inheritdoc/>
         public string Name => nameof(Distribution.Cauchy);
 
+        /// <inheritdoc/>
         public decimal FirstParameter => _x0;
 
+        /// <inheritdoc/>
         public decimal SecondParameter => _gamma;
 
-        public decimal GetMean() => throw new NotImplementedException("NaN");
+        /// <inheritdoc/>
+        public decimal GetMean() => throw new ArithmeticException("NaN");
 
+        /// <inheritdoc/>
         public decimal GetVariance() => throw new ArithmeticException("NaN");
 
+        /// <inheritdoc/>
         public bool Quantile(decimal p, out decimal quantile)
         {
             if(p > 0 && p < 1)
@@ -45,11 +53,20 @@ namespace ImageProcessing.Distributions.TwoParameterDistributions
 
             return false;
         }
-       
-        public IDistribution SetParams((decimal, decimal) parms)
+
+        /// <inheritdoc/>
+        public IDistribution SetParams((string First, string Second) parms)
         {
-            _x0    = parms.Item1;
-            _gamma = parms.Item2;
+            if (!parms.First.TryParse(out _x0))
+            {
+                throw new ArgumentException(nameof(parms.First));
+            }
+
+            if (!parms.Second.TryParse(out _gamma))
+            {
+                throw new ArgumentException(nameof(parms.Second));
+            }
+
             return this;
         }
     }

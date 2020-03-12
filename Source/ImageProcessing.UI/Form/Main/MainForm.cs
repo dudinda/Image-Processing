@@ -210,11 +210,11 @@ namespace ImageProcessing.Form.Main
             switch (color)
             {
                 case RGBColors.Red:
-                    IsRedChannelChecked = !IsRedChannelChecked;
+                    IsRedChannelChecked   = !IsRedChannelChecked;
                     break;
 
                 case RGBColors.Blue:
-                    IsBlueChannelChecked = !IsBlueChannelChecked;
+                    IsBlueChannelChecked  = !IsBlueChannelChecked;
                     break;
 
                 case RGBColors.Green:
@@ -253,5 +253,10 @@ namespace ImageProcessing.Form.Main
         public void ShowError(string error)
             => ErrorTooltip.Show(error, this, PointToClient(CursorPosition.GetCursorPosition()), 2000);
 
+        public void AddToQualityMeasureContainer(Bitmap transformed, string filter)
+        {
+            transformed.Tag = filter;
+            QualityMeasure.Add(transformed);
+        }
     }
 }

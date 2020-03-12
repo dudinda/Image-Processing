@@ -1,5 +1,4 @@
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Common.Extensions.TupleExtensions;
 using ImageProcessing.Core.EventAggregator.Interface.EventArgs;
 
 namespace ImageProcessing.Core.EventAggregator.Implementation.EventArgs
@@ -9,15 +8,11 @@ namespace ImageProcessing.Core.EventAggregator.Implementation.EventArgs
         public DistributionEventArgs(Distribution arg, (string, string) parameters)
         {
             Arg = arg;
-
-            if(parameters.TryParse<decimal, decimal>(out var parms))
-            {
-                Parameters = parms;
-            }
+            Parameters = parameters;
         }
 
         ///<inheritdoc cref="Distribution/>
         public Distribution Arg { get; }
-        public (decimal, decimal) Parameters { get; private set; }
+        public (string, string) Parameters { get; private set; }
     }
 }
