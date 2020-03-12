@@ -46,7 +46,7 @@ namespace ImageProcessing.UI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            _controller = new AppController(GetContainerAdapter(container));
+            _controller = new AppController(GetContainerAdapter());
 
             _controller.IoC
                 .RegisterSingleton<ApplicationContext>()

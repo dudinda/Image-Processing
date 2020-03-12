@@ -63,7 +63,9 @@ namespace ImageProcessing.Presentation.Presenters.Convolution
                 {
                     var block = new PipelineBlock(copy);
 
-                    switch (View.SelectedFilter)
+                    var filter = View.SelectedFilter;
+
+                    switch (filter)
                     {
                         case ConvolutionFilter.BoxBlur3x3:
                         case ConvolutionFilter.BoxBlur5x5:
