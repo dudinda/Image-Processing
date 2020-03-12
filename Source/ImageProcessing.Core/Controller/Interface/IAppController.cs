@@ -6,6 +6,12 @@ using ImageProcessing.Core.Presenter;
 
 namespace ImageProcessing.Core.Controller.Interface
 {
+    /// <summary>
+    /// Represents the access point to the specified DI container,
+    /// resolving 
+    /// Further, controls the flow of application,
+    /// by providing the <see cref="Run{TPresenter}" method.
+    /// </summary>
     public interface IAppController
     {
         /// <summary>
@@ -27,7 +33,11 @@ namespace ImageProcessing.Core.Controller.Interface
         void Run<TPresenter, TViewModel>(TViewModel vm)
             where TPresenter : class, IPresenter<TViewModel>;
 
-
+        /// <summary>
+        /// Exti the application by disposing
+        /// the <typeparamref name="TContext"/> if
+        /// it exists.
+        /// </summary>
         void Exit<TContext>()
             where TContext : IDisposable;
 

@@ -3,7 +3,6 @@ using System;
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Container;
 using ImageProcessing.Core.Controller.Interface;
-using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.IoC.Implementation;
 using ImageProcessing.Core.IoC.Interface;
 using ImageProcessing.Core.Presenter;
@@ -49,9 +48,15 @@ namespace ImageProcessing.Core.Controller.Implementation
             presenter.Run(vm);
         }
 
+        /// <inheritdoc cref="IAppController.Exit{TContext}"/>
         public void Exit<TContext>()
             where TContext : IDisposable
         {
+            if (!IoC.IsRegistered<TContext>())
+            {
+                throw new InvalidOperationException("Application context is not specified.");
+            }
+
             IoC.Resolve<TContext>().Dispose();
         }
     }

@@ -66,7 +66,6 @@ namespace ImageProcessing.UI
                 .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
                 .RegisterSingleton<ISTATaskService, STATaskService>();
                 
-
             IContainer GetContainerAdapter()
             {
                 switch (container)
