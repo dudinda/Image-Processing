@@ -12,7 +12,7 @@ namespace ImageProcessing
         {
             try
             {
-                Startup.Build(Container.LightInject);
+                Startup.Build(Container.Ninject);
                 Startup.Run();
             }
             catch(Exception ex)

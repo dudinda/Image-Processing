@@ -11,7 +11,7 @@ using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Core.Presenter.Abstract;
 using ImageProcessing.Presentation.ViewModel.Histogram;
 using ImageProcessing.Presentation.Views.Histogram;
-using ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Interface;
+using ImageProcessing.ServiceLayer.Service.DistributionServices.BitmapLuminanceDistribution.Interface;
 
 namespace ImageProcessing.Presentation.Presenters
 {

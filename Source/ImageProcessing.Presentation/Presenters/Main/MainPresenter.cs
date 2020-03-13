@@ -16,19 +16,17 @@ using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Factory.Base;
 using ImageProcessing.Core.Factory.DistributionFactory;
 using ImageProcessing.Core.Factory.RGBFiltersFactory;
-using ImageProcessing.Core.Locker.Interface;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Core.Pipeline.Block.Implementation;
 using ImageProcessing.Core.Presenter.Abstract;
-using ImageProcessing.Core.Service.STATask;
+using ImageProcessing.Core.ServiceLayer.Services.Locker.Interface;
+using ImageProcessing.Core.ServiceLayer.Services.STATask;
 using ImageProcessing.Presentation.Presenters.Convolution;
 using ImageProcessing.Presentation.ViewModel.Convolution;
 using ImageProcessing.Presentation.ViewModel.Histogram;
 using ImageProcessing.Presentation.Views.Main;
-using ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Interface;
-using ImageProcessing.Services.RGBFilterService.Interface;
-
-using LightInject;
+using ImageProcessing.ServiceLayer.Service.DistributionServices.BitmapLuminanceDistribution.Interface;
+using ImageProcessing.ServiceLayer.Services.RGBFilterService.Interface;
 
 namespace ImageProcessing.Presentation.Presenters.Main
 {
@@ -42,10 +40,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
         private readonly IDistributionFactory _distributionFactory;
         private readonly IRGBFiltersFactory _rgbFiltersFactory;
 
-        private readonly IEventAggregator _eventAggregator;
-
-        private readonly IAsyncLocker _zoomLocker;
-        private readonly IAsyncLocker _operationLocker;
+        private readonly IAsyncZoomLocker _zoomLocker;
+        private readonly IAsyncOperationLocker _operationLocker;
 
         public MainPresenter(IAppController controller,
                              IMainView view,
@@ -55,12 +51,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
                              IRGBFilterService rgbFilterService,
                              IEventAggregator eventAggregator,
                              IAwaitablePipeline pipeline,
+                             IAsyncZoomLocker zoomLocker,
+                             IAsyncOperationLocker operationLocker
 
-                             [Inject("ZoomLocker")]
-                             IAsyncLocker zoomLocker,
-
-                             [Inject("OperationLocker")]
-                             IAsyncLocker operationLocker
             ) : base(controller, view, pipeline, eventAggregator)
         {
             Requires.IsNotNull(baseFactory, nameof(baseFactory));

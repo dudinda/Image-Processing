@@ -8,7 +8,7 @@ using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Core.Presenter.Abstract;
 using ImageProcessing.Presentation.ViewModel.QualityMeasure;
 using ImageProcessing.Presentation.Views.QualityMeasure;
-using ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Interface;
+using ImageProcessing.ServiceLayer.Service.DistributionServices.BitmapLuminanceDistribution.Interface;
 
 namespace ImageProcessing.Presentation.Presenters
 {
