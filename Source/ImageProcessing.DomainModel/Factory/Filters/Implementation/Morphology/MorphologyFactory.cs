@@ -2,7 +2,8 @@ using System;
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.Factory.Morphology;
-using ImageProcessing.Core.Model.Morphology.Base;
+using ImageProcessing.Core.Model.Morphology.BinaryOperator;
+using ImageProcessing.Core.Model.Morphology.UnaryOperator;
 using ImageProcessing.DomainModel.Model.Morphology;
 using ImageProcessing.DomainModel.Model.Morphology.BlackHat;
 using ImageProcessing.DomainModel.Model.Morphology.Closing;
@@ -15,16 +16,16 @@ namespace ImageProcessing.DomainModel.Factory.Filters.Implementation.Morphology
 {
     /// <summary>
     /// Provides a factory method for all types
-    /// marked by <see cref="IMorphologyBase"/>.
+    /// marked by <see cref="IMorphology"/>.
     /// </summary>
     public class MorphologyFactory : IMorphologyFactory
     {
         /// <summary>
         /// A factory method
         /// where <see cref="MorphologyOperator"/> represents
-        /// enumeration for types marked by <see cref="IMorphologyBase"/>.
+        /// enumeration for types implementing <see cref="IMorphologyBinary"/>.
         /// </summary>
-        public IMorphologyBase GetFilter(MorphologyOperator filter)
+        public IMorphologyBinary BinaryFilter(MorphologyOperator filter)
         {
             switch (filter)
             {
@@ -32,6 +33,20 @@ namespace ImageProcessing.DomainModel.Factory.Filters.Implementation.Morphology
                     return new AdditionOperator();
                 case MorphologyOperator.Subtraction:
                     return new SubtractionOperator();
+               
+                default: throw new NotImplementedException();
+            }
+        }
+
+        /// <summary>
+        /// A factory method
+        /// where <see cref="MorphologyOperator"/> represents
+        /// enumeration for types implementing <see cref="IMorphologyUnary"/>.
+        /// </summary>
+        public IMorphologyUnary GetFilter(MorphologyOperator filter)
+        {
+            switch (filter)
+            {        
                 case MorphologyOperator.Dilation:
                     return new DilationOperator();
                 case MorphologyOperator.Erosion:
