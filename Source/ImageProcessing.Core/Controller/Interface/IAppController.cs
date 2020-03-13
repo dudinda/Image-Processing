@@ -9,7 +9,7 @@ namespace ImageProcessing.Core.Controller.Interface
     /// <summary>
     /// Represents the access point to the specified DI container,
     /// resolving dependencies via <see cref="IoC"/>.
-    /// Further, controls the flow of application,
+    /// Further, controls the flow of the application,
     /// by providing the <see cref="Run{TPresenter}"
     /// and <see cref="Exit{TContext}"/> methods.
     /// </summary>
@@ -32,7 +32,8 @@ namespace ImageProcessing.Core.Controller.Interface
         /// <para>Where the <typeparamref name="TPresenter"/> is a <see cref="IPresenter{TViewModel}"/> type.</para>
         /// </summary>
         void Run<TPresenter, TViewModel>(TViewModel vm)
-            where TPresenter : class, IPresenter<TViewModel>;
+            where TPresenter : class, IPresenter<TViewModel>
+            where TViewModel : class;
 
         /// <summary>
         /// Exti the application by disposing

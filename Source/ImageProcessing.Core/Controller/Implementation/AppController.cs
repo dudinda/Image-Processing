@@ -40,6 +40,7 @@ namespace ImageProcessing.Core.Controller.Implementation
         /// <inheritdoc cref="IAppController.Run{TPresenter, TViewModel}(TViewModel)"/>
         public void Run<TPresenter, TViewModel>(TViewModel vm)
             where TPresenter : class, IPresenter<TViewModel>
+            where TViewModel : class
         {
             if (!IoC.IsRegistered<TPresenter>())
             {
@@ -47,7 +48,10 @@ namespace ImageProcessing.Core.Controller.Implementation
             }
 
             var presenter = IoC.Resolve<TPresenter>();
-            presenter.Run(vm);
+
+            presenter.Run(
+                Requires.IsNotNull(vm, nameof(vm))
+            );
         }
 
         /// <inheritdoc cref="IAppController.Exit{TContext}"/>
