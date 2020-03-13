@@ -16,15 +16,18 @@ namespace ImageProcessing.Core.Adapters.LightInject
         private readonly ServiceContainer _container = new ServiceContainer();
 
         /// <inheritdoc/>
-        public void Register<TService, TImplementation>() where TImplementation : TService
+        public void Register<TService, TImplementation>()
+            where TImplementation : TService
             => _container.Register<TService, TImplementation>();
 
         /// <inheritdoc/>
-        public void RegisterSingleton<TService, TImplementation>() where TImplementation : TService
+        public void RegisterSingleton<TService, TImplementation>()
+            where TImplementation : TService
             => _container.Register<TService, TImplementation>(new PerContainerLifetime());
 
         /// <inheritdoc/>
-        public void RegisterSingleton<TService, TImplementation>(string name) where TImplementation : TService
+        public void RegisterSingleton<TService, TImplementation>(string name)
+            where TImplementation : TService
             => _container.Register<TService, TImplementation>(name, new PerContainerLifetime());
 
         /// <inheritdoc/>

@@ -12,17 +12,20 @@ namespace ImageProcessing.Core.Container
         /// <summary>
         /// Registers the <typeparamref name="TService"/>  with the <typeparamref name="TImplementation"/>.
         /// </summary>
-        void Register<TService, TImplementation>() where TImplementation : TService;
+        void Register<TService, TImplementation>()
+            where TImplementation : TService;
 
         /// <summary>
         /// Registers the signleton <typeparamref name="TService"/>  with the <typeparamref name="TImplementation"/>.
         /// </summary>
-        void RegisterSingleton<TService, TImplementation>() where TImplementation : TService;
+        void RegisterSingleton<TService, TImplementation>()
+            where TImplementation : TService;
 
         /// <summary>
         /// Registers the named signleton <typeparamref name="TService"/>  with the <typeparamref name="TImplementation"/>.
         /// </summary>
-        void RegisterSingleton<TService, TImplementation>(string serviceName) where TImplementation : TService;
+        void RegisterSingleton<TService, TImplementation>(string serviceName)
+            where TImplementation : TService;
 
         /// <summary>
         /// Registers a concrete type as a service.

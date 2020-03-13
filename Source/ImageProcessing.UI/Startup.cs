@@ -3,6 +3,7 @@ using System.Windows.Forms;
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.Adapters.LightInject;
+using ImageProcessing.Core.Adapters.Ninject;
 using ImageProcessing.Core.Container;
 using ImageProcessing.Core.Controller.Implementation;
 using ImageProcessing.Core.Controller.Interface;
@@ -50,6 +51,9 @@ namespace ImageProcessing.UI
 
             _controller.IoC
                 .RegisterSingleton<ApplicationContext>()
+                .RegisterSingleton<IEventAggregator, EventAggregator>()
+                .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
+                .RegisterSingleton<ISTATaskService, STATaskService>()
                 .Register<IMainView, MainForm>()
                 .RegisterView<IHistogramView, HistogramForm>()
                 .RegisterView<IConvolutionFilterView, ConvolutionFilterForm>()
@@ -61,17 +65,16 @@ namespace ImageProcessing.UI
                 .Register<IRGBFilterService, RGBFilterService>()
                 .EnableAnnotatedConstructorInjection()
                 .RegisterNamedSingleton<IAsyncLocker, ZoomAsyncLocker>("ZoomLocker")
-                .RegisterNamedSingleton<IAsyncLocker, OperationAsyncLocker>("OperationLocker")
-                .RegisterSingleton<IEventAggregator, EventAggregator>()
-                .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
-                .RegisterSingleton<ISTATaskService, STATaskService>();
-                
+                .RegisterNamedSingleton<IAsyncLocker, OperationAsyncLocker>("OperationLocker");
+            
             IContainer GetContainerAdapter()
             {
                 switch (container)
                 {
                     case Container.LightInject:
                         return new LightInjectAdapter();
+                    case Container.Ninject:
+                        return new NinjectAdapter();
 
                     default: throw new NotImplementedException(nameof(container));
                 }

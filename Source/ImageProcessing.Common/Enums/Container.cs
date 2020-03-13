@@ -17,6 +17,12 @@ namespace ImageProcessing.Common.Enums
         /// Light inject.
         /// </summary>
         [Description("Light inject")]
-        LightInject = 1
+        LightInject = 1,
+
+        /// <summary>
+        /// Ninject.
+        /// </summary>
+        [Description("Ninject")]
+        Ninject     = 2
     }
 }
