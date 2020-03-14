@@ -14,7 +14,7 @@ using ImageProcessing.DomainModel.Model.RgbFilters.Interface;
 [assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Binary
 {
-    internal sealed class BinaryFilter : IRGBFilter
+    internal sealed class BinaryFilter : IRgbFilter
     {
         public Bitmap Filter(Bitmap bitmap)
         {

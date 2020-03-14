@@ -10,11 +10,11 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.RgbFilter
 {
     public sealed class RgbFilterServiceProvider : IRgbFilterServiceProvider
     {
-        private readonly IRGBFiltersFactory _rgbFilterFactory;
-        private readonly IRGBFilterService _rgbFilterService;
+        private readonly IRgbFilterFactory _rgbFilterFactory;
+        private readonly IRgbFilterService _rgbFilterService;
 
-        public RgbFilterServiceProvider(IRGBFiltersFactory rgbFilterFactory,
-                                        IRGBFilterService rgbFilterService)
+        public RgbFilterServiceProvider(IRgbFilterFactory rgbFilterFactory,
+                                        IRgbFilterService rgbFilterService)
         {
             _rgbFilterFactory = Requires.IsNotNull(
                 rgbFilterFactory, nameof(rgbFilterFactory)
@@ -25,7 +25,7 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.RgbFilter
             );
         }
 
-        public Bitmap Apply(Bitmap bmp, RGBFilter filter)
+        public Bitmap Apply(Bitmap bmp, Common.Enums.RgbFilter filter)
         {
             Requires.IsNotNull(bmp, nameof(bmp));
 
@@ -36,7 +36,7 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.RgbFilter
                    );
         }
 
-        public Bitmap Apply(Bitmap bmp, RGBColors filter)
+        public Bitmap Apply(Bitmap bmp, RgbColors filter)
         {
             Requires.IsNotNull(bmp, nameof(bmp));
 

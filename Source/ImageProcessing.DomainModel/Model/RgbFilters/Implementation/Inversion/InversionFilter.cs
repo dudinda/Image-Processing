@@ -11,7 +11,7 @@ using ImageProcessing.DomainModel.Model.RgbFilters.Interface;
 [assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Inversion
 {
-    internal sealed class InversionFilter : IRGBFilter
+    internal sealed class InversionFilter : IRgbFilter
     {
         public Bitmap Filter(Bitmap bitmap)
         {

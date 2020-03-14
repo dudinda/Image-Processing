@@ -18,7 +18,7 @@ namespace ImageProcessing.Form.Main
             BindFileMenu();
             BindToolbar();
             BindConvolutionFilters();
-            BindRGBFilters();
+            BindRgbFilters();
             BindDistributions();
         }
 
@@ -103,25 +103,25 @@ namespace ImageProcessing.Form.Main
         /// <summary>
         /// Publish event handlers for a rgb filters menu
         /// </summary>
-        private void BindRGBFilters()
+        private void BindRgbFilters()
         {
             InversionFilter.Click += (sender, args)
-                => EventAggregator.Publish(new RGBFilterEventArgs(RGBFilter.Inversion));
+                => EventAggregator.Publish(new RgbFilterEventArgs(RgbFilter.Inversion));
 
             BinaryFilter.Click += (sender, args)
-                => EventAggregator.Publish(new RGBFilterEventArgs(RGBFilter.Binary));
+                => EventAggregator.Publish(new RgbFilterEventArgs(RgbFilter.Binary));
 
             GrayscaleFilter.Click += (sender, args)
-                => EventAggregator.Publish(new RGBFilterEventArgs(RGBFilter.Grayscale));
+                => EventAggregator.Publish(new RgbFilterEventArgs(RgbFilter.Grayscale));
 
             ColorFilterBlue.Click += (sender, args)
-                => EventAggregator.Publish(new RGBColorFilterEventArgs(RGBColors.Blue));
+                => EventAggregator.Publish(new RgbColorFilterEventArgs(RgbColors.Blue));
 
             ColorFilterRed.Click += (sender, args)
-                => EventAggregator.Publish(new RGBColorFilterEventArgs(RGBColors.Red));
+                => EventAggregator.Publish(new RgbColorFilterEventArgs(RgbColors.Red));
 
             ColorFilterGreen.Click += (sender, args)
-                => EventAggregator.Publish(new RGBColorFilterEventArgs(RGBColors.Green));
+                => EventAggregator.Publish(new RgbColorFilterEventArgs(RgbColors.Green));
         }
 
         /// <summary>

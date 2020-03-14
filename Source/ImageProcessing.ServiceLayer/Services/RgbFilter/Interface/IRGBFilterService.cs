@@ -4,8 +4,8 @@ using ImageProcessing.DomainModel.Model.RgbFilters.Interface;
 
 namespace ImageProcessing.ServiceLayer.Services.RgbFilter.Interface
 {
-    public interface IRGBFilterService
+    public interface IRgbFilterService
     {
-        Bitmap Filter(Bitmap source, IRGBFilter filter);
+        Bitmap Filter(Bitmap source, IRgbFilter filter);
     }
 }

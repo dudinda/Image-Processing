@@ -247,7 +247,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private async Task ApplyRGBFilter(RGBFilterEventArgs e)
+        private async Task ApplyRgbFilter(RgbFilterEventArgs e)
         {
             try
             {
@@ -286,7 +286,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
             }
         }
 
-        private async Task ApplyColorFilter(RGBColorFilterEventArgs e)
+        private async Task ApplyColorFilter(RgbColorFilterEventArgs e)
         {
             try
             {
@@ -329,9 +329,9 @@ namespace ImageProcessing.Presentation.Presenters.Main
                 View.ShowError($"Error while applying a filter by the color channel.");
             }
 
-            bool IsDefault(RGBColors color)
+            bool IsDefault(RgbColors color)
             {
-                if(color is default(RGBColors))
+                if(color is default(RgbColors))
                 {
                     View.DstImage = View.SrcImage;
 

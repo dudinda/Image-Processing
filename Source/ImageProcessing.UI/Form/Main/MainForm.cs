@@ -205,30 +205,30 @@ namespace ImageProcessing.Form.Main
             }
         }
 
-        public RGBColors GetSelectedColors(RGBColors color)
+        public RgbColors GetSelectedColors(RgbColors color)
         {
-            var result = default(RGBColors);
+            var result = default(RgbColors);
 
             switch (color)
             {
-                case RGBColors.Red:
+                case RgbColors.Red:
                     IsRedChannelChecked   = !IsRedChannelChecked;
                     break;
 
-                case RGBColors.Blue:
+                case RgbColors.Blue:
                     IsBlueChannelChecked  = !IsBlueChannelChecked;
                     break;
 
-                case RGBColors.Green:
+                case RgbColors.Green:
                     IsGreenChannelChecked = !IsGreenChannelChecked;
                     break;
 
                 default: throw new NotSupportedException(nameof(color));
             }
 
-            if (IsRedChannelChecked)   result |= RGBColors.Red;
-            if (IsBlueChannelChecked)  result |= RGBColors.Blue;
-            if (IsGreenChannelChecked) result |= RGBColors.Green;
+            if (IsRedChannelChecked)   result |= RgbColors.Red;
+            if (IsBlueChannelChecked)  result |= RgbColors.Blue;
+            if (IsGreenChannelChecked) result |= RgbColors.Green;
 
             return result;
         }
@@ -250,14 +250,17 @@ namespace ImageProcessing.Form.Main
         }
 
         public void ShowInfo(string info)
-            => RandomVariableInfo.Show(info, this, PointToClient(CursorPosition.GetCursorPosition()), 2000);
+            => RandomVariableInfo.Show(info, this, PointToClient(
+                CursorPosition.GetCursorPosition()), 2000
+            );
 
         public void ShowError(string error)
-            => ErrorTooltip.Show(error, this, PointToClient(CursorPosition.GetCursorPosition()), 2000);
+            => ErrorToolTip.Show(error, this, PointToClient(
+                CursorPosition.GetCursorPosition()), 2000
+            );
 
-        public void AddToQualityMeasureContainer(Bitmap transformed, string filter)
+        public void AddToQualityMeasureContainer(Bitmap transformed)
         {
-            transformed.Tag = filter;
             QualityMeasure.Add(transformed);
         }
     }

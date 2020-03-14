@@ -3,14 +3,14 @@ using ImageProcessing.Core.EventAggregator.Interface.EventArgs;
 
 namespace ImageProcessing.Core.EventAggregator.Implementation.EventArgs
 {
-    public class RGBColorFilterEventArgs : IBaseEventArgs<RGBColors>
+    public class RgbColorFilterEventArgs : IBaseEventArgs<RgbColors>
     {
-        public RGBColorFilterEventArgs(RGBColors arg)
+        public RgbColorFilterEventArgs(RgbColors arg)
         {
             Arg = arg;
         }
 
-        ///<inheritdoc cref="RGBColors"/>
-        public RGBColors Arg { get; }
+        ///<inheritdoc cref="RgbColors"/>
+        public RgbColors Arg { get; }
     }
 }

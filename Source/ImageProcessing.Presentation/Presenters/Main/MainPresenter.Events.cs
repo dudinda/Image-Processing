@@ -10,8 +10,8 @@ namespace ImageProcessing.Presentation.Presenters.Main
 {
     partial class MainPresenter : ISubscriber<ApplyConvolutionFilterEventArgs>,
                                   ISubscriber<ShowConvolutionFilterPresenterEventArgs>,
-                                  ISubscriber<RGBFilterEventArgs>,
-                                  ISubscriber<RGBColorFilterEventArgs>,
+                                  ISubscriber<RgbFilterEventArgs>,
+                                  ISubscriber<RgbColorFilterEventArgs>,
                                   ISubscriber<DistributionEventArgs>,
                                   ISubscriber<ImageContainerEventArgs>,
                                   ISubscriber<FileDialogEventArgs>,
@@ -26,10 +26,10 @@ namespace ImageProcessing.Presentation.Presenters.Main
         public async Task OnEventHandler(ShowConvolutionFilterPresenterEventArgs e)
             => await ShowConvolutionFiltersMenu(e).ConfigureAwait(true);
 
-        public async Task OnEventHandler(RGBFilterEventArgs e)
-            => await ApplyRGBFilter(e).ConfigureAwait(true);
+        public async Task OnEventHandler(RgbFilterEventArgs e)
+            => await ApplyRgbFilter(e).ConfigureAwait(true);
 
-        public async Task OnEventHandler(RGBColorFilterEventArgs e)
+        public async Task OnEventHandler(RgbColorFilterEventArgs e)
             => await ApplyColorFilter(e).ConfigureAwait(true);
 
         public async Task OnEventHandler(DistributionEventArgs e)

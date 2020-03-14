@@ -18,24 +18,24 @@ namespace ImageProcessing.DomainModel.Factory.RgbFilters.Implementation
 {
     /// <summary>
     /// A factory method
-    /// where <see cref="RGBFilter"/> and <see cref="RGBColors"/> represent
+    /// where <see cref="RgbFilter"/> and <see cref="RgbColors"/> represent
     /// enumeration for types implementing <see cref="IDistribution"/>.
     /// </summary>
-    public sealed class RGBFiltersFactory : IRGBFiltersFactory
+    public sealed class RgbFilterFactory : IRgbFilterFactory
     {
         /// <summary>
-        /// Provides a factory method for all <see cref="RGBFilter"/>
-        /// implementing <see cref="IRGBFilter"/>.
+        /// Provides a factory method for all <see cref="RgbFilter"/>
+        /// implementing <see cref="IRgbFilter"/>.
         /// </summary>
-        public IRGBFilter GetFilter(RGBFilter filter)
+        public IRgbFilter GetFilter(RgbFilter filter)
         {
             switch (filter)
             {
-                case RGBFilter.Binary:
+                case RgbFilter.Binary:
                     return new BinaryFilter();
-                case RGBFilter.Grayscale:
+                case RgbFilter.Grayscale:
                     return new GrayscaleFilter();
-                case RGBFilter.Inversion:
+                case RgbFilter.Inversion:
                     return new InversionFilter();
 
                 default: throw new NotImplementedException(nameof(filter));
@@ -43,11 +43,11 @@ namespace ImageProcessing.DomainModel.Factory.RgbFilters.Implementation
         }
 
         /// <summary>
-        /// Provides a factory method for all <see cref="RGBColors"/>
-        /// implementing <see cref="IRGBFilter"/>.
+        /// Provides a factory method for all <see cref="RgbColors"/>
+        /// implementing <see cref="IRgbFilter"/>.
         /// </summary>
 		[MethodImpl(MethodImplOptions.NoInlining)]
-		public IRGBFilter GetColorFilter(RGBColors color)
+		public IRgbFilter GetColorFilter(RgbColors color)
         {
             var filter = Assembly
                  .GetExecutingAssembly()

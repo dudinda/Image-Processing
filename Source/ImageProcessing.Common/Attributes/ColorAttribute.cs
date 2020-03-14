@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using ImageProcessing.Common.Enums;
 
@@ -13,9 +13,9 @@ namespace ImageProcessing.Common.Attributes
         /// <summary>
         /// A color combination of R, G and B.
         /// </summary>
-        public RGBColors Color { get; }
+        public RgbColors Color { get; }
 
-        public ColorAttribute(RGBColors color)
+        public ColorAttribute(RgbColors color)
         {
             Color = color;
         }

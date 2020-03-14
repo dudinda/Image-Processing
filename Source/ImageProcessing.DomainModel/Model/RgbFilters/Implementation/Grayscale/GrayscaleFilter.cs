@@ -12,7 +12,7 @@ using ImageProcessing.DomainModel.Model.RgbFilters.Interface;
 [assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Grayscale
 {
-    internal sealed class GrayscaleFilter : IRGBFilter
+    internal sealed class GrayscaleFilter : IRgbFilter
     {
         public Bitmap Filter(Bitmap bitmap)
         {

@@ -1,4 +1,4 @@
-﻿using System.Windows.Forms;
+using System.Windows.Forms;
 
 namespace ImageProcessing.Form.Main
 {
@@ -83,7 +83,7 @@ namespace ImageProcessing.Form.Main
             this.Dst = new System.Windows.Forms.PictureBox();
             this.TrackBarDstPanel = new System.Windows.Forms.Panel();
             this.DstZoom = new ImageProcessing.UI.Control.ZoomTrackBar();
-            this.ErrorTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.ErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.RandomVariableInfo = new MetroFramework.Components.MetroToolTip();
             this.Container = new ImageProcessing.UI.Control.UndoRedoSplitContainer();
             this.MainMenu.SuspendLayout();
@@ -161,7 +161,7 @@ namespace ImageProcessing.Form.Main
             // 
             this.InversionFilter.Name = "InversionFilter";
             this.InversionFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Q)));
-            this.InversionFilter.Size = new System.Drawing.Size(172, 22);
+            this.InversionFilter.Size = new System.Drawing.Size(180, 22);
             this.InversionFilter.Tag = "Inversion";
             this.InversionFilter.Text = "Inversion";
             // 
@@ -169,7 +169,7 @@ namespace ImageProcessing.Form.Main
             // 
             this.GrayscaleFilter.Name = "GrayscaleFilter";
             this.GrayscaleFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.W)));
-            this.GrayscaleFilter.Size = new System.Drawing.Size(172, 22);
+            this.GrayscaleFilter.Size = new System.Drawing.Size(180, 22);
             this.GrayscaleFilter.Tag = "Grayscale";
             this.GrayscaleFilter.Text = "GrayScale";
             // 
@@ -177,7 +177,7 @@ namespace ImageProcessing.Form.Main
             // 
             this.BinaryFilter.Name = "BinaryFilter";
             this.BinaryFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
-            this.BinaryFilter.Size = new System.Drawing.Size(172, 22);
+            this.BinaryFilter.Size = new System.Drawing.Size(180, 22);
             this.BinaryFilter.Tag = "Binary";
             this.BinaryFilter.Text = "Binary";
             // 
@@ -189,7 +189,7 @@ namespace ImageProcessing.Form.Main
             this.ColorFilterBlue});
             this.ColorFilter.Name = "ColorFilter";
             this.ColorFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.R)));
-            this.ColorFilter.Size = new System.Drawing.Size(172, 22);
+            this.ColorFilter.Size = new System.Drawing.Size(180, 22);
             this.ColorFilter.Text = "Color filters";
             // 
             // ColorFilterRed
@@ -237,7 +237,7 @@ namespace ImageProcessing.Form.Main
             this.ExponentialDistribution,
             this.RayleighDistribution});
             this.OneParameterDistributions.Name = "OneParameterDistributions";
-            this.OneParameterDistributions.Size = new System.Drawing.Size(155, 22);
+            this.OneParameterDistributions.Size = new System.Drawing.Size(180, 22);
             this.OneParameterDistributions.Text = "One-parameter";
             // 
             // ExponentialDistribution
@@ -264,7 +264,7 @@ namespace ImageProcessing.Form.Main
             this.NormalDistribution,
             this.ParabolaDistribution});
             this.TwoParameterDistributions.Name = "TwoParameterDistributions";
-            this.TwoParameterDistributions.Size = new System.Drawing.Size(155, 22);
+            this.TwoParameterDistributions.Size = new System.Drawing.Size(180, 22);
             this.TwoParameterDistributions.Text = "Two-parameter";
             // 
             // UniformDistribution
@@ -699,7 +699,7 @@ namespace ImageProcessing.Form.Main
         private System.Windows.Forms.ToolStripButton Expectation;
         private System.Windows.Forms.ToolStripButton Variance;
         private System.Windows.Forms.ToolStripButton StandardDeviation;
-        private ToolTip ErrorTooltip;
+        private ToolTip ErrorToolTip;
         private Panel PictureBoxSrcPanel;
         private Panel TrackBarSrcPanel;
         private Panel PictureBoxDstPanel;

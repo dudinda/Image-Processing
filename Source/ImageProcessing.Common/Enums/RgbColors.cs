@@ -7,7 +7,7 @@ namespace ImageProcessing.Common.Enums
     /// A bit field, representing each channel of the RGB color space.
     /// </summary>
     [Flags]
-    public enum RGBColors
+    public enum RgbColors
     {
         /// <summary>
         /// The channel isn't selected.

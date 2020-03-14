@@ -7,7 +7,7 @@ using ImageProcessing.DomainModel.Model.RgbFilters.Interface.Color;
 [assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Color.Colors
 {
-    [Color(RGBColors.Red)]
+    [Color(Common.Enums.RgbColors.Red)]
     internal sealed class RColor : IColor
     {
         public unsafe void SetPixelColor(byte* ptr)

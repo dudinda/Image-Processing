@@ -5,7 +5,7 @@ namespace ImageProcessing.Common.Enums
     /// <summary>
     /// Specifies filters based on the RGB color space.
     /// </summary>
-    public enum RGBFilter
+    public enum RgbFilter
     {
         /// <summary>
         /// An unknown filter

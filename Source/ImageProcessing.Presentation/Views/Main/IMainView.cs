@@ -66,14 +66,14 @@ namespace ImageProcessing.Presentation.Views.Main
         /// Adds an image, transformed by a distribution to
         /// the quality measure container.
         /// </summary>
-        void AddToQualityMeasureContainer(Bitmap transformed, string filter);
+        void AddToQualityMeasureContainer(Bitmap transformed);
 
         /// <summary>
         /// Get the 
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
-        RGBColors GetSelectedColors(RGBColors color);
+        RgbColors GetSelectedColors(RgbColors color);
 
         /// <summary>
         /// Show the information about <see cref="RandomVariable"/>
