@@ -9,7 +9,7 @@ using ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Interf
 
 namespace ImageProcessing.ServiceLayer.Providers.Implementation.BitmapDistribution
 {
-    public class BitmapLuminanceDistributionServiceProvider
+    public sealed class BitmapLuminanceDistributionServiceProvider
         : IBitmapLuminanceDistributionServiceProvider
     {
         private readonly IBitmapLuminanceDistributionService _service;

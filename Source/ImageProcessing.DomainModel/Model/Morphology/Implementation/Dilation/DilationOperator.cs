@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 using ImageProcessing.Common.Extensions.BitmapExtensions;
@@ -8,6 +9,7 @@ using ImageProcessing.Common.Helpers;
 using ImageProcessing.Common.Utility.BitMatrix.Implementation;
 using ImageProcessing.DomainModel.Model.Morphology.Interface.UnaryOperator;
 
+[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.DomainModel.Model.Morphology.Implementation.Dilation
 {
     /// <summary>

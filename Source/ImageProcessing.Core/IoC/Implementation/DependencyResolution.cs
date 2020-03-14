@@ -1,15 +1,17 @@
 using System;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Container;
 using ImageProcessing.Core.IoC.Interface;
 using ImageProcessing.Core.View;
 
+[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.Core.IoC.Implementation
 {
     /// <inheritdoc cref="IDependencyResolution"/>
-    public class DependencyResolution : IDependencyResolution
+    internal sealed class DependencyResolution : IDependencyResolution
     {
         /// <inheritdoc cref="IContainer"/>
         private readonly IContainer _container;

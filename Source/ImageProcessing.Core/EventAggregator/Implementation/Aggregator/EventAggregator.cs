@@ -9,7 +9,7 @@ using ImageProcessing.Core.EventAggregator.Interface.Subscriber;
 namespace ImageProcessing.Core.EventAggregator.Implementation
 {
     /// <inheritdoc cref="IEventAggregator"/>
-    public class EventAggregator : IEventAggregator
+    public  sealed class EventAggregator : IEventAggregator
     {
         private readonly object _syncRoot = new object();
 

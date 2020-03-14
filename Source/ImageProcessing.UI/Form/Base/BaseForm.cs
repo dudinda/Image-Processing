@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 using ImageProcessing.Common.Helpers;
@@ -5,9 +6,10 @@ using ImageProcessing.Core.EventAggregator.Interface;
 
 using MetroFramework.Forms;
 
+[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.Form.Base
 {
-    public class BaseMainForm : MetroForm
+    internal class BaseMainForm : MetroForm
     {
         protected IEventAggregator EventAggregator { get; }
         protected ApplicationContext Context { get; }
@@ -20,7 +22,7 @@ namespace ImageProcessing.Form.Base
         }
     }
 
-    public class BaseForm : MetroForm
+    internal class BaseForm : MetroForm
     {
         protected IEventAggregator EventAggregator { get; }
 

@@ -1,16 +1,17 @@
 
 using System;
+using System.Runtime.CompilerServices;
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.EnumExtensions;
-using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Form.Base;
 using ImageProcessing.Presentation.Views.Convolution;
 
+[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.UI.Form.Convolution
 {
-    public partial class ConvolutionFilterForm : BaseForm, IConvolutionFilterView
+    internal sealed partial class ConvolutionFilterForm : BaseForm, IConvolutionFilterView
     {
         public ConvolutionFilterForm(IEventAggregator eventAggregator)
             : base(eventAggregator)

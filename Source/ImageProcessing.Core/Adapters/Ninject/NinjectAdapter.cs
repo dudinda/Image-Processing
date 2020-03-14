@@ -11,7 +11,7 @@ namespace ImageProcessing.Core.Adapters.Ninject
     /// Provides access to Ninject <typeparamref name="StandardKernel"/>
     /// via <see cref="IContainer"/>.
     /// </summary>
-    public class NinjectAdapter : IContainer
+    public sealed class NinjectAdapter : IContainer
     {
         private readonly StandardKernel _container = new StandardKernel();
 

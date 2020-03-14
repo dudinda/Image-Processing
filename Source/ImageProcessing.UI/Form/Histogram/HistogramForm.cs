@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.Common.Enums;
@@ -7,9 +8,10 @@ using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Form.Base;
 using ImageProcessing.Presentation.Views.Histogram;
 
+[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.Form.Histogram
 {
-    public partial class HistogramForm : BaseForm, IHistogramView
+    internal sealed partial class HistogramForm : BaseForm, IHistogramView
     {
         public HistogramForm(IEventAggregator eventAggregator)
             : base(eventAggregator)

@@ -1,9 +1,8 @@
 using System;
 
 using ImageProcessing.Common.Enums;
-using ImageProcessing.UI;
 
-namespace ImageProcessing
+namespace ImageProcessing.UI
 {
     internal static class Program
     {

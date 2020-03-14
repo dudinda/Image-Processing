@@ -11,7 +11,7 @@ using ImageProcessing.ServiceLayer.Services.ConvolutionFilterServices.Interface;
 
 namespace ImageProcessing.ServiceLayer.Providers.Implementation.Convolution
 {
-    public class ConvolutionServiceProvider : IConvolutionServiceProvider
+    public sealed class ConvolutionServiceProvider : IConvolutionServiceProvider
     {
         private readonly IConvolutionFilterFactory _convolutionFilterFactory;
         private readonly IConvolutionFilterService _convolutionFilterService;

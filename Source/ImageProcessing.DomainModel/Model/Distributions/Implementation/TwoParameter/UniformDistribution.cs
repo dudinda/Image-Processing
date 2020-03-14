@@ -1,9 +1,11 @@
 using System;
+using System.Runtime.CompilerServices;
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.StringExtensions;
 using ImageProcessing.DomainModel.Model.Distributions.Interface;
 
+[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.DomainModel.Model.Distributions.Implementation.TwoParameter
 {
     /// <inheritdoc/>

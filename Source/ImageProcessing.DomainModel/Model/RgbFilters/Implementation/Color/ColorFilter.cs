@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 using ImageProcessing.Common.Extensions.BitmapExtensions;
@@ -8,6 +9,7 @@ using ImageProcessing.Common.Helpers;
 using ImageProcessing.DomainModel.Model.RgbFilters.Interface;
 using ImageProcessing.DomainModel.Model.RgbFilters.Interface.Color;
 
+[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Color
 {
     internal sealed class ColorFilter : IRGBFilter

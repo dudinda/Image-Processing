@@ -7,7 +7,7 @@ using ImageProcessing.Core.Pipeline.BlockItem.Interface;
 
 namespace ImageProcessing.Core.Pipeline.Block.Implementation
 {
-    public class PipelineBlock : IPipelineBlock
+    public sealed class PipelineBlock : IPipelineBlock
     {
         private readonly ConcurrentQueue<IItem> _block = new ConcurrentQueue<IItem>();
 

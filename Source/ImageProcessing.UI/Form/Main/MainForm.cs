@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 using ImageProcessing.Common.Enums;
@@ -8,9 +9,10 @@ using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Form.Base;
 using ImageProcessing.Presentation.Views.Main;
 
+[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.Form.Main
 {
-    public partial class MainForm : BaseMainForm, IMainView
+    internal sealed partial class MainForm : BaseMainForm, IMainView
     {
         public MainForm(ApplicationContext context,
                         IEventAggregator eventAggregator)

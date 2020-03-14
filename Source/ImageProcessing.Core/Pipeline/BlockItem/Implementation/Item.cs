@@ -1,10 +1,12 @@
-﻿using System;
+using System;
+using System.Runtime.CompilerServices;
 
 using ImageProcessing.Core.Pipeline.BlockItem.Interface;
 
+[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.Core.Pipeline.BlockItem.Implementation
 {
-    internal class Item : IItem
+    internal sealed class Item : IItem
     {
         public Type InputType { get; }
         public Type OutputType { get; }

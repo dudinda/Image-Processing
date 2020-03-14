@@ -33,7 +33,6 @@
     <ProjectReference Include="..\ImageProcessing.DomainModel\ImageProcessing.DomainModel.csproj" />
     <ProjectReference Include="..\ImageProcessing.Presentation\ImageProcessing.Presentation.csproj" />
     <ProjectReference Include="..\ImageProcessing.ServiceLayer\ImageProcessing.ServiceLayer.csproj" />
-    <ProjectReference Include="..\ImageProcessing.Services\ImageProcessing.ServiceLayer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -58,6 +57,9 @@
     </Compile>
     <Compile Update="Form\Main\MainForm.Events.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Form\Convolution\ConvolutionFilterForm.Events.cs">
+      <DependentUpon>ConvolutionFilterForm.cs</DependentUpon>
     </Compile>
   </ItemGroup>
 

@@ -7,7 +7,7 @@ using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 
 namespace ImageProcessing.Core.Pipeline.AwaitablePipeline.Implementation
 {
-    public class AwaitablePipeline : IAwaitablePipeline, IDisposable
+    public sealed class AwaitablePipeline : IAwaitablePipeline, IDisposable
     {
         private readonly BlockingQueue<Task<object>> _queue
            = new BlockingQueue<Task<object>>(64);

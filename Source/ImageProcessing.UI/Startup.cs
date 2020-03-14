@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 using ImageProcessing.Common.Enums;
@@ -53,6 +54,7 @@ using ImageProcessing.ServiceLayer.Services.StaTask.Implementation;
 using ImageProcessing.ServiceLayer.Services.StaTask.Interface;
 using ImageProcessing.UI.Form.Convolution;
 
+[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.UI
 {
     internal static class Startup 
