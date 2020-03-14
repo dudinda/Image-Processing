@@ -23,7 +23,9 @@ namespace ImageProcessing.Presentation.Presenters
                                        IBitmapLuminanceDistributionService distibutionService
             ) : base(controller, view, pipeline, eventAggregator) 
         {
-            _distributionService = Requires.IsNotNull(distibutionService, nameof(distibutionService));
+            _distributionService = Requires.IsNotNull(
+                distibutionService, nameof(distibutionService)
+            );
         }
 
         public void BuildHistogram()

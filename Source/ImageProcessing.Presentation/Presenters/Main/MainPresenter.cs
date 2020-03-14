@@ -1,6 +1,7 @@
 using System;
 using System.Configuration;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,60 +14,56 @@ using ImageProcessing.Core.Controller.Interface;
 using ImageProcessing.Core.EventAggregator.Implementation.EventArgs;
 using ImageProcessing.Core.EventAggregator.Implementation.EventArgs.Convolution;
 using ImageProcessing.Core.EventAggregator.Interface;
-using ImageProcessing.Core.Factory.Base;
-using ImageProcessing.Core.Factory.DistributionFactory;
-using ImageProcessing.Core.Factory.RGBFiltersFactory;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Core.Pipeline.Block.Implementation;
 using ImageProcessing.Core.Presenter.Abstract;
+using ImageProcessing.Core.ServiceLayer.Providers.BitmapDistribution;
+using ImageProcessing.Core.ServiceLayer.Providers.RgbFilter;
 using ImageProcessing.Core.ServiceLayer.Services.Locker.Interface;
 using ImageProcessing.Core.ServiceLayer.Services.STATask;
 using ImageProcessing.Presentation.Presenters.Convolution;
 using ImageProcessing.Presentation.ViewModel.Convolution;
 using ImageProcessing.Presentation.ViewModel.Histogram;
 using ImageProcessing.Presentation.Views.Main;
-using ImageProcessing.ServiceLayer.Service.DistributionServices.BitmapLuminanceDistribution.Interface;
-using ImageProcessing.ServiceLayer.Services.RGBFilterService.Interface;
 
 namespace ImageProcessing.Presentation.Presenters.Main
 {
     public partial class MainPresenter : BasePresenter<IMainView>
     {
 
-        private readonly IBitmapLuminanceDistributionService _distributionService;
-        private readonly IRGBFilterService _rgbFilterService;
+        private readonly IBitmapLuminanceDistributionServiceProvider _lumaProvider;
+        private readonly IRgbFilterServiceProvider _rgbProvider;
         private readonly ISTATaskService _staTaskService;
-
-        private readonly IDistributionFactory _distributionFactory;
-        private readonly IRGBFiltersFactory _rgbFiltersFactory;
-
         private readonly IAsyncZoomLocker _zoomLocker;
         private readonly IAsyncOperationLocker _operationLocker;
 
         public MainPresenter(IAppController controller,
                              IMainView view,
-                             IBaseFactory baseFactory,
-                             IBitmapLuminanceDistributionService distributionService,
                              ISTATaskService staTaskService,
-                             IRGBFilterService rgbFilterService,
                              IEventAggregator eventAggregator,
                              IAwaitablePipeline pipeline,
                              IAsyncZoomLocker zoomLocker,
-                             IAsyncOperationLocker operationLocker
+                             IAsyncOperationLocker operationLocker,
+                             IBitmapLuminanceDistributionServiceProvider lumaProvider,
+                             IRgbFilterServiceProvider rgbProvider
 
             ) : base(controller, view, pipeline, eventAggregator)
         {
-            Requires.IsNotNull(baseFactory, nameof(baseFactory));
-
-            _distributionFactory = baseFactory.GetDistributionFactory();
-            _rgbFiltersFactory   = baseFactory.GetRGBFilterFactory();
-
-            _staTaskService      = Requires.IsNotNull(staTaskService, nameof(staTaskService));
-            _rgbFilterService    = Requires.IsNotNull(rgbFilterService, nameof(rgbFilterService));
-            _distributionService = Requires.IsNotNull(distributionService, nameof(distributionService));
-            
-            _zoomLocker      = Requires.IsNotNull(zoomLocker, nameof(zoomLocker));
-            _operationLocker = Requires.IsNotNull(operationLocker, nameof(operationLocker));
+            _lumaProvider = Requires.IsNotNull(
+                lumaProvider, nameof(lumaProvider)
+            );
+            _rgbProvider = Requires.IsNotNull(
+                rgbProvider, nameof(rgbProvider)
+            );
+            _staTaskService = Requires.IsNotNull(
+                staTaskService, nameof(staTaskService)
+            );
+            _zoomLocker = Requires.IsNotNull(
+                zoomLocker, nameof(zoomLocker)
+            );
+            _operationLocker = Requires.IsNotNull(
+                operationLocker, nameof(operationLocker)
+            );
 
             EventAggregator.Subscribe(this);
         }
@@ -263,13 +260,10 @@ namespace ImageProcessing.Presentation.Presenters.Main
                         ImageContainer.Source
                     ).ConfigureAwait(true);
 
-                    var operation = _rgbFiltersFactory
-                        .GetFilter(e.Arg);
-
                     Pipeline
                         .Register(new PipelineBlock(copy)
                             .Add<Bitmap, Bitmap>(
-                                (bmp) => _rgbFilterService.Filter(bmp, operation)
+                                (bmp) => _rgbProvider.Apply(bmp, e.Arg)
                             )
                             .Add<Bitmap, Bitmap>(
                                 (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
@@ -309,13 +303,10 @@ namespace ImageProcessing.Presentation.Presenters.Main
                             ImageContainer.Source
                         ).ConfigureAwait(true);
 
-                        var operation = _rgbFiltersFactory
-                            .GetColorFilter(result);
-
                         Pipeline
                             .Register(new PipelineBlock(copy)
                                 .Add<Bitmap, Bitmap>(
-                                    (bmp) => operation.Filter(bmp)
+                                    (bmp) => _rgbProvider.Apply(bmp, result)
                                 )
                                 .Add<Bitmap, Bitmap>(
                                     (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
@@ -358,10 +349,6 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
-                    var filter = _distributionFactory
-                        .GetFilter(e.Arg)
-                        .SetParams(e.Parameters);
-
                     View.SetCursor(CursorType.Wait);
 
                     var copy = await GetImageCopy(
@@ -371,7 +358,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     Pipeline
                         .Register(new PipelineBlock(copy)
                             .Add<Bitmap, Bitmap>(
-                                (bmp) => Transform(bmp)
+                                (bmp) => _lumaProvider.Transform(bmp, e.Arg, e.Parameters)
                             )                     
                             .Add<Bitmap, Bitmap>(
                                 (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
@@ -381,16 +368,6 @@ namespace ImageProcessing.Presentation.Presenters.Main
                     await Render(
                         ImageContainer.Destination
                     ).ConfigureAwait(true);
-
-                    Bitmap Transform(Bitmap bmp)
-                    {
-                        var result = _distributionService
-                            .TransformTo(bmp, filter);
-
-                        View.AddToQualityMeasureContainer(result, filter.Name);
-
-                        return new Bitmap(result);
-                    };
                 }
 
             }
@@ -529,25 +506,13 @@ namespace ImageProcessing.Presentation.Presenters.Main
                         container
                     ).ConfigureAwait(true);
 
-                    var result = await Task.Run(() =>
-                    {
-                        switch (e.Action)
-                        {
-                            case RandomVariable.Expectation:
-                                return _distributionService.GetExpectation(copy).ToString();
-                            case RandomVariable.Variance:
-                                return _distributionService.GetVariance(copy).ToString();
-                            case RandomVariable.StandardDeviation:
-                                return _distributionService.GetStandardDeviation(copy).ToString();
-                            case RandomVariable.Entropy:
-                                return _distributionService.GetEntropy(copy).ToString();
-                        }
+                    var result = await Task.Run(
+                        () => _lumaProvider.GetInfo(copy, e.Action)
+                    ).ConfigureAwait(true);
 
-                        throw new NotImplementedException(nameof(e.Action));
-
-                    }).ConfigureAwait(true);
-
-                    View.ShowInfo(result);
+                    View.ShowInfo(
+                        result.ToString(CultureInfo.InvariantCulture)
+                    );
                 }
             }
             catch (Exception ex)

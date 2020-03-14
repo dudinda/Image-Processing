@@ -29,8 +29,13 @@ namespace ImageProcessing.Presentation.Presenters.Convolution
 										  IAsyncOperationLocker operationLocker
             ) : base(controller, view, pipeline, eventAggregator)
 		{
-			_convolutionProvider = Requires.IsNotNull(convolutionFilterServiceProvider, nameof(convolutionFilterServiceProvider));
-			_operationLocker     = Requires.IsNotNull(operationLocker, nameof(operationLocker));
+			_convolutionProvider = Requires.IsNotNull(
+                convolutionFilterServiceProvider, nameof(convolutionFilterServiceProvider)
+            );
+
+			_operationLocker     = Requires.IsNotNull(
+                operationLocker, nameof(operationLocker)
+            );
 
 			EventAggregator.Subscribe(this);
 		}
