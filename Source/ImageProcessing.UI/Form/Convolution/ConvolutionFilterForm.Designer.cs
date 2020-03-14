@@ -1,6 +1,6 @@
 namespace ImageProcessing.UI.Form.Convolution
 { 
-    public partial class ConvolutionFilterForm
+    partial class ConvolutionFilterForm
     {
 		/// <summary>
 		/// Required designer variable.
@@ -28,19 +28,21 @@ namespace ImageProcessing.UI.Form.Convolution
 		/// </summary>
 		private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.ConvolutionFilterComboBox = new MetroFramework.Controls.MetroComboBox();
             this.Apply = new MetroFramework.Controls.MetroButton();
+            this.ErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // ConvolutionFilterComboBox
             // 
             this.ConvolutionFilterComboBox.FormattingEnabled = true;
-            this.ConvolutionFilterComboBox.ItemHeight = 24;
+            this.ConvolutionFilterComboBox.ItemHeight = 23;
             this.ConvolutionFilterComboBox.Items.AddRange(new object[] {
             "Select a filter..."});
             this.ConvolutionFilterComboBox.Location = new System.Drawing.Point(23, 29);
             this.ConvolutionFilterComboBox.Name = "ConvolutionFilterComboBox";
-            this.ConvolutionFilterComboBox.Size = new System.Drawing.Size(254, 30);
+            this.ConvolutionFilterComboBox.Size = new System.Drawing.Size(254, 29);
             this.ConvolutionFilterComboBox.TabIndex = 0;
             this.ConvolutionFilterComboBox.UseSelectable = true;
             // 
@@ -70,5 +72,6 @@ namespace ImageProcessing.UI.Form.Convolution
 		#endregion
 		private MetroFramework.Controls.MetroComboBox ConvolutionFilterComboBox;
         private MetroFramework.Controls.MetroButton Apply;
+        private System.Windows.Forms.ToolTip ErrorToolTip;
     }
 }

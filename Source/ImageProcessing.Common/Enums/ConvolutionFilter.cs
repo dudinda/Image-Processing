@@ -34,7 +34,7 @@ namespace ImageProcessing.Common.Enums
         /// <summary>
         /// The gaussian blur filter with a kernel size 5x5.
         /// </summary>
-        [Description("Gaussian blur 3x3")]
+        [Description("Gaussian blur 5x5")]
         GaussianBlur5x5            = 4,
 
         /// <summary>

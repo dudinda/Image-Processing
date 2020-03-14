@@ -59,7 +59,7 @@ namespace ImageProcessing.Presentation.Presenters.Convolution
 			}
 			catch(Exception ex)
 			{
-				View.ShowError();
+				View.ShowError("Error while applying a convolution filter.");
 			}
 		}
 
