@@ -17,9 +17,16 @@ namespace ImageProcessing.Form.Base
         protected BaseMainForm(ApplicationContext context, IEventAggregator eventAggregator)
             : base()
         {
-            Context         = Requires.IsNotNull(context, nameof(context));
-            EventAggregator = Requires.IsNotNull(eventAggregator, nameof(eventAggregator));
+            Context = Requires.IsNotNull(
+                context, nameof(context)
+            );
+
+            EventAggregator = Requires.IsNotNull(
+                eventAggregator, nameof(eventAggregator)
+            );
         }
+
+        protected BaseMainForm() { }
     }
 
     internal class BaseForm : MetroForm
@@ -29,7 +36,11 @@ namespace ImageProcessing.Form.Base
         protected BaseForm(IEventAggregator eventAggregator)
             : base()
         {
-            EventAggregator = Requires.IsNotNull(eventAggregator, nameof(eventAggregator));
+            EventAggregator = Requires.IsNotNull(
+                eventAggregator, nameof(eventAggregator)
+            );
         }
+
+        protected BaseForm() { }
     }
 }
