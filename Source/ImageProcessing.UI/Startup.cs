@@ -11,17 +11,23 @@ using ImageProcessing.Core.EventAggregator.Implementation;
 using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Factory.Base;
 using ImageProcessing.Core.Factory.ConvolutionFactory;
+using ImageProcessing.Core.Factory.DistributionFactory;
 using ImageProcessing.Core.Factory.Morphology;
+using ImageProcessing.Core.Factory.RGBFiltersFactory;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Implementation;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
+using ImageProcessing.Core.ServiceLayer.Providers.BitmapDistribution;
 using ImageProcessing.Core.ServiceLayer.Providers.Convolution;
 using ImageProcessing.Core.ServiceLayer.Providers.Morphology;
+using ImageProcessing.Core.ServiceLayer.Providers.RgbFilter;
 using ImageProcessing.Core.ServiceLayer.Services.Locker.Interface;
 using ImageProcessing.Core.ServiceLayer.Services.Morphology;
 using ImageProcessing.Core.ServiceLayer.Services.STATask;
 using ImageProcessing.DomainModel.Factory.Filters.Implementation.Morphology;
 using ImageProcessing.Factory.Base;
 using ImageProcessing.Factory.Filters.Convolution;
+using ImageProcessing.Factory.Filters.Distributions;
+using ImageProcessing.Factory.Filters.RGBFilters;
 using ImageProcessing.Form.Histogram;
 using ImageProcessing.Form.Main;
 using ImageProcessing.Form.QualityMeasure;
@@ -30,7 +36,9 @@ using ImageProcessing.Presentation.Views.Convolution;
 using ImageProcessing.Presentation.Views.Histogram;
 using ImageProcessing.Presentation.Views.Main;
 using ImageProcessing.Presentation.Views.QualityMeasure;
+using ImageProcessing.ServiceLayer.Providers.BitmapDistribution;
 using ImageProcessing.ServiceLayer.Providers.Morphology;
+using ImageProcessing.ServiceLayer.Providers.RgbFilter;
 using ImageProcessing.ServiceLayer.Service.DistributionServices.BitmapLuminanceDistribution.Interface;
 using ImageProcessing.ServiceLayer.Services.ConvolutionFilterServices.Implementation;
 using ImageProcessing.ServiceLayer.Services.ConvolutionFilterServices.Interface;
@@ -64,7 +72,8 @@ namespace ImageProcessing.UI
                 .RegisterSingleton<IEventAggregator, EventAggregator>()
                 .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
                 .RegisterSingleton<ISTATaskService, STATaskService>()
-                .Register<IMainView, MainForm>()
+                .RegisterSingleton<IAsyncZoomLocker, ZoomAsyncLocker>()
+                .RegisterView<IMainView, MainForm>()
                 .RegisterView<IHistogramView, HistogramForm>()
                 .RegisterView<IConvolutionFilterView, ConvolutionFilterForm>()
                 .RegisterView<IQualityMeasureView, QualityMeasureForm>()
@@ -75,12 +84,15 @@ namespace ImageProcessing.UI
                 .Register<IMorphologyFactory, MorphologyFactory>()
                 .Register<IRandomVariableDistributionService, RandomVariableDistributionService>()
                 .Register<IBitmapLuminanceDistributionService, BitmapLuminanceDistributionService>()
+                .Register<IDistributionFactory, DistributionFactory>()
                 .Register<IRGBFilterService, RGBFilterService>()
-                .RegisterSingleton<IAsyncZoomLocker, ZoomAsyncLocker>()
+                .Register<IRGBFiltersFactory, RGBFiltersFactory>()
                 .Register<IAsyncOperationLocker, OperationAsyncLocker>()
                 .Register<IConvolutionFilterServiceProvider, ConvolutionFilterServiceProvider>()
-                .Register<IMorphologyServiceProvider, MorphologyServiceProvider>();
-
+                .Register<IMorphologyServiceProvider, MorphologyServiceProvider>()
+                .Register<IBitmapLuminanceDistributionServiceProvider, BitmapLuminanceDistributionServiceProvider>()
+                .Register<IRgbFilterServiceProvider, RgbFilterServiceProvider>();
+            
             IContainer GetContainerAdapter()
             {
                 switch (container)
