@@ -1,8 +1,8 @@
 using System;
 
-namespace ImageProcessing.Core.Factory.Filter
+namespace ImageProcessing.Core.Factory
 {
-    public interface IFilterFactory<out TFilter, in TEnum>
+    public interface IBaseFactory<out TFilter, in TEnum>
         where TEnum : Enum
     {
         /// <summary>
