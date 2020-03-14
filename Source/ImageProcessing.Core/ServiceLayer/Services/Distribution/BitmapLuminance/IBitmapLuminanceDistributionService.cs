@@ -6,7 +6,7 @@ namespace ImageProcessing.ServiceLayer.Service.DistributionServices.BitmapLumina
 {
     public interface IBitmapLuminanceDistributionService
     {
-        Bitmap TransformTo(Bitmap bitmap, IDistribution distribution);
+        Bitmap Transform(Bitmap bitmap, IDistribution distribution);
         int[] GetFrequencies(Bitmap bitmap);
         decimal GetExpectation(Bitmap bitmap);
         decimal GetVariance(Bitmap bitmap);

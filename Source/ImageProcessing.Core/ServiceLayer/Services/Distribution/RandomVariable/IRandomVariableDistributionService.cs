@@ -4,7 +4,8 @@ namespace ImageProcessing.ServiceLayer.Services.DistributionServices.Distributio
 {
     public interface IRandomVariableDistributionService
     {
-        decimal[] TransformTo(decimal[] cdf, IDistribution distribution);
+        decimal[] TransformToDecimal(decimal[] cdf, IDistribution distribution);
+        byte[] TransformToByte(decimal[] cdf, IDistribution distribution);
         decimal GetEntropy(decimal[] pmf);
         decimal GetExpectation(decimal[] pmf);
         decimal GetVariance(decimal[] pmf);

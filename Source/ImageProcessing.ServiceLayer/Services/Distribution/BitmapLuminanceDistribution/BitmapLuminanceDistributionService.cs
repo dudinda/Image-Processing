@@ -1,83 +1,198 @@
+using System;
+using System.Collections.Concurrent;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Threading.Tasks;
 
+using ImageProcessing.Common.Extensions.BitmapExtensions;
+using ImageProcessing.Common.Extensions.DecimalMathRealExtensions;
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Model.Distribution;
 using ImageProcessing.ServiceLayer.Service.DistributionServices.BitmapLuminanceDistribution.Interface;
-using ImageProcessing.ServiceLayer.Services.DistributionServices.BitmapLuminanceDistribution.Abstract;
+using ImageProcessing.ServiceLayer.Services.DistributionServices.Distribution.Interface;
 
-namespace ImageProcessing.ServiceLayer.Services.DistributionServices.BitmapLuminanceDistribution
+namespace ImageProcessing.ServiceLayer.Services.DistributionServices.BitmapLuminanceDistribution.Abstract
 {
-    public class BitmapLuminanceDistributionService : BitmapLuminanceDistributionServiceImplementation, IBitmapLuminanceDistributionService
+    public class BitmapLuminanceDistributionService : IBitmapLuminanceDistributionService
     {
-        public Bitmap TransformTo(Bitmap bitmap, IDistribution distribution)
+        private readonly IRandomVariableDistributionService _service;
+
+        public BitmapLuminanceDistributionService(IRandomVariableDistributionService service)
+        {
+            _service = service;
+        }
+
+        public Bitmap Transform(Bitmap bitmap, IDistribution distribution)
         {
             Requires.IsNotNull(bitmap, nameof(bitmap));
             Requires.IsNotNull(distribution, nameof(distribution));
 
-            return TransformToImpl(bitmap, distribution);
-        }
+            var cdf = GetCDF(bitmap);
 
-        public decimal GetExpectation(Bitmap bitmap)
-        {
-            Requires.IsNotNull(bitmap, nameof(bitmap));
+            //get the new pixel values, according to a selected distribution
+            var newPixels = _service.TransformToByte(cdf, distribution);
 
-            return GetExpectationImpl(bitmap);
-        }
+            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                                             ImageLockMode.ReadWrite,
+                                             bitmap.PixelFormat);
 
-        public decimal GetVariance(Bitmap bitmap)
-        {
-            Requires.IsNotNull(bitmap, nameof(bitmap));
+            var options = new ParallelOptions()
+            {
+                MaxDegreeOfParallelism = Environment.ProcessorCount
+            };
 
-            return GetVarianceImpl(bitmap);
-        }
+            var ptrStep = bitmap.GetBitsPerPixel() / 8;
+            var size = bitmap.Size;
 
-        public decimal GetStandardDeviation(Bitmap bitmap)
-        {
-            Requires.IsNotNull(bitmap, nameof(bitmap));
+            unsafe
+            {
+                var startPtr = (byte*)bitmapData.Scan0.ToPointer();
 
-            return GetStandardDeviationImpl(bitmap);
-        }
+                Parallel.For(0, size.Height, options, y =>
+                {
+                    //get a start address
+                    var ptr = startPtr + y * bitmapData.Stride;
 
-        public decimal GetConditionalExpectation((int x1, int x2) interval, Bitmap bitmap)
-        {
-            Requires.IsNotNull(bitmap, nameof(bitmap));
+                    for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
+                    {
+                        //get a new pixel value, transofrming by a quantile
+                        ptr[0] = ptr[1] = ptr[2] = newPixels[ptr[0]];
+                    }
+                });
+            }
 
-            return GetConditionalExpectationImpl(interval, bitmap);
-        }
+            bitmap.UnlockBits(bitmapData);
 
-        public decimal GetConditionalVariance((int x1, int x2) interval, Bitmap bitmap)
-        {
-            Requires.IsNotNull(bitmap, nameof(bitmap));
-
-            return GetConditionalVarianceImpl(interval, bitmap);
-        }
-
-        public int[] GetFrequencies(Bitmap bitmap)
-        {
-            Requires.IsNotNull(bitmap, nameof(bitmap));
-
-            return GetFrequenciesImpl(bitmap);
-        }
-
-        public decimal[] GetCDF(Bitmap bitmap)
-        {
-            Requires.IsNotNull(bitmap, nameof(bitmap));
-
-            return GetCDFImpl(bitmap);
+            return bitmap;
         }
 
         public decimal[] GetPMF(Bitmap bitmap)
         {
             Requires.IsNotNull(bitmap, nameof(bitmap));
 
-            return GetPMFImpl(bitmap);
+            return _service.GetPMF(
+                GetFrequencies(bitmap)
+            );
         }
 
-        public decimal GetEntropy(Bitmap bmp)
+        public decimal[] GetCDF(Bitmap bitmap)
         {
-            Requires.IsNotNull(bmp, nameof(bmp));
+            Requires.IsNotNull(bitmap, nameof(bitmap));
 
-            return GetEntropyImpl(bmp);
-        } 
+            return _service.GetCDF(
+                GetPMF(bitmap)
+            );
+        }
+            
+        public decimal GetExpectation(Bitmap bitmap)
+        {
+            Requires.IsNotNull(bitmap, nameof(bitmap));
+
+            return _service.GetExpectation(
+                _service.GetPMF(
+                    GetFrequencies(bitmap)
+                )
+            );
+        }
+
+        public decimal GetVariance(Bitmap bitmap)
+        {
+            Requires.IsNotNull(bitmap, nameof(bitmap));
+
+            return _service.GetVariance(
+                _service.GetPMF(
+                    GetFrequencies(bitmap)
+                )
+            );
+        }
+
+        public int[] GetFrequencies(Bitmap bitmap)
+        {
+            Requires.IsNotNull(bitmap, nameof(bitmap));
+
+            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                                            ImageLockMode.ReadWrite,
+                                            bitmap.PixelFormat);
+
+            var frequencies = new int[256];
+            var ptrStep = bitmap.GetBitsPerPixel() / 8;
+
+            unsafe
+            {
+                var size = bitmap.Size;
+
+                var options = new ParallelOptions()
+                {
+                    MaxDegreeOfParallelism = Environment.ProcessorCount
+                };
+
+                var startPtr = (byte*)bitmapData.Scan0.ToPointer();
+
+                var bag = new ConcurrentBag<int[]>();
+
+                //get N partial frequency arrays
+                Parallel.For(0, size.Height, options, () => new int[256], (y, state, partial) =>
+                {
+                    var ptr = startPtr + y * bitmapData.Stride;
+
+                    for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
+                    {
+                        partial[ptr[0]]++;
+                    }
+
+                    return partial;
+                },
+                (part) => bag.Add(part));
+
+                //get summary frequencies
+                foreach (var subarray in bag)
+                {
+                    for (int i = 0; i < 256; ++i)
+                    {
+                        frequencies[i] += subarray[i];
+                    }
+                }
+            }
+
+            bitmap.UnlockBits(bitmapData);
+
+            return frequencies;
+        }
+
+        public decimal GetEntropy(Bitmap bitmap)
+        {
+            Requires.IsNotNull(bitmap, nameof(bitmap));
+
+            return _service.GetEntropy(
+                _service.GetPMF(
+                    GetFrequencies(bitmap)
+                )
+            );
+        }
+
+        public decimal GetStandardDeviation(Bitmap bitmap)
+        {
+            Requires.IsNotNull(bitmap, nameof(bitmap));
+
+            return GetVariance(bitmap).Sqrt();
+        }
+
+        public decimal GetConditionalExpectation((int x1, int x2) interval, Bitmap bitmap)
+        {
+            Requires.IsNotNull(bitmap, nameof(bitmap));
+
+            return _service.GetConditionalExpectation(interval,
+                GetPMF(bitmap)
+            );
+        }
+
+        public decimal GetConditionalVariance((int x1, int x2) interval, Bitmap bitmap)
+        {
+            Requires.IsNotNull(bitmap, nameof(bitmap));
+
+            return _service.GetConditionalVariance(interval,
+                GetPMF(bitmap)
+            );
+        }   
     }
 }

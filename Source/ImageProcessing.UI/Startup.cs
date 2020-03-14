@@ -42,7 +42,7 @@ using ImageProcessing.ServiceLayer.Providers.RgbFilter;
 using ImageProcessing.ServiceLayer.Service.DistributionServices.BitmapLuminanceDistribution.Interface;
 using ImageProcessing.ServiceLayer.Services.ConvolutionFilterServices.Implementation;
 using ImageProcessing.ServiceLayer.Services.ConvolutionFilterServices.Interface;
-using ImageProcessing.ServiceLayer.Services.DistributionServices.BitmapLuminanceDistribution;
+using ImageProcessing.ServiceLayer.Services.DistributionServices.BitmapLuminanceDistribution.Abstract;
 using ImageProcessing.ServiceLayer.Services.DistributionServices.Distribution.Interface;
 using ImageProcessing.ServiceLayer.Services.DistributionServices.RandomVariableDistribution;
 using ImageProcessing.ServiceLayer.Services.LockerService.Operation;
