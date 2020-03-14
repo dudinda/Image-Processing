@@ -13,7 +13,8 @@ namespace ImageProcessing.Core.IoC.Interface
     {
         /// <summary>
         /// Register the <typeparamref name="TView"/> with the <typeparamref name="TImplementation"/>
-        /// <para>Where the <typeparamref name="TImplementation"/> is a <typeparamref name="TView"/>  or <see langword="class"/>, and <typeparamref name="TView"/> is a <see cref="IView"/>.</para>
+        /// <para>Where the <typeparamref name="TImplementation"/> is a <typeparamref name="TView"/>  or <see langword="class"/>,
+        /// and <typeparamref name="TView"/> is a <see cref="IView"/>.</para>
         /// <para><b>Returns:</b> The current instance of <see cref="IDependencyResolution"/>.</para>
         /// </summary>
         IDependencyResolution RegisterView<TView, TImplementation>()

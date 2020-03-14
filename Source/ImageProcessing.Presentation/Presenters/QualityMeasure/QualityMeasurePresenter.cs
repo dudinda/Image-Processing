@@ -8,11 +8,11 @@ using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Core.Presenter.Abstract;
 using ImageProcessing.Presentation.ViewModel.QualityMeasure;
 using ImageProcessing.Presentation.Views.QualityMeasure;
-using ImageProcessing.ServiceLayer.Service.DistributionServices.BitmapLuminanceDistribution.Interface;
+using ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
 
 namespace ImageProcessing.Presentation.Presenters
 {
-    public class QualityMeasurePresenter : BasePresenter<IQualityMeasureView, QualityMeasureViewModel>
+    public sealed class QualityMeasurePresenter : BasePresenter<IQualityMeasureView, QualityMeasureViewModel>
     {
         private readonly IBitmapLuminanceDistributionService _distributionService;
 

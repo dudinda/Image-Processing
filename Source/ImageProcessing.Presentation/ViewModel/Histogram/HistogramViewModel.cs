@@ -1,10 +1,10 @@
-﻿using System.Drawing;
+using System.Drawing;
 
 using ImageProcessing.Common.Enums;
 
 namespace ImageProcessing.Presentation.ViewModel.Histogram
 {
-    public class HistogramViewModel
+    public sealed class HistogramViewModel
     {
         public HistogramViewModel(Bitmap source, RandomVariable mode)
         {

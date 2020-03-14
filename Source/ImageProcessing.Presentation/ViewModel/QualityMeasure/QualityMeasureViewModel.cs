@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace ImageProcessing.Presentation.ViewModel.QualityMeasure
 {
-    public class QualityMeasureViewModel
+    public sealed class QualityMeasureViewModel
     {
         public QualityMeasureViewModel(ConcurrentQueue<Bitmap> queue)
         {

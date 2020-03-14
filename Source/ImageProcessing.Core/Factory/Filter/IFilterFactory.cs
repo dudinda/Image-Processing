@@ -8,7 +8,7 @@ namespace ImageProcessing.Core.Factory.Filter
         /// <summary>
         /// Provides a factory method
         /// where <typeparamref name="TEnum"/> represents
-        /// enumeration for <typeparamref name="TFilter"/>
+        /// enumeration for the <typeparamref name="TFilter"/>.
         /// </summary>
         TFilter GetFilter(TEnum filter);
     }

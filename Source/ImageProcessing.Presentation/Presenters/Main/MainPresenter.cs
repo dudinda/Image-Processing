@@ -17,18 +17,19 @@ using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Core.Pipeline.Block.Implementation;
 using ImageProcessing.Core.Presenter.Abstract;
-using ImageProcessing.Core.ServiceLayer.Providers.BitmapDistribution;
-using ImageProcessing.Core.ServiceLayer.Providers.RgbFilter;
-using ImageProcessing.Core.ServiceLayer.Services.Locker.Interface;
-using ImageProcessing.Core.ServiceLayer.Services.STATask;
 using ImageProcessing.Presentation.Presenters.Convolution;
 using ImageProcessing.Presentation.ViewModel.Convolution;
 using ImageProcessing.Presentation.ViewModel.Histogram;
 using ImageProcessing.Presentation.Views.Main;
+using ImageProcessing.ServiceLayer.Providers.Interface.BitmapDistribution;
+using ImageProcessing.ServiceLayer.Providers.Interface.RgbFilter;
+using ImageProcessing.ServiceLayer.Services.LockerService.Operation.Interface;
+using ImageProcessing.ServiceLayer.Services.LockerService.Zoom.Interface;
+using ImageProcessing.ServiceLayer.Services.StaTask.Interface;
 
 namespace ImageProcessing.Presentation.Presenters.Main
 {
-    public partial class MainPresenter : BasePresenter<IMainView>
+    public sealed partial class MainPresenter : BasePresenter<IMainView>
     {
 
         private readonly IBitmapLuminanceDistributionServiceProvider _lumaProvider;

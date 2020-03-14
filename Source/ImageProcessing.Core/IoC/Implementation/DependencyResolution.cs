@@ -16,7 +16,9 @@ namespace ImageProcessing.Core.IoC.Implementation
 
         public DependencyResolution(IContainer container)
         {
-            _container = Requires.IsNotNull(container, nameof(container));
+            _container = Requires.IsNotNull(
+                container, nameof(container)
+            );
         }
 
         /// <inheritdoc cref="IDependencyResolution.EnableAnnotatedConstructorInjection"/>

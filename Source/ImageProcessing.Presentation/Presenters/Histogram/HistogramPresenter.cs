@@ -11,11 +11,11 @@ using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Core.Presenter.Abstract;
 using ImageProcessing.Presentation.ViewModel.Histogram;
 using ImageProcessing.Presentation.Views.Histogram;
-using ImageProcessing.ServiceLayer.Service.DistributionServices.BitmapLuminanceDistribution.Interface;
+using ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
 
 namespace ImageProcessing.Presentation.Presenters
 {
-    public class HistogramPresenter : BasePresenter<IHistogramView, HistogramViewModel>
+    public sealed class HistogramPresenter : BasePresenter<IHistogramView, HistogramViewModel>
     {
         private readonly IBitmapLuminanceDistributionService _distributionService;
 

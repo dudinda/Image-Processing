@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ImageProcessing.Presentation": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}

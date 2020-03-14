@@ -15,15 +15,26 @@ namespace ImageProcessing.Core.Presenter.Abstract
         protected IAwaitablePipeline Pipeline { get; }
         protected IEventAggregator EventAggregator { get; }
 
-		protected BasePresenter(IAppController controller,
+        protected BasePresenter(IAppController controller,
                                 TView view,
                                 IAwaitablePipeline pipeline,
                                 IEventAggregator eventAggregator)
-		{
-			Controller      = Requires.IsNotNull(controller, nameof(controller));
-			View            = Requires.IsNotNull(view, nameof(view));
-            Pipeline        = Requires.IsNotNull(pipeline, nameof(pipeline));
-            EventAggregator = Requires.IsNotNull(eventAggregator, nameof(eventAggregator));
+        {
+            EventAggregator = Requires.IsNotNull(
+                eventAggregator, nameof(eventAggregator)
+            );
+
+            Controller = Requires.IsNotNull(
+                controller, nameof(controller)
+            );
+
+            Pipeline = Requires.IsNotNull(
+                pipeline, nameof(pipeline)
+            );
+
+            View = Requires.IsNotNull(
+                view, nameof(view)
+            );       
         }
 
 		public virtual void Run() => View.Show();
@@ -36,8 +47,8 @@ namespace ImageProcessing.Core.Presenter.Abstract
 		protected TView View { get; }
 		protected IAppController Controller { get; }
         protected IAwaitablePipeline Pipeline { get; }
-        protected TViewModel ViewModel { get; private set; }
         protected IEventAggregator EventAggregator { get; }
+        protected TViewModel ViewModel { get; private set; }
 
         protected BasePresenter(IAppController controller,
                                 TView view,

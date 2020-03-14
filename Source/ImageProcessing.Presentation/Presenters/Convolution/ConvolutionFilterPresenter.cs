@@ -9,36 +9,36 @@ using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Core.Pipeline.Block.Implementation;
 using ImageProcessing.Core.Presenter.Abstract;
-using ImageProcessing.Core.ServiceLayer.Providers.Convolution;
-using ImageProcessing.Core.ServiceLayer.Services.Locker.Interface;
 using ImageProcessing.Presentation.ViewModel.Convolution;
 using ImageProcessing.Presentation.Views.Convolution;
+using ImageProcessing.ServiceLayer.Providers.Interface.Convolution;
+using ImageProcessing.ServiceLayer.Services.LockerService.Operation.Interface;
 
 namespace ImageProcessing.Presentation.Presenters.Convolution
 {
-    public partial class ConvolutionFilterPresenter : BasePresenter<IConvolutionFilterView, ConvolutionFilterViewModel>
+    public sealed partial class ConvolutionFilterPresenter : BasePresenter<IConvolutionFilterView, ConvolutionFilterViewModel>
 	{
-		private readonly IConvolutionFilterServiceProvider _convolutionProvider;
+		private readonly IConvolutionServiceProvider _convolutionProvider;
 		private readonly IAsyncOperationLocker _operationLocker;
 
-		public ConvolutionFilterPresenter(IAppController controller,
-										  IConvolutionFilterView view,
+        public ConvolutionFilterPresenter(IAppController controller,
+                                          IConvolutionFilterView view,
                                           IAwaitablePipeline pipeline,
                                           IEventAggregator eventAggregator,
-										  IConvolutionFilterServiceProvider convolutionFilterServiceProvider,
-										  IAsyncOperationLocker operationLocker
+                                          IConvolutionServiceProvider convolutionFilterServiceProvider,
+                                          IAsyncOperationLocker operationLocker
             ) : base(controller, view, pipeline, eventAggregator)
-		{
-			_convolutionProvider = Requires.IsNotNull(
+        {
+            _convolutionProvider = Requires.IsNotNull(
                 convolutionFilterServiceProvider, nameof(convolutionFilterServiceProvider)
             );
 
-			_operationLocker     = Requires.IsNotNull(
+            _operationLocker = Requires.IsNotNull(
                 operationLocker, nameof(operationLocker)
             );
 
-			EventAggregator.Subscribe(this);
-		}
+            EventAggregator.Subscribe(this);
+        }
 
 		private async Task ApplyConvolutionFilter(ConvolutionFilterEventArgs e)
 		{

@@ -1,8 +1,8 @@
-﻿using System.Drawing;
+using System.Drawing;
 
 namespace ImageProcessing.Presentation.ViewModel.Convolution
 {
-    public class ConvolutionFilterViewModel
+    public sealed class ConvolutionFilterViewModel
     {
         public ConvolutionFilterViewModel(Bitmap source)
         {
