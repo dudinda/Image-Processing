@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Drawing;
 
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Core.Factory.RGBFiltersFactory;
-using ImageProcessing.Services.RGBFilterService.Interface;
+using ImageProcessing.DomainModel.Factory.RgbFilters.Interface;
+using ImageProcessing.ServiceLayer.Services.RgbFilter.Interface;
 
 using NSubstitute;
 
@@ -12,19 +12,20 @@ using NUnit.Framework;
 namespace ImageProcessing.Tests.Services
 {
     [TestFixture]
-    internal class RGBFilterServiceTests
+    internal class RgbFilterServiceTests
     {
-        private IRGBFilterService _filterService;
-        private IRGBFiltersFactory _rgbFilterFactory;
+        private IRgbFilterService _filterService;
+        private IRgbFilterFactory _rgbFilterFactory;
 
         [SetUp]
         public void SetUp()
         {
-            _filterService = Substitute.For<IRGBFilterService>();
+            _filterService = Substitute.For<IRgbFilterService>();
+            _rgbFilterFactory = Substitute.For<IRgbFilterFactory>();
         }
 
-        [TestCase(RGBFilter.Binary)]
-        public void ServiceThrowsArgumentNullExceptionIfBitmapSourceIsNull(RGBFilter filterType)
+        [TestCase(RgbFilter.Binary)]
+        public void ServiceThrowsArgumentNullExceptionIfBitmapSourceIsNull(RgbFilter filterType)
         {
             var filter = _rgbFilterFactory.GetFilter(filterType);
             Assert.Throws<ArgumentNullException>(() => _filterService.Filter(null, filter));

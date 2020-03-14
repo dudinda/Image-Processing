@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Drawing;
 
-using ImageProcessing.Services.DistributionServices.Distribution.Interface;
+using ImageProcessing.ServiceLayer.Services.Distributions.RandomVariable.Interface;
 
 using NSubstitute;
 
@@ -13,13 +13,12 @@ namespace ImageProcessing.Tests.Services
     internal class RandomVariableDistributionServiceTests
     {
         private IRandomVariableDistributionService _distributionService;
-        private Image _image;
+
         
         [SetUp]
         public void SetUp()
         {
             _distributionService = Substitute.For<IRandomVariableDistributionService>();
-            _image = Substitute.For<Image>();
         }
 
         [Test]

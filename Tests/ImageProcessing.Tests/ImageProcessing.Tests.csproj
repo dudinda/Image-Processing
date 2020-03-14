@@ -110,7 +110,7 @@
     <Compile Include="Presentation\QualityMeasure\QualityMeasurePresenterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\RandomVariableDistributionServiceTests.cs" />
-    <Compile Include="Services\RGBFilterServiceTests.cs" />
+    <Compile Include="Services\RgbFilterServiceTests.cs" />
     <Compile Include="DecimalMath\Real\DecimalMathTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -129,9 +129,17 @@
       <Project>{ffc62fcd-eda2-49d4-8380-e07fac8eacee}</Project>
       <Name>ImageProcessing.DecimalMath</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Source\ImageProcessing.DomainModel\ImageProcessing.DomainModel.csproj">
+      <Project>{70757D0C-2202-42C5-9E93-B3E54418FE76}</Project>
+      <Name>ImageProcessing.DomainModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.Presentation\ImageProcessing.Presentation.csproj">
       <Project>{26F0D611-47D0-4222-8235-1375C45AB861}</Project>
       <Name>ImageProcessing.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\ImageProcessing.ServiceLayer\ImageProcessing.ServiceLayer.csproj">
+      <Project>{FAD40911-9967-4DCC-9CA1-6BB37BB8D9BD}</Project>
+      <Name>ImageProcessing.ServiceLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +150,7 @@
     <Folder Include="DecimalMath\Complex\" />
     <Folder Include="DecimalMath\Integration\" />
     <Folder Include="DecimalMath\Special\" />
+    <Folder Include="Domain\Factory\" />
     <Folder Include="UI\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

@@ -1,16 +1,14 @@
-using System.Drawing;
 
 using ImageProcessing.Core.Controller.Interface;
 using ImageProcessing.Core.EventAggregator.Interface;
-using ImageProcessing.Core.Factory.Base;
-using ImageProcessing.Core.Locker.Interface;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
-using ImageProcessing.Core.Service.STATask;
 using ImageProcessing.Presentation.Presenters.Main;
 using ImageProcessing.Presentation.Views.Main;
-using ImageProcessing.Services.ConvolutionFilterServices.Interface;
-using ImageProcessing.Services.DistributionServices.BitmapLuminanceDistribution.Interface;
-using ImageProcessing.Services.RGBFilterService.Interface;
+using ImageProcessing.ServiceLayer.Providers.Interface.BitmapDistribution;
+using ImageProcessing.ServiceLayer.Providers.Interface.RgbFilter;
+using ImageProcessing.ServiceLayer.Services.LockerService.Operation.Interface;
+using ImageProcessing.ServiceLayer.Services.LockerService.Zoom.Interface;
+using ImageProcessing.ServiceLayer.Services.StaTask.Interface;
 
 using NSubstitute;
 
@@ -25,40 +23,36 @@ namespace ImageProcessing.Tests.Presenters
         private IAppController _controller;
         private MainPresenter _presenter;
         private IMainView _view;
-        private IBaseFactory _baseFactory;
         private IEventAggregator _eventAggregator;
-        private IConvolutionFilterService _convolutionFilterService;
-        private IBitmapLuminanceDistributionService _bitmapLuminanceDistributionFilter;
-        private IRGBFilterService _rgbFilterService;
         private ISTATaskService _staTaskService;
-        private IAsyncLocker _operationLocker;
-        private IAsyncLocker _zoomLocker;
-        private IAwaitablePipeline<Bitmap> _pipeline;
+        private IAsyncOperationLocker _operationLocker;
+        private IAsyncZoomLocker _zoomLocker;
+        private IAwaitablePipeline _pipeline;
+        private IBitmapLuminanceDistributionServiceProvider _lumaProvider;
+        private IRgbFilterServiceProvider _rgbProvider;
 
         [SetUp]
         public void SetUp()
         {
             _controller      = Substitute.For<IAppController>();
-            _baseFactory     = Substitute.For<IBaseFactory>();
             _view            = Substitute.For<IMainView>();
             _eventAggregator = Substitute.For<IEventAggregator>();
             _staTaskService  = Substitute.For<ISTATaskService>();
-            _pipeline        = Substitute.For<IAwaitablePipeline<Bitmap>>();
-
-            _convolutionFilterService          = Substitute.For<IConvolutionFilterService>();
-            _bitmapLuminanceDistributionFilter = Substitute.For<IBitmapLuminanceDistributionService>();
-            _rgbFilterService                  = Substitute.For<IRGBFilterService>();
+            _pipeline        = Substitute.For<IAwaitablePipeline>();
+            _operationLocker = Substitute.For<IAsyncOperationLocker>();
+            _zoomLocker      = Substitute.For<IAsyncZoomLocker>();
+            _lumaProvider    = Substitute.For<IBitmapLuminanceDistributionServiceProvider>();
+            _rgbProvider     = Substitute.For<IRgbFilterServiceProvider>();
 
             _presenter = new MainPresenter(_controller,
                                            _view,
-                                           _baseFactory,
-                                           _bitmapLuminanceDistributionFilter,
                                            _staTaskService,
-                                           _rgbFilterService,
                                            _eventAggregator,
                                            _pipeline,
                                            _zoomLocker,
-                                           _operationLocker);
+                                           _operationLocker,
+                                           _lumaProvider,
+                                           _rgbProvider);
           _presenter.Run();
         }
 
