@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-using ImageProcessing.Common.Interop;
+using ImageProcessing.Interop.Code.Wrapper;
 using ImageProcessing.ServiceLayer.Services.StaTask.Interface;
 
 namespace ImageProcessing.ServiceLayer.Services.StaTask.Implementation

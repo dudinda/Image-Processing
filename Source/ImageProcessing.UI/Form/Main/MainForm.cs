@@ -4,9 +4,9 @@ using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Common.Interop;
 using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Form.Base;
+using ImageProcessing.Interop.Code.Wrapper;
 using ImageProcessing.Presentation.Views.Main;
 
 [assembly: InternalsVisibleTo("ImageProcessing.Tests")]

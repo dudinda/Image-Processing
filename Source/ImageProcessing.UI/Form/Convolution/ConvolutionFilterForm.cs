@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.EnumExtensions;
-using ImageProcessing.Common.Interop;
+using ImageProcessing.Interop.Code.Wrapper;
 using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Form.Base;
 using ImageProcessing.Presentation.Views.Convolution;

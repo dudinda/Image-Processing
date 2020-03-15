@@ -2,9 +2,9 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-using ImageProcessing.Common.Interop.Structs;
+using ImageProcessing.Interop.Code.Structs;
 
-namespace ImageProcessing.Common.Interop.Api
+namespace ImageProcessing.Interop.Api
 {
     /// <summary>
     /// Provides the API from windows kernel

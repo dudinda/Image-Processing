@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ImageProcessing.Interop\ImageProcessing.Interop.csproj" />
     <ProjectReference Include="..\ImageProcessing.Core\ImageProcessing.Core.csproj" />
     <ProjectReference Include="..\ImageProcessing.DecimalMath\ImageProcessing.DecimalMath.csproj" />
     <ProjectReference Include="..\ImageProcessing.DomainModel\ImageProcessing.DomainModel.csproj" />

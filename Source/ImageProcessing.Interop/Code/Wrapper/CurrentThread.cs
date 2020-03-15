@@ -1,6 +1,6 @@
-using ImageProcessing.Common.Interop.Api;
+using ImageProcessing.Interop.Api;
 
-namespace ImageProcessing.Common.Interop
+namespace ImageProcessing.Interop.Code.Wrapper
 {
     /// <summary>
     /// Provides a wrapper over the native windows kernel
@@ -8,6 +8,7 @@ namespace ImageProcessing.Common.Interop
     /// </summary>
     public static class CurrentThread
     {
-        public static int GetId() => NativeMethods.GetCurrentThreadId();
+        public static int GetId()
+            => NativeMethods.GetCurrentThreadId();
     }
 }
