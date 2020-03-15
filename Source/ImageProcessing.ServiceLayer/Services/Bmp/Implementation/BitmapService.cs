@@ -15,24 +15,24 @@ namespace ImageProcessing.ServiceLayer.Services.Bmp.Implementation
     public class BitmapService : IBitmapService
     {
         /// <inheritdoc/>
-        public Bitmap Normalize(Bitmap src)
+        public Bitmap Normalize(Bitmap bitmap)
         {
-            Requires.IsNotNull(src, nameof(src));
+            Requires.IsNotNull(bitmap, nameof(bitmap));
 
-            var max = Max(src);
-            var min = Min(src);
+            var max = Max(bitmap);
+            var min = Min(bitmap);
 
             var newMax = 255;
             var newMin = 0;
 
             var divisor = (double)(newMax - newMin) / (double)(max - min);
 
-            var bitmapData = src.LockBits(new Rectangle(0, 0, src.Width, src.Height),
+            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                                                        ImageLockMode.ReadWrite,
-                                                       src.PixelFormat);
+                                                       bitmap.PixelFormat);
 
-            var size = src.Size;
-            var ptrStep = src.GetBitsPerPixel() / 8;
+            var size = bitmap.Size;
+            var ptrStep = bitmap.GetBitsPerPixel() / 8;
 
             var options = new ParallelOptions()
             {
@@ -62,15 +62,17 @@ namespace ImageProcessing.ServiceLayer.Services.Bmp.Implementation
         }
 
         /// <inheritdoc/>
-        public byte Max(Bitmap src)
+        public byte Max(Bitmap bitmap)
         {
-            var result = new Bitmap(src);
+            Requires.IsNotNull(bitmap, nameof(bitmap));
+
+            var result = new Bitmap(bitmap);
             var resultData = result.LockBits(new Rectangle(0, 0, result.Width, result.Height),
-                                                           ImageLockMode.WriteOnly,
-                                                           src.PixelFormat);
+                                                           ImageLockMode.ReadOnly,
+                                                           bitmap.PixelFormat);
 
             var size = result.Size;
-            var ptrStep = src.GetBitsPerPixel() / 8;
+            var ptrStep = bitmap.GetBitsPerPixel() / 8;
 
             unsafe
             {
@@ -104,15 +106,17 @@ namespace ImageProcessing.ServiceLayer.Services.Bmp.Implementation
         }
 
         /// <inheritdoc/>
-        public byte Min(Bitmap src)
+        public byte Min(Bitmap bitmap)
         {
-            var result = new Bitmap(src);
+            Requires.IsNotNull(bitmap, nameof(bitmap));
+
+            var result = new Bitmap(bitmap);
             var resultData = result.LockBits(new Rectangle(0, 0, result.Width, result.Height),
-                                                           ImageLockMode.WriteOnly,
-                                                           src.PixelFormat);
+                                                           ImageLockMode.ReadOnly,
+                                                           bitmap.PixelFormat);
 
             var size = result.Size;
-            var ptrStep = src.GetBitsPerPixel() / 8;
+            var ptrStep = bitmap.GetBitsPerPixel() / 8;
 
             unsafe
             {

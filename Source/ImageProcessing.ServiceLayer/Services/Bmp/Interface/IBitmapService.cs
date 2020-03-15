@@ -15,16 +15,16 @@ namespace ImageProcessing.ServiceLayer.Services.Bmp.Interface
         /// <summary>
         /// Get the maxima value of luma.
         /// </summary>
-        byte Min(Bitmap src);
+        byte Min(Bitmap bitmap);
 
         /// <summary>
         /// Get the maxima value of luma.
         /// </summary>
-        byte Max(Bitmap src);
+        byte Max(Bitmap bitmap);
 
         /// <summary>
         /// Change the range of pixel intensity values.
         /// </summary>
-        Bitmap Normalize(Bitmap src);
+        Bitmap Normalize(Bitmap bitmap);
     }
 }
