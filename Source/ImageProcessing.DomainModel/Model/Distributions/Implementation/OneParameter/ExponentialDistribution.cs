@@ -9,7 +9,9 @@ using ImageProcessing.DomainModel.Model.Distributions.Interface;
 [assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.DomainModel.Model.Distributions.Implementation.OneParameter
 {
-    /// <inheritdoc/>
+    /// <summary>
+    /// Implements <see cref="IDistribution"/>
+    /// </summary>
     internal sealed class ExponentialDistribution : IDistribution
     {
         private decimal _lambda;

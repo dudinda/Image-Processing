@@ -8,6 +8,7 @@ namespace ImageProcessing.Interop.Code.Wrapper
     /// </summary>
     public static class CurrentThread
     {
+        /// <inheritdoc cref="NativeMethods.GetCurrentThreadId"/>
         public static int GetId()
             => NativeMethods.GetCurrentThreadId();
     }

@@ -10,7 +10,9 @@ using ImageProcessing.DomainModel.Model.Distributions.Interface;
 [assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.DomainModel.Model.Distributions.Implementation.TwoParameter
 {
-    /// <inheritdoc/>
+    /// <summary>
+    /// Implements <see cref="IDistribution"/>
+    /// </summary>
     internal sealed class WeibullDistribution : IDistribution
     {
         private decimal _lambda;

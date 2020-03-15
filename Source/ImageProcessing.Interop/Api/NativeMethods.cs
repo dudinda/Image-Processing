@@ -13,7 +13,7 @@ namespace ImageProcessing.Interop.Api
     internal static class NativeMethods
     {
         /// <summary>
-        /// Recivies the window handles associated
+        /// Receives the window handles associated
         /// with a thread
         /// </summary>
         internal delegate bool EnumThreadWndProc(IntPtr hWnd, IntPtr lp);

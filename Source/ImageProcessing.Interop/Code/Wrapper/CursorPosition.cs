@@ -10,10 +10,8 @@ namespace ImageProcessing.Interop.Code.Wrapper
     /// method <see cref="NativeMethods.GetCursorPos(out Structs.LPPOINT)"/>
     /// </summary>
     public static class CursorPosition
-    {      
-        /// <summary>
-        /// Retrieves the cursor's position, in screen coordinates.
-        /// </summary>
+    {
+        /// <inheritdoc cref="NativeMethods.GetCursorPos(out Structs.LPPOINT)"/>
         public static Point GetCursorPosition()
         {
             if (NativeMethods.GetCursorPos(out var lpPoint))

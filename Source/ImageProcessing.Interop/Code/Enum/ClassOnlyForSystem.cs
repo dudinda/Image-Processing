@@ -53,13 +53,13 @@ namespace ImageProcessing.Interop.Code.Enum
         /// <summary>
         /// The class for the task switch window.
         /// </summary>
-        [Description("#32770")]
+        [Description("#32771")]
         TaskSwitchWindow = 7,
 
         /// <summary>
         /// The class for icon titles.
         /// </summary>
-        [Description("#32771")]
+        [Description("#32772")]
         IconTitles       = 8
     }
 }

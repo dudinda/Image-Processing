@@ -9,7 +9,9 @@ using ImageProcessing.DomainModel.Model.Distributions.Interface;
 [assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.DomainModel.Model.Distributions.Implementation.OneParameter
 {
-    /// <inheritdoc/>
+    /// <summary>
+    /// Implements <see cref="IDistribution"/>
+    /// </summary>
     internal sealed class ParabolaDistribution : IDistribution
     {
         private decimal _k;

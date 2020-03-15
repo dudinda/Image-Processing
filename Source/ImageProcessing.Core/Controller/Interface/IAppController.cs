@@ -10,8 +10,8 @@ namespace ImageProcessing.Core.Controller.Interface
     /// Represents the access point to the specified DI container,
     /// resolving dependencies via <see cref="IoC"/>.
     /// Further, controls the flow of the application,
-    /// by providing the <see cref="Run{TPresenter}"
-    /// and <see cref="Exit{TContext}"/> methods.
+    /// by providing the <see cref="Run{TPresenter}"/>
+    /// and <see cref="Run{TPresenter, TViewModel}"/> methods.
     /// </summary>
     public interface IAppController : IDisposable
     {
