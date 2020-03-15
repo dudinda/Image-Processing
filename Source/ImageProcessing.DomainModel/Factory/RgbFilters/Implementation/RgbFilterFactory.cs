@@ -16,11 +16,8 @@ using ImageProcessing.DomainModel.Model.RgbFilters.Interface.Color;
 
 namespace ImageProcessing.DomainModel.Factory.RgbFilters.Implementation
 {
-    /// <summary>
-    /// A factory method
-    /// where <see cref="RgbFilter"/> and <see cref="RgbColors"/> represent
-    /// enumeration for types implementing <see cref="IDistribution"/>.
-    /// </summary>
+
+    /// <inheritdoc cref="IRgbFilterFactory"/>
     public sealed class RgbFilterFactory : IRgbFilterFactory
     {
         /// <summary>
@@ -42,10 +39,7 @@ namespace ImageProcessing.DomainModel.Factory.RgbFilters.Implementation
             }
         }
 
-        /// <summary>
-        /// Provides a factory method for all <see cref="RgbColors"/>
-        /// implementing <see cref="IRgbFilter"/>.
-        /// </summary>
+        /// <inheritdoc />
 		[MethodImpl(MethodImplOptions.NoInlining)]
 		public IRgbFilter GetColorFilter(RgbColors color)
         {

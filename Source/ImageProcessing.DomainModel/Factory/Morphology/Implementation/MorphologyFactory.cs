@@ -16,17 +16,10 @@ using ImageProcessing.DomainModel.Model.Morphology.Interface.UnaryOperator;
 
 namespace ImageProcessing.DomainModel.Factory.Morphology.Implementation
 {
-    /// <summary>
-    /// Provides a factory method for all types
-    /// marked by <see cref="IMorphology"/>.
-    /// </summary>
+    /// <inheritdoc cref="IMorphologyFactory" />
     public sealed class MorphologyFactory : IMorphologyFactory
     {
-        /// <summary>
-        /// A factory method
-        /// where <see cref="MorphologyOperator"/> represents
-        /// enumeration for types implementing <see cref="IMorphologyBinary"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public IMorphologyBinary BinaryFilter(MorphologyOperator filter)
         {
             switch (filter)
@@ -42,8 +35,8 @@ namespace ImageProcessing.DomainModel.Factory.Morphology.Implementation
 
         /// <summary>
         /// A factory method
-        /// where <see cref="MorphologyOperator"/> represents
-        /// enumeration for types implementing <see cref="IMorphologyUnary"/>.
+        /// where the <see cref="MorphologyOperator"/> represents an
+        /// enumeration for types implementing the <see cref="IMorphologyUnary"/>.
         /// </summary>
         public IMorphologyUnary GetFilter(MorphologyOperator filter)
         {

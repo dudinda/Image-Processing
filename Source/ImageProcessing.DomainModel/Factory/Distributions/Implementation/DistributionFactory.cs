@@ -8,16 +8,13 @@ using ImageProcessing.DomainModel.Model.Distributions.Interface;
 
 namespace ImageProcessing.DomainModel.Factory.Distributions.Implementation
 {
-    /// <summary>
-    /// Provides a factory method for all types
-    /// implementing <see cref="IDistribution"/>.
-    /// </summary>
+    /// <inheritdoc cref="IDistributionFactory" />
     public sealed class DistributionFactory : IDistributionFactory
     {
         /// <summary>
         /// A factory method
-        /// where <see cref="Distribution"/> represents
-        /// enumeration for types implementing <see cref="IDistribution"/>.
+        /// where <see cref="Distribution"/> represents an
+        /// enumeration for the types implementing the <see cref="IDistribution"/>.
         /// </summary>
         public IDistribution GetFilter(Distribution distribution) 
         {

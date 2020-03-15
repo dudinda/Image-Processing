@@ -5,10 +5,15 @@ using ImageProcessing.DomainModel.Model.RgbFilters.Interface;
 namespace ImageProcessing.DomainModel.Factory.RgbFilters.Interface
 {
     /// <summary>
-    /// Interface that RGBFilterFactory methods are required to implement.
+    /// Provides a factory method for all the types
+    /// implementing the <see cref="IRgbFilter"/>.
     /// </summary>
     public interface IRgbFilterFactory : IBaseFactory<IRgbFilter, RgbFilter>
     {
+        /// <summary>
+        /// Provides a factory method for all <see cref="RgbColors"/>
+        /// implementing <see cref="IRgbFilter"/>.
+        /// </summary>
         IRgbFilter GetColorFilter(RgbColors color);
     }
 }

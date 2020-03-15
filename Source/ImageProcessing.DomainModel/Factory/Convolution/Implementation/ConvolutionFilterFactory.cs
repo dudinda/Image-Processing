@@ -14,10 +14,7 @@ using ImageProcessing.DomainModel.Factory.Convolution.Interface;
 
 namespace ImageProcessing.DomainModel.Factory.Convolution.Implementation
 {
-    /// <summary>
-    /// Provides a factory method for all types
-    /// implementing <see cref="IConvolutionFilter"/>.
-    /// </summary>
+    /// <inheritdoc cref="IConvolutionFilterFactory" />
     public sealed class ConvolutionFilterFactory : IConvolutionFilterFactory
     {
         /// <summary>

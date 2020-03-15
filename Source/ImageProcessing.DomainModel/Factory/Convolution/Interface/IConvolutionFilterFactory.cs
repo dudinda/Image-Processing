@@ -5,7 +5,8 @@ using ImageProcessing.DomainModel.Convolution.Interface;
 namespace ImageProcessing.DomainModel.Factory.Convolution.Interface
 {
     /// <summary>
-    /// Interface that ConvolutionFilterFactory methods are required to implement.
+    /// Provides a factory method for all the types
+    /// implementing the <see cref="IConvolutionFilter"/>.
     /// </summary>
     public interface IConvolutionFilterFactory : IBaseFactory<IConvolutionFilter, ConvolutionFilter>
     {

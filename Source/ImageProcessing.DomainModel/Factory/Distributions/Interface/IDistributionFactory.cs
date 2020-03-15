@@ -5,7 +5,8 @@ using ImageProcessing.DomainModel.Model.Distributions.Interface;
 namespace ImageProcessing.DomainModel.Factory.Distributions.Interface
 {
     /// <summary>
-    /// Interface that DistributionFactory methods are required to implement.
+    /// Provides a factory method for all the types
+    /// implementing the <see cref="IDistribution"/>.
     /// </summary>
     public interface IDistributionFactory : IBaseFactory<IDistribution, Distribution>
     {
