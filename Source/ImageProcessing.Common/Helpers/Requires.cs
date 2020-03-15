@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace ImageProcessing.Common.Helpers
 {
@@ -6,8 +6,7 @@ namespace ImageProcessing.Common.Helpers
     {
         public static T IsNotNull<T>(T instance, string paramName) where T : class
         {
-            // Use ReferenceEquals in case T overrides equals.
-            if (object.ReferenceEquals(null, instance)) {
+            if (instance is null) {
                 throw new ArgumentNullException(paramName);
             }
 
