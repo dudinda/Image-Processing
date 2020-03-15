@@ -77,9 +77,9 @@ namespace ImageProcessing.ServiceLayer.Services.Convolution.Implementation
                         G = G * filter.Factor + filter.Bias;
                         R = R * filter.Factor + filter.Bias;
 
-                        destinationPtr[0] = GetByteValue(B);
-                        destinationPtr[1] = GetByteValue(G);
-                        destinationPtr[2] = GetByteValue(R);
+                        destinationPtr[0] = GetByteValue(ref B);
+                        destinationPtr[1] = GetByteValue(ref G);
+                        destinationPtr[2] = GetByteValue(ref R);
                     }                   
                 });          
             }
@@ -89,7 +89,7 @@ namespace ImageProcessing.ServiceLayer.Services.Convolution.Implementation
 
             return destination;
 
-            byte GetByteValue(double value)
+            byte GetByteValue(ref double value)
             {
                 if (value > 255)
                 {
