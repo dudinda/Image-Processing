@@ -72,6 +72,7 @@ namespace ImageProcessing.UI
 
             _controller.IoC
                 .RegisterSingleton<ApplicationContext>()
+                .RegisterSingleton<MainPresenter>()
                 .RegisterSingleton<IEventAggregator, EventAggregator>()
                 .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
                 .RegisterSingleton<ISTATaskService, STATaskService>()

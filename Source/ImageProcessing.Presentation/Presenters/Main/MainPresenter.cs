@@ -597,6 +597,7 @@ namespace ImageProcessing.Presentation.Presenters.Main
         private void CloseForm()
         {
             _staTaskService.Dispose();
+            Controller.Dispose();
         }
     }
 }
