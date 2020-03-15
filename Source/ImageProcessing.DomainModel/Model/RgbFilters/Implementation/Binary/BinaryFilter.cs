@@ -16,6 +16,7 @@ namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Binary
 {
     internal sealed class BinaryFilter : IRgbFilter
     {
+        /// <inheritdoc />
         public Bitmap Filter(Bitmap bitmap)
         {
             Requires.IsNotNull(bitmap, nameof(bitmap));
@@ -23,9 +24,10 @@ namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Binary
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                                              ImageLockMode.ReadWrite,
                                              bitmap.PixelFormat);
-
+            var rec = Luma.Rec709;
             var luminance = 0.0;
             var ptrStep = bitmap.GetBitsPerPixel() / 8;
+
             var size = bitmap.Size;
             var options = new ParallelOptions()
             {
@@ -39,14 +41,16 @@ namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Binary
                 var bag = new ConcurrentBag<double>();
 
                 //get N luminance partial sums
-                Parallel.For<double>(0, size.Height, options, () => 0.0, (y, state, partial) =>
+                Parallel.For(0, size.Height, options, () => 0.0, (y, state, partial) =>
                 {
                     var ptr = startPtr + y * bitmapData.Stride;
 
                     for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
                         partial += Recommendation
-                        .GetLumaCoefficients(ref ptr[2], ref ptr[1], ref ptr[0], Luma.Rec709);
+                        .GetLumaCoefficients(
+                            ref ptr[2], ref ptr[1], ref ptr[0], ref rec
+                        );
                     }
 
                     return partial;
@@ -63,7 +67,9 @@ namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Binary
                     for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
                         luminance = Recommendation
-                        .GetLumaCoefficients(ref ptr[2], ref ptr[1], ref ptr[0], Luma.Rec709);
+                        .GetLumaCoefficients(
+                            ref ptr[2], ref ptr[1], ref ptr[0], ref rec
+                        );
 
                         //if relative luminance greater or equal than average
                         //set it to white
