@@ -13,7 +13,7 @@ namespace ImageProcessing.Core.Controller.Interface
     /// by providing the <see cref="Run{TPresenter}"
     /// and <see cref="Exit{TContext}"/> methods.
     /// </summary>
-    public interface IAppController
+    public interface IAppController : IDisposable
     {
         /// <summary>
         /// Provides the specified DI Container.
@@ -34,14 +34,5 @@ namespace ImageProcessing.Core.Controller.Interface
         void Run<TPresenter, TViewModel>(TViewModel vm)
             where TPresenter : class, IPresenter<TViewModel>
             where TViewModel : class;
-
-        /// <summary>
-        /// Exti the application by disposing
-        /// the <typeparamref name="TContext"/> if
-        /// it exists.
-        /// </summary>
-        void Exit<TContext>()
-            where TContext : IDisposable;
-
     }
 }

@@ -23,102 +23,197 @@ namespace ImageProcessing.Core.IoC.Implementation
             );
         }
 
-        /// <inheritdoc cref="IDependencyResolution.EnableAnnotatedConstructorInjection"/>
-        public IDependencyResolution EnableAnnotatedConstructorInjection()
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterTransientView<TView, TImplementation>()
+                where TImplementation : class, TView
+                where TView : IView
         {
-            _container.EnableAnnotatedConstructorInjection();
+            _container.RegisterTransient<TView, TImplementation>();
             return this;
         }
 
-        /// <inheritdoc cref="IDependencyResolution.IsRegistered{TService}"/>
-        public bool IsRegistered<TService>()
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterSingletonView<TView, TImplementation>()
+                where TImplementation : class, TView
+                where TView : IView
         {
-            return _container.IsRegistered<TService>();
-        }
-
-        /// <inheritdoc cref="IDependencyResolution.Register{TService, TImplementation}"/>
-        public IDependencyResolution Register<TService, TImplementation>() where TImplementation : TService
-        {
-            _container.Register<TService, TImplementation>();
+            _container.RegisterSingleton<TView, TImplementation>();
             return this;
         }
 
-        /// <inheritdoc cref="IDependencyResolution.Register{TService}"/>
-        public IDependencyResolution Register<TService>()
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterTransient<TService, TImplementation>()
+            where TImplementation : TService
         {
-            _container.Register<TService>();
+            _container.RegisterTransient<TService, TImplementation>();
             return this;
         }
 
-        /// <inheritdoc cref="IDependencyResolution.Register{TService, TArgument}(Expression{Func{TArgument, TService}})"/>
-        public IDependencyResolution Register<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterScoped<TService, TImplementation>()
+            where TImplementation : TService
         {
-            _container.Register(factory);
+            _container.RegisterScoped<TService, TImplementation>();
             return this;
         }
 
-        /// <inheritdoc cref="IDependencyResolution.RegisterInstance{TService}(TService)"/>
-        public IDependencyResolution RegisterInstance<TService>(TService instance)
-        {
-            _container.RegisterInstance(instance);
-            return this;
-        }
-
-        /// <inheritdoc cref="IDependencyResolution.RegisterNamedInstance{TService}(TService, string)"/>
-        public IDependencyResolution RegisterNamedInstance<TService>(TService instance, string serviceName)
-        {
-            _container.RegisterInstance(instance, serviceName);
-            return this;
-        }
-
-        /// <inheritdoc cref="IDependencyResolution.RegisterNamedSingleton{TService, TImplementation}(string)"/>
-        public IDependencyResolution RegisterNamedSingleton<TService, TImplementation>(string serviceName) where TImplementation : TService
-        {
-            _container.RegisterSingleton<TService, TImplementation>(serviceName);
-            return this;
-        }
-
-        /// <inheritdoc cref="IDependencyResolution.RegisterSingleton{TService, TImplementation}"/>
-        public IDependencyResolution RegisterSingleton<TService, TImplementation>() where TImplementation : TService
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterSingleton<TService, TImplementation>()
+            where TImplementation : TService
         {
             _container.RegisterSingleton<TService, TImplementation>();
             return this;
         }
 
-        /// <inheritdoc cref="IDependencyResolution.RegisterSingleton{TService}"/>
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterTransient<TService>()
+        {
+            _container.RegisterTransient<TService>();
+            return this;
+        }
+
+        /// <inheritdoc/>
         public IDependencyResolution RegisterSingleton<TService>()
         {
             _container.RegisterSingleton<TService>();
             return this;
         }
 
-        /// <inheritdoc cref="IDependencyResolution.RegisterSingleton{TService, TArgument}(Expression{Func{TArgument, TService}})"/>
-        public IDependencyResolution RegisterSingleton<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterScoped<TService>()
+        {
+            _container.RegisterScoped<TService>();
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterNamedTransient<TService, TImplementation>(string serviceName)
+            where TImplementation : TService
+        {
+            _container.RegisterTransient<TService, TImplementation>(serviceName);
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterNamedScoped<TService, TImplementation>(string serviceName)
+            where TImplementation : TService
+        {
+            _container.RegisterScoped<TService, TImplementation>(serviceName);
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterNamedSingleton<TService, TImplementation>(string serviceName)
+            where TImplementation : TService
+        {
+            _container.RegisterSingleton<TService, TImplementation>(serviceName);
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterTransientInstance<TService>(TService instance)
+        {
+            _container.RegisterTransient(instance);
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterScopedInstance<TService>(TService instance)
+        {
+            _container.RegisterScoped(instance);
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterSingletonInstance<TService>(TService instance)
+        {
+            _container.RegisterSingleton(instance);
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterTransientNamedInstance<TService>(TService instance, string serviceName)
+        {
+            _container.RegisterTransient(instance, serviceName);
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterScopedNamedInstance<TService>(TService instance, string serviceName)
+        {
+            _container.RegisterScoped(instance, serviceName);
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterSingletonNamedInstance<TService>(TService instance, string serviceName)
+        {
+            _container.RegisterSingleton(instance, serviceName);
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterTransientFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
+        {
+            _container.RegisterTransient(factory);
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterScopedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
+        {
+            _container.RegisterScoped(factory);
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterSingletonFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
         {
             _container.RegisterSingleton(factory);
             return this;
         }
 
-        /// <inheritdoc cref="IDependencyResolution.RegisterSingleton{TService, TArgument}(Expression{Func{TArgument, TService}}, string)"/>
-        public IDependencyResolution RegisterSingleton<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string serviceName)
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterTransientNamedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name)
         {
-            _container.RegisterSingleton(factory, serviceName);
+            _container.RegisterTransient(factory, name);
             return this;
         }
 
-        /// <inheritdoc cref="IDependencyResolution.RegisterView{TView, TImplementation}"/>
-        public IDependencyResolution RegisterView<TView, TImplementation>()
-            where TView : IView
-            where TImplementation : class, TView
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterScopedNamedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name)
         {
-            _container.Register<TView, TImplementation>();
+            _container.RegisterScoped(factory, name);
             return this;
         }
 
-        /// <inheritdoc cref="IDependencyResolution.Resolve{TService}"/>
+        /// <inheritdoc/>
+        public IDependencyResolution RegisterSingletonNamedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name)
+        {
+            _container.RegisterSingleton(factory, name);
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public IDependencyResolution EnableAnnotatedConstructorInjection()
+        {
+            _container.EnableAnnotatedConstructorInjection();
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public bool IsRegistered<TService>()
+            => _container.IsRegistered<TService>();
+
+        /// <inheritdoc/>
         public TService Resolve<TService>()
-        {
-            return _container.Resolve<TService>();
-        }
+            => _container.Resolve<TService>();
+
+        /// <summary>
+        /// Performs the disosing of the specified
+        /// <see cref="IContainer"/>
+        /// </summary>
+        public void Dispose()
+            => _container.Dispose();
     }
 }

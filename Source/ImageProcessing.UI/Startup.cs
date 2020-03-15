@@ -74,24 +74,24 @@ namespace ImageProcessing.UI
                 .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
                 .RegisterSingleton<ISTATaskService, STATaskService>()
                 .RegisterSingleton<IAsyncZoomLocker, ZoomAsyncLocker>()
-                .RegisterView<IMainView, MainForm>()
-                .RegisterView<IHistogramView, HistogramForm>()
-                .RegisterView<IConvolutionFilterView, ConvolutionFilterForm>()
-                .RegisterView<IQualityMeasureView, QualityMeasureForm>()
-                .Register<IConvolutionFilterService, ConvolutionFilterService>()
-                .Register<IConvolutionFilterFactory, ConvolutionFilterFactory>()
-                .Register<IMorphologyService, MorphologyService>()
-                .Register<IMorphologyFactory, MorphologyFactory>()
-                .Register<IRandomVariableDistributionService, RandomVariableDistributionService>()
-                .Register<IBitmapLuminanceDistributionService, BitmapLuminanceDistributionService>()
-                .Register<IDistributionFactory, DistributionFactory>()
-                .Register<IRgbFilterService, RgbFilterService>()
-                .Register<IRgbFilterFactory, RgbFilterFactory>()
-                .Register<IAsyncOperationLocker, OperationAsyncLocker>()
-                .Register<IConvolutionServiceProvider, ConvolutionServiceProvider>()
-                .Register<IMorphologyServiceProvider, MorphologyServiceProvider>()
-                .Register<IBitmapLuminanceDistributionServiceProvider, BitmapLuminanceDistributionServiceProvider>()
-                .Register<IRgbFilterServiceProvider, RgbFilterServiceProvider>();
+                .RegisterSingletonView<IMainView, MainForm>()
+                .RegisterTransientView<IHistogramView, HistogramForm>()
+                .RegisterTransientView<IConvolutionFilterView, ConvolutionFilterForm>()
+                .RegisterTransientView<IQualityMeasureView, QualityMeasureForm>()
+                .RegisterTransient<IConvolutionFilterService, ConvolutionFilterService>()
+                .RegisterTransient<IConvolutionFilterFactory, ConvolutionFilterFactory>()
+                .RegisterTransient<IMorphologyService, MorphologyService>()
+                .RegisterTransient<IMorphologyFactory, MorphologyFactory>()
+                .RegisterTransient<IRandomVariableDistributionService, RandomVariableDistributionService>()
+                .RegisterTransient<IBitmapLuminanceDistributionService, BitmapLuminanceDistributionService>()
+                .RegisterTransient<IDistributionFactory, DistributionFactory>()
+                .RegisterTransient<IRgbFilterService, RgbFilterService>()
+                .RegisterTransient<IRgbFilterFactory, RgbFilterFactory>()
+                .RegisterScoped<IAsyncOperationLocker, OperationAsyncLocker>()
+                .RegisterTransient<IConvolutionServiceProvider, ConvolutionServiceProvider>()
+                .RegisterTransient<IMorphologyServiceProvider, MorphologyServiceProvider>()
+                .RegisterTransient<IBitmapLuminanceDistributionServiceProvider, BitmapLuminanceDistributionServiceProvider>()
+                .RegisterTransient<IRgbFilterServiceProvider, RgbFilterServiceProvider>();
             
             IContainer GetContainerAdapter()
             {
@@ -124,7 +124,7 @@ namespace ImageProcessing.UI
                 throw new InvalidOperationException("The application is not built.");
             }
 
-            _controller.Exit<ApplicationContext>();
+            _controller.Dispose();
         }
     }
 }

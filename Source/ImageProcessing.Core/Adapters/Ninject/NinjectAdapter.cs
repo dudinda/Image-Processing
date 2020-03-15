@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using ImageProcessing.Core.Container;
 
 using Ninject;
+using Ninject.Extensions.NamedScope;
 
 namespace ImageProcessing.Core.Adapters.Ninject
 {
@@ -14,52 +15,142 @@ namespace ImageProcessing.Core.Adapters.Ninject
     public sealed class NinjectAdapter : IContainer
     {
         private readonly StandardKernel _container = new StandardKernel();
-
+    
         /// <inheritdoc/>
-        public void EnableAnnotatedConstructorInjection()
-            => throw new NotSupportedException();
-
-        /// <inheritdoc/>
-        public bool IsRegistered<TService>()
-            => _container.CanResolve<TService>();
-        
-        /// <inheritdoc/>
-        public void Register<TService, TImplementation>()
+        public void RegisterTransient<TService, TImplementation>()
             where TImplementation : TService
-            => _container.Bind<TService>().To<TImplementation>();
-        
-        /// <inheritdoc/>
-        public void Register<TService>()
-            => _container.Bind<TService>().ToSelf();
+            => _container
+                   .Bind<TService>()
+                   .To<TImplementation>()
+                   .InTransientScope();
 
         /// <inheritdoc/>
-        public void Register<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
-            => throw new NotImplementedException(nameof(factory));
-        
-        /// <inheritdoc/>
-        public void RegisterInstance<TService>(TService instance)
-            => _container.Bind<TService>().ToConstant(instance);
-        
-        /// <inheritdoc/>
-        public void RegisterInstance<TService>(TService instance, string serviceName)
-            => _container.Bind<TService>().ToConstant(instance).Named(serviceName);
-        
+        public void RegisterScoped<TService, TImplementation>()
+            where TImplementation : TService
+            => _container
+                   .Bind<TService>()
+                   .To<TImplementation>()
+                   .InCallScope();
+
         /// <inheritdoc/>
         public void RegisterSingleton<TService, TImplementation>()
             where TImplementation : TService
-            => _container.Bind<TService>().To<TImplementation>().InSingletonScope();
-        
+            => _container
+                   .Bind<TService>()
+                   .To<TImplementation>()
+                   .InSingletonScope();
+
+        /// <inheritdoc/>
+        public void RegisterTransient<TService, TImplementation>(string serviceName)
+            where TImplementation : TService
+            => _container
+                   .Bind<TService>()
+                   .To<TImplementation>()
+                   .InTransientScope()
+                   .Named(serviceName);
+
+        /// <inheritdoc/>
+        public void RegisterScoped<TService, TImplementation>(string serviceName)
+            where TImplementation : TService
+            => _container
+                   .Bind<TService>()
+                   .To<TImplementation>()
+                   .InCallScope()
+                   .Named(serviceName);
+
         /// <inheritdoc/>
         public void RegisterSingleton<TService, TImplementation>(string serviceName)
             where TImplementation : TService
-            => _container.Bind<TService>().To<TImplementation>().Named(serviceName);
-        
+            => _container
+                   .Bind<TService>()
+                   .To<TImplementation>()
+                   .InSingletonScope()
+                   .Named(serviceName);
+
+        /// <inheritdoc/>
+        public void RegisterTransient<TService>()
+            => _container
+                   .Bind<TService>()
+                   .ToSelf()
+                   .InTransientScope();
+
+        /// <inheritdoc/>
+        public void RegisterScoped<TService>()
+            => _container
+                   .Bind<TService>()
+                   .ToSelf()
+                   .InCallScope();
+
         /// <inheritdoc/>
         public void RegisterSingleton<TService>()
-            => _container.Bind<TService>().ToSelf().InSingletonScope();
+            => _container
+                   .Bind<TService>()
+                   .ToSelf()
+                   .InSingletonScope();
+
+        /// <inheritdoc/>
+        public void RegisterTransient<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
+            => throw new NotImplementedException(nameof(factory));
+
+        /// <inheritdoc/>
+        public void RegisterScoped<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
+            => throw new NotImplementedException(nameof(factory));
 
         /// <inheritdoc/>
         public void RegisterSingleton<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
+            => throw new NotImplementedException(nameof(factory));
+
+        /// <inheritdoc/>
+        public void RegisterTransient<TService>(TService instance)
+            => _container
+                   .Bind<TService>()
+                   .ToConstant(instance)
+                   .InTransientScope();
+
+        /// <inheritdoc/>
+        public void RegisterScoped<TService>(TService instance)
+            => _container
+                   .Bind<TService>()
+                   .ToConstant(instance)
+                   .InCallScope();
+
+        /// <inheritdoc/>
+        public void RegisterSingleton<TService>(TService instance)
+            => _container
+                   .Bind<TService>()
+                   .ToConstant(instance)
+                   .InSingletonScope();
+
+        /// <inheritdoc/>
+        public void RegisterTransient<TService>(TService instance, string serviceName)
+            => _container
+                   .Bind<TService>()
+                   .ToConstant(instance)
+                   .InTransientScope()
+                   .Named(serviceName);
+
+        /// <inheritdoc/>
+        public void RegisterScoped<TService>(TService instance, string serviceName)
+            => _container
+                   .Bind<TService>()
+                   .ToConstant(instance)
+                   .InCallScope()
+                   .Named(serviceName);
+
+        /// <inheritdoc/>
+        public void RegisterSingleton<TService>(TService instance, string serviceName)
+            => _container
+                   .Bind<TService>()
+                   .ToConstant(instance)
+                   .InSingletonScope()
+                   .Named(serviceName);
+
+        /// <inheritdoc/>
+        public void RegisterTransient<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name)
+            => throw new NotImplementedException(nameof(factory));
+
+        /// <inheritdoc/>
+        public void RegisterScoped<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name)
             => throw new NotImplementedException(nameof(factory));
 
         /// <inheritdoc/>
@@ -70,6 +161,18 @@ namespace ImageProcessing.Core.Adapters.Ninject
         public TService Resolve<TService>()
             => _container.Get<TService>();
 
+        /// <summary>
+        /// Dispose the Ninject container.
+        /// </summary>
+        public void Dispose()
+            => _container.Dispose();
 
+        /// <inheritdoc/>
+        public void EnableAnnotatedConstructorInjection()
+            => throw new NotSupportedException();
+
+        /// <inheritdoc/>
+        public bool IsRegistered<TService>()
+            => _container.CanResolve<TService>();
     }
 }

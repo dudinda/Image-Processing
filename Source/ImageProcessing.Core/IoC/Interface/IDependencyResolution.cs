@@ -1,6 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
+using ImageProcessing.Core.Controller.Implementation;
 using ImageProcessing.Core.View;
 
 namespace ImageProcessing.Core.IoC.Interface
@@ -9,76 +10,159 @@ namespace ImageProcessing.Core.IoC.Interface
     /// Provides access to the specified
     /// DI container within the <seealso cref="AppController"/>.
     /// </summary>
-    public interface IDependencyResolution
+    public interface IDependencyResolution : IDisposable
     {
         /// <summary>
-        /// Register the <typeparamref name="TView"/> with the <typeparamref name="TImplementation"/>
+        /// Register the <typeparamref name="TView"/> as <typeparamref name="TImplementation"/> with the transient scope.
         /// <para>Where the <typeparamref name="TImplementation"/> is a <typeparamref name="TView"/>  or <see langword="class"/>,
         /// and <typeparamref name="TView"/> is a <see cref="IView"/>.</para>
         /// <para><b>Returns:</b> The current instance of <see cref="IDependencyResolution"/>.</para>
         /// </summary>
-        IDependencyResolution RegisterView<TView, TImplementation>()
+        IDependencyResolution RegisterTransientView<TView, TImplementation>()
                 where TImplementation : class, TView
                 where TView : IView;
 
         /// <summary>
-        /// Registers the <typeparamref name="TService"/>  with the <typeparamref name="TImplementation"/>.
-        /// <para><b>Returns:</b> Current instance of the <see cref="IDependencyResolution"/>.</para>
+        /// Register the <typeparamref name="TView"/> as <typeparamref name="TImplementation"/> with the singleton scope.
+        /// <para>Where the <typeparamref name="TImplementation"/> is a <typeparamref name="TView"/>  or <see langword="class"/>,
+        /// and <typeparamref name="TView"/> is a <see cref="IView"/>.</para>
+        /// <para><b>Returns:</b> The current instance of <see cref="IDependencyResolution"/>.</para>
         /// </summary>
-        IDependencyResolution Register<TService, TImplementation>() where TImplementation : TService;
+        IDependencyResolution RegisterSingletonView<TView, TImplementation>()
+                where TImplementation : class, TView
+                where TView : IView;
 
         /// <summary>
-        /// Registers the singleton <typeparamref name="TService"/>  with the <typeparamref name="TImplementation"/>.
-        /// <para><b>Returns:</b> Current instance of <see cref="IDependencyResolution"/>.</para>
+        /// Registers the <typeparamref name="TService"/>  as <typeparamref name="TImplementation"/>
+        /// with the transient scope.
         /// </summary>
-        IDependencyResolution RegisterSingleton<TService, TImplementation>() where TImplementation : TService;
+        IDependencyResolution RegisterTransient<TService, TImplementation>()
+            where TImplementation : TService;
 
         /// <summary>
-        /// Registers the named singleton <typeparamref name="TService"/>  with the <typeparamref name="TImplementation"/>.
+        /// Registers the <typeparamref name="TService"/>  as <typeparamref name="TImplementation"/>
+        /// with the caller-name scope.
         /// </summary>
-        IDependencyResolution RegisterNamedSingleton<TService, TImplementation>(string serviceName) where TImplementation : TService;
+        IDependencyResolution RegisterScoped<TService, TImplementation>()
+            where TImplementation : TService;
 
         /// <summary>
-        /// Registers a concrete type as a service.
-        /// <para><b>Returns:</b> Current instance of <see cref="IDependencyResolution"/>.</para>
+        /// Registers the signleton <typeparamref name="TService"/>  as <typeparamref name="TImplementation"/>
+        /// with the singleton scope.
         /// </summary>
-        IDependencyResolution Register<TService>();
+        IDependencyResolution RegisterSingleton<TService, TImplementation>()
+            where TImplementation : TService;
 
         /// <summary>
-        /// Registers a concrete type as a singleton service.
-        /// <para><b>Returns:</b> Current instance of <see cref="IDependencyResolution"/>.</para>
+        /// Registers a concrete type as a service
+        /// with the transient scope.
+        /// </summary>
+        IDependencyResolution RegisterTransient<TService>();
+
+        /// <summary>
+        /// Registers a concrete type as a service
+        /// with the singleton scope.
         /// </summary>
         IDependencyResolution RegisterSingleton<TService>();
 
         /// <summary>
-        /// Registers the <typeparamref name="TService"/> with the given instance.
-        /// <para><b>Returns:</b> The current instance of <see cref="IDependencyResolution"/>.</para>
+        /// Registers a concrete type as a service with
+        /// the caller-name scope.
         /// </summary>
-        IDependencyResolution RegisterInstance<TService>(TService instance);
+        IDependencyResolution RegisterScoped<TService>();
 
         /// <summary>
-        /// Registers the named <typeparamref name="TService"/> with the given instance.
-        /// <para><b>Returns:</b> Current instance of <see cref="IDependencyResolution"/>.</para>
+        /// Registers the named signleton <typeparamref name="TService"/> as a named
+        /// <typeparamref name="TImplementation"/> with the transient scope.
         /// </summary>
-        IDependencyResolution RegisterNamedInstance<TService>(TService instance, string serviceName);
+        IDependencyResolution RegisterNamedTransient<TService, TImplementation>(string serviceName)
+            where TImplementation : TService;
 
         /// <summary>
-        /// Registers the <typeparamref name="TService"/>with the factory that describes.
-        /// the dependencies of the service.
-        /// </summary>
-        IDependencyResolution Register<TService, TArgument>(Expression<Func<TArgument, TService>> factory);
+        /// Registers the named signleton <typeparamref name="TService"/> as a named
+        /// <typeparamref name="TImplementation"/>  with the caller-name scope.
+        ///</summary>
+        IDependencyResolution RegisterNamedScoped<TService, TImplementation>(string serviceName)
+            where TImplementation : TService;
 
         /// <summary>
-        /// Registers the <typeparamref name="TService"/>as singleton with the factory that describes
-        /// the dependencies of the service.
+        /// Registers the named signleton <typeparamref name="TService"/>  as a named
+        /// <typeparamref name="TImplementation"/> with the singleton scope.
         /// </summary>
-        IDependencyResolution RegisterSingleton<TService, TArgument>(Expression<Func<TArgument, TService>> factory);
+        IDependencyResolution RegisterNamedSingleton<TService, TImplementation>(string serviceName)
+            where TImplementation : TService;
 
         /// <summary>
-        /// Registers the <typeparamref name="TService"/> as singleton with the factory that describes
-        /// the named dependencies of the service.
+        /// Registers the <typeparamref name="TService"/> instance
+        /// with the transient scope.
         /// </summary>
-        IDependencyResolution RegisterSingleton<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name);
+        IDependencyResolution RegisterTransientInstance<TService>(TService instance);
+
+        /// <summary>
+        /// Registers the <typeparamref name="TService"/> instance
+        /// with the caller-name scope.
+        /// </summary>
+        IDependencyResolution RegisterScopedInstance<TService>(TService instance);
+
+        /// <summary>
+        /// Registers the <typeparamref name="TService"/> instance
+        /// with the singleton scope.
+        /// </summary>
+        IDependencyResolution RegisterSingletonInstance<TService>(TService instance);
+
+        /// <summary>
+        /// Registers the named <typeparamref name="TService"/> instance
+        /// with the transient scope.
+        /// </summary>
+        IDependencyResolution RegisterTransientNamedInstance<TService>(TService instance, string serviceName);
+
+        /// <summary>
+        /// Registers the named <typeparamref name="TService"/> instance
+        /// with the caller-name scope.
+        /// </summary>
+        IDependencyResolution RegisterScopedNamedInstance<TService>(TService instance, string serviceName);
+
+        /// <summary>
+        /// Registers the named <typeparamref name="TService"/> instance
+        /// with the singleton scope.
+        /// </summary>
+        IDependencyResolution RegisterSingletonNamedInstance<TService>(TService instance, string serviceName);
+
+        /// <summary>
+        /// Registers the <typeparamref name="TService"/> as the factory that describes.
+        /// the dependencies of the service with the transient scope.
+        /// </summary>
+        IDependencyResolution RegisterTransientFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory);
+
+        /// <summary>
+        /// Registers the <typeparamref name="TService"/> as the factory that describes.
+        /// the dependencies of the service with the caller-name scope.
+        /// </summary>
+        IDependencyResolution RegisterScopedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory);
+
+        /// <summary>
+        /// Registers the <typeparamref name="TService"/> as the factory that describes
+        /// the dependencies of the service with the singleton scope.
+        /// </summary>
+        IDependencyResolution RegisterSingletonFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory);
+
+        /// <summary>
+        /// Registers the <typeparamref name="TService"/> as the factory that describes
+        /// the named dependencies of the service with the transient scope.
+        /// </summary>
+        IDependencyResolution RegisterTransientNamedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name);
+
+        /// <summary>
+        /// Registers the <typeparamref name="TService"/> as the factory that describes
+        /// the named dependencies of the service with the caller-name scope.
+        /// </summary>
+        IDependencyResolution RegisterScopedNamedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name);
+
+        /// <summary>
+        /// Registers the <typeparamref name="TService"/> as the factory that describes
+        /// the named dependencies of the service with the singleton scope.
+        /// </summary>
+        IDependencyResolution RegisterSingletonNamedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name);
 
         /// <summary>
         /// Enable annotated dependency injection via constructor.

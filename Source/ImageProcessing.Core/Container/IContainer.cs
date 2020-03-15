@@ -7,68 +7,144 @@ namespace ImageProcessing.Core.Container
     /// Provides access to the specified
     /// DI container.
     /// </summary>
-    public interface IContainer
+    public interface IContainer : IDisposable
     {
         /// <summary>
-        /// Registers the <typeparamref name="TService"/>  with the <typeparamref name="TImplementation"/>.
+        /// Registers the <typeparamref name="TService"/>  as <typeparamref name="TImplementation"/>
+        /// with the transient scope.
         /// </summary>
-        void Register<TService, TImplementation>()
+        void RegisterTransient<TService, TImplementation>()
             where TImplementation : TService;
 
         /// <summary>
-        /// Registers the signleton <typeparamref name="TService"/>  with the <typeparamref name="TImplementation"/>.
+        /// Registers the <typeparamref name="TService"/>  as <typeparamref name="TImplementation"/>
+        /// with the caller-name scope.
+        /// </summary>
+        void RegisterScoped<TService, TImplementation>()
+            where TImplementation : TService;
+
+        /// <summary>
+        /// Registers the signleton <typeparamref name="TService"/>  as <typeparamref name="TImplementation"/>
+        /// with the singleton scope.
         /// </summary>
         void RegisterSingleton<TService, TImplementation>()
             where TImplementation : TService;
 
         /// <summary>
-        /// Registers the named signleton <typeparamref name="TService"/>  with the <typeparamref name="TImplementation"/>.
+        /// Registers a concrete type as a service
+        /// with the transient scope.
+        /// </summary>
+        void RegisterTransient<TService>();
+
+        /// <summary>
+        /// Registers a concrete type as a service
+        /// with the singleton scope.
+        /// </summary>
+        void RegisterSingleton<TService>();
+
+        /// <summary>
+        /// Registers a concrete type as a service with
+        /// the caller-name scope.
+        /// </summary>
+        void RegisterScoped<TService>();
+
+        /// <summary>
+        /// Registers the named signleton <typeparamref name="TService"/> as a named
+        /// <typeparamref name="TImplementation"/> with the transient scope.
+        /// </summary>
+        void RegisterTransient<TService, TImplementation>(string serviceName)
+            where TImplementation : TService;
+
+        /// <summary>
+        /// Registers the named signleton <typeparamref name="TService"/> as a named
+        /// <typeparamref name="TImplementation"/>  with the caller-name scope.
+        ///</summary>
+        void RegisterScoped<TService, TImplementation>(string serviceName)
+            where TImplementation : TService;
+
+        /// <summary>
+        /// Registers the named signleton <typeparamref name="TService"/>  as a named
+        /// <typeparamref name="TImplementation"/> with the singleton scope.
         /// </summary>
         void RegisterSingleton<TService, TImplementation>(string serviceName)
             where TImplementation : TService;
 
         /// <summary>
-        /// Registers a concrete type as a service.
+        /// Registers the <typeparamref name="TService"/> instance
+        /// with the transient scope.
         /// </summary>
-        void Register<TService>();
+        void RegisterTransient<TService>(TService instance);
 
         /// <summary>
-        /// Registers a concrete type as a singleton service.
+        /// Registers the <typeparamref name="TService"/> instance
+        /// with the caller-name scope.
         /// </summary>
-        void RegisterSingleton<TService>();
+        void RegisterScoped<TService>(TService instance);
 
         /// <summary>
-        /// Registers the <typeparamref name="TService"/> with the given instance.
+        /// Registers the <typeparamref name="TService"/> instance
+        /// with the singleton scope.
         /// </summary>
-        void RegisterInstance<TService>(TService instance);
+        void RegisterSingleton<TService>(TService instance);
 
         /// <summary>
-        /// Registers the named <typeparamref name="TService"/> with the given instance.
+        /// Registers the named <typeparamref name="TService"/> instance
+        /// with the transient scope.
         /// </summary>
-        void RegisterInstance<TService>(TService instance, string serviceName);
+        void RegisterTransient<TService>(TService instance, string serviceName);
 
         /// <summary>
-        /// Registers the <typeparamref name="TService"/>with the factory that describes.
-        /// the dependencies of the service.
+        /// Registers the named <typeparamref name="TService"/> instance
+        /// with the caller-name scope.
         /// </summary>
-        void Register<TService, TArgument>(Expression<Func<TArgument, TService>> factory);
+        void RegisterScoped<TService>(TService instance, string serviceName);
 
         /// <summary>
-        /// Registers the <typeparamref name="TService"/>as singleton with the factory that describes
-        /// the dependencies of the service.
+        /// Registers the named <typeparamref name="TService"/> instance
+        /// with the singleton scope.
+        /// </summary>
+        void RegisterSingleton<TService>(TService instance, string serviceName);
+
+        /// <summary>
+        /// Registers the <typeparamref name="TService"/> as the factory that describes.
+        /// the dependencies of the service with the transient scope.
+        /// </summary>
+        void RegisterTransient<TService, TArgument>(Expression<Func<TArgument, TService>> factory);
+
+        /// <summary>
+        /// Registers the <typeparamref name="TService"/> as the factory that describes.
+        /// the dependencies of the service with the caller-name scope.
+        /// </summary>
+        void RegisterScoped<TService, TArgument>(Expression<Func<TArgument, TService>> factory);
+
+        /// <summary>
+        /// Registers the <typeparamref name="TService"/> as the factory that describes
+        /// the dependencies of the service with the singleton scope.
         /// </summary>
         void RegisterSingleton<TService, TArgument>(Expression<Func<TArgument, TService>> factory);
 
         /// <summary>
-        /// Registers the <typeparamref name="TService"/> as singleton with the factory that describes
-        /// the named dependencies of the service.
+        /// Registers the <typeparamref name="TService"/> as the factory that describes
+        /// the named dependencies of the service with the transient scope.
+        /// </summary>
+        void RegisterTransient<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name);
+
+        /// <summary>
+        /// Registers the <typeparamref name="TService"/> as the factory that describes
+        /// the named dependencies of the service with the caller-name scope.
+        /// </summary>
+        void RegisterScoped<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name);
+
+        /// <summary>
+        /// Registers the <typeparamref name="TService"/> as the factory that describes
+        /// the named dependencies of the service with the singleton scope.
         /// </summary>
         void RegisterSingleton<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name);
 
         /// <summary>
-        /// Get an instance of the given <typeparamref name="TService"/> type.
+        /// Enable annotated dependency injection via constructor.
         /// </summary>
-        TService Resolve<TService>();
+        void EnableAnnotatedConstructorInjection();
 
         /// <summary>
         /// Returns <b>true</b> if the container can create the requested service, otherwise <b>false</b>.
@@ -76,9 +152,9 @@ namespace ImageProcessing.Core.Container
         bool IsRegistered<TService>();
 
         /// <summary>
-        /// Enable annotated dependency injection via constructor.
+        /// Get an instance of the given <typeparamref name="TService"/> type.
         /// </summary>
-        void EnableAnnotatedConstructorInjection();
+        TService Resolve<TService>();
     }
 
 }

@@ -21,7 +21,7 @@ namespace ImageProcessing.Core.Controller.Implementation
                 Requires.IsNotNull(container, nameof(container))
             );
 
-            IoC.RegisterInstance<IAppController>(this);
+            IoC.RegisterSingletonInstance<IAppController>(this);
         }
 
         /// <inheritdoc cref="IAppController.Run{TPresenter}"/>
@@ -30,7 +30,7 @@ namespace ImageProcessing.Core.Controller.Implementation
         {
             if (!IoC.IsRegistered<TPresenter>())
             {
-                IoC.Register<TPresenter>();
+                IoC.RegisterTransient<TPresenter>();
             }
 
             var presenter = IoC.Resolve<TPresenter>();
@@ -44,7 +44,7 @@ namespace ImageProcessing.Core.Controller.Implementation
         {
             if (!IoC.IsRegistered<TPresenter>())
             {
-                IoC.Register<TPresenter>();
+                IoC.RegisterTransient<TPresenter>();
             }
 
             var presenter = IoC.Resolve<TPresenter>();
@@ -54,16 +54,7 @@ namespace ImageProcessing.Core.Controller.Implementation
             );
         }
 
-        /// <inheritdoc cref="IAppController.Exit{TContext}"/>
-        public void Exit<TContext>()
-            where TContext : IDisposable
-        {
-            if (!IoC.IsRegistered<TContext>())
-            {
-                throw new InvalidOperationException("Application context is not specified.");
-            }
-
-            IoC.Resolve<TContext>().Dispose();
-        }
+        public void Dispose()
+            => IoC.Dispose();
     }
 }
