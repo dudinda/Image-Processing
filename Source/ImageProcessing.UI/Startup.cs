@@ -36,6 +36,8 @@ using ImageProcessing.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.ServiceLayer.Providers.Interface.Convolution;
 using ImageProcessing.ServiceLayer.Providers.Interface.Morphology;
 using ImageProcessing.ServiceLayer.Providers.Interface.RgbFilter;
+using ImageProcessing.ServiceLayer.Services.Bmp.Implementation;
+using ImageProcessing.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.ServiceLayer.Services.Convolution.Implementation;
 using ImageProcessing.ServiceLayer.Services.ConvolutionFilterServices.Interface;
 using ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Implementation;
@@ -82,6 +84,7 @@ namespace ImageProcessing.UI
                 .RegisterTransient<IConvolutionFilterFactory, ConvolutionFilterFactory>()
                 .RegisterTransient<IMorphologyService, MorphologyService>()
                 .RegisterTransient<IMorphologyFactory, MorphologyFactory>()
+                .RegisterTransient<IBitmapService, BitmapService>()
                 .RegisterTransient<IRandomVariableDistributionService, RandomVariableDistributionService>()
                 .RegisterTransient<IBitmapLuminanceDistributionService, BitmapLuminanceDistributionService>()
                 .RegisterTransient<IDistributionFactory, DistributionFactory>()

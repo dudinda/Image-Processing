@@ -3,10 +3,10 @@ using System.Drawing;
 using System.Threading.Tasks;
 
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Common.Extensions.BitmapExtensions;
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.DomainModel.Factory.Convolution.Interface;
 using ImageProcessing.ServiceLayer.Providers.Interface.Convolution;
+using ImageProcessing.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.ServiceLayer.Services.ConvolutionFilterServices.Interface;
 
 namespace ImageProcessing.ServiceLayer.Providers.Implementation.Convolution
@@ -15,9 +15,10 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.Convolution
     {
         private readonly IConvolutionFilterFactory _convolutionFilterFactory;
         private readonly IConvolutionFilterService _convolutionFilterService;
-
+        private readonly IBitmapService _bitmapService;
         public ConvolutionServiceProvider(IConvolutionFilterFactory convolutionFilterFactory,
-                                                IConvolutionFilterService convolutionFilterService)
+                                          IConvolutionFilterService convolutionFilterService,
+                                          IBitmapService bitmapService)
         {
             _convolutionFilterFactory = Requires.IsNotNull(
                 convolutionFilterFactory, nameof(convolutionFilterFactory)
@@ -25,6 +26,10 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.Convolution
 
             _convolutionFilterService = Requires.IsNotNull(
                 convolutionFilterService, nameof(convolutionFilterService)
+            );
+
+            _bitmapService = Requires.IsNotNull(
+                bitmapService, nameof(bitmapService)
             );
         }
 
@@ -60,7 +65,7 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.Convolution
                         () => GetFilter(bmp, ConvolutionFilter.SobelOperatorVertical3x3)
                     );
 
-                    return BitmapExtension.Magnitude(xDerivative.Result, yDerivative.Result);
+                    return _bitmapService.Magnitude(xDerivative.Result, yDerivative.Result);
 
                 case ConvolutionFilter.LoGOperator3x3:
 
