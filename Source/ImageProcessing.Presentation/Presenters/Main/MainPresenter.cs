@@ -570,17 +570,27 @@ namespace ImageProcessing.Presentation.Presenters.Main
 
         private async Task Render(ImageContainer container)
         {
-            var result = await Pipeline
-                .AwaitResult()
-                .ConfigureAwait(true);
+            try
+            {
+                var result = await Pipeline
+                    .AwaitResult()
+                    .ConfigureAwait(true);
 
-            View.SetImage(container, (Bitmap)result);
-            View.Refresh(container);
-            View.ResetTrackBarValue(container);
-
-            if (!Pipeline.Any())
+                View.SetImage(container, (Bitmap)result);
+                View.Refresh(container);
+                View.ResetTrackBarValue(container);
+            }
+            catch (Exception ex)
             {
                 View.SetCursor(CursorType.Default);
+                throw;
+            }
+            finally
+            {
+                if (!Pipeline.Any())
+                {
+                    View.SetCursor(CursorType.Default);
+                }
             }
         }
 
