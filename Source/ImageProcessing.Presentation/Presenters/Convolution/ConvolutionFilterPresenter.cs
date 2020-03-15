@@ -49,11 +49,15 @@ namespace ImageProcessing.Presentation.Presenters.Convolution
                         () => new Bitmap(ViewModel.Source)
                      ).ConfigureAwait(true);
 
+                var block = new PipelineBlock(copy)
+                    .Add<Bitmap, Bitmap>(
+                        (bmp) => _convolutionProvider
+                            .ApplyFilter(bmp, View.SelectedFilter)
+                    );
+
                 EventAggregator.Publish(
                     new ApplyConvolutionFilterEventArgs(
-                        new PipelineBlock(
-                            _convolutionProvider.ApplyFilter(copy, View.SelectedFilter)
-                        )
+                       block
                     )
                 );
 			}
