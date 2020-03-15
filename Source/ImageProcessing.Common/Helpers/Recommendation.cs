@@ -7,7 +7,7 @@ namespace ImageProcessing.Common.Helpers
     public static class Recommendation
     {
 
-        public static double GetLumaCoefficients(byte R, byte G, byte B, Luma rec)
+        public static double GetLumaCoefficients(ref byte R, ref byte G, ref byte B, Luma rec)
             => GetLumaCoefficientsByRec(R, G, B, rec);
 
         /// <summary>
@@ -21,11 +21,11 @@ namespace ImageProcessing.Common.Helpers
             switch(rec)
             {
                 case Luma.Rec601:
-                    return GetRec601(R, G, B);
+                    return GetRec601(ref R, ref G, ref B);
                 case Luma.Rec709:
-                    return GetRec709(R, G, B);
+                    return GetRec709(ref R, ref G, ref B);
                 case Luma.Rec240:
-                    return GetSmpte240M(R, G, B);
+                    return GetSmpte240M(ref R, ref G, ref B);
 
                 default: throw new InvalidOperationException(nameof(rec));
             }
@@ -34,19 +34,19 @@ namespace ImageProcessing.Common.Helpers
         /// <summary>
         /// Evaluate relative luminance by Rec. 601
         /// </summary>
-        private static double GetRec601(double R, double G, double B) 
+        private static double GetRec601(ref double R, ref double G, ref double B) 
             => R * 0.299 + G * 0.587 + B * 0.114;
 
         /// <summary>
         /// Evaluate relative luminance by Rec. 709
         /// </summary>
-        private static double GetRec709(double R, double G, double B)
+        private static double GetRec709(ref double R, ref double G, ref double B)
            => R * 0.2126 + G * 0.7152 + B * 0.0722;
 
         /// <summary>
         /// Evaluate relative luminance by SMPTE 240M
         /// </summary>
-        private static double GetSmpte240M(double R, double G, double B)
+        private static double GetSmpte240M(ref double R, ref double G, ref double B)
            => R * 0.212 + G * 0.701 + B * 0.087;
     }
 }

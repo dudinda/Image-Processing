@@ -40,7 +40,8 @@ namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Grayscale
 
                     for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
-                        ptr[0] = ptr[1] = ptr[2] = (byte)Recommendation.GetLumaCoefficients(ptr[2], ptr[1], ptr[0], Luma.Rec709);
+                        ptr[0] = ptr[1] = ptr[2] = (byte)Recommendation
+                        .GetLumaCoefficients(ref ptr[2], ref ptr[1], ref ptr[0], Luma.Rec709);
                     }
                 });
             }

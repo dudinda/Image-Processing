@@ -45,7 +45,8 @@ namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Binary
 
                     for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
-                        partial += (byte)Recommendation.GetLumaCoefficients(ptr[2], ptr[1], ptr[0], Luma.Rec709);
+                        partial += (byte)Recommendation
+                        .GetLumaCoefficients(ref ptr[2], ref ptr[1], ref ptr[0], Luma.Rec709);
                     }
 
                     return partial;
@@ -61,7 +62,8 @@ namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Binary
 
                     for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
-                        luminance = (byte)Recommendation.GetLumaCoefficients(ptr[2], ptr[1], ptr[0], Luma.Rec709);
+                        luminance = (byte)Recommendation
+                        .GetLumaCoefficients(ref ptr[2], ref ptr[1], ref ptr[0], Luma.Rec709);
 
                         //if relative luminance greater or equal than average
                         //set it to white
