@@ -22,7 +22,6 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.BitmapDistributi
             _service = Requires.IsNotNull(
                 service, nameof(service)
             );
-
             _factory = Requires.IsNotNull(
                 factory, nameof(factory)
             );

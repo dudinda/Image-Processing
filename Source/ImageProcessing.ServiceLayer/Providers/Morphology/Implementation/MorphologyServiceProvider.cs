@@ -20,7 +20,6 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.Morphology
             _morphologyService = Requires.IsNotNull(
                 morphologyService, nameof(morphologyService)
             );
-
             _morphologyFactory = Requires.IsNotNull(
                 morphologyFactory, nameof(morphologyFactory)
             );

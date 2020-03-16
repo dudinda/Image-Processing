@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Concurrent;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ImageProcessing.Common.Extensions.BitmapExtensions
 {
@@ -27,11 +24,12 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
 
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                                                         ImageLockMode.ReadWrite,
-                                                        PixelFormat.Format24bppRgb);
+                                                        bitmap.PixelFormat);
 
             var resolution = bitmap.Width * bitmap.Height;
+            var ptrStep = bitmap.GetBitsPerPixel() / 8;
 
-            var random = new Random();
+            var random = new Random(Guid.NewGuid().GetHashCode());
 
             unsafe
             {
@@ -41,9 +39,9 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
 
                 var ptr = startPtr;
 
-                for (var index = resolution - 1; index > 1; --index, ptr += 3)
+                for (var index = resolution - 1; index > 1; --index, ptr += ptrStep)
                 {
-                    var newPtr = startPtr + random.Next(index) * 3;
+                    var newPtr = startPtr + random.Next(index) * ptrStep;
 
                     B = ptr[0];
                     G = ptr[1];

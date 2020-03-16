@@ -44,7 +44,7 @@ namespace ImageProcessing.ServiceLayer.Services.Convolution.Implementation
                 Parallel.For(kernelOffset, size.Height - kernelOffset, options, y =>
                 {
                     //get the address of a new line, considering a kernel offset
-                    var sourcePtr      = sourceStartPtr      + y * sourceBitmapData.Stride + kernelOffset * ptrStep;
+                    var sourcePtr      = sourceStartPtr      + y * sourceBitmapData.Stride      + kernelOffset * ptrStep;
                     var destinationPtr = destinationStartPtr + y * destinationBitmapData.Stride + kernelOffset * ptrStep;
 
                     //accumulators of R, G, B components 

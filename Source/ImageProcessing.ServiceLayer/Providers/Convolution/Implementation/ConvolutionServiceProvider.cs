@@ -23,11 +23,9 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.Convolution
             _convolutionFilterFactory = Requires.IsNotNull(
                 convolutionFilterFactory, nameof(convolutionFilterFactory)
             );
-
             _convolutionFilterService = Requires.IsNotNull(
                 convolutionFilterService, nameof(convolutionFilterService)
             );
-
             _bitmapService = Requires.IsNotNull(
                 bitmapService, nameof(bitmapService)
             );
