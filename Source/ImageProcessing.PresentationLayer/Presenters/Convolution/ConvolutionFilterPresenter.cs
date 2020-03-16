@@ -9,12 +9,12 @@ using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Core.Pipeline.Block.Implementation;
 using ImageProcessing.Core.Presenter.Abstract;
-using ImageProcessing.Presentation.ViewModel.Convolution;
-using ImageProcessing.Presentation.Views.Convolution;
+using ImageProcessing.PresentationLayer.ViewModel.Convolution;
+using ImageProcessing.PresentationLayer.Views.Convolution;
 using ImageProcessing.ServiceLayer.Providers.Interface.Convolution;
 using ImageProcessing.ServiceLayer.Services.LockerService.Operation.Interface;
 
-namespace ImageProcessing.Presentation.Presenters.Convolution
+namespace ImageProcessing.PresentationLayer.Presenters.Convolution
 {
     public sealed partial class ConvolutionFilterPresenter : BasePresenter<IConvolutionFilterView, ConvolutionFilterViewModel>
 	{

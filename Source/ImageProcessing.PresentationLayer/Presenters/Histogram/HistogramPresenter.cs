@@ -9,11 +9,11 @@ using ImageProcessing.Core.Controller.Interface;
 using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Core.Presenter.Abstract;
-using ImageProcessing.Presentation.ViewModel.Histogram;
-using ImageProcessing.Presentation.Views.Histogram;
+using ImageProcessing.PresentationLayer.ViewModel.Histogram;
+using ImageProcessing.PresentationLayer.Views.Histogram;
 using ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
 
-namespace ImageProcessing.Presentation.Presenters
+namespace ImageProcessing.PresentationLayer.Presenters
 {
     public sealed class HistogramPresenter : BasePresenter<IHistogramView, HistogramViewModel>
     {

@@ -1,7 +1,7 @@
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.View;
 
-namespace ImageProcessing.Presentation.Views.Convolution
+namespace ImageProcessing.PresentationLayer.Views.Convolution
 {
     public interface IConvolutionFilterView : IView
     {

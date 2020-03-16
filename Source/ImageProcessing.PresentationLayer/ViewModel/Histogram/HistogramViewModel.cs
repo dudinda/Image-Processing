@@ -2,7 +2,7 @@ using System.Drawing;
 
 using ImageProcessing.Common.Enums;
 
-namespace ImageProcessing.Presentation.ViewModel.Histogram
+namespace ImageProcessing.PresentationLayer.ViewModel.Histogram
 {
     public sealed class HistogramViewModel
     {

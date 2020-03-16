@@ -3,7 +3,7 @@ using System.Drawing;
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.View;
 
-namespace ImageProcessing.Presentation.Views.Main
+namespace ImageProcessing.PresentationLayer.Views.Main
 {
     public interface IMainView : IView
     {

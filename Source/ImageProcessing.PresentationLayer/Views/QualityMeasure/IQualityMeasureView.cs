@@ -2,7 +2,7 @@
 
 using ImageProcessing.Core.View;
 
-namespace ImageProcessing.Presentation.Views.QualityMeasure
+namespace ImageProcessing.PresentationLayer.Views.QualityMeasure
 {
     public interface IQualityMeasureView : IView
     {

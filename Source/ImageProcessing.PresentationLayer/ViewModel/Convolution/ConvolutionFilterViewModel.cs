@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace ImageProcessing.Presentation.ViewModel.Convolution
+namespace ImageProcessing.PresentationLayer.ViewModel.Convolution
 {
     public sealed class ConvolutionFilterViewModel
     {

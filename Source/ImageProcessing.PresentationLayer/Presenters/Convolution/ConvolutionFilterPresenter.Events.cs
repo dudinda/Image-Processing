@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using ImageProcessing.Core.EventAggregator.Implementation.EventArgs.Convolution;
 using ImageProcessing.Core.EventAggregator.Interface.Subscriber;
 
-namespace ImageProcessing.Presentation.Presenters.Convolution
+namespace ImageProcessing.PresentationLayer.Presenters.Convolution
 {
     partial class ConvolutionFilterPresenter : ISubscriber<ConvolutionFilterEventArgs>
     {

@@ -3,7 +3,7 @@
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.View;
 
-namespace ImageProcessing.Presentation.Views.Histogram
+namespace ImageProcessing.PresentationLayer.Views.Histogram
 {
     public interface IHistogramView : IView
     {

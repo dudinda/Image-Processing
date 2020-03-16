@@ -6,7 +6,7 @@ using ImageProcessing.Core.EventAggregator.Implementation.EventArgs;
 using ImageProcessing.Core.EventAggregator.Implementation.EventArgs.Convolution;
 using ImageProcessing.Core.EventAggregator.Interface.Subscriber;
 
-namespace ImageProcessing.Presentation.Presenters.Main
+namespace ImageProcessing.PresentationLayer.Presenters.Main
 {
     partial class MainPresenter : ISubscriber<ApplyConvolutionFilterEventArgs>,
                                   ISubscriber<ShowConvolutionFilterPresenterEventArgs>,

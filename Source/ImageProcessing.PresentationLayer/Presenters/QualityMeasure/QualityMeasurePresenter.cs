@@ -6,11 +6,11 @@ using ImageProcessing.Core.Controller.Interface;
 using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Core.Presenter.Abstract;
-using ImageProcessing.Presentation.ViewModel.QualityMeasure;
-using ImageProcessing.Presentation.Views.QualityMeasure;
+using ImageProcessing.PresentationLayer.ViewModel.QualityMeasure;
+using ImageProcessing.PresentationLayer.Views.QualityMeasure;
 using ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
 
-namespace ImageProcessing.Presentation.Presenters
+namespace ImageProcessing.PresentationLayer.Presenters
 {
     public sealed class QualityMeasurePresenter : BasePresenter<IQualityMeasureView, QualityMeasureViewModel>
     {
