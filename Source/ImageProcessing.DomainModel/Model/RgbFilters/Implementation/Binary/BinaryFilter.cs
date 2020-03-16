@@ -25,7 +25,7 @@ namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Binary
                                              ImageLockMode.ReadWrite,
                                              bitmap.PixelFormat);
             var rec = Luma.Rec709;
-            var luminance = 0.0;
+            
             var ptrStep = bitmap.GetBitsPerPixel() / 8;
 
             var size = bitmap.Size;
@@ -63,6 +63,8 @@ namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Binary
                 Parallel.For(0, size.Height, options, y =>
                 {
                     var ptr = startPtr + y * bitmapData.Stride;
+
+                    var luminance = 0.0;
 
                     for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
