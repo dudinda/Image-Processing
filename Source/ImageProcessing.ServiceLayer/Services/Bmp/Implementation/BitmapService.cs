@@ -155,7 +155,7 @@ namespace ImageProcessing.ServiceLayer.Services.Bmp.Implementation
             Requires.IsNotNull(xDerivative, nameof(xDerivative));
             Requires.IsNotNull(yDerivative, nameof(yDerivative));
 
-            var result = new Bitmap(xDerivative.Width, xDerivative.Height);
+            var result = new Bitmap(xDerivative);
 
             var xDerivativeData = xDerivative.LockBits(new Rectangle(0, 0, result.Width, result.Height),
                                                        ImageLockMode.ReadOnly,
@@ -170,7 +170,7 @@ namespace ImageProcessing.ServiceLayer.Services.Bmp.Implementation
                                                            result.PixelFormat);
 
             var size = result.Size;
-            var ptrStep = result.GetBitsPerPixel();
+            var ptrStep = result.GetBitsPerPixel() / 8;
 
             unsafe
             {
@@ -189,7 +189,7 @@ namespace ImageProcessing.ServiceLayer.Services.Bmp.Implementation
                     var xDerivativePtr = xDerivativeStartPtr + y * xDerivativeData.Stride;
                     var yDerivativePtr = yDerivativeStartPtr + y * yDerivativeData.Stride;
 
-                    for (int x = 0; x < size.Width; ++x, resultPtr += ptrStep, xDerivativePtr += ptrStep, yDerivativePtr += ptrStep)
+                    for (var x = 0; x < size.Width; ++x, resultPtr += ptrStep, xDerivativePtr += ptrStep, yDerivativePtr += ptrStep)
                     {
                         double Gx = xDerivativePtr[0];
                         double Gy = yDerivativePtr[0];

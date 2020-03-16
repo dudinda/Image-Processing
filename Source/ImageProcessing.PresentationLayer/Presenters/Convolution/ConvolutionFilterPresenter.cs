@@ -49,10 +49,12 @@ namespace ImageProcessing.PresentationLayer.Presenters.Convolution
                         () => new Bitmap(ViewModel.Source)
                      ).ConfigureAwait(true);
 
+                var filter = View.SelectedFilter;
+
                 var block = new PipelineBlock(copy)
                     .Add<Bitmap, Bitmap>(
                         (bmp) => _convolutionProvider
-                            .ApplyFilter(bmp, View.SelectedFilter)
+                            .ApplyFilter(bmp, filter)
                     );
 
                 EventAggregator.Publish(
@@ -66,6 +68,9 @@ namespace ImageProcessing.PresentationLayer.Presenters.Convolution
 				View.ShowError("Error while applying a convolution filter.");
 			}
 		}
+
+        private async Task ShowTooltipOnError(ShowTooltipOnErrorEventArgs e)
+            => View.ShowError(e.Error);
 
 	}
 }

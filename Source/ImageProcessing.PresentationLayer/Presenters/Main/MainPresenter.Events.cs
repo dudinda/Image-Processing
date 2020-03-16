@@ -2,9 +2,11 @@ using System;
 using System.Threading.Tasks;
 
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Core.EventAggregator.Implementation.EventArgs;
-using ImageProcessing.Core.EventAggregator.Implementation.EventArgs.Convolution;
 using ImageProcessing.Core.EventAggregator.Interface.Subscriber;
+using ImageProcessing.DomainModel.DomainEvent.CommonArgs;
+using ImageProcessing.DomainModel.DomainEvent.ConvolutionArgs;
+using ImageProcessing.DomainModel.DomainEvent.DistributionArgs;
+using ImageProcessing.DomainModel.DomainEvent.RgbArgs;
 
 namespace ImageProcessing.PresentationLayer.Presenters.Main
 {
@@ -46,7 +48,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
 
         public async Task OnEventHandler(FileDialogEventArgs e)
         {
-            switch (e.Arg)
+            switch (e.Action)
             {
                 case FileDialogAction.Open:
                     await OpenImage().ConfigureAwait(true);
@@ -59,13 +61,13 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
                     break;
 
                 default:
-                    throw new NotImplementedException(nameof(e.Arg));
+                    throw new NotImplementedException(nameof(e.Action));
             }
         }
 
         public async Task OnEventHandler(ToolbarActionEventArgs e)
         {
-            switch (e.Arg)
+            switch (e.Action)
             {
                 case ToolbarAction.Shuffle:
                     await Shuffle().ConfigureAwait(true);
@@ -75,7 +77,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
                     break;
 
                 default:
-                    throw new NotImplementedException(nameof(e.Arg));
+                    throw new NotImplementedException(nameof(e.Action));
             }
         }
 

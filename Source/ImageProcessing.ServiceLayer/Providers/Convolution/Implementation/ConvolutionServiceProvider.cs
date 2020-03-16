@@ -55,12 +55,14 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.Convolution
                    
                 case ConvolutionFilter.SobelOperator3x3:
 
+                    var cpy = new Bitmap(bmp);
+
                     var yDerivative = Task.Run(
                         () => GetFilter(bmp, ConvolutionFilter.SobelOperatorHorizontal3x3)
                     );
 
                     var xDerivative = Task.Run(
-                        () => GetFilter(bmp, ConvolutionFilter.SobelOperatorVertical3x3)
+                        () => GetFilter(cpy, ConvolutionFilter.SobelOperatorVertical3x3)
                     );
 
                     return _bitmapService.Magnitude(xDerivative.Result, yDerivative.Result);

@@ -5,9 +5,14 @@ using ImageProcessing.DomainModel.DomainEvent.ConvolutionArgs;
 
 namespace ImageProcessing.PresentationLayer.Presenters.Convolution
 {
-    partial class ConvolutionFilterPresenter : ISubscriber<ConvolutionFilterEventArgs>
+    partial class ConvolutionFilterPresenter : ISubscriber<ConvolutionFilterEventArgs>,
+                                               ISubscriber<ShowTooltipOnErrorEventArgs>
     {
         public async Task OnEventHandler(ConvolutionFilterEventArgs e)
             => await ApplyConvolutionFilter(e).ConfigureAwait(true);
+
+        public Task OnEventHandler(ShowTooltipOnErrorEventArgs e)
+            => ShowTooltipOnError(e);
+       
     }
 }

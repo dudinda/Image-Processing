@@ -239,11 +239,19 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
             }
             catch (OperationCanceledException cancelEx)
             {
-                View.ShowError("The operation has been canceled.");
+                EventAggregator.Publish(
+                    new ShowTooltipOnErrorEventArgs(
+                        "The operation has been canceled."
+                    )
+                );
             }
             catch (Exception ex)
             {
-                View.ShowError("Error while applying a convolution filter.");
+                EventAggregator.Publish(
+                    new ShowTooltipOnErrorEventArgs(
+                        "Error while applying a convolution filter."
+                    )
+                );
             }
         }
 
