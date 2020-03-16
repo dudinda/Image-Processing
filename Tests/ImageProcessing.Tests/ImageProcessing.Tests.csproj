@@ -133,9 +133,9 @@
       <Project>{70757D0C-2202-42C5-9E93-B3E54418FE76}</Project>
       <Name>ImageProcessing.DomainModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.Presentation\ImageProcessing.Presentation.csproj">
-      <Project>{26F0D611-47D0-4222-8235-1375C45AB861}</Project>
-      <Name>ImageProcessing.Presentation</Name>
+    <ProjectReference Include="..\..\Source\ImageProcessing.PresentationLayer\ImageProcessing.PresentationLayer.csproj">
+      <Project>{E23B6A87-60B7-470F-A6ED-0A7ECF4C9EBA}</Project>
+      <Name>ImageProcessing.PresentationLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.ServiceLayer\ImageProcessing.ServiceLayer.csproj">
       <Project>{FAD40911-9967-4DCC-9CA1-6BB37BB8D9BD}</Project>

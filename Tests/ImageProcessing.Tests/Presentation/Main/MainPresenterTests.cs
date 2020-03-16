@@ -2,8 +2,8 @@
 using ImageProcessing.Core.Controller.Interface;
 using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
-using ImageProcessing.Presentation.Presenters.Main;
-using ImageProcessing.Presentation.Views.Main;
+using ImageProcessing.PresentationLayer.Presenters.Main;
+using ImageProcessing.PresentationLayer.Views.Main;
 using ImageProcessing.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.ServiceLayer.Providers.Interface.RgbFilter;
 using ImageProcessing.ServiceLayer.Services.LockerService.Operation.Interface;

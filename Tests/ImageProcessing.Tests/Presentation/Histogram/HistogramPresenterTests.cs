@@ -1,8 +1,8 @@
 using ImageProcessing.Core.Controller.Interface;
 using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
-using ImageProcessing.Presentation.Presenters;
-using ImageProcessing.Presentation.Views.Histogram;
+using ImageProcessing.PresentationLayer.Presenters;
+using ImageProcessing.PresentationLayer.Views.Histogram;
 using ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
 
 using NSubstitute;
