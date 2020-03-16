@@ -11,7 +11,7 @@ namespace ImageProcessing.Common.Helpers
             => GetLumaCoefficientsByRec(R, G, B, ref rec);
 
         /// <summary>
-        /// Evaluate relative luminance using a specified recommendation
+        /// Evaluate relative luminance using a specified recommendation.
         /// </summary>
         /// <param name="pixel">The source pixel</param>
         /// <param name="rec">The specified recommendation</param>
@@ -32,19 +32,19 @@ namespace ImageProcessing.Common.Helpers
         }
 
         /// <summary>
-        /// Evaluate relative luminance by Rec. 601
+        /// Evaluate relative luminance by Rec. 601.
         /// </summary>
         private static double GetRec601(ref double R, ref double G, ref double B) 
             => R * 0.299 + G * 0.587 + B * 0.114;
 
         /// <summary>
-        /// Evaluate relative luminance by Rec. 709
+        /// Evaluate relative luminance by Rec. 709.
         /// </summary>
         private static double GetRec709(ref double R, ref double G, ref double B)
            => R * 0.2126 + G * 0.7152 + B * 0.0722;
 
         /// <summary>
-        /// Evaluate relative luminance by SMPTE 240M
+        /// Evaluate relative luminance by SMPTE 240M.
         /// </summary>
         private static double GetSmpte240M(ref double R, ref double G, ref double B)
            => R * 0.212 + G * 0.701 + B * 0.087;

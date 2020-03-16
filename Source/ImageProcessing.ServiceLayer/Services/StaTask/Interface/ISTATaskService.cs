@@ -3,10 +3,29 @@ using System.Threading.Tasks;
 
 namespace ImageProcessing.ServiceLayer.Services.StaTask.Interface
 {
+    /// <summary>
+    /// Provides functionality to run the
+    /// specified work in the single-threaded
+    /// apartment state. Mainly used to run
+    /// non-blocking modal windows.
+    /// </summary>
     public interface ISTATaskService : IDisposable
     {
-        Task<TArg> StartSTATask<TArg>(Func<TArg> func) 
-            where TArg : class;
+        /// <summary>
+        /// Start the specified work
+        /// as the STA task. Returns <typeparamref name="TResult"/>
+        /// upon completion.
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="func"></param>
+        /// <returns></returns>
+        Task<TResult> StartSTATask<TResult>(Func<TResult> func) 
+            where TResult : class;
+
+        /// <summary>
+        /// Start the specified work
+        /// as the STA task.
+        /// </summary>
         Task StartSTATask(Action func);
     }
 }

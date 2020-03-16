@@ -55,7 +55,7 @@ namespace ImageProcessing.Core.Controller.Implementation
         }
 
         /// <summary>
-        /// Dispose the specified <see cref="IoC"/>
+        /// Dispose the specified <see cref="IoC"/>.
         /// </summary>
         public void Dispose()
             => IoC.Dispose();

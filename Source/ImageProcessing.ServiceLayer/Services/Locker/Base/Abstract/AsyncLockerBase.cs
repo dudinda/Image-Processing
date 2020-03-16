@@ -6,11 +6,13 @@ using ImageProcessing.ServiceLayer.Services.Locker.Base.Interface;
 
 namespace ImageProcessing.ServiceLayer.Services.Locker.Base.Abstract
 {
+    /// <inheritdoc cref="IAsyncLocker" />
     public abstract class AsyncLockerBase : IAsyncLocker
     {
         private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
 
-        public async Task<T> LockAsync<T>(Func<T> worker)
+        /// <inheritdoc />
+        public async Task<TResult> LockAsync<TResult>(Func<TResult> worker)
         {
             await _semaphore.WaitAsync().ConfigureAwait(false);
             try
@@ -27,6 +29,7 @@ namespace ImageProcessing.ServiceLayer.Services.Locker.Base.Abstract
             }
         }
 
+        /// <inheritdoc />
         public async Task LockAsync(Action worker)
         {
             await _semaphore.WaitAsync().ConfigureAwait(false);

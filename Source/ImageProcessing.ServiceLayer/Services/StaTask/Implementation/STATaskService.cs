@@ -8,12 +8,13 @@ using ImageProcessing.ServiceLayer.Services.StaTask.Interface;
 
 namespace ImageProcessing.ServiceLayer.Services.StaTask.Implementation
 {
+    /// <inheritdoc cref="ISTATaskService"/>
     public sealed class STATaskService : ISTATaskService
     {
         private readonly int _maxNumberOfModals;
 
         /// <summary>
-        /// Contains threads' ids which hold a modal window
+        /// Contains threads' ids which hold a modal windows.
         /// </summary>
         private static List<int> _pool = new List<int>();
 
@@ -33,6 +34,8 @@ namespace ImageProcessing.ServiceLayer.Services.StaTask.Implementation
             _maxNumberOfModals = maxNumberOfModals;
         }
 
+
+        /// <inheritdoc/>
         public Task<TArg> StartSTATask<TArg>(Func<TArg> func)
             where TArg : class
         {
@@ -70,6 +73,7 @@ namespace ImageProcessing.ServiceLayer.Services.StaTask.Implementation
             return tcs.Task;
         }
 
+        /// <inheritdoc/>
         public Task StartSTATask(Action func)
         {
             var tcs = new TaskCompletionSource<object>();
@@ -106,6 +110,10 @@ namespace ImageProcessing.ServiceLayer.Services.StaTask.Implementation
             return tcs.Task;
         }
 
+        /// <summary>
+        /// Close all modal windows belonging
+        /// to the pool on disposing.
+        /// </summary>
         public void Dispose()
         {
             foreach(var threadId in _pool)

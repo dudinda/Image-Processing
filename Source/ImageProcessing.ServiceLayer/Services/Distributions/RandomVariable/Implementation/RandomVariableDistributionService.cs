@@ -9,8 +9,10 @@ using ImageProcessing.ServiceLayer.Services.Distributions.RandomVariable.Interfa
 
 namespace ImageProcessing.ServiceLayer.Services.Distributions.RandomVariable.Implementation
 {
+    /// <inheritdoc cref="IRandomVariableDistributionService"/>
     public sealed class RandomVariableDistributionService : IRandomVariableDistributionService
     {
+        /// <inheritdoc/>
         public decimal[] TransformToDecimal(decimal[] cdf, IDistribution distribution)
         {
             Requires.IsNotNull(cdf, nameof(cdf));
@@ -27,6 +29,7 @@ namespace ImageProcessing.ServiceLayer.Services.Distributions.RandomVariable.Imp
             return result;
         }
 
+        /// <inheritdoc/>
         public byte[] TransformToByte(decimal[] cdf, IDistribution distribution)
         {
             Requires.IsNotNull(cdf, nameof(cdf));
@@ -56,6 +59,7 @@ namespace ImageProcessing.ServiceLayer.Services.Distributions.RandomVariable.Imp
             return result;
         }
 
+        /// <inheritdoc/>
         public decimal GetExpectation(decimal[] pmf)
         {
             Requires.IsNotNull(pmf, nameof(pmf));
@@ -78,6 +82,7 @@ namespace ImageProcessing.ServiceLayer.Services.Distributions.RandomVariable.Imp
             return total;
         }
 
+        /// <inheritdoc/>
         public decimal GetVariance(decimal[] pmf)
         {
             Requires.IsNotNull(pmf, nameof(pmf));
@@ -102,6 +107,7 @@ namespace ImageProcessing.ServiceLayer.Services.Distributions.RandomVariable.Imp
             return total;
         }
 
+        /// <inheritdoc/>
         public decimal GetStandardDeviation(decimal[] pmf)
         {
             Requires.IsNotNull(pmf, nameof(pmf));
@@ -117,6 +123,7 @@ namespace ImageProcessing.ServiceLayer.Services.Distributions.RandomVariable.Imp
             return GetVariance(pmf).Sqrt();
         }
 
+        /// <inheritdoc/>
         public decimal GetConditionalExpectation((int x1, int x2) interval, decimal[] pmf)
         {
             Requires.IsNotNull(pmf, nameof(pmf));
@@ -141,6 +148,7 @@ namespace ImageProcessing.ServiceLayer.Services.Distributions.RandomVariable.Imp
             return uvalue / lvalue;
         }
 
+        /// <inheritdoc/>
         public decimal GetConditionalVariance((int x1, int x2) interval, decimal[] frequencies)
         {
             Requires.IsNotNull(frequencies, nameof(frequencies));
@@ -163,6 +171,7 @@ namespace ImageProcessing.ServiceLayer.Services.Distributions.RandomVariable.Imp
             return uvalue / lvalue;
         }
 
+        /// <inheritdoc/>
         public decimal[] GetCDF(decimal[] pmf)
         {
             Requires.IsNotNull(pmf, nameof(pmf));
@@ -190,6 +199,7 @@ namespace ImageProcessing.ServiceLayer.Services.Distributions.RandomVariable.Imp
             return cdf;
         }
 
+        /// <inheritdoc/>
         public decimal[] GetPMF(int[] frequencies)
         {
             Requires.IsNotNull(frequencies, nameof(frequencies));
@@ -206,6 +216,7 @@ namespace ImageProcessing.ServiceLayer.Services.Distributions.RandomVariable.Imp
                 .ToArray();
         }
 
+        /// <inheritdoc/>
         public decimal GetEntropy(decimal[] pmf)
         {
             Requires.IsNotNull(pmf, nameof(pmf));

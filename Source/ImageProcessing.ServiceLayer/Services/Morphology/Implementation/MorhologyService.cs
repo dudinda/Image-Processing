@@ -8,8 +8,10 @@ using ImageProcessing.ServiceLayer.Services.Morphology.Interface;
 
 namespace ImageProcessing.ServiceLayer.Services.Morphology.Implementation
 {
+    /// <inheritdoc  cref="IMorphologyService"/>
     public sealed class MorphologyService : IMorphologyService
     {
+        /// <inheritdoc />
         public Bitmap ApplyOperator(Bitmap bmp, BitMatrix kernel, IMorphologyUnary filter)
         {
             Requires.IsNotNull(bmp, nameof(bmp));
@@ -17,7 +19,8 @@ namespace ImageProcessing.ServiceLayer.Services.Morphology.Implementation
 
             return filter.Filter(bmp, kernel);
         }
-        
+
+        /// <inheritdoc />
         public Bitmap ApplyOperator(Bitmap lvalue, Bitmap rvalue, IMorphologyBinary filter)
         {
             Requires.IsNotNull(rvalue, nameof(rvalue));

@@ -13,6 +13,7 @@ using ImageProcessing.ServiceLayer.Services.Distributions.RandomVariable.Interfa
 
 namespace ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Implementation
 {
+    /// <see cref="IBitmapLuminanceDistributionService"/>
     public sealed class BitmapLuminanceDistributionService : IBitmapLuminanceDistributionService
     {
         private readonly IRandomVariableDistributionService _service;
@@ -22,6 +23,7 @@ namespace ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Im
             _service = service;
         }
 
+        /// <inheritdoc />
         public Bitmap Transform(Bitmap bitmap, IDistribution distribution)
         {
             Requires.IsNotNull(bitmap, nameof(bitmap));
@@ -66,6 +68,7 @@ namespace ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Im
             return bitmap;
         }
 
+        /// <inheritdoc />
         public decimal[] GetPMF(Bitmap bitmap)
         {
             Requires.IsNotNull(bitmap, nameof(bitmap));
@@ -75,6 +78,7 @@ namespace ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Im
             );
         }
 
+        /// <inheritdoc />
         public decimal[] GetCDF(Bitmap bitmap)
         {
             Requires.IsNotNull(bitmap, nameof(bitmap));
@@ -83,7 +87,8 @@ namespace ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Im
                 GetPMF(bitmap)
             );
         }
-            
+
+        /// <inheritdoc />
         public decimal GetExpectation(Bitmap bitmap)
         {
             Requires.IsNotNull(bitmap, nameof(bitmap));
@@ -95,6 +100,7 @@ namespace ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Im
             );
         }
 
+        /// <inheritdoc />
         public decimal GetVariance(Bitmap bitmap)
         {
             Requires.IsNotNull(bitmap, nameof(bitmap));
@@ -106,6 +112,7 @@ namespace ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Im
             );
         }
 
+        /// <inheritdoc />
         public int[] GetFrequencies(Bitmap bitmap)
         {
             Requires.IsNotNull(bitmap, nameof(bitmap));
@@ -159,6 +166,7 @@ namespace ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Im
             return frequencies;
         }
 
+        /// <inheritdoc />
         public decimal GetEntropy(Bitmap bitmap)
         {
             Requires.IsNotNull(bitmap, nameof(bitmap));
@@ -170,6 +178,7 @@ namespace ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Im
             );
         }
 
+        /// <inheritdoc />
         public decimal GetStandardDeviation(Bitmap bitmap)
         {
             Requires.IsNotNull(bitmap, nameof(bitmap));
@@ -177,6 +186,7 @@ namespace ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Im
             return GetVariance(bitmap).Sqrt();
         }
 
+        /// <inheritdoc />
         public decimal GetConditionalExpectation((int x1, int x2) interval, Bitmap bitmap)
         {
             Requires.IsNotNull(bitmap, nameof(bitmap));
@@ -186,6 +196,7 @@ namespace ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Im
             );
         }
 
+        /// <inheritdoc />
         public decimal GetConditionalVariance((int x1, int x2) interval, Bitmap bitmap)
         {
             Requires.IsNotNull(bitmap, nameof(bitmap));

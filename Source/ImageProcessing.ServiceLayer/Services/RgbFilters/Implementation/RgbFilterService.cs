@@ -6,8 +6,10 @@ using ImageProcessing.ServiceLayer.Services.RgbFilter.Interface;
 
 namespace ImageProcessing.ServiceLayer.Services.RgbFilter.Implementation
 {
+    /// <inheritdoc cref="IRgbFilterService"/>
     public sealed class RgbFilterService : IRgbFilterService
     {
+        /// <inheritdoc/>
         public Bitmap Filter(Bitmap source, IRgbFilter filter)
         {
             Requires.IsNotNull(source, nameof(source));
