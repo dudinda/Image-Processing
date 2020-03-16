@@ -56,9 +56,9 @@ namespace ImageProcessing.ServiceLayer.Services.Bmp.Implementation
                 });
             }
 
-            src.UnlockBits(bitmapData);
+            bitmap.UnlockBits(bitmapData);
 
-            return src;
+            return bitmap;
         }
 
         /// <inheritdoc/>
