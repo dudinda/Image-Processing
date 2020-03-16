@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using ImageProcessing.Common.Extensions.DecimalMathRealExtensions;
 
@@ -8,11 +8,21 @@ namespace ImageProcessing.DecimalMath.Special
 {
     public static class DecimalMathSpecial
     {
+        /// <summary>
+        /// Evaluate Li(x).
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
         public static decimal Li(decimal x)
         {
             return Ei(Log(x));
         }
 
+        /// <summary>
+        /// Evaluate Ei(x).
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
         public static decimal Ei(decimal x)
         {
             var result = Euler + Log(Abs(x));
@@ -30,6 +40,12 @@ namespace ImageProcessing.DecimalMath.Special
 
             return result;
         }
+
+        /// <summary>
+        /// Evaluate Ci(x).
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
         public static decimal Ci(decimal x)
         {
             var result = Euler + Log(x);
@@ -48,6 +64,12 @@ namespace ImageProcessing.DecimalMath.Special
             return result;
         }
 
+        /// <summary>
+        /// Evaluate Si(x).
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+
         public static decimal Si(decimal x)
         {
             var total = x;
@@ -64,6 +86,11 @@ namespace ImageProcessing.DecimalMath.Special
             return result;
         }
 
+        /// <summary>
+        /// Evaluate ErfInv(x).
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
         public static decimal ErfInv(decimal x)
         {
             if(x.Abs() >= 1)

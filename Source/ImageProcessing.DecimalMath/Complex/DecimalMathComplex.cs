@@ -55,10 +55,7 @@ namespace ImageProcessing.DecimalMath.Complex
         /// <returns>z + z'</returns>
         public static (decimal x, decimal y) Add((decimal x, decimal y) z1, (decimal x, decimal y) z2)
         {
-            checked
-            {
-                return (Re(z1) + Re(z2), Im(z1) + Im(z2));
-            }
+            return (Re(z1) + Re(z2), Im(z1) + Im(z2));
         }
 
         /// <summary>
@@ -69,10 +66,7 @@ namespace ImageProcessing.DecimalMath.Complex
         /// <returns>z - z'</returns>
         public static (decimal x, decimal y) Sub((decimal x, decimal y) z1, (decimal x, decimal y) z2)
         {
-            checked
-            {
-                return (Re(z1) - Re(z2), Im(z1) - Re(z2));
-            }
+            return (Re(z1) - Re(z2), Im(z1) - Re(z2));
         }
 
         /// <summary>
@@ -83,10 +77,7 @@ namespace ImageProcessing.DecimalMath.Complex
         /// <returns>zz'</returns>
         public static (decimal x, decimal y) Mul((decimal x, decimal y) z1, (decimal x, decimal y) z2)
         {
-            checked
-            {
-                return ((Re(z1) * Re(z2) - Im(z1) * Im(z2), Re(z1) * Im(z2) + Im(z1) * Re(z2)));
-            }
+            return ((Re(z1) * Re(z2) - Im(z1) * Im(z2), Re(z1) * Im(z2) + Im(z1) * Re(z2)));
         }
 
         /// <summary>
@@ -99,12 +90,9 @@ namespace ImageProcessing.DecimalMath.Complex
         {
             var numerator = Mul(z1, Conj(z2));
 
-            checked
-            {
-                var denominator = Re(z2) * Re(z2) + Im(z2) * Im(z2);
+            var denominator = Re(z2) * Re(z2) + Im(z2) * Im(z2);
 
-                return (Re(numerator) / denominator, Im(numerator) / denominator);
-            }
+            return (Re(numerator) / denominator, Im(numerator) / denominator);
         }
         
         /// <summary>

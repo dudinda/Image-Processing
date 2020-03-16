@@ -69,11 +69,8 @@ namespace ImageProcessing.DecimalMath.Real
                 return 0;
             }
 
-            checked
-            {
-                //x = y
-                return Abs(x) * Sqrt2;
-            }
+            //x = y
+            return Abs(x) * Sqrt2;
         }
 
         /// <summary>
@@ -90,10 +87,7 @@ namespace ImageProcessing.DecimalMath.Real
         /// </summary>
         public static decimal Fmad(decimal x, decimal y, decimal z)
         {
-            checked
-            {
-                return (x * y) + z;
-            }
+            return (x * y) + z;
         }
 
         /// <summary>
@@ -102,12 +96,9 @@ namespace ImageProcessing.DecimalMath.Real
         /// <param name="x">An argument of a function</param>
         public static decimal Ceil(decimal x)
         {
-            checked
+            if (Frac(x) != 0)
             {
-                if (Frac(x) != 0)
-                {
-                    return Floor(x) + 1;
-                }
+                return Floor(x) + 1;
             }
 
             return x;
@@ -151,10 +142,7 @@ namespace ImageProcessing.DecimalMath.Real
         /// <returns></returns>
         public static decimal Mod(decimal x, decimal mod)
         {
-            checked
-            {
-                return x - mod * Floor(x / mod);
-            }
+            return x - mod * Floor(x / mod);
         }
 
         #region Log and exp functions
@@ -191,15 +179,12 @@ namespace ImageProcessing.DecimalMath.Real
         /// <param name="precision">A error</param>
         public static decimal Pow(decimal value, decimal power, decimal precision = Epsilon)
         {
-            if(value < 0)
+            if (value < 0)
             {
                 throw new ArgumentException("The value must be a positive real number");
             }
 
-            checked
-            {
-                return Exp(power * Log(value, precision: precision));
-            }
+            return Exp(power * Log(value, precision: precision));
         }
 
         /// <summary>
@@ -212,13 +197,10 @@ namespace ImageProcessing.DecimalMath.Real
             var total = 1.0M;
             var result = total;
 
-            checked
+            for (var k = 1; Abs(total) > precision; ++k)
             {
-                for (var k = 1; Abs(total) > precision; ++k)
-                {
-                    total = total * x / k;
-                    result += total;
-                }
+                total = total * x / k;
+                result += total;
             }
 
             return result;
@@ -463,16 +445,13 @@ namespace ImageProcessing.DecimalMath.Real
         {
             x = Abs(x);
             //|cosh(x) - (e ** x) / 2| < 3.8 * 10 ** -10 for all x > 21
-            if(x > 21)
+            if (x > 21)
             {
                 return Exp(x, precision) * 0.5M;
             }
 
-            checked
-            {
-                var exp = Exp(x, precision);
-                return (exp +  1.0M / exp ) * 0.5M;
-            }
+            var exp = Exp(x, precision);
+            return (exp + 1.0M / exp) * 0.5M;
         }
 
         /// <summary>
@@ -491,10 +470,7 @@ namespace ImageProcessing.DecimalMath.Real
                 return sign * result * 0.5M;
             }
 
-            checked
-            {
-                return sign * (result - 1.0M / result) *  0.5M;
-            }
+            return sign * (result - 1.0M / result) * 0.5M;
         }
 
         /// <summary>
