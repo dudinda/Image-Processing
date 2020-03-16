@@ -2,7 +2,7 @@ using System;
 
 using ImageProcessing.Common.Enums;
 
-namespace ImageProcessing.UI
+namespace ImageProcessing.UILayer
 {
     internal static class Program
     {

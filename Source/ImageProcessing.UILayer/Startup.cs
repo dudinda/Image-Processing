@@ -23,11 +23,11 @@ using ImageProcessing.DomainModel.Factory.RgbFilters.Interface;
 using ImageProcessing.Form.Histogram;
 using ImageProcessing.Form.Main;
 using ImageProcessing.Form.QualityMeasure;
-using ImageProcessing.Presentation.Presenters.Main;
-using ImageProcessing.Presentation.Views.Convolution;
-using ImageProcessing.Presentation.Views.Histogram;
-using ImageProcessing.Presentation.Views.Main;
-using ImageProcessing.Presentation.Views.QualityMeasure;
+using ImageProcessing.PresentationLayer.Presenters.Main;
+using ImageProcessing.PresentationLayer.Views.Convolution;
+using ImageProcessing.PresentationLayer.Views.Histogram;
+using ImageProcessing.PresentationLayer.Views.Main;
+using ImageProcessing.PresentationLayer.Views.QualityMeasure;
 using ImageProcessing.ServiceLayer.Providers.Implementation.BitmapDistribution;
 using ImageProcessing.ServiceLayer.Providers.Implementation.Convolution;
 using ImageProcessing.ServiceLayer.Providers.Implementation.Morphology;
@@ -54,10 +54,10 @@ using ImageProcessing.ServiceLayer.Services.RgbFilter.Implementation;
 using ImageProcessing.ServiceLayer.Services.RgbFilter.Interface;
 using ImageProcessing.ServiceLayer.Services.StaTask.Implementation;
 using ImageProcessing.ServiceLayer.Services.StaTask.Interface;
-using ImageProcessing.UI.Form.Convolution;
+using ImageProcessing.UILayer.Form.Convolution;
 
 [assembly: InternalsVisibleTo("ImageProcessing.Tests")]
-namespace ImageProcessing.UI
+namespace ImageProcessing.UILayer
 {
     internal static class Startup 
     {

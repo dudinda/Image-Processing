@@ -1,4 +1,4 @@
-namespace ImageProcessing.UI.Form.Convolution
+namespace ImageProcessing.UILayer.Form.Convolution
 { 
     partial class ConvolutionFilterForm
     {
@@ -65,6 +65,7 @@ namespace ImageProcessing.UI.Form.Convolution
             this.MinimizeBox = false;
             this.Name = "ConvolutionFilterForm";
             this.Resizable = false;
+            this.TopMost = true;
             this.ResumeLayout(false);
 
         }

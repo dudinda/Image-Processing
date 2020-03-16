@@ -7,7 +7,7 @@ using ImageProcessing.Core.EventAggregator.Interface;
 using MetroFramework.Forms;
 
 [assembly: InternalsVisibleTo("ImageProcessing.Tests")]
-namespace ImageProcessing.Form.Base
+namespace ImageProcessing.UILayer.Form.Base
 {
     internal class BaseMainForm : MetroForm
     {

@@ -7,7 +7,7 @@ using ImageProcessing.Common.Extensions.BitmapExtensions;
 
 using MetroFramework.Controls;
 
-namespace ImageProcessing.UI.Control
+namespace ImageProcessing.UILayer.Control
 {
     public class ZoomTrackBar : MetroTrackBar
     {

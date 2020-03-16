@@ -5,8 +5,8 @@ using System.Windows.Forms.DataVisualization.Charting;
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.EnumExtensions;
 using ImageProcessing.Core.EventAggregator.Interface;
-using ImageProcessing.Form.Base;
-using ImageProcessing.Presentation.Views.Histogram;
+using ImageProcessing.PresentationLayer.Views.Histogram;
+using ImageProcessing.UILayer.Form.Base;
 
 [assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.Form.Histogram

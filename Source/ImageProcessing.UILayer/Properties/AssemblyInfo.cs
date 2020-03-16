@@ -5,11 +5,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ImageProcessing.UI")]
+[assembly: AssemblyTitle("ImageProcessing.UILayer")]
 [assembly: AssemblyDescription("UI Layer")]
 [assembly: AssemblyProduct("ImageProcessing")]
 [assembly: AssemblyCopyright("Copyright © Daniil Dudin  <#=DateTime.Now.Year#>")]
-[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

@@ -1,6 +1,6 @@
 using ImageProcessing.Core.EventAggregator.Implementation.EventArgs.Convolution;
 
-namespace ImageProcessing.UI.Form.Convolution
+namespace ImageProcessing.UILayer.Form.Convolution
 {
     partial class ConvolutionFilterForm
     {

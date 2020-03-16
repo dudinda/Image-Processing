@@ -5,7 +5,7 @@ using ImageProcessing.Common.Enums;
 using ImageProcessing.Utility.FixedStack.Implementation;
 using ImageProcessing.Utility.FixedStack.Interface;
 
-namespace ImageProcessing.UI.Control
+namespace ImageProcessing.UILayer.Control
 {
     public class UndoRedoSplitContainer : SplitContainer
     {

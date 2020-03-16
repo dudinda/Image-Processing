@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.EventAggregator.Interface;
-using ImageProcessing.Form.Base;
 using ImageProcessing.Interop.Code.Wrapper;
-using ImageProcessing.Presentation.Views.Main;
+using ImageProcessing.PresentationLayer.Views.Main;
+using ImageProcessing.UILayer.Form.Base;
 
 [assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.Form.Main

@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net47</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ApplicationIcon />
     <OutputType>WinExe</OutputType>
-    <StartupObject>ImageProcessing.UI.Program</StartupObject>
+    <StartupObject>ImageProcessing.UILayer.Program</StartupObject>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Platforms>AnyCPU;x64;x86</Platforms>
   </PropertyGroup>
@@ -30,8 +30,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ImageProcessing.Interop\ImageProcessing.Interop.csproj" />
     <ProjectReference Include="..\ImageProcessing.Core\ImageProcessing.Core.csproj" />
-    <ProjectReference Include="..\ImageProcessing.DomainModel\ImageProcessing.DomainModel.csproj" />
-    <ProjectReference Include="..\ImageProcessing.Presentation\ImageProcessing.Presentation.csproj" />
+    <ProjectReference Include="..\ImageProcessing.PresentationLayer\ImageProcessing.PresentationLayer.csproj" />
     <ProjectReference Include="..\ImageProcessing.ServiceLayer\ImageProcessing.ServiceLayer.csproj" />
   </ItemGroup>
 
