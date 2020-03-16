@@ -1,5 +1,3 @@
-using ImageProcessing.Core.EventAggregator.Interface.EventArgs;
-
 namespace ImageProcessing.Core.EventAggregator.Interface
 {
     /// <summary>
