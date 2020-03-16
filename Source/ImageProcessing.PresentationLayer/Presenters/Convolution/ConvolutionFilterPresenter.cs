@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Controller.Interface;
-using ImageProcessing.Core.EventAggregator.Implementation.EventArgs.Convolution;
 using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Core.Pipeline.Block.Implementation;
 using ImageProcessing.Core.Presenter.Abstract;
+using ImageProcessing.DomainModel.DomainEvent.ConvolutionArgs;
 using ImageProcessing.PresentationLayer.ViewModel.Convolution;
 using ImageProcessing.PresentationLayer.Views.Convolution;
 using ImageProcessing.ServiceLayer.Providers.Interface.Convolution;

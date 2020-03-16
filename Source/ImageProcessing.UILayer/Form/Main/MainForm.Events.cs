@@ -1,8 +1,10 @@
 using System.Windows.Forms;
 
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Core.EventAggregator.Implementation.EventArgs;
-using ImageProcessing.Core.EventAggregator.Implementation.EventArgs.Convolution;
+using ImageProcessing.DomainModel.DomainEvent.CommonArgs;
+using ImageProcessing.DomainModel.DomainEvent.ConvolutionArgs;
+using ImageProcessing.DomainModel.DomainEvent.DistributionArgs;
+using ImageProcessing.DomainModel.DomainEvent.RgbArgs;
 
 namespace ImageProcessing.Form.Main
 {

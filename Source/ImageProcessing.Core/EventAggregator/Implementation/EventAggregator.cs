@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
+using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.EventAggregator.Interface.Subscriber;
 
@@ -53,6 +54,8 @@ namespace ImageProcessing.Core.EventAggregator.Implementation
         /// <inheritdoc cref="IEventAggregator.Subscribe(object)"/>
         public void Subscribe(object subscriber)
         {
+            Requires.IsNotNull(subscriber, nameof(subscriber));
+
             lock (_syncRoot)
             {
                 var subsriberTypes = subscriber

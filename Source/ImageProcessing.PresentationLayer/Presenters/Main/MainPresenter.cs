@@ -11,12 +11,14 @@ using ImageProcessing.Common.Extensions.BitmapExtensions;
 using ImageProcessing.Common.Extensions.StringExtensions;
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Controller.Interface;
-using ImageProcessing.Core.EventAggregator.Implementation.EventArgs;
-using ImageProcessing.Core.EventAggregator.Implementation.EventArgs.Convolution;
 using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Core.Pipeline.Block.Implementation;
 using ImageProcessing.Core.Presenter.Abstract;
+using ImageProcessing.DomainModel.DomainEvent.CommonArgs;
+using ImageProcessing.DomainModel.DomainEvent.ConvolutionArgs;
+using ImageProcessing.DomainModel.DomainEvent.DistributionArgs;
+using ImageProcessing.DomainModel.DomainEvent.RgbArgs;
 using ImageProcessing.PresentationLayer.Presenters.Convolution;
 using ImageProcessing.PresentationLayer.ViewModel.Convolution;
 using ImageProcessing.PresentationLayer.ViewModel.Histogram;
@@ -144,12 +146,11 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
                                 return _operationLocker.LockAsync(() =>
                                 {
                                     new Bitmap(View.SrcImageCopy)
-                                        .Save(
-                                            dialog.FileName,
-                                            Path.GetExtension(
-                                                dialog.FileName
-                                        ).GetImageFormat()
-                                    );
+                                        .Save(dialog.FileName,
+                                              Path.GetExtension(
+                                                  dialog.FileName
+                                              ).GetImageFormat()
+                                         );
                                 });
                             }
 
@@ -175,12 +176,11 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
                     await _operationLocker.LockAsync(() =>
                     {
                         new Bitmap(View.SrcImageCopy)
-                            .Save(
-                                View.PathToFile,
-                                Path.GetExtension(
-                                    View.PathToFile
-                            ).GetImageFormat()
-                        );
+                            .Save(View.PathToFile,
+                                  Path.GetExtension(
+                                      View.PathToFile
+                                  ).GetImageFormat()
+                             );
                     }).ConfigureAwait(true);
                 }
             }
@@ -226,7 +226,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
                     View.SetCursor(CursorType.Wait);
 
                     Pipeline
-                        .Register(e.Arg
+                        .Register(e.Block
                             .Add<Bitmap, Bitmap>(
                                 (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
                             )
@@ -264,7 +264,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
                     Pipeline
                         .Register(new PipelineBlock(copy)
                             .Add<Bitmap, Bitmap>(
-                                (bmp) => _rgbProvider.Apply(bmp, e.Arg)
+                                (bmp) => _rgbProvider.Apply(bmp, e.Filter)
                             )
                             .Add<Bitmap, Bitmap>(
                                 (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
@@ -294,7 +294,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
 
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
-                    var result = View.GetSelectedColors(e.Arg);
+                    var result = View.GetSelectedColors(e.Color);
 
                     if (!IsDefault(result))
                     {
@@ -359,7 +359,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
                     Pipeline
                         .Register(new PipelineBlock(copy)
                             .Add<Bitmap, Bitmap>(
-                                (bmp) => _lumaProvider.Transform(bmp, e.Arg, e.Parameters)
+                                (bmp) => _lumaProvider.Transform(bmp, e.Distribution, e.Parameters)
                             )                     
                             .Add<Bitmap, Bitmap>(
                                 (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
@@ -421,13 +421,13 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
             {
                 Requires.IsNotNull(e, nameof(e));
 
-                if (!View.ImageIsNull(e.Arg))
+                if (!View.ImageIsNull(e.Container))
                 {
                     Controller.Run<HistogramPresenter, HistogramViewModel>(
                         new HistogramViewModel(
                             new Bitmap(
                                 await GetImageCopy(
-                                    e.Arg
+                                    e.Container
                                 ).ConfigureAwait(true)
                             ),
                         e.Action)
@@ -479,7 +479,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
 
             void GetDestination(out (ImageContainer To, ImageContainer From) container)
             {
-                switch (e.Arg)
+                switch (e.Container)
                 {
                     case ImageContainer.Source:
                         container = (ImageContainer.Destination, ImageContainer.Source);
@@ -488,7 +488,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
                         container = (ImageContainer.Source, ImageContainer.Destination);
                         break;
 
-                    default: throw new NotImplementedException(nameof(e.Arg));
+                    default: throw new NotImplementedException(nameof(e.Container));
                 }
             };
         }
@@ -499,7 +499,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
             {
                 Requires.IsNotNull(e, nameof(e));
 
-                var container = e.Arg;
+                var container = e.Container;
 
                 if (!View.ImageIsNull(container))
                 {
@@ -528,7 +528,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
             {
                 Requires.IsNotNull(e, nameof(e));
 
-                var container = e.Arg;
+                var container = e.Container;
 
                 if (!View.ImageIsNull(container))
                 {
@@ -548,15 +548,18 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
 
         private Bitmap DefaultPipelineBlock(Bitmap bmp, ImageContainer to)
         {
-            View.SetImageCopy(to, new Bitmap(bmp));
+            lock (this)
+            {
+                View.SetImageCopy(to, new Bitmap(bmp));
 
-            View.AddToUndoContainer(
-                (new Bitmap(View.GetImageCopy(to)), to)
-            );
+                View.AddToUndoContainer(
+                    (new Bitmap(View.GetImageCopy(to)), to)
+                );
 
-            View.SetImageToZoom(to, new Bitmap(bmp));
+                View.SetImageToZoom(to, new Bitmap(bmp));
 
-            return (Bitmap)View.GetImageCopy(to).Clone();
+                return (Bitmap)View.GetImageCopy(to).Clone();
+            }
         }
 
         private async Task<Bitmap> GetImageCopy(ImageContainer container)
@@ -595,9 +598,9 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
         }
 
         private void CloseForm()
-        {
-            _staTaskService.Dispose();
-            Controller.Dispose();
-        }
+            => Controller.Dispose();
+
+
+
     }
 }
