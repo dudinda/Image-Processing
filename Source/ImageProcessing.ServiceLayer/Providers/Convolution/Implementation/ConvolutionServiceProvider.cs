@@ -68,7 +68,12 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.Convolution
                         () => GetFilter(cpy, ConvolutionFilter.SobelOperatorVertical3x3)
                     );
 
-                    return _bitmapService.Magnitude(xDerivative.Result, yDerivative.Result);
+                    return _cache.GetOrCreate(filter,
+                        () => _bitmapService
+                                  .Magnitude(xDerivative.Result,
+                                             yDerivative.Result
+                                  )
+                              );
 
                 case ConvolutionFilter.LoGOperator3x3:
 
