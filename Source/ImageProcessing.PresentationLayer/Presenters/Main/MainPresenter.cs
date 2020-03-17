@@ -25,6 +25,7 @@ using ImageProcessing.PresentationLayer.ViewModel.Histogram;
 using ImageProcessing.PresentationLayer.Views.Main;
 using ImageProcessing.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.ServiceLayer.Providers.Interface.RgbFilter;
+using ImageProcessing.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.ServiceLayer.Services.LockerService.Zoom.Interface;
 using ImageProcessing.ServiceLayer.Services.StaTask.Interface;
@@ -39,6 +40,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
         private readonly ISTATaskService _staTaskService;
         private readonly IAsyncZoomLocker _zoomLocker;
         private readonly IAsyncOperationLocker _operationLocker;
+        private readonly ICacheService<Bitmap> _cache;
 
         public MainPresenter(IAppController controller,
                              IMainView view,
@@ -48,25 +50,23 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
                              IAsyncZoomLocker zoomLocker,
                              IAsyncOperationLocker operationLocker,
                              IBitmapLuminanceDistributionServiceProvider lumaProvider,
-                             IRgbFilterServiceProvider rgbProvider
+                             IRgbFilterServiceProvider rgbProvider,
+                             ICacheService<Bitmap> cache
 
             ) : base(controller, view, pipeline, eventAggregator)
         {
             _lumaProvider = Requires.IsNotNull(
-                lumaProvider, nameof(lumaProvider)
-            );
+                lumaProvider, nameof(lumaProvider));
             _rgbProvider = Requires.IsNotNull(
-                rgbProvider, nameof(rgbProvider)
-            );
+                rgbProvider, nameof(rgbProvider));
             _staTaskService = Requires.IsNotNull(
-                staTaskService, nameof(staTaskService)
-            );
+                staTaskService, nameof(staTaskService));
             _zoomLocker = Requires.IsNotNull(
-                zoomLocker, nameof(zoomLocker)
-            );
+                zoomLocker, nameof(zoomLocker));
             _operationLocker = Requires.IsNotNull(
-                operationLocker, nameof(operationLocker)
-            );
+                operationLocker, nameof(operationLocker));
+            _cache = Requires.IsNotNull(
+                cache, nameof(cache));
 
             EventAggregator.Subscribe(this);
         }
@@ -586,6 +586,11 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
                 var result = await Pipeline
                     .AwaitResult()
                     .ConfigureAwait(true);
+
+                if(container is ImageContainer.Source)
+                {
+                    _cache.Clear();
+                }
 
                 View.SetImage(container, (Bitmap)result);
                 View.Refresh(container);

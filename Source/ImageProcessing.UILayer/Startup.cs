@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
@@ -38,6 +39,8 @@ using ImageProcessing.ServiceLayer.Providers.Interface.Morphology;
 using ImageProcessing.ServiceLayer.Providers.Interface.RgbFilter;
 using ImageProcessing.ServiceLayer.Services.Bmp.Implementation;
 using ImageProcessing.ServiceLayer.Services.Bmp.Interface;
+using ImageProcessing.ServiceLayer.Services.Cache.Implementation;
+using ImageProcessing.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.ServiceLayer.Services.Convolution.Implementation;
 using ImageProcessing.ServiceLayer.Services.ConvolutionFilterServices.Interface;
 using ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Implementation;
@@ -77,6 +80,7 @@ namespace ImageProcessing.UILayer
                 .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
                 .RegisterSingleton<ISTATaskService, STATaskService>()
                 .RegisterSingleton<IAsyncZoomLocker, ZoomAsyncLocker>()
+                .RegisterSingleton<ICacheService<Bitmap>, CacheService<Bitmap>>()
                 .RegisterSingletonView<IMainView, MainForm>()
                 .RegisterTransientView<IHistogramView, HistogramForm>()
                 .RegisterTransientView<IConvolutionFilterView, ConvolutionFilterForm>()

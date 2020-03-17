@@ -7,6 +7,7 @@ using ImageProcessing.Common.Helpers;
 using ImageProcessing.DomainModel.Factory.Convolution.Interface;
 using ImageProcessing.ServiceLayer.Providers.Interface.Convolution;
 using ImageProcessing.ServiceLayer.Services.Bmp.Interface;
+using ImageProcessing.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.ServiceLayer.Services.ConvolutionFilterServices.Interface;
 
 namespace ImageProcessing.ServiceLayer.Providers.Implementation.Convolution
@@ -16,19 +17,21 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.Convolution
         private readonly IConvolutionFilterFactory _convolutionFilterFactory;
         private readonly IConvolutionFilterService _convolutionFilterService;
         private readonly IBitmapService _bitmapService;
+        private readonly ICacheService<Bitmap> _cache;
+
         public ConvolutionServiceProvider(IConvolutionFilterFactory convolutionFilterFactory,
                                           IConvolutionFilterService convolutionFilterService,
-                                          IBitmapService bitmapService)
+                                          IBitmapService bitmapService,
+                                          ICacheService<Bitmap> cache)
         {
             _convolutionFilterFactory = Requires.IsNotNull(
-                convolutionFilterFactory, nameof(convolutionFilterFactory)
-            );
+                convolutionFilterFactory, nameof(convolutionFilterFactory));
             _convolutionFilterService = Requires.IsNotNull(
-                convolutionFilterService, nameof(convolutionFilterService)
-            );
+                convolutionFilterService, nameof(convolutionFilterService));
             _bitmapService = Requires.IsNotNull(
-                bitmapService, nameof(bitmapService)
-            );
+                bitmapService, nameof(bitmapService));
+            _cache = Requires.IsNotNull(
+                cache, nameof(cache));
         }
 
         public Bitmap ApplyFilter(Bitmap bmp, ConvolutionFilter filter)
@@ -78,11 +81,14 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.Convolution
             }
 
             Bitmap GetFilter(Bitmap src, ConvolutionFilter convolution)
-                => _convolutionFilterService
+                => _cache.GetOrCreate(convolution,
+                   () =>
+                   _convolutionFilterService
                        .Convolution(src,
                            _convolutionFilterFactory
                                .GetFilter(convolution)
-                       );
+                       )
+                   );
         }
     }
 }
