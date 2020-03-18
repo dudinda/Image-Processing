@@ -1,6 +1,5 @@
 using System;
 
-using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.IoC.Interface;
 using ImageProcessing.Core.Presenter;
 

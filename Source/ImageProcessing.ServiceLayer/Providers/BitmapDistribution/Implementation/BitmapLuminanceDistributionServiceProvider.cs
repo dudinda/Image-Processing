@@ -23,14 +23,11 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.BitmapDistributi
              ICacheService<Bitmap> cache)
         {
             _service = Requires.IsNotNull(
-                service, nameof(service)
-            );
+                service, nameof(service));
             _factory = Requires.IsNotNull(
-                factory, nameof(factory)
-            );
+                factory, nameof(factory));
             _cache = Requires.IsNotNull(
-                cache, nameof(cache)
-            );
+                cache, nameof(cache));
         }
 
         public Bitmap Transform(Bitmap bmp, Distribution distribution, (string, string) parms)

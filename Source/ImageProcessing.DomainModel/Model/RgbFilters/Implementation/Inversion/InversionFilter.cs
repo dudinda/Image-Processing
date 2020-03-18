@@ -52,7 +52,6 @@ namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Inversion
                 });
             }
 
-
             bitmap.UnlockBits(bitmapData);
 
             return bitmap;

@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
+using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Pipeline.BlockItem.Interface;
 
 [assembly: InternalsVisibleTo("ImageProcessing.Tests")]
@@ -15,11 +16,12 @@ namespace ImageProcessing.Core.Pipeline.BlockItem.Implementation
 
         public Item(Func<object, object> step, Type typeIn, Type typeOut)
         {
-
-            _step = step ?? throw new ArgumentNullException(nameof(_step));
-
-            InputType = typeIn ?? throw new ArgumentNullException(nameof(typeIn));
-            OutputType = typeOut ?? throw new ArgumentNullException(nameof(typeOut));
+            _step = Requires.IsNotNull(
+                step, nameof(step));
+            InputType = Requires.IsNotNull(
+                typeIn, nameof(typeIn));
+            OutputType = Requires.IsNotNull(
+                typeOut, nameof(typeOut) );
         }
 
         public object Execute(object arg)

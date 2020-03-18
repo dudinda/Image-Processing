@@ -20,14 +20,11 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.RgbFilter
                                         ICacheService<Bitmap> cache)
         {
             _rgbFilterFactory = Requires.IsNotNull(
-                rgbFilterFactory, nameof(rgbFilterFactory)
-            );
+                rgbFilterFactory, nameof(rgbFilterFactory));
             _rgbFilterService = Requires.IsNotNull(
-                rgbFilterService, nameof(rgbFilterService)
-            );
+                rgbFilterService, nameof(rgbFilterService) );
             _cache = Requires.IsNotNull(
-                cache, nameof(cache)
-            );
+                cache, nameof(cache));
         }
 
         public Bitmap Apply(Bitmap bmp, Common.Enums.RgbFilter filter)

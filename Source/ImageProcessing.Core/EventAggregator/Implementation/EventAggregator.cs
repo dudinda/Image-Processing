@@ -17,7 +17,6 @@ namespace ImageProcessing.Core.EventAggregator.Implementation
         private Dictionary<Type, List<WeakReference>> eventSubsribers
             = new Dictionary<Type, List<WeakReference>>();
 
-
         /// <inheritdoc cref="IEventAggregator.Publish{TEventType}(TEventType)"/>
         public void Publish<TEventType>(TEventType publisher)
         {

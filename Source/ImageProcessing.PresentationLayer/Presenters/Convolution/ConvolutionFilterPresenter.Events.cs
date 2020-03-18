@@ -13,6 +13,5 @@ namespace ImageProcessing.PresentationLayer.Presenters.Convolution
 
         public Task OnEventHandler(ShowTooltipOnErrorEventArgs e)
             => ShowTooltipOnError(e);
-       
     }
 }

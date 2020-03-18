@@ -21,14 +21,11 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.Morphology
                                          ICacheService<Bitmap> cache)
         {
             _morphologyService = Requires.IsNotNull(
-                morphologyService, nameof(morphologyService)
-            );
+                morphologyService, nameof(morphologyService));
             _morphologyFactory = Requires.IsNotNull(
-                morphologyFactory, nameof(morphologyFactory)
-            );
+                morphologyFactory, nameof(morphologyFactory));
             _cache = Requires.IsNotNull(
-                cache, nameof(cache)
-            );
+                cache, nameof(cache));
         }
 
         public Bitmap ApplyBinary(Bitmap lvalue, Bitmap rvalue, MorphologyOperator filter)

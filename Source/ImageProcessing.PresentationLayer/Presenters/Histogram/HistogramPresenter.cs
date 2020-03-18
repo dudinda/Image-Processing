@@ -27,8 +27,7 @@ namespace ImageProcessing.PresentationLayer.Presenters
             ) : base(controller, view, pipeline, eventAggregator)
         {
             _distributionService = Requires.IsNotNull(
-                distibutionService, nameof(distibutionService)
-            );
+                distibutionService, nameof(distibutionService));
         }
 
         public override void Run(HistogramViewModel vm)

@@ -12,13 +12,14 @@ namespace ImageProcessing.Core.Pipeline.AwaitablePipeline.Implementation
         private readonly BlockingQueue<Task<object>> _queue
            = new BlockingQueue<Task<object>>(64);
 
-
         private readonly CancellationTokenSource _source 
             = new CancellationTokenSource();
 
         public bool Register(IPipelineBlock output)
         {
-            var task = new Task<object>(() => output.Process(_source.Token), _source.Token);
+            var task = new Task<object>(
+                () => output.Process(_source.Token), _source.Token
+            );
             
             if (_queue.TryEnqueue(task))
             {

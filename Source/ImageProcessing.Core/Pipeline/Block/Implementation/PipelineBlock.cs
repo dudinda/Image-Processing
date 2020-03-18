@@ -9,7 +9,8 @@ namespace ImageProcessing.Core.Pipeline.Block.Implementation
 {
     public sealed class PipelineBlock : IPipelineBlock
     {
-        private readonly ConcurrentQueue<IItem> _block = new ConcurrentQueue<IItem>();
+        private readonly ConcurrentQueue<IItem> _block
+            = new ConcurrentQueue<IItem>();
 
         private object _item;
         private Type _itemType;
@@ -37,7 +38,9 @@ namespace ImageProcessing.Core.Pipeline.Block.Implementation
                 }
                 else
                 {
-                    throw new ArgumentException("Function output - input types don't match in the pipeline block.");
+                    throw new ArgumentException(
+                        "Function output - input types don't match in the pipeline block."
+                    );
                 }
             }
 
@@ -46,7 +49,13 @@ namespace ImageProcessing.Core.Pipeline.Block.Implementation
 
         public IPipelineBlock Add<TIn, TOut>(Func<TIn, TOut> step)
         {
-            _block.Enqueue(new Item(result => step.Invoke((TIn)(object)result), typeof(TIn), typeof(TOut)));
+            _block.Enqueue(
+                    new Item(
+                            result => step.Invoke(
+                                (TIn)(object)result), typeof(TIn), typeof(TOut)
+                             )
+                    );
+
             return this;
         }
     }
