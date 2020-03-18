@@ -25,6 +25,7 @@ using ImageProcessing.PresentationLayer.ViewModel.Histogram;
 using ImageProcessing.PresentationLayer.Views.Main;
 using ImageProcessing.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.ServiceLayer.Providers.Interface.RgbFilter;
+using ImageProcessing.ServiceLayer.Providers.Operation.Interface;
 using ImageProcessing.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.ServiceLayer.Services.LockerService.Zoom.Interface;
@@ -41,17 +42,18 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
         private readonly IAsyncZoomLocker _zoomLocker;
         private readonly IAsyncOperationLocker _operationLocker;
         private readonly ICacheService<Bitmap> _cache;
+        private readonly INonBlockDialogProvider _operationProvider;
 
         public MainPresenter(IAppController controller,
                              IMainView view,
-                             ISTATaskService staTaskService,
                              IEventAggregator eventAggregator,
                              IAwaitablePipeline pipeline,
                              IAsyncZoomLocker zoomLocker,
                              IAsyncOperationLocker operationLocker,
                              IBitmapLuminanceDistributionServiceProvider lumaProvider,
                              IRgbFilterServiceProvider rgbProvider,
-                             ICacheService<Bitmap> cache
+                             ICacheService<Bitmap> cache,
+                             INonBlockDialogProvider operationProvider
 
             ) : base(controller, view, pipeline, eventAggregator)
         {
@@ -59,14 +61,14 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
                 lumaProvider, nameof(lumaProvider));
             _rgbProvider = Requires.IsNotNull(
                 rgbProvider, nameof(rgbProvider));
-            _staTaskService = Requires.IsNotNull(
-                staTaskService, nameof(staTaskService));
             _zoomLocker = Requires.IsNotNull(
                 zoomLocker, nameof(zoomLocker));
             _operationLocker = Requires.IsNotNull(
                 operationLocker, nameof(operationLocker));
             _cache = Requires.IsNotNull(
                 cache, nameof(cache));
+            _operationProvider = Requires.IsNotNull(
+                operationProvider, nameof(operationProvider));
 
             EventAggregator.Subscribe(this);
         }
@@ -75,36 +77,9 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
         {
             try
             {
-                var openResult = await _staTaskService.StartSTATask(() =>
-                {
-                    using (var dialog = new OpenFileDialog())
-                    {
-                        dialog.InitialDirectory = Environment.GetFolderPath(
-                            Environment.SpecialFolder.Personal 
-                        );
-
-                        dialog.Filter = ConfigurationManager.AppSettings["Filters"];
-
-                        if (dialog.ShowDialog() == DialogResult.OK)
-                        {
-                            View.PathToFile = dialog.FileName;
-
-                            return Task.Run(() =>
-                            {
-                                using (var stream = File.OpenRead(dialog.FileName))
-                                {
-                                    return new Bitmap(
-                                        Image.FromStream(stream)
-                                    );
-                                }
-                            });
-                        }
-
-                        return Task.FromResult<Bitmap>(null);
-                    }
-                }).ConfigureAwait(true);
-
-                var result = await openResult.ConfigureAwait(true);
+                var result = await _operationProvider.NonBlockOpen(
+                    ConfigurationManager.AppSettings["Filters"]
+                ).ConfigureAwait(true);
 
                 if (result != null)
                 {
@@ -135,30 +110,12 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
             {
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
-                    var saveAsModalTask = await _staTaskService.StartSTATask(() =>
-                    {
-                        using (var dialog = new SaveFileDialog())
-                        {
-                            dialog.Filter = ConfigurationManager.AppSettings["Filters"];
+                    var copy = await GetImageCopy(ImageContainer.Source)
+                        .ConfigureAwait(true);
 
-                            if (dialog.ShowDialog() == DialogResult.OK)
-                            {
-                                return _operationLocker.LockAsync(() =>
-                                {
-                                    new Bitmap(View.SrcImageCopy)
-                                        .Save(dialog.FileName,
-                                              Path.GetExtension(
-                                                  dialog.FileName
-                                              ).GetImageFormat()
-                                         );
-                                });
-                            }
-
-                            return Task.FromResult<object>(null);
-                        }
-                    }).ConfigureAwait(true);
-
-                    await saveAsModalTask.ConfigureAwait(true);
+                    await _operationProvider.NonBlockSaveAs(copy,
+                        ConfigurationManager.AppSettings["Filters"]
+                    ).ConfigureAwait(false);
                 }
             }
             catch(Exception ex)
@@ -173,15 +130,16 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
             {
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
-                    await _operationLocker.LockAsync(() =>
-                    {
-                        new Bitmap(View.SrcImageCopy)
-                            .Save(View.PathToFile,
-                                  Path.GetExtension(
-                                      View.PathToFile
-                                  ).GetImageFormat()
-                             );
-                    }).ConfigureAwait(true);
+                    var copy = await GetImageCopy(ImageContainer.Source)
+                        .ConfigureAwait(true);
+
+                    await Task.Run(
+                        () => copy.Save(View.PathToFile,
+                                        Path.GetExtension(
+                                            View.PathToFile
+                                        ).GetImageFormat()
+                                   )
+                        ).ConfigureAwait(true);
                 }
             }
             catch(Exception ex)

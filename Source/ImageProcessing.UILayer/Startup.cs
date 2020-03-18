@@ -37,6 +37,8 @@ using ImageProcessing.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.ServiceLayer.Providers.Interface.Convolution;
 using ImageProcessing.ServiceLayer.Providers.Interface.Morphology;
 using ImageProcessing.ServiceLayer.Providers.Interface.RgbFilter;
+using ImageProcessing.ServiceLayer.Providers.Operation.Implementation;
+using ImageProcessing.ServiceLayer.Providers.Operation.Interface;
 using ImageProcessing.ServiceLayer.Services.Bmp.Implementation;
 using ImageProcessing.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.ServiceLayer.Services.Cache.Implementation;
@@ -47,6 +49,8 @@ using ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Implem
 using ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
 using ImageProcessing.ServiceLayer.Services.Distributions.RandomVariable.Implementation;
 using ImageProcessing.ServiceLayer.Services.Distributions.RandomVariable.Interface;
+using ImageProcessing.ServiceLayer.Services.FileDialog.Implementation;
+using ImageProcessing.ServiceLayer.Services.FileDialog.Interface;
 using ImageProcessing.ServiceLayer.Services.LockerService.Operation.Implementation;
 using ImageProcessing.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.ServiceLayer.Services.LockerService.Zoom.Implementation;
@@ -93,6 +97,8 @@ namespace ImageProcessing.UILayer
                 .RegisterTransient<IRandomVariableDistributionService, RandomVariableDistributionService>()
                 .RegisterTransient<IBitmapLuminanceDistributionService, BitmapLuminanceDistributionService>()
                 .RegisterTransient<IDistributionFactory, DistributionFactory>()
+                .RegisterTransient<IFileDialogService, FileDialogService>()
+                .RegisterScoped<INonBlockDialogProvider, NonBlockDialogProvider>()
                 .RegisterTransient<IRgbFilterService, RgbFilterService>()
                 .RegisterTransient<IRgbFilterFactory, RgbFilterFactory>()
                 .RegisterScoped<IAsyncOperationLocker, OperationAsyncLocker>()
