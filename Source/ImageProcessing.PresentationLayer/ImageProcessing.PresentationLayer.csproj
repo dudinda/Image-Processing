@@ -9,7 +9,6 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Optimize>false</Optimize>
     <DebugType>full</DebugType>
-    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <ItemGroup>
@@ -36,6 +35,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="ImageProcessing.ServiceLayer">
+      <HintPath>..\ImageProcessing.ServiceLayer\bin\Debug\netstandard2.0\ImageProcessing.ServiceLayer.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.Windows.Forms.dll</HintPath>
     </Reference>
