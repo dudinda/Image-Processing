@@ -20,7 +20,9 @@ namespace ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Im
 
         public BitmapLuminanceDistributionService(IRandomVariableDistributionService service)
         {
-            _service = service;
+            _service = Requires.IsNotNull(
+                service, nameof(service)
+            );
         }
 
         /// <inheritdoc />

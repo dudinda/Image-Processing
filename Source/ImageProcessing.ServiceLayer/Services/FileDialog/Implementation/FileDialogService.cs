@@ -9,7 +9,7 @@ using ImageProcessing.ServiceLayer.Services.FileDialog.Interface;
 
 namespace ImageProcessing.ServiceLayer.Services.FileDialog.Implementation
 {
-    public class FileDialogService : IFileDialogService
+    public sealed class FileDialogService : IFileDialogService
     {
         public async Task<Bitmap> OpenFileDialog(string filters)
         {

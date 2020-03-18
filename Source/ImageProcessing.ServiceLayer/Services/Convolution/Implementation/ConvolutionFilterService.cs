@@ -10,8 +10,10 @@ using ImageProcessing.ServiceLayer.Services.ConvolutionFilterServices.Interface;
 
 namespace ImageProcessing.ServiceLayer.Services.Convolution.Implementation
 {
+    /// <inheritdoc cref="IConvolutionFilterService"/>
     public sealed class ConvolutionFilterService : IConvolutionFilterService
     {
+        /// <inheritdoc/>
         public Bitmap Convolution(Bitmap source, IConvolutionFilter filter) 
         {
             Requires.IsNotNull(source, nameof(source));

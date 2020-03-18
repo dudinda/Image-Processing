@@ -22,7 +22,7 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.RgbFilter
             _rgbFilterFactory = Requires.IsNotNull(
                 rgbFilterFactory, nameof(rgbFilterFactory));
             _rgbFilterService = Requires.IsNotNull(
-                rgbFilterService, nameof(rgbFilterService) );
+                rgbFilterService, nameof(rgbFilterService));
             _cache = Requires.IsNotNull(
                 cache, nameof(cache));
         }

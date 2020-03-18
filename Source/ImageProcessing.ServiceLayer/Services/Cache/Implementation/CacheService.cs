@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 
+using ImageProcessing.Common.Helpers;
 using ImageProcessing.ServiceLayer.Services.Cache.Interface;
 
 using Microsoft.Extensions.Caching.Memory;
@@ -8,17 +9,22 @@ using Microsoft.Extensions.Primitives;
 
 namespace ImageProcessing.ServiceLayer.Services.Cache.Implementation
 {
+    /// <inheritdoc cref="ICacheService{TItem}"/>
     public sealed class CacheService<TItem> : ICacheService<TItem>
     {
         private static CancellationTokenSource _resetToken
             = new CancellationTokenSource();
 
         private IMemoryCache _cache = new MemoryCache(
-            new MemoryCacheOptions() { SizeLimit = 1 << 10 }
+            new MemoryCacheOptions() { SizeLimit = 1 << 6 }
         );
 
+        /// <inheritdoc/>
         public TItem GetOrCreate(object key, Func<TItem> createItem)
         {
+            Requires.IsNotNull(key, nameof(key));
+            Requires.IsNotNull(createItem, nameof(createItem));
+
             if (!_cache.TryGetValue(key, out var cacheEntry))// Look for cache key.
             {
                 cacheEntry = createItem();
@@ -39,7 +45,8 @@ namespace ImageProcessing.ServiceLayer.Services.Cache.Implementation
             return (TItem)cacheEntry;
         }
 
-        public void Clear()
+        /// <inheritdoc/>
+        public void Reset()
         {
             if (_resetToken != null &&
                !_resetToken.IsCancellationRequested &&

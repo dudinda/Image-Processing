@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.BitmapExtensions;
@@ -29,7 +28,6 @@ using ImageProcessing.ServiceLayer.Providers.Operation.Interface;
 using ImageProcessing.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.ServiceLayer.Services.LockerService.Zoom.Interface;
-using ImageProcessing.ServiceLayer.Services.StaTask.Interface;
 
 namespace ImageProcessing.PresentationLayer.Presenters.Main
 {
@@ -38,7 +36,6 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
 
         private readonly IBitmapLuminanceDistributionServiceProvider _lumaProvider;
         private readonly IRgbFilterServiceProvider _rgbProvider;
-        private readonly ISTATaskService _staTaskService;
         private readonly IAsyncZoomLocker _zoomLocker;
         private readonly IAsyncOperationLocker _operationLocker;
         private readonly ICacheService<Bitmap> _cache;
@@ -79,7 +76,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
             {
                 var result = await _operationProvider.NonBlockOpen(
                     ConfigurationManager.AppSettings["Filters"]
-                ).ConfigureAwait(true);
+                ).ConfigureAwait(false);
 
                 if (result != null)
                 {
@@ -570,8 +567,5 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
 
         private void CloseForm()
             => Controller.Dispose();
-
-
-
     }
 }

@@ -3,7 +3,8 @@ using ImageProcessing.ServiceLayer.Services.LockerService.Zoom.Interface;
 
 namespace ImageProcessing.ServiceLayer.Services.LockerService.Zoom.Implementation
 {
-    public sealed class ZoomAsyncLocker : AsyncLockerBase, IAsyncZoomLocker
+    /// <inheritdoc cref="IAsyncZoomLocker"/>
+    public sealed class AsyncZoomLocker : AsyncLockerBase, IAsyncZoomLocker
     {
 
     }
