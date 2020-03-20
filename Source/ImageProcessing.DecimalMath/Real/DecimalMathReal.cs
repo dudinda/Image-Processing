@@ -4,7 +4,7 @@ namespace ImageProcessing.DecimalMath.Real
 {
     /// <summary>
     /// The class contains functions of a real variable,
-    /// where each argument is represented as <see cref="decimal">
+    /// where each argument is represented as the <see cref="decimal"> value.
     /// </summary>
     public static class DecimalMathReal
     {
@@ -17,7 +17,7 @@ namespace ImageProcessing.DecimalMath.Real
         public const decimal Ln2     = 0.69314718055994530941M;
 
         /// <summary>
-        /// Evaluate sgn(x)
+        /// Evaluate sgn(x).
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static decimal Sign(decimal x)
@@ -28,7 +28,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
      
         /// <summary>
-        /// Evaluate max{x, y}
+        /// Evaluate max{x, y}.
         /// </summary>
         /// <param name="x">The left-hand value</param>
         /// <param name="y">The right-hand value</param>
@@ -38,7 +38,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Evaluate min{x, y}
+        /// Evaluate min{x, y}.
         /// </summary>
         /// <param name="x">The left-hand value</param>
         /// <param name="y">The right-hand value</param>
@@ -48,7 +48,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Evaluate hypot(x, y)
+        /// Evaluate hypot(x, y).
         /// </summary>
         /// <param name="x">The left-hand value</param>
         /// <param name="y">The right-hand value</param>
@@ -74,7 +74,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Evaluate |x|
+        /// Evaluate |x|.
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static decimal Abs(decimal x)
@@ -91,7 +91,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Evaluate ceil(x) 
+        /// Evaluate ceil(x).
         /// </summary>
         /// <param name="x">An argument of a function</param>
         public static decimal Ceil(decimal x)
@@ -105,7 +105,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Evaluate floor(x) 
+        /// Evaluate floor(x).
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static decimal Floor(decimal x)
@@ -126,7 +126,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Evaluate {x}
+        /// Evaluate {x}.
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static decimal Frac(decimal x)
@@ -135,7 +135,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Evaluate x mod b as x - b floor(x/b)
+        /// Evaluate x mod b as x - b floor(x/b).
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <param name="mod"></param>
@@ -148,7 +148,7 @@ namespace ImageProcessing.DecimalMath.Real
         #region Log and exp functions
 
         /// <summary>
-        /// Evaluate sqrt(x) with a specified precision
+        /// Evaluate sqrt(x) with a specified precision.
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
@@ -172,7 +172,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Evaluate x ** power with a specified precision
+        /// Evaluate x ** power with a specified precision.
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <param name="power">A power</param>
@@ -188,7 +188,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Evaluate exp(x) with a specified precision
+        /// Evaluate exp(x) with a specified precision.
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
@@ -207,7 +207,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
     
         /// <summary>
-        /// Evaluate log(x) based on Arithmetic-Geometric Mean (Borchardt's algorithm) 
+        /// Evaluate log(x) based on Arithmetic-Geometric Mean (Borchardt's algorithm).
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
@@ -256,7 +256,7 @@ namespace ImageProcessing.DecimalMath.Real
         #region Trigonometric functions
 
         /// <summary>
-        /// Evaluate sin(x) with a specified precision
+        /// Evaluate sin(x) with a specified precision.
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
@@ -277,7 +277,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Evaluate cos(x) with a specified precision
+        /// Evaluate cos(x) with a specified precision.
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
@@ -298,7 +298,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Evaluate cot(x) with a specified precision
+        /// Evaluate cot(x) with a specified precision.
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
@@ -308,7 +308,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Evaluate tan(x) with a specified precision
+        /// Evaluate tan(x) with a specified precision.
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
@@ -316,7 +316,7 @@ namespace ImageProcessing.DecimalMath.Real
         {
             x = Mod(x, PI);
 
-            var error = Abs(Abs(x) - PI * 0.5M);
+            var error = Abs(Abs(x) - PiOver2);
 
             //x infinitely small to -+PI over 2
             if (error < precision)
@@ -336,7 +336,7 @@ namespace ImageProcessing.DecimalMath.Real
         #region Inverse trigonometric functions
 
         /// <summary>
-        /// Evaluate atan(x)
+        /// Evaluate atan(x).
         /// </summary>
         /// <param name="x">An argument of the function</param>
 
@@ -350,7 +350,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Evaluate arccot(x) with a specified precision
+        /// Evaluate arccot(x) with a specified precision.
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static decimal Arccot(decimal x)
@@ -359,7 +359,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Evaluate arcsin(x) with a specified precision
+        /// Evaluate arcsin(x) with a specified precision.
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static decimal Arcsin(decimal x)
@@ -373,7 +373,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Evaluate arccos(x) with a specified precision
+        /// Evaluate arccos(x) with a specified precision.
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static decimal Arccos(decimal x)
@@ -382,7 +382,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Approximate atan(x) in the range [0, 0.66]
+        /// Approximate atan(x) in the range [0, 0.66].
         /// </summary>
         /// <param name="x">An argument of the function</param>
         private static decimal ArctanImpl(decimal x)
@@ -409,7 +409,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Reduce a positive argument to the [0, 0.66] 
+        /// Reduce a positive argument to the [0, 0.66].
         /// </summary>
         /// <param name="x">An argument of a function to be reduced</param>
         private static decimal ArctanReduce(decimal x)
@@ -437,7 +437,7 @@ namespace ImageProcessing.DecimalMath.Real
         #region Hyberbolic functions
 
         /// <summary>
-        /// Evaluate cosh(x) with a specified precision
+        /// Evaluate cosh(x) with a specified precision.
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
@@ -455,7 +455,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Evaluate sinh(x) with a specified precision
+        /// Evaluate sinh(x) with a specified precision.
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
@@ -474,7 +474,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Evaluate tanh(x) with a specified precision
+        /// Evaluate tanh(x) with a specified precision.
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
@@ -484,7 +484,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Evaluate coth(x) with a specified precision
+        /// Evaluate coth(x) with a specified precision.
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
@@ -508,7 +508,7 @@ namespace ImageProcessing.DecimalMath.Real
         #region Inverse hyperbolic functions
 
         /// <summary>
-        /// Evaluate arcosh(x) with a specified precision
+        /// Evaluate arcosh(x) with a specified precision.
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static decimal Arcosh(decimal x, decimal precision = Epsilon)
@@ -522,7 +522,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Evaluate arsinh(x) with a specified precision
+        /// Evaluate arsinh(x) with a specified precision.
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static decimal Arsinh(decimal x, decimal precision = Epsilon)
@@ -531,7 +531,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Evaluate artanh(x) with a specified precision
+        /// Evaluate artanh(x) with a specified precision.
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static decimal Artanh(decimal x, decimal precision = Epsilon)
@@ -545,7 +545,7 @@ namespace ImageProcessing.DecimalMath.Real
         }
 
         /// <summary>
-        /// Evaluate arcoth(x) with a specified precision
+        /// Evaluate arcoth(x) with a specified precision.
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static decimal Arcoth(decimal x, decimal precision = Epsilon)
@@ -558,6 +558,10 @@ namespace ImageProcessing.DecimalMath.Real
             return 0.5M * Log((x + 1.0M) / (x - 1.0M), precision: precision);
         }
 
+        /// <summary>
+        /// Evaluate sin(x) and cos(x) simultaneously.
+        /// </summary>
+        /// <param name="x">An argument of the function</param>
         public static (decimal sin, decimal cos) SinCos(decimal x)
         {
             return (Sin(x), Cos(x));

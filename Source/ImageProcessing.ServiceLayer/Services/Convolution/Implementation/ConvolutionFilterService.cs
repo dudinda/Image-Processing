@@ -61,9 +61,9 @@ namespace ImageProcessing.ServiceLayer.Services.Convolution.Implementation
                         G = 0;
                         B = 0;
 
-                        for (int kernelRow = -kernelOffset; kernelRow <= kernelOffset; ++kernelRow)
+                        for (var kernelRow = -kernelOffset; kernelRow <= kernelOffset; ++kernelRow)
                         {
-                            for (int kernelColumn = -kernelOffset; kernelColumn <= kernelOffset; ++kernelColumn)
+                            for (var kernelColumn = -kernelOffset; kernelColumn <= kernelOffset; ++kernelColumn)
                             {
                                 //get the address of a current element
                                 elementPtr = sourcePtr + kernelColumn * ptrStep + kernelRow * sourceBitmapData.Stride;

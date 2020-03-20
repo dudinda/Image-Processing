@@ -25,7 +25,8 @@ namespace ImageProcessing.ServiceLayer.Services.Cache.Implementation
             Requires.IsNotNull(key, nameof(key));
             Requires.IsNotNull(createItem, nameof(createItem));
 
-            if (!_cache.TryGetValue(key, out var cacheEntry))// Look for cache key.
+            // Look for a cache key.
+            if (!_cache.TryGetValue(key, out var cacheEntry))
             {
                 cacheEntry = createItem();
 

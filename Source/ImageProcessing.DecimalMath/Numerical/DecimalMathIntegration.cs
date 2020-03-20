@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Concurrent;
+using System.Linq;
+using System.Threading.Tasks;
 
 using ImageProcessing.DecimalMath.Code.Enums;
 using ImageProcessing.DecimalMath.Code.Extension.RandomExtensions;
@@ -8,7 +11,7 @@ namespace ImageProcessing.DecimalMath.Numerical
     public static class DecimalMathIntegration
     {
         /// <summary>
-        /// Integrate a real valued function f(x)
+        /// Integrate a real valued function f(x).
         /// </summary>
         /// <param name="f">A function of a real variable</param>
         /// <param name="b">The end of an interval</param>
@@ -38,21 +41,25 @@ namespace ImageProcessing.DecimalMath.Numerical
 
         private static decimal Trapezoidal(Func<decimal, decimal> f, (decimal x1, decimal x2) interval, int N = 40000)
         {
+            var options = new ParallelOptions()
+            {
+                MaxDegreeOfParallelism = Environment.ProcessorCount
+            };
+
+            var bag = new ConcurrentBag<decimal>();
+
             var b = interval.x2;
             var a = interval.x1;
 
-            checked
-            {
-                var h = (b - a) / N;
-                var res = (f(a) + f(b)) / 2.0M;
+            var h = (b - a) / N;
+            var res = (f(a) + f(b)) / 2.0M;
 
-                for (var k = 1; k < N; ++k)
-                {
-                    res += f(a + k * h);
-                }
+            //get N partial sums
+            Parallel.For(1, N - 1, options, () => 0.0M,
+                (y, state, partial) => partial += f(a + y * h)
+            ,(x) => bag.Add(x));
 
-                return h * res;
-            }
+            return h * (res + bag.Sum());
         }
 
         private static decimal MonteCarlo(Func<decimal, decimal> f, (decimal x1, decimal x2) interval, int N = 40000)
@@ -66,16 +73,12 @@ namespace ImageProcessing.DecimalMath.Numerical
 
             var coef = (b - a) / N;
 
-            checked
+            for (var k = 0; k < N; ++k)
             {
-                for (var k = 0; k < N; ++k)
-                {
-                    result += f(generator.NextDecimal(a, b));
-                }
-
-                return coef * result;
+                result += f(generator.NextDecimal(a, b));
             }
-        }
 
+            return coef * result;
+        }
     }
 }

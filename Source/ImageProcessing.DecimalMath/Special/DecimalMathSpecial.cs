@@ -3,11 +3,12 @@ using System;
 using ImageProcessing.Common.Extensions.DecimalMathRealExtensions;
 
 using static ImageProcessing.DecimalMath.Real.DecimalMathReal;
+using static ImageProcessing.DecimalMath.Complex.DecimalMathComplex;
 
 namespace ImageProcessing.DecimalMath.Special
 {
     public static class DecimalMathSpecial
-    {
+    {   
         /// <summary>
         /// Evaluate Li(x).
         /// </summary>
@@ -131,5 +132,35 @@ namespace ImageProcessing.DecimalMath.Special
             return p * x;
         }
 
+        /*
+        private static int g = 7;
+        private static decimal[] p =
+            {0.99999999999980993M, 676.5203681218851M,    -1259.1392167224028M,
+             771.32342877765313M, -176.61502916214059M,    12.507343278686905M,
+            -0.13857109526572012M, 9.9843695780195716e-6M, 1.5056327351493116e-7M};
+
+        public (decimal x, decimal y) Gamma((decimal x, decimal y) z)
+        {
+            if (z.x < 0.5M)
+            {
+                return Div((PI, 0),  Mul(Sin(Mul(z, PI)), Gamma(Sub((1, 0), z))));
+            }
+            else
+            {
+                z = (z.x - 1, z.y);
+
+                var (re, im) = (p[0], 0M);
+
+                for (var i = 1; i < g + 2; ++i)
+                {
+                    (re, im) = Add((re, im), Div((p[i], 0), (Add(z, (decimal)i))));
+                }
+
+                var (tRe, tIm) = Add(z, g + 0.5M);
+
+                return PrincipalSqrt(2 * Math.PI) * (Complex.Pow(t, z + 0.5)) * Complex.Exp(-t) * x;
+            }
+        }
+        */
     }
 }

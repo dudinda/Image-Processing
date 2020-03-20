@@ -544,7 +544,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
 
                 if(container is ImageContainer.Source)
                 {
-                    _cache.Clear();
+                    _cache.Reset();
                 }
 
                 View.SetImage(container, (Bitmap)result);

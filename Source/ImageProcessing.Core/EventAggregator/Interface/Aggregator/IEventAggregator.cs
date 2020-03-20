@@ -2,7 +2,7 @@ namespace ImageProcessing.Core.EventAggregator.Interface
 {
     /// <summary>
     /// Responds to any event from a source object
-    /// by propagating that event to target objects
+    /// by propagating that event to target objects.
     /// </summary>
     public interface IEventAggregator
     {
@@ -14,7 +14,7 @@ namespace ImageProcessing.Core.EventAggregator.Interface
 
         /// <summary>
         /// Subscribe a specified object with handlers
-        /// to all messages with <typeparamref name="TEventType"/>  args
+        /// to all messages with <typeparamref name="TEventType"/>  args.
         /// </summary>
         void Subscribe(object subscriber);
     }

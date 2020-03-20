@@ -8,6 +8,7 @@ namespace ImageProcessing.PresentationLayer.ViewModel.Convolution
         {
             Source = source;
         }
+
         public Bitmap Source { get; }
     }
 }

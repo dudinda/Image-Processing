@@ -50,18 +50,24 @@ namespace ImageProcessing.DomainModel.Model.Morphology.Implementation.Subtractio
                     MaxDegreeOfParallelism = Environment.ProcessorCount
                 };
 
+                int b, g, r;
+
                 Parallel.For(0, size.Height, options, y =>
                 {
-                    //get an address of a new line
-                    var rvaluePtr = rvalueStartPtr + y * rvalueBitmapData.Stride;
-                    var lvaluePtr = lvalueStartPtr + y * lvalueBitmapData.Stride;
-                    var resultPtr = resultStartPtr + y * resultBitmapData.Stride;
+                //get an address of a new line
+                var rvaluePtr = rvalueStartPtr + y * rvalueBitmapData.Stride;
+                var lvaluePtr = lvalueStartPtr + y * lvalueBitmapData.Stride;
+                var resultPtr = resultStartPtr + y * resultBitmapData.Stride;
 
-                    for (var x = 0; x < size.Width; ++x, rvaluePtr += ptrStep, lvaluePtr += ptrStep, resultPtr += ptrStep)
-                    {
-                        resultPtr[0] = GetByteValue(lvaluePtr[0] - rvaluePtr[0]);
-                        resultPtr[1] = GetByteValue(lvaluePtr[1] - rvaluePtr[1]);
-                        resultPtr[2] = GetByteValue(lvaluePtr[2] - rvaluePtr[2]);
+                for (var x = 0; x < size.Width; ++x, rvaluePtr += ptrStep, lvaluePtr += ptrStep, resultPtr += ptrStep)
+                {
+                    b = lvaluePtr[0] - rvaluePtr[0];
+                    g = lvaluePtr[1] - rvaluePtr[1];
+                    r = lvaluePtr[2] - rvaluePtr[2];
+
+                        resultPtr[0] = GetByteValue(ref b);
+                        resultPtr[1] = GetByteValue(ref g);
+                        resultPtr[2] = GetByteValue(ref r);
                     }
                 });
             }
@@ -72,7 +78,7 @@ namespace ImageProcessing.DomainModel.Model.Morphology.Implementation.Subtractio
 
             return result;
 
-            byte GetByteValue(int value)
+            byte GetByteValue(ref int value)
             {
                 if (value > 255)
                 {

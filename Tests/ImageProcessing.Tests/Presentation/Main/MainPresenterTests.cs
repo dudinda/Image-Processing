@@ -1,4 +1,6 @@
 
+using System.Drawing;
+
 using ImageProcessing.Core.Controller.Interface;
 using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
@@ -6,6 +8,8 @@ using ImageProcessing.PresentationLayer.Presenters.Main;
 using ImageProcessing.PresentationLayer.Views.Main;
 using ImageProcessing.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.ServiceLayer.Providers.Interface.RgbFilter;
+using ImageProcessing.ServiceLayer.Providers.Operation.Interface;
+using ImageProcessing.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.ServiceLayer.Services.LockerService.Zoom.Interface;
 using ImageProcessing.ServiceLayer.Services.StaTask.Interface;
@@ -30,29 +34,33 @@ namespace ImageProcessing.Tests.Presenters
         private IAwaitablePipeline _pipeline;
         private IBitmapLuminanceDistributionServiceProvider _lumaProvider;
         private IRgbFilterServiceProvider _rgbProvider;
+        private INonBlockDialogProvider _nonBlockprovider;
+        private ICacheService<Bitmap> _cache;
 
         [SetUp]
         public void SetUp()
         {
-            _controller      = Substitute.For<IAppController>();
-            _view            = Substitute.For<IMainView>();
-            _eventAggregator = Substitute.For<IEventAggregator>();
-            _staTaskService  = Substitute.For<ISTATaskService>();
-            _pipeline        = Substitute.For<IAwaitablePipeline>();
-            _operationLocker = Substitute.For<IAsyncOperationLocker>();
-            _zoomLocker      = Substitute.For<IAsyncZoomLocker>();
-            _lumaProvider    = Substitute.For<IBitmapLuminanceDistributionServiceProvider>();
-            _rgbProvider     = Substitute.For<IRgbFilterServiceProvider>();
+            _controller       = Substitute.For<IAppController>();
+            _view             = Substitute.For<IMainView>();
+            _eventAggregator  = Substitute.For<IEventAggregator>();
+            _pipeline         = Substitute.For<IAwaitablePipeline>();
+            _operationLocker  = Substitute.For<IAsyncOperationLocker>();
+            _zoomLocker       = Substitute.For<IAsyncZoomLocker>();
+            _lumaProvider     = Substitute.For<IBitmapLuminanceDistributionServiceProvider>();
+            _rgbProvider      = Substitute.For<IRgbFilterServiceProvider>();
+            _nonBlockprovider = Substitute.For<INonBlockDialogProvider>();
+            _cache            = Substitute.For<ICacheService<Bitmap>>();
 
-            _presenter = new MainPresenter(_controller,
+             _presenter = new MainPresenter(_controller,
                                            _view,
-                                           _staTaskService,
                                            _eventAggregator,
                                            _pipeline,
                                            _zoomLocker,
                                            _operationLocker,
                                            _lumaProvider,
-                                           _rgbProvider);
+                                           _rgbProvider,
+                                           _cache,
+                                           _nonBlockprovider);
           _presenter.Run();
         }
 
