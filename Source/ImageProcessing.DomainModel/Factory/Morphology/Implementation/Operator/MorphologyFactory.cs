@@ -38,7 +38,7 @@ namespace ImageProcessing.DomainModel.Factory.Morphology.Implementation
         /// where the <see cref="MorphologyOperator"/> represents an
         /// enumeration for types implementing the <see cref="IMorphologyUnary"/>.
         /// </summary>
-        public IMorphologyUnary GetFilter(MorphologyOperator filter)
+        public IMorphologyUnary Get(MorphologyOperator filter)
         {
             switch (filter)
             {        

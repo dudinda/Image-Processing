@@ -3,18 +3,17 @@ using System.Runtime.CompilerServices;
 
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Common.Utility.BitMatrix.Implementation;
-using ImageProcessing.DomainModel.Model.Morphology.Implementation.Dilation;
-using ImageProcessing.DomainModel.Model.Morphology.Implementation.Erosion;
+using ImageProcessing.DomainModel.Model.Morphology.Implementation.Closing;
 using ImageProcessing.DomainModel.Model.Morphology.Implementation.Subtraction;
 using ImageProcessing.DomainModel.Model.Morphology.Interface.UnaryOperator;
 
 [assembly: InternalsVisibleTo("ImageProcessing.Tests")]
-namespace ImageProcessing.DomainModel.Model.Morphology.Implementation.MorphologicalGradient
+namespace ImageProcessing.DomainModel.Model.Morphology.Implementation.BlackHat
 {
     /// <summary>
     /// Implements the <see cref="IMorphologyUnary"/>.
     /// </summary>
-    internal sealed class MorphologicalGradientOperator : IMorphologyUnary
+    internal sealed class BlackHatOperator : IMorphologyUnary
     {
         /// <inheritdoc />
         public Bitmap Filter(Bitmap bitmap, BitMatrix kernel)
@@ -23,10 +22,12 @@ namespace ImageProcessing.DomainModel.Model.Morphology.Implementation.Morphologi
             Requires.IsNotNull(kernel, nameof(kernel));
 
             var subtraction = new SubtractionOperator();
-            var dilation    = new DilationOperator();
-            var erosion     = new ErosionOperator();
+            var closing     = new ClosingOperator();
 
-            return subtraction.Filter(dilation.Filter(bitmap, kernel), erosion.Filter(bitmap, kernel));
+            using (var rvalue = new Bitmap(bitmap))
+            {    
+                return subtraction.Filter(closing.Filter(bitmap, kernel), rvalue);
+            }
         }
     }
 }

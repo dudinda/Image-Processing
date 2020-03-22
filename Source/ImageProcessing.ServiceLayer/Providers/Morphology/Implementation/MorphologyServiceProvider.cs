@@ -4,6 +4,7 @@ using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Common.Utility.BitMatrix.Implementation;
 using ImageProcessing.DomainModel.Factory.Morphology.Interface;
+using ImageProcessing.DomainModel.Factory.Morphology.Interface.StructuringElement;
 using ImageProcessing.ServiceLayer.Providers.Interface.Morphology;
 using ImageProcessing.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.ServiceLayer.Services.Morphology.Interface;
@@ -14,6 +15,7 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.Morphology
     {
         private readonly IMorphologyService _morphologyService;
         private readonly IMorphologyFactory _morphologyFactory;
+        private readonly IStructuringElementFactory _kernelFactory;
         private readonly ICacheService<Bitmap> _cache;
 
         public MorphologyServiceProvider(IMorphologyService morphologyService,
@@ -33,29 +35,38 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.Morphology
             Requires.IsNotNull(lvalue, nameof(lvalue));
             Requires.IsNotNull(rvalue, nameof(rvalue));
 
-            return _cache.GetOrCreate(filter,
-                () =>
-                _morphologyService
-                    .ApplyOperator(lvalue, rvalue,
-                        _morphologyFactory.BinaryFilter(filter)
-                )
+            return _morphologyService
+                       .ApplyOperator(lvalue, rvalue,
+                           _morphologyFactory.BinaryFilter(filter)
+                
             );
         }
 
-        public Bitmap ApplyUnary(Bitmap bmp, BitMatrix kernel, MorphologyOperator filter)
+        public Bitmap ApplyCustomUnary(Bitmap bmp, BitMatrix kernel, MorphologyOperator filter)
+        {
+            return _morphologyService
+                       .ApplyOperator(bmp, kernel,
+                           _morphologyFactory.Get(filter)
+            );
+        }
+
+        public Bitmap ApplyUnary(Bitmap bmp, StructuringElem kernel, (int width, int height) dim, MorphologyOperator filter)
         {
             Requires.IsNotNull(bmp, nameof(bmp));
-            Requires.IsNotNull(kernel, nameof(kernel));
 
             return _cache.GetOrCreate(filter,
                 () =>
                 _morphologyService
-                    .ApplyOperator(bmp, kernel,
-                        _morphologyFactory.GetFilter(filter)
+                    .ApplyOperator(bmp,
+                        _kernelFactory.Get(kernel).GetKernel(dim),
+                        _morphologyFactory.Get(filter)
                 )
             );
         }
-      
 
+        public Bitmap ApplyUnary(Bitmap bmp, StructuringElem kernel, MorphologyOperator filter)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

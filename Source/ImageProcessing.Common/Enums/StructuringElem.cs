@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace ImageProcessing.Common.Enums
 {
-    public enum MorphologyShape
+    public enum StructuringElem
     {
         /// <summary>
         /// An unknown kernel type.
