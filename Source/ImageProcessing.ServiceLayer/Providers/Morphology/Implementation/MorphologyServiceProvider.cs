@@ -20,12 +20,15 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.Morphology
 
         public MorphologyServiceProvider(IMorphologyService morphologyService,
                                          IMorphologyFactory morphologyFactory,
-                                         ICacheService<Bitmap> cache)
+                                         ICacheService<Bitmap> cache,
+                                         IStructuringElementFactory kernelFactory)
         {
             _morphologyService = Requires.IsNotNull(
                 morphologyService, nameof(morphologyService));
             _morphologyFactory = Requires.IsNotNull(
                 morphologyFactory, nameof(morphologyFactory));
+            _kernelFactory = Requires.IsNotNull(
+                kernelFactory, nameof(kernelFactory));
             _cache = Requires.IsNotNull(
                 cache, nameof(cache));
         }
@@ -62,11 +65,6 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.Morphology
                         _morphologyFactory.Get(filter)
                 )
             );
-        }
-
-        public Bitmap ApplyUnary(Bitmap bmp, StructuringElem kernel, MorphologyOperator filter)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

@@ -19,8 +19,10 @@ using ImageProcessing.DomainModel.Factory.Distributions.Implementation;
 using ImageProcessing.DomainModel.Factory.Distributions.Interface;
 using ImageProcessing.DomainModel.Factory.Morphology.Implementation;
 using ImageProcessing.DomainModel.Factory.Morphology.Interface;
+using ImageProcessing.DomainModel.Factory.Morphology.Interface.StructuringElement;
 using ImageProcessing.DomainModel.Factory.RgbFilters.Implementation;
 using ImageProcessing.DomainModel.Factory.RgbFilters.Interface;
+using ImageProcessing.DomainModel.Factory.StructuringElement.Implementation;
 using ImageProcessing.Form.Histogram;
 using ImageProcessing.Form.Main;
 using ImageProcessing.Form.QualityMeasure;
@@ -93,6 +95,7 @@ namespace ImageProcessing.UILayer
                 .RegisterTransient<IConvolutionFilterFactory, ConvolutionFilterFactory>()
                 .RegisterTransient<IMorphologyService, MorphologyService>()
                 .RegisterTransient<IMorphologyFactory, MorphologyFactory>()
+                .RegisterTransient<IStructuringElementFactory, StructuringElementFactory>()
                 .RegisterTransient<IBitmapService, BitmapService>()
                 .RegisterTransient<IRandomVariableDistributionService, RandomVariableDistributionService>()
                 .RegisterTransient<IBitmapLuminanceDistributionService, BitmapLuminanceDistributionService>()
