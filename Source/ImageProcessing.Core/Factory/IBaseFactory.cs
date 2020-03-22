@@ -14,6 +14,6 @@ namespace ImageProcessing.Core.Factory
         /// where <typeparamref name="TEnum"/> represents
         /// enumeration for the <typeparamref name="TFilter"/>.
         /// </summary>
-        TFilter GetFilter(TEnum filter);
+        TFilter Get(TEnum filter);
     }
 }

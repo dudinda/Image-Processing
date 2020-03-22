@@ -91,7 +91,7 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.Convolution
                    _convolutionFilterService
                        .Convolution(src,
                            _convolutionFilterFactory
-                               .GetFilter(convolution)
+                               .Get(convolution)
                        )
                    );
         }

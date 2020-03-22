@@ -34,12 +34,9 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.BitmapDistributi
         {
             Requires.IsNotNull(bmp, nameof(bmp));
 
-            return _cache.GetOrCreate(distribution,
-                () =>
-                _service.Transform(bmp,
-                    _factory.GetFilter(distribution)
-                        .SetParams(parms)
-                )
+            return  _service.Transform(bmp,
+                        _factory.Get(distribution)
+                            .SetParams(parms)
             );
         }
 

@@ -22,7 +22,7 @@ namespace ImageProcessing.DomainModel.Factory.Convolution.Implementation
         /// where <see cref="ConvolutionFilter"/> represents
         /// enumeration for types implementing <see cref="IConvolutionFilter"/>.
         /// </summary>
-        public IConvolutionFilter GetFilter(ConvolutionFilter filter)
+        public IConvolutionFilter Get(ConvolutionFilter filter)
         {
             switch (filter)
             {

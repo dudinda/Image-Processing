@@ -16,7 +16,7 @@ namespace ImageProcessing.DomainModel.Factory.Distributions.Implementation
         /// where <see cref="Distribution"/> represents an
         /// enumeration for the types implementing the <see cref="IDistribution"/>.
         /// </summary>
-        public IDistribution GetFilter(Distribution distribution) 
+        public IDistribution Get(Distribution distribution) 
         {
             switch (distribution)
             {

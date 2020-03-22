@@ -36,7 +36,7 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.RgbFilter
                 _rgbFilterService
                     .Filter(bmp,
                         _rgbFilterFactory
-                            .GetFilter(filter)
+                            .Get(filter)
                 )
             ); 
         }

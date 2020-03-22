@@ -27,7 +27,7 @@ namespace ImageProcessing.Tests.Services
         [TestCase(RgbFilter.Binary)]
         public void ServiceThrowsArgumentNullExceptionIfBitmapSourceIsNull(RgbFilter filterType)
         {
-            var filter = _rgbFilterFactory.GetFilter(filterType);
+            var filter = _rgbFilterFactory.Get(filterType);
             Assert.Throws<ArgumentNullException>(() => _filterService.Filter(null, filter));
         }
 
