@@ -18,18 +18,16 @@ namespace ImageProcessing.DomainModel.Factory.StructuringElement.Implementation
         /// enumeration for types implementing the <see cref="IStructuringElementFactory"/>.
         /// </summary>
         public IStructuringElement Get(StructuringElem filter)
+        => filter switch
         {
-            switch (filter)
-            {
-                case StructuringElem.Elliptical:
-                    return new EllipticalElement();
-                case StructuringElem.Rectangular:
-                    return new RectangularElement();
-                case StructuringElem.CrossShaped:
-                    return new CrossShapedElement();
+            StructuringElem.CrossShaped
+                => new CrossShapedElement(),
+            StructuringElem.Elliptical
+                => new EllipticalElement(),
+            StructuringElem.Rectangular
+                => new RectangularElement(),
 
-                default: throw new NotImplementedException(nameof(filter));
-            }
-        }
+            _   => throw new NotImplementedException(nameof(filter))
+        };            
     }
 }

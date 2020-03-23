@@ -101,7 +101,7 @@ namespace ImageProcessing.UILayer
                 .RegisterTransient<IBitmapLuminanceDistributionService, BitmapLuminanceDistributionService>()
                 .RegisterTransient<IDistributionFactory, DistributionFactory>()
                 .RegisterTransient<IFileDialogService, FileDialogService>()
-                .RegisterScoped<INonBlockDialogProvider, NonBlockDialogProvider>()
+                .RegisterScoped<INonBlockDialogService, NonBlockDialogService>()
                 .RegisterTransient<IRgbFilterService, RgbFilterService>()
                 .RegisterTransient<IRgbFilterFactory, RgbFilterFactory>()
                 .RegisterScoped<IAsyncOperationLocker, AsyncOperationLocker>()
@@ -109,19 +109,17 @@ namespace ImageProcessing.UILayer
                 .RegisterTransient<IMorphologyServiceProvider, MorphologyServiceProvider>()
                 .RegisterTransient<IBitmapLuminanceDistributionServiceProvider, BitmapLuminanceDistributionServiceProvider>()
                 .RegisterTransient<IRgbFilterServiceProvider, RgbFilterServiceProvider>();
-            
-            IContainer GetContainerAdapter()
-            {
-                switch (container)
-                {
-                    case Container.LightInject:
-                        return new LightInjectAdapter();
-                    case Container.Ninject:
-                        return new NinjectAdapter();
 
-                    default: throw new NotImplementedException(nameof(container));
-                }
-            };
+            IContainer GetContainerAdapter()
+            => container switch
+            {
+                Container.LightInject
+                    => new LightInjectAdapter(),
+                Container.Ninject
+                    => new NinjectAdapter(),
+
+                _   => throw new NotImplementedException(nameof(container))
+            };          
         }
 
         internal static void Run()

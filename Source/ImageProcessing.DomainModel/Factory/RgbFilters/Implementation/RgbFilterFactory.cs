@@ -25,20 +25,18 @@ namespace ImageProcessing.DomainModel.Factory.RgbFilters.Implementation
         /// implementing <see cref="IRgbFilter"/>.
         /// </summary>
         public IRgbFilter Get(RgbFilter filter)
+        => filter switch
         {
-            switch (filter)
-            {
-                case RgbFilter.Binary:
-                    return new BinaryFilter();
-                case RgbFilter.Grayscale:
-                    return new GrayscaleFilter();
-                case RgbFilter.Inversion:
-                    return new InversionFilter();
+            RgbFilter.Binary
+                => new BinaryFilter(),
+            RgbFilter.Grayscale
+                => new GrayscaleFilter(),
+            RgbFilter.Inversion
+                => new InversionFilter(),
 
-                default: throw new NotImplementedException(nameof(filter));
-            }
-        }
-
+            _   => throw new NotImplementedException(nameof(filter))
+        };
+          
         /// <inheritdoc />
 		[MethodImpl(MethodImplOptions.NoInlining)]
 		public IRgbFilter GetColorFilter(RgbColors color)

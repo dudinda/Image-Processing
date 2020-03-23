@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Threading.Tasks;
 
 using ImageProcessing.Common.Enums;
+using ImageProcessing.Common.Extensions.EnumExtensions;
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.DomainModel.Factory.Convolution.Interface;
 using ImageProcessing.ServiceLayer.Providers.Interface.Convolution;
@@ -40,24 +41,7 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.Convolution
 
             switch (filter)
             {
-                case ConvolutionFilter.BoxBlur3x3:
-                case ConvolutionFilter.BoxBlur5x5:
-                case ConvolutionFilter.EmbossOperator3x3:
-                case ConvolutionFilter.GaussianBlur3x3:
-                case ConvolutionFilter.GaussianBlur5x5:
-                case ConvolutionFilter.GaussianOperator3x3:
-                case ConvolutionFilter.GaussianOperator5x5:
-                case ConvolutionFilter.LaplacianOperator3x3:
-                case ConvolutionFilter.LaplacianOperator5x5:
-                case ConvolutionFilter.MotionBlur9x9:
-                case ConvolutionFilter.SharpenOperator3x3:
-                case ConvolutionFilter.SobelOperatorHorizontal3x3:
-                case ConvolutionFilter.SobelOperatorVertical3x3:
-
-                    return GetFilter(bmp, filter);
-                   
                 case ConvolutionFilter.SobelOperator3x3:
-
                     var cpy = new Bitmap(bmp);
 
                     var yDerivative = Task.Run(
@@ -76,13 +60,15 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.Convolution
                               );
 
                 case ConvolutionFilter.LoGOperator3x3:
-
                     return GetFilter(
                         GetFilter(bmp, ConvolutionFilter.GaussianBlur3x3),
                         ConvolutionFilter.LaplacianOperator3x3
                     );
 
-                default: throw new NotImplementedException(nameof(filter));
+                default: return filter.PartitionOver(
+                    (ConvolutionFilter.BoxBlur3x3, ConvolutionFilter.SobelOperatorVertical3x3),
+                    () => GetFilter(bmp, filter)
+                );
             }
 
             Bitmap GetFilter(Bitmap src, ConvolutionFilter convolution)

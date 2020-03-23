@@ -21,17 +21,15 @@ namespace ImageProcessing.DomainModel.Factory.Morphology.Implementation
     {
         /// <inheritdoc/>
         public IMorphologyBinary BinaryFilter(MorphologyOperator filter)
+        => filter switch
         {
-            switch (filter)
-            {
-                case MorphologyOperator.Addition:
-                    return new AdditionOperator();
-                case MorphologyOperator.Subtraction:
-                    return new SubtractionOperator();
-               
-                default: throw new NotImplementedException();
-            }
-        }
+            MorphologyOperator.Addition
+                => new AdditionOperator(),
+            MorphologyOperator.Subtraction
+                => new SubtractionOperator(),
+
+            _   => throw new NotImplementedException(nameof(filter))
+        };
 
         /// <summary>
         /// A factory method
@@ -39,26 +37,24 @@ namespace ImageProcessing.DomainModel.Factory.Morphology.Implementation
         /// enumeration for types implementing the <see cref="IMorphologyUnary"/>.
         /// </summary>
         public IMorphologyUnary Get(MorphologyOperator filter)
+        => filter switch
         {
-            switch (filter)
-            {        
-                case MorphologyOperator.Dilation:
-                    return new DilationOperator();
-                case MorphologyOperator.Erosion:
-                    return new ErosionOperator();
-                case MorphologyOperator.Opening:
-                    return new OpeningOperator();
-                case MorphologyOperator.Closing:
-                    return new ClosingOperator();
-                case MorphologyOperator.TopHat:
-                    return new TopHatOperator();
-                case MorphologyOperator.BlackHat:
-                    return new BlackHatOperator();
-                case MorphologyOperator.Gradient:
-                    return new MorphologicalGradientOperator();
+            MorphologyOperator.Dilation
+                => new DilationOperator(),
+            MorphologyOperator.Erosion
+                => new ErosionOperator(),
+            MorphologyOperator.Opening
+                => new OpeningOperator(),
+            MorphologyOperator.Closing
+                => new ClosingOperator(),
+            MorphologyOperator.TopHat
+                => new TopHatOperator(),
+            MorphologyOperator.BlackHat
+                => new BlackHatOperator(),
+            MorphologyOperator.Gradient
+                => new MorphologicalGradientOperator(),
 
-                default: throw new NotImplementedException();
-            }
-        }
+            _   => throw new NotImplementedException(nameof(filter))
+        };       
     }
 }

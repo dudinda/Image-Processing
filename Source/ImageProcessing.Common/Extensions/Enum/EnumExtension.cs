@@ -19,6 +19,14 @@ namespace ImageProcessing.Common.Extensions.EnumExtensions
             where TEnum : Enum => (TEnum)Enum.Parse(typeof(TEnum), value);
 
         /// <summary>
+        /// Get a <see cref="Enum"/> value by name.
+        /// </summary>
+        /// <typeparam name="TEnum">An enumerated type.</typeparam>
+        /// <param name="value">The source value.</param>
+        public static TEnum GetEnumValueByInt<TEnum>(this int value)
+            where TEnum : Enum => (TEnum)Enum.ToObject(typeof(TEnum), value);
+
+        /// <summary>
         /// Get a description of the <see cref="Enum"/> value.
         /// </summary>
         /// <typeparam name="TEnum">An enumerated type.</typeparam>
@@ -30,6 +38,26 @@ namespace ImageProcessing.Common.Extensions.EnumExtensions
             var memInfo = type.GetMember(value.ToString());
             var attributes = memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
             return (attributes.Length > 0) ? ((DescriptionAttribute)attributes[0]).Description : null;
+        }
+
+        public static TCallOut PartitionOver<TEnum, TCallOut>
+            (this TEnum src, (TEnum from, TEnum to) partition, Func<TCallOut> callback)
+            where TEnum : Enum
+        {
+            var (to, from) = (Convert.ToInt32(partition.from), Convert.ToInt32(partition.to));
+
+            var isInPartition
+                = Enum.GetValues(typeof(TEnum))
+                       .Cast<int>()
+                       .Where(val => val >= from && val <= to)
+                       .Any(val => GetEnumValueByInt<TEnum>(val).Equals(src));
+
+            if(isInPartition)
+            {
+                return callback();
+            }
+
+            throw new NotImplementedException(nameof(src));
         }
 
         /// <summary>

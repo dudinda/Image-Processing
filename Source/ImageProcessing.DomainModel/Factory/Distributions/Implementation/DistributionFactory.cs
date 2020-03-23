@@ -16,29 +16,27 @@ namespace ImageProcessing.DomainModel.Factory.Distributions.Implementation
         /// where <see cref="Distribution"/> represents an
         /// enumeration for the types implementing the <see cref="IDistribution"/>.
         /// </summary>
-        public IDistribution Get(Distribution distribution) 
+        public IDistribution Get(Distribution distribution)
+        => distribution switch
         {
-            switch (distribution)
-            {
-                case Distribution.Exponential:
-                    return new ExponentialDistribution();
-                case Distribution.Rayleigh:
-                    return new RayleighDistribution();
-                case Distribution.Laplace:
-                    return new LaplaceDistribution();
-                case Distribution.Cauchy:
-                    return new CauchyDistribution();
-                case Distribution.Normal:
-                    return new NormalDistribution();
-                case Distribution.Parabola:
-                    return new ParabolaDistribution();
-                case Distribution.Uniform:
-                    return new UniformDistribution();
-                case Distribution.Weibull:
-                    return new WeibullDistribution();
+            Distribution.Exponential
+                => new ExponentialDistribution(),
+            Distribution.Laplace
+                => new LaplaceDistribution(),
+            Distribution.Rayleigh
+                => new RayleighDistribution(),
+            Distribution.Cauchy
+                => new CauchyDistribution(),
+            Distribution.Normal
+                => new NormalDistribution(),
+            Distribution.Parabola
+                => new ParabolaDistribution(),
+            Distribution.Uniform
+                => new UniformDistribution(),
+            Distribution.Weibull
+                => new WeibullDistribution(),
 
-                default: throw new NotImplementedException(nameof(distribution));
-            }
-        }
+            _   => throw new NotImplementedException(nameof(distribution))
+        };              
     }
 }

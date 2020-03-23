@@ -23,38 +23,37 @@ namespace ImageProcessing.DomainModel.Factory.Convolution.Implementation
         /// enumeration for types implementing <see cref="IConvolutionFilter"/>.
         /// </summary>
         public IConvolutionFilter Get(ConvolutionFilter filter)
+        => filter switch
         {
-            switch (filter)
-            {
-                case ConvolutionFilter.BoxBlur3x3:
-                    return new BoxBlur3x3();
-                case ConvolutionFilter.BoxBlur5x5:
-                    return new BoxBlur5x5();
-                case ConvolutionFilter.EmbossOperator3x3:
-                    return new Emboss3x3();
-                case ConvolutionFilter.GaussianBlur3x3:
-                    return new GaussianBlur3x3();
-                case ConvolutionFilter.GaussianBlur5x5:
-                    return new GaussianBlur5x5();
-                case ConvolutionFilter.GaussianOperator3x3:
-                    return new GaussianOperator3x3();
-                case ConvolutionFilter.GaussianOperator5x5:
-                    return new GaussianOperator5x5();
-                case ConvolutionFilter.LaplacianOperator3x3:
-                    return new LaplacianOperator3x3();
-                case ConvolutionFilter.LaplacianOperator5x5:
-                    return new LaplacianOperator5x5();
-                case ConvolutionFilter.MotionBlur9x9:
-                    return new MotionBlur9x9();
-                case ConvolutionFilter.SharpenOperator3x3:
-                    return new Sharpen3x3();
-                case ConvolutionFilter.SobelOperatorHorizontal3x3:
-                    return new SobelOperatorHorizontal();
-                case ConvolutionFilter.SobelOperatorVertical3x3:
-                    return new SobelOperatorVertical();
+            ConvolutionFilter.BoxBlur3x3
+                => new BoxBlur3x3(),
+            ConvolutionFilter.BoxBlur5x5
+                => new BoxBlur5x5(),
+            ConvolutionFilter.EmbossOperator3x3
+                => new Emboss3x3(),
+            ConvolutionFilter.GaussianBlur3x3
+                => new GaussianBlur3x3(),
+            ConvolutionFilter.GaussianBlur5x5
+                => new GaussianBlur5x5(),
+            ConvolutionFilter.GaussianOperator3x3
+                => new GaussianOperator3x3(),
+            ConvolutionFilter.GaussianOperator5x5
+                => new GaussianOperator5x5(),
+            ConvolutionFilter.LaplacianOperator3x3
+                => new LaplacianOperator3x3(),
+            ConvolutionFilter.LaplacianOperator5x5
+                => new LaplacianOperator5x5(),
+            ConvolutionFilter.MotionBlur9x9
+                => new MotionBlur9x9(),
+            ConvolutionFilter.SharpenOperator3x3
+                => new Sharpen3x3(),
+            ConvolutionFilter.SobelOperatorHorizontal3x3
+                => new SobelOperatorHorizontal(),
 
-                default: throw new NotImplementedException(nameof(filter));
-            }
-        }
+            ConvolutionFilter.SobelOperatorVertical3x3
+                => new SobelOperatorVertical(),
+
+            _   => throw new NotImplementedException(nameof(filter))
+        };
     }
 }
