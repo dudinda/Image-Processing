@@ -2,7 +2,7 @@ using System.Drawing;
 
 using ImageProcessing.DomainModel.Model.RgbFilters.Interface;
 
-namespace ImageProcessing.ServiceLayer.Services.RgbFilter.Interface
+namespace ImageProcessing.ServiceLayer.Services.RgbFilters.Interface
 {
     /// <summary>
     /// Provides a selected <see cref="IRgbFilter"/>

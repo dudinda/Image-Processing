@@ -23,11 +23,11 @@ using ImageProcessing.PresentationLayer.ViewModel.Convolution;
 using ImageProcessing.PresentationLayer.ViewModel.Histogram;
 using ImageProcessing.PresentationLayer.Views.Main;
 using ImageProcessing.ServiceLayer.Providers.Interface.BitmapDistribution;
-using ImageProcessing.ServiceLayer.Providers.Interface.RgbFilter;
-using ImageProcessing.ServiceLayer.Providers.Operation.Interface;
+using ImageProcessing.ServiceLayer.Providers.Interface.RgbFilters;
 using ImageProcessing.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.ServiceLayer.Services.LockerService.Zoom.Interface;
+using ImageProcessing.ServiceLayer.Services.NonBlockDialog.Interface;
 
 namespace ImageProcessing.PresentationLayer.Presenters.Main
 {
@@ -39,7 +39,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
         private readonly IAsyncZoomLocker _zoomLocker;
         private readonly IAsyncOperationLocker _operationLocker;
         private readonly ICacheService<Bitmap> _cache;
-        private readonly INonBlockDialogService _operationProvider;
+        private readonly INonBlockDialogService _nonBlock;
 
         public MainPresenter(IAppController controller,
                              IMainView view,
@@ -50,7 +50,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
                              IBitmapLuminanceDistributionServiceProvider lumaProvider,
                              IRgbFilterServiceProvider rgbProvider,
                              ICacheService<Bitmap> cache,
-                             INonBlockDialogService operationProvider
+                             INonBlockDialogService nonBlock
 
             ) : base(controller, view, pipeline, eventAggregator)
         {
@@ -64,8 +64,8 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
                 operationLocker, nameof(operationLocker));
             _cache = Requires.IsNotNull(
                 cache, nameof(cache));
-            _operationProvider = Requires.IsNotNull(
-                operationProvider, nameof(operationProvider));
+            _nonBlock = Requires.IsNotNull(
+                nonBlock, nameof(nonBlock));
 
             EventAggregator.Subscribe(this);
         }
@@ -74,7 +74,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
         {
             try
             {
-                var result = await _operationProvider.NonBlockOpen(
+                var result = await _nonBlock.NonBlockOpen(
                     ConfigurationManager.AppSettings["Filters"]
                 ).ConfigureAwait(true);
 
@@ -110,7 +110,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
                     var copy = await GetImageCopy(ImageContainer.Source)
                         .ConfigureAwait(true);
 
-                    await _operationProvider.NonBlockSaveAs(copy,
+                    await _nonBlock.NonBlockSaveAs(copy,
                         ConfigurationManager.AppSettings["Filters"]
                     ).ConfigureAwait(false);
                 }

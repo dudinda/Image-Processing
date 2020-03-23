@@ -49,7 +49,6 @@ namespace ImageProcessing.DomainModel.Factory.Convolution.Implementation
                 => new Sharpen3x3(),
             ConvolutionFilter.SobelOperatorHorizontal3x3
                 => new SobelOperatorHorizontal(),
-
             ConvolutionFilter.SobelOperatorVertical3x3
                 => new SobelOperatorVertical(),
 

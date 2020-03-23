@@ -3,7 +3,7 @@ using System.Drawing;
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.DomainModel.Factory.RgbFilters.Interface;
-using ImageProcessing.ServiceLayer.Services.RgbFilter.Interface;
+using ImageProcessing.ServiceLayer.Services.RgbFilters.Interface;
 
 using NSubstitute;
 

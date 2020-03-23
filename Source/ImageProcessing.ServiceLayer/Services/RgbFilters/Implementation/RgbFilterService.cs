@@ -2,9 +2,9 @@ using System.Drawing;
 
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.DomainModel.Model.RgbFilters.Interface;
-using ImageProcessing.ServiceLayer.Services.RgbFilter.Interface;
+using ImageProcessing.ServiceLayer.Services.RgbFilters.Interface;
 
-namespace ImageProcessing.ServiceLayer.Services.RgbFilter.Implementation
+namespace ImageProcessing.ServiceLayer.Services.RgbFilters.Implementation
 {
     /// <inheritdoc cref="IRgbFilterService"/>
     public sealed class RgbFilterService : IRgbFilterService

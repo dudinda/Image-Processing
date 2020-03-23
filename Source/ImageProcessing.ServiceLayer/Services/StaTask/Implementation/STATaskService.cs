@@ -18,11 +18,7 @@ namespace ImageProcessing.ServiceLayer.Services.StaTask.Implementation
         /// </summary>
         private static List<int> _pool = new List<int>();
 
-
-        public STATaskService() : this(4)
-        {
-
-        } 
+        public STATaskService() : this(4) { } 
 
         public STATaskService(int maxNumberOfModals = 4)
         {

@@ -3,11 +3,11 @@ using System.Drawing;
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.DomainModel.Factory.RgbFilters.Interface;
-using ImageProcessing.ServiceLayer.Providers.Interface.RgbFilter;
+using ImageProcessing.ServiceLayer.Providers.Interface.RgbFilters;
 using ImageProcessing.ServiceLayer.Services.Cache.Interface;
-using ImageProcessing.ServiceLayer.Services.RgbFilter.Interface;
+using ImageProcessing.ServiceLayer.Services.RgbFilters.Interface;
 
-namespace ImageProcessing.ServiceLayer.Providers.Implementation.RgbFilter
+namespace ImageProcessing.ServiceLayer.Providers.Implementation.RgbFilters
 {
     public sealed class RgbFilterServiceProvider : IRgbFilterServiceProvider
     {
@@ -27,7 +27,7 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.RgbFilter
                 cache, nameof(cache));
         }
 
-        public Bitmap Apply(Bitmap bmp, Common.Enums.RgbFilter filter)
+        public Bitmap Apply(Bitmap bmp, RgbFilter filter)
         {
             Requires.IsNotNull(bmp, nameof(bmp));
 

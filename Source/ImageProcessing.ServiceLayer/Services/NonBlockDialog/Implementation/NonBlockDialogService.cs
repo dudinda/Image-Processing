@@ -2,21 +2,21 @@ using System.Drawing;
 using System.Threading.Tasks;
 
 using ImageProcessing.Common.Helpers;
-using ImageProcessing.ServiceLayer.Providers.Operation.Interface;
 using ImageProcessing.ServiceLayer.Services.FileDialog.Interface;
+using ImageProcessing.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.ServiceLayer.Services.StaTask.Interface;
 
-namespace ImageProcessing.ServiceLayer.Providers.Operation.Implementation
+namespace ImageProcessing.ServiceLayer.NonBlockDialog.Implementation
 {
-    public sealed class NonBlockDialogProvider : INonBlockDialogProvider
+    public sealed class NonBlockDialogService : INonBlockDialogService
     {
         private readonly IFileDialogService _service;
         private readonly ISTATaskService _staService;
 
-        public NonBlockDialogProvider(IFileDialogService service,
+        public NonBlockDialogService(IFileDialogService service,
                                       ISTATaskService staService)
         {
-            _service    = Requires.IsNotNull(
+            _service = Requires.IsNotNull(
                 service, nameof(service));
             _staService = Requires.IsNotNull(
                 staService, nameof(staService));

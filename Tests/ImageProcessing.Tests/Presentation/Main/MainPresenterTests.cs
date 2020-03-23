@@ -7,11 +7,11 @@ using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.PresentationLayer.Presenters.Main;
 using ImageProcessing.PresentationLayer.Views.Main;
 using ImageProcessing.ServiceLayer.Providers.Interface.BitmapDistribution;
-using ImageProcessing.ServiceLayer.Providers.Interface.RgbFilter;
-using ImageProcessing.ServiceLayer.Providers.Operation.Interface;
+using ImageProcessing.ServiceLayer.Providers.Interface.RgbFilters;
 using ImageProcessing.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.ServiceLayer.Services.LockerService.Zoom.Interface;
+using ImageProcessing.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.ServiceLayer.Services.StaTask.Interface;
 
 using NSubstitute;
@@ -34,7 +34,7 @@ namespace ImageProcessing.Tests.Presenters
         private IAwaitablePipeline _pipeline;
         private IBitmapLuminanceDistributionServiceProvider _lumaProvider;
         private IRgbFilterServiceProvider _rgbProvider;
-        private INonBlockDialogProvider _nonBlockprovider;
+        private INonBlockDialogService _nonBlockprovider;
         private ICacheService<Bitmap> _cache;
 
         [SetUp]
@@ -48,7 +48,7 @@ namespace ImageProcessing.Tests.Presenters
             _zoomLocker       = Substitute.For<IAsyncZoomLocker>();
             _lumaProvider     = Substitute.For<IBitmapLuminanceDistributionServiceProvider>();
             _rgbProvider      = Substitute.For<IRgbFilterServiceProvider>();
-            _nonBlockprovider = Substitute.For<INonBlockDialogProvider>();
+            _nonBlockprovider = Substitute.For<INonBlockDialogService>();
             _cache            = Substitute.For<ICacheService<Bitmap>>();
 
              _presenter = new MainPresenter(_controller,
