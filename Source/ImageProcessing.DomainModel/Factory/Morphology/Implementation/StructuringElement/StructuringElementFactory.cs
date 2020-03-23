@@ -9,6 +9,7 @@ using ImageProcessing.DomainModel.Model.Morphology.Interface.StructuringElement;
 
 namespace ImageProcessing.DomainModel.Factory.StructuringElement.Implementation
 {
+    /// <inheritdoc cref="IStructuringElementFactory"/>
     public sealed class StructuringElementFactory : IStructuringElementFactory
     {
         /// <summary>
