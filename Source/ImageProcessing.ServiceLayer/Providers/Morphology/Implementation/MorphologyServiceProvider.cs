@@ -33,6 +33,7 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.Morphology
                 cache, nameof(cache));
         }
 
+        /// <inheritdoc/>
         public Bitmap ApplyBinary(Bitmap lvalue, Bitmap rvalue, MorphologyOperator filter)
         {
             Requires.IsNotNull(lvalue, nameof(lvalue));
@@ -40,19 +41,23 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.Morphology
 
             return _morphologyService
                        .ApplyOperator(lvalue, rvalue,
-                           _morphologyFactory.BinaryFilter(filter)
-                
+                           _morphologyFactory.BinaryFilter(filter)         
             );
         }
 
+        /// <inheritdoc/>
         public Bitmap ApplyCustomUnary(Bitmap bmp, BitMatrix kernel, MorphologyOperator filter)
         {
+            Requires.IsNotNull(bmp, nameof(bmp));
+            Requires.IsNotNull(kernel, nameof(kernel));
+
             return _morphologyService
                        .ApplyOperator(bmp, kernel,
                            _morphologyFactory.Get(filter)
             );
         }
 
+        /// <inheritdoc/>
         public Bitmap ApplyUnary(Bitmap bmp, StructuringElem kernel, (int width, int height) dim, MorphologyOperator filter)
         {
             Requires.IsNotNull(bmp, nameof(bmp));
