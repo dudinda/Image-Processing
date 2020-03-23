@@ -19,7 +19,7 @@ namespace ImageProcessing.Common.Extensions.EnumExtensions
             where TEnum : Enum => (TEnum)Enum.Parse(typeof(TEnum), value);
 
         /// <summary>
-        /// Get a <see cref="Enum"/> value by name.
+        /// Get a <see cref="Enum"/> value by integer.
         /// </summary>
         /// <typeparam name="TEnum">An enumerated type.</typeparam>
         /// <param name="value">The source value.</param>
@@ -40,6 +40,11 @@ namespace ImageProcessing.Common.Extensions.EnumExtensions
             return (attributes.Length > 0) ? ((DescriptionAttribute)attributes[0]).Description : null;
         }
 
+        /// <summary>
+        /// Partition the specified <typeparamref name="TEnum"/> over
+        /// the specified <paramref name="partition"/>. Returns the
+        /// specified <typeparamref name="TCallOut"/> from <paramref name="callback"/>.
+        /// </summary>
         public static TCallOut PartitionOver<TEnum, TCallOut>
             (this TEnum src, (TEnum from, TEnum to) partition, Func<TCallOut> callback)
             where TEnum : Enum
@@ -48,11 +53,10 @@ namespace ImageProcessing.Common.Extensions.EnumExtensions
 
             var isInPartition
                 = Enum.GetValues(typeof(TEnum))
-                       .Cast<int>()
-                       .Where(val => val >= from && val <= to)
-                       .Any(val => GetEnumValueByInt<TEnum>(val).Equals(src));
+                       .Cast<TEnum>()
+                       .Any(val => val.Equals(src));
 
-            if(isInPartition)
+            if (isInPartition)
             {
                 return callback();
             }

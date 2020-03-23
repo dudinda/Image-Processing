@@ -39,7 +39,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
         private readonly IAsyncZoomLocker _zoomLocker;
         private readonly IAsyncOperationLocker _operationLocker;
         private readonly ICacheService<Bitmap> _cache;
-        private readonly INonBlockDialogProvider _operationProvider;
+        private readonly INonBlockDialogService _operationProvider;
 
         public MainPresenter(IAppController controller,
                              IMainView view,
@@ -50,7 +50,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
                              IBitmapLuminanceDistributionServiceProvider lumaProvider,
                              IRgbFilterServiceProvider rgbProvider,
                              ICacheService<Bitmap> cache,
-                             INonBlockDialogProvider operationProvider
+                             INonBlockDialogService operationProvider
 
             ) : base(controller, view, pipeline, eventAggregator)
         {
@@ -76,7 +76,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
             {
                 var result = await _operationProvider.NonBlockOpen(
                     ConfigurationManager.AppSettings["Filters"]
-                ).ConfigureAwait(false);
+                ).ConfigureAwait(true);
 
                 if (result != null)
                 {
