@@ -8,7 +8,7 @@ namespace ImageProcessing.Common.Attributes
     /// The attribute is used to decorate classes, implementing the IColor interface.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
-    public class ColorAttribute : Attribute
+    public sealed class ColorAttribute : Attribute
     {
         /// <summary>
         /// A color combination of R, G and B.

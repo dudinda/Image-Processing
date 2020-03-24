@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
+using ImageProcessing.Common.Utility.BlockingQueue.Interface;
+
 namespace ImageProcessing.Common.Utility.BlockingQueue.Implementation
 {
-    public class BlockingQueue<T>
+    public sealed class BlockingQueue<T> : IBlockingQueue<T>
     {
         private readonly Queue<T> _queue = new Queue<T>();
         private readonly int _maxSize;

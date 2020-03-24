@@ -8,7 +8,7 @@ using ImageProcessing.Common.Extensions.EnumExtensions;
 namespace ImageProcessing.Common.Extensions.StringExtensions
 {
     /// <summary>
-    /// Extension methods for <see cref="string">.
+    /// Extension methods for a <see cref="string">.
     /// </summary>
     public static class StringExtension
     {

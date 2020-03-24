@@ -5,7 +5,7 @@ using ImageProcessing.Common.Utility.BitMatrix.Interface;
 namespace ImageProcessing.Common.Utility.BitMatrix.Implementation.Safe
 {
     /// <inheritdoc cref="IBitMatrix"/>
-    public class BitMatrixSafe : IBitMatrix
+    public sealed class BitMatrixSafe : IBitMatrix
     {
         private readonly object _sync = new object();
 

@@ -6,7 +6,7 @@ using System.Drawing.Imaging;
 namespace ImageProcessing.Common.Extensions.BitmapExtensions
 {
     /// <summary>
-    /// Extension methods for <see cref="Bitmap"> class
+    /// Extension methods for a <see cref="Bitmap"> class
     /// </summary>
     public static class BitmapExtension
     {

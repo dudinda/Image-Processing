@@ -12,7 +12,7 @@ using ImageProcessing.ServiceLayer.Services.Bmp.Interface;
 namespace ImageProcessing.ServiceLayer.Services.Bmp.Implementation
 {
     /// <inheritdoc cref="IBitmapService"/>
-    public class BitmapService : IBitmapService
+    public sealed class BitmapService : IBitmapService
     {
         /// <inheritdoc/>
         public Bitmap Normalize(Bitmap bitmap)

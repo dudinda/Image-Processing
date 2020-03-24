@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,7 +6,7 @@ using ImageProcessing.Utility.FixedStack.Interface;
 
 namespace ImageProcessing.Utility.FixedStack.Implementation
 {
-    public class FixedStack<T> : IFixedStack<T>
+    public sealed class FixedStack<T> : IFixedStack<T>
     {
         private readonly List<T> _stack = new List<T>();
         private readonly int _size;

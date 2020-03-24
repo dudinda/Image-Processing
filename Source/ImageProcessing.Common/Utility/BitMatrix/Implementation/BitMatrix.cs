@@ -5,7 +5,7 @@ using ImageProcessing.Common.Utility.BitMatrix.Interface;
 namespace ImageProcessing.Common.Utility.BitMatrix.Implementation
 {
     /// <inheritdoc cref="IBitMatrix"/>
-    public class BitMatrix : IBitMatrix
+    public sealed class BitMatrix : IBitMatrix
     {
         private readonly byte[] _data;
 

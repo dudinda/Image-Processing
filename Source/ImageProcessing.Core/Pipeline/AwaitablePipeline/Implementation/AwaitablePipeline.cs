@@ -3,14 +3,15 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using ImageProcessing.Common.Utility.BlockingQueue.Implementation;
+using ImageProcessing.Common.Utility.BlockingQueue.Interface;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 
 namespace ImageProcessing.Core.Pipeline.AwaitablePipeline.Implementation
 {
     public sealed class AwaitablePipeline : IAwaitablePipeline, IDisposable
     {
-        private readonly BlockingQueue<Task<object>> _queue
-           = new BlockingQueue<Task<object>>(64);
+        private readonly IBlockingQueue<Task<object>> _queue
+           = new BlockingQueue<Task<object>>(1 << 6);
 
         private readonly CancellationTokenSource _source 
             = new CancellationTokenSource();

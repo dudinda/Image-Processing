@@ -34,8 +34,6 @@
 
   <ItemGroup>
     <Folder Include="bin\" />
-    <Folder Include="Pipeline\BlockItem\Implementation\ActionItem\" />
-    <Folder Include="Pipeline\BlockItem\Implementation\FuncItem\" />
   </ItemGroup>
 
 </Project>
