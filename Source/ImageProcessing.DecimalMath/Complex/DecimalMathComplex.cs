@@ -188,7 +188,7 @@ namespace ImageProcessing.DecimalMath.Complex
         {
             var (sin, cos) = DecimalMathReal.SinCos(z.phi);
 
-            return (sin * z.r, cos * z.r);
+            return (cos * z.r, sin * z.r);
         }
 
         /// <summary>
@@ -201,7 +201,7 @@ namespace ImageProcessing.DecimalMath.Complex
             var r          = DecimalMathReal.Exp(z.x);
             var (sin, cos) = DecimalMathReal.SinCos(z.y);
 
-            return (sin * r, cos * r);
+            return (cos * r, sin * r);
             
         }
 
@@ -231,7 +231,7 @@ namespace ImageProcessing.DecimalMath.Complex
 
             var newR = DecimalMathReal.Pow(r, k);
 
-            return (newR * sin, newR * cos);
+            return (newR * cos, newR * sin);
         }
 
         /// <summary>
@@ -252,7 +252,7 @@ namespace ImageProcessing.DecimalMath.Complex
 
             var (sin, cos) = DecimalMathReal.SinCos(phi / 2);
 
-            return (root * sin, root * cos);
+            return (root * cos, root * sin);
         }
 
         /// <summary>
