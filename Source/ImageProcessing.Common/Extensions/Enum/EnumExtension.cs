@@ -49,12 +49,14 @@ namespace ImageProcessing.Common.Extensions.EnumExtensions
             (this TEnum src, (TEnum from, TEnum to) partition, Func<TCallOut> callback)
             where TEnum : Enum
         {
-            var (to, from) = (Convert.ToInt32(partition.from), Convert.ToInt32(partition.to));
+            var (from, to) = (Convert.ToInt32(partition.from), Convert.ToInt32(partition.to));
+            var srcInt = Convert.ToInt32(src);
 
             var isInPartition
                 = Enum.GetValues(typeof(TEnum))
-                       .Cast<TEnum>()
-                       .Any(val => val.Equals(src));
+                       .Cast<int>()
+                       .Where(val => val >= from && val <= to)
+                       .Any(val => val.Equals(srcInt));
 
             if (isInPartition)
             {
