@@ -33,7 +33,6 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
 {
     public sealed partial class MainPresenter : BasePresenter<IMainView>
     {
-
         private readonly IBitmapLuminanceDistributionServiceProvider _lumaProvider;
         private readonly IRgbFilterServiceProvider _rgbProvider;
         private readonly IAsyncZoomLocker _zoomLocker;
@@ -112,7 +111,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
 
                     await _nonBlock.NonBlockSaveAs(copy,
                         ConfigurationManager.AppSettings["Filters"]
-                    ).ConfigureAwait(false);
+                    ).ConfigureAwait(true);
                 }
             }
             catch(Exception ex)
