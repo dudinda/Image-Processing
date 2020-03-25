@@ -20,8 +20,10 @@ using ImageProcessing.DomainModel.Factory.Distributions.Interface;
 using ImageProcessing.DomainModel.Factory.Morphology.Implementation;
 using ImageProcessing.DomainModel.Factory.Morphology.Interface;
 using ImageProcessing.DomainModel.Factory.Morphology.Interface.StructuringElement;
-using ImageProcessing.DomainModel.Factory.RgbFilters.Implementation;
-using ImageProcessing.DomainModel.Factory.RgbFilters.Interface;
+using ImageProcessing.DomainModel.Factory.RgbFilters.Color.Implementation;
+using ImageProcessing.DomainModel.Factory.RgbFilters.Color.Interface;
+using ImageProcessing.DomainModel.Factory.RgbFilters.Rgb.Implementation;
+using ImageProcessing.DomainModel.Factory.RgbFilters.Rgb.Interface;
 using ImageProcessing.DomainModel.Factory.StructuringElement.Implementation;
 using ImageProcessing.Form.Histogram;
 using ImageProcessing.Form.Main;
@@ -104,6 +106,7 @@ namespace ImageProcessing.UILayer
                 .RegisterScoped<INonBlockDialogService, NonBlockDialogService>()
                 .RegisterTransient<IRgbFilterService, RgbFilterService>()
                 .RegisterTransient<IRgbFilterFactory, RgbFilterFactory>()
+                .RegisterScoped<IColorFactory, ColorFactory>()
                 .RegisterScoped<IAsyncOperationLocker, AsyncOperationLocker>()
                 .RegisterTransient<IConvolutionServiceProvider, ConvolutionServiceProvider>()
                 .RegisterTransient<IMorphologyServiceProvider, MorphologyServiceProvider>()

@@ -2,7 +2,7 @@ using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.Factory;
 using ImageProcessing.DomainModel.Model.RgbFilters.Interface;
 
-namespace ImageProcessing.DomainModel.Factory.RgbFilters.Interface
+namespace ImageProcessing.DomainModel.Factory.RgbFilters.Rgb.Interface
 {
     /// <summary>
     /// Provides a factory method for all the types

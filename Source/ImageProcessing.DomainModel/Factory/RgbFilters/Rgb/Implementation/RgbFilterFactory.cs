@@ -1,25 +1,28 @@
 using System;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 
-using ImageProcessing.Common.Attributes;
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Common.Extensions.TypeExtensions;
-using ImageProcessing.DomainModel.Factory.RgbFilters.Interface;
+using ImageProcessing.Common.Helpers;
+using ImageProcessing.DomainModel.Factory.RgbFilters.Color.Interface;
+using ImageProcessing.DomainModel.Factory.RgbFilters.Rgb.Interface;
 using ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Binary;
 using ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Color;
 using ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Grayscale;
 using ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Inversion;
 using ImageProcessing.DomainModel.Model.RgbFilters.Interface;
-using ImageProcessing.DomainModel.Model.RgbFilters.Interface.Color;
 
-namespace ImageProcessing.DomainModel.Factory.RgbFilters.Implementation
+namespace ImageProcessing.DomainModel.Factory.RgbFilters.Rgb.Implementation
 {
 
     /// <inheritdoc cref="IRgbFilterFactory"/>
     public sealed class RgbFilterFactory : IRgbFilterFactory
     {
+        private readonly IColorFactory _factory;
+
+        public RgbFilterFactory(IColorFactory factory)
+        {
+            _factory = Requires.IsNotNull(
+                factory, nameof(factory));
+        }
         /// <summary>
         /// Provides a factory method for all <see cref="RgbFilter"/>
         /// implementing <see cref="IRgbFilter"/>.
@@ -38,19 +41,11 @@ namespace ImageProcessing.DomainModel.Factory.RgbFilters.Implementation
         };
           
         /// <inheritdoc />
-		[MethodImpl(MethodImplOptions.NoInlining)]
 		public IRgbFilter GetColorFilter(RgbColors color)
-        {
-            var filter = Assembly
-                 .GetExecutingAssembly()
-                 .GetTypes()
-                 .Where( type => type.GetInterface(nameof(IColor)) != null && type.IsClass)
-                 .Where( type => type.HasAttribute<ColorAttribute>())
-                 .Where( type => type.GetAttributeValue((ColorAttribute attr) => attr.Color == color))
-                 .Select(type => (IColor)Activator.CreateInstance(type))
-                 .Single();
-
-            return new ColorFilter(filter);
+        {        
+            return new ColorFilter(
+                    _factory.Get(color)
+            );
         }
     }
 }
