@@ -23,6 +23,7 @@ namespace ImageProcessing.DomainModel.Factory.RgbFilters.Rgb.Implementation
             _factory = Requires.IsNotNull(
                 factory, nameof(factory));
         }
+
         /// <summary>
         /// Provides a factory method for all <see cref="RgbFilter"/>
         /// implementing <see cref="IRgbFilter"/>.

@@ -7,8 +7,13 @@ using ImageProcessing.DomainModel.Model.RgbFilters.Interface.Color;
 
 namespace ImageProcessing.DomainModel.Factory.RgbFilters.Color.Implementation
 {
+    /// <inheritdoc cref="IColorFactory"/>
     public sealed class ColorFactory : IColorFactory
     {
+        /// <summary>
+        /// Provides a factory method for all <see cref="RgbColors"/>
+        /// implementing <see cref="IColor"/>.
+        /// </summary>
         public IColor Get(RgbColors filter)
             => filter switch
             {
