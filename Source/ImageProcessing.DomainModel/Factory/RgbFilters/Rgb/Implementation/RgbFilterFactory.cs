@@ -42,11 +42,9 @@ namespace ImageProcessing.DomainModel.Factory.RgbFilters.Rgb.Implementation
         };
           
         /// <inheritdoc />
-		public IRgbFilter GetColorFilter(RgbColors color)
-        {        
-            return new ColorFilter(
-                    _factory.Get(color)
-            );
-        }
+		public IRgbFilter Get(RgbColors color)
+            => new ColorFilter(
+                _factory.Get(color)
+            );     
     }
 }
