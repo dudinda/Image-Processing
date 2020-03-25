@@ -14,11 +14,12 @@ namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Color
 {
     internal sealed class ColorFilter : IRgbFilter
     {
-        IColor _filter;
+        private readonly IColor _filter;
 
         public ColorFilter(IColor filter)
         {
-            _filter = filter;
+            _filter = Requires.IsNotNull(
+                filter, nameof(filter));
         }
 
         public Bitmap Filter(Bitmap bitmap)
