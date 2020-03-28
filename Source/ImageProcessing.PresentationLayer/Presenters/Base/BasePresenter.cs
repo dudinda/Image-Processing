@@ -1,11 +1,11 @@
-
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Controller.Interface;
 using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
+using ImageProcessing.Core.Presenter;
 using ImageProcessing.Core.View;
 
-namespace ImageProcessing.Core.Presenter.Abstract
+namespace ImageProcessing.PresentationLayer.Presenters.Base
 {
     /// <summary>
     /// Provides base functionality for

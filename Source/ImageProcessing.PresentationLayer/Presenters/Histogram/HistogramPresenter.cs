@@ -8,7 +8,7 @@ using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Controller.Interface;
 using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
-using ImageProcessing.Core.Presenter.Abstract;
+using ImageProcessing.PresentationLayer.Presenters.Base;
 using ImageProcessing.PresentationLayer.ViewModel.Histogram;
 using ImageProcessing.PresentationLayer.Views.Histogram;
 using ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
