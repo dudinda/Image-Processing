@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 using ImageProcessing.Common.Helpers;
@@ -14,9 +15,10 @@ using ImageProcessing.PresentationLayer.Views.Convolution;
 using ImageProcessing.ServiceLayer.Providers.Interface.Convolution;
 using ImageProcessing.ServiceLayer.Services.LockerService.Operation.Interface;
 
+[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.PresentationLayer.Presenters.Convolution
 {
-    public sealed partial class ConvolutionFilterPresenter : BasePresenter<IConvolutionFilterView, ConvolutionFilterViewModel>
+    internal sealed partial class ConvolutionFilterPresenter : BasePresenter<IConvolutionFilterView, ConvolutionFilterViewModel>
 	{
 		private readonly IConvolutionServiceProvider _convolutionProvider;
 		private readonly IAsyncOperationLocker _operationLocker;

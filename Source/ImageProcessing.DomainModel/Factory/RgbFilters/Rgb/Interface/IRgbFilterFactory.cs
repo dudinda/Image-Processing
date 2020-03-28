@@ -1,5 +1,5 @@
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Core.Factory;
+using ImageProcessing.DomainModel.Factory.Base;
 using ImageProcessing.DomainModel.Model.RgbFilters.Interface;
 
 namespace ImageProcessing.DomainModel.Factory.RgbFilters.Rgb.Interface

@@ -10,7 +10,7 @@ using ImageProcessing.DomainModel.DomainEvent.RgbArgs;
 
 namespace ImageProcessing.PresentationLayer.Presenters.Main
 {
-    partial class MainPresenter : ISubscriber<ApplyConvolutionFilterEventArgs>,
+    public sealed partial class MainPresenter : ISubscriber<ApplyConvolutionFilterEventArgs>,
                                   ISubscriber<ShowConvolutionFilterPresenterEventArgs>,
                                   ISubscriber<RgbFilterEventArgs>,
                                   ISubscriber<RgbColorFilterEventArgs>,

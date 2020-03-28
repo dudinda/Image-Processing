@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Controller.Interface;
@@ -10,9 +11,10 @@ using ImageProcessing.PresentationLayer.ViewModel.QualityMeasure;
 using ImageProcessing.PresentationLayer.Views.QualityMeasure;
 using ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
 
+[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.PresentationLayer.Presenters
 {
-    public sealed class QualityMeasurePresenter : BasePresenter<IQualityMeasureView, QualityMeasureViewModel>
+    internal sealed class QualityMeasurePresenter : BasePresenter<IQualityMeasureView, QualityMeasureViewModel>
     {
         private readonly IBitmapLuminanceDistributionService _distributionService;
 

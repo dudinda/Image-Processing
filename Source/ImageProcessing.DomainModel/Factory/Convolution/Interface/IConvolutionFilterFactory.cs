@@ -1,6 +1,6 @@
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Core.Factory;
 using ImageProcessing.DomainModel.Convolution.Interface;
+using ImageProcessing.DomainModel.Factory.Base;
 
 namespace ImageProcessing.DomainModel.Factory.Convolution.Interface
 {

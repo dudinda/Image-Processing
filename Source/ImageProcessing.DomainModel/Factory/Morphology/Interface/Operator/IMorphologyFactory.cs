@@ -1,6 +1,6 @@
 
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Core.Factory;
+using ImageProcessing.DomainModel.Factory.Base;
 using ImageProcessing.DomainModel.Model.Morphology.Interface.BinaryOperator;
 using ImageProcessing.DomainModel.Model.Morphology.Interface.UnaryOperator;
 
