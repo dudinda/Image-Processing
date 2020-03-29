@@ -1,7 +1,6 @@
 using System;
 using System.Drawing;
-using System.Reflection;
-using System.Resources;
+using System.IO;
 
 using BenchmarkDotNet.Attributes;
 
@@ -23,17 +22,21 @@ namespace ImageProcessing.DomainModel.Benchmark.RgbFilter.Binary
         [GlobalSetup]
         public void Setup()
         {
-            var manager = new ResourceManager("Frames/Frames.resx", Assembly.GetExecutingAssembly());
+            using (var ms = new MemoryStream(Frames.Frames._1920x1080frame))
+            {
+                _frame1920x1080 = new Bitmap(Image.FromStream(ms));
+            }
 
-            _frame1920x1080 = new Bitmap((Image)manager.GetObject("1920x1080frame"));
-            _frame2560x1440 = new Bitmap((Image)manager.GetObject("2560x1440frame"));
-
+            using (var ms = new MemoryStream(Frames.Frames._2560x1440frame))
+            {
+                _frame2560x1440 = new Bitmap(Image.FromStream(ms));
+            }
         }
 
         [Benchmark]
         public void ApplyBinaryFilterTo1920x1080()
         {
-                filter.Filter(_frame1920x1080);           
+            filter.Filter(_frame1920x1080);           
         }
 
         [Benchmark]
@@ -43,7 +46,6 @@ namespace ImageProcessing.DomainModel.Benchmark.RgbFilter.Binary
             {
                 filter.Filter(_frame1920x1080);
             }
-
         }
 
         [Benchmark]

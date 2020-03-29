@@ -65,7 +65,7 @@ namespace ImageProcessing.DomainModel.Benchmark.Frames {
         /// </summary>
         internal static byte[] _1920x1080frame {
             get {
-                object obj = ResourceManager.GetObject("1920x1080frame", resourceCulture);
+                object obj = ResourceManager.GetObject("_1920x1080frame", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -75,7 +75,7 @@ namespace ImageProcessing.DomainModel.Benchmark.Frames {
         /// </summary>
         internal static byte[] _2560x1440frame {
             get {
-                object obj = ResourceManager.GetObject("2560x1440frame", resourceCulture);
+                object obj = ResourceManager.GetObject("_2560x1440frame", resourceCulture);
                 return ((byte[])(obj));
             }
         }
