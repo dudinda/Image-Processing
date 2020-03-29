@@ -1,3 +1,5 @@
+using System;
+
 using ImageProcessing.Common.Enums;
 using ImageProcessing.DomainModel.Convolution.Implemetation.Blur.BoxBlur;
 using ImageProcessing.DomainModel.Convolution.Implemetation.Blur.GaussianBlur;
@@ -10,6 +12,7 @@ using ImageProcessing.DomainModel.Convolution.Implemetation.Sharpen;
 using ImageProcessing.DomainModel.Factory.Convolution.Interface;
 
 using NSubstitute;
+using NSubstitute.ExceptionExtensions;
 
 using NUnit.Framework;
 
@@ -205,6 +208,18 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Convolution
                 _convolutionFactory.Get(
                     ConvolutionFilter.SobelOperatorVertical3x3
                 ), Is.TypeOf(typeof(SobelOperatorVertical))
+            );
+        }
+
+        [Test]
+        public void FactoryThrowsNotImplementedExceptionOnUnknownEnum()
+        {
+            _convolutionFactory
+                .Get(ConvolutionFilter.Unknown)
+                .Throws(new NotImplementedException());
+
+            Assert.Throws<NotImplementedException>(
+                () => _convolutionFactory.Get(ConvolutionFilter.Unknown)
             );
         }
 

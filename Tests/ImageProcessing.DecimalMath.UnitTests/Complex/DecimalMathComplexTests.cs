@@ -1,7 +1,6 @@
-using static ImageProcessing.DecimalMath.Complex.DecimalMathComplex;
-using static ImageProcessing.DecimalMath.Real.DecimalMathReal;
-
 using NUnit.Framework;
+
+using static ImageProcessing.DecimalMath.Complex.DecimalMathComplex;
 
 namespace ImageProcessing.Tests.DecimalMath.Complex
 {
@@ -50,7 +49,7 @@ namespace ImageProcessing.Tests.DecimalMath.Complex
             var z1 = (0.25M, 3M);
             var z2 = (0.25M, -3M);
 
-            var z = Div(z1, z2);
+            var z = Sub(z1, z2);
 
             Assert.AreEqual(Re(z), 0);
             Assert.AreEqual(Im(z), 6);

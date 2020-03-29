@@ -69,7 +69,9 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Rgb
         [Test]
         public void FactoryThrowsNotImplementedExceptionOnUnknownEnum()
         {
-           _rgbFilterFactory.Get(RgbFilter.Unknown).Throws(new NotImplementedException());
+           _rgbFilterFactory
+                .Get(RgbFilter.Unknown)
+                .Throws(new NotImplementedException());
 
             Assert.Throws<NotImplementedException>(
                 () => _rgbFilterFactory.Get(RgbFilter.Unknown)
