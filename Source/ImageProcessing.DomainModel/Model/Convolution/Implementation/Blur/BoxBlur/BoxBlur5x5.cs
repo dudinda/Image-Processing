@@ -2,7 +2,6 @@ using System.Runtime.CompilerServices;
 
 using ImageProcessing.DomainModel.Convolution.Interface;
 
-[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.DomainModel.Convolution.Implemetation.Blur.BoxBlur
 {
     /// <summary>
@@ -16,7 +15,7 @@ namespace ImageProcessing.DomainModel.Convolution.Implemetation.Blur.BoxBlur
         /// <inheritdoc />
         public double Factor { get; } = 1.0 / 25.0;
 
-       /// <inheritdoc />
+        /// <inheritdoc />
         public string FilterName { get; } = nameof(BoxBlur5x5);
 
         /// <inheritdoc />

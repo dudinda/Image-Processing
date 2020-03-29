@@ -2,7 +2,6 @@ using System.Runtime.CompilerServices;
 
 using ImageProcessing.DomainModel.Convolution.Interface;
 
-[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.DomainModel.Convolution.Implemetation.Sharpen
 {
     /// <summary>

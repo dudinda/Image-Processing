@@ -11,8 +11,6 @@ using ImageProcessing.Common.Extensions.BitmapExtensions;
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.DomainModel.Model.RgbFilters.Interface;
 
-[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
-[assembly: InternalsVisibleTo("ImageProcessing.DomainModel.Benchmark")]
 namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Binary
 {
     internal sealed class BinaryFilter : IRgbFilter

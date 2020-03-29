@@ -5,7 +5,6 @@ using ImageProcessing.Common.Extensions.StringExtensions;
 using ImageProcessing.DecimalMath.Real;
 using ImageProcessing.DomainModel.Model.Distributions.Interface;
 
-
 namespace ImageProcessing.DomainModel.Model.Distributions.Implementation.TwoParameter
 {
     /// <summary>
