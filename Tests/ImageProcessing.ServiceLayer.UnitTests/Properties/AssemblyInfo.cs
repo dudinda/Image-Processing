@@ -2,18 +2,18 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("ImageProcessing.Tests")]
+[assembly: AssemblyTitle("ImageProcessing.ServiceLayer.UnitTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ImageProcessing.Tests")]
+[assembly: AssemblyProduct("ImageProcessing.ServiceLayer.UnitTests")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]
 
-[assembly: Guid("8ec2495b-c648-468b-b0c3-2cd6375b3aeb")]
+[assembly: Guid("32361109-f78e-4c54-aaab-2001078e4ae2")]
 
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]

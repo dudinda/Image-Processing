@@ -1,18 +1,6 @@
-using System;
-using System.Drawing;
-
-using ImageProcessing.Common.Enums;
-using ImageProcessing.DomainModel.Factory.RgbFilters.Interface;
-using ImageProcessing.ServiceLayer.Services.RgbFilters.Interface;
-
-using NSubstitute;
-
-using NUnit.Framework;
-
-namespace ImageProcessing.Tests.Services
+namespace ImageProcessing.ServiceLayer.UnitTests.Services.RgbFilters
 {
-    [TestFixture]
-    internal class RgbFilterServiceTests
+    internal sealed class RgbFilterServiceTests
     {
         private IRgbFilterService _filterService;
         private IRgbFilterFactory _rgbFilterFactory;
