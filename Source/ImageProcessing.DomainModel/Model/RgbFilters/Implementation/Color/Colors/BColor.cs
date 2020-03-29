@@ -1,8 +1,6 @@
-using System.Runtime.CompilerServices;
-
+using System;
 using ImageProcessing.DomainModel.Model.RgbFilters.Interface.Color;
 
-[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Color.Colors
 {
     internal sealed class BColor : IColor
@@ -11,6 +9,6 @@ namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Color.Colo
         {
             ptr[1] = 0;
             ptr[2] = 0;
-        }
+        }   
     }
 }

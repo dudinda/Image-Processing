@@ -1,5 +1,4 @@
 using System.Drawing;
-using System.Runtime.CompilerServices;
 
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Common.Utility.BitMatrix.Implementation;
@@ -7,7 +6,6 @@ using ImageProcessing.DomainModel.Model.Morphology.Implementation.Dilation;
 using ImageProcessing.DomainModel.Model.Morphology.Implementation.Erosion;
 using ImageProcessing.DomainModel.Model.Morphology.Interface.UnaryOperator;
 
-[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.DomainModel.Model.Morphology.Implementation.Opening
 {
     /// <summary>
