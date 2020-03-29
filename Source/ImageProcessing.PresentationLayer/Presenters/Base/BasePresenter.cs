@@ -103,8 +103,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Base
         public virtual void Run(TViewModel vm)
 		{
 			ViewModel = Requires.IsNotNull(
-                vm, nameof(vm)
-            );
+                vm, nameof(vm));
 
 			View.Show();
 		}

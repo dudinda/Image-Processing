@@ -18,12 +18,9 @@ namespace ImageProcessing.UILayer.Form.Base
             : base()
         {
             Context = Requires.IsNotNull(
-                context, nameof(context)
-            );
-
+                context, nameof(context));
             EventAggregator = Requires.IsNotNull(
-                eventAggregator, nameof(eventAggregator)
-            );
+                eventAggregator, nameof(eventAggregator));
         }
 
         protected BaseMainForm() { }
@@ -37,8 +34,7 @@ namespace ImageProcessing.UILayer.Form.Base
             : base()
         {
             EventAggregator = Requires.IsNotNull(
-                eventAggregator, nameof(eventAggregator)
-            );
+                eventAggregator, nameof(eventAggregator));
         }
 
         protected BaseForm() { }
