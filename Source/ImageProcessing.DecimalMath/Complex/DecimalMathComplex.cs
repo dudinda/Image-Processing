@@ -270,7 +270,7 @@ namespace ImageProcessing.DecimalMath.Complex
 
             for(var n = 0; n < k; ++n)
             {
-                var (cos, sin) = DecimalMathReal.SinCos(2 * DecimalMathReal.PI * n / k);
+                var (sin, cos) = DecimalMathReal.SinCos((2 * DecimalMathReal.PI * n + phi) / k);
 
                 list.Add((rootOfR * cos, rootOfR * sin));
             }
