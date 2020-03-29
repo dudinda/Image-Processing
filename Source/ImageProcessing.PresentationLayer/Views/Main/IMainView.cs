@@ -20,9 +20,6 @@ namespace ImageProcessing.PresentationLayer.Views.Main
         /// </summary>
         string PathToFile { get; set; }
  
-        /// <summary>
-        /// Adds 
-        /// </summary>
         void AddToUndoContainer((Bitmap changed, ImageContainer from) action);
 
         /// <summary>

@@ -4,25 +4,26 @@ using ImageProcessing.Common.Enums;
 
 namespace ImageProcessing.PresentationLayer.Views.ViewComponent.BitmapZoom
 {
+    /// <summary>
+    /// Represents a view component with a zoom menu.
+    /// </summary>
     public interface IBitmapZoom
     {
         /// <summary>
-        /// Reset the zoom trackbar value after
-        /// the <see cref="ImageContainer"/> rendering. 
+        /// Reset a zoom trackbar value after
+        /// an <see cref="ImageContainer"/> rendering. 
         /// </summary>
         void ResetTrackBarValue(ImageContainer container, int value = 0, bool isEnabled = true);
 
         /// <summary>
-        /// Perform the zoom of the specified
+        /// Perform a zoom of the specified
         /// <see cref="ImageContainer"/>.
         /// </summary>
         Image ZoomImage(ImageContainer container);
 
         /// <summary>
-        /// Set the specified <see cref="Image"/> to the selected <see cref="ImageContainer"/>.
-        /// </summary>
-        /// <param name="container"></param>
-        /// <param name="image"></param>
+        /// Set the specified <see cref="Image"/> to
+        /// the selected <see cref="ImageContainer"/>.
         void SetImageToZoom(ImageContainer container, Image image);
     }
 }

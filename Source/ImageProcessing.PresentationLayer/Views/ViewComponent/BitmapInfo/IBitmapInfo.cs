@@ -1,9 +1,14 @@
+using ImageProcessing.Common.Enums;
+
 namespace ImageProcessing.PresentationLayer.Views.ViewComponent.BitmapInfo
 {
+    /// <summary>
+    /// Represents a view component with a bitmap distribution info.
+    /// </summary>
     public interface IBitmapInfo
     {
         /// <summary>
-        /// Parameters is used during the histogram
+        /// Parameters used during the histogram
         /// transorfmation by a specified distribution.
         /// </summary>
         (string, string) Parameters { get; }
@@ -12,7 +17,6 @@ namespace ImageProcessing.PresentationLayer.Views.ViewComponent.BitmapInfo
         /// Show the information about <see cref="RandomVariable"/>
         /// value of the specified <see cref="ImageContainer"/>.
         /// </summary>
-        /// <param name="info"></param>
         void ShowInfo(string info);
     }
 }

@@ -2,6 +2,9 @@ using ImageProcessing.Common.Enums;
 
 namespace ImageProcessing.PresentationLayer.Views.ViewComponent.RgbMenu
 {
+    /// <summary>
+    /// Represents a view component with a rgb color menu.
+    /// </summary>
     public interface IColorMenu
     {
         /// <summary>
