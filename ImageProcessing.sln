@@ -34,18 +34,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageProcessing.DomainModel
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageProcessing.Services.Benchmark", "Benchmarks\ImageProcessing.Services.Benchmark\ImageProcessing.Services.Benchmark.csproj", "{3EDAFA59-0A1E-4047-A537-730093359E0E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Static", "Static", "{01F75F62-8716-4A59-90F2-67C2EDE5C2FD}"
-	ProjectSection(SolutionItems) = preProject
-		Benchmarks\Static\1920x1080frame.jpg = Benchmarks\Static\1920x1080frame.jpg
-		Benchmarks\Static\2560x1440frame.jpg = Benchmarks\Static\2560x1440frame.jpg
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Static", "Static", "{904AD718-2BC4-4A97-95D0-36CAE1826A76}"
-	ProjectSection(SolutionItems) = preProject
-		Tests\Static\1920x1080frame.jpg = Tests\Static\1920x1080frame.jpg
-		Tests\Static\2560x1440frame.jpg = Tests\Static\2560x1440frame.jpg
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing.ServiceLayer.UnitTests", "Tests\ImageProcessing.ServiceLayer.UnitTests\ImageProcessing.ServiceLayer.UnitTests.csproj", "{32361109-F78E-4C54-AAAB-2001078E4AE2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing.DomainModel.UnitTests", "Tests\ImageProcessing.DomainModel.UnitTests\ImageProcessing.DomainModel.UnitTests.csproj", "{E619F72F-A242-432C-9145-64EA55DF9DF8}"
@@ -341,8 +329,6 @@ Global
 		{E23B6A87-60B7-470F-A6ED-0A7ECF4C9EBA} = {9F6E1FA1-6994-4E5E-86FE-E25F4CC9F1B5}
 		{2077A1E8-0C3E-4543-A20B-270DA1D588FA} = {F5738705-7CFB-444C-8E11-D2465401CCCE}
 		{3EDAFA59-0A1E-4047-A537-730093359E0E} = {F5738705-7CFB-444C-8E11-D2465401CCCE}
-		{01F75F62-8716-4A59-90F2-67C2EDE5C2FD} = {F5738705-7CFB-444C-8E11-D2465401CCCE}
-		{904AD718-2BC4-4A97-95D0-36CAE1826A76} = {36E887BA-A885-405D-B082-62793BF9493F}
 		{32361109-F78E-4C54-AAAB-2001078E4AE2} = {36E887BA-A885-405D-B082-62793BF9493F}
 		{E619F72F-A242-432C-9145-64EA55DF9DF8} = {36E887BA-A885-405D-B082-62793BF9493F}
 		{A8130976-186C-43CF-AC0A-CBD7C886E7F6} = {36E887BA-A885-405D-B082-62793BF9493F}
