@@ -18,6 +18,6 @@ namespace ImageProcessing.DomainModel.Factory.Morphology.Interface
         /// where the <see cref="MorphologyOperator"/> represents an
         /// enumeration for types implementing the <see cref="IMorphologyBinary"/>.
         /// </summary>
-        IMorphologyBinary BinaryFilter(MorphologyOperator filter);
+        IMorphologyBinary GetBinary(MorphologyOperator filter);
     }
 }

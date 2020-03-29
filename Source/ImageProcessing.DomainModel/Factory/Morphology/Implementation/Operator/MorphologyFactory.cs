@@ -20,7 +20,7 @@ namespace ImageProcessing.DomainModel.Factory.Morphology.Implementation
     public sealed class MorphologyFactory : IMorphologyFactory
     {
         /// <inheritdoc/>
-        public IMorphologyBinary BinaryFilter(MorphologyOperator filter)
+        public IMorphologyBinary GetBinary(MorphologyOperator filter)
         => filter switch
         {
             MorphologyOperator.Addition

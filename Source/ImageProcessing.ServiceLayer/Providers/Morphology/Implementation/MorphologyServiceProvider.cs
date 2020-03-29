@@ -41,7 +41,7 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.Morphology
 
             return _morphologyService
                        .ApplyOperator(lvalue, rvalue,
-                           _morphologyFactory.BinaryFilter(filter)         
+                           _morphologyFactory.GetBinary(filter)         
             );
         }
 
