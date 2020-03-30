@@ -9,6 +9,7 @@ using ImageProcessing.DomainModel.Convolution.Implemetation.EdgeDetection.Laplac
 using ImageProcessing.DomainModel.Convolution.Implemetation.EdgeDetection.SobelOperator;
 using ImageProcessing.DomainModel.Convolution.Implemetation.Emboss;
 using ImageProcessing.DomainModel.Convolution.Implemetation.Sharpen;
+using ImageProcessing.DomainModel.Factory.Convolution.Implementation;
 using ImageProcessing.DomainModel.Factory.Convolution.Interface;
 
 using NSubstitute;
@@ -26,16 +27,12 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Convolution
         [SetUp]
         public void SetUp()
         {
-            _convolutionFactory = Substitute.For<IConvolutionFilterFactory>();
+            _convolutionFactory = new ConvolutionFilterFactory();
         }
 
         [Test]
         public void FactoryReturnsBoxBlur3x3ByEnumValue()
         {
-            _convolutionFactory
-                .Get(ConvolutionFilter.BoxBlur3x3)
-                .Returns(_ => new BoxBlur3x3());
-
             Assert.That(
                 _convolutionFactory.Get(
                     ConvolutionFilter.BoxBlur3x3
@@ -46,10 +43,6 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Convolution
         [Test]
         public void FactoryReturnsBoxBlur5x5ByEnumValue()
         {
-            _convolutionFactory
-                 .Get(ConvolutionFilter.BoxBlur5x5)
-                 .Returns(_ => new BoxBlur5x5());
-
             Assert.That(
                 _convolutionFactory.Get(
                     ConvolutionFilter.BoxBlur5x5
@@ -60,10 +53,6 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Convolution
         [Test]
         public void FactoryReturnsEmbossOperator3x3ByEnumValue()
         {
-            _convolutionFactory
-                .Get(ConvolutionFilter.EmbossOperator3x3)
-                .Returns(_ => new Emboss3x3());
-
             Assert.That(
                 _convolutionFactory.Get(
                     ConvolutionFilter.EmbossOperator3x3
@@ -74,10 +63,6 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Convolution
         [Test]
         public void FactoryReturnsGaussianBlur3x3ByEnumValue()
         {
-            _convolutionFactory
-                .Get(ConvolutionFilter.GaussianBlur3x3)
-                .Returns(_ => new GaussianBlur3x3());
-
             Assert.That(
                 _convolutionFactory.Get(
                     ConvolutionFilter.GaussianBlur3x3
@@ -88,10 +73,6 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Convolution
         [Test]
         public void FactoryReturnsGaussianBlur5x5ByEnumValue()
         {
-            _convolutionFactory
-                .Get(ConvolutionFilter.GaussianBlur5x5)
-                .Returns(_ => new GaussianBlur3x3());
-
             Assert.That(
                 _convolutionFactory.Get(
                     ConvolutionFilter.GaussianBlur5x5
@@ -102,10 +83,6 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Convolution
         [Test]
         public void FactoryReturnsGaussianOperator3x3ByEnumValue()
         {
-            _convolutionFactory
-                .Get(ConvolutionFilter.GaussianOperator3x3)
-                .Returns(_ => new GaussianOperator3x3());
-
             Assert.That(
                 _convolutionFactory.Get(
                     ConvolutionFilter.GaussianOperator3x3
@@ -116,10 +93,6 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Convolution
         [Test]
         public void FactoryReturnsGaussianOperator5x5ByEnumValue()
         {
-            _convolutionFactory
-                .Get(ConvolutionFilter.GaussianOperator5x5)
-                .Returns(_ => new GaussianOperator5x5());
-
             Assert.That(
                 _convolutionFactory.Get(
                     ConvolutionFilter.GaussianOperator5x5
@@ -130,10 +103,6 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Convolution
         [Test]
         public void FactoryReturnsLaplacianOperator3x3ByEnumValue()
         {
-            _convolutionFactory
-                .Get(ConvolutionFilter.LaplacianOperator3x3)
-                .Returns(_ => new LaplacianOperator3x3());
-
             Assert.That(
                 _convolutionFactory.Get(
                     ConvolutionFilter.LaplacianOperator3x3
@@ -144,10 +113,6 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Convolution
         [Test]
         public void FactoryReturnsLaplacianOperator5x5ByEnumValue()
         {
-            _convolutionFactory
-                .Get(ConvolutionFilter.LaplacianOperator5x5)
-                .Returns(_ => new LaplacianOperator5x5());
-
             Assert.That(
                 _convolutionFactory.Get(
                     ConvolutionFilter.LaplacianOperator5x5
@@ -158,10 +123,6 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Convolution
         [Test]
         public void FactoryReturnsMotionBlur9x9ByEnumValue()
         {
-            _convolutionFactory
-                .Get(ConvolutionFilter.MotionBlur9x9)
-                .Returns(_ => new MotionBlur9x9());
-
             Assert.That(
                 _convolutionFactory.Get(
                     ConvolutionFilter.MotionBlur9x9
@@ -172,10 +133,6 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Convolution
         [Test]
         public void FactoryReturnsSharpenOperator3x3ByEnumValue()
         {
-            _convolutionFactory
-                .Get(ConvolutionFilter.SharpenOperator3x3)
-                .Returns(_ => new Sharpen3x3());
-
             Assert.That(
                 _convolutionFactory.Get(
                     ConvolutionFilter.SharpenOperator3x3
@@ -186,10 +143,6 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Convolution
         [Test]
         public void FactoryReturnsSobelOperatorHorizontal3x3ByEnumValue()
         {
-            _convolutionFactory
-                .Get(ConvolutionFilter.SobelOperatorHorizontal3x3)
-                .Returns(_ => new SobelOperatorHorizontal());
-
             Assert.That(
                 _convolutionFactory.Get(
                     ConvolutionFilter.SobelOperatorHorizontal3x3
@@ -200,10 +153,6 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Convolution
         [Test]
         public void FactoryReturnsSobelOperatorVertical3x3ByEnumValue()
         {
-            _convolutionFactory
-                .Get(ConvolutionFilter.SobelOperatorVertical3x3)
-                .Returns(_ => new SobelOperatorVertical());
-
             Assert.That(
                 _convolutionFactory.Get(
                     ConvolutionFilter.SobelOperatorVertical3x3
@@ -214,10 +163,6 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Convolution
         [Test]
         public void FactoryThrowsNotImplementedExceptionOnUnknownEnum()
         {
-            _convolutionFactory
-                .Get(ConvolutionFilter.Unknown)
-                .Throws(new NotImplementedException());
-
             Assert.Throws<NotImplementedException>(
                 () => _convolutionFactory.Get(ConvolutionFilter.Unknown)
             );

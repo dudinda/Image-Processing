@@ -1,6 +1,7 @@
 using System;
 
 using ImageProcessing.Common.Enums;
+using ImageProcessing.DomainModel.Factory.RgbFilters.Color.Implementation;
 using ImageProcessing.DomainModel.Factory.RgbFilters.Color.Interface;
 using ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Color.Colors;
 
@@ -19,16 +20,12 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Color
         [SetUp]
         public void SetUp()
         {
-            _colorFactory = Substitute.For<IColorFactory>();
+            _colorFactory = new ColorFactory();
         }
 
         [Test]
         public void FactoryReturnsRedColorOnRCombination()
         {
-            _colorFactory.Get(
-                RgbColors.Red
-            ).Returns(_ => new RColor());
-
             Assert.That(
                 _colorFactory.Get(
                     RgbColors.Red
@@ -39,10 +36,6 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Color
         [Test]
         public void FactoryReturnsBlueColorOnBCombination()
         {
-            _colorFactory.Get(
-                 RgbColors.Blue
-             ).Returns(_ => new BColor());
-
             Assert.That(
                 _colorFactory.Get(
                     RgbColors.Blue
@@ -53,10 +46,6 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Color
         [Test]
         public void FactoryReturnsGreenColorOnBCombination()
         {
-            _colorFactory.Get(
-                RgbColors.Green
-            ).Returns(_ => new GColor());
-
             Assert.That(
                 _colorFactory.Get(
                    RgbColors.Green
@@ -67,10 +56,6 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Color
         [Test]
         public void FactoryReturnsRedGreenColorOnRGCombination()
         {
-            _colorFactory.Get(
-                 RgbColors.Green | RgbColors.Red
-             ).Returns(_ => new RGColor());
-
             Assert.That(
                 _colorFactory.Get(
                     RgbColors.Green | RgbColors.Red
@@ -81,10 +66,6 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Color
         [Test]
         public void FactoryReturnsRedBlueColorOnRBCombination()
         {
-            _colorFactory.Get(
-                RgbColors.Blue | RgbColors.Red
-            ).Returns(_ => new RBColor());
-
             Assert.That(
                 _colorFactory.Get(
                     RgbColors.Blue | RgbColors.Red
@@ -95,10 +76,6 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Color
         [Test]
         public void FactoryReturnsBlueGreenColorOnBGCombination()
         {
-            _colorFactory.Get(
-                 RgbColors.Blue | RgbColors.Green 
-             ).Returns(_ => new BGColor());
-
             Assert.That(
                 _colorFactory.Get(
                     RgbColors.Blue | RgbColors.Green 
@@ -109,10 +86,6 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Color
         [Test]
         public void FactoryReturnsRedGreenBlueColorOnRGBCombination()
         {
-            _colorFactory.Get(
-                RgbColors.Blue | RgbColors.Green | RgbColors.Red
-            ).Returns(_ => new RGBColor());
-
             Assert.That(
                 _colorFactory.Get(
                     RgbColors.Blue | RgbColors.Green | RgbColors.Red
@@ -123,10 +96,6 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Color
         [Test]
         public void FactoryThrowsNotImplementedExceptionOnUnknownEnum()
         {
-            _colorFactory
-                .Get(RgbColors.Unknown)
-                .Throws(new NotImplementedException());
-
             Assert.Throws<NotImplementedException>(
                 () => _colorFactory.Get(RgbColors.Unknown)
             );
