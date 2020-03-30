@@ -13,9 +13,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ImageProcessing.Common\ImageProcessing.Common.csproj" />
-    <ProjectReference Include="..\ImageProcessing.ServiceLayer\ImageProcessing.ServiceLayer.csproj" />
     <ProjectReference Include="..\ImageProcessing.Core\ImageProcessing.Core.csproj" />
     <ProjectReference Include="..\ImageProcessing.DomainModel\ImageProcessing.DomainModel.csproj" />
+    <ProjectReference Include="..\ImageProcessing.ServiceLayer\ImageProcessing.ServiceLayer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,13 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="ImageProcessing.ServiceLayer">
-      <HintPath>..\ImageProcessing.ServiceLayer\bin\Debug\netstandard2.0\ImageProcessing.ServiceLayer.dll</HintPath>
-    </Reference>
     <Reference Include="System.Windows.Forms.DataVisualization" />
-    <Reference Include="WindowsBase">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\WindowsBase.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
