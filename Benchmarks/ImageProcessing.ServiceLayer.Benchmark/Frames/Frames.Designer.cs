@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ImageProcessing.Services.Benchmark.Frames {
+namespace ImageProcessing.ServiceLayer.Benchmark.Frames {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace ImageProcessing.Services.Benchmark.Frames {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ImageProcessing.Services.Benchmark.Frames.Frames", typeof(Frames).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ImageProcessing.ServiceLayer.Benchmark.Frames.Frames", typeof(Frames).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,26 @@ namespace ImageProcessing.Services.Benchmark.Frames {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] _1920x1080frame {
+            get {
+                object obj = ResourceManager.GetObject("_1920x1080frame", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] _2560x1440frame {
+            get {
+                object obj = ResourceManager.GetObject("_2560x1440frame", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }

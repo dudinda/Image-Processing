@@ -4,15 +4,18 @@ using System.IO;
 
 using BenchmarkDotNet.Attributes;
 
-using ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Binary;
-using ImageProcessing.DomainModel.Model.RgbFilters.Interface;
+using ImageProcessing.DomainModel.Convolution.Implemetation.Blur.GaussianBlur;
+using ImageProcessing.DomainModel.Convolution.Interface;
+using ImageProcessing.ServiceLayer.Services.Convolution.Implementation;
+using ImageProcessing.ServiceLayer.Services.ConvolutionFilterServices.Interface;
 
-namespace ImageProcessing.DomainModel.Benchmark.RgbFilter.Binary
+namespace ImageProcessing.ServiceLayer.Benchmark.Services.Convolution.Kernel5x5
 {
     [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
-    public class BinaryFilterBenchmark : IDisposable
+    public class CovolutionFilter5x5Benchmark : IDisposable
     {
-        private IRgbFilter filter = new BinaryFilter();
+        private IConvolutionFilter filter5x5 = new GaussianBlur5x5();
+        private IConvolutionFilterService service = new ConvolutionFilterService();
 
         private Bitmap _frame1920x1080;
         private Bitmap _frame2560x1440;
@@ -34,32 +37,32 @@ namespace ImageProcessing.DomainModel.Benchmark.RgbFilter.Binary
         }
 
         [Benchmark]
-        public void ApplyBinaryFilterTo1920x1080()
+        public void Apply5x5ConvolutionTo1920x1080()
         {
-            filter.Filter(_frame1920x1080);           
+            service.Convolution(_frame1920x1080, filter5x5);
         }
 
         [Benchmark]
-        public void ApplyBinaryFilterTo1920x1080Frame60Fps()
+        public void Apply5x5ConvoltuionTo1920x1080Frame60Fps()
         {
-            for(var start = 0; start < frameRate; ++start)
+            for (var start = 0; start < frameRate; ++start)
             {
-                filter.Filter(_frame1920x1080);
+                service.Convolution(_frame1920x1080, filter5x5);
             }
         }
 
         [Benchmark]
-        public void ApplyBinaryFilterTo2560x1440()
+        public void Apply5x5ConvolutionTo2560x1440()
         {
-            filter.Filter(_frame2560x1440);
+            service.Convolution(_frame2560x1440, filter5x5);
         }
 
         [Benchmark]
-        public void ApplyBinaryFilterTo2560x1440Frame60Fps()
+        public void Apply5x5ConvolutionTo2560x1440Frame60Fps()
         {
             for (var start = 0; start < frameRate; ++start)
             {
-                filter.Filter(_frame2560x1440);
+                service.Convolution(_frame2560x1440, filter5x5);
             }
         }
 

@@ -9,7 +9,8 @@ using ImageProcessing.DomainModel.Model.RgbFilters.Interface;
 
 namespace ImageProcessing.DomainModel.Benchmark.RgbFilter.Inversion
 {
-    internal sealed class InversionFilterBenchmark : IDisposable
+    [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
+    public class InversionFilterBenchmark : IDisposable
     {
         private IRgbFilter filter = new InversionFilter();
 

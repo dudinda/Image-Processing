@@ -10,7 +10,8 @@ using ImageProcessing.DomainModel.Model.RgbFilters.Interface;
 
 namespace ImageProcessing.DomainModel.Benchmark.RgbFilter.Color
 {
-    internal sealed class ColorFilterBenchmark : IDisposable
+    [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
+    public class ColorFilterBenchmark : IDisposable
     {
         private IRgbFilter filter = new ColorFilter(new RGColor());
 

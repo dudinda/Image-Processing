@@ -9,7 +9,8 @@ using ImageProcessing.DomainModel.Model.RgbFilters.Interface;
 
 namespace ImageProcessing.DomainModel.Benchmark.RgbFilter.Grayscale
 {
-    internal sealed class GrayscaleFilterBenchmark : IDisposable
+    [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
+    public class GrayscaleFilterBenchmark : IDisposable
     {
         private IRgbFilter filter = new GrayscaleFilter();
 
