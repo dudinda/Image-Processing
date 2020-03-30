@@ -86,7 +86,7 @@
       <Name>ImageProcessing.DomainModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.ServiceLayer\ImageProcessing.ServiceLayer.csproj">
-      <Project>{fad40911-9967-4dcc-9ca1-6bb37bb8d9bd}</Project>
+      <Project>{0C16EDBD-D0F9-4144-AE13-A8FD7670BEB0}</Project>
       <Name>ImageProcessing.ServiceLayer</Name>
     </ProjectReference>
   </ItemGroup>
