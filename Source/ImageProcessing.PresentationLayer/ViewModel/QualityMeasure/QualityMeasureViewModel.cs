@@ -1,13 +1,16 @@
 using System.Collections.Concurrent;
 using System.Drawing;
 
+using ImageProcessing.Common.Helpers;
+
 namespace ImageProcessing.PresentationLayer.ViewModel.QualityMeasure
 {
-    public sealed class QualityMeasureViewModel
+    internal sealed class QualityMeasureViewModel
     {
         public QualityMeasureViewModel(ConcurrentQueue<Bitmap> queue)
         {
-            Queue = queue;
+            Queue = Requires.IsNotNull(
+                queue, nameof(queue));
         }
 
         public ConcurrentQueue<Bitmap> Queue { get; }

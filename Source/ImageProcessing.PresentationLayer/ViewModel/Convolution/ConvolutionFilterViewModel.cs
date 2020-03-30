@@ -1,12 +1,15 @@
 using System.Drawing;
 
+using ImageProcessing.Common.Helpers;
+
 namespace ImageProcessing.PresentationLayer.ViewModel.Convolution
 {
-    public sealed class ConvolutionFilterViewModel
+    internal sealed class ConvolutionFilterViewModel
     {
         public ConvolutionFilterViewModel(Bitmap source)
         {
-            Source = source;
+            Source = Requires.IsNotNull(
+                source, nameof(source));
         }
 
         public Bitmap Source { get; }
