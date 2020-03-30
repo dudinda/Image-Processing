@@ -3,7 +3,7 @@ using System.ComponentModel;
 namespace ImageProcessing.Common.Enums
 {
     /// <summary>
-    /// Specifies a toolbar action of the main window
+    /// Specifies a toolbar action of the main window.
     /// </summary>
     public enum ToolbarAction
     {

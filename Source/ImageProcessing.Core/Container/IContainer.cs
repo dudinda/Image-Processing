@@ -11,7 +11,7 @@ namespace ImageProcessing.Core.Container
     {
         /// <summary>
         /// Registers the <typeparamref name="TService"/>  as <typeparamref name="TImplementation"/>
-        /// with the transient scope.
+        /// with a transient scope.
         /// </summary>
         void RegisterTransient<TService, TImplementation>()
             where TImplementation : TService;
@@ -25,20 +25,20 @@ namespace ImageProcessing.Core.Container
 
         /// <summary>
         /// Registers the signleton <typeparamref name="TService"/>  as <typeparamref name="TImplementation"/>
-        /// with the singleton scope.
+        /// with a singleton scope.
         /// </summary>
         void RegisterSingleton<TService, TImplementation>()
             where TImplementation : TService;
 
         /// <summary>
         /// Registers a concrete type as a service
-        /// with the transient scope.
+        /// with a transient scope.
         /// </summary>
         void RegisterTransient<TService>();
 
         /// <summary>
         /// Registers a concrete type as a service
-        /// with the singleton scope.
+        /// with a singleton scope.
         /// </summary>
         void RegisterSingleton<TService>();
 
@@ -49,14 +49,14 @@ namespace ImageProcessing.Core.Container
         void RegisterScoped<TService>();
 
         /// <summary>
-        /// Registers the named signleton <typeparamref name="TService"/> as a named
-        /// <typeparamref name="TImplementation"/> with the transient scope.
+        /// Registers the named singleton <typeparamref name="TService"/> as a named
+        /// <typeparamref name="TImplementation"/> with a transient scope.
         /// </summary>
         void RegisterTransient<TService, TImplementation>(string serviceName)
             where TImplementation : TService;
 
         /// <summary>
-        /// Registers the named signleton <typeparamref name="TService"/> as a named
+        /// Registers the named singleton <typeparamref name="TService"/> as a named
         /// <typeparamref name="TImplementation"/>  with the caller-name scope.
         ///</summary>
         void RegisterScoped<TService, TImplementation>(string serviceName)
@@ -64,14 +64,14 @@ namespace ImageProcessing.Core.Container
 
         /// <summary>
         /// Registers the named signleton <typeparamref name="TService"/>  as a named
-        /// <typeparamref name="TImplementation"/> with the singleton scope.
+        /// <typeparamref name="TImplementation"/> with a singleton scope.
         /// </summary>
         void RegisterSingleton<TService, TImplementation>(string serviceName)
             where TImplementation : TService;
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> instance
-        /// with the transient scope.
+        /// with a transient scope.
         /// </summary>
         void RegisterTransient<TService>(TService instance);
 
@@ -83,13 +83,13 @@ namespace ImageProcessing.Core.Container
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> instance
-        /// with the singleton scope.
+        /// with a singleton scope.
         /// </summary>
         void RegisterSingleton<TService>(TService instance);
 
         /// <summary>
         /// Registers the named <typeparamref name="TService"/> instance
-        /// with the transient scope.
+        /// with a transient scope.
         /// </summary>
         void RegisterTransient<TService>(TService instance, string serviceName);
 
@@ -101,13 +101,13 @@ namespace ImageProcessing.Core.Container
 
         /// <summary>
         /// Registers the named <typeparamref name="TService"/> instance
-        /// with the singleton scope.
+        /// with a singleton scope.
         /// </summary>
         void RegisterSingleton<TService>(TService instance, string serviceName);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes.
-        /// the dependencies of the service with the transient scope.
+        /// the dependencies of the service with a transient scope.
         /// </summary>
         void RegisterTransient<TService, TArgument>(Expression<Func<TArgument, TService>> factory);
 
@@ -119,13 +119,13 @@ namespace ImageProcessing.Core.Container
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes
-        /// the dependencies of the service with the singleton scope.
+        /// the dependencies of the service with a singleton scope.
         /// </summary>
         void RegisterSingleton<TService, TArgument>(Expression<Func<TArgument, TService>> factory);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes
-        /// the named dependencies of the service with the transient scope.
+        /// the named dependencies of the service with a transient scope.
         /// </summary>
         void RegisterTransient<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name);
 
@@ -137,12 +137,12 @@ namespace ImageProcessing.Core.Container
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes
-        /// the named dependencies of the service with the singleton scope.
+        /// the named dependencies of the service with a singleton scope.
         /// </summary>
         void RegisterSingleton<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name);
 
         /// <summary>
-        /// Enable annotated dependency injection via constructor.
+        /// Enable the annotated dependency injection via constructor.
         /// </summary>
         void EnableAnnotatedConstructorInjection();
 

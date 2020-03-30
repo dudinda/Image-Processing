@@ -11,7 +11,7 @@ namespace ImageProcessing.DomainModel.Factory.Base
     {
         /// <summary>
         /// Provides a factory method
-        /// where <typeparamref name="TEnum"/> represents
+        /// where a <typeparamref name="TEnum"/> value represents an
         /// enumeration for the <typeparamref name="TFilter"/>.
         /// </summary>
         TFilter Get(TEnum filter);

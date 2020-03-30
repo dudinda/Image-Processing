@@ -13,7 +13,7 @@ namespace ImageProcessing.DomainModel.Factory.Distributions.Implementation
     {
         /// <summary>
         /// A factory method
-        /// where <see cref="Distribution"/> represents an
+        /// where the <see cref="Distribution"/> represents an
         /// enumeration for the types implementing the <see cref="IDistribution"/>.
         /// </summary>
         public IDistribution Get(Distribution distribution)

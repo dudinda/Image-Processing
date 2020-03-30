@@ -7,7 +7,7 @@ namespace ImageProcessing.Core.Controller.Interface
 {
     /// <summary>
     /// Represents the access point to the specified DI container,
-    /// resolving dependencies via <see cref="IoC"/>.
+    /// resolving dependencies via the <see cref="IoC"/>.
     /// Further, controls the flow of the application,
     /// by providing the <see cref="Run{TPresenter}"/>
     /// and <see cref="Run{TPresenter, TViewModel}"/> methods.

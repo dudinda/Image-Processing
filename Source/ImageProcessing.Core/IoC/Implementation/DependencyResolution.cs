@@ -7,7 +7,6 @@ using ImageProcessing.Core.Container;
 using ImageProcessing.Core.IoC.Interface;
 using ImageProcessing.Core.View;
 
-[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.Core.IoC.Implementation
 {
     /// <inheritdoc cref="IDependencyResolution"/>

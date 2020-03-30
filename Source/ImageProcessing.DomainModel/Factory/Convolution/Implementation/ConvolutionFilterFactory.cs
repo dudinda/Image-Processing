@@ -19,8 +19,8 @@ namespace ImageProcessing.DomainModel.Factory.Convolution.Implementation
     {
         /// <summary>
         /// A factory method
-        /// where <see cref="ConvolutionFilter"/> represents
-        /// enumeration for types implementing <see cref="IConvolutionFilter"/>.
+        /// where the <see cref="ConvolutionFilter"/> represents an
+        /// enumeration for the types implementing the <see cref="IConvolutionFilter"/>.
         /// </summary>
         public IConvolutionFilter Get(ConvolutionFilter filter)
         => filter switch

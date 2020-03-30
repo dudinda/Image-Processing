@@ -11,8 +11,8 @@ namespace ImageProcessing.DomainModel.Factory.RgbFilters.Rgb.Interface
     public interface IRgbFilterFactory : IBaseFactory<IRgbFilter, RgbFilter>
     {
         /// <summary>
-        /// Provides a factory method for all <see cref="RgbColors"/>
-        /// implementing <see cref="IRgbFilter"/>.
+        /// Provides a factory method for all the <see cref="RgbColors"/>
+        /// implementing the <see cref="IRgbFilter"/>.
         /// </summary>
         IRgbFilter Get(RgbColors color);
     }

@@ -11,6 +11,10 @@ using ImageProcessing.PresentationLayer.Views.ViewComponent.RgbMenu;
 
 namespace ImageProcessing.PresentationLayer.Views.Main
 {
+    /// <summary>
+    /// Represents the base behavior
+    /// of the main window.
+    /// </summary>
     public interface IMainView : IView,
         IError, IBitmapContainer, IColorMenu,
         IBitmapInfo, IBitmapZoom, ICursor
@@ -19,7 +23,7 @@ namespace ImageProcessing.PresentationLayer.Views.Main
         /// Specifies a path to the opened file.
         /// </summary>
         string PathToFile { get; set; }
- 
+
         void AddToUndoContainer((Bitmap changed, ImageContainer from) action);
 
         /// <summary>

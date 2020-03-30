@@ -25,8 +25,8 @@ namespace ImageProcessing.DomainModel.Factory.RgbFilters.Rgb.Implementation
         }
 
         /// <summary>
-        /// Provides a factory method for all <see cref="RgbFilter"/>
-        /// implementing <see cref="IRgbFilter"/>.
+        /// Provides a factory method for all the <see cref="RgbFilter"/>
+        /// implementing the <see cref="IRgbFilter"/>.
         /// </summary>
         public IRgbFilter Get(RgbFilter filter)
         => filter switch

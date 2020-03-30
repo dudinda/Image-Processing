@@ -4,14 +4,14 @@ using System.Linq;
 namespace ImageProcessing.Common.Extensions.TypeExtensions
 {
     /// <summary>
-    /// Extension methods for a <see cref="Type">.
+    /// Extension methods for a <see cref="Type"> class.
     /// </summary>
     public static class TypeExtension
     {
         /// <summary>
-        /// Get the specified <typeparamref name="TValue"/> of an <typeparamref name="TAttribute"/> 
-        /// from <see cref="Type"/>.
-        /// <para>Where <typeparamref name="TAttribute"/> is an <see cref="Attribute"/>. </para>
+        /// Get the specified <typeparamref name="TValue"/> from an <typeparamref name="TAttribute"/> 
+        /// defined on a <see cref="Type"/>.
+        /// <para>Where the <typeparamref name="TAttribute"/> is an <see cref="Attribute"/>. </para>
         /// </summary>
         public static TValue GetAttributeValue<TAttribute, TValue>
             (this Type type, Func<TAttribute, TValue> valueSelector)
@@ -40,8 +40,8 @@ namespace ImageProcessing.Common.Extensions.TypeExtensions
 
         /// <summary>
         /// Check whether the specified <see cref="Type"/>
-        /// contains the <typeparamref name="TAttribute"/>.
-        /// <para>Where <typeparamref name="TAttribute"/> is an <see cref="Attribute"/>. </para>
+        /// contains a <typeparamref name="TAttribute"/>.
+        /// <para>Where the <typeparamref name="TAttribute"/> is an <see cref="Attribute"/>. </para>
         /// </summary>
         public static bool HasAttribute<TAttribute>(this Type type)
             where TAttribute : Attribute

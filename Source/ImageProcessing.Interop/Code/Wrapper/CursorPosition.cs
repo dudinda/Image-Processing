@@ -7,7 +7,7 @@ namespace ImageProcessing.Interop.Code.Wrapper
 {
     /// <summary>
     /// Provides a wrapper over the native windows kernel
-    /// method <see cref="NativeMethods.GetCursorPos(out Structs.LPPOINT)"/>
+    /// method <see cref="NativeMethods.GetCursorPos(out Structs.LPPOINT)"/>.
     /// </summary>
     public static class CursorPosition
     {

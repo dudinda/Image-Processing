@@ -1,7 +1,6 @@
 using System;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.EnumExtensions;
@@ -14,10 +13,10 @@ using ImageProcessing.PresentationLayer.ViewModel.Histogram;
 using ImageProcessing.PresentationLayer.Views.Histogram;
 using ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
 
-[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.PresentationLayer.Presenters
 {
-    internal sealed class HistogramPresenter : BasePresenter<IHistogramView, HistogramViewModel>
+    internal sealed class HistogramPresenter
+        : BasePresenter<IHistogramView, HistogramViewModel>
     {
         private readonly IBitmapLuminanceDistributionService _distributionService;
 

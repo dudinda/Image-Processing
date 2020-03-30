@@ -11,8 +11,8 @@ namespace ImageProcessing.DomainModel.Factory.RgbFilters.Color.Implementation
     public sealed class ColorFactory : IColorFactory
     {
         /// <summary>
-        /// Provides a factory method for all <see cref="RgbColors"/>
-        /// implementing <see cref="IColor"/>.
+        /// Provides a factory method for all the <see cref="RgbColors"/>
+        /// implementing the <see cref="IColor"/>.
         /// </summary>
         public IColor Get(RgbColors filter)
             => filter switch

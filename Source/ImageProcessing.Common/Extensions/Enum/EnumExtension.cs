@@ -11,7 +11,7 @@ namespace ImageProcessing.Common.Extensions.EnumExtensions
     public static class EnumExtension
     {
         /// <summary>
-        /// Get a <see cref="Enum"/> value by name.
+        /// Get a <see cref="Enum"/> value by the name.
         /// </summary>
         /// <typeparam name="TEnum">An enumerated type.</typeparam>
         /// <param name="value">The source value.</param>
@@ -19,7 +19,7 @@ namespace ImageProcessing.Common.Extensions.EnumExtensions
             where TEnum : Enum => (TEnum)Enum.Parse(typeof(TEnum), value);
 
         /// <summary>
-        /// Get a <see cref="Enum"/> value by integer.
+        /// Get a <see cref="Enum"/> value by an integer.
         /// </summary>
         /// <typeparam name="TEnum">An enumerated type.</typeparam>
         /// <param name="value">The source value.</param>
@@ -42,11 +42,11 @@ namespace ImageProcessing.Common.Extensions.EnumExtensions
 
         /// <summary>
         /// Partition the specified <typeparamref name="TEnum"/> over
-        /// the specified <paramref name="partition"/>. Returns the
-        /// specified <typeparamref name="TCallOut"/> from <paramref name="callback"/>.
+        /// the <paramref name="partition"/>. Returns the
+        /// specified <typeparamref name="TCallOut"/> from a <paramref name="callback"/>.
         /// </summary>
-        public static TCallOut PartitionOver<TEnum, TCallOut>
-            (this TEnum src, (TEnum from, TEnum to) partition, Func<TCallOut> callback)
+        public static TOutResult PartitionOver<TEnum, TOutResult>
+            (this TEnum src, (TEnum from, TEnum to) partition, Func<TOutResult> callback)
             where TEnum : Enum
         {
             var (from, to) = (Convert.ToInt32(partition.from), Convert.ToInt32(partition.to));
@@ -67,7 +67,7 @@ namespace ImageProcessing.Common.Extensions.EnumExtensions
         }
 
         /// <summary>
-        /// Get a <see cref="Enum"/ >value from a specified description value.
+        /// Get a <see cref="Enum" /> value from the specified description value.
         /// </summary>
         /// <typeparam name="TEnum">An enumerated type.</typeparam>
         /// <param name="description>The source value.</param>
@@ -105,6 +105,13 @@ namespace ImageProcessing.Common.Extensions.EnumExtensions
             throw new ArgumentException("Not found.", nameof(description));
         }
 
+        /// <summary>
+        /// Get all values from the specified <typeparamref name="TEnum"/>
+        /// except for the default value.
+        /// </summary>
+        /// <typeparam name="TEnum">An enumerated type.</typeparam>
+        /// <param name="enumeration">The source enumeration.</param>
+        /// <returns>All values except for the default.</returns>
         public static TEnum[] GetEnumValuesExceptDefault<TEnum>(this TEnum enumeration)
         { 
             return Enum.GetValues(typeof(TEnum))

@@ -11,12 +11,12 @@ namespace ImageProcessing.DomainModel.Convolution.Interface
         string FilterName { get; }
 
         /// <summary>
-        /// Specifies the <see cref="Kernel"/> multiplication factor.
+        /// Specifies a <see cref="Kernel"/> multiplication factor.
         /// </summary>
         double Factor { get; }
 
         /// <summary>
-        /// Specifies the convolution matrix of a type implementing <see cref="IConvolutionFilter"/>.
+        /// Specifies a convolution matrix of the type implementing the <see cref="IConvolutionFilter"/>.
         /// </summary>
         double[,] Kernel { get; }
 

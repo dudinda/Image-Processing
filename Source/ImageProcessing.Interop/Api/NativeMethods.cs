@@ -7,14 +7,14 @@ using ImageProcessing.Interop.Code.Structs;
 namespace ImageProcessing.Interop.Api
 {
     /// <summary>
-    /// Provides the API from windows kernel
-    /// native methods
+    /// Provides an API from windows kernel
+    /// native methods.
     /// </summary>
     internal static class NativeMethods
     {
         /// <summary>
         /// Receives the window handles associated
-        /// with a thread
+        /// with a thread.
         /// </summary>
         internal delegate bool EnumThreadWndProc(IntPtr hWnd, IntPtr lp);
 

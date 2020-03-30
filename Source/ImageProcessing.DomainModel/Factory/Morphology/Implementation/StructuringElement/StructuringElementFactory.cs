@@ -15,7 +15,7 @@ namespace ImageProcessing.DomainModel.Factory.StructuringElement.Implementation
         /// <summary>
         /// A factory method
         /// where the <see cref="StructuringElem"/> represents an
-        /// enumeration for types implementing the <see cref="IStructuringElementFactory"/>.
+        /// enumeration for the types implementing the <see cref="IStructuringElementFactory"/>.
         /// </summary>
         public IStructuringElement Get(StructuringElem filter)
         => filter switch

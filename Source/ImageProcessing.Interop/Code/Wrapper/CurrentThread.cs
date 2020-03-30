@@ -4,7 +4,7 @@ namespace ImageProcessing.Interop.Code.Wrapper
 {
     /// <summary>
     /// Provides a wrapper over the native windows kernel
-    /// method <see cref="NativeMethods.GetCurrentThreadId"/>
+    /// method <see cref="NativeMethods.GetCurrentThreadId"/>.
     /// </summary>
     public static class CurrentThread
     {

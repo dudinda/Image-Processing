@@ -6,15 +6,15 @@ using System.Drawing.Imaging;
 namespace ImageProcessing.Common.Extensions.BitmapExtensions
 {
     /// <summary>
-    /// Extension methods for a <see cref="Bitmap"> class
+    /// Extension methods for a <see cref="Bitmap"> class.
     /// </summary>
     public static class BitmapExtension
     {
         /// <summary>
         /// Perform the Fisher–Yates shuffle on a selected bitmap.
         /// </summary>
-        /// <param name="bitmap">A bitmap</param>
-        /// <returns>The shuffled bitmap</returns>
+        /// <param name="bitmap">A bitmap.</param>
+        /// <returns>The shuffled bitmap.</returns>
         public static Bitmap Shuffle(this Bitmap bitmap)
         {
             if (bitmap is null)
@@ -35,7 +35,7 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
             {
                 var startPtr = (byte*)bitmapData.Scan0.ToPointer();
 
-                byte R, G, B;
+                byte r, g, b;
 
                 var ptr = startPtr;
 
@@ -43,17 +43,17 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
                 {
                     var newPtr = startPtr + random.Next(index) * ptrStep;
 
-                    B = ptr[0];
-                    G = ptr[1];
-                    R = ptr[2];
+                    r = ptr[0];
+                    g = ptr[1];
+                    b = ptr[2];
 
                     ptr[0] = newPtr[0];
                     ptr[1] = newPtr[1];
                     ptr[2] = newPtr[2];
 
-                    newPtr[0] = B;
-                    newPtr[1] = G;
-                    newPtr[2] = R;
+                    newPtr[0] = r;
+                    newPtr[1] = g;
+                    newPtr[2] = b;
 
                 }
             }
@@ -96,13 +96,13 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
         }
 
         /// <summary>
-        /// Get a number of bits per pixel of a selected image
+        /// Get a number of bits per pixel of a selected image.
         /// </summary>
-        /// <param name="bmp"></param>
-        /// <returns></returns>
-        public static byte GetBitsPerPixel(this Bitmap bmp)
+        /// <param name="bitmap">A bitmap.</param>
+        /// <returns>A number of bits per pixel.</returns>
+        public static byte GetBitsPerPixel(this Bitmap bitmap)
         {
-            switch (bmp.PixelFormat)
+            switch (bitmap.PixelFormat)
             {
                 case PixelFormat.Format8bppIndexed:
                     return 8;
@@ -120,6 +120,14 @@ namespace ImageProcessing.Common.Extensions.BitmapExtensions
             }              
         }
 
+        /// <summary>
+        /// Adjust an image border by the
+        /// 
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="numberOfPixels">Number of pixels to adjust.</param>
+        /// <param name="borderColor">A color of the border.</param>
+        /// <returns>An adjusted bitmap.</returns>
         public static Bitmap AdjustBorder(this Bitmap src, int numberOfPixels, Color borderColor)
         {
             var result = new Bitmap(src);

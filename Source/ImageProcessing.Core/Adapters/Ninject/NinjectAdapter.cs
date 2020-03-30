@@ -9,8 +9,8 @@ using Ninject.Extensions.NamedScope;
 namespace ImageProcessing.Core.Adapters.Ninject
 {
     /// <summary>
-    /// Provides access to Ninject <typeparamref name="StandardKernel"/>
-    /// via <see cref="IContainer"/>.
+    /// Provides access to the Ninject <typeparamref name="StandardKernel"/>
+    /// via the <see cref="IContainer"/>.
     /// </summary>
     public sealed class NinjectAdapter : IContainer
     {

@@ -13,9 +13,9 @@ namespace ImageProcessing.Core.IoC.Interface
     public interface IDependencyResolution : IDisposable
     {
         /// <summary>
-        /// Register the <typeparamref name="TView"/> as <typeparamref name="TImplementation"/> with the transient scope.
+        /// Register the <typeparamref name="TView"/> as <typeparamref name="TImplementation"/> with a transient scope.
         /// <para>Where the <typeparamref name="TImplementation"/> is a <typeparamref name="TView"/>  or <see langword="class"/>,
-        /// and <typeparamref name="TView"/> is a <see cref="IView"/>.</para>
+        /// and a <typeparamref name="TView"/> is a <see cref="IView"/>.</para>
         /// <para><b>Returns:</b> The current instance of <see cref="IDependencyResolution"/>.</para>
         /// </summary>
         IDependencyResolution RegisterTransientView<TView, TImplementation>()
