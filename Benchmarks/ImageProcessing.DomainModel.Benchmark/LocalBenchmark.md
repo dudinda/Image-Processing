@@ -1,15 +1,15 @@
-#Domain model local benchmark
+# Domain model local benchmark
 
-##RGB Filters
+## RGB Filters
 
-##Inversion filter
+### Inversion filter
 
 <p align="center">
     <img src="https://i.imgur.com/08572mU.png" width="700" height = "200" alt="inverse filter">
     <p align="center">Fig. 1 - Image processing with an inverse rgb filter.</p>
 </p>
 
-##Color filter
+### Color filter
 
 <p align="center">
     <img src="https://i.imgur.com/OEhWIkw.png" width="700" height = "200" alt="color filter">
@@ -17,7 +17,7 @@
 </p>
 
 
-##Grayscale filter
+### Grayscale filter
 
 <p align="center">
     <img src="https://i.imgur.com/CMBoh3T.png" width="700" height = "200" alt="grayscale filter">
@@ -25,7 +25,7 @@
 </p>
 
 
-##Binary filter
+### Binary filter
 
 <p align="center">
     <img src="https://i.imgur.com/RsHcWLl.png" width="700" height = "200" alt="binary filter">
