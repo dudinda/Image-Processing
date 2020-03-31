@@ -34,10 +34,8 @@ namespace ImageProcessing.DomainModel.Benchmark.RgbFilter.Binary
         }
 
         [Benchmark]
-        public void ApplyBinaryFilterTo1920x1080()
-        {
-            filter.Filter(_frame1920x1080);           
-        }
+        public Bitmap ApplyBinaryFilterTo1920x1080()
+            => filter.Filter(_frame1920x1080);
 
         [Benchmark]
         public void ApplyBinaryFilterTo1920x1080Frame60Fps()
@@ -49,10 +47,8 @@ namespace ImageProcessing.DomainModel.Benchmark.RgbFilter.Binary
         }
 
         [Benchmark]
-        public void ApplyBinaryFilterTo2560x1440()
-        {
-            filter.Filter(_frame2560x1440);
-        }
+        public Bitmap ApplyBinaryFilterTo2560x1440()
+            => filter.Filter(_frame2560x1440);
 
         [Benchmark]
         public void ApplyBinaryFilterTo2560x1440Frame60Fps()

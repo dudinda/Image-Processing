@@ -36,7 +36,11 @@ namespace ImageProcessing.DomainModel.Benchmark.RgbFilter.Color
         }
 
         [Benchmark]
-        public void ApplyBinaryFilterTo1920x1080Frame60Fps()
+        public Bitmap ApplyColorFilterTo1920x1080Frame()
+            => filter.Filter(_frame1920x1080);
+
+        [Benchmark]
+        public void ApplyColorFilterTo1920x1080Frame60Fps()
         {
             for (var start = 0; start < frameRate; ++start)
             {
@@ -45,7 +49,11 @@ namespace ImageProcessing.DomainModel.Benchmark.RgbFilter.Color
         }
 
         [Benchmark]
-        public void ApplyBinaryFilterTo2560x1440Frame60Fps()
+        public Bitmap ApplyColorFilterTo2560x1440Frame()
+          => filter.Filter(_frame2560x1440);
+
+        [Benchmark]
+        public void ApplyColorFilterTo2560x1440Frame60Fps()
         {
             for (var start = 0; start < frameRate; ++start)
             {

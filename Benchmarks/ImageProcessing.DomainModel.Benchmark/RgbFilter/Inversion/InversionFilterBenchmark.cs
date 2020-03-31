@@ -34,7 +34,11 @@ namespace ImageProcessing.DomainModel.Benchmark.RgbFilter.Inversion
         }
 
         [Benchmark]
-        public void ApplyBinaryFilterTo1920x1080Frame60Fps()
+        public Bitmap ApplyInversionFilterTo1920x1080Frame()
+            => filter.Filter(_frame1920x1080);
+
+        [Benchmark]
+        public void ApplyInversionFilterTo1920x1080Frame60Fps()
         {
             for (var start = 0; start < frameRate; ++start)
             {
@@ -43,7 +47,11 @@ namespace ImageProcessing.DomainModel.Benchmark.RgbFilter.Inversion
         }
 
         [Benchmark]
-        public void ApplyBinaryFilterTo2560x1440Frame60Fps()
+        public Bitmap ApplyInversionFilterTo2560x1440Frame()
+            => filter.Filter(_frame2560x1440);
+
+        [Benchmark]
+        public void ApplyInversionFilterTo2560x1440Frame60Fps()
         {
             for (var start = 0; start < frameRate; ++start)
             {
