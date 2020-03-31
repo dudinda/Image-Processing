@@ -13,7 +13,7 @@
 
 <p align="center">
     <img src="https://i.imgur.com/OEhWIkw.png" width="700" height = "200" alt="color filter">
-    <p align="center">Fig. 1 - Image processing with a color rgb filter.</p>
+    <p align="center">Fig. 2 - Image processing with a color rgb filter.</p>
 </p>
 
 
@@ -21,7 +21,7 @@
 
 <p align="center">
     <img src="https://i.imgur.com/CMBoh3T.png" width="700" height = "200" alt="grayscale filter">
-    <p align="center">Fig. 1 - Image processing with a grayscale rgb filter.</p>
+    <p align="center">Fig. 3 - Image processing with a grayscale rgb filter.</p>
 </p>
 
 
@@ -29,7 +29,7 @@
 
 <p align="center">
     <img src="https://i.imgur.com/RsHcWLl.png" width="700" height = "200" alt="binary filter">
-    <p align="center">Fig. 1 - Image processing with a binary rgb filter.</p>
+    <p align="center">Fig. 4 - Image processing with a binary rgb filter.</p>
 </p>
 
 
