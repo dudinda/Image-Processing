@@ -37,10 +37,8 @@ namespace ImageProcessing.ServiceLayer.Benchmark.Services.Convolution.Kernel3x3
         }
 
         [Benchmark]
-        public void Apply3x3ConvolutionTo1920x1080()
-        {
-            service.Convolution(_frame1920x1080, filter3x3);
-        }
+        public Bitmap Apply3x3ConvolutionTo1920x1080()
+            => service.Convolution(_frame1920x1080, filter3x3);
 
         [Benchmark]
         public void Apply3x3ConvoltuionTo1920x1080Frame60Fps()
@@ -52,10 +50,8 @@ namespace ImageProcessing.ServiceLayer.Benchmark.Services.Convolution.Kernel3x3
         }
 
         [Benchmark]
-        public void Apply3x3ConvolutionTo2560x1440()
-        {
-            service.Convolution(_frame2560x1440, filter3x3);
-        }
+        public Bitmap Apply3x3ConvolutionTo2560x1440()
+            => service.Convolution(_frame2560x1440, filter3x3);
 
         [Benchmark]
         public void Apply3x3ConvolutionTo2560x1440Frame60Fps()

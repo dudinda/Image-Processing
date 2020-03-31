@@ -38,9 +38,7 @@ namespace ImageProcessing.ServiceLayer.Benchmark.Services.Convolution.Kernel9x9
 
         [Benchmark]
         public void Apply9x9ConvolutionTo1920x1080()
-        {
-            service.Convolution(_frame1920x1080, filter9x9);
-        }
+            => service.Convolution(_frame1920x1080, filter9x9);
 
         [Benchmark]
         public void Apply9x9ConvoltuionTo1920x1080Frame60Fps()
@@ -53,9 +51,7 @@ namespace ImageProcessing.ServiceLayer.Benchmark.Services.Convolution.Kernel9x9
 
         [Benchmark]
         public void Apply9x9ConvolutionTo2560x1440()
-        {
-            service.Convolution(_frame2560x1440, filter9x9);
-        }
+            => service.Convolution(_frame2560x1440, filter9x9);
 
         [Benchmark]
         public void Apply9x9ConvolutionTo2560x1440Frame60Fps()

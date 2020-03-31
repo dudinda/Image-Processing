@@ -37,10 +37,8 @@ namespace ImageProcessing.ServiceLayer.Benchmark.Services.Convolution.Kernel5x5
         }
 
         [Benchmark]
-        public void Apply5x5ConvolutionTo1920x1080()
-        {
-            service.Convolution(_frame1920x1080, filter5x5);
-        }
+        public Bitmap Apply5x5ConvolutionTo1920x1080()
+            => service.Convolution(_frame1920x1080, filter5x5);
 
         [Benchmark]
         public void Apply5x5ConvoltuionTo1920x1080Frame60Fps()
@@ -52,10 +50,8 @@ namespace ImageProcessing.ServiceLayer.Benchmark.Services.Convolution.Kernel5x5
         }
 
         [Benchmark]
-        public void Apply5x5ConvolutionTo2560x1440()
-        {
-            service.Convolution(_frame2560x1440, filter5x5);
-        }
+        public Bitmap Apply5x5ConvolutionTo2560x1440()
+            => service.Convolution(_frame2560x1440, filter5x5);
 
         [Benchmark]
         public void Apply5x5ConvolutionTo2560x1440Frame60Fps()
