@@ -4,16 +4,12 @@ using ImageProcessing.Common.Enums;
 using ImageProcessing.DomainModel.Convolution.Implemetation.Blur.BoxBlur;
 using ImageProcessing.DomainModel.Convolution.Implemetation.Blur.GaussianBlur;
 using ImageProcessing.DomainModel.Convolution.Implemetation.Blur.MotionBlur;
-using ImageProcessing.DomainModel.Convolution.Implemetation.EdgeDetection.GaussianOperator;
 using ImageProcessing.DomainModel.Convolution.Implemetation.EdgeDetection.LaplacianOperator;
 using ImageProcessing.DomainModel.Convolution.Implemetation.EdgeDetection.SobelOperator;
 using ImageProcessing.DomainModel.Convolution.Implemetation.Emboss;
 using ImageProcessing.DomainModel.Convolution.Implemetation.Sharpen;
 using ImageProcessing.DomainModel.Factory.Convolution.Implementation;
 using ImageProcessing.DomainModel.Factory.Convolution.Interface;
-
-using NSubstitute;
-using NSubstitute.ExceptionExtensions;
 
 using NUnit.Framework;
 
@@ -77,26 +73,6 @@ namespace ImageProcessing.DomainModel.UnitTests.Factory.Convolution
                 _convolutionFactory.Get(
                     ConvolutionFilter.GaussianBlur5x5
                 ), Is.TypeOf(typeof(GaussianBlur3x3))
-            );
-        }
-
-        [Test]
-        public void FactoryReturnsGaussianOperator3x3ByEnumValue()
-        {
-            Assert.That(
-                _convolutionFactory.Get(
-                    ConvolutionFilter.GaussianOperator3x3
-                ), Is.TypeOf(typeof(GaussianOperator3x3))
-            );
-        }
-
-        [Test]
-        public void FactoryReturnsGaussianOperator5x5ByEnumValue()
-        {
-            Assert.That(
-                _convolutionFactory.Get(
-                    ConvolutionFilter.GaussianOperator5x5
-                ), Is.TypeOf(typeof(GaussianOperator5x5))
             );
         }
 

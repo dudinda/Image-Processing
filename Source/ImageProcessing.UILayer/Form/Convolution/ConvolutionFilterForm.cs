@@ -1,7 +1,5 @@
-
 using System;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.EnumExtensions;
@@ -10,7 +8,6 @@ using ImageProcessing.Interop.Code.Wrapper;
 using ImageProcessing.PresentationLayer.Views.Convolution;
 using ImageProcessing.UILayer.Form.Base;
 
-[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.UILayer.Form.Convolution
 {
     internal sealed partial class ConvolutionFilterForm : BaseForm, IConvolutionFilterView

@@ -1,6 +1,5 @@
 using System;
 using System.Drawing;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 using ImageProcessing.Common.Enums;
@@ -67,7 +66,6 @@ using ImageProcessing.ServiceLayer.Services.StaTask.Implementation;
 using ImageProcessing.ServiceLayer.Services.StaTask.Interface;
 using ImageProcessing.UILayer.Form.Convolution;
 
-[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.UILayer
 {
     internal static class Startup 

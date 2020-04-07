@@ -1,4 +1,3 @@
-using System;
 using System.Drawing;
 using System.Threading.Tasks;
 
@@ -71,7 +70,7 @@ namespace ImageProcessing.ServiceLayer.Providers.Implementation.Convolution
                 default:
 
                     return filter.PartitionOver(
-                        (ConvolutionFilter.BoxBlur3x3, ConvolutionFilter.SobelOperatorVertical3x3),
+                        (ConvolutionFilter.BoxBlur3x3, ConvolutionFilter.SharpenOperator3x3),
                         () => GetFilter(bmp, filter)
                     );
             }

@@ -1,10 +1,8 @@
 using System;
-using System.Runtime.CompilerServices;
 
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Pipeline.BlockItem.Interface;
 
-[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.Core.Pipeline.BlockItem.Implementation
 {
     internal sealed class Item : IItem

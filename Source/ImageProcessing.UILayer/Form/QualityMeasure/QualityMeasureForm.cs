@@ -1,11 +1,9 @@
-using System.Runtime.CompilerServices;
 using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.PresentationLayer.Views.QualityMeasure;
 using ImageProcessing.UILayer.Form.Base;
 
-[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.Form.QualityMeasure
 {
     internal sealed partial class QualityMeasureForm : BaseForm, IQualityMeasureView
@@ -26,10 +24,7 @@ namespace ImageProcessing.Form.QualityMeasure
         }
 
         private void SetHistogram()
-        {
-            Histogram.Series.Clear();
-        }
-
+            => Histogram.Series.Clear();    
     }
 }
 

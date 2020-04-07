@@ -44,64 +44,52 @@ namespace ImageProcessing.Common.Enums
         MotionBlur9x9              = 5,
 
         /// <summary>
-        /// The Gaussian operator with a kernel size 3x3.
-        /// </summary>
-        [Description("Gaussian operator 3x3")]
-        GaussianOperator3x3        = 6,
-
-        /// <summary>
-        /// The Gaussian operator with a kernel size 5x5.
-        /// </summary>
-        [Description("Gaussian operator 5x5")]
-        GaussianOperator5x5        = 7,
-
-        /// <summary>
         /// The Laplacian operator with a kernel size 3x3.
         /// </summary>
         [Description("Laplacian operator 3x3")]
-        LaplacianOperator3x3       = 8,
+        LaplacianOperator3x3       = 6,
 
         /// <summary>
         /// The Laplacian operator with a kernel size 5x5.
         /// </summary>
         [Description("Laplacian operator 5x5")]
-        LaplacianOperator5x5       = 9,
+        LaplacianOperator5x5       = 7,
 
         /// <summary>
         /// The horizontal Sobel operator, representing dG/dy where G is an image.
         /// </summary>
         [Description("Sobel horizontal operator 3x3")]
-        SobelOperatorHorizontal3x3 = 10,
+        SobelOperatorHorizontal3x3 = 8,
 
         /// <summary>
         /// The vertical Sobel operator, representing dG/dx where G is an image.
         /// </summary>
         [Description("Sobel vertical operator 3x3")]
-        SobelOperatorVertical3x3   = 11,
+        SobelOperatorVertical3x3   = 9,
 
         /// <summary>
         /// The Emboss operator with a kernel size 3x3.
         /// </summary>
         [Description("Emboss operator 3x3")]
-        EmbossOperator3x3          = 12,
+        EmbossOperator3x3          = 10,
 
         /// <summary>
         /// The Sharpen operator with a kernel size 3x3.
         /// </summary>
         [Description("Sharpen operator 3x3")]
-        SharpenOperator3x3         = 13,
+        SharpenOperator3x3         = 11,
 
         /// <summary>
         /// The Sobel operator with a kernel size 3x3.
         /// </summary>
         [Description("Sobel operator 3x3")]
-        SobelOperator3x3           = 14,
+        SobelOperator3x3           = 12,
 
         /// <summary>
         /// The Laplacian of Gaussian operator with a kernel size 3x3.
         /// </summary>
         [Description("Laplacian of Gaussian operator 3x3")]
-        LoGOperator3x3             = 15,
+        LoGOperator3x3             = 13,
 
 
     }

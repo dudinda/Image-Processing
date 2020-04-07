@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 using ImageProcessing.Common.Helpers;
@@ -6,12 +5,18 @@ using ImageProcessing.Core.EventAggregator.Interface;
 
 using MetroFramework.Forms;
 
-[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.UILayer.Form.Base
 {
+    /// <summary>
+    /// Represents the base form with the contextual
+    /// information about an application thread.
+    /// </summary>
     internal class BaseMainForm : MetroForm
     {
+        /// <inheritdoc cref="IEventAggregator"/>
         protected IEventAggregator EventAggregator { get; }
+
+        /// <inheritdoc cref="ApplicationContext"/>
         protected ApplicationContext Context { get; }
 
         protected BaseMainForm(ApplicationContext context, IEventAggregator eventAggregator)
@@ -26,8 +31,12 @@ namespace ImageProcessing.UILayer.Form.Base
         protected BaseMainForm() { }
     }
 
+    /// <summary>
+    /// Represents the base form.
+    /// </summary>
     internal class BaseForm : MetroForm
     {
+        /// <inheritdoc cref="IEventAggregator"/>
         protected IEventAggregator EventAggregator { get; }
 
         protected BaseForm(IEventAggregator eventAggregator)

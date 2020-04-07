@@ -1,6 +1,5 @@
 using System;
 using System.Drawing;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 using ImageProcessing.Common.Enums;
@@ -9,7 +8,6 @@ using ImageProcessing.Interop.Code.Wrapper;
 using ImageProcessing.PresentationLayer.Views.Main;
 using ImageProcessing.UILayer.Form.Base;
 
-[assembly: InternalsVisibleTo("ImageProcessing.Tests")]
 namespace ImageProcessing.Form.Main
 {
     internal sealed partial class MainForm : BaseMainForm, IMainView

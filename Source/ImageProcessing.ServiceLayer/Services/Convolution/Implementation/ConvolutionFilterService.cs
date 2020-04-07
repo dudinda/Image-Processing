@@ -40,7 +40,7 @@ namespace ImageProcessing.ServiceLayer.Services.Convolution.Implementation
 
                 var options = new ParallelOptions()
                 {
-                    MaxDegreeOfParallelism = Environment.ProcessorCount - 1
+                    MaxDegreeOfParallelism = Environment.ProcessorCount
                 };
 
                 Parallel.For(kernelOffset, size.Height - kernelOffset, options, y =>
@@ -50,16 +50,16 @@ namespace ImageProcessing.ServiceLayer.Services.Convolution.Implementation
                     var destinationPtr = destinationStartPtr + y * destinationBitmapData.Stride + kernelOffset * ptrStep;
 
                     //accumulators of R, G, B components 
-                    double R, G, B;
+                    double r, g, b;
                     //a pointer, which gets addresses of elements in the radius of a convolution kernel
                     byte* elementPtr = null;
 
                     for (int x = kernelOffset; x < size.Width - kernelOffset; ++x, sourcePtr += ptrStep, destinationPtr += ptrStep)
                     {
                         //set accumulators to 0
-                        R = 0;
-                        G = 0;
-                        B = 0;
+                        r = 0;
+                        g = 0;
+                        b = 0;
 
                         for (var kernelRow = -kernelOffset; kernelRow <= kernelOffset; ++kernelRow)
                         {
@@ -69,19 +69,19 @@ namespace ImageProcessing.ServiceLayer.Services.Convolution.Implementation
                                 elementPtr = sourcePtr + kernelColumn * ptrStep + kernelRow * sourceBitmapData.Stride;
 
                                 //sum
-                                B += elementPtr[0] * filter.Kernel[kernelRow + kernelOffset, kernelColumn + kernelOffset];
-                                G += elementPtr[1] * filter.Kernel[kernelRow + kernelOffset, kernelColumn + kernelOffset];
-                                R += elementPtr[2] * filter.Kernel[kernelRow + kernelOffset, kernelColumn + kernelOffset];
+                                b += elementPtr[0] * filter.Kernel[kernelRow + kernelOffset, kernelColumn + kernelOffset];
+                                g += elementPtr[1] * filter.Kernel[kernelRow + kernelOffset, kernelColumn + kernelOffset];
+                                r += elementPtr[2] * filter.Kernel[kernelRow + kernelOffset, kernelColumn + kernelOffset];
                             }
                         }
                         //multiply each component by the kernel factor
-                        B = B * filter.Factor + filter.Bias;
-                        G = G * filter.Factor + filter.Bias;
-                        R = R * filter.Factor + filter.Bias;
+                        b = b * filter.Factor + filter.Bias;
+                        g = g * filter.Factor + filter.Bias;
+                        r = r * filter.Factor + filter.Bias;
 
-                        destinationPtr[0] = GetByteValue(ref B);
-                        destinationPtr[1] = GetByteValue(ref G);
-                        destinationPtr[2] = GetByteValue(ref R);
+                        destinationPtr[0] = GetByteValue(ref b);
+                        destinationPtr[1] = GetByteValue(ref g);
+                        destinationPtr[2] = GetByteValue(ref r);
                     }                   
                 });          
             }

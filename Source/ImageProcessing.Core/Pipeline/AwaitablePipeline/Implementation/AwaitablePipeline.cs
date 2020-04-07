@@ -8,7 +8,7 @@ using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 
 namespace ImageProcessing.Core.Pipeline.AwaitablePipeline.Implementation
 {
-    public sealed class AwaitablePipeline : IAwaitablePipeline, IDisposable
+    public sealed class AwaitablePipeline : IAwaitablePipeline
     {
         private readonly IBlockingQueue<Task<object>> _queue
            = new BlockingQueue<Task<object>>(1 << 6);
@@ -41,7 +41,8 @@ namespace ImageProcessing.Core.Pipeline.AwaitablePipeline.Implementation
             throw new InvalidOperationException();
         }
 
-        public bool Any() => _queue.Any();
+        public bool Any()
+            => _queue.Any();
 
         public void Dispose()
         {
