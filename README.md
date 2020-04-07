@@ -5,7 +5,7 @@ Image filtration and contrast optimization.
 <p>The original purpose was to research the possible advantages of grayscale images contrast optimization using a normal distribution regarding a uniform distribution. Two parameters such as the expectation and the std allow to control relative luminance and contrast, respectively.</p>
 
 <p align="center">
-    <img src="https://i.imgur.com/lB5qQNq.png" width="600" height = "400" alt="application window">
+    <img src="https://i.imgur.com/dUMCOy1.png" width="700" height = "400" alt="application window">
     <p align="center">Fig. 1 - The main window.</p>
 </p>
 
@@ -43,21 +43,9 @@ Image filtration and contrast optimization.
 
 ***
 
-</p>To test the operation of this system, a computer equipment was used with the following
-technical characteristics: processor IntelCore i5 - 3450, 3.10 GHz, instruction set
-- x64, RAM - 12 GB. The results are presented as an average of 10 tests for a frame of
-size 1920x1680:</p>
-<ol>
-    <li>Grayscale filter: ~0.0282 seconds per frame</li>
-    <li>Inversion filter:  ~0.0277 seconds per frame</li>
-    <li>Binary filter: ~0.0713 seconds per frame</li>
-<li>Histogram transformation using the specified distribution: ~0.0344 seconds per
-    frame</li>
-    <li>Image processing with matrix filter of radius 3: ~0.246 seconds per frame</li>
-    <li>Image processing with matrix filter of radius 5: ~0.597 seconds per frame</li>
-    <li>Image processing with matrix filter of radius 9: ~1.81 seconds per frame</li>
-    </ol>
+# Benchmarks [CPU]
 
+[RGB Filters](https://github.com/Softenraged/Image-Processing/blob/master/Benchmarks/ImageProcessing.DomainModel.Benchmark/LocalBenchmark.md#rgb-filters)
 
-
+[Convolution](https://github.com/Softenraged/Image-Processing/blob/master/Benchmarks/ImageProcessing.ServiceLayer.Benchmark/LocalBenchmark.md#convolution)
 
