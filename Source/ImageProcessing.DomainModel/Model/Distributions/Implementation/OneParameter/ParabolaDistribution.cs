@@ -8,7 +8,7 @@ using ImageProcessing.DomainModel.Model.Distributions.Interface;
 namespace ImageProcessing.DomainModel.Model.Distributions.Implementation.OneParameter
 {
     /// <summary>
-    /// Implements <see cref="IDistribution"/>
+    /// Implements the <see cref="IDistribution"/>.
     /// </summary>
     internal sealed class ParabolaDistribution : IDistribution
     {

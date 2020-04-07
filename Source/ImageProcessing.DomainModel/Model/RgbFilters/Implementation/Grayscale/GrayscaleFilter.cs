@@ -10,8 +10,12 @@ using ImageProcessing.DomainModel.Model.RgbFilters.Interface;
 
 namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Grayscale
 {
+    /// <summary>
+    /// Implements the <see cref="IRgbFilter"/>.
+    /// </summary>
     internal sealed class GrayscaleFilter : IRgbFilter
     {
+        /// <inheritdoc />
         public Bitmap Filter(Bitmap bitmap)
         {
             Requires.IsNotNull(bitmap, nameof(bitmap));

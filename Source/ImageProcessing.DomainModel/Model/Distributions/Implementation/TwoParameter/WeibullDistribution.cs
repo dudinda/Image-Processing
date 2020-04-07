@@ -9,7 +9,7 @@ using ImageProcessing.DomainModel.Model.Distributions.Interface;
 namespace ImageProcessing.DomainModel.Model.Distributions.Implementation.TwoParameter
 {
     /// <summary>
-    /// Implements <see cref="IDistribution"/>
+    /// Implements the <see cref="IDistribution"/>.
     /// </summary>
     internal sealed class WeibullDistribution : IDistribution
     {

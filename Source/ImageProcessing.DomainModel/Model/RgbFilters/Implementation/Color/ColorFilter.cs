@@ -10,8 +10,12 @@ using ImageProcessing.DomainModel.Model.RgbFilters.Interface.Color;
 
 namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Color
 {
+    /// <summary>
+    /// Implements the <see cref="IRgbFilter"/>.
+    /// </summary>
     internal sealed class ColorFilter : IRgbFilter
     {
+        /// <inheritdoc cref="IColor" />
         private readonly IColor _filter;
 
         public ColorFilter(IColor filter)
@@ -20,6 +24,7 @@ namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Color
                 filter, nameof(filter));
         }
 
+        /// <inheritdoc />
         public Bitmap Filter(Bitmap bitmap)
         {
             Requires.IsNotNull(bitmap, nameof(bitmap));

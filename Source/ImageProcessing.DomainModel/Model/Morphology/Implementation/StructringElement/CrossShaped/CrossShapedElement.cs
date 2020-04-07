@@ -3,8 +3,12 @@ using ImageProcessing.DomainModel.Model.Morphology.Interface.StructuringElement;
 
 namespace ImageProcessing.DomainModel.Model.Morphology.Implementation.StructringElement.CrossShaped
 {
+    /// <summary>
+    /// Implements the <see cref="IStructuringElement"/>.
+    /// </summary>
     internal sealed class CrossShapedElement : IStructuringElement
     {
+        /// <inheritdoc cref="IStructuringElement"/>.
         public BitMatrix GetKernel((int width, int height) dimension)
         {
             var kernel = new BitMatrix(dimension);

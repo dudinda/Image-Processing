@@ -1,11 +1,9 @@
-using System.Runtime.CompilerServices;
-
 using ImageProcessing.DomainModel.Convolution.Interface;
 
 namespace ImageProcessing.DomainModel.Convolution.Implemetation.Blur.GaussianBlur
 {
     /// <summary>
-    /// Implements <see cref="IConvolutionFilter"/>.
+    /// Implements the <see cref="IConvolutionFilter"/>.
     /// </summary>
 	internal sealed class GaussianBlur5x5 : IConvolutionFilter
 	{

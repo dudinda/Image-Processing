@@ -11,11 +11,15 @@ using ImageProcessing.DomainModel.Model.RgbFilters.Interface;
 
 namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Inversion
 {
+    /// <summary>
+    /// Implements the <see cref="IRgbFilter"/>.
+    /// </summary>
     internal sealed class InversionFilter : IRgbFilter
     {
         private static readonly ConcurrentDictionary<RgbFilter, byte[]>
             _inverseCache = new ConcurrentDictionary<RgbFilter, byte[]>();
 
+        /// <inheritdoc />
         public Bitmap Filter(Bitmap bitmap)
         {
             Requires.IsNotNull(bitmap, nameof(bitmap));

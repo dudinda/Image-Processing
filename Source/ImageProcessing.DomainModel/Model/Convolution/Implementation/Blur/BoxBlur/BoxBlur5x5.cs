@@ -1,11 +1,9 @@
-using System.Runtime.CompilerServices;
-
 using ImageProcessing.DomainModel.Convolution.Interface;
 
 namespace ImageProcessing.DomainModel.Convolution.Implemetation.Blur.BoxBlur
 {
     /// <summary>
-    /// Implements <see cref="IConvolutionFilter"/>.
+    /// Implements the <see cref="IConvolutionFilter"/>.
     /// </summary>
     internal sealed class BoxBlur5x5 : IConvolutionFilter
     {

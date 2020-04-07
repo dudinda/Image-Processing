@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 using ImageProcessing.Common.Enums;
@@ -13,6 +12,9 @@ using ImageProcessing.DomainModel.Model.RgbFilters.Interface;
 
 namespace ImageProcessing.DomainModel.Model.RgbFilters.Implementation.Binary
 {
+    /// <summary>
+    /// Implements the <see cref="IRgbFilter"/>.
+    /// </summary>
     internal sealed class BinaryFilter : IRgbFilter
     {
         /// <inheritdoc />

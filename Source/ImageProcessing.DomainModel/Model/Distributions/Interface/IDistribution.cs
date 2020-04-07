@@ -24,22 +24,22 @@ namespace ImageProcessing.DomainModel.Model.Distributions.Interface
         decimal SecondParameter { get; }
 
         /// <summary>
-        /// E[X] of a specified distribution.
+        /// E[X] of the specified distribution.
         /// </summary>
         decimal GetMean();
 
         /// <summary>
-        /// Var[X] of a specified distribution.
+        /// Var[X] of the specified distribution.
         /// </summary>
         decimal GetVariance();
 
         /// <summary>
-        /// Q(p) of a specified distribution.
+        /// Q(p) of the specified distribution.
         /// </summary>
         bool Quantile(decimal p, out decimal quanile);
 
         /// <summary>
-        ///Set parameters of a distribution.
+        ///Set distribution parameters.
         /// </summary>
         IDistribution SetParams((string First, string Second) parms);
     }

@@ -5,8 +5,12 @@ using ImageProcessing.DomainModel.Model.Morphology.Interface.StructuringElement;
 
 namespace ImageProcessing.DomainModel.Model.Morphology.Implementation.StructringElement.Elliptical
 {
+    /// <summary>
+    /// Implements the <see cref="IStructuringElement"/>.
+    /// </summary>
     internal sealed class EllipticalElement : IStructuringElement
     {
+        /// <inheritdoc cref="IStructuringElement"/>.
         public BitMatrix GetKernel((int width, int height) dimension)
         {
             var coVertex = dimension.height / 2;

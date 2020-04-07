@@ -23,7 +23,6 @@ namespace ImageProcessing.DomainModel.Convolution.Interface
         /// <summary>
         /// A value to be added to the final result value when calculating the matrix.
         /// </summary>
-        double Bias { get; }
-              
+        double Bias { get; }            
     }
 }
