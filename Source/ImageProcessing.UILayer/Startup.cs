@@ -1,15 +1,10 @@
-using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-using ImageProcessing.Common.Enums;
-using ImageProcessing.Core.Adapters.LightInject;
-using ImageProcessing.Core.Adapters.Ninject;
-using ImageProcessing.Core.Container;
-using ImageProcessing.Core.Controller.Implementation;
-using ImageProcessing.Core.Controller.Interface;
+using ImageProcessing.Core.EntryPoint.Interface;
 using ImageProcessing.Core.EventAggregator.Implementation;
 using ImageProcessing.Core.EventAggregator.Interface;
+using ImageProcessing.Core.IoC.Interface;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Implementation;
 using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.DomainModel.Factory.Convolution.Implementation;
@@ -68,18 +63,14 @@ using ImageProcessing.UILayer.Form.Convolution;
 
 namespace ImageProcessing.UILayer
 {
-    internal static class Startup 
+    internal class Startup : IStartup
     {
-        private static IAppController _controller;
-
-        internal static void Build(Container container)
+        public void Build(IDependencyResolution builder)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            _controller = new AppController(GetContainerAdapter());
-
-            _controller.IoC
+            builder
                 .RegisterSingleton<ApplicationContext>()
                 .RegisterSingleton<MainPresenter>()
                 .RegisterSingleton<IEventAggregator, EventAggregator>()
@@ -109,38 +100,7 @@ namespace ImageProcessing.UILayer
                 .RegisterTransient<IConvolutionServiceProvider, ConvolutionServiceProvider>()
                 .RegisterTransient<IMorphologyServiceProvider, MorphologyServiceProvider>()
                 .RegisterTransient<IBitmapLuminanceDistributionServiceProvider, BitmapLuminanceDistributionServiceProvider>()
-                .RegisterTransient<IRgbFilterServiceProvider, RgbFilterServiceProvider>();
-
-            IContainer GetContainerAdapter()
-            => container switch
-            {
-                Container.LightInject
-                    => new LightInjectAdapter(),
-                Container.Ninject
-                    => new NinjectAdapter(),
-
-                _   => throw new NotImplementedException(nameof(container))
-            };          
-        }
-
-        internal static void Run()
-        {
-            if (_controller is null)
-            {
-                throw new InvalidOperationException("The application is not built.");
-            }
-
-            _controller.Run<MainPresenter>();
-        }
-
-        internal static void Exit()
-        {
-            if (_controller is null)
-            {
-                throw new InvalidOperationException("The application is not built.");
-            }
-
-            _controller.Dispose();
-        }
+                .RegisterTransient<IRgbFilterServiceProvider, RgbFilterServiceProvider>();      
+        }      
     }
 }

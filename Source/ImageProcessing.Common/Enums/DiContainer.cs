@@ -5,7 +5,7 @@ namespace ImageProcessing.Common.Enums
     /// <summary>
     /// Specifies a DI container.
     /// </summary>
-    public enum Container
+    public enum DiContainer
     {
         /// <summary>
         /// An unknown DI container.

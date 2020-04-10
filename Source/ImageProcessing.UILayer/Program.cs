@@ -1,6 +1,8 @@
 using System;
 
 using ImageProcessing.Common.Enums;
+using ImageProcessing.Core.EntryPoint;
+using ImageProcessing.PresentationLayer.Presenters.Main;
 
 namespace ImageProcessing.UILayer
 {
@@ -11,12 +13,13 @@ namespace ImageProcessing.UILayer
         {
             try
             {
-                Startup.Build(Container.Ninject);
-                Startup.Run();
+                AppStart.BuildContainer(DiContainer.Ninject);
+                AppStart.UseStartup<Startup>();
+                AppStart.Run<MainPresenter>();
             }
             catch(Exception ex)
             {
-                Startup.Exit();
+                AppStart.Exit();
             }
         }
     }
