@@ -13,8 +13,8 @@ namespace ImageProcessing.ServiceLayer.Services.StaTask.Interface
     {
         /// <summary>
         /// Start the specified work
-        /// as the STA task. Returns <typeparamref name="TResult"/>
-        /// upon completion.
+        /// as a STA task. Returns <typeparamref name="TResult"/>
+        /// upon the completion.
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
         /// <param name="func"></param>
@@ -24,7 +24,7 @@ namespace ImageProcessing.ServiceLayer.Services.StaTask.Interface
 
         /// <summary>
         /// Start the specified work
-        /// as the STA task.
+        /// as a STA task.
         /// </summary>
         Task StartSTATask(Action func);
     }

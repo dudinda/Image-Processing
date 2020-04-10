@@ -10,7 +10,7 @@ using ImageProcessing.EntryPoint.State.StartWork;
 namespace ImageProcessing.EntryPoint.State.Implementation.IsBuilt
 {
     /// <summary>
-    /// Aplication has been built state.
+    /// An application has been built state.
     /// </summary>
     internal sealed class AppIsBuilt : IAppState
     {

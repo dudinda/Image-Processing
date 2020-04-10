@@ -3,7 +3,7 @@ using System;
 namespace ImageProcessing.DomainModel.Factory.Base
 {
     /// <summary>
-    /// Base factory method provider for all the types
+    /// A base factory method provider for all the types
     /// implementing the <typeparamref name="TFilter"/>.
     /// </summary>
     public interface IBaseFactory<out TFilter, in TEnum>

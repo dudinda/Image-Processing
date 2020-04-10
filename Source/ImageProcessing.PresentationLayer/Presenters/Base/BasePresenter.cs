@@ -10,10 +10,10 @@ namespace ImageProcessing.PresentationLayer.Presenters.Base
     /// <summary>
     /// Provides base functionality for
     /// the presentation layer of the application.
-    /// Allows to access the UI layer components via
+    /// Allows to access the UI layer components via a
     /// <typeparamref name="TView"/>, controls the flow of the application
-    /// via <see cref="IAppController"/> and <see cref="IAwaitablePipeline"/>
-    /// and provides messaging between forms and presenters via <see cref="IEventAggregator"/>.
+    /// via the <see cref="IAppController"/> and <see cref="IAwaitablePipeline"/>
+    /// and provides messaging between forms and presenters via the <see cref="IEventAggregator"/>.
     /// </summary>
     public abstract class BasePresenter<TView> : IPresenter
 		where TView : class, IView
@@ -55,11 +55,11 @@ namespace ImageProcessing.PresentationLayer.Presenters.Base
     /// <summary>
     /// Provides base functionality for
     /// the presentation layer of the application.
-    /// Allows to access the UI layer components via
+    /// Allows to access the UI layer components via a
     /// <see cref="TView"/> with the specified <see cref="TViewModel"/>,
     /// controls the flow of the application
-    /// via <see cref="IAppController"/> and <see cref="IAwaitablePipeline"/>
-    /// and provides messaging between forms via <see cref="IEventAggregator"/>.
+    /// via the <see cref="IAppController"/> and <see cref="IAwaitablePipeline"/>
+    /// and provides messaging between forms via the <see cref="IEventAggregator"/>.
     /// </summary>
 	public abstract class BasePresenter<TView, TViewModel> : IPresenter<TViewModel>
 		where TView : class, IView

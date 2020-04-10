@@ -8,7 +8,7 @@ using ImageProcessing.EntryPoint.Startup;
 namespace ImageProcessing.EntryPoint.State.EndWork
 {
     /// <summary>
-    /// Application ends its work state.
+    ///An application ends its work state.
     /// </summary>
     internal sealed class AppEndWork : IAppState
     {

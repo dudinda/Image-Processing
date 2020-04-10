@@ -9,7 +9,7 @@ using ImageProcessing.EntryPoint.State.EndWork;
 namespace ImageProcessing.EntryPoint.State.StartWork
 {
     /// <summary>
-    /// Application starts its work state.
+    /// An application starts its work state.
     /// </summary>
     internal sealed class AppStartWork : IAppState
     {

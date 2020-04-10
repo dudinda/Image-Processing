@@ -14,7 +14,7 @@ namespace ImageProcessing.ServiceLayer.Services.StaTask.Implementation
         private readonly int _maxNumberOfModals;
 
         /// <summary>
-        /// Contains threads' ids which hold a modal windows.
+        /// Contains threads' ids which hold modal windows.
         /// </summary>
         private static List<int> _pool = new List<int>();
 

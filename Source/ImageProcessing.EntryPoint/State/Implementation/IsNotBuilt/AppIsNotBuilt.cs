@@ -14,7 +14,7 @@ using ImageProcessing.EntryPoint.State.Implementation.IsBuilt;
 namespace ImageProcessing.Core.EntryPoint.State.IsNotBuilt
 {
     /// <summary>
-    /// Application has not been built state.
+    /// An application has not been built state.
     /// </summary>
     internal sealed class AppIsNotBuilt : IAppState
     {

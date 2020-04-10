@@ -209,8 +209,8 @@ namespace ImageProcessing.Core.IoC.Implementation
             => _container.Resolve<TService>();
 
         /// <summary>
-        /// Performs the disosing of the specified
-        /// <see cref="IContainer"/>
+        /// Performs the disposing of the specified
+        /// <see cref="IContainer"/>.
         /// </summary>
         public void Dispose()
             => _container.Dispose();
