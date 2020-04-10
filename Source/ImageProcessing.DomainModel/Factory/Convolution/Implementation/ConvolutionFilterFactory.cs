@@ -4,7 +4,6 @@ using ImageProcessing.Common.Enums;
 using ImageProcessing.DomainModel.Convolution.Implemetation.Blur.BoxBlur;
 using ImageProcessing.DomainModel.Convolution.Implemetation.Blur.GaussianBlur;
 using ImageProcessing.DomainModel.Convolution.Implemetation.Blur.MotionBlur;
-using ImageProcessing.DomainModel.Convolution.Implemetation.EdgeDetection.GaussianOperator;
 using ImageProcessing.DomainModel.Convolution.Implemetation.EdgeDetection.LaplacianOperator;
 using ImageProcessing.DomainModel.Convolution.Implemetation.EdgeDetection.SobelOperator;
 using ImageProcessing.DomainModel.Convolution.Implemetation.Emboss;
@@ -35,10 +34,6 @@ namespace ImageProcessing.DomainModel.Factory.Convolution.Implementation
                 => new GaussianBlur3x3(),
             ConvolutionFilter.GaussianBlur5x5
                 => new GaussianBlur5x5(),
-            ConvolutionFilter.GaussianOperator3x3
-                => new GaussianOperator3x3(),
-            ConvolutionFilter.GaussianOperator5x5
-                => new GaussianOperator5x5(),
             ConvolutionFilter.LaplacianOperator3x3
                 => new LaplacianOperator3x3(),
             ConvolutionFilter.LaplacianOperator5x5

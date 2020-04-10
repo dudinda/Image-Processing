@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Container;
 using ImageProcessing.Core.Controller.Interface;
