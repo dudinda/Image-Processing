@@ -11,7 +11,7 @@ namespace ImageProcessing.Core.Adapters.LightInject
     /// Provides access to the LightInject <typeparamref name="ServiceContainer"/>
     /// via the <see cref="IContainer"/>.
     /// </summary>
-    public sealed class LightInjectAdapter : IContainer
+    internal sealed class LightInjectAdapter : IContainer
     {
         private readonly ServiceContainer _container = new ServiceContainer();
 

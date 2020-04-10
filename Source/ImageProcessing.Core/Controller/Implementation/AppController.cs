@@ -8,7 +8,7 @@ using ImageProcessing.Core.Presenter;
 namespace ImageProcessing.Core.Controller.Implementation
 {
     /// <inheritdoc cref="IAppController"/>
-    public sealed class AppController : IAppController
+    internal sealed class AppController : IAppController
     {
         /// <inheritdoc cref="IDependencyResolution"/>
         public IDependencyResolution IoC { get; }
