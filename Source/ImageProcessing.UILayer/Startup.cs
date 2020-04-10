@@ -75,7 +75,7 @@ namespace ImageProcessing.UILayer
                 .RegisterSingleton<MainPresenter>()
                 .RegisterSingleton<IEventAggregator, EventAggregator>()
                 .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
-                .RegisterSingleton<ISTATaskService, STATaskService>()
+                .RegisterSingleton<IStaTaskService, StaTaskService>()
                 .RegisterSingleton<IAsyncZoomLocker, AsyncZoomLocker>()
                 .RegisterSingleton<ICacheService<Bitmap>, CacheService<Bitmap>>()
                 .RegisterSingletonView<IMainView, MainForm>()

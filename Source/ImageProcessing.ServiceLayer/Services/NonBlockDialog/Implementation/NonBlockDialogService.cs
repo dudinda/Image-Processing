@@ -11,10 +11,10 @@ namespace ImageProcessing.ServiceLayer.NonBlockDialog.Implementation
     public sealed class NonBlockDialogService : INonBlockDialogService
     {
         private readonly IFileDialogService _service;
-        private readonly ISTATaskService _staService;
+        private readonly IStaTaskService _staService;
 
         public NonBlockDialogService(IFileDialogService service,
-                                      ISTATaskService staService)
+                                     IStaTaskService staService)
         {
             _service = Requires.IsNotNull(
                 service, nameof(service));

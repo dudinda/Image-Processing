@@ -8,8 +8,8 @@ using ImageProcessing.ServiceLayer.Services.StaTask.Interface;
 
 namespace ImageProcessing.ServiceLayer.Services.StaTask.Implementation
 {
-    /// <inheritdoc cref="ISTATaskService"/>
-    public sealed class STATaskService : ISTATaskService
+    /// <inheritdoc cref="IStaTaskService"/>
+    public sealed class StaTaskService : IStaTaskService
     {
         private readonly int _maxNumberOfModals;
 
@@ -18,9 +18,9 @@ namespace ImageProcessing.ServiceLayer.Services.StaTask.Implementation
         /// </summary>
         private static List<int> _pool = new List<int>();
 
-        public STATaskService() : this(4) { } 
+        public StaTaskService() : this(4) { } 
 
-        public STATaskService(int maxNumberOfModals = 4)
+        public StaTaskService(int maxNumberOfModals = 4)
         {
             if(maxNumberOfModals < 0)
             {
