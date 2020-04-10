@@ -1,9 +1,9 @@
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Controller.Interface;
-using ImageProcessing.Core.EventAggregator.Interface;
-using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Core.Presenter;
 using ImageProcessing.Core.View;
+using ImageProcessing.ServiceLayer.Services.EventAggregator.Interface;
+using ImageProcessing.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface;
 
 namespace ImageProcessing.PresentationLayer.Presenters.Base
 {

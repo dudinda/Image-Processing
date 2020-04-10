@@ -10,9 +10,6 @@ using ImageProcessing.Common.Extensions.BitmapExtensions;
 using ImageProcessing.Common.Extensions.StringExtensions;
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Controller.Interface;
-using ImageProcessing.Core.EventAggregator.Interface;
-using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
-using ImageProcessing.Core.Pipeline.Block.Implementation;
 using ImageProcessing.DomainModel.DomainEvent.CommonArgs;
 using ImageProcessing.DomainModel.DomainEvent.ConvolutionArgs;
 using ImageProcessing.DomainModel.DomainEvent.DistributionArgs;
@@ -25,9 +22,13 @@ using ImageProcessing.PresentationLayer.Views.Main;
 using ImageProcessing.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.ServiceLayer.Providers.Interface.RgbFilters;
 using ImageProcessing.ServiceLayer.Services.Cache.Interface;
+using ImageProcessing.ServiceLayer.Services.EventAggregator.Interface;
 using ImageProcessing.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.ServiceLayer.Services.LockerService.Zoom.Interface;
 using ImageProcessing.ServiceLayer.Services.NonBlockDialog.Interface;
+using ImageProcessing.ServiceLayer.Services.Pipeline;
+using ImageProcessing.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface;
+using ImageProcessing.ServiceLayer.Services.Pipeline.Block.Implementation;
 
 namespace ImageProcessing.PresentationLayer.Presenters.Main
 {
@@ -180,7 +181,7 @@ namespace ImageProcessing.PresentationLayer.Presenters.Main
                     View.SetCursor(CursorType.Wait);
 
                     Pipeline
-                        .Register(e.Block
+                        .Register((e.Block as IPipelineBlock)
                             .Add<Bitmap, Bitmap>(
                                 (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
                             )

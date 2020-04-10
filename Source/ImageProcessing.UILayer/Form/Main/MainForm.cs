@@ -3,9 +3,9 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Interop.Code.Wrapper;
 using ImageProcessing.PresentationLayer.Views.Main;
+using ImageProcessing.ServiceLayer.Services.EventAggregator.Interface;
 using ImageProcessing.UILayer.Form.Base;
 
 namespace ImageProcessing.Form.Main

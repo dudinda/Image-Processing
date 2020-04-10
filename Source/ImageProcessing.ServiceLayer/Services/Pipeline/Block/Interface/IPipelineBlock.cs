@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 
-namespace ImageProcessing.Core.Pipeline
+namespace ImageProcessing.ServiceLayer.Services.Pipeline
 {
     public interface IPipelineBlock
     {

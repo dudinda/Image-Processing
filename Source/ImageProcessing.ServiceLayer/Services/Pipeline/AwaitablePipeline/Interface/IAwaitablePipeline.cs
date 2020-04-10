@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface
+namespace ImageProcessing.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface
 {
     public interface IAwaitablePipeline : IDisposable
     {

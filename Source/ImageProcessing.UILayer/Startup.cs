@@ -1,12 +1,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-using ImageProcessing.Core.EntryPoint.Interface;
-using ImageProcessing.Core.EventAggregator.Implementation;
-using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.Core.IoC.Interface;
-using ImageProcessing.Core.Pipeline.AwaitablePipeline.Implementation;
-using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.DomainModel.Factory.Convolution.Implementation;
 using ImageProcessing.DomainModel.Factory.Convolution.Interface;
 using ImageProcessing.DomainModel.Factory.Distributions.Implementation;
@@ -19,6 +14,7 @@ using ImageProcessing.DomainModel.Factory.RgbFilters.Color.Interface;
 using ImageProcessing.DomainModel.Factory.RgbFilters.Rgb.Implementation;
 using ImageProcessing.DomainModel.Factory.RgbFilters.Rgb.Interface;
 using ImageProcessing.DomainModel.Factory.StructuringElement.Implementation;
+using ImageProcessing.EntryPoint.Startup;
 using ImageProcessing.Form.Histogram;
 using ImageProcessing.Form.Main;
 using ImageProcessing.Form.QualityMeasure;
@@ -46,6 +42,8 @@ using ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Implem
 using ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
 using ImageProcessing.ServiceLayer.Services.Distributions.RandomVariable.Implementation;
 using ImageProcessing.ServiceLayer.Services.Distributions.RandomVariable.Interface;
+using ImageProcessing.ServiceLayer.Services.EventAggregator.Implementation;
+using ImageProcessing.ServiceLayer.Services.EventAggregator.Interface;
 using ImageProcessing.ServiceLayer.Services.FileDialog.Implementation;
 using ImageProcessing.ServiceLayer.Services.FileDialog.Interface;
 using ImageProcessing.ServiceLayer.Services.LockerService.Operation.Implementation;
@@ -55,6 +53,8 @@ using ImageProcessing.ServiceLayer.Services.LockerService.Zoom.Interface;
 using ImageProcessing.ServiceLayer.Services.Morphology.Implementation;
 using ImageProcessing.ServiceLayer.Services.Morphology.Interface;
 using ImageProcessing.ServiceLayer.Services.NonBlockDialog.Interface;
+using ImageProcessing.ServiceLayer.Services.Pipeline.AwaitablePipeline.Implementation;
+using ImageProcessing.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.ServiceLayer.Services.RgbFilters.Implementation;
 using ImageProcessing.ServiceLayer.Services.RgbFilters.Interface;
 using ImageProcessing.ServiceLayer.Services.StaTask.Implementation;

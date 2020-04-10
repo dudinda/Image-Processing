@@ -6,12 +6,12 @@ using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.EnumExtensions;
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Controller.Interface;
-using ImageProcessing.Core.EventAggregator.Interface;
-using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.PresentationLayer.Presenters.Base;
 using ImageProcessing.PresentationLayer.ViewModel.Histogram;
 using ImageProcessing.PresentationLayer.Views.Histogram;
 using ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
+using ImageProcessing.ServiceLayer.Services.EventAggregator.Interface;
+using ImageProcessing.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface;
 
 namespace ImageProcessing.PresentationLayer.Presenters
 {

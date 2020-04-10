@@ -3,8 +3,8 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Common.Extensions.EnumExtensions;
-using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.PresentationLayer.Views.Histogram;
+using ImageProcessing.ServiceLayer.Services.EventAggregator.Interface;
 using ImageProcessing.UILayer.Form.Base;
 
 namespace ImageProcessing.Form.Histogram

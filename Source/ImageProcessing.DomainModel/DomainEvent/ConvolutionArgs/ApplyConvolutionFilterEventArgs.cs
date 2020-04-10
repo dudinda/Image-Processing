@@ -1,13 +1,13 @@
-using ImageProcessing.Core.Pipeline;
-
 namespace ImageProcessing.DomainModel.DomainEvent.ConvolutionArgs
 {
     public sealed class ApplyConvolutionFilterEventArgs 
     {
-        public ApplyConvolutionFilterEventArgs(IPipelineBlock block)
+        public ApplyConvolutionFilterEventArgs(object block)
             => Block = block;
 
-        ///<inheritdoc cref="PipelineBlock{Bitmap}"/>
-        public IPipelineBlock Block { get; }
+        /// <summary>
+        /// A pipeline block.
+        /// </summary>
+        public object Block { get; }
     }
 }

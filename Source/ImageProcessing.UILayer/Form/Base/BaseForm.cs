@@ -1,7 +1,7 @@
 using System.Windows.Forms;
 
 using ImageProcessing.Common.Helpers;
-using ImageProcessing.Core.EventAggregator.Interface;
+using ImageProcessing.ServiceLayer.Services.EventAggregator.Interface;
 
 using MetroFramework.Forms;
 

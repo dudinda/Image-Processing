@@ -3,12 +3,12 @@ using System.Drawing;
 
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Controller.Interface;
-using ImageProcessing.Core.EventAggregator.Interface;
-using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.PresentationLayer.Presenters.Base;
 using ImageProcessing.PresentationLayer.ViewModel.QualityMeasure;
 using ImageProcessing.PresentationLayer.Views.QualityMeasure;
 using ImageProcessing.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
+using ImageProcessing.ServiceLayer.Services.EventAggregator.Interface;
+using ImageProcessing.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface;
 
 namespace ImageProcessing.PresentationLayer.Presenters
 {

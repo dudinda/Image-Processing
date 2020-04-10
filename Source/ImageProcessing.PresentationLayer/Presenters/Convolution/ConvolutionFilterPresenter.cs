@@ -4,15 +4,15 @@ using System.Threading.Tasks;
 
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Controller.Interface;
-using ImageProcessing.Core.EventAggregator.Interface;
-using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
-using ImageProcessing.Core.Pipeline.Block.Implementation;
 using ImageProcessing.DomainModel.DomainEvent.ConvolutionArgs;
 using ImageProcessing.PresentationLayer.Presenters.Base;
 using ImageProcessing.PresentationLayer.ViewModel.Convolution;
 using ImageProcessing.PresentationLayer.Views.Convolution;
 using ImageProcessing.ServiceLayer.Providers.Interface.Convolution;
+using ImageProcessing.ServiceLayer.Services.EventAggregator.Interface;
 using ImageProcessing.ServiceLayer.Services.LockerService.Operation.Interface;
+using ImageProcessing.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface;
+using ImageProcessing.ServiceLayer.Services.Pipeline.Block.Implementation;
 
 namespace ImageProcessing.PresentationLayer.Presenters.Convolution
 {

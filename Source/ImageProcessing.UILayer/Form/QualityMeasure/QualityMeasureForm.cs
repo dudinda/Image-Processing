@@ -1,7 +1,7 @@
 using System.Windows.Forms.DataVisualization.Charting;
 
-using ImageProcessing.Core.EventAggregator.Interface;
 using ImageProcessing.PresentationLayer.Views.QualityMeasure;
+using ImageProcessing.ServiceLayer.Services.EventAggregator.Interface;
 using ImageProcessing.UILayer.Form.Base;
 
 namespace ImageProcessing.Form.QualityMeasure

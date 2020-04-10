@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading;
 
 using ImageProcessing.Common.Helpers;
-using ImageProcessing.Core.EventAggregator.Interface;
-using ImageProcessing.Core.EventAggregator.Interface.Subscriber;
+using ImageProcessing.ServiceLayer.Services.EventAggregator.Interface;
+using ImageProcessing.ServiceLayer.Services.EventAggregator.Interface.Subscriber;
 
-namespace ImageProcessing.Core.EventAggregator.Implementation
+namespace ImageProcessing.ServiceLayer.Services.EventAggregator.Implementation
 {
     /// <inheritdoc cref="IEventAggregator"/>
     public sealed class EventAggregator : IEventAggregator

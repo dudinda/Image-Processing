@@ -1,18 +1,18 @@
 using System;
 
 using ImageProcessing.Common.Helpers;
-using ImageProcessing.Core.Pipeline.BlockItem.Interface;
+using ImageProcessing.ServiceLayer.Services.Pipeline.Item.Interface;
 
-namespace ImageProcessing.Core.Pipeline.BlockItem.Implementation
+namespace ImageProcessing.ServiceLayer.Services.Pipeline.Item.Implementation
 {
-    internal sealed class Item : IItem
+    internal sealed class BlockItem : IBlockItem
     {
         public Type InputType { get; }
         public Type OutputType { get; }
 
         private readonly Func<object, object> _step;
 
-        public Item(Func<object, object> step, Type typeIn, Type typeOut)
+        public BlockItem(Func<object, object> step, Type typeIn, Type typeOut)
         {
             _step = Requires.IsNotNull(
                 step, nameof(step));

@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 using ImageProcessing.Common.Utility.BlockingQueue.Implementation;
 using ImageProcessing.Common.Utility.BlockingQueue.Interface;
-using ImageProcessing.Core.Pipeline.AwaitablePipeline.Interface;
+using ImageProcessing.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface;
 
-namespace ImageProcessing.Core.Pipeline.AwaitablePipeline.Implementation
+namespace ImageProcessing.ServiceLayer.Services.Pipeline.AwaitablePipeline.Implementation
 {
     public sealed class AwaitablePipeline : IAwaitablePipeline
     {

@@ -2,15 +2,15 @@ using System;
 using System.Collections.Concurrent;
 using System.Threading;
 
-using ImageProcessing.Core.Pipeline.BlockItem.Implementation;
-using ImageProcessing.Core.Pipeline.BlockItem.Interface;
+using ImageProcessing.ServiceLayer.Services.Pipeline.Item.Implementation;
+using ImageProcessing.ServiceLayer.Services.Pipeline.Item.Interface;
 
-namespace ImageProcessing.Core.Pipeline.Block.Implementation
+namespace ImageProcessing.ServiceLayer.Services.Pipeline.Block.Implementation
 {
     public sealed class PipelineBlock : IPipelineBlock
     {
-        private readonly ConcurrentQueue<IItem> _block
-            = new ConcurrentQueue<IItem>();
+        private readonly ConcurrentQueue<IBlockItem> _block
+            = new ConcurrentQueue<IBlockItem>();
 
         private object _item;
         private Type _itemType;
@@ -50,7 +50,7 @@ namespace ImageProcessing.Core.Pipeline.Block.Implementation
         public IPipelineBlock Add<TIn, TOut>(Func<TIn, TOut> step)
         {
             _block.Enqueue(
-                    new Item(
+                    new BlockItem(
                             result => step.Invoke(
                                 (TIn)(object)result), typeof(TIn), typeof(TOut)
                              )

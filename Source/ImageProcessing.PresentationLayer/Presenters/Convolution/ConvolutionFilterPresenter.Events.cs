@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 
-using ImageProcessing.Core.EventAggregator.Interface.Subscriber;
 using ImageProcessing.DomainModel.DomainEvent.ConvolutionArgs;
+using ImageProcessing.ServiceLayer.Services.EventAggregator.Interface.Subscriber;
 
 namespace ImageProcessing.PresentationLayer.Presenters.Convolution
 {
