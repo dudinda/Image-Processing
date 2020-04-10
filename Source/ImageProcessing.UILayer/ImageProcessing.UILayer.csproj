@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ImageProcessing.EntryPoint\ImageProcessing.EntryPoint.csproj" />
     <ProjectReference Include="..\ImageProcessing.Interop\ImageProcessing.Interop.csproj" />
     <ProjectReference Include="..\ImageProcessing.Core\ImageProcessing.Core.csproj" />
     <ProjectReference Include="..\ImageProcessing.PresentationLayer\ImageProcessing.PresentationLayer.csproj" />

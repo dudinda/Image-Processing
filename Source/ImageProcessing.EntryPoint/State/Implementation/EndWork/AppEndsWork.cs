@@ -1,11 +1,11 @@
 using System;
 
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Core.EntryPoint.Interface;
 using ImageProcessing.Core.EntryPoint.State.Interface;
 using ImageProcessing.Core.Presenter;
+using ImageProcessing.EntryPoint.Startup;
 
-namespace ImageProcessing.Core.EntryPoint.State.Implementation.Exit
+namespace ImageProcessing.EntryPoint.State.EndWork
 {
     /// <summary>
     /// Application ends its work state.

@@ -1,12 +1,13 @@
 using System;
 
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Core.EntryPoint.Interface;
-using ImageProcessing.Core.EntryPoint.State.Implementation.Run;
 using ImageProcessing.Core.EntryPoint.State.Interface;
 using ImageProcessing.Core.Presenter;
+using ImageProcessing.EntryPoint.Startup;
+using ImageProcessing.EntryPoint.State.EndWork;
+using ImageProcessing.EntryPoint.State.StartWork;
 
-namespace ImageProcessing.Core.EntryPoint.State.Implementation.Exit
+namespace ImageProcessing.EntryPoint.State.Implementation.IsBuilt
 {
     /// <summary>
     /// Aplication has been built state.

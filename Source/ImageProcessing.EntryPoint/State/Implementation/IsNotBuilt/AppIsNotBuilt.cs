@@ -5,12 +5,13 @@ using ImageProcessing.Core.Adapters.LightInject;
 using ImageProcessing.Core.Adapters.Ninject;
 using ImageProcessing.Core.Container;
 using ImageProcessing.Core.Controller.Implementation;
-using ImageProcessing.Core.EntryPoint.Interface;
-using ImageProcessing.Core.EntryPoint.State.Implementation.Exit;
 using ImageProcessing.Core.EntryPoint.State.Interface;
 using ImageProcessing.Core.Presenter;
+using ImageProcessing.EntryPoint;
+using ImageProcessing.EntryPoint.Startup;
+using ImageProcessing.EntryPoint.State.Implementation.IsBuilt;
 
-namespace ImageProcessing.Core.EntryPoint.State.Implementation
+namespace ImageProcessing.Core.EntryPoint.State.IsNotBuilt
 {
     /// <summary>
     /// Application has not been built state.
@@ -36,8 +37,9 @@ namespace ImageProcessing.Core.EntryPoint.State.Implementation
 
             App.State = new AppIsBuilt();
 
-            IContainer GetContainerAdapter() => container
-                switch
+            IContainer GetContainerAdapter()
+                => container
+            switch
             {
                 DiContainer.LightInject
                     => new LightInjectAdapter(),

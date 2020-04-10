@@ -1,12 +1,11 @@
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Core.Controller.Implementation;
 using ImageProcessing.Core.Controller.Interface;
-using ImageProcessing.Core.EntryPoint.Interface;
-using ImageProcessing.Core.EntryPoint.State.Implementation;
 using ImageProcessing.Core.EntryPoint.State.Interface;
+using ImageProcessing.Core.EntryPoint.State.IsNotBuilt;
 using ImageProcessing.Core.Presenter;
+using ImageProcessing.EntryPoint.Startup;
 
-namespace ImageProcessing.Core.EntryPoint
+namespace ImageProcessing.EntryPoint
 {
     /// <summary>
     /// Entry point into the application lifecycle.
@@ -14,7 +13,7 @@ namespace ImageProcessing.Core.EntryPoint
     public static class App
     {
         /// <inheritdoc cref="IAppController"/>
-        internal static AppController Controller { get; set; }
+        internal static IAppController Controller { get; set; }
 
         /// <inheritdoc cref="IAppState"/>
         internal static IAppState State { get; set; } = new AppIsNotBuilt();
@@ -32,6 +31,5 @@ namespace ImageProcessing.Core.EntryPoint
         /// <inheritdoc cref="IAppState.Exit"/>
         public static void Exit()
             => State.Exit();
-        
     }
 }

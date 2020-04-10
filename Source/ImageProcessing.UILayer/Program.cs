@@ -1,7 +1,7 @@
 using System;
 
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Core.EntryPoint;
+using ImageProcessing.EntryPoint;
 using ImageProcessing.PresentationLayer.Presenters.Main;
 
 namespace ImageProcessing.UILayer
