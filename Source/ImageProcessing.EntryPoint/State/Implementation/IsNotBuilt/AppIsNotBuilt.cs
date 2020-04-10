@@ -22,20 +22,22 @@ namespace ImageProcessing.Core.EntryPoint.State.IsNotBuilt
         public void Build<TStartup>(DiContainer container)
             where TStartup : class, IStartup
         {
-            App.Controller = new AppController(GetContainerAdapter());
+            AppLifecycle.Controller = new AppController(GetContainerAdapter());
 
-            if (App.Controller.IoC.IsRegistered<TStartup>())
+            if (AppLifecycle.Controller.IoC.IsRegistered<TStartup>())
             {
-                throw new InvalidOperationException("The specified startup is already defined.");
+                throw new InvalidOperationException(
+                    "The specified startup is already defined."
+                );
             }
 
-            App.Controller.IoC.RegisterSingleton<TStartup>();
+            AppLifecycle.Controller.IoC.RegisterSingleton<TStartup>();
 
-            App.Controller.IoC
+            AppLifecycle.Controller.IoC
                 .Resolve<TStartup>()
-                .Build(App.Controller.IoC);
+                .Build(AppLifecycle.Controller.IoC);
 
-            App.State = new AppIsBuilt();
+            AppLifecycle.State = new AppIsBuilt();
 
             IContainer GetContainerAdapter()
                 => container

@@ -4,13 +4,14 @@ using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.EntryPoint.State.Interface;
 using ImageProcessing.Core.Presenter;
 using ImageProcessing.EntryPoint.Startup;
+using ImageProcessing.EntryPoint.State.EndWork;
 
-namespace ImageProcessing.EntryPoint.State.EndWork
+namespace ImageProcessing.EntryPoint.State.StartWork
 {
     /// <summary>
-    /// Application ends its work state.
+    /// Application starts its work state.
     /// </summary>
-    internal sealed class AppEndsWork : IAppState
+    internal sealed class AppStartWork : IAppState
     {
         /// <inheritdoc/>
         public void Build<TStartup>(DiContainer container)
@@ -21,13 +22,14 @@ namespace ImageProcessing.EntryPoint.State.EndWork
 
         /// <inheritdoc/>
         public void Exit()
-            => App.Controller.Dispose();
+        {
+            AppLifecycle.State = new AppEndWork();
+            AppLifecycle.State.Exit();
+        }
 
         /// <inheritdoc/>
         public void Run<TMainPresenter>()
             where TMainPresenter : class, IPresenter
-            => throw new InvalidOperationException(
-                "The application is already running."
-            );      
+            => AppLifecycle.Controller.Run<TMainPresenter>();      
     }
 }

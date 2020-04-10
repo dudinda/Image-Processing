@@ -24,16 +24,16 @@ namespace ImageProcessing.EntryPoint.State.Implementation.IsBuilt
         /// <inheritdoc/>
         public void Exit()
         {
-            App.State = new AppEndsWork();
-            App.State.Exit();
+            AppLifecycle.State = new AppEndWork();
+            AppLifecycle.State.Exit();
         }
 
         /// <inheritdoc/>
         public void Run<TMainPresenter>()
             where TMainPresenter : class, IPresenter
         {
-            App.State = new AppStartsWork();
-            App.State.Run<TMainPresenter>();
+            AppLifecycle.State = new AppStartWork();
+            AppLifecycle.State.Run<TMainPresenter>();
         }
     }
 }

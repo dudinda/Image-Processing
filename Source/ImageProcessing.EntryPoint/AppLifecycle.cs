@@ -10,13 +10,14 @@ namespace ImageProcessing.EntryPoint
     /// <summary>
     /// Entry point into the application lifecycle.
     /// </summary>
-    public static class App
+    public static class AppLifecycle
     {
         /// <inheritdoc cref="IAppController"/>
         internal static IAppController Controller { get; set; }
 
         /// <inheritdoc cref="IAppState"/>
-        internal static IAppState State { get; set; } = new AppIsNotBuilt();
+        internal static IAppState State { get; set; }
+            = new AppIsNotBuilt();
 
         /// <inheritdoc cref="IAppState.Build{TStartup}(DiContainer)"/>
         public static void Build<TStartup>(DiContainer container)
