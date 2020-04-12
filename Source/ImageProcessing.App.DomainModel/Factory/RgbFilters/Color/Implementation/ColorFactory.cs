@@ -15,25 +15,25 @@ namespace ImageProcessing.App.DomainModel.Factory.RgbFilters.Color.Implementatio
         /// implementing the <see cref="IColor"/>.
         /// </summary>
         public IColor Get(RgbColors filter)
-            => filter switch
-            {
-                RgbColors.Red
-                    => new RColor(),
-                RgbColors.Green
-                    => new GColor(),
-                RgbColors.Blue
-                    => new BColor(),
-                RgbColors.Red | RgbColors.Green
-                    => new RGColor(),
-                RgbColors.Red | RgbColors.Blue
-                    => new RBColor(),
-                RgbColors.Green | RgbColors.Blue
-                    => new BGColor(),
-                RgbColors.Green | RgbColors.Blue | RgbColors.Red
-                    => new RGBColor(),
+            => filter
+        switch
+        {
+            RgbColors.Red
+                => new RColor(),
+            RgbColors.Green
+                => new GColor(),
+            RgbColors.Blue
+                => new BColor(),
+            RgbColors.Red | RgbColors.Green
+                => new RGColor(),
+            RgbColors.Red | RgbColors.Blue
+                => new RBColor(),
+            RgbColors.Green | RgbColors.Blue
+                => new BGColor(),
+            RgbColors.Green | RgbColors.Blue | RgbColors.Red
+                => new RGBColor(),
 
-                _   => throw new NotSupportedException(nameof(filter))
-            };
-     
+            _ => throw new NotSupportedException(nameof(filter))
+        };
     }
 }

@@ -17,7 +17,8 @@ namespace ImageProcessing.App.DomainModel.Factory.Distributions.Implementation
         /// enumeration for the types implementing the <see cref="IDistribution"/>.
         /// </summary>
         public IDistribution Get(Distribution distribution)
-        => distribution switch
+            => distribution
+        switch
         {
             Distribution.Exponential
                 => new ExponentialDistribution(),

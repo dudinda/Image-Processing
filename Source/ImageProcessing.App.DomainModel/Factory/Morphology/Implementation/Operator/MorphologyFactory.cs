@@ -21,7 +21,8 @@ namespace ImageProcessing.App.DomainModel.Factory.Morphology.Implementation
     {
         /// <inheritdoc/>
         public IMorphologyBinary GetBinary(MorphologyOperator filter)
-        => filter switch
+            => filter
+        switch
         {
             MorphologyOperator.Addition
                 => new AdditionOperator(),
@@ -37,7 +38,8 @@ namespace ImageProcessing.App.DomainModel.Factory.Morphology.Implementation
         /// enumeration for the types implementing the <see cref="IMorphologyUnary"/>.
         /// </summary>
         public IMorphologyUnary Get(MorphologyOperator filter)
-        => filter switch
+            => filter
+        switch
         {
             MorphologyOperator.Dilation
                 => new DilationOperator(),

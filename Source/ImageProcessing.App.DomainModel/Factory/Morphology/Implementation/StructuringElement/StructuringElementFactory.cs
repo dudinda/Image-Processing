@@ -18,7 +18,8 @@ namespace ImageProcessing.App.DomainModel.Factory.StructuringElement.Implementat
         /// enumeration for the types implementing the <see cref="IStructuringElementFactory"/>.
         /// </summary>
         public IStructuringElement Get(StructuringElem filter)
-        => filter switch
+            => filter
+        switch
         {
             StructuringElem.CrossShaped
                 => new CrossShapedElement(),

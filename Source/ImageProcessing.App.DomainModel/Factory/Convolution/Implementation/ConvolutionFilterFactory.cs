@@ -22,7 +22,8 @@ namespace ImageProcessing.App.DomainModel.Factory.Convolution.Implementation
         /// enumeration for the types implementing the <see cref="IConvolutionFilter"/>.
         /// </summary>
         public IConvolutionFilter Get(ConvolutionFilter filter)
-        => filter switch
+            => filter
+        switch
         {
             ConvolutionFilter.BoxBlur3x3
                 => new BoxBlur3x3(),

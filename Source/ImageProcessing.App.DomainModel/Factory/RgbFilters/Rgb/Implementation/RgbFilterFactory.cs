@@ -29,7 +29,8 @@ namespace ImageProcessing.App.DomainModel.Factory.RgbFilters.Rgb.Implementation
         /// implementing the <see cref="IRgbFilter"/>.
         /// </summary>
         public IRgbFilter Get(RgbFilter filter)
-        => filter switch
+            => filter
+        switch
         {
             RgbFilter.Binary
                 => new BinaryFilter(),
