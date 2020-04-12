@@ -1,5 +1,5 @@
-using ImageProcessing.Common.Enums;
-using ImageProcessing.Core.Presenter;
+using ImageProcessing.Core.DI.Code.Enums;
+using ImageProcessing.Core.MVP.Presenter;
 using ImageProcessing.EntryPoint.Startup;
 
 namespace ImageProcessing.Core.EntryPoint.State.Interface

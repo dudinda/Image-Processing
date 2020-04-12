@@ -1,8 +1,8 @@
 using System;
 
-using ImageProcessing.Common.Enums;
+using ImageProcessing.Core.DI.Code.Enums;
 using ImageProcessing.Core.EntryPoint.State.Interface;
-using ImageProcessing.Core.Presenter;
+using ImageProcessing.Core.MVP.Presenter;
 using ImageProcessing.EntryPoint.Code.Enums;
 using ImageProcessing.EntryPoint.Factory;
 using ImageProcessing.EntryPoint.Startup;

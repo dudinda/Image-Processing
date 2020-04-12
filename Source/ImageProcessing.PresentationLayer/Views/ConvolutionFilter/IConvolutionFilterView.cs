@@ -1,5 +1,5 @@
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Core.View;
+using ImageProcessing.Core.MVP.View;
 using ImageProcessing.PresentationLayer.Views.ViewComponent.Error;
 
 namespace ImageProcessing.PresentationLayer.Views.Convolution

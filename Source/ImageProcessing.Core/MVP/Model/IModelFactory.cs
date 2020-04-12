@@ -1,19 +1,19 @@
 using System;
 
-namespace ImageProcessing.DomainModel.Factory.Base
+namespace ImageProcessing.Core.MVP.Model
 {
     /// <summary>
     /// A base factory method provider for all the types
-    /// implementing the <typeparamref name="TFilter"/>.
+    /// implementing the <typeparamref name="TModel"/>.
     /// </summary>
-    public interface IBaseFactory<out TFilter, in TEnum>
+    public interface IModelFactory<out TModel, in TEnum>
         where TEnum : Enum
     {
         /// <summary>
         /// Provides a factory method
         /// where a <typeparamref name="TEnum"/> value represents an
-        /// enumeration for the <typeparamref name="TFilter"/>.
+        /// enumeration for the <typeparamref name="TModel"/>.
         /// </summary>
-        TFilter Get(TEnum filter);
+        TModel Get(TEnum filter);
     }
 }

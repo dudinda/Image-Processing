@@ -1,7 +1,7 @@
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Controller.Interface;
-using ImageProcessing.Core.Presenter;
-using ImageProcessing.Core.View;
+using ImageProcessing.Core.MVP.Presenter;
+using ImageProcessing.Core.MVP.View;
 using ImageProcessing.ServiceLayer.Services.EventAggregator.Interface;
 using ImageProcessing.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface;
 

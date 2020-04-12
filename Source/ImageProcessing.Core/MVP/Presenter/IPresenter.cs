@@ -1,4 +1,4 @@
-namespace ImageProcessing.Core.Presenter
+namespace ImageProcessing.Core.MVP.Presenter
 {
     /// <summary>
     /// Represents the base behavior of

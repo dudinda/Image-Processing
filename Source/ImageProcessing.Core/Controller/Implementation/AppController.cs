@@ -1,11 +1,10 @@
-using System.Runtime.CompilerServices;
 
 using ImageProcessing.Common.Helpers;
 using ImageProcessing.Core.Container;
 using ImageProcessing.Core.Controller.Interface;
 using ImageProcessing.Core.IoC.Implementation;
 using ImageProcessing.Core.IoC.Interface;
-using ImageProcessing.Core.Presenter;
+using ImageProcessing.Core.MVP.Presenter;
 
 namespace ImageProcessing.Core.Controller.Implementation
 {

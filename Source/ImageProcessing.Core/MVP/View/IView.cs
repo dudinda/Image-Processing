@@ -1,4 +1,4 @@
-namespace ImageProcessing.Core.View
+namespace ImageProcessing.Core.MVP.View
 {
     /// <summary>
     /// Represents the base behavior

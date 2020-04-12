@@ -1,7 +1,6 @@
-using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.Common.Enums;
-using ImageProcessing.Core.View;
+using ImageProcessing.Core.MVP.View;
 using ImageProcessing.PresentationLayer.Views.ViewComponent.DataChart;
 
 namespace ImageProcessing.PresentationLayer.Views.Histogram

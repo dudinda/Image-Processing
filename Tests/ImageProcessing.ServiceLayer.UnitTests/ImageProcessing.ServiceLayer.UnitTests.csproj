@@ -81,6 +81,10 @@
       <Project>{5303B857-0B43-40F3-857F-AAE229EE3EEE}</Project>
       <Name>ImageProcessing.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Source\ImageProcessing.Core\ImageProcessing.Core.csproj">
+      <Project>{ab4fb28d-b081-4279-acd6-e0abec245494}</Project>
+      <Name>ImageProcessing.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.DomainModel\ImageProcessing.DomainModel.csproj">
       <Project>{70757d0c-2202-42c5-9e93-b3e54418fe76}</Project>
       <Name>ImageProcessing.DomainModel</Name>

@@ -1,7 +1,7 @@
 using System;
 
 using ImageProcessing.Core.IoC.Interface;
-using ImageProcessing.Core.Presenter;
+using ImageProcessing.Core.MVP.Presenter;
 
 namespace ImageProcessing.Core.Controller.Interface
 {
