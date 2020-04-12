@@ -3,8 +3,9 @@ using System;
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.EntryPoint.State.Interface;
 using ImageProcessing.Core.Presenter;
+using ImageProcessing.EntryPoint.Code.Enums;
+using ImageProcessing.EntryPoint.Factory;
 using ImageProcessing.EntryPoint.Startup;
-using ImageProcessing.EntryPoint.State.EndWork;
 
 namespace ImageProcessing.EntryPoint.State.StartWork
 {
@@ -23,7 +24,10 @@ namespace ImageProcessing.EntryPoint.State.StartWork
         /// <inheritdoc/>
         public void Exit()
         {
-            AppLifecycle.State = new AppEndWork();
+            AppLifecycle.State = StateFactory.Get(
+                AppState.EndWork
+            );
+
             AppLifecycle.State.Exit();
         }
 

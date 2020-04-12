@@ -2,6 +2,7 @@ using System;
 
 using ImageProcessing.Common.Enums;
 using ImageProcessing.EntryPoint;
+using ImageProcessing.EntryPoint.Code.Enums;
 using ImageProcessing.PresentationLayer.Presenters.Main;
 
 namespace ImageProcessing.UILayer
@@ -18,6 +19,7 @@ namespace ImageProcessing.UILayer
             }
             catch(Exception ex)
             {
+                AppLifecycle.SetState(AppState.EndWork);
                 AppLifecycle.Exit();
             }
         }

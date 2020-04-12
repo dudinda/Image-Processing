@@ -8,6 +8,8 @@ using ImageProcessing.Core.Controller.Implementation;
 using ImageProcessing.Core.EntryPoint.State.Interface;
 using ImageProcessing.Core.Presenter;
 using ImageProcessing.EntryPoint;
+using ImageProcessing.EntryPoint.Code.Enums;
+using ImageProcessing.EntryPoint.Factory;
 using ImageProcessing.EntryPoint.Startup;
 using ImageProcessing.EntryPoint.State.Implementation.IsBuilt;
 
@@ -37,7 +39,9 @@ namespace ImageProcessing.Core.EntryPoint.State.IsNotBuilt
                 .Resolve<TStartup>()
                 .Build(AppLifecycle.Controller.IoC);
 
-            AppLifecycle.State = new AppIsBuilt();
+            AppLifecycle.State = StateFactory.Get(
+                AppState.IsBuilt
+            );
 
             IContainer GetContainerAdapter()
                 => container

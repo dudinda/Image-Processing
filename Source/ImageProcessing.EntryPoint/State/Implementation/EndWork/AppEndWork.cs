@@ -21,7 +21,9 @@ namespace ImageProcessing.EntryPoint.State.EndWork
 
         /// <inheritdoc/>
         public void Exit()
-            => AppLifecycle.Controller.Dispose();
+            => AppLifecycle
+                .Controller
+                .Dispose();
 
         /// <inheritdoc/>
         public void Run<TMainPresenter>()

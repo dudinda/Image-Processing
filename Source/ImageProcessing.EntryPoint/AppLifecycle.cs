@@ -1,8 +1,9 @@
 using ImageProcessing.Common.Enums;
 using ImageProcessing.Core.Controller.Interface;
 using ImageProcessing.Core.EntryPoint.State.Interface;
-using ImageProcessing.Core.EntryPoint.State.IsNotBuilt;
 using ImageProcessing.Core.Presenter;
+using ImageProcessing.EntryPoint.Code.Enums;
+using ImageProcessing.EntryPoint.Factory;
 using ImageProcessing.EntryPoint.Startup;
 
 namespace ImageProcessing.EntryPoint
@@ -17,7 +18,9 @@ namespace ImageProcessing.EntryPoint
 
         /// <inheritdoc cref="IAppState"/>
         internal static IAppState State { get; set; }
-            = new AppIsNotBuilt();
+            = StateFactory.Get(
+                AppState.IsNotBuilt
+            );
 
         /// <inheritdoc cref="IAppState.Build{TStartup}(DiContainer)"/>
         public static void Build<TStartup>(DiContainer container)
@@ -32,5 +35,11 @@ namespace ImageProcessing.EntryPoint
         /// <inheritdoc cref="IAppState.Exit"/>
         public static void Exit()
             => State.Exit();
+
+        /// <summary>
+        /// Set a state of an application.
+        /// </summary>
+        public static void SetState(AppState state)
+            => State = StateFactory.Get(state);
     }
 }
