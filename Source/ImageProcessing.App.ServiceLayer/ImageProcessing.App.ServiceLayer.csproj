@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ImageProcessing.Framework.Core\ImageProcessing.Framework.Core.csproj" />
     <ProjectReference Include="..\ImageProcessing.App.DomainModel\ImageProcessing.App.DomainModel.csproj" />
+    <ProjectReference Include="..\ImageProcessing.Utility.DataStructure\ImageProcessing.Utility.DataStructure.csproj" />
     <ProjectReference Include="..\ImageProcessing.Utility.DecimalMath\ImageProcessing.Utility.DecimalMath.csproj" />
     <ProjectReference Include="..\ImageProcessing.Utility.Interop\ImageProcessing.Utility.Interop.csproj" />
   </ItemGroup>

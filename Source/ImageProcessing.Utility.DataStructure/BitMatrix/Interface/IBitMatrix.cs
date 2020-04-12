@@ -1,4 +1,4 @@
-namespace ImageProcessing.App.Common.Utility.BitMatrix.Interface
+namespace ImageProcessing.Utility.DataStructure.BitMatrix.Interface
 {
     /// <summary>
     /// Specifies a memory efficient 2D array

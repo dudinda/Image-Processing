@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ImageProcessing.App.Common.Utility.BlockingQueue.Interface
+namespace ImageProcessing.Utility.DataStructure.BlockingQueue.Interface
 {
     public interface IBlockingQueue<T>
     {

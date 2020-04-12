@@ -1,9 +1,9 @@
-﻿using System.Drawing;
+using System.Drawing;
 using System.Windows.Forms;
 
 using ImageProcessing.App.Common.Enums;
-using ImageProcessing.Utility.FixedStack.Implementation;
-using ImageProcessing.Utility.FixedStack.Interface;
+using ImageProcessing.Utility.DataStructure.FixedStack.Implementation;
+using ImageProcessing.Utility.DataStructure.FixedStack.Interface;
 
 namespace ImageProcessing.App.UILayer.Control
 {
@@ -22,7 +22,6 @@ namespace ImageProcessing.App.UILayer.Control
         {
             _undo.Push(action);
         }
-
 
         public (Bitmap, ImageContainer)? Undo()
         {
@@ -47,6 +46,5 @@ namespace ImageProcessing.App.UILayer.Control
 
             return _undo.Peek();
         }
-
     }
 }

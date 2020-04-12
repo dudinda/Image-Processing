@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -25,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ImageProcessing.App.Common\ImageProcessing.App.Common.csproj" />
     <ProjectReference Include="..\ImageProcessing.Framework.Core\ImageProcessing.Framework.Core.csproj" />
+    <ProjectReference Include="..\ImageProcessing.Utility.DataStructure\ImageProcessing.Utility.DataStructure.csproj" />
     <ProjectReference Include="..\ImageProcessing.Utility.DecimalMath\ImageProcessing.Utility.DecimalMath.csproj" />
   </ItemGroup>
 

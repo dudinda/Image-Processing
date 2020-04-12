@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-using ImageProcessing.App.Common.Utility.BlockingQueue.Interface;
+using ImageProcessing.Utility.DataStructure.BlockingQueue.Interface;
 
-namespace ImageProcessing.App.Common.Utility.BlockingQueue.Implementation
+namespace ImageProcessing.Utility.DataStructure.BlockingQueue.Implementation
 {
     public sealed class BlockingQueue<T> : IBlockingQueue<T>
     {
@@ -45,6 +45,7 @@ namespace ImageProcessing.App.Common.Utility.BlockingQueue.Implementation
                 return true;
             }
         }
+
         public bool TryDequeue(out T value)
         {
             lock (_queue)

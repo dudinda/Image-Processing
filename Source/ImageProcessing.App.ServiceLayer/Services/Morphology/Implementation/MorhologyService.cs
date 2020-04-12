@@ -1,10 +1,10 @@
 using System.Drawing;
 
 using ImageProcessing.App.Common.Helpers;
-using ImageProcessing.App.Common.Utility.BitMatrix.Implementation;
 using ImageProcessing.App.DomainModel.Model.Morphology.Interface.BinaryOperator;
 using ImageProcessing.App.DomainModel.Model.Morphology.Interface.UnaryOperator;
 using ImageProcessing.App.ServiceLayer.Services.Morphology.Interface;
+using ImageProcessing.Utility.DataStructure.BitMatrix.Implementation;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Morphology.Implementation
 {

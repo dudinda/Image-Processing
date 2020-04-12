@@ -2,9 +2,9 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Common.Utility.BlockingQueue.Implementation;
-using ImageProcessing.App.Common.Utility.BlockingQueue.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface;
+using ImageProcessing.Utility.DataStructure.BlockingQueue.Implementation;
+using ImageProcessing.Utility.DataStructure.BlockingQueue.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.AwaitablePipeline.Implementation
 {

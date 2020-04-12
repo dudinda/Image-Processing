@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.Common.Extensions.BitmapExtensions;
 using ImageProcessing.App.Common.Helpers;
-using ImageProcessing.App.Common.Utility.BitMatrix.Implementation;
 using ImageProcessing.App.DomainModel.Model.Morphology.Interface.UnaryOperator;
+using ImageProcessing.Utility.DataStructure.BitMatrix.Implementation;
 
 namespace ImageProcessing.App.DomainModel.Model.Morphology.Implementation.Dilation
 {

@@ -2,12 +2,12 @@ using System.Drawing;
 
 using ImageProcessing.App.Common.Enums;
 using ImageProcessing.App.Common.Helpers;
-using ImageProcessing.App.Common.Utility.BitMatrix.Implementation;
 using ImageProcessing.App.DomainModel.Factory.Morphology.Interface;
 using ImageProcessing.App.DomainModel.Factory.Morphology.Interface.StructuringElement;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Morphology;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Morphology.Interface;
+using ImageProcessing.Utility.DataStructure.BitMatrix.Implementation;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Morphology
 {

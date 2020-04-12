@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using ImageProcessing.Utility.FixedStack.Interface;
+using ImageProcessing.Utility.DataStructure.FixedStack.Interface;
 
-namespace ImageProcessing.Utility.FixedStack.Implementation
+namespace ImageProcessing.Utility.DataStructure.FixedStack.Implementation
 {
     public sealed class FixedStack<T> : IFixedStack<T>
     {

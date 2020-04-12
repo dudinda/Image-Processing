@@ -1,7 +1,7 @@
 using System;
 
-using ImageProcessing.App.Common.Utility.BitMatrix.Implementation;
 using ImageProcessing.App.DomainModel.Model.Morphology.Interface.StructuringElement;
+using ImageProcessing.Utility.DataStructure.BitMatrix.Implementation;
 
 namespace ImageProcessing.App.DomainModel.Model.Morphology.Implementation.StructringElement.Elliptical
 {

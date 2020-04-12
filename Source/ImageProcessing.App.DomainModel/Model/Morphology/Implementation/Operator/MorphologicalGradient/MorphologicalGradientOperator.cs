@@ -1,11 +1,11 @@
 using System.Drawing;
 
 using ImageProcessing.App.Common.Helpers;
-using ImageProcessing.App.Common.Utility.BitMatrix.Implementation;
 using ImageProcessing.App.DomainModel.Model.Morphology.Implementation.Dilation;
 using ImageProcessing.App.DomainModel.Model.Morphology.Implementation.Erosion;
 using ImageProcessing.App.DomainModel.Model.Morphology.Implementation.Subtraction;
 using ImageProcessing.App.DomainModel.Model.Morphology.Interface.UnaryOperator;
+using ImageProcessing.Utility.DataStructure.BitMatrix.Implementation;
 
 namespace ImageProcessing.App.DomainModel.Model.Morphology.Implementation.MorphologicalGradient
 {

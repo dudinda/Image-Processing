@@ -1,8 +1,8 @@
 using System;
 
-using ImageProcessing.App.Common.Utility.BitMatrix.Interface;
+using ImageProcessing.Utility.DataStructure.BitMatrix.Interface;
 
-namespace ImageProcessing.App.Common.Utility.BitMatrix.Implementation
+namespace ImageProcessing.Utility.DataStructure.BitMatrix.Implementation
 {
     /// <inheritdoc cref="IBitMatrix"/>
     public sealed class BitMatrix : IBitMatrix
