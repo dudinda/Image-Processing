@@ -1,0 +1,32 @@
+using ImageProcessing.Framework.Core.DI.Code.Enums;
+using ImageProcessing.Framework.Core.MVP.Presenter;
+using ImageProcessing.EntryPoint.Startup;
+
+namespace ImageProcessing.Framework.Core.EntryPoint.State.Interface
+{
+    /// <summary>
+    /// Represents an application state.
+    /// </summary>
+    internal interface IAppState
+    {
+        /// <summary>
+        /// Build an application. Use the specified
+        /// <see cref="DiContainer"/> and use
+        /// a <typeparamref name="TStartup"/> class
+        /// as an entry configuration for dependencies.
+        /// </summary>
+        void Build<TStartup>(DiContainer container)
+            where TStartup : class, IStartup;
+
+        /// <summary>
+        /// Run the specified <typeparamref name="TMainPresenter"/>.
+        /// </summary>
+        void Run<TMainPresenter>()
+            where TMainPresenter : class, IPresenter;
+
+        /// <summary>
+        /// Exit an application.
+        /// </summary>
+        void Exit();
+    }
+}

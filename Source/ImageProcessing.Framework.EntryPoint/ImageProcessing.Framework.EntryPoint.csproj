@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ImageProcessing.App.Common\ImageProcessing.App.Common.csproj" />
+    <ProjectReference Include="..\ImageProcessing.Framework.Core\ImageProcessing.Framework.Core.csproj" />
+  </ItemGroup>
+
+</Project>
