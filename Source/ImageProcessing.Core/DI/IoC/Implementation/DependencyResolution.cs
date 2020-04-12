@@ -1,13 +1,12 @@
 using System;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 
 using ImageProcessing.Common.Helpers;
-using ImageProcessing.Core.Container;
-using ImageProcessing.Core.IoC.Interface;
-using ImageProcessing.Core.View;
+using ImageProcessing.Core.DI.Container;
+using ImageProcessing.Core.DI.IoC.Interface;
+using ImageProcessing.Core.MVP.View;
 
-namespace ImageProcessing.Core.IoC.Implementation
+namespace ImageProcessing.Core.DI.IoC.Implementation
 {
     /// <inheritdoc cref="IDependencyResolution"/>
     internal sealed class DependencyResolution : IDependencyResolution

@@ -1,8 +1,8 @@
 using System;
 
-using ImageProcessing.Core.Adapters.LightInject;
-using ImageProcessing.Core.Adapters.Ninject;
-using ImageProcessing.Core.Container;
+using ImageProcessing.Core.DI.Adapters.LightInject;
+using ImageProcessing.Core.DI.Adapters.Ninject;
+using ImageProcessing.Core.DI.Container;
 using ImageProcessing.Core.Controller.Implementation;
 using ImageProcessing.Core.DI.Code.Enums;
 using ImageProcessing.Core.EntryPoint.State.Interface;

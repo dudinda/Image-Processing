@@ -1,9 +1,9 @@
 
 using ImageProcessing.Common.Helpers;
-using ImageProcessing.Core.Container;
+using ImageProcessing.Core.DI.Container;
 using ImageProcessing.Core.Controller.Interface;
-using ImageProcessing.Core.IoC.Implementation;
-using ImageProcessing.Core.IoC.Interface;
+using ImageProcessing.Core.DI.IoC.Implementation;
+using ImageProcessing.Core.DI.IoC.Interface;
 using ImageProcessing.Core.MVP.Presenter;
 
 namespace ImageProcessing.Core.Controller.Implementation

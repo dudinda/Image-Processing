@@ -2,9 +2,9 @@ using System;
 using System.Linq.Expressions;
 
 using ImageProcessing.Core.Controller.Implementation;
-using ImageProcessing.Core.View;
+using ImageProcessing.Core.MVP.View;
 
-namespace ImageProcessing.Core.IoC.Interface
+namespace ImageProcessing.Core.DI.IoC.Interface
 {
     /// <summary>
     /// Provides access to the specified

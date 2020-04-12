@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace ImageProcessing.Core.Container
+namespace ImageProcessing.Core.DI.Container
 {
     /// <summary>
     /// Provides access to the specified

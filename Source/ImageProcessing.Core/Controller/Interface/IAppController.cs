@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.Core.IoC.Interface;
+using ImageProcessing.Core.DI.IoC.Interface;
 using ImageProcessing.Core.MVP.Presenter;
 
 namespace ImageProcessing.Core.Controller.Interface

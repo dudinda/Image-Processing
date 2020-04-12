@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.Common.Enums;
+using ImageProcessing.Core.DI.Code.Enums;
 using ImageProcessing.EntryPoint;
 using ImageProcessing.EntryPoint.Code.Enums;
 using ImageProcessing.PresentationLayer.Presenters.Main;

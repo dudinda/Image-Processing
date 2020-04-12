@@ -1,12 +1,12 @@
 using System;
 using System.Linq.Expressions;
 
-using ImageProcessing.Core.Container;
+using ImageProcessing.Core.DI.Container;
 
 using Ninject;
 using Ninject.Extensions.NamedScope;
 
-namespace ImageProcessing.Core.Adapters.Ninject
+namespace ImageProcessing.Core.DI.Adapters.Ninject
 {
     /// <summary>
     /// Provides access to the Ninject <typeparamref name="StandardKernel"/>

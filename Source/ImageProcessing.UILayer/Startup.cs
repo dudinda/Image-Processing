@@ -1,7 +1,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-using ImageProcessing.Core.IoC.Interface;
+using ImageProcessing.Core.DI.IoC.Interface;
 using ImageProcessing.DomainModel.Factory.Convolution.Implementation;
 using ImageProcessing.DomainModel.Factory.Convolution.Interface;
 using ImageProcessing.DomainModel.Factory.Distributions.Implementation;

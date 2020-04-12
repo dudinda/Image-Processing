@@ -1,4 +1,4 @@
-using ImageProcessing.Core.IoC.Interface;
+using ImageProcessing.Core.DI.IoC.Interface;
 
 namespace ImageProcessing.EntryPoint.Startup
 {

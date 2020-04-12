@@ -1,11 +1,11 @@
 using System;
 using System.Linq.Expressions;
 
-using ImageProcessing.Core.Container;
+using ImageProcessing.Core.DI.Container;
 
 using LightInject;
 
-namespace ImageProcessing.Core.Adapters.LightInject
+namespace ImageProcessing.Core.DI.Adapters.LightInject
 {
     /// <summary>
     /// Provides access to the LightInject <typeparamref name="ServiceContainer"/>

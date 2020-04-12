@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace ImageProcessing.Common.Enums
+namespace ImageProcessing.Core.DI.Code.Enums
 {
     /// <summary>
     /// Specifies a DI container.
