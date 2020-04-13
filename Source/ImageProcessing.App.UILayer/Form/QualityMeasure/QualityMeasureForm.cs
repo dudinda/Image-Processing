@@ -4,7 +4,7 @@ using ImageProcessing.App.PresentationLayer.Views.QualityMeasure;
 using ImageProcessing.App.ServiceLayer.Services.EventAggregator.Interface;
 using ImageProcessing.App.UILayer.Form.Base;
 
-namespace ImageProcessing.Form.QualityMeasure
+namespace ImageProcessing.App.UILayer.Form.QualityMeasure
 {
     internal sealed partial class QualityMeasureForm : BaseForm, IQualityMeasureView
     {

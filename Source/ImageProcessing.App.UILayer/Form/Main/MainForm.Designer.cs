@@ -1,6 +1,6 @@
 using System.Windows.Forms;
 
-namespace ImageProcessing.Form.Main
+namespace ImageProcessing.App.UILayer.Form.Main
 {
     partial class MainForm
     {

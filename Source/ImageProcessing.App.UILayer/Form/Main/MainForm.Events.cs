@@ -6,7 +6,7 @@ using ImageProcessing.App.DomainModel.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.DomainModel.DomainEvent.DistributionArgs;
 using ImageProcessing.App.DomainModel.DomainEvent.RgbArgs;
 
-namespace ImageProcessing.Form.Main
+namespace ImageProcessing.App.UILayer.Form.Main
 {
     partial class MainForm
     {

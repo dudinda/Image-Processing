@@ -1,4 +1,4 @@
-﻿namespace ImageProcessing.Form.QualityMeasure
+namespace ImageProcessing.App.UILayer.Form.QualityMeasure
 {
     partial class QualityMeasureForm
     {

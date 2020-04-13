@@ -1,6 +1,6 @@
 using ImageProcessing.Framework.Core.DI.Code.Enums;
 using ImageProcessing.Framework.Core.MVP.Presenter;
-using ImageProcessing.EntryPoint.Startup;
+using ImageProcessing.Framework.EntryPoint.Startup;
 
 namespace ImageProcessing.Framework.Core.EntryPoint.State.Interface
 {

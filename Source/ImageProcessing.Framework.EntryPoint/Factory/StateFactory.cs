@@ -2,12 +2,12 @@ using System;
 
 using ImageProcessing.Framework.Core.EntryPoint.State.Interface;
 using ImageProcessing.Framework.Core.EntryPoint.State.IsNotBuilt;
-using ImageProcessing.EntryPoint.Code.Enums;
-using ImageProcessing.EntryPoint.State.EndWork;
-using ImageProcessing.EntryPoint.State.Implementation.IsBuilt;
-using ImageProcessing.EntryPoint.State.StartWork;
+using ImageProcessing.Framework.EntryPoint.Code.Enums;
+using ImageProcessing.Framework.EntryPoint.State.EndWork;
+using ImageProcessing.Framework.EntryPoint.State.Implementation.IsBuilt;
+using ImageProcessing.Framework.EntryPoint.State.StartWork;
 
-namespace ImageProcessing.EntryPoint.Factory
+namespace ImageProcessing.Framework.EntryPoint.Factory
 {
     /// <summary>
     /// A factory method provider for all the types

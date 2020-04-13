@@ -1,4 +1,4 @@
-namespace ImageProcessing.EntryPoint.Code.Enums
+namespace ImageProcessing.Framework.EntryPoint.Code.Enums
 {
     /// <summary>
     /// Represents a state of an application.

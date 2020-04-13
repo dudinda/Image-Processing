@@ -8,7 +8,7 @@ using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.ServiceLayer.Services.EventAggregator.Interface;
 using ImageProcessing.App.UILayer.Form.Base;
 
-namespace ImageProcessing.Form.Main
+namespace ImageProcessing.App.UILayer.Form.Main
 {
     internal sealed partial class MainForm : BaseMainForm, IMainView
     {

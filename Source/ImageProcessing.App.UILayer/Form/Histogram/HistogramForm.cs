@@ -7,7 +7,7 @@ using ImageProcessing.App.PresentationLayer.Views.Histogram;
 using ImageProcessing.App.ServiceLayer.Services.EventAggregator.Interface;
 using ImageProcessing.App.UILayer.Form.Base;
 
-namespace ImageProcessing.Form.Histogram
+namespace ImageProcessing.App.UILayer.Form.Histogram
 {
     internal sealed partial class HistogramForm : BaseForm, IHistogramView
     {

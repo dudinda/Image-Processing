@@ -1,7 +1,6 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-using ImageProcessing.Framework.Core.DI.IoC.Interface;
 using ImageProcessing.App.DomainModel.Factory.Convolution.Implementation;
 using ImageProcessing.App.DomainModel.Factory.Convolution.Interface;
 using ImageProcessing.App.DomainModel.Factory.Distributions.Implementation;
@@ -14,10 +13,6 @@ using ImageProcessing.App.DomainModel.Factory.RgbFilters.Color.Interface;
 using ImageProcessing.App.DomainModel.Factory.RgbFilters.Rgb.Implementation;
 using ImageProcessing.App.DomainModel.Factory.RgbFilters.Rgb.Interface;
 using ImageProcessing.App.DomainModel.Factory.StructuringElement.Implementation;
-using ImageProcessing.EntryPoint.Startup;
-using ImageProcessing.Form.Histogram;
-using ImageProcessing.Form.Main;
-using ImageProcessing.Form.QualityMeasure;
 using ImageProcessing.App.PresentationLayer.Presenters.Main;
 using ImageProcessing.App.PresentationLayer.Views.Convolution;
 using ImageProcessing.App.PresentationLayer.Views.Histogram;
@@ -60,6 +55,11 @@ using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Interface;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Interface;
 using ImageProcessing.App.UILayer.Form.Convolution;
+using ImageProcessing.App.UILayer.Form.Histogram;
+using ImageProcessing.App.UILayer.Form.Main;
+using ImageProcessing.App.UILayer.Form.QualityMeasure;
+using ImageProcessing.Framework.Core.DI.IoC.Interface;
+using ImageProcessing.Framework.EntryPoint.Startup;
 
 namespace ImageProcessing.App.UILayer
 {

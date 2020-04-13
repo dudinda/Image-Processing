@@ -1,9 +1,9 @@
 using System;
 
-using ImageProcessing.Framework.Core.DI.Code.Enums;
-using ImageProcessing.EntryPoint;
-using ImageProcessing.EntryPoint.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Presenters.Main;
+using ImageProcessing.Framework.Core.DI.Code.Enums;
+using ImageProcessing.Framework.EntryPoint;
+using ImageProcessing.Framework.EntryPoint.Code.Enums;
 
 namespace ImageProcessing.App.UILayer
 {

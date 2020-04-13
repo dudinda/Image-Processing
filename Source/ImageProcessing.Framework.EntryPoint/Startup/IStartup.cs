@@ -1,6 +1,6 @@
 using ImageProcessing.Framework.Core.DI.IoC.Interface;
 
-namespace ImageProcessing.EntryPoint.Startup
+namespace ImageProcessing.Framework.EntryPoint.Startup
 {
     public interface IStartup
     {

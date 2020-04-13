@@ -1,4 +1,4 @@
-﻿namespace ImageProcessing.Form.Histogram
+namespace ImageProcessing.App.UILayer.Form.Histogram
 {
     partial class HistogramForm
     {
