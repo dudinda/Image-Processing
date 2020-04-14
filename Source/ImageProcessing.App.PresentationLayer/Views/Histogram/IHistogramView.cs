@@ -20,7 +20,6 @@ namespace ImageProcessing.App.PresentationLayer.Views.Histogram
         /// <summary>
         /// Initialize a random variable function. 
         /// </summary>
-        /// <param name="action"></param>
-        void Init(RandomVariable action);
+        void Init(RandomVariableFunction action);
     }
 }

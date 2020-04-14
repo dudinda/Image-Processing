@@ -40,7 +40,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             View.Show();
         }
 
-        private void Build(Bitmap bitmap, RandomVariable function)
+        private void Build(Bitmap bitmap, RandomVariableFunction function)
         {
             Requires.IsNotNull(bitmap, nameof(bitmap));
 
@@ -60,11 +60,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             {
                 switch (function)
                 {
-                    case RandomVariable.PMF:
+                    case RandomVariableFunction.PMF:
                         values = _distributionService.GetPMF(bitmap);
                         View.YAxisMaximum = (double)yValues.Max();
                         break;
-                    case RandomVariable.CDF:
+                    case RandomVariableFunction.CDF:
                         values = _distributionService.GetCDF(bitmap);
                         View.YAxisMaximum = 1;
                         break;

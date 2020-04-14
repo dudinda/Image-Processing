@@ -84,7 +84,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.TrackBarDstPanel = new System.Windows.Forms.Panel();
             this.DstZoom = new ImageProcessing.App.UILayer.Control.ZoomTrackBar();
             this.ErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.RandomVariableInfo = new MetroFramework.Components.MetroToolTip();
+            this.RandomVariableInformation = new MetroFramework.Components.MetroToolTip();
             this.Container = new ImageProcessing.App.UILayer.Control.UndoRedoSplitContainer();
             this.MainMenu.SuspendLayout();
             this.ToolBarMenu.SuspendLayout();
@@ -161,7 +161,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // 
             this.InversionFilter.Name = "InversionFilter";
             this.InversionFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Q)));
-            this.InversionFilter.Size = new System.Drawing.Size(180, 22);
+            this.InversionFilter.Size = new System.Drawing.Size(172, 22);
             this.InversionFilter.Tag = "Inversion";
             this.InversionFilter.Text = "Inversion";
             // 
@@ -169,7 +169,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // 
             this.GrayscaleFilter.Name = "GrayscaleFilter";
             this.GrayscaleFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.W)));
-            this.GrayscaleFilter.Size = new System.Drawing.Size(180, 22);
+            this.GrayscaleFilter.Size = new System.Drawing.Size(172, 22);
             this.GrayscaleFilter.Tag = "Grayscale";
             this.GrayscaleFilter.Text = "GrayScale";
             // 
@@ -177,7 +177,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // 
             this.BinaryFilter.Name = "BinaryFilter";
             this.BinaryFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
-            this.BinaryFilter.Size = new System.Drawing.Size(180, 22);
+            this.BinaryFilter.Size = new System.Drawing.Size(172, 22);
             this.BinaryFilter.Tag = "Binary";
             this.BinaryFilter.Text = "Binary";
             // 
@@ -189,7 +189,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.ColorFilterBlue});
             this.ColorFilter.Name = "ColorFilter";
             this.ColorFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.R)));
-            this.ColorFilter.Size = new System.Drawing.Size(180, 22);
+            this.ColorFilter.Size = new System.Drawing.Size(172, 22);
             this.ColorFilter.Text = "Color filters";
             // 
             // ColorFilterRed
@@ -237,7 +237,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.ExponentialDistribution,
             this.RayleighDistribution});
             this.OneParameterDistributions.Name = "OneParameterDistributions";
-            this.OneParameterDistributions.Size = new System.Drawing.Size(180, 22);
+            this.OneParameterDistributions.Size = new System.Drawing.Size(155, 22);
             this.OneParameterDistributions.Text = "One-parameter";
             // 
             // ExponentialDistribution
@@ -264,7 +264,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.NormalDistribution,
             this.ParabolaDistribution});
             this.TwoParameterDistributions.Name = "TwoParameterDistributions";
-            this.TwoParameterDistributions.Size = new System.Drawing.Size(180, 22);
+            this.TwoParameterDistributions.Size = new System.Drawing.Size(155, 22);
             this.TwoParameterDistributions.Text = "Two-parameter";
             // 
             // UniformDistribution
@@ -597,11 +597,11 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.DstZoom.TrackBarValue = 0;
             this.DstZoom.Value = 0;
             // 
-            // RandomVariableInfo
+            // RandomVariableInformation
             // 
-            this.RandomVariableInfo.Style = MetroFramework.MetroColorStyle.Blue;
-            this.RandomVariableInfo.StyleManager = null;
-            this.RandomVariableInfo.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.RandomVariableInformation.Style = MetroFramework.MetroColorStyle.Blue;
+            this.RandomVariableInformation.StyleManager = null;
+            this.RandomVariableInformation.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
             // Container
             // 
@@ -705,7 +705,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         private Panel PictureBoxDstPanel;
         private Panel TrackBarDstPanel;
         private App.UILayer.Control.ZoomTrackBar SrcZoom;
-        private MetroFramework.Components.MetroToolTip RandomVariableInfo;
+        private MetroFramework.Components.MetroToolTip RandomVariableInformation;
         private App.UILayer.Control.AppendProcessedBitmapToolStripButton QualityMeasure;
         private App.UILayer.Control.UndoRedoSplitContainer Container;
         private ToolStripButton Redo;

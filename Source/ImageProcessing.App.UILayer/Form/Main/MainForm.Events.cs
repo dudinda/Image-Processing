@@ -51,22 +51,22 @@ namespace ImageProcessing.App.UILayer.Form.Main
                 => EventAggregator.Publish(new ToolbarActionEventArgs(ToolbarAction.Shuffle));
 
             PMF.Click += (sender, args)
-                => EventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.PMF, ImageContainer.Source));
+                => EventAggregator.Publish(new RandomVariableFunctionEventArgs(RandomVariableFunction.PMF, ImageContainer.Source));
 
             CDF.Click += (sender, args)
-                => EventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.CDF, ImageContainer.Source));
+                => EventAggregator.Publish(new RandomVariableFunctionEventArgs(RandomVariableFunction.CDF, ImageContainer.Source));
 
             Expectation.Click += (sender, args)
-                => EventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.Expectation, ImageContainer.Source));
+                => EventAggregator.Publish(new RandomVariableInfoEventArgs(RandomVariableInfo.Expectation, ImageContainer.Source));
 
             Variance.Click += (sender, args)
-                => EventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.Variance, ImageContainer.Source));
+                => EventAggregator.Publish(new RandomVariableInfoEventArgs(RandomVariableInfo.Variance, ImageContainer.Source));
 
             StandardDeviation.Click += (sender, args)
-                => EventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.StandardDeviation, ImageContainer.Source));
+                => EventAggregator.Publish(new RandomVariableInfoEventArgs(RandomVariableInfo.StandardDeviation, ImageContainer.Source));
 
             Entropy.Click += (sender, args)
-                => EventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.Entropy, ImageContainer.Source));
+                => EventAggregator.Publish(new RandomVariableInfoEventArgs(RandomVariableInfo.Entropy, ImageContainer.Source));
 
             ReplaceSrcByDst.Click += (sernder, args)
                 => EventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Destination));
@@ -166,22 +166,54 @@ namespace ImageProcessing.App.UILayer.Form.Main
             switch (keyData)
             {
                 case (Keys.Right):
-                    EventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Source));
+
+                    EventAggregator.Publish(
+                        new ImageContainerEventArgs(ImageContainer.Source)
+                    );
+
                     return true;
                 case (Keys.Left):
-                    EventAggregator.Publish(new ImageContainerEventArgs(ImageContainer.Destination));
+
+                    EventAggregator.Publish(
+                        new ImageContainerEventArgs(ImageContainer.Destination)
+                    );
+
                     return true;
                 case (Keys.Q):
-                    EventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.PMF, ImageContainer.Source));
+
+                    EventAggregator.Publish(
+                        new RandomVariableFunctionEventArgs(
+                            RandomVariableFunction.PMF, ImageContainer.Source
+                        )
+                    );
+
                     return true;
                 case (Keys.Q | Keys.Control):
-                    EventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.PMF, ImageContainer.Destination));
+
+                    EventAggregator.Publish(
+                        new RandomVariableFunctionEventArgs(
+                            RandomVariableFunction.PMF, ImageContainer.Destination
+                        )
+                    );
+
                     return true;
                 case (Keys.W):
-                    EventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.CDF, ImageContainer.Source));
+
+                    EventAggregator.Publish(
+                        new RandomVariableFunctionEventArgs(
+                            RandomVariableFunction.CDF, ImageContainer.Source
+                        )
+                    );
+
                     return true;
                 case (Keys.W | Keys.Control):
-                    EventAggregator.Publish(new RandomVariableEventArgs(RandomVariable.CDF, ImageContainer.Destination));
+
+                    EventAggregator.Publish(
+                        new RandomVariableFunctionEventArgs(
+                            RandomVariableFunction.CDF, ImageContainer.Destination
+                        )
+                    );
+
                     return true;
             }
 

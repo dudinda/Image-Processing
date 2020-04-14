@@ -19,6 +19,6 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistributio
         /// <summary>
         /// Get the information about a <see cref="Bitmap"/> luminance distribution.
         /// </summary>
-        decimal GetInfo(Bitmap bmp, RandomVariable info);
+        decimal GetInfo(Bitmap bmp, RandomVariableInfo info);
     }
 }

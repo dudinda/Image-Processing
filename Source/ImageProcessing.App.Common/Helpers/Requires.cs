@@ -14,7 +14,8 @@ namespace ImageProcessing.App.Common.Helpers
         public static TReference IsNotNull<TReference>(TReference instance, string arg)
             where TReference : class
         {
-            if (instance is null) {
+            if (instance is null)
+            {
                 throw new ArgumentNullException(arg);
             }
 

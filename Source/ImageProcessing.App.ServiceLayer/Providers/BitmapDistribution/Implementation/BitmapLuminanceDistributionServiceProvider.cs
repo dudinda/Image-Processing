@@ -35,19 +35,19 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistri
             );
         }
 
-        public decimal GetInfo(Bitmap bmp, RandomVariable info)
+        public decimal GetInfo(Bitmap bmp, RandomVariableInfo info)
         {
             Requires.IsNotNull(bmp, nameof(bmp));
 
             switch (info)
             {
-                case RandomVariable.Expectation:
+                case RandomVariableInfo.Expectation:
                     return _service.GetExpectation(bmp);
-                case RandomVariable.Entropy:
+                case RandomVariableInfo.Entropy:
                     return _service.GetEntropy(bmp);
-                case RandomVariable.Variance:
+                case RandomVariableInfo.Variance:
                     return _service.GetVariance(bmp);
-                case RandomVariable.StandardDeviation:
+                case RandomVariableInfo.StandardDeviation:
                     return _service.GetStandardDeviation(bmp);
 
                 default: throw new NotImplementedException(nameof(info));

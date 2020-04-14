@@ -132,10 +132,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                     await Task.Run(
                         () => copy.Save(View.PathToFile,
-                                        Path.GetExtension(
-                                            View.PathToFile
-                                        ).GetImageFormat()
-                                   )
+                                        Path.GetExtension(View.PathToFile)
+                                            .GetImageFormat())
                         ).ConfigureAwait(true);
                 }
             }
@@ -378,7 +376,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        private async Task BuildFunction(RandomVariableEventArgs e)
+        private async Task BuildFunction(RandomVariableFunctionEventArgs e)
         {
             try
             {
@@ -456,7 +454,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             };
         }
 
-        private async Task GetRandomVariableInfo(RandomVariableEventArgs e)
+        private async Task GetRandomVariableInfo(RandomVariableInfoEventArgs e)
         {
             try
             {

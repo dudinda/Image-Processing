@@ -43,7 +43,7 @@ namespace ImageProcessing.App.Common.Extensions.EnumExtensions
         /// <summary>
         /// Partition the specified <typeparamref name="TEnum"/> over
         /// the <paramref name="partition"/>. Returns the
-        /// specified <typeparamref name="TCallOut"/> from a <paramref name="callback"/>.
+        /// specified <typeparamref name="TOutResult"/> from a <paramref name="callback"/>.
         /// </summary>
         public static TOutResult PartitionOver<TEnum, TOutResult>
             (this TEnum src, (TEnum from, TEnum to) partition, Func<TOutResult> callback)
@@ -70,7 +70,7 @@ namespace ImageProcessing.App.Common.Extensions.EnumExtensions
         /// Get a <see cref="Enum" /> value from the specified description value.
         /// </summary>
         /// <typeparam name="TEnum">An enumerated type.</typeparam>
-        /// <param name="description>The source value.</param>
+        /// <param name="description">The source value.</param>
         public static TEnum GetValueFromDescription<TEnum>(this string description)
             where TEnum : Enum
         {

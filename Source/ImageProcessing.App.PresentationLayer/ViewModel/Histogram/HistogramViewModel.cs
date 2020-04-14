@@ -7,7 +7,7 @@ namespace ImageProcessing.App.PresentationLayer.ViewModel.Histogram
 {
     internal sealed class HistogramViewModel
     {
-        public HistogramViewModel(Bitmap source, RandomVariable mode)
+        public HistogramViewModel(Bitmap source, RandomVariableFunction mode)
         {
             Source = Requires.IsNotNull(
                 source, nameof(source));
@@ -16,6 +16,6 @@ namespace ImageProcessing.App.PresentationLayer.ViewModel.Histogram
         }
 
         public Bitmap Source { get; }
-        public RandomVariable Mode { get; }
+        public RandomVariableFunction Mode { get; }
     }
 }

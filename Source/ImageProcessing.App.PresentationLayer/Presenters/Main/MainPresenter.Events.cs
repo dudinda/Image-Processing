@@ -19,7 +19,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
           ISubscriber<ImageContainerEventArgs>,
           ISubscriber<FileDialogEventArgs>,
           ISubscriber<ToolbarActionEventArgs>,
-          ISubscriber<RandomVariableEventArgs>,
+          ISubscriber<RandomVariableInfoEventArgs>,
+          ISubscriber<RandomVariableFunctionEventArgs>,
           ISubscriber<ZoomEventArgs>,
           ISubscriber<CloseFormEventArgs>
     {
@@ -82,25 +83,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public async Task OnEventHandler(RandomVariableEventArgs e)
-        {
-            switch (e.Action)
-            {
-                case RandomVariable.CDF:
-                case RandomVariable.PMF:
-                    BuildFunction(e);
-                    break;
+        public async Task OnEventHandler(RandomVariableInfoEventArgs e)
+            => await GetRandomVariableInfo(e).ConfigureAwait(true);
 
-                case RandomVariable.Expectation:
-                case RandomVariable.Entropy:
-                case RandomVariable.StandardDeviation:
-                case RandomVariable.Variance:
-                    await GetRandomVariableInfo(e);
-                    break;
 
-                default:
-                    throw new NotImplementedException(nameof(e.Action));
-            }
-        }
+        public async Task OnEventHandler(RandomVariableFunctionEventArgs e)
+        => BuildFunction(e);      
     }
 }

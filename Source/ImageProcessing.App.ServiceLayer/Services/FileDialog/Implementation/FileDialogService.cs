@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using ImageProcessing.App.Common.Extensions.StringExtensions;
+using ImageProcessing.App.Common.Extensions.BitmapExtensions;
 using ImageProcessing.App.ServiceLayer.Services.FileDialog.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.FileDialog.Implementation
@@ -48,10 +48,8 @@ namespace ImageProcessing.App.ServiceLayer.Services.FileDialog.Implementation
                 {
                     await Task.Run(() =>
                     {
-                       src.Save(dialog.FileName,
-                                Path.GetExtension(
-                                    dialog.FileName
-                                ).GetImageFormat()
+                       src.Save(dialog.FileName, Path.GetExtension(
+                                    dialog.FileName).GetImageFormat()
                           );
                     });
                 }

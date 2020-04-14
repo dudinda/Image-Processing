@@ -3,9 +3,9 @@ using System.ComponentModel;
 namespace ImageProcessing.App.Common.Enums
 {
     /// <summary>
-    /// Specifies characteristics of a random variable.
+    /// Specifies information about a random variable.
     /// </summary>
-    public enum RandomVariable
+    public enum RandomVariableInfo
     {
         /// <summary>
         /// An unknown characteristic.
@@ -35,30 +35,18 @@ namespace ImageProcessing.App.Common.Enums
         /// H(x).
         /// </summary>
         [Description("H(x)")]
-        Entropy                = 5,
+        Entropy                = 4,
 
         /// <summary>
         /// E(X | Y).
         /// </summary>
         [Description("E(X | Y)")]
-        ConditionalExpectation = 6,
+        ConditionalExpectation = 5,
 
         /// <summary>
         /// Var(X | Y).
         /// </summary
         [Description("Var(X | Y)")]
-        ConditionalVariance    = 7,
-
-        /// <summary>
-        /// p(x).
-        /// </summary>
-        [Description("p(x)")]
-        PMF                    = 8,
-
-        /// <summary>
-        /// F(x).
-        /// </summary>
-        [Description("F(x)")]
-        CDF                    = 9
+        ConditionalVariance    = 6
     }
 }

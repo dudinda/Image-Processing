@@ -248,7 +248,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         }
 
         public void ShowInfo(string info)
-            => RandomVariableInfo.Show(info, this, PointToClient(
+            => RandomVariableInformation.Show(info, this, PointToClient(
                 CursorPosition.GetCursorPosition()), 2000
             );
 

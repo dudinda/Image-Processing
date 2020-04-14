@@ -28,19 +28,19 @@ namespace ImageProcessing.App.UILayer.Form.Histogram
             base.Show();
         }
   
-        public void Init(RandomVariable action)
+        public void Init(RandomVariableFunction action)
         {
-            var pmf = RandomVariable.PMF.GetDescription();
-            var cdf = RandomVariable.CDF.GetDescription();
+            var pmf = RandomVariableFunction.PMF.GetDescription();
+            var cdf = RandomVariableFunction.CDF.GetDescription();
 
             switch (action)
             {
-                case RandomVariable.CDF:
+                case RandomVariableFunction.CDF:
                     Text = cdf;
                     Freq.Series[cdf].IsVisibleInLegend = true;
                     Freq.Series[pmf].IsVisibleInLegend = false;
                     break;
-                case RandomVariable.PMF:
+                case RandomVariableFunction.PMF:
                     Text = pmf;
                     Freq.Series[pmf].IsVisibleInLegend = true;
                     Freq.Series[cdf].IsVisibleInLegend = false;

@@ -3,6 +3,9 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
+using ImageProcessing.App.Common.Enums;
+using ImageProcessing.App.Common.Extensions.EnumExtensions;
+
 namespace ImageProcessing.App.Common.Extensions.BitmapExtensions
 {
     /// <summary>
@@ -121,10 +124,9 @@ namespace ImageProcessing.App.Common.Extensions.BitmapExtensions
         }
 
         /// <summary>
-        /// Adjust an image border by the
-        /// 
+        /// Adjust an image border by the <paramref name="numberOfPixels"/>.
         /// </summary>
-        /// <param name="src"></param>
+        /// <param name="src">The source image.</param>
         /// <param name="numberOfPixels">Number of pixels to adjust.</param>
         /// <param name="borderColor">A color of the border.</param>
         /// <returns>An adjusted bitmap.</returns>
@@ -138,6 +140,43 @@ namespace ImageProcessing.App.Common.Extensions.BitmapExtensions
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Get a <see cref="Bitmap"/> extension.
+        /// </summary>
+        /// <param name="ext"></param>
+        /// <returns></returns>
+        public static ImageFormat GetImageFormat(this string ext)
+        {
+            var extension = ext.GetValueFromDescription<ImageExtension>();
+
+            switch (extension)
+            {
+                case ImageExtension.Jpeg:
+                    return ImageFormat.Jpeg;
+                case ImageExtension.Bmp:
+                    return ImageFormat.Bmp;
+                case ImageExtension.Png:
+                    return ImageFormat.Png;
+                case ImageExtension.Emf:
+                    return ImageFormat.Emf;
+                case ImageExtension.Exif:
+                    return ImageFormat.Exif;
+                case ImageExtension.Gif:
+                    return ImageFormat.Gif;
+                case ImageExtension.Icon:
+                    return ImageFormat.Icon;
+                case ImageExtension.MemoryBmp:
+                    return ImageFormat.MemoryBmp;
+                case ImageExtension.Tiff:
+                    return ImageFormat.Tiff;
+                case ImageExtension.Wmf:
+                    return ImageFormat.Wmf;
+
+                default:
+                    throw new NotImplementedException(ext);
+            }
         }
     }
 }
