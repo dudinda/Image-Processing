@@ -1,6 +1,6 @@
 using ImageProcessing.App.Common.Enums;
-using ImageProcessing.Framework.Core.MVP.Model;
 using ImageProcessing.App.DomainModel.Model.Distributions.Interface;
+using ImageProcessing.Microkernel.MVP.Model;
 
 namespace ImageProcessing.App.DomainModel.Factory.Distributions.Interface
 {

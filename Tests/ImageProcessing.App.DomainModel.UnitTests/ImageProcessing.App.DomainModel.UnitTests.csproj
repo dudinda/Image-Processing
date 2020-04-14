@@ -82,9 +82,9 @@
       <Project>{2ED4A387-6DD9-43D9-908F-88ED898103F2}</Project>
       <Name>ImageProcessing.App.DomainModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.Framework.Core\ImageProcessing.Framework.Core.csproj">
-      <Project>{ED5CD1F5-ABED-45C2-8097-2963419F9DB7}</Project>
-      <Name>ImageProcessing.Framework.Core</Name>
+    <ProjectReference Include="..\..\Source\ImageProcessing.Microkernel.MVP\ImageProcessing.Microkernel.MVP.csproj">
+      <Project>{e547bf84-7467-4aa0-a836-84beab772924}</Project>
+      <Name>ImageProcessing.Microkernel.MVP</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

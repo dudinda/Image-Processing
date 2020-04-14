@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Drawing;
 
 using ImageProcessing.App.Common.Helpers;
-using ImageProcessing.Framework.Core.Controller.Interface;
+using ImageProcessing.Microkernel.DI.Controller.Interface;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.ViewModel.QualityMeasure;
 using ImageProcessing.App.PresentationLayer.Views.QualityMeasure;

@@ -1,8 +1,8 @@
 
 using ImageProcessing.App.Common.Enums;
-using ImageProcessing.Framework.Core.MVP.Model;
 using ImageProcessing.App.DomainModel.Model.Morphology.Interface.BinaryOperator;
 using ImageProcessing.App.DomainModel.Model.Morphology.Interface.UnaryOperator;
+using ImageProcessing.Microkernel.MVP.Model;
 
 namespace ImageProcessing.App.DomainModel.Factory.Morphology.Interface
 {

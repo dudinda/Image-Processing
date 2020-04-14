@@ -58,8 +58,8 @@ using ImageProcessing.App.UILayer.Form.Convolution;
 using ImageProcessing.App.UILayer.Form.Histogram;
 using ImageProcessing.App.UILayer.Form.Main;
 using ImageProcessing.App.UILayer.Form.QualityMeasure;
-using ImageProcessing.Framework.Core.DI.IoC.Interface;
-using ImageProcessing.Framework.EntryPoint.Startup;
+using ImageProcessing.Microkernel.DI.IoC.Interface;
+using ImageProcessing.Microkernel.Startup;
 
 namespace ImageProcessing.App.UILayer
 {

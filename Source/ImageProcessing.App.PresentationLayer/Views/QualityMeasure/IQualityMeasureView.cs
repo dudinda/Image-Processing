@@ -1,5 +1,5 @@
-using ImageProcessing.Framework.Core.MVP.View;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.DataChart;
+using ImageProcessing.Microkernel.MVP.View;
 
 namespace ImageProcessing.App.PresentationLayer.Views.QualityMeasure
 {

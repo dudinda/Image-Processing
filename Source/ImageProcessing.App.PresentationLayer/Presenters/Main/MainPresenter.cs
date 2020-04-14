@@ -9,7 +9,6 @@ using ImageProcessing.App.Common.Enums;
 using ImageProcessing.App.Common.Extensions.BitmapExtensions;
 using ImageProcessing.App.Common.Extensions.StringExtensions;
 using ImageProcessing.App.Common.Helpers;
-using ImageProcessing.Framework.Core.Controller.Interface;
 using ImageProcessing.App.DomainModel.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainModel.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.DomainModel.DomainEvent.DistributionArgs;
@@ -29,6 +28,7 @@ using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
+using ImageProcessing.Microkernel.DI.Controller.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 {

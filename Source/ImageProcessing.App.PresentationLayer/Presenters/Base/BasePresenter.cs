@@ -1,9 +1,9 @@
 using ImageProcessing.App.Common.Helpers;
-using ImageProcessing.Framework.Core.Controller.Interface;
-using ImageProcessing.Framework.Core.MVP.Presenter;
-using ImageProcessing.Framework.Core.MVP.View;
 using ImageProcessing.App.ServiceLayer.Services.EventAggregator.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface;
+using ImageProcessing.Microkernel.DI.Controller.Interface;
+using ImageProcessing.Microkernel.MVP.Presenter;
+using ImageProcessing.Microkernel.MVP.View;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Base
 {

@@ -1,6 +1,6 @@
 using ImageProcessing.App.Common.Enums;
-using ImageProcessing.Framework.Core.MVP.Model;
 using ImageProcessing.App.DomainModel.Model.RgbFilters.Interface.Color;
+using ImageProcessing.Microkernel.MVP.Model;
 
 namespace ImageProcessing.App.DomainModel.Factory.RgbFilters.Color.Interface
 {

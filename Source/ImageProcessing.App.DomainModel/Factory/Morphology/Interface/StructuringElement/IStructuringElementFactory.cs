@@ -1,6 +1,6 @@
 using ImageProcessing.App.Common.Enums;
-using ImageProcessing.Framework.Core.MVP.Model;
 using ImageProcessing.App.DomainModel.Model.Morphology.Interface.StructuringElement;
+using ImageProcessing.Microkernel.MVP.Model;
 
 namespace ImageProcessing.App.DomainModel.Factory.Morphology.Interface.StructuringElement
 {

@@ -5,7 +5,7 @@ using System.Linq;
 using ImageProcessing.App.Common.Enums;
 using ImageProcessing.App.Common.Extensions.EnumExtensions;
 using ImageProcessing.App.Common.Helpers;
-using ImageProcessing.Framework.Core.Controller.Interface;
+using ImageProcessing.Microkernel.DI.Controller.Interface;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.ViewModel.Histogram;
 using ImageProcessing.App.PresentationLayer.Views.Histogram;
