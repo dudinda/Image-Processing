@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -14,6 +14,7 @@ namespace ImageProcessing.App.UILayer.Control
         private Image _image;
 
         private readonly object _sync = new object();
+
         private double _factor
            => Convert.ToDouble(base.Value) /
               Convert.ToDouble(base.Maximum - base.Minimum);
@@ -92,7 +93,6 @@ namespace ImageProcessing.App.UILayer.Control
             }
         }
 
- 
         /// <summary>
         /// onKeyDown
         /// </summary>
@@ -123,6 +123,5 @@ namespace ImageProcessing.App.UILayer.Control
                     break;
             }
         }
-
     }
 }

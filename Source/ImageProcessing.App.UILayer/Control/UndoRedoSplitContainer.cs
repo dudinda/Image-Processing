@@ -19,10 +19,8 @@ namespace ImageProcessing.App.UILayer.Control
         }
 
         public void Add((Bitmap, ImageContainer) action)
-        {
-            _undo.Push(action);
-        }
-
+            => _undo.Push(action);
+        
         public (Bitmap, ImageContainer)? Undo()
         {
             if (!_undo.Any())
