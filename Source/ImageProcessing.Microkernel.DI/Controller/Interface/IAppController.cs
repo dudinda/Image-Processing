@@ -1,5 +1,6 @@
 using System;
 
+using ImageProcessing.Microkernel.DI.Aggregator.Interface.Aggregator;
 using ImageProcessing.Microkernel.DI.IoC.Interface;
 using ImageProcessing.Microkernel.MVP.Presenter;
 
@@ -14,10 +15,11 @@ namespace ImageProcessing.Microkernel.DI.Controller.Interface
     /// </summary>
     public interface IAppController : IDisposable
     {
-        /// <summary>
-        /// Provides the specified DI Container.
-        /// </summary>
+        /// <inheritdoc cref="IDependencyResolution"/>
         IDependencyResolution IoC { get; }
+
+        /// <inheritdoc cref="IEventAggregator"/>
+        IEventAggregator Aggregator { get; }
 
         /// <summary>
         /// Run the specified <typeparamref name="TPresenter"/>.

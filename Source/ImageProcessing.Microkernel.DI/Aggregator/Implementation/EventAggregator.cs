@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-using ImageProcessing.App.Common.Helpers;
-using ImageProcessing.App.ServiceLayer.Services.EventAggregator.Interface;
-using ImageProcessing.App.ServiceLayer.Services.EventAggregator.Interface.Subscriber;
+using ImageProcessing.Microkernel.DI.Aggregator.Interface.Aggregator;
+using ImageProcessing.Microkernel.DI.Aggregator.Subscriber;
 
-namespace ImageProcessing.App.ServiceLayer.Services.EventAggregator.Implementation
+namespace ImageProcessing.Microkernel.DI.Aggregator.Implementation
 {
     /// <inheritdoc cref="IEventAggregator"/>
-    public sealed class EventAggregator : IEventAggregator
+    internal sealed class EventAggregator : IEventAggregator
     {
         private readonly object _syncRoot = new object();
 
@@ -30,7 +29,10 @@ namespace ImageProcessing.App.ServiceLayer.Services.EventAggregator.Implementati
             {
                 if (weakSubsriber.IsAlive)
                 {
-                    InvokeSubscriberEvent(publisher, (ISubscriber<TEventType>)weakSubsriber.Target);
+                    InvokeSubscriberEvent(
+                        publisher,
+                        (ISubscriber<TEventType>)weakSubsriber.Target
+                    );
                 }
                 else
                 {
@@ -53,7 +55,10 @@ namespace ImageProcessing.App.ServiceLayer.Services.EventAggregator.Implementati
         /// <inheritdoc cref="IEventAggregator.Subscribe(object)"/>
         public void Subscribe(object subscriber)
         {
-            Requires.IsNotNull(subscriber, nameof(subscriber));
+            if(subscriber is null)
+            {
+                throw new ArgumentNullException(nameof(subscriber));
+            }
 
             lock (_syncRoot)
             {
@@ -75,7 +80,9 @@ namespace ImageProcessing.App.ServiceLayer.Services.EventAggregator.Implementati
             }
         }
 
-        private void InvokeSubscriberEvent<TEventType>(TEventType publisher, ISubscriber<TEventType> subscriber)
+        private void InvokeSubscriberEvent<TEventType>(
+            TEventType publisher,
+            ISubscriber<TEventType> subscriber)
         {
             var syncContext = SynchronizationContext.Current;
 

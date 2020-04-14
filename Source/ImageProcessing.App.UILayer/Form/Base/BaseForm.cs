@@ -1,7 +1,7 @@
 using System.Windows.Forms;
 
 using ImageProcessing.App.Common.Helpers;
-using ImageProcessing.App.ServiceLayer.Services.EventAggregator.Interface;
+using ImageProcessing.Microkernel.DI.Controller.Interface;
 
 using MetroFramework.Forms;
 
@@ -13,19 +13,19 @@ namespace ImageProcessing.App.UILayer.Form.Base
     /// </summary>
     internal class BaseMainForm : MetroForm
     {
-        /// <inheritdoc cref="IEventAggregator"/>
-        protected IEventAggregator EventAggregator { get; }
+        /// <inheritdoc cref="IAppController"/>
+        protected IAppController Controller { get; }
 
         /// <inheritdoc cref="ApplicationContext"/>
         protected ApplicationContext Context { get; }
 
-        protected BaseMainForm(ApplicationContext context, IEventAggregator eventAggregator)
+        protected BaseMainForm(ApplicationContext context, IAppController controller)
             : base()
         {
             Context = Requires.IsNotNull(
                 context, nameof(context));
-            EventAggregator = Requires.IsNotNull(
-                eventAggregator, nameof(eventAggregator));
+            Controller = Requires.IsNotNull(
+                controller, nameof(controller));
         }
 
         protected BaseMainForm() { }
@@ -36,14 +36,14 @@ namespace ImageProcessing.App.UILayer.Form.Base
     /// </summary>
     internal class BaseForm : MetroForm
     {
-        /// <inheritdoc cref="IEventAggregator"/>
-        protected IEventAggregator EventAggregator { get; }
+        /// <inheritdoc cref="IAppController"/>
+        protected IAppController Controller { get; }
 
-        protected BaseForm(IEventAggregator eventAggregator)
+        protected BaseForm(IAppController controller)
             : base()
         {
-            EventAggregator = Requires.IsNotNull(
-                eventAggregator, nameof(eventAggregator));
+            Controller = Requires.IsNotNull(
+                controller, nameof(controller));
         }
 
         protected BaseForm() { }

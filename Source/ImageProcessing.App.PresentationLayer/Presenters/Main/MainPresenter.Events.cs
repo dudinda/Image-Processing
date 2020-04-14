@@ -6,7 +6,7 @@ using ImageProcessing.App.DomainModel.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainModel.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.DomainModel.DomainEvent.DistributionArgs;
 using ImageProcessing.App.DomainModel.DomainEvent.RgbArgs;
-using ImageProcessing.App.ServiceLayer.Services.EventAggregator.Interface.Subscriber;
+using ImageProcessing.Microkernel.DI.Aggregator.Subscriber;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 {
@@ -86,8 +86,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         public async Task OnEventHandler(RandomVariableInfoEventArgs e)
             => await GetRandomVariableInfo(e).ConfigureAwait(true);
 
-
         public async Task OnEventHandler(RandomVariableFunctionEventArgs e)
-        => BuildFunction(e);      
+            => BuildFunction(e);      
     }
 }

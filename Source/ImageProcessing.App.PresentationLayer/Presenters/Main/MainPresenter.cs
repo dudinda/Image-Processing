@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.Common.Enums;
 using ImageProcessing.App.Common.Extensions.BitmapExtensions;
-using ImageProcessing.App.Common.Extensions.StringExtensions;
 using ImageProcessing.App.Common.Helpers;
 using ImageProcessing.App.DomainModel.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainModel.DomainEvent.ConvolutionArgs;
@@ -21,7 +20,6 @@ using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.RgbFilters;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
-using ImageProcessing.App.ServiceLayer.Services.EventAggregator.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Zoom.Interface;
 using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
@@ -43,7 +41,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
         public MainPresenter(IAppController controller,
                              IMainView view,
-                             IEventAggregator eventAggregator,
                              IAwaitablePipeline pipeline,
                              IAsyncZoomLocker zoomLocker,
                              IAsyncOperationLocker operationLocker,
@@ -52,7 +49,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                              ICacheService<Bitmap> cache,
                              INonBlockDialogService nonBlock
 
-            ) : base(controller, view, pipeline, eventAggregator)
+            ) : base(controller, view, pipeline)
         {
             _lumaProvider = Requires.IsNotNull(
                 lumaProvider, nameof(lumaProvider));
@@ -67,7 +64,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             _nonBlock = Requires.IsNotNull(
                 nonBlock, nameof(nonBlock));
 
-            EventAggregator.Subscribe(this);
+            Controller
+                .Aggregator.Subscribe(this);
         }
 
         private async Task OpenImage()
@@ -192,7 +190,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (OperationCanceledException cancelEx)
             {
-                EventAggregator.Publish(
+                Controller.Aggregator.Publish(
                     new ShowTooltipOnErrorEventArgs(
                         "The operation has been canceled."
                     )
@@ -200,7 +198,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (Exception ex)
             {
-                EventAggregator.Publish(
+                Controller.Aggregator.Publish(
                     new ShowTooltipOnErrorEventArgs(
                         "Error while applying a convolution filter."
                     )

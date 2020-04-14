@@ -1,4 +1,4 @@
-namespace ImageProcessing.App.ServiceLayer.Services.EventAggregator.Interface
+namespace ImageProcessing.Microkernel.DI.Aggregator.Interface.Aggregator
 {
     /// <summary>
     /// Responds to any event from a source object

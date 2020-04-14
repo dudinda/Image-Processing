@@ -4,17 +4,18 @@ using System.Windows.Forms.DataVisualization.Charting;
 using ImageProcessing.App.Common.Enums;
 using ImageProcessing.App.Common.Extensions.EnumExtensions;
 using ImageProcessing.App.PresentationLayer.Views.Histogram;
-using ImageProcessing.App.ServiceLayer.Services.EventAggregator.Interface;
 using ImageProcessing.App.UILayer.Form.Base;
+using ImageProcessing.Microkernel.DI.Controller.Interface;
 
 namespace ImageProcessing.App.UILayer.Form.Histogram
 {
     internal sealed partial class HistogramForm : BaseForm, IHistogramView
     {
-        public HistogramForm(IEventAggregator eventAggregator)
-            : base(eventAggregator) => InitializeComponent();
+        public HistogramForm(IAppController controller)
+            : base(controller) => InitializeComponent();
         
-        public Chart GetChart => Freq;
+        public Chart GetChart
+            => Freq;
 
         public double YAxisMaximum 
         { 

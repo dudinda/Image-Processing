@@ -1,4 +1,6 @@
 using ImageProcessing.App.Common.Helpers;
+using ImageProcessing.Microkernel.DI.Aggregator.Implementation;
+using ImageProcessing.Microkernel.DI.Aggregator.Interface.Aggregator;
 using ImageProcessing.Microkernel.DI.Container;
 using ImageProcessing.Microkernel.DI.Controller.Interface;
 using ImageProcessing.Microkernel.DI.IoC.Implementation;
@@ -10,8 +12,11 @@ namespace ImageProcessing.Microkernel.DI.Controller.Implementation
     /// <inheritdoc cref="IAppController"/>
     internal sealed class AppController : IAppController
     {
-        /// <inheritdoc cref="IDependencyResolution"/>
+        /// <inheritdoc/>
         public IDependencyResolution IoC { get; }
+
+        /// <inheritdoc/>
+        public IEventAggregator Aggregator { get; }
 
         public AppController(IContainer container)
         {
@@ -20,6 +25,9 @@ namespace ImageProcessing.Microkernel.DI.Controller.Implementation
             );
 
             IoC.RegisterSingletonInstance<IAppController>(this);
+            IoC.RegisterSingleton<IEventAggregator, EventAggregator>();
+
+            Aggregator = IoC.Resolve<IEventAggregator>();
         }
 
         /// <inheritdoc cref="IAppController.Run{TPresenter}"/>

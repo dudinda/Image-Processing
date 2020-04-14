@@ -3,18 +3,18 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using ImageProcessing.App.Common.Enums;
-using ImageProcessing.Utility.Interop.Code.Wrapper;
 using ImageProcessing.App.PresentationLayer.Views.Main;
-using ImageProcessing.App.ServiceLayer.Services.EventAggregator.Interface;
 using ImageProcessing.App.UILayer.Form.Base;
+using ImageProcessing.Microkernel.DI.Controller.Interface;
+using ImageProcessing.Utility.Interop.Code.Wrapper;
 
 namespace ImageProcessing.App.UILayer.Form.Main
 {
     internal sealed partial class MainForm : BaseMainForm, IMainView
     {
         public MainForm(ApplicationContext context,
-                        IEventAggregator eventAggregator)
-            : base(context, eventAggregator)
+                        IAppController controller)
+            : base(context, controller)
         {
             InitializeComponent();
             Bind();
@@ -97,20 +97,14 @@ namespace ImageProcessing.App.UILayer.Form.Main
         }
 
         public void AddToUndoContainer((Bitmap changed, ImageContainer from) action)
-        {
-            Container.Add(action);
-        }
-
+            => Container.Add(action);
+        
         public (Bitmap changed, ImageContainer from)? UndoAction()
-        {
-            return Container.Undo();
-        }
-
+            => Container.Undo();
+       
         public (Bitmap changed, ImageContainer from)? RedoAction()
-        {
-            return Container.Redo();
-        }
-
+            => Container.Redo();
+        
         public void Refresh(ImageContainer container)
         {
             switch (container)
@@ -258,8 +252,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
             );
 
         public void AddToQualityMeasureContainer(Bitmap transformed)
-        {
-            QualityMeasure.Add(transformed);
-        }
+            => QualityMeasure.Add(transformed);     
     }
 }

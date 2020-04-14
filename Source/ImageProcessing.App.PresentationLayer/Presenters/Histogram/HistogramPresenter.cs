@@ -5,13 +5,12 @@ using System.Linq;
 using ImageProcessing.App.Common.Enums;
 using ImageProcessing.App.Common.Extensions.EnumExtensions;
 using ImageProcessing.App.Common.Helpers;
-using ImageProcessing.Microkernel.DI.Controller.Interface;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.ViewModel.Histogram;
 using ImageProcessing.App.PresentationLayer.Views.Histogram;
 using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
-using ImageProcessing.App.ServiceLayer.Services.EventAggregator.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface;
+using ImageProcessing.Microkernel.DI.Controller.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters
 {
@@ -23,9 +22,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         public HistogramPresenter(IAppController controller,
                                   IHistogramView view,
                                   IAwaitablePipeline pipeline,
-                                  IEventAggregator eventAggregator,
                                   IBitmapLuminanceDistributionService distibutionService
-            ) : base(controller, view, pipeline, eventAggregator)
+            ) : base(controller, view, pipeline)
         {
             _distributionService = Requires.IsNotNull(
                 distibutionService, nameof(distibutionService));

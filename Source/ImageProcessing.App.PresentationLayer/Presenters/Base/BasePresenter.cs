@@ -1,5 +1,4 @@
 using ImageProcessing.App.Common.Helpers;
-using ImageProcessing.App.ServiceLayer.Services.EventAggregator.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Microkernel.DI.Controller.Interface;
 using ImageProcessing.Microkernel.MVP.Presenter;
@@ -18,9 +17,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
     public abstract class BasePresenter<TView> : IPresenter
 		where TView : class, IView
 	{
-        ///<inheritdoc cref="IEventAggregator"/>
-        protected IEventAggregator EventAggregator { get; }
-
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller { get; }
 
@@ -34,11 +30,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
 
         protected BasePresenter(IAppController controller,
                                 TView view,
-                                IAwaitablePipeline pipeline,
-                                IEventAggregator eventAggregator)
+                                IAwaitablePipeline pipeline)
         {
-            EventAggregator = Requires.IsNotNull(
-                eventAggregator, nameof(eventAggregator));
             Controller = Requires.IsNotNull(
                 controller, nameof(controller));
             Pipeline = Requires.IsNotNull(
@@ -65,9 +58,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
 		where TView : class, IView
 		where TViewModel : class
 	{
-        ///<inheritdoc cref="IEventAggregator"/>
-        protected IEventAggregator EventAggregator { get; }
-
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller { get; }
 
@@ -86,11 +76,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
 
         protected BasePresenter(IAppController controller,
                                 TView view,
-                                IAwaitablePipeline pipeline,
-                                IEventAggregator eventAggregator)
+                                IAwaitablePipeline pipeline)
 		{
-            EventAggregator = Requires.IsNotNull(
-                 eventAggregator, nameof(eventAggregator));
             Controller = Requires.IsNotNull(
                 controller, nameof(controller));
             Pipeline = Requires.IsNotNull(

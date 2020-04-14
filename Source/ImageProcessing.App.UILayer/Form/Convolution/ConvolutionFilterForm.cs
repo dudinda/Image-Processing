@@ -3,17 +3,17 @@ using System.Linq;
 
 using ImageProcessing.App.Common.Enums;
 using ImageProcessing.App.Common.Extensions.EnumExtensions;
-using ImageProcessing.Utility.Interop.Code.Wrapper;
 using ImageProcessing.App.PresentationLayer.Views.Convolution;
-using ImageProcessing.App.ServiceLayer.Services.EventAggregator.Interface;
 using ImageProcessing.App.UILayer.Form.Base;
+using ImageProcessing.Microkernel.DI.Controller.Interface;
+using ImageProcessing.Utility.Interop.Code.Wrapper;
 
 namespace ImageProcessing.App.UILayer.Form.Convolution
 {
     internal sealed partial class ConvolutionFilterForm : BaseForm, IConvolutionFilterView
     {
-        public ConvolutionFilterForm(IEventAggregator eventAggregator)
-            : base(eventAggregator)
+        public ConvolutionFilterForm(IAppController controller)
+            : base(controller)
         {
             InitializeComponent();
 

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace ImageProcessing.App.ServiceLayer.Services.EventAggregator.Interface.Subscriber
+namespace ImageProcessing.Microkernel.DI.Aggregator.Subscriber
 {
     public interface ISubscriber<TEventType>
     {

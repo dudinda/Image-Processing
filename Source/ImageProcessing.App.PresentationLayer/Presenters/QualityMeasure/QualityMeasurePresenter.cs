@@ -2,13 +2,12 @@ using System.Collections.Generic;
 using System.Drawing;
 
 using ImageProcessing.App.Common.Helpers;
-using ImageProcessing.Microkernel.DI.Controller.Interface;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.ViewModel.QualityMeasure;
 using ImageProcessing.App.PresentationLayer.Views.QualityMeasure;
 using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
-using ImageProcessing.App.ServiceLayer.Services.EventAggregator.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface;
+using ImageProcessing.Microkernel.DI.Controller.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters
 {
@@ -20,9 +19,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         public QualityMeasurePresenter(IAppController controller, 
                                        IQualityMeasureView view,
                                        IAwaitablePipeline pipeline,
-                                       IEventAggregator eventAggregator,
                                        IBitmapLuminanceDistributionService distibutionService
-            ) : base(controller, view, pipeline, eventAggregator) 
+            ) : base(controller, view, pipeline) 
         {
             _distributionService = Requires.IsNotNull(
                 distibutionService, nameof(distibutionService));

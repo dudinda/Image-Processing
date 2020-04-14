@@ -37,8 +37,6 @@ using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Im
 using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable.Interface;
-using ImageProcessing.App.ServiceLayer.Services.EventAggregator.Implementation;
-using ImageProcessing.App.ServiceLayer.Services.EventAggregator.Interface;
 using ImageProcessing.App.ServiceLayer.Services.FileDialog.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.FileDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Implementation;
@@ -73,7 +71,6 @@ namespace ImageProcessing.App.UILayer
             builder
                 .RegisterSingleton<ApplicationContext>()
                 .RegisterSingleton<MainPresenter>()
-                .RegisterSingleton<IEventAggregator, EventAggregator>()
                 .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
                 .RegisterSingleton<IStaTaskService, StaTaskService>()
                 .RegisterSingleton<IAsyncZoomLocker, AsyncZoomLocker>()

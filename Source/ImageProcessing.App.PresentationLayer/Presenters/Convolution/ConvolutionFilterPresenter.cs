@@ -3,16 +3,15 @@ using System.Drawing;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Common.Helpers;
-using ImageProcessing.Microkernel.DI.Controller.Interface;
 using ImageProcessing.App.DomainModel.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
 using ImageProcessing.App.PresentationLayer.Views.Convolution;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Convolution;
-using ImageProcessing.App.ServiceLayer.Services.EventAggregator.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
+using ImageProcessing.Microkernel.DI.Controller.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
 {
@@ -25,17 +24,17 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
         public ConvolutionFilterPresenter(IAppController controller,
                                           IConvolutionFilterView view,
                                           IAwaitablePipeline pipeline,
-                                          IEventAggregator eventAggregator,
                                           IConvolutionServiceProvider convolutionFilterServiceProvider,
                                           IAsyncOperationLocker operationLocker
-            ) : base(controller, view, pipeline, eventAggregator)
+            ) : base(controller, view, pipeline)
         {
             _convolutionProvider = Requires.IsNotNull(
                 convolutionFilterServiceProvider, nameof(convolutionFilterServiceProvider));
             _operationLocker = Requires.IsNotNull(
                 operationLocker, nameof(operationLocker));
 
-            EventAggregator.Subscribe(this);
+            Controller
+                .Aggregator.Subscribe(this);
         }
 
 		private async Task ApplyConvolutionFilter(ConvolutionFilterEventArgs e)
@@ -55,7 +54,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
                             .ApplyFilter(bmp, filter)
                     );
 
-                EventAggregator.Publish(
+                Controller.Aggregator.Publish(
                     new ApplyConvolutionFilterEventArgs(
                        block
                     )
