@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 using ImageProcessing.App.Common.Enums;
@@ -6,12 +7,17 @@ using ImageProcessing.App.Common.Helpers;
 using ImageProcessing.App.DomainModel.Factory.Distributions.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
+using ImageProcessing.Microkernel.DI.Code.Attributes;
+using ImageProcessing.Microkernel.DI.Code.Extensions;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistribution
 {
     public sealed class BitmapLuminanceDistributionServiceProvider
         : IBitmapLuminanceDistributionServiceProvider
     {
+        private static readonly Dictionary<string, CommandAttribute>
+            _command = typeof(BitmapLuminanceDistributionServiceProvider).GetCommands();
+
         private readonly IBitmapLuminanceDistributionService _service;
         private readonly IDistributionFactory _factory;
 
@@ -39,19 +45,25 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistri
         {
             Requires.IsNotNull(bmp, nameof(bmp));
 
-            switch (info)
-            {
-                case RandomVariableInfo.Expectation:
-                    return _service.GetExpectation(bmp);
-                case RandomVariableInfo.Entropy:
-                    return _service.GetEntropy(bmp);
-                case RandomVariableInfo.Variance:
-                    return _service.GetVariance(bmp);
-                case RandomVariableInfo.StandardDeviation:
-                    return _service.GetStandardDeviation(bmp);
-
-                default: throw new NotImplementedException(nameof(info));
-            }
+            return (decimal)_command[
+                info.ToString()
+                ].Method.Invoke(this, new object[] { bmp });
         }
+
+        [Command(nameof(RandomVariableInfo.Expectation))]
+        private decimal GetExpectatoion(Bitmap bmp)
+            => _service.GetExpectation(bmp);
+
+        [Command(nameof(RandomVariableInfo.Variance))]
+        private decimal GetVariance(Bitmap bmp)
+               => _service.GetVariance(bmp);
+
+        [Command(nameof(RandomVariableInfo.Entropy))]
+        private decimal GetEntropy(Bitmap bmp)
+              => _service.GetEntropy(bmp);
+
+        [Command(nameof(RandomVariableInfo.StandardDeviation))]
+        private decimal GetStandardDeviation(Bitmap bmp)
+              => _service.GetStandardDeviation(bmp);
     }
 }

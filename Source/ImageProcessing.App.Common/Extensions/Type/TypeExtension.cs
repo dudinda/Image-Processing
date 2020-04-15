@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace ImageProcessing.App.Common.Extensions.TypeExtensions
 {
@@ -8,6 +10,12 @@ namespace ImageProcessing.App.Common.Extensions.TypeExtensions
     /// </summary>
     public static class TypeExtension
     {
+        public static IEnumerable<MethodInfo> GetMethodsByAttribute<TAttribute>(this Type type, BindingFlags flags)
+            where TAttribute : Attribute
+            => type.GetType()
+                   .GetMethods(flags)
+                   .Where(method => method.GetCustomAttribute(typeof(TAttribute), false) != null);
+        
         /// <summary>
         /// Get the specified <typeparamref name="TValue"/> from an <typeparamref name="TAttribute"/> 
         /// defined on a <see cref="Type"/>.
