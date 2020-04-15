@@ -1,19 +1,24 @@
+using System.Collections.Generic;
 using System.Drawing;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Common.Enums;
-using ImageProcessing.App.Common.Extensions.EnumExtensions;
 using ImageProcessing.App.Common.Helpers;
 using ImageProcessing.App.DomainModel.Factory.Convolution.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Convolution;
 using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interface;
+using ImageProcessing.Microkernel.DI.Code.Attributes;
+using ImageProcessing.Microkernel.DI.Code.Extensions;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Convolution
 {
     public sealed class ConvolutionServiceProvider : IConvolutionServiceProvider
     {
+        private static readonly Dictionary<string, CommandAttribute>
+            _command = typeof(ConvolutionServiceProvider).GetCommands();
+
         private readonly IConvolutionFilterFactory _convolutionFilterFactory;
         private readonly IConvolutionFilterService _convolutionFilterService;
         private readonly IBitmapService _bitmapService;
@@ -38,52 +43,54 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Convolution
         {
             Requires.IsNotNull(bmp, nameof(bmp));
 
-            switch (filter)
+            try
             {
-                case ConvolutionFilter.SobelOperator3x3:
-
-                    using (var cpy = new Bitmap(bmp))
-                    {
-                        var yDerivative = Task.Run(
-                            () => GetFilter(bmp, ConvolutionFilter.SobelOperatorHorizontal3x3)
-                        );
-
-                        var xDerivative = Task.Run(
-                            () => GetFilter(cpy, ConvolutionFilter.SobelOperatorVertical3x3)
-                        );
-
-                        return _cache.GetOrCreate(filter,
-                            () => _bitmapService
-                                      .Magnitude(xDerivative.Result,
-                                                 yDerivative.Result
-                                      )
-                        );
-                    }
-
-                case ConvolutionFilter.LoGOperator3x3:
-
-                    return GetFilter(
-                        GetFilter(bmp, ConvolutionFilter.GaussianBlur3x3),
-                        ConvolutionFilter.LaplacianOperator3x3
-                    );
-
-                default:
-
-                    return filter.PartitionOver(
-                        (ConvolutionFilter.BoxBlur3x3, ConvolutionFilter.SharpenOperator3x3),
-                        () => GetFilter(bmp, filter)
-                    );
+                return _command[
+                    filter.ToString()
+                ].Method.Invoke(this, new object[] { bmp, filter }) as Bitmap;
             }
+            catch(KeyNotFoundException)
+            {
+                return GetFilter(bmp, filter);
+            }
+        }
 
-            Bitmap GetFilter(Bitmap src, ConvolutionFilter convolution)
-                => _cache.GetOrCreate(convolution,
-                   () =>
-                   _convolutionFilterService
-                       .Convolution(src,
-                           _convolutionFilterFactory
-                               .Get(convolution)
-                       )
+        [Command(nameof(ConvolutionFilter.LoGOperator3x3))]
+        private Bitmap LoG3x3(Bitmap bmp, ConvolutionFilter filter)
+        {
+            return GetFilter(
+                       GetFilter(bmp, ConvolutionFilter.GaussianBlur3x3),
+                       ConvolutionFilter.LaplacianOperator3x3
                    );
         }
+
+        [Command(nameof(ConvolutionFilter.SobelOperator3x3))]
+        private Bitmap SobelOperator(Bitmap bmp, ConvolutionFilter filter)
+        {
+            using (var cpy = new Bitmap(bmp))
+            {
+                var yDerivative = Task.Run(
+                    () => GetFilter(bmp, ConvolutionFilter.SobelOperatorHorizontal3x3)
+                );
+
+                var xDerivative = Task.Run(
+                    () => GetFilter(cpy, ConvolutionFilter.SobelOperatorVertical3x3)
+                );
+
+                return _cache.GetOrCreate(filter,
+                    () => _bitmapService
+                              .Magnitude(xDerivative.Result,
+                                         yDerivative.Result
+                              )
+                );
+            }
+        }
+
+        private Bitmap GetFilter(Bitmap src, ConvolutionFilter convolution)
+            => _cache.GetOrCreate(convolution,
+               () =>_convolutionFilterService
+                   .Convolution(src,_convolutionFilterFactory.Get(convolution)
+           )
+       );
     }
 }

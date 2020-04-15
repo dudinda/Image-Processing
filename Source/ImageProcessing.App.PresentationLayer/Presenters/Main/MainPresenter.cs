@@ -65,7 +65,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                 nonBlock, nameof(nonBlock));
 
             Controller
-                .Aggregator.Subscribe(this);
+                .Aggregator
+                .Subscribe(this);
         }
 
         private async Task OpenImage()
