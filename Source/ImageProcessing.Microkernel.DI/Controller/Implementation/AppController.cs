@@ -1,4 +1,5 @@
-using ImageProcessing.App.Common.Helpers;
+using System;
+
 using ImageProcessing.Microkernel.DI.Aggregator.Implementation;
 using ImageProcessing.Microkernel.DI.Aggregator.Interface.Aggregator;
 using ImageProcessing.Microkernel.DI.Container;
@@ -20,9 +21,12 @@ namespace ImageProcessing.Microkernel.DI.Controller.Implementation
 
         public AppController(IContainer container)
         {
-            IoC = new DependencyResolution(
-                Requires.IsNotNull(container, nameof(container))
-            );
+            if(container is null)
+            {
+                throw new ArgumentNullException(nameof(container));
+            }
+
+            IoC = new DependencyResolution(container);
 
             IoC.RegisterSingletonInstance<IAppController>(this);
             IoC.RegisterSingleton<IEventAggregator, EventAggregator>();
@@ -39,8 +43,7 @@ namespace ImageProcessing.Microkernel.DI.Controller.Implementation
                 IoC.RegisterTransient<TPresenter>();
             }
 
-            var presenter = IoC.Resolve<TPresenter>();
-            presenter.Run();
+            IoC.Resolve<TPresenter>().Run();
         }
 
         /// <inheritdoc cref="IAppController.Run{TPresenter, TViewModel}(TViewModel)"/>
@@ -48,16 +51,17 @@ namespace ImageProcessing.Microkernel.DI.Controller.Implementation
             where TPresenter : class, IPresenter<TViewModel>
             where TViewModel : class
         {
+            if(vm is null)
+            {
+                throw new ArgumentNullException(nameof(vm));
+            }
+
             if (!IoC.IsRegistered<TPresenter>())
             {
                 IoC.RegisterTransient<TPresenter>();
             }
 
-            var presenter = IoC.Resolve<TPresenter>();
-
-            presenter.Run(
-                Requires.IsNotNull(vm, nameof(vm))
-            );
+            IoC.Resolve<TPresenter>().Run(vm);
         }
 
         /// <summary>

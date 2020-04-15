@@ -110,10 +110,6 @@ namespace ImageProcessing.Microkernel.DI.Adapters.LightInject
             => _container.GetInstance<TService>();
 
         /// <inheritdoc/>
-        public void EnableAnnotatedConstructorInjection()
-            => _container.EnableAnnotatedConstructorInjection();
-
-        /// <inheritdoc/>
         public bool IsRegistered<TService>()
             => _container.CanGetInstance(typeof(TService), string.Empty);
 

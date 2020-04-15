@@ -142,11 +142,6 @@ namespace ImageProcessing.Microkernel.DI.Container
         void RegisterSingleton<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name);
 
         /// <summary>
-        /// Enable the annotated dependency injection via constructor.
-        /// </summary>
-        void EnableAnnotatedConstructorInjection();
-
-        /// <summary>
         /// Returns <b>true</b> if the container can create the requested service, otherwise <b>false</b>.
         /// </summary>
         bool IsRegistered<TService>();

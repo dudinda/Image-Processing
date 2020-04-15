@@ -1,7 +1,6 @@
 using System;
 using System.Linq.Expressions;
 
-using ImageProcessing.App.Common.Helpers;
 using ImageProcessing.Microkernel.DI.Container;
 using ImageProcessing.Microkernel.DI.IoC.Interface;
 using ImageProcessing.Microkernel.MVP.View;
@@ -16,9 +15,12 @@ namespace ImageProcessing.Microkernel.DI.IoC.Implementation
 
         public DependencyResolution(IContainer container)
         {
-            _container = Requires.IsNotNull(
-                container, nameof(container)
-            );
+            if(container is null)
+            {
+                throw new ArgumentNullException(nameof(container));
+            }
+
+            _container = container;
         }
 
         /// <inheritdoc/>
@@ -189,13 +191,6 @@ namespace ImageProcessing.Microkernel.DI.IoC.Implementation
         public IDependencyResolution RegisterSingletonNamedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name)
         {
             _container.RegisterSingleton(factory, name);
-            return this;
-        }
-
-        /// <inheritdoc/>
-        public IDependencyResolution EnableAnnotatedConstructorInjection()
-        {
-            _container.EnableAnnotatedConstructorInjection();
             return this;
         }
 

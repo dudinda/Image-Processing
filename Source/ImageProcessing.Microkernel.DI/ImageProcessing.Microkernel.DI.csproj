@@ -15,6 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="LightInject" Version="6.3.2" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -30,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ImageProcessing.App.Common\ImageProcessing.App.Common.csproj" />
     <ProjectReference Include="..\ImageProcessing.Microkernel.MVP\ImageProcessing.Microkernel.MVP.csproj" />
   </ItemGroup>
 

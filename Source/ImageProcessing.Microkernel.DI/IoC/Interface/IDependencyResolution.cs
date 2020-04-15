@@ -165,11 +165,6 @@ namespace ImageProcessing.Microkernel.DI.IoC.Interface
         IDependencyResolution RegisterSingletonNamedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name);
 
         /// <summary>
-        /// Enable annotated dependency injection via constructor.
-        /// </summary>
-        IDependencyResolution EnableAnnotatedConstructorInjection();
-
-        /// <summary>
         /// Returns <b>true</b> if the container can create the requested service, otherwise <b>false</b>.
         /// </summary>
         bool IsRegistered<TService>();
