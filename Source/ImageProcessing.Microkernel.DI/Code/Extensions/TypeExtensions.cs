@@ -20,12 +20,13 @@ namespace ImageProcessing.Microkernel.DI.Code.Extensions
                .GetMethodsByAttribute<CommandAttribute>(
                    BindingFlags.NonPublic | BindingFlags.DeclaredOnly | BindingFlags.Instance)
                .ToDictionary(
-               method => method.GetCustomAttribute<CommandAttribute>().Key,
-               method =>
-               {
-                   var attr = method.GetCustomAttribute<CommandAttribute>();
-                   attr.Method = method;
-                   return attr;
-               });
+                   method => method.GetCustomAttribute<CommandAttribute>().Key,
+                   method =>
+                   {
+                       var attr = method.GetCustomAttribute<CommandAttribute>();
+                           attr.Method = method;
+
+                       return attr;
+                   });
     }
 }
