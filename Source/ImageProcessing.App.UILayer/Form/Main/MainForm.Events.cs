@@ -8,7 +8,7 @@ using ImageProcessing.App.DomainModel.DomainEvent.RgbArgs;
 
 namespace ImageProcessing.App.UILayer.Form.Main
 {
-    partial class MainForm
+    internal sealed partial class MainForm
     {
         /// <summary>
         /// Publish the main window event handlers

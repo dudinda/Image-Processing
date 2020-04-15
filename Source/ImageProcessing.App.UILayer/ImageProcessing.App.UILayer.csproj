@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
@@ -56,6 +56,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Update="Form\Main\MainForm.Events.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Form\Main\MainForm.Commands.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Update="Form\Convolution\ConvolutionFilterForm.Events.cs">
