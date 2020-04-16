@@ -5,9 +5,9 @@ using ImageProcessing.Microkernel.DI.Adapters.LightInject;
 using ImageProcessing.Microkernel.DI.Adapters.Ninject;
 using ImageProcessing.Microkernel.DI.Code.Enums;
 using ImageProcessing.Microkernel.DI.Container;
-using ImageProcessing.Microkernel.DI.Controller.Implementation;
 using ImageProcessing.Microkernel.DI.EntryPoint.State.Interface;
 using ImageProcessing.Microkernel.Factory;
+using ImageProcessing.Microkernel.MVP.Controller.Implementation;
 using ImageProcessing.Microkernel.MVP.Presenter;
 using ImageProcessing.Microkernel.Startup;
 

@@ -1,10 +1,10 @@
 using System;
 using System.Linq.Expressions;
 
-using ImageProcessing.Microkernel.DI.Controller.Implementation;
+using ImageProcessing.Microkernel.MVP.Controller.Implementation;
 using ImageProcessing.Microkernel.MVP.View;
 
-namespace ImageProcessing.Microkernel.DI.IoC.Interface
+namespace ImageProcessing.Microkernel.MVP.IoC.Interface
 {
     /// <summary>
     /// Provides access to the specified

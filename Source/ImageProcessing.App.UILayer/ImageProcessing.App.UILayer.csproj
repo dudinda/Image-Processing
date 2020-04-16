@@ -30,10 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ImageProcessing.App.CommonLayer\ImageProcessing.App.CommonLayer.csproj" />
-    <ProjectReference Include="..\ImageProcessing.Microkernel.DI\ImageProcessing.Microkernel.DI.csproj" />
-    <ProjectReference Include="..\ImageProcessing.Microkernel.EntryPoint\ImageProcessing.Microkernel.EntryPoint.csproj" />
     <ProjectReference Include="..\ImageProcessing.App.PresentationLayer\ImageProcessing.App.PresentationLayer.csproj" />
-    <ProjectReference Include="..\ImageProcessing.App.ServiceLayer\ImageProcessing.App.ServiceLayer.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,7 +2,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.App.PresentationLayer.Views.QualityMeasure;
 using ImageProcessing.App.UILayer.Form.Base;
-using ImageProcessing.Microkernel.DI.Controller.Interface;
+using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 namespace ImageProcessing.App.UILayer.Form.QualityMeasure
 {

@@ -9,8 +9,7 @@ using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.ViewModel.Histogram;
 using ImageProcessing.App.PresentationLayer.Views.Histogram;
 using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface;
-using ImageProcessing.Microkernel.DI.Controller.Interface;
+using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters
 {

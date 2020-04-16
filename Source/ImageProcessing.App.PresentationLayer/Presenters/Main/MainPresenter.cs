@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExtensions;
 using ImageProcessing.App.CommonLayer.Helpers;
-using ImageProcessing.App.DomainModel.DomainEvent.CommonArgs;
-using ImageProcessing.App.DomainModel.DomainEvent.ConvolutionArgs;
-using ImageProcessing.App.DomainModel.DomainEvent.DistributionArgs;
-using ImageProcessing.App.DomainModel.DomainEvent.RgbArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Convolution;
 using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
@@ -24,9 +24,8 @@ using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interfac
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Zoom.Interface;
 using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline;
-using ImageProcessing.App.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
-using ImageProcessing.Microkernel.DI.Controller.Interface;
+using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 {

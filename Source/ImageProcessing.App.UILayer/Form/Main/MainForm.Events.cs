@@ -1,10 +1,10 @@
 using System.Windows.Forms;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainModel.DomainEvent.CommonArgs;
-using ImageProcessing.App.DomainModel.DomainEvent.ConvolutionArgs;
-using ImageProcessing.App.DomainModel.DomainEvent.DistributionArgs;
-using ImageProcessing.App.DomainModel.DomainEvent.RgbArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs;
 
 namespace ImageProcessing.App.UILayer.Form.Main
 {

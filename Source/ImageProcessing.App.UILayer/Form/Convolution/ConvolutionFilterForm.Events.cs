@@ -1,4 +1,4 @@
-using ImageProcessing.App.DomainModel.DomainEvent.ConvolutionArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
 
 namespace ImageProcessing.App.UILayer.Form.Convolution
 {

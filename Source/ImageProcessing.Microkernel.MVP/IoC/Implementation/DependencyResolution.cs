@@ -2,10 +2,10 @@ using System;
 using System.Linq.Expressions;
 
 using ImageProcessing.Microkernel.DI.Container;
-using ImageProcessing.Microkernel.DI.IoC.Interface;
+using ImageProcessing.Microkernel.MVP.IoC.Interface;
 using ImageProcessing.Microkernel.MVP.View;
 
-namespace ImageProcessing.Microkernel.DI.IoC.Implementation
+namespace ImageProcessing.Microkernel.MVP.IoC.Implementation
 {
     /// <inheritdoc cref="IDependencyResolution"/>
     internal sealed class DependencyResolution : IDependencyResolution

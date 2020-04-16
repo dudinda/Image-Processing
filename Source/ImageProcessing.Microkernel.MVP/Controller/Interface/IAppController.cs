@@ -1,10 +1,10 @@
 using System;
 
-using ImageProcessing.Microkernel.DI.Aggregator.Interface.Aggregator;
-using ImageProcessing.Microkernel.DI.IoC.Interface;
+using ImageProcessing.Microkernel.MVP.Aggregator.Interface.Aggregator;
+using ImageProcessing.Microkernel.MVP.IoC.Interface;
 using ImageProcessing.Microkernel.MVP.Presenter;
 
-namespace ImageProcessing.Microkernel.DI.Controller.Interface
+namespace ImageProcessing.Microkernel.MVP.Controller.Interface
 {
     /// <summary>
     /// Represents the access point to the specified DI container,

@@ -2,11 +2,11 @@ using System;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainModel.DomainEvent.CommonArgs;
-using ImageProcessing.App.DomainModel.DomainEvent.ConvolutionArgs;
-using ImageProcessing.App.DomainModel.DomainEvent.DistributionArgs;
-using ImageProcessing.App.DomainModel.DomainEvent.RgbArgs;
-using ImageProcessing.Microkernel.DI.Aggregator.Subscriber;
+using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs;
+using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 {

@@ -4,4 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ImageProcessing.Microkernel.DI\ImageProcessing.Microkernel.DI.csproj" />
+  </ItemGroup>
+
 </Project>

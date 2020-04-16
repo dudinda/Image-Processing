@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-using ImageProcessing.Microkernel.DI.Aggregator.Interface.Aggregator;
-using ImageProcessing.Microkernel.DI.Aggregator.Subscriber;
+using ImageProcessing.Microkernel.MVP.Aggregator.Interface.Aggregator;
+using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 
-namespace ImageProcessing.Microkernel.DI.Aggregator.Implementation
+namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
 {
     /// <inheritdoc cref="IEventAggregator"/>
     internal sealed class EventAggregator : IEventAggregator

@@ -5,7 +5,7 @@ using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExtensions;
 using ImageProcessing.App.PresentationLayer.Views.Convolution;
 using ImageProcessing.App.UILayer.Form.Base;
-using ImageProcessing.Microkernel.DI.Controller.Interface;
+using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Utility.Interop.Code.Wrapper;
 
 namespace ImageProcessing.App.UILayer.Form.Convolution

@@ -1,14 +1,15 @@
 using System;
 
-using ImageProcessing.Microkernel.DI.Aggregator.Implementation;
-using ImageProcessing.Microkernel.DI.Aggregator.Interface.Aggregator;
 using ImageProcessing.Microkernel.DI.Container;
-using ImageProcessing.Microkernel.DI.Controller.Interface;
-using ImageProcessing.Microkernel.DI.IoC.Implementation;
-using ImageProcessing.Microkernel.DI.IoC.Interface;
 using ImageProcessing.Microkernel.MVP.Presenter;
 
-namespace ImageProcessing.Microkernel.DI.Controller.Implementation
+using ImageProcessing.Microkernel.MVP.Aggregator.Implementation;
+using ImageProcessing.Microkernel.MVP.Aggregator.Interface.Aggregator;
+using ImageProcessing.Microkernel.MVP.Controller.Interface;
+using ImageProcessing.Microkernel.MVP.IoC.Implementation;
+using ImageProcessing.Microkernel.MVP.IoC.Interface;
+
+namespace ImageProcessing.Microkernel.MVP.Controller.Implementation
 {
     /// <inheritdoc cref="IAppController"/>
     internal sealed class AppController : IAppController

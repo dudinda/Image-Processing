@@ -1,7 +1,7 @@
 using System.Windows.Forms;
 
 using ImageProcessing.App.CommonLayer.Helpers;
-using ImageProcessing.Microkernel.DI.Controller.Interface;
+using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 using MetroFramework.Forms;
 

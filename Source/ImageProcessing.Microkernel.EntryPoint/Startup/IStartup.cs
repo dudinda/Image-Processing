@@ -1,4 +1,4 @@
-using ImageProcessing.Microkernel.DI.IoC.Interface;
+using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
 namespace ImageProcessing.Microkernel.Startup
 {

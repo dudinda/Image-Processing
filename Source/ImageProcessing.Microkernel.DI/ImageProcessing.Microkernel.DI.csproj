@@ -30,8 +30,4 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ImageProcessing.Microkernel.MVP\ImageProcessing.Microkernel.MVP.csproj" />
-  </ItemGroup>
-
 </Project>

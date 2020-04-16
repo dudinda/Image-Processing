@@ -1,4 +1,4 @@
-namespace ImageProcessing.Microkernel.DI.Aggregator.Interface.Aggregator
+namespace ImageProcessing.Microkernel.MVP.Aggregator.Interface.Aggregator
 {
     /// <summary>
     /// Responds to any event from a source object
