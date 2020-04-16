@@ -1,6 +1,14 @@
 # Image Processing
 Image filtration and contrast optimization.
 
+1. [Thesis](#Thesis)
+2. [Architecture](#Architecture)
+3. [Benchmarks](#Benchmarks)
+
+***
+
+## Thesis
+
 <p>The application was developed as the R&D work.</p> 
 <p>The original purpose was to research the possible advantages of grayscale images contrast optimization using a normal distribution regarding a uniform distribution. Two parameters such as the expectation and the std allow to control relative luminance and contrast, respectively.</p>
 
@@ -43,7 +51,7 @@ Image filtration and contrast optimization.
 
 ***
 
-# Architecture
+## Architecture
 
 <p align="center">
    <img src="https://i.imgur.com/wxDianc.png"  width="800" height = "400" alt="architecture">
@@ -52,7 +60,7 @@ Image filtration and contrast optimization.
 
 ***
 
-# Benchmarks [CPU]
+## Benchmarks [CPU]
 
 [RGB Filters](https://github.com/Softenraged/Image-Processing/blob/master/Benchmarks/ImageProcessing.App.DomainModel.Benchmark/LocalBenchmark.md#rgb-filters)
 
