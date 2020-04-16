@@ -46,7 +46,7 @@ Image filtration and contrast optimization.
 # Architecture
 
 <p align="center">
-   <img src="https://i.imgur.com/CHTugnc.png"  width="800" height = "400" alt="architecture">
+   <img src="https://i.imgur.com/wxDianc.png"  width="800" height = "400" alt="architecture">
    <p align="center">Fig. 6 - The architecture of the application.</p>
 </p>
 
