@@ -1,3 +1,5 @@
+using System;
+
 using ImageProcessing.App.Common.Helpers;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface;
 using ImageProcessing.Microkernel.DI.Controller.Interface;
@@ -17,29 +19,33 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
     public abstract class BasePresenter<TView> : IPresenter
 		where TView : class, IView
 	{
+        private Lazy<IAwaitablePipeline> _pipeline
+            => new Lazy<IAwaitablePipeline>(
+                Controller.IoC.Resolve<IAwaitablePipeline>
+            );
+
+        private Lazy<TView> _view
+           => new Lazy<TView>(
+               Controller.IoC.Resolve<TView>
+           );
+
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller { get; }
 
         /// <inheritdoc cref="IAwaitablePipeline"/>
-        protected IAwaitablePipeline Pipeline { get; }
+        protected IAwaitablePipeline Pipeline
+            => _pipeline.Value;
 
         /// <summary>
         /// Access point to the UI layer components.
         /// </summary>
-        protected TView View { get; }
-
-        protected BasePresenter(IAppController controller,
-                                TView view,
-                                IAwaitablePipeline pipeline)
-        {
-            Controller = Requires.IsNotNull(
+        protected TView View
+            => _view.Value;
+       
+        protected BasePresenter(IAppController controller)
+            => Controller = Requires.IsNotNull(
                 controller, nameof(controller));
-            Pipeline = Requires.IsNotNull(
-                pipeline, nameof(pipeline));
-            View = Requires.IsNotNull(
-                view, nameof(view));       
-        }
-
+        
         /// <inheritdoc/>
 		public virtual void Run()
             => View.Show();
@@ -58,34 +64,38 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
 		where TView : class, IView
 		where TViewModel : class
 	{
+        private Lazy<IAwaitablePipeline> _pipeline
+           => new Lazy<IAwaitablePipeline>(
+               Controller.IoC.Resolve<IAwaitablePipeline>
+           );
+
+        private Lazy<TView> _view
+           => new Lazy<TView>(
+               Controller.IoC.Resolve<TView>
+           );
+
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller { get; }
 
         /// <inheritdoc cref="IAwaitablePipeline"/>
-        protected IAwaitablePipeline Pipeline { get; }
+        protected IAwaitablePipeline Pipeline
+            => _pipeline.Value;
 
         /// <summary>
         /// Access point to the UI layer components.
         /// </summary>
-        protected TView View { get; }
-
+        protected TView View
+            => _view.Value;
+      
         /// <summary>
         /// View model of a presenter.
         /// </summary>
         protected TViewModel ViewModel { get; private set; }
 
-        protected BasePresenter(IAppController controller,
-                                TView view,
-                                IAwaitablePipeline pipeline)
-		{
-            Controller = Requires.IsNotNull(
+        protected BasePresenter(IAppController controller)
+		    => Controller = Requires.IsNotNull(
                 controller, nameof(controller));
-            Pipeline = Requires.IsNotNull(
-                pipeline, nameof(pipeline));
-            View = Requires.IsNotNull(
-                view, nameof(view));
-        }
-
+        
         /// <inheritdoc/>
         public virtual void Run(TViewModel vm)
 		{

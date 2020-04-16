@@ -22,11 +22,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
 		private readonly IAsyncOperationLocker _operationLocker;
 
         public ConvolutionFilterPresenter(IAppController controller,
-                                          IConvolutionFilterView view,
-                                          IAwaitablePipeline pipeline,
                                           IConvolutionServiceProvider convolutionFilterServiceProvider,
-                                          IAsyncOperationLocker operationLocker
-            ) : base(controller, view, pipeline)
+                                          IAsyncOperationLocker operationLocker)
+            : base(controller)
         {
             _convolutionProvider = Requires.IsNotNull(
                 convolutionFilterServiceProvider, nameof(convolutionFilterServiceProvider));
@@ -34,7 +32,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
                 operationLocker, nameof(operationLocker));
 
             Controller
-                .Aggregator.Subscribe(this);
+                .Aggregator
+                .Subscribe(this);
         }
 
 		private async Task ApplyConvolutionFilter(ConvolutionFilterEventArgs e)

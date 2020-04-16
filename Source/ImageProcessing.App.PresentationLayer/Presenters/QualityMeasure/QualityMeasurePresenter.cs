@@ -17,10 +17,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         private readonly IBitmapLuminanceDistributionService _distributionService;
 
         public QualityMeasurePresenter(IAppController controller, 
-                                       IQualityMeasureView view,
-                                       IAwaitablePipeline pipeline,
-                                       IBitmapLuminanceDistributionService distibutionService
-            ) : base(controller, view, pipeline) 
+                                       IBitmapLuminanceDistributionService distibutionService)
+            : base(controller) 
         {
             _distributionService = Requires.IsNotNull(
                 distibutionService, nameof(distibutionService));

@@ -40,16 +40,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         private readonly INonBlockDialogService _nonBlock;
 
         public MainPresenter(IAppController controller,
-                             IMainView view,
-                             IAwaitablePipeline pipeline,
                              IAsyncZoomLocker zoomLocker,
                              IAsyncOperationLocker operationLocker,
                              IBitmapLuminanceDistributionServiceProvider lumaProvider,
                              IRgbFilterServiceProvider rgbProvider,
                              ICacheService<Bitmap> cache,
-                             INonBlockDialogService nonBlock
-
-            ) : base(controller, view, pipeline)
+                             INonBlockDialogService nonBlock)
+            : base(controller)
         {
             _lumaProvider = Requires.IsNotNull(
                 lumaProvider, nameof(lumaProvider));

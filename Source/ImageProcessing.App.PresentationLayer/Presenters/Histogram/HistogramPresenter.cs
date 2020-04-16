@@ -20,10 +20,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         private readonly IBitmapLuminanceDistributionService _distributionService;
 
         public HistogramPresenter(IAppController controller,
-                                  IHistogramView view,
-                                  IAwaitablePipeline pipeline,
-                                  IBitmapLuminanceDistributionService distibutionService
-            ) : base(controller, view, pipeline)
+                                  IBitmapLuminanceDistributionService distibutionService)
+            : base(controller)
         {
             _distributionService = Requires.IsNotNull(
                 distibutionService, nameof(distibutionService));
