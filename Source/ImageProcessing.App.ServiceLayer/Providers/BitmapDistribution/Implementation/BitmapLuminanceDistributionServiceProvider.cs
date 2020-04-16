@@ -5,7 +5,7 @@ using ImageProcessing.App.CommonLayer.Attributes;
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.TypeExtensions;
 using ImageProcessing.App.CommonLayer.Helpers;
-using ImageProcessing.App.DomainModel.Factory.Distributions.Interface;
+using ImageProcessing.App.DomainLayer.Factory.Distributions.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
 

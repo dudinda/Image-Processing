@@ -2,7 +2,7 @@ using System.Drawing;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Helpers;
-using ImageProcessing.App.DomainModel.Factory.RgbFilters.Rgb.Interface;
+using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Rgb.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.RgbFilters;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Interface;

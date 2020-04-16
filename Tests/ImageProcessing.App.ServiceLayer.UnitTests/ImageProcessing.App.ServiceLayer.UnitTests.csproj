@@ -90,16 +90,16 @@
       <Project>{4DC35D60-2801-481F-9600-832FFD5AE930}</Project>
       <Name>ImageProcessing.App.CommonLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.DomainModel\ImageProcessing.App.DomainModel.csproj">
-      <Project>{2ED4A387-6DD9-43D9-908F-88ED898103F2}</Project>
-      <Name>ImageProcessing.App.DomainModel</Name>
+    <ProjectReference Include="..\..\Source\ImageProcessing.App.DomainLayer\ImageProcessing.App.DomainLayer.csproj">
+      <Project>{03943CD9-C3EC-494E-B3FB-1B8BE4AEF91B}</Project>
+      <Name>ImageProcessing.App.DomainLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.App.ServiceLayer\ImageProcessing.App.ServiceLayer.csproj">
       <Project>{94C3F770-5A06-4D18-AFF5-C4EB20CBB727}</Project>
       <Name>ImageProcessing.App.ServiceLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.Microkernel.MVP\ImageProcessing.Microkernel.MVP.csproj">
-      <Project>{e547bf84-7467-4aa0-a836-84beab772924}</Project>
+      <Project>{E547BF84-7467-4AA0-A836-84BEAB772924}</Project>
       <Name>ImageProcessing.Microkernel.MVP</Name>
     </ProjectReference>
   </ItemGroup>

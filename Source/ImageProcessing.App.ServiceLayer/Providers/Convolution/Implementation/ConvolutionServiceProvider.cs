@@ -6,7 +6,7 @@ using ImageProcessing.App.CommonLayer.Attributes;
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.TypeExtensions;
 using ImageProcessing.App.CommonLayer.Helpers;
-using ImageProcessing.App.DomainModel.Factory.Convolution.Interface;
+using ImageProcessing.App.DomainLayer.Factory.Convolution.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Convolution;
 using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;

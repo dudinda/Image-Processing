@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExtensions;
 using ImageProcessing.App.CommonLayer.Helpers;
-using ImageProcessing.App.DomainModel.Convolution.Interface;
+using ImageProcessing.App.DomainLayer.Convolution.Interface;
 using ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation

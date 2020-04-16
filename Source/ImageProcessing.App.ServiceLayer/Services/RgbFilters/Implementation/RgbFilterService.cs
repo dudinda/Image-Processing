@@ -1,7 +1,7 @@
 using System.Drawing;
 
 using ImageProcessing.App.CommonLayer.Helpers;
-using ImageProcessing.App.DomainModel.Model.RgbFilters.Interface;
+using ImageProcessing.App.DomainLayer.Model.RgbFilters.Interface;
 using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.RgbFilters.Implementation

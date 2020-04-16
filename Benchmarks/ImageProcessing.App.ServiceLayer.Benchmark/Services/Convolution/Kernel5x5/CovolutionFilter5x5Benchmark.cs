@@ -4,8 +4,8 @@ using System.IO;
 
 using BenchmarkDotNet.Attributes;
 
-using ImageProcessing.App.DomainModel.Convolution.Implemetation.Blur.GaussianBlur;
-using ImageProcessing.App.DomainModel.Convolution.Interface;
+using ImageProcessing.App.DomainLayer.Convolution.Implemetation.Blur.GaussianBlur;
+using ImageProcessing.App.DomainLayer.Convolution.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interface;
 
