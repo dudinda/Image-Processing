@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ImageProcessing.App.Common\ImageProcessing.App.Common.csproj" />
+    <ProjectReference Include="..\ImageProcessing.App.CommonLayer\ImageProcessing.App.CommonLayer.csproj" />
   </ItemGroup>
 
 </Project>

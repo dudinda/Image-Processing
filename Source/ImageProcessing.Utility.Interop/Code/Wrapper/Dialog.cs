@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-using ImageProcessing.App.Common.Extensions.EnumExtensions;
+using ImageProcessing.App.CommonLayer.Extensions.EnumExtensions;
 using ImageProcessing.Utility.Interop.Api;
 using ImageProcessing.Utility.Interop.Code.Enum;
 

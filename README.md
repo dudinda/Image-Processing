@@ -45,7 +45,7 @@ Image filtration and contrast optimization.
 
 # Benchmarks [CPU]
 
-[RGB Filters](https://github.com/Softenraged/Image-Processing/blob/master/Benchmarks/ImageProcessing.App.DomainModel.Benchmark/LocalBenchmark.md#rgb-filters)
+[RGB Filters](https://github.com/Softenraged/Image-Processing/blob/master/Benchmarks/ImageProcessing.App.DomainLayer.Benchmark/LocalBenchmark.md#rgb-filters)
 
 [Convolution](https://github.com/Softenraged/Image-Processing/blob/master/Benchmarks/ImageProcessing.App.ServiceLayer.Benchmark/LocalBenchmark.md#convolution)
 

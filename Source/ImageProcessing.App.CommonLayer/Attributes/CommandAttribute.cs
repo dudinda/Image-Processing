@@ -11,7 +11,12 @@ namespace ImageProcessing.App.CommonLayer.Attributes
     {
         public CommandAttribute(string key)
         {
-            Key = key ?? throw new ArgumentNullException(nameof(key));
+            if(key is null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            Key = key; 
         }
 
         /// <summary>
