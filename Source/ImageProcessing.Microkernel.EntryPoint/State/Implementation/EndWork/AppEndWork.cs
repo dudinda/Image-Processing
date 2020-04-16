@@ -22,8 +22,7 @@ namespace ImageProcessing.Microkernel.State.EndWork
         /// <inheritdoc/>
         public void Exit()
             => AppLifecycle
-                .Controller
-                .Dispose();
+                .Controller.Dispose();
 
         /// <inheritdoc/>
         public void Run<TMainPresenter>()

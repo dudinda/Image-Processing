@@ -22,20 +22,27 @@ namespace ImageProcessing.Microkernel.DI.State.IsNotBuilt
         public void Build<TStartup>(DiContainer container)
             where TStartup : class, IStartup
         {
-            AppLifecycle.Controller = new AppController(GetContainerAdapter());
+            AppLifecycle.Controller = new AppController(
+                GetContainerAdapter()
+            );
 
-            if (AppLifecycle.Controller.IoC.IsRegistered<TStartup>())
+            if (AppLifecycle
+                    .Controller
+                    .IoC.IsRegistered<TStartup>())
             {
                 throw new InvalidOperationException(
                     "The specified startup is already defined."
                 );
             }
 
-            AppLifecycle.Controller.IoC.RegisterSingleton<TStartup>();
+            AppLifecycle
+                .Controller
+                .IoC.RegisterSingleton<TStartup>();
 
-            AppLifecycle.Controller.IoC
-                .Resolve<TStartup>()
-                .Build(AppLifecycle.Controller.IoC);
+            AppLifecycle
+                .Controller
+                .IoC.Resolve<TStartup>()
+                    .Build(AppLifecycle.Controller.IoC);
 
             AppLifecycle.State = StateFactory.Get(
                 AppState.IsBuilt

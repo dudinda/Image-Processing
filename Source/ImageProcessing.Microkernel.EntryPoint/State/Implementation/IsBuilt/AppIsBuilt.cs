@@ -28,7 +28,8 @@ namespace ImageProcessing.Microkernel.State.Implementation.IsBuilt
                 AppState.EndWork
             );
 
-            AppLifecycle.State.Exit();
+            AppLifecycle
+                .State.Exit();
         }
 
         /// <inheritdoc/>
@@ -39,7 +40,8 @@ namespace ImageProcessing.Microkernel.State.Implementation.IsBuilt
                 AppState.StartWork
             );
 
-            AppLifecycle.State.Run<TMainPresenter>();
+            AppLifecycle
+                .State.Run<TMainPresenter>();
         }
     }
 }
