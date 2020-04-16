@@ -3,7 +3,7 @@ Image filtration and contrast optimization.
 
 1. [Thesis](#Thesis)
 2. [Architecture](#Architecture)
-3. [Benchmarks](#Benchmarks)
+3. [Benchmarks](#benchmarks-cpu)
 
 ***
 
