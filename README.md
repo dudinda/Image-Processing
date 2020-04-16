@@ -43,6 +43,14 @@ Image filtration and contrast optimization.
 
 ***
 
+#Architecture
+<p align="center">
+   <img src="https://i.imgur.com/CHTugnc.png"  width="500" height = "400" alt="architecture">
+   <p align="center">Fig. 6 - The architecure of the application.</p>
+</p>
+
+***
+
 # Benchmarks [CPU]
 
 [RGB Filters](https://github.com/Softenraged/Image-Processing/blob/master/Benchmarks/ImageProcessing.App.DomainModel.Benchmark/LocalBenchmark.md#rgb-filters)
