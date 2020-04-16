@@ -1,6 +1,6 @@
 using System.Drawing;
 
-using ImageProcessing.App.Common.Enums;
+using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.Utility.DataStructure.BitMatrix.Implementation;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Interface.Morphology

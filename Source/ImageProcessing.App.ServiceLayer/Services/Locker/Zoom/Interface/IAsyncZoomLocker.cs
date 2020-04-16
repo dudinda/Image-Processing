@@ -1,5 +1,5 @@
 using ImageProcessing.App.ServiceLayer.Services.Locker.Base.Interface;
-using ImageProcessing.App.Common.Enums;
+using ImageProcessing.App.CommonLayer.Enums;
 
 namespace ImageProcessing.App.ServiceLayer.Services.LockerService.Zoom.Interface
 {

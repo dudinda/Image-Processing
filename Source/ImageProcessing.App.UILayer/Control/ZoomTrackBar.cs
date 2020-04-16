@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-using ImageProcessing.App.Common.Extensions.BitmapExtensions;
+using ImageProcessing.App.CommonLayer.Extensions.BitmapExtensions;
 
 using MetroFramework.Controls;
 

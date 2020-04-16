@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 
-using ImageProcessing.App.Common.Enums;
+using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainModel.Factory.RgbFilters.Rgb.Interface;
 using ImageProcessing.App.DomainModel.Model.RgbFilters.Implementation.Binary;
 using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Implementation;

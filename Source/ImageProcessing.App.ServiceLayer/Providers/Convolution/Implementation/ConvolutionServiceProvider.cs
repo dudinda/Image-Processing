@@ -2,15 +2,15 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Common.Enums;
-using ImageProcessing.App.Common.Helpers;
+using ImageProcessing.App.CommonLayer.Attributes;
+using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.CommonLayer.Extensions.TypeExtensions;
+using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainModel.Factory.Convolution.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Convolution;
 using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interface;
-using ImageProcessing.Microkernel.DI.Code.Attributes;
-using ImageProcessing.Microkernel.DI.Code.Extensions;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Convolution
 {

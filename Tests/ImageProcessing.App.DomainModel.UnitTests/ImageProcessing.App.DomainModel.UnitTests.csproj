@@ -74,9 +74,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.Common\ImageProcessing.App.Common.csproj">
-      <Project>{20D5DBFC-0E4A-4CE2-A031-68966C7373BA}</Project>
-      <Name>ImageProcessing.App.Common</Name>
+    <ProjectReference Include="..\..\Source\ImageProcessing.App.CommonLayer\ImageProcessing.App.CommonLayer.csproj">
+      <Project>{4DC35D60-2801-481F-9600-832FFD5AE930}</Project>
+      <Name>ImageProcessing.App.CommonLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.App.DomainModel\ImageProcessing.App.DomainModel.csproj">
       <Project>{2ED4A387-6DD9-43D9-908F-88ED898103F2}</Project>

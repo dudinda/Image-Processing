@@ -1,6 +1,6 @@
 using System.Drawing;
 
-using ImageProcessing.App.Common.Helpers;
+using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainModel.Model.Morphology.Implementation.Dilation;
 using ImageProcessing.App.DomainModel.Model.Morphology.Implementation.Erosion;
 using ImageProcessing.App.DomainModel.Model.Morphology.Interface.UnaryOperator;

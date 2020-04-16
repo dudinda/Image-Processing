@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.App.Common.Helpers;
+using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Item.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Item.Implementation

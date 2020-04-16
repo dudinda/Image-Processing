@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Common.Enums;
+using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainModel.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainModel.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.DomainModel.DomainEvent.DistributionArgs;

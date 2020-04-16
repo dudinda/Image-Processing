@@ -1,6 +1,6 @@
 using System.Drawing;
 
-using ImageProcessing.App.Common.Helpers;
+using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainModel.Model.Morphology.Implementation.Closing;
 using ImageProcessing.App.DomainModel.Model.Morphology.Implementation.Subtraction;
 using ImageProcessing.App.DomainModel.Model.Morphology.Interface.UnaryOperator;

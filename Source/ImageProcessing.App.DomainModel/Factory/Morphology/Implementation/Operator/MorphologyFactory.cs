@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.App.Common.Enums;
+using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainModel.Factory.Morphology.Interface;
 using ImageProcessing.App.DomainModel.Model.Morphology.Implementation.Addition;
 using ImageProcessing.App.DomainModel.Model.Morphology.Implementation.BlackHat;

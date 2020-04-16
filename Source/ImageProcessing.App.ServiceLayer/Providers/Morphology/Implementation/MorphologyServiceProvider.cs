@@ -1,7 +1,7 @@
 using System.Drawing;
 
-using ImageProcessing.App.Common.Enums;
-using ImageProcessing.App.Common.Helpers;
+using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainModel.Factory.Morphology.Interface;
 using ImageProcessing.App.DomainModel.Factory.Morphology.Interface.StructuringElement;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Morphology;

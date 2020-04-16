@@ -1,4 +1,4 @@
-using ImageProcessing.App.Common.Enums;
+using ImageProcessing.App.CommonLayer.Enums;
 
 namespace ImageProcessing.App.PresentationLayer.Views.ViewComponent.Cursor
 {
@@ -7,10 +7,6 @@ namespace ImageProcessing.App.PresentationLayer.Views.ViewComponent.Cursor
     /// </summary>
     public interface ICursor
     {
-        /// <summary>
-        /// Update cursor to a <see cref="CursorType"/>.
-        /// </summary>
-        /// <param name="cursor"></param>
         void SetCursor(CursorType cursor);
     }
 }

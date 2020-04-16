@@ -1,6 +1,6 @@
 using System.Drawing;
 
-using ImageProcessing.App.Common.Helpers;
+using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainModel.Model.Morphology.Interface.BinaryOperator;
 using ImageProcessing.App.DomainModel.Model.Morphology.Interface.UnaryOperator;
 using ImageProcessing.App.ServiceLayer.Services.Morphology.Interface;

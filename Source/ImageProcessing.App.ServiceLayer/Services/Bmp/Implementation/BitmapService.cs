@@ -5,8 +5,8 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Common.Extensions.BitmapExtensions;
-using ImageProcessing.App.Common.Helpers;
+using ImageProcessing.App.CommonLayer.Extensions.BitmapExtensions;
+using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation

@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.App.Common.Enums;
+using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainModel.Convolution.Implemetation.Blur.BoxBlur;
 using ImageProcessing.App.DomainModel.Convolution.Implemetation.Blur.GaussianBlur;
 using ImageProcessing.App.DomainModel.Convolution.Implemetation.Blur.MotionBlur;

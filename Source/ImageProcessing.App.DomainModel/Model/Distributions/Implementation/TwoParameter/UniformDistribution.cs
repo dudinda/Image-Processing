@@ -1,7 +1,7 @@
 using System;
 
-using ImageProcessing.App.Common.Enums;
-using ImageProcessing.App.Common.Extensions.StringExtensions;
+using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.CommonLayer.Extensions.StringExtensions;
 using ImageProcessing.App.DomainModel.Model.Distributions.Interface;
 
 namespace ImageProcessing.App.DomainModel.Model.Distributions.Implementation.TwoParameter

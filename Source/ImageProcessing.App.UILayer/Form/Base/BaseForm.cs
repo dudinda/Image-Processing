@@ -1,6 +1,6 @@
 using System.Windows.Forms;
 
-using ImageProcessing.App.Common.Helpers;
+using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.Microkernel.DI.Controller.Interface;
 
 using MetroFramework.Forms;
@@ -41,10 +41,8 @@ namespace ImageProcessing.App.UILayer.Form.Base
 
         protected BaseForm(IAppController controller)
             : base()
-        {
-            Controller = Requires.IsNotNull(
+            => Controller = Requires.IsNotNull(
                 controller, nameof(controller));
-        }
 
         protected BaseForm() { }
     }

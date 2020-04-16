@@ -1,14 +1,13 @@
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-using ImageProcessing.App.Common.Enums;
-using ImageProcessing.App.Common.Helpers;
+using ImageProcessing.App.CommonLayer.Attributes;
+using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.CommonLayer.Extensions.TypeExtensions;
+using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainModel.Factory.Distributions.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
-using ImageProcessing.Microkernel.DI.Code.Attributes;
-using ImageProcessing.Microkernel.DI.Code.Extensions;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistribution
 {
@@ -47,7 +46,7 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistri
 
             return (decimal)_command[
                 info.ToString()
-                ].Method.Invoke(this, new object[] { bmp });
+            ].Method.Invoke(this, new object[] { bmp });
         }
 
         [Command(nameof(RandomVariableInfo.Expectation))]

@@ -2,9 +2,9 @@ using System;
 using System.Drawing;
 using System.Linq;
 
-using ImageProcessing.App.Common.Enums;
-using ImageProcessing.App.Common.Extensions.EnumExtensions;
-using ImageProcessing.App.Common.Helpers;
+using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.CommonLayer.Extensions.EnumExtensions;
+using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.ViewModel.Histogram;
 using ImageProcessing.App.PresentationLayer.Views.Histogram;

@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.App.Common.Enums;
+using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainModel.Factory.RgbFilters.Color.Implementation;
 using ImageProcessing.App.DomainModel.Factory.RgbFilters.Color.Interface;
 using ImageProcessing.App.DomainModel.Model.RgbFilters.Implementation.Color.Colors;

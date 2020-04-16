@@ -1,4 +1,4 @@
-using ImageProcessing.App.Common.Enums;
+using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainModel.Factory.Distributions.Implementation;
 using ImageProcessing.App.DomainModel.Factory.Distributions.Interface;
 using ImageProcessing.App.DomainModel.Model.Distributions.Implementation.OneParameter;

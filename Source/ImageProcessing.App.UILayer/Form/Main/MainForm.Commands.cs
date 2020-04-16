@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-using ImageProcessing.App.Common.Enums;
-using ImageProcessing.App.Common.Helpers;
+using ImageProcessing.App.CommonLayer.Attributes;
+using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.CommonLayer.Extensions.TypeExtensions;
+using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.UILayer.Code.Enums;
-using ImageProcessing.Microkernel.DI.Code.Attributes;
-using ImageProcessing.Microkernel.DI.Code.Extensions;
 
 namespace ImageProcessing.App.UILayer.Form.Main
 {

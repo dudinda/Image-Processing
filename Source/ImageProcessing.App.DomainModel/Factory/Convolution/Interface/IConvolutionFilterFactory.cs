@@ -1,4 +1,4 @@
-using ImageProcessing.App.Common.Enums;
+using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainModel.Convolution.Interface;
 using ImageProcessing.Microkernel.MVP.Model;
 

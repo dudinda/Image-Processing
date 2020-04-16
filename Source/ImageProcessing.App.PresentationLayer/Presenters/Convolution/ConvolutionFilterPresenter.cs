@@ -2,7 +2,7 @@ using System;
 using System.Drawing;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Common.Helpers;
+using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainModel.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;

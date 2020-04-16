@@ -1,7 +1,7 @@
 using System.Collections.Concurrent;
 using System.Drawing;
 
-using ImageProcessing.App.Common.Helpers;
+using ImageProcessing.App.CommonLayer.Helpers;
 
 namespace ImageProcessing.App.PresentationLayer.ViewModel.QualityMeasure
 {

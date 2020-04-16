@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 
-using ImageProcessing.App.Common.Helpers;
+using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
 
 using Microsoft.Extensions.Caching.Memory;

@@ -1,7 +1,7 @@
 using System.Drawing;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Common.Helpers;
+using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.ServiceLayer.Services.FileDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Interface;

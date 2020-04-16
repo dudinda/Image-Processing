@@ -1,5 +1,5 @@
 
-using ImageProcessing.App.Common.Enums;
+using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainModel.Model.Morphology.Interface.BinaryOperator;
 using ImageProcessing.App.DomainModel.Model.Morphology.Interface.UnaryOperator;
 using ImageProcessing.Microkernel.MVP.Model;

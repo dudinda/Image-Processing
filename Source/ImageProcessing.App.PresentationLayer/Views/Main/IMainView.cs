@@ -1,6 +1,6 @@
 using System.Drawing;
 
-using ImageProcessing.App.Common.Enums;
+using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.BitmapContainer;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.BitmapInfo;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.BitmapZoom;
@@ -15,9 +15,9 @@ namespace ImageProcessing.App.PresentationLayer.Views.Main
     /// Represents the base behavior
     /// of the main window.
     /// </summary>
-    public interface IMainView : IView,
-        IError, IBitmapContainer, IColorMenu,
-        IBitmapInfo, IBitmapZoom, ICursor
+    public interface IMainView : IView, IBitmapZoom,
+        IError, IColorMenu, IBitmapContainer,
+        IBitmapInfo, ICursor
     {    
         /// <summary>
         /// Specifies a path to the opened file.

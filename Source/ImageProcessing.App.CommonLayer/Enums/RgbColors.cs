@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
 
-namespace ImageProcessing.App.Common.Enums
+namespace ImageProcessing.App.CommonLayer.Enums
 {
     /// <summary>
     /// A bit field, representing each channel of the RGB color space.

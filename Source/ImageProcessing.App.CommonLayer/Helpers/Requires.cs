@@ -1,6 +1,6 @@
 using System;
 
-namespace ImageProcessing.App.Common.Helpers
+namespace ImageProcessing.App.CommonLayer.Helpers
 {
     public static class Requires
     {

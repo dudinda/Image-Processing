@@ -1,8 +1,8 @@
 using System;
 
-using ImageProcessing.App.Common.Enums;
+using ImageProcessing.App.CommonLayer.Enums;
 
-namespace ImageProcessing.App.Common.Helpers
+namespace ImageProcessing.App.CommonLayer.Helpers
 {
     public static class Recommendation
     {

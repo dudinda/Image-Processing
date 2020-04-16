@@ -4,9 +4,9 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Common.Enums;
-using ImageProcessing.App.Common.Extensions.BitmapExtensions;
-using ImageProcessing.App.Common.Helpers;
+using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.CommonLayer.Extensions.BitmapExtensions;
+using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainModel.Model.RgbFilters.Interface;
 
 namespace ImageProcessing.App.DomainModel.Model.RgbFilters.Implementation.Inversion

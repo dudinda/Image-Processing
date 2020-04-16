@@ -3,10 +3,10 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
-using ImageProcessing.App.Common.Enums;
-using ImageProcessing.App.Common.Extensions.EnumExtensions;
+using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.CommonLayer.Extensions.EnumExtensions;
 
-namespace ImageProcessing.App.Common.Extensions.BitmapExtensions
+namespace ImageProcessing.App.CommonLayer.Extensions.BitmapExtensions
 {
     /// <summary>
     /// Extension methods for a <see cref="Bitmap"> class.

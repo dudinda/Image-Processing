@@ -1,7 +1,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-using ImageProcessing.App.Common.Enums;
+using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.Utility.DataStructure.FixedStack.Implementation;
 using ImageProcessing.Utility.DataStructure.FixedStack.Interface;
 

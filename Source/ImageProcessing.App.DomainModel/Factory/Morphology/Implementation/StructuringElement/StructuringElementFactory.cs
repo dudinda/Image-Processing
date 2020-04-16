@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.App.Common.Enums;
+using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainModel.Factory.Morphology.Interface.StructuringElement;
 using ImageProcessing.App.DomainModel.Model.Morphology.Implementation.StructringElement.CrossShaped;
 using ImageProcessing.App.DomainModel.Model.Morphology.Implementation.StructringElement.Elliptical;

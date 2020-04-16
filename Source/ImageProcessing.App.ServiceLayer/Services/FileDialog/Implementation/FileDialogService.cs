@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using ImageProcessing.App.Common.Extensions.BitmapExtensions;
+using ImageProcessing.App.CommonLayer.Extensions.BitmapExtensions;
 using ImageProcessing.App.ServiceLayer.Services.FileDialog.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.FileDialog.Implementation

@@ -1,7 +1,7 @@
 using System;
 
-using ImageProcessing.App.Common.Enums;
-using ImageProcessing.App.Common.Extensions.StringExtensions;
+using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.CommonLayer.Extensions.StringExtensions;
 using ImageProcessing.App.DomainModel.Model.Distributions.Interface;
 using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.Real;
 using ImageProcessing.Utility.DecimalMath.Real;

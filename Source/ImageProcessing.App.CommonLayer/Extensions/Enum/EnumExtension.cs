@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
-namespace ImageProcessing.App.Common.Extensions.EnumExtensions
+namespace ImageProcessing.App.CommonLayer.Extensions.EnumExtensions
 {
     /// <summary>
     /// Extension methods for a <see cref="Enum"/> value.
@@ -37,33 +37,8 @@ namespace ImageProcessing.App.Common.Extensions.EnumExtensions
             var type = value.GetType();
             var memInfo = type.GetMember(value.ToString());
             var attributes = memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
+
             return (attributes.Length > 0) ? ((DescriptionAttribute)attributes[0]).Description : null;
-        }
-
-        /// <summary>
-        /// Partition the specified <typeparamref name="TEnum"/> over
-        /// the <paramref name="partition"/>. Returns the
-        /// specified <typeparamref name="TOutResult"/> from a <paramref name="callback"/>.
-        /// </summary>
-        public static TOutResult PartitionOver<TEnum, TOutResult>
-            (this TEnum src, (TEnum from, TEnum to) partition, Func<TOutResult> callback)
-            where TEnum : Enum
-        {
-            var (from, to) = (Convert.ToInt32(partition.from), Convert.ToInt32(partition.to));
-            var srcInt = Convert.ToInt32(src);
-
-            var isInPartition
-                = Enum.GetValues(typeof(TEnum))
-                       .Cast<int>()
-                       .Where(val => val >= from && val <= to)
-                       .Any(val => val.Equals(srcInt));
-
-            if (isInPartition)
-            {
-                return callback();
-            }
-
-            throw new NotImplementedException(nameof(src));
         }
 
         /// <summary>

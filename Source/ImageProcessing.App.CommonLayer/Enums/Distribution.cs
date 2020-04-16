@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace ImageProcessing.App.Common.Enums
+namespace ImageProcessing.App.CommonLayer.Enums
 {
     /// <summary>
     /// Specifies a distribution of a random variable.

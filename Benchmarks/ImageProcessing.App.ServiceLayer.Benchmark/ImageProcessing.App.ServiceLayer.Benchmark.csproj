@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Source\ImageProcessing.App.CommonLayer\ImageProcessing.App.CommonLayer.csproj" />
     <ProjectReference Include="..\..\Source\ImageProcessing.App.DomainModel\ImageProcessing.App.DomainModel.csproj" />
     <ProjectReference Include="..\..\Source\ImageProcessing.App.ServiceLayer\ImageProcessing.App.ServiceLayer.csproj" />
   </ItemGroup>

@@ -1,4 +1,4 @@
-using ImageProcessing.App.Common.Enums;
+using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.Error;
 using ImageProcessing.Microkernel.MVP.View;
 

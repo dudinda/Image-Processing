@@ -1,6 +1,6 @@
 using System.Drawing;
 
-using ImageProcessing.App.Common.Enums;
+using ImageProcessing.App.CommonLayer.Enums;
 
 namespace ImageProcessing.App.PresentationLayer.Views.ViewComponent.BitmapContainer
 {

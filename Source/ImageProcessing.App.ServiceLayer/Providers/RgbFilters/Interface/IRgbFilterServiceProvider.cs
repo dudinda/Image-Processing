@@ -1,5 +1,5 @@
 using System.Drawing;
-using ImageProcessing.App.Common.Enums;
+using ImageProcessing.App.CommonLayer.Enums;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Interface.RgbFilters
 {

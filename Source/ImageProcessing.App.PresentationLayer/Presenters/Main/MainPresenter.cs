@@ -5,9 +5,9 @@ using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Common.Enums;
-using ImageProcessing.App.Common.Extensions.BitmapExtensions;
-using ImageProcessing.App.Common.Helpers;
+using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.CommonLayer.Extensions.BitmapExtensions;
+using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainModel.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainModel.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.DomainModel.DomainEvent.DistributionArgs;
