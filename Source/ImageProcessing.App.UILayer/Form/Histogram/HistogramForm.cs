@@ -40,25 +40,26 @@ namespace ImageProcessing.App.UILayer.Form.Histogram
 
         /// <inheritdoc/>
         public void Init(RandomVariableFunction action)
-            => _command[
-                action.ToString()
-            ].Method.Invoke(this, null);
-        
-        [Command(nameof(RandomVariableFunction.CDF))]
-        private void SetupCDF()
         {
             var pmf = RandomVariableFunction.PMF.GetDescription();
             var cdf = RandomVariableFunction.CDF.GetDescription();
+
+            _command[
+                action.ToString()
+            ].Method.Invoke(this, new object[] { pmf, cdf });
+        } 
+        
+        [Command(nameof(RandomVariableFunction.CDF))]
+        private void SetupCDF(string pmf, string cdf)
+        {          
             Text = cdf;
             Freq.Series[cdf].IsVisibleInLegend = true;
             Freq.Series[pmf].IsVisibleInLegend = false;
         }
 
         [Command(nameof(RandomVariableFunction.PMF))]
-        private void SetupPMF()
+        private void SetupPMF(string pmf, string cdf)
         {
-            var pmf = RandomVariableFunction.PMF.GetDescription();
-            var cdf = RandomVariableFunction.CDF.GetDescription();
             Text = pmf;
             Freq.Series[pmf].IsVisibleInLegend = true;
             Freq.Series[cdf].IsVisibleInLegend = false;
