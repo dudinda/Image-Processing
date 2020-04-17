@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace ImageProcessing.Utility.Interop.Code.Enum
+namespace ImageProcessing.Utility.Interop.Code.Enums
 {
     /// <summary>
     /// The following table describes the system classes

@@ -6,7 +6,7 @@ using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.UILayer.Code.Enums;
 using ImageProcessing.App.UILayer.Form.Base;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
-using ImageProcessing.Utility.Interop.Code.Wrapper;
+using ImageProcessing.Utility.Interop.Wrapper;
 
 namespace ImageProcessing.App.UILayer.Form.Main
 {

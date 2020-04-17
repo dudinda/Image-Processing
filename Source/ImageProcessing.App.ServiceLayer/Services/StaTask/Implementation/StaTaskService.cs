@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-using ImageProcessing.Utility.Interop.Code.Wrapper;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Interface;
+using ImageProcessing.Utility.Interop.Wrapper;
 
 namespace ImageProcessing.App.ServiceLayer.Services.StaTask.Implementation
 {
