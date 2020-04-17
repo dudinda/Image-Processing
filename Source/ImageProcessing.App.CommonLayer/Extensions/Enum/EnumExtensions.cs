@@ -8,7 +8,7 @@ namespace ImageProcessing.App.CommonLayer.Extensions.EnumExtensions
     /// <summary>
     /// Extension methods for a <see cref="Enum"/> value.
     /// </summary>
-    public static class EnumExtension
+    public static class EnumExtensions
     {
         /// <summary>
         /// Get a <see cref="Enum"/> value by the name.

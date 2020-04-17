@@ -5,7 +5,7 @@ namespace ImageProcessing.App.CommonLayer.Extensions.StringExtensions
     /// <summary>
     /// Extension methods for a <see cref="string"> class.
     /// </summary>
-    public static class StringExtension
+    public static class StringExtensions
     {
         public static bool TryParse<TValue>(this string input, out TValue value)
             where TValue : struct

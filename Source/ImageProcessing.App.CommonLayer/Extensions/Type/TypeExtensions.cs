@@ -10,7 +10,7 @@ namespace ImageProcessing.App.CommonLayer.Extensions.TypeExtensions
     /// <summary>
     /// Extension methods for a <see cref="Type"> class.
     /// </summary>
-    public static class TypeExtension
+    public static class TypeExtensions
     {
         /// <summary>
         /// Get all the methods, decorated by the <typeparamref name="TAttribute"/>
