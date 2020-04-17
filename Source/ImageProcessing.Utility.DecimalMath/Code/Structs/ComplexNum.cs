@@ -4,11 +4,16 @@ namespace ImageProcessing.Utility.DecimalMath.Code.Structs
 {
     internal struct ComplexNum
     {
-        internal (decimal Re, decimal Im) Z { get; set; }
+        internal (decimal Re, decimal Im) Z { get; }
 
         internal ComplexNum((decimal re, decimal im) z)
         {
             Z = z;
+        }
+
+        internal ComplexNum(decimal c)
+        {
+            Z = (c, 0);
         }
 
         public static ComplexNum operator -(

@@ -142,8 +142,18 @@ namespace ImageProcessing.Utility.DecimalMath.Special
             return p * x;
         }
 
+        /// <summary>
+        /// Evaluate Γ(1 + z).
+        /// </summary>
+        /// <param name="z">x + iy</param>
+        /// <returns>Γ(1 + z)</returns>
         public static (decimal x, decimal y) Gamma((decimal x, decimal y) z)
         {
+            if(z.x < 0)
+            {
+                throw new ArgumentException("NaN");
+            }
+
             if (z.x < 0.5M)
             {
                 return (PI / new ComplexNum(Sin(Mul(z, PI))) * new ComplexNum(Gamma(Sub(1, z)))).Z;
@@ -153,7 +163,7 @@ namespace ImageProcessing.Utility.DecimalMath.Special
             {
                 var decZ = new ComplexNum(Sub(z, 1));
 
-                var x = new ComplexNum((p[0], 0M));
+                var x = new ComplexNum(p[0]);
 
                 for (var i = 1; i < g + 2; ++i)
                 {
@@ -168,5 +178,23 @@ namespace ImageProcessing.Utility.DecimalMath.Special
                        x).Z;
             }
         }
+
+        /// <summary>
+        /// Evaluate B(z1, z2).
+        /// </summary>
+        /// <param name="z1">x + iy</param>
+        /// <param name="z2">x' + iy'</param>
+        /// <returns>B(z1, z2)</returns>
+        public static (decimal x, decimal y) Beta(
+            (decimal x, decimal y) z1,
+            (decimal x, decimal y) z2)
+        {
+            var a = new ComplexNum(z1) - 1;
+            var b = new ComplexNum(z2) - 1;
+
+            var sum = a + b;
+
+            return Div(Mul(Gamma(a.Z), Gamma(b.Z)), Gamma((a + b).Z));
+        } 
     }
 }
