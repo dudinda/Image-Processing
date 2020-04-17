@@ -13,7 +13,7 @@ namespace ImageProcessing.Utility.DecimalMath.Code.Structs
 
         public static ComplexNum operator -(
            ComplexNum z)
-           => new ComplexNum((z.Z.Re, z.Z.Im));
+           => new ComplexNum((-z.Z.Re, -z.Z.Im));
 
         public static ComplexNum operator +(
             ComplexNum z1, ComplexNum z2)
