@@ -39,7 +39,7 @@ namespace ImageProcessing.Microkernel
         /// <summary>
         /// Set a state of an application.
         /// </summary>
-        public static void SetState(AppState state)
+        internal static void SetState(AppState state)
             => State = StateFactory.Get(state);
     }
 }

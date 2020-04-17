@@ -19,7 +19,6 @@ namespace ImageProcessing.App.UILayer
             }
             catch(Exception ex)
             {
-                AppLifecycle.SetState(AppState.EndWork);
                 AppLifecycle.Exit();
             }
         }

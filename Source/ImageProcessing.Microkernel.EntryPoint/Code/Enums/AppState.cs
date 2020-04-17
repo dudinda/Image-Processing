@@ -3,7 +3,7 @@ namespace ImageProcessing.Microkernel.Code.Enums
     /// <summary>
     /// Represents a state of an application.
     /// </summary>
-    public enum AppState
+    internal enum AppState
     {
         /// <summary>
         /// An unknown application state.
