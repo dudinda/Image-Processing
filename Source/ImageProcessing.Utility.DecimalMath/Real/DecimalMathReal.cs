@@ -33,20 +33,16 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// <param name="x">The left-hand value</param>
         /// <param name="y">The right-hand value</param>
         public static decimal Max(decimal x, decimal y)
-        {
-            return x > y ? x : y;
-        }
-
+            => x > y ? x : y;
+        
         /// <summary>
         /// Evaluate min{x, y}.
         /// </summary>
         /// <param name="x">The left-hand value</param>
         /// <param name="y">The right-hand value</param>
         public static decimal Min(decimal x, decimal y)
-        {
-            return x < y ? x : y;
-        }
-
+            => x < y ? x : y;
+        
         /// <summary>
         /// Evaluate hypot(x, y).
         /// </summary>
@@ -78,18 +74,14 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static decimal Abs(decimal x)
-        {
-            return x >= 0 ? x : -x;
-        }
-
+            => x >= 0 ? x : -x;
+        
         /// <summary>
         /// Fused multiply - add decimal
         /// </summary>
         public static decimal Fmad(decimal x, decimal y, decimal z)
-        {
-            return (x * y) + z;
-        }
-
+            => (x * y) + z;
+        
         /// <summary>
         /// Evaluate ceil(x).
         /// </summary>
@@ -130,10 +122,8 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static decimal Frac(decimal x)
-        {
-            return x % 1;
-        }
-
+            => x % 1;
+        
         /// <summary>
         /// Evaluate x mod b as x - b floor(x/b).
         /// </summary>
@@ -141,10 +131,8 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// <param name="mod"></param>
         /// <returns></returns>
         public static decimal Mod(decimal x, decimal mod)
-        {
-            return x - mod * Floor(x / mod);
-        }
-
+            => x - mod * Floor(x / mod);
+        
         #region Log and exp functions
 
         /// <summary>
@@ -177,7 +165,10 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// <param name="x">An argument of the function</param>
         /// <param name="power">A power</param>
         /// <param name="precision">A error</param>
-        public static decimal Pow(decimal value, decimal power, decimal precision = Epsilon)
+        public static decimal Pow(
+            decimal value,
+            decimal power,
+            decimal precision = Epsilon)
         {
             if (value < 0)
             {
@@ -211,7 +202,10 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
-        public static decimal Log(decimal x, decimal lbase = E, decimal precision = Epsilon)
+        public static decimal Log(
+            decimal x,
+            decimal lbase = E,
+            decimal precision = Epsilon)
         {
             if(x < 0)
             {
@@ -354,10 +348,8 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static decimal Arccot(decimal x)
-        {
-            return Sign(x) * PiOver2 - Arctan(x);
-        }
-
+            => Sign(x) * PiOver2 - Arctan(x);
+        
         /// <summary>
         /// Evaluate arcsin(x) with a specified precision.
         /// </summary>
@@ -377,10 +369,8 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static decimal Arccos(decimal x)
-        {
-            return PiOver2 - Arcsin(x);
-        }
-
+            => PiOver2 - Arcsin(x);
+        
         /// <summary>
         /// Approximate atan(x) in the range [0, 0.66].
         /// </summary>
@@ -479,10 +469,8 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
         public static decimal Tanh(decimal x, decimal precision = Epsilon)
-        {
-            return Sinh(x, precision) / Cosh(x, precision);
-        }
-
+            => Sinh(x, precision) / Cosh(x, precision);
+        
         /// <summary>
         /// Evaluate coth(x) with a specified precision.
         /// </summary>
@@ -526,10 +514,8 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static decimal Arsinh(decimal x, decimal precision = Epsilon)
-        {
-            return Log(x + Sqrt(x * x + 1, precision), precision: precision);
-        }
-
+            => Log(x + Sqrt(x * x + 1, precision), precision: precision);
+        
         /// <summary>
         /// Evaluate artanh(x) with a specified precision.
         /// </summary>
@@ -563,10 +549,8 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static (decimal sin, decimal cos) SinCos(decimal x)
-        {
-            return (Sin(x), Cos(x));
-        }
-
+            => (Sin(x), Cos(x));
+        
         #endregion
     }
 }
