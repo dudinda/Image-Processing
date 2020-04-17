@@ -1,4 +1,5 @@
 using System;
+using System.Linq.Expressions;
 
 using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Item.Interface;
@@ -10,19 +11,18 @@ namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Item.Implementation
         public Type InputType { get; }
         public Type OutputType { get; }
 
-        private readonly Func<object, object> _step;
+        private readonly Expression<Func<object, object>> _step;
 
-        public BlockItem(Func<object, object> step, Type typeIn, Type typeOut)
+        public BlockItem(Expression<Func<object, object>> step)
         {
             _step = Requires.IsNotNull(
                 step, nameof(step));
-            InputType = Requires.IsNotNull(
-                typeIn, nameof(typeIn));
-            OutputType = Requires.IsNotNull(
-                typeOut, nameof(typeOut) );
+
+            InputType  = _step.Parameters[0].Type;
+            OutputType = _step.ReturnType;
         }
 
         public object Execute(object arg)
-            => _step(arg);
+            => _step.Compile().Invoke(arg);
     }
 }

@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Concurrent;
+using System.Linq.Expressions;
 using System.Threading;
 
+using ImageProcessing.App.CommonLayer.Extensions.Expressions;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Item.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Item.Interface;
 
@@ -47,14 +49,13 @@ namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementatio
             return result;          
         }
 
-        public IPipelineBlock Add<TIn, TOut>(Func<TIn, TOut> step)
+        public IPipelineBlock Add<TIn, TOut>(Expression<Func<TIn, TOut>> step)
         {
             _block.Enqueue(
-                    new BlockItem(
-                            result => step.Invoke(
-                                (TIn)(object)result), typeof(TIn), typeof(TOut)
-                             )
-                    );
+                new BlockItem(
+                    step.ConvertFunction()
+                )
+            );
 
             return this;
         }
