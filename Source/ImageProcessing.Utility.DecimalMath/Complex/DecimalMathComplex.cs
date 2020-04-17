@@ -14,10 +14,8 @@ namespace ImageProcessing.Utility.DecimalMath.Complex
         /// <param name="z">x + iy</param>
         /// <returns>Re(z)</returns>
         public static decimal Re((decimal x, decimal y) z)
-        {
-            return z.x;
-        } 
-
+            => z.x;
+      
         /// <summary>
         /// Evaluate Im(z).
         /// </summary>
@@ -263,7 +261,7 @@ namespace ImageProcessing.Utility.DecimalMath.Complex
         /// <param name="z">x + iy</param>
         /// <param name="power"></param>
         /// <returns>z ** k</returns>
-        public static (decimal x, decimal y) Pow((decimal x, decimal y) z, int k)
+        public static (decimal x, decimal y) Pow((decimal x, decimal y) z, decimal k)
             => Pow(z, (k, 0));
 
         /// <summary>
@@ -287,8 +285,8 @@ namespace ImageProcessing.Utility.DecimalMath.Complex
 
             //evaluate as exp(log(r)(x' + iy') + i*phi(x' + iy'))
 
-            var re = new ComplexNum(Mul(DecimalMathReal.Log(r), z2));
-            var im = new ComplexNum(Mul(phi, z2));
+            var re = new ComplexOperator(Mul(DecimalMathReal.Log(r), z2));
+            var im = new ComplexOperator(Mul(phi, z2));
 
             return Exp((re + im).Z);
         }

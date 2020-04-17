@@ -154,28 +154,27 @@ namespace ImageProcessing.Utility.DecimalMath.Special
                 throw new ArgumentException("NaN");
             }
 
+            var w = (ComplexOperator)z;
+
             if (z.x < 0.5M)
             {
-                return (PI / new ComplexNum(Sin(Mul(z, PI))) * new ComplexNum(Gamma(Sub(1, z)))).Z;
+                return PI / (ComplexOperator)Sin(w * PI) *  Gamma(w - 1);
 
             }
             else
             {
-                var decZ = new ComplexNum(Sub(z, 1));
+                w -= 1;
 
-                var x = new ComplexNum(p[0]);
+                var x = (ComplexOperator)p[0];
 
                 for (var i = 1; i < g + 2; ++i)
                 {
-                    x = x + p[i] / new ComplexNum(Add(z, i));
+                    x += p[i] / (w + i);
                 }
 
-                var t = new ComplexNum(Add(z, g)) + 0.5M;
+                var t = w + g + 0.5M;
 
-               return (Sqrt(2M * PI)                             *
-                       new ComplexNum(Pow(t.Z, (decZ + 0.5M).Z)) *
-                       new ComplexNum(Exp((-t).Z))               *
-                       x).Z;
+               return Sqrt(2M * PI) * t^(w + 0.5M) * Exp((-t).Z) * x;
             }
         }
 
@@ -189,12 +188,10 @@ namespace ImageProcessing.Utility.DecimalMath.Special
             (decimal x, decimal y) z1,
             (decimal x, decimal y) z2)
         {
-            var a = new ComplexNum(z1) - 1;
-            var b = new ComplexNum(z2) - 1;
+            var a = (ComplexOperator)z1;
+            var b = (ComplexOperator)z2;
 
-            var sum = a + b;
-
-            return Div(Mul(Gamma(a.Z), Gamma(b.Z)), Gamma((a + b).Z));
+            return (ComplexOperator)Gamma(a - 1) * Gamma(b - 1) / Gamma(a + b - 1);
         } 
     }
 }
