@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 
+using ImageProcessing.Utility.DecimalMath.Code.Structs;
 using ImageProcessing.Utility.DecimalMath.Real;
 
 namespace ImageProcessing.Utility.DecimalMath.Complex
@@ -23,40 +24,41 @@ namespace ImageProcessing.Utility.DecimalMath.Complex
         /// <param name="z">x + iy</param>
         /// <returns>Im(z)</returns>
         public static decimal Im((decimal x, decimal y) z)
-        {
-            return z.y;
-        }
-
+            => z.y;
+        
         /// <summary>
         /// Evaluate conjugate of z.
         /// </summary>
         /// <param name="z">x + iy</param>
         /// <returns>conj(z)</returns>
         public static (decimal x, decimal y) Conj((decimal x, decimal y) z)
-        {
-            return (z.x, -z.y);
-        }
-
+            => (z.x, -z.y);
+        
         /// <summary>
         /// Evaluate |z|.
         /// </summary>
         /// <param name="z">x + iy</param>
         /// <returns>|z|</returns>
         public static decimal Abs((decimal x, decimal y) z)
-        {
-            return DecimalMathReal.Hypot(z.x, z.y);
-        }
-
+            => DecimalMathReal.Hypot(z.x, z.y);
+        
         /// <summary>
         /// Evaluate z + c.
         /// </summary>
-        /// <param name="z1">x  + iy</param>
-        /// <param name="c">const'</param>
-        /// <returns>z + z'</returns>
+        /// <param name="z">x  + iy</param>
+        /// <param name="c">const</param>
+        /// <returns>z + c</returns>
         public static (decimal x, decimal y) Add((decimal x, decimal y) z, decimal c)
-        {
-            return (z.x + c, z.y);
-        }
+            => (z.x + c, z.y);
+
+        /// <summary>
+        /// Evaluate c + z.
+        /// </summary>
+        /// <param name="c">const</param>
+        /// <param name="z">x + iy</param>
+        /// <returns>c + z</returns>
+        public static (decimal x, decimal y) Add(decimal c, (decimal x, decimal y) z)
+            => (z.x + c, z.y);
 
         /// <summary>
         /// Evaluate z + z'.
@@ -65,10 +67,8 @@ namespace ImageProcessing.Utility.DecimalMath.Complex
         /// <param name="z2">x' + iy'</param>
         /// <returns>z + z'</returns>
         public static (decimal x, decimal y) Add((decimal x, decimal y) z1, (decimal x, decimal y) z2)
-        {
-            return (z1.x + z2.x, z2.y + z2.y);
-        }
-
+            => (z1.x + z2.x, z2.y + z2.y);
+        
         /// <summary>
         /// Evaluate z - z'.
         /// </summary>
@@ -76,32 +76,26 @@ namespace ImageProcessing.Utility.DecimalMath.Complex
         /// <param name="z2">x' + iy'</param>
         /// <returns>z - z'</returns>
         public static (decimal x, decimal y) Sub((decimal x, decimal y) z1, (decimal x, decimal y) z2)
-        {
-            return (z1.x - z2.y, z1.x - z2.y);
-        }
-
+            => (z1.x - z2.y, z1.x - z2.y);
+        
         /// <summary>
         /// Evaluate z - c.
         /// </summary>
         /// <param name="z">x  + iy</param>
         /// <param name="c">const</param>
-        /// <returns>z - z'</returns>
+        /// <returns>z - c</returns>
         public static (decimal x, decimal y) Sub((decimal x, decimal y) z, decimal c)
-        {
-            return (z.x - c, z.y);
-        }
-
+            => (z.x - c, z.y);
+        
         /// <summary>
         /// Evaluate c - z.
         /// </summary>
         /// <param name="c">const</param>
         /// <param name="z">x + iy</param>
-        /// <returns>z - z'</returns>
+        /// <returns>c - z</returns>
         public static (decimal x, decimal y) Sub(decimal c, (decimal x, decimal y) z)
-        {
-            return (c - z.x, -z.y);
-        }
-
+            => (c - z.x, -z.y);
+        
         /// <summary>
         /// Evaluate zz'.
         /// </summary>
@@ -109,20 +103,25 @@ namespace ImageProcessing.Utility.DecimalMath.Complex
         /// <param name="z2">x' + iy'</param>
         /// <returns>zz'</returns>
         public static (decimal x, decimal y) Mul((decimal x, decimal y) z1, (decimal x, decimal y) z2)
-        {
-            return ((z1.x * z2.x - z1.y * z2.y, z1.x * z2.y + z1.y * z2.x));
-        }
-
+            => ((z1.x * z2.x - z1.y * z2.y, z1.x * z2.y + z1.y * z2.x));
+        
         /// <summary>
         /// Evaluate Cz.
         /// </summary>
-        /// <param name="z1">x  + iy</param>
+        /// <param name="z">x  + iy</param>
         /// <param name="c">const</param>
-        /// <returns>zz'</returns>
+        /// <returns>Cz</returns>
         public static (decimal x, decimal y) Mul((decimal x, decimal y) z, decimal c)
-        {
-            return (z.x * c, z.y * c);
-        }
+            => (z.x * c, z.y * c);
+
+        /// <summary>
+        /// Evaluate zC.
+        /// </summary>
+        /// <param name="c">const</param>
+        /// <param name="z">x + iy</param>
+        /// <returns>zC</returns>
+        public static (decimal x, decimal y) Mul(decimal c, (decimal x, decimal y) z)
+            => (z.x * c, z.y * c);
 
         /// <summary>
         /// Evaluate z/z'.
@@ -144,7 +143,7 @@ namespace ImageProcessing.Utility.DecimalMath.Complex
         /// </summary>
         /// <param name="c">const</param>
         /// <param name="z2">x' + iy'</param>
-        /// <returns>z/z'</returns>
+        /// <returns>c/z</returns>
         public static (decimal x, decimal y) Div(decimal c, (decimal x, decimal y) z2)
         {
             var numerator = Mul(Conj(z2), c);
@@ -159,22 +158,18 @@ namespace ImageProcessing.Utility.DecimalMath.Complex
         /// </summary>
         /// <param name="z">x + iy</param>
         /// <param name="z2">const</param>
-        /// <returns>z/z'</returns>
+        /// <returns>z/c</returns>
         public static (decimal x, decimal y) Div((decimal x, decimal y) z, decimal c)
-        {
-            return (z.x / c, z.y / c);
-        }
-
+            => (z.x / c, z.y / c);
+        
         /// <summary>
         /// Evaluate cos(z) as cos(x)cosh(y) - isin(x)sinh(y).
         /// </summary>
         /// <param name="z">x + iy</param>
         /// <returns>cos(z)</returns>
         public static (decimal x, decimal y) Cos((decimal x, decimal y) z)
-        {
-            return (DecimalMathReal.Cos(z.x) * DecimalMathReal.Cosh(z.y), -DecimalMathReal.Sin(z.x) * DecimalMathReal.Sinh(z.y));
-        }
-
+            => (DecimalMathReal.Cos(z.x) * DecimalMathReal.Cosh(z.y), -DecimalMathReal.Sin(z.x) * DecimalMathReal.Sinh(z.y));
+        
         /// <summary>
         /// Evaluate tan(z) as sin(2x) + isinh(2y) over cos(2x) + cosh(2y).
         /// </summary>
@@ -193,10 +188,8 @@ namespace ImageProcessing.Utility.DecimalMath.Complex
         /// <param name="z">x + iy</param>
         /// <returns>sin(z)</returns>
         public static (decimal x, decimal y) Sin((decimal x, decimal y) z)
-        {
-            return (DecimalMathReal.Sin(z.x) * DecimalMathReal.Cosh(z.y), DecimalMathReal.Cos(z.x) * DecimalMathReal.Sinh(z.y));
-        }
-
+            => (DecimalMathReal.Sin(z.x) * DecimalMathReal.Cosh(z.y), DecimalMathReal.Cos(z.x) * DecimalMathReal.Sinh(z.y));
+        
         /// <summary>
         /// Evaluate Arg(z).
         /// </summary>
@@ -223,14 +216,12 @@ namespace ImageProcessing.Utility.DecimalMath.Complex
         /// <param name="z">x + iy</param>
         /// <returns>(r, phi)</returns>
         public static (decimal r, decimal phi) Polar((decimal x, decimal y) z)
-        {
-            return (Abs(z), Arg(z));
-        }
-
+            => (Abs(z), Arg(z));
+        
         /// <summary>
         /// Transfrom polar form to cartesian representation.
         /// </summary>
-        /// <param name="z">r, phi</param>
+        /// <param name="z">r*exp(phi*i)</param>
         /// <returns>x + iy</returns>
         public static (decimal x, decimal y) FromPolar((decimal r, decimal phi) z)
         {
@@ -260,38 +251,64 @@ namespace ImageProcessing.Utility.DecimalMath.Complex
         /// <param name="lbase"></param>
         /// <param name="precision"></param>
         /// <returns></returns>
-        public static (decimal x, decimal y) Log((decimal x, decimal y) z, decimal lbase = DecimalMathReal.E, decimal precision = DecimalMathReal.Epsilon)
-        {
-            return (DecimalMathReal.Log(Abs(z), lbase, precision), Arg(z));
-        }
+        public static (decimal x, decimal y) Log(
+            (decimal x, decimal y) z,
+             decimal lbase = DecimalMathReal.E,
+             decimal precision = DecimalMathReal.Epsilon)
+            => (DecimalMathReal.Log(Abs(z), lbase, precision), Arg(z));
 
         /// <summary>
         /// Evaluate z ** k, where k is in N.
         /// </summary>
         /// <param name="z">x + iy</param>
         /// <param name="power"></param>
-        /// <returns></returns>
+        /// <returns>z ** k</returns>
         public static (decimal x, decimal y) Pow((decimal x, decimal y) z, int k)
-        {
-            var (r, phi) = Polar(z);
-
-            var (sin, cos) = DecimalMathReal.SinCos(k * phi);
-
-            var newR = DecimalMathReal.Pow(r, k);
-
-            return (newR * cos, newR * sin);
-        }
+            => Pow(z, (k, 0));
 
         /// <summary>
-        /// Evalueate principal square root of z.
+        /// Evaluate k ** z, where k is in N.
+        /// </summary>
+        /// <param name="k">const</param>
+        /// <param name="z">x + iy</param>
+        /// <returns>z ** k</returns>
+        public static (decimal x, decimal y) Pow(decimal k, (decimal x, decimal y) z)
+            => Pow((k, 0), z);
+
+        /// <summary>
+        /// Evaluate z ** z'.
+        /// </summary>
+        /// <param name="z1">x + iy</param>
+        /// <param name="z2">x' + iy'</param>
+        /// <returns>z ** k</returns>
+        public static (decimal x, decimal y) Pow((decimal x, decimal y) z1, (decimal x, decimal y) z2)
+        {
+            var (r, phi) = Polar(z1);
+
+            //evaluate as exp(log(r)(x' + iy') + i*phi(x' + iy'))
+
+            var re = new ComplexNum(Mul(DecimalMathReal.Log(r), z2));
+            var im = new ComplexNum(Mul(phi, z2));
+
+            return Exp((re + im).Z);
+        }
+
+
+        /// <summary>
+        /// Evaluate principal square root of z.
         /// </summary>
         /// <param name="z">x + iy</param>
-        /// <returns></returns>
+        /// <returns>sqrt(z)</returns>
         public static (decimal x, decimal y) PrincipalSqrt((decimal x, decimal y) z)
         {
             if(Re(z) < 0)
             {
                 z.x = -z.x;
+            }
+
+            if(Im(z) == 0)
+            {
+                return (DecimalMathReal.Sqrt(z.x), 0M);
             }
 
             var (r, phi) = Polar(z);
@@ -325,7 +342,5 @@ namespace ImageProcessing.Utility.DecimalMath.Complex
 
             return list.ToArray();
         }
-
-
     }
 }

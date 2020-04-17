@@ -11,21 +11,45 @@ namespace ImageProcessing.Utility.DecimalMath.Code.Structs
             Z = z;
         }
 
+        public static ComplexNum operator -(
+           ComplexNum z)
+           => new ComplexNum((z.Z.Re, z.Z.Im));
+
         public static ComplexNum operator +(
             ComplexNum z1, ComplexNum z2)
             => new ComplexNum(DecimalMathComplex.Add(z1.Z, z2.Z));
 
         public static ComplexNum operator +(
-            ComplexNum z1, decimal c)
-            => new ComplexNum(DecimalMathComplex.Add(z1.Z, c));
+            ComplexNum z, decimal c)
+            => new ComplexNum(DecimalMathComplex.Add(z.Z, c));
+
+        public static ComplexNum operator +(
+          decimal c, ComplexNum z)
+          => new ComplexNum(DecimalMathComplex.Add(c, z.Z));
+
+        public static ComplexNum operator -(
+            ComplexNum z1, ComplexNum z2)
+            => new ComplexNum(DecimalMathComplex.Sub(z1.Z, z2.Z));
+
+        public static ComplexNum operator -(
+            ComplexNum z, decimal c)
+            => new ComplexNum(DecimalMathComplex.Sub(z.Z, c));
+
+        public static ComplexNum operator -(
+          decimal c, ComplexNum z)
+          => new ComplexNum(DecimalMathComplex.Sub(c, z.Z));
 
         public static ComplexNum operator *(
             ComplexNum z1, ComplexNum z2)
             => new ComplexNum(DecimalMathComplex.Mul(z1.Z, z2.Z));
 
         public static ComplexNum operator *(
-            ComplexNum z1, decimal c)
-            => new ComplexNum(DecimalMathComplex.Mul(z1.Z, c));
+            ComplexNum z, decimal c)
+            => new ComplexNum(DecimalMathComplex.Mul(z.Z, c));
+
+        public static ComplexNum operator *(
+            decimal c, ComplexNum z)
+            => new ComplexNum(DecimalMathComplex.Mul(c, z.Z));
 
         public static ComplexNum operator /(
             ComplexNum z1, ComplexNum z2)

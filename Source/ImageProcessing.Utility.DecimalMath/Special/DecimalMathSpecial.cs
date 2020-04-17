@@ -151,7 +151,7 @@ namespace ImageProcessing.Utility.DecimalMath.Special
             }
             else
             {
-                z = Sub(z, 1);
+                var decZ = new ComplexNum(Sub(z, 1));
 
                 var x = new ComplexNum((p[0], 0M));
 
@@ -162,8 +162,10 @@ namespace ImageProcessing.Utility.DecimalMath.Special
 
                 var t = new ComplexNum(Add(z, g)) + 0.5M;
 
-                throw new NotImplementedException();
-               // return PrincipalSqrt(2 * Math.PI) * (Complex.Pow(t, z + 0.5)) * Complex.Exp(-t) * x;
+               return (Sqrt(2M * PI)                             *
+                       new ComplexNum(Pow(t.Z, (decZ + 0.5M).Z)) *
+                       new ComplexNum(Exp((-t).Z))               *
+                       x).Z;
             }
         }
     }
