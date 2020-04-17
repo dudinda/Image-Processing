@@ -81,6 +81,28 @@ namespace ImageProcessing.Utility.DecimalMath.Complex
         }
 
         /// <summary>
+        /// Evaluate z - c.
+        /// </summary>
+        /// <param name="z">x  + iy</param>
+        /// <param name="c">const</param>
+        /// <returns>z - z'</returns>
+        public static (decimal x, decimal y) Sub((decimal x, decimal y) z, decimal c)
+        {
+            return (z.x - c, z.y);
+        }
+
+        /// <summary>
+        /// Evaluate c - z.
+        /// </summary>
+        /// <param name="c">const</param>
+        /// <param name="z">x + iy</param>
+        /// <returns>z - z'</returns>
+        public static (decimal x, decimal y) Sub(decimal c, (decimal x, decimal y) z)
+        {
+            return (c - z.x, -z.y);
+        }
+
+        /// <summary>
         /// Evaluate zz'.
         /// </summary>
         /// <param name="z1">x  + iy</param>
@@ -116,7 +138,33 @@ namespace ImageProcessing.Utility.DecimalMath.Complex
 
             return (numerator.x / denominator, numerator.y / denominator);
         }
-        
+
+        /// <summary>
+        /// Evaluate c/z.
+        /// </summary>
+        /// <param name="c">const</param>
+        /// <param name="z2">x' + iy'</param>
+        /// <returns>z/z'</returns>
+        public static (decimal x, decimal y) Div(decimal c, (decimal x, decimal y) z2)
+        {
+            var numerator = Mul(Conj(z2), c);
+
+            var denominator = z2.x * z2.x + z2.y * z2.y;
+
+            return (numerator.x / denominator, numerator.y / denominator);
+        }
+
+        /// <summary>
+        /// Evaluate z/c.
+        /// </summary>
+        /// <param name="z">x + iy</param>
+        /// <param name="z2">const</param>
+        /// <returns>z/z'</returns>
+        public static (decimal x, decimal y) Div((decimal x, decimal y) z, decimal c)
+        {
+            return (z.x / c, z.y / c);
+        }
+
         /// <summary>
         /// Evaluate cos(z) as cos(x)cosh(y) - isin(x)sinh(y).
         /// </summary>

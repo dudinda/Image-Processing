@@ -1,6 +1,7 @@
 using System;
 
 using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.Real;
+using ImageProcessing.Utility.DecimalMath.Code.Structs;
 
 using static ImageProcessing.Utility.DecimalMath.Complex.DecimalMathComplex;
 using static ImageProcessing.Utility.DecimalMath.Real.DecimalMathReal;
@@ -8,7 +9,16 @@ using static ImageProcessing.Utility.DecimalMath.Real.DecimalMathReal;
 namespace ImageProcessing.Utility.DecimalMath.Special
 {
     public static class DecimalMathSpecial
-    {   
+    {
+        private static int g = 7;
+
+        private static decimal[] p =
+        {
+             0.99999999999980993M, 676.5203681218851M,     -1259.1392167224028M,
+             771.32342877765313M,  -176.61502916214059M,   12.507343278686905M,
+            -0.13857109526572012M, 9.9843695780195716e-6M, 1.5056327351493116e-7M
+        };
+
         /// <summary>
         /// Evaluate Li(x).
         /// </summary>
@@ -132,35 +142,29 @@ namespace ImageProcessing.Utility.DecimalMath.Special
             return p * x;
         }
 
-        /*
-        private static int g = 7;
-        private static decimal[] p =
-            {0.99999999999980993M, 676.5203681218851M,    -1259.1392167224028M,
-             771.32342877765313M, -176.61502916214059M,    12.507343278686905M,
-            -0.13857109526572012M, 9.9843695780195716e-6M, 1.5056327351493116e-7M};
-
-        public (decimal x, decimal y) Gamma((decimal x, decimal y) z)
+        public static (decimal x, decimal y) Gamma((decimal x, decimal y) z)
         {
             if (z.x < 0.5M)
             {
-                return Div((PI, 0),  Mul(Sin(Mul(z, PI)), Gamma(Sub((1, 0), z))));
+                return (PI / new ComplexNum(Sin(Mul(z, PI))) * new ComplexNum(Gamma(Sub(1, z)))).Z;
+
             }
             else
             {
-                z = (z.x - 1, z.y);
+                z = Sub(z, 1);
 
-                var (re, im) = (p[0], 0M);
+                var x = new ComplexNum((p[0], 0M));
 
                 for (var i = 1; i < g + 2; ++i)
                 {
-                    (re, im) = Add((re, im), Div((p[i], 0), (Add(z, (decimal)i))));
+                    x = x + p[i] / new ComplexNum(Add(z, i));
                 }
 
-                var (tRe, tIm) = Add(z, g + 0.5M);
+                var t = new ComplexNum(Add(z, g)) + 0.5M;
 
-                return PrincipalSqrt(2 * Math.PI) * (Complex.Pow(t, z + 0.5)) * Complex.Exp(-t) * x;
+                throw new NotImplementedException();
+               // return PrincipalSqrt(2 * Math.PI) * (Complex.Pow(t, z + 0.5)) * Complex.Exp(-t) * x;
             }
         }
-        */
     }
 }
