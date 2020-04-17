@@ -1,8 +1,10 @@
-using System;
+using System.Collections.Generic;
 using System.Windows.Forms.DataVisualization.Charting;
 
+using ImageProcessing.App.CommonLayer.Attributes;
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExtensions;
+using ImageProcessing.App.CommonLayer.Extensions.TypeExtensions;
 using ImageProcessing.App.PresentationLayer.Views.Histogram;
 using ImageProcessing.App.UILayer.Form.Base;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
@@ -12,6 +14,9 @@ namespace ImageProcessing.App.UILayer.Form.Histogram
     /// <inheritdoc cref="IHistogramView"/>
     internal sealed partial class HistogramForm : BaseForm, IHistogramView
     {
+        private static readonly Dictionary<string, CommandAttribute>
+          _command = typeof(HistogramForm).GetCommands();
+
         public HistogramForm(IAppController controller)
             : base(controller) => InitializeComponent();
 
@@ -35,26 +40,29 @@ namespace ImageProcessing.App.UILayer.Form.Histogram
 
         /// <inheritdoc/>
         public void Init(RandomVariableFunction action)
+            => _command[
+                action.ToString()
+            ].Method.Invoke(this, null);
+        
+        [Command(nameof(RandomVariableFunction.CDF))]
+        private void SetupCDF()
         {
             var pmf = RandomVariableFunction.PMF.GetDescription();
             var cdf = RandomVariableFunction.CDF.GetDescription();
-
-            switch (action)
-            {
-                case RandomVariableFunction.CDF:
-                    Text = cdf;
-                    Freq.Series[cdf].IsVisibleInLegend = true;
-                    Freq.Series[pmf].IsVisibleInLegend = false;
-                    break;
-                case RandomVariableFunction.PMF:
-                    Text = pmf;
-                    Freq.Series[pmf].IsVisibleInLegend = true;
-                    Freq.Series[cdf].IsVisibleInLegend = false;
-                    break;
-
-                default: throw new NotImplementedException(nameof(action));
-            }                    
+            Text = cdf;
+            Freq.Series[cdf].IsVisibleInLegend = true;
+            Freq.Series[pmf].IsVisibleInLegend = false;
         }
-      
+
+        [Command(nameof(RandomVariableFunction.PMF))]
+        private void SetupPMF()
+        {
+            var pmf = RandomVariableFunction.PMF.GetDescription();
+            var cdf = RandomVariableFunction.CDF.GetDescription();
+            Text = pmf;
+            Freq.Series[pmf].IsVisibleInLegend = true;
+            Freq.Series[cdf].IsVisibleInLegend = false;
+        }
+
     }
 }

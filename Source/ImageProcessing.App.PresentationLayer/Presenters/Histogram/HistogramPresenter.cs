@@ -1,9 +1,11 @@
-using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
+using ImageProcessing.App.CommonLayer.Attributes;
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExtensions;
+using ImageProcessing.App.CommonLayer.Extensions.TypeExtensions;
 using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.ViewModel.Histogram;
@@ -16,6 +18,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
     internal sealed class HistogramPresenter
         : BasePresenter<IHistogramView, HistogramViewModel>
     {
+        private static readonly Dictionary<string, CommandAttribute>
+           _command = typeof(HistogramPresenter).GetCommands();
+
         private readonly IBitmapLuminanceDistributionService _distributionService;
 
         public HistogramPresenter(IAppController controller,
@@ -41,7 +46,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
 
             var chart = View.GetChart;
 
-            GetFunction(out var yValues);
+            var yValues = (decimal[])_command[
+                function.ToString()
+            ].Method.Invoke(this, new[] { bitmap });
 
             View.Init(function);
 
@@ -50,23 +57,23 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 chart.Series[function.GetDescription()]
                      .Points.AddXY(graylevel, yValues[graylevel]);
             }
+        }
 
-            void GetFunction(out decimal[] values)
-            {
-                switch (function)
-                {
-                    case RandomVariableFunction.PMF:
-                        values = _distributionService.GetPMF(bitmap);
-                        View.YAxisMaximum = (double)yValues.Max();
-                        break;
-                    case RandomVariableFunction.CDF:
-                        values = _distributionService.GetCDF(bitmap);
-                        View.YAxisMaximum = 1;
-                        break;
+        [Command(nameof(RandomVariableFunction.PMF))]
+        private decimal[] BuildPMF(Bitmap bmp)
+        {
+            var values = _distributionService.GetPMF(bmp);
+            View.YAxisMaximum = (double)values.Max();
 
-                    default: throw new NotImplementedException(nameof(function));
-                }
-            }
+            return values;
+        }
+
+        [Command(nameof(RandomVariableFunction.CDF))]
+        private decimal[] BuildCDF(Bitmap bmp)
+        {
+            View.YAxisMaximum = 1;
+
+            return _distributionService.GetCDF(bmp);
         }
     }
 }
