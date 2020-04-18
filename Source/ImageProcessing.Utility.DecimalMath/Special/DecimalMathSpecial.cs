@@ -147,7 +147,7 @@ namespace ImageProcessing.Utility.DecimalMath.Special
         /// </summary>
         /// <param name="z">x + iy</param>
         /// <returns>Γ(1 + z)</returns>
-        public static (decimal x, decimal y) Gamma((decimal x, decimal y) z)
+        public static (decimal Re, decimal Im) Gamma((decimal x, decimal y) z)
         {
             if(z.x < 0)
             {
@@ -184,7 +184,7 @@ namespace ImageProcessing.Utility.DecimalMath.Special
         /// <param name="z1">x + iy</param>
         /// <param name="z2">x' + iy'</param>
         /// <returns>B(z1, z2)</returns>
-        public static (decimal x, decimal y) Beta(
+        public static (decimal Re, decimal Im) Beta(
             (decimal x, decimal y) z1,
             (decimal x, decimal y) z2)
         {

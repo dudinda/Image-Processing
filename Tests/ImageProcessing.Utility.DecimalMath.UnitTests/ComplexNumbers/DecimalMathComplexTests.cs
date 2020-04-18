@@ -40,8 +40,8 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.ComplexNumbers
 
             var result = Sub(z1, z);
 
-            Assert.That(() => Abs(((decimal)w.Real - result.x)) < Epsilon);
-            Assert.That(() => Abs(((decimal)w.Imaginary - result.y)) < Epsilon);
+            Assert.That(() => Abs(((decimal)w.Real - result.Re)) < Epsilon);
+            Assert.That(() => Abs(((decimal)w.Imaginary - result.Im)) < Epsilon);
         }
 
         [Test, TestCaseSource(nameof(_cases))]
@@ -56,8 +56,8 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.ComplexNumbers
 
             var result = Add(z1, z);
 
-            Assert.That(() => Abs(((decimal)w.Real - result.x)) < Epsilon);
-            Assert.That(() => Abs(((decimal)w.Imaginary - result.y)) < Epsilon);
+            Assert.That(() => Abs(((decimal)w.Real - result.Re)) < Epsilon);
+            Assert.That(() => Abs(((decimal)w.Imaginary - result.Im)) < Epsilon);
         }
 
         [Test, TestCaseSource(nameof(_cases))]
@@ -72,8 +72,8 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.ComplexNumbers
 
             var result = Mul(z1, z);
 
-            Assert.That(() => Abs(((decimal)w.Real - result.x)) < Epsilon);
-            Assert.That(() => Abs(((decimal)w.Imaginary - result.y)) < Epsilon);
+            Assert.That(() => Abs(((decimal)w.Real - result.Re)) < Epsilon);
+            Assert.That(() => Abs(((decimal)w.Imaginary - result.Im)) < Epsilon);
         }
 
         [Test, TestCaseSource(nameof(_cases))]
@@ -88,8 +88,8 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.ComplexNumbers
 
             var result = Div(z1, z);
 
-            Assert.That(() => Abs(((decimal)w.Real - result.x)) < Epsilon);
-            Assert.That(() => Abs(((decimal)w.Imaginary - result.y)) < Epsilon);
+            Assert.That(() => Abs(((decimal)w.Real - result.Re)) < Epsilon);
+            Assert.That(() => Abs(((decimal)w.Imaginary - result.Im)) < Epsilon);
         }
     }
 }
