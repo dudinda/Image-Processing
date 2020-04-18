@@ -1,3 +1,4 @@
+using System;
 using System.Windows.Forms;
 
 using ImageProcessing.App.CommonLayer.Helpers;
@@ -13,21 +14,23 @@ namespace ImageProcessing.App.UILayer.Form.Base
     /// </summary>
     internal class BaseMainForm : MetroForm
     {
+        private Lazy<ApplicationContext> _context
+            => new Lazy<ApplicationContext>(
+                Controller.IoC.Resolve<ApplicationContext>
+            );
+
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller { get; }
 
         /// <inheritdoc cref="ApplicationContext"/>
-        protected ApplicationContext Context { get; }
+        protected ApplicationContext Context
+            => _context.Value;
 
-        protected BaseMainForm(ApplicationContext context, IAppController controller)
+        protected BaseMainForm(IAppController controller)
             : base()
-        {
-            Context = Requires.IsNotNull(
-                context, nameof(context));
-            Controller = Requires.IsNotNull(
+            => Controller = Requires.IsNotNull(
                 controller, nameof(controller));
-        }
-
+        
         protected BaseMainForm() { }
     }
 

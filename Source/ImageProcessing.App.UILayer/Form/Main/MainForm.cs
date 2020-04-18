@@ -13,9 +13,8 @@ namespace ImageProcessing.App.UILayer.Form.Main
     /// <inheritdoc cref="IMainView"/>
     internal sealed partial class MainForm : BaseMainForm, IMainView
     {
-        public MainForm(ApplicationContext context,
-                        IAppController controller)
-            : base(context, controller)
+        public MainForm(IAppController controller)
+            : base(controller)
         {
             InitializeComponent();
             Bind();
