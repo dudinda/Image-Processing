@@ -4,8 +4,8 @@ using System.Linq;
 using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainLayer.Model.Distributions.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable.Interface;
-using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.Real;
-using ImageProcessing.Utility.DecimalMath.Real;
+using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.RealAxis;
+using ImageProcessing.Utility.DecimalMath.RealAxis;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable.Implementation
 {
