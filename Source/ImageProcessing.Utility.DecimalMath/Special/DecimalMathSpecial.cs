@@ -1,10 +1,10 @@
 using System;
 
-using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.Real;
+using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.RealAxis;
 using ImageProcessing.Utility.DecimalMath.Code.Structs;
 
-using static ImageProcessing.Utility.DecimalMath.Complex.DecimalMathComplex;
-using static ImageProcessing.Utility.DecimalMath.Real.DecimalMathReal;
+using static ImageProcessing.Utility.DecimalMath.ComplexPlane.DecimalMathComplex;
+using static ImageProcessing.Utility.DecimalMath.RealAxis.DecimalMathReal;
 
 namespace ImageProcessing.Utility.DecimalMath.Special
 {

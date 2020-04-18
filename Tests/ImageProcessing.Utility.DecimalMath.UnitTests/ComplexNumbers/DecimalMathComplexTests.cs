@@ -1,8 +1,10 @@
 
+using ImageProcessing.Utility.DecimalMath.UnitTests.Factory;
+
 using NUnit.Framework;
 
-using static ImageProcessing.Utility.DecimalMath.Complex.DecimalMathComplex;
-using static ImageProcessing.Utility.DecimalMath.Real.DecimalMathReal;
+using static ImageProcessing.Utility.DecimalMath.ComplexPlane.DecimalMathComplex;
+using static ImageProcessing.Utility.DecimalMath.RealAxis.DecimalMathReal;
 
 using ComplexNumber = System.Numerics.Complex;
 
@@ -11,15 +13,9 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.ComplexNumbers
     [TestFixture]
     public class DecimalMathComplexTests
     {
-        private static readonly object[] _cases =
-        {
-            (5M, 3M),
-            (0M, 1M),
-            (1M, 0M),
-            (0.001M, 0M),
-            (0M, 0.001M)
-        };
-
+        private static readonly object[] _cases
+            = DecimalMathComplexCasesFactory.Factory["Numbers"];
+       
         [Test, TestCaseSource(nameof(_cases))]
         public void RealPartTest((decimal re, decimal im) z)
         {

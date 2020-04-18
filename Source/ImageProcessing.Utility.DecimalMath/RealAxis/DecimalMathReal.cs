@@ -1,6 +1,6 @@
 using System;
 
-namespace ImageProcessing.Utility.DecimalMath.Real
+namespace ImageProcessing.Utility.DecimalMath.RealAxis
 {
     /// <summary>
     /// The class contains functions of a real variable,
@@ -52,12 +52,14 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         {
             if (x > y)
             {
-                return Abs(x) * Sqrt(1 + (y / x) * (y / x));
+                var d = y / x;
+                return Abs(x) * Sqrt(1 + d * d);
             }
 
             if (x < y)
             {
-                return Abs(y) * Sqrt((x / y) * (x / y) + 1);
+                var d = x / y;
+                return Abs(y) * Sqrt(d * d + 1);
             }
 
             if (x == 0 && y == 0)

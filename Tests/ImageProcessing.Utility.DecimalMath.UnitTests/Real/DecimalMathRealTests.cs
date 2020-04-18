@@ -1,25 +1,25 @@
 using System;
 
-using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.Real;
-using ImageProcessing.Utility.DecimalMath.Real;
+using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.RealAxis;
+using ImageProcessing.Utility.DecimalMath.RealAxis;
 using ImageProcessing.Utility.DecimalMath.UnitTests.Factory;
 
 using NUnit.Framework;
 
-using static ImageProcessing.Utility.DecimalMath.Real.DecimalMathReal;
+using static ImageProcessing.Utility.DecimalMath.RealAxis.DecimalMathReal;
 
 namespace ImageProcessing.Tests.Utility
 {
     [TestFixture]
     public class DecimalMathRealTests
     {
-        private readonly object[] _realAxis
+        private static readonly object[] _realAxis
             = DecimalMathRealCasesFactory.Factory["(-inf, +inf)"];
-        private readonly object[] _trigonometry
+        private static readonly object[] _trigonometry
             = DecimalMathRealCasesFactory.Factory["Trigonometry"];
-        private readonly object[] _fromMinusToPlusOneClosed
+        private static readonly object[] _fromMinusToPlusOneClosed
             = DecimalMathRealCasesFactory.Factory["[-1, 1]"];
-        private readonly object[] _fromMinusToPlusOneOpen
+        private static readonly object[] _fromMinusToPlusOneOpen
             = DecimalMathRealCasesFactory.Factory["(-1, 1)"];
 
         [Test, TestCaseSource(nameof(_realAxis))]

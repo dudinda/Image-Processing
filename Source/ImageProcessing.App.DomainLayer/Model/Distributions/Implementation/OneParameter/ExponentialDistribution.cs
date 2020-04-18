@@ -2,8 +2,8 @@ using System;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.StringExtensions;
-using ImageProcessing.Utility.DecimalMath.Real;
 using ImageProcessing.App.DomainLayer.Model.Distributions.Interface;
+using ImageProcessing.Utility.DecimalMath.RealAxis;
 
 namespace ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.OneParameter
 {
