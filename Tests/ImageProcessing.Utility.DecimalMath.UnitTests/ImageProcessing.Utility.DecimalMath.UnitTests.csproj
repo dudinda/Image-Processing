@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComplexNumbers\DecimalMathComplexTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Real\DecimalMathRealTests.cs" />
   </ItemGroup>
