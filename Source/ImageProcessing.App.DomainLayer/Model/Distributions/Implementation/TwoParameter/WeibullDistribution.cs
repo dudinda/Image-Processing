@@ -6,6 +6,8 @@ using ImageProcessing.App.DomainLayer.Model.Distributions.Interface;
 using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.RealAxis;
 using ImageProcessing.Utility.DecimalMath.RealAxis;
 
+using static ImageProcessing.Utility.DecimalMath.SpecialFunctions.DecimalMathSpecial;
+
 namespace ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.TwoParameter
 {
     /// <summary>
@@ -37,10 +39,13 @@ namespace ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.Two
         public decimal SecondParameter => _k;
 
         /// <inheritdoc/>
-        public decimal GetMean() => throw new NotImplementedException();
+        public decimal GetMean()
+            => _lambda * Gamma((1 / _k, 0)).Re;
 
         /// <inheritdoc/>
-        public decimal GetVariance() => throw new NotImplementedException();
+        public decimal GetVariance()
+            => _lambda * _lambda *
+            Gamma((2 / _k, 0)).Re - GetMean() * GetMean();
 
         /// <inheritdoc/>
         public bool Quantile(decimal p, out decimal quantile)

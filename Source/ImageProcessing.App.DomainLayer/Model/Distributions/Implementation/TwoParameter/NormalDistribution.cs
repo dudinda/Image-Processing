@@ -4,7 +4,7 @@ using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.StringExtensions;
 using ImageProcessing.App.DomainLayer.Model.Distributions.Interface;
 using ImageProcessing.Utility.DecimalMath.RealAxis;
-using ImageProcessing.Utility.DecimalMath.Special;
+using ImageProcessing.Utility.DecimalMath.SpecialFunctions;
 
 namespace ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.TwoParameter
 {

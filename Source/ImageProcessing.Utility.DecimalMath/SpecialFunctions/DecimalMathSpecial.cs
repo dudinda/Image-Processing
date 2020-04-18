@@ -6,7 +6,7 @@ using ImageProcessing.Utility.DecimalMath.Code.Structs;
 using static ImageProcessing.Utility.DecimalMath.ComplexPlane.DecimalMathComplex;
 using static ImageProcessing.Utility.DecimalMath.RealAxis.DecimalMathReal;
 
-namespace ImageProcessing.Utility.DecimalMath.Special
+namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
 {
     public static class DecimalMathSpecial
     {
@@ -192,6 +192,22 @@ namespace ImageProcessing.Utility.DecimalMath.Special
             var b = (ComplexOperator)z2;
 
             return (ComplexOperator)Gamma(a - 1) * Gamma(b - 1) / Gamma(a + b - 1);
-        } 
+        }
+
+        /// <summary>
+        /// Evaluate Binom(z1, z2).
+        /// </summary>
+        /// <param name="z1">x + iy</param>
+        /// <param name="z2">x' + iy'</param>
+        /// <returns>Binom(z1, z2)</returns>
+        public static (decimal Re, decimal Im) Binom(
+            (decimal x, decimal y) z1,
+            (decimal x, decimal y) z2)
+        {
+            var n = (ComplexOperator)z1;
+            var k = (ComplexOperator)z2;
+
+            return Reciprocal((n - 1) * Beta(n - k + 1, k + 1));
+        }
     }
 }
