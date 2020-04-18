@@ -172,12 +172,8 @@ namespace ImageProcessing.Utility.DecimalMath.ComplexPlane
         /// <param name="z">x + iy</param>
         /// <returns>tan(z)</returns>
         public static (decimal x, decimal y) Tan((decimal x, decimal y) z)
-        {
-            var denominator = Real.Cos(2 * z.x) + Real.Cosh(2 * z.y);
-
-            return (Real.Sin(2 * z.x) / denominator,
-                    Real.Sinh(2 * z.y) / denominator);
-        }
+            => (ComplexOperator)(Real.Sin(2 * z.x), Real.Sinh(2 * z.y)) /
+                                 Real.Cos(2 * z.x) + Real.Cosh(2 * z.y);
 
         /// <summary>
         /// Evaluate sin(z) as sin(x)cosh(y) + icos(x)sinh(y).
@@ -215,18 +211,14 @@ namespace ImageProcessing.Utility.DecimalMath.ComplexPlane
         /// <returns>(r, phi)</returns>
         public static (decimal r, decimal phi) Polar((decimal x, decimal y) z)
             => (Abs(z), Arg(z));
-        
+
         /// <summary>
         /// Transfrom polar form to cartesian representation.
         /// </summary>
         /// <param name="z">r*exp(phi*i)</param>
         /// <returns>x + iy</returns>
         public static (decimal x, decimal y) FromPolar((decimal r, decimal phi) z)
-        {
-            var (sin, cos) = Real.SinCos(z.phi);
-
-            return (ComplexOperator)z.r * (cos, sin);
-        }
+            => (ComplexOperator)z.r * Real.CosSin(z.phi);
 
         /// <summary>
         /// Evaluate exp(z).
@@ -234,13 +226,7 @@ namespace ImageProcessing.Utility.DecimalMath.ComplexPlane
         /// <param name="z">x + iy</param>
         /// <returns>exp(z)</returns>
         public static (decimal x, decimal y) Exp((decimal x, decimal y) z)
-        {
-            var r          = Real.Exp(z.x);
-            var (sin, cos) = Real.SinCos(z.y);
-
-            return (ComplexOperator)r * (cos, sin);
-            
-        }
+            => (ComplexOperator)Real.Exp(Re(z)) * Real.CosSin(Im(z));
 
         /// <summary>
         /// Evaluate log(z) as log(r) + iarg(z).
@@ -301,13 +287,13 @@ namespace ImageProcessing.Utility.DecimalMath.ComplexPlane
             var list = new List<(decimal x, decimal y)>();
             var (r, phi) = Polar(z);
 
-            var rootOfR = Real.Pow(r, 1 / k);
+            var root = Real.Pow(r, 1 / k);
 
             for(var n = 0; n < k; ++n)
             {
-                var (sin, cos) = Real.SinCos((2 * Real.PI * n + phi) / k);
-
-                list.Add((rootOfR * cos, rootOfR * sin));
+                list.Add(
+                    (ComplexOperator)root * Real.CosSin((2 * Real.PI * n + phi) / k)
+                );
             }
 
             return list.ToArray();

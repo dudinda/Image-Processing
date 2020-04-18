@@ -154,11 +154,11 @@ namespace ImageProcessing.Utility.DecimalMath.Code.Structs
 
         public static ComplexOperator operator ^(
             ComplexOperator z1, (decimal, decimal) z2)
-            => new ComplexOperator(Complex.Pow(z1.Z, z2));
+            => z1 ^ (ComplexOperator)z2;
 
         public static ComplexOperator operator ^(
             (decimal, decimal) z1, ComplexOperator z2)
-            => new ComplexOperator(Complex.Pow(z1, z2.Z));
+            => (ComplexOperator)z1 ^ z2;
 
         public static explicit operator ComplexOperator(decimal c)
             => new ComplexOperator(c);

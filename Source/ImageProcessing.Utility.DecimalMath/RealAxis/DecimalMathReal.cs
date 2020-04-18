@@ -547,11 +547,11 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         }
 
         /// <summary>
-        /// Evaluate sin(x) and cos(x) simultaneously.
+        /// Evaluate cos(x) and sin(x) simultaneously.
         /// </summary>
         /// <param name="x">An argument of the function</param>
-        public static (decimal sin, decimal cos) SinCos(decimal x)
-            => (Sin(x), Cos(x));
+        public static (decimal sin, decimal cos) CosSin(decimal x)
+            => (Cos(x), Sin(x));
         
         #endregion
     }
