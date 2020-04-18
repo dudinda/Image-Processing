@@ -2,98 +2,49 @@ using System;
 
 using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.Real;
 using ImageProcessing.Utility.DecimalMath.Real;
+using ImageProcessing.Utility.DecimalMath.UnitTests.Factory;
 
 using NUnit.Framework;
+
+using static ImageProcessing.Utility.DecimalMath.Real.DecimalMathReal;
 
 namespace ImageProcessing.Tests.Utility
 {
     [TestFixture]
     public class DecimalMathRealTests
     {
-        [TestCase(-2.63)]
-        [TestCase(-351.000001)]
-        [TestCase(-0.00000001)]
-        [TestCase(-0.230001)]
-        public void FloorFunctionNegativeTest(double value)
+        private readonly object[] _realAxis
+            = DecimalMathRealCasesFactory.Factory["(-inf, +inf)"];
+        private readonly object[] _trigonometry
+            = DecimalMathRealCasesFactory.Factory["Trigonometry"];
+        private readonly object[] _fromMinusToPlusOneClosed
+            = DecimalMathRealCasesFactory.Factory["[-1, 1]"];
+        private readonly object[] _fromMinusToPlusOneOpen
+            = DecimalMathRealCasesFactory.Factory["(-1, 1)"];
+
+        [Test, TestCaseSource(nameof(_realAxis))]
+        public void FloorFunctionTest(decimal value)
         {
-            var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Floor(value));
 
-            Assert.AreEqual(DecimalMathReal.Floor(target), cmpVal);
-            Assert.AreEqual(target.Floor(), cmpVal);
+            Assert.AreEqual(Floor(value), cmpVal);
         }
 
-        [TestCase(2.63)]
-        [TestCase(351.000001)]
-        [TestCase(0.00000001)]
-        [TestCase(0.230001)]
-        public void FloorFunctionPositiveTest(double value)
+        [Test, TestCaseSource(nameof(_realAxis))]
+        public void CeilFunctionTest(decimal value)
         {
-            var target = Convert.ToDecimal(value);
-            var cmpVal = Convert.ToDecimal(Math.Floor(value));
+            var cmpVal = Math.Ceiling(value);
 
-            Assert.AreEqual(DecimalMathReal.Floor(target), cmpVal);
-            Assert.AreEqual(target.Floor(), cmpVal);
+            Assert.AreEqual(Ceil(value), cmpVal);
         }
 
-        [TestCase(2)]
-        [TestCase(-2)]
-        [TestCase(1005)]
-        [TestCase(0)]
-        [TestCase(-1524)]
-        public void FloorFunctionIdentityTest(decimal value)
-        {
-            var target = Convert.ToDecimal(value);
-            var cmpVal = Convert.ToDecimal(Math.Floor(value));
 
-            Assert.AreEqual(DecimalMathReal.Floor(target), cmpVal);
-            Assert.AreEqual(target.Floor(), cmpVal);
-        }
+        [Test, TestCaseSource(nameof(_realAxis))]
+        public void ExponentTest(decimal value)
+        { 
+            var cmpVal = (decimal)Math.Exp((double)value);
 
-        [TestCase(-2.63)]
-        [TestCase(-351.000001)]
-        [TestCase(-0.00000001)]
-        [TestCase(-0.230001)]
-        public void CeilFunctionNegativeTest(decimal value)
-        {
-            Assert.AreEqual(value.Ceil(), Math.Ceiling(value));
-            Assert.AreEqual(DecimalMathReal.Ceil(value), Math.Ceiling(value));
-        }
-
-        [TestCase(2.63)]
-        [TestCase(351.000001)]
-        [TestCase(0.00000001)]
-        [TestCase(0.230001)]
-        public void CeilFunctionPositiveTest(decimal value)
-        {
-            Assert.AreEqual(value.Ceil(), Math.Ceiling(value));
-            Assert.AreEqual(DecimalMathReal.Ceil(value), Math.Ceiling(value));
-        }
-
-        [TestCase(2)]
-        [TestCase(-2)]
-        [TestCase(1005)]
-        [TestCase(0)]
-        [TestCase(-1524)]
-        public void CeilFunctionIdentityTest(decimal value)
-        {
-            Assert.AreEqual(value.Ceil(), value);
-            Assert.AreEqual(DecimalMathReal.Ceil(value), value);
-        }
-
-        [TestCase(2)]
-        [TestCase(-2)]
-        [TestCase(2.12524)]
-        [TestCase(-2.1243)]
-        [TestCase(0)]
-        [TestCase(1)]
-        public void ExponentTest(double value)
-        {
-            var target = Convert.ToDecimal(value);
-            var cmpVal = Convert.ToDecimal(Math.Exp(value));
-
-            Assert.That((DecimalMathReal.Exp(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
-            Assert.That((target.Exp() - cmpVal).Abs(), Is.LessThan(0.0000001M));
+            Assert.That(Abs(Exp(value) - cmpVal) < 0.0000001M);
         }
 
         [Test]
@@ -101,13 +52,13 @@ namespace ImageProcessing.Tests.Utility
         {
             var pi = DecimalMathReal.PI;
 
-            Assert.AreEqual(DecimalMathReal.Mod(pi / 2 + 3 * pi, pi), pi / 2);
-            Assert.AreEqual(DecimalMathReal.Mod(pi / 2 - 3 * pi, pi), pi / 2);
-            Assert.AreEqual(DecimalMathReal.Mod(25M, 5M), 0.0M);
-            Assert.AreEqual(DecimalMathReal.Mod(-1M, 3M), 2.0M);
-            Assert.AreEqual(DecimalMathReal.Mod(-1.27M, 1M), 0.73M);
-            Assert.AreEqual(DecimalMathReal.Mod(2.000256M, 1M), 0.000256M);
-            Assert.AreEqual(DecimalMathReal.Mod(3.0M / 2.0M, 1.0M / 2.0M), 0);
+            Assert.AreEqual(Mod(pi / 2 + 3 * pi, pi), pi / 2);
+            Assert.AreEqual(Mod(pi / 2 - 3 * pi, pi), pi / 2);
+            Assert.AreEqual(Mod(25M, 5M), 0.0M);
+            Assert.AreEqual(Mod(-1M, 3M), 2.0M);
+            Assert.AreEqual(Mod(-1.27M, 1M), 0.73M);
+            Assert.AreEqual(Mod(2.000256M, 1M), 0.000256M);
+            Assert.AreEqual(Mod(3.0M / 2.0M, 1.0M / 2.0M), 0);
 
             Assert.AreEqual((pi / 2 + 3 * pi).Mod(pi), pi / 2);
             Assert.AreEqual((pi / 2 - 3 * pi).Mod(pi), pi / 2);
@@ -129,92 +80,39 @@ namespace ImageProcessing.Tests.Utility
             var logbase = Convert.ToDecimal(lbase);
             var cmpVal  = Convert.ToDecimal(Math.Log(value, lbase));
 
-            Assert.That((DecimalMathReal.Log(target, logbase) - cmpVal).Abs(), Is.LessThan(0.00000001M));
+            Assert.That((Log(target, logbase) - cmpVal).Abs(), Is.LessThan(0.00000001M));
             Assert.That((target.Log(logbase) - cmpVal).Abs(), Is.LessThan(0.00000001M));
         }
 
-        [TestCase(0)]
-        [TestCase(0.0000000001)]
-        [TestCase(0.25)]
-        [TestCase(1125123)]
-        [TestCase(100)]
-        [TestCase(231.24125)]
-        [TestCase(100000000)]
-        public void SqrtTests(double value)
+        [Test, TestCaseSource(nameof(_nonNegativeRealAxis))]
+        public void SqrtTests(decimal value)
         {
-            var target = Convert.ToDecimal(value);
-            var cmpVal = Convert.ToDecimal(Math.Sqrt(value));
+            var cmpVal = (decimal)Math.Sqrt((double)value);
 
-            Assert.That((DecimalMathReal.Sqrt(target) - cmpVal).Abs(), Is.LessThan(0.00000001M));
-            Assert.That((target.Sqrt() - cmpVal).Abs(), Is.LessThan(0.00000001M));
+            Assert.That(Abs(Sqrt(value) - cmpVal), Is.LessThan(0.00000001M));
         }
    
-        [TestCase(0)]
-        public void SignIdentityTest(double value)
+        [Test, TestCaseSource(nameof(_realAxis))]
+        public void SignTest(decimal value)
         {
-            var target = Convert.ToDecimal(value);
+            var cmpVal = (decimal)(Math.Sign(value));
 
-            Assert.That(DecimalMathReal.Sign(target), Is.EqualTo(0));
-            Assert.That(target.Sign(), Is.EqualTo(0));
-        }
-
-        [TestCase(1)]
-        [TestCase(0.000000000000001)]
-        [TestCase(0.00001)]
-        [TestCase(100)]
-        [TestCase(10000000000000)]
-        public void SignPositiveValueTest(double value)
-        {
-            var target = Convert.ToDecimal(value);
-
-            Assert.That(DecimalMathReal.Sign(target), Is.EqualTo(1));
-            Assert.That(target.Sign(), Is.EqualTo(1));
-        }
-
-        [TestCase(-1)]
-        [TestCase(-0.000000000000001)]
-        [TestCase(-0.00001)]
-        [TestCase(-100)]
-        [TestCase(-10000000000000)]
-        public void SignNegativeValueTest(double value)
-        {
-            var target = Convert.ToDecimal(value);
-
-            Assert.That(DecimalMathReal.Sign(target), Is.EqualTo(-1));
-            Assert.That(target.Sign(), Is.EqualTo(-1));
+            Assert.That(Sign(value), Is.EqualTo(cmpVal));
         }
 
         #region Trigonometric functions tests
 
-        [TestCase(3 * Math.PI / 2)]
-        [TestCase(Math.PI / 2)]
-        [TestCase(Math.PI)]
-        [TestCase(2 * Math.PI)]
-        [TestCase(Math.PI / 3)]
-        [TestCase(Math.PI / 4)]
-        [TestCase(Math.PI / 6)]
+        [Test, TestCaseSource(nameof(_trigonometry))]
         public void CosineTableValuesTest(double value)
         {
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Cos(value));
 
-            Assert.That((DecimalMathReal.Cos(target) - cmpVal).Abs(), Is.LessThan(0.00001M));
+            Assert.That((Cos(target) - cmpVal).Abs(), Is.LessThan(0.00001M));
             Assert.That((target.Cos() - cmpVal).Abs(), Is.LessThan(0.00001M));
         }
 
-        [TestCase(100000000000000)]
-        [TestCase(1000.125123123123)]
-        [TestCase(1000000000.0000000000007)]
-        [TestCase(0.000000000000010)]
-        [TestCase(0.1000412412512400)]
-        [TestCase(0.999999231241241123231)]
-        [TestCase(0)]
-        [TestCase(-100000000000000)]
-        [TestCase(-100000.125123123123)]
-        [TestCase(-1000000000.0000000000007)]
-        [TestCase(-0.000000000000010)]
-        [TestCase(-0.1000412412512400)]
-        [TestCase(-0.999999231241241123231)]
+        [Test, TestCaseSource(nameof(_realAxis))]
         public void CosineTest(double value)
         {
             var target = Convert.ToDecimal(value);
@@ -224,13 +122,7 @@ namespace ImageProcessing.Tests.Utility
             Assert.That((target.Cos() - cmpVal).Abs(), Is.LessThan(0.00001M));
         }
 
-        [TestCase(3 * Math.PI / 2)]
-        [TestCase(Math.PI / 2)]
-        [TestCase(Math.PI)]
-        [TestCase(2 * Math.PI)]
-        [TestCase(Math.PI / 3)]
-        [TestCase(Math.PI / 4)]
-        [TestCase(Math.PI / 6)]
+        [Test, TestCaseSource(nameof(_trigonometry))]
         public void SineTableValuesTest(double value)
         {
             var target = Convert.ToDecimal(value);
@@ -240,19 +132,7 @@ namespace ImageProcessing.Tests.Utility
             Assert.That((target.Sin() - cmpVal).Abs(), Is.LessThan(0.00001M));
         }
 
-        [TestCase(100000000000000)]
-        [TestCase(1000.125123123123)]
-        [TestCase(1000000000.0000000000007)]
-        [TestCase(0.000000000000010)]
-        [TestCase(0.1000412412512400)]
-        [TestCase(0.999999231241241123231)]
-        [TestCase(0)]
-        [TestCase(-100000000000000)]
-        [TestCase(-1000.125123123123)]
-        [TestCase(-1000000000.0000000000007)]
-        [TestCase(-0.000000000000010)]
-        [TestCase(-0.1000412412512400)]
-        [TestCase(-0.999999231241241123231)]
+        [Test, TestCaseSource(nameof(_realAxis))]
         public void SineTest(double value)
         {
             var target = Convert.ToDecimal(value);
@@ -262,17 +142,7 @@ namespace ImageProcessing.Tests.Utility
             Assert.That((target.Sin() - cmpVal).Abs(), Is.LessThan(0.0000001M));
         }
 
-
-        [TestCase(Math.PI)]
-        [TestCase(2 * Math.PI)]
-        [TestCase(Math.PI / 3)]
-        [TestCase(Math.PI / 4)]
-        [TestCase(Math.PI / 6)]
-        [TestCase(-Math.PI)]
-        [TestCase(-2 * Math.PI)]
-        [TestCase(-Math.PI / 3)]
-        [TestCase(-Math.PI / 4)]
-        [TestCase(-Math.PI / 6)]
+        [Test, TestCaseSource(nameof(_trigonometry))]
         public void TangentTableValuesTest(double value)
         {
             var target = Convert.ToDecimal(value);
@@ -282,19 +152,7 @@ namespace ImageProcessing.Tests.Utility
             Assert.That((target.Tan() - cmpVal).Abs(), Is.LessThan(0.0000001M));
         }
 
-        [TestCase(100000000000000)]
-        [TestCase(1000.125123123123)]
-        [TestCase(1000000000.0000000000007)]
-        [TestCase(0.000000000000010)]
-        [TestCase(0.1000412412512400)]
-        [TestCase(0.999999231241241123231)]
-        [TestCase(0)]
-        [TestCase(-100000000000000)]
-        [TestCase(-1000.125123123123)]
-        [TestCase(-1000000000.0000000000007)]
-        [TestCase(-0.000000000000010)]
-        [TestCase(-0.1000412412512400)]
-        [TestCase(-0.999999231241241123231)]
+        [Test, TestCaseSource(nameof(_realAxis))]
         public void TangentTest(double value)
         {
             var target = Convert.ToDecimal(value);
@@ -304,77 +162,39 @@ namespace ImageProcessing.Tests.Utility
             Assert.That((target.Tan() - cmpVal).Abs(), Is.LessThan(0.0000001M));
         }
 
-
-        [TestCase(Math.PI / 2)]
-        [TestCase(Math.PI / 3)]
-        [TestCase(Math.PI / 4)]
-        [TestCase(Math.PI / 6)]
-        [TestCase(-Math.PI / 2)]
-        [TestCase(-Math.PI / 3)]
-        [TestCase(-Math.PI / 4)]
-        [TestCase(-Math.PI / 6)]
+        [Test, TestCaseSource(nameof(_trigonometry))]
         public void CotangentTableValuesTest(double value)
         {
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(1.0 / Math.Tan(value));
 
-            Assert.That((DecimalMathReal.Cot(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
+            Assert.That((Cot(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
             Assert.That((target.Cot() - cmpVal).Abs(), Is.LessThan(0.0000001M));
         }
 
-        [TestCase(100000000000000)]
-        [TestCase(1000.125123123123)]
-        [TestCase(1000000000.0000000000007)]
-        [TestCase(0.000000000000010)]
-        [TestCase(0.1000412412512400)]
-        [TestCase(0.999999231241241123231)]
-        [TestCase(-100000000000000)]
-        [TestCase(-1000.125123123123)]
-        [TestCase(-1000000000.0000000000007)]
-        [TestCase(-0.000000000000010)]
-        [TestCase(-0.1000412412512400)]
-        [TestCase(-0.999999231241241123231)]
-
-        public void CotangentTest(double value)
+        [Test, TestCaseSource(nameof(_realAxis))]
+        public void CotangentTest(decimal value)
         {
-            var target = Convert.ToDecimal(value);
-            var cmpVal = Convert.ToDecimal(1.0 / Math.Tan(value));
+            var cmpVal = (decimal)(1.0 / Math.Tan((double)value));
 
-            Assert.That((DecimalMathReal.Cot(target) - cmpVal).Abs(), Is.LessThan(0.0000001M));
-            Assert.That((target.Cot() - cmpVal).Abs(), Is.LessThan(0.0000001M));
+            Assert.That(Abs(Cot(value) - cmpVal), Is.LessThan(0.0000001M));
         }
 
         #endregion
 
         #region Hyperbolic functions tests
 
-        [TestCase(0)]
-        [TestCase(0.1)]
-        [TestCase(1)]
-        [TestCase(10)]
-        [TestCase(5)]
-        [TestCase(-0.001)]
-        [TestCase(-1)]
-        [TestCase(-10)]
-        [TestCase(-5)]
+        [Test, TestCaseSource(nameof(_realAxis))]
         public void SinhTests(double value)
         {
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Sinh(value));
 
-            Assert.That((DecimalMathReal.Sinh(target) - cmpVal).Abs(), Is.LessThan(0.00000001M));
+            Assert.That((Sinh(target) - cmpVal).Abs(), Is.LessThan(0.00000001M));
             Assert.That((target.Sinh() - cmpVal).Abs(), Is.LessThan(0.00000001M));
         }
 
-        [TestCase(0)]
-        [TestCase(0.1)]
-        [TestCase(1)]
-        [TestCase(10)]
-        [TestCase(5)]
-        [TestCase(-0.001)]
-        [TestCase(-1)]
-        [TestCase(-10)]
-        [TestCase(-5)]
+        [Test, TestCaseSource(nameof(_realAxis))]
         public void CoshTests(double value)
         {
             var target = Convert.ToDecimal(value);
@@ -384,40 +204,23 @@ namespace ImageProcessing.Tests.Utility
             Assert.That((target.Cosh() - cmpVal).Abs(), Is.LessThan(0.00000001M));
         }
 
-        [TestCase(0)]
-        [TestCase(0.1)]
-        [TestCase(1)]
-        [TestCase(10)]
-        [TestCase(5)]
-        [TestCase(-0.001)]
-        [TestCase(-1)]
-        [TestCase(-10)]
-        [TestCase(-5)]
+        [Test, TestCaseSource(nameof(_realAxis))]
         public void TanhTests(double value)
         {
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Tanh(value));
 
-            Assert.That((DecimalMathReal.Tanh(target) - cmpVal).Abs(), Is.LessThan(0.00000001M));
+            Assert.That((Tanh(target) - cmpVal).Abs(), Is.LessThan(0.00000001M));
             Assert.That((target.Tanh() - cmpVal).Abs(), Is.LessThan(0.00000001M));
         }
 
-        [TestCase(0.001)]
-        [TestCase(0.0000001)]
-        [TestCase(1)]
-        [TestCase(10)]
-        [TestCase(5)]
-        [TestCase(-0.001)]
-        [TestCase(-0.0000001)]
-        [TestCase(-1)]
-        [TestCase(-10)]
-        [TestCase(-5)]
+        [Test, TestCaseSource(nameof(_realAxis))]
         public void CothTests(double value)
         {
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(1.0 / Math.Tanh(value));
 
-            Assert.That((DecimalMathReal.Coth(target) - cmpVal).Abs(), Is.LessThan(0.000001M));
+            Assert.That((Coth(target) - cmpVal).Abs(), Is.LessThan(0.000001M));
             Assert.That((target.Coth() - cmpVal).Abs(), Is.LessThan(0.000001M));
         }
 
@@ -425,25 +228,14 @@ namespace ImageProcessing.Tests.Utility
 
         #region Inverse hyperbolic functions tests
 
-        [TestCase(0)]
-        [TestCase(0.0000001)]
-        [TestCase(0.01)]
-        [TestCase(2)]
-        [TestCase(20)]
-        [TestCase(200)]
-        [TestCase(2000)]
-        [TestCase(-200)]
-        [TestCase(-0.0000001)]
-        [TestCase(-0.01)]
-        [TestCase(-2)]
-        [TestCase(-2000)]
-        public void ArsinhTests(double value)
+        [Test, TestCaseSource(nameof(_realAxis))]
+        public void ArsinhTests(decimal val)
         {
-            var target = Convert.ToDecimal(value);
+            var value = (double)val;
+
             var cmpVal = Convert.ToDecimal(Math.Log(value + Math.Sqrt(value * value + 1)));
 
-            Assert.That((DecimalMathReal.Arsinh(target) - cmpVal).Abs(), Is.LessThan(0.000001M));
-            Assert.That((target.Arsinh() - cmpVal).Abs(), Is.LessThan(0.000001M));
+            Assert.That(Abs(Arsinh(val) - cmpVal), Is.LessThan(0.000001M));
         }
 
         [TestCase(1)]
@@ -501,13 +293,7 @@ namespace ImageProcessing.Tests.Utility
 
         #region Inverse trigonometric functions tests
 
-        [TestCase(-1)]
-        [TestCase(-0.5)]
-        [TestCase(-0.0000000001)]
-        [TestCase(0)]
-        [TestCase(0.0000000001)]
-        [TestCase(0.5)]
-        [TestCase(1)]
+        [Test, TestCaseSource(nameof(_fromMinusToPlusOneClosed))]
         public void ArcsinTests(double value)
         {
             var target = Convert.ToDecimal(value);
@@ -519,13 +305,7 @@ namespace ImageProcessing.Tests.Utility
 
   
    
-        [TestCase(-1)]
-        [TestCase(-0.5)]
-        [TestCase(-0.0000000001)]
-        [TestCase(0)]
-        [TestCase(0.0000000001)]
-        [TestCase(0.5)]
-        [TestCase(1)]
+        [Test, TestCaseSource(nameof(_fromMinusToPlusOneClosed))]
         public void ArccosTests(double value)
         {
             var target = Convert.ToDecimal(value);
@@ -536,14 +316,7 @@ namespace ImageProcessing.Tests.Utility
         }
 
 
-        [TestCase(0)]
-        [TestCase(0.0000000001)]
-        [TestCase(-100)]
-        [TestCase(Math.PI * Math.E)]
-        [TestCase(-0.0000000001)]
-        [TestCase(-5)]
-        [TestCase(-9)]
-        [TestCase(100)]
+        [Test, TestCaseSource(nameof(_realAxis))]
         public void ArctanSmallNumbersTest(double value)
         {
             var target = Convert.ToDecimal(value);
@@ -554,14 +327,8 @@ namespace ImageProcessing.Tests.Utility
         }
 
 
-        [TestCase(0.0000000001)]
-        [TestCase(-100)]
-        [TestCase(Math.PI * Math.E)]
-        [TestCase(-0.0000000001)]
-        [TestCase(-5)]
-        [TestCase(-9)]
-        [TestCase(100)]
-        public void ArccotSmallNumbersTest(double value)
+        [Test, TestCaseSource(nameof(_realAxis))]
+        public void ArccotTest(double value)
         {
             var target = Convert.ToDecimal(value);
             var cmpVal = Convert.ToDecimal(Math.Atan(1.0 / value));
@@ -572,6 +339,25 @@ namespace ImageProcessing.Tests.Utility
 
         #endregion
 
+        private static readonly object[] _nonNegativeRealAxis =
+        {
+            100000000000000M,
+            1000.125123123123M,
+            1000000000.0000000000007M,
+            0.000000000000010M,
+            0.1000412412512400M,
+            0.999999231241241123231M,
+            0M
+        };
 
+        private static readonly object[] _positiveRealAxis =
+        {
+            100000000000000M,
+            1000.125123123123M,
+            1000000000.0000000000007M,
+            0.000000000000010M,
+            0.1000412412512400M,
+            0.999999231241241123231M,
+        };
     }
 }

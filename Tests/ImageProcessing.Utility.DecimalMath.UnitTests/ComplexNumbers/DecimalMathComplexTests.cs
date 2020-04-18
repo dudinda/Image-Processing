@@ -11,7 +11,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.ComplexNumbers
     [TestFixture]
     public class DecimalMathComplexTests
     {
-        private static readonly object[] TestCases =
+        private static readonly object[] _cases =
         {
             (5M, 3M),
             (0M, 1M),
@@ -20,19 +20,19 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.ComplexNumbers
             (0M, 0.001M)
         };
 
-        [Test, TestCaseSource("TestCases")]
+        [Test, TestCaseSource(nameof(_cases))]
         public void RealPartTest((decimal re, decimal im) z)
         {
             Assert.AreEqual(Re(z), z.re);
         }
 
-        [Test, TestCaseSource("TestCases")]
+        [Test, TestCaseSource(nameof(_cases))]
         public void ImaginaryPartTest((decimal re, decimal im) z)
         {
             Assert.AreEqual(Im(z), z.im);
         }
 
-        [Test, TestCaseSource("TestCases")]
+        [Test, TestCaseSource(nameof(_cases))]
         public void SubtractionTest((decimal re, decimal im) z)
         {
             var z1 = (25M, 30M);
@@ -48,7 +48,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.ComplexNumbers
             Assert.That(() => Abs(((decimal)w.Imaginary - result.y)) < Epsilon);
         }
 
-        [Test, TestCaseSource("TestCases")]
+        [Test, TestCaseSource(nameof(_cases))]
         public void AdditionTest((decimal re, decimal im) z)
         {
             var z1 = (25M, 30M);
@@ -64,7 +64,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.ComplexNumbers
             Assert.That(() => Abs(((decimal)w.Imaginary - result.y)) < Epsilon);
         }
 
-        [Test, TestCaseSource("TestCases")]
+        [Test, TestCaseSource(nameof(_cases))]
         public void MultiplicationTest((decimal re, decimal im) z)
         {
             var z1 = (25M, 30M);
@@ -80,7 +80,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.ComplexNumbers
             Assert.That(() => Abs(((decimal)w.Imaginary - result.y)) < Epsilon);
         }
 
-        [Test, TestCaseSource("TestCases")]
+        [Test, TestCaseSource(nameof(_cases))]
         public void DivisionTest((decimal re, decimal im) z)
         {
             var z1 = (25M, 30M);
