@@ -11,6 +11,7 @@ using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Convolution;
@@ -65,10 +66,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                 .Subscribe(this);
         }
 
-        private async Task OpenImage()
+        private async Task OpenImage(OpenFileDialogEventArgs e)
         {
             try
             {
+                Requires.IsNotNull(e, nameof(e));
+
                 var result = await _nonBlock.NonBlockOpen(
                     ConfigurationManager.AppSettings["Filters"]
                 ).ConfigureAwait(true);
@@ -96,10 +99,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        private async Task SaveImageAs()
+        private async Task SaveImageAs(SaveAsFileDialogEventArgs e)
         {
             try
             {
+                Requires.IsNotNull(e, nameof(e));
+
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
                     var copy = await GetImageCopy(ImageContainer.Source)
@@ -116,10 +121,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        private async Task SaveImage()
+        private async Task SaveImage(SaveWithoutFileDialogEventArgs e)
         {
             try
             {
+                Requires.IsNotNull(e, nameof(e));
+
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
                     var copy = await GetImageCopy(ImageContainer.Source)

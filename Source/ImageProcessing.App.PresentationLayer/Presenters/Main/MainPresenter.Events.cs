@@ -5,6 +5,7 @@ using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 
@@ -17,12 +18,14 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
           ISubscriber<RgbColorFilterEventArgs>,
           ISubscriber<DistributionEventArgs>,
           ISubscriber<ImageContainerEventArgs>,
-          ISubscriber<FileDialogEventArgs>,
           ISubscriber<ToolbarActionEventArgs>,
           ISubscriber<RandomVariableInfoEventArgs>,
           ISubscriber<RandomVariableFunctionEventArgs>,
           ISubscriber<ZoomEventArgs>,
-          ISubscriber<CloseFormEventArgs>
+          ISubscriber<CloseFormEventArgs>,
+          ISubscriber<OpenFileDialogEventArgs>,
+          ISubscriber<SaveAsFileDialogEventArgs>,
+          ISubscriber<SaveWithoutFileDialogEventArgs>
     {
         public async Task OnEventHandler(ApplyConvolutionFilterEventArgs e)
             => await ApplyConvolutionFilter(e).ConfigureAwait(true);
@@ -48,25 +51,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         public async Task OnEventHandler(CloseFormEventArgs e)
             => CloseForm();
 
-        public async Task OnEventHandler(FileDialogEventArgs e)
-        {
-            switch (e.Action)
-            {
-                case FileDialogAction.Open:
-                    await OpenImage().ConfigureAwait(true);
-                    break;
-                case FileDialogAction.SaveWithoutDialog:
-                    await SaveImage().ConfigureAwait(true);
-                    break;
-                case FileDialogAction.SaveAs:
-                    await SaveImageAs().ConfigureAwait(true);
-                    break;
-
-                default:
-                    throw new NotImplementedException(nameof(e.Action));
-            }
-        }
-
         public async Task OnEventHandler(ToolbarActionEventArgs e)
         {
             switch (e.Action)
@@ -87,6 +71,16 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             => await GetRandomVariableInfo(e).ConfigureAwait(true);
 
         public async Task OnEventHandler(RandomVariableFunctionEventArgs e)
-            => BuildFunction(e);      
+            => await BuildFunction(e).ConfigureAwait(true);
+
+        public async Task OnEventHandler(SaveAsFileDialogEventArgs e)
+            => await SaveImageAs(e).ConfigureAwait(true);
+        
+        public async Task OnEventHandler(OpenFileDialogEventArgs e)
+            => await OpenImage(e).ConfigureAwait(true);
+
+        public async Task OnEventHandler(SaveWithoutFileDialogEventArgs e)
+            => await SaveImage(e).ConfigureAwait(true);
+        
     }
 }
