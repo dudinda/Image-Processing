@@ -65,7 +65,7 @@ namespace ImageProcessing.Utility.DecimalMath.Complex
         /// <param name="z2">x' + iy'</param>
         /// <returns>z + z'</returns>
         public static (decimal x, decimal y) Add((decimal x, decimal y) z1, (decimal x, decimal y) z2)
-            => (z1.x + z2.x, z2.y + z2.y);
+            => (z1.x + z2.x, z1.y + z2.y);
         
         /// <summary>
         /// Evaluate z - z'.
@@ -74,7 +74,7 @@ namespace ImageProcessing.Utility.DecimalMath.Complex
         /// <param name="z2">x' + iy'</param>
         /// <returns>z - z'</returns>
         public static (decimal x, decimal y) Sub((decimal x, decimal y) z1, (decimal x, decimal y) z2)
-            => (z1.x - z2.y, z1.x - z2.y);
+            => (z1.x - z2.x, z1.y - z2.y);
         
         /// <summary>
         /// Evaluate z - c.
@@ -285,10 +285,10 @@ namespace ImageProcessing.Utility.DecimalMath.Complex
 
             //evaluate as exp(log(r)(x' + iy') + i*phi(x' + iy'))
 
-            var re = new ComplexOperator(Mul(DecimalMathReal.Log(r), z2));
-            var im = new ComplexOperator(Mul(phi, z2));
+            var re = DecimalMathReal.Log(r) * (ComplexOperator)z2;
+            var im = phi * (ComplexOperator)z2;
 
-            return Exp((re + im).Z);
+            return Exp(re + im);
         }
 
 
