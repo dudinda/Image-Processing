@@ -14,10 +14,12 @@ using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.ToolbarArgs;
+using ImageProcessing.App.DomainLayer.DomainEvents.QualityMeasureArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Convolution;
 using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
 using ImageProcessing.App.PresentationLayer.ViewModel.Histogram;
+using ImageProcessing.App.PresentationLayer.ViewModel.QualityMeasure;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.RgbFilters;
@@ -143,6 +145,29 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             catch(Exception ex)
             {
                 View.ShowError("Error while saving the file.");
+            }
+        }
+
+        private async Task ShowQualityMeasureForm(ShowQualityMeasureEventArgs e)
+        {
+            try
+            {
+                Requires.IsNotNull(e, nameof(e));
+
+                await Task.Yield();
+
+                if (!View.ImageIsNull(ImageContainer.Source))
+                {
+                    Controller.Run<QualityMeasurePresenter, QualityMeasureViewModel>(
+                        new QualityMeasureViewModel(View.GetQualityQueue())
+                    );
+
+                    View.ClearQueue();
+                }
+            }
+            catch (Exception ex)
+            {
+                View.ShowError($"Error while building quality measure histogram.");
             }
         }
 
@@ -319,6 +344,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     var copy = await GetImageCopy(
                         ImageContainer.Source
                     ).ConfigureAwait(true);
+
+                    copy.Tag = e.Distribution.ToString();
 
                     Pipeline
                         .Register(new PipelineBlock(copy)

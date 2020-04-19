@@ -9,8 +9,10 @@ namespace ImageProcessing.App.PresentationLayer.ViewModel.QualityMeasure
     {
         public QualityMeasureViewModel(ConcurrentQueue<Bitmap> queue)
         {
-            Queue = Requires.IsNotNull(
-                queue, nameof(queue));
+            Queue = new ConcurrentQueue<Bitmap>(
+                Requires.IsNotNull(
+                queue, nameof(queue))
+            );
         }
 
         public ConcurrentQueue<Bitmap> Queue { get; }

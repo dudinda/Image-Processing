@@ -23,17 +23,23 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 distibutionService, nameof(distibutionService));
         }
 
-        public void BuildHistogram()
+        public override void Run(QualityMeasureViewModel vm)
+        {
+            Requires.IsNotNull(vm, nameof(vm));
+
+            BuildHistogram(vm);
+
+            View.Show();
+        }
+
+        private void BuildHistogram(QualityMeasureViewModel vm)
         {
             var chart = View.GetChart;
-            var list = new List<Bitmap>();
 
-            for (var step = 0; step < list.Count; ++step)
+            while(vm.Queue.TryDequeue(out var bitmap))
             {
-                var bitmap = list[step];
-
                 var variance = new List<decimal>();
-                var names    = new List<string>();
+                var names = new List<string>();
 
                 for (int graylevel = 0; graylevel < 255; graylevel += 15)
                 {

@@ -7,6 +7,7 @@ using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.ToolbarArgs;
+using ImageProcessing.App.DomainLayer.DomainEvents.QualityMeasureArgs;
 
 namespace ImageProcessing.App.UILayer.Form.Main
 {
@@ -144,6 +145,11 @@ namespace ImageProcessing.App.UILayer.Form.Main
             DstZoom.KeyPress += (sender, args)
                 => Controller.Aggregator.Publish(
                     new ZoomEventArgs(ImageContainer.Destination)
+                );
+
+            QualityMeasure.Click += (sender, args)
+                => Controller.Aggregator.Publish(
+                    new ShowQualityMeasureEventArgs()
                 );
         }
 

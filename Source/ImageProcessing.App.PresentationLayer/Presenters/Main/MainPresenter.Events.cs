@@ -6,6 +6,7 @@ using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.ToolbarArgs;
+using ImageProcessing.App.DomainLayer.DomainEvents.QualityMeasureArgs;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Main
@@ -13,6 +14,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
     public sealed partial class MainPresenter
         : ISubscriber<ApplyConvolutionFilterEventArgs>,
           ISubscriber<ShowConvolutionFilterPresenterEventArgs>,
+          ISubscriber<ShowQualityMeasureEventArgs>,
           ISubscriber<RgbFilterEventArgs>,
           ISubscriber<RgbColorFilterEventArgs>,
           ISubscriber<DistributionEventArgs>,
@@ -67,5 +69,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
         public async Task OnEventHandler(ShuffleEventArgs e)
             => await Shuffle(e).ConfigureAwait(true);
+
+        public async Task OnEventHandler(ShowQualityMeasureEventArgs e)
+            => await ShowQualityMeasureForm(e).ConfigureAwait(true);
     }
 }

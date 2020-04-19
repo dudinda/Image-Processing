@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -154,6 +155,12 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
         /// <inheritdoc/>
         public void AddToQualityMeasureContainer(Bitmap transformed)
-            =>  QualityMeasure.Add(transformed);     
+            =>  QualityMeasure.Add(transformed);
+
+        public ConcurrentQueue<Bitmap> GetQualityQueue()
+            => QualityMeasure.Queue;
+
+        public void ClearQueue()
+            => QualityMeasure.Reset();
     }
 }
