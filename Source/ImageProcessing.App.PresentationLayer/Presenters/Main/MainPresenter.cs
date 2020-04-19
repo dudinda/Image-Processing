@@ -323,7 +323,10 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         .Register(new PipelineBlock(copy)
                             .Add<Bitmap, Bitmap>(
                                 (bmp) => _lumaProvider.Transform(bmp, e.Distribution, e.Parameters)
-                            )                     
+                            )
+                            .Add<Bitmap>(
+                                (bmp) => View.AddToQualityMeasureContainer(bmp)
+                            )
                             .Add<Bitmap, Bitmap>(
                                 (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
                             )

@@ -5,6 +5,7 @@ using System.Threading;
 
 using ImageProcessing.App.CommonLayer.Extensions.Expressions;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Item.Implementation;
+using ImageProcessing.App.ServiceLayer.Services.Pipeline.Item.Implementation.Action;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Item.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation
@@ -33,7 +34,13 @@ namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementatio
             {
                 _token.ThrowIfCancellationRequested();
                 
-                if (function.InputType.IsAssignableFrom(firstArg))
+                if(function.OutputType == typeof(void) &&
+                        function.InputType.IsAssignableFrom(firstArg))
+                {
+                    firstArg = function.InputType;
+                    result = function.Execute(result);
+                }
+                else if (function.InputType.IsAssignableFrom(firstArg))
                 {
                     firstArg = function.OutputType;
                     result = function.Execute(result);
@@ -52,12 +59,24 @@ namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementatio
         public IPipelineBlock Add<TIn, TOut>(Expression<Func<TIn, TOut>> step)
         {
             _block.Enqueue(
-                new BlockItem(
+                new FuncBlockItem(
                     step.ConvertFunction()
                 )
             );
 
             return this;
         }
+
+        public IPipelineBlock Add<TIn>(Expression<Action<TIn>> step)
+        {
+            _block.Enqueue(
+                new ActionBlockItem(
+                    step.ConvertFunction()
+                )
+            );
+
+            return this;
+        }
+
     }
 }
