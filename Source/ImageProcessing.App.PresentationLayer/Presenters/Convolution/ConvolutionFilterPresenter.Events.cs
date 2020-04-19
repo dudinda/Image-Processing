@@ -12,7 +12,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
         public async Task OnEventHandler(ConvolutionFilterEventArgs e)
             => await ApplyConvolutionFilter(e).ConfigureAwait(true);
 
-        public Task OnEventHandler(ShowTooltipOnErrorEventArgs e)
-            => ShowTooltipOnError(e);
+        public async Task OnEventHandler(ShowTooltipOnErrorEventArgs e)
+            => await ShowTooltipOnError(e).ConfigureAwait(true);
     }
 }

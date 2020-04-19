@@ -95,10 +95,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
             );
 
         /// <inheritdoc/>
-        public void AddToQualityMeasureMainMetaInfo(Bitmap transformed)
-            => QualityMeasure.Add(transformed);
-
-        /// <inheritdoc/>
         public void ResetTrackBarValue(ImageContainer container, int value = 0, bool isEnabled = true)
             => _command[
                 container.ToString() + nameof(MainViewAction.ResetTrackBar)

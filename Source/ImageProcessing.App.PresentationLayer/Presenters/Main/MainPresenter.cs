@@ -13,6 +13,7 @@ using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.ToolbarArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Convolution;
 using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
@@ -348,10 +349,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }      
         }
 
-        private async Task Shuffle()
+        private async Task Shuffle(ShuffleEventArgs e)
         {
             try
             {
+                Requires.IsNotNull(e, nameof(e));
+
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
                     View.SetCursor(CursorType.Wait);

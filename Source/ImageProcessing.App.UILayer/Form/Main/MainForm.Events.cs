@@ -4,7 +4,9 @@ using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.ToolbarArgs;
 
 namespace ImageProcessing.App.UILayer.Form.Main
 {
@@ -16,7 +18,8 @@ namespace ImageProcessing.App.UILayer.Form.Main
         private void Bind()
         {
             Controller
-                .Aggregator.Subscribe(this);
+                .Aggregator
+                .Subscribe(this);
 
             BindFileMenu();
             BindToolbar();
@@ -32,17 +35,17 @@ namespace ImageProcessing.App.UILayer.Form.Main
         {
             OpenFile.Click += (sender, args)
                 => Controller.Aggregator.Publish(
-                    new FileDialogEventArgs(FileDialogAction.Open)
+                    new OpenFileDialogEventArgs()
                 );
 
             SaveFile.Click += (sender, args)
                 => Controller.Aggregator.Publish(
-                    new FileDialogEventArgs(FileDialogAction.SaveWithoutDialog)
+                    new SaveWithoutFileDialogEventArgs()
                 );
 
             SaveFileAs.Click += (sender, args)
                 => Controller.Aggregator.Publish(
-                    new FileDialogEventArgs(FileDialogAction.SaveAs)
+                    new SaveAsFileDialogEventArgs()
                 );
    
             FormClosing += (sender, args)
@@ -58,7 +61,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         {
             ShuffleSrc.Click += (sender, args)
                 => Controller.Aggregator.Publish(
-                    new ToolbarActionEventArgs(ToolbarAction.Shuffle)
+                    new ShuffleEventArgs()
                 );
 
             PMF.Click += (sender, args)
