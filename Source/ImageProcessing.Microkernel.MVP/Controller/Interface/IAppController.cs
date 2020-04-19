@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.Microkernel.MVP.Aggregator.Interface.Aggregator;
+using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
 using ImageProcessing.Microkernel.MVP.Presenter;
 

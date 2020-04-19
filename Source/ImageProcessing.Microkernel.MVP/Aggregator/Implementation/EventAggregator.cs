@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-using ImageProcessing.Microkernel.MVP.Aggregator.Interface.Aggregator;
+using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 
 namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation

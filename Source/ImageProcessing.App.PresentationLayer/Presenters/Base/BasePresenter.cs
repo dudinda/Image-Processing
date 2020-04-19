@@ -1,8 +1,8 @@
 using System;
-using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface;
+using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Microkernel.MVP.Presenter;
 using ImageProcessing.Microkernel.MVP.View;
