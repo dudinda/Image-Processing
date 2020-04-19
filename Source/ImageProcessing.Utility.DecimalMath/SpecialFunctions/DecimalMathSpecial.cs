@@ -174,7 +174,7 @@ namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
 
                 var t = w + g + 0.5M;
 
-               return Sqrt(2M * PI) * t^(w + 0.5M) * Exp(-t) * x;
+               return Sqrt(2M * PI) * ( t ^ (w + 0.5M) ) * Exp(-t) * x;
             }
         }
 

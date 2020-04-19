@@ -291,9 +291,7 @@ namespace ImageProcessing.Utility.DecimalMath.ComplexPlane
 
             for(var n = 0; n < k; ++n)
             {
-                list.Add(
-                    (ComplexOperator)root * Real.CosSin((2 * Real.PI * n + phi) / k)
-                );
+                list.Add( (ComplexOperator)root * Real.CosSin((2 * Real.PI * n + phi) / k) );
             }
 
             return list.ToArray();
