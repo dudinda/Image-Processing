@@ -145,6 +145,11 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable
                 lvalue += pmf[i];
             }
 
+            if (uvalue == 0.0M && lvalue == 0.0M)
+            {
+                return 0;
+            }
+
             return uvalue / lvalue;
         }
 
@@ -166,6 +171,11 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable
             {
                 uvalue += frequencies[i] * ((i - mean) * (i - mean));
                 lvalue += frequencies[i];
+            }
+
+            if(uvalue == 0.0M && lvalue == 0.0M)
+            {
+                return 0;
             }
 
             return uvalue / lvalue;
