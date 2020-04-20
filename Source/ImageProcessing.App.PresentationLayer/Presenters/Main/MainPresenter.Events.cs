@@ -50,7 +50,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             => await Zoom(e).ConfigureAwait(true);
 
         public async Task OnEventHandler(CloseFormEventArgs e)
-            => CloseForm();
+            => await CloseForm().ConfigureAwait(true);
 
         public async Task OnEventHandler(RandomVariableInfoEventArgs e)
             => await GetRandomVariableInfo(e).ConfigureAwait(true);
