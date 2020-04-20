@@ -19,6 +19,8 @@ using ImageProcessing.App.PresentationLayer.Views.Convolution;
 using ImageProcessing.App.PresentationLayer.Views.Histogram;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.PresentationLayer.Views.QualityMeasure;
+using ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Implementation;
+using ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Interface;
 using ImageProcessing.App.ServiceLayer.NonBlockDialog.Implementation;
 using ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Providers.Implementation.Convolution;
@@ -100,7 +102,8 @@ namespace ImageProcessing.App.UILayer
                 .RegisterTransient<IConvolutionServiceProvider, ConvolutionServiceProvider>()
                 .RegisterTransient<IMorphologyServiceProvider, MorphologyServiceProvider>()
                 .RegisterTransient<IBitmapLuminanceDistributionServiceProvider, BitmapLuminanceDistributionServiceProvider>()
-                .RegisterTransient<IRgbFilterServiceProvider, RgbFilterServiceProvider>();      
+                .RegisterTransient<IRgbFilterServiceProvider, RgbFilterServiceProvider>()
+                .RegisterScoped<IChartSeriesBuilder, ChartSeriesBuilder>();      
         }      
     }
 }

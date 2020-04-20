@@ -11,8 +11,7 @@ namespace ImageProcessing.App.UILayer.Form.QualityMeasure
         public QualityMeasureForm(IAppController controller)
             : base(controller)
         {
-            InitializeComponent();
-            SetHistogram();     
+            InitializeComponent();   
         }
 
         public Chart GetChart
@@ -22,10 +21,7 @@ namespace ImageProcessing.App.UILayer.Form.QualityMeasure
         {
             Focus();
             base.Show();
-        }
-
-        private void SetHistogram()
-            => Histogram.Series.Clear();    
+        } 
     }
 }
 
