@@ -1,0 +1,23 @@
+using System;
+
+using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Recommendation.Interface;
+using ImageProcessing.App.DomainLayer.Model.Recommendation.Implementation;
+using ImageProcessing.App.DomainLayer.Model.Recommendation.Interface;
+
+namespace ImageProcessing.App.DomainLayer.Factory.RgbFilters.Recommendation.Implementation
+{
+    public sealed class RecommendationFactory : IRecommendationFactory
+    {
+        public IRecommendation Get(Luma filter)
+            => filter
+        switch
+        {
+            Luma.Rec601 => new Rec601(),
+            Luma.Rec709 => new Rec709(),
+            Luma.Rec240 => new Smpte240M(),
+
+            _ => throw new NotImplementedException(nameof(filter))
+        };
+    }
+}
