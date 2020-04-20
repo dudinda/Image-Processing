@@ -207,7 +207,7 @@ namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
             var n = (ComplexOperator)z1;
             var k = (ComplexOperator)z2;
 
-            return Reciprocal((n - 1) * Beta(n - k + 1, k + 1));
+            return Reciprocal((n + 1) * Beta(n - k + 1, k + 1));
         }
     }
 }

@@ -113,11 +113,11 @@ namespace ImageProcessing.Utility.DecimalMath.ComplexPlane
             => (ComplexOperator)z1 * z2;
 
         /// <summary>
-        /// Evaluate Cz.
+        /// Evaluate zС.
         /// </summary>
         /// <param name="z">x  + iy</param>
         /// <param name="c">const</param>
-        /// <returns>Cz</returns>
+        /// <returns>zC</returns>
         public static (decimal Re, decimal Im) Mul((decimal x, decimal y) z, decimal c)
             => (ComplexOperator)z * c;
 
