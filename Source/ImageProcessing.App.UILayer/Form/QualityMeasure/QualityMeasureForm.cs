@@ -10,10 +10,8 @@ namespace ImageProcessing.App.UILayer.Form.QualityMeasure
     {
         public QualityMeasureForm(IAppController controller)
             : base(controller)
-        {
-            InitializeComponent();   
-        }
-
+            => InitializeComponent();   
+        
         public Chart GetChart
             => Histogram;
 

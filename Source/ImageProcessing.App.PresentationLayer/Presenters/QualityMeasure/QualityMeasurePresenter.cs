@@ -42,6 +42,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         private void BuildHistogram(QualityMeasureViewModel vm)
         {
             var chart = View.GetChart;
+                chart.Series.Clear();
 
             var random = new Random(Guid.NewGuid().GetHashCode());
 
@@ -50,7 +51,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 var variance = new List<decimal>();
                 var names    = new List<string>();
 
-                for (int graylevel = 0; graylevel < 255; graylevel += 15)
+                for (var graylevel = 0; graylevel < 255; graylevel += 15)
                 {
                     names.Add($"{graylevel}-{graylevel + 15}");
                     variance.Add(_distributionService.GetConditionalVariance((graylevel, graylevel + 15), bitmap));
@@ -61,13 +62,14 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 _builder.SetName(key)
                         .SetColor(Color.FromArgb(random.Next(0, 256),
                                                  random.Next(0, 256),
-                                                 random.Next(0, 256)))
+                                                 random.Next(0, 256))
+                        )
                         .SetMarkerStyle(MarkerStyle.None)
                         .SetChartType(SeriesChartType.Column);
 
 
                 chart.Series.Add(_builder.Build());
-                
+                chart.Series[key].Enabled = true;
                 chart.Series[key].Points.DataBindXY(names, variance);
                 chart.Series[key].LabelAngle = -90;
             }
