@@ -285,7 +285,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                 {
                     var result = View.GetSelectedColors(e.Color);
 
-                    if (!IsDefault(result))
+                    if (result != RgbColors.Unknown)
                     {
                         View.SetCursor(CursorType.Wait);
 
@@ -307,6 +307,10 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                             ImageContainer.Destination
                         ).ConfigureAwait(true);
                     }
+                    else
+                    {
+                        View.SetImage(ImageContainer.Destination, View.DstImage);
+                    }
                 }
             }
             catch (OperationCanceledException cancelEx)
@@ -317,18 +321,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             {
                 View.ShowError($"Error while applying a filter by the color channel.");
             }
-
-            bool IsDefault(RgbColors color)
-            {
-                if(color is default(RgbColors))
-                {
-                    View.DstImage = View.SrcImage;
-
-                    return true;
-                }
-
-                return false;
-            };
         }
 
         private async Task ApplyHistogramTransformation(DistributionEventArgs e)
@@ -442,26 +434,24 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             {
                 Requires.IsNotNull(e, nameof(e));
 
-                GetDestination(out var container);
+                var (To, From) = e.Container == ImageContainer.Source   ?
+                    (ImageContainer.Destination, ImageContainer.Source) :
+                    (ImageContainer.Source, ImageContainer.Destination);
 
-                if (!View.ImageIsNull(container.From))
+                if (!View.ImageIsNull(From))
                 {
                     View.SetCursor(CursorType.Wait);
 
-                    var copy = await GetImageCopy(
-                        container.From
-                    ).ConfigureAwait(true);
+                    var copy = await GetImageCopy(From).ConfigureAwait(true);
 
                     Pipeline
                         .Register(new PipelineBlock(copy)
                             .Add<Bitmap, Bitmap>(
-                                (bmp) => DefaultPipelineBlock(bmp, container.To)
+                                (bmp) => DefaultPipelineBlock(bmp, To)
                             )
                         );
 
-                    await Render(
-                        container.To
-                    ).ConfigureAwait(true);
+                    await Render(To).ConfigureAwait(true);
                 }
             }
             catch (OperationCanceledException cancelEx)
@@ -471,22 +461,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             catch (Exception ex)
             {
                 View.ShowError("Error while replacing the image.");
-            }
-
-            void GetDestination(out (ImageContainer To, ImageContainer From) container)
-            {
-                switch (e.Container)
-                {
-                    case ImageContainer.Source:
-                        container = (ImageContainer.Destination, ImageContainer.Source);
-                        break;
-                    case ImageContainer.Destination:
-                        container = (ImageContainer.Source, ImageContainer.Destination);
-                        break;
-
-                    default: throw new NotImplementedException(nameof(e.Container));
-                }
-            };
+            }        
         }
 
         private async Task GetRandomVariableInfo(RandomVariableInfoEventArgs e)
@@ -561,9 +536,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         private async Task<Bitmap> GetImageCopy(ImageContainer container)
         {
             return await _operationLocker.LockAsync(() =>
-                  new Bitmap(
-                      View.GetImageCopy(container)
-                  )
+                  new Bitmap(View.GetImageCopy(container))
             ).ConfigureAwait(true);
         }
 
@@ -598,7 +571,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        private async Task CloseForm()
+        private async Task CloseForm(CloseFormEventArgs e)
         {
             await Task.Yield();
             Controller.Dispose();

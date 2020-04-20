@@ -69,7 +69,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
 
 
                 chart.Series.Add(_builder.Build());
-                chart.Series[key].Enabled = true;
                 chart.Series[key].Points.DataBindXY(names, variance);
                 chart.Series[key].LabelAngle = -90;
             }
