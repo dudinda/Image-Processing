@@ -8,7 +8,7 @@ namespace ImageProcessing.Utility.DataStructure.FixedStack.Implementation
 {
     public sealed class FixedStack<T> : IFixedStack<T>
     {
-        private readonly List<T> _stack = new List<T>();
+        private readonly LinkedList<T> _stack = new LinkedList<T>();
         private readonly int _size;
 
         public FixedStack(int size)
@@ -30,12 +30,11 @@ namespace ImageProcessing.Utility.DataStructure.FixedStack.Implementation
             {
                 try
                 {
+                    var result = _stack.First;
 
-                    var result = _stack.First();
+                    _stack.RemoveFirst();
 
-                    _stack.RemoveAt(0);
-
-                    return result;
+                    return result.Value;
                 }
                 catch (ArgumentOutOfRangeException)
                 {
@@ -48,12 +47,12 @@ namespace ImageProcessing.Utility.DataStructure.FixedStack.Implementation
         {
             lock (_stack)
             {
-                if (_stack.Count.Equals(10))
+                if (_stack.Count == 10))
                 {
-                    _stack.Remove(_stack.Last());
+                    _stack.RemoveLast();
                 }
 
-                _stack.Insert(0, bmp);
+                _stack.AddFirst(bmp);
             }
         }
 
@@ -63,7 +62,7 @@ namespace ImageProcessing.Utility.DataStructure.FixedStack.Implementation
             {
                 try
                 {
-                    return _stack.First();
+                    return _stack.First.Value;
                 }
                 catch (InvalidOperationException)
                 {
