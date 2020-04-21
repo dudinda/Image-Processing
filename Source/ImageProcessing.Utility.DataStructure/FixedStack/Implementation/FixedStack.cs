@@ -28,18 +28,11 @@ namespace ImageProcessing.Utility.DataStructure.FixedStack.Implementation
         {
             lock (_stack)
             {
-                try
-                {
-                    var result = _stack.First;
+                var result = _stack.First;
 
-                    _stack.RemoveFirst();
+                _stack.RemoveFirst();
 
-                    return result.Value;
-                }
-                catch (ArgumentOutOfRangeException)
-                {
-                    throw new InvalidOperationException("The stack is empty.");
-                }
+                return result.Value;
             }
         }
 
@@ -47,7 +40,7 @@ namespace ImageProcessing.Utility.DataStructure.FixedStack.Implementation
         {
             lock (_stack)
             {
-                if (_stack.Count == 10)
+                if (_stack.Count == _size)
                 {
                     _stack.RemoveLast();
                 }
@@ -58,16 +51,14 @@ namespace ImageProcessing.Utility.DataStructure.FixedStack.Implementation
 
         public T Peek()
         {
+            if(!Any())
+            {
+                throw new InvalidOperationException("The stack is empty.");
+            }
+
             lock (_stack)
             {
-                try
-                {
-                    return _stack.First.Value;
-                }
-                catch (InvalidOperationException)
-                {
-                    throw new IndexOutOfRangeException("The stack is empty.");
-                }
+                return _stack.First.Value;
             }
         }
     }
