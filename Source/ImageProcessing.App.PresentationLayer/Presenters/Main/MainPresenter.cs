@@ -98,7 +98,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch(Exception ex)
             {
-                View.ShowError("Error while opening the file.");
+                OnError("Error while opening the file.");
             }
         }
 
@@ -120,7 +120,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch(Exception ex)
             {
-                View.ShowError("Error while saving the file.");
+                OnError("Error while saving the file.");
             }
         }
 
@@ -144,7 +144,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch(Exception ex)
             {
-                View.ShowError("Error while saving the file.");
+                OnError("Error while saving the file.");
             }
         }
 
@@ -167,7 +167,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (Exception ex)
             {
-                View.ShowError($"Error while building quality measure histogram.");
+                OnError($"Error while building quality measure histogram.");
             }
         }
 
@@ -192,7 +192,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (Exception ex)
             {
-                View.ShowError($"Error while opening a convolution filters menu.");
+                OnError($"Error while opening a convolution filters menu.");
             }
         }
 
@@ -220,19 +220,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (OperationCanceledException cancelEx)
             {
-                Controller.Aggregator.Publish(
-                    new ShowTooltipOnErrorEventArgs(
-                        "The operation has been canceled."
-                    )
-                );
+                OnError("The operation has been canceled.");
             }
             catch (Exception ex)
             {
-                Controller.Aggregator.Publish(
-                    new ShowTooltipOnErrorEventArgs(
-                        "Error while applying a convolution filter."
-                    )
-                );
+                OnError("Error while applying a convolution filter.");
             }
         }
 
@@ -267,11 +259,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (OperationCanceledException cancelEx)
             {
-                View.ShowError("The operation has been canceled.");
+                OnError("The operation has been canceled.");
             }
             catch (Exception ex)
             {
-                View.ShowError("Error while applying an RGB filter.");
+                OnError("Error while applying an RGB filter.");
             }
         }
 
@@ -315,11 +307,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (OperationCanceledException cancelEx)
             {
-                View.ShowError("The operation has been canceled.");
+                OnError("The operation has been canceled.");
             }
             catch (Exception ex)
             {
-                View.ShowError($"Error while applying a filter by the color channel.");
+                OnError($"Error while applying a filter by the color channel.");
             }
         }
 
@@ -360,11 +352,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (OperationCanceledException cancelEx)
             {
-                View.ShowError("The operation has been canceled.");
+                OnError("The operation has been canceled.");
             }
             catch (Exception ex)
             {
-                View.ShowError("Error while applying a histogram transformation.");
+                OnError("Error while applying a histogram transformation.");
             }      
         }
 
@@ -399,7 +391,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch
             {
-                View.ShowError("Error while shuffling the image.");
+                OnError("Error while shuffling the image.");
             }
         }
 
@@ -424,7 +416,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (Exception ex)
             {
-                View.ShowError($"Error while buiding the plot.");
+                OnError($"Error while buiding the plot.");
             }
         }
 
@@ -456,11 +448,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (OperationCanceledException cancelEx)
             {
-                View.ShowError("The operation has been canceled.");
+                OnError("The operation has been canceled.");
             }
             catch (Exception ex)
             {
-                View.ShowError("Error while replacing the image.");
+                OnError("Error while replacing the image." );
             }        
         }
 
@@ -489,7 +481,10 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (Exception ex)
             {
-                View.ShowError($"Error while getting the information about {e.Action.ToString().ToLower()}.");
+               OnError(
+                    $@"Error while getting the 
+                       information about {e.Action.ToString().ToLower()}."
+                );
             }
         }
 
@@ -511,9 +506,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     View.Refresh(container);
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                View.ShowError("Error while zooming the image.");
+                OnError("Error while zooming the image.");
             }
         }
 
@@ -542,35 +537,39 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
         private async Task Render(ImageContainer container)
         {
-            try
+            var result = await Pipeline
+                .AwaitResult()
+                .ConfigureAwait(true);
+
+            if (container == ImageContainer.Source)
             {
-                var result = await Pipeline
-                    .AwaitResult()
-                    .ConfigureAwait(true);
-
-                if(container is ImageContainer.Source)
-                {
-                    _cache.Reset();
-                }
-
-                View.SetImage(container, (Bitmap)result);
-                View.Refresh(container);
-                View.ResetTrackBarValue(container);
+                _cache.Reset();
             }
-            catch (Exception ex)
+
+            View.SetImage(container, (Bitmap)result);
+            View.Refresh(container);
+            View.ResetTrackBarValue(container);
+
+            if (!Pipeline.Any())
             {
                 View.SetCursor(CursorType.Default);
-                throw;
-            }
-            finally
-            {
-                if (!Pipeline.Any())
-                {
-                    View.SetCursor(CursorType.Default);
-                }
             }
         }
 
+        private void OnError(string error)
+        {
+            View.ShowError(error);
+
+            if (!Pipeline.Any())
+            {
+                View.SetCursor(CursorType.Default);
+            }
+            else
+            {
+                View.SetCursor(CursorType.Wait);
+            }
+        }
+           
         private async Task CloseForm(CloseFormEventArgs e)
         {
             await Task.Yield();
