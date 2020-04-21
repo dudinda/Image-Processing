@@ -47,7 +47,7 @@ namespace ImageProcessing.Utility.DataStructure.FixedStack.Implementation
         {
             lock (_stack)
             {
-                if (_stack.Count == 10))
+                if (_stack.Count == 10)
                 {
                     _stack.RemoveLast();
                 }
