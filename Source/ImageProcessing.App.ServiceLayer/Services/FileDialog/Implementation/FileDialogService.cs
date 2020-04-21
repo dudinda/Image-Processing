@@ -31,10 +31,12 @@ namespace ImageProcessing.App.ServiceLayer.Services.FileDialog.Implementation
                                 Image.FromStream(stream)
                             );
                         }
-                    });              
+                    }).ConfigureAwait(false);              
                 }
 
-                return await Task.FromResult<Bitmap>(null);
+                return await Task
+                    .FromResult<Bitmap>(null)
+                    .ConfigureAwait(false);
             }
         }
 
@@ -48,10 +50,10 @@ namespace ImageProcessing.App.ServiceLayer.Services.FileDialog.Implementation
                 {
                     await Task.Run(() =>
                     {
-                       src.Save(dialog.FileName, Path.GetExtension(
-                                    dialog.FileName).GetImageFormat()
-                          );
-                    });
+                       src.Save(dialog.FileName,
+                                Path.GetExtension(dialog.FileName)
+                                    .GetImageFormat());
+                    }).ConfigureAwait(false);
                 }
             }
         }

@@ -18,9 +18,9 @@ namespace ImageProcessing.App.CommonLayer.Extensions.TypeExt
         public static IEnumerable<MethodInfo> GetMethodsByAttribute<TAttribute>(
             this Type type, BindingFlags flags)
             where TAttribute : Attribute
-            => type.GetMethods(flags).Where(
+            => type?.GetMethods(flags).Where(
                 method => method.GetCustomAttribute(typeof(TAttribute), false) != null
-            );
+            ) ?? throw new ArgumentNullException(nameof(type));
 
         /// <summary>
         /// Get all the methods,
@@ -78,6 +78,7 @@ namespace ImageProcessing.App.CommonLayer.Extensions.TypeExt
         /// </summary>
         public static bool HasAttribute<TAttribute>(this Type type)
             where TAttribute : Attribute
-            => type?.IsDefined(typeof(TAttribute), false) ?? throw new ArgumentNullException(nameof(type));
+            => type?.IsDefined(typeof(TAttribute), false)
+            ?? throw new ArgumentNullException(nameof(type));
     }
 }

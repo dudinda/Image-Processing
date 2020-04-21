@@ -31,10 +31,10 @@ namespace ImageProcessing.App.ServiceLayer.Services.Cache.Implementation
                 cacheEntry = createItem();
 
                 var options = new MemoryCacheEntryOptions()
-                 .SetSize(1)
-                 .SetPriority(CacheItemPriority.High)
-                 .SetSlidingExpiration(TimeSpan.FromMinutes(10))
-                 .SetAbsoluteExpiration(TimeSpan.FromMinutes(20));
+                    .SetSize(1)
+                    .SetPriority(CacheItemPriority.High)
+                    .SetSlidingExpiration(TimeSpan.FromMinutes(10))
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(20));
 
                 options.AddExpirationToken(
                     new CancellationChangeToken(_resetToken.Token)
