@@ -155,12 +155,21 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
         /// <inheritdoc/>
         public void AddToQualityMeasureContainer(Bitmap transformed)
-            =>  QualityMeasure.Add(transformed);
+        {
+            if(QualityMeasure.Add(transformed))
+            {
+                QualityMeasure.Enabled = true;
+            }
+
+        }
 
         public ConcurrentQueue<Bitmap> GetQualityQueue()
             => QualityMeasure.Queue;
 
         public void ClearQueue()
-            => QualityMeasure.Reset();
+        {
+            QualityMeasure.Reset();
+            QualityMeasure.Enabled = false;
+        }
     }
 }

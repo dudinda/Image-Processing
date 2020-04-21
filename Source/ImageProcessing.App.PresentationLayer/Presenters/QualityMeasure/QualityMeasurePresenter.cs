@@ -65,12 +65,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                                                  random.Next(0, 256))
                         )
                         .SetMarkerStyle(MarkerStyle.None)
-                        .SetChartType(SeriesChartType.Column);
+                        .SetChartType(SeriesChartType.Column)
+                        .SetLabelAngle(-90);
 
 
                 chart.Series.Add(_builder.Build());
                 chart.Series[key].Points.DataBindXY(names, variance);
-                chart.Series[key].LabelAngle = -90;
             }
         }
     }

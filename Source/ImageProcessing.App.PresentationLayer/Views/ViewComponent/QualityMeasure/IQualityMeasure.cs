@@ -5,6 +5,11 @@ namespace ImageProcessing.App.PresentationLayer.Views.ViewComponent.QualityMeasu
 {
     public interface IQualityMeasure
     {
+        /// <summary>
+        /// Adds an image, transformed by a distribution to
+        /// the quality measure container.
+        /// </summary>
+        void AddToQualityMeasureContainer(Bitmap transformed);
         ConcurrentQueue<Bitmap> GetQualityQueue();
         void ClearQueue();
     }
