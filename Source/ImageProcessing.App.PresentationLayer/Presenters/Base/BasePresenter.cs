@@ -1,7 +1,7 @@
 using System;
 
 using ImageProcessing.App.CommonLayer.Helpers;
-using ImageProcessing.App.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Microkernel.MVP.Presenter;

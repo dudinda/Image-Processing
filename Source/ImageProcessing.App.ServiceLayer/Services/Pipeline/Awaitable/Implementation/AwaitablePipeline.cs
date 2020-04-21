@@ -2,11 +2,11 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.ServiceLayer.Services.Pipeline.AwaitablePipeline.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.Utility.DataStructure.BlockingQueue.Implementation;
 using ImageProcessing.Utility.DataStructure.BlockingQueue.Interface;
 
-namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.AwaitablePipeline.Implementation
+namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Implementation
 {
     public sealed class AwaitablePipeline : IAwaitablePipeline
     {
