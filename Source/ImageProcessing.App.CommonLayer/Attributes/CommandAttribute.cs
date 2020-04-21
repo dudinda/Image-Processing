@@ -4,7 +4,7 @@ using System.Reflection;
 namespace ImageProcessing.App.CommonLayer.Attributes
 {
     /// <summary>
-    /// Execute a decorated method  by the key.
+    /// Execute by the key a decorated with the attribute method.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
     public sealed class CommandAttribute : Attribute
