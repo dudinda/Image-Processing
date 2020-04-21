@@ -9,6 +9,11 @@ namespace ImageProcessing.App.DomainLayer.Factory.RgbFilters.Recommendation.Impl
 {
     public sealed class RecommendationFactory : IRecommendationFactory
     {
+        /// <summary>
+        /// A factory method
+        /// where the <see cref="Luma"/> represents an
+        /// enumeration for the types implementing the <see cref="IRecommendation"/>.
+        /// </summary>
         public IRecommendation Get(Luma filter)
             => filter
         switch

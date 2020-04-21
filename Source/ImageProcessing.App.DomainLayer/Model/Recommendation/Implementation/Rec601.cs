@@ -2,12 +2,13 @@ using ImageProcessing.App.DomainLayer.Model.Recommendation.Interface;
 
 namespace ImageProcessing.App.DomainLayer.Model.Recommendation.Implementation
 {
+    /// <inheritdoc cref="IRecommendation"/>
     internal sealed class Rec601 : IRecommendation
     {
         /// <summary>
         /// Evaluate relative luminance by Rec. 601.
         /// </summary>
-        public double GetLuma(ref byte R, ref byte G, ref byte B)
-            => R * 0.299 + G * 0.587 + B * 0.114;
+        public double GetLuma(ref byte r, ref byte g, ref byte b)
+            => r * 0.299 + g * 0.587 + b * 0.114;
     }
 }
