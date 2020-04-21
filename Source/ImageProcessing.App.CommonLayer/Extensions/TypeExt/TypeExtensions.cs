@@ -5,7 +5,7 @@ using System.Reflection;
 
 using ImageProcessing.App.CommonLayer.Attributes;
 
-namespace ImageProcessing.App.CommonLayer.Extensions.TypeExtensions
+namespace ImageProcessing.App.CommonLayer.Extensions.TypeExt
 {
     /// <summary>
     /// Extension methods for a <see cref="Type"> class.
@@ -50,7 +50,7 @@ namespace ImageProcessing.App.CommonLayer.Extensions.TypeExtensions
             (this Type type, Func<TAttribute, TValue> valueSelector)
             where TAttribute : Attribute
         {
-            if(type is null)
+            if (type is null)
             {
                 throw new ArgumentNullException(nameof(type));
             }

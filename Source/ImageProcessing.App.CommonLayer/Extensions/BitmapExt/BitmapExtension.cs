@@ -4,9 +4,9 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.CommonLayer.Extensions.EnumExtensions;
+using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
 
-namespace ImageProcessing.App.CommonLayer.Extensions.BitmapExtensions
+namespace ImageProcessing.App.CommonLayer.Extensions.BitmapExt
 {
     /// <summary>
     /// Extension methods for a <see cref="Bitmap"> class.

@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace ImageProcessing.App.CommonLayer.Extensions.Expressions
+namespace ImageProcessing.App.CommonLayer.Extensions.ExpressionExt
 {
     public static class ExpressionExtensions
     {

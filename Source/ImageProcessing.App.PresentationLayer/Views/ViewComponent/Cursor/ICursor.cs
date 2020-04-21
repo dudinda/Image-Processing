@@ -7,6 +7,9 @@ namespace ImageProcessing.App.PresentationLayer.Views.ViewComponent.Cursor
     /// </summary>
     public interface ICursor
     {
+        /// <summary>
+        /// Set the specified <see cref="CursorType"/>.
+        /// </summary>
         void SetCursor(CursorType cursor);
     }
 }

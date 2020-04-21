@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.CommonLayer.Attributes;
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.CommonLayer.Extensions.TypeExtensions;
+using ImageProcessing.App.CommonLayer.Extensions.TypeExt;
 using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.UILayer.Code.Enums;
 

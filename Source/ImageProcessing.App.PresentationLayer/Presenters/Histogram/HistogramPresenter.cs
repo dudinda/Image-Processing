@@ -4,8 +4,8 @@ using System.Linq;
 
 using ImageProcessing.App.CommonLayer.Attributes;
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.CommonLayer.Extensions.EnumExtensions;
-using ImageProcessing.App.CommonLayer.Extensions.TypeExtensions;
+using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
+using ImageProcessing.App.CommonLayer.Extensions.TypeExt;
 using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.ViewModel.Histogram;

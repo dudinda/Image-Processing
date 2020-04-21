@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace ImageProcessing.App.CommonLayer.Extensions.StringExtensions
+namespace ImageProcessing.App.CommonLayer.Extensions.StringExt
 {
     /// <summary>
     /// Extension methods for a <see cref="string"> class.

@@ -8,10 +8,9 @@ namespace ImageProcessing.App.PresentationLayer.Views.ViewComponent.RgbMenu
     public interface IColorMenu
     {
         /// <summary>
-        /// Get the 
+        /// Get a color combination from the
+        /// rgb colors menu.
         /// </summary>
-        /// <param name="color"></param>
-        /// <returns></returns>
         RgbColors GetSelectedColors(RgbColors color);
     }
 }

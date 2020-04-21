@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using System.Threading;
 
-using ImageProcessing.App.CommonLayer.Extensions.Expressions;
+using ImageProcessing.App.CommonLayer.Extensions.ExpressionExt;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Item.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Item.Implementation.Action;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Item.Interface;
@@ -35,7 +35,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementatio
                 _token.ThrowIfCancellationRequested();
                 
                 if(function.OutputType == typeof(void) &&
-                        function.InputType.IsAssignableFrom(firstArg))
+                   function.InputType.IsAssignableFrom(firstArg))
                 {
                     firstArg = function.InputType;
                     result = function.Execute(result);

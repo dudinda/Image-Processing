@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.CommonLayer.Extensions.BitmapExtensions;
+using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
 using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Recommendation.Implementation;
 using ImageProcessing.App.DomainLayer.Model.RgbFilters.Interface;

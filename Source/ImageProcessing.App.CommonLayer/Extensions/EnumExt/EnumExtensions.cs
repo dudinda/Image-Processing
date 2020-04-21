@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
-namespace ImageProcessing.App.CommonLayer.Extensions.EnumExtensions
+namespace ImageProcessing.App.CommonLayer.Extensions.EnumExt
 {
     /// <summary>
     /// Extension methods for a <see cref="Enum"/> value.
