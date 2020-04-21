@@ -18,57 +18,57 @@ namespace ImageProcessing.App.UILayer.Form.Main
         [Command(
            nameof(ImageContainer.Source) +
            nameof(MainViewAction.ImageIsNull))]
-        private bool SourceImageIsNull()
+        private bool SourceImageIsNullCommand()
            => Src.Image is null;
 
         [Command(
             nameof(ImageContainer.Destination) +
             nameof(MainViewAction.ImageIsNull))]
-        private bool DestinationImageIsNull()
+        private bool DestinationImageIsNullCommand()
             => Dst.Image is null;
 
         [Command(
             nameof(ImageContainer.Source) +
             nameof(MainViewAction.Refresh))]
-        private void RefreshSource()
+        private void RefreshSourceCommand()
             => Src.Refresh();
 
         [Command(
             nameof(ImageContainer.Destination) +
             nameof(MainViewAction.Refresh))]
-        private void RefreshDestination()
+        private void RefreshDestinationCommand()
             => Dst.Refresh();
 
         [Command(
             nameof(ImageContainer.Source) +
             nameof(MainViewAction.GetCopy))]
-        private Image GetSourceCopy()
+        private Image GetSourceCopyCommand()
             => SrcImageCopy;
 
         [Command(
            nameof(ImageContainer.Source) +
            nameof(MainViewAction.SetCopy))]
-        private void SetSourceCopy(Image image)
+        private void SetSourceCopyCommand(Image image)
            => SrcImageCopy = Requires.IsNotNull(
                image, nameof(image));
 
         [Command(
            nameof(ImageContainer.Destination) +
            nameof(MainViewAction.SetCopy))]
-        private void SetDestinationCopy(Image image)
+        private void SetDestinationCopyCommand(Image image)
            => DstImageCopy = Requires.IsNotNull(
                image, nameof(image));
 
         [Command(
             nameof(ImageContainer.Destination) +
             nameof(MainViewAction.GetCopy))]
-        private Image GetDestinationCopy()
+        private Image GetDestinationCopyCommand()
             => DstImageCopy;
 
         [Command(
             nameof(ImageContainer.Source) +
             nameof(MainViewAction.SetImage))]
-        private void SetSourceImage(Image image)
+        private void SetSourceImageCommand(Image image)
         {
             SrcImage = Requires.IsNotNull(
                 image, nameof(image));
@@ -78,7 +78,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         [Command(
             nameof(ImageContainer.Destination) +
             nameof(MainViewAction.SetImage))]
-        private void SetDestinationImage(Image image)
+        private void SetDestinationImageCommand(Image image)
         {
             DstImage = Requires.IsNotNull(
                 image, nameof(image));
@@ -88,7 +88,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         [Command(
             nameof(ImageContainer.Source) +
             nameof(MainViewAction.ResetTrackBar))]
-        private void ResetSourceTrackBarValue(int value = 0, bool isEnabled = true)
+        private void ResetSourceTrackBarValueCommand(int value = 0, bool isEnabled = true)
         {
             SrcZoom.TrackBarValue = value;
             SrcZoom.Enabled = isEnabled;
@@ -98,7 +98,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         [Command(
             nameof(ImageContainer.Destination) +
             nameof(MainViewAction.ResetTrackBar))]
-        private void ResetDestinationTrackBarValue(int value = 0, bool isEnabled = true)
+        private void ResetDestinationTrackBarValueCommand(int value = 0, bool isEnabled = true)
         {
             DstZoom.TrackBarValue = value;
             DstZoom.Enabled = isEnabled;
@@ -108,51 +108,51 @@ namespace ImageProcessing.App.UILayer.Form.Main
         [Command(
             nameof(ImageContainer.Source) +
             nameof(MainViewAction.Zoom))]
-        private Image ZoomSourceImage()
+        private Image ZoomSourceImageCommand()
             => SrcZoom.Zoom();
 
         [Command(
             nameof(ImageContainer.Destination) +
             nameof(MainViewAction.Zoom))]
-        private Image ZoomDestinationImage()
+        private Image ZoomDestinationImageCommand()
            => DstZoom.Zoom();
 
         [Command(nameof(CursorType.Wait))]
-        private void SetWaitCursor()
+        private void SetWaitCursorCommand()
             => Application.UseWaitCursor = true;
 
         [Command(nameof(CursorType.Default))]
-        private void SetDefaultCursor()
+        private void SetDefaultCursorCommand()
             => Application.UseWaitCursor = false;
 
         [Command(
             nameof(ImageContainer.Source) +
             nameof(MainViewAction.SetToZoom))]
-        private Image SetToZoomSourceImage(Image image)
+        private Image SetToZoomSourceImageCommand(Image image)
             => SrcZoom.ImageToZoom = Requires.IsNotNull(
                 image, nameof(image));
 
         [Command(
             nameof(ImageContainer.Destination) +
             nameof(MainViewAction.SetToZoom))]
-        private Image SetToZoomDestinationImage(Image image)
+        private Image SetToZoomDestinationImageCommand(Image image)
            => DstZoom.ImageToZoom = Requires.IsNotNull(
                image, nameof(image));
 
         [Command(nameof(RgbColors.Green))]
-        private void SwitchGreenColor()
+        private void SwitchGreenColorCommand()
             => ColorFilterGreen.Checked = !ColorFilterGreen.Checked;
 
         [Command(nameof(RgbColors.Red))]
-        private void SwitchRedColor()
+        private void SwitchRedColorCommand()
             => ColorFilterRed.Checked = !ColorFilterRed.Checked;
 
         [Command(nameof(RgbColors.Blue))]
-        private void SwitchBlueColor()
+        private void SwitchBlueColorCommand()
             => ColorFilterBlue.Checked = !ColorFilterBlue.Checked;
 
         [Command(nameof(MainViewAction.GetColor))]
-        private RgbColors GetColor()
+        private RgbColors GetColorCommand()
         {
             var result = default(RgbColors);
 

@@ -103,9 +103,9 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
         /// <inheritdoc/>
         public Image ZoomImage(ImageContainer container)
-            => _command[
+            => (Image)_command[
                 container.ToString() + nameof(MainViewAction.Zoom)
-            ].Method.Invoke(this, null) as Image;
+            ].Method.Invoke(this, null);
 
         /// <inheritdoc/>
         public void SetImageToZoom(ImageContainer container, Image image)
@@ -115,9 +115,9 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
         /// <inheritdoc/>
         public Image GetImageCopy(ImageContainer container)
-            => _command[
+            => (Image)_command[
                 container.ToString() + nameof(MainViewAction.GetCopy)
-            ].Method.Invoke(this, null) as Image;
+            ].Method.Invoke(this, null);
 
         /// <inheritdoc/>
         public void SetImageCopy(ImageContainer container, Image copy)

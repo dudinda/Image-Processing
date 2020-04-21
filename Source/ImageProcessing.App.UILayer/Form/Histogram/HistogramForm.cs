@@ -50,7 +50,7 @@ namespace ImageProcessing.App.UILayer.Form.Histogram
         } 
         
         [Command(nameof(RandomVariableFunction.CDF))]
-        private void SetupCDF(string pmf, string cdf)
+        private void SetupCDFCommand(string pmf, string cdf)
         {          
             Text = cdf;
             Freq.Series[cdf].IsVisibleInLegend = true;
@@ -58,7 +58,7 @@ namespace ImageProcessing.App.UILayer.Form.Histogram
         }
 
         [Command(nameof(RandomVariableFunction.PMF))]
-        private void SetupPMF(string pmf, string cdf)
+        private void SetupPMFCommand(string pmf, string cdf)
         {
             Text = pmf;
             Freq.Series[pmf].IsVisibleInLegend = true;

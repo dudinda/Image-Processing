@@ -60,7 +60,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         }
 
         [Command(nameof(RandomVariableFunction.PMF))]
-        private decimal[] BuildPMF(Bitmap bmp)
+        private decimal[] BuildPMFCommand(Bitmap bmp)
         {
             var values = _distributionService.GetPMF(bmp);
             View.YAxisMaximum = (double)values.Max();
@@ -69,7 +69,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         }
 
         [Command(nameof(RandomVariableFunction.CDF))]
-        private decimal[] BuildCDF(Bitmap bmp)
+        private decimal[] BuildCDFCommand(Bitmap bmp)
         {
             View.YAxisMaximum = 1;
 

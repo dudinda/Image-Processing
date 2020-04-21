@@ -45,9 +45,9 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Convolution
 
             try
             {
-                return _command[
+                return (Bitmap)_command[
                     filter.ToString()
-                ].Method.Invoke(this, new object[] { bmp, filter }) as Bitmap;
+                ].Method.Invoke(this, new object[] { bmp, filter } );
             }
             catch(KeyNotFoundException)
             {
@@ -56,7 +56,7 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Convolution
         }
 
         [Command(nameof(ConvolutionFilter.LoGOperator3x3))]
-        private Bitmap LoG3x3(Bitmap bmp, ConvolutionFilter filter)
+        private Bitmap GetLoG3x3Command(Bitmap bmp, ConvolutionFilter filter)
         {
             return GetFilter(
                        GetFilter(bmp, ConvolutionFilter.GaussianBlur3x3),
@@ -65,16 +65,16 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Convolution
         }
 
         [Command(nameof(ConvolutionFilter.SobelOperator3x3))]
-        private Bitmap SobelOperator(Bitmap bmp, ConvolutionFilter filter)
+        private Bitmap GetSobelOperatorCommand(Bitmap bmp, ConvolutionFilter filter)
         {
-            using (var cpy = new Bitmap(bmp))
+            using (var copy = new Bitmap(bmp))
             {
                 var yDerivative = Task.Run(
                     () => GetFilter(bmp, ConvolutionFilter.SobelOperatorHorizontal3x3)
                 );
 
                 var xDerivative = Task.Run(
-                    () => GetFilter(cpy, ConvolutionFilter.SobelOperatorVertical3x3)
+                    () => GetFilter(copy, ConvolutionFilter.SobelOperatorVertical3x3)
                 );
 
                 return _cache.GetOrCreate(filter,
@@ -89,7 +89,7 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Convolution
         private Bitmap GetFilter(Bitmap src, ConvolutionFilter convolution)
             => _cache.GetOrCreate(convolution,
                () =>_convolutionFilterService
-                   .Convolution(src,_convolutionFilterFactory.Get(convolution)
+                   .Convolution(src, _convolutionFilterFactory.Get(convolution)
            )
        );
     }

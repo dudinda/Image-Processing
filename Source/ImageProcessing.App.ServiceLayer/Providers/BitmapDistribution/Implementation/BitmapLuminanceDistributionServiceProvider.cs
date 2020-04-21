@@ -50,19 +50,19 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistri
         }
 
         [Command(nameof(RandomVariableInfo.Expectation))]
-        private decimal GetExpectatoion(Bitmap bmp)
+        private decimal GetExpectationCommand(Bitmap bmp)
             => _service.GetExpectation(bmp);
 
         [Command(nameof(RandomVariableInfo.Variance))]
-        private decimal GetVariance(Bitmap bmp)
+        private decimal GetVarianceCommand(Bitmap bmp)
                => _service.GetVariance(bmp);
 
         [Command(nameof(RandomVariableInfo.Entropy))]
-        private decimal GetEntropy(Bitmap bmp)
+        private decimal GetEntropyCommand(Bitmap bmp)
               => _service.GetEntropy(bmp);
 
         [Command(nameof(RandomVariableInfo.StandardDeviation))]
-        private decimal GetStandardDeviation(Bitmap bmp)
+        private decimal GetStandardDeviationCommand(Bitmap bmp)
               => _service.GetStandardDeviation(bmp);
     }
 }
