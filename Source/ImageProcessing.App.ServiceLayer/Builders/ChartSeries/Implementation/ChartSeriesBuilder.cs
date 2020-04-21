@@ -10,10 +10,11 @@ namespace ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Implementation
         private string _name;
         private Color _color;
         private bool _IsVisibleInLegend;
-        private SeriesChartType _type;
-        private MarkerStyle _style;
-        private int _width;
+        private SeriesChartType _chartType;
+        private MarkerStyle _markerStyle;
+        private int _borderWidth;
         private Color _borderColor;
+        private int _labelAngle;
            
         public IChartSeriesBuilder SetName(string name)
         {
@@ -33,23 +34,23 @@ namespace ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Implementation
             return this;
         }
              
-        public IChartSeriesBuilder SetChartType(SeriesChartType type)
+        public IChartSeriesBuilder SetChartType(SeriesChartType chartType)
         {
-            _type = type;
+            _chartType = chartType;
             return this;
         }
             
 
-        public IChartSeriesBuilder SetMarkerStyle(MarkerStyle style)
+        public IChartSeriesBuilder SetMarkerStyle(MarkerStyle markerStyle)
         {
-            _style = style;
+            _markerStyle = markerStyle;
             return this;
         }
             
 
-        public IChartSeriesBuilder SetBorderWidth(int width)
+        public IChartSeriesBuilder SetBorderWidth(int borderWidth)
         {
-            _width = width;
+            _borderWidth = borderWidth;
             return this;
         }
 
@@ -59,16 +60,23 @@ namespace ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Implementation
             return this;
         }
 
+        public IChartSeriesBuilder SetLabelAngle(int labelAngle)
+        {
+            _labelAngle = labelAngle;
+            return this;
+        }
+
         public Series Build()
         {
             var series = new Series(_name);
 
-                series.Color             = _color;
-                series.BorderColor       = _borderColor;
-                series.IsVisibleInLegend = _IsVisibleInLegend;
-                series.ChartType         = _type;
-                series.MarkerStyle       = _style;
-                series.BorderWidth       = _width;
+            series.Color = _color;
+            series.BorderColor = _borderColor;
+            series.IsVisibleInLegend = _IsVisibleInLegend;
+            series.ChartType = _chartType;
+            series.MarkerStyle = _markerStyle;
+            series.BorderWidth = _borderWidth;
+            series.LabelAngle = _labelAngle;
 
             return series;
         }

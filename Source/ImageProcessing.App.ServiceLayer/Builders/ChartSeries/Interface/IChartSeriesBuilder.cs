@@ -10,9 +10,10 @@ namespace ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Interface
         IChartSeriesBuilder SetName(string name);
         IChartSeriesBuilder SetColor(Color color);
         IChartSeriesBuilder SetLegendVisibility(bool isVisible);
-        IChartSeriesBuilder SetChartType(SeriesChartType type);
-        IChartSeriesBuilder SetMarkerStyle(MarkerStyle style);
-        IChartSeriesBuilder SetBorderWidth(int width);
+        IChartSeriesBuilder SetChartType(SeriesChartType chartType);
+        IChartSeriesBuilder SetMarkerStyle(MarkerStyle markerStyle);
+        IChartSeriesBuilder SetBorderWidth(int borderWidth);
         IChartSeriesBuilder SetBorderColor(Color color);
+        IChartSeriesBuilder SetLabelAngle(int labelAngle);
     }
 }

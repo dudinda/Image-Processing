@@ -1,7 +1,14 @@
 namespace ImageProcessing.App.ServiceLayer.Builders.Base
 {
-    public interface IBuilder<out TBuilder>
+    /// <summary>
+    /// Provides a base interface for builders.
+    /// </summary
+    public interface IBuilder<out TModel>
     {
-        TBuilder Build();
+        /// <summary>
+        /// Built the specified <typeparamref name="TModel"/>
+        /// </summary>
+        /// <returns></returns>
+        TModel Build();
     }
 }
