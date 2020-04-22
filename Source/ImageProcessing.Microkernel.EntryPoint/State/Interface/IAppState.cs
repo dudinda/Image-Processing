@@ -23,7 +23,7 @@ namespace ImageProcessing.Microkernel.DI.EntryPoint.State.Interface
         /// <summary>
         /// Run the specified <typeparamref name="TMainPresenter"/>.
         /// </summary>
-        Task Run<TMainPresenter>()
+        void Run<TMainPresenter>()
             where TMainPresenter : class, IPresenter;
 
         /// <summary>

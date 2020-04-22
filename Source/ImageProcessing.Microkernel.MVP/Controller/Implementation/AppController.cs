@@ -36,7 +36,44 @@ namespace ImageProcessing.Microkernel.MVP.Controller.Implementation
         }
 
         /// <inheritdoc cref="IAppController.Run{TPresenter}"/>
-        public async Task Run<TPresenter>()
+        public void Run<TPresenter>()
+           where TPresenter : class, IPresenter
+        {
+            if (!IoC.IsRegistered<TPresenter>())
+            {
+                IoC.RegisterTransient<TPresenter>();
+            }
+
+            IoC.Resolve<TPresenter>()
+               .Run()
+               .GetAwaiter()
+               .GetResult();
+
+        }
+
+        /// <inheritdoc cref="IAppController.RunAsync{TPresenter, TViewModel}(TViewModel)"/>
+        public void Run<TPresenter, TViewModel>(TViewModel vm)
+            where TPresenter : class, IPresenter<TViewModel>
+            where TViewModel : class
+        {
+            if (vm is null)
+            {
+                throw new ArgumentNullException(nameof(vm));
+            }
+
+            if (!IoC.IsRegistered<TPresenter>())
+            {
+                IoC.RegisterTransient<TPresenter>();
+            }
+
+            IoC.Resolve<TPresenter>()
+               .Run(vm)
+               .GetAwaiter()
+               .GetResult();
+        }
+
+        /// <inheritdoc cref="IAppController.RunAsync{TPresenter}"/>
+        public async Task RunAsync<TPresenter>()
             where TPresenter : class, IPresenter
         {
             if (!IoC.IsRegistered<TPresenter>())
@@ -50,8 +87,8 @@ namespace ImageProcessing.Microkernel.MVP.Controller.Implementation
                 .ConfigureAwait(false);
         }
 
-        /// <inheritdoc cref="IAppController.Run{TPresenter, TViewModel}(TViewModel)"/>
-        public async Task Run<TPresenter, TViewModel>(TViewModel vm)
+        /// <inheritdoc cref="IAppController.RunAsync{TPresenter, TViewModel}(TViewModel)"/>
+        public async Task RunAsync<TPresenter, TViewModel>(TViewModel vm)
             where TPresenter : class, IPresenter<TViewModel>
             where TViewModel : class
         {
@@ -75,6 +112,6 @@ namespace ImageProcessing.Microkernel.MVP.Controller.Implementation
         /// Dispose the specified <see cref="IoC"/>.
         /// </summary>
         public void Dispose()
-            => IoC.Dispose();
+            => IoC.Dispose();   
     }
 }

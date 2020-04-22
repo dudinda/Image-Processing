@@ -26,14 +26,29 @@ namespace ImageProcessing.Microkernel.MVP.Controller.Interface
         /// Run the specified <typeparamref name="TPresenter"/>.
         /// <para>Where the <typeparamref name="TPresenter"/> is a <see cref="IPresenter"/> type.</para>
         /// </summary>
-        Task Run<TPresenter>()
+        void Run<TPresenter>()
             where TPresenter : class, IPresenter;
 
         /// <summary>
         /// Run the specified <typeparamref name="TPresenter"/> with a selected <typeparamref name="TViewModel"/> .
         /// <para>Where the <typeparamref name="TPresenter"/> is a <see cref="IPresenter{TViewModel}"/> type.</para>
         /// </summary>
-        Task Run<TPresenter, TViewModel>(TViewModel vm)
+        void Run<TPresenter, TViewModel>(TViewModel vm)
+            where TPresenter : class, IPresenter<TViewModel>
+            where TViewModel : class;
+
+        /// <summary>
+        /// Run asynchronously the specified <typeparamref name="TPresenter"/>.
+        /// <para>Where the <typeparamref name="TPresenter"/> is a <see cref="IPresenter"/> type.</para>
+        /// </summary>
+        Task RunAsync<TPresenter>()
+            where TPresenter : class, IPresenter;
+
+        /// <summary>
+        /// Run asynchronously the specified <typeparamref name="TPresenter"/> with a selected <typeparamref name="TViewModel"/> .
+        /// <para>Where the <typeparamref name="TPresenter"/> is a <see cref="IPresenter{TViewModel}"/> type.</para>
+        /// </summary>
+        Task RunAsync<TPresenter, TViewModel>(TViewModel vm)
             where TPresenter : class, IPresenter<TViewModel>
             where TViewModel : class;
     }

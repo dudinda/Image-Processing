@@ -26,7 +26,7 @@ namespace ImageProcessing.Microkernel.State.EndWork
                 .Controller.Dispose();
 
         /// <inheritdoc/>
-        public Task Run<TMainPresenter>()
+        public void Run<TMainPresenter>()
             where TMainPresenter : class, IPresenter
             => throw new InvalidOperationException(
                 "The application is already running."

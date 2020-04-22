@@ -77,7 +77,7 @@ namespace ImageProcessing.Microkernel.DI.State.IsNotBuilt
             );
 
         /// <inheritdoc/>
-        public Task Run<TMainPresenter>()
+        public void Run<TMainPresenter>()
             where TMainPresenter : class, IPresenter
             => throw new InvalidOperationException(
                 "The application is not built."

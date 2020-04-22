@@ -34,16 +34,14 @@ namespace ImageProcessing.Microkernel.State.Implementation.IsBuilt
         }
 
         /// <inheritdoc/>
-        public async Task Run<TMainPresenter>()
+        public void Run<TMainPresenter>()
             where TMainPresenter : class, IPresenter
         {
             AppLifecycle.State = StateFactory.Get(
                 AppState.StartWork
             );
 
-            await AppLifecycle.State
-                .Run<TMainPresenter>()
-                .ConfigureAwait(false);
+            AppLifecycle.State.Run<TMainPresenter>();    
         }
     }
 }

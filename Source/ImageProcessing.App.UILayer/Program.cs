@@ -10,15 +10,12 @@ namespace ImageProcessing.App.UILayer
     internal static class Program
     {
         [STAThread]
-        internal static async Task Main()
+        internal static void Main()
         {
             try
             {
                 AppLifecycle.Build<Startup>(DiContainer.Ninject);
-
-                await AppLifecycle
-                    .Run<MainPresenter>()
-                    .ConfigureAwait(true);
+                AppLifecycle.Run<MainPresenter>();
             }
             catch(Exception ex)
             {

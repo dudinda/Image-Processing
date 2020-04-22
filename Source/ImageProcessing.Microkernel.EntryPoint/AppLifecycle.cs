@@ -30,11 +30,9 @@ namespace ImageProcessing.Microkernel
             => State.Build<TStartup>(container);
 
         /// <inheritdoc cref="IAppState.Run{TMainPresenter}"/>
-        public static async Task Run<TMainPresenter>()
+        public static void Run<TMainPresenter>()
             where TMainPresenter : class, IPresenter
-            => await State
-            .Run<TMainPresenter>()
-            .ConfigureAwait(false);
+            => State.Run<TMainPresenter>();
 
         /// <inheritdoc cref="IAppState.Exit"/>
         public static void Exit()

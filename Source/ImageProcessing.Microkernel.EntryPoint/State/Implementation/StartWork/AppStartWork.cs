@@ -33,10 +33,10 @@ namespace ImageProcessing.Microkernel.State.StartWork
         }
 
         /// <inheritdoc/>
-        public async Task Run<TMainPresenter>()
+        public void Run<TMainPresenter>()
             where TMainPresenter : class, IPresenter
-            => await AppLifecycle.Controller
-            .Run<TMainPresenter>()
-            .ConfigureAwait(false);      
+            => AppLifecycle
+                .Controller
+                .Run<TMainPresenter>();    
     }
 }
