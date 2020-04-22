@@ -5,7 +5,7 @@ namespace ImageProcessing.App.PresentationLayer.Views.ViewComponent.QualityMeasu
 {
     public interface IQualityMeasure
     {
-        bool QualityMeasureIsEnabled { get; set; }
+        void EnableQualityQueue(bool isEnabled);
 
         /// <summary>
         /// Adds an image, transformed by a distribution to
@@ -13,6 +13,6 @@ namespace ImageProcessing.App.PresentationLayer.Views.ViewComponent.QualityMeasu
         /// </summary>
         void AddToQualityMeasureContainer(Bitmap transformed);
         ConcurrentQueue<Bitmap> GetQualityQueue();
-        void ClearQueue();
+        void ClearQualityQueue();
     }
 }

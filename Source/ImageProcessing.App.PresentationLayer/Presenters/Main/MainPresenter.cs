@@ -162,8 +162,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         new QualityMeasureViewModel(View.GetQualityQueue())
                     );
 
-                    View.ClearQueue();
-                    View.QualityMeasureIsEnabled = false;
+                    View.ClearQualityQueue();
+                    View.EnableQualityQueue(false);
                 }
             }
             catch (Exception ex)
@@ -347,7 +347,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         )
                     )
                     {
-                        View.QualityMeasureIsEnabled = true;
+                        View.EnableQualityQueue(true);
 
                         await Render(
                             ImageContainer.Destination
