@@ -163,6 +163,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     );
 
                     View.ClearQueue();
+                    View.QualityMeasureIsEnabled = false;
                 }
             }
             catch (Exception ex)
@@ -331,24 +332,28 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                     copy.Tag = e.Distribution.ToString();
 
-                    Pipeline
-                        .Register(new PipelineBlock(copy)
-                            .Add<Bitmap, Bitmap>(
-                                (bmp) => _lumaProvider.Transform(bmp, e.Distribution, e.Parameters)
-                            )
-                            .Add<Bitmap>(
-                                (bmp) => View.AddToQualityMeasureContainer(bmp)
-                            )
-                            .Add<Bitmap, Bitmap>(
-                                (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
-                            )
-                        );
+                    if(
+                        Pipeline
+                            .Register(new PipelineBlock(copy)
+                                .Add<Bitmap, Bitmap>(
+                                    (bmp) => _lumaProvider.Transform(bmp, e.Distribution, e.Parameters)
+                                )
+                                .Add<Bitmap>(
+                                    (bmp) => View.AddToQualityMeasureContainer(bmp)
+                                )
+                                .Add<Bitmap, Bitmap>(
+                                    (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
+                                )
+                        )
+                    )
+                    {
+                        View.QualityMeasureIsEnabled = true;
 
-                    await Render(
-                        ImageContainer.Destination
-                    ).ConfigureAwait(true);
+                        await Render(
+                            ImageContainer.Destination
+                        ).ConfigureAwait(true);
+                    }          
                 }
-
             }
             catch (OperationCanceledException cancelEx)
             {
@@ -519,8 +524,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                 View.SetImageCopy(to, new Bitmap(bmp));
 
                 View.AddToUndoContainer(
-                    (new Bitmap(View.GetImageCopy(to)), to)
-                );
+    (new Bitmap(View.GetImageCopy(to)), to)
+);
 
                 View.SetImageToZoom(to, new Bitmap(bmp));
 
@@ -529,11 +534,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         }
 
         private async Task<Bitmap> GetImageCopy(ImageContainer container)
-        {
-            return await _operationLocker.LockAsync(() =>
+            => await _operationLocker.LockAsync(() =>
                   new Bitmap(View.GetImageCopy(container))
             ).ConfigureAwait(true);
-        }
 
         private async Task Render(ImageContainer container)
         {

@@ -18,7 +18,6 @@ namespace ImageProcessing.App.UILayer.Control
             if(!IsQueued(bitmap))
             {
                 Queue.Enqueue(bitmap);
-                Enabled = true;
                 return true;
             }
 
@@ -31,8 +30,6 @@ namespace ImageProcessing.App.UILayer.Control
             {
 
             }
-
-            Enabled = false;
         }   
     }
 }

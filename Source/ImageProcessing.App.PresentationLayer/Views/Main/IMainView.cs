@@ -26,12 +26,5 @@ namespace ImageProcessing.App.PresentationLayer.Views.Main
         string PathToFile { get; set; }
 
         void AddToUndoContainer((Bitmap changed, ImageContainer from) action);
-
-        /// <summary>
-        /// Adds an image, transformed by a distribution to
-        /// the quality measure container.
-        /// </summary>
-        void AddToQualityMeasureContainer(Bitmap transformed);
-
     }
 }

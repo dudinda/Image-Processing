@@ -153,14 +153,18 @@ namespace ImageProcessing.App.UILayer.Form.Main
         public void AddToUndoContainer((Bitmap changed, ImageContainer from) action)
             => Container.Add(action);
 
+
+        public bool QualityMeasureIsEnabled
+        {
+            get => QualityMeasure.Enabled;
+            set => QualityMeasure.Enabled = value;
+        }
+            
+
         /// <inheritdoc/>
         public void AddToQualityMeasureContainer(Bitmap transformed)
         {
-            if(QualityMeasure.Add(transformed))
-            {
-                QualityMeasure.Enabled = true;
-            }
-
+            QualityMeasure.Add(transformed);
         }
 
         public ConcurrentQueue<Bitmap> GetQualityQueue()
@@ -169,7 +173,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
         public void ClearQueue()
         {
             QualityMeasure.Reset();
-            QualityMeasure.Enabled = false;
         }
     }
 }

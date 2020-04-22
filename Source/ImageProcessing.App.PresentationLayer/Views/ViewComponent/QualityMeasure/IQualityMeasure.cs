@@ -5,6 +5,8 @@ namespace ImageProcessing.App.PresentationLayer.Views.ViewComponent.QualityMeasu
 {
     public interface IQualityMeasure
     {
+        bool QualityMeasureIsEnabled { get; set; }
+
         /// <summary>
         /// Adds an image, transformed by a distribution to
         /// the quality measure container.

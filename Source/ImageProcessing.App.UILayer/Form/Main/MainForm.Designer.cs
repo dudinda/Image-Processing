@@ -31,6 +31,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.FileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -352,7 +353,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // FirstParamLabel
             // 
             this.FirstParamLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.FirstParamLabel.Image = global::ImageProcessing.App.UILayer.Properties.Resources.FirstParamLabel_Image;
+            this.FirstParamLabel.Image = ((System.Drawing.Image)(resources.GetObject("FirstParamLabel.Image")));
             this.FirstParamLabel.Name = "FirstParamLabel";
             this.FirstParamLabel.Size = new System.Drawing.Size(20, 24);
             this.FirstParamLabel.ToolTipText = "First parameter";
@@ -365,7 +366,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // 
             // SecondParamLabel
             // 
-            this.SecondParamLabel.Image = global::ImageProcessing.App.UILayer.Properties.Resources.SecondParamLabel_Image;
+            this.SecondParamLabel.Image = ((System.Drawing.Image)(resources.GetObject("SecondParamLabel.Image")));
             this.SecondParamLabel.Name = "SecondParamLabel";
             this.SecondParamLabel.Size = new System.Drawing.Size(20, 24);
             this.SecondParamLabel.ToolTipText = "Второй параметр";
@@ -379,7 +380,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // PMF
             // 
             this.PMF.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.PMF.Image = global::ImageProcessing.App.UILayer.Properties.Resources.PMF_Image;
+            this.PMF.Image = ((System.Drawing.Image)(resources.GetObject("PMF.Image")));
             this.PMF.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.PMF.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.PMF.Name = "PMF";
@@ -390,7 +391,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // CDF
             // 
             this.CDF.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.CDF.Image = global::ImageProcessing.App.UILayer.Properties.Resources.CDF_Image;
+            this.CDF.Image = ((System.Drawing.Image)(resources.GetObject("CDF.Image")));
             this.CDF.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.CDF.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.CDF.Name = "CDF";
@@ -401,7 +402,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // Expectation
             // 
             this.Expectation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Expectation.Image = global::ImageProcessing.App.UILayer.Properties.Resources.Expectation_Image;
+            this.Expectation.Image = ((System.Drawing.Image)(resources.GetObject("Expectation.Image")));
             this.Expectation.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.Expectation.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Expectation.Name = "Expectation";
@@ -412,7 +413,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // Variance
             // 
             this.Variance.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Variance.Image = global::ImageProcessing.App.UILayer.Properties.Resources.Variance_Image;
+            this.Variance.Image = ((System.Drawing.Image)(resources.GetObject("Variance.Image")));
             this.Variance.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.Variance.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Variance.Name = "Variance";
@@ -423,7 +424,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // StandardDeviation
             // 
             this.StandardDeviation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.StandardDeviation.Image = global::ImageProcessing.App.UILayer.Properties.Resources.StandardDeviation_Image;
+            this.StandardDeviation.Image = ((System.Drawing.Image)(resources.GetObject("StandardDeviation.Image")));
             this.StandardDeviation.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.StandardDeviation.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.StandardDeviation.Name = "StandardDeviation";
@@ -435,7 +436,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // Entropy
             // 
             this.Entropy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Entropy.Image = global::ImageProcessing.App.UILayer.Properties.Resources.Entropy_Image;
+            this.Entropy.Image = ((System.Drawing.Image)(resources.GetObject("Entropy.Image")));
             this.Entropy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.Entropy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Entropy.Name = "Entropy";
@@ -447,7 +448,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // 
             this.Undo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.Undo.Enabled = false;
-            this.Undo.Image = global::ImageProcessing.App.UILayer.Properties.Resources.Undo_Image;
+            this.Undo.Image = ((System.Drawing.Image)(resources.GetObject("Undo.Image")));
             this.Undo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Undo.Name = "Undo";
             this.Undo.Size = new System.Drawing.Size(24, 24);
@@ -457,7 +458,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // 
             this.Redo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.Redo.Enabled = false;
-            this.Redo.Image = global::ImageProcessing.App.UILayer.Properties.Resources.Redo_Image;
+            this.Redo.Image = ((System.Drawing.Image)(resources.GetObject("Redo.Image")));
             this.Redo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Redo.Name = "Redo";
             this.Redo.Size = new System.Drawing.Size(24, 24);
@@ -466,7 +467,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // ReplaceSrcByDst
             // 
             this.ReplaceSrcByDst.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ReplaceSrcByDst.Image = global::ImageProcessing.App.UILayer.Properties.Resources.change_Image;
+            this.ReplaceSrcByDst.Image = ((System.Drawing.Image)(resources.GetObject("ReplaceSrcByDst.Image")));
             this.ReplaceSrcByDst.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ReplaceSrcByDst.Name = "ReplaceSrcByDst";
             this.ReplaceSrcByDst.Size = new System.Drawing.Size(24, 24);
@@ -476,7 +477,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // ReplaceDstBySrc
             // 
             this.ReplaceDstBySrc.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ReplaceDstBySrc.Image = global::ImageProcessing.App.UILayer.Properties.Resources.toolStripButton1_Image;
+            this.ReplaceDstBySrc.Image = ((System.Drawing.Image)(resources.GetObject("ReplaceDstBySrc.Image")));
             this.ReplaceDstBySrc.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ReplaceDstBySrc.Name = "ReplaceDstBySrc";
             this.ReplaceDstBySrc.Size = new System.Drawing.Size(24, 24);
@@ -492,7 +493,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // ShuffleSrc
             // 
             this.ShuffleSrc.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ShuffleSrc.Image = global::ImageProcessing.App.UILayer.Properties.Resources.ShuffleSrc_Image;
+            this.ShuffleSrc.Image = ((System.Drawing.Image)(resources.GetObject("ShuffleSrc.Image")));
             this.ShuffleSrc.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ShuffleSrc.Name = "ShuffleSrc";
             this.ShuffleSrc.Size = new System.Drawing.Size(24, 24);
@@ -502,7 +503,8 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // QualityMeasure
             // 
             this.QualityMeasure.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.QualityMeasure.Image = global::ImageProcessing.App.UILayer.Properties.Resources.toolStripButton11_Image;
+            this.QualityMeasure.Enabled = false;
+            this.QualityMeasure.Image = ((System.Drawing.Image)(resources.GetObject("QualityMeasure.Image")));
             this.QualityMeasure.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.QualityMeasure.Name = "QualityMeasure";
             this.QualityMeasure.Size = new System.Drawing.Size(24, 24);

@@ -22,7 +22,7 @@ namespace ImageProcessing.App.UILayer.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace ImageProcessing.App.UILayer.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ImageProcessing.App.UILayer.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace ImageProcessing.App.UILayer.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap CDF_Image {
+        public static System.Drawing.Bitmap CDF_Image {
             get {
                 object obj = ResourceManager.GetObject("CDF.Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -73,7 +73,7 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap change_Image {
+        public static System.Drawing.Bitmap change_Image {
             get {
                 object obj = ResourceManager.GetObject("change.Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -83,7 +83,7 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap compare_Image {
+        public static System.Drawing.Bitmap compare_Image {
             get {
                 object obj = ResourceManager.GetObject("compare.Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -93,7 +93,7 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Entropy_Image {
+        public static System.Drawing.Bitmap Entropy_Image {
             get {
                 object obj = ResourceManager.GetObject("Entropy.Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -103,7 +103,7 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Expectation_Image {
+        public static System.Drawing.Bitmap Expectation_Image {
             get {
                 object obj = ResourceManager.GetObject("Expectation.Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -113,7 +113,7 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap FirstParamLabel_Image {
+        public static System.Drawing.Bitmap FirstParamLabel_Image {
             get {
                 object obj = ResourceManager.GetObject("FirstParamLabel.Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -123,7 +123,7 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap PMF_Image {
+        public static System.Drawing.Bitmap PMF_Image {
             get {
                 object obj = ResourceManager.GetObject("PMF.Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -133,7 +133,7 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Redo_Image {
+        public static System.Drawing.Bitmap Redo_Image {
             get {
                 object obj = ResourceManager.GetObject("Redo_Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -143,7 +143,7 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap SecondParamLabel_Image {
+        public static System.Drawing.Bitmap SecondParamLabel_Image {
             get {
                 object obj = ResourceManager.GetObject("SecondParamLabel.Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -153,7 +153,7 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ShuffleSrc_Image {
+        public static System.Drawing.Bitmap ShuffleSrc_Image {
             get {
                 object obj = ResourceManager.GetObject("ShuffleSrc.Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -163,7 +163,7 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap StandardDeviation_Image {
+        public static System.Drawing.Bitmap StandardDeviation_Image {
             get {
                 object obj = ResourceManager.GetObject("StandardDeviation.Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -173,7 +173,7 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap toolStripButton1_Image {
+        public static System.Drawing.Bitmap toolStripButton1_Image {
             get {
                 object obj = ResourceManager.GetObject("toolStripButton1.Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -183,7 +183,7 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap toolStripButton11_Image {
+        public static System.Drawing.Bitmap toolStripButton11_Image {
             get {
                 object obj = ResourceManager.GetObject("toolStripButton11.Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -193,7 +193,7 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Undo_Image {
+        public static System.Drawing.Bitmap Undo_Image {
             get {
                 object obj = ResourceManager.GetObject("Undo.Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -203,7 +203,7 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Variance_Image {
+        public static System.Drawing.Bitmap Variance_Image {
             get {
                 object obj = ResourceManager.GetObject("Variance.Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -213,7 +213,7 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ZoomInDstBtn_Image {
+        public static System.Drawing.Bitmap ZoomInDstBtn_Image {
             get {
                 object obj = ResourceManager.GetObject("ZoomInDstBtn.Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -223,7 +223,7 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ZoomInSrcBtn_Image {
+        public static System.Drawing.Bitmap ZoomInSrcBtn_Image {
             get {
                 object obj = ResourceManager.GetObject("ZoomInSrcBtn.Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -233,7 +233,7 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ZoomOutDstBtn_Image {
+        public static System.Drawing.Bitmap ZoomOutDstBtn_Image {
             get {
                 object obj = ResourceManager.GetObject("ZoomOutDstBtn.Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -243,7 +243,7 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ZoomOutSrcBtn_Image {
+        public static System.Drawing.Bitmap ZoomOutSrcBtn_Image {
             get {
                 object obj = ResourceManager.GetObject("ZoomOutSrcBtn.Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
