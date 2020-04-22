@@ -36,16 +36,14 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             Requires.IsNotNull(vm, nameof(vm));
 
-            await Build(vm.Source, vm.Mode).ConfigureAwait(true);
+            Build(vm.Source, vm.Mode);
 
             View.Show();
         }
 
-        private async Task Build(Bitmap bitmap, RandomVariableFunction function)
+        private void Build(Bitmap bitmap, RandomVariableFunction function)
         {
             Requires.IsNotNull(bitmap, nameof(bitmap));
-
-            await Task.Yield();
 
             var chart = View.GetChart;
 

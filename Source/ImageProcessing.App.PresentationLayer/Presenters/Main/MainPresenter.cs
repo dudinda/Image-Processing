@@ -83,17 +83,19 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                 {
                     View.SetCursor(CursorType.Wait);
 
-                    Pipeline
-                        .Register(new PipelineBlock(result)
-                            .Add<Bitmap, Bitmap>(
-                                (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Source)
+                    if(
+                        Pipeline
+                            .Register(new PipelineBlock(result)
+                                .Add<Bitmap, Bitmap>(
+                                    (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Source)
+                                 )
                              )
-                         );
-
-                    await Render(
-                        ImageContainer.Source
-                    ).ConfigureAwait(true);
-
+                        )
+                    {
+                        await Render(
+                            ImageContainer.Source
+                        ).ConfigureAwait(true);
+                    }
                 }
             }
             catch(Exception ex)
@@ -136,11 +138,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         ImageContainer.Source
                     ).ConfigureAwait(true);
 
-                    await Task.Run(
-                        () => copy.Save(View.PathToFile,
-                                        Path.GetExtension(View.PathToFile)
-                                            .GetImageFormat())
-                        ).ConfigureAwait(true);
+                    await Task.Run(() => copy
+                    .Save(View.PathToFile,
+                          Path.GetExtension(View.PathToFile)
+                              .GetImageFormat())
+                    ).ConfigureAwait(true);
                 }
             }
             catch(Exception ex)
@@ -204,16 +206,19 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                 {
                     View.SetCursor(CursorType.Wait);
 
-                    Pipeline
-                        .Register((e.Block as IPipelineBlock)
-                            .Add<Bitmap, Bitmap>(
-                                (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
+                    if(
+                        Pipeline
+                            .Register((e.Block as IPipelineBlock)
+                                .Add<Bitmap, Bitmap>(
+                                    (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
+                                )
                             )
-                        );
-
-                    await Render(
-                        ImageContainer.Destination
-                    ).ConfigureAwait(true);
+                        )
+                    {
+                        await Render(
+                            ImageContainer.Destination
+                        ).ConfigureAwait(true);
+                    }    
                 }
             }
             catch (OperationCanceledException cancelEx)
