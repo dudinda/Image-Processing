@@ -39,8 +39,6 @@ namespace ImageProcessing.Microkernel.MVP.Controller.Implementation
         public async Task Run<TPresenter>()
             where TPresenter : class, IPresenter
         {
-            await Task.Yield();
-
             if (!IoC.IsRegistered<TPresenter>())
             {
                 IoC.RegisterTransient<TPresenter>();
@@ -61,8 +59,6 @@ namespace ImageProcessing.Microkernel.MVP.Controller.Implementation
             {
                 throw new ArgumentNullException(nameof(vm));
             }
-
-            await Task.Yield();
 
             if (!IoC.IsRegistered<TPresenter>())
             {
