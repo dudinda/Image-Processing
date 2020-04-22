@@ -581,9 +581,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         }
            
         private async Task CloseForm(CloseFormEventArgs e)
-        {
-            await Task.Yield();
-            Controller.Dispose();
-        } 
+            => Controller.Dispose();
     }
 }

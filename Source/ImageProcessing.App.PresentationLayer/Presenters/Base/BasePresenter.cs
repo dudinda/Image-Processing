@@ -50,11 +50,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
         
         /// <inheritdoc/>
 		public virtual async Task Run()
-        {
-            await Task.Yield();
-
-            View.Show();
-        }
+            => View.Show();
 	}
 
     /// <summary>
@@ -107,8 +103,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
 		{
 			ViewModel = Requires.IsNotNull(
                 vm, nameof(vm));
-
-            await Task.Yield();
 
 			View.Show();
 		}
