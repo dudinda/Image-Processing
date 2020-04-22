@@ -37,7 +37,7 @@ namespace ImageProcessing.App.UILayer.Form.Base
     /// <summary>
     /// Represents the base form.
     /// </summary>
-    internal class BaseForm : MetroForm
+    internal class BaseForm : MetroForm, IDisposable
     {
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller { get; }
@@ -48,5 +48,11 @@ namespace ImageProcessing.App.UILayer.Form.Base
                 controller, nameof(controller));
 
         protected BaseForm() { }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            Hide();
+            e.Cancel = true;
+        }
     }
 }

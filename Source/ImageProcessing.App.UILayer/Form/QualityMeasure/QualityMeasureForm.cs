@@ -9,8 +9,7 @@ namespace ImageProcessing.App.UILayer.Form.QualityMeasure
     internal sealed partial class QualityMeasureForm : BaseForm, IQualityMeasureView
     {
         public QualityMeasureForm(IAppController controller)
-            : base(controller)
-            => InitializeComponent();   
+            : base(controller) => InitializeComponent();   
         
         public Chart GetChart
             => Histogram;
@@ -19,7 +18,17 @@ namespace ImageProcessing.App.UILayer.Form.QualityMeasure
         {
             Focus();
             base.Show();
-        } 
+        }
+
+        public new void Dispose()
+        {
+            if (components != null)
+            {
+                components.Dispose();
+            }
+
+            base.Dispose(true);
+        }
     }
 }
 

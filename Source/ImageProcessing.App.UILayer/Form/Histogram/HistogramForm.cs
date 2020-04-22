@@ -65,5 +65,14 @@ namespace ImageProcessing.App.UILayer.Form.Histogram
             Freq.Series[cdf].IsVisibleInLegend = false;
         }
 
+        public new void Dispose()
+        {
+            if (components != null)
+            {
+                components.Dispose();
+            }
+
+            base.Dispose(true);
+        }
     }
 }

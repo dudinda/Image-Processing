@@ -46,5 +46,15 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
              => ErrorToolTip.Show(error, this, PointToClient(
                  CursorPosition.GetCursorPosition()), 2000
              );
+
+        public new void Dispose()
+        {
+            if (components != null)
+            {
+                components.Dispose();
+            }
+
+            base.Dispose(true);
+        }
     }
 }
