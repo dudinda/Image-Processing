@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 using ImageProcessing.Microkernel.DI.Container;
 using ImageProcessing.Microkernel.MVP.Aggregator.Implementation;
@@ -35,19 +36,24 @@ namespace ImageProcessing.Microkernel.MVP.Controller.Implementation
         }
 
         /// <inheritdoc cref="IAppController.Run{TPresenter}"/>
-        public void Run<TPresenter>()
+        public async Task Run<TPresenter>()
             where TPresenter : class, IPresenter
         {
+            await Task.Yield();
+
             if (!IoC.IsRegistered<TPresenter>())
             {
                 IoC.RegisterTransient<TPresenter>();
             }
 
-            IoC.Resolve<TPresenter>().Run();
+            await IoC
+                .Resolve<TPresenter>()
+                .Run()
+                .ConfigureAwait(false);
         }
 
         /// <inheritdoc cref="IAppController.Run{TPresenter, TViewModel}(TViewModel)"/>
-        public void Run<TPresenter, TViewModel>(TViewModel vm)
+        public async Task Run<TPresenter, TViewModel>(TViewModel vm)
             where TPresenter : class, IPresenter<TViewModel>
             where TViewModel : class
         {
@@ -56,12 +62,17 @@ namespace ImageProcessing.Microkernel.MVP.Controller.Implementation
                 throw new ArgumentNullException(nameof(vm));
             }
 
+            await Task.Yield();
+
             if (!IoC.IsRegistered<TPresenter>())
             {
                 IoC.RegisterTransient<TPresenter>();
             }
 
-            IoC.Resolve<TPresenter>().Run(vm);
+            await IoC
+                .Resolve<TPresenter>()
+                .Run(vm)
+                .ConfigureAwait(false);
         }
 
         /// <summary>

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Attributes;
 using ImageProcessing.App.CommonLayer.Enums;
@@ -31,18 +32,20 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 distibutionService, nameof(distibutionService));
         }
 
-        public override void Run(HistogramViewModel vm)
+        public override async Task Run(HistogramViewModel vm)
         {
             Requires.IsNotNull(vm, nameof(vm));
 
-            Build(vm.Source, vm.Mode);
+            await Build(vm.Source, vm.Mode).ConfigureAwait(true);
 
             View.Show();
         }
 
-        private void Build(Bitmap bitmap, RandomVariableFunction function)
+        private async Task Build(Bitmap bitmap, RandomVariableFunction function)
         {
             Requires.IsNotNull(bitmap, nameof(bitmap));
+
+            await Task.Yield();
 
             var chart = View.GetChart;
 

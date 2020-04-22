@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 using ImageProcessing.App.PresentationLayer.Presenters.Main;
 using ImageProcessing.Microkernel;
@@ -9,12 +10,15 @@ namespace ImageProcessing.App.UILayer
     internal static class Program
     {
         [STAThread]
-        internal static void Main()
+        internal static async Task Main()
         {
             try
             {
                 AppLifecycle.Build<Startup>(DiContainer.Ninject);
-                AppLifecycle.Run<MainPresenter>();
+
+                await AppLifecycle
+                    .Run<MainPresenter>()
+                    .ConfigureAwait(true);
             }
             catch(Exception ex)
             {

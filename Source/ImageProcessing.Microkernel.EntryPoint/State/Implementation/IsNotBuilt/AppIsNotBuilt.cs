@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 using ImageProcessing.Microkernel.Code.Enums;
 using ImageProcessing.Microkernel.DI.Adapters.LightInject;
@@ -76,7 +77,7 @@ namespace ImageProcessing.Microkernel.DI.State.IsNotBuilt
             );
 
         /// <inheritdoc/>
-        public void Run<TMainPresenter>()
+        public Task Run<TMainPresenter>()
             where TMainPresenter : class, IPresenter
             => throw new InvalidOperationException(
                 "The application is not built."

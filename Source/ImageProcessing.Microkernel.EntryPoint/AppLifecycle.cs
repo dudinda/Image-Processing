@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 using ImageProcessing.Microkernel.Code.Enums;
 using ImageProcessing.Microkernel.DI.Code.Enums;
 using ImageProcessing.Microkernel.DI.EntryPoint.State.Interface;
@@ -28,9 +30,11 @@ namespace ImageProcessing.Microkernel
             => State.Build<TStartup>(container);
 
         /// <inheritdoc cref="IAppState.Run{TMainPresenter}"/>
-        public static void Run<TMainPresenter>()
+        public static async Task Run<TMainPresenter>()
             where TMainPresenter : class, IPresenter
-            => State.Run<TMainPresenter>();
+            => await State
+            .Run<TMainPresenter>()
+            .ConfigureAwait(false);
 
         /// <inheritdoc cref="IAppState.Exit"/>
         public static void Exit()

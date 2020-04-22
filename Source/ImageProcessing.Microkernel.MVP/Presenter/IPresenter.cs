@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace ImageProcessing.Microkernel.MVP.Presenter
 {
     /// <summary>
@@ -9,7 +11,7 @@ namespace ImageProcessing.Microkernel.MVP.Presenter
         /// <summary>
         /// Run a presenter.
         /// </summary>
-        void Run();
+        Task Run();
     }
 
     /// <summary>
@@ -24,7 +26,7 @@ namespace ImageProcessing.Microkernel.MVP.Presenter
         /// Run a presenter with the specified
         /// <see cref="TViewModel"/>.
         /// </summary>
-        void Run(TViewModel argument);
+        Task Run(TViewModel argument);
     }
 
 }

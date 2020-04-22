@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.App.CommonLayer.Helpers;
@@ -30,17 +31,19 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 builder, nameof(builder));
         }
 
-        public override void Run(QualityMeasureViewModel vm)
+        public override async Task Run(QualityMeasureViewModel vm)
         {
             Requires.IsNotNull(vm, nameof(vm));
 
-            BuildHistogram(vm);
+            await BuildHistogram(vm).ConfigureAwait(true);
 
             View.Show();
         }
 
-        private void BuildHistogram(QualityMeasureViewModel vm)
+        private async Task BuildHistogram(QualityMeasureViewModel vm)
         {
+            await Task.Yield();
+
             var chart = View.GetChart;
                 chart.Series.Clear();
 

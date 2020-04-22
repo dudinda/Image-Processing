@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 using ImageProcessing.Microkernel.Code.Enums;
 using ImageProcessing.Microkernel.DI.Code.Enums;
@@ -33,15 +34,16 @@ namespace ImageProcessing.Microkernel.State.Implementation.IsBuilt
         }
 
         /// <inheritdoc/>
-        public void Run<TMainPresenter>()
+        public async Task Run<TMainPresenter>()
             where TMainPresenter : class, IPresenter
         {
             AppLifecycle.State = StateFactory.Get(
                 AppState.StartWork
             );
 
-            AppLifecycle
-                .State.Run<TMainPresenter>();
+            await AppLifecycle.State
+                .Run<TMainPresenter>()
+                .ConfigureAwait(false);
         }
     }
 }

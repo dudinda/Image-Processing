@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
@@ -25,14 +26,14 @@ namespace ImageProcessing.Microkernel.MVP.Controller.Interface
         /// Run the specified <typeparamref name="TPresenter"/>.
         /// <para>Where the <typeparamref name="TPresenter"/> is a <see cref="IPresenter"/> type.</para>
         /// </summary>
-        void Run<TPresenter>()
+        Task Run<TPresenter>()
             where TPresenter : class, IPresenter;
 
         /// <summary>
         /// Run the specified <typeparamref name="TPresenter"/> with a selected <typeparamref name="TViewModel"/> .
         /// <para>Where the <typeparamref name="TPresenter"/> is a <see cref="IPresenter{TViewModel}"/> type.</para>
         /// </summary>
-        void Run<TPresenter, TViewModel>(TViewModel vm)
+        Task Run<TPresenter, TViewModel>(TViewModel vm)
             where TPresenter : class, IPresenter<TViewModel>
             where TViewModel : class;
     }

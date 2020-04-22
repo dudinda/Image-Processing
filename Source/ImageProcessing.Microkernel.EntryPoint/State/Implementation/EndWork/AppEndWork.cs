@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 using ImageProcessing.Microkernel.DI.Code.Enums;
 using ImageProcessing.Microkernel.DI.EntryPoint.State.Interface;
@@ -25,7 +26,7 @@ namespace ImageProcessing.Microkernel.State.EndWork
                 .Controller.Dispose();
 
         /// <inheritdoc/>
-        public void Run<TMainPresenter>()
+        public Task Run<TMainPresenter>()
             where TMainPresenter : class, IPresenter
             => throw new InvalidOperationException(
                 "The application is already running."

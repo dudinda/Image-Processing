@@ -132,8 +132,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
-                    var copy = await GetImageCopy(ImageContainer.Source)
-                        .ConfigureAwait(true);
+                    var copy = await GetImageCopy(
+                        ImageContainer.Source
+                    ).ConfigureAwait(true);
 
                     await Task.Run(
                         () => copy.Save(View.PathToFile,
@@ -154,13 +155,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             {
                 Requires.IsNotNull(e, nameof(e));
 
-                await Task.Yield();
-
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
-                    Controller.Run<QualityMeasurePresenter, QualityMeasureViewModel>(
+                    await Controller.Run<QualityMeasurePresenter, QualityMeasureViewModel>(
                         new QualityMeasureViewModel(View.GetQualityQueue())
-                    );
+                    ).ConfigureAwait(true);
 
                     View.ClearQualityQueue();
                     View.EnableQualityQueue(false);
@@ -180,15 +179,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
-                    Controller.Run<ConvolutionFilterPresenter, ConvolutionFilterViewModel>(
-                        new ConvolutionFilterViewModel(
-                            new Bitmap(
-                                await GetImageCopy(
-                                    ImageContainer.Source
-                                ).ConfigureAwait(true)
-                            )
-                        )
-                    );
+                    var copy = await GetImageCopy(
+                        ImageContainer.Source
+                    ).ConfigureAwait(true);
+
+                    await Controller.Run<ConvolutionFilterPresenter, ConvolutionFilterViewModel>(
+                        new ConvolutionFilterViewModel(copy)
+                    ).ConfigureAwait(true);
                 }
             }
             catch (Exception ex)
@@ -243,19 +240,22 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         ImageContainer.Source
                     ).ConfigureAwait(true);
 
-                    Pipeline
-                        .Register(new PipelineBlock(copy)
-                            .Add<Bitmap, Bitmap>(
-                                (bmp) => _rgbProvider.Apply(bmp, e.Filter)
+                    if(
+                        Pipeline
+                            .Register(new PipelineBlock(copy)
+                                .Add<Bitmap, Bitmap>(
+                                    (bmp) => _rgbProvider.Apply(bmp, e.Filter)
+                                )
+                                .Add<Bitmap, Bitmap>(
+                                    (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
+                                )
                             )
-                            .Add<Bitmap, Bitmap>(
-                                (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
-                            )
-                        );
-
-                    await Render(
-                        ImageContainer.Destination
-                    ).ConfigureAwait(true);
+                        )
+                    {
+                        await Render(
+                            ImageContainer.Destination
+                        ).ConfigureAwait(true);
+                    }         
                 }
             }
             catch (OperationCanceledException cancelEx)
@@ -286,19 +286,22 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                             ImageContainer.Source
                         ).ConfigureAwait(true);
 
-                        Pipeline
-                            .Register(new PipelineBlock(copy)
-                                .Add<Bitmap, Bitmap>(
-                                    (bmp) => _rgbProvider.Apply(bmp, result)
+                        if(
+                            Pipeline
+                                .Register(new PipelineBlock(copy)
+                                    .Add<Bitmap, Bitmap>(
+                                        (bmp) => _rgbProvider.Apply(bmp, result)
+                                    )
+                                    .Add<Bitmap, Bitmap>(
+                                        (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
+                                    )
                                 )
-                                .Add<Bitmap, Bitmap>(
-                                    (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
-                                )
-                            );
-
-                        await Render(
-                            ImageContainer.Destination
-                        ).ConfigureAwait(true);
+                            )
+                        {
+                            await Render(
+                                ImageContainer.Destination
+                            ).ConfigureAwait(true);
+                        }                                   
                     }
                     else
                     {
@@ -344,14 +347,14 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                                 .Add<Bitmap, Bitmap>(
                                     (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
                                 )
+                            )
                         )
-                    )
                     {
-                        View.EnableQualityQueue(true);
-
                         await Render(
                             ImageContainer.Destination
                         ).ConfigureAwait(true);
+
+                        View.EnableQualityQueue(true);
                     }          
                 }
             }
@@ -379,19 +382,22 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         ImageContainer.Source
                     ).ConfigureAwait(true);
 
-                    Pipeline
-                        .Register(new PipelineBlock(copy)
-                            .Add<Bitmap, Bitmap>(
-                                (bmp) => bmp.Shuffle()
+                    if(
+                        Pipeline
+                            .Register(new PipelineBlock(copy)
+                                .Add<Bitmap, Bitmap>(
+                                    (bmp) => bmp.Shuffle()
+                                )
+                                .Add<Bitmap, Bitmap>(
+                                    (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
+                                 )
                             )
-                            .Add<Bitmap, Bitmap>(
-                                (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
-                            )
-                        );
-
-                    await Render(
-                        ImageContainer.Destination
-                    ).ConfigureAwait(true);
+                        )
+                    {
+                        await Render(
+                            ImageContainer.Destination
+                        ).ConfigureAwait(true);
+                    }
                 }
             }
             catch
@@ -408,15 +414,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                 if (!View.ImageIsNull(e.Container))
                 {
-                    Controller.Run<HistogramPresenter, HistogramViewModel>(
-                        new HistogramViewModel(
-                            new Bitmap(
-                                await GetImageCopy(
-                                    e.Container
-                                ).ConfigureAwait(true)
-                            ),
-                        e.Action)
-                    );
+                    var copy = await GetImageCopy(
+                        e.Container
+                    ).ConfigureAwait(true);
+
+                    await Controller.Run<HistogramPresenter, HistogramViewModel>(
+                        new HistogramViewModel(copy, e.Action)
+                    ).ConfigureAwait(true);
                 }
             }
             catch (Exception ex)
@@ -441,14 +445,17 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                     var copy = await GetImageCopy(From).ConfigureAwait(true);
 
-                    Pipeline
-                        .Register(new PipelineBlock(copy)
-                            .Add<Bitmap, Bitmap>(
-                                (bmp) => DefaultPipelineBlock(bmp, To)
+                    if(
+                        Pipeline
+                            .Register(new PipelineBlock(copy)
+                                .Add<Bitmap, Bitmap>(
+                                    (bmp) => DefaultPipelineBlock(bmp, To)
+                                )
                             )
-                        );
-
-                    await Render(To).ConfigureAwait(true);
+                        )
+                    {
+                        await Render(To).ConfigureAwait(true);
+                    }               
                 }
             }
             catch (OperationCanceledException cancelEx)
@@ -524,8 +531,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                 View.SetImageCopy(to, new Bitmap(bmp));
 
                 View.AddToUndoContainer(
-    (new Bitmap(View.GetImageCopy(to)), to)
-);
+                    (new Bitmap(View.GetImageCopy(to)), to)
+                );
 
                 View.SetImageToZoom(to, new Bitmap(bmp));
 

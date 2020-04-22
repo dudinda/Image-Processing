@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 using ImageProcessing.Microkernel.DI.Code.Enums;
 using ImageProcessing.Microkernel.MVP.Presenter;
 using ImageProcessing.Microkernel.Startup;
@@ -21,7 +23,7 @@ namespace ImageProcessing.Microkernel.DI.EntryPoint.State.Interface
         /// <summary>
         /// Run the specified <typeparamref name="TMainPresenter"/>.
         /// </summary>
-        void Run<TMainPresenter>()
+        Task Run<TMainPresenter>()
             where TMainPresenter : class, IPresenter;
 
         /// <summary>

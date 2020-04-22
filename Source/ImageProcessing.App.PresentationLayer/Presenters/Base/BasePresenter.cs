@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
@@ -48,8 +49,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
                 controller, nameof(controller));
         
         /// <inheritdoc/>
-		public virtual void Run()
-            => View.Show();
+		public virtual async Task Run()
+        {
+            await Task.Yield();
+
+            View.Show();
+        }
 	}
 
     /// <summary>
@@ -98,10 +103,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
                 controller, nameof(controller));
         
         /// <inheritdoc/>
-        public virtual void Run(TViewModel vm)
+        public virtual async Task Run(TViewModel vm)
 		{
 			ViewModel = Requires.IsNotNull(
                 vm, nameof(vm));
+
+            await Task.Yield();
 
 			View.Show();
 		}
