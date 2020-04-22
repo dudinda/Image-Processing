@@ -35,15 +35,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             Requires.IsNotNull(vm, nameof(vm));
 
-            await BuildHistogram(vm).ConfigureAwait(true);
+            BuildHistogram(vm);
 
             View.Show();
         }
 
         private async Task BuildHistogram(QualityMeasureViewModel vm)
         {
-            await Task.Yield();
-
             var chart = View.GetChart;
                 chart.Series.Clear();
 
