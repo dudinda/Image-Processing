@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
@@ -17,8 +16,6 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
         /// <inheritdoc/>
         public Bitmap Normalize(Bitmap bitmap)
         {
-            Requires.IsNotNull(bitmap, nameof(bitmap));
-
             var max = Max(bitmap);
             var min = Min(bitmap);
 
@@ -64,8 +61,6 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
         /// <inheritdoc/>
         public byte Max(Bitmap bitmap)
         {
-            Requires.IsNotNull(bitmap, nameof(bitmap));
-
             var result = new Bitmap(bitmap);
             var resultData = result.LockBits(new Rectangle(0, 0, result.Width, result.Height),
                                                            ImageLockMode.ReadOnly,
@@ -108,8 +103,6 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
         /// <inheritdoc/>
         public byte Min(Bitmap bitmap)
         {
-            Requires.IsNotNull(bitmap, nameof(bitmap));
-
             var result = new Bitmap(bitmap);
             var resultData = result.LockBits(new Rectangle(0, 0, result.Width, result.Height),
                                                            ImageLockMode.ReadOnly,
@@ -152,9 +145,6 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
         /// <inheritdoc/>
         public Bitmap Magnitude(Bitmap xDerivative, Bitmap yDerivative)
         {
-            Requires.IsNotNull(xDerivative, nameof(xDerivative));
-            Requires.IsNotNull(yDerivative, nameof(yDerivative));
-
             var result = new Bitmap(xDerivative);
 
             var xDerivativeData = xDerivative.LockBits(new Rectangle(0, 0, result.Width, result.Height),

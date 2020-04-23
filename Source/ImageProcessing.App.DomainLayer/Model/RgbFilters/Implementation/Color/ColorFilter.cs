@@ -4,7 +4,6 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainLayer.Model.RgbFilters.Interface;
 using ImageProcessing.App.DomainLayer.Model.RgbFilters.Interface.Color;
 
@@ -19,16 +18,11 @@ namespace ImageProcessing.App.DomainLayer.Model.RgbFilters.Implementation.Color
         private readonly IColor _filter;
 
         public ColorFilter(IColor filter)
-        {
-            _filter = Requires.IsNotNull(
-                filter, nameof(filter));
-        }
+            => _filter = filter;
 
         /// <inheritdoc />
         public Bitmap Filter(Bitmap bitmap)
         {
-            Requires.IsNotNull(bitmap, nameof(bitmap));
-
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                                              ImageLockMode.ReadWrite,
                                              bitmap.PixelFormat);

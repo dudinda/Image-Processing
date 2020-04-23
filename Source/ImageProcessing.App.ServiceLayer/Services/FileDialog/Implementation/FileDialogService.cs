@@ -11,7 +11,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.FileDialog.Implementation
 {
     public sealed class FileDialogService : IFileDialogService
     {
-        public async Task<Bitmap> OpenFileDialog(string filters)
+        public async Task<Bitmap?> OpenFileDialog(string? filters)
         {
             using (var dialog = new OpenFileDialog())
             {
@@ -35,12 +35,12 @@ namespace ImageProcessing.App.ServiceLayer.Services.FileDialog.Implementation
                 }
 
                 return await Task
-                    .FromResult<Bitmap>(null)
+                    .FromResult<Bitmap?>(null)
                     .ConfigureAwait(false);
             }
         }
 
-        public async Task SaveFileAsDialog(Bitmap src, string filters)
+        public async Task SaveFileAsDialog(Bitmap src, string? filters)
         {
             using (var dialog = new SaveFileDialog())
             {

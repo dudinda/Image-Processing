@@ -1,7 +1,6 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainLayer.Factory.Convolution.Implementation;
 using ImageProcessing.App.DomainLayer.Factory.Convolution.Interface;
 using ImageProcessing.App.DomainLayer.Factory.Distributions.Implementation;
@@ -68,8 +67,6 @@ namespace ImageProcessing.App.UILayer
     {
         public void Build(IDependencyResolution builder)
         {
-            Requires.IsNotNull(builder, nameof(builder));
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

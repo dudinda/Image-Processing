@@ -7,7 +7,6 @@ using ImageProcessing.App.CommonLayer.Attributes;
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
 using ImageProcessing.App.CommonLayer.Extensions.TypeExt;
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.ViewModel.Histogram;
 using ImageProcessing.App.PresentationLayer.Views.Histogram;
@@ -26,18 +25,10 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
 
         public HistogramPresenter(IAppController controller,
                                   IBitmapLuminanceDistributionService distibutionService)
-            : base(controller)
-        {
-            _distributionService = Requires.IsNotNull(
-                distibutionService, nameof(distibutionService));
-        }
+            : base(controller) => _distributionService = distibutionService;
 
         public override void Run(HistogramViewModel vm)
-        {
-            Requires.IsNotNull(vm, nameof(vm));
-
-            DoWorkBeforeShow(vm);
-        }
+            => DoWorkBeforeShow(vm);
 
         private async Task DoWorkBeforeShow(HistogramViewModel vm)
         {
@@ -50,8 +41,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
 
         private void Build(Bitmap bitmap, RandomVariableFunction function)
         {
-            Requires.IsNotNull(bitmap, nameof(bitmap));
-
             var chart = View.GetChart;
 
             var yValues = (decimal[])_command[

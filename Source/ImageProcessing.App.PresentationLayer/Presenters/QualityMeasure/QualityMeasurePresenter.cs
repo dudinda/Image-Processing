@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms.DataVisualization.Charting;
 
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.ViewModel.QualityMeasure;
 using ImageProcessing.App.PresentationLayer.Views.QualityMeasure;
@@ -25,19 +24,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                                        IChartSeriesBuilder builder)
             : base(controller) 
         {
-            _distributionService = Requires.IsNotNull(
-                distibutionService, nameof(distibutionService));
-            _builder = Requires.IsNotNull(
-                builder, nameof(builder));
+            _distributionService =  distibutionService;
+            _builder = builder;
         }
 
         public override void Run(QualityMeasureViewModel vm)
-        {
-            Requires.IsNotNull(vm, nameof(vm));
-
-            DoWorkBeforeShow(vm);  
-        }
-
+            => DoWorkBeforeShow(vm);  
+        
         private async Task DoWorkBeforeShow(QualityMeasureViewModel vm)
         {
             await Task.Run(

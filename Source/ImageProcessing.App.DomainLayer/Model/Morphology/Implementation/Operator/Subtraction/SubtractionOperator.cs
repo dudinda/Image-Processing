@@ -4,7 +4,6 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainLayer.Model.Morphology.Interface.BinaryOperator;
 
 namespace ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.Subtraction
@@ -17,9 +16,6 @@ namespace ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.Subtra
         /// <inheritdoc />
         public Bitmap Filter(Bitmap lvalue, Bitmap rvalue)
         {        
-            Requires.IsNotNull(lvalue, nameof(lvalue));
-            Requires.IsNotNull(rvalue, nameof(rvalue));
-
             var result = new Bitmap(lvalue);
 
             var lvalueBitmapData = lvalue.LockBits(new Rectangle(0, 0, lvalue.Width, lvalue.Height),

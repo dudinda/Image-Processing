@@ -1,7 +1,6 @@
 using System.Drawing;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Rgb.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.RgbFilters;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
@@ -19,40 +18,28 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.RgbFilters
                                         IRgbFilterService rgbFilterService,
                                         ICacheService<Bitmap> cache)
         {
-            _rgbFilterFactory = Requires.IsNotNull(
-                rgbFilterFactory, nameof(rgbFilterFactory));
-            _rgbFilterService = Requires.IsNotNull(
-                rgbFilterService, nameof(rgbFilterService));
-            _cache = Requires.IsNotNull(
-                cache, nameof(cache));
+            _rgbFilterFactory = rgbFilterFactory;
+            _rgbFilterService = rgbFilterService;
+            _cache = cache;
         }
 
         public Bitmap Apply(Bitmap bmp, RgbFilter filter)
-        {
-            Requires.IsNotNull(bmp, nameof(bmp));
-
-            return _cache.GetOrCreate(filter,
-                () =>
-                _rgbFilterService
-                    .Filter(bmp,
-                        _rgbFilterFactory
-                            .Get(filter)
-                )
-            ); 
-        }
+            => _cache.GetOrCreate(filter,
+               () =>
+               _rgbFilterService
+                   .Filter(bmp,
+                       _rgbFilterFactory
+                           .Get(filter)
+               )
+           ); 
 
         public Bitmap Apply(Bitmap bmp, RgbColors filter)
-        {
-            Requires.IsNotNull(bmp, nameof(bmp));
-
-            return _cache.GetOrCreate(filter,
-                () =>
-                _rgbFilterService
-                    .Filter(bmp,
-                        _rgbFilterFactory
-                            .Get(filter)
-                )
-            );
-        }
+            => _cache.GetOrCreate(filter,
+               () => _rgbFilterService
+                   .Filter(bmp,
+                       _rgbFilterFactory
+                           .Get(filter)
+               )
+           );
     }
 }

@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
@@ -51,18 +50,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                              INonBlockDialogService nonBlock)
             : base(controller)
         {
-            _lumaProvider = Requires.IsNotNull(
-                lumaProvider, nameof(lumaProvider));
-            _rgbProvider = Requires.IsNotNull(
-                rgbProvider, nameof(rgbProvider));
-            _zoomLocker = Requires.IsNotNull(
-                zoomLocker, nameof(zoomLocker));
-            _operationLocker = Requires.IsNotNull(
-                operationLocker, nameof(operationLocker));
-            _cache = Requires.IsNotNull(
-                cache, nameof(cache));
-            _nonBlock = Requires.IsNotNull(
-                nonBlock, nameof(nonBlock));
+            _lumaProvider = lumaProvider;
+            _rgbProvider = rgbProvider;
+            _zoomLocker = zoomLocker;
+            _operationLocker = operationLocker;
+            _cache = cache;
+            _nonBlock = nonBlock;
 
             Controller
                 .Aggregator
@@ -73,8 +66,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                Requires.IsNotNull(e, nameof(e));
-
                 var result = await _nonBlock.NonBlockOpen(
                     ConfigurationManager.AppSettings["Filters"]
                 ).ConfigureAwait(true);
@@ -108,8 +99,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                Requires.IsNotNull(e, nameof(e));
-
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
                     var copy = await GetImageCopy(ImageContainer.Source)
@@ -130,8 +119,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                Requires.IsNotNull(e, nameof(e));
-
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
                     var copy = await GetImageCopy(
@@ -155,8 +142,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                Requires.IsNotNull(e, nameof(e));
-
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
                     Controller.Run<QualityMeasurePresenter, QualityMeasureViewModel>(
@@ -177,8 +162,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                Requires.IsNotNull(e, nameof(e));
-
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
                     var copy = await GetImageCopy(
@@ -200,15 +183,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                Requires.IsNotNull(e, nameof(e));
-
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
                     View.SetCursor(CursorType.Wait);
 
                     if(
                         Pipeline
-                            .Register((e.Block as IPipelineBlock)
+                            .Register(((IPipelineBlock)e.Block)
                                 .Add<Bitmap, Bitmap>(
                                     (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
                                 )
@@ -235,8 +216,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                Requires.IsNotNull(e, nameof(e));
-
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
                     View.SetCursor(CursorType.Wait);
@@ -277,8 +256,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                Requires.IsNotNull(e, nameof(e));
-
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
                     var result = View.GetSelectedColors(e.Color);
@@ -328,8 +305,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                Requires.IsNotNull(e, nameof(e));
-
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
                     View.SetCursor(CursorType.Wait);
@@ -377,8 +352,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                Requires.IsNotNull(e, nameof(e));
-
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
                     View.SetCursor(CursorType.Wait);
@@ -415,8 +388,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                Requires.IsNotNull(e, nameof(e));
-
                 if (!View.ImageIsNull(e.Container))
                 {
                     var copy = await GetImageCopy(
@@ -438,8 +409,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                Requires.IsNotNull(e, nameof(e));
-
                 var (To, From) = e.Container == ImageContainer.Source   ?
                     (ImageContainer.Destination, ImageContainer.Source) :
                     (ImageContainer.Source, ImageContainer.Destination);
@@ -477,8 +446,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                Requires.IsNotNull(e, nameof(e));
-
                 var container = e.Container;
 
                 if (!View.ImageIsNull(container))
@@ -509,8 +476,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                Requires.IsNotNull(e, nameof(e));
-
                 var container = e.Container;
 
                 if (!View.ImageIsNull(container))

@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using ImageProcessing.App.CommonLayer.Attributes;
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.TypeExt;
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.UILayer.Code.Enums;
 
 namespace ImageProcessing.App.UILayer.Form.Main
@@ -49,15 +48,13 @@ namespace ImageProcessing.App.UILayer.Form.Main
            nameof(ImageContainer.Source) +
            nameof(MainViewAction.SetCopy))]
         private void SetSourceCopyCommand(Image image)
-           => SrcImageCopy = Requires.IsNotNull(
-               image, nameof(image));
+           => SrcImageCopy = image;
 
         [Command(
            nameof(ImageContainer.Destination) +
            nameof(MainViewAction.SetCopy))]
         private void SetDestinationCopyCommand(Image image)
-           => DstImageCopy = Requires.IsNotNull(
-               image, nameof(image));
+           => DstImageCopy = image;
 
         [Command(
             nameof(ImageContainer.Destination) +
@@ -70,8 +67,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             nameof(MainViewAction.SetImage))]
         private void SetSourceImageCommand(Image image)
         {
-            SrcImage = Requires.IsNotNull(
-                image, nameof(image));
+            SrcImage = image;
             Undo.Enabled = true;
         }
 
@@ -80,8 +76,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             nameof(MainViewAction.SetImage))]
         private void SetDestinationImageCommand(Image image)
         {
-            DstImage = Requires.IsNotNull(
-                image, nameof(image));
+            DstImage = image;
             Undo.Enabled = true;
         }
 
@@ -129,15 +124,13 @@ namespace ImageProcessing.App.UILayer.Form.Main
             nameof(ImageContainer.Source) +
             nameof(MainViewAction.SetToZoom))]
         private Image SetToZoomSourceImageCommand(Image image)
-            => SrcZoom.ImageToZoom = Requires.IsNotNull(
-                image, nameof(image));
+            => SrcZoom.ImageToZoom = image;
 
         [Command(
             nameof(ImageContainer.Destination) +
             nameof(MainViewAction.SetToZoom))]
         private Image SetToZoomDestinationImageCommand(Image image)
-           => DstZoom.ImageToZoom = Requires.IsNotNull(
-               image, nameof(image));
+           => DstZoom.ImageToZoom = image;
 
         [Command(nameof(RgbColors.Green))]
         private void SwitchGreenColorCommand()
@@ -162,6 +155,5 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
             return result;
         }
-
     }
 }

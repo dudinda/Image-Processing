@@ -39,10 +39,10 @@ namespace ImageProcessing.App.UILayer.Form.Histogram
         }
 
         /// <inheritdoc/>
-        public void Init(RandomVariableFunction action)
+        public void Init(RandomVariableFunction function)
         {
             _command[
-                action.ToString()
+                function.ToString()
             ].Method.Invoke(this, new object[] {
                 RandomVariableFunction.PMF.GetDescription(),
                 RandomVariableFunction.CDF.GetDescription()

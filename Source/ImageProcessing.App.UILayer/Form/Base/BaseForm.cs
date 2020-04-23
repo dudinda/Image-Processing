@@ -1,7 +1,6 @@
 using System;
 using System.Windows.Forms;
 
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 using MetroFramework.Forms;
@@ -21,17 +20,17 @@ namespace ImageProcessing.App.UILayer.Form.Base
 
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller { get; }
+            = null!;
 
         /// <inheritdoc cref="ApplicationContext"/>
         protected ApplicationContext Context
             => _context.Value;
 
         protected BaseMainForm(IAppController controller)
-            : base()
-            => Controller = Requires.IsNotNull(
-                controller, nameof(controller));
+            : base() => Controller = controller;
         
-        protected BaseMainForm() { }
+        protected BaseMainForm()
+            : base() { }
     }
 
     /// <summary>
@@ -41,13 +40,13 @@ namespace ImageProcessing.App.UILayer.Form.Base
     {
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller { get; }
+            = null!;
 
         protected BaseForm(IAppController controller)
-            : base()
-            => Controller = Requires.IsNotNull(
-                controller, nameof(controller));
+            : base() => Controller = controller;
 
-        protected BaseForm() { }
+        protected BaseForm()
+            : base() { }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {

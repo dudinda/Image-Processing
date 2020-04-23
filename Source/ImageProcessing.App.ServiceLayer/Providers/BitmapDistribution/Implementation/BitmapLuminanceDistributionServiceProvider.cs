@@ -4,7 +4,6 @@ using System.Drawing;
 using ImageProcessing.App.CommonLayer.Attributes;
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.TypeExt;
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainLayer.Factory.Distributions.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
@@ -24,31 +23,21 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistri
             (IBitmapLuminanceDistributionService service,
              IDistributionFactory factory)
         {
-            _service = Requires.IsNotNull(
-                service, nameof(service));
-            _factory = Requires.IsNotNull(
-                factory, nameof(factory));
+            _service = service;
+            _factory = factory;
         }
 
         public Bitmap Transform(Bitmap bmp, Distribution distribution, (string, string) parms)
-        {
-            Requires.IsNotNull(bmp, nameof(bmp));
-
-            return  _service.Transform(bmp,
-                        _factory.Get(distribution)
+            =>  _service.Transform(bmp,
+                    _factory.Get(distribution)
                             .SetParams(parms)
             );
-        }
 
         public decimal GetInfo(Bitmap bmp, RandomVariableInfo info)
-        {
-            Requires.IsNotNull(bmp, nameof(bmp));
-
-            return (decimal)_command[
+            => (decimal)_command[
                 info.ToString()
             ].Method.Invoke(this, new object[] { bmp });
-        }
-
+        
         [Command(nameof(RandomVariableInfo.Expectation))]
         private decimal GetExpectationCommand(Bitmap bmp)
             => _service.GetExpectation(bmp);

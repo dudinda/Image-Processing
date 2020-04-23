@@ -7,7 +7,7 @@ namespace ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Implementation
 {
     public sealed class ChartSeriesBuilder : IChartSeriesBuilder
     {
-        private string _name;
+        private string? _name;
         private Color _color;
         private bool _IsVisibleInLegend;
         private SeriesChartType _chartType;

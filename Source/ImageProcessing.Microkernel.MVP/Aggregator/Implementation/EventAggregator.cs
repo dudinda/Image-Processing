@@ -55,11 +55,6 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
         /// <inheritdoc cref="IEventAggregator.Subscribe(object)"/>
         public void Subscribe(object subscriber)
         {
-            if(subscriber is null)
-            {
-                throw new ArgumentNullException(nameof(subscriber));
-            }
-
             lock (_syncRoot)
             {
                 var subsriberTypes = subscriber

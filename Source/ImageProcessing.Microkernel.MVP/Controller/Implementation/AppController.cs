@@ -22,11 +22,6 @@ namespace ImageProcessing.Microkernel.MVP.Controller.Implementation
 
         public AppController(IContainer container)
         {
-            if(container is null)
-            {
-                throw new ArgumentNullException(nameof(container));
-            }
-
             IoC = new DependencyResolution(container);
 
             IoC.RegisterSingletonInstance<IAppController>(this);
@@ -52,11 +47,6 @@ namespace ImageProcessing.Microkernel.MVP.Controller.Implementation
             where TPresenter : class, IPresenter<TViewModel>
             where TViewModel : class
         {
-            if (vm is null)
-            {
-                throw new ArgumentNullException(nameof(vm));
-            }
-
             if (!IoC.IsRegistered<TPresenter>())
             {
                 IoC.RegisterTransient<TPresenter>();

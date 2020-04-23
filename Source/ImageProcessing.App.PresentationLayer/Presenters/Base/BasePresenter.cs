@@ -1,7 +1,5 @@
 using System;
-using System.Threading.Tasks;
 
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
@@ -43,10 +41,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
         /// </summary>
         protected TView View
             => _view.Value;
-       
+
         protected BasePresenter(IAppController controller)
-            => Controller = Requires.IsNotNull(
-                controller, nameof(controller));
+            => Controller = controller;
 
         /// <inheritdoc/>
         public virtual void Run()
@@ -88,21 +85,20 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
         /// </summary>
         protected TView View
             => _view.Value;
-      
+
         /// <summary>
         /// View model of a presenter.
         /// </summary>
         protected TViewModel ViewModel { get; private set; }
+            = null!;
 
         protected BasePresenter(IAppController controller)
-		    => Controller = Requires.IsNotNull(
-                controller, nameof(controller));
+            => Controller = controller;
         
         /// <inheritdoc/>
         public virtual void Run(TViewModel vm)
 		{
-			ViewModel = Requires.IsNotNull(
-                vm, nameof(vm));
+            ViewModel = vm;
 
             View.Show();
 		}

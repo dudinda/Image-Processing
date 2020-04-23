@@ -4,7 +4,6 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainLayer.Convolution.Interface;
 using ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interface;
 
@@ -16,9 +15,6 @@ namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
         /// <inheritdoc/>
         public Bitmap Convolution(Bitmap source, IConvolutionFilter filter) 
         {
-            Requires.IsNotNull(source, nameof(source));
-            Requires.IsNotNull(filter, nameof(filter));
-
             var destination = new Bitmap(source);
 
             var sourceBitmapData = source.LockBits(new Rectangle(0, 0, source.Width, source.Height),

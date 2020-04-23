@@ -17,6 +17,7 @@ namespace ImageProcessing.Microkernel
     {
         /// <inheritdoc cref="IAppController"/>
         internal static IAppController Controller { get; set; }
+            = null!;
 
         /// <inheritdoc cref="IAppState"/>
         internal static IAppState State { get; set; }

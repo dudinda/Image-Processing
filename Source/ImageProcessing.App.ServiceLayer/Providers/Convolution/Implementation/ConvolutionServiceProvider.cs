@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using ImageProcessing.App.CommonLayer.Attributes;
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.TypeExt;
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainLayer.Factory.Convolution.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Convolution;
 using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
@@ -29,20 +28,14 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Convolution
                                           IBitmapService bitmapService,
                                           ICacheService<Bitmap> cache)
         {
-            _convolutionFilterFactory = Requires.IsNotNull(
-                convolutionFilterFactory, nameof(convolutionFilterFactory));
-            _convolutionFilterService = Requires.IsNotNull(
-                convolutionFilterService, nameof(convolutionFilterService));
-            _bitmapService = Requires.IsNotNull(
-                bitmapService, nameof(bitmapService));
-            _cache = Requires.IsNotNull(
-                cache, nameof(cache));
+            _convolutionFilterFactory = convolutionFilterFactory;
+            _convolutionFilterService = convolutionFilterService;
+            _bitmapService = bitmapService;
+            _cache = cache;
         }
 
         public Bitmap ApplyFilter(Bitmap bmp, ConvolutionFilter filter)
         {
-            Requires.IsNotNull(bmp, nameof(bmp));
-
             try
             {
                 return (Bitmap)_command[
@@ -57,12 +50,11 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Convolution
 
         [Command(nameof(ConvolutionFilter.LoGOperator3x3))]
         private Bitmap GetLoG3x3Command(Bitmap bmp, ConvolutionFilter filter)
-        {
-            return GetFilter(
-                       GetFilter(bmp, ConvolutionFilter.GaussianBlur3x3),
-                       ConvolutionFilter.LaplacianOperator3x3
-                   );
-        }
+            => GetFilter(
+                GetFilter(bmp, ConvolutionFilter.GaussianBlur3x3),
+                ConvolutionFilter.LaplacianOperator3x3
+            );
+        
 
         [Command(nameof(ConvolutionFilter.SobelOperator3x3))]
         private Bitmap GetSobelOperatorCommand(Bitmap bmp, ConvolutionFilter filter)

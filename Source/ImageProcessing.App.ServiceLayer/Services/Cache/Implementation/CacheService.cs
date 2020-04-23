@@ -1,7 +1,6 @@
 using System;
 using System.Threading;
 
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
 
 using Microsoft.Extensions.Caching.Memory;
@@ -22,9 +21,6 @@ namespace ImageProcessing.App.ServiceLayer.Services.Cache.Implementation
         /// <inheritdoc/>
         public TItem GetOrCreate(object key, Func<TItem> createItem)
         {
-            Requires.IsNotNull(key, nameof(key));
-            Requires.IsNotNull(createItem, nameof(createItem));
-
             // Look for a cache key.
             if (!_cache.TryGetValue(key, out var cacheEntry))
             {

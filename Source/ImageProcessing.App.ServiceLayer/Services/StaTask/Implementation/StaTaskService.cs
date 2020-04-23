@@ -22,7 +22,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.StaTask.Implementation
 
         public StaTaskService(int maxNumberOfModals = 4)
         {
-            if(maxNumberOfModals < 0)
+            if(maxNumberOfModals <= 0)
             {
                 throw new ArgumentException(nameof(maxNumberOfModals));
             }
@@ -60,7 +60,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.StaTask.Implementation
            
             if(_pool.Count > _maxNumberOfModals)
             {
-                tcs.SetResult(default(TArg));
+                tcs.SetResult(default(TArg)!);
                 return tcs.Task;
             }
 
@@ -81,7 +81,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.StaTask.Implementation
                 {
                     _pool.Add(id);
                     func();
-                    tcs.SetResult(null);
+                    tcs.SetResult(null!);
                 }
                 catch (Exception e)
                 {
@@ -97,7 +97,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.StaTask.Implementation
 
             if (_pool.Count > _maxNumberOfModals)
             {
-                tcs.SetResult(null);
+                tcs.SetResult(null!);
                 return tcs.Task;
             }
 

@@ -10,14 +10,7 @@ namespace ImageProcessing.App.CommonLayer.Attributes
     public sealed class CommandAttribute : Attribute
     {
         public CommandAttribute(string key)
-        {
-            if(key is null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            Key = key; 
-        }
+            => Key = key;
 
         /// <summary>
         /// A key.
@@ -28,5 +21,6 @@ namespace ImageProcessing.App.CommonLayer.Attributes
         /// A method metadata.
         /// </summary>
         public MethodInfo Method { get; set; }
+            = null!;
     }
 }

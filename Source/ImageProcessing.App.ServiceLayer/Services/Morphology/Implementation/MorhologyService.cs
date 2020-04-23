@@ -1,6 +1,5 @@
 using System.Drawing;
 
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainLayer.Model.Morphology.Interface.BinaryOperator;
 using ImageProcessing.App.DomainLayer.Model.Morphology.Interface.UnaryOperator;
 using ImageProcessing.App.ServiceLayer.Services.Morphology.Interface;
@@ -13,21 +12,10 @@ namespace ImageProcessing.App.ServiceLayer.Services.Morphology.Implementation
     {
         /// <inheritdoc />
         public Bitmap ApplyOperator(Bitmap bmp, BitMatrix kernel, IMorphologyUnary filter)
-        {
-            Requires.IsNotNull(bmp, nameof(bmp));
-            Requires.IsNotNull(filter, nameof(filter));
-
-            return filter.Filter(bmp, kernel);
-        }
-
+            => filter.Filter(bmp, kernel);
+        
         /// <inheritdoc />
         public Bitmap ApplyOperator(Bitmap lvalue, Bitmap rvalue, IMorphologyBinary filter)
-        {
-            Requires.IsNotNull(rvalue, nameof(rvalue));
-            Requires.IsNotNull(lvalue, nameof(lvalue));
-            Requires.IsNotNull(filter, nameof(filter));
-
-            return filter.Filter(rvalue, lvalue);
-        }
+            => filter.Filter(rvalue, lvalue);
     }
 }

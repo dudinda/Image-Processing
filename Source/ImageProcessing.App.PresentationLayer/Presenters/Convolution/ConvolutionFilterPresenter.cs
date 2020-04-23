@@ -2,7 +2,6 @@ using System;
 using System.Drawing;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
@@ -25,10 +24,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
                                           IAsyncOperationLocker operationLocker)
             : base(controller)
         {
-            _convolutionProvider = Requires.IsNotNull(
-                convolutionFilterServiceProvider, nameof(convolutionFilterServiceProvider));
-            _operationLocker = Requires.IsNotNull(
-                operationLocker, nameof(operationLocker));
+            _convolutionProvider = convolutionFilterServiceProvider;
+            _operationLocker = operationLocker;
 
             Controller
                 .Aggregator

@@ -1,7 +1,6 @@
 using System.Drawing;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.CommonLayer.Helpers;
 
 namespace ImageProcessing.App.PresentationLayer.ViewModel.Histogram
 {
@@ -9,9 +8,7 @@ namespace ImageProcessing.App.PresentationLayer.ViewModel.Histogram
     {
         public HistogramViewModel(Bitmap source, RandomVariableFunction mode)
         {
-            Source = Requires.IsNotNull(
-                source, nameof(source));
-
+            Source = source;
             Mode = mode;
         }
 

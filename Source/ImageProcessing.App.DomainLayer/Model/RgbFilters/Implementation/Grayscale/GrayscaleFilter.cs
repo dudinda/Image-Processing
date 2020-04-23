@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Recommendation.Implementation;
 using ImageProcessing.App.DomainLayer.Model.RgbFilters.Interface;
 
@@ -19,8 +18,6 @@ namespace ImageProcessing.App.DomainLayer.Model.RgbFilters.Implementation.Graysc
         /// <inheritdoc />
         public Bitmap Filter(Bitmap bitmap)
         {
-            Requires.IsNotNull(bitmap, nameof(bitmap));
-
             var rec = new RecommendationFactory().Get(Luma.Rec709);
 
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),

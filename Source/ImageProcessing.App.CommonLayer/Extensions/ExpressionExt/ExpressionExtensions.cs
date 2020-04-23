@@ -5,6 +5,10 @@ namespace ImageProcessing.App.CommonLayer.Extensions.ExpressionExt
 {
     public static class ExpressionExtensions
     {
+        /// <summary>
+        /// Transform an expression of <see cref="Func{TIn, Out}"/> to
+        /// the expression of <see cref="object"/> and <see cref="object"/>.
+        /// </summary>
         public static Expression<Func<object, object>> ConvertFunction<TIn, TOut>(
             this Expression<Func<TIn, TOut>> function)
         {

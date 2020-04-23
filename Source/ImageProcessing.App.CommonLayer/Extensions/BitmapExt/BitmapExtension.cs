@@ -20,11 +20,6 @@ namespace ImageProcessing.App.CommonLayer.Extensions.BitmapExt
         /// <returns>The shuffled bitmap.</returns>
         public static Bitmap Shuffle(this Bitmap bitmap)
         {
-            if (bitmap is null)
-            {
-                throw new ArgumentNullException(nameof(bitmap));
-            }
-
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                                                         ImageLockMode.ReadWrite,
                                                         bitmap.PixelFormat);

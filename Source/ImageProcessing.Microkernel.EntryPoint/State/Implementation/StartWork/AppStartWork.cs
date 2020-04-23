@@ -29,7 +29,7 @@ namespace ImageProcessing.Microkernel.State.StartWork
                 AppState.EndWork
             );
 
-            AppLifecycle .State.Exit();
+            AppLifecycle.State.Exit();
         }
 
         /// <inheritdoc/>

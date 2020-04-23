@@ -1,7 +1,7 @@
 using System;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainLayer.Model.Distributions.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable.Interface;
 using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.RealAxis;
@@ -15,9 +15,6 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable
         /// <inheritdoc/>
         public decimal[] TransformToDecimal(decimal[] cdf, IDistribution distribution)
         {
-            Requires.IsNotNull(cdf, nameof(cdf));
-            Requires.IsNotNull(distribution, nameof(distribution));
-
             var result = new decimal[cdf.Length];
 
             //transform an array by a quantile function
@@ -32,9 +29,6 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable
         /// <inheritdoc/>
         public byte[] TransformToByte(decimal[] cdf, IDistribution distribution)
         {
-            Requires.IsNotNull(cdf, nameof(cdf));
-            Requires.IsNotNull(distribution, nameof(distribution));
-
             var result = new byte[256];
 
             //transform an array by a quantile function
@@ -62,14 +56,12 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable
         /// <inheritdoc/>
         public decimal GetExpectation(decimal[] pmf)
         {
-            Requires.IsNotNull(pmf, nameof(pmf));
-
-            Requires.IsTrue(
-                () => pmf.Any(value => value > 0),
+            Contract.Requires(
+                pmf.Any(value => value > 0),
                 "Probability mass function is always positive.");
 
-            Requires.IsTrue(
-                () => (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
+            Contract.Requires(
+                (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
                 "The pmf must be normalized.");
 
             var total = 0.0M;
@@ -85,14 +77,12 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable
         /// <inheritdoc/>
         public decimal GetVariance(decimal[] pmf)
         {
-            Requires.IsNotNull(pmf, nameof(pmf));
-
-            Requires.IsTrue(
-                () => pmf.Any(value => value > 0),
+            Contract.Requires(
+                pmf.Any(value => value > 0),
                 "Probability mass function is always positive.");
 
-            Requires.IsTrue(
-                () => (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
+            Contract.Requires(
+                (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
                 "The pmf must be normalized.");
 
             var total = 0.0M;
@@ -110,14 +100,12 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable
         /// <inheritdoc/>
         public decimal GetStandardDeviation(decimal[] pmf)
         {
-            Requires.IsNotNull(pmf, nameof(pmf));
-
-            Requires.IsTrue(
-                () => pmf.Any(value => value > 0),
+            Contract.Requires(
+                pmf.Any(value => value > 0),
                 "Probability mass function is always positive.");
 
-            Requires.IsTrue(
-                () => (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
+            Contract.Requires(
+                (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
                 "The pmf must be normalized.");
 
             return GetVariance(pmf).Sqrt();
@@ -126,14 +114,12 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable
         /// <inheritdoc/>
         public decimal GetConditionalExpectation((int x1, int x2) interval, decimal[] pmf)
         {
-            Requires.IsNotNull(pmf, nameof(pmf));
-
-            Requires.IsTrue(
-                () => pmf.Any(value => value > 0),
+            Contract.Requires(
+                pmf.Any(value => value > 0),
                 "Probability mass function is always positive.");
 
-            Requires.IsTrue(
-                () => (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
+            Contract.Requires(
+                (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
                 "The pmf must be normalized.");
 
             var uvalue = 0.0M;
@@ -156,10 +142,8 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable
         /// <inheritdoc/>
         public decimal GetConditionalVariance((int x1, int x2) interval, decimal[] frequencies)
         {
-            Requires.IsNotNull(frequencies, nameof(frequencies));
-
-            Requires.IsTrue(
-                () => frequencies.Any(value => value > 0),
+            Contract.Requires(
+                frequencies.Any(value => value > 0),
                 "Frequencies are always positive.");
 
             var mean = GetConditionalExpectation(interval, frequencies);
@@ -184,14 +168,12 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable
         /// <inheritdoc/>
         public decimal[] GetCDF(decimal[] pmf)
         {
-            Requires.IsNotNull(pmf, nameof(pmf));
-
-            Requires.IsTrue(
-                () => pmf.Any(value => value > 0),
+            Contract.Requires(
+                pmf.Any(value => value > 0),
                 "Probability mass function is always positive.");
 
-            Requires.IsTrue(
-                () => (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
+            Contract.Requires(
+                (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
                 "The pmf must be normalized.");
 
             var cdf = pmf.Clone() as decimal[];
@@ -212,10 +194,8 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable
         /// <inheritdoc/>
         public decimal[] GetPMF(int[] frequencies)
         {
-            Requires.IsNotNull(frequencies, nameof(frequencies));
-
-            Requires.IsTrue(
-                () => frequencies.Any(value => value > 0),
+            Contract.Requires(
+                frequencies.Any(value => value > 0),
                 "Frequencies are always positive.");
 
             var total = frequencies.Sum();
@@ -229,14 +209,12 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable
         /// <inheritdoc/>
         public decimal GetEntropy(decimal[] pmf)
         {
-            Requires.IsNotNull(pmf, nameof(pmf));
-
-            Requires.IsTrue(
-                () => pmf.Any(value => value > 0),
+            Contract.Requires(
+                pmf.Any(value => value > 0),
                 "Probability mass function is always positive.");
 
-            Requires.IsTrue(
-                () => (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
+            Contract.Requires(
+                (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
                 "The pmf must be normalized.");
 
             var entropy = 0.0M;

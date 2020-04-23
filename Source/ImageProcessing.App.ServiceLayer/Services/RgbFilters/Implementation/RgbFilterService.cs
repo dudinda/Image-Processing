@@ -1,6 +1,5 @@
 using System.Drawing;
 
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainLayer.Model.RgbFilters.Interface;
 using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Interface;
 
@@ -11,11 +10,6 @@ namespace ImageProcessing.App.ServiceLayer.Services.RgbFilters.Implementation
     {
         /// <inheritdoc/>
         public Bitmap Filter(Bitmap source, IRgbFilter filter)
-        {
-            Requires.IsNotNull(source, nameof(source));
-            Requires.IsNotNull(filter, nameof(filter));
-
-            return filter.Filter(source);
-        }
+            => filter.Filter(source);     
     }
 }

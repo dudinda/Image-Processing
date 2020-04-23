@@ -1,7 +1,6 @@
 using System;
 using System.Linq.Expressions;
 
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Item.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Item.Implementation
@@ -15,9 +14,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Item.Implementation
 
         public FuncBlockItem(Expression<Func<object, object>> step)
         {
-            _step = Requires.IsNotNull(
-                step, nameof(step));
-
+            _step = step;
             InputType  = _step.Parameters[0].Type;
             OutputType = _step.ReturnType;
         }

@@ -1,7 +1,6 @@
 using System;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Color.Interface;
 using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Rgb.Interface;
 using ImageProcessing.App.DomainLayer.Model.RgbFilters.Implementation.Binary;
@@ -19,11 +18,8 @@ namespace ImageProcessing.App.DomainLayer.Factory.RgbFilters.Rgb.Implementation
         private readonly IColorFactory _factory;
 
         public RgbFilterFactory(IColorFactory factory)
-        {
-            _factory = Requires.IsNotNull(
-                factory, nameof(factory));
-        }
-
+            => _factory = factory;
+        
         /// <summary>
         /// Provides a factory method for all the <see cref="RgbFilter"/>
         /// implementing the <see cref="IRgbFilter"/>.

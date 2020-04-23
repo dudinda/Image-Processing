@@ -1,6 +1,5 @@
 using System.Drawing;
 
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.Dilation;
 using ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.Erosion;
 using ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.Subtraction;
@@ -17,9 +16,6 @@ namespace ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.Morpho
         /// <inheritdoc />
         public Bitmap Filter(Bitmap bitmap, BitMatrix kernel)
         {
-            Requires.IsNotNull(bitmap, nameof(bitmap));
-            Requires.IsNotNull(kernel, nameof(kernel));
-
             var subtraction = new SubtractionOperator();
             var dilation    = new DilationOperator();
             var erosion     = new ErosionOperator();

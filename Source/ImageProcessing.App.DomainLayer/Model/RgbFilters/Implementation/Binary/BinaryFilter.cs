@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Recommendation.Implementation;
 using ImageProcessing.App.DomainLayer.Model.RgbFilters.Interface;
 
@@ -21,8 +20,6 @@ namespace ImageProcessing.App.DomainLayer.Model.RgbFilters.Implementation.Binary
         /// <inheritdoc />
         public Bitmap Filter(Bitmap bitmap)
         {
-            Requires.IsNotNull(bitmap, nameof(bitmap));
-
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                                              ImageLockMode.ReadWrite,
                                              bitmap.PixelFormat);

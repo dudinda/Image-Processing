@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace ImageProcessing.App.CommonLayer.Extensions.EnumExt
@@ -49,12 +50,12 @@ namespace ImageProcessing.App.CommonLayer.Extensions.EnumExt
         public static TEnum GetValueFromDescription<TEnum>(this string description)
             where TEnum : Enum
         {
+
             var type = typeof(TEnum);
 
-            if (!type.IsEnum)
-            {
-                throw new InvalidOperationException();
-            }
+            Contract.Requires<InvalidOperationException>(
+                type.IsEnum, nameof(type)
+            );
 
             foreach (var field in type.GetFields())
             {

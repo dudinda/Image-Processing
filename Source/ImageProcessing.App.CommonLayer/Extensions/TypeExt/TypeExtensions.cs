@@ -18,9 +18,9 @@ namespace ImageProcessing.App.CommonLayer.Extensions.TypeExt
         public static IEnumerable<MethodInfo> GetMethodsByAttribute<TAttribute>(
             this Type type, BindingFlags flags)
             where TAttribute : Attribute
-            => type?.GetMethods(flags).Where(
+            => type.GetMethods(flags).Where(
                 method => method.GetCustomAttribute(typeof(TAttribute), false) != null
-            ) ?? throw new ArgumentNullException(nameof(type));
+            );
 
         /// <summary>
         /// Get all the methods,
@@ -50,16 +50,6 @@ namespace ImageProcessing.App.CommonLayer.Extensions.TypeExt
             (this Type type, Func<TAttribute, TValue> valueSelector)
             where TAttribute : Attribute
         {
-            if (type is null)
-            {
-                throw new ArgumentNullException(nameof(type));
-            }
-
-            if (valueSelector is null)
-            {
-                throw new ArgumentNullException(nameof(valueSelector));
-            }
-
             var att = type.GetCustomAttributes(typeof(TAttribute), true)
                           .FirstOrDefault() as TAttribute;
 
@@ -68,7 +58,7 @@ namespace ImageProcessing.App.CommonLayer.Extensions.TypeExt
                 return valueSelector(att);
             }
 
-            return default(TValue);
+            return default(TValue)!;
         }
 
         /// <summary>
@@ -77,8 +67,6 @@ namespace ImageProcessing.App.CommonLayer.Extensions.TypeExt
         /// <para>Where the <typeparamref name="TAttribute"/> is an <see cref="Attribute"/>. </para>
         /// </summary>
         public static bool HasAttribute<TAttribute>(this Type type)
-            where TAttribute : Attribute
-            => type?.IsDefined(typeof(TAttribute), false)
-            ?? throw new ArgumentNullException(nameof(type));
+            where TAttribute : Attribute => type.IsDefined(typeof(TAttribute), false);
     }
 }

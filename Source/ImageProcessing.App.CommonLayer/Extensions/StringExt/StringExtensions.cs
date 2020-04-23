@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 
 namespace ImageProcessing.App.CommonLayer.Extensions.StringExt
@@ -16,7 +17,7 @@ namespace ImageProcessing.App.CommonLayer.Extensions.StringExt
                 value = (TValue)converter.ConvertFromString(input);
                 return true;
             }
-            catch
+            catch(NotSupportedException ex)
             {
                 value = default(TValue);
                 return false;

@@ -1,7 +1,6 @@
 using System.Drawing;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.ServiceLayer.Services.FileDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Interface;
@@ -16,13 +15,11 @@ namespace ImageProcessing.App.ServiceLayer.NonBlockDialog.Implementation
         public NonBlockDialogService(IFileDialogService service,
                                      IStaTaskService staService)
         {
-            _service = Requires.IsNotNull(
-                service, nameof(service));
-            _staService = Requires.IsNotNull(
-                staService, nameof(staService));
+            _service = service;
+            _staService = staService;
         }
 
-        public async Task<Bitmap> NonBlockOpen(string filters)
+        public async Task<Bitmap> NonBlockOpen(string? filters)
         {
             var result = await _staService.StartSTATask(
                 () => _service.OpenFileDialog(filters)
@@ -33,8 +30,6 @@ namespace ImageProcessing.App.ServiceLayer.NonBlockDialog.Implementation
 
         public async Task NonBlockSaveAs(Bitmap src, string filters)
         {
-            Requires.IsNotNull(src, nameof(src));
-
             await _staService.StartSTATask(
                  () => _service.SaveFileAsDialog(src, filters)
             ).ConfigureAwait(false);          

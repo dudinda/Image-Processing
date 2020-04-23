@@ -4,7 +4,6 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
-using ImageProcessing.App.CommonLayer.Helpers;
 using ImageProcessing.App.DomainLayer.Model.Morphology.Interface.UnaryOperator;
 using ImageProcessing.Utility.DataStructure.BitMatrix.Implementation;
 
@@ -18,9 +17,6 @@ namespace ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.Dilati
         /// <inheritdoc />
         public Bitmap Filter(Bitmap bitmap, BitMatrix kernel)
         {
-            Requires.IsNotNull(bitmap, nameof(bitmap));
-            Requires.IsNotNull(kernel, nameof(kernel));
-
             var destination = new Bitmap(bitmap);
 
             var source = bitmap.AdjustBorder(kernel.ColumnCount / 2, Color.Black);
