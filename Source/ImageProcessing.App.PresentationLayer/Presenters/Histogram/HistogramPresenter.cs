@@ -36,7 +36,14 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             Requires.IsNotNull(vm, nameof(vm));
 
-            Build(vm.Source, vm.Mode);
+            DoWorkBeforeShow(vm);
+        }
+
+        private async Task DoWorkBeforeShow(HistogramViewModel vm)
+        {
+            await Task.Run(
+                () => Build(vm.Source, vm.Mode)
+            ).ConfigureAwait(true);
 
             View.Show();
         }

@@ -11,7 +11,7 @@ namespace ImageProcessing.Microkernel.MVP.Presenter
         /// <summary>
         /// Run a presenter.
         /// </summary>
-        Task Run();
+        void Run();
     }
 
     /// <summary>
@@ -26,7 +26,7 @@ namespace ImageProcessing.Microkernel.MVP.Presenter
         /// Run a presenter with the specified
         /// <see cref="TViewModel"/>.
         /// </summary>
-        Task Run(TViewModel argument);
+        void Run(TViewModel argument);
     }
 
 }
