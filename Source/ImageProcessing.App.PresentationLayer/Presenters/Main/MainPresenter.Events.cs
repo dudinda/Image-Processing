@@ -28,49 +28,49 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
           ISubscriber<SaveWithoutFileDialogEventArgs>,
           ISubscriber<ShuffleEventArgs>
     {
-        public async Task OnEventHandler(ApplyConvolutionFilterEventArgs e)
-            => await ApplyConvolutionFilter(e).ConfigureAwait(true);
+        public void OnEventHandler(ApplyConvolutionFilterEventArgs e)
+            => ApplyConvolutionFilter(e);
 
-        public async Task OnEventHandler(ShowConvolutionFilterPresenterEventArgs e)
-            => await ShowConvolutionFiltersMenu(e).ConfigureAwait(true);
+        public void OnEventHandler(ShowConvolutionFilterPresenterEventArgs e)
+            => ShowConvolutionFiltersMenu(e);
 
-        public async Task OnEventHandler(RgbFilterEventArgs e)
-            => await ApplyRgbFilter(e).ConfigureAwait(true);
+        public void OnEventHandler(RgbFilterEventArgs e)
+            => ApplyRgbFilter(e);
 
-        public async Task OnEventHandler(RgbColorFilterEventArgs e)
-            => await ApplyColorFilter(e).ConfigureAwait(true);
+        public void OnEventHandler(RgbColorFilterEventArgs e)
+            => ApplyColorFilter(e);
 
-        public async Task OnEventHandler(DistributionEventArgs e)
-            => await ApplyHistogramTransformation(e).ConfigureAwait(true);
+        public void OnEventHandler(DistributionEventArgs e)
+            => ApplyHistogramTransformation(e);
 
-        public async Task OnEventHandler(ImageContainerEventArgs e)
-            => await Replace(e).ConfigureAwait(true);
+        public void OnEventHandler(ImageContainerEventArgs e)
+            => Replace(e);
 
-        public async Task OnEventHandler(ZoomEventArgs e)
-            => await Zoom(e).ConfigureAwait(true);
+        public void OnEventHandler(ZoomEventArgs e)
+            => Zoom(e);
 
-        public async Task OnEventHandler(CloseFormEventArgs e)
-            => await CloseForm(e).ConfigureAwait(true);
+        public void OnEventHandler(CloseFormEventArgs e)
+            => CloseForm(e);
 
-        public async Task OnEventHandler(RandomVariableInfoEventArgs e)
-            => await GetRandomVariableInfo(e).ConfigureAwait(true);
+        public void OnEventHandler(RandomVariableInfoEventArgs e)
+            => GetRandomVariableInfo(e);
 
-        public async Task OnEventHandler(RandomVariableFunctionEventArgs e)
-            => await BuildFunction(e).ConfigureAwait(true);
+        public void OnEventHandler(RandomVariableFunctionEventArgs e)
+            => BuildFunction(e);
 
-        public async Task OnEventHandler(SaveAsFileDialogEventArgs e)
-            => await SaveImageAs(e).ConfigureAwait(true);
+        public void OnEventHandler(SaveAsFileDialogEventArgs e)
+            => SaveImageAs(e);
         
-        public async Task OnEventHandler(OpenFileDialogEventArgs e)
-            => await OpenImage(e).ConfigureAwait(true);
+        public void OnEventHandler(OpenFileDialogEventArgs e)
+            => OpenImage(e);
 
-        public async Task OnEventHandler(SaveWithoutFileDialogEventArgs e)
-            => await SaveImage(e).ConfigureAwait(true);
+        public void OnEventHandler(SaveWithoutFileDialogEventArgs e)
+            => SaveImage(e);
 
-        public async Task OnEventHandler(ShuffleEventArgs e)
-            => await Shuffle(e).ConfigureAwait(true);
+        public void OnEventHandler(ShuffleEventArgs e)
+            => Shuffle(e);
 
-        public async Task OnEventHandler(ShowQualityMeasureEventArgs e)
-            => await ShowQualityMeasureForm(e).ConfigureAwait(true);
+        public void OnEventHandler(ShowQualityMeasureEventArgs e)
+            => ShowQualityMeasureForm(e);
     }
 }

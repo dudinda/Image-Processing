@@ -585,7 +585,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
            
-        private async Task CloseForm(CloseFormEventArgs e)
+        private void CloseForm(CloseFormEventArgs e)
             => Controller.Dispose();
     }
 }

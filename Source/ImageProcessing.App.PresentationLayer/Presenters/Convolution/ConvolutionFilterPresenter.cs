@@ -64,7 +64,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
 			}
 		}
 
-        private async Task ShowTooltipOnError(ShowTooltipOnErrorEventArgs e)
+        private void ShowTooltipOnError(ShowTooltipOnErrorEventArgs e)
             => View.ShowError(e.Error);
 	}
 }

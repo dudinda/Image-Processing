@@ -40,7 +40,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             View.Show();
         }
 
-        private async Task BuildHistogram(QualityMeasureViewModel vm)
+        private void BuildHistogram(QualityMeasureViewModel vm)
         {
             var chart = View.GetChart;
                 chart.Series.Clear();
