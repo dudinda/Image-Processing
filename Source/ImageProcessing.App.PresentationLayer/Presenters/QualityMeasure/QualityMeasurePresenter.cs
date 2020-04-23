@@ -31,7 +31,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 builder, nameof(builder));
         }
 
-        public override async Task Run(QualityMeasureViewModel vm)
+        public override void Run(QualityMeasureViewModel vm)
         {
             Requires.IsNotNull(vm, nameof(vm));
 

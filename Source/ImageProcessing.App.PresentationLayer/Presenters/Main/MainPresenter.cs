@@ -159,9 +159,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
-                    await Controller.RunAsync<QualityMeasurePresenter, QualityMeasureViewModel>(
+                    Controller.Run<QualityMeasurePresenter, QualityMeasureViewModel>(
                         new QualityMeasureViewModel(View.GetQualityQueue())
-                    ).ConfigureAwait(true);
+                    );
 
                     View.ClearQualityQueue();
                     View.EnableQualityQueue(false);
@@ -185,9 +185,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         ImageContainer.Source
                     ).ConfigureAwait(true);
 
-                    await Controller.RunAsync<ConvolutionFilterPresenter, ConvolutionFilterViewModel>(
+                    Controller.Run<ConvolutionFilterPresenter, ConvolutionFilterViewModel>(
                         new ConvolutionFilterViewModel(copy)
-                    ).ConfigureAwait(true);
+                    );
                 }
             }
             catch (Exception ex)
@@ -423,9 +423,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         e.Container
                     ).ConfigureAwait(true);
 
-                    await Controller.RunAsync<HistogramPresenter, HistogramViewModel>(
+                    Controller.Run<HistogramPresenter, HistogramViewModel>(
                         new HistogramViewModel(copy, e.Action)
-                    ).ConfigureAwait(true);
+                    );
                 }
             }
             catch (Exception ex)

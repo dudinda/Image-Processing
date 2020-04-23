@@ -32,7 +32,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 distibutionService, nameof(distibutionService));
         }
 
-        public override async Task Run(HistogramViewModel vm)
+        public override void Run(HistogramViewModel vm)
         {
             Requires.IsNotNull(vm, nameof(vm));
 

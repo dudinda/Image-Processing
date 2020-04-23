@@ -44,11 +44,7 @@ namespace ImageProcessing.Microkernel.MVP.Controller.Implementation
                 IoC.RegisterTransient<TPresenter>();
             }
 
-            IoC.Resolve<TPresenter>()
-               .Run()
-               .GetAwaiter()
-               .GetResult();
-
+            IoC.Resolve<TPresenter>().Run();
         }
 
         /// <inheritdoc cref="IAppController.RunAsync{TPresenter, TViewModel}(TViewModel)"/>
@@ -66,46 +62,7 @@ namespace ImageProcessing.Microkernel.MVP.Controller.Implementation
                 IoC.RegisterTransient<TPresenter>();
             }
 
-            IoC.Resolve<TPresenter>()
-               .Run(vm)
-               .GetAwaiter()
-               .GetResult();
-        }
-
-        /// <inheritdoc cref="IAppController.RunAsync{TPresenter}"/>
-        public async Task RunAsync<TPresenter>()
-            where TPresenter : class, IPresenter
-        {
-            if (!IoC.IsRegistered<TPresenter>())
-            {
-                IoC.RegisterTransient<TPresenter>();
-            }
-
-            await IoC
-                .Resolve<TPresenter>()
-                .Run()
-                .ConfigureAwait(false);
-        }
-
-        /// <inheritdoc cref="IAppController.RunAsync{TPresenter, TViewModel}(TViewModel)"/>
-        public async Task RunAsync<TPresenter, TViewModel>(TViewModel vm)
-            where TPresenter : class, IPresenter<TViewModel>
-            where TViewModel : class
-        {
-            if(vm is null)
-            {
-                throw new ArgumentNullException(nameof(vm));
-            }
-
-            if (!IoC.IsRegistered<TPresenter>())
-            {
-                IoC.RegisterTransient<TPresenter>();
-            }
-
-            await IoC
-                .Resolve<TPresenter>()
-                .Run(vm)
-                .ConfigureAwait(false);
+            IoC.Resolve<TPresenter>().Run(vm);
         }
 
         /// <summary>

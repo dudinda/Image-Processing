@@ -47,9 +47,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
         protected BasePresenter(IAppController controller)
             => Controller = Requires.IsNotNull(
                 controller, nameof(controller));
-        
+
         /// <inheritdoc/>
-		public virtual async Task Run()
+        public virtual void Run()
             => View.Show();
 	}
 
@@ -99,12 +99,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
                 controller, nameof(controller));
         
         /// <inheritdoc/>
-        public virtual async Task Run(TViewModel vm)
+        public virtual void Run(TViewModel vm)
 		{
 			ViewModel = Requires.IsNotNull(
                 vm, nameof(vm));
 
-			View.Show();
+            View.Show();
 		}
 	}
 }
