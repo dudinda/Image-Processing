@@ -1,3 +1,4 @@
+using System;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.DataChart;
@@ -10,7 +11,7 @@ namespace ImageProcessing.App.PresentationLayer.Views.Histogram
     /// a histogram data chart window.
     /// </summary>
     public interface IHistogramView : IView,
-        IDataChart
+        IDataChart, IDisposable
     {
         /// <summary>
         /// Set a maximum value on the y axis.

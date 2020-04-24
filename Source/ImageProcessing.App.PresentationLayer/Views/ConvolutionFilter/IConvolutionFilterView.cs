@@ -1,3 +1,5 @@
+using System;
+
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.Error;
 using ImageProcessing.Microkernel.MVP.View;
@@ -8,7 +10,7 @@ namespace ImageProcessing.App.PresentationLayer.Views.Convolution
     /// Represents the base behavior of a
     /// convolution filter window.
     /// </summary>
-    public interface IConvolutionFilterView : IView, IError
+    public interface IConvolutionFilterView : IView, IError, IDisposable
     {
         /// <summary>
         /// Get the specified <see cref="ConvolutionFilter"/>

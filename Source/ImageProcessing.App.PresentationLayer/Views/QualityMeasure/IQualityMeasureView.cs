@@ -1,5 +1,4 @@
-using System.Collections.Concurrent;
-using System.Drawing;
+using System;
 
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.DataChart;
 using ImageProcessing.Microkernel.MVP.View;
@@ -11,7 +10,7 @@ namespace ImageProcessing.App.PresentationLayer.Views.QualityMeasure
     /// a quality measure window.
     /// </summary>
     public interface IQualityMeasureView : IView,
-        IDataChart
+        IDataChart, IDisposable
     {
        
     }
