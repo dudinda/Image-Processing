@@ -61,7 +61,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
             result.AddRange(
                 GetLimitPoints(0M));
 
-            result.Add(
+            result.AddRange(
                 GetOpenIntervalFromZeroToOne());
 
             return result.ToArray();
