@@ -12,54 +12,39 @@ namespace ImageProcessing.Utility.DataStructure.FixedStack.Implementation
         private readonly int _size;
 
         public FixedStack(int size)
-        {
-            _size = size;
-        }
+            => _size = size;
 
         public bool Any()
-        {
-            lock (_stack)
-            {
-               return _stack.Any();
-            }
-        }
+            => _stack.Any();
+
 
         public T Pop()
         {
-            lock (_stack)
-            {
-                var result = _stack.First;
+            var result = _stack.First;
 
-                _stack.RemoveFirst();
+            _stack.RemoveFirst();
 
-                return result.Value;
-            }
+            return result.Value;
         }
 
         public void Push(T bmp)
         {
-            lock (_stack)
+            if (_stack.Count == _size)
             {
-                if (_stack.Count == _size)
-                {
-                    _stack.RemoveLast();
-                }
-
-                _stack.AddFirst(bmp);
+                _stack.RemoveLast();
             }
+
+            _stack.AddFirst(bmp);
         }
 
         public T Peek()
         {
-            if(!Any())
-            {
-                throw new InvalidOperationException("The stack is empty.");
-            }
-
-            lock (_stack)
+            if (Any())
             {
                 return _stack.First.Value;
             }
+
+            throw new InvalidOperationException("The stack is empty.");
         }
     }
 }

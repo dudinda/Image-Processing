@@ -2,7 +2,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.Utility.DataStructure.FixedStack.Implementation;
+using ImageProcessing.Utility.DataStructure.FixedStack.Implementation.Safe;
 using ImageProcessing.Utility.DataStructure.FixedStack.Interface;
 
 namespace ImageProcessing.App.UILayer.Control
@@ -14,8 +14,8 @@ namespace ImageProcessing.App.UILayer.Control
 
         public UndoRedoSplitContainer()
         {
-            _undo = new FixedStack<(Bitmap changed, ImageContainer from)>(10);
-            _redo = new FixedStack<(Bitmap returned, ImageContainer to)>(10);
+            _undo = new FixedStackSafe<(Bitmap changed, ImageContainer from)>(10);
+            _redo = new FixedStackSafe<(Bitmap returned, ImageContainer to)>(10);
         }
 
         public void Add((Bitmap, ImageContainer) action)
