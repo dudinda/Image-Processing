@@ -83,27 +83,25 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// </summary>
         public static decimal Fmad(decimal x, decimal y, decimal z)
             => (x * y) + z;
-        
+
         /// <summary>
         /// Evaluate ceil(x).
         /// </summary>
         /// <param name="x">An argument of a function</param>
         public static decimal Ceil(decimal x)
-        {
-            if (Frac(x) != 0)
-            {
-                return Floor(x) + 1;
-            }
-
-            return x;
-        }
-
+            => -Floor(-x);
+        
         /// <summary>
         /// Evaluate floor(x).
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static decimal Floor(decimal x)
         {
+            if (x == 0)
+            {
+                return x;
+            }
+
             var result = x - Frac(x);
 
             if (result == x)
