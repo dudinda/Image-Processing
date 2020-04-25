@@ -8,212 +8,219 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
         /// <summary>
         /// (-1, 0)
         /// </summary>
-        public static object[] GetOpenIntervalFromMinusOneToZero()
+        public static IEnumerable<object> GetOpenIntervalFromMinusOneToZero()
         {
-            var result = new List<object>();
-
-            result.AddRange(new object[] {
-                -0.99999999999M,
-                -0.91111925125M,
-                -0.7555M,
-                -0.6123M,
-                -0.544M,
-                -0.412512M,
-                -0.000001M
-            });
-
-            return result.ToArray();
+            yield return -0.99999999999M;
+            yield return -0.91111925125M;
+            yield return -0.7555M;
+            yield return -0.6123M;
+            yield return -0.544M;
+            yield return -0.412512M;
+            yield return -0.000001M;
         }
 
         /// <summary>
         /// (0, 1)
         /// </summary>
-        public static object[] GetOpenIntervalFromZeroToOne()
+        public static IEnumerable<object> GetOpenIntervalFromZeroToOne()
         {
-            var result = new List<object>();
-
-            result.AddRange(new object[] {
-                 0.99999999999M,
-                 0.91111925125M,
-                 0.7555M,
-                 0.6123M,
-                 0.544M,
-                 0.412512M,
-                 0.000001M
-            });
-
-            return result.ToArray();
+            yield return 0.99999999999M;
+            yield return 0.91111925125M;
+            yield return 0.7555M;
+            yield return 0.6123M;
+            yield return 0.544M;
+            yield return 0.412512M;
+            yield return 0.000001M;
         }
 
-        public static object[] GetLimitPoints(params object[] points)
-            => points;
+        public static IEnumerable<object> GetLimitPoints(params object[] points)
+        {
+            foreach(var item in points)
+            {
+                yield return item;
+            }
+        }
        
         /// <summary>
         /// (-1, 1)
         /// </summary>
-        public static object[] GetOpenIntervalFromMinusOneToOne()
+        public static IEnumerable<object> GetOpenIntervalFromMinusOneToOne()
         {
-            var result = new List<object>();
+            foreach (var item in GetOpenIntervalFromMinusOneToZero())
+            {
+                yield return item;
+            }
 
-            result.AddRange(
-                GetOpenIntervalFromMinusOneToZero());
+            foreach (var item in GetLimitPoints(0M))
+            {
+                yield return item;
+            }
 
-            result.AddRange(
-                GetLimitPoints(0M));
-
-            result.AddRange(
-                GetOpenIntervalFromZeroToOne());
-
-            return result.ToArray();
+            foreach (var item in GetOpenIntervalFromZeroToOne())
+            {
+                yield return item;
+            }
         }
 
         /// <summary>
         /// (-1, 1) \ {0}
         /// </summary>
-        public static object[] GetOpenIntervalFromMinusOneToOneExceptZero()
+        public static IEnumerable<object> GetOpenIntervalFromMinusOneToOneExceptZero()
         {
-            var result = new List<object>();
-
-            result.AddRange(
-                GetOpenIntervalFromMinusOneToZero());
-
-            result.AddRange(
-                GetOpenIntervalFromZeroToOne());
-
-            return result.ToArray();
+            foreach(var item in GetOpenIntervalFromMinusOneToZero())
+            {
+                yield return item;
+            }
+            
+            foreach(var item in GetOpenIntervalFromZeroToOne())
+            {
+                yield return item;
+            }
         }
 
         /// <summary>
         /// [1, +inf)
         /// </summary>
-        public static object[] HalfOpenIntervalFromOneToPlusInf()
+        public static IEnumerable<object> HalfOpenIntervalFromOneToPlusInf()
         {
-            var result = new List<object>();
-
-            result.AddRange(
-                GetLimitPoints(1M));
-
-            result.AddRange(
-                GetOpenIntervalFromOneToPlusInf());
-
-            return result.ToArray();
+            foreach(var item in GetLimitPoints(1M))
+            {
+                yield return item;
+            }
+            foreach(var item in GetOpenIntervalFromOneToPlusInf())
+            {
+                yield return item;
+            }
         }
 
         /// <summary>
         /// (1, +inf)
         /// </summary>
-        public static object[] GetOpenIntervalFromOneToPlusInf()
+        public static IEnumerable<object> GetOpenIntervalFromOneToPlusInf()
         {
-            var result = new List<object>();
-
-            result.AddRange(new object[] {
-                 1.0000001M,
-                 1.25125125M,
-                 2M,
-                 10.125125125M,
-                 100M,
-                 10000.125125125M,
-                 10000000M
-            });
-
-            return result.ToArray();
+            yield return 1.0000001M;
+            yield return 1.25125125M;
+            yield return 2M;
+            yield return 10.125125125M;
+            yield return 100M;
+            yield return 10000.125125125M;
+            yield return 10000000M;
         }
 
         /// <summary>
         /// (-inf, -1)
         /// </summary>
-        public static object[] GetOpenIntervalFromMinusInfToMinusOne()
+        public static IEnumerable<object> GetOpenIntervalFromMinusInfToMinusOne()
         {
-            var result = new List<object>();
 
-            result.AddRange(new object[] {
-                 -1.0000001M,
-                 -1.25125125M,
-                 -2M,
-                 -10.125125125M,
-                 -100M,
-                 -10000.125125125M,
-                 -10000000M
-            });
-
-            return result.ToArray();
+            yield return -1.0000001M;
+            yield return -1.25125125M;
+            yield return -2M;
+            yield return -10.125125125M;
+            yield return -100M;
+            yield return -10000.125125125M;
+            yield return -10000000M;
         }
 
         /// <summary>
         /// (-inf, -1]
         /// </summary>
-        public static object[] GetHalfOpenIntervalFromMinusInfToMinusOne()
+        public static IEnumerable<object> GetHalfOpenIntervalFromMinusInfToMinusOne()
         {
-            var result = new List<object>();
+            foreach (var item in GetLimitPoints(-1M))
+            {
+                yield return item;
+            }
 
-            result.AddRange(
-                GetLimitPoints(-1M));
-
-            result.AddRange(
-                GetOpenIntervalFromMinusInfToMinusOne()
-                );
-
-            return result.ToArray();
+            foreach (var item in GetOpenIntervalFromMinusInfToMinusOne())
+            {
+                yield return item;
+            }
         }
 
         /// <summary>
         /// [-1, 1]
         /// </summary>
-        public static object[] GetCloseIntervalFromMinusOneToOne()
+        public static IEnumerable<object> GetCloseIntervalFromMinusOneToOne()
         {
-            var result = new List<object>();
+            foreach (var item in GetLimitPoints(-1M, 1M))
+            {
+                yield return item;
+            }
 
-            result.AddRange(
-                GetLimitPoints(-1M, 1M)
-                );
-
-            result.AddRange(
-                GetOpenIntervalFromMinusOneToOne()
-                );
-          
-            return result.ToArray();
+            foreach (var item in GetOpenIntervalFromMinusOneToOne())
+            {
+                yield return item;
+            }
         }
 
         /// <summary>
         /// (-inf, +inf)
         /// </summary>
-        public static object[] GetRealAxis()
+        public static IEnumerable<object> GetRealAxis()
         {
-            var result = new List<object>();
+            foreach(var item in GetOpenIntervalFromOneToPlusInf())
+            {
+                yield return item;
+            }
 
-            result.AddRange(
-                GetOpenIntervalFromOneToPlusInf()
-                );
+            foreach (var item in GetOpenIntervalFromMinusInfToMinusOne())
+            {
+                yield return item;
+            }
 
-            result.AddRange(
-                GetOpenIntervalFromMinusInfToMinusOne()
-                );
-
-            result.AddRange(
-                GetCloseIntervalFromMinusOneToOne()
-                );
-
-            return result.ToArray();
+            foreach (var item in GetCloseIntervalFromMinusOneToOne())
+            {
+                yield return item;
+            }
         }
 
-        public static object[] GetTrigonometryPoints()
+        /// <summary>
+        /// (-inf, +inf)
+        /// </summary>
+        public static IEnumerable<object> GetNonNegativeRealAxis()
         {
-            var result = new List<object>();
+            foreach(var item in GetOpenIntervalFromOneToPlusInf())
+            {
+                yield return item;
+            }
 
-            result.AddRange(
-                GetLimitPoints(
-                    3 * Math.PI / 2,
-                    Math.PI / 2,
-                    Math.PI,
-                    2 * Math.PI,
-                    Math.PI / 3,
-                    Math.PI / 4,
-                    Math.PI / 6
-                    )
-                );
+            foreach (var item in GetOpenIntervalFromZeroToOne())
+            {
+                yield return item;
+            }
 
-            return result.ToArray();
+            foreach (var item in GetLimitPoints(0M, 1M))
+            {
+                yield return item;
+            }
         }
 
+        /// <summary>
+        /// (-inf, -1) U (1, +inf)
+        /// </summary>
+        public static IEnumerable<object> GetRealAxisExceptClosedFromMinusToPlusOne()
+        {
+            foreach (var item in GetOpenIntervalFromOneToPlusInf())
+            {
+                yield return item;
+            }
+
+            foreach (var item in GetOpenIntervalFromMinusInfToMinusOne())
+            {
+                yield return item;
+            }
+        }
+
+        public static IEnumerable<object> GetTrigonometryPoints()
+        {
+            yield return 3 * Math.PI / 2;
+            yield return Math.PI / 2;
+            yield return Math.PI;
+            yield return 2 * Math.PI;
+            yield return Math.PI / 3;
+            yield return Math.PI / 4;
+            yield return Math.PI / 6;
+        }
     }
 }
