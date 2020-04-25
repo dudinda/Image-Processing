@@ -16,7 +16,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
     /// via the <see cref="IAppController"/> and <see cref="IAwaitablePipeline"/>
     /// and provides messaging between forms and presenters via the <see cref="IEventAggregator"/>.
     /// </summary>
-    public abstract class BasePresenter<TView> : IPresenter
+    internal abstract class BasePresenter<TView> : IPresenter
 		where TView : class, IView
 	{
         private Lazy<IAwaitablePipeline> _pipeline
@@ -59,7 +59,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
     /// via the <see cref="IAppController"/> and <see cref="IAwaitablePipeline"/>
     /// and provides messaging between forms via the <see cref="IEventAggregator"/>.
     /// </summary>
-	public abstract class BasePresenter<TView, TViewModel> : IPresenter<TViewModel>
+	internal abstract class BasePresenter<TView, TViewModel> : IPresenter<TViewModel>
 		where TView : class, IView
 		where TViewModel : class
 	{

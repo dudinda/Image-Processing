@@ -11,7 +11,7 @@ using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 {
-    public sealed partial class MainPresenter
+    internal sealed partial class MainPresenter
         : ISubscriber<ApplyConvolutionFilterEventArgs>,
           ISubscriber<ShowConvolutionFilterPresenterEventArgs>,
           ISubscriber<ShowQualityMeasureEventArgs>,

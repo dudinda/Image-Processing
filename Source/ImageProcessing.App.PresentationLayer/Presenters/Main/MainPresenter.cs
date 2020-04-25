@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Enums;
@@ -30,9 +31,10 @@ using ImageProcessing.App.ServiceLayer.Services.Pipeline;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
+[assembly: InternalsVisibleTo("ImageProcessing.App.UILayer")]
 namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 {
-    public sealed partial class MainPresenter : BasePresenter<IMainView>
+    internal sealed partial class MainPresenter : BasePresenter<IMainView>
     {
         private readonly IBitmapLuminanceDistributionServiceProvider _lumaProvider;
         private readonly IRgbFilterServiceProvider _rgbProvider;
