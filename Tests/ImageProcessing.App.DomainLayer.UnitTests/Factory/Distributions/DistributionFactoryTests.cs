@@ -1,10 +1,14 @@
+using System;
+
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainLayer.Factory.Distributions.Implementation;
 using ImageProcessing.App.DomainLayer.Factory.Distributions.Interface;
 using ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.OneParameter;
-using ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.TwoParameter;
+using ImageProcessing.App.DomainLayer.UnitTests.CaseFactory;
 
 using NUnit.Framework;
+
+using static ImageProcessing.App.DomainLayer.UnitTests.CaseFactory.DomainLayerFactoriesCaseFactory;
 
 namespace ImageProcessing.App.DomainLayer.UnitTests.Factory.Distributions
 {
@@ -19,84 +23,16 @@ namespace ImageProcessing.App.DomainLayer.UnitTests.Factory.Distributions
             _distributionFactory = new DistributionFactory();
         }
 
-        [Test]
-        public void FactoryReturnsRayleighByEnumValue()
-        {
-            Assert.That(
-                _distributionFactory.Get(
-                    Distribution.Rayleigh
-                ), Is.TypeOf(typeof(RayleighDistribution))
-            );
-        }
+        [Test, TestCaseSource(
+               typeof(DomainLayerFactoriesCaseFactory),
+               nameof(DistributionFactoryTestCases))]
+        public void FactoryReturnsRayleighByEnumValue(Distribution distribution, Type returnType)
+            => Assert.That(_distributionFactory.Get(distribution), Is.TypeOf(returnType));
 
         [Test]
-        public void FactoryReturnsExponentialByEnumValue()
-        {
-            Assert.That(
-                _distributionFactory.Get(
-                    Distribution.Exponential
-                ), Is.TypeOf(typeof(ExponentialDistribution))
-            );
-        }
-
-        [Test]
-        public void FactoryReturnsCauchyByEnumValue()
-        {
-            Assert.That(
-                _distributionFactory.Get(
-                    Distribution.Cauchy
-                ), Is.TypeOf(typeof(CauchyDistribution))
-            );
-        }
-
-        [Test]
-        public void FactoryReturnsLaplaceByEnumValue()
-        {
-            Assert.That(
-                _distributionFactory.Get(
-                    Distribution.Laplace
-                ), Is.TypeOf(typeof(LaplaceDistribution))
-            );
-        }
-
-        [Test]
-        public void FactoryReturnsNormalByEnumValue()
-        {
-            Assert.That(
-                _distributionFactory.Get(
-                    Distribution.Normal
-                ), Is.TypeOf(typeof(NormalDistribution))
-            );
-        }
-
-        [Test]
-        public void FactoryReturnsParabolaByEnumValue()
-        {
-            Assert.That(
-                _distributionFactory.Get(
-                    Distribution.Parabola
-                ), Is.TypeOf(typeof(ParabolaDistribution))
-            );
-        }
-
-        [Test]
-        public void FactoryReturnsUniformByEnumValue()
-        {
-            Assert.That(
-                _distributionFactory.Get(
-                    Distribution.Uniform
-                ), Is.TypeOf(typeof(UniformDistribution))
-            );
-        }
-
-        [Test]
-        public void FactoryReturnsWeibullByEnumValue()
-        {
-            Assert.That(
-                _distributionFactory.Get(
-                    Distribution.Weibull
-                ), Is.TypeOf(typeof(WeibullDistribution))
-            );
-        }
+        public void FactoryThrowsNotImplementedExceptionOnUnknownEnum()
+            => Assert.Throws<NotImplementedException>(
+                () => _distributionFactory.Get(Distribution.Unknown)
+            );       
     }
 }

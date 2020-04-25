@@ -214,6 +214,13 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
 
         public static IEnumerable<object> GetTrigonometryPoints()
         {
+            yield return -3 * Math.PI / 2;
+            yield return -Math.PI / 2;
+            yield return -Math.PI;
+            yield return -2 * Math.PI;
+            yield return -Math.PI / 3;
+            yield return -Math.PI / 4;
+            yield return -Math.PI / 6;
             yield return 3 * Math.PI / 2;
             yield return Math.PI / 2;
             yield return Math.PI;

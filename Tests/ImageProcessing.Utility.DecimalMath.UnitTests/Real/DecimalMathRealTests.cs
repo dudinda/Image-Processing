@@ -3,7 +3,6 @@ using System;
 using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.RealAxis;
 using ImageProcessing.Utility.DecimalMath.RealAxis;
 using ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory;
-using ImageProcessing.Utility.DecimalMath.UnitTests.CaseRepository;
 
 using NUnit.Framework;
 
@@ -18,6 +17,7 @@ namespace ImageProcessing.Tests.Utility
         [Test, TestCaseSource(
             typeof(RealDomainCasesFactory),
             nameof(GetRealAxis))]
+
         public void FloorFunctionTest(decimal value)
             => Assert.AreEqual(Floor(value), Math.Floor(value));
 

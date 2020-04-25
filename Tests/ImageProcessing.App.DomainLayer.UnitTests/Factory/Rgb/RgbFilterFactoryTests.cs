@@ -5,12 +5,13 @@ using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Color.Interface;
 using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Rgb.Implementation;
 using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Rgb.Interface;
 using ImageProcessing.App.DomainLayer.Model.RgbFilters.Implementation.Binary;
-using ImageProcessing.App.DomainLayer.Model.RgbFilters.Implementation.Grayscale;
-using ImageProcessing.App.DomainLayer.Model.RgbFilters.Implementation.Inversion;
+using ImageProcessing.App.DomainLayer.UnitTests.CaseFactory;
 
 using NSubstitute;
 
 using NUnit.Framework;
+
+using static ImageProcessing.App.DomainLayer.UnitTests.CaseFactory.DomainLayerFactoriesCaseFactory;
 
 namespace ImageProcessing.App.DomainLayer.UnitTests.Factory.Rgb
 {
@@ -27,42 +28,16 @@ namespace ImageProcessing.App.DomainLayer.UnitTests.Factory.Rgb
             );
         }
 
-        [Test]
-        public void FactoryReturnsBinaryFilterByEnum()
-        {
-            Assert.That(
-                _rgbFilterFactory.Get(
-                    RgbFilter.Binary
-                ), Is.TypeOf(typeof(BinaryFilter))
-            );
-        }
-
-        [Test]
-        public void FactoryReturnsGrayscaleFilterByEnum()
-        {
-            Assert.That(
-                _rgbFilterFactory.Get(
-                    RgbFilter.Grayscale
-                ), Is.TypeOf(typeof(GrayscaleFilter))
-            );
-        }
-
-        [Test]
-        public void FactoryReturnsInversionFilterByEnum()
-        {
-            Assert.That(
-                _rgbFilterFactory.Get(
-                    RgbFilter.Inversion
-                ), Is.TypeOf(typeof(InversionFilter))
-            );
-        }
+        [Test, TestCaseSource(
+               typeof(DomainLayerFactoriesCaseFactory),
+               nameof(RgbFiltersFactoryTestCases))]
+        public void FactoryReturnsBinaryFilterByEnum(RgbFilter filter, Type returnType)
+            =>  Assert.That(_rgbFilterFactory.Get(filter), Is.TypeOf(returnType));
 
         [Test]
         public void FactoryThrowsNotImplementedExceptionOnUnknownEnum()
-        {
-            Assert.Throws<NotImplementedException>(
+            => Assert.Throws<NotImplementedException>(
                 () => _rgbFilterFactory.Get(RgbFilter.Unknown)
             );
-        }
     }
 }
