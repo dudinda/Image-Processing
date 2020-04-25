@@ -67,6 +67,7 @@ namespace ImageProcessing.App.CommonLayer.Extensions.TypeExt
         /// <para>Where the <typeparamref name="TAttribute"/> is an <see cref="Attribute"/>. </para>
         /// </summary>
         public static bool HasAttribute<TAttribute>(this Type type)
-            where TAttribute : Attribute => type.IsDefined(typeof(TAttribute), false);
+            where TAttribute : Attribute
+            => type.IsDefined(typeof(TAttribute), false);
     }
 }

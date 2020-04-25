@@ -32,7 +32,7 @@ namespace ImageProcessing.App.CommonLayer.Extensions.EnumExt
         /// </summary>
         /// <typeparam name="TEnum">An enumerated type.</typeparam>
         /// <param name="value">The source value.</param>
-        public static string GetDescription<TEnum>(this TEnum value)
+        public static string? GetDescription<TEnum>(this TEnum value)
             where TEnum : Enum
         {
             var type = value.GetType();
@@ -78,7 +78,7 @@ namespace ImageProcessing.App.CommonLayer.Extensions.EnumExt
                 }
             }
 
-            throw new ArgumentException("Not found.", nameof(description));
+            throw new ArgumentException(description, nameof(description));
         }
 
         /// <summary>
