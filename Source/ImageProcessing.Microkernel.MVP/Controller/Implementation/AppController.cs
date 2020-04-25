@@ -42,7 +42,7 @@ namespace ImageProcessing.Microkernel.MVP.Controller.Implementation
             IoC.Resolve<TPresenter>().Run();
         }
 
-        /// <inheritdoc cref="IAppController.RunAsync{TPresenter, TViewModel}(TViewModel)"/>
+        /// <inheritdoc cref="IAppController.Run{TPresenter, TViewModel}(TViewModel)"/>
         public void Run<TPresenter, TViewModel>(TViewModel vm)
             where TPresenter : class, IPresenter<TViewModel>
             where TViewModel : class

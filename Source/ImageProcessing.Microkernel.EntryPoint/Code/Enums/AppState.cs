@@ -21,12 +21,12 @@ namespace ImageProcessing.Microkernel.Code.Enums
         IsBuilt    = 2,
 
         /// <summary>
-        ///An application starts work.
+        ///An application starts to work.
         /// </summary>
         StartWork  = 3,
 
         /// <summary>
-        ///An application ends works.
+        ///An application ends work.
         /// </summary>
         EndWork    = 4
     }

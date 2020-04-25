@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 
 using ImageProcessing.Microkernel.Code.Enums;
 using ImageProcessing.Microkernel.DI.Code.Enums;
