@@ -25,8 +25,7 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.RgbFilters
 
         public Bitmap Apply(Bitmap bmp, RgbFilter filter)
             => _cache.GetOrCreate(filter,
-               () =>
-               _rgbFilterService
+               () => _rgbFilterService
                    .Filter(bmp,
                        _rgbFilterFactory
                            .Get(filter)
