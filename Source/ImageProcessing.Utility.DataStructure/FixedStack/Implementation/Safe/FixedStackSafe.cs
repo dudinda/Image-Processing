@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 using ImageProcessing.Utility.DataStructure.FixedStack.Interface;
 
@@ -18,7 +17,7 @@ namespace ImageProcessing.Utility.DataStructure.FixedStack.Implementation.Safe
         {
             lock (_stack)
             {
-               return _stack.Any();
+               return _stack.Count > 0;
             }
         }
 

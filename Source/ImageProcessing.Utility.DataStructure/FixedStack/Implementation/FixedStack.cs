@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 using ImageProcessing.Utility.DataStructure.FixedStack.Interface;
 
@@ -15,7 +14,7 @@ namespace ImageProcessing.Utility.DataStructure.FixedStack.Implementation
             => _size = size;
 
         public bool Any()
-            => _stack.Any();
+            => _stack.Count > 0;
 
 
         public T Pop()
