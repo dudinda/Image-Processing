@@ -2,7 +2,7 @@ using System;
 
 using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.RealAxis;
 using ImageProcessing.Utility.DecimalMath.RealAxis;
-using ImageProcessing.Utility.DecimalMath.UnitTests.Factory;
+using ImageProcessing.Utility.DecimalMath.UnitTests.CaseRepository;
 
 using NUnit.Framework;
 
@@ -14,13 +14,15 @@ namespace ImageProcessing.Tests.Utility
     public class DecimalMathRealTests
     {
         private static readonly object[] _realAxis
-            = DecimalMathRealCasesFactory.Factory["(-inf, +inf)"];
+            = DecimalMathRealCasesRepository.Repository["(-inf, +inf)"];
         private static readonly object[] _trigonometry
-            = DecimalMathRealCasesFactory.Factory["Trigonometry"];
+            = DecimalMathRealCasesRepository.Repository["Trigonometry"];
         private static readonly object[] _fromMinusToPlusOneClosed
-            = DecimalMathRealCasesFactory.Factory["[-1, 1]"];
+            = DecimalMathRealCasesRepository.Repository["[-1, 1]"];
         private static readonly object[] _fromMinusToPlusOneOpen
-            = DecimalMathRealCasesFactory.Factory["(-1, 1)"];
+            = DecimalMathRealCasesRepository.Repository["(-1, 1)"];
+        private static readonly object[] _closedFromOneToPlusInf
+            = DecimalMathRealCasesRepository.Repository["[1, +inf)"];
 
         [Test, TestCaseSource(nameof(_realAxis))]
         public void FloorFunctionTest(decimal value)
@@ -238,13 +240,7 @@ namespace ImageProcessing.Tests.Utility
             Assert.That(Abs(Arsinh(val) - cmpVal), Is.LessThan(0.000001M));
         }
 
-        [TestCase(1)]
-        [TestCase(1.000001)]
-        [TestCase(2)]
-        [TestCase(20.002523)]
-        [TestCase(200)]
-        [TestCase(2000.12516)]
-        [TestCase(20000)]
+        [Test, TestCaseSource(nameof(_closedFromOneToPlusInf))]
         public void ArcoshTests(double value)
         {
             var target = Convert.ToDecimal(value);
@@ -254,13 +250,7 @@ namespace ImageProcessing.Tests.Utility
             Assert.That((target.Arcosh() - cmpVal).Abs(), Is.LessThan(0.000001M));
         }
 
-        [TestCase(-0.999999999)]
-        [TestCase(-0.125162123)]
-        [TestCase(-0.00000001)]
-        [TestCase(0)]
-        [TestCase(0.00000001)]
-        [TestCase(0.125162123)]
-        [TestCase(0.99999999)]
+        [Test, TestCaseSource(nameof(_fromMinusToPlusOneOpen))]
         public void ArtanhTests(double value)
         {
             var target = Convert.ToDecimal(value);

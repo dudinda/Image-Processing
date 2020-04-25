@@ -1,5 +1,4 @@
-
-using ImageProcessing.Utility.DecimalMath.UnitTests.Factory;
+using ImageProcessing.Utility.DecimalMath.UnitTests.CaseRepository;
 
 using NUnit.Framework;
 
@@ -14,7 +13,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.ComplexNumbers
     public class DecimalMathComplexTests
     {
         private static readonly object[] _cases
-            = DecimalMathComplexCasesFactory.Factory["Numbers"];
+            = DecimalMathComplexCasesRepository.Factory["Numbers"];
        
         [Test, TestCaseSource(nameof(_cases))]
         public void RealPartTest((decimal re, decimal im) z)

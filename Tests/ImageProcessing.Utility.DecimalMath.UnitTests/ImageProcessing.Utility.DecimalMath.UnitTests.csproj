@@ -67,9 +67,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CaseFactory\RealDomainCasesFactory.cs" />
     <Compile Include="ComplexNumbers\DecimalMathComplexTests.cs" />
-    <Compile Include="Factory\DecimalMathComplexCasesFactory.cs" />
-    <Compile Include="Factory\DecimalMathRealCasesFactory.cs" />
+    <Compile Include="CaseRepository\DecimalMathComplexCasesRepository.cs" />
+    <Compile Include="CaseRepository\DecimalMathRealCasesRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Real\DecimalMathRealTests.cs" />
   </ItemGroup>

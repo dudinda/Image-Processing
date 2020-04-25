@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace ImageProcessing.Utility.DecimalMath.UnitTests.Factory
+namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseRepository
 {
-    public static class DecimalMathComplexCasesFactory
+    public static class DecimalMathComplexCasesRepository
     {
         public static  Dictionary<string, object[]> Factory { get; }
             = new Dictionary<string, object[]>()
