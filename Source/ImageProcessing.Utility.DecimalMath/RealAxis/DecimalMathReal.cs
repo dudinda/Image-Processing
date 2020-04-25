@@ -20,9 +20,12 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// Evaluate sgn(x).
         /// </summary>
         /// <param name="x">An argument of the function</param>
-        public static decimal Sign(decimal x)
+        public static int Sign(decimal x)
         {
-            if (x == 0) return 0;
+            if (x == 0)
+            {
+                return 0;
+            }
 
             return x > 0 ? 1 : -1;
         }
@@ -78,12 +81,6 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         public static decimal Abs(decimal x)
             => x >= 0 ? x : -x;
         
-        /// <summary>
-        /// Fused multiply - add decimal
-        /// </summary>
-        public static decimal Fmad(decimal x, decimal y, decimal z)
-            => (x * y) + z;
-
         /// <summary>
         /// Evaluate ceil(x).
         /// </summary>
@@ -175,6 +172,12 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
                 throw new ArgumentException("The value must be a positive real number");
             }
 
+            // 0 ** 0 = 1
+            if(value == 0 && power == 0)
+            {
+                return 1;
+            }
+
             return Exp(power * Log(value, precision: precision));
         }
 
@@ -185,6 +188,11 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="precision">A error</param>
         public static decimal Exp(decimal x, decimal precision = Epsilon)
         {
+            if(x == 0)
+            {
+                return 1;
+            }
+
             var total = 1.0M;
             var result = total;
 
@@ -263,7 +271,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
 
             for (var k = 0; Abs(total) > precision; ++k)
             {
-                total = -total * x * x / Fmad(k, Fmad(4, k, 10), 6);
+                total = -total * x * x / (k * (4 * k + 10) + 6);
                 result += total;
             }
 
@@ -284,7 +292,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
 
             for (var k = 0; Abs(total) > precision; ++k)
             {
-                total = total * -x * x / Fmad(k, Fmad(4, k, 6), 2);
+                total = total * -x * x / (k * (4 * k + 6) + 2);
                 result += total;
             }
 
@@ -297,10 +305,8 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
         public static decimal Cot(decimal x, decimal precision = Epsilon)
-        {
-            return 1.0M / Tan(x, precision);
-        }
-
+            => 1.0M / Tan(x, precision);
+        
         /// <summary>
         /// Evaluate tan(x) with a specified precision.
         /// </summary>
@@ -336,9 +342,15 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
 
         public static decimal Arctan(decimal x)
         {
-            if (x == 0) return 0;
+            if (x == 0)
+            {
+                return 0;
+            } 
 
-            if (x > 0) return ArctanReduce(x);
+            if (x > 0)
+            {
+                return ArctanReduce(x);
+            }
 
             return -ArctanReduce(-x);
         }
@@ -391,10 +403,10 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
 
             var z = x * x;
 
-            z = z * Fmad(Fmad(Fmad(Fmad(p0, z, p1), z, p2), z, p3), z, p4) /
-                    Fmad(Fmad(Fmad(Fmad(z + q0, z, q1), z, q2), z, q3), z, q4);
+            z = z * ((((p0 * z + p1) * z + p2) * z + p3) * z + p4) /
+                    (((((z + q0) * z + q1) * z + q2) * z + q3) * z + q4);
 
-            return Fmad(x, z, x);
+            return (x * z + x);
 
         }
 
