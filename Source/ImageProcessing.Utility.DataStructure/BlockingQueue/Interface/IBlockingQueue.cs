@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System;
 
 namespace ImageProcessing.Utility.DataStructure.BlockingQueue.Interface
 {
-    public interface IBlockingQueue<T>
+    public interface IBlockingQueue<T> : IDisposable
     {
         bool TryEnqueue(T item);
         bool TryDequeue(out T value);
-        void Close();
         bool Any();
     }
 }

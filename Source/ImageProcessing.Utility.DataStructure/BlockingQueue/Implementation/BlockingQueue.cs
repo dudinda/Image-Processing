@@ -82,9 +82,9 @@ namespace ImageProcessing.Utility.DataStructure.BlockingQueue.Implementation
             }
         }
 
-        public void Close()
+        public void Dispose()
         {
-            lock (_queue)
+            lock(_queue)
             {
                 closing = true;
                 Monitor.PulseAll(_queue);
