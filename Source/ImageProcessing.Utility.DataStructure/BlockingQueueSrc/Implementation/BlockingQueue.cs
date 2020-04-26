@@ -11,7 +11,7 @@ namespace ImageProcessing.Utility.DataStructure.BlockingQueueSrc.Implementation
         private readonly Queue<T> _queue = new Queue<T>();
         private readonly int _maxSize;
 
-        private bool closing;
+        private bool _closing;
 
         public BlockingQueue(int maxSize)
         {
@@ -22,7 +22,7 @@ namespace ImageProcessing.Utility.DataStructure.BlockingQueueSrc.Implementation
         {
             lock (_queue)
             {
-                if (closing)
+                if (_closing)
                 {
                     return false;
                 }
@@ -55,7 +55,7 @@ namespace ImageProcessing.Utility.DataStructure.BlockingQueueSrc.Implementation
                 //block
                 while (_queue.Count == 0)
                 {
-                    if (closing)
+                    if (_closing)
                     {
                         value = default(T);
                         return false;
@@ -84,10 +84,13 @@ namespace ImageProcessing.Utility.DataStructure.BlockingQueueSrc.Implementation
 
         public void Dispose()
         {
-            lock(_queue)
+            if (!_closing)
             {
-                closing = true;
-                Monitor.PulseAll(_queue);
+                lock (_queue)
+                {
+                    _closing = true;
+                    Monitor.PulseAll(_queue);
+                }
             }
         }
     }
