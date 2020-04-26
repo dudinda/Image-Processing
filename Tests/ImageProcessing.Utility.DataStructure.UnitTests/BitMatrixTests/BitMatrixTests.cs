@@ -20,7 +20,7 @@ namespace ImageProcessing.Utility.DataStructure.UnitTests.CollectionTests
             {                                                               //01010
                 for(var column = 0; column < _matrix.ColumnCount; ++column) //10101
                 {                                                           //01010
-                    _matrix[row, column] = (row + column) % 2 == 1;         //10101
+                    _matrix[row, column] = (row + column) % 2 == 0;         //10101
                 }
             }
         }
