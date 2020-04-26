@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 using ImageProcessing.Utility.DataStructure.FixedStackSrc.Interface;
@@ -44,5 +45,18 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation
 
             throw new InvalidOperationException("The stack is empty.");
         }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            var iterator = _stack.GetEnumerator();
+
+            while(iterator.MoveNext())
+            {
+                yield return iterator.Current;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+            => GetEnumerator();
     }
 }
