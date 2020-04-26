@@ -18,7 +18,7 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrix.Implementation
             var bitCount  = size.width * size.height;
             var byteCount = bitCount >> 3;
 
-            if (bitCount % 8 != 0)
+            if ((bitCount & 7) != 0)
             {
                 ++byteCount;
             }
@@ -48,7 +48,7 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrix.Implementation
                 }
 
                 var pos = rowIndex * ColumnCount + columnIndex;
-                var index = pos % 8;
+                var index = pos & 7;
 
                 pos >>= 3;
 
@@ -69,7 +69,7 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrix.Implementation
                 }
 
                 var pos = rowIndex * ColumnCount + columnIndex;
-                var index = pos % 8;
+                var index = pos & 7;
 
                 pos >>= 3;
 

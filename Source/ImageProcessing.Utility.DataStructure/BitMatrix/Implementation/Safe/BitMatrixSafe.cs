@@ -20,7 +20,7 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrix.Implementation.Safe
             var bitCount  = size.width * size.height;
             var byteCount = bitCount >> 3;
 
-            if (bitCount % 8 != 0)
+            if ((bitCount & 7) != 0)
             {
                 ++byteCount;
             }
@@ -50,7 +50,7 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrix.Implementation.Safe
                 }
 
                 var pos   = rowIndex * ColumnCount + columnIndex;
-                var index = pos % 8;
+                var index = pos & 7;
 
                 pos >>= 3;
 
@@ -73,7 +73,7 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrix.Implementation.Safe
                 }
 
                 var pos = rowIndex * ColumnCount + columnIndex;
-                var index = pos % 8;
+                var index = pos & 7;
 
                 pos >>= 3;
 
@@ -89,14 +89,21 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrix.Implementation.Safe
             }
         }
 
-        public IEnumerator GetEnumerator()
+        public IEnumerator<bool> GetEnumerator()
         {
-            throw new NotImplementedException();
+            lock (_sync)
+            {
+                for (var row = 0; row < RowCount; ++row)
+                {
+                    for (var column = 0; column < ColumnCount; ++column)
+                    {
+                        yield return this[row, column];
+                    }
+                }
+            }
         }
 
-        IEnumerator<bool> IEnumerable<bool>.GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+        IEnumerator IEnumerable.GetEnumerator()
+            => GetEnumerator();
     }
 }
