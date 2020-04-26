@@ -15,6 +15,16 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation.Safe
 
         public BitMatrixSafe((int width, int height) size)
         {
+            if (size.width <= 0)
+            {
+                throw new ArgumentException(nameof(size.width));
+            }
+
+            if (size.height <= 0)
+            {
+                throw new ArgumentException(nameof(size.height));
+            }
+
             RowCount    = size.width;
             ColumnCount = size.height;
 
