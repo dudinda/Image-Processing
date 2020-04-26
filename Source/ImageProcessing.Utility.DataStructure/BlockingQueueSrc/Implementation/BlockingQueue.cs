@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-using ImageProcessing.Utility.DataStructure.BlockingQueue.Interface;
+using ImageProcessing.Utility.DataStructure.BlockingQueueSrc.Interface;
 
-namespace ImageProcessing.Utility.DataStructure.BlockingQueue.Implementation
+namespace ImageProcessing.Utility.DataStructure.BlockingQueueSrc.Implementation
 {
     public sealed class BlockingQueue<T> : IBlockingQueue<T>
     {

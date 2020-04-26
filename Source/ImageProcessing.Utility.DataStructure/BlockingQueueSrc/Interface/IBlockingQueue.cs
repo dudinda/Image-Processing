@@ -1,6 +1,6 @@
 using System;
 
-namespace ImageProcessing.Utility.DataStructure.BlockingQueue.Interface
+namespace ImageProcessing.Utility.DataStructure.BlockingQueueSrc.Interface
 {
     public interface IBlockingQueue<T> : IDisposable
     {

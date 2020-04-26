@@ -3,7 +3,7 @@ using System.Drawing;
 using ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.Dilation;
 using ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.Erosion;
 using ImageProcessing.App.DomainLayer.Model.Morphology.Interface.UnaryOperator;
-using ImageProcessing.Utility.DataStructure.BitMatrix.Implementation;
+using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
 namespace ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.Closing
 {

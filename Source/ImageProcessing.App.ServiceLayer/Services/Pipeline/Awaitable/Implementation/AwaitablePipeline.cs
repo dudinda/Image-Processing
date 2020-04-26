@@ -3,8 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
-using ImageProcessing.Utility.DataStructure.BlockingQueue.Implementation;
-using ImageProcessing.Utility.DataStructure.BlockingQueue.Interface;
+using ImageProcessing.Utility.DataStructure.BlockingQueueSrc.Implementation;
+using ImageProcessing.Utility.DataStructure.BlockingQueueSrc.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Implementation
 {
@@ -48,7 +48,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Implement
         {
             _source.Cancel();
             _source.Dispose();
-            _queue.Close();
+            _queue.Dispose();
         }
     }
 }

@@ -1,7 +1,7 @@
 using System.Drawing;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.Utility.DataStructure.BitMatrix.Implementation;
+using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Interface.Morphology
 {

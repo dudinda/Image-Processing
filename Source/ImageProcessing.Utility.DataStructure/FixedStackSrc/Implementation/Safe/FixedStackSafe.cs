@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-using ImageProcessing.Utility.DataStructure.FixedStack.Interface;
+using ImageProcessing.Utility.DataStructure.FixedStackSrc.Interface;
 
-namespace ImageProcessing.Utility.DataStructure.FixedStack.Implementation.Safe
+namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Safe
 {
     public sealed class FixedStackSafe<T> : IFixedStack<T>
     {

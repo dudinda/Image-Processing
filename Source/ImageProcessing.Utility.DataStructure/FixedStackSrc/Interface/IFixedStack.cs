@@ -1,4 +1,4 @@
-namespace ImageProcessing.Utility.DataStructure.FixedStack.Interface
+namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Interface
 {
     public interface IFixedStack<T>
     {

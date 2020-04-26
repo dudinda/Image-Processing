@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ImageProcessing.Utility.DataStructure.BitMatrix.Interface
+namespace ImageProcessing.Utility.DataStructure.BitMatrixSrc.Interface
 {
     /// <summary>
     /// Specifies a memory efficient 2D array

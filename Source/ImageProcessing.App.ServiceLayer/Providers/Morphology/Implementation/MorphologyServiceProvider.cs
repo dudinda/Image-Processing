@@ -6,7 +6,7 @@ using ImageProcessing.App.DomainLayer.Factory.Morphology.Interface.StructuringEl
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Morphology;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Morphology.Interface;
-using ImageProcessing.Utility.DataStructure.BitMatrix.Implementation;
+using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Morphology
 {

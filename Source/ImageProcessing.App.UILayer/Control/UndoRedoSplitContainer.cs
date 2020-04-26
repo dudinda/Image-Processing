@@ -2,8 +2,8 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.Utility.DataStructure.FixedStack.Implementation.Safe;
-using ImageProcessing.Utility.DataStructure.FixedStack.Interface;
+using ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Safe;
+using ImageProcessing.Utility.DataStructure.FixedStackSrc.Interface;
 
 namespace ImageProcessing.App.UILayer.Control
 {

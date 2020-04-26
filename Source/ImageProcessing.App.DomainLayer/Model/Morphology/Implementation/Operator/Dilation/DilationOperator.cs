@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.Model.Morphology.Interface.UnaryOperator;
-using ImageProcessing.Utility.DataStructure.BitMatrix.Implementation;
+using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
 namespace ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.Dilation
 {

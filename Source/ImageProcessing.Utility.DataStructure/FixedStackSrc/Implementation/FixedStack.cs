@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-using ImageProcessing.Utility.DataStructure.FixedStack.Interface;
+using ImageProcessing.Utility.DataStructure.FixedStackSrc.Interface;
 
-namespace ImageProcessing.Utility.DataStructure.FixedStack.Implementation
+namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation
 {
     public sealed class FixedStack<T> : IFixedStack<T>
     {
@@ -15,7 +15,6 @@ namespace ImageProcessing.Utility.DataStructure.FixedStack.Implementation
 
         public bool Any()
             => _stack.Count > 0;
-
 
         public T Pop()
         {

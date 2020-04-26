@@ -3,7 +3,7 @@ using System.Drawing;
 using ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.Closing;
 using ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.Subtraction;
 using ImageProcessing.App.DomainLayer.Model.Morphology.Interface.UnaryOperator;
-using ImageProcessing.Utility.DataStructure.BitMatrix.Implementation;
+using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
 namespace ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.BlackHat
 {

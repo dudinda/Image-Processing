@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using ImageProcessing.Utility.DataStructure.BitMatrix.Interface;
 
-namespace ImageProcessing.Utility.DataStructure.BitMatrix.Implementation.Safe
+using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Interface;
+
+namespace ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation.Safe
 {
     /// <inheritdoc cref="IBitMatrix"/>
     public sealed class BitMatrixSafe : IBitMatrix
