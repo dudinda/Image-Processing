@@ -23,13 +23,31 @@ namespace ImageProcessing.Utility.DataStructure.UnitTests.Fakes
             set => _matrix[rowIndex, columnIndex] = value;
         }
 
+        public bool TryGet(int rowIndex, int columnIndex)
+            => _matrix[rowIndex, columnIndex];
+
+        public IEnumerable Traverse2DArray()
+        {
+            var array = _matrix.To2DArray();
+
+            for(var row = 0; row < _matrix.RowCount; ++row)
+            {
+                for(var column = 0; column < _matrix.ColumnCount; ++column)
+                {
+                    yield return array[row, column];
+                }
+            }
+
+        }
+
         public IEnumerable Traverse()
         {
-            var iterator = _matrix.GetEnumerator();
-
-            while(iterator.MoveNext())
+            using (var iterator = _matrix.GetEnumerator())
             {
-                yield return iterator.Current;
+                while (iterator.MoveNext())
+                {
+                    yield return iterator.Current;
+                }
             }
         }
     }
