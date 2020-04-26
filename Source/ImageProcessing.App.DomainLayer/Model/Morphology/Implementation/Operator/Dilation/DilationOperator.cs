@@ -44,6 +44,7 @@ namespace ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.Dilati
                     MaxDegreeOfParallelism = Environment.ProcessorCount - 1
                 };
 
+                var mask = kernel.To2DArray();
 
                 Parallel.For(kernelOffset, size.Height - kernelOffset, options, y =>
                 {
@@ -56,8 +57,6 @@ namespace ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.Dilati
 
                     for (int x = kernelOffset; x < size.Width - kernelOffset; ++x, sourcePtr += ptrStep, destinationPtr += ptrStep)
                     {
-                        bool isDilate = false;
-
                         for (int kernelRow = -kernelOffset; kernelRow <= kernelOffset; ++kernelRow)
                         {
                             for (int kernelColumn = -kernelOffset; kernelColumn <= kernelOffset; ++kernelColumn)
@@ -65,17 +64,16 @@ namespace ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.Dilati
                                 //get the address of a current element
                                 elementPtr = sourcePtr + kernelColumn * ptrStep + kernelRow * sourceBitmapData.Stride;
 
-                                if (kernel[kernelRow + kernelOffset, kernelColumn + kernelOffset] && elementPtr[0] == 255)
+                                if (mask[kernelRow + kernelOffset, kernelColumn + kernelOffset] && elementPtr[0] == 255)
                                 {
                                     destinationPtr[0] = destinationPtr[1] = destinationPtr[2] = 255;
-                                    isDilate = true;
-                                    break;
+                                    goto IsDilated;
                                 }
 
                             }
-
-                            if (isDilate) break;
                         }
+
+                        IsDilated:;
                     }
                 });
             }

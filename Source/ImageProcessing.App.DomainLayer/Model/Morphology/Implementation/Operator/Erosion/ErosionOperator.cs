@@ -44,6 +44,8 @@ namespace ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.Erosio
                     MaxDegreeOfParallelism = Environment.ProcessorCount - 1
                 };
 
+                var mask = kernel.To2DArray();
+
                 Parallel.For(kernelOffset, size.Height - kernelOffset, options, y =>
                 {
                     //get the address of a new line, considering a kernel offset
@@ -55,8 +57,6 @@ namespace ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.Erosio
 
                     for (int x = kernelOffset; x < size.Width - kernelOffset; ++x, sourcePtr += ptrStep, destinationPtr += ptrStep)
                     {
-                        bool isEroded = false;
-
                         for (int kernelRow = -kernelOffset; kernelRow <= kernelOffset; ++kernelRow)
                         {
                             for (int kernelColumn = -kernelOffset; kernelColumn <= kernelOffset; ++kernelColumn)
@@ -64,16 +64,15 @@ namespace ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.Erosio
                                 //get the address of a current element
                                 elementPtr = sourcePtr + kernelColumn * ptrStep + kernelRow * sourceBitmapData.Stride;
 
-                                if (kernel[kernelRow + kernelOffset, kernelColumn + kernelOffset] && elementPtr[0] != 255)
+                                if (mask[kernelRow + kernelOffset, kernelColumn + kernelOffset] && elementPtr[0] != 255)
                                 {
                                     destinationPtr[0] = destinationPtr[1] = destinationPtr[2] = 0;
-                                    isEroded = true;
-                                    break;
+                                    goto IsEroded;
                                 }
                             }
-
-                            if (isEroded) break;
                         }
+
+                        IsEroded:;
                     }
                 });
             }
