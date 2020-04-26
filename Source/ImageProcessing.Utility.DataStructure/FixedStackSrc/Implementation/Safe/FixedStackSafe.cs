@@ -64,11 +64,12 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Saf
         {
             lock (_stack)
             {
-                var iterator = _stack.GetEnumerator();
-
-                while (iterator.MoveNext())
+                using (var iterator = _stack.GetEnumerator())
                 {
-                    yield return iterator.Current;
+                    while (iterator.MoveNext())
+                    {
+                        yield return iterator.Current;
+                    }
                 }
             }
         }

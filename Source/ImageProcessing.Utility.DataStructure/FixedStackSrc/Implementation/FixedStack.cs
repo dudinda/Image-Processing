@@ -48,11 +48,12 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation
 
         public IEnumerator<T> GetEnumerator()
         {
-            var iterator = _stack.GetEnumerator();
-
-            while(iterator.MoveNext())
+            using (var iterator = _stack.GetEnumerator())
             {
-                yield return iterator.Current;
+                while (iterator.MoveNext())
+                {
+                    yield return iterator.Current;
+                }
             }
         }
 
