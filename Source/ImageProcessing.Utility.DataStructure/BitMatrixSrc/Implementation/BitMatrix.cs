@@ -23,7 +23,7 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation
             {
                 ++byteCount;
             }
-
+      
             _data = new byte[byteCount];
         }
 
@@ -96,5 +96,21 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation
 
         IEnumerator IEnumerable.GetEnumerator()
             => GetEnumerator();
+
+
+        public bool[,] To2DArray()
+        {
+            var result = new bool[RowCount, ColumnCount];
+
+            for(var row = 0; row < RowCount; ++row)
+            {
+                for(var column = 0; column < ColumnCount; ++column)
+                {
+                    result[row, column] = this[row, column];
+                }
+            }
+
+            return result;
+        }
     }
 }

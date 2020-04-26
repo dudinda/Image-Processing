@@ -23,5 +23,11 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrixSrc.Interface
         /// Get or set the value at the specified position.
         /// </summary>
         bool this[int rowIndex, int columnIndex] { get; set; }
+
+        /// <summary>
+        /// Convert a bit matrix to a 2D boolean array.  
+        /// </summary>
+        /// <returns></returns>
+        bool[,] To2DArray();
     }
 }
