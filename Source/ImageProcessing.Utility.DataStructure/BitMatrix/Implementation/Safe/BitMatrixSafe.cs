@@ -1,5 +1,6 @@
 using System;
-
+using System.Collections;
+using System.Collections.Generic;
 using ImageProcessing.Utility.DataStructure.BitMatrix.Interface;
 
 namespace ImageProcessing.Utility.DataStructure.BitMatrix.Implementation.Safe
@@ -86,6 +87,16 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrix.Implementation.Safe
                     }
                 }
             }
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator<bool> IEnumerable<bool>.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 }
