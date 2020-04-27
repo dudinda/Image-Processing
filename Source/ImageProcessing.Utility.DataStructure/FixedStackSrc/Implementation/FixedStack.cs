@@ -22,9 +22,11 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation
             }
         }
 
+        /// <inheritdoc/>
         public bool Any()
             => _stack.Count > 0;
 
+        /// <inheritdoc/>
         public T Pop()
         {
             var result = _stack.First;
@@ -34,6 +36,7 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation
             return result.Value;
         }
 
+        /// <inheritdoc/>
         public void Push(T bmp)
         {
             if (_stack.Count == _size)
@@ -44,6 +47,7 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation
             _stack.AddFirst(bmp);
         }
 
+        /// <inheritdoc/>
         public T Peek()
         {
             if (Any())
@@ -54,6 +58,9 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation
             throw new InvalidOperationException("The stack is empty.");
         }
 
+        /// <summary>
+        /// Iterate a stack from head to tail.
+        /// </summary>
         public IEnumerator<T> GetEnumerator()
         {
             using (var iterator = _stack.GetEnumerator())
@@ -65,7 +72,12 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation
             }
         }
 
+        /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator()
             => GetEnumerator();
+
+        /// <inheritdoc/>
+        public object Clone()
+            => new FixedStack<T>(this);
     }
 }

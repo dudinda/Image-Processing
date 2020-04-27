@@ -22,14 +22,16 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Saf
             }
         }
 
+        /// <inheritdoc/>
         public bool Any()
         {
             lock (_stack)
             {
-               return _stack.Count > 0;
+                return _stack.Count > 0;
             }
         }
 
+        /// <inheritdoc/>
         public T Pop()
         {
             lock (_stack)
@@ -42,6 +44,7 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Saf
             }
         }
 
+        /// <inheritdoc/>
         public void Push(T bmp)
         {
             lock (_stack)
@@ -55,6 +58,7 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Saf
             }
         }
 
+        /// <inheritdoc/>
         public T Peek()
         {
             lock (_stack)
@@ -68,6 +72,9 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Saf
             throw new InvalidOperationException("The stack is empty.");
         }
 
+        /// <summary>
+        /// Iterate a stack from head to tail.
+        /// </summary>
         public IEnumerator<T> GetEnumerator()
         {
             lock (_stack)
@@ -82,7 +89,17 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Saf
             }
         }
 
+        /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator()
             => GetEnumerator();
+
+        /// <inheritdoc/>
+        public object Clone()
+        {
+            lock (_stack)
+            {
+                return new FixedStackSafe<T>(this);
+            }
+        }
     }
 }
