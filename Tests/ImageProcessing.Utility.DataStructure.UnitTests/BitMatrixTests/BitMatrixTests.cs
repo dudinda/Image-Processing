@@ -36,19 +36,40 @@ namespace ImageProcessing.Utility.DataStructure.UnitTests.CollectionTests
            );
 
         [Test]
+        public void DstMatrixIsIdenticalToSrcBooleanMatrixTest()
+        {
+            var dst = new BitMatrixFake(_matrix.To2DArray());
+
+            CollectionAssert.AreEqual(
+              _matrix.Traverse(),
+              dst.Traverse()
+          );
+        }
+
+        [Test]
+        public void DstMatrixIsIdenticalToSrcMatrixTest()
+        {
+            var dst = new BitMatrixFake(_matrix);
+
+            CollectionAssert.AreEqual(
+              _matrix.Traverse(),
+              dst.Traverse()
+          );
+        }
+
+        [Test]
         public void BitMatrixTraverse2DArrayOrderTest()
           => CollectionAssert.AreEqual(
               _matrix.Traverse2DArray(),
               GetTraverseByColumnThenByRowCases
           );
-
+    
         [Test, TestCaseSource(
             typeof(BitMatrixCaseFactory),
             nameof(GetInvalidIndices))]
         public void BitMatrixThrowsOnInvalidIndices((int width, int height) size)
             => Assert.Throws<ArgumentOutOfRangeException>(
                 () => _matrix.TryGet(size.width, size.height)
-            );
-           
+            );     
     }
 }

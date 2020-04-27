@@ -6,43 +6,51 @@ namespace ImageProcessing.Utility.DataStructure.UnitTests.Fakes
 {
     internal sealed class BitMatrixFake
     {
-        private readonly BitMatrix _matrix;
-
-        public BitMatrixFake(int row, int column)
-            => _matrix = new BitMatrix(row, column);
+        public  BitMatrix Matrix { get; }
 
         public int RowCount
-            => _matrix.RowCount;
+            => Matrix.RowCount;
 
         public int ColumnCount
-            => _matrix.ColumnCount;
+            => Matrix.ColumnCount;
+
+        public BitMatrixFake(int row, int column)
+            => Matrix = new BitMatrix(row, column);
+
+        public BitMatrixFake(BitMatrixFake matrix)
+            => Matrix = new BitMatrix(matrix.Matrix);
+
+        public BitMatrixFake(bool[,] matrix)
+            => Matrix = new BitMatrix(matrix);
+
+        public bool[,] To2DArray()
+            => Matrix.To2DArray();
 
         public bool this[int rowIndex, int columnIndex]
         {
-            get => _matrix[rowIndex, columnIndex];
-            set => _matrix[rowIndex, columnIndex] = value;
+            get => Matrix[rowIndex, columnIndex];
+            set => Matrix[rowIndex, columnIndex] = value;
         }
 
         public bool TryGet(int rowIndex, int columnIndex)
-            => _matrix[rowIndex, columnIndex];
+            => Matrix[rowIndex, columnIndex];
 
         public IEnumerable Traverse2DArray()
         {
-            var array = _matrix.To2DArray();
+            var array = Matrix.To2DArray();
 
-            for(var row = 0; row < _matrix.RowCount; ++row)
+            for(var row = 0; row < Matrix.RowCount; ++row)
             {
-                for(var column = 0; column < _matrix.ColumnCount; ++column)
+                for(var column = 0; column < Matrix.ColumnCount; ++column)
                 {
                     yield return array[row, column];
                 }
             }
-
         }
 
         public IEnumerable Traverse()
         {
-            using (var iterator = _matrix.GetEnumerator())
+            using (var iterator = Matrix.GetEnumerator())
             {
                 while (iterator.MoveNext())
                 {
