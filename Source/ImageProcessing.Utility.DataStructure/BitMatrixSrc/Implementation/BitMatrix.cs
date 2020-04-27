@@ -117,6 +117,25 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation
             }
         }
 
+        /// <inheritdoc/>
+        public bool[,] To2DArray()
+        {
+            var result = new bool[RowCount, ColumnCount];
+
+            for (var row = 0; row < RowCount; ++row)
+            {
+                for (var column = 0; column < ColumnCount; ++column)
+                {
+                    result[row, column] = this[row, column];
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Iterate a matrix in a row-major-order.
+        /// </summary>
         public IEnumerator<bool> GetEnumerator()
         {
             for(var row = 0; row < RowCount; ++row)
@@ -128,22 +147,12 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation
             }
         }
 
+        /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator()
             => GetEnumerator();
 
-        public bool[,] To2DArray()
-        {
-            var result = new bool[RowCount, ColumnCount];
-
-            for(var row = 0; row < RowCount; ++row)
-            {
-                for(var column = 0; column < ColumnCount; ++column)
-                {
-                    result[row, column] = this[row, column];
-                }
-            }
-
-            return result;
-        }
+        /// <inheritdoc/>
+        public object Clone()
+            => new BitMatrix(this);
     }
 }

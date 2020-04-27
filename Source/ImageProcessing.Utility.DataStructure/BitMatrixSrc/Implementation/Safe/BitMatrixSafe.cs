@@ -124,23 +124,7 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation.Safe
             }
         }
 
-        public IEnumerator<bool> GetEnumerator()
-        {
-            lock (_sync)
-            {
-                for (var row = 0; row < RowCount; ++row)
-                {
-                    for (var column = 0; column < ColumnCount; ++column)
-                    {
-                        yield return this[row, column];
-                    }
-                }
-            }
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-            => GetEnumerator();
-
+        /// <inheritdoc/>
         public bool[,] To2DArray()
         {
             var result = new bool[RowCount, ColumnCount];
@@ -157,6 +141,36 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation.Safe
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Iterate a matrix in a row-major-order.
+        /// </summary>
+        public IEnumerator<bool> GetEnumerator()
+        {
+            lock (_sync)
+            {
+                for (var row = 0; row < RowCount; ++row)
+                {
+                    for (var column = 0; column < ColumnCount; ++column)
+                    {
+                        yield return this[row, column];
+                    }
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        IEnumerator IEnumerable.GetEnumerator()
+            => GetEnumerator();
+
+        /// <inheritdoc/>
+        public object Clone()
+        {
+            lock(_sync)
+            {
+                return new BitMatrixSafe(this);
+            }
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,7 +8,7 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrixSrc.Interface
     /// Specifies a memory efficient 2D array
     /// where a boolean value uses 1 bit.
     /// </summary>
-    public interface IBitMatrix : IEnumerable, IEnumerable<bool>
+    public interface IBitMatrix : IEnumerable, IEnumerable<bool>, ICloneable
     {
         /// <summary>
         /// The number of rows.
