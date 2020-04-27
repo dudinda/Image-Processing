@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 using static ImageProcessing.Utility.DataStructure.UnitTests.StubFactory.FixedStackStubFactory;
 
-namespace ImageProcessing.Utility.DataStructure.UnitTests.BitMatrixTests
+namespace ImageProcessing.Utility.DataStructure.UnitTests.Tests
 {
     [TestFixture]
     public class FixedStackTests

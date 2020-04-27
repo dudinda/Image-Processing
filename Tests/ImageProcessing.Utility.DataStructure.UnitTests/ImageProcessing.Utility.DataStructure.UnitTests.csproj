@@ -43,8 +43,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BitMatrixTests\BitMatrixTests.cs" />
-    <Compile Include="BitMatrixTests\FixedStackTests.cs" />
+    <Compile Include="Tests\BitMatrixTests.cs" />
+    <Compile Include="Tests\FixedStackTests.cs" />
     <Compile Include="StubFactory\BitMatrixStubFactory.cs" />
     <Compile Include="StubFactory\FixedStackStubFactory.cs" />
     <Compile Include="Fakes\BitMatrixFake.cs" />

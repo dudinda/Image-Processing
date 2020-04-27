@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 using static ImageProcessing.Utility.DataStructure.UnitTests.StubFactory.BitMatrixStubFactory;
 
-namespace ImageProcessing.Utility.DataStructure.UnitTests.CollectionTests
+namespace ImageProcessing.Utility.DataStructure.UnitTests.Tests
 {
     [TestFixture]
     public class BitMatrixTests
