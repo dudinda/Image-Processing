@@ -10,12 +10,16 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Saf
     {
         private readonly LinkedList<T> _stack = new LinkedList<T>();
 
-        /// <inheritdoc/>
-        public int Capacity { get; }
-
         public FixedStackSafe(int capacity)
-            => Capacity = capacity;
+        {
+            if (capacity <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(capacity));
+            }
 
+            Capacity = capacity;
+        }
+           
         public FixedStackSafe(IFixedStack<T> stack)
             : this(stack.Capacity)
         {
@@ -24,6 +28,9 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Saf
                 _stack.AddLast(item);
             }
         }
+
+        /// <inheritdoc/>
+        public int Capacity { get; }
 
         /// <inheritdoc/>
         public bool IsEmpty
@@ -83,13 +90,16 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Saf
         /// </summary>
         public IEnumerator<T> GetEnumerator()
         {
-            lock (_stack)
+            if (!IsEmpty)
             {
-                using (var iterator = _stack.GetEnumerator())
+                lock (_stack)
                 {
-                    while (iterator.MoveNext())
+                    using (var iterator = _stack.GetEnumerator())
                     {
-                        yield return iterator.Current;
+                        while (iterator.MoveNext())
+                        {
+                            yield return iterator.Current;
+                        }
                     }
                 }
             }
