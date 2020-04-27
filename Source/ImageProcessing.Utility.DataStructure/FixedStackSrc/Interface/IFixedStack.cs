@@ -7,6 +7,11 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Interface
     public interface IFixedStack<T> : IEnumerable, IEnumerable<T>, ICloneable
     {
         /// <summary>
+        /// The number of elements which a stack is able to hold.  
+        /// </summary>
+        int Capacity { get; }
+
+        /// <summary>
         /// Checks whether the stack is empty.
         /// </summary>
         bool Any();

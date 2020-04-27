@@ -9,12 +9,15 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation
     public sealed class FixedStack<T> : IFixedStack<T>
     {
         private readonly LinkedList<T> _stack = new LinkedList<T>();
-        private readonly int _size;
 
-        public FixedStack(int size)
-            => _size = size;
+        /// <inheritdoc/>
+        public int Capacity { get; }
+
+        public FixedStack(int capacity)
+            => Capacity = capacity;
 
         public FixedStack(IFixedStack<T> stack)
+            : this(stack.Capacity)
         {
             foreach(var item in stack)
             {
@@ -39,7 +42,7 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation
         /// <inheritdoc/>
         public void Push(T bmp)
         {
-            if (_stack.Count == _size)
+            if (_stack.Count == Capacity)
             {
                 _stack.RemoveLast();
             }

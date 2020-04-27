@@ -9,12 +9,15 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Saf
     public sealed class FixedStackSafe<T> : IFixedStack<T>
     {
         private readonly LinkedList<T> _stack = new LinkedList<T>();
-        private readonly int _size;
 
-        public FixedStackSafe(int size)
-            => _size = size;
+        /// <inheritdoc/>
+        public int Capacity { get; }
+
+        public FixedStackSafe(int capacity)
+            => Capacity = capacity;
 
         public FixedStackSafe(IFixedStack<T> stack)
+            : this(stack.Capacity)
         {
             foreach (var item in stack)
             {
@@ -49,7 +52,7 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Saf
         {
             lock (_stack)
             {
-                if (_stack.Count == _size)
+                if (_stack.Count == Capacity)
                 {
                     _stack.RemoveLast();
                 }
