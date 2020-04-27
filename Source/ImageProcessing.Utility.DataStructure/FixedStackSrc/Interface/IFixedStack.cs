@@ -12,9 +12,9 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Interface
         int Capacity { get; }
 
         /// <summary>
-        /// Checks whether the stack is empty.
+        /// Check whether the stack is empty.
         /// </summary>
-        bool Any();
+        bool IsEmpty { get; }
 
         /// <summary>
         /// Removes and returns the object of type T at the top of the stack. 

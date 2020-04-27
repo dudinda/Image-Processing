@@ -26,11 +26,14 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Saf
         }
 
         /// <inheritdoc/>
-        public bool Any()
+        public bool IsEmpty
         {
-            lock (_stack)
+            get
             {
-                return _stack.Count > 0;
+                lock (_stack)
+                {
+                    return _stack.Count == 0;
+                }
             }
         }
 
@@ -66,7 +69,7 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Saf
         {
             lock (_stack)
             {
-                if (Any())
+                if (!IsEmpty)
                 {
                     return _stack.First.Value;
                 }

@@ -23,7 +23,7 @@ namespace ImageProcessing.App.UILayer.Control
         
         public (Bitmap, ImageContainer)? Undo()
         {
-            if (!_undo.Any())
+            if (_undo.IsEmpty)
             {
                 return null;
             }
@@ -35,7 +35,7 @@ namespace ImageProcessing.App.UILayer.Control
 
         public (Bitmap, ImageContainer)? Redo()
         {
-            if (!_redo.Any())
+            if (_redo.IsEmpty)
             {
                 return null;
             }

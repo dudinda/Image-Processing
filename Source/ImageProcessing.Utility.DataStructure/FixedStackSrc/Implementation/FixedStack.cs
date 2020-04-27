@@ -26,8 +26,8 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation
         }
 
         /// <inheritdoc/>
-        public bool Any()
-            => _stack.Count > 0;
+        public bool IsEmpty
+            => _stack.Count == 0;
 
         /// <inheritdoc/>
         public T Pop()
@@ -53,7 +53,7 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation
         /// <inheritdoc/>
         public T Peek()
         {
-            if (Any())
+            if (!IsEmpty)
             {
                 return _stack.First.Value;
             }
