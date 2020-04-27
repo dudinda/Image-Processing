@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace ImageProcessing.Utility.DataStructure.UnitTests.StubFactory
+namespace ImageProcessing.Utility.DataStructure.UnitTests.CaseFactory
 {
-    public static class FixedStackStubFactory
+    public static class FixedStackCaseFactory
     {
         public static IEnumerable<int> GetStackValues
         {

@@ -1,11 +1,11 @@
 using System;
 
-using ImageProcessing.Utility.DataStructure.UnitTests.StubFactory;
+using ImageProcessing.Utility.DataStructure.UnitTests.CaseFactory;
 using ImageProcessing.Utility.DataStructure.UnitTests.Fakes;
 
 using NUnit.Framework;
 
-using static ImageProcessing.Utility.DataStructure.UnitTests.StubFactory.BitMatrixStubFactory;
+using static ImageProcessing.Utility.DataStructure.UnitTests.CaseFactory.BitMatrixCaseFactory;
 
 namespace ImageProcessing.Utility.DataStructure.UnitTests.Tests
 {
@@ -76,7 +76,7 @@ namespace ImageProcessing.Utility.DataStructure.UnitTests.Tests
           );
     
         [Test, TestCaseSource(
-            typeof(BitMatrixStubFactory),
+            typeof(BitMatrixCaseFactory),
             nameof(GetInvalidIndices))]
         public void BitMatrixThrowsOnInvalidIndices((int width, int height) size)
             => Assert.Throws<ArgumentOutOfRangeException>(

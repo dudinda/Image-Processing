@@ -2,7 +2,7 @@ using ImageProcessing.Utility.DataStructure.UnitTests.Fakes;
 
 using NUnit.Framework;
 
-using static ImageProcessing.Utility.DataStructure.UnitTests.StubFactory.FixedStackStubFactory;
+using static ImageProcessing.Utility.DataStructure.UnitTests.CaseFactory.FixedStackCaseFactory;
 
 namespace ImageProcessing.Utility.DataStructure.UnitTests.Tests
 {
