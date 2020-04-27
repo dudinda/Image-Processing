@@ -13,7 +13,15 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Saf
 
         public FixedStackSafe(int size)
             => _size = size;
-        
+
+        public FixedStackSafe(IFixedStack<T> stack)
+        {
+            foreach (var item in stack)
+            {
+                _stack.AddLast(item);
+            }
+        }
+
         public bool Any()
         {
             lock (_stack)

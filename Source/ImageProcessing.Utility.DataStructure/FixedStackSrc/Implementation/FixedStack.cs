@@ -14,6 +14,14 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation
         public FixedStack(int size)
             => _size = size;
 
+        public FixedStack(IFixedStack<T> stack)
+        {
+            foreach(var item in stack)
+            {
+                _stack.AddLast(item);
+            }
+        }
+
         public bool Any()
             => _stack.Count > 0;
 
