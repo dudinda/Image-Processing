@@ -44,8 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitMatrixTests\BitMatrixTests.cs" />
-    <Compile Include="CaseFactory\BitMatrixCaseFactory.cs" />
-    <Compile Include="CaseFactory\FixedStackCasesFactory.cs" />
+    <Compile Include="BitMatrixTests\FixedStackTests.cs" />
+    <Compile Include="StubFactory\BitMatrixStubFactory.cs" />
+    <Compile Include="StubFactory\FixedStackStubFactory.cs" />
     <Compile Include="Fakes\BitMatrixFake.cs" />
     <Compile Include="Fakes\FixedStackFake.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,11 +1,11 @@
 using System;
 
-using ImageProcessing.Utility.DataStructure.UnitTests.CaseFactory;
+using ImageProcessing.Utility.DataStructure.UnitTests.StubFactory;
 using ImageProcessing.Utility.DataStructure.UnitTests.Fakes;
 
 using NUnit.Framework;
 
-using static ImageProcessing.Utility.DataStructure.UnitTests.CaseFactory.BitMatrixCaseFactory;
+using static ImageProcessing.Utility.DataStructure.UnitTests.StubFactory.BitMatrixStubFactory;
 
 namespace ImageProcessing.Utility.DataStructure.UnitTests.CollectionTests
 {
@@ -58,6 +58,17 @@ namespace ImageProcessing.Utility.DataStructure.UnitTests.CollectionTests
         }
 
         [Test]
+        public void SrcMatrixCloneIsIdenticalToSrcMatrixTest()
+        {
+            var dst = (BitMatrixFake)new BitMatrixFake(_matrix).Clone();
+
+            CollectionAssert.AreEqual(
+              _matrix.Traverse(),
+              dst.Traverse()
+          );
+        }
+
+        [Test]
         public void BitMatrixTraverse2DArrayOrderTest()
           => CollectionAssert.AreEqual(
               _matrix.Traverse2DArray(),
@@ -65,7 +76,7 @@ namespace ImageProcessing.Utility.DataStructure.UnitTests.CollectionTests
           );
     
         [Test, TestCaseSource(
-            typeof(BitMatrixCaseFactory),
+            typeof(BitMatrixStubFactory),
             nameof(GetInvalidIndices))]
         public void BitMatrixThrowsOnInvalidIndices((int width, int height) size)
             => Assert.Throws<ArgumentOutOfRangeException>(

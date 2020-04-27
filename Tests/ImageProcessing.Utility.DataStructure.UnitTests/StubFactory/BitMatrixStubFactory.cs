@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace ImageProcessing.Utility.DataStructure.UnitTests.CaseFactory
+namespace ImageProcessing.Utility.DataStructure.UnitTests.StubFactory
 {
-    public static class BitMatrixCaseFactory
+    public static class BitMatrixStubFactory
     {
 
         public const int RowSize = 5;

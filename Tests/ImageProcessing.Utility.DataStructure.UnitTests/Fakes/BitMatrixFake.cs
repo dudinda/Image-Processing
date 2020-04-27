@@ -1,10 +1,11 @@
 using System.Collections;
-
+using System.Collections.Generic;
 using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
+using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Interface;
 
 namespace ImageProcessing.Utility.DataStructure.UnitTests.Fakes
 {
-    internal sealed class BitMatrixFake
+    internal sealed class BitMatrixFake : IBitMatrix
     {
         public  BitMatrix Matrix { get; }
 
@@ -23,8 +24,14 @@ namespace ImageProcessing.Utility.DataStructure.UnitTests.Fakes
         public BitMatrixFake(bool[,] matrix)
             => Matrix = new BitMatrix(matrix);
 
+        public BitMatrixFake(BitMatrix matrix)
+            => Matrix = matrix;
+
         public bool[,] To2DArray()
             => Matrix.To2DArray();
+
+        public object Clone()
+            => new BitMatrixFake((BitMatrix)Matrix.Clone());
 
         public bool this[int rowIndex, int columnIndex]
         {
@@ -58,5 +65,11 @@ namespace ImageProcessing.Utility.DataStructure.UnitTests.Fakes
                 }
             }
         }
+
+        public IEnumerator<bool> GetEnumerator()
+            => Matrix.GetEnumerator();
+        
+        IEnumerator IEnumerable.GetEnumerator()
+            => GetEnumerator();
     }
 }
