@@ -11,22 +11,22 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation
     {
         private readonly byte[] _data;
 
-        public BitMatrix((int width, int height) size)
+        public BitMatrix(int width, int height)
         {
-            if(size.width <= 0)
+            if(width <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(size.width));
+                throw new ArgumentOutOfRangeException(nameof(width));
             }
 
-            if (size.height <= 0)
+            if (height <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(size.height));
+                throw new ArgumentOutOfRangeException(nameof(height));
             }
 
-            RowCount    = size.width;
-            ColumnCount = size.height;
+            RowCount    = width;
+            ColumnCount = height;
 
-            var bitCount  = size.width * size.height;
+            var bitCount  = width * height;
             var byteCount = bitCount >> 3;
 
             if ((bitCount & 7) != 0)
@@ -35,6 +35,30 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation
             }
       
             _data = new byte[byteCount];
+        }
+
+        public BitMatrix(IBitMatrix matrix)
+          : this(matrix.RowCount, matrix.ColumnCount)
+        {
+            for (var row = 0; row < RowCount; ++row)
+            {
+                for (var column = 0; column < ColumnCount; ++column)
+                {
+                    this[row, column] = matrix[row, column];
+                }
+            }
+        }
+
+        public BitMatrix(bool[,] matrix)
+          : this(matrix.GetLength(0), matrix.GetLength(1))
+        {
+            for (var row = 0; row < RowCount; ++row)
+            {
+                for (var column = 0; column < ColumnCount; ++column)
+                {
+                    this[row, column] = matrix[row, column];
+                }
+            }
         }
 
         /// <inheritdoc />
@@ -106,7 +130,6 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation
 
         IEnumerator IEnumerable.GetEnumerator()
             => GetEnumerator();
-
 
         public bool[,] To2DArray()
         {

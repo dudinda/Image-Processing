@@ -11,7 +11,7 @@ namespace ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.Struct
         /// <inheritdoc cref="IStructuringElement"/>.
         public BitMatrix GetKernel((int width, int height) dimension)
         {
-            var kernel = new BitMatrix(dimension);
+            var kernel = new BitMatrix(dimension.width, dimension.height);
 
             var x = dimension.width / 2;
             var y = dimension.height / 2;

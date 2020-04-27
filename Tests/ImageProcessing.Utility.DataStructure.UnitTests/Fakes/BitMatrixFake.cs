@@ -9,7 +9,7 @@ namespace ImageProcessing.Utility.DataStructure.UnitTests.Fakes
         private readonly BitMatrix _matrix;
 
         public BitMatrixFake(int row, int column)
-            => _matrix = new BitMatrix((row, column));
+            => _matrix = new BitMatrix(row, column);
 
         public int RowCount
             => _matrix.RowCount;

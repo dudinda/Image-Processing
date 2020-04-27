@@ -19,7 +19,7 @@ namespace ImageProcessing.App.DomainLayer.Model.Morphology.Implementation.Struct
             var unitsStartIndex = 0;
             var unitsEndIndex = 0;
 
-            var kernel = new BitMatrix(dimension);
+            var kernel = new BitMatrix(dimension.width, dimension.height);
 
             for (var row = 0; row < dimension.height; ++row)
             {

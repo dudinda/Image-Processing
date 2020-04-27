@@ -13,22 +13,46 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation.Safe
 
         private readonly byte[] _data;
 
-        public BitMatrixSafe((int width, int height) size)
+        public BitMatrixSafe(IBitMatrix matrix)
+            : this(matrix.RowCount, matrix.ColumnCount)
         {
-            if (size.width <= 0)
+            for(var row = 0; row < RowCount; ++row)
             {
-                throw new ArgumentException(nameof(size.width));
+                for(var column = 0; column < ColumnCount; ++column)
+                {
+                    this[row, column] = matrix[row, column];
+                }
+            }
+        }
+
+        public BitMatrixSafe(bool[,] matrix)
+          : this(matrix.GetLength(0), matrix.GetLength(1))
+        {
+            for (var row = 0; row < RowCount; ++row)
+            {
+                for (var column = 0; column < ColumnCount; ++column)
+                {
+                    this[row, column] = matrix[row, column];
+                }
+            }
+        }
+
+        public BitMatrixSafe(int width, int height)
+        {
+            if (width <= 0)
+            {
+                throw new ArgumentException(nameof(width));
             }
 
-            if (size.height <= 0)
+            if (height <= 0)
             {
-                throw new ArgumentException(nameof(size.height));
+                throw new ArgumentException(nameof(height));
             }
 
-            RowCount    = size.width;
-            ColumnCount = size.height;
+            RowCount    = width;
+            ColumnCount = height;
 
-            var bitCount  = size.width * size.height;
+            var bitCount  = width * height;
             var byteCount = bitCount >> 3;
 
             if ((bitCount & 7) != 0)
