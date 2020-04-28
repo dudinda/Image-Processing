@@ -76,7 +76,7 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Saf
         {
             lock (_stack)
             {
-                if (!IsEmpty)
+                if (_stack.Count != 0)
                 {
                     return _stack.First.Value;
                 }
@@ -90,9 +90,9 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Saf
         /// </summary>
         public IEnumerator<T> GetEnumerator()
         {
-            if (!IsEmpty)
+            lock (_stack)
             {
-                lock (_stack)
+                if (_stack.Count != 0)
                 {
                     using (var iterator = _stack.GetEnumerator())
                     {
