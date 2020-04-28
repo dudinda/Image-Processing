@@ -4,7 +4,6 @@ namespace ImageProcessing.Utility.DataStructure.UnitTests.CaseFactory
 {
     public static class BitMatrixCaseFactory
     {
-
         public const int RowSize = 5;
         public const int ColumnSize = 5;
 

@@ -15,6 +15,9 @@ namespace ImageProcessing.Utility.DataStructure.UnitTests.Fakes
             Stack = new FixedStack<T>(capacity);
         }
 
+        public FixedStackFake(FixedStackFake<T> fake)
+            => Stack = new FixedStack<T>(fake.Stack);
+
         public int Capacity
             => Stack.Capacity;
 
@@ -48,6 +51,6 @@ namespace ImageProcessing.Utility.DataStructure.UnitTests.Fakes
         }
 
         public object Clone()
-            => Stack.Clone();
+            => new FixedStackFake<T>(this);
     }
 }

@@ -1,3 +1,6 @@
+using System;
+
+using ImageProcessing.Utility.DataStructure.UnitTests.CaseFactory;
 using ImageProcessing.Utility.DataStructure.UnitTests.Fakes;
 
 using NUnit.Framework;
@@ -14,9 +17,9 @@ namespace ImageProcessing.Utility.DataStructure.UnitTests.Tests
         [SetUp]
         public void SetUp()
         {
-            _stack = new FixedStackFake<int>(10);
+            _stack = new FixedStackFake<int>(StackSize);
 
-            /// --> (head) 0-1-...-9 (tail)
+            /// --> (top) 0-1-...-9 (bottom)
 
             for(var value = 9; value >= 0; --value)
             {
@@ -30,5 +33,13 @@ namespace ImageProcessing.Utility.DataStructure.UnitTests.Tests
                _stack.Traverse(),
                GetStackValues
            );
+
+        [Test, TestCaseSource(
+            typeof(FixedStackCaseFactory),
+            nameof(GetInvalidCapacity))]
+        public void BitMatrixThrowsOnInvalidIndices(int capacity)
+            => Assert.Throws<ArgumentOutOfRangeException>(
+                () => new FixedStackFake<int>(capacity)
+            );
     }
 }
