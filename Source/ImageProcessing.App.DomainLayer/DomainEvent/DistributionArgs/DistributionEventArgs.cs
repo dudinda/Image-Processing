@@ -1,13 +1,14 @@
 using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.DomainEvent.Base;
 
 namespace ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs
 {
-    public sealed class DistributionEventArgs
+    public sealed class DistributionEventArgs : BaseEventArgs
     {
         public DistributionEventArgs(Distribution distribution, (string, string) parameters)
         {
             Distribution = distribution;
-            Parameters   = parameters;
+            Parameters = parameters;
         }
 
         ///<inheritdoc cref="Distribution/>

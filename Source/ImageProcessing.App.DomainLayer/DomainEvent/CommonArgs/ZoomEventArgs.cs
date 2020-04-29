@@ -1,8 +1,9 @@
 using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.DomainEvent.Base;
 
 namespace ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs
 {
-    public sealed class ZoomEventArgs 
+    public sealed class ZoomEventArgs : BaseEventArgs
     {
         public ZoomEventArgs(ImageContainer container)
             => Container = container;
