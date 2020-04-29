@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 
 namespace ImageProcessing.Utility.DecimalMath.RealAxis
 {
@@ -119,7 +120,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static decimal Frac(decimal x)
-            => x % 1;
+            => x % 1M;
         
         /// <summary>
         /// Evaluate x mod b as x - b floor(x/b).
@@ -141,7 +142,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         {
             if (value < 0)
             {
-                throw new ArgumentException("The value must be positive real.");
+                throw new ArgumentException("The value must be a positive real.");
             }
 
             var x = value;
@@ -360,7 +361,14 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static decimal Arccot(decimal x)
-            => Sign(x) * PiOver2 - Arctan(x);
+        {
+            if (x == 0m)
+            {
+                return PiOver2;
+            }
+
+            return Sign(x) * PiOver2 - Arctan(x);
+        }
         
         /// <summary>
         /// Evaluate arcsin(x) with a specified precision.
