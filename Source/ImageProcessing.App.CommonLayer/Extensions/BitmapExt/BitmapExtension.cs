@@ -60,7 +60,7 @@ namespace ImageProcessing.App.CommonLayer.Extensions.BitmapExt
 
             return bitmap;
         }
-  
+
         /// <summary>
         /// Resize an image to a specified width and height.
         /// </summary>
@@ -114,8 +114,7 @@ namespace ImageProcessing.App.CommonLayer.Extensions.BitmapExt
                     return 32;
 
                 default: throw new NotSupportedException("Only 8, 24 and 32 bit images are supported.");
-
-            }              
+            }
         }
 
         /// <summary>
@@ -143,35 +142,31 @@ namespace ImageProcessing.App.CommonLayer.Extensions.BitmapExt
         /// <param name="ext"></param>
         /// <returns></returns>
         public static ImageFormat GetImageFormat(this string ext)
+            => ext.GetValueFromDescription<ImageExtension>()
+        switch
         {
-            var extension = ext.GetValueFromDescription<ImageExtension>();
+            ImageExtension.Jpeg
+                => ImageFormat.Jpeg,
+            ImageExtension.Bmp
+                => ImageFormat.Bmp,
+            ImageExtension.Png
+                => ImageFormat.Png,
+            ImageExtension.Emf
+                => ImageFormat.Emf,
+            ImageExtension.Exif
+                => ImageFormat.Exif,
+            ImageExtension.Gif
+                => ImageFormat.Gif,
+            ImageExtension.Icon
+                => ImageFormat.Icon,
+            ImageExtension.MemoryBmp
+                => ImageFormat.MemoryBmp,
+            ImageExtension.Tiff
+                => ImageFormat.Tiff,
+            ImageExtension.Wmf
+                => ImageFormat.Wmf,
 
-            switch (extension)
-            {
-                case ImageExtension.Jpeg:
-                    return ImageFormat.Jpeg;
-                case ImageExtension.Bmp:
-                    return ImageFormat.Bmp;
-                case ImageExtension.Png:
-                    return ImageFormat.Png;
-                case ImageExtension.Emf:
-                    return ImageFormat.Emf;
-                case ImageExtension.Exif:
-                    return ImageFormat.Exif;
-                case ImageExtension.Gif:
-                    return ImageFormat.Gif;
-                case ImageExtension.Icon:
-                    return ImageFormat.Icon;
-                case ImageExtension.MemoryBmp:
-                    return ImageFormat.MemoryBmp;
-                case ImageExtension.Tiff:
-                    return ImageFormat.Tiff;
-                case ImageExtension.Wmf:
-                    return ImageFormat.Wmf;
-
-                default:
-                    throw new NotImplementedException(ext);
-            }
-        }
+            _ => throw new NotImplementedException(ext)
+        };
     }
 }
