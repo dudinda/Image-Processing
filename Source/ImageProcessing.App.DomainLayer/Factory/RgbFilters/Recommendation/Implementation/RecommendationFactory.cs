@@ -18,9 +18,12 @@ namespace ImageProcessing.App.DomainLayer.Factory.RgbFilters.Recommendation.Impl
             => filter
         switch
         {
-            Luma.Rec601 => new Rec601(),
-            Luma.Rec709 => new Rec709(),
-            Luma.Rec240 => new Smpte240M(),
+            Luma.Rec601
+                => new Rec601(),
+            Luma.Rec709
+                => new Rec709(),
+            Luma.Rec240
+                => new Smpte240M(),
 
             _ => throw new NotImplementedException(nameof(filter))
         };
