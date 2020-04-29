@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 
+using static ImageProcessing.Utility.DecimalMath.RealAxis.DecimalMathReal;
+
 namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
 {
     public static class RealDomainCasesFactory
@@ -8,7 +10,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
         /// <summary>
         /// (-1, 0)
         /// </summary>
-        public static IEnumerable<object> GetOpenIntervalFromMinusOneToZero()
+        public static IEnumerable<decimal> GetOpenIntervalFromMinusOneToZero()
         {
             yield return -0.99999999999M;
             yield return -0.91111925125M;
@@ -22,7 +24,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
         /// <summary>
         /// (0, 1)
         /// </summary>
-        public static IEnumerable<object> GetOpenIntervalFromZeroToOne()
+        public static IEnumerable<decimal> GetOpenIntervalFromZeroToOne()
         {
             yield return 0.99999999999M;
             yield return 0.91111925125M;
@@ -33,7 +35,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
             yield return 0.000001M;
         }
 
-        public static IEnumerable<object> GetLimitPoints(params object[] points)
+        public static IEnumerable<decimal> GetLimitPoints(params decimal[] points)
         {
             foreach(var item in points)
             {
@@ -44,7 +46,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
         /// <summary>
         /// (-1, 1)
         /// </summary>
-        public static IEnumerable<object> GetOpenIntervalFromMinusOneToOne()
+        public static IEnumerable<decimal> GetOpenIntervalFromMinusOneToOne()
         {
             foreach (var item in GetOpenIntervalFromMinusOneToZero())
             {
@@ -65,7 +67,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
         /// <summary>
         /// (-1, 1) \ {0}
         /// </summary>
-        public static IEnumerable<object> GetOpenIntervalFromMinusOneToOneExceptZero()
+        public static IEnumerable<decimal> GetOpenIntervalFromMinusOneToOneExceptZero()
         {
             foreach(var item in GetOpenIntervalFromMinusOneToZero())
             {
@@ -81,7 +83,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
         /// <summary>
         /// [1, +inf)
         /// </summary>
-        public static IEnumerable<object> HalfOpenIntervalFromOneToPlusInf()
+        public static IEnumerable<decimal> HalfOpenIntervalFromOneToPlusInf()
         {
             foreach(var item in GetLimitPoints(1M))
             {
@@ -96,7 +98,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
         /// <summary>
         /// (1, +inf)
         /// </summary>
-        public static IEnumerable<object> GetOpenIntervalFromOneToPlusInf()
+        public static IEnumerable<decimal> GetOpenIntervalFromOneToPlusInf()
         {
             yield return 1.0000001M;
             yield return 1.25125125M;
@@ -110,7 +112,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
         /// <summary>
         /// (-inf, -1)
         /// </summary>
-        public static IEnumerable<object> GetOpenIntervalFromMinusInfToMinusOne()
+        public static IEnumerable<decimal> GetOpenIntervalFromMinusInfToMinusOne()
         {
 
             yield return -1.0000001M;
@@ -125,7 +127,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
         /// <summary>
         /// (-inf, -1]
         /// </summary>
-        public static IEnumerable<object> GetHalfOpenIntervalFromMinusInfToMinusOne()
+        public static IEnumerable<decimal> GetHalfOpenIntervalFromMinusInfToMinusOne()
         {
             foreach (var item in GetLimitPoints(-1M))
             {
@@ -141,7 +143,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
         /// <summary>
         /// [-1, 1]
         /// </summary>
-        public static IEnumerable<object> GetCloseIntervalFromMinusOneToOne()
+        public static IEnumerable<decimal> GetCloseIntervalFromMinusOneToOne()
         {
             foreach (var item in GetLimitPoints(-1M, 1M))
             {
@@ -157,7 +159,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
         /// <summary>
         /// (-inf, +inf)
         /// </summary>
-        public static IEnumerable<object> GetRealAxis()
+        public static IEnumerable<decimal> GetRealAxis()
         {
             foreach(var item in GetOpenIntervalFromOneToPlusInf())
             {
@@ -178,7 +180,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
         /// <summary>
         /// (-inf, +inf)
         /// </summary>
-        public static IEnumerable<object> GetNonNegativeRealAxis()
+        public static IEnumerable<decimal> GetNonNegativeRealAxis()
         {
             foreach(var item in GetOpenIntervalFromOneToPlusInf())
             {
@@ -199,7 +201,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
         /// <summary>
         /// (-inf, -1) U (1, +inf)
         /// </summary>
-        public static IEnumerable<object> GetRealAxisExceptClosedFromMinusToPlusOne()
+        public static IEnumerable<decimal> GetRealAxisExceptClosedFromMinusToPlusOne()
         {
             foreach (var item in GetOpenIntervalFromOneToPlusInf())
             {
@@ -212,22 +214,22 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
             }
         }
 
-        public static IEnumerable<object> GetTrigonometryPoints()
+        public static IEnumerable<decimal> GetTrigonometryPoints()
         {
-            yield return -3 * Math.PI / 2;
-            yield return -Math.PI / 2;
-            yield return -Math.PI;
-            yield return -2 * Math.PI;
-            yield return -Math.PI / 3;
-            yield return -Math.PI / 4;
-            yield return -Math.PI / 6;
-            yield return 3 * Math.PI / 2;
-            yield return Math.PI / 2;
-            yield return Math.PI;
-            yield return 2 * Math.PI;
-            yield return Math.PI / 3;
-            yield return Math.PI / 4;
-            yield return Math.PI / 6;
+            yield return -3M * PI / 2M;
+            yield return -PI / 2M;
+            yield return -PI;
+            yield return -2M * PI;
+            yield return -PI / 3M;
+            yield return -PI / 4M;
+            yield return -PI / 6M;
+            yield return 3M * PI / 2M;
+            yield return PI / 2M;
+            yield return PI;
+            yield return 2M * PI;
+            yield return PI / 3M;
+            yield return PI / 4M;
+            yield return PI / 6M;
         }
     }
 }
