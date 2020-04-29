@@ -8,7 +8,8 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation
 {
     public sealed class FixedStack<T> : IFixedStack<T>
     {
-        private readonly LinkedList<T> _stack = new LinkedList<T>();
+        private readonly LinkedList<T> _stack
+            = new LinkedList<T>();
 
         public FixedStack(int capacity)
         {

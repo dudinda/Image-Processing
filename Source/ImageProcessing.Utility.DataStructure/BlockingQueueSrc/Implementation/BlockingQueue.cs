@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -8,13 +9,19 @@ namespace ImageProcessing.Utility.DataStructure.BlockingQueueSrc.Implementation
 {
     public sealed class BlockingQueue<T> : IBlockingQueue<T>
     {
-        private readonly Queue<T> _queue = new Queue<T>();
         private readonly int _maxSize;
+        private readonly Queue<T> _queue
+            = new Queue<T>();
 
         private bool _closing;
 
         public BlockingQueue(int maxSize)
         {
+            if(maxSize <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(maxSize));
+            }
+
             _maxSize = maxSize;
         }
 
