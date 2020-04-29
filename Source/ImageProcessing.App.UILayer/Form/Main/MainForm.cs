@@ -22,10 +22,10 @@ namespace ImageProcessing.App.UILayer.Form.Main
         }
 
         /// <inheritdoc/>
-        public Image SrcImageCopy { get; set; }
+        public Image? SrcImageCopy { get; set; }
 
         /// <inheritdoc/>
-        public Image DstImageCopy { get; set; }
+        public Image? DstImageCopy { get; set; }
 
         /// <inheritdoc/>
         public Image SrcImage
@@ -159,7 +159,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
         /// <inheritdoc/>
         public void AddToQualityMeasureContainer(Bitmap transformed)
-            => QualityMeasure.Add(transformed);
+            => QualityMeasure.TryAdd(transformed);
         
         /// <inheritdoc/>
         public ConcurrentQueue<Bitmap> GetQualityQueue()

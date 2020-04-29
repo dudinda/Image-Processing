@@ -75,7 +75,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.ReplaceDstBySrc = new System.Windows.Forms.ToolStripButton();
             this.PathToImage = new System.Windows.Forms.ToolStripLabel();
             this.ShuffleSrc = new System.Windows.Forms.ToolStripButton();
-            this.QualityMeasure = new ImageProcessing.App.UILayer.Control.AppendProcessedBitmapToolStripButton();
+            this.QualityMeasure = new ImageProcessing.App.UILayer.Control.QualityMeasureToolStripButton();
             this.PictureBoxSrcPanel = new System.Windows.Forms.Panel();
             this.Src = new System.Windows.Forms.PictureBox();
             this.TrackBarSrcPanel = new System.Windows.Forms.Panel();
@@ -708,7 +708,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         private Panel TrackBarDstPanel;
         private App.UILayer.Control.ZoomTrackBar SrcZoom;
         private MetroFramework.Components.MetroToolTip RandomVariableInformation;
-        private App.UILayer.Control.AppendProcessedBitmapToolStripButton QualityMeasure;
+        private App.UILayer.Control.QualityMeasureToolStripButton QualityMeasure;
         private App.UILayer.Control.UndoRedoSplitContainer Container;
         private ToolStripButton Redo;
         private App.UILayer.Control.ZoomTrackBar DstZoom;

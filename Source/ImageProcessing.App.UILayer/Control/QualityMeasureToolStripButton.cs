@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace ImageProcessing.App.UILayer.Control
 {
-    public class AppendProcessedBitmapToolStripButton : ToolStripButton
+    public class QualityMeasureToolStripButton : ToolStripButton
     {
         public ConcurrentQueue<Bitmap> Queue { get; }
             = new ConcurrentQueue<Bitmap>();
@@ -13,7 +13,7 @@ namespace ImageProcessing.App.UILayer.Control
         public bool IsQueued(Image bitmap)
             => Queue.Any(bmp => bmp.Tag.Equals(bitmap.Tag));
 
-        public bool Add(Bitmap bitmap)
+        public bool TryAdd(Bitmap bitmap)
         {
             if(!IsQueued(bitmap))
             {
@@ -28,7 +28,7 @@ namespace ImageProcessing.App.UILayer.Control
         {
             while(Queue.TryDequeue(out var result))
             {
-
+                result.Dispose();
             }
         }   
     }
