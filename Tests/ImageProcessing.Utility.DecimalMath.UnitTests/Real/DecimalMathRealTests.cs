@@ -152,9 +152,9 @@ namespace ImageProcessing.Tests.Utility
         [Test, TestCaseSource(
             typeof(RealDomainCasesFactory),
             nameof(GetTrigonometryPoints))]
-        public void CotangentTableValuesTest(double value)
+        public void CotangentTableValuesTest(decimal value)
             => Assert.That(
-                Abs(Cot(Convert.ToDecimal(value)) - Convert.ToDecimal(1.0 / Math.Tan(value))),
+                Abs(Cot(value) - Convert.ToDecimal(1.0 / Math.Tan((double)value))),
                 Is.LessThan(0.0000001M)
             );
 
@@ -264,7 +264,7 @@ namespace ImageProcessing.Tests.Utility
 
         [Test, TestCaseSource(
            typeof(RealDomainCasesFactory),
-           nameof(GetRealAxisExceptClosedFromMinusToPlusOne))]
+           nameof(GetCloseIntervalFromMinusOneToOne))]
         public void ArcsinTests(decimal value)
         {
             var cmpVal = Convert.ToDecimal(Math.Asin((double)value));
@@ -272,16 +272,14 @@ namespace ImageProcessing.Tests.Utility
             Assert.That((Arcsin(value) - cmpVal).Abs(), Is.LessThan(0.0000001M));
         }
 
-
-
         [Test, TestCaseSource(
             typeof(RealDomainCasesFactory),
-            nameof(GetRealAxisExceptClosedFromMinusToPlusOne))]
+            nameof(GetCloseIntervalFromMinusOneToOne))]
         public void ArccosTests(decimal value)
         {
             var cmpVal = Convert.ToDecimal(Math.Acos((double)value));
 
-            Assert.That((Arccos(value) - cmpVal).Abs(), Is.LessThan(0.0000001M));
+            Assert.That(Abs(Arccos(value) - cmpVal), Is.LessThan(0.0000001M));
         }
 
 

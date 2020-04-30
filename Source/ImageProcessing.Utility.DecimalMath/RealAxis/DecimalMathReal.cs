@@ -86,13 +86,15 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// Evaluate ceil(x).
         /// </summary>
         /// <param name="x">An argument of a function</param>
+        [Obsolete("Use Math.Ceiling(x) instead.")]
         public static decimal Ceil(decimal x)
             => -Floor(-x);
-        
+
         /// <summary>
         /// Evaluate floor(x).
         /// </summary>
         /// <param name="x">An argument of the function</param>
+        [Obsolete("Use Math.Floor(x) instead.")]
         public static decimal Floor(decimal x)
         {
             if (x == 0)
@@ -100,7 +102,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
                 return x;
             }
 
-            var result = x - Frac(x);
+            var result = x - decimal.Remainder(x, 1.0M);
 
             if (result == x)
             {
@@ -119,9 +121,10 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// Evaluate {x}.
         /// </summary>
         /// <param name="x">An argument of the function</param>
+        [Obsolete("Use Decimal.Remainder(x, 1.0M) instead.")]
         public static decimal Frac(decimal x)
             => x % 1M;
-        
+
         /// <summary>
         /// Evaluate x mod b as x - b floor(x/b).
         /// </summary>
@@ -129,7 +132,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="mod"></param>
         /// <returns></returns>
         public static decimal Mod(decimal x, decimal mod)
-            => x - mod * Floor(x / mod);
+            => x - mod * Math.Floor(x / mod);
         
         #region Log and exp functions
 
