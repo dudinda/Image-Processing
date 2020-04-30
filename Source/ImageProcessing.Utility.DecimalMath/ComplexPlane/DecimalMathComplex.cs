@@ -172,8 +172,8 @@ namespace ImageProcessing.Utility.DecimalMath.ComplexPlane
         /// <param name="z">x + iy</param>
         /// <returns>tan(z)</returns>
         public static (decimal Re, decimal Im) Tan((decimal x, decimal y) z)
-            => (ComplexOperator)(Real.Sin(2 * z.x), Real.Sinh(2 * z.y)) /
-                                 Real.Cos(2 * z.x) + Real.Cosh(2 * z.y);
+            => (ComplexOperator)(Real.Sin(2.0M * z.x), Real.Sinh(2.0M * z.y)) /
+                                 Real.Cos(2.0M * z.x) + Real.Cosh(2.0M * z.y);
 
         /// <summary>
         /// Evaluate sin(z) as sin(x)cosh(y) + icos(x)sinh(y).
@@ -191,12 +191,12 @@ namespace ImageProcessing.Utility.DecimalMath.ComplexPlane
         /// <returns>Arg(z)</returns>
         public static decimal Arg((decimal x, decimal y) z)
         {
-            if(z.x > 0 && z.y != 0)
+            if(z.x > 0.0M && z.y != 0.0M)
             {
-                return 2 * Real.Arctan(z.y / (Abs(z) + z.x));
+                return 2.0M * Real.Arctan(z.y / (Abs(z) + z.x));
             }
 
-            if(z.x < 0 && z.y == 0 )
+            if(z.x < 0.0M && z.y == 0.0M)
             {
                 return Real.PI;
             }
@@ -226,7 +226,7 @@ namespace ImageProcessing.Utility.DecimalMath.ComplexPlane
         /// <param name="z">x + iy</param>
         /// <returns>exp(z)</returns>
         public static (decimal Re, decimal Im) Exp((decimal x, decimal y) z)
-            => (ComplexOperator)Real.Exp(Re(z)) * Real.CosSin(Im(z));
+            => (ComplexOperator)Real.Exp(z.x) * Real.CosSin(z.y);
 
         /// <summary>
         /// Evaluate log(z) as log(r) + iarg(z).
@@ -248,7 +248,7 @@ namespace ImageProcessing.Utility.DecimalMath.ComplexPlane
         /// <param name="power"></param>
         /// <returns>z ** k</returns>
         public static (decimal Re, decimal Im) Pow((decimal x, decimal y) z, decimal k)
-            => (ComplexOperator)z ^ (k, 0);
+            => (ComplexOperator)z ^ (k, 0.0M);
 
         /// <summary>
         /// Evaluate k ** z, where k is in N.
@@ -257,7 +257,7 @@ namespace ImageProcessing.Utility.DecimalMath.ComplexPlane
         /// <param name="z">x + iy</param>
         /// <returns>z ** k</returns>
         public static (decimal Re, decimal Im) Pow(decimal k, (decimal x, decimal y) z)
-            => (ComplexOperator)(k, 0) ^ z;
+            => (ComplexOperator)(k, 0.0M) ^ z;
         
         /// <summary>
         /// Evaluate z ** z'.
@@ -274,7 +274,7 @@ namespace ImageProcessing.Utility.DecimalMath.ComplexPlane
         /// <param name="z">x + iy</param>
         /// <returns>sqrt(z)</returns>
         public static (decimal Re, decimal Im) PrincipalSqrt((decimal x, decimal y) z)
-            => FromPolar((Real.Sqrt(Abs(z)), Polar(z).phi / 2));
+            => FromPolar((Real.Sqrt(Abs(z)), Polar(z).phi / 2.0M));
        
         /// <summary>
         /// Evaluate z ** 1/k.
@@ -287,11 +287,11 @@ namespace ImageProcessing.Utility.DecimalMath.ComplexPlane
             var list = new List<(decimal x, decimal y)>();
             var (r, phi) = Polar(z);
 
-            var root = Real.Pow(r, 1 / k);
+            var root = Real.Pow(r, 1.0M / k);
 
             for(var n = 0; n < k; ++n)
             {
-                list.Add( (ComplexOperator)root * Real.CosSin((2 * Real.PI * n + phi) / k) );
+                list.Add( (ComplexOperator)root * Real.CosSin((2.0M * Real.PI * n + phi) / k) );
             }
 
             return list.ToArray();
