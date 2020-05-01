@@ -38,7 +38,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">The left-hand value</param>
         /// <param name="y">The right-hand value</param>
         public static decimal Max(decimal x, decimal y)
-            => x > y ? x : y;
+            => x >= y ? x : y;
         
         /// <summary>
         /// Evaluate min{x, y}.
@@ -46,7 +46,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">The left-hand value</param>
         /// <param name="y">The right-hand value</param>
         public static decimal Min(decimal x, decimal y)
-            => x < y ? x : y;
+            => x <= y ? x : y;
         
         /// <summary>
         /// Evaluate hypot(x, y).
@@ -58,13 +58,13 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
             if (x > y)
             {
                 var d = y / x;
-                return Abs(x) * Sqrt(1/ + d * d);
+                return Abs(x) * Sqrt(1.0M + d * d);
             }
 
             if (x < y)
             {
                 var d = x / y;
-                return Abs(y) * Sqrt(d * d + 1);
+                return Abs(y) * Sqrt(d * d + 1.0M);
             }
 
             if (x == 0.0M && y == 0.0M)
