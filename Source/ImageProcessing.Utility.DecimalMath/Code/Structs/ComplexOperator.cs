@@ -1,3 +1,5 @@
+using System;
+
 using Complex = ImageProcessing.Utility.DecimalMath.ComplexPlane.DecimalMathComplex;
 using Real = ImageProcessing.Utility.DecimalMath.RealAxis.DecimalMathReal;
 
@@ -95,12 +97,12 @@ namespace ImageProcessing.Utility.DecimalMath.Code.Structs
             var c = z2.Z.Re;
             var d = z2.Z.Im;
 
-            if (Complex.Abs(z1) < Complex.Abs(z2))
+            if (Real.Abs(d) < Real.Abs(c))
             {
                 var r = d / c;
                 var den = c + d * r;
                 var e = (a + b * r) / den;
-                var f = (b * r - a) / den;
+                var f = (b - a * r) / den;
 
                 return (ComplexOperator)(e, f);
             }
