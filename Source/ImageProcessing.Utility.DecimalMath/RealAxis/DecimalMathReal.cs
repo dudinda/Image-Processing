@@ -1,4 +1,6 @@
 using System;
+using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
 
 namespace ImageProcessing.Utility.DecimalMath.RealAxis
 {
@@ -56,7 +58,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
             if (x > y)
             {
                 var d = y / x;
-                return Abs(x) * Sqrt(1 + d * d);
+                return Abs(x) * Sqrt(1/ + d * d);
             }
 
             if (x < y)
@@ -110,7 +112,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
 
             if (x < 0.0M)
             {
-                return result - 1;
+                return result - 1.0M;
             }
 
             return result;
@@ -122,7 +124,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">An argument of the function</param>
         [Obsolete("Use Decimal.Remainder(x, 1.0M) instead.")]
         public static decimal Frac(decimal x)
-            => x % 1M;
+            => x % 1.0M;
 
         /// <summary>
         /// Evaluate x mod b as x - b floor(x/b).
@@ -132,41 +134,17 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <returns></returns>
         public static decimal Mod(decimal x, decimal mod)
             => x - mod * Math.Floor(x / mod);
-        
+
         #region Log and exp functions
 
         /// <summary>
-        /// Evaluate sqrt(x) with a specified precision.
+        /// Evaluate sqrt(x).
         /// </summary>
         /// <param name="x">An argument of the function</param>
-        /// <param name="precision">A error</param>
-        public static decimal Sqrt(decimal value, decimal precision = Epsilon)
-        {
-            if (value < 0.0M)
-            {
-                throw new ArgumentException("The value must be a positive real.");
-            }
-
-            if (value <= 3.0M)
-            {
-                return (value * (value * (4.94975M * value + 12.3744M) + 3.71231M) + 0.0883883M) /
-                       (value * (value * (value + 10.5M) + 8.74999M) + 0.874999M);
-            }
-            else
-            {
-
-                var x = value;
-                var y = 1.0M;
-
-                while (Abs(x - y) > precision)
-                {
-                    x = (x + y) * 0.5M;
-                    y = value / x;
-                }
-
-                return x;
-            }
-        }
+        /// <param name="precision">A error</param> 
+        public static decimal Sqrt(decimal x)
+            => (decimal)Math.Sqrt((double)x);
+        
 
         /// <summary>
         /// Evaluate x ** power with a specified precision.
@@ -537,7 +515,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
                 throw new ArgumentException("NaN");
             }
 
-            return Log(x + Sqrt(x * x - 1.0M, precision), precision: precision);
+            return Log(x + Sqrt(x * x - 1.0M), precision: precision);
         }
 
         /// <summary>
@@ -545,7 +523,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static decimal Arsinh(decimal x, decimal precision = Epsilon)
-            => Log(x + Sqrt(x * x + 1.0M, precision), precision: precision);
+            => Log(x + Sqrt(x * x + 1.0M), precision: precision);
         
         /// <summary>
         /// Evaluate artanh(x) with a specified precision.

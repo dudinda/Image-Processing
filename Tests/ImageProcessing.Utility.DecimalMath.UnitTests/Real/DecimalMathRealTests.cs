@@ -57,28 +57,23 @@ namespace ImageProcessing.Tests.Utility
             Assert.AreEqual((3.0M / 2.0M).Mod(1.0M / 2.0M), 0);
         }
 
-        [TestCase(1.25, 5)]
-        [TestCase(567, 123)]
-        [TestCase(0.245, 0.001)]
-        [TestCase(Math.E * Math.E, Math.E)]
-        [TestCase(1500, 0.5)]
-        public void LogSmallNumbersTest(double value, double lbase)
+        [Test, TestCaseSource(
+             typeof(RealDomainCasesFactory),
+              nameof(GetPositiveRealAxis))]
+        public void LnTests(decimal value)
         {
-            var target  = Convert.ToDecimal(value);
-            var logbase = Convert.ToDecimal(lbase);
-            var cmpVal  = Convert.ToDecimal(Math.Log(value, lbase));
+            var cmpVal  = Convert.ToDecimal(Math.Log((double)value));
 
-            Assert.That((Log(target, logbase) - cmpVal).Abs(), Is.LessThan(0.00000001M));
-            Assert.That((target.Log(logbase) - cmpVal).Abs(), Is.LessThan(0.00000001M));
+            Assert.That((Log(value) - cmpVal).Abs(), Is.LessThan(0.00000001M));
         }
 
         [Test, TestCaseSource(
             typeof(RealDomainCasesFactory),
-            nameof(GetNonNegativeRealAxis))]
+             nameof(GetNonNegativeRealAxis))]
         public void SqrtTests(decimal value)
             => Assert.That(
                 Abs(Sqrt(value) - (decimal)Math.Sqrt((double)value)),
-                Is.LessThan(0.00000001M)
+                Is.LessThan(0.00001M)
             );
 
         [Test, TestCaseSource(
@@ -232,7 +227,7 @@ namespace ImageProcessing.Tests.Utility
 
             var cmpVal = Convert.ToDecimal(Math.Log(value + Math.Sqrt(value * value - 1)));
 
-            Assert.That((Arcosh(val) - cmpVal).Abs(), Is.LessThan(0.000001M));
+            Assert.That((Arcosh(val) - cmpVal).Abs(), Is.LessThan(0.00001M));
         }
 
         [Test, TestCaseSource(

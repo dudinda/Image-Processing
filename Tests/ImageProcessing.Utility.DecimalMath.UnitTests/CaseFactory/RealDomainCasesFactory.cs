@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 using static ImageProcessing.Utility.DecimalMath.RealAxis.DecimalMathReal;
@@ -178,11 +177,24 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
         }
 
         /// <summary>
-        /// (-inf, +inf)
+        /// [0, +inf)
         /// </summary>
         public static IEnumerable<decimal> GetNonNegativeRealAxis()
         {
-            foreach(var item in GetOpenIntervalFromOneToPlusInf())
+            foreach(var item in GetPositiveRealAxis())
+            {
+                yield return item;
+            }
+
+            yield return 0M;
+        }
+
+        /// <summary>
+        /// (0, +inf)
+        /// </summary>
+        public static IEnumerable<decimal> GetPositiveRealAxis()
+        {
+            foreach (var item in GetOpenIntervalFromOneToPlusInf())
             {
                 yield return item;
             }
@@ -192,11 +204,9 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
                 yield return item;
             }
 
-            foreach (var item in GetLimitPoints(0M, 1M))
-            {
-                yield return item;
-            }
+            yield return 1M;
         }
+
 
         /// <summary>
         /// (-inf, -1) U (1, +inf)
