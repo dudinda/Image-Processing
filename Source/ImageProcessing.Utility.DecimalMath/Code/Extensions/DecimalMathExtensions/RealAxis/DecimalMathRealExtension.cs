@@ -31,7 +31,7 @@ namespace ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensi
         public static decimal Sqrt(
             this decimal value,
             decimal precision = Real.Epsilon)
-            => Real.Sqrt(value, precision);
+            => Real.Sqrt(value);
 
         /// <inheritdoc cref="Real.Log(decimal, decimal, decimal)"/>
         public static decimal Log(
