@@ -7,7 +7,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
 {
     public static class RealFunctionCasesFactory
     {
-        public static IEnumerable<decimal>  GetArctanValues()
+        public static IEnumerable<decimal>  GetArccotValues()
         {
             foreach(var argument in GetRealAxis())
             {

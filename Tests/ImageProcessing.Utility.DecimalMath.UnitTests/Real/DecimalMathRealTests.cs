@@ -275,7 +275,9 @@ namespace ImageProcessing.Tests.Utility
             );
 
 
-        [Test, TestCaseSource(typeof(RealFunctionCasesFactory), nameof(GetArctanValues))]
+        [Test, TestCaseSource(
+            typeof(RealFunctionCasesFactory),
+            nameof(GetArccotValues))]
         public void ArccotTest(decimal value)
         {
             var cmpVal = Convert.ToDecimal(Math.Atan(1.0 / (double)value));
