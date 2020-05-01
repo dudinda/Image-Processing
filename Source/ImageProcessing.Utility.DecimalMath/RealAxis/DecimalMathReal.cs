@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 
 namespace ImageProcessing.Utility.DecimalMath.RealAxis
 {
@@ -148,16 +147,25 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
                 throw new ArgumentException("The value must be a positive real.");
             }
 
-            var x = value;
-            var y = 1.0M;
-
-            while (Abs(x - y) > precision)
+            if (value <= 3.0M)
             {
-                x = (x + y) * 0.5M;
-                y = value / x;
+                return (value * (value * (4.94975M * value + 12.3744M) + 3.71231M) + 0.0883883M) /
+                       (value * (value * (value + 10.5M) + 8.74999M) + 0.874999M);
             }
+            else
+            {
 
-            return x;
+                var x = value;
+                var y = 1.0M;
+
+                while (Abs(x - y) > precision)
+                {
+                    x = (x + y) * 0.5M;
+                    y = value / x;
+                }
+
+                return x;
+            }
         }
 
         /// <summary>
