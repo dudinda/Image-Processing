@@ -259,7 +259,7 @@ namespace ImageProcessing.Tests.Utility
 
         [Test, TestCaseSource(
            typeof(RealDomainCasesFactory),
-           nameof(GetCloseIntervalFromMinusOneToOne))]
+           nameof(GetOpenIntervalFromMinusOneToOne))]
         public void ArcsinTests(decimal value)
         {
             var cmpVal = Convert.ToDecimal(Math.Asin((double)value));
@@ -269,7 +269,7 @@ namespace ImageProcessing.Tests.Utility
 
         [Test, TestCaseSource(
             typeof(RealDomainCasesFactory),
-            nameof(GetCloseIntervalFromMinusOneToOne))]
+            nameof(GetOpenIntervalFromMinusOneToOne))]
         public void ArccosTests(decimal value)
         {
             var cmpVal = Convert.ToDecimal(Math.Acos((double)value));

@@ -105,13 +105,13 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
 
             var result = x - decimal.Remainder(x, 1.0M);
 
-            if (result == x)
-            {
-                return x;
-            }
-
             if (x < 0.0M)
             {
+                if(result == x)
+                {
+                    return result;
+                }
+
                 return result - 1.0M;
             }
 
@@ -145,7 +145,6 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         public static decimal Sqrt(decimal x)
             => (decimal)Math.Sqrt((double)x);
         
-
         /// <summary>
         /// Evaluate x ** power with a specified precision.
         /// </summary>
