@@ -28,7 +28,7 @@ namespace ImageProcessing.Tests.Utility
 
         [Test, TestCaseSource(
             typeof(RealDomainCasesFactory),
-            nameof(GetRealAxis))]
+            nameof(GetOpenIntervalFromMinusExpOverflowToPlusExpOverflow))]
         public void ExponentTest(decimal value)
             => Assert.That(
                 Abs(Exp(value) - (decimal)Math.Exp((double)value)),
@@ -168,7 +168,7 @@ namespace ImageProcessing.Tests.Utility
 
         [Test, TestCaseSource(
             typeof(RealDomainCasesFactory),
-            nameof(GetRealAxis))]
+            nameof(GetOpenIntervalFromMinusExpOverflowToPlusExpOverflow))]
         public void SinhTests(decimal value)
             => Assert.That(
                 Abs(Sinh(value) - (decimal)Math.Sinh((double)value)),
@@ -197,11 +197,15 @@ namespace ImageProcessing.Tests.Utility
             typeof(RealDomainCasesFactory),
             nameof(GetOpenIntervalFromMinusExpOverflowToPlusExpOverflow))]
         public void CothTests(decimal value)
-            => Assert.That(
+        {
+            if (value != 0)
+            {
+                Assert.That(
                 Abs(Coth(value) - (decimal)(1.0 / Math.Tanh((double)value))),
-                Is.LessThan(0.000001M)
-            );
-
+                Is.LessThan(0.000001M));
+            }
+        }
+        
         #endregion
 
         #region Inverse hyperbolic functions tests

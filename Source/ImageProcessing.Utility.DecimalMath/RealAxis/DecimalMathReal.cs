@@ -10,19 +10,25 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
     /// </summary>
     public static class DecimalMathReal
     {
-        public const decimal E           = 2.71828182845905M;
-        public const decimal Epsilon     = 1.0E-26M;
-        public const decimal PI          = 3.14159265358979323846M;
-        public const decimal PiOver2     = 1.57079632679489661923M;
-        public const decimal Euler       = 0.57721566490153286060M;
-        public const decimal Sqrt2       = 1.41421356237309504880M;
-        public const decimal Ln2         = 0.69314718055994530941M;
+        public const decimal E       = 2.71828182845905M;
+        public const decimal Epsilon = 1.0E-26M;
+        public const decimal PI      = 3.14159265358979323846M;
+        public const decimal PiOver2 = 1.57079632679489661923M;
+        public const decimal Euler   = 0.57721566490153286060M;
+        public const decimal Sqrt2   = 1.41421356237309504880M;
+        public const decimal Ln2     = 0.69314718055994530941M;
 
         /// <summary>
         /// Taylor series of exp(x) throws overflow exception
         /// during the loop when x > 65.370524. 
         /// </summary>
-        private const decimal ExpOverFlow = 65.370524M;
+        private const decimal ExpOverFlow       = 65.370524M;
+
+        /// <summary>
+        /// x ** 2 throws overflow exception
+        /// when x > 281474976710656.
+        /// </summary>
+        private const decimal SquareOfXOverflow = 281474976710656M;
 
         /// <summary>
         /// Evaluate sgn(x).
@@ -529,6 +535,11 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">An argument of the function</param>
         public static decimal Arcosh(decimal x, decimal precision = Epsilon)
         {
+            if (x > SquareOfXOverflow)
+            {
+                throw new OverflowException(nameof(x));
+            }
+
             if (x < 1.0M)
             {
                 throw new ArgumentException("NaN");
@@ -542,8 +553,15 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// </summary>
         /// <param name="x">An argument of the function</param>
         public static decimal Arsinh(decimal x, decimal precision = Epsilon)
-            => Log(x + Sqrt(x * x + 1.0M), precision: precision);
-        
+        {
+            if (x > SquareOfXOverflow)
+            {
+                throw new OverflowException(nameof(x));
+            }
+
+            return Log(x + Sqrt(x * x + 1.0M), precision: precision); 
+        }
+
         /// <summary>
         /// Evaluate artanh(x) with a specified precision.
         /// </summary>

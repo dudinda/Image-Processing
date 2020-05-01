@@ -157,9 +157,8 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
 
             yield return 100M;
             yield return 10000.125125125M;
-            yield return 10000000M;
-            yield return 1000000000000M;
-            yield return 10000000M;
+            yield return 100000M;
+            yield return 1000000M;
         }
 
         /// <summary>
@@ -170,11 +169,10 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
 
             yield return -100M;
             yield return -10000.125125125M;
-            yield return -10000000M;
-            yield return -1000000000000M;
-            yield return -10000000M;
+            yield return -100000M;
+            yield return -1000000M;
 
-            foreach(var item in GetOpenIntervalFromMinusExpOverflowToMinusOne())
+            foreach (var item in GetOpenIntervalFromMinusExpOverflowToMinusOne())
             {
                 yield return item;
             }
