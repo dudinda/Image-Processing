@@ -177,7 +177,7 @@ namespace ImageProcessing.Tests.Utility
 
         [Test, TestCaseSource(
             typeof(RealDomainCasesFactory),
-            nameof(GetRealAxis))]
+            nameof(GetOpenIntervalFromMinusExpOverflowToPlusExpOverflow))]
         public void CoshTests(decimal value)
             => Assert.That(
                 Abs(Cosh(value) - (decimal)Math.Cosh((double)value)),
@@ -186,7 +186,7 @@ namespace ImageProcessing.Tests.Utility
 
         [Test, TestCaseSource(
             typeof(RealDomainCasesFactory),
-            nameof(GetRealAxis))]
+            nameof(GetOpenIntervalFromMinusExpOverflowToPlusExpOverflow))]
         public void TanhTests(decimal value)
             => Assert.That(
                 Abs(Tanh(value) - (decimal)Math.Tanh((double)value)),
@@ -195,7 +195,7 @@ namespace ImageProcessing.Tests.Utility
 
         [Test, TestCaseSource(
             typeof(RealDomainCasesFactory),
-            nameof(GetRealAxis))]
+            nameof(GetOpenIntervalFromMinusExpOverflowToPlusExpOverflow))]
         public void CothTests(decimal value)
             => Assert.That(
                 Abs(Coth(value) - (decimal)(1.0 / Math.Tanh((double)value))),

@@ -10,13 +10,19 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
     /// </summary>
     public static class DecimalMathReal
     {
-        public const decimal E       = 2.71828182845905M;
-        public const decimal Epsilon = 1.0E-26M;
-        public const decimal PI      = 3.14159265358979323846M;
-        public const decimal PiOver2 = 1.57079632679489661923M;
-        public const decimal Euler   = 0.57721566490153286060M;
-        public const decimal Sqrt2   = 1.41421356237309504880M;
-        public const decimal Ln2     = 0.69314718055994530941M;
+        public const decimal E           = 2.71828182845905M;
+        public const decimal Epsilon     = 1.0E-26M;
+        public const decimal PI          = 3.14159265358979323846M;
+        public const decimal PiOver2     = 1.57079632679489661923M;
+        public const decimal Euler       = 0.57721566490153286060M;
+        public const decimal Sqrt2       = 1.41421356237309504880M;
+        public const decimal Ln2         = 0.69314718055994530941M;
+
+        /// <summary>
+        /// Taylor series of exp(x) throws overflow exception
+        /// during the loop when x > 65.370524. 
+        /// </summary>
+        private const decimal ExpOverFlow = 65.370524M;
 
         /// <summary>
         /// Evaluate sgn(x).
@@ -177,7 +183,12 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="precision">A error</param>
         public static decimal Exp(decimal x, decimal precision = Epsilon)
         {
-            if(x == 0.0M)
+            if (x > ExpOverFlow)
+            {
+                throw new OverflowException(nameof(x));
+            }
+
+            if (x == 0.0M)
             {
                 return 1.0M;
             }
@@ -187,12 +198,12 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
 
             var step = 1.0M;
 
-            while (Abs(total) > precision)
+            do
             {
                 total = total * x / step;
                 result += total;
                 ++step;
-            }
+            } while (Abs(total) > precision);
 
             return result;
         }

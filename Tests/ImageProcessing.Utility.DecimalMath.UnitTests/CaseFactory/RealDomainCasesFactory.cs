@@ -95,16 +95,70 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
         }
 
         /// <summary>
-        /// (1, +inf)
+        /// (-overflow(exp), overflow(exp))
         /// </summary>
-        public static IEnumerable<decimal> GetOpenIntervalFromOneToPlusInf()
+        public static IEnumerable<decimal> GetOpenIntervalFromMinusExpOverflowToPlusExpOverflow()
+        {
+            foreach(var item in GetOpenIntervalFromMinusExpOverflowToMinusOne())
+            {
+                yield return item;
+            }
+
+            foreach(var item in GetClosedIntervalFromMinusOneToOne())
+            {
+                yield return item;
+            }
+
+            foreach(var item in GetOpenIntervalFromOneToExpOverflow())
+            {
+                yield return item;
+            }
+        }
+
+        /// <summary>
+        /// (1, overflow(exp))
+        /// where overflow(exp) occurs on
+        /// x > 65.370524M
+        /// </summary>
+        public static IEnumerable<decimal> GetOpenIntervalFromOneToExpOverflow()
         {
             yield return 1.0000001M;
             yield return 1.25125125M;
             yield return 2M;
             yield return 10.125125125M;
+            yield return 63.370524M;
+        }
+
+        /// <summary>
+        /// (-overflow(exp), -1)
+        /// where -overflow(exp) occurs on
+        /// x < -65.370524M
+        /// </summary>
+        public static IEnumerable<decimal> GetOpenIntervalFromMinusExpOverflowToMinusOne()
+        {
+
+            yield return -1.0000001M;
+            yield return -1.25125125M;
+            yield return -2M;
+            yield return -10.125125125M;
+            yield return -63.370524M;
+        }
+
+        /// <summary>
+        /// (1, +inf)
+        /// </summary>
+        public static IEnumerable<decimal> GetOpenIntervalFromOneToPlusInf()
+        {
+
+            foreach (var item in GetOpenIntervalFromOneToExpOverflow())
+            {
+                yield return item;
+            }
+
             yield return 100M;
             yield return 10000.125125125M;
+            yield return 10000000M;
+            yield return 1000000000000M;
             yield return 10000000M;
         }
 
@@ -114,13 +168,16 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
         public static IEnumerable<decimal> GetOpenIntervalFromMinusInfToMinusOne()
         {
 
-            yield return -1.0000001M;
-            yield return -1.25125125M;
-            yield return -2M;
-            yield return -10.125125125M;
             yield return -100M;
             yield return -10000.125125125M;
             yield return -10000000M;
+            yield return -1000000000000M;
+            yield return -10000000M;
+
+            foreach(var item in GetOpenIntervalFromMinusExpOverflowToMinusOne())
+            {
+                yield return item;
+            }
         }
 
         /// <summary>
@@ -142,7 +199,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
         /// <summary>
         /// [-1, 1]
         /// </summary>
-        public static IEnumerable<decimal> GetCloseIntervalFromMinusOneToOne()
+        public static IEnumerable<decimal> GetClosedIntervalFromMinusOneToOne()
         {
             foreach (var item in GetLimitPoints(-1M, 1M))
             {
@@ -170,7 +227,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
                 yield return item;
             }
 
-            foreach (var item in GetCloseIntervalFromMinusOneToOne())
+            foreach (var item in GetClosedIntervalFromMinusOneToOne())
             {
                 yield return item;
             }
