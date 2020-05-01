@@ -8,6 +8,7 @@ using NUnit.Framework;
 
 using static ImageProcessing.Utility.DecimalMath.RealAxis.DecimalMathReal;
 using static ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory.RealDomainCasesFactory;
+using static ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory.RealFunctionCasesFactory;
 
 namespace ImageProcessing.Tests.Utility
 {
@@ -35,27 +36,11 @@ namespace ImageProcessing.Tests.Utility
                 Is.LessThan(0.0000001M)
             );
 
-        [Test]
-        public void ModuloTest()
-        {
-            var pi = DecimalMathReal.PI;
-
-            Assert.AreEqual(Mod(pi / 2 + 3 * pi, pi), pi / 2);
-            Assert.AreEqual(Mod(pi / 2 - 3 * pi, pi), pi / 2);
-            Assert.AreEqual(Mod(25M, 5M), 0.0M);
-            Assert.AreEqual(Mod(-1M, 3M), 2.0M);
-            Assert.AreEqual(Mod(-1.27M, 1M), 0.73M);
-            Assert.AreEqual(Mod(2.000256M, 1M), 0.000256M);
-            Assert.AreEqual(Mod(3.0M / 2.0M, 1.0M / 2.0M), 0);
-
-            Assert.AreEqual((pi / 2 + 3 * pi).Mod(pi), pi / 2);
-            Assert.AreEqual((pi / 2 - 3 * pi).Mod(pi), pi / 2);
-            Assert.AreEqual((25M).Mod(5M), 0.0M);
-            Assert.AreEqual((-1M).Mod(3M), 2.0M);
-            Assert.AreEqual((-1.27M).Mod(1M), 0.73M);
-            Assert.AreEqual((2.000256M).Mod(1M), 0.000256M);
-            Assert.AreEqual((3.0M / 2.0M).Mod(1.0M / 2.0M), 0);
-        }
+        [Test, TestCaseSource(
+          typeof(RealFunctionCasesFactory),
+           nameof(GetModValuesAndResult))]
+        public void ModuloTest((decimal x, decimal mod, decimal result) src)
+            => Assert.AreEqual(Mod(src.x, src.mod), src.result);
 
         [Test, TestCaseSource(
              typeof(RealDomainCasesFactory),
@@ -290,12 +275,10 @@ namespace ImageProcessing.Tests.Utility
             );
 
 
-        [Test, TestCaseSource(typeof(RealDomainCasesFactory), nameof(GetRealAxis))]
+        [Test, TestCaseSource(typeof(RealFunctionCasesFactory), nameof(GetArctanValues))]
         public void ArccotTest(decimal value)
         {
-            var cmpVal = value == 0m ?
-                PiOver2 :
-                Convert.ToDecimal(Math.Atan(1.0 / (double)value));
+            var cmpVal = Convert.ToDecimal(Math.Atan(1.0 / (double)value));
 
             Assert.That(Abs(Arccot(value) - cmpVal), Is.LessThan(0.000001M));
         }

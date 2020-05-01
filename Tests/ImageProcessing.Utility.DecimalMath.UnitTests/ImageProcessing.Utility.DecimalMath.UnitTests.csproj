@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CaseFactory\RealDomainCasesFactory.cs" />
+    <Compile Include="CaseFactory\RealFunctionCasesFactory.cs" />
     <Compile Include="ComplexNumbers\DecimalMathComplexTests.cs" />
     <Compile Include="CaseFactory\ComplexDomainCasesFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

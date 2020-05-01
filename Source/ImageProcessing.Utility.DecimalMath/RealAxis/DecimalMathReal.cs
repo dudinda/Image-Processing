@@ -202,13 +202,13 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
             var total = 1.0M;
             var result = total;
 
-            var step = 1.0M;
+            var k = 1.0M;
 
             do
             {
-                total = total * x / step;
+                total = total * x / k;
                 result += total;
-                ++step;
+                ++k;
             } while (Abs(total) > precision);
 
             return result;
@@ -278,14 +278,14 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
             var total = x;
             var result = total;
 
-            var step = 0.0M;
+            var k = 0.0M;
 
-            while(Abs(total) > precision)
+            do
             {
-                total = -total * x * x / (step * (4M * step + 10M) + 6M);
+                total = -total * x * x / (k * (4M * k + 10M) + 6M);
                 result += total;
-                ++step;
-            }
+                ++k;
+            } while (Abs(total) > precision);
 
             return result;
         }
@@ -302,14 +302,14 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
             var total = 1.0M;
             var result = total;
 
-            var step = 0.0M;
+            var k = 0.0M;
 
-            while (Abs(total) > precision)
+            do
             {
-                total = total * -x * x / (step * (4M * step + 6M) + 2M);
+                total = total * -x * x / (k * (4M * k + 6M) + 2M);
                 result += total;
-                ++step;
-            }
+                ++k;
+            } while (Abs(total) > precision);
 
             return result;
         }
