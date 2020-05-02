@@ -153,7 +153,6 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// Evaluate sqrt(x).
         /// </summary>
         /// <param name="x">An argument of the function</param>
-        /// <param name="precision">A error</param> 
         public static decimal Sqrt(decimal x)
             => (decimal)Math.Sqrt((double)x);
         
@@ -273,6 +272,11 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="precision">A error</param>
         public static decimal Sin(decimal x, decimal precision = Epsilon)
         {
+            if(x == 0.0M)
+            {
+                return 0;
+            }
+
             x = Mod(x, 2.0M * PI);
 
             var total = x;
@@ -320,7 +324,29 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
         public static decimal Cot(decimal x, decimal precision = Epsilon)
-            => 1.0M / Tan(x, precision);
+        {
+            x = Mod(x, PI);
+
+            if(Abs(x - PiOver2) < Epsilon)
+            {
+                return 0;
+            }
+
+            //x infinitely small to -+PI
+            if (Abs(x) < precision)
+            {
+                switch (Sign(x))
+                {
+                    case -1:
+                        throw new ArgumentException("-inf");
+                    case 1:
+                        throw new ArgumentException("+inf");
+                }
+            }
+
+            return Cos(x) / Sin(x);
+        }
+
         
         /// <summary>
         /// Evaluate tan(x) with a specified precision.
@@ -331,7 +357,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         {
             x = Mod(x, PI);
 
-            var error = Abs(Abs(x) - PiOver2);
+            var error = Abs(x - PiOver2);
 
             //x infinitely small to -+PI over 2
             if (error < precision)

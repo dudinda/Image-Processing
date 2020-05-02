@@ -111,8 +111,8 @@ namespace ImageProcessing.Tests.Utility
             );
 
         [Test, TestCaseSource(
-            typeof(RealDomainCasesFactory),
-            nameof(GetTrigonometryPoints))]
+            typeof(RealFunctionCasesFactory),
+            nameof(GetTanTableValues))]
         public void TangentTableValuesTest(decimal value)
         {
             var cmpVal = Convert.ToDecimal(Math.Tan((double)value));
@@ -121,8 +121,8 @@ namespace ImageProcessing.Tests.Utility
         }
 
         [Test, TestCaseSource(
-            typeof(RealDomainCasesFactory),
-            nameof(GetRealAxis))]
+            typeof(RealFunctionCasesFactory),
+            nameof(GetTanRealAxisValues))]
         public void TangentTest(decimal value)
             => Assert.That(
                 Abs(Tan(value) - (decimal)Math.Tan((double)value)),
@@ -130,8 +130,8 @@ namespace ImageProcessing.Tests.Utility
             );
 
         [Test, TestCaseSource(
-            typeof(RealDomainCasesFactory),
-            nameof(GetTrigonometryPoints))]
+            typeof(RealFunctionCasesFactory),
+            nameof(GetCotTableValues))]
         public void CotangentTableValuesTest(decimal value)
             => Assert.That(
                 Abs(Cot(value) - Convert.ToDecimal(1.0 / Math.Tan((double)value))),
@@ -139,11 +139,11 @@ namespace ImageProcessing.Tests.Utility
             );
 
         [Test, TestCaseSource(
-            typeof(RealDomainCasesFactory),
-            nameof(GetRealAxis))]
+            typeof(RealFunctionCasesFactory),
+            nameof(GetCotRealAxisValues))]
         public void CotangentTest(decimal value)
             => Assert.That(
-                Abs(Cot(value) - (decimal)(1.0 / Math.Tan((double)value))),
+                Abs(Cot(value) - (decimal)(Math.Cos((double)value) / Math.Sin((double)value))),
                 Is.LessThan(0.0000001M)
             );
 

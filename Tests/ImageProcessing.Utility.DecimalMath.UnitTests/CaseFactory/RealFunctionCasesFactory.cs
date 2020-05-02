@@ -30,5 +30,49 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
             yield return (2.000256M, 1M, 0.000256M);
             yield return (3.0M / 2.0M, 1.0M / 2.0M, 0);
         }
+
+        public static IEnumerable<decimal> GetCotTableValues()
+        {
+            foreach(var argument in GetTrigonometryPoints())
+            {
+                if(Mod(argument, PI) > Epsilon)
+                {
+                    yield return argument;
+                }
+            }
+        }
+
+        public static IEnumerable<decimal> GetCotRealAxisValues()
+        {
+            foreach (var argument in GetRealAxis())
+            {
+                if (Mod(argument, PI) > Epsilon)
+                {
+                    yield return argument;
+                }
+            }
+        }
+
+        public static IEnumerable<decimal> GetTanTableValues()
+        {
+            foreach (var argument in GetTrigonometryPoints())
+            {
+                if (Abs(Mod(argument, PI) - PiOver2) > Epsilon)
+                {
+                    yield return argument;
+                }
+            }
+        }
+
+        public static IEnumerable<decimal> GetTanRealAxisValues()
+        {
+            foreach (var argument in GetRealAxis())
+            {
+                if (Abs(Mod(argument, PI) - PiOver2) > Epsilon)
+                {
+                    yield return argument;
+                }
+            }
+        }
     }
 }
