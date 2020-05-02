@@ -1,7 +1,6 @@
 using System;
 
 using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.RealAxis;
-using ImageProcessing.Utility.DecimalMath.RealAxis;
 using ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory;
 
 using NUnit.Framework;
@@ -35,7 +34,7 @@ namespace ImageProcessing.Tests.Utility
                 Abs(Exp(value) - (decimal)Math.Exp((double)value)),
                 Is.LessThan(0.0000001M)
             );
-
+        
         [Test, TestCaseSource(
           typeof(RealFunctionCasesFactory),
            nameof(GetModValuesAndResult))]
@@ -179,18 +178,14 @@ namespace ImageProcessing.Tests.Utility
             );
 
         [Test, TestCaseSource(
-            typeof(RealDomainCasesFactory),
-            nameof(GetOpenIntervalFromMinusExpOverflowToPlusExpOverflow))]
+            typeof(RealFunctionCasesFactory),
+            nameof(GetCothRealAxisValues))]
         public void CothTests(decimal value)
-        {
-            if (value != 0)
-            {
-                Assert.That(
+            => Assert.That(
                 Abs(Coth(value) - (decimal)(1.0 / Math.Tanh((double)value))),
-                Is.LessThan(0.000001M));
-            }
-        }
-        
+                Is.LessThan(0.000001M)
+            );
+                  
         #endregion
 
         #region Inverse hyperbolic functions tests

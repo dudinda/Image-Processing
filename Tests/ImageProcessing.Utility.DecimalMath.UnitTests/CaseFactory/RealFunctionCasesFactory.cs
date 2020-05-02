@@ -74,5 +74,16 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
                 }
             }
         }
+
+        public static IEnumerable<decimal> GetCothRealAxisValues()
+        {
+            foreach (var argument in GetOpenIntervalFromMinusExpOverflowToPlusExpOverflow())
+            {
+                if(argument != 0)
+                {
+                    yield return argument;
+                }
+            }
+        }
     }
 }
