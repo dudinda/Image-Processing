@@ -74,14 +74,16 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation
         /// </summary>
         public IEnumerator<T> GetEnumerator()
         {
-            if (!IsEmpty)
+            if (IsEmpty)
             {
-                using (var iterator = _stack.GetEnumerator())
+                yield break;
+            }
+
+            using (var iterator = _stack.GetEnumerator())
+            {
+                while (iterator.MoveNext())
                 {
-                    while (iterator.MoveNext())
-                    {
-                        yield return iterator.Current;
-                    }
+                    yield return iterator.Current;
                 }
             }
         }
