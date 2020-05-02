@@ -1,5 +1,3 @@
-using System.Threading.Tasks;
-
 using ImageProcessing.Microkernel.Code.Enums;
 using ImageProcessing.Microkernel.DI.Code.Enums;
 using ImageProcessing.Microkernel.DI.EntryPoint.State.Interface;
@@ -8,7 +6,7 @@ using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Microkernel.MVP.Presenter;
 using ImageProcessing.Microkernel.Startup;
 
-namespace ImageProcessing.Microkernel
+namespace ImageProcessing.Microkernel.EntryPoint
 {
     /// <summary>
     /// The entry point into an application lifecycle.

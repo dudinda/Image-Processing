@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
+using static System.Reflection.BindingFlags;
+
 using ImageProcessing.App.CommonLayer.Attributes;
 
 namespace ImageProcessing.App.CommonLayer.Extensions.TypeExt
@@ -30,7 +32,7 @@ namespace ImageProcessing.App.CommonLayer.Extensions.TypeExt
         public static Dictionary<string, CommandAttribute> GetCommands(this Type type)
            => type
                .GetMethodsByAttribute<CommandAttribute>(
-                   BindingFlags.NonPublic | BindingFlags.DeclaredOnly | BindingFlags.Instance)
+                   NonPublic | DeclaredOnly | Instance)
                .ToDictionary(
                    method => method.GetCustomAttribute<CommandAttribute>().Key,
                    method =>

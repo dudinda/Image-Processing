@@ -1,14 +1,13 @@
 using System;
-using System.Threading.Tasks;
 
 using ImageProcessing.App.PresentationLayer.Presenters.Main;
-using ImageProcessing.Microkernel;
 using ImageProcessing.Microkernel.DI.Code.Enums;
+using ImageProcessing.Microkernel.EntryPoint;
 
 namespace ImageProcessing.App.UILayer
 {
     internal static class Program
-    {
+    {    
         [STAThread]
         internal static void Main()
         {

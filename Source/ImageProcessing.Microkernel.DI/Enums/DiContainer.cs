@@ -1,5 +1,3 @@
-using System.ComponentModel;
-
 namespace ImageProcessing.Microkernel.DI.Code.Enums
 {
     /// <summary>

@@ -2,6 +2,7 @@ using System;
 
 using ImageProcessing.Microkernel.DI.Code.Enums;
 using ImageProcessing.Microkernel.DI.EntryPoint.State.Interface;
+using ImageProcessing.Microkernel.EntryPoint;
 using ImageProcessing.Microkernel.MVP.Presenter;
 using ImageProcessing.Microkernel.Startup;
 
