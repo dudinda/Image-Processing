@@ -29,22 +29,6 @@ namespace ImageProcessing.App.ServiceLayer.UnitTests.Services.RgbFilters
             _filterService = new RgbFilterService();
         }
 
-        [Test]
-        public void ServiceThrowsArgumentNullExceptionIfBitmapSourceIsNull()
-        {
-            _filterFactory.Get(RgbFilter.Binary).Returns(new BinaryFilter());
-
-            var filter = _filterFactory.Get(RgbFilter.Binary);
-
-            Assert.Throws<ArgumentNullException>(() => _filterService.Filter(null, filter));
-        }
-
-        [Test]
-        public void ServiceThrowsArgumentNullExceptionIfFiltersNull()
-        {
-            Assert.Throws<ArgumentNullException>(() => _filterService.Filter(_frame1920x1080, null));
-        }
-
         [TearDown]
         public void Dispose()
         {
