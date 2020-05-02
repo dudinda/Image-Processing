@@ -325,6 +325,8 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="precision">A error</param>
         public static decimal Cot(decimal x, decimal precision = Epsilon)
         {
+            var sign = Sign(x);
+
             x = Mod(x, PI);
 
             if(Abs(x - PiOver2) < Epsilon)
@@ -333,14 +335,12 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
             }
 
             //x infinitely small to -+PI
-            if (Abs(x) < precision)
+            if (x < precision)
             {
-                switch (Sign(x))
+                switch (sign)
                 {
-                    case -1:
-                        throw new ArgumentException("-inf");
-                    case 1:
-                        throw new ArgumentException("+inf");
+                    case -1: throw new ArgumentException("-inf");
+                    case  1: throw new ArgumentException("+inf");
                 }
             }
 
@@ -355,6 +355,8 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="precision">A error</param>
         public static decimal Tan(decimal x, decimal precision = Epsilon)
         {
+            var sign = Sign(x);
+
             x = Mod(x, PI);
 
             var error = Abs(x - PiOver2);
@@ -362,7 +364,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
             //x infinitely small to -+PI over 2
             if (error < precision)
             {
-                switch (Sign(x))
+                switch (sign)
                 {
                     case -1: throw new ArgumentException("-inf");
                     case  1: throw new ArgumentException("+inf");
