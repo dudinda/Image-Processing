@@ -50,12 +50,18 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Saf
         {
             lock (_stack)
             {
+                if(_stack.Count == 0)
+                {
+                    throw new InvalidOperationException("The stack is empty.");
+                }
+
                 var result = _stack.First;
 
                 _stack.RemoveFirst();
 
                 return result.Value;
             }
+
         }
 
         /// <inheritdoc/>
@@ -87,7 +93,7 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Saf
         }
 
         /// <summary>
-        /// Iterate a stack from head to tail.
+        /// Iterate the stack from top to bottom.
         /// </summary>
         public IEnumerator<T> GetEnumerator()
         {

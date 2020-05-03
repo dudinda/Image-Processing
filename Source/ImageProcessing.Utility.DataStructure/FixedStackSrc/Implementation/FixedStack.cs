@@ -40,6 +40,11 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation
         /// <inheritdoc/>
         public T Pop()
         {
+            if(IsEmpty)
+            {
+                throw new InvalidOperationException("The stack is empty.");
+            }
+
             var result = _stack.First;
 
             _stack.RemoveFirst();
@@ -70,7 +75,7 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation
         }
 
         /// <summary>
-        /// Iterate a stack from head to tail.
+        /// Iterate the stack from top to bottom.
         /// </summary>
         public IEnumerator<T> GetEnumerator()
         {
