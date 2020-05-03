@@ -11,8 +11,8 @@ Image filtration and contrast optimization.
 
 ## Thesis
 
-<p>The application was developed as the R&D work.</p> 
-<p>The original purpose was to research the possible advantages of grayscale images contrast optimization using a normal distribution regarding a uniform distribution. Two parameters such as the expectation and the std allow to control relative luminance and contrast, respectively.</p>
+<p>The application was originally developed as an R&D work.</p> 
+<p>The original purpose was to research the possible advantages of grayscale images contrast optimization using a normal distribution regarding a uniform distribution. Two parameters such as the expectation and std allow to control relative luminance and contrast, respectively.</p>
 
 <p align="center">
     <img src="https://i.imgur.com/dUMCOy1.png" width="700" height = "400" alt="application window">
@@ -33,10 +33,10 @@ Image filtration and contrast optimization.
                     
 <p align="center">
     <img src="https://i.imgur.com/0txwVZ7.png" width="500" height = "400" alt="An image transformed by a normal distribution with the expectation = 90 and std = 60">
-    <p align="center">Fig. 4 - The histogram transformation by the normal distribution where µ = 90 and σ = 60.</p>
+    <p align="center">Fig. 4 - The histogram transformation by a normal distribution where µ = 90 and σ = 60.</p>
 </p>
 
-<p> To justify which image is better, regarding its contrast, one may use a definition of conditional variance: </p>
+<p> To justify which image is better, regarding its contrast, one may use the definition of conditional variance: </p>
 <p align="center">
     <img src="https://i.imgur.com/qa6QE4v.png" width="350" height = "150"">
 </p>
@@ -46,10 +46,10 @@ Image filtration and contrast optimization.
 
 <p align="center">
     <img src="https://i.imgur.com/OhGb6lI.png" alt="application window">
-     <p align="center">Fig. 5 - Using a definition of conditional variance on 16 intervals of relative luminance.</p>
+     <p align="center">Fig. 5 - Using the definition of conditional variance on 16 intervals of relative luminance.</p>
 </p>
 
-<p> Thus, one may conclude that normal distribution represents better result regarding uniform distribution on a group of underexposed images.</p>
+<p> Thus, one may conclude that a normal distribution may represent better result regarding a uniform distribution on a group of underexposed images.</p>
 
 ***
 
@@ -57,7 +57,7 @@ Image filtration and contrast optimization.
 
 <p align="center">
    <img src="https://i.imgur.com/SV9sOfQ.png"  width="800" height = "400" alt="architecture">
-   <p align="center">Fig. 6 - The architecture of the application.</p>
+   <p align="center">Fig. 6 - The application architecture.</p>
 </p>
 
 ***
