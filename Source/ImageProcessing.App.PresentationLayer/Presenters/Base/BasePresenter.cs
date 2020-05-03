@@ -24,10 +24,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
                 Controller.IoC.Resolve<IAwaitablePipeline>
             );
 
-        private Lazy<TView> _view
-           => new Lazy<TView>(
-               Controller.IoC.Resolve<TView>
-           );
 
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller { get; }
@@ -36,11 +32,24 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
         protected IAwaitablePipeline Pipeline
             => _pipeline.Value;
 
+        private TView _view
+            = null!;
+
         /// <summary>
         /// Access point to the UI layer components.
         /// </summary>
         protected TView View
-            => _view.Value;
+        {
+            get
+            {
+                if (_view is null)
+                {
+                    _view = Controller.IoC.Resolve<TView>();
+                }
+
+                return _view;
+            }
+        }
 
         protected BasePresenter(IAppController controller)
             => Controller = controller;
