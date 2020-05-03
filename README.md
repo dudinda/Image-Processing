@@ -12,7 +12,7 @@ Image filtration and contrast optimization.
 ## Thesis
 
 <p>The application was originally developed as an R&D work.</p> 
-<p>The original purpose was to research the possible advantages of grayscale images contrast optimization using a normal distribution regarding a uniform distribution. Two parameters such as an expectation and a std allow to control relative luminance and contrast, respectively.</p>
+<p>The original purpose was to research the possible advantages of grayscale images contrast optimization using a normal distribution regarding a uniform distribution. Two parameters such as the expectation and std allow to control relative luminance and contrast, respectively.</p>
 
 <p align="center">
     <img src="https://i.imgur.com/dUMCOy1.png" width="700" height = "400" alt="application window">
