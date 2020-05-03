@@ -21,6 +21,9 @@ namespace ImageProcessing.App.UILayer.Form.QualityMeasure
             base.Show();
         }
 
+        /// <summary>
+        /// Used by a DI container to dispose the singleton form
+        /// on Release().
         public new void Dispose()
         {
             if (components != null)
@@ -31,6 +34,9 @@ namespace ImageProcessing.App.UILayer.Form.QualityMeasure
             base.Dispose(true);
         }
 
+        /// <summary>
+        /// Restrict the generated <see cref="Dispose(bool)"/> call
+        /// on a non-context form closing.
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             Hide();

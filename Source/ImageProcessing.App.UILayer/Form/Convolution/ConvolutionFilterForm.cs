@@ -48,6 +48,10 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
                  CursorPosition.GetCursorPosition()), 2000
              );
 
+        /// <summary>
+        /// Used by a DI container to dispose the singleton form
+        /// on Release().
+        /// </summary>
         public new void Dispose()
         {
             if (components != null)
@@ -58,6 +62,10 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
             base.Dispose(true);
         }
 
+        /// <summary>
+        /// Restrict the generated <see cref="Dispose(bool)"/> call
+        /// on a non-context form closing.
+        /// </summary>
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             Hide();

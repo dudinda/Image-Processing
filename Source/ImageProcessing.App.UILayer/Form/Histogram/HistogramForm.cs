@@ -65,6 +65,9 @@ namespace ImageProcessing.App.UILayer.Form.Histogram
             Freq.Series[cdf].IsVisibleInLegend = false;
         }
 
+        /// <summary>
+        /// Used by a generated <see cref="Dispose(bool)"/> call.
+        /// Can be used by a DI container in singleton scope on Release();
         public new void Dispose()
         {
             if (components != null)
