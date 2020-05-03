@@ -1,3 +1,4 @@
+using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.App.PresentationLayer.Views.QualityMeasure;
@@ -28,6 +29,12 @@ namespace ImageProcessing.App.UILayer.Form.QualityMeasure
             }
 
             base.Dispose(true);
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            Hide();
+            e.Cancel = true;
         }
     }
 }

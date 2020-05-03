@@ -47,11 +47,5 @@ namespace ImageProcessing.App.UILayer.Form.Base
 
         protected BaseForm()
             : base() { }
-
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            Hide();
-            e.Cancel = true;
-        }
     }
 }

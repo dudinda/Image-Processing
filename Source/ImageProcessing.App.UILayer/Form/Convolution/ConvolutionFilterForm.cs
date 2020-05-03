@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Windows.Forms;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
@@ -55,6 +56,12 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
             }
 
             base.Dispose(true);
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            Hide();
+            e.Cancel = true;
         }
     }
 }

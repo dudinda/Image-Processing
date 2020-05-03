@@ -78,7 +78,7 @@ namespace ImageProcessing.App.UILayer
                 .RegisterSingleton<IAsyncZoomLocker, AsyncZoomLocker>()
                 .RegisterSingleton<ICacheService<Bitmap>, CacheService<Bitmap>>()
                 .RegisterSingletonView<IMainView, MainForm>()
-                .RegisterSingletonView<IHistogramView, HistogramForm>()
+                .RegisterTransientView<IHistogramView, HistogramForm>()
                 .RegisterSingletonView<IConvolutionFilterView, ConvolutionFilterForm>()
                 .RegisterSingletonView<IQualityMeasureView, QualityMeasureForm>()
                 .RegisterTransient<IConvolutionFilterService, ConvolutionFilterService>()
