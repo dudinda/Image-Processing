@@ -1,5 +1,3 @@
-using System;
-
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
@@ -19,21 +17,28 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
     internal abstract class BasePresenter<TView> : IPresenter
 		where TView : class, IView
 	{
-        private Lazy<IAwaitablePipeline> _pipeline
-            => new Lazy<IAwaitablePipeline>(
-                Controller.IoC.Resolve<IAwaitablePipeline>
-            );
+        private IAwaitablePipeline _pipeline
+            = null!;
 
+        private TView _view
+            = null!;
 
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller { get; }
 
         /// <inheritdoc cref="IAwaitablePipeline"/>
         protected IAwaitablePipeline Pipeline
-            => _pipeline.Value;
+        {
+            get
+            {
+                if(_pipeline is null)
+                {
+                    _pipeline = Controller.IoC.Resolve<IAwaitablePipeline>();
+                }
 
-        private TView _view
-            = null!;
+                return _pipeline;
+            }
+        }
 
         /// <summary>
         /// Access point to the UI layer components.
@@ -42,7 +47,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
         {
             get
             {
-                if (_view is null)
+                if(_view is null)
                 {
                     _view = Controller.IoC.Resolve<TView>();
                 }
@@ -72,21 +77,28 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
 		where TView : class, IView
 		where TViewModel : class
 	{
-        private Lazy<IAwaitablePipeline> _pipeline
-           => new Lazy<IAwaitablePipeline>(
-               Controller.IoC.Resolve<IAwaitablePipeline>
-           );
+        private IAwaitablePipeline _pipeline
+             = null!;
+
+        private TView _view
+            = null!;
 
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller { get; }
 
         /// <inheritdoc cref="IAwaitablePipeline"/>
         protected IAwaitablePipeline Pipeline
-            => _pipeline.Value;
+        {
+            get
+            {
+                if (_pipeline is null)
+                {
+                    _pipeline = Controller.IoC.Resolve<IAwaitablePipeline>();
+                }
 
-
-        private TView _view
-            = null!;
+                return _pipeline;
+            }
+        }
 
         /// <summary>
         /// Access point to the UI layer components.
@@ -95,7 +107,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
         {
             get
             {
-                if(_view is null)
+                if (_view is null)
                 {
                     _view = Controller.IoC.Resolve<TView>();
                 }
@@ -103,7 +115,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
                 return _view;
             }
         }
-             
 
         /// <summary>
         /// View model of a presenter.
@@ -118,7 +129,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
         public virtual void Run(TViewModel vm)
 		{
             ViewModel = vm;
-
             View.Show();
 		}
 	}
