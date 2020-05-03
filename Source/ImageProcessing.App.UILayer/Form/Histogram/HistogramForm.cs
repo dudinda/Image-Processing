@@ -66,8 +66,8 @@ namespace ImageProcessing.App.UILayer.Form.Histogram
         }
 
         /// <summary>
-        /// Used by a generated <see cref="Dispose(bool)"/> call.
-        /// Can be used by a DI container in singleton scope on Release();
+        /// Used by the generated <see cref="Dispose(bool)"/> call.
+        /// Can be used by a DI container in a singleton scope on Release();
         public new void Dispose()
         {
             if (components != null)
