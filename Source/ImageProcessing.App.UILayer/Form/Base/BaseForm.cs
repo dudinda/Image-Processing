@@ -13,10 +13,8 @@ namespace ImageProcessing.App.UILayer.Form.Base
     /// </summary>
     internal class BaseMainForm : MetroForm
     {
-        private Lazy<ApplicationContext> _context
-            => new Lazy<ApplicationContext>(
-                Controller.IoC.Resolve<ApplicationContext>
-            );
+        private ApplicationContext _context
+            = null!;
 
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller { get; }
@@ -24,7 +22,18 @@ namespace ImageProcessing.App.UILayer.Form.Base
 
         /// <inheritdoc cref="ApplicationContext"/>
         protected ApplicationContext Context
-            => _context.Value;
+        {
+            get
+            {
+                if(_context is null)
+                {
+                    _context = Controller.IoC.Resolve<ApplicationContext>();
+                }
+
+                return _context;
+            }
+        }
+           
 
         protected BaseMainForm(IAppController controller)
             : base() => Controller = controller;
