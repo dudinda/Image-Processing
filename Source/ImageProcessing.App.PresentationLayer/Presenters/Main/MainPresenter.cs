@@ -150,7 +150,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         new QualityMeasureViewModel(View.GetQualityQueue())
                     );
 
-                    View.ClearQualityQueue();
                     View.EnableQualityQueue(false);
                 }
             }
