@@ -33,17 +33,18 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         
         private async Task DoWorkBeforeShow(QualityMeasureViewModel vm)
         {
+            var chart = View.GetChart;
+
             await Task.Run(
-                () => BuildHistogram(vm)
+                () => BuildHistogram(vm, chart)
             ).ConfigureAwait(true);
 
             View.Show();
         }
 
-        private void BuildHistogram(QualityMeasureViewModel vm)
+        private void BuildHistogram(QualityMeasureViewModel vm, Chart chart)
         {
-            var chart = View.GetChart;
-                chart.Series.Clear();
+            chart.Series.Clear();
 
             var random = new Random(Guid.NewGuid().GetHashCode());
 
@@ -72,6 +73,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
 
                 chart.Series.Add(_builder.Build());
                 chart.Series[key].Points.DataBindXY(names, variance);
+
+                bitmap.Dispose();
             }
         }
     }
