@@ -68,7 +68,8 @@ namespace ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Implementation
 
         public Series Build()
         {
-            var series = new Series(_name);
+            var series = _name is null ?
+                new Series() : new Series(_name);
 
             series.Color = _color;
             series.BorderColor = _borderColor;
