@@ -50,12 +50,12 @@ namespace ImageProcessing.App.CommonLayer.Extensions.EnumExt
         public static TEnum GetValueFromDescription<TEnum>(this string description)
             where TEnum : Enum
         {
-
             var type = typeof(TEnum);
 
-            Contract.Requires<InvalidOperationException>(
-                type.IsEnum, nameof(type)
-            );
+           if(!type.IsEnum)
+            {
+                throw new InvalidOperationException(nameof(type));
+            }
 
             foreach (var field in type.GetFields())
             {
@@ -89,11 +89,8 @@ namespace ImageProcessing.App.CommonLayer.Extensions.EnumExt
         /// <param name="enumeration">The source enumeration.</param>
         /// <returns>All values except for the default.</returns>
         public static TEnum[] GetEnumValuesExceptDefault<TEnum>(this TEnum enumeration)
-        { 
-            return Enum.GetValues(typeof(TEnum))
-                       .Cast<TEnum>()
-                       .Where(e => !EqualityComparer<TEnum>.Default.Equals(e, default(TEnum)))
-                       .ToArray();
-        }
+            => Enum.GetValues(typeof(TEnum)).Cast<TEnum>()
+                   .Where(e => !EqualityComparer<TEnum>.Default.Equals(e, default(TEnum)))
+                   .ToArray();
     }
 }
