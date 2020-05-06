@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.App.CommonLayer.Attributes;
 using ImageProcessing.App.CommonLayer.Enums;
@@ -32,26 +33,26 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
 
         private async Task DoWorkBeforeShow(HistogramViewModel vm)
         {
+            var chart = View.GetChart;
+
             await Task.Run(
-                () => Build(vm.Source, vm.Mode)
+                () => Build(vm, chart)
             ).ConfigureAwait(true);
 
             View.Show();
         }
 
-        private void Build(Bitmap bitmap, RandomVariableFunction function)
+        private void Build(HistogramViewModel vm, Chart chart)
         {
-            var chart = View.GetChart;
-
             var yValues = (decimal[])_command[
-                function.ToString()
-            ].Method.Invoke(this, new[] { bitmap });
+                vm.Mode.ToString()
+            ].Method.Invoke(this, new[] { vm.Source });
 
-            View.Init(function);
+            View.Init(vm.Mode);
 
             for (int graylevel = 0; graylevel < 256; ++graylevel)
             {
-                chart.Series[function.GetDescription()]
+                chart.Series[vm.Mode.GetDescription()]
                      .Points.AddXY(graylevel, yValues[graylevel]);
             }
         }
