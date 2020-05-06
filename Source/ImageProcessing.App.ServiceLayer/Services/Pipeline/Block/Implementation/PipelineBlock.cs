@@ -15,20 +15,15 @@ namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementatio
         private readonly ConcurrentQueue<IBlockItem> _block
             = new ConcurrentQueue<IBlockItem>();
 
-        private object _item;
-        private Type _itemType;
+        private readonly object _blockItem;
 
-        public PipelineBlock(object item)
-        {
-            _item = item;
-            _itemType = item.GetType();
-        }
+        public PipelineBlock(object blockItem)
+            => _blockItem = blockItem;
 
         public object Process(CancellationToken _token)
         {
-            var result = _item;
-
-            var firstArg = _itemType;
+            var result = _blockItem;
+            var firstArg = _blockItem.GetType();
 
             while(_block.TryDequeue(out var function))
             {
