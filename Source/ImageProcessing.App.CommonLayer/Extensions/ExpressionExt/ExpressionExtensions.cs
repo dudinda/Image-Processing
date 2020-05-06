@@ -7,7 +7,9 @@ namespace ImageProcessing.App.CommonLayer.Extensions.ExpressionExt
     {
         /// <summary>
         /// Transform an expression of <see cref="Func{TIn, Out}"/> to
-        /// the expression of <see cref="object"/> and <see cref="object"/>.
+        /// the expression of  <see cref="Func{object, object}"/>
+        /// where the <typeparamref name="TIn"/> and <typeparamref name="TOut"/> both
+        /// are an <see cref="object"/> class.
         /// </summary>
         public static Expression<Func<object, object>> ConvertFunction<TIn, TOut>(
             this Expression<Func<TIn, TOut>> function)
@@ -24,6 +26,12 @@ namespace ImageProcessing.App.CommonLayer.Extensions.ExpressionExt
             );
         }
 
+        /// <summary>
+        /// Transform an expression of <see cref="Action{TIn}"/> to
+        /// the expression of  <see cref="Action{object}"/>
+        /// where the <typeparamref name="TIn"/>
+        /// is an <see cref="object"/> class.
+        /// </summary>
         public static Expression<Action<object>> ConvertFunction<TIn>(
            this Expression<Action<TIn>> function)
         {
