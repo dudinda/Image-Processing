@@ -41,6 +41,9 @@ namespace ImageProcessing.Microkernel.State.Implementation.IsBuilt
                 AppState.StartWork
             );
 
+            AppLifecycle.Controller.IoC
+                .RegisterSingleton<TMainPresenter>();
+
             AppLifecycle.State.Run<TMainPresenter>();    
         }
     }

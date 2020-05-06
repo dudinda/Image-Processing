@@ -71,8 +71,6 @@ namespace ImageProcessing.App.UILayer
             Application.SetCompatibleTextRenderingDefault(false);
 
             builder
-                .RegisterSingleton<ApplicationContext>()
-                .RegisterSingleton<MainPresenter>()
                 .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
                 .RegisterSingleton<IStaTaskService, StaTaskService>()
                 .RegisterSingleton<IAsyncZoomLocker, AsyncZoomLocker>()
