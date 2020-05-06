@@ -27,6 +27,9 @@ namespace ImageProcessing.App.UILayer.Form.Base
             {
                 if(_context is null)
                 {
+                    Controller.IoC
+                        .RegisterSingleton<ApplicationContext>();
+
                     _context = Controller.IoC.Resolve<ApplicationContext>();
                 }
 
