@@ -18,10 +18,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
         /// </summary>
         private void Bind()
         {
-            Controller
-                .Aggregator
-                .Subscribe(this);
-
             BindFileMenu();
             BindToolbar();
             BindConvolutionFilters();
