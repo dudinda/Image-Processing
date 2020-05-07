@@ -39,6 +39,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 () => Build(vm, chart)
             ).ConfigureAwait(true);
 
+            View.Init(vm.Mode);
             View.Show();
         }
 
@@ -47,8 +48,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             var yValues = (decimal[])_command[
                 vm.Mode.ToString()
             ].Method.Invoke(this, new[] { vm.Source });
-
-            View.Init(vm.Mode);
 
             for (int graylevel = 0; graylevel < 256; ++graylevel)
             {
