@@ -36,11 +36,5 @@ namespace ImageProcessing.Microkernel.EntryPoint
         /// <inheritdoc cref="IAppState.Exit"/>
         public static void Exit()
             => State.Exit();
-
-        /// <summary>
-        /// Set a state of an application.
-        /// </summary>
-        internal static void SetState(AppState state)
-            => State = StateFactory.Get(state);
     }
 }
