@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
 using ImageProcessing.App.PresentationLayer.Views.Convolution;
-using ImageProcessing.App.UILayer.Form.Base;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Utility.Interop.Wrapper;
 

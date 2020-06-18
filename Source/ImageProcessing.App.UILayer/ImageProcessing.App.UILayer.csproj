@@ -41,7 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Form\Base\BaseForm.cs">
+    <Compile Update="Form\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Properties\Resources.Designer.cs">

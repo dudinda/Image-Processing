@@ -5,7 +5,7 @@ using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 using MetroFramework.Forms;
 
-namespace ImageProcessing.App.UILayer.Form.Base
+namespace ImageProcessing.App.UILayer.Form
 {
     /// <summary>
     /// Represents the base form with the contextual

@@ -6,7 +6,6 @@ using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
 using ImageProcessing.App.CommonLayer.Extensions.TypeExt;
 using ImageProcessing.App.PresentationLayer.Views.Histogram;
-using ImageProcessing.App.UILayer.Form.Base;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 namespace ImageProcessing.App.UILayer.Form.Histogram
