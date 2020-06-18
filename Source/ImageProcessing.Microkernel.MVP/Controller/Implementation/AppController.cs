@@ -1,6 +1,3 @@
-using System;
-using System.Threading.Tasks;
-
 using ImageProcessing.Microkernel.DI.Container;
 using ImageProcessing.Microkernel.MVP.Aggregator.Implementation;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
@@ -25,9 +22,10 @@ namespace ImageProcessing.Microkernel.MVP.Controller.Implementation
             IoC = new DependencyResolution(container);
 
             IoC.RegisterSingletonInstance<IAppController>(this);
-            IoC.RegisterSingleton<IEventAggregator, EventAggregator>();
-
-            Aggregator = IoC.Resolve<IEventAggregator>();
+            
+            Aggregator = IoC
+                .RegisterSingleton<IEventAggregator, EventAggregator>()
+                .Resolve<IEventAggregator>();
         }
 
         /// <inheritdoc cref="IAppController.Run{TPresenter}"/>
