@@ -29,23 +29,18 @@ namespace ImageProcessing.Microkernel.DI.State.IsNotBuilt
                     GetContainerAdapter()
                 );
 
-                if (AppLifecycle
-                        .Controller
-                        .IoC.IsRegistered<TStartup>())
+                var ioc = AppLifecycle.Controller.IoC;
+
+                if (ioc.IsRegistered<TStartup>())
                 {
                     throw new InvalidOperationException(
                         "The specified startup is already defined."
                     );
                 }
 
-                AppLifecycle
-                    .Controller
-                    .IoC.RegisterSingleton<TStartup>();
-
-                AppLifecycle
-                    .Controller
-                    .IoC.Resolve<TStartup>()
-                        .Build(AppLifecycle.Controller.IoC);
+                ioc.RegisterSingleton<TStartup>()
+                   .Resolve<TStartup>()
+                   .Build(ioc);
 
                 AppLifecycle.State = StateFactory.Get(
                     AppState.IsBuilt
