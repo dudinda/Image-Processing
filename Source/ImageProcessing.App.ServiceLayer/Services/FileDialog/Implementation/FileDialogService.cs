@@ -11,7 +11,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.FileDialog.Implementation
 {
     public sealed class FileDialogService : IFileDialogService
     {
-        public async Task<Bitmap?> OpenFileDialog(string? filters)
+        public async Task<(Bitmap? Image, string Path)> OpenFileDialog(string? filters)
         {
             using (var dialog = new OpenFileDialog())
             {
@@ -27,15 +27,15 @@ namespace ImageProcessing.App.ServiceLayer.Services.FileDialog.Implementation
                     {
                         using (var stream = File.OpenRead(dialog.FileName))
                         {
-                            return new Bitmap(
+                            return (new Bitmap(
                                 Image.FromStream(stream)
-                            );
+                            ), dialog.FileName);
                         }
                     }).ConfigureAwait(false);              
                 }
 
                 return await Task
-                    .FromResult<Bitmap?>(null)
+                    .FromResult<(Bitmap?, string)>(default)
                     .ConfigureAwait(false);
             }
         }

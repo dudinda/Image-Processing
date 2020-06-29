@@ -19,7 +19,7 @@ namespace ImageProcessing.App.ServiceLayer.NonBlockDialog.Implementation
             _staService = staService;
         }
 
-        public async Task<Bitmap?> NonBlockOpen(string? filters)
+        public async Task<(Bitmap? Image, string Path)> NonBlockOpen(string? filters)
         {
             var result = await _staService.StartSTATask(
                 () => _service.OpenFileDialog(filters)

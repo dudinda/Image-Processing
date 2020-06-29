@@ -59,6 +59,10 @@ namespace ImageProcessing.App.UILayer.Form.Main
         }
 
         /// <inheritdoc/>
+        public void SetPathToFile(string path)
+            => PathToFile = path;
+        
+        /// <inheritdoc/>
         public void AddToUndoMainMetaInfo((Bitmap changed, ImageContainer from) action)
             => Container.Add(action);
 

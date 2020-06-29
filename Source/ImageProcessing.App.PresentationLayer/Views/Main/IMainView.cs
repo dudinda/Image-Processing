@@ -19,11 +19,13 @@ namespace ImageProcessing.App.PresentationLayer.Views.Main
     public interface IMainView : IView, IBitmapZoom,
         IError, IColorMenu, IBitmapContainer,
         IBitmapInfo, ICursor, IQualityMeasure
-    {    
+    {
         /// <summary>
         /// Specifies a path to the opened file.
         /// </summary>
-        string PathToFile { get; set; }
+        public string PathToFile { get; }
+     
+        void SetPathToFile(string path);
 
         void AddToUndoContainer((Bitmap changed, ImageContainer from) action);
     }

@@ -72,13 +72,16 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     ConfigurationManager.AppSettings["Filters"]
                 ).ConfigureAwait(true);
 
-                if (result != null)
+                if (result.Image != null)
                 {
                     View.SetCursor(CursorType.Wait);
 
                     if(
                         Pipeline
-                            .Register(new PipelineBlock(result)
+                            .Register(new PipelineBlock(result.Image)
+                                .Add<Bitmap>(
+                                    (bmp) => View.SetPathToFile(result.Path)
+                                )
                                 .Add<Bitmap, Bitmap>(
                                     (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Source)
                                  )
@@ -127,11 +130,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         ImageContainer.Source
                     ).ConfigureAwait(true);
 
-                    await Task.Run(() => copy
-                    .Save(View.PathToFile,
-                          Path.GetExtension(View.PathToFile)
-                              .GetImageFormat())
-                    ).ConfigureAwait(true);
+                    await Task.Run(() => copy.Save(
+                        View.PathToFile,
+                        Path.GetExtension(
+                            View.PathToFile
+                        ).GetImageFormat()
+                     )).ConfigureAwait(true);
                 }
             }
             catch(Exception ex)
