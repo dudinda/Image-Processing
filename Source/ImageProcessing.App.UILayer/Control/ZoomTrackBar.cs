@@ -36,7 +36,10 @@ namespace ImageProcessing.App.UILayer.Control
         public Image ImageToZoom {
             get 
             {
-                return _image;
+                lock (_sync)
+                {
+                    return _image;
+                }
             } 
             set
             {
