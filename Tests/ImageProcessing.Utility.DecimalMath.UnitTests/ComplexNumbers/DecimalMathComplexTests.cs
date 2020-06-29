@@ -79,8 +79,8 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.ComplexNumbers
 
             var result = Mul(z1, z);
 
-            Assert.That(() => Abs(((decimal)w.Real - result.Re)) < Epsilon);
-            Assert.That(() => Abs(((decimal)w.Imaginary - result.Im)) < Epsilon);
+            Assert.That(() => Abs(((decimal)w.Real - result.Re)) < 1.0E-9M);
+            Assert.That(() => Abs(((decimal)w.Imaginary - result.Im)) < 1.0E-9M);
         }
 
         [Test, TestCaseSource(

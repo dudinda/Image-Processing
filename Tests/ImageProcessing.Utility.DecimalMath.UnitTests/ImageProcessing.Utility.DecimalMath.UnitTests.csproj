@@ -71,6 +71,7 @@
     <Compile Include="CaseFactory\RealFunctionCasesFactory.cs" />
     <Compile Include="ComplexNumbers\DecimalMathComplexTests.cs" />
     <Compile Include="CaseFactory\ComplexDomainCasesFactory.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Real\DecimalMathRealTests.cs" />
   </ItemGroup>

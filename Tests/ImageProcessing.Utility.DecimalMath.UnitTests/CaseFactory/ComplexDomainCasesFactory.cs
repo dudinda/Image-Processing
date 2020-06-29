@@ -1,20 +1,24 @@
 using System.Collections.Generic;
+using ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory;
+using ImageProcessing.Utility.DecimalMath.UnitTests.Extensions;
 
 namespace ImageProcessing.Utility.DecimalMath.UnitTests.CasesFactory
 {
     public static class ComplexDomainCasesFactory
     {
-        public static IEnumerable<(decimal re, decimal im)> GetComplexNumbers()
+        /// <summary>
+        /// R x R
+        /// </summary>
+        public static IEnumerable<(decimal Re, decimal Im)> GetComplexNumbers()
         {
-            yield return (1M, 2M);
-            yield return (5M, 3M);
-            yield return (0M, 1M);
-            yield return (1M, 0M);
-            yield return (0.001M, 0M);
-            yield return (0M, 0.0001M);
-            yield return (1000M, 3000M);
-            yield return (25M, 30M);
-            yield return (-1000M, -3000M);
+            
+            foreach(var point in new[] {
+                RealDomainCasesFactory.GetRealAxis(),
+                RealDomainCasesFactory.GetRealAxis()
+            }.Cartesian2DToTuple())
+            {
+                yield return point;
+            }
         }
     }
 }
