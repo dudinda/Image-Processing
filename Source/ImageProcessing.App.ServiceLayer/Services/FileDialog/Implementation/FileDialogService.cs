@@ -9,8 +9,10 @@ using ImageProcessing.App.ServiceLayer.Services.FileDialog.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.FileDialog.Implementation
 {
+    /// <inheritdoc cref="IFileDialogService"/>
     public sealed class FileDialogService : IFileDialogService
     {
+        /// <inheritdoc/>
         public async Task<(Bitmap? Image, string Path)> OpenFileDialog(string? filters)
         {
             using (var dialog = new OpenFileDialog())
@@ -40,6 +42,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.FileDialog.Implementation
             }
         }
 
+        /// <inheritdoc/>
         public async Task SaveFileAsDialog(Bitmap src, string? filters)
         {
             using (var dialog = new SaveFileDialog())

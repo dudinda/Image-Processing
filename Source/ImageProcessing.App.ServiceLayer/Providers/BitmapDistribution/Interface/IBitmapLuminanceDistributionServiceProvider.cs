@@ -4,16 +4,16 @@ using ImageProcessing.App.CommonLayer.Enums;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution
 {
+    /// <summary>
+    /// Provides the <see cref="Distribution"/> and
+    /// <see cref="RandomVariableInfo"/> implementation for a bitmap.
+    /// </summary>
     public interface IBitmapLuminanceDistributionServiceProvider
     {
         /// <summary>
         /// Transfrom the specified bitmap to a <see cref="Distribution"/> with
         /// <see cref="parms"/>.
         /// </summary>
-        /// <param name="bmp">The source bitmap.</param>
-        /// <param name="distribution">A distribution.</param>
-        /// <param name="parms">Distribution params.</param>
-        /// <returns>Transformed to the specified distribution bitmap.</returns>
         Bitmap Transform(Bitmap bmp, Distribution distribution, (string, string) parms);
 
         /// <summary>

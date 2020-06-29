@@ -5,6 +5,9 @@ using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Interface.Morphology
 {
+    /// <summary>
+    /// Provides the <see cref="MorphologyOperator"/> implementation.
+    /// </summary>
     public interface IMorphologyServiceProvider
     {
         /// <summary>

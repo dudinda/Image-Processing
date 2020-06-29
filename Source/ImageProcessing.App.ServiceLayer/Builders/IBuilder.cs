@@ -8,7 +8,6 @@ namespace ImageProcessing.App.ServiceLayer.Builders.Base
         /// <summary>
         /// Built the specified <typeparamref name="TModel"/>
         /// </summary>
-        /// <returns></returns>
         TModel Build();
     }
 }

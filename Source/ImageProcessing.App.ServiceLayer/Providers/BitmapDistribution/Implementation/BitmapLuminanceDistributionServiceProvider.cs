@@ -10,6 +10,7 @@ using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.In
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistribution
 {
+    /// <inheritdoc cref="IBitmapLuminanceDistributionServiceProvider"/>
     public sealed class BitmapLuminanceDistributionServiceProvider
         : IBitmapLuminanceDistributionServiceProvider
     {
@@ -27,12 +28,14 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistri
             _factory = factory;
         }
 
+        /// <inheritdoc/>
         public Bitmap Transform(Bitmap bmp, Distribution distribution, (string, string) parms)
             =>  _service.Transform(bmp,
                     _factory.Get(distribution)
                             .SetParams(parms)
             );
 
+        /// <inheritdoc/>
         public decimal GetInfo(Bitmap bmp, RandomVariableInfo info)
             => (decimal)_command[
                 info.ToString()

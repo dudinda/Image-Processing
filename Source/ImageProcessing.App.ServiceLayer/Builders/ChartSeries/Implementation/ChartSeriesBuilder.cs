@@ -5,6 +5,7 @@ using ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Implementation
 {
+    /// <inheritdoc/>
     public sealed class ChartSeriesBuilder : IChartSeriesBuilder
     {
         private string? _name;
@@ -15,57 +16,66 @@ namespace ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Implementation
         private int _borderWidth;
         private Color _borderColor;
         private int _labelAngle;
-           
+
+        /// <inheritdoc/>
         public IChartSeriesBuilder SetName(string name)
         {
             _name = name;
             return this;
         }
-           
+
+        /// <inheritdoc/>
         public IChartSeriesBuilder SetColor(Color color)
         {
             _color = color;
             return this;
         }
-           
+
+        /// <inheritdoc/>
         public IChartSeriesBuilder SetLegendVisibility(bool isVisible)
         {
             _IsVisibleInLegend = isVisible;
             return this;
         }
-             
+
+        /// <inheritdoc/>
         public IChartSeriesBuilder SetChartType(SeriesChartType chartType)
         {
             _chartType = chartType;
             return this;
         }
-            
 
+        /// <inheritdoc/>
         public IChartSeriesBuilder SetMarkerStyle(MarkerStyle markerStyle)
         {
             _markerStyle = markerStyle;
             return this;
         }
-            
 
+        /// <inheritdoc/>
         public IChartSeriesBuilder SetBorderWidth(int borderWidth)
         {
             _borderWidth = borderWidth;
             return this;
         }
 
+        /// <inheritdoc/>
         public IChartSeriesBuilder SetBorderColor(Color color)
         {
             _borderColor = color;
             return this;
         }
 
+        /// <inheritdoc/>
         public IChartSeriesBuilder SetLabelAngle(int labelAngle)
         {
             _labelAngle = labelAngle;
             return this;
         }
 
+        /// <summary>
+        /// Build the <see cref="Series"/>.
+        /// </summary>
         public Series Build()
         {
             var series = _name is null ?

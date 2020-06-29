@@ -8,6 +8,7 @@ using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.RgbFilters
 {
+    /// <inheritdoc cref="IRgbFilterServiceProvider"/>
     public sealed class RgbFilterServiceProvider : IRgbFilterServiceProvider
     {
         private readonly IRgbFilterFactory _rgbFilterFactory;
@@ -23,6 +24,7 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.RgbFilters
             _cache = cache;
         }
 
+        /// <inheritdoc/>
         public Bitmap Apply(Bitmap bmp, RgbFilter filter)
             => _cache.GetOrCreate(filter,
                () => _rgbFilterService
@@ -30,8 +32,9 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.RgbFilters
                        _rgbFilterFactory
                            .Get(filter)
                )
-           ); 
+           );
 
+        /// <inheritdoc/>
         public Bitmap Apply(Bitmap bmp, RgbColors filter)
             => _cache.GetOrCreate(filter,
                () => _rgbFilterService

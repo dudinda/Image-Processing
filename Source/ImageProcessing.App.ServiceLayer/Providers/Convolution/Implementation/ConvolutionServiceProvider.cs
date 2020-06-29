@@ -13,6 +13,7 @@ using ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interf
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Convolution
 {
+    /// <inheritdoc cref="IConvolutionServiceProvider"/>
     public sealed class ConvolutionServiceProvider : IConvolutionServiceProvider
     {
         private static readonly Dictionary<string, CommandAttribute>
@@ -34,6 +35,7 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Convolution
             _cache = cache;
         }
 
+        /// <inheritdoc/>
         public Bitmap ApplyFilter(Bitmap bmp, ConvolutionFilter filter)
         {
             try
