@@ -13,12 +13,12 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CasesFactory
         public static IEnumerable<(decimal Re, decimal Im)> GetComplexNumbers()
         {
             
-            foreach(var point in new[] {
+            foreach(var z in new[] {
                 RealDomainCasesFactory.GetRealAxis(),
                 RealDomainCasesFactory.GetRealAxis()
             }.GeneratePlane())
             {
-                yield return point;
+                yield return z;
             }
         }
     }

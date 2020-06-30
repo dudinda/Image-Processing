@@ -23,17 +23,17 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.Extensions
               );
         }
 
-        internal static IEnumerable<(decimal Re, decimal Im)> GeneratePlane(
+        internal static IEnumerable<(decimal x, decimal y)> GeneratePlane(
             this IEnumerable<IEnumerable<decimal>> sets)
         {
             if(sets.Count() > 2)
             {
-                throw new ArgumentNullException("Wrong dimension.");
+                throw new ArgumentException("Wrong dimension.");
             }
 
-            foreach(var z in sets.Cartesian().Select(prod => prod.ToArray())) 
+            foreach(var point in sets.Cartesian().Select(prod => prod.ToArray())) 
             {
-                yield return (z[0], z[1]);
+                yield return (point[0], point[1]);
             }        
         }
 
