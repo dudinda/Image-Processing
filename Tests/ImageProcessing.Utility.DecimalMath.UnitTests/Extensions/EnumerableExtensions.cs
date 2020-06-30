@@ -12,21 +12,30 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.Extensions
         internal static IEnumerable<IEnumerable<TSet>> Cartesian<TSet>(
             this IEnumerable<IEnumerable<TSet>> sets)
         {
+            if(sets is null)
+            {
+                throw new ArgumentNullException(nameof(sets));
+            } 
+
             IEnumerable<IEnumerable<TSet>> emptyProduct
                 = new[] { Enumerable.Empty<TSet>() };
             return sets.Aggregate(
               emptyProduct,
-              (accumulator, sequence) =>
-                  from accseq in accumulator
-                  from item in sequence
-                  select accseq.Concat(new[] { item })
+              (accumulator, sequence) => accumulator.SelectMany(
+                  accseq => sequence,
+                  (accseq, item) => accseq.Concat(new[] { item }))
               );
         }
 
         internal static IEnumerable<(decimal x, decimal y)> GeneratePlane(
             this IEnumerable<IEnumerable<decimal>> sets)
         {
-            if(sets.Count() > 2)
+            if(sets is null)
+            {
+                throw new ArgumentNullException(nameof(sets));
+            }
+
+            if(sets.Count() != 2)
             {
                 throw new ArgumentException("Wrong dimension.");
             }
