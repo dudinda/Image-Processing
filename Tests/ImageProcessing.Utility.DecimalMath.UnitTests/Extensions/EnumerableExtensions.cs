@@ -10,39 +10,30 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.Extensions
     internal static class EnumerableExtensions
     {
         internal static IEnumerable<IEnumerable<TSet>> Cartesian<TSet>(
-            this IEnumerable<IEnumerable<TSet>> sequences)
+            this IEnumerable<IEnumerable<TSet>> sets)
         {
-            IEnumerable<IEnumerable<TSet>> emptyProduct = new[] { Enumerable.Empty<TSet>() };
-            return sequences.Aggregate(
+            IEnumerable<IEnumerable<TSet>> emptyProduct
+                = new[] { Enumerable.Empty<TSet>() };
+            return sets.Aggregate(
               emptyProduct,
               (accumulator, sequence) =>
-              {
-                  var result = new List<IEnumerable<TSet>>();
-
-                  foreach (var accseq in accumulator)
-                  {
-                      foreach (var item in sequence)
-                      {
-                          result.Add(accseq.Concat(new[] { item }));
-                      }
-                  }
-
-                  return result;
-              });
+                  from accseq in accumulator
+                  from item in sequence
+                  select accseq.Concat(new[] { item })
+              );
         }
 
-        internal static IEnumerable<(decimal Re, decimal Im)> Cartesian2DToTuple(
-            this IEnumerable<IEnumerable<decimal>> axes)
+        internal static IEnumerable<(decimal Re, decimal Im)> GeneratePlane(
+            this IEnumerable<IEnumerable<decimal>> sets)
         {
-            if(axes.Count() > 2)
+            if(sets.Count() > 2)
             {
                 throw new ArgumentNullException("Wrong dimension.");
             }
 
-            foreach(var product in axes.Cartesian())
+            foreach(var z in sets.Cartesian().Select(prod => prod.ToArray())) 
             {
-                var result = product.ToArray();
-                yield return (result[0], result[1]);
+                yield return (z[0], z[1]);
             }        
         }
 

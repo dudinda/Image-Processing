@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory;
 using ImageProcessing.Utility.DecimalMath.UnitTests.Extensions;
 
@@ -15,7 +16,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CasesFactory
             foreach(var point in new[] {
                 RealDomainCasesFactory.GetRealAxis(),
                 RealDomainCasesFactory.GetRealAxis()
-            }.Cartesian2DToTuple())
+            }.GeneratePlane())
             {
                 yield return point;
             }
