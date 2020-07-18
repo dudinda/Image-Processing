@@ -16,7 +16,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.StaTask.Implementation
         /// <summary>
         /// Contains threads' ids which hold modal windows.
         /// </summary>
-        private static List<int> _pool = new List<int>();
+        private static HashSet<int> _pool = new HashSet<int>();
 
         public StaTaskService() : this(4) { } 
 
