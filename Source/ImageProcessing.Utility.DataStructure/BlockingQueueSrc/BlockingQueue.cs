@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-using ImageProcessing.Utility.DataStructure.BlockingQueueSrc.Interface;
-
 namespace ImageProcessing.Utility.DataStructure.BlockingQueueSrc.Implementation
 {
-    public sealed class BlockingQueue<T> : IBlockingQueue<T>
+    public sealed class BlockingQueue<T> : IDisposable
     {
         private readonly int _maxSize;
         private readonly Queue<T> _queue

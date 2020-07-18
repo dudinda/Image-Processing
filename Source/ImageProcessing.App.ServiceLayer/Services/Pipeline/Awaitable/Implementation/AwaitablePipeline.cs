@@ -4,13 +4,12 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.Utility.DataStructure.BlockingQueueSrc.Implementation;
-using ImageProcessing.Utility.DataStructure.BlockingQueueSrc.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Implementation
 {
     public sealed class AwaitablePipeline : IAwaitablePipeline
     {
-        private readonly IBlockingQueue<Task<object>> _queue
+        private readonly BlockingQueue<Task<object>> _queue
            = new BlockingQueue<Task<object>>(1 << 6);
 
         private readonly CancellationTokenSource _source 
