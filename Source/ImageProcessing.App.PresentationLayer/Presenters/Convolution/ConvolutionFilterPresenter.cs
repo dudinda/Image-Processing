@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
+using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
 using ImageProcessing.App.PresentationLayer.Views.Convolution;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Convolution;
@@ -57,7 +58,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
 			}
 			catch(Exception ex)
 			{
-				View.ShowError("Error while applying a convolution filter.");
+				View.ShowError(Errors.ApplyConvolutionFilter);
 			}
 		}
 

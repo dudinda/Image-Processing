@@ -17,6 +17,7 @@ using ImageProcessing.App.DomainLayer.DomainEvent.ToolbarArgs;
 using ImageProcessing.App.DomainLayer.DomainEvents.QualityMeasureArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Convolution;
+using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
 using ImageProcessing.App.PresentationLayer.ViewModel.Histogram;
 using ImageProcessing.App.PresentationLayer.ViewModel.QualityMeasure;
@@ -96,7 +97,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch(Exception ex)
             {
-                OnError("Error while opening the file.");
+                OnError(Errors.OpenFile);
             }
         }
 
@@ -110,13 +111,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         .ConfigureAwait(true);
 
                     await _nonBlock.NonBlockSaveAs(copy,
-                        ConfigurationManager.AppSettings["Filters"]
+                         ConfigurationManager.AppSettings["Filters"]
                     ).ConfigureAwait(true);
                 }
             }
             catch(Exception ex)
             {
-                OnError("Error while saving the file.");
+                OnError(Errors.SaveFile);
             }
         }
 
@@ -140,7 +141,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch(Exception ex)
             {
-                OnError("Error while saving the file.");
+                OnError(Errors.SaveFile);
             }
         }
 
@@ -159,7 +160,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (Exception ex)
             {
-                OnError($"Error while building quality measure histogram.");
+                OnError(Errors.QualityHistogram);
             }
         }
 
@@ -180,7 +181,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (Exception ex)
             {
-                OnError($"Error while opening a convolution filters menu.");
+                OnError(Errors.ShowConvolutionMenu);
             }
         }
 
@@ -209,11 +210,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (OperationCanceledException cancelEx)
             {
-                OnError("The operation has been canceled.");
+                OnError(Errors.CancelOperation);
             }
             catch (Exception ex)
             {
-                OnError("Error while applying a convolution filter.");
+                OnError(Errors.ApplyConvolutionFilter);
             }
         }
 
@@ -249,11 +250,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (OperationCanceledException cancelEx)
             {
-                OnError("The operation has been canceled.");
+                OnError(Errors.CancelOperation);
             }
             catch (Exception ex)
             {
-                OnError("Error while applying an RGB filter.");
+                OnError(Errors.ApplyRgbFilter);
             }
         }
 
@@ -298,11 +299,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (OperationCanceledException cancelEx)
             {
-                OnError("The operation has been canceled.");
+                OnError(Errors.CancelOperation);
             }
             catch (Exception ex)
             {
-                OnError($"Error while applying a filter by the color channel.");
+                OnError(Errors.ApplyColorFilter);
             }
         }
 
@@ -345,11 +346,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (OperationCanceledException cancelEx)
             {
-                OnError("The operation has been canceled.");
+                OnError(Errors.CancelOperation);
             }
             catch (Exception ex)
             {
-                OnError("Error while applying a histogram transformation.");
+                OnError(Errors.TransformHistogram);
             }      
         }
 
@@ -385,7 +386,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch
             {
-                OnError("Error while shuffling the image.");
+                OnError(Errors.Shuffle);
             }
         }
 
@@ -406,7 +407,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (Exception ex)
             {
-                OnError($"Error while buiding the plot.");
+                OnError(Errors.BuildFunction);
             }
         }
 
@@ -439,11 +440,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (OperationCanceledException cancelEx)
             {
-                OnError("The operation has been canceled.");
+                OnError(Errors.CancelOperation);
             }
             catch (Exception ex)
             {
-                OnError("Error while replacing the image." );
+                OnError(Errors.ReplaceImage);
             }        
         }
 
@@ -470,10 +471,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (Exception ex)
             {
-               OnError(
-                    $@"Error while getting the 
-                       information about {e.Action.ToString().ToLower()}."
-                );
+               OnError(Errors.RandomVariableInfo);
             }
         }
 
@@ -495,7 +493,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch(Exception ex)
             {
-                OnError("Error while zooming the image.");
+                OnError(Errors.Zoom);
             }
         }
 

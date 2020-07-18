@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "ImageProcessing.App.PresentationLayer": {
-      "commandName": "Project",
-      "nativeDebugging": false
-    }
-  }
-}
