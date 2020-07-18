@@ -21,11 +21,11 @@ namespace ImageProcessing.App.DomainLayer.Convolution.Implemetation.Blur.BoxBlur
         public ReadOnly2DArray<double> Kernel { get; }
             = new ReadOnly2DArray<double>(
                 new double[,] {
-                    {1, 1, 1, 1, 1 },
-                    {1, 1, 1, 1, 1 },
-                    {1, 1, 1, 1, 1 },
-                    {1, 1, 1, 1, 1 },
-                    {1, 1, 1, 1, 1 }
+                    { 1, 1, 1, 1, 1 },
+                    { 1, 1, 1, 1, 1 },
+                    { 1, 1, 1, 1, 1 },
+                    { 1, 1, 1, 1, 1 },
+                    { 1, 1, 1, 1, 1 }
                 });
     }
 }

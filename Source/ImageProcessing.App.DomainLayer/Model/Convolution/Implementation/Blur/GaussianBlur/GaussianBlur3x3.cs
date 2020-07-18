@@ -21,9 +21,9 @@ namespace ImageProcessing.App.DomainLayer.Convolution.Implemetation.Blur.Gaussia
 		public ReadOnly2DArray<double> Kernel { get; }
 			= new ReadOnly2DArray<double>(
 			    new double[,] {
-                    {1, 2, 1 },
-					{2, 4, 2 },
-					{1, 2, 1 }
+                    { 1, 2, 1 },
+					{ 2, 4, 2 },
+					{ 1, 2, 1 }
                 });
 	};
 }

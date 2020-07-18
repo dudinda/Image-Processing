@@ -21,9 +21,9 @@ namespace ImageProcessing.App.DomainLayer.Convolution.Implemetation.EdgeDetectio
         public ReadOnly2DArray<double> Kernel { get; }
             = new ReadOnly2DArray<double>(
                 new double[,] {
-                    { -1, -2, -1 },
-                    {  0,  0,  0 },
-                    {  1,  2,  1 }
+                    {-1, -2, -1 },
+                    { 0,  0,  0 },
+                    { 1,  2,  1 }
                 });
     };
 }
