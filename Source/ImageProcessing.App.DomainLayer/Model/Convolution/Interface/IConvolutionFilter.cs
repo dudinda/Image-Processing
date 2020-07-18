@@ -1,3 +1,5 @@
+using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
+
 namespace ImageProcessing.App.DomainLayer.Convolution.Interface
 {
     /// <summary>
@@ -18,7 +20,7 @@ namespace ImageProcessing.App.DomainLayer.Convolution.Interface
         /// <summary>
         /// Specifies a convolution matrix of the type implementing the <see cref="IConvolutionFilter"/>.
         /// </summary>
-        double[,] Kernel { get; }
+        ReadOnly2DArray<double> Kernel { get; }
 
         /// <summary>
         /// A value to be added to the final result value when calculating the matrix.

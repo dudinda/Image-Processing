@@ -1,4 +1,5 @@
 using ImageProcessing.App.DomainLayer.Convolution.Interface;
+using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
 namespace ImageProcessing.App.DomainLayer.Convolution.Implemetation.EdgeDetection.SobelOperator
 {
@@ -17,10 +18,12 @@ namespace ImageProcessing.App.DomainLayer.Convolution.Implemetation.EdgeDetectio
         public string FilterName { get; } = nameof(SobelOperatorVertical);
 
         /// <inheritdoc />
-        public double[,] Kernel { get; }
-            =
-            new double[,] { { -1,  0, 1 },
-                            { -2,  0, 2 },
-                            { -1,  0, 1 } };
+        public ReadOnly2DArray<double> Kernel { get; }
+            = new ReadOnly2DArray<double>(
+                new double[,] {
+                    { -1,  0, 1 },
+                    { -2,  0, 2 },
+                    { -1,  0, 1 }
+                });
     }
 }

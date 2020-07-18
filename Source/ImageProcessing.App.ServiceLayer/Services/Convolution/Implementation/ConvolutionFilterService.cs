@@ -32,7 +32,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
                 var sourceStartPtr      = (byte*)sourceBitmapData.Scan0.ToPointer();
                 var destinationStartPtr = (byte*)destinationBitmapData.Scan0.ToPointer();
                 
-                var kernelOffset = (byte)((filter.Kernel.GetLength(1) - 1) / 2);
+                var kernelOffset = (byte)((filter.Kernel.ColumnCount - 1) / 2);
 
                 var options = new ParallelOptions()
                 {
