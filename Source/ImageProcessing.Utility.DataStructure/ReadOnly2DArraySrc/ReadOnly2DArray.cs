@@ -19,16 +19,6 @@ namespace ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation
             RowCount    = source.GetLength(0);
             ColumnCount = source.GetLength(1);
 
-            if (RowCount <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(RowCount));
-            }
-
-            if (ColumnCount <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(ColumnCount));
-            }
-
             _array = new T[RowCount, ColumnCount];
 
             for (var row = 0; row < RowCount; ++row)
@@ -42,20 +32,7 @@ namespace ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation
 
         public T this[int rowIndex, int columnIndex]
         {
-            get
-            {
-                if (rowIndex < 0 || rowIndex >= RowCount)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(rowIndex));
-                }
-
-                if (columnIndex < 0 || columnIndex >= ColumnCount)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(columnIndex));
-                }
-
-                return _array[rowIndex, columnIndex];
-            }
+            get => _array[rowIndex, columnIndex];
         }
 
         public int Count => RowCount * ColumnCount;
