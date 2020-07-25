@@ -1,16 +1,15 @@
 using System;
 
+using ImageProcessing.Microkernel.AppConfig;
 using ImageProcessing.Microkernel.Code.Enums;
-using ImageProcessing.Microkernel.DI.Adapters.LightInject;
-using ImageProcessing.Microkernel.DI.Adapters.Ninject;
 using ImageProcessing.Microkernel.DI.Code.Enums;
-using ImageProcessing.Microkernel.DI.Container;
 using ImageProcessing.Microkernel.DI.EntryPoint.State.Interface;
 using ImageProcessing.Microkernel.EntryPoint;
-using ImageProcessing.Microkernel.Factory;
+using ImageProcessing.Microkernel.EntryPoint.Code.Constants;
+using ImageProcessing.Microkernel.EntryPoint.Factory.ContainerAdapter;
+using ImageProcessing.Microkernel.Factory.State;
 using ImageProcessing.Microkernel.MVP.Controller.Implementation;
 using ImageProcessing.Microkernel.MVP.Presenter;
-using ImageProcessing.Microkernel.Startup;
 
 namespace ImageProcessing.Microkernel.DI.State.IsNotBuilt
 {
@@ -26,7 +25,7 @@ namespace ImageProcessing.Microkernel.DI.State.IsNotBuilt
             try
             {
                 AppLifecycle.Controller = new AppController(
-                    GetContainerAdapter()
+                    ContainerAdapterFactory.Get(container)
                 );
 
                 var ioc = AppLifecycle.Controller.IoC;
@@ -34,13 +33,12 @@ namespace ImageProcessing.Microkernel.DI.State.IsNotBuilt
                 if (ioc.IsRegistered<TStartup>())
                 {
                     throw new InvalidOperationException(
-                        "The specified startup is already defined."
+                        Exceptions.StartupIsDefined
                     );
                 }
 
                 ioc.RegisterSingleton<TStartup>()
-                   .Resolve<TStartup>()
-                   .Build(ioc);
+                   .Resolve<TStartup>().Build(ioc);
 
                 AppLifecycle.State = StateFactory.Get(
                     AppState.IsBuilt
@@ -53,31 +51,20 @@ namespace ImageProcessing.Microkernel.DI.State.IsNotBuilt
                 );
                 throw;
             }
-      
-            IContainer GetContainerAdapter()
-                => container
-            switch
-            {
-                DiContainer.LightInject
-                    => new LightInjectAdapter(),
-                DiContainer.Ninject
-                    => new NinjectAdapter(),
-
-                _ => throw new NotImplementedException(nameof(container))
-            };
+     
         }
 
         /// <inheritdoc/>
         public void Exit()
             => throw new InvalidOperationException(
-                "The application is not built."
+                Exceptions.ApplicationIsNotBuilt
             );
 
         /// <inheritdoc/>
         public void Run<TMainPresenter>()
             where TMainPresenter : class, IPresenter
             => throw new InvalidOperationException(
-                "The application is not built."
+                Exceptions.ApplicationIsNotBuilt
             );
         
     }

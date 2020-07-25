@@ -1,10 +1,10 @@
+using ImageProcessing.Microkernel.AppConfig;
 using ImageProcessing.Microkernel.Code.Enums;
 using ImageProcessing.Microkernel.DI.Code.Enums;
 using ImageProcessing.Microkernel.DI.EntryPoint.State.Interface;
 using ImageProcessing.Microkernel.Factory;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Microkernel.MVP.Presenter;
-using ImageProcessing.Microkernel.Startup;
 
 namespace ImageProcessing.Microkernel.EntryPoint
 {
@@ -19,9 +19,7 @@ namespace ImageProcessing.Microkernel.EntryPoint
 
         /// <inheritdoc cref="IAppState"/>
         internal static IAppState State { get; set; }
-            = StateFactory.Get(
-                AppState.IsNotBuilt
-            );
+            = StateFactory.Get(AppState.IsNotBuilt);
 
         /// <inheritdoc cref="IAppState.Build{TStartup}(DiContainer)"/>
         public static void Build<TStartup>(DiContainer container)

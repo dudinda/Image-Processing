@@ -7,7 +7,7 @@ using ImageProcessing.Microkernel.State.EndWork;
 using ImageProcessing.Microkernel.State.Implementation.IsBuilt;
 using ImageProcessing.Microkernel.State.StartWork;
 
-namespace ImageProcessing.Microkernel.Factory
+namespace ImageProcessing.Microkernel.Factory.State
 {
     /// <summary>
     /// A factory method provider for all the types

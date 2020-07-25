@@ -1,8 +1,6 @@
-using System.Threading.Tasks;
-
+using ImageProcessing.Microkernel.AppConfig;
 using ImageProcessing.Microkernel.DI.Code.Enums;
 using ImageProcessing.Microkernel.MVP.Presenter;
-using ImageProcessing.Microkernel.Startup;
 
 namespace ImageProcessing.Microkernel.DI.EntryPoint.State.Interface
 {

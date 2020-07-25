@@ -1,12 +1,13 @@
 using System;
 
+using ImageProcessing.Microkernel.AppConfig;
 using ImageProcessing.Microkernel.Code.Enums;
 using ImageProcessing.Microkernel.DI.Code.Enums;
 using ImageProcessing.Microkernel.DI.EntryPoint.State.Interface;
 using ImageProcessing.Microkernel.EntryPoint;
-using ImageProcessing.Microkernel.Factory;
+using ImageProcessing.Microkernel.EntryPoint.Code.Constants;
+using ImageProcessing.Microkernel.Factory.State;
 using ImageProcessing.Microkernel.MVP.Presenter;
-using ImageProcessing.Microkernel.Startup;
 
 namespace ImageProcessing.Microkernel.State.Implementation.IsBuilt
 {
@@ -19,7 +20,7 @@ namespace ImageProcessing.Microkernel.State.Implementation.IsBuilt
         public void Build<TStartup>(DiContainer container)
             where TStartup : class, IStartup
             => throw new InvalidOperationException(
-                "The application is already built."
+                Exceptions.ApplicationIsBuilt
             );
 
         /// <inheritdoc/>
@@ -29,8 +30,7 @@ namespace ImageProcessing.Microkernel.State.Implementation.IsBuilt
                 AppState.EndWork
             );
 
-            AppLifecycle
-                .State.Exit();
+            AppLifecycle.State.Exit();
         }
 
         /// <inheritdoc/>
