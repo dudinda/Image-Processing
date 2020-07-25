@@ -16,6 +16,7 @@ namespace ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Implementation
         private int _borderWidth;
         private Color _borderColor;
         private int _labelAngle;
+        private bool _isVisibleInLegend;
 
         /// <inheritdoc/>
         public IChartSeriesBuilder SetName(string name)
@@ -73,6 +74,13 @@ namespace ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Implementation
             return this;
         }
 
+        /// <inheritdoc/>
+        public IChartSeriesBuilder SetVisibleInLegend(bool isVisibleInLegend)
+        {
+            _isVisibleInLegend = isVisibleInLegend;
+            return this;
+        }
+
         /// <summary>
         /// Build the <see cref="Series"/>.
         /// </summary>
@@ -88,7 +96,7 @@ namespace ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Implementation
             series.MarkerStyle = _markerStyle;
             series.BorderWidth = _borderWidth;
             series.LabelAngle = _labelAngle;
-
+            series.IsVisibleInLegend = _isVisibleInLegend;
             return series;
         }
         

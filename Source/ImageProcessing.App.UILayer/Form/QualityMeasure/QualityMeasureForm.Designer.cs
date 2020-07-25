@@ -22,29 +22,30 @@ namespace ImageProcessing.App.UILayer.Form.QualityMeasure
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.Histogram = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.Histogram)).BeginInit();
             this.SuspendLayout();
             // 
             // Histogram
             // 
-            chartArea1.AxisX.Interval = 1D;
-            chartArea1.AxisX.IsLabelAutoFit = false;
-            chartArea1.AxisX.LabelStyle.Angle = 90;
-            chartArea1.Name = "ChartArea1";
-            this.Histogram.ChartAreas.Add(chartArea1);
+            chartArea2.AxisX.Interval = 1D;
+            chartArea2.AxisX.IsLabelAutoFit = false;
+            chartArea2.AxisX.LabelStyle.Angle = 90;
+            chartArea2.Name = "ChartArea1";
+            this.Histogram.ChartAreas.Add(chartArea2);
             this.Histogram.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.Histogram.Legends.Add(legend1);
+            legend2.Name = "Legend1";
+            this.Histogram.Legends.Add(legend2);
             this.Histogram.Location = new System.Drawing.Point(20, 60);
             this.Histogram.Name = "Histogram";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "p(x)";
-            this.Histogram.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.IsVisibleInLegend = false;
+            series2.Legend = "Legend1";
+            series2.Name = "p(x)";
+            this.Histogram.Series.Add(series2);
             this.Histogram.Size = new System.Drawing.Size(491, 387);
             this.Histogram.TabIndex = 1;
             // 
@@ -55,7 +56,7 @@ namespace ImageProcessing.App.UILayer.Form.QualityMeasure
             this.ClientSize = new System.Drawing.Size(531, 467);
             this.Controls.Add(this.Histogram);
             this.Name = "QualityMeasureForm";
-            this.Text = "QualityMeasure";
+            this.Text = "Grayscale Levels";
             ((System.ComponentModel.ISupportInitialize)(this.Histogram)).EndInit();
             this.ResumeLayout(false);
 

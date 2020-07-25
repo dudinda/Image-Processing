@@ -49,5 +49,10 @@ namespace ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Interface
         /// Set the series angle label.
         /// </summary>
         IChartSeriesBuilder SetLabelAngle(int labelAngle);
+
+        /// <summary>
+        /// Set the series visibility in the legend.
+        /// </summary>
+        IChartSeriesBuilder SetVisibleInLegend(bool isVisibleInLegend);
     }
 }

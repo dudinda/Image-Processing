@@ -6,7 +6,7 @@ namespace ImageProcessing.App.PresentationLayer.ViewModel.QualityMeasure
     internal sealed class QualityMeasureViewModel
     {
         public QualityMeasureViewModel(ConcurrentQueue<Bitmap> queue)
-            => Queue = new ConcurrentQueue<Bitmap>(queue);
+            => Queue = queue;
     
         public ConcurrentQueue<Bitmap> Queue { get; }
 
