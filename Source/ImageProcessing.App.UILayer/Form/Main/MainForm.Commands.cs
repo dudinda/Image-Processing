@@ -149,9 +149,12 @@ namespace ImageProcessing.App.UILayer.Form.Main
         {
             var result = default(RgbColors);
 
-            if (ColorFilterRed.Checked)   result |= RgbColors.Red;
-            if (ColorFilterBlue.Checked)  result |= RgbColors.Blue;
-            if (ColorFilterGreen.Checked) result |= RgbColors.Green;
+            if (ColorFilterRed.Checked)
+                result |= RgbColors.Red;
+            if (ColorFilterBlue.Checked)
+                result |= RgbColors.Blue;
+            if (ColorFilterGreen.Checked)
+                result |= RgbColors.Green;
 
             return result;
         }

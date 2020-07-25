@@ -11,7 +11,7 @@ namespace ImageProcessing.App.UILayer.Form
     /// Represents the base form with the contextual
     /// information about an application thread.
     /// </summary>
-    internal abstract class BaseMainForm : MetroForm
+    internal abstract class BaseForm : MetroForm
     {
         private ApplicationContext _context
             = null!;
@@ -27,8 +27,9 @@ namespace ImageProcessing.App.UILayer.Form
             {
                 if(_context is null)
                 {
+                    Controller.IoC.RegisterSingleton<ApplicationContext>();
+
                     _context = Controller.IoC
-                        .RegisterSingleton<ApplicationContext>()
                         .Resolve<ApplicationContext>();
                 }
 
@@ -37,26 +38,14 @@ namespace ImageProcessing.App.UILayer.Form
         }
            
 
-        protected BaseMainForm(IAppController controller)
-            : base() => Controller = controller;
-        
-        protected BaseMainForm()
-            : base() { }
-    }
-
-    /// <summary>
-    /// Represents the base form.
-    /// </summary>
-    internal abstract class BaseForm : MetroForm, IDisposable
-    {
-        /// <inheritdoc cref="IAppController"/>
-        protected IAppController Controller { get; }
-            = null!;
-
         protected BaseForm(IAppController controller)
-            : base() => Controller = controller;
-
+            : base()
+        {
+            Controller = controller;
+        }
+        
         protected BaseForm()
             : base() { }
     }
+
 }

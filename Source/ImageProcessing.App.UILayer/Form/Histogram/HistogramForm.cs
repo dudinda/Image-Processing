@@ -17,7 +17,10 @@ namespace ImageProcessing.App.UILayer.Form.Histogram
           _command = typeof(HistogramForm).GetCommands();
 
         public HistogramForm(IAppController controller)
-            : base(controller) => InitializeComponent();
+            : base(controller)
+        {
+            InitializeComponent();
+        }
 
         /// <inheritdoc/>
         public Chart GetChart

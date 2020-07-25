@@ -11,7 +11,7 @@ using ImageProcessing.Utility.Interop.Wrapper;
 namespace ImageProcessing.App.UILayer.Form.Main
 {
     /// <inheritdoc cref="IMainView"/>
-    internal sealed partial class MainForm : BaseMainForm, IMainView
+    internal sealed partial class MainForm : BaseForm, IMainView
     {
         public MainForm(IAppController controller)
             : base(controller)
