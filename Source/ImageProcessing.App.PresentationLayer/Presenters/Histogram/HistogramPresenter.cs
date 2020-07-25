@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -11,6 +12,7 @@ using ImageProcessing.App.CommonLayer.Extensions.TypeExt;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.ViewModel.Histogram;
 using ImageProcessing.App.PresentationLayer.Views.Histogram;
+using ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
@@ -23,10 +25,16 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
            _command = typeof(HistogramPresenter).GetCommands();
 
         private readonly IBitmapLuminanceDistributionService _distributionService;
+        private readonly IChartSeriesBuilder _builder;
 
         public HistogramPresenter(IAppController controller,
-                                  IBitmapLuminanceDistributionService distibutionService)
-            : base(controller) => _distributionService = distibutionService;
+                                  IBitmapLuminanceDistributionService distibutionService,
+                                  IChartSeriesBuilder builder)
+            : base(controller)
+        {
+            _distributionService = distibutionService;
+            _builder = builder;
+        }
 
         public override void Run(HistogramViewModel vm)
             => DoWorkBeforeShow(vm);
@@ -34,43 +42,61 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         private async Task DoWorkBeforeShow(HistogramViewModel vm)
         {
             var chart = View.GetChart;
+                chart.Series.Clear();
 
-            await Task.Run(
-                () => Build(vm, chart)
+            var key = vm.Mode.ToString();
+
+            var (series, yMax) = await Task.Run(
+                () => BuildPlot(vm)
             ).ConfigureAwait(true);
 
-            View.Init(vm.Mode);
+            chart.Series[key] = series;
+
+            View.YAxisMaximum = (double)yMax;
             View.Show();
         }
 
-        private void Build(HistogramViewModel vm, Chart chart)
+        private (Series, decimal) BuildPlot(HistogramViewModel vm)
         {
+            var key = vm.Mode.ToString();
+
             var yValues = (decimal[])_command[
-                vm.Mode.ToString()
+                key
             ].Method.Invoke(this, new[] { vm.Source });
+
+            var series = _builder.Build();
 
             for (int graylevel = 0; graylevel < 256; ++graylevel)
             {
-                chart.Series[vm.Mode.GetDescription()]
-                     .Points.AddXY(graylevel, yValues[graylevel]);
+               series.Points.AddXY(graylevel, yValues[graylevel]);
             }
+
+            return (series, yValues.Max());
         }
 
         [Command(nameof(RandomVariableFunction.PMF))]
         private decimal[] BuildPMFCommand(Bitmap bmp)
-        {
-            var values = _distributionService.GetPMF(bmp);
-            View.YAxisMaximum = (double)values.Max();
+        {          
+            _builder
+               .SetName(RandomVariableFunction.PMF.GetDescription())
+               .SetMarkerStyle(MarkerStyle.None)
+               .SetVisibleInLegend(true);
 
-            return values;
+            return _distributionService.GetPMF(bmp);
         }
+       
+
 
         [Command(nameof(RandomVariableFunction.CDF))]
         private decimal[] BuildCDFCommand(Bitmap bmp)
         {
-            View.YAxisMaximum = 1;
+            _builder
+               .SetName(RandomVariableFunction.CDF.GetDescription())
+               .SetMarkerStyle(MarkerStyle.None)
+               .SetChartType(SeriesChartType.StepLine)
+               .SetVisibleInLegend(true);
 
-            return _distributionService.GetCDF(bmp);
+            return _distributionService.GetCDF(bmp); 
         }
     }
 }
