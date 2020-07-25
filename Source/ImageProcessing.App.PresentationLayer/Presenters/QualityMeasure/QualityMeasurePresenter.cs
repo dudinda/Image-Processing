@@ -36,7 +36,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             var chart = View.GetChart;
           
             var map = await Task.Run(
-                () => BuildHistogram(vm)
+                () => BuildSeries(vm)
             ).ConfigureAwait(true);
 
             foreach(var pair in map)
@@ -47,7 +47,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             View.Show();
         }
 
-        private Dictionary<string, Series> BuildHistogram(QualityMeasureViewModel vm)
+        private Dictionary<string, Series> BuildSeries(QualityMeasureViewModel vm)
         {
             var result = new Dictionary<string, Series>();
 
