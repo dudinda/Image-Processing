@@ -17,7 +17,7 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Convolution
     public sealed class ConvolutionServiceProvider : IConvolutionServiceProvider
     {
         private static readonly Dictionary<string, CommandAttribute>
-            _command = typeof(ConvolutionServiceProvider).GetCommands();
+            _composite = typeof(ConvolutionServiceProvider).GetCommands();
 
         private readonly IConvolutionFilterFactory _convolutionFilterFactory;
         private readonly IConvolutionFilterService _convolutionFilterService;
@@ -38,16 +38,16 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Convolution
         /// <inheritdoc/>
         public Bitmap ApplyFilter(Bitmap bmp, ConvolutionFilter filter)
         {
-            try
+            var key = filter.ToString();
+
+            if(_composite.ContainsKey(key))
             {
-                return (Bitmap)_command[
-                    filter.ToString()
-                ].Method.Invoke(this, new object[] { bmp, filter } );
+                return (Bitmap)_composite[
+                   key
+               ].Method.Invoke(this, new object[] { bmp, filter });
             }
-            catch(KeyNotFoundException)
-            {
-                return GetFilter(bmp, filter);
-            }
+
+            return GetFilter(bmp, filter);
         }
 
         [Command(nameof(ConvolutionFilter.LoGOperator3x3))]
