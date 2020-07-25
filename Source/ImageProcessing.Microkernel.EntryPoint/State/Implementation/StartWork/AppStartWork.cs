@@ -6,7 +6,7 @@ using ImageProcessing.Microkernel.DI.Code.Enums;
 using ImageProcessing.Microkernel.DI.EntryPoint.State.Interface;
 using ImageProcessing.Microkernel.EntryPoint;
 using ImageProcessing.Microkernel.EntryPoint.Code.Constants;
-using ImageProcessing.Microkernel.Factory;
+using ImageProcessing.Microkernel.Factory.State;
 using ImageProcessing.Microkernel.MVP.Presenter;
 
 namespace ImageProcessing.Microkernel.State.StartWork
