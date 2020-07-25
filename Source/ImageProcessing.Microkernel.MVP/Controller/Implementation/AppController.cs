@@ -22,10 +22,9 @@ namespace ImageProcessing.Microkernel.MVP.Controller.Implementation
             IoC = new DependencyResolution(container);
 
             IoC.RegisterSingletonInstance<IAppController>(this);
-            
-            Aggregator = IoC
-                .RegisterSingleton<IEventAggregator, EventAggregator>()
-                .Resolve<IEventAggregator>();
+            IoC.RegisterSingleton<IEventAggregator, EventAggregator>();
+
+            Aggregator = IoC.Resolve<IEventAggregator>();
         }
 
         /// <inheritdoc cref="IAppController.Run{TPresenter}"/>
