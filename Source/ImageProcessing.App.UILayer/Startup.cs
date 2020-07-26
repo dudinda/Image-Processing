@@ -40,6 +40,8 @@ using ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable.Imp
 using ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable.Interface;
 using ImageProcessing.App.ServiceLayer.Services.FileDialog.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.FileDialog.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Histogram.Implementation;
+using ImageProcessing.App.ServiceLayer.Services.Histogram.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Zoom.Implementation;
@@ -100,7 +102,8 @@ namespace ImageProcessing.App.UILayer
                 .RegisterTransient<IBitmapLuminanceDistributionServiceProvider, BitmapLuminanceDistributionServiceProvider>()
                 .RegisterTransient<IRgbFilterServiceProvider, RgbFilterServiceProvider>()
                 .RegisterScoped<IChartSeriesBuilder, ChartSeriesBuilder>()
-                .RegisterTransient<IQualityMeasureService, QualityMeasureService>();      
+                .RegisterTransient<IQualityMeasureService, QualityMeasureService>()
+                .RegisterTransient<IHistogramService, HistogramService>();      
         }      
     }
 }
