@@ -59,10 +59,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             _operationLocker = operationLocker;
             _cache = cache;
             _nonBlock = nonBlock;
-
-            Controller
-                .Aggregator
-                .Subscribe(this);
         }
 
         private async Task OpenImage(OpenFileDialogEventArgs e)

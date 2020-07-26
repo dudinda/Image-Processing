@@ -57,7 +57,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
         }
 
         protected BasePresenter(IAppController controller)
-            => Controller = controller;
+        {
+            Controller = controller;
+
+            Controller
+                .Aggregator
+                .Subscribe(this);
+        }
 
         /// <inheritdoc/>
         public virtual void Run()
@@ -123,7 +129,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
             = null!;
 
         protected BasePresenter(IAppController controller)
-            => Controller = controller;
+        {
+            Controller = controller;
+
+            Controller
+                .Aggregator
+                .Subscribe(this);
+        }
         
         /// <inheritdoc/>
         public virtual void Run(TViewModel vm)
@@ -131,5 +143,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
             ViewModel = vm;
             View.Show();
 		}
+
 	}
 }

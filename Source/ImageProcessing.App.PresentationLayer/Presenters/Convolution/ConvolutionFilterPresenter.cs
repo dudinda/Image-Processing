@@ -27,10 +27,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
         {
             _convolutionProvider = convolutionFilterServiceProvider;
             _operationLocker = operationLocker;
-
-            Controller
-                .Aggregator
-                .Subscribe(this);
         }
 
 		private async Task ApplyConvolutionFilter(ConvolutionFilterEventArgs e)
