@@ -49,6 +49,8 @@ using ImageProcessing.App.ServiceLayer.Services.Morphology.Interface;
 using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
+using ImageProcessing.App.ServiceLayer.Services.QualityMeasure.Implementation;
+using ImageProcessing.App.ServiceLayer.Services.QualityMeasure.Interface;
 using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Interface;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Implementation;
@@ -97,7 +99,8 @@ namespace ImageProcessing.App.UILayer
                 .RegisterTransient<IMorphologyServiceProvider, MorphologyServiceProvider>()
                 .RegisterTransient<IBitmapLuminanceDistributionServiceProvider, BitmapLuminanceDistributionServiceProvider>()
                 .RegisterTransient<IRgbFilterServiceProvider, RgbFilterServiceProvider>()
-                .RegisterScoped<IChartSeriesBuilder, ChartSeriesBuilder>();      
+                .RegisterScoped<IChartSeriesBuilder, ChartSeriesBuilder>()
+                .RegisterTransient<IQualityMeasureService, QualityMeasureService>();      
         }      
     }
 }
