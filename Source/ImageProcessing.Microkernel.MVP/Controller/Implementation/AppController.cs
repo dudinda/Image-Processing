@@ -33,7 +33,7 @@ namespace ImageProcessing.Microkernel.MVP.Controller.Implementation
         {
             if (!IoC.IsRegistered<TPresenter>())
             {
-                IoC.RegisterTransient<TPresenter>();
+                IoC.RegisterSingleton<TPresenter>();
             }
 
             IoC.Resolve<TPresenter>().Run();
@@ -46,7 +46,7 @@ namespace ImageProcessing.Microkernel.MVP.Controller.Implementation
         {
             if (!IoC.IsRegistered<TPresenter>())
             {
-                IoC.RegisterTransient<TPresenter>();
+                IoC.RegisterSingleton<TPresenter>();
             }
 
             IoC.Resolve<TPresenter>().Run(vm);
