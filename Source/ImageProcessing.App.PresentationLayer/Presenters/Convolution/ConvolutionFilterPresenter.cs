@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Properties;
@@ -33,24 +34,27 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
 		{
 			try
 			{
-				var copy = await _operationLocker
-                    .LockAsync(
-                        () => new Bitmap(ViewModel.Source)
-                     ).ConfigureAwait(true);
-
                 var filter = View.SelectedFilter;
 
-                var block = new PipelineBlock(copy)
-                    .Add<Bitmap, Bitmap>(
-                        (bmp) => _convolutionProvider
-                            .ApplyFilter(bmp, filter)
-                    );
+                if (filter != ConvolutionFilter.Unknown)
+                {
+                    var copy = await _operationLocker
+                        .LockAsync(
+                            () => new Bitmap(ViewModel.Source)
+                         ).ConfigureAwait(true);
 
-                Controller.Aggregator.Publish(
-                    new ApplyConvolutionFilterEventArgs(
-                       block
-                    )
-                );
+                    var block = new PipelineBlock(copy)
+                        .Add<Bitmap, Bitmap>(
+                            (bmp) => _convolutionProvider
+                                .ApplyFilter(bmp, filter)
+                        );
+
+                    Controller.Aggregator.Publish(
+                        new ApplyConvolutionFilterEventArgs(
+                           block
+                        )
+                    );
+                }
 			}
 			catch(Exception ex)
 			{

@@ -88,9 +88,7 @@ namespace ImageProcessing.App.CommonLayer.Extensions.EnumExt
         /// <typeparam name="TEnum">An enumerated type.</typeparam>
         /// <param name="enumeration">The source enumeration.</param>
         /// <returns>All values except for the default.</returns>
-        public static TEnum[] GetEnumValuesExceptDefault<TEnum>(this TEnum enumeration)
-            => Enum.GetValues(typeof(TEnum)).Cast<TEnum>()
-                   .Where(e => !EqualityComparer<TEnum>.Default.Equals(e, default(TEnum)))
-                   .ToArray();
+        public static TEnum[] GetAllEnumValues<TEnum>(this TEnum enumeration)
+            => Enum.GetValues(typeof(TEnum)).Cast<TEnum>().ToArray();
     }
 }

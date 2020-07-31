@@ -2,7 +2,7 @@ using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
 
 namespace ImageProcessing.App.UILayer.Form.Convolution
 {
-    partial class ConvolutionFilterForm
+    internal sealed partial class ConvolutionFilterForm
     {
         private void Bind()
         {

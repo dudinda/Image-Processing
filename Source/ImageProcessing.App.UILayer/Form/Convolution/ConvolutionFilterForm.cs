@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
-using System.Windows.Forms;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
+using ImageProcessing.App.PresentationLayer.Presenters.Convolution;
 using ImageProcessing.App.PresentationLayer.Views.Convolution;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Utility.Interop.Wrapper;
@@ -19,13 +19,13 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
             InitializeComponent();
 
             var values = default(ConvolutionFilter)
-                .GetEnumValuesExceptDefault()
+                .GetAllEnumValues()
                 .Select(val => val.GetDescription())
                 .ToArray();
 
             ConvolutionFilterComboBox.Items.AddRange(
-                Array.ConvertAll(values, item => (object)item)
-            );
+                 Array.ConvertAll(values, item => (object)item)
+             );
 
             ConvolutionFilterComboBox.SelectedIndex = 0;
 
@@ -36,8 +36,7 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
         public ConvolutionFilter SelectedFilter
         {
             get => ConvolutionFilterComboBox
-                .SelectedItem
-                .ToString()
+                .SelectedItem.ToString()
                 .GetValueFromDescription<ConvolutionFilter>();
         }
 
@@ -48,9 +47,8 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
              );
 
         /// <summary>
-        /// Used by a DI container to dispose the singleton form
-        /// on Release().
-        /// </summary>
+        /// Used by the generated <see cref="Dispose(bool)"/> call.
+        /// Can be used by a DI container in a singleton scope on Release();
         public new void Dispose()
         {
             if (components != null)
@@ -58,17 +56,11 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
                 components.Dispose();
             }
 
-            base.Dispose(true);
-        }
+            Controller
+                .Aggregator
+                .Unsubscribe(typeof(ConvolutionFilterPresenter));
 
-        /// <summary>
-        /// Restrict the generated <see cref="Dispose(bool)"/> call
-        /// on a non-context form closing.
-        /// </summary>
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            Hide();
-            e.Cancel = true;
+            base.Dispose(true);
         }
     }
 }
