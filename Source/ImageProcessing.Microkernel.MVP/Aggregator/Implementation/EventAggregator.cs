@@ -13,42 +13,24 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
     {
         private readonly object _syncRoot = new object();
 
-        private Dictionary<Type, List<WeakReference>> eventSubsribers
-            = new Dictionary<Type, List<WeakReference>>();
+        private Dictionary<Type, HashSet<object>> eventSubsribers
+            = new Dictionary<Type, HashSet<object>>();
 
         /// <inheritdoc cref="IEventAggregator.Publish{TEventType}(TEventType)"/>
         public void Publish<TEventType>(TEventType publisher)
         {
             var subsriberType = typeof(ISubscriber<>).MakeGenericType(typeof(TEventType));
 
-            var subscribers = GetSubscriberList(subsriberType);
-
+            var subscribers = GetSubscribers(subsriberType);
+            
             var subsribersToBeRemoved = new List<WeakReference>();
 
-            foreach (var weakSubsriber in subscribers)
+            foreach (var subscriber in subscribers)
             {
-                if (weakSubsriber.IsAlive)
-                {
-                    InvokeSubscriberEvent(
+                InvokeSubscriberEvent(
                         publisher,
-                        (ISubscriber<TEventType>)weakSubsriber.Target
+                        (ISubscriber<TEventType>)subscriber
                     );
-                }
-                else
-                {
-                    subsribersToBeRemoved.Add(weakSubsriber);
-                }
-            }
-
-            if (subsribersToBeRemoved.Any())
-            {
-                lock (_syncRoot)
-                {
-                    foreach (var remove in subsribersToBeRemoved)
-                    {
-                        subscribers.Remove(remove);
-                    }
-                }
             }
         }
 
@@ -57,20 +39,37 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
         {
             lock (_syncRoot)
             {
-                var subsriberTypes = subscriber
-                    .GetType()
-                    .GetInterfaces()
-                    .Where(i => i.IsGenericType &&
-                           i.GetGenericTypeDefinition() == typeof(ISubscriber<>)
-                     );
 
-                var weakReference = new WeakReference(subscriber);
+                var subscriberType = subscriber.GetType();
+
+                var subsriberTypes = subscriberType.GetInterfaces()
+                    .Where(i => i.IsGenericType &&
+                           i.GetGenericTypeDefinition() == typeof(ISubscriber<>));
 
                 foreach (var subsriberType in subsriberTypes)
                 {
-                    var subscribers = GetSubscriberList(subsriberType);
+                    var subscribers = GetSubscribers(subsriberType);
+                        subscribers.Add(subscriber);
+                    
+                }
+            }
+        }
 
-                    subscribers.Add(weakReference);
+        /// <inheritdoc cref="IEventAggregator.Unsubscribe(Type))"/>
+        public void Unsubscribe(Type subscriber)
+        {
+            lock (_syncRoot)
+            {
+                var subsriberTypes = subscriber.GetInterfaces()
+                    .Where(i => i.IsGenericType &&
+                           i.GetGenericTypeDefinition() == typeof(ISubscriber<>));
+
+                foreach (var subsriberType in subsriberTypes)
+                {
+                    var subscribers = GetSubscribers(subsriberType);
+                        subscribers.RemoveWhere(
+                            sub => sub.GetType() == subscriber
+                        );
                 }
             }
         }
@@ -89,20 +88,23 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
             syncContext.Post(s => subscriber.OnEventHandler(publisher), null);
         }
 
-        private List<WeakReference> GetSubscriberList(Type subsriberType)
+        private HashSet<object> GetSubscribers(Type subsriberType)
         {
             lock (_syncRoot)
             {
-                var isFound = eventSubsribers.TryGetValue(subsriberType, out var subsribersList);
+                var isFound = eventSubsribers
+                    .TryGetValue(
+                        subsriberType, out var subsribers
+                     );
 
                 if (!isFound)
                 {
-                    subsribersList = new List<WeakReference>();
+                    subsribers = new HashSet<object>();
 
-                    eventSubsribers.Add(subsriberType, subsribersList);
+                    eventSubsribers.Add(subsriberType, subsribers);
                 }
 
-                return subsribersList;
+                return subsribers;
             }
         }
     }

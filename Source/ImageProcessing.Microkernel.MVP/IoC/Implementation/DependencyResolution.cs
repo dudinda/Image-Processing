@@ -35,7 +35,7 @@ namespace ImageProcessing.Microkernel.MVP.IoC.Implementation
         /// <inheritdoc/>
         public IDependencyResolution RegisterSingletonView<TView, TImplementation>()
                 where TImplementation : class, TView
-                where TView : IView
+                where TView : IView, IDisposable
         {
             _container.RegisterSingleton<TView, TImplementation>();
             return this;

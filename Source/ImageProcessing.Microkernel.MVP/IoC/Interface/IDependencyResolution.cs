@@ -30,7 +30,7 @@ namespace ImageProcessing.Microkernel.MVP.IoC.Interface
         /// </summary>
         IDependencyResolution RegisterSingletonView<TView, TImplementation>()
                 where TImplementation : class, TView
-                where TView : IView;
+                where TView : IView, IDisposable;
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/>  as <typeparamref name="TImplementation"/>
