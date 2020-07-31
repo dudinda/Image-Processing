@@ -18,11 +18,11 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Interface
         /// Subscribe a specified object with handlers
         /// to all messages with <typeparamref name="TEventType"/>  args.
         /// </summary>
-        void Subscribe(object subscriber);
+        void Subscribe(object subscriber, object publisher);
 
         /// <summary>
         /// Unsubscribe from the specified <paramref name="subscriber"/>.
         /// </summary>
-        void Unsubscribe(Type subscriber);
+        void Unsubscribe(Type subscriber, object publisher);
     }
 }

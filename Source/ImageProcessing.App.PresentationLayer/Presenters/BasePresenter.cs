@@ -50,6 +50,10 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
                 if(_view is null)
                 {
                     _view = Controller.IoC.Resolve<TView>();
+
+                    Controller
+                        .Aggregator
+                        .Subscribe(this, _view);
                 }
 
                 return _view;
@@ -58,11 +62,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
 
         protected BasePresenter(IAppController controller)
         {
-            Controller = controller;
-
-            Controller
-                .Aggregator
-                .Subscribe(this);
+            Controller = controller;      
         }
 
         /// <inheritdoc/>
@@ -79,7 +79,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
     /// via the <see cref="IAppController"/> and <see cref="IAwaitablePipeline"/>
     /// and provides messaging between forms via the <see cref="IEventAggregator"/>.
     /// </summary>
-	internal abstract class BasePresenter<TView, TViewModel> : IPresenter<TViewModel>
+    internal abstract class BasePresenter<TView, TViewModel> : IPresenter<TViewModel>
 		where TView : class, IView
 		where TViewModel : class
 	{
@@ -116,6 +116,10 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
                 if (_view is null)
                 {
                     _view = Controller.IoC.Resolve<TView>();
+
+                    Controller
+                        .Aggregator
+                        .Subscribe(this, _view);
                 }
 
                 return _view;
@@ -131,10 +135,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
         protected BasePresenter(IAppController controller)
         {
             Controller = controller;
-
-            Controller
-                .Aggregator
-                .Subscribe(this);
         }
         
         /// <inheritdoc/>

@@ -13,8 +13,8 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
     {
         private readonly object _syncRoot = new object();
 
-        private Dictionary<Type, HashSet<object>> eventSubsribers
-            = new Dictionary<Type, HashSet<object>>();
+        private Dictionary<Type, HashSet<(object, object)>> eventSubsribers
+            = new Dictionary<Type, HashSet<(object, object)>>();
 
         /// <inheritdoc cref="IEventAggregator.Publish{TEventType}(TEventType)"/>
         public void Publish<TEventType>(TEventType publisher)
@@ -25,17 +25,17 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
             
             var subsribersToBeRemoved = new List<WeakReference>();
 
-            foreach (var subscriber in subscribers)
+            foreach (var pair in subscribers)
             {
                 InvokeSubscriberEvent(
                         publisher,
-                        (ISubscriber<TEventType>)subscriber
+                        (ISubscriber<TEventType>)pair.Subscriber
                     );
             }
         }
 
-        /// <inheritdoc cref="IEventAggregator.Subscribe(object)"/>
-        public void Subscribe(object subscriber)
+        /// <inheritdoc cref="IEventAggregator.Subscribe(object, object)"/>
+        public void Subscribe(object subscriber, object publisher)
         {
             lock (_syncRoot)
             {
@@ -49,14 +49,18 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
                 foreach (var subsriberType in subsriberTypes)
                 {
                     var subscribers = GetSubscribers(subsriberType);
-                        subscribers.Add(subscriber);
+
+                    if (!subscribers.Any(pair => pair.Subscriber == subscriber))
+                    {
+                        subscribers.Add((subscriber, publisher));
+                    }
                     
                 }
             }
         }
 
-        /// <inheritdoc cref="IEventAggregator.Unsubscribe(Type))"/>
-        public void Unsubscribe(Type subscriber)
+        /// <inheritdoc cref="IEventAggregator.Unsubscribe(Type, publisher))"/>
+        public void Unsubscribe(Type subscriber, object publisher)
         {
             lock (_syncRoot)
             {
@@ -68,7 +72,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
                 {
                     var subscribers = GetSubscribers(subsriberType);
                         subscribers.RemoveWhere(
-                            sub => sub.GetType() == subscriber
+                            pair => pair.Publisher  == publisher
                         );
                 }
             }
@@ -88,7 +92,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
             syncContext.Post(s => subscriber.OnEventHandler(publisher), null);
         }
 
-        private HashSet<object> GetSubscribers(Type subsriberType)
+        private HashSet<(object Subscriber, object Publisher)> GetSubscribers(Type subsriberType)
         {
             lock (_syncRoot)
             {
@@ -99,7 +103,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
 
                 if (!isFound)
                 {
-                    subsribers = new HashSet<object>();
+                    subsribers = new HashSet<(object, object)>();
 
                     eventSubsribers.Add(subsriberType, subsribers);
                 }

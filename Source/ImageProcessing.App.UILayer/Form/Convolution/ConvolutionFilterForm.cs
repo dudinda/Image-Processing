@@ -56,9 +56,8 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
                 components.Dispose();
             }
 
-            Controller
-                .Aggregator
-                .Unsubscribe(typeof(ConvolutionFilterPresenter));
+            Controller.Aggregator
+                .Unsubscribe(typeof(ConvolutionFilterPresenter), this);
 
             base.Dispose(true);
         }
