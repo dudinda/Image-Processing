@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 
 using ImageProcessing.App.CommonLayer.Enums;
@@ -18,7 +19,7 @@ namespace ImageProcessing.App.PresentationLayer.Views.Main
     /// </summary>
     public interface IMainView : IView, IBitmapZoom,
         IError, IColorMenu, IBitmapContainer,
-        IBitmapInfo, ICursor, IQualityMeasure
+        IBitmapInfo, ICursor, IQualityMeasure, IDisposable
     {
         /// <summary>
         /// Specifies a path to the opened file.
