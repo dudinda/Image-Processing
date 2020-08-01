@@ -42,7 +42,7 @@ namespace ImageProcessing.Microkernel.State.Implementation.IsBuilt
             );
 
             AppLifecycle.Controller.IoC
-                .RegisterSingleton<TMainPresenter>();
+                .RegisterTransient<TMainPresenter>();
 
             AppLifecycle.State.Run<TMainPresenter>();    
         }
