@@ -21,11 +21,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
         {
             var subsriberType = typeof(ISubscriber<>).MakeGenericType(typeof(TEventType));
 
-            var subscribers = GetSubscribers(subsriberType);
-            
-            var subsribersToBeRemoved = new List<WeakReference>();
-
-            foreach (var pair in subscribers)
+            foreach (var pair in GetSubscribers(subsriberType))
             {
                 InvokeSubscriberEvent(
                         publisher,
@@ -39,7 +35,6 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
         {
             lock (_syncRoot)
             {
-
                 var subscriberType = subscriber.GetType();
 
                 var subsriberTypes = subscriberType.GetInterfaces()
@@ -53,8 +48,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
                     if (!subscribers.Any(pair => pair.Subscriber == subscriber))
                     {
                         subscribers.Add((subscriber, publisher));
-                    }
-                    
+                    }             
                 }
             }
         }
@@ -72,7 +66,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
                 {
                     var subscribers = GetSubscribers(subsriberType);
                         subscribers.RemoveWhere(
-                            pair => pair.Publisher  == publisher
+                            pair => pair.Publisher == publisher
                         );
                 }
             }
