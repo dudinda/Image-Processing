@@ -49,7 +49,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
                                 .ApplyFilter(bmp, filter)
                         );
 
-                    Controller.Aggregator.Publish(
+                    Controller.Aggregator.PublishFromAll(
                         new ApplyConvolutionFilterEventArgs(
                            block
                         )

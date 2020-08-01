@@ -187,21 +187,26 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             {
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
-                    View.SetCursor(CursorType.Wait);
+                    var block = e.Block as IPipelineBlock;
 
-                    if(
-                        Pipeline
-                            .Register(((IPipelineBlock)e.Block)
-                                .Add<Bitmap, Bitmap>(
-                                    (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
+                    if (block != null)
+                    {
+                        View.SetCursor(CursorType.Wait);
+
+                        if (
+                            Pipeline
+                                .Register(block
+                                    .Add<Bitmap, Bitmap>(
+                                        (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
+                                    )
                                 )
                             )
-                        )
-                    {
-                        await Render(
-                            ImageContainer.Destination
-                        ).ConfigureAwait(true);
-                    }    
+                        {
+                            await Render(
+                                ImageContainer.Destination
+                            ).ConfigureAwait(true);
+                        }
+                    }
                 }
             }
             catch (OperationCanceledException cancelEx)
@@ -498,7 +503,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             lock (this)
             {
                 View.SetImageCopy(to, new Bitmap(bmp));
-
+     
                 View.AddToUndoContainer(
                     (new Bitmap(View.GetImageCopy(to)), to)
                 );

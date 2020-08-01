@@ -9,10 +9,16 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Interface
     public interface IEventAggregator
     {
         /// <summary>
-        /// Publish a message to all subscribers
+        /// Publish a message to all subscribers from a concrete <paramref name="publisher"/>
         /// with <typeparamref name="TEventType"/> event args.
         /// </summary>
-        void Publish<TEventType>(TEventType publisher);
+        void PublishFrom<TEventArgs>(object publisher, TEventArgs args);
+
+        /// <summary>
+        /// Publish a message to all subscribers from all the publishers
+        /// with <typeparamref name="TEventType"/> event args.
+        /// </summary>
+        void PublishFromAll<TEventArgs>(TEventArgs args);
 
         /// <summary>
         /// Subscribe a specified object with handlers

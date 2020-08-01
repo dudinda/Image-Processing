@@ -7,8 +7,8 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
         private void Bind()
         {
             Apply.Click += (sender, args)
-                => Controller.Aggregator.Publish(
-                    new ConvolutionFilterEventArgs()
+                => Controller.Aggregator.PublishFrom(this,
+                    new ConvolutionFilterEventArgs(this)
                 );
         }
     }
