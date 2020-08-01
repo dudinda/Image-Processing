@@ -17,28 +17,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
     internal abstract class BasePresenter<TView> : IPresenter
 		where TView : class, IView
 	{
-        private IAwaitablePipeline _pipeline
-            = null!;
-
         private TView _view
             = null!;
 
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller { get; }
-
-        /// <inheritdoc cref="IAwaitablePipeline"/>
-        protected IAwaitablePipeline Pipeline
-        {
-            get
-            {
-                if(_pipeline is null)
-                {
-                    _pipeline = Controller.IoC.Resolve<IAwaitablePipeline>();
-                }
-
-                return _pipeline;
-            }
-        }
 
         /// <summary>
         /// Access point to the UI layer components.
@@ -61,9 +44,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
         }
 
         protected BasePresenter(IAppController controller)
-        {
-            Controller = controller;      
-        }
+            => Controller = controller;
 
         /// <inheritdoc/>
         public virtual void Run()
@@ -83,28 +64,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
 		where TView : class, IView
 		where TViewModel : class
 	{
-        private IAwaitablePipeline _pipeline
-             = null!;
-
         private TView _view
             = null!;
 
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller { get; }
-
-        /// <inheritdoc cref="IAwaitablePipeline"/>
-        protected IAwaitablePipeline Pipeline
-        {
-            get
-            {
-                if (_pipeline is null)
-                {
-                    _pipeline = Controller.IoC.Resolve<IAwaitablePipeline>();
-                }
-
-                return _pipeline;
-            }
-        }
 
         /// <summary>
         /// Access point to the UI layer components.
@@ -133,16 +97,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
             = null!;
 
         protected BasePresenter(IAppController controller)
-        {
-            Controller = controller;
-        }
-        
+            => Controller = controller;
+
         /// <inheritdoc/>
         public virtual void Run(TViewModel vm)
 		{
             ViewModel = vm;
             View.Show();
 		}
-
 	}
 }

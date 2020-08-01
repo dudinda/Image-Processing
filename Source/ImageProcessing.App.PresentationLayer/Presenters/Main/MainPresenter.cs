@@ -27,6 +27,7 @@ using ImageProcessing.App.ServiceLayer.Facades.MainPresenterProviders.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline;
+using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
@@ -39,11 +40,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         private readonly INonBlockDialogService _nonBlock;
         private readonly IMainPresenterLockersFacade _locker;
         private readonly IMainPresenterProvidersFacade _providers;
-  
+        private readonly IAwaitablePipeline _pipeline;
+
         public MainPresenter(
             IAppController controller,
             ICacheService<Bitmap> cache,
             INonBlockDialogService nonBlock,
+            IAwaitablePipeline pipeline,
             IMainPresenterLockersFacade locker,
             IMainPresenterProvidersFacade providers) : base(controller)
         {
@@ -51,6 +54,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             _nonBlock = nonBlock;
             _locker = locker;
             _providers = providers;
+            _pipeline = pipeline;
         }
 
         private async Task OpenImage(OpenFileDialogEventArgs e)
@@ -66,7 +70,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     View.SetCursor(CursorType.Wait);
 
                     if(
-                        Pipeline
+                        _pipeline
                             .Register(new PipelineBlock(result.Image)
                                 .Add<Bitmap>(
                                     (bmp) => View.SetPathToFile(result.Path)
@@ -186,7 +190,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         View.SetCursor(CursorType.Wait);
 
                         if (
-                            Pipeline
+                            _pipeline
                                 .Register(block
                                     .Add<Bitmap, Bitmap>(
                                         (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
@@ -224,7 +228,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     ).ConfigureAwait(true);
 
                     if(
-                        Pipeline
+                        _pipeline
                             .Register(new PipelineBlock(copy)
                                 .Add<Bitmap, Bitmap>(
                                     (bmp) => _providers.Apply(bmp, e.Filter)
@@ -268,7 +272,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         ).ConfigureAwait(true);
 
                         if(
-                            Pipeline
+                            _pipeline
                                 .Register(new PipelineBlock(copy)
                                     .Add<Bitmap, Bitmap>(
                                         (bmp) => _providers.Apply(bmp, result)
@@ -315,7 +319,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     copy.Tag = e.Distribution.ToString();
 
                     if(
-                        Pipeline
+                        _pipeline
                             .Register(new PipelineBlock(copy)
                                 .Add<Bitmap, Bitmap>(
                                     (bmp) => _providers.Transform(bmp, e.Distribution, e.Parameters)
@@ -360,7 +364,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     ).ConfigureAwait(true);
 
                     if(
-                        Pipeline
+                        _pipeline
                             .Register(new PipelineBlock(copy)
                                 .Add<Bitmap, Bitmap>(
                                     (bmp) => bmp.Shuffle()
@@ -419,7 +423,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     var copy = await GetImageCopy(From).ConfigureAwait(true);
 
                     if(
-                        Pipeline
+                        _pipeline
                             .Register(new PipelineBlock(copy)
                                 .Add<Bitmap, Bitmap>(
                                     (bmp) => DefaultPipelineBlock(bmp, To)
@@ -513,7 +517,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
         private async Task Render(ImageContainer container)
         {
-            var result = await Pipeline
+            var result = await _pipeline
                 .AwaitResult()
                 .ConfigureAwait(true);
 
@@ -526,7 +530,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             View.Refresh(container);
             View.ResetTrackBarValue(container);
 
-            if (!Pipeline.Any())
+            if (!_pipeline.Any())
             {
                 View.SetCursor(CursorType.Default);
             }
@@ -536,7 +540,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             View.ShowError(error);
 
-            if (!Pipeline.Any())
+            if (!_pipeline.Any())
             {
                 View.SetCursor(CursorType.Default);
             }
