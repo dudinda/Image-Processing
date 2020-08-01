@@ -22,11 +22,9 @@ using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
 using ImageProcessing.App.PresentationLayer.ViewModel.Histogram;
 using ImageProcessing.App.PresentationLayer.ViewModel.QualityMeasure;
 using ImageProcessing.App.PresentationLayer.Views.Main;
-using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
-using ImageProcessing.App.ServiceLayer.Providers.Interface.RgbFilters;
+using ImageProcessing.App.ServiceLayer.Facades.MainPresenterLockers.Interface;
+using ImageProcessing.App.ServiceLayer.Facades.MainPresenterProviders.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
-using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
-using ImageProcessing.App.ServiceLayer.Services.LockerService.Zoom.Interface;
 using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
@@ -37,28 +35,22 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 {
     internal sealed partial class MainPresenter : BasePresenter<IMainView>
     {
-        private readonly IBitmapLuminanceDistributionServiceProvider _lumaProvider;
-        private readonly IRgbFilterServiceProvider _rgbProvider;
-        private readonly IAsyncZoomLocker _zoomLocker;
-        private readonly IAsyncOperationLocker _operationLocker;
         private readonly ICacheService<Bitmap> _cache;
         private readonly INonBlockDialogService _nonBlock;
-
-        public MainPresenter(IAppController controller,
-                             IAsyncZoomLocker zoomLocker,
-                             IAsyncOperationLocker operationLocker,
-                             IBitmapLuminanceDistributionServiceProvider lumaProvider,
-                             IRgbFilterServiceProvider rgbProvider,
-                             ICacheService<Bitmap> cache,
-                             INonBlockDialogService nonBlock)
-            : base(controller)
+        private readonly IMainPresenterLockersFacade _locker;
+        private readonly IMainPresenterProvidersFacade _providers;
+  
+        public MainPresenter(
+            IAppController controller,
+            ICacheService<Bitmap> cache,
+            INonBlockDialogService nonBlock,
+            IMainPresenterLockersFacade locker,
+            IMainPresenterProvidersFacade providers) : base(controller)
         {
-            _lumaProvider = lumaProvider;
-            _rgbProvider = rgbProvider;
-            _zoomLocker = zoomLocker;
-            _operationLocker = operationLocker;
             _cache = cache;
             _nonBlock = nonBlock;
+            _locker = locker;
+            _providers = providers;
         }
 
         private async Task OpenImage(OpenFileDialogEventArgs e)
@@ -235,7 +227,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         Pipeline
                             .Register(new PipelineBlock(copy)
                                 .Add<Bitmap, Bitmap>(
-                                    (bmp) => _rgbProvider.Apply(bmp, e.Filter)
+                                    (bmp) => _providers.Apply(bmp, e.Filter)
                                 )
                                 .Add<Bitmap, Bitmap>(
                                     (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
@@ -279,7 +271,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                             Pipeline
                                 .Register(new PipelineBlock(copy)
                                     .Add<Bitmap, Bitmap>(
-                                        (bmp) => _rgbProvider.Apply(bmp, result)
+                                        (bmp) => _providers.Apply(bmp, result)
                                     )
                                     .Add<Bitmap, Bitmap>(
                                         (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
@@ -326,7 +318,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         Pipeline
                             .Register(new PipelineBlock(copy)
                                 .Add<Bitmap, Bitmap>(
-                                    (bmp) => _lumaProvider.Transform(bmp, e.Distribution, e.Parameters)
+                                    (bmp) => _providers.Transform(bmp, e.Distribution, e.Parameters)
                                 )
                                 .Add<Bitmap>(
                                     (bmp) => View.AddToQualityMeasureContainer(bmp)
@@ -462,7 +454,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     ).ConfigureAwait(true);
 
                     var result = await Task.Run(
-                        () => _lumaProvider.GetInfo(copy, e.Action)
+                        () => _providers.GetInfo(copy, e.Action)
                     ).ConfigureAwait(true);
 
                     View.ShowInfo(
@@ -484,7 +476,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                 if (!View.ImageIsNull(container))
                 {
-                    var image = await _zoomLocker.LockAsync(() =>
+                    var image = await _locker.LockZoomAsync(() =>
                         View.ZoomImage(container)
                     ).ConfigureAwait(true);
 
@@ -515,7 +507,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         }
 
         private async Task<Bitmap> GetImageCopy(ImageContainer container)
-            => await _operationLocker.LockAsync(() =>
+            => await _locker.LockOperationAsync(() =>
                   new Bitmap(View.GetImageCopy(container))
             ).ConfigureAwait(true);
 
