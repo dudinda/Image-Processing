@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Windows.Forms;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
@@ -17,6 +18,8 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
     /// <inheritdoc cref="IConvolutionFilterView"/>
     internal sealed partial class ConvolutionFilterForm : BaseForm, IConvolutionFormElements
     {
+        private readonly IConvolutionEventBinder _binder;
+
         public ConvolutionFilterForm(
             IAppController controller,
             IConvolutionEventBinder binder) : base(controller)
@@ -34,7 +37,8 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
 
             ConvolutionFilterComboBox.SelectedIndex = 0;
 
-            binder.Bind(this);
+            _binder = binder;
+            _binder.Bind(this);
         }
 
         /// <inheritdoc/>
@@ -64,10 +68,21 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
                 components.Dispose();
             }
 
-            Controller.Aggregator
+            Controller
+                .Aggregator
                 .Unsubscribe(typeof(ConvolutionFilterPresenter), this);
 
             base.Dispose(true);
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (_binder.ProcessCmdKey(this, keyData))
+            {
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }
