@@ -2,7 +2,6 @@ using System;
 using System.Configuration;
 using System.Drawing;
 using System.Globalization;
-using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -69,22 +68,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                 {
                     View.SetCursor(CursorType.Wait);
 
-                    if(
-                        _pipeline
-                            .Register(new PipelineBlock(result.Image)
-                                .Add<Bitmap>(
-                                    (bmp) => View.SetPathToFile(result.Path)
-                                )
-                                .Add<Bitmap, Bitmap>(
-                                    (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Source)
-                                 )
-                             )
-                        )
-                    {
-                        await Render(
-                            ImageContainer.Source
-                        ).ConfigureAwait(true);
-                    }
+                    var block = new PipelineBlock(result.Image)
+                        .Add<Bitmap>((bmp) => View.SetPathToFile(result.Path));
+
+                    await TryRender(
+                        block, ImageContainer.Source
+                    ).ConfigureAwait(true);
                 }
             }
             catch(Exception ex)
@@ -187,23 +176,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     {
                         View.SetCursor(CursorType.Wait);
 
-                        if (
-                            _pipeline
-                                .Register(block
-                                    .Add<Bitmap, Bitmap>(
-                                        (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
-                                    )
-                                )
-                            )
-                        {
-                            await Render(
-                                ImageContainer.Destination
-                            ).ConfigureAwait(true);
-                        }
+                        await TryRender(
+                            block, ImageContainer.Destination
+                        ).ConfigureAwait(true);
                     }
                 }
             }
-            catch (OperationCanceledException cancelEx)
+            catch (OperationCanceledException cancel)
             {
                 OnError(Errors.CancelOperation);
             }
@@ -225,25 +204,17 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         ImageContainer.Source
                     ).ConfigureAwait(true);
 
-                    if(
-                        _pipeline
-                            .Register(new PipelineBlock(copy)
+                    var block = new PipelineBlock(copy)
                                 .Add<Bitmap, Bitmap>(
                                     (bmp) => _providers.Apply(bmp, e.Filter)
-                                )
-                                .Add<Bitmap, Bitmap>(
-                                    (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
-                                )
-                            )
-                        )
-                    {
-                        await Render(
-                            ImageContainer.Destination
-                        ).ConfigureAwait(true);
-                    }         
+                                );
+
+                    await TryRender(
+                        block, ImageContainer.Destination
+                    ).ConfigureAwait(true);
                 }
             }
-            catch (OperationCanceledException cancelEx)
+            catch (OperationCanceledException cancel)
             {
                 OnError(Errors.CancelOperation);
             }
@@ -269,22 +240,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                             ImageContainer.Source
                         ).ConfigureAwait(true);
 
-                        if(
-                            _pipeline
-                                .Register(new PipelineBlock(copy)
-                                    .Add<Bitmap, Bitmap>(
-                                        (bmp) => _providers.Apply(bmp, result)
-                                    )
-                                    .Add<Bitmap, Bitmap>(
-                                        (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
-                                    )
-                                )
-                            )
-                        {
-                            await Render(
-                                ImageContainer.Destination
-                            ).ConfigureAwait(true);
-                        }                                   
+                        var block = new PipelineBlock(copy)
+                            .Add<Bitmap, Bitmap>((bmp) => _providers.Apply(bmp, result));
+
+                        await TryRender(
+                            block, ImageContainer.Destination
+                        ).ConfigureAwait(true);
+
                     }
                     else
                     {
@@ -292,7 +254,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     }
                 }
             }
-            catch (OperationCanceledException cancelEx)
+            catch (OperationCanceledException cancel)
             {
                 OnError(Errors.CancelOperation);
             }
@@ -316,30 +278,22 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                     copy.Tag = e.Distribution.ToString();
 
-                    if(
-                        _pipeline
-                            .Register(new PipelineBlock(copy)
-                                .Add<Bitmap, Bitmap>(
-                                    (bmp) => _providers.Transform(bmp, e.Distribution, e.Parameters)
-                                )
-                                .Add<Bitmap>(
-                                    (bmp) => View.AddToQualityMeasureContainer(bmp)
-                                )
-                                .Add<Bitmap, Bitmap>(
-                                    (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
-                                )
-                            )
-                        )
-                    {
-                        await Render(
-                            ImageContainer.Destination
-                        ).ConfigureAwait(true);
+                    var block = new PipelineBlock(copy)
+                        .Add<Bitmap, Bitmap>(
+                            (bmp) => _providers.Transform(bmp, e.Distribution, e.Parameters)
+                         )
+                        .Add<Bitmap>(
+                            (bmp) => View.AddToQualityMeasureContainer(bmp)
+                         );
 
-                        View.EnableQualityQueue(true);
-                    }          
+                    await TryRender(
+                        block, ImageContainer.Destination
+                    ).ConfigureAwait(true);
+
+                    View.EnableQualityQueue(true);
                 }
             }
-            catch (OperationCanceledException cancelEx)
+            catch (OperationCanceledException cancel)
             {
                 OnError(Errors.CancelOperation);
             }
@@ -361,22 +315,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         ImageContainer.Source
                     ).ConfigureAwait(true);
 
-                    if(
-                        _pipeline
-                            .Register(new PipelineBlock(copy)
-                                .Add<Bitmap, Bitmap>(
-                                    (bmp) => bmp.Shuffle()
-                                )
-                                .Add<Bitmap, Bitmap>(
-                                    (bmp) => DefaultPipelineBlock(bmp, ImageContainer.Destination)
-                                 )
-                            )
-                        )
-                    {
-                        await Render(
-                            ImageContainer.Destination
-                        ).ConfigureAwait(true);
-                    }
+                    var block = new PipelineBlock(copy)
+                        .Add<Bitmap, Bitmap>((bmp) => bmp.Shuffle());
+
+                    await TryRender(
+                        block, ImageContainer.Destination
+                    ).ConfigureAwait(true);
                 }
             }
             catch
@@ -410,7 +354,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                var (To, From) = e.Container == ImageContainer.Source   ?
+                var (To, From) = e.Container == ImageContainer.Source ?
                     (ImageContainer.Destination, ImageContainer.Source) :
                     (ImageContainer.Source, ImageContainer.Destination);
 
@@ -418,22 +362,15 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                 {
                     View.SetCursor(CursorType.Wait);
 
-                    var copy = await GetImageCopy(From).ConfigureAwait(true);
+                    var copy = await GetImageCopy(From)
+                        .ConfigureAwait(true);
 
-                    if(
-                        _pipeline
-                            .Register(new PipelineBlock(copy)
-                                .Add<Bitmap, Bitmap>(
-                                    (bmp) => DefaultPipelineBlock(bmp, To)
-                                )
-                            )
-                        )
-                    {
-                        await Render(To).ConfigureAwait(true);
-                    }               
+                    await TryRender(
+                        new PipelineBlock(copy), To
+                    ).ConfigureAwait(true);
                 }
             }
-            catch (OperationCanceledException cancelEx)
+            catch (OperationCanceledException cancel)
             {
                 OnError(Errors.CancelOperation);
             }
@@ -513,25 +450,52 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                   new Bitmap(View.GetImageCopy(container))
             ).ConfigureAwait(true);
 
-        private async Task Render(ImageContainer container)
+
+        private async Task TryRender(IPipelineBlock block, ImageContainer container)
         {
-            var result = await _pipeline
+            var isRendered = await Render(
+                block, container
+            ).ConfigureAwait(true);
+
+            if (!isRendered)
+            {
+                throw new InvalidOperationException(nameof(isRendered));
+            } 
+        }
+
+        private async Task<bool> Render(IPipelineBlock block, ImageContainer container)
+        {
+            if (
+                _pipeline
+                    .Register(block
+                        .Add<Bitmap, Bitmap>(
+                            (bmp) => DefaultPipelineBlock(bmp, container)
+                         )
+                     )
+                 )
+            {
+                var result = await _pipeline
                 .AwaitResult()
                 .ConfigureAwait(true);
 
-            if (container == ImageContainer.Source)
-            {
-                _cache.Reset();
+                if (container == ImageContainer.Source)
+                {
+                    _cache.Reset();
+                }
+
+                View.SetImage(container, (Bitmap)result);
+                View.Refresh(container);
+                View.ResetTrackBarValue(container);
+
+                if (!_pipeline.Any())
+                {
+                    View.SetCursor(CursorType.Default);
+                }
+
+                return true;
             }
 
-            View.SetImage(container, (Bitmap)result);
-            View.Refresh(container);
-            View.ResetTrackBarValue(container);
-
-            if (!_pipeline.Any())
-            {
-                View.SetCursor(CursorType.Default);
-            }
+            return false;
         }
 
         private void OnError(string error)
