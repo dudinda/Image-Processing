@@ -71,7 +71,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     var block = new PipelineBlock(result.Image)
                         .Add<Bitmap>((bmp) => View.SetPathToFile(result.Path));
 
-                    await TryRender(
+                    await Render(
                         block, ImageContainer.Source
                     ).ConfigureAwait(true);
                 }
@@ -176,7 +176,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     {
                         View.SetCursor(CursorType.Wait);
 
-                        await TryRender(
+                        await Render(
                             block, ImageContainer.Destination
                         ).ConfigureAwait(true);
                     }
@@ -205,11 +205,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     ).ConfigureAwait(true);
 
                     var block = new PipelineBlock(copy)
-                                .Add<Bitmap, Bitmap>(
-                                    (bmp) => _providers.Apply(bmp, e.Filter)
-                                );
+                        .Add<Bitmap, Bitmap>((bmp) => _providers.Apply(bmp, e.Filter));
 
-                    await TryRender(
+                    await Render(
                         block, ImageContainer.Destination
                     ).ConfigureAwait(true);
                 }
@@ -243,7 +241,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         var block = new PipelineBlock(copy)
                             .Add<Bitmap, Bitmap>((bmp) => _providers.Apply(bmp, result));
 
-                        await TryRender(
+                        await Render(
                             block, ImageContainer.Destination
                         ).ConfigureAwait(true);
 
@@ -279,14 +277,10 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     copy.Tag = e.Distribution.ToString();
 
                     var block = new PipelineBlock(copy)
-                        .Add<Bitmap, Bitmap>(
-                            (bmp) => _providers.Transform(bmp, e.Distribution, e.Parameters)
-                         )
-                        .Add<Bitmap>(
-                            (bmp) => View.AddToQualityMeasureContainer(bmp)
-                         );
+                        .Add<Bitmap, Bitmap>((bmp) => _providers.Transform(bmp, e.Distribution, e.Parameters))
+                        .Add<Bitmap>((bmp) => View.AddToQualityMeasureContainer(bmp)  );
 
-                    await TryRender(
+                    await Render(
                         block, ImageContainer.Destination
                     ).ConfigureAwait(true);
 
@@ -318,7 +312,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     var block = new PipelineBlock(copy)
                         .Add<Bitmap, Bitmap>((bmp) => bmp.Shuffle());
 
-                    await TryRender(
+                    await Render(
                         block, ImageContainer.Destination
                     ).ConfigureAwait(true);
                 }
@@ -365,7 +359,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     var copy = await GetImageCopy(From)
                         .ConfigureAwait(true);
 
-                    await TryRender(
+                    await Render(
                         new PipelineBlock(copy), To
                     ).ConfigureAwait(true);
                 }
@@ -451,9 +445,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             ).ConfigureAwait(true);
 
 
-        private async Task TryRender(IPipelineBlock block, ImageContainer container)
+        private async Task Render(IPipelineBlock block, ImageContainer container)
         {
-            var isRendered = await Render(
+            var isRendered = await TryRender(
                 block, container
             ).ConfigureAwait(true);
 
@@ -463,7 +457,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             } 
         }
 
-        private async Task<bool> Render(IPipelineBlock block, ImageContainer container)
+        private async Task<bool> TryRender(IPipelineBlock block, ImageContainer container)
         {
             if (
                 _pipeline
