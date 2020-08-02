@@ -68,11 +68,10 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                 {
                     View.SetCursor(CursorType.Wait);
 
-                    var block = new PipelineBlock(result.Image)
-                        .Add<Bitmap>((bmp) => View.SetPathToFile(result.Path));
-
                     await Render(
-                        block, ImageContainer.Source
+                        new PipelineBlock(result.Image)
+                            .Add<Bitmap>((bmp) => View.SetPathToFile(result.Path)),
+                        ImageContainer.Source
                     ).ConfigureAwait(true);
                 }
             }
@@ -204,11 +203,10 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         ImageContainer.Source
                     ).ConfigureAwait(true);
 
-                    var block = new PipelineBlock(copy)
-                        .Add<Bitmap, Bitmap>((bmp) => _providers.Apply(bmp, e.Filter));
-
                     await Render(
-                        block, ImageContainer.Destination
+                        new PipelineBlock(copy)
+                            .Add<Bitmap, Bitmap>((bmp) => _providers.Apply(bmp, e.Filter)),
+                        ImageContainer.Destination
                     ).ConfigureAwait(true);
                 }
             }
@@ -238,11 +236,10 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                             ImageContainer.Source
                         ).ConfigureAwait(true);
 
-                        var block = new PipelineBlock(copy)
-                            .Add<Bitmap, Bitmap>((bmp) => _providers.Apply(bmp, result));
-
                         await Render(
-                            block, ImageContainer.Destination
+                            new PipelineBlock(copy)
+                                .Add<Bitmap, Bitmap>((bmp) => _providers.Apply(bmp, result)),
+                            ImageContainer.Destination
                         ).ConfigureAwait(true);
 
                     }
@@ -276,12 +273,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                     copy.Tag = e.Distribution.ToString();
 
-                    var block = new PipelineBlock(copy)
-                        .Add<Bitmap, Bitmap>((bmp) => _providers.Transform(bmp, e.Distribution, e.Parameters))
-                        .Add<Bitmap>((bmp) => View.AddToQualityMeasureContainer(bmp)  );
-
                     await Render(
-                        block, ImageContainer.Destination
+                        new PipelineBlock(copy)
+                            .Add<Bitmap, Bitmap>((bmp) => _providers.Transform(bmp, e.Distribution, e.Parameters))
+                            .Add<Bitmap>((bmp) => View.AddToQualityMeasureContainer(bmp)),
+                        ImageContainer.Destination
                     ).ConfigureAwait(true);
 
                     View.EnableQualityQueue(true);
@@ -309,11 +305,10 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         ImageContainer.Source
                     ).ConfigureAwait(true);
 
-                    var block = new PipelineBlock(copy)
-                        .Add<Bitmap, Bitmap>((bmp) => bmp.Shuffle());
-
                     await Render(
-                        block, ImageContainer.Destination
+                        new PipelineBlock(copy)
+                            .Add<Bitmap, Bitmap>((bmp) => bmp.Shuffle()),
+                        ImageContainer.Destination
                     ).ConfigureAwait(true);
                 }
             }
@@ -428,11 +423,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             lock (this)
             {
                 View.SetImageCopy(to, new Bitmap(bmp));
-     
-                View.AddToUndoContainer(
-                    (new Bitmap(View.GetImageCopy(to)), to)
-                );
-
+                View.AddToUndoContainer( (new Bitmap(View.GetImageCopy(to)), to) );
                 View.SetImageToZoom(to, new Bitmap(bmp));
 
                 return (Bitmap)View.GetImageCopy(to).Clone();
