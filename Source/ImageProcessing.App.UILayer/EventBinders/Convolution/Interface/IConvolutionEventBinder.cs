@@ -5,8 +5,8 @@ using ImageProcessing.App.UILayer.FormElements.Convolution;
 
 namespace ImageProcessing.App.UILayer.EventBinders.Convolution.Interface
 {
-    interface IConvolutionEventBinder : IBaseEventBinder<IConvolutionFormElements>
+    interface IConvolutionEventBinder : IBaseEventBinder<IConvolutionElementsExposer>
     {
-        public bool ProcessCmdKey(IConvolutionFormElements view, Keys keyData);
+        public bool ProcessCmdKey(IConvolutionElementsExposer view, Keys keyData);
     }
 }

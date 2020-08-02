@@ -5,18 +5,28 @@ using System.Windows.Forms;
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.UILayer.Code.Enums;
+using ImageProcessing.App.UILayer.Control;
+using ImageProcessing.App.UILayer.EventBinders.Main.Interface;
+using ImageProcessing.App.UILayer.FormElements.Main;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Utility.Interop.Wrapper;
 
 namespace ImageProcessing.App.UILayer.Form.Main
 {
     /// <inheritdoc cref="IMainView"/>
-    internal sealed partial class MainForm : BaseForm, IMainView
+    internal sealed partial class MainForm : BaseForm, IMainView, IMainElementsExposer
     {
-        public MainForm(IAppController controller)
-            : base(controller)
+        private readonly IMainEventBinder _binder;
+
+        public MainForm(
+            IAppController controller,
+            IMainEventBinder binder) : base(controller)
         {
             InitializeComponent();
+
+            _binder = binder;
+            _binder.Bind(this);
+
             Bind();
         }
 
@@ -50,6 +60,31 @@ namespace ImageProcessing.App.UILayer.Form.Main
         /// <inheritdoc/>
         public (string, string) Parameters
             => (FirstParam.Text, SecondParam.Text);
+
+        public ToolStripMenuItem SaveAsMenu
+            => SaveFileAs;
+        public ToolStripMenuItem OpenFileMenu
+            => OpenFile;
+
+        public ToolStripMenuItem SaveFileMenu
+            => SaveFile;
+
+        public ToolStripButton ReplaceSrcByDstButton
+            => ReplaceSrcByDst;
+
+        public ToolStripButton ReplaceDstBySrcButton
+            => ReplaceDstBySrc;
+
+        public ZoomTrackBar ZoomSrcTrackBar
+            => SrcZoom;
+
+        public ZoomTrackBar ZoomDstTrackBar
+            => DstZoom;
+
+        public ToolStripMenuItem ConvolutionMenu
+            => ConvolutionFiltersMenu;
+
+        ToolStripMenuItem IMainElementsExposer.RgbMenu => throw new System.NotImplementedException();
 
         /// <inheritdoc/>
         public new void Show()

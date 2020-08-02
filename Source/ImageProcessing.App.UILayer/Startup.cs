@@ -64,6 +64,8 @@ using ImageProcessing.App.ServiceLayer.Services.StaTask.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Interface;
 using ImageProcessing.App.UILayer.EventBinders.Convolution.Implementation;
 using ImageProcessing.App.UILayer.EventBinders.Convolution.Interface;
+using ImageProcessing.App.UILayer.EventBinders.Main.Implementation;
+using ImageProcessing.App.UILayer.EventBinders.Main.Interface;
 using ImageProcessing.App.UILayer.EventBinders.Rgb.Implementation;
 using ImageProcessing.App.UILayer.EventBinders.Rgb.Interface;
 using ImageProcessing.App.UILayer.Form.Convolution;
@@ -90,7 +92,7 @@ namespace ImageProcessing.App.UILayer
                 .RegisterSingleton<ICacheService<Bitmap>, CacheService<Bitmap>>()
                 .RegisterSingletonView<IMainView, MainForm>()
                 .RegisterTransientView<IHistogramView, HistogramForm>()
-                .RegisterTransientView<IConvolutionFilterView, ConvolutionFilterForm>()
+                .RegisterTransientView<IConvolutionView, ConvolutionFilterForm>()
                 .RegisterTransientView<IRgbView, RgbForm>()
                 .RegisterSingletonView<IQualityMeasureView, QualityMeasureForm>()
                 .RegisterTransient<IConvolutionFilterService, ConvolutionFilterService>()
@@ -118,7 +120,8 @@ namespace ImageProcessing.App.UILayer
                 .RegisterTransient<IMainPresenterLockersFacade, MainPresenterLockersFacade>()
                 .RegisterTransient<IMainPresenterProvidersFacade, MainPresenterProvidersFacade>()
                 .RegisterTransient<IRgbEventBinder, RgbEventBinder>()
-                .RegisterTransient<IConvolutionEventBinder, ConvolutionEventBinder>();      
+                .RegisterTransient<IConvolutionEventBinder, ConvolutionEventBinder>()
+                .RegisterTransient<IMainEventBinder, MainEventBinder>();      
         }      
     }
 }

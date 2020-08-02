@@ -4,7 +4,7 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.UILayer.FormElements.Convolution
 {
-    internal interface IConvolutionFormElements : IConvolutionFilterView
+    internal interface IConvolutionElementsExposer : IConvolutionView
     {
         MetroButton ApplyButton { get; }
     }

@@ -15,8 +15,8 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.UILayer.Form.Convolution
 {
-    /// <inheritdoc cref="IConvolutionFilterView"/>
-    internal sealed partial class ConvolutionFilterForm : BaseForm, IConvolutionFormElements
+    /// <inheritdoc cref="IConvolutionView"/>
+    internal sealed partial class ConvolutionFilterForm : BaseForm, IConvolutionElementsExposer
     {
         private readonly IConvolutionEventBinder _binder;
 

@@ -12,7 +12,7 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.UILayer.Form.Rgb
 {
-    internal sealed partial class RgbForm : BaseForm, IRgbFormElements
+    internal sealed partial class RgbForm : BaseForm, IRgbElementsExposer
     {
         public RgbForm(
             IAppController controller,

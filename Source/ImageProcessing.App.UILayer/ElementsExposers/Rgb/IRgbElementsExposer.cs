@@ -4,7 +4,7 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.UILayer.FormControls.Rgb
 {
-    internal interface IRgbFormElements : IRgbView
+    internal interface IRgbElementsExposer : IRgbView
     {
         MetroRadioButton RedButton { get; }
         MetroRadioButton GreenButton { get; }

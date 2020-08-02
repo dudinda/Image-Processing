@@ -10,7 +10,7 @@ namespace ImageProcessing.App.PresentationLayer.Views.Convolution
     /// Represents the base behavior of a
     /// convolution filter window.
     /// </summary>
-    public interface IConvolutionFilterView : IView, IError, IDisposable
+    public interface IConvolutionView : IView, IError, IDisposable
     {
         /// <summary>
         /// Get the specified <see cref="ConvolutionFilter"/>

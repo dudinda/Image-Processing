@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
+
+using ImageProcessing.App.UILayer.FormControls.Base;
+using ImageProcessing.App.UILayer.FormElements.Main;
 
 namespace ImageProcessing.App.UILayer.EventBinders.Main.Interface
 {
-    interface IMainEventBinder
+    internal interface IMainEventBinder : IBaseEventBinder<IMainElementsExposer>
     {
+        public bool ProcessCmdKey(IMainElementsExposer view, Keys keyData);
     }
 }

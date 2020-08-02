@@ -22,7 +22,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
             BindFileMenu();
             BindToolbar();
             BindConvolutionFilters();
-            BindRgbFilters();
             BindDistributions();
         }
 
@@ -31,21 +30,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         /// </summary>
         private void BindFileMenu()
         {
-            OpenFile.Click += (sender, args)
-                => Controller.Aggregator.PublishFromAll(
-                    new OpenFileDialogEventArgs()
-                );
-
-            SaveFile.Click += (sender, args)
-                => Controller.Aggregator.PublishFromAll(
-                    new SaveWithoutFileDialogEventArgs()
-                );
-
-            SaveFileAs.Click += (sender, args)
-                => Controller.Aggregator.PublishFromAll(
-                    new SaveAsFileDialogEventArgs()
-                );
-   
+           
             FormClosing += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
                     new CloseFormEventArgs()
@@ -104,46 +89,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
                     )
                 );
 
-            ReplaceSrcByDst.Click += (sernder, args)
-                => Controller.Aggregator.PublishFromAll(
-                    new ImageContainerEventArgs(ImageContainer.Destination)
-                );
-
-            ReplaceDstBySrc.Click += (sernder, args)
-                => Controller.Aggregator.PublishFromAll(
-                    new ImageContainerEventArgs(ImageContainer.Source)
-                );
-
-            SrcZoom.MouseWheel += (sender, args)
-             => Controller.Aggregator.PublishFromAll(
-                 new ZoomEventArgs(ImageContainer.Source)
-             );
-
-            SrcZoom.MouseUp += (secnder, args)
-                => Controller.Aggregator.PublishFromAll(
-                    new ZoomEventArgs(ImageContainer.Source)
-                );
-
-            SrcZoom.KeyPress += (secnder, args)
-                => Controller.Aggregator.PublishFromAll(
-                    new ZoomEventArgs(ImageContainer.Source)
-                );
-
-            DstZoom.MouseWheel += (sender, args)
-                => Controller.Aggregator.PublishFromAll(
-                    new ZoomEventArgs(ImageContainer.Destination)
-                );
-
-            DstZoom.MouseUp += (sender, args)
-                => Controller.Aggregator.PublishFromAll(
-                    new ZoomEventArgs(ImageContainer.Destination)
-                );
-
-            DstZoom.KeyPress += (sender, args)
-                => Controller.Aggregator.PublishFromAll(
-                    new ZoomEventArgs(ImageContainer.Destination)
-                );
-
+            
             QualityMeasure.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
                     new ShowQualityMeasureEventArgs()
@@ -166,42 +112,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
                 );
         }
 
-        /// <summary>
-        /// Publish event handlers for a rgb filters menu
-        /// </summary>
-        private void BindRgbFilters()
-        {
-           /* InversionFilter.Click += (sender, args)
-                => Controller.Aggregator.PublishFromAll(
-                    new RgbFilterEventArgs(RgbFilter.Inversion)
-                );
-
-            BinaryFilter.Click += (sender, args)
-                => Controller.Aggregator.PublishFromAll(
-                    new RgbFilterEventArgs(RgbFilter.Binary)
-                );
-
-            GrayscaleFilter.Click += (sender, args)
-                => Controller.Aggregator.PublishFromAll(
-                    new RgbFilterEventArgs(RgbFilter.Grayscale)
-                );
-
-            ColorFilterBlue.Click += (sender, args)
-                => Controller.Aggregator.PublishFromAll(
-                    new RgbColorFilterEventArgs(RgbColors.Blue)
-                );
-
-            ColorFilterRed.Click += (sender, args)
-                => Controller.Aggregator.PublishFromAll(
-                    new RgbColorFilterEventArgs(RgbColors.Red)
-                );
-
-            ColorFilterGreen.Click += (sender, args)
-                => Controller.Aggregator.PublishFromAll(
-                    new RgbColorFilterEventArgs(RgbColors.Green)
-                ); */
-        }
-
+     
         /// <summary>
         /// Publish event handlers for a histogram transformation menu
         /// </summary>
@@ -271,58 +182,9 @@ namespace ImageProcessing.App.UILayer.Form.Main
         /// <param name="keyData">The pressed key</param>
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            switch (keyData)
+            if(_binder.ProcessCmdKey(this, keyData))
             {
-                case (Keys.Right):
-
-                    Controller.Aggregator.PublishFromAll(
-                        new ImageContainerEventArgs(ImageContainer.Source)
-                    );
-
-                    return true;
-                case (Keys.Left):
-
-                    Controller.Aggregator.PublishFromAll(
-                        new ImageContainerEventArgs(ImageContainer.Destination)
-                    );
-
-                    return true;
-                case (Keys.Q):
-
-                    Controller.Aggregator.PublishFromAll(
-                        new RandomVariableFunctionEventArgs(
-                            RandomVariableFunction.PMF, ImageContainer.Source
-                        )
-                    );
-
-                    return true;
-                case (Keys.Q | Keys.Control):
-
-                    Controller.Aggregator.PublishFromAll(
-                        new RandomVariableFunctionEventArgs(
-                            RandomVariableFunction.PMF, ImageContainer.Destination
-                        )
-                    );
-
-                    return true;
-                case (Keys.W):
-
-                    Controller.Aggregator.PublishFromAll(
-                        new RandomVariableFunctionEventArgs(
-                            RandomVariableFunction.CDF, ImageContainer.Source
-                        )
-                    );
-
-                    return true;
-                case (Keys.W | Keys.Control):
-
-                    Controller.Aggregator.PublishFromAll(
-                        new RandomVariableFunctionEventArgs(
-                            RandomVariableFunction.CDF, ImageContainer.Destination
-                        )
-                    );
-
-                    return true;
+                return true; 
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
