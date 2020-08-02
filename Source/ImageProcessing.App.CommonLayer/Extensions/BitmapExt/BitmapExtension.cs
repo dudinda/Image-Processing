@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.IO;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
@@ -168,5 +169,11 @@ namespace ImageProcessing.App.CommonLayer.Extensions.BitmapExt
 
             _ => throw new NotImplementedException(ext)
         };
+
+        /// <summary>
+        /// Save an image to the specified path.
+        /// </summary>
+        public static void SaveByPath(this Image image, string path)
+            => image.Save(path, Path.GetExtension(path).GetImageFormat());      
     }
 }

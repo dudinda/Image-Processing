@@ -99,8 +99,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             {
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
-                    var copy = await GetImageCopy(ImageContainer.Source)
-                        .ConfigureAwait(true);
+                    var copy = await GetImageCopy(
+                        ImageContainer.Source
+                    ).ConfigureAwait(true);
 
                     await _nonBlock.NonBlockSaveAs(copy,
                          ConfigurationManager.AppSettings["Filters"]
@@ -123,12 +124,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         ImageContainer.Source
                     ).ConfigureAwait(true);
 
-                    await Task.Run(() => copy.Save(
-                        View.PathToFile,
-                        Path.GetExtension(
-                            View.PathToFile
-                        ).GetImageFormat()
-                     )).ConfigureAwait(true);
+                    await Task.Run(
+                        () => copy.SaveByPath(View.PathToFile)
+                    ).ConfigureAwait(true);
                 }
             }
             catch(Exception ex)
