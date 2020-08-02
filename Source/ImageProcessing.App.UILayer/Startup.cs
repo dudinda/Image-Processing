@@ -62,6 +62,8 @@ using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Interface;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Interface;
+using ImageProcessing.App.UILayer.EventBinders.Convolution.Implementation;
+using ImageProcessing.App.UILayer.EventBinders.Convolution.Interface;
 using ImageProcessing.App.UILayer.EventBinders.Rgb.Implementation;
 using ImageProcessing.App.UILayer.EventBinders.Rgb.Interface;
 using ImageProcessing.App.UILayer.Form.Convolution;
@@ -115,7 +117,8 @@ namespace ImageProcessing.App.UILayer
                 .RegisterTransient<IHistogramService, HistogramService>()
                 .RegisterTransient<IMainPresenterLockersFacade, MainPresenterLockersFacade>()
                 .RegisterTransient<IMainPresenterProvidersFacade, MainPresenterProvidersFacade>()
-                .RegisterTransient<IRgbEventBinder, RgbEventBinder>();      
+                .RegisterTransient<IRgbEventBinder, RgbEventBinder>()
+                .RegisterTransient<IConvolutionEventBinder, ConvolutionEventBinder>();      
         }      
     }
 }

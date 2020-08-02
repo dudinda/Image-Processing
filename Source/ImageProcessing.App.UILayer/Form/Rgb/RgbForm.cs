@@ -12,12 +12,11 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.UILayer.Form.Rgb
 {
-    internal sealed partial class RgbForm : BaseForm, IRgbFormControls
+    internal sealed partial class RgbForm : BaseForm, IRgbFormElements
     {
         public RgbForm(
             IAppController controller,
-            IRgbEventBinder binder)
-            : base(controller)
+            IRgbEventBinder binder) : base(controller)
         {
             InitializeComponent();
 
@@ -65,6 +64,19 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
             return (RgbColors)_command[
                  nameof(RgbViewAction.GetColor)
             ].Method.Invoke(this, null);
+        }
+
+        /// <summary>
+        /// Used by the generated <see cref="Dispose(bool)"/> call.
+        /// Can be used by a DI container in a singleton scope on Release();
+        public new void Dispose()
+        {
+            if (components != null)
+            {
+                components.Dispose();
+            }
+
+            base.Dispose(true);
         }
     }
 }

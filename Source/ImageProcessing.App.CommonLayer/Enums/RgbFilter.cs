@@ -20,21 +20,15 @@ namespace ImageProcessing.App.CommonLayer.Enums
         Grayscale = 1,
 
         /// <summary>
-        /// Filter by a color channel.
-        /// </summary>
-        [Description("RGB Filter")]
-        Color     = 2,
-
-        /// <summary>
         /// Inversion filter.
         /// </summary>
         [Description("Inversion filter")]
-        Inversion = 3,
+        Inversion = 2,
 
         /// <summary>
         /// Binary filter.
         /// </summary>
         [Description("Binary filter")]
-        Binary    = 4
+        Binary    = 3
     }
 }

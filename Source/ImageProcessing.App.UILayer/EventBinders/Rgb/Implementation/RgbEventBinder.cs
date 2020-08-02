@@ -6,7 +6,7 @@ using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 
 namespace ImageProcessing.App.UILayer.EventBinders.Rgb.Implementation
 {
-    internal class RgbEventBinder : IRgbEventBinder
+    internal sealed class RgbEventBinder : IRgbEventBinder
     {
         private readonly IEventAggregator _aggregator;
 
@@ -15,7 +15,7 @@ namespace ImageProcessing.App.UILayer.EventBinders.Rgb.Implementation
             _aggregator = aggregator;
         }
 
-        public void Bind(IRgbFormControls source)
+        public void Bind(IRgbFormElements source)
         {
             source.ApplyFilterButton.Click += (sender, args)
                  => _aggregator.PublishFrom(source,
@@ -29,12 +29,12 @@ namespace ImageProcessing.App.UILayer.EventBinders.Rgb.Implementation
 
             source.GreenButton.Click += (sender, args)
                 => _aggregator.PublishFrom(source,
-                    new RgbColorFilterEventArgs(RgbColors.Green, this)
+                    new RgbColorFilterEventArgs(RgbColors.Green, source)
                 );
 
             source.BlueButton.Click += (sender, args)
                => _aggregator.PublishFrom(source,
-                   new RgbColorFilterEventArgs(RgbColors.Blue, this)
+                   new RgbColorFilterEventArgs(RgbColors.Blue, source)
                );
         }
     }

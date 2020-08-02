@@ -5,16 +5,21 @@ using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
 using ImageProcessing.App.PresentationLayer.Presenters.Convolution;
 using ImageProcessing.App.PresentationLayer.Views.Convolution;
+using ImageProcessing.App.UILayer.EventBinders.Convolution.Interface;
+using ImageProcessing.App.UILayer.FormElements.Convolution;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Utility.Interop.Wrapper;
+
+using MetroFramework.Controls;
 
 namespace ImageProcessing.App.UILayer.Form.Convolution
 {
     /// <inheritdoc cref="IConvolutionFilterView"/>
-    internal sealed partial class ConvolutionFilterForm : BaseForm, IConvolutionFilterView
+    internal sealed partial class ConvolutionFilterForm : BaseForm, IConvolutionFormElements
     {
-        public ConvolutionFilterForm(IAppController controller)
-            : base(controller)
+        public ConvolutionFilterForm(
+            IAppController controller,
+            IConvolutionEventBinder binder) : base(controller)
         {
             InitializeComponent();
 
@@ -29,7 +34,7 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
 
             ConvolutionFilterComboBox.SelectedIndex = 0;
 
-            Bind();
+            binder.Bind(this);
         }
 
         /// <inheritdoc/>
@@ -39,6 +44,9 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
                 .SelectedItem.ToString()
                 .GetValueFromDescription<ConvolutionFilter>();
         }
+
+        public MetroButton ApplyButton
+            => Apply;
 
         /// <inheritdoc/>
         public void ShowError(string error)

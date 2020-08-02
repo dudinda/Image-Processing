@@ -25,20 +25,8 @@ namespace ImageProcessing.App.UILayer.Form
         protected IAppController Controller { get; }
             = null!;
 
-        protected BaseForm(
-            IAppController controller)
-           : base()
-        {
-            Controller = controller;
-        }
-
-        protected BaseForm(
-            IAppController controller,
-            IBaseEventBinder<IView> binder)
-           : this(controller)
-        {
-            binder.Bind(this);
-        }
+        protected BaseForm(IAppController controller)
+            : base() => Controller = controller;
 
         protected BaseForm()
             : base() { }

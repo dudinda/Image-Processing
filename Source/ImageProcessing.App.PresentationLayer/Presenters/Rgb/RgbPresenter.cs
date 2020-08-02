@@ -36,19 +36,22 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
             {
                 var filter = View.SelectedFilter;
 
-                var copy = await _locker
-                    .LockOperationAsync(
-                        () => new Bitmap(ViewModel.Source)
-                     ).ConfigureAwait(true);
+                if (filter != RgbFilter.Unknown)
+                {
+                    var copy = await _locker
+                        .LockOperationAsync(
+                            () => new Bitmap(ViewModel.Source)
+                         ).ConfigureAwait(true);
 
-                var block = new PipelineBlock(copy)
-                    .Add<Bitmap, Bitmap>(
-                       (bmp) => _provider.Apply(bmp, filter)
-                    );
+                    var block = new PipelineBlock(copy)
+                        .Add<Bitmap, Bitmap>(
+                           (bmp) => _provider.Apply(bmp, filter)
+                        );
 
-                Controller.Aggregator.PublishFromAll(
-                    new RenderEventArgs(block, e.Publisher)
-                 );
+                    Controller.Aggregator.PublishFromAll(
+                        new RenderEventArgs(block, e.Publisher)
+                     );
+                }
             }
             catch (Exception ex)
             {
