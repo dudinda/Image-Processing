@@ -2,7 +2,9 @@ using System.ComponentModel;
 using System.Windows.Forms;
 
 using ImageProcessing.App.UILayer.Code.Attributes;
+using ImageProcessing.App.UILayer.FormControls.Base;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
+using ImageProcessing.Microkernel.MVP.View;
 
 using MetroFramework.Forms;
 
@@ -14,7 +16,7 @@ namespace ImageProcessing.App.UILayer.Form
     /// </summary>
     [TypeDescriptionProvider(
         typeof(AbstractFormDescriptionProvider<BaseForm, MetroForm>))]
-    internal abstract class BaseForm : MetroForm
+    internal abstract class BaseForm : MetroForm, IView
     {
         private ApplicationContext _context
             = null!;
@@ -23,10 +25,19 @@ namespace ImageProcessing.App.UILayer.Form
         protected IAppController Controller { get; }
             = null!;
 
-        protected BaseForm(IAppController controller)
+        protected BaseForm(
+            IAppController controller)
            : base()
         {
             Controller = controller;
+        }
+
+        protected BaseForm(
+            IAppController controller,
+            IBaseEventBinder<IView> binder)
+           : this(controller)
+        {
+            binder.Bind(this);
         }
 
         protected BaseForm()
@@ -51,6 +62,6 @@ namespace ImageProcessing.App.UILayer.Form
 
                 return _context;
             }
-        }             
+        }
     }
 }

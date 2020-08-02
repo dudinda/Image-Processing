@@ -5,11 +5,11 @@ namespace ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs
 {
     public sealed class RgbFilterEventArgs : BaseEventArgs
     {
-        public RgbFilterEventArgs(RgbFilter filter)
-            => Filter = filter;
+        public RgbFilterEventArgs(object publisher)
+            : base(publisher)
+        {
+        }
 
-        ///<inheritdoc cref="RgbFilter"/>
-        public RgbFilter Filter { get; }
 
     }
 }

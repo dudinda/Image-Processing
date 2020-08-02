@@ -5,6 +5,7 @@ using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Show;
 using ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.ToolbarArgs;
 using ImageProcessing.App.DomainLayer.DomainEvents.QualityMeasureArgs;
@@ -147,6 +148,11 @@ namespace ImageProcessing.App.UILayer.Form.Main
                 => Controller.Aggregator.PublishFromAll(
                     new ShowQualityMeasureEventArgs()
                 );
+
+            RgbMenu.Click += (sender, args)
+                => Controller.Aggregator.PublishFromAll(
+                    new ShowRgbFiltersEventArgs()
+                );
         }
 
         /// <summary>
@@ -165,7 +171,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         /// </summary>
         private void BindRgbFilters()
         {
-            InversionFilter.Click += (sender, args)
+           /* InversionFilter.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
                     new RgbFilterEventArgs(RgbFilter.Inversion)
                 );
@@ -193,7 +199,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             ColorFilterGreen.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
                     new RgbColorFilterEventArgs(RgbColors.Green)
-                );
+                ); */
         }
 
         /// <summary>

@@ -8,8 +8,17 @@ namespace ImageProcessing.App.DomainLayer.DomainEvent.Base
     public abstract class BaseEventArgs
     {
         public DateTime PublishedOn { get; }
+        public object Publisher { get; }
 
         public BaseEventArgs()
-            => PublishedOn = DateTime.UtcNow;
+        {
+            PublishedOn = DateTime.UtcNow;
+        }
+
+        public BaseEventArgs(object publisher) : base()
+        {
+            Publisher = publisher;
+        }
+           
     }
 }

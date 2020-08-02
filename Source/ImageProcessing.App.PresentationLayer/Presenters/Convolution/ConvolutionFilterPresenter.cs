@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
@@ -50,8 +51,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
                         );
 
                     Controller.Aggregator.PublishFromAll(
-                        new ApplyConvolutionFilterEventArgs(
-                           block
+                        new RenderEventArgs(
+                           block, e.Publisher
                         )
                     );
                 }

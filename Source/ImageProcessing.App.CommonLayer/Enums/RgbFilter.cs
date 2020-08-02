@@ -10,7 +10,7 @@ namespace ImageProcessing.App.CommonLayer.Enums
         /// <summary>
         /// An unknown filter.
         /// </summary>
-        [Description("Filter is not specified")]
+        [Description("Select a filter...")]
         Unknown = 0,
 
         /// <summary>

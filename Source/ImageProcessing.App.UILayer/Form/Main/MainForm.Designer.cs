@@ -37,14 +37,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.OpenFile = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveFile = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveFileAs = new System.Windows.Forms.ToolStripMenuItem();
-            this.FiltersMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.InversionFilter = new System.Windows.Forms.ToolStripMenuItem();
-            this.GrayscaleFilter = new System.Windows.Forms.ToolStripMenuItem();
-            this.BinaryFilter = new System.Windows.Forms.ToolStripMenuItem();
-            this.ColorFilter = new System.Windows.Forms.ToolStripMenuItem();
-            this.ColorFilterRed = new System.Windows.Forms.ToolStripMenuItem();
-            this.ColorFilterGreen = new System.Windows.Forms.ToolStripMenuItem();
-            this.ColorFilterBlue = new System.Windows.Forms.ToolStripMenuItem();
             this.ConvolutionFiltersMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.DistributionsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.OneParameterDistributions = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,6 +79,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.ErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.RandomVariableInformation = new MetroFramework.Components.MetroToolTip();
             this.Container = new ImageProcessing.App.UILayer.Control.UndoRedoSplitContainer();
+            this.RgbMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.ToolBarMenu.SuspendLayout();
             this.PictureBoxSrcPanel.SuspendLayout();
@@ -106,7 +99,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.MainMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileMenu,
-            this.FiltersMenu,
+            this.RgbMenu,
             this.ConvolutionFiltersMenu,
             this.DistributionsMenu});
             this.MainMenu.Location = new System.Drawing.Point(20, 60);
@@ -146,76 +139,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
             | System.Windows.Forms.Keys.S)));
             this.SaveFileAs.Size = new System.Drawing.Size(186, 22);
             this.SaveFileAs.Text = "Save As";
-            // 
-            // FiltersMenu
-            // 
-            this.FiltersMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.InversionFilter,
-            this.GrayscaleFilter,
-            this.BinaryFilter,
-            this.ColorFilter});
-            this.FiltersMenu.Name = "FiltersMenu";
-            this.FiltersMenu.Size = new System.Drawing.Size(50, 20);
-            this.FiltersMenu.Text = "Filters";
-            // 
-            // InversionFilter
-            // 
-            this.InversionFilter.Name = "InversionFilter";
-            this.InversionFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Q)));
-            this.InversionFilter.Size = new System.Drawing.Size(172, 22);
-            this.InversionFilter.Tag = "Inversion";
-            this.InversionFilter.Text = "Inversion";
-            // 
-            // GrayscaleFilter
-            // 
-            this.GrayscaleFilter.Name = "GrayscaleFilter";
-            this.GrayscaleFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.W)));
-            this.GrayscaleFilter.Size = new System.Drawing.Size(172, 22);
-            this.GrayscaleFilter.Tag = "Grayscale";
-            this.GrayscaleFilter.Text = "GrayScale";
-            // 
-            // BinaryFilter
-            // 
-            this.BinaryFilter.Name = "BinaryFilter";
-            this.BinaryFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
-            this.BinaryFilter.Size = new System.Drawing.Size(172, 22);
-            this.BinaryFilter.Tag = "Binary";
-            this.BinaryFilter.Text = "Binary";
-            // 
-            // ColorFilter
-            // 
-            this.ColorFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ColorFilterRed,
-            this.ColorFilterGreen,
-            this.ColorFilterBlue});
-            this.ColorFilter.Name = "ColorFilter";
-            this.ColorFilter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.R)));
-            this.ColorFilter.Size = new System.Drawing.Size(172, 22);
-            this.ColorFilter.Text = "Color filters";
-            // 
-            // ColorFilterRed
-            // 
-            this.ColorFilterRed.Name = "ColorFilterRed";
-            this.ColorFilterRed.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.ColorFilterRed.Size = new System.Drawing.Size(147, 22);
-            this.ColorFilterRed.Tag = "Red";
-            this.ColorFilterRed.Text = "Red";
-            // 
-            // ColorFilterGreen
-            // 
-            this.ColorFilterGreen.Name = "ColorFilterGreen";
-            this.ColorFilterGreen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.ColorFilterGreen.Size = new System.Drawing.Size(147, 22);
-            this.ColorFilterGreen.Tag = "Green";
-            this.ColorFilterGreen.Text = "Green";
-            // 
-            // ColorFilterBlue
-            // 
-            this.ColorFilterBlue.Name = "ColorFilterBlue";
-            this.ColorFilterBlue.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
-            this.ColorFilterBlue.Size = new System.Drawing.Size(147, 22);
-            this.ColorFilterBlue.Tag = "Blue";
-            this.ColorFilterBlue.Text = "Blue";
             // 
             // ConvolutionFiltersMenu
             // 
@@ -624,6 +547,12 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.Container.SplitterDistance = 359;
             this.Container.TabIndex = 10;
             // 
+            // RgbMenu
+            // 
+            this.RgbMenu.Name = "RgbMenu";
+            this.RgbMenu.Size = new System.Drawing.Size(50, 20);
+            this.RgbMenu.Text = "Filters";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -661,14 +590,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
         private System.Windows.Forms.ToolStripMenuItem FileMenu;
         private System.Windows.Forms.ToolStripMenuItem OpenFile;
         private System.Windows.Forms.ToolStripMenuItem SaveFileAs;
-        private System.Windows.Forms.ToolStripMenuItem FiltersMenu;
-        private System.Windows.Forms.ToolStripMenuItem InversionFilter;
-        private System.Windows.Forms.ToolStripMenuItem GrayscaleFilter;
-        private System.Windows.Forms.ToolStripMenuItem BinaryFilter;
-        private System.Windows.Forms.ToolStripMenuItem ColorFilter;
-        private System.Windows.Forms.ToolStripMenuItem ColorFilterRed;
-        private System.Windows.Forms.ToolStripMenuItem ColorFilterGreen;
-        private System.Windows.Forms.ToolStripMenuItem ColorFilterBlue;
         private System.Windows.Forms.ToolStripMenuItem DistributionsMenu;
         private System.Windows.Forms.ToolStripMenuItem OneParameterDistributions;
         private System.Windows.Forms.ToolStripMenuItem ExponentialDistribution;
@@ -712,6 +633,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         private App.UILayer.Control.UndoRedoSplitContainer Container;
         private ToolStripButton Redo;
         private App.UILayer.Control.ZoomTrackBar DstZoom;
+        private ToolStripMenuItem RgbMenu;
     }
 }
 

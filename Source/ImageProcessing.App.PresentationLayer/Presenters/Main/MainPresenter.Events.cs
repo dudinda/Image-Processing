@@ -1,9 +1,10 @@
-using System.Threading.Tasks;
 
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Show;
 using ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.ToolbarArgs;
 using ImageProcessing.App.DomainLayer.DomainEvents.QualityMeasureArgs;
@@ -12,11 +13,9 @@ using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 {
     internal sealed partial class MainPresenter
-        : ISubscriber<ApplyConvolutionFilterEventArgs>,
+        : ISubscriber<RenderEventArgs>,
           ISubscriber<ShowConvolutionFilterPresenterEventArgs>,
           ISubscriber<ShowQualityMeasureEventArgs>,
-          ISubscriber<RgbFilterEventArgs>,
-          ISubscriber<RgbColorFilterEventArgs>,
           ISubscriber<DistributionEventArgs>,
           ISubscriber<ImageContainerEventArgs>,
           ISubscriber<RandomVariableInfoEventArgs>,
@@ -26,19 +25,14 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
           ISubscriber<OpenFileDialogEventArgs>,
           ISubscriber<SaveAsFileDialogEventArgs>,
           ISubscriber<SaveWithoutFileDialogEventArgs>,
+          ISubscriber<ShowRgbFiltersEventArgs>,
           ISubscriber<ShuffleEventArgs>
     {
-        public void OnEventHandler(ApplyConvolutionFilterEventArgs e)
-            => ApplyConvolutionFilter(e);
+        public void OnEventHandler(RenderEventArgs e)
+            => AttachToRenderer(e);
 
         public void OnEventHandler(ShowConvolutionFilterPresenterEventArgs e)
             => ShowConvolutionFiltersMenu(e);
-
-        public void OnEventHandler(RgbFilterEventArgs e)
-            => ApplyRgbFilter(e);
-
-        public void OnEventHandler(RgbColorFilterEventArgs e)
-            => ApplyColorFilter(e);
 
         public void OnEventHandler(DistributionEventArgs e)
             => ApplyHistogramTransformation(e);
@@ -72,5 +66,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
         public void OnEventHandler(ShowQualityMeasureEventArgs e)
             => ShowQualityMeasureForm(e);
+
+        public void OnEventHandler(ShowRgbFiltersEventArgs e)
+            => ShowRgbFiltersMenu(e);
+        
     }
 }

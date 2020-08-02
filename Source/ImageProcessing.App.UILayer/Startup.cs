@@ -17,6 +17,7 @@ using ImageProcessing.App.PresentationLayer.Views.Convolution;
 using ImageProcessing.App.PresentationLayer.Views.Histogram;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.PresentationLayer.Views.QualityMeasure;
+using ImageProcessing.App.PresentationLayer.Views.Rgb;
 using ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Implementation;
 using ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Interface;
 using ImageProcessing.App.ServiceLayer.Facades.MainPresenterLockers.Implementation;
@@ -61,10 +62,13 @@ using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Interface;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Interface;
+using ImageProcessing.App.UILayer.EventBinders.Rgb.Implementation;
+using ImageProcessing.App.UILayer.EventBinders.Rgb.Interface;
 using ImageProcessing.App.UILayer.Form.Convolution;
 using ImageProcessing.App.UILayer.Form.Histogram;
 using ImageProcessing.App.UILayer.Form.Main;
 using ImageProcessing.App.UILayer.Form.QualityMeasure;
+using ImageProcessing.App.UILayer.Form.Rgb;
 using ImageProcessing.Microkernel.AppConfig;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
@@ -85,6 +89,7 @@ namespace ImageProcessing.App.UILayer
                 .RegisterSingletonView<IMainView, MainForm>()
                 .RegisterTransientView<IHistogramView, HistogramForm>()
                 .RegisterTransientView<IConvolutionFilterView, ConvolutionFilterForm>()
+                .RegisterTransientView<IRgbView, RgbForm>()
                 .RegisterSingletonView<IQualityMeasureView, QualityMeasureForm>()
                 .RegisterTransient<IConvolutionFilterService, ConvolutionFilterService>()
                 .RegisterTransient<IConvolutionFilterFactory, ConvolutionFilterFactory>()
@@ -109,7 +114,8 @@ namespace ImageProcessing.App.UILayer
                 .RegisterTransient<IQualityMeasureService, QualityMeasureService>()
                 .RegisterTransient<IHistogramService, HistogramService>()
                 .RegisterTransient<IMainPresenterLockersFacade, MainPresenterLockersFacade>()
-                .RegisterTransient<IMainPresenterProvidersFacade, MainPresenterProvidersFacade>();      
+                .RegisterTransient<IMainPresenterProvidersFacade, MainPresenterProvidersFacade>()
+                .RegisterTransient<IRgbEventBinder, RgbEventBinder>();      
         }      
     }
 }

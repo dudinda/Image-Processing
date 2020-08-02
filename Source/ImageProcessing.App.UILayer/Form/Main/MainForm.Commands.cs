@@ -130,33 +130,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
             nameof(ImageContainer.Destination) +
             nameof(MainViewAction.SetToZoom))]
         private Image SetToZoomDestinationImageCommand(Image image)
-           => DstZoom.ImageToZoom = image;
-
-        [Command(nameof(RgbColors.Green))]
-        private void SwitchGreenColorCommand()
-            => ColorFilterGreen.Checked = !ColorFilterGreen.Checked;
-
-        [Command(nameof(RgbColors.Red))]
-        private void SwitchRedColorCommand()
-            => ColorFilterRed.Checked = !ColorFilterRed.Checked;
-
-        [Command(nameof(RgbColors.Blue))]
-        private void SwitchBlueColorCommand()
-            => ColorFilterBlue.Checked = !ColorFilterBlue.Checked;
-
-        [Command(nameof(MainViewAction.GetColor))]
-        private RgbColors GetColorCommand()
-        {
-            var result = default(RgbColors);
-
-            if (ColorFilterRed.Checked)
-                result |= RgbColors.Red;
-            if (ColorFilterBlue.Checked)
-                result |= RgbColors.Blue;
-            if (ColorFilterGreen.Checked)
-                result |= RgbColors.Green;
-
-            return result;
-        }
+           => DstZoom.ImageToZoom = image;    
     }
 }

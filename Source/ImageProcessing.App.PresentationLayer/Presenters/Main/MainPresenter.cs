@@ -11,15 +11,18 @@ using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
-using ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Show;
 using ImageProcessing.App.DomainLayer.DomainEvent.ToolbarArgs;
 using ImageProcessing.App.DomainLayer.DomainEvents.QualityMeasureArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Convolution;
+using ImageProcessing.App.PresentationLayer.Presenters.Rgb;
 using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
 using ImageProcessing.App.PresentationLayer.ViewModel.Histogram;
 using ImageProcessing.App.PresentationLayer.ViewModel.QualityMeasure;
+using ImageProcessing.App.PresentationLayer.ViewModel.Rgb;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.ServiceLayer.Facades.MainPresenterLockers.Interface;
 using ImageProcessing.App.ServiceLayer.Facades.MainPresenterProviders.Interface;
@@ -123,6 +126,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
+
+
         private async Task ShowQualityMeasureForm(ShowQualityMeasureEventArgs e)
         {
             try
@@ -163,7 +168,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        private async Task ApplyConvolutionFilter(ApplyConvolutionFilterEventArgs e)
+        private async Task AttachToRenderer(RenderEventArgs e)
         {
             try
             {
@@ -191,71 +196,25 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        private async Task ApplyRgbFilter(RgbFilterEventArgs e)
+        private async Task ShowRgbFiltersMenu(ShowRgbFiltersEventArgs e)
         {
             try
             {
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
-                    View.SetCursor(CursorType.Wait);
-
                     var copy = await GetImageCopy(
-                        ImageContainer.Source
-                    ).ConfigureAwait(true);
+                       ImageContainer.Source
+                   ).ConfigureAwait(true);
 
-                    await Render(
-                        new PipelineBlock(copy)
-                            .Add<Bitmap, Bitmap>((bmp) => _providers.Apply(bmp, e.Filter)),
-                        ImageContainer.Destination
-                    ).ConfigureAwait(true);
+                    Controller.Run<RgbPresenter, RgbViewModel>(
+                        new RgbViewModel(copy)
+                    );
+
                 }
-            }
-            catch (OperationCanceledException cancel)
-            {
-                OnError(Errors.CancelOperation);
             }
             catch (Exception ex)
             {
                 OnError(Errors.ApplyRgbFilter);
-            }
-        }
-
-        private async Task ApplyColorFilter(RgbColorFilterEventArgs e)
-        {
-            try
-            {
-                if (!View.ImageIsNull(ImageContainer.Source))
-                {
-                    var result = View.GetSelectedColors(e.Color);
-
-                    if (result != RgbColors.Unknown)
-                    {
-                        View.SetCursor(CursorType.Wait);
-
-                        var copy = await GetImageCopy(
-                            ImageContainer.Source
-                        ).ConfigureAwait(true);
-
-                        await Render(
-                            new PipelineBlock(copy)
-                                .Add<Bitmap, Bitmap>((bmp) => _providers.Apply(bmp, result)),
-                            ImageContainer.Destination
-                        ).ConfigureAwait(true);
-
-                    }
-                    else
-                    {
-                        View.SetImage(ImageContainer.Destination, View.DstImage);
-                    }
-                }
-            }
-            catch (OperationCanceledException cancel)
-            {
-                OnError(Errors.CancelOperation);
-            }
-            catch (Exception ex)
-            {
-                OnError(Errors.ApplyColorFilter);
             }
         }
 

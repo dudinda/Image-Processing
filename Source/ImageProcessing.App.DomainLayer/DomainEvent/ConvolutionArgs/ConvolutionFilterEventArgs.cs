@@ -5,11 +5,9 @@ namespace ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs
 {
     public sealed class ConvolutionFilterEventArgs : BaseEventArgs
     {
-        public ConvolutionFilterEventArgs(object sender)
+        public ConvolutionFilterEventArgs(object publisher) : base(publisher)
         {
-            Sender = sender;
-        }
 
-        public object Sender { get; }
+        }
     }
 }
