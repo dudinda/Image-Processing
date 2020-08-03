@@ -3,6 +3,7 @@ using System.Linq;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
+using ImageProcessing.App.PresentationLayer.Presenters.Rgb;
 using ImageProcessing.App.UILayer.Code.Enums;
 using ImageProcessing.App.UILayer.EventBinders.Rgb.Interface;
 using ImageProcessing.App.UILayer.FormControls.Rgb;
@@ -12,7 +13,7 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.UILayer.Form.Rgb
 {
-    internal sealed partial class RgbForm : BaseForm, IRgbElementsExposer
+    internal sealed partial class RgbForm : BaseForm, IRgbElementExposer
     {
         public RgbForm(
             IAppController controller,
@@ -75,6 +76,10 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
             {
                 components.Dispose();
             }
+
+            Controller
+               .Aggregator
+               .Unsubscribe(typeof(RgbPresenter), this);
 
             base.Dispose(true);
         }

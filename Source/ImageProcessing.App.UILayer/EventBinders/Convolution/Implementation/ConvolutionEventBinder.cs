@@ -22,7 +22,7 @@ namespace ImageProcessing.App.UILayer.EventBinders.Convolution.Implementation
             _aggregator = aggregator;
         }
 
-        public void Bind(IConvolutionElementsExposer source)
+        public void Bind(IConvolutionElementExposer source)
         {
             source.ApplyButton.Click += (sender, args)
                 => _aggregator.PublishFrom(source,
@@ -30,7 +30,7 @@ namespace ImageProcessing.App.UILayer.EventBinders.Convolution.Implementation
                 );
         }
 
-        public bool ProcessCmdKey(IConvolutionElementsExposer view, Keys keyData)
+        public bool ProcessCmdKey(IConvolutionElementExposer view, Keys keyData)
         {
             var key = keyData.ToString();
 
@@ -45,7 +45,7 @@ namespace ImageProcessing.App.UILayer.EventBinders.Convolution.Implementation
 
 
         [Command(nameof(Keys.Q))]
-        private bool ClickCommandQ(IConvolutionElementsExposer source)
+        private bool ClickCommandQ(IConvolutionElementExposer source)
         {
             _aggregator.PublishFrom(source,
                 new ConvolutionFilterEventArgs(source)
@@ -55,7 +55,7 @@ namespace ImageProcessing.App.UILayer.EventBinders.Convolution.Implementation
         }
 
         [Command(nameof(Keys.Enter))]
-        private bool ClickCommandEnter(IConvolutionElementsExposer source)
+        private bool ClickCommandEnter(IConvolutionElementExposer source)
         {
             _aggregator.PublishFrom(source,
                 new ConvolutionFilterEventArgs(source)

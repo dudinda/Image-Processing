@@ -1,4 +1,5 @@
 using System.Windows.Forms;
+
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs;
 using ImageProcessing.App.UILayer.EventBinders.Rgb.Interface;
@@ -16,7 +17,7 @@ namespace ImageProcessing.App.UILayer.EventBinders.Rgb.Implementation
             _aggregator = aggregator;
         }
 
-        public void Bind(IRgbElementsExposer source)
+        public void Bind(IRgbElementExposer source)
         {
             source.ApplyFilterButton.Click += (sender, args)
                  => _aggregator.PublishFrom(source,
@@ -39,7 +40,7 @@ namespace ImageProcessing.App.UILayer.EventBinders.Rgb.Implementation
                );
         }
 
-        public bool ProcessCmdKey(IRgbElementsExposer view, Keys keyData)
+        public bool ProcessCmdKey(IRgbElementExposer view, Keys keyData)
         {
             return false;
         }

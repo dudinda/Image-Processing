@@ -14,7 +14,7 @@ using ImageProcessing.Utility.Interop.Wrapper;
 namespace ImageProcessing.App.UILayer.Form.Main
 {
     /// <inheritdoc cref="IMainView"/>
-    internal sealed partial class MainForm : BaseForm, IMainView, IMainElementsExposer
+    internal sealed partial class MainForm : BaseForm, IMainView, IMainElementExposer
     {
         private readonly IMainEventBinder _binder;
 
@@ -84,7 +84,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         public ToolStripMenuItem ConvolutionMenu
             => ConvolutionFiltersMenu;
 
-        ToolStripMenuItem IMainElementsExposer.RgbMenu => throw new System.NotImplementedException();
+        ToolStripMenuItem IMainElementExposer.RgbMenu => throw new System.NotImplementedException();
 
         /// <inheritdoc/>
         public new void Show()

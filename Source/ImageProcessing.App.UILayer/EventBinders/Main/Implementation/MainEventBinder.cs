@@ -1,4 +1,5 @@
 using System.Windows.Forms;
+
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
@@ -18,7 +19,7 @@ namespace ImageProcessing.App.UILayer.EventBinders.Main.Implementation
             _aggregator = aggregator;
         }
 
-        public void Bind(IMainElementsExposer source)
+        public void Bind(IMainElementExposer source)
         {
             source.OpenFileMenu.Click += (sender, args)
                 => _aggregator.PublishFromAll(
@@ -76,7 +77,7 @@ namespace ImageProcessing.App.UILayer.EventBinders.Main.Implementation
                 );
         }
 
-        public bool ProcessCmdKey(IMainElementsExposer view, Keys keyData)
+        public bool ProcessCmdKey(IMainElementExposer view, Keys keyData)
         {
             switch (keyData)
             {

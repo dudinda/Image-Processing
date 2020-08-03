@@ -6,8 +6,8 @@ using ImageProcessing.App.UILayer.FormControls.Rgb;
 
 namespace ImageProcessing.App.UILayer.EventBinders.Rgb.Interface
 {
-    internal interface IRgbEventBinder : IBaseEventBinder<IRgbElementsExposer>
+    internal interface IRgbEventBinder : IBaseEventBinder<IRgbElementExposer>
     {
-        public bool ProcessCmdKey(IRgbElementsExposer view, Keys keyData);
+        public bool ProcessCmdKey(IRgbElementExposer view, Keys keyData);
     }
 }
