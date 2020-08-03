@@ -13,9 +13,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
     {
         private readonly IHistogramService _histogramService;
 
-        public HistogramPresenter(IAppController controller,
-                                  IHistogramService histogramService)
-            : base(controller)
+        public HistogramPresenter(
+            IAppController controller,
+            IHistogramService histogramService) : base(controller)
         {
             _histogramService = histogramService;
         }

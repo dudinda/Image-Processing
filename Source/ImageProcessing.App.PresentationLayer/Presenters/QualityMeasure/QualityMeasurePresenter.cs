@@ -13,9 +13,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
     {
         private readonly IQualityMeasureService _qualityService;
 
-        public QualityMeasurePresenter(IAppController controller, 
-                                       IQualityMeasureService qualityService)
-            : base(controller) 
+        public QualityMeasurePresenter(
+            IAppController controller, 
+            IQualityMeasureService qualityService) : base(controller) 
         {
             _qualityService = qualityService;
         }

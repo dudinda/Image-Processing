@@ -205,6 +205,21 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
         /// <inheritdoc/>
         public void ClearQualityQueue()
-            => QualityMeasure.Reset();       
+            => QualityMeasure.Reset();
+
+        /// <summary>
+        /// Used by the generated <see cref="Dispose(bool)"/> call.
+        /// Can be used by a DI container in a singleton scope on Release();
+        public new void Dispose()
+        {
+            if (components != null)
+            {
+                components.Dispose();
+            }
+
+            Controller.Dispose();
+
+            base.Dispose(true);
+        }
     }
 }

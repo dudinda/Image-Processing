@@ -38,12 +38,12 @@ namespace ImageProcessing.App.UILayer.EventBinders.Main.Implementation
 
             source.ReplaceSrcByDstButton.Click += (sernder, args)
                 => _aggregator.PublishFromAll(
-                    new ImageContainerEventArgs(ImageContainer.Destination)
+                    new ReplaceImageEventArgs(ImageContainer.Destination)
                 );
 
             source.ReplaceDstBySrcButton.Click += (sernder, args)
                 => _aggregator.PublishFromAll(
-                    new ImageContainerEventArgs(ImageContainer.Source)
+                    new ReplaceImageEventArgs(ImageContainer.Source)
                 );
 
             source.ZoomSrcTrackBar.MouseWheel += (sender, args)
@@ -84,21 +84,21 @@ namespace ImageProcessing.App.UILayer.EventBinders.Main.Implementation
                 case (Keys.Right):
 
                     _aggregator.PublishFromAll(
-                        new ImageContainerEventArgs(ImageContainer.Source)
+                        new ReplaceImageEventArgs(ImageContainer.Source)
                     );
 
                     return true;
                 case (Keys.Left):
 
                     _aggregator.PublishFromAll(
-                        new ImageContainerEventArgs(ImageContainer.Destination)
+                        new ReplaceImageEventArgs(ImageContainer.Destination)
                     );
 
                     return true;
                 case (Keys.Q):
 
                     _aggregator.PublishFromAll(
-                        new RandomVariableFunctionEventArgs(
+                        new BuildRandomVariableFunctionEventArgs(
                             RandomVariableFunction.PMF, ImageContainer.Source
                         )
                     );
@@ -107,7 +107,7 @@ namespace ImageProcessing.App.UILayer.EventBinders.Main.Implementation
                 case (Keys.Q | Keys.Control):
 
                     _aggregator.PublishFromAll(
-                        new RandomVariableFunctionEventArgs(
+                        new BuildRandomVariableFunctionEventArgs(
                             RandomVariableFunction.PMF, ImageContainer.Destination
                         )
                     );
@@ -116,7 +116,7 @@ namespace ImageProcessing.App.UILayer.EventBinders.Main.Implementation
                 case (Keys.W):
 
                     _aggregator.PublishFromAll(
-                        new RandomVariableFunctionEventArgs(
+                        new BuildRandomVariableFunctionEventArgs(
                             RandomVariableFunction.CDF, ImageContainer.Source
                         )
                     );
@@ -125,7 +125,7 @@ namespace ImageProcessing.App.UILayer.EventBinders.Main.Implementation
                 case (Keys.W | Keys.Control):
 
                     _aggregator.PublishFromAll(
-                        new RandomVariableFunctionEventArgs(
+                        new BuildRandomVariableFunctionEventArgs(
                             RandomVariableFunction.CDF, ImageContainer.Destination
                         )
                     );

@@ -13,7 +13,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
     {
         private readonly object _syncRoot = new object();
 
-        private Dictionary<Type, HashSet<(object, object)>> eventSubscribers
+        private readonly Dictionary<Type, HashSet<(object, object)>> _eventSubscribers
             = new Dictionary<Type, HashSet<(object, object)>>();
 
         /// <inheritdoc cref="IEventAggregator.PublishFrom{TEventArgs}(object, TEventArgs)"
@@ -116,7 +116,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
         {
             lock (_syncRoot)
             {
-                var isFound = eventSubscribers
+                var isFound = _eventSubscribers
                     .TryGetValue(
                         subsriberType, out var subsribers
                      );
@@ -125,7 +125,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
                 {
                     subsribers = new HashSet<(object, object)>();
 
-                    eventSubscribers.Add(subsriberType, subsribers);
+                    _eventSubscribers.Add(subsriberType, subsribers);
                 }
 
                 return subsribers;

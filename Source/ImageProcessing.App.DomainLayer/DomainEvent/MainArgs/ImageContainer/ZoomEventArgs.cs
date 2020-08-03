@@ -3,11 +3,11 @@ using ImageProcessing.App.DomainLayer.DomainEvent.Base;
 
 namespace ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs
 {
-    public sealed class ImageContainerEventArgs : BaseEventArgs
+    public sealed class ZoomEventArgs : BaseEventArgs
     {
-        public ImageContainerEventArgs(ImageContainer container)
+        public ZoomEventArgs(ImageContainer container) : base()
             => Container = container;
-       
+        
         ///<inheritdoc cref="ImageContainer"/>
         public ImageContainer Container { get; }
     }

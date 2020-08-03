@@ -2,8 +2,8 @@ using System.Threading.Tasks;
 
 namespace ImageProcessing.Microkernel.MVP.Aggregator.Subscriber
 {
-    public interface ISubscriber<TEventType>
+    public interface ISubscriber<TEventArgs>
     {
-        void OnEventHandler(TEventType e);
+        Task OnEventHandler(TEventArgs e);
     }
 }

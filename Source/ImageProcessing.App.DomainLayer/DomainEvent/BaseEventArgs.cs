@@ -8,7 +8,9 @@ namespace ImageProcessing.App.DomainLayer.DomainEvent.Base
     public abstract class BaseEventArgs
     {
         public DateTime PublishedOn { get; }
+
         public object Publisher { get; }
+            = null!;
 
         public BaseEventArgs()
         {

@@ -3,9 +3,9 @@ using ImageProcessing.App.DomainLayer.DomainEvent.Base;
 
 namespace ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs
 {
-    public sealed class RgbFilterEventArgs : BaseEventArgs
+    public sealed class ApplyRgbFilterEventArgs : BaseEventArgs
     {
-        public RgbFilterEventArgs(object publisher)
+        public ApplyRgbFilterEventArgs(object publisher)
             : base(publisher)
         {
         }

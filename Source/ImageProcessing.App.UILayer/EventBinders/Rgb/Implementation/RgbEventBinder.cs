@@ -21,22 +21,22 @@ namespace ImageProcessing.App.UILayer.EventBinders.Rgb.Implementation
         {
             source.ApplyFilterButton.Click += (sender, args)
                  => _aggregator.PublishFrom(source,
-                     new RgbFilterEventArgs(source)
+                     new ApplyRgbFilterEventArgs(source)
                  );
 
             source.RedButton.Click += (sender, args)
                 => _aggregator.PublishFrom(source,
-                    new RgbColorFilterEventArgs(RgbColors.Red, source)
+                    new ApplyRgbColorFilterEventArgs(RgbColors.Red, source)
                 );
 
             source.GreenButton.Click += (sender, args)
                 => _aggregator.PublishFrom(source,
-                    new RgbColorFilterEventArgs(RgbColors.Green, source)
+                    new ApplyRgbColorFilterEventArgs(RgbColors.Green, source)
                 );
 
             source.BlueButton.Click += (sender, args)
                => _aggregator.PublishFrom(source,
-                   new RgbColorFilterEventArgs(RgbColors.Blue, source)
+                   new ApplyRgbColorFilterEventArgs(RgbColors.Blue, source)
                );
         }
 

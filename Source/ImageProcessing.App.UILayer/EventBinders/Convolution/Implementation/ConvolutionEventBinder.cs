@@ -26,7 +26,7 @@ namespace ImageProcessing.App.UILayer.EventBinders.Convolution.Implementation
         {
             source.ApplyButton.Click += (sender, args)
                 => _aggregator.PublishFrom(source,
-                    new ConvolutionFilterEventArgs(source)
+                    new ApplyConvolutionFilterEventArgs(source)
                 );
         }
 
@@ -48,7 +48,7 @@ namespace ImageProcessing.App.UILayer.EventBinders.Convolution.Implementation
         private bool ClickCommandQ(IConvolutionElementExposer source)
         {
             _aggregator.PublishFrom(source,
-                new ConvolutionFilterEventArgs(source)
+                new ApplyConvolutionFilterEventArgs(source)
             );
 
             return true;
@@ -58,7 +58,7 @@ namespace ImageProcessing.App.UILayer.EventBinders.Convolution.Implementation
         private bool ClickCommandEnter(IConvolutionElementExposer source)
         {
             _aggregator.PublishFrom(source,
-                new ConvolutionFilterEventArgs(source)
+                new ApplyConvolutionFilterEventArgs(source)
             );
 
             return true;

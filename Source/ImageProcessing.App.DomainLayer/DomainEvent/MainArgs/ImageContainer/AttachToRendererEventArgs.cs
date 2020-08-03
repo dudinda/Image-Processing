@@ -2,9 +2,9 @@ using ImageProcessing.App.DomainLayer.DomainEvent.Base;
 
 namespace ImageProcessing.App.DomainLayer.DomainEvent.MainArgs
 {
-    public sealed class RenderEventArgs : BaseEventArgs
+    public sealed class AttachToRendererEventArgs : BaseEventArgs
     {
-        public RenderEventArgs(object block, object publisher)
+        public AttachToRendererEventArgs(object block, object publisher)
             : base(publisher)
         {
             Block = block;

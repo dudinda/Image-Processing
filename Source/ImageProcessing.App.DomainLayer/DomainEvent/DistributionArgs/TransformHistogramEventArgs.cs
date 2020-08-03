@@ -3,9 +3,11 @@ using ImageProcessing.App.DomainLayer.DomainEvent.Base;
 
 namespace ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs
 {
-    public sealed class DistributionEventArgs : BaseEventArgs
+    public sealed class TransformHistogramEventArgs : BaseEventArgs
     {
-        public DistributionEventArgs(Distribution distribution, (string, string) parameters)
+        public TransformHistogramEventArgs(
+            Distribution distribution,
+            (string, string) parameters) : base()
         {
             Distribution = distribution;
             Parameters = parameters;

@@ -3,18 +3,18 @@ using ImageProcessing.App.DomainLayer.DomainEvent.Base;
 
 namespace ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs
 {
-    public class RandomVariableFunctionEventArgs : BaseEventArgs
+    public sealed class GetRandomVariableInfoEventArgs : BaseEventArgs
     {
-        public RandomVariableFunctionEventArgs(
-            RandomVariableFunction action,
-            ImageContainer container)
+        public GetRandomVariableInfoEventArgs(
+            RandomVariableInfo action,
+            ImageContainer container)  : base()
         {
             Action = action;
             Container = container;
         }
 
-        /// <inheritdoc cref="RandomVariableFunction"/>
-        public RandomVariableFunction Action { get; }
+        /// <inheritdoc cref="RandomVariableInfo"/>
+        public RandomVariableInfo Action { get; }
 
         /// <inheritdoc cref="ImageContainer"/>
         public ImageContainer Container { get; }

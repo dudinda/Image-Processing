@@ -12,26 +12,29 @@ using ImageProcessing.App.PresentationLayer.Views.Convolution;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Convolution;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
+using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
 {
     internal sealed partial class ConvolutionFilterPresenter
-        : BasePresenter<IConvolutionView, ConvolutionFilterViewModel>
-	{
+        : BasePresenter<IConvolutionView, ConvolutionFilterViewModel>,
+          ISubscriber<ApplyConvolutionFilterEventArgs>,
+          ISubscriber<ShowTooltipOnErrorEventArgs>
+    {
 		private readonly IConvolutionServiceProvider _convolutionProvider;
 		private readonly IAsyncOperationLocker _operationLocker;
 
-        public ConvolutionFilterPresenter(IAppController controller,
-                                          IConvolutionServiceProvider convolutionFilterServiceProvider,
-                                          IAsyncOperationLocker operationLocker)
-            : base(controller)
+        public ConvolutionFilterPresenter(
+            IAppController controller,
+            IConvolutionServiceProvider convolutionServiceProvider,
+            IAsyncOperationLocker operationLocker) : base(controller)
         {
-            _convolutionProvider = convolutionFilterServiceProvider;
+            _convolutionProvider = convolutionServiceProvider;
             _operationLocker = operationLocker;
         }
 
-		private async Task ApplyConvolutionFilter(ConvolutionFilterEventArgs e)
+		public async Task OnEventHandler(ApplyConvolutionFilterEventArgs e)
 		{
 			try
 			{
@@ -51,7 +54,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
                         );
 
                     Controller.Aggregator.PublishFromAll(
-                        new RenderEventArgs(
+                        new AttachToRendererEventArgs(
                            block, e.Publisher
                         )
                     );
@@ -63,7 +66,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
 			}
 		}
 
-        private void ShowTooltipOnError(ShowTooltipOnErrorEventArgs e)
-            => View.ShowError(e.Error);
+        public Task OnEventHandler(ShowTooltipOnErrorEventArgs e)
+        {
+            View.ShowError(e.Error);
+
+            return Task.CompletedTask;
+        }         
 	}
 }

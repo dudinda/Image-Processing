@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using ImageProcessing.App.CommonLayer.Attributes;
 
 namespace ImageProcessing.App.CommonLayer.Enums
 {
@@ -10,55 +11,63 @@ namespace ImageProcessing.App.CommonLayer.Enums
         /// <summary>
         /// An unknown distribution.
         /// </summary>
-        [Description("Distribution is not specified")]
+        [Description("Select a distribution...")]
         Unknown     = 0,
 
         /// <summary>
         /// Exponential distribution.
         /// </summary>
-        [Description("1 - λ")]
+        [Description("Exponential")]
+        [Distribution("λ")]
         Exponential = 1,
 
         /// <summary>
         /// Rayleigh distribution.
         /// </summary>
-        [Description("1 - σ")]
+        [Description("Rayleigh")]
+        [Distribution("σ")]
         Rayleigh    = 2,
 
         /// <summary>
         /// Cauchy distribution.
         /// </summary>
-        [Description("1 - x0, 2 - γ")]
+        [Description("Cauchy")]
+        [Distribution("x0", "γ")]
         Cauchy      = 3,
 
         /// <summary>
         /// Laplace distribution.
         /// </summary>
-        [Description("1 - μ, 2 - b")]
+        [Description("Laplace")]
+        [Distribution("μ", "b")]
         Laplace     = 4,
 
         /// <summary>
         /// Normal distribution.
         /// </summary>
-        [Description("1 - μ, 2 - σ")]
+        [Description("Normal")]
+        [Distribution("μ", "σ")]
         Normal      = 5,
 
         /// <summary>
         /// Parabola distribution.
         /// </summary>
-        [Description("1 - k")]
+        [Description("Parabola")]
+        [Distribution("k")]
         Parabola    = 6,
 
         /// <summary>
         /// Uniform distribution.
         /// </summary>
-        [Description("1 - a, 2 - b")]
+        [Description("Uniform")]
+        [Distribution("a", "b")]
         Uniform     = 7,
 
         /// <summary>
         /// Weibull distribution.
         /// </summary>
-        [Description("1 - λ, 2 - k")]
+        [Description("Weibull")]
+        [Distribution("λ", "k")]
         Weibull     = 8
     }
 }

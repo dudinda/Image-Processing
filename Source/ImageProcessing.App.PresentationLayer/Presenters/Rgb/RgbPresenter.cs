@@ -11,12 +11,15 @@ using ImageProcessing.App.PresentationLayer.Views.Rgb;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.RgbFilters;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
+using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
 {
     internal sealed partial class RgbPresenter
-        : BasePresenter<IRgbView, RgbViewModel>
+        : BasePresenter<IRgbView, RgbViewModel>,
+          ISubscriber<ApplyRgbFilterEventArgs>,
+          ISubscriber<ApplyRgbColorFilterEventArgs>
     {
         private readonly IRgbFilterServiceProvider _provider;
         private readonly IAsyncOperationLocker _locker;
@@ -30,7 +33,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
             _locker = locker;
         }
 
-        private async Task ApplyRgbFilter(RgbFilterEventArgs e)
+        public async Task OnEventHandler(ApplyRgbFilterEventArgs e)
         {
             try
             {
@@ -49,7 +52,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
                         );
 
                     Controller.Aggregator.PublishFromAll(
-                        new RenderEventArgs(block, e.Publisher)
+                        new AttachToRendererEventArgs(block, e.Publisher)
                      );
                 }
             }
@@ -59,7 +62,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
             }
         }
 
-        private async Task ApplyColorFilter(RgbColorFilterEventArgs e)
+        public async Task OnEventHandler(ApplyRgbColorFilterEventArgs e)
         {
             try
             {
@@ -78,7 +81,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
                         );
 
                     Controller.Aggregator.PublishFromAll(
-                        new RenderEventArgs(block, e.Publisher)
+                        new AttachToRendererEventArgs(block, e.Publisher)
                      );
                 }
             }

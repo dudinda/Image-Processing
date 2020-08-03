@@ -1,7 +1,6 @@
 using System;
 using System.Configuration;
 using System.Drawing;
-using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -9,19 +8,14 @@ using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
-using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Show;
-using ImageProcessing.App.DomainLayer.DomainEvent.ToolbarArgs;
-using ImageProcessing.App.DomainLayer.DomainEvents.QualityMeasureArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Convolution;
 using ImageProcessing.App.PresentationLayer.Presenters.Rgb;
 using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
-using ImageProcessing.App.PresentationLayer.ViewModel.Histogram;
-using ImageProcessing.App.PresentationLayer.ViewModel.QualityMeasure;
 using ImageProcessing.App.PresentationLayer.ViewModel.Rgb;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.ServiceLayer.Facades.MainPresenterLockers.Interface;
@@ -31,17 +25,25 @@ using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
+using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 [assembly: InternalsVisibleTo("ImageProcessing.App.UILayer")]
 namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 {
-    internal sealed partial class MainPresenter : BasePresenter<IMainView>
+    internal sealed partial class MainPresenter : BasePresenter<IMainView>,
+          ISubscriber<AttachToRendererEventArgs>,
+          ISubscriber<ShowConvolutionMenuEventArgs>,
+          ISubscriber<ReplaceImageEventArgs>,
+          ISubscriber<ZoomEventArgs>,
+          ISubscriber<OpenFileDialogEventArgs>,
+          ISubscriber<SaveAsFileDialogEventArgs>,
+          ISubscriber<SaveWithoutFileDialogEventArgs>,
+          ISubscriber<ShowRgbMenuEventArgs>
     {
         private readonly ICacheService<Bitmap> _cache;
         private readonly INonBlockDialogService _nonBlock;
         private readonly IMainPresenterLockersFacade _locker;
-        private readonly IMainPresenterProvidersFacade _providers;
         private readonly IAwaitablePipeline _pipeline;
 
         public MainPresenter(
@@ -49,17 +51,15 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             ICacheService<Bitmap> cache,
             INonBlockDialogService nonBlock,
             IAwaitablePipeline pipeline,
-            IMainPresenterLockersFacade locker,
-            IMainPresenterProvidersFacade providers) : base(controller)
+            IMainPresenterLockersFacade locker) : base(controller)
         {
             _cache = cache;
             _nonBlock = nonBlock;
             _locker = locker;
-            _providers = providers;
             _pipeline = pipeline;
         }
 
-        private async Task OpenImage(OpenFileDialogEventArgs e)
+        public async Task OnEventHandler(OpenFileDialogEventArgs e)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        private async Task SaveImageAs(SaveAsFileDialogEventArgs e)
+        public async Task OnEventHandler(SaveAsFileDialogEventArgs e)
         {
             try
             {
@@ -105,7 +105,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        private async Task SaveImage(SaveWithoutFileDialogEventArgs e)
+        public async Task OnEventHandler(SaveWithoutFileDialogEventArgs e)
         {
             try
             {
@@ -126,28 +126,29 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-
-
-        private async Task ShowQualityMeasureForm(ShowQualityMeasureEventArgs e)
+        public async Task OnEventHandler(ShowRgbMenuEventArgs e)
         {
             try
             {
                 if (!View.ImageIsNull(ImageContainer.Source))
                 {
-                    Controller.Run<QualityMeasurePresenter, QualityMeasureViewModel>(
-                        new QualityMeasureViewModel(View.GetQualityQueue())
+                    var copy = await GetImageCopy(
+                       ImageContainer.Source
+                   ).ConfigureAwait(true);
+
+                    Controller.Run<RgbPresenter, RgbViewModel>(
+                        new RgbViewModel(copy)
                     );
 
-                    View.EnableQualityQueue(false);
                 }
             }
             catch (Exception ex)
             {
-                OnError(Errors.QualityHistogram);
+                OnError(Errors.ApplyRgbFilter);
             }
         }
 
-        private async Task ShowConvolutionFiltersMenu(ShowConvolutionFilterPresenterEventArgs e)
+        public async Task OnEventHandler(ShowConvolutionMenuEventArgs e)
         {
             try
             {
@@ -168,7 +169,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        private async Task AttachToRenderer(RenderEventArgs e)
+        public async Task OnEventHandler(AttachToRendererEventArgs e)
         {
             try
             {
@@ -196,109 +197,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        private async Task ShowRgbFiltersMenu(ShowRgbFiltersEventArgs e)
-        {
-            try
-            {
-                if (!View.ImageIsNull(ImageContainer.Source))
-                {
-                    var copy = await GetImageCopy(
-                       ImageContainer.Source
-                   ).ConfigureAwait(true);
-
-                    Controller.Run<RgbPresenter, RgbViewModel>(
-                        new RgbViewModel(copy)
-                    );
-
-                }
-            }
-            catch (Exception ex)
-            {
-                OnError(Errors.ApplyRgbFilter);
-            }
-        }
-
-        private async Task ApplyHistogramTransformation(DistributionEventArgs e)
-        {
-            try
-            {
-                if (!View.ImageIsNull(ImageContainer.Source))
-                {
-                    View.SetCursor(CursorType.Wait);
-
-                    var copy = await GetImageCopy(
-                        ImageContainer.Source
-                    ).ConfigureAwait(true);
-
-                    copy.Tag = e.Distribution.ToString();
-
-                    await Render(
-                        new PipelineBlock(copy)
-                            .Add<Bitmap, Bitmap>((bmp) => _providers.Transform(bmp, e.Distribution, e.Parameters))
-                            .Add<Bitmap>((bmp) => View.AddToQualityMeasureContainer(bmp)),
-                        ImageContainer.Destination
-                    ).ConfigureAwait(true);
-
-                    View.EnableQualityQueue(true);
-                }
-            }
-            catch (OperationCanceledException cancel)
-            {
-                OnError(Errors.CancelOperation);
-            }
-            catch (Exception ex)
-            {
-                OnError(Errors.TransformHistogram);
-            }      
-        }
-
-        private async Task Shuffle(ShuffleEventArgs e)
-        {
-            try
-            {
-                if (!View.ImageIsNull(ImageContainer.Source))
-                {
-                    View.SetCursor(CursorType.Wait);
-
-                    var copy = await GetImageCopy(
-                        ImageContainer.Source
-                    ).ConfigureAwait(true);
-
-                    await Render(
-                        new PipelineBlock(copy)
-                            .Add<Bitmap, Bitmap>((bmp) => bmp.Shuffle()),
-                        ImageContainer.Destination
-                    ).ConfigureAwait(true);
-                }
-            }
-            catch
-            {
-                OnError(Errors.Shuffle);
-            }
-        }
-
-        private async Task BuildFunction(RandomVariableFunctionEventArgs e)
-        {
-            try
-            {
-                if (!View.ImageIsNull(e.Container))
-                {
-                    var copy = await GetImageCopy(
-                        e.Container
-                    ).ConfigureAwait(true);
-
-                    Controller.Run<HistogramPresenter, HistogramViewModel>(
-                        new HistogramViewModel(copy, e.Action)
-                    );
-                }
-            }
-            catch (Exception ex)
-            {
-                OnError(Errors.BuildFunction);
-            }
-        }
-
-        private async Task Replace(ImageContainerEventArgs e)
+        public async Task OnEventHandler(ReplaceImageEventArgs e)
         {
             try
             {
@@ -327,35 +226,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                 OnError(Errors.ReplaceImage);
             }        
         }
-
-        private async Task GetRandomVariableInfo(RandomVariableInfoEventArgs e)
-        {
-            try
-            {
-                var container = e.Container;
-
-                if (!View.ImageIsNull(container))
-                {
-                    var copy = await GetImageCopy(
-                        container
-                    ).ConfigureAwait(true);
-
-                    var result = await Task.Run(
-                        () => _providers.GetInfo(copy, e.Action)
-                    ).ConfigureAwait(true);
-
-                    View.ShowInfo(
-                        result.ToString(CultureInfo.InvariantCulture)
-                    );
-                }
-            }
-            catch (Exception ex)
-            {
-               OnError(Errors.RandomVariableInfo);
-            }
-        }
-
-        private async Task Zoom(ZoomEventArgs e)
+    
+        public async Task OnEventHandler(ZoomEventArgs e)
         {
             try
             {
@@ -397,18 +269,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
         private async Task Render(IPipelineBlock block, ImageContainer container)
         {
-            var isRendered = await TryRender(
-                block, container
-            ).ConfigureAwait(true);
-
-            if (!isRendered)
-            {
-                throw new InvalidOperationException(nameof(isRendered));
-            } 
-        }
-
-        private async Task<bool> TryRender(IPipelineBlock block, ImageContainer container)
-        {
             if (
                 _pipeline
                     .Register(block
@@ -436,10 +296,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     View.SetCursor(CursorType.Default);
                 }
 
-                return true;
             }
 
-            return false;
+            throw new InvalidOperationException();
         }
 
         private void OnError(string error)
@@ -455,8 +314,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                 View.SetCursor(CursorType.Wait);
             }
         }
-           
-        private void CloseForm(CloseFormEventArgs e)
+
+        public void CloseForm(CloseFormEventArgs e)
             => Controller.Dispose();
     }
 }

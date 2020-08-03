@@ -4,7 +4,7 @@ namespace ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs
 {
     public sealed class ShowTooltipOnErrorEventArgs : BaseEventArgs
     {
-        public ShowTooltipOnErrorEventArgs(string error)
+        public ShowTooltipOnErrorEventArgs(string error) : base()
             => Error = error;
 
         public string Error { get; }

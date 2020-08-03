@@ -49,42 +49,42 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
             PMF.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
-                    new RandomVariableFunctionEventArgs(
+                    new BuildRandomVariableFunctionEventArgs(
                         RandomVariableFunction.PMF, ImageContainer.Source
                     )
                 );
 
             CDF.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
-                    new RandomVariableFunctionEventArgs(
+                    new BuildRandomVariableFunctionEventArgs(
                         RandomVariableFunction.CDF, ImageContainer.Source
                     )
                 );
 
             Expectation.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
-                    new RandomVariableInfoEventArgs(
+                    new GetRandomVariableInfoEventArgs(
                         RandomVariableInfo.Expectation, ImageContainer.Source
                     )
                 );
 
             Variance.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
-                    new RandomVariableInfoEventArgs(
+                    new GetRandomVariableInfoEventArgs(
                         RandomVariableInfo.Variance, ImageContainer.Source
                     )
                 );
 
             StandardDeviation.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
-                    new RandomVariableInfoEventArgs(
+                    new GetRandomVariableInfoEventArgs(
                         RandomVariableInfo.StandardDeviation, ImageContainer.Source
                     )
                 );
 
             Entropy.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
-                    new RandomVariableInfoEventArgs(
+                    new GetRandomVariableInfoEventArgs(
                         RandomVariableInfo.Entropy, ImageContainer.Source
                     )
                 );
@@ -92,12 +92,12 @@ namespace ImageProcessing.App.UILayer.Form.Main
             
             QualityMeasure.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
-                    new ShowQualityMeasureEventArgs()
+                    new ShowQualityMeasureMenuEventArgs()
                 );
 
             RgbMenu.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
-                    new ShowRgbFiltersEventArgs()
+                    new ShowRgbMenuEventArgs()
                 );
         }
 
@@ -108,7 +108,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         {
             ConvolutionFiltersMenu.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
-                    new ShowConvolutionFilterPresenterEventArgs()
+                    new ShowConvolutionMenuEventArgs()
                 );
         }
 
@@ -120,56 +120,56 @@ namespace ImageProcessing.App.UILayer.Form.Main
         {
             ExponentialDistribution.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
-                    new DistributionEventArgs(
+                    new TransformHistogramEventArgs(
                         Distribution.Exponential, Parameters
                     )
                 );
 
             ParabolaDistribution.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
-                    new DistributionEventArgs(
+                    new TransformHistogramEventArgs(
                         Distribution.Parabola, Parameters
                     )
                 );
 
             RayleighDistribution.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
-                    new DistributionEventArgs(
+                    new TransformHistogramEventArgs(
                         Distribution.Rayleigh, Parameters
                     )
                 );
 
             CauchyDistribution.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
-                    new DistributionEventArgs(
+                    new TransformHistogramEventArgs(
                         Distribution.Cauchy, Parameters
                     )
                 );
 
             LaplaceDistribution.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
-                    new DistributionEventArgs(
+                    new TransformHistogramEventArgs(
                         Distribution.Laplace, Parameters
                     )
                 );
 
             NormalDistribution.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
-                    new DistributionEventArgs(
+                    new TransformHistogramEventArgs(
                         Distribution.Normal, Parameters
                     )
                 );
 
             UniformDistribution.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
-                    new DistributionEventArgs(
+                    new TransformHistogramEventArgs(
                         Distribution.Uniform, Parameters
                     )
                 );
 
             WeibullDistribution.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
-                    new DistributionEventArgs(
+                    new TransformHistogramEventArgs(
                         Distribution.Weibull, Parameters
                     )
                 );
