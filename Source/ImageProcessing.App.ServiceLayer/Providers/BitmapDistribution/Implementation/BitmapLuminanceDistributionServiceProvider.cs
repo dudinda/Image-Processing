@@ -29,7 +29,7 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistri
         }
 
         /// <inheritdoc/>
-        public Bitmap Transform(Bitmap bmp, Distribution distribution, (string, string) parms)
+        public Bitmap Transform(Bitmap bmp, Distributions distribution, (string, string) parms)
             =>  _service.Transform(bmp,
                     _factory.Get(distribution)
                             .SetParams(parms)

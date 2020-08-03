@@ -26,11 +26,11 @@ namespace ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.Two
         public WeibullDistribution(decimal lambda, decimal k)
         {
             _lambda = lambda;
-            _k      = k;
+            _k = k;
         }
 
         /// <inheritdoc/>
-        public string Name => nameof(Distribution.Weibull);
+        public string Name => nameof(CommonLayer.Enums.Distributions.Weibull);
 
         /// <inheritdoc/>
         public decimal FirstParameter => _lambda;
@@ -50,7 +50,7 @@ namespace ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.Two
         /// <inheritdoc/>
         public bool Quantile(decimal p, out decimal quantile)
         {
-            if (p < 1)
+            if (p < 1 && _k != 0)
             {
                 quantile = _lambda * -(DecimalMathReal.Log(1 - p).Pow(1.0M / _k));
 

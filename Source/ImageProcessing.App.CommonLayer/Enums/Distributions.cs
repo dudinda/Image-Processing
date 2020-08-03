@@ -6,7 +6,7 @@ namespace ImageProcessing.App.CommonLayer.Enums
     /// <summary>
     /// Specifies a distribution of a random variable.
     /// </summary>
-    public enum Distribution
+    public enum Distributions
     {
         /// <summary>
         /// An unknown distribution.

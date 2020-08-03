@@ -13,28 +13,28 @@ namespace ImageProcessing.App.DomainLayer.Factory.Distributions.Implementation
     {
         /// <summary>
         /// A factory method
-        /// where the <see cref="Distribution"/> represents an
+        /// where the <see cref="CommonLayer.Enums.Distributions"/> represents an
         /// enumeration for the types implementing the <see cref="IDistribution"/>.
         /// </summary>
-        public IDistribution Get(Distribution distribution)
+        public IDistribution Get(CommonLayer.Enums.Distributions distribution)
             => distribution
         switch
         {
-            Distribution.Exponential
+            CommonLayer.Enums.Distributions.Exponential
                 => new ExponentialDistribution(),
-            Distribution.Laplace
+            CommonLayer.Enums.Distributions.Laplace
                 => new LaplaceDistribution(),
-            Distribution.Rayleigh
+            CommonLayer.Enums.Distributions.Rayleigh
                 => new RayleighDistribution(),
-            Distribution.Cauchy
+            CommonLayer.Enums.Distributions.Cauchy
                 => new CauchyDistribution(),
-            Distribution.Normal
+            CommonLayer.Enums.Distributions.Normal
                 => new NormalDistribution(),
-            Distribution.Parabola
+            CommonLayer.Enums.Distributions.Parabola
                 => new ParabolaDistribution(),
-            Distribution.Uniform
+            CommonLayer.Enums.Distributions.Uniform
                 => new UniformDistribution(),
-            Distribution.Weibull
+            CommonLayer.Enums.Distributions.Weibull
                 => new WeibullDistribution(),
 
             _   => throw new NotImplementedException(nameof(distribution))

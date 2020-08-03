@@ -7,8 +7,6 @@ using ImageProcessing.App.PresentationLayer.Views.ViewComponent.BitmapInfo;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.BitmapZoom;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.Cursor;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.Error;
-using ImageProcessing.App.PresentationLayer.Views.ViewComponent.QualityMeasure;
-using ImageProcessing.App.PresentationLayer.Views.ViewComponent.RgbMenu;
 using ImageProcessing.Microkernel.MVP.View;
 
 namespace ImageProcessing.App.PresentationLayer.Views.Main
@@ -18,8 +16,8 @@ namespace ImageProcessing.App.PresentationLayer.Views.Main
     /// of the main window.
     /// </summary>
     public interface IMainView : IView, IBitmapZoom,
-        IError, IColorMenu, IBitmapContainer,
-        IBitmapInfo, ICursor, IQualityMeasure, IDisposable
+        ITooltip, IBitmapContainer, IBitmapInfo,
+        ICursor, IDisposable
     {
         /// <summary>
         /// Specifies a path to the opened file.

@@ -32,9 +32,9 @@ namespace ImageProcessing.App.ServiceLayer.Facades.MainPresenterProviders.Implem
         public decimal GetInfo(Bitmap bmp, RandomVariableInfo info)
             => _lumaProvider.GetInfo(bmp, info);
 
-        /// <inheritdoc cref="IBitmapLuminanceDistributionServiceProvider.Transform(Bitmap, Distribution, (string, string))"/>
+        /// <inheritdoc cref="IBitmapLuminanceDistributionServiceProvider.Transform(Bitmap, Distributions, (string, string))"/>
         public Bitmap Transform(
-            Bitmap bmp, Distribution distribution, (string, string) parms)
+            Bitmap bmp, Distributions distribution, (string, string) parms)
             => _lumaProvider.Transform(bmp, distribution, parms);     
     }
 }

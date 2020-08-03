@@ -8,6 +8,7 @@ using ImageProcessing.App.UILayer.Code.Enums;
 using ImageProcessing.App.UILayer.EventBinders.Rgb.Interface;
 using ImageProcessing.App.UILayer.FormControls.Rgb;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
+using ImageProcessing.Utility.Interop.Wrapper;
 
 using MetroFramework.Controls;
 
@@ -36,22 +37,26 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
         }
 
         /// <inheritdoc/>
-        public RgbFilter SelectedFilter
+        public RgbFilter Dropdown
         {
             get => RgbFilterComboBox
                 .SelectedItem.ToString()
                 .GetValueFromDescription<RgbFilter>();
         }
 
+        /// <inheritdoc/>
         public MetroRadioButton RedButton
             => RedColor;
 
+        /// <inheritdoc/>
         public MetroRadioButton GreenButton
             => RedColor;
 
+        /// <inheritdoc/>
         public MetroRadioButton BlueButton
             => BlueColor;
 
+        /// <inheritdoc/>
         public MetroButton ApplyFilterButton
             => ApplyFilter;
 
@@ -66,6 +71,13 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
                  nameof(RgbViewAction.GetColor)
             ].Method.Invoke(this, null);
         }
+
+        /// <inheritdoc/>
+        public void Tooltip(string message)
+           => ShowToolTip.Show(message, this, PointToClient(
+                 CursorPosition.GetCursorPosition()), 2000
+             );
+
 
         /// <summary>
         /// Used by the generated <see cref="Dispose(bool)"/> call.

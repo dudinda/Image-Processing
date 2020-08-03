@@ -25,7 +25,7 @@ namespace ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.One
         }
 
         /// <inheritdoc/>
-        public string Name => nameof(Distribution.Rayleigh);
+        public string Name => nameof(CommonLayer.Enums.Distributions.Rayleigh);
 
         /// <inheritdoc/>
         public decimal FirstParameter => _sigma;

@@ -28,7 +28,7 @@ namespace ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.Two
         }
 
         /// <inheritdoc/>
-        public string Name => nameof(Distribution.Normal);
+        public string Name => nameof(CommonLayer.Enums.Distributions.Normal);
 
         /// <inheritdoc/>
         public decimal FirstParameter => _mu;
@@ -45,7 +45,9 @@ namespace ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.Two
         /// <inheritdoc/>
         public bool Quantile(decimal p, out decimal quantile)
         {
-            if (DecimalMathReal.Abs(p) < 1)
+            var erfArg = 2 * p - 1;
+
+            if (DecimalMathReal.Abs(erfArg) < 1)
             {
                 quantile = _mu + _sigma * DecimalMathReal.Sqrt2 * DecimalMathSpecial.ErfInv(2 * p - 1);
 

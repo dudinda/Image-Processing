@@ -25,7 +25,7 @@ namespace ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.One
         }
 
         /// <inheritdoc/>
-        public string Name => nameof(Distribution.Exponential);
+        public string Name => nameof(CommonLayer.Enums.Distributions.Exponential);
 
         /// <inheritdoc/>
         public decimal FirstParameter => _lambda;
@@ -42,7 +42,7 @@ namespace ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.One
         /// <inheritdoc/>
         public bool Quantile(decimal p, out decimal quantile)
         {
-            if (p < 1)
+            if (p < 1 && _lambda != 0)
             {
                 quantile = -DecimalMathReal.Log(1 - p) / _lambda;
 

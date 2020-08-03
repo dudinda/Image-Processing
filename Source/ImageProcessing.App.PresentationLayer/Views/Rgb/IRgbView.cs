@@ -1,15 +1,20 @@
 using System;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.PresentationLayer.Views.ViewComponent.RgbMenu;
+using ImageProcessing.App.PresentationLayer.Views.ViewComponent.Dropdown;
+using ImageProcessing.App.PresentationLayer.Views.ViewComponent.Error;
 using ImageProcessing.Microkernel.MVP.View;
 
 namespace ImageProcessing.App.PresentationLayer.Views.Rgb
 {
-    public interface IRgbView
-        : IView, IDisposable, IColorMenu
+    public interface IRgbView : IView,
+        IDisposable, IDropdown<RgbFilter>, ITooltip
         
     {
-        public RgbFilter SelectedFilter { get; }
+        /// <summary>
+        /// Get a color combination from the
+        /// rgb colors menu.
+        /// </summary>
+        RgbColors GetSelectedColors(RgbColors color);
     }
 }

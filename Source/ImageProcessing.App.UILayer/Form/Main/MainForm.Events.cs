@@ -121,56 +121,56 @@ namespace ImageProcessing.App.UILayer.Form.Main
             ExponentialDistribution.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
                     new TransformHistogramEventArgs(
-                        Distribution.Exponential, Parameters
+                        Distributions.Exponential, Parameters
                     )
                 );
 
             ParabolaDistribution.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
                     new TransformHistogramEventArgs(
-                        Distribution.Parabola, Parameters
+                        Distributions.Parabola, Parameters
                     )
                 );
 
             RayleighDistribution.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
                     new TransformHistogramEventArgs(
-                        Distribution.Rayleigh, Parameters
+                        Distributions.Rayleigh, Parameters
                     )
                 );
 
             CauchyDistribution.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
                     new TransformHistogramEventArgs(
-                        Distribution.Cauchy, Parameters
+                        Distributions.Cauchy, Parameters
                     )
                 );
 
             LaplaceDistribution.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
                     new TransformHistogramEventArgs(
-                        Distribution.Laplace, Parameters
+                        Distributions.Laplace, Parameters
                     )
                 );
 
             NormalDistribution.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
                     new TransformHistogramEventArgs(
-                        Distribution.Normal, Parameters
+                        Distributions.Normal, Parameters
                     )
                 );
 
             UniformDistribution.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
                     new TransformHistogramEventArgs(
-                        Distribution.Uniform, Parameters
+                        Distributions.Uniform, Parameters
                     )
                 );
 
             WeibullDistribution.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
                     new TransformHistogramEventArgs(
-                        Distribution.Weibull, Parameters
+                        Distributions.Weibull, Parameters
                     )
                 );
         }

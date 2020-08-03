@@ -25,7 +25,7 @@ namespace ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.One
         }
 
         /// <inheritdoc/>
-        public string Name => nameof(Distribution.Parabola);
+        public string Name => nameof(CommonLayer.Enums.Distributions.Parabola);
 
         /// <inheritdoc/>
         public decimal FirstParameter => _k;

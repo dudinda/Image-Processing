@@ -6,7 +6,7 @@ namespace ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs
     public sealed class TransformHistogramEventArgs : BaseEventArgs
     {
         public TransformHistogramEventArgs(
-            Distribution distribution,
+            Distributions distribution,
             (string, string) parameters) : base()
         {
             Distribution = distribution;
@@ -14,7 +14,7 @@ namespace ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs
         }
 
         ///<inheritdoc cref="Distribution/>
-        public Distribution Distribution { get; }
+        public Distributions Distribution { get; }
 
         /// <summary>
         /// Parameters of the specified <see cref="Distribution"/>.

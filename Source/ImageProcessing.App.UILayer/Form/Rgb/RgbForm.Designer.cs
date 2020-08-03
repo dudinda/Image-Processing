@@ -22,6 +22,7 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.RadioColorGroup = new MetroFramework.Controls.MetroPanel();
             this.BlueColor = new MetroFramework.Controls.MetroRadioButton();
             this.GreenColor = new MetroFramework.Controls.MetroRadioButton();
@@ -29,6 +30,7 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
             this.Palette = new MetroFramework.Controls.MetroButton();
             this.RgbFilterComboBox = new MetroFramework.Controls.MetroComboBox();
             this.ApplyFilter = new MetroFramework.Controls.MetroButton();
+            this.ShowToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.RadioColorGroup.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -130,5 +132,6 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
         public MetroFramework.Controls.MetroRadioButton GreenColor;
         public MetroFramework.Controls.MetroRadioButton RedColor;
         public MetroFramework.Controls.MetroButton ApplyFilter;
+        private System.Windows.Forms.ToolTip ShowToolTip;
     }
 }

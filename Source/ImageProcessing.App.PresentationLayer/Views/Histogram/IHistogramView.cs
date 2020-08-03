@@ -17,10 +17,5 @@ namespace ImageProcessing.App.PresentationLayer.Views.Histogram
         /// Set a maximum value on the y axis.
         /// </summary>
         double YAxisMaximum { get; set; }
-
-        /// <summary>
-        /// Initialize a random variable function. 
-        /// </summary>
-        void Init(RandomVariableFunction action);
     }
 }

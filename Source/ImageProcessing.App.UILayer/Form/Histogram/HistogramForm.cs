@@ -40,33 +40,6 @@ namespace ImageProcessing.App.UILayer.Form.Histogram
             base.Show();
         }
 
-        /// <inheritdoc/>
-        public void Init(RandomVariableFunction function)
-        {
-            _command[
-                function.ToString()
-            ].Method.Invoke(this, new object[] {
-                RandomVariableFunction.PMF.GetDescription(),
-                RandomVariableFunction.CDF.GetDescription()
-            });
-        } 
-        
-        [Command(nameof(RandomVariableFunction.CDF))]
-        private void SetupCDFCommand(string pmf, string cdf)
-        {          
-            Text = cdf;
-            Freq.Series[cdf].IsVisibleInLegend = true;
-            Freq.Series[pmf].IsVisibleInLegend = false;
-        }
-
-        [Command(nameof(RandomVariableFunction.PMF))]
-        private void SetupPMFCommand(string pmf, string cdf)
-        {
-            Text = pmf;
-            Freq.Series[pmf].IsVisibleInLegend = true;
-            Freq.Series[cdf].IsVisibleInLegend = false;
-        }
-
         /// <summary>
         /// Used by the generated <see cref="Dispose(bool)"/> call.
         /// Can be used by a DI container in a singleton scope on Release();

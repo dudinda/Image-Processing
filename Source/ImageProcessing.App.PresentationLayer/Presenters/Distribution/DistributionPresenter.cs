@@ -65,7 +65,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             }
             catch (Exception ex)
             {
-                View.ShowError(Errors.TransformHistogram);
+                View.Tooltip(Errors.TransformHistogram);
             }
         }
 
@@ -89,7 +89,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             }
             catch(Exception ex)
             {
-                View.ShowError(Errors.Shuffle);
+                View.Tooltip(Errors.Shuffle);
             }
         }
 
@@ -108,7 +108,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             }
             catch (Exception ex)
             {
-                View.ShowError(Errors.BuildFunction);
+                View.Tooltip(Errors.BuildFunction);
             }
         }
 
@@ -124,7 +124,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             }
             catch (Exception ex)
             {
-                View.ShowError(Errors.QualityHistogram);
+                View.Tooltip(Errors.QualityHistogram);
             }
         }
 
@@ -143,13 +143,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
                     () => _provider.GetInfo(copy, e.Action)
                 ).ConfigureAwait(true);
 
-                /*  View.ShowInfo(
-                      result.ToString(CultureInfo.InvariantCulture)
-                  );*/
+                 View.Tooltip(result.ToString(CultureInfo.InvariantCulture));
             }
             catch (Exception ex)
             {
-                View.ShowError(Errors.RandomVariableInfo);
+                View.Tooltip(Errors.RandomVariableInfo);
             }
         }
     }

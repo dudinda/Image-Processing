@@ -16,8 +16,7 @@ using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
 {
-    internal sealed partial class RgbPresenter
-        : BasePresenter<IRgbView, RgbViewModel>,
+    internal sealed partial class RgbPresenter : BasePresenter<IRgbView, RgbViewModel>,
           ISubscriber<ApplyRgbFilterEventArgs>,
           ISubscriber<ApplyRgbColorFilterEventArgs>
     {
@@ -37,7 +36,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
         {
             try
             {
-                var filter = View.SelectedFilter;
+                var filter = View.Dropdown;
 
                 if (filter != RgbFilter.Unknown)
                 {

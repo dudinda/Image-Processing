@@ -26,7 +26,7 @@ namespace ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.Two
         }
 
         /// <inheritdoc/>
-        public string Name => nameof(Distribution.Uniform);
+        public string Name => nameof(CommonLayer.Enums.Distributions.Uniform);
 
         /// <inheritdoc/>
         public decimal FirstParameter => _a;

@@ -303,7 +303,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
         private void OnError(string error)
         {
-            View.ShowError(error);
+            View.Tooltip(error);
 
             if (!_pipeline.Any())
             {

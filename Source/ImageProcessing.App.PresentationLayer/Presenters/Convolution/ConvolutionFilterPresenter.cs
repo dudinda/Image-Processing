@@ -38,7 +38,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
 		{
 			try
 			{
-                var filter = View.SelectedFilter;
+                var filter = View.Dropdown;
 
                 if (filter != ConvolutionFilter.Unknown)
                 {
@@ -62,13 +62,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
 			}
 			catch(Exception ex)
 			{
-				View.ShowError(Errors.ApplyConvolutionFilter);
+				View.Tooltip(Errors.ApplyConvolutionFilter);
 			}
 		}
 
         public Task OnEventHandler(ShowTooltipOnErrorEventArgs e)
         {
-            View.ShowError(e.Error);
+            View.Tooltip(e.Error);
 
             return Task.CompletedTask;
         }         

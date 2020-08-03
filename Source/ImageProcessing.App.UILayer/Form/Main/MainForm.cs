@@ -128,8 +128,8 @@ namespace ImageProcessing.App.UILayer.Form.Main
             );
 
         /// <inheritdoc/>
-        public void ShowError(string error)
-            => ErrorToolTip.Show(error, this, PointToClient(
+        public void Tooltip(string message)
+            => ErrorToolTip.Show(message, this, PointToClient(
                 CursorPosition.GetCursorPosition()), 2000
             );
 

@@ -27,7 +27,7 @@ namespace ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.Two
         }
 
         /// <inheritdoc/>
-        public string Name => nameof(Distribution.Laplace);
+        public string Name => nameof(CommonLayer.Enums.Distributions.Laplace);
 
         /// <inheritdoc/>
         public decimal FirstParameter => _mu;
