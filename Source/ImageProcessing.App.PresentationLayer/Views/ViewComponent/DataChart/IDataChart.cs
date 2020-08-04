@@ -10,6 +10,6 @@ namespace ImageProcessing.App.PresentationLayer.Views.ViewComponent.DataChart
         /// <summary>
         /// Get a chart.
         /// </summary>
-        Chart GetChart { get; }
+        Chart DataChart { get; }
     }
 }

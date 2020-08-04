@@ -17,15 +17,14 @@ using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
 {
-    internal sealed partial class ConvolutionFilterPresenter
-        : BasePresenter<IConvolutionView, ConvolutionFilterViewModel>,
+    internal sealed partial class ConvolutionPresenter : BasePresenter<IConvolutionView, ConvolutionFilterViewModel>,
           ISubscriber<ApplyConvolutionFilterEventArgs>,
           ISubscriber<ShowTooltipOnErrorEventArgs>
     {
 		private readonly IConvolutionServiceProvider _convolutionProvider;
 		private readonly IAsyncOperationLocker _operationLocker;
 
-        public ConvolutionFilterPresenter(
+        public ConvolutionPresenter(
             IAppController controller,
             IConvolutionServiceProvider convolutionServiceProvider,
             IAsyncOperationLocker operationLocker) : base(controller)
@@ -53,8 +52,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
                                 .ApplyFilter(bmp, filter)
                         );
 
-                    Controller.Aggregator.PublishFrom(
-                        e.Publisher,
+                    Controller.Aggregator.PublishFromAll(
                         new AttachToRendererEventArgs(
                            block
                         )

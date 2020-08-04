@@ -158,7 +158,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         ImageContainer.Source
                     ).ConfigureAwait(true);
 
-                    Controller.Run<ConvolutionFilterPresenter, ConvolutionFilterViewModel>(
+                    Controller.Run<ConvolutionPresenter, ConvolutionFilterViewModel>(
                         new ConvolutionFilterViewModel(copy)
                     );
                 }

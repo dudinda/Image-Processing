@@ -25,7 +25,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         
         private async Task DoWorkBeforeShow(QualityMeasureViewModel vm)
         {
-            var chart = View.GetChart;
+            var chart = View.DataChart;
           
             var map = await Task.Run(
                 () => _qualityService.BuildIntervals(vm.Queue)
