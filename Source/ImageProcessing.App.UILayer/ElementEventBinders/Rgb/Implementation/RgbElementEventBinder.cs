@@ -8,11 +8,11 @@ using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 
 namespace ImageProcessing.App.UILayer.EventBinders.Rgb.Implementation
 {
-    internal sealed class RgbEventBinder : IRgbEventBinder
+    internal sealed class RgbElementEventBinder : IRgbElementEventBinder
     {
         private readonly IEventAggregator _aggregator;
 
-        public RgbEventBinder(IEventAggregator aggregator)
+        public RgbElementEventBinder(IEventAggregator aggregator)
         {
             _aggregator = aggregator;
         }

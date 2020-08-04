@@ -10,19 +10,19 @@ using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 
 namespace ImageProcessing.App.UILayer.EventBinders.Convolution.Implementation
 {
-    internal sealed class ConvolutionEventBinder : IConvolutionEventBinder
+    internal sealed class ConvolutionElementEventBinder : IConvolutionElementEventBinder
     {
         private static readonly Dictionary<string, CommandAttribute>
-               _cmdCommand = typeof(ConvolutionEventBinder).GetCommands();
+               _cmdCommand = typeof(ConvolutionElementEventBinder).GetCommands();
 
         private readonly IEventAggregator _aggregator;
 
-        public ConvolutionEventBinder(IEventAggregator aggregator)
+        public ConvolutionElementEventBinder(IEventAggregator aggregator)
         {
             _aggregator = aggregator;
         }
 
-        public void Bind(IConvolutionElementExposer source)
+        public void Expose(IConvolutionElementExposer source)
         {
             source.ApplyButton.Click += (sender, args)
                 => _aggregator.PublishFrom(source,

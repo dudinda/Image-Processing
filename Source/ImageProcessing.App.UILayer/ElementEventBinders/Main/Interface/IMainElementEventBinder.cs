@@ -5,7 +5,7 @@ using ImageProcessing.App.UILayer.FormElements.Main;
 
 namespace ImageProcessing.App.UILayer.EventBinders.Main.Interface
 {
-    internal interface IMainEventBinder : IBaseEventBinder<IMainElementExposer>
+    internal interface IMainElementEventBinder : IElementEventBinder<IMainElementExposer>
     {
         public bool ProcessCmdKey(IMainElementExposer view, Keys keyData);
     }

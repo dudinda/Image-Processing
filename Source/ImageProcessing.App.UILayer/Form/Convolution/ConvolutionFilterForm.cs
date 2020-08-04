@@ -18,11 +18,11 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
     /// <inheritdoc cref="IConvolutionView"/>
     internal sealed partial class ConvolutionFilterForm : BaseForm, IConvolutionElementExposer
     {
-        private readonly IConvolutionEventBinder _binder;
+        private readonly IConvolutionElementEventBinder _binder;
 
         public ConvolutionFilterForm(
             IAppController controller,
-            IConvolutionEventBinder binder) : base(controller)
+            IConvolutionElementEventBinder binder) : base(controller)
         {
             InitializeComponent();
 
@@ -70,7 +70,7 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
 
             Controller
                 .Aggregator
-                .Unsubscribe(typeof(ConvolutionFilterPresenter), this);
+                .Unsubscribe(typeof(ConvolutionPresenter), this);
 
             base.Dispose(true);
         }

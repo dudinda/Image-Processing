@@ -10,16 +10,16 @@ using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 
 namespace ImageProcessing.App.UILayer.EventBinders.Main.Implementation
 {
-    internal sealed class MainEventBinder : IMainEventBinder
+    internal sealed class MainElementEventBinder : IMainElementEventBinder
     {
         private readonly IEventAggregator _aggregator;
 
-        public MainEventBinder(IEventAggregator aggregator)
+        public MainElementEventBinder(IEventAggregator aggregator)
         {
             _aggregator = aggregator;
         }
 
-        public void Bind(IMainElementExposer source)
+        public void Expose(IMainElementExposer source)
         {
             source.OpenFileMenu.Click += (sender, args)
                 => _aggregator.PublishFromAll(

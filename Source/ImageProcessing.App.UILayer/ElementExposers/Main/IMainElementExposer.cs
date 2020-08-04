@@ -1,3 +1,4 @@
+using System.Drawing;
 using System.Windows.Forms;
 
 using ImageProcessing.App.PresentationLayer.Views.Main;
@@ -10,6 +11,10 @@ namespace ImageProcessing.App.UILayer.FormElements.Main
     /// </summary>
     internal interface IMainElementExposer : IMainView
     {
+        Image? SourceImageCopy { get; set; }
+        Image? DestinationImageCopy { get; set; }
+        PictureBox SourceBox { get; }
+        PictureBox DestinationBox { get; }
         /// <summary>
         /// Save as dialog.
         /// </summary>
@@ -54,5 +59,10 @@ namespace ImageProcessing.App.UILayer.FormElements.Main
         /// Show rgb control panel.
         /// </summary>
         ToolStripMenuItem RgbMenu { get; }
+
+        /// <summary>
+        /// Replace a destination container image by a source.
+        /// </summary>
+        ToolStripButton Undo { get; }
     }
 }

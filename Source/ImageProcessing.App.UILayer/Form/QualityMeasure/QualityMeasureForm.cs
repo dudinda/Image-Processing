@@ -14,7 +14,7 @@ namespace ImageProcessing.App.UILayer.Form.QualityMeasure
             InitializeComponent();
         }
         
-        public Chart GetChart
+        public Chart DataChart
             => Histogram;
 
         public new void Show()

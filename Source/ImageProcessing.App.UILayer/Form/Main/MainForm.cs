@@ -6,6 +6,7 @@ using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.UILayer.Code.Enums;
 using ImageProcessing.App.UILayer.Control;
+using ImageProcessing.App.UILayer.ElementCommands.Main.Interface;
 using ImageProcessing.App.UILayer.EventBinders.Main.Interface;
 using ImageProcessing.App.UILayer.FormElements.Main;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
@@ -16,16 +17,21 @@ namespace ImageProcessing.App.UILayer.Form.Main
     /// <inheritdoc cref="IMainView"/>
     internal sealed partial class MainForm : BaseForm, IMainView, IMainElementExposer
     {
-        private readonly IMainEventBinder _binder;
+        private readonly IMainElementEventBinder _binder;
+        private readonly IMainElementCommand _command;
 
         public MainForm(
             IAppController controller,
-            IMainEventBinder binder) : base(controller)
+            IMainElementEventBinder binder,
+            IMainElementCommand command) : base(controller)
         {
             InitializeComponent();
 
+            _command = command;
             _binder = binder;
-            _binder.Bind(this);
+
+            _binder.Expose(this);
+            _command.Expose(this);
 
             Bind();
         }
@@ -86,6 +92,25 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
         ToolStripMenuItem IMainElementExposer.RgbMenu => throw new System.NotImplementedException();
 
+        public Image SourceImageCopy
+        {
+            get => SrcImageCopy;
+            set => SrcImageCopy = value;
+        }
+        public Image DestinationImageCopy
+        {
+            get => DstImageCopy;
+            set => DstImageCopy = value;
+        }
+
+        public PictureBox SourceBox
+            => Src;
+
+        public PictureBox DestinationBox
+            => Dst;
+
+        ToolStripButton IMainElementExposer.Undo => throw new System.NotImplementedException();
+
         /// <inheritdoc/>
         public new void Show()
         {
@@ -110,18 +135,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
             => Container.Redo();
 
         /// <inheritdoc/>
-        public RgbColors GetSelectedColors(RgbColors color)
-        {
-            _command[
-                 color.ToString()
-            ].Method.Invoke(this, null);
-
-            return (RgbColors)_command[
-                 nameof(MainViewAction.GetColor)
-            ].Method.Invoke(this, null);
-        }
-
-        /// <inheritdoc/>
         public void ShowInfo(string info)
             => RandomVariableInformation.Show(info, this, PointToClient(
                 CursorPosition.GetCursorPosition()), 2000
@@ -135,58 +148,52 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
         /// <inheritdoc/>
         public void ResetTrackBarValue(ImageContainer container, int value = 0, bool isEnabled = true)
-            => _command[
-                container.ToString() + nameof(MainViewAction.ResetTrackBar)
-            ].Method.Invoke(this, new object[] { value, isEnabled });
+            => _command.Procedure(
+                container.ToString() + nameof(MainViewAction.ResetTrackBar),
+                value, isEnabled);
 
         /// <inheritdoc/>
         public Image ZoomImage(ImageContainer container)
-            => (Image)_command[
-                container.ToString() + nameof(MainViewAction.Zoom)
-            ].Method.Invoke(this, null);
+            => (Image)_command.Function(
+                container.ToString() + nameof(MainViewAction.Zoom));
 
         /// <inheritdoc/>
         public void SetImageToZoom(ImageContainer container, Image image)
-            => _command[
-                container.ToString() + nameof(MainViewAction.SetToZoom)
-            ].Method.Invoke(this, new object[] { image });
+            => _command.Procedure(
+                container.ToString() + nameof(MainViewAction.SetToZoom),
+                args: image);
 
         /// <inheritdoc/>
         public Image GetImageCopy(ImageContainer container)
-            => (Image)_command[
-                container.ToString() + nameof(MainViewAction.GetCopy)
-            ].Method.Invoke(this, null);
+            => (Image)_command.Function(
+                container.ToString() + nameof(MainViewAction.GetCopy));
 
         /// <inheritdoc/>
         public void SetImageCopy(ImageContainer container, Image copy)
-            => _command[
-                container.ToString() + nameof(MainViewAction.SetCopy)
-            ].Method.Invoke(this, new object[] { copy });
+            => _command.Procedure(
+                container.ToString() + nameof(MainViewAction.SetCopy),
+                args: copy);
 
         /// <inheritdoc/>
         public void SetImage(ImageContainer container, Image image)
-            => _command[
-                container.ToString() + nameof(MainViewAction.SetImage)
-            ].Method.Invoke(this, new object[] { image });
+            => _command.Procedure(
+                container.ToString() + nameof(MainViewAction.SetImage),
+                args: image);
 
         /// <inheritdoc/>
         public bool ImageIsNull(ImageContainer container)
-            => (bool)_command[
-                container.ToString() + nameof(MainViewAction.ImageIsNull)
-            ].Method.Invoke(this, null);
+            => (bool)_command.Function(
+                container.ToString() + nameof(MainViewAction.ImageIsNull));
 
         /// <inheritdoc/>
         public void Refresh(ImageContainer container)
-             => _command[
-                 container.ToString() + nameof(MainViewAction.Refresh)
-             ].Method.Invoke(this, null);
+             => _command.Procedure(
+                 container.ToString() + nameof(MainViewAction.Refresh));
 
         /// <inheritdoc/>
         public void SetCursor(CursorType cursor)
-            => _command[
-                cursor.ToString()
-            ].Method.Invoke(this, null);
-
+            => _command.Procedure(cursor.ToString());
+        
         /// <inheritdoc/>
         public void AddToUndoContainer((Bitmap changed, ImageContainer from) action)
             => Container.Add(action);

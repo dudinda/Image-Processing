@@ -1,74 +1,78 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-
 using ImageProcessing.App.CommonLayer.Attributes;
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.TypeExt;
 using ImageProcessing.App.UILayer.Code.Enums;
+using ImageProcessing.App.UILayer.ElementCommands.Main.Interface;
+using ImageProcessing.App.UILayer.FormElements.Main;
 
-namespace ImageProcessing.App.UILayer.Form.Main
+namespace ImageProcessing.App.UILayer.ElementCommands.Main.Implementation
 {
-    internal sealed partial class MainForm
+    internal sealed class MainElementCommand : IMainElementCommand
     {
         private static readonly Dictionary<string, CommandAttribute>
-            _command = typeof(MainForm).GetCommands();
+           _command = typeof(MainElementCommand).GetCommands();
+
+        private IMainElementExposer _exposer
+            = null!;
 
         [Command(
            nameof(ImageContainer.Source) +
            nameof(MainViewAction.ImageIsNull))]
         private bool SourceImageIsNullCommand()
-           => Src.Image is null;
+           => _exposer.SourceBox.Image is null;
 
         [Command(
             nameof(ImageContainer.Destination) +
             nameof(MainViewAction.ImageIsNull))]
         private bool DestinationImageIsNullCommand()
-            => Dst.Image is null;
+            => _exposer.DestinationBox.Image is null;
 
         [Command(
             nameof(ImageContainer.Source) +
             nameof(MainViewAction.Refresh))]
         private void RefreshSourceCommand()
-            => Src.Refresh();
+            => _exposer.SourceBox.Refresh();
 
         [Command(
             nameof(ImageContainer.Destination) +
             nameof(MainViewAction.Refresh))]
         private void RefreshDestinationCommand()
-            => Dst.Refresh();
+            => _exposer.DestinationBox.Refresh();
 
         [Command(
             nameof(ImageContainer.Source) +
             nameof(MainViewAction.GetCopy))]
         private Image GetSourceCopyCommand()
-            => SrcImageCopy;
+            => _exposer.SourceImageCopy;
 
         [Command(
            nameof(ImageContainer.Source) +
            nameof(MainViewAction.SetCopy))]
         private void SetSourceCopyCommand(Image image)
-           => SrcImageCopy = image;
+           => _exposer.SourceImageCopy = image;
 
         [Command(
            nameof(ImageContainer.Destination) +
            nameof(MainViewAction.SetCopy))]
         private void SetDestinationCopyCommand(Image image)
-           => DstImageCopy = image;
+           => _exposer.DestinationImageCopy = image;
 
         [Command(
             nameof(ImageContainer.Destination) +
             nameof(MainViewAction.GetCopy))]
         private Image GetDestinationCopyCommand()
-            => DstImageCopy;
+            => _exposer.DestinationImageCopy;
 
         [Command(
             nameof(ImageContainer.Source) +
             nameof(MainViewAction.SetImage))]
         private void SetSourceImageCommand(Image image)
         {
-            SrcImage = image;
-            Undo.Enabled = true;
+            _exposer.SourceBox.Image = image;
+            _exposer.Undo.Enabled = true;
         }
 
         [Command(
@@ -76,8 +80,8 @@ namespace ImageProcessing.App.UILayer.Form.Main
             nameof(MainViewAction.SetImage))]
         private void SetDestinationImageCommand(Image image)
         {
-            DstImage = image;
-            Undo.Enabled = true;
+            _exposer.DestinationBox.Image = image;
+            _exposer.Undo.Enabled = true;
         }
 
         [Command(
@@ -85,9 +89,9 @@ namespace ImageProcessing.App.UILayer.Form.Main
             nameof(MainViewAction.ResetTrackBar))]
         private void ResetSourceTrackBarValueCommand(int value = 0, bool isEnabled = true)
         {
-            SrcZoom.TrackBarValue = value;
-            SrcZoom.Enabled = isEnabled;
-            SrcZoom.Focus();
+            _exposer.ZoomSrcTrackBar.TrackBarValue = value;
+            _exposer.ZoomSrcTrackBar.Enabled = isEnabled;
+            _exposer.ZoomSrcTrackBar.Focus();
         }
 
         [Command(
@@ -95,22 +99,22 @@ namespace ImageProcessing.App.UILayer.Form.Main
             nameof(MainViewAction.ResetTrackBar))]
         private void ResetDestinationTrackBarValueCommand(int value = 0, bool isEnabled = true)
         {
-            DstZoom.TrackBarValue = value;
-            DstZoom.Enabled = isEnabled;
-            DstZoom.Focus();
+            _exposer.ZoomDstTrackBar.TrackBarValue = value;
+            _exposer.ZoomDstTrackBar.Enabled = isEnabled;
+            _exposer.ZoomDstTrackBar.Focus();
         }
 
         [Command(
             nameof(ImageContainer.Source) +
             nameof(MainViewAction.Zoom))]
         private Image ZoomSourceImageCommand()
-            => SrcZoom.Zoom();
+            => _exposer.ZoomSrcTrackBar.Zoom();
 
         [Command(
             nameof(ImageContainer.Destination) +
             nameof(MainViewAction.Zoom))]
         private Image ZoomDestinationImageCommand()
-           => DstZoom.Zoom();
+           => _exposer.ZoomDstTrackBar.Zoom();
 
         [Command(nameof(CursorType.Wait))]
         private void SetWaitCursorCommand()
@@ -124,12 +128,21 @@ namespace ImageProcessing.App.UILayer.Form.Main
             nameof(ImageContainer.Source) +
             nameof(MainViewAction.SetToZoom))]
         private Image SetToZoomSourceImageCommand(Image image)
-            => SrcZoom.ImageToZoom = image;
+            => _exposer.ZoomSrcTrackBar.ImageToZoom = image;
 
         [Command(
             nameof(ImageContainer.Destination) +
             nameof(MainViewAction.SetToZoom))]
         private Image SetToZoomDestinationImageCommand(Image image)
-           => DstZoom.ImageToZoom = image;    
+           => _exposer.ZoomDstTrackBar.ImageToZoom = image;
+
+        public object Function(string command, params object[] args)
+            => _command[command].Method.Invoke(this, args);
+
+        public void Procedure(string command, params object[] args)
+            => _command[command].Method.Invoke(this, args);
+
+        public void Expose(IMainElementExposer exposer)
+            => _exposer = exposer;
     }
 }

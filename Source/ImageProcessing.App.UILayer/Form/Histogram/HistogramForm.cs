@@ -23,7 +23,7 @@ namespace ImageProcessing.App.UILayer.Form.Histogram
         }
 
         /// <inheritdoc/>
-        public Chart GetChart
+        public Chart DataChart
             => Freq;
 
         /// <inheritdoc/>

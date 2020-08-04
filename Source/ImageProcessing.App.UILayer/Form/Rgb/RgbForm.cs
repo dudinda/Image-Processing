@@ -5,6 +5,7 @@ using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
 using ImageProcessing.App.PresentationLayer.Presenters.Rgb;
 using ImageProcessing.App.UILayer.Code.Enums;
+using ImageProcessing.App.UILayer.ElementCommands.Rgb.Interface;
 using ImageProcessing.App.UILayer.EventBinders.Rgb.Interface;
 using ImageProcessing.App.UILayer.FormControls.Rgb;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
@@ -16,9 +17,13 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
 {
     internal sealed partial class RgbForm : BaseForm, IRgbElementExposer
     {
+        private readonly IRgbElementCommand _command;
+        private readonly IRgbElementEventBinder _binder;
+
         public RgbForm(
             IAppController controller,
-            IRgbEventBinder binder) : base(controller)
+            IRgbElementEventBinder binder,
+            IRgbElementCommand command) : base(controller)
         {
             InitializeComponent();
 
@@ -33,7 +38,11 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
 
             RgbFilterComboBox.SelectedIndex = 0;
 
-            binder.Bind(this);
+            _binder = binder;
+            _command = command;
+
+            _binder.Expose(this);
+            _command.Expose(this);
         }
 
         /// <inheritdoc/>
@@ -63,13 +72,10 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
         /// <inheritdoc/>
         public RgbColors GetSelectedColors(RgbColors color)
         {
-            _command[
-                 color.ToString()
-            ].Method.Invoke(this, null);
+            _command.Procedure(color.ToString());
 
-            return (RgbColors)_command[
-                 nameof(RgbViewAction.GetColor)
-            ].Method.Invoke(this, null);
+            return (RgbColors)_command
+                .Function(nameof(RgbViewAction.GetColor));
         }
 
         /// <inheritdoc/>
