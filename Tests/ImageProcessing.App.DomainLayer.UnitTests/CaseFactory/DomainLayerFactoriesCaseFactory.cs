@@ -11,7 +11,6 @@ using ImageProcessing.App.DomainLayer.Convolution.Implemetation.Sharpen;
 using ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.OneParameter;
 using ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.TwoParameter;
 using ImageProcessing.App.DomainLayer.Model.RgbFilters.Implementation.Binary;
-using ImageProcessing.App.DomainLayer.Model.RgbFilters.Implementation.Color;
 using ImageProcessing.App.DomainLayer.Model.RgbFilters.Implementation.Color.Colors;
 using ImageProcessing.App.DomainLayer.Model.RgbFilters.Implementation.Grayscale;
 using ImageProcessing.App.DomainLayer.Model.RgbFilters.Implementation.Inversion;
@@ -26,13 +25,7 @@ namespace ImageProcessing.App.DomainLayer.UnitTests.CaseFactory
         {
             get
             {
-                yield return new TestCaseData(RgbColors.Red, typeof(RColor));
-                yield return new TestCaseData(RgbColors.Blue, typeof(BColor));
-                yield return new TestCaseData(RgbColors.Green, typeof(GColor));
-                yield return new TestCaseData(RgbColors.Red | RgbColors.Green, typeof(RGColor));
-                yield return new TestCaseData(RgbColors.Blue | RgbColors.Green, typeof(BGColor));
-                yield return new TestCaseData(RgbColors.Red | RgbColors.Blue, typeof(RBColor));
-                yield return new TestCaseData(RgbColors.Red | RgbColors.Green | RgbColors.Blue, typeof(RGBColor));
+                yield return new TestCaseData(RgbColors.Red, typeof(RColor)).Returns(new RColor());
             }
         }
 
@@ -58,14 +51,14 @@ namespace ImageProcessing.App.DomainLayer.UnitTests.CaseFactory
         {
             get
             {
-                yield return new TestCaseData(Distribution.Rayleigh, typeof(RayleighDistribution));
-                yield return new TestCaseData(Distribution.Exponential, typeof(ExponentialDistribution));
-                yield return new TestCaseData(Distribution.Cauchy, typeof(CauchyDistribution));
-                yield return new TestCaseData(Distribution.Laplace, typeof(LaplaceDistribution));
-                yield return new TestCaseData(Distribution.Normal, typeof(NormalDistribution));
-                yield return new TestCaseData(Distribution.Parabola, typeof(ParabolaDistribution));
-                yield return new TestCaseData(Distribution.Uniform, typeof(UniformDistribution));
-                yield return new TestCaseData(Distribution.Weibull, typeof(WeibullDistribution));
+                yield return new TestCaseData(Distributions.Rayleigh, typeof(RayleighDistribution));
+                yield return new TestCaseData(Distributions.Exponential, typeof(ExponentialDistribution));
+                yield return new TestCaseData(Distributions.Cauchy, typeof(CauchyDistribution));
+                yield return new TestCaseData(Distributions.Laplace, typeof(LaplaceDistribution));
+                yield return new TestCaseData(Distributions.Normal, typeof(NormalDistribution));
+                yield return new TestCaseData(Distributions.Parabola, typeof(ParabolaDistribution));
+                yield return new TestCaseData(Distributions.Uniform, typeof(UniformDistribution));
+                yield return new TestCaseData(Distributions.Weibull, typeof(WeibullDistribution));
             }
         }
 

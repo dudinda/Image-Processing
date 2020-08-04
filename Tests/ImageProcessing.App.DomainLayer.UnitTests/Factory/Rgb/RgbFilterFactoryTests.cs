@@ -4,7 +4,6 @@ using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Color.Interface;
 using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Rgb.Implementation;
 using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Rgb.Interface;
-using ImageProcessing.App.DomainLayer.Model.RgbFilters.Implementation.Binary;
 using ImageProcessing.App.DomainLayer.UnitTests.CaseFactory;
 
 using NSubstitute;

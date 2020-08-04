@@ -1,9 +1,7 @@
 using System;
 
-using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainLayer.Factory.Distributions.Implementation;
 using ImageProcessing.App.DomainLayer.Factory.Distributions.Interface;
-using ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.OneParameter;
 using ImageProcessing.App.DomainLayer.UnitTests.CaseFactory;
 
 using NUnit.Framework;

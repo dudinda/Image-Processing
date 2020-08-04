@@ -3,6 +3,7 @@ using System;
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Color.Implementation;
 using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Color.Interface;
+using ImageProcessing.App.DomainLayer.Model.RgbFilters.Interface.Color;
 using ImageProcessing.App.DomainLayer.UnitTests.CaseFactory;
 
 using NUnit.Framework;
@@ -25,8 +26,8 @@ namespace ImageProcessing.App.DomainLayer.UnitTests.Factory.Color
         [Test, TestCaseSource(
             typeof(DomainLayerFactoriesCaseFactory),
             nameof(ColorFactoryTestCases))]
-        public void FactoryReturnsRedColorOnRCombination(RgbColors color, Type returnType)
-            => Assert.That(_colorFactory.Get(color), Is.TypeOf(returnType));
+        public IColor FactoryReturnsRedColorOnRCombination(RgbColors color, Type returnType)
+            => _colorFactory.Get(color);
 
         [Test]
         public void FactoryThrowsNotImplementedExceptionOnUnknownEnum()

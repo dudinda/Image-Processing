@@ -1,13 +1,6 @@
 using System;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.Convolution.Implemetation.Blur.BoxBlur;
-using ImageProcessing.App.DomainLayer.Convolution.Implemetation.Blur.GaussianBlur;
-using ImageProcessing.App.DomainLayer.Convolution.Implemetation.Blur.MotionBlur;
-using ImageProcessing.App.DomainLayer.Convolution.Implemetation.EdgeDetection.LaplacianOperator;
-using ImageProcessing.App.DomainLayer.Convolution.Implemetation.EdgeDetection.SobelOperator;
-using ImageProcessing.App.DomainLayer.Convolution.Implemetation.Emboss;
-using ImageProcessing.App.DomainLayer.Convolution.Implemetation.Sharpen;
 using ImageProcessing.App.DomainLayer.Factory.Convolution.Implementation;
 using ImageProcessing.App.DomainLayer.Factory.Convolution.Interface;
 using ImageProcessing.App.DomainLayer.UnitTests.CaseFactory;
