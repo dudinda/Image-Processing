@@ -52,7 +52,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
                                 .ApplyFilter(bmp, filter)
                         );
 
-                    Controller.Aggregator.PublishFromAll(
+                    Controller.Aggregator.PublishFromPresenter(
+                        e.Publisher,
                         new AttachToRendererEventArgs(
                            block
                         )

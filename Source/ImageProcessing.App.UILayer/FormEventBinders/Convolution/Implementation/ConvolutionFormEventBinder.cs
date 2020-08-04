@@ -25,7 +25,7 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Convolution.Implementatio
         public void OnElementExpose(IConvolutionFormExposer source)
         {
             source.ApplyButton.Click += (sender, args)
-                => _aggregator.PublishFrom(source,
+                => _aggregator.PublishFromForm(source,
                     new ApplyConvolutionFilterEventArgs(source)
                 );
         }
@@ -47,7 +47,7 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Convolution.Implementatio
         [Command(nameof(Keys.Q))]
         private bool ClickCommandQ(IConvolutionFormExposer source)
         {
-            _aggregator.PublishFrom(source,
+            _aggregator.PublishFromForm(source,
                 new ApplyConvolutionFilterEventArgs(source)
             );
 
@@ -57,7 +57,7 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Convolution.Implementatio
         [Command(nameof(Keys.Enter))]
         private bool ClickCommandEnter(IConvolutionFormExposer source)
         {
-            _aggregator.PublishFrom(source,
+            _aggregator.PublishFromForm(source,
                 new ApplyConvolutionFilterEventArgs(source)
             );
 

@@ -17,7 +17,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
             = new Dictionary<Type, HashSet<(object, object)>>();
 
         /// <inheritdoc cref="IEventAggregator.PublishFrom{TEventArgs}(object, TEventArgs)"
-        public void PublishFrom<TEventArgs>(object publisher, TEventArgs args)
+        public void PublishFromForm<TEventArgs>(object publisher, TEventArgs args)
         {
             var subsriberType = typeof(ISubscriber<>).MakeGenericType(typeof(TEventArgs));
 
@@ -25,19 +25,35 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
             {
                 var pairs = GetSubscribers(subsriberType).Where((pair) => pair.Publisher == publisher);
 
-                Publish(pairs, args);
+                foreach (var pair in pairs)
+                {
+                    var subscriber = pair.Subscriber as ISubscriber<TEventArgs>;
+
+                    if (subscriber != null)
+                    {
+                        InvokeSubscriberEvent(args, subscriber, pair.Publisher);
+                    }
+                }
             }
         }
 
 
         /// <inheritdoc cref="IEventAggregator.PublishFromAll{TEventArgs}(TEventArgs)"
-        public void PublishFromAll<TEventArgs>(TEventArgs args)
+        public void PublishFromPresenter<TEventArgs>(object publisher, TEventArgs args)
         {
             var subsriberType = typeof(ISubscriber<>).MakeGenericType(typeof(TEventArgs));
 
             lock (_syncRoot)
             {
-                Publish(GetSubscribers(subsriberType), args);
+                foreach (var pair in GetSubscribers(subsriberType))
+                {
+                    var subscriber = pair.Subscriber as ISubscriber<TEventArgs>;
+
+                    if (subscriber != null)
+                    {
+                        InvokeSubscriberEvent(args, subscriber, publisher);
+                    }
+                }
             }
         }
 
@@ -83,32 +99,13 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
             }
         }
 
-        private void Publish<TEventArgs>(
-            IEnumerable<(object Subscriber, object Publisher)> pairs,
-            TEventArgs args)
-        {
-            foreach (var pair in pairs)
-            {
-                var subscriber = pair.Subscriber as ISubscriber<TEventArgs>;
-
-                if (subscriber != null)
-                {
-                    InvokeSubscriberEvent(args, subscriber, pair.Publisher);
-                }
-            }
-        }
-
         private void InvokeSubscriberEvent<TEventArgs>(
             TEventArgs args,
             ISubscriber<TEventArgs> subscriber,
             object publisher)
         {
-            var syncContext = SynchronizationContext.Current;
-
-            if (syncContext is null)
-            {
-                syncContext = new SynchronizationContext();
-            }
+            var syncContext = SynchronizationContext.Current
+                ?? new SynchronizationContext();
 
             syncContext.Post(s => subscriber.OnEventHandler(publisher, args), null);
         }

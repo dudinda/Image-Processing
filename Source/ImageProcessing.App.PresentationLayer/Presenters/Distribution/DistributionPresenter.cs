@@ -57,7 +57,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
                     .Add<Bitmap>((bmp) => View.AddToQualityMeasureContainer(bmp))
                     .Add<Bitmap>((bmp) => View.EnableQualityQueue(true));
 
-                Controller.Aggregator.PublishFrom(
+                Controller.Aggregator.PublishFromPresenter(
                     e.Publisher,
                     new AttachToRendererEventArgs(
                        block
@@ -82,7 +82,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
                 var block = new PipelineBlock(copy)
                    .Add<Bitmap, Bitmap>((bmp) => bmp.Shuffle());
 
-                Controller.Aggregator.PublishFrom(
+                Controller.Aggregator.PublishFromPresenter(
                     e.Publisher,
                     new AttachToRendererEventArgs(
                        block

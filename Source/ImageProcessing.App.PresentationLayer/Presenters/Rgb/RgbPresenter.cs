@@ -50,7 +50,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
                            (bmp) => _provider.Apply(bmp, filter)
                         );
 
-                    Controller.Aggregator.PublishFrom(
+                    Controller.Aggregator.PublishFromPresenter(
                         e.Publisher,
                         new AttachToRendererEventArgs(block)
                      );
@@ -80,7 +80,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
                            (bmp) => _provider.Apply(bmp, color)
                         );
 
-                    Controller.Aggregator.PublishFrom(
+                    Controller.Aggregator.PublishFromPresenter(
                         e.Publisher,
                         new AttachToRendererEventArgs(block)
                      );

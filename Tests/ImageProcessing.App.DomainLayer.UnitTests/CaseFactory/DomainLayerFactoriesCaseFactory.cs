@@ -25,6 +25,13 @@ namespace ImageProcessing.App.DomainLayer.UnitTests.CaseFactory
         {
             get
             {
+                yield return new TestCaseData(RgbColors.Red, typeof(RColor));
+                yield return new TestCaseData(RgbColors.Blue, typeof(BColor));
+                yield return new TestCaseData(RgbColors.Green, typeof(GColor));
+                yield return new TestCaseData(RgbColors.Red | RgbColors.Green, typeof(RGColor));
+                yield return new TestCaseData(RgbColors.Blue | RgbColors.Green, typeof(BGColor));
+                yield return new TestCaseData(RgbColors.Red | RgbColors.Blue, typeof(RBColor));
+                yield return new TestCaseData(RgbColors.Red | RgbColors.Green | RgbColors.Blue, typeof(RGBColor));
                 yield return new TestCaseData(RgbColors.Red, typeof(RColor)).Returns(new RColor());
             }
         }
