@@ -62,21 +62,21 @@ using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Interface;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Interface;
-using ImageProcessing.App.UILayer.ElementCommands.Main.Implementation;
-using ImageProcessing.App.UILayer.ElementCommands.Main.Interface;
-using ImageProcessing.App.UILayer.ElementCommands.Rgb.Implementation;
-using ImageProcessing.App.UILayer.ElementCommands.Rgb.Interface;
-using ImageProcessing.App.UILayer.EventBinders.Convolution.Implementation;
-using ImageProcessing.App.UILayer.EventBinders.Convolution.Interface;
-using ImageProcessing.App.UILayer.EventBinders.Main.Implementation;
-using ImageProcessing.App.UILayer.EventBinders.Main.Interface;
-using ImageProcessing.App.UILayer.EventBinders.Rgb.Implementation;
-using ImageProcessing.App.UILayer.EventBinders.Rgb.Interface;
 using ImageProcessing.App.UILayer.Form.Convolution;
 using ImageProcessing.App.UILayer.Form.Histogram;
 using ImageProcessing.App.UILayer.Form.Main;
 using ImageProcessing.App.UILayer.Form.QualityMeasure;
 using ImageProcessing.App.UILayer.Form.Rgb;
+using ImageProcessing.App.UILayer.FormCommands.Main.Implementation;
+using ImageProcessing.App.UILayer.FormCommands.Main.Interface;
+using ImageProcessing.App.UILayer.FormCommands.Rgb.Implementation;
+using ImageProcessing.App.UILayer.FormCommands.Rgb.Interface;
+using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Implementation;
+using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Interface;
+using ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation;
+using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
+using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Implementation;
+using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface;
 using ImageProcessing.Microkernel.AppConfig;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
@@ -96,7 +96,7 @@ namespace ImageProcessing.App.UILayer
                 .RegisterSingleton<ICacheService<Bitmap>, CacheService<Bitmap>>()
                 .RegisterSingletonView<IMainView, MainForm>()
                 .RegisterTransientView<IHistogramView, HistogramForm>()
-                .RegisterTransientView<IConvolutionView, DistributionForm>()
+                .RegisterTransientView<IConvolutionView, ConvolutionFilterForm>()
                 .RegisterTransientView<IRgbView, RgbForm>()
                 .RegisterSingletonView<IQualityMeasureView, QualityMeasureForm>()
                 .RegisterTransient<IConvolutionFilterService, ConvolutionFilterService>()
@@ -123,11 +123,11 @@ namespace ImageProcessing.App.UILayer
                 .RegisterTransient<IHistogramService, HistogramService>()
                 .RegisterTransient<IMainPresenterLockersFacade, MainPresenterLockersFacade>()
                 .RegisterTransient<IMainPresenterProvidersFacade, MainPresenterProvidersFacade>()
-                .RegisterTransient<IRgbElementEventBinder, RgbElementEventBinder>()
-                .RegisterTransient<IConvolutionElementEventBinder, ConvolutionElementEventBinder>()
-                .RegisterTransient<IMainElementEventBinder, MainElementEventBinder>()
-                .RegisterTransient<IMainElementCommand, MainElementCommand>()
-                .RegisterTransient<IRgbElementCommand, RgbElementCommand>();      
+                .RegisterTransient<IRgbFormEventBinder, RgbFormEventBinder>()
+                .RegisterTransient<IConvolutionFormEventBinder, ConvolutionFormEventBinder>()
+                .RegisterTransient<IMainFormEventBinder, MainFormEventBinder>()
+                .RegisterTransient<IMainFormCommand, MainFormCommand>()
+                .RegisterTransient<IRgbFormCommand, RgbFormCommand>();      
         }      
     }
 }

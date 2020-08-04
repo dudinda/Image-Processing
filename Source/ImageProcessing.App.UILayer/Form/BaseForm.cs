@@ -2,7 +2,6 @@ using System.ComponentModel;
 using System.Windows.Forms;
 
 using ImageProcessing.App.UILayer.Code.Attributes;
-using ImageProcessing.App.UILayer.FormControls.Base;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Microkernel.MVP.View;
 

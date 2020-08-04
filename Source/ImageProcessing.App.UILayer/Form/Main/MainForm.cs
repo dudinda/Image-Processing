@@ -6,32 +6,32 @@ using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.UILayer.Code.Enums;
 using ImageProcessing.App.UILayer.Control;
-using ImageProcessing.App.UILayer.ElementCommands.Main.Interface;
-using ImageProcessing.App.UILayer.EventBinders.Main.Interface;
-using ImageProcessing.App.UILayer.FormElements.Main;
+using ImageProcessing.App.UILayer.FormCommands.Main.Interface;
+using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
+using ImageProcessing.App.UILayer.FormExposers.Main;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Utility.Interop.Wrapper;
 
 namespace ImageProcessing.App.UILayer.Form.Main
 {
     /// <inheritdoc cref="IMainView"/>
-    internal sealed partial class MainForm : BaseForm, IMainView, IMainElementExposer
+    internal sealed partial class MainForm : BaseForm, IMainView, IMainFormExposer
     {
-        private readonly IMainElementEventBinder _binder;
-        private readonly IMainElementCommand _command;
+        private readonly IMainFormEventBinder _binder;
+        private readonly IMainFormCommand _command;
 
         public MainForm(
             IAppController controller,
-            IMainElementEventBinder binder,
-            IMainElementCommand command) : base(controller)
+            IMainFormEventBinder binder,
+            IMainFormCommand command) : base(controller)
         {
             InitializeComponent();
 
             _command = command;
             _binder = binder;
 
-            _binder.Expose(this);
-            _command.Expose(this);
+            _binder.OnElementExpose(this);
+            _command.OnElementExpose(this);
 
             Bind();
         }
@@ -90,7 +90,8 @@ namespace ImageProcessing.App.UILayer.Form.Main
         public ToolStripMenuItem ConvolutionMenu
             => ConvolutionFiltersMenu;
 
-        ToolStripMenuItem IMainElementExposer.RgbMenu => throw new System.NotImplementedException();
+        public ToolStripMenuItem RgbMenuButton
+            => RgbMenu;
 
         public Image SourceImageCopy
         {
@@ -109,7 +110,8 @@ namespace ImageProcessing.App.UILayer.Form.Main
         public PictureBox DestinationBox
             => Dst;
 
-        ToolStripButton IMainElementExposer.Undo => throw new System.NotImplementedException();
+        public ToolStripButton UndoButton
+            => Undo;
 
         /// <inheritdoc/>
         public new void Show()

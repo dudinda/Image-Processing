@@ -5,9 +5,9 @@ using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
 using ImageProcessing.App.PresentationLayer.Presenters.Rgb;
 using ImageProcessing.App.UILayer.Code.Enums;
-using ImageProcessing.App.UILayer.ElementCommands.Rgb.Interface;
-using ImageProcessing.App.UILayer.EventBinders.Rgb.Interface;
-using ImageProcessing.App.UILayer.FormControls.Rgb;
+using ImageProcessing.App.UILayer.Exposers.Rgb;
+using ImageProcessing.App.UILayer.FormCommands.Rgb.Interface;
+using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Utility.Interop.Wrapper;
 
@@ -15,15 +15,15 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.UILayer.Form.Rgb
 {
-    internal sealed partial class RgbForm : BaseForm, IRgbElementExposer
+    internal sealed partial class RgbForm : BaseForm, IRgbFormExposer
     {
-        private readonly IRgbElementCommand _command;
-        private readonly IRgbElementEventBinder _binder;
+        private readonly IRgbFormCommand _command;
+        private readonly IRgbFormEventBinder _binder;
 
         public RgbForm(
             IAppController controller,
-            IRgbElementEventBinder binder,
-            IRgbElementCommand command) : base(controller)
+            IRgbFormEventBinder binder,
+            IRgbFormCommand command) : base(controller)
         {
             InitializeComponent();
 
@@ -41,8 +41,8 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
             _binder = binder;
             _command = command;
 
-            _binder.Expose(this);
-            _command.Expose(this);
+            _binder.OnElementExpose(this);
+            _command.OnElementExpose(this);
         }
 
         /// <inheritdoc/>

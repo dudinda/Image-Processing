@@ -43,6 +43,9 @@
     <Compile Update="Form\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Form\Distribution\DistributionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -55,12 +58,6 @@
     </Compile>
     <Compile Update="Form\Main\MainForm.Events.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Form\Main\MainForm.Commands.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Form\Convolution\ConvolutionFilterForm.Events.cs">
-      <DependentUpon>ConvolutionFilterForm.cs</DependentUpon>
     </Compile>
   </ItemGroup>
 
