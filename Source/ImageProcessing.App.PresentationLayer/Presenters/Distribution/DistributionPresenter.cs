@@ -41,7 +41,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             _provider = provider;
         }
 
-        public async Task OnEventHandler(TransformHistogramEventArgs e)
+        public async Task OnEventHandler(object publisher, TransformHistogramEventArgs e)
         {
             try
             {
@@ -57,9 +57,10 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
                     .Add<Bitmap>((bmp) => View.AddToQualityMeasureContainer(bmp))
                     .Add<Bitmap>((bmp) => View.EnableQualityQueue(true));
 
-                Controller.Aggregator.PublishFromAll(
+                Controller.Aggregator.PublishFrom(
+                    e.Publisher,
                     new AttachToRendererEventArgs(
-                       block, e.Publisher
+                       block
                     )
                 );
             }
@@ -69,7 +70,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             }
         }
 
-        public async Task OnEventHandler(ShuffleEventArgs e)
+        public async Task OnEventHandler(object publisher, ShuffleEventArgs e)
         {
             try
             {
@@ -81,10 +82,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
                 var block = new PipelineBlock(copy)
                    .Add<Bitmap, Bitmap>((bmp) => bmp.Shuffle());
 
-                Controller.Aggregator.PublishFromAll(
-                     new AttachToRendererEventArgs(
-                        block, e.Publisher
-                     )
+                Controller.Aggregator.PublishFrom(
+                    e.Publisher,
+                    new AttachToRendererEventArgs(
+                       block
+                    )
                  );                     
             }
             catch(Exception ex)
@@ -93,7 +95,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             }
         }
 
-        public async Task OnEventHandler(BuildRandomVariableFunctionEventArgs e)
+        public async Task OnEventHandler(object publisher, BuildRandomVariableFunctionEventArgs e)
         {
             try
             {
@@ -112,7 +114,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             }
         }
 
-        public async Task OnEventHandler(ShowQualityMeasureMenuEventArgs e)
+        public async Task OnEventHandler(object publisher, ShowQualityMeasureMenuEventArgs e)
         {
             try
             {
@@ -128,7 +130,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             }
         }
 
-        public async Task OnEventHandler(GetRandomVariableInfoEventArgs e)
+        public async Task OnEventHandler(object publisher, GetRandomVariableInfoEventArgs e)
         {
             try
             {

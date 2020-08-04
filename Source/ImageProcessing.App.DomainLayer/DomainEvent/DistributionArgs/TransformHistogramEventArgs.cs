@@ -6,8 +6,9 @@ namespace ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs
     public sealed class TransformHistogramEventArgs : BaseEventArgs
     {
         public TransformHistogramEventArgs(
+            object publisher,
             Distributions distribution,
-            (string, string) parameters) : base()
+            (string, string) parameters) : base(publisher)
         {
             Distribution = distribution;
             Parameters = parameters;

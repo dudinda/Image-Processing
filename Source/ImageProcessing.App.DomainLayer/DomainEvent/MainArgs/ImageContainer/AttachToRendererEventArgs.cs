@@ -4,8 +4,8 @@ namespace ImageProcessing.App.DomainLayer.DomainEvent.MainArgs
 {
     public sealed class AttachToRendererEventArgs : BaseEventArgs
     {
-        public AttachToRendererEventArgs(object block, object publisher)
-            : base(publisher)
+        public AttachToRendererEventArgs(object block)
+            : base()
         {
             Block = block;
         }

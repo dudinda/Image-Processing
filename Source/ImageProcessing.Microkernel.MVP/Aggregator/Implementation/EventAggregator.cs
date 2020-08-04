@@ -93,14 +93,15 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
 
                 if (subscriber != null)
                 {
-                    InvokeSubscriberEvent(args, subscriber);
+                    InvokeSubscriberEvent(args, subscriber, pair.Publisher);
                 }
             }
         }
 
-        private void InvokeSubscriberEvent<TEventType>(
-            TEventType publisher,
-            ISubscriber<TEventType> subscriber)
+        private void InvokeSubscriberEvent<TEventArgs>(
+            TEventArgs args,
+            ISubscriber<TEventArgs> subscriber,
+            object publisher)
         {
             var syncContext = SynchronizationContext.Current;
 
@@ -109,7 +110,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
                 syncContext = new SynchronizationContext();
             }
 
-            syncContext.Post(s => subscriber.OnEventHandler(publisher), null);
+            syncContext.Post(s => subscriber.OnEventHandler(publisher, args), null);
         }
 
         private HashSet<(object Subscriber, object Publisher)> GetSubscribers(Type subsriberType)

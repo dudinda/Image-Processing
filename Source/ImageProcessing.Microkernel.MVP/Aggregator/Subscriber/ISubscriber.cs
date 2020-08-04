@@ -4,6 +4,6 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Subscriber
 {
     public interface ISubscriber<TEventArgs>
     {
-        Task OnEventHandler(TEventArgs e);
+        Task OnEventHandler(object publisher, TEventArgs e);
     }
 }

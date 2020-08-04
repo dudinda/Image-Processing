@@ -44,7 +44,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         {
             ShuffleSrc.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
-                    new ShuffleEventArgs()
+                    new ShuffleEventArgs(this)
                 );
 
             PMF.Click += (sender, args)
@@ -118,7 +118,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         /// </summary>
         private void BindDistributions()
         {
-            ExponentialDistribution.Click += (sender, args)
+         /*   ExponentialDistribution.Click += (sender, args)
                 => Controller.Aggregator.PublishFromAll(
                     new TransformHistogramEventArgs(
                         Distributions.Exponential, Parameters
@@ -173,6 +173,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
                         Distributions.Weibull, Parameters
                     )
                 );
+               */
         }
 
         /// <summary>

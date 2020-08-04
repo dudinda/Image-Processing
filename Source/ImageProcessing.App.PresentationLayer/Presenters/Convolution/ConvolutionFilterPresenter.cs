@@ -34,7 +34,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
             _operationLocker = operationLocker;
         }
 
-		public async Task OnEventHandler(ApplyConvolutionFilterEventArgs e)
+		public async Task OnEventHandler(object publisher, ApplyConvolutionFilterEventArgs e)
 		{
 			try
 			{
@@ -53,9 +53,10 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
                                 .ApplyFilter(bmp, filter)
                         );
 
-                    Controller.Aggregator.PublishFromAll(
+                    Controller.Aggregator.PublishFrom(
+                        e.Publisher,
                         new AttachToRendererEventArgs(
-                           block, e.Publisher
+                           block
                         )
                     );
                 }
@@ -66,7 +67,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
 			}
 		}
 
-        public Task OnEventHandler(ShowTooltipOnErrorEventArgs e)
+        public Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
             View.Tooltip(e.Error);
 

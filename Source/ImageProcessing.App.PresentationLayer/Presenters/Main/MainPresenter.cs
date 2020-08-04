@@ -59,7 +59,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             _pipeline = pipeline;
         }
 
-        public async Task OnEventHandler(OpenFileDialogEventArgs e)
+        public async Task OnEventHandler(object publisher, OpenFileDialogEventArgs e)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public async Task OnEventHandler(SaveAsFileDialogEventArgs e)
+        public async Task OnEventHandler(object publisher, SaveAsFileDialogEventArgs e)
         {
             try
             {
@@ -105,7 +105,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public async Task OnEventHandler(SaveWithoutFileDialogEventArgs e)
+        public async Task OnEventHandler(object publisher, SaveWithoutFileDialogEventArgs e)
         {
             try
             {
@@ -126,7 +126,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public async Task OnEventHandler(ShowRgbMenuEventArgs e)
+        public async Task OnEventHandler(object publisher, ShowRgbMenuEventArgs e)
         {
             try
             {
@@ -148,7 +148,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public async Task OnEventHandler(ShowConvolutionMenuEventArgs e)
+        public async Task OnEventHandler(object publisher, ShowConvolutionMenuEventArgs e)
         {
             try
             {
@@ -169,7 +169,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public async Task OnEventHandler(AttachToRendererEventArgs e)
+        public async Task OnEventHandler(object publisher, AttachToRendererEventArgs e)
         {
             try
             {
@@ -197,7 +197,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public async Task OnEventHandler(ReplaceImageEventArgs e)
+        public async Task OnEventHandler(object publisher, ReplaceImageEventArgs e)
         {
             try
             {
@@ -227,7 +227,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }        
         }
     
-        public async Task OnEventHandler(ZoomEventArgs e)
+        public async Task OnEventHandler(object publisher, ZoomEventArgs e)
         {
             try
             {

@@ -32,7 +32,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
             _locker = locker;
         }
 
-        public async Task OnEventHandler(ApplyRgbFilterEventArgs e)
+        public async Task OnEventHandler(object publisher, ApplyRgbFilterEventArgs e)
         {
             try
             {
@@ -50,8 +50,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
                            (bmp) => _provider.Apply(bmp, filter)
                         );
 
-                    Controller.Aggregator.PublishFromAll(
-                        new AttachToRendererEventArgs(block, e.Publisher)
+                    Controller.Aggregator.PublishFrom(
+                        e.Publisher,
+                        new AttachToRendererEventArgs(block)
                      );
                 }
             }
@@ -61,7 +62,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
             }
         }
 
-        public async Task OnEventHandler(ApplyRgbColorFilterEventArgs e)
+        public async Task OnEventHandler(object publisher, ApplyRgbColorFilterEventArgs e)
         {
             try
             {
@@ -79,8 +80,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
                            (bmp) => _provider.Apply(bmp, color)
                         );
 
-                    Controller.Aggregator.PublishFromAll(
-                        new AttachToRendererEventArgs(block, e.Publisher)
+                    Controller.Aggregator.PublishFrom(
+                        e.Publisher,
+                        new AttachToRendererEventArgs(block)
                      );
                 }
             }
