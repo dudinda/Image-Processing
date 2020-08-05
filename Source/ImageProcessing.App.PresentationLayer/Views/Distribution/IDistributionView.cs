@@ -21,5 +21,8 @@ namespace ImageProcessing.App.PresentationLayer.Views.Distribution
         void AddToQualityMeasureContainer(Bitmap transformed);
         ConcurrentQueue<Bitmap> GetQualityQueue();
         void ClearQualityQueue();
+
+        /// <inheritdoc/>
+        public (string, string) Parameters { get; }
     }
 }

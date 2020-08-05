@@ -7,15 +7,10 @@ namespace ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs
     {
         public TransformHistogramEventArgs(
             object publisher,
-            Distributions distribution,
             (string, string) parameters) : base(publisher)
         {
-            Distribution = distribution;
             Parameters = parameters;
         }
-
-        ///<inheritdoc cref="Distribution/>
-        public Distributions Distribution { get; }
 
         /// <summary>
         /// Parameters of the specified <see cref="Distribution"/>.

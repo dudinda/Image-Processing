@@ -32,8 +32,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
             _binder.OnElementExpose(this);
             _command.OnElementExpose(this);
-
-            Bind();
         }
 
         /// <inheritdoc/>
@@ -64,34 +62,44 @@ namespace ImageProcessing.App.UILayer.Form.Main
         }
 
         /// <inheritdoc/>
-        public (string, string) Parameters
-            => (FirstParam.Text, SecondParam.Text);
-
         public ToolStripMenuItem SaveAsMenu
             => SaveFileAs;
+
+        /// <inheritdoc/>
         public ToolStripMenuItem OpenFileMenu
             => OpenFile;
 
+        /// <inheritdoc/>
         public ToolStripMenuItem SaveFileMenu
             => SaveFile;
 
+        /// <inheritdoc/>
         public ToolStripButton ReplaceSrcByDstButton
             => ReplaceSrcByDst;
 
+        /// <inheritdoc/>
         public ToolStripButton ReplaceDstBySrcButton
             => ReplaceDstBySrc;
 
+        /// <inheritdoc/>
         public ZoomTrackBar ZoomSrcTrackBar
             => SrcZoom;
 
+        /// <inheritdoc/>
         public ZoomTrackBar ZoomDstTrackBar
             => DstZoom;
 
-        public ToolStripMenuItem ConvolutionMenu
+        /// <inheritdoc/>
+        public ToolStripMenuItem ConvolutionMenuButton
             => ConvolutionFiltersMenu;
 
+        /// <inheritdoc/>
         public ToolStripMenuItem RgbMenuButton
             => RgbMenu;
+
+        /// <inheritdoc/>
+        public ToolStripMenuItem DistributionMenuButton
+            => DistributionsMenu;
 
         public Image SourceImageCopy
         {
@@ -200,21 +208,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
         public void AddToUndoContainer((Bitmap changed, ImageContainer from) action)
             => Container.Add(action);
 
-        /// <inheritdoc/>
-        public void EnableQualityQueue(bool isEnabled)
-            => QualityMeasure.Enabled = isEnabled;
-
-        /// <inheritdoc/>
-        public void AddToQualityMeasureContainer(Bitmap transformed)
-            => QualityMeasure.TryAdd(transformed);
-        
-        /// <inheritdoc/>
-        public ConcurrentQueue<Bitmap> GetQualityQueue()
-            => QualityMeasure.Queue;
-
-        /// <inheritdoc/>
-        public void ClearQualityQueue()
-            => QualityMeasure.Reset();
 
         /// <summary>
         /// Used by the generated <see cref="Dispose(bool)"/> call.

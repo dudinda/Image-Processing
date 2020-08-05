@@ -35,12 +35,20 @@ namespace ImageProcessing.App.UILayer.FormCommands.Rgb.Implementation
             var result = default(RgbColors);
 
             if (_exposer.RedButton.Checked)
+            {
                 result |= RgbColors.Red;
+            }
+                
             if (_exposer.BlueButton.Checked)
+            {
                 result |= RgbColors.Blue;
+            }
+                
             if (_exposer.GreenButton.Checked)
+            {
                 result |= RgbColors.Green;
-
+            }
+               
             return result;
         }
 

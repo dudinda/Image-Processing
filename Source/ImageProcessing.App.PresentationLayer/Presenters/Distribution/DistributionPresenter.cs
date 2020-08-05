@@ -46,19 +46,21 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
         {
             try
             {
+                var distribution = View.Dropdown;
+
                 var copy = await _locker
                     .LockOperationAsync(
                         () => new Bitmap(ViewModel.Source)
                      ).ConfigureAwait(true);
 
-                copy.Tag = e.Distribution.ToString();
+                copy.Tag = distribution.ToString();
 
                 Controller.Aggregator.PublishFromAll(
                     e.Publisher,
                     new AttachBlockToRendererEventArgs(
                        block: new PipelineBlock(copy)
                            .Add<Bitmap, Bitmap>(
-                               (bmp) => _provider.Transform(bmp, e.Distribution, e.Parameters)
+                               (bmp) => _provider.Transform(bmp, distribution, e.Parameters)
                             )
                            .Add<Bitmap>(
                                (bmp) => View.AddToQualityMeasureContainer(bmp)

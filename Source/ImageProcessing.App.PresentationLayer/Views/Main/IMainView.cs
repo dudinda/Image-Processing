@@ -3,7 +3,6 @@ using System.Drawing;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.BitmapContainer;
-using ImageProcessing.App.PresentationLayer.Views.ViewComponent.BitmapInfo;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.BitmapZoom;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.Cursor;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.Error;
@@ -16,7 +15,7 @@ namespace ImageProcessing.App.PresentationLayer.Views.Main
     /// of the main window.
     /// </summary>
     public interface IMainView : IView, IBitmapZoom,
-        ITooltip, IBitmapContainer, IBitmapInfo,
+        ITooltip, IBitmapContainer,
         ICursor, IDisposable
     {
         /// <summary>

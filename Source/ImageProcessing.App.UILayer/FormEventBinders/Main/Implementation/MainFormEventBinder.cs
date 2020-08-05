@@ -2,8 +2,11 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Menu;
+using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Show;
 using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Main;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
@@ -75,6 +78,21 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation
                 => _aggregator.PublishFrom(source,
                     new ZoomEventArgs(ImageContainer.Destination)
                 );
+
+            source.RgbMenuButton.Click += (sender, args)
+               => _aggregator.PublishFrom(source,
+                   new ShowRgbMenuEventArgs()
+               );
+
+            source.ConvolutionMenuButton.Click += (sender, args)
+                => _aggregator.PublishFrom(source,
+                    new ShowConvolutionMenuEventArgs()
+                );
+
+            source.DistributionMenuButton.Click += (sender, args)
+                => _aggregator.PublishFrom(source,
+                    new ShowDistributionMenuEventArgs()
+                );
         }
 
         public bool ProcessCmdKey(IMainFormExposer view, Keys keyData)
@@ -92,42 +110,6 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation
 
                     _aggregator.PublishFrom(view,
                         new ReplaceImageEventArgs(ImageContainer.Destination)
-                    );
-
-                    return true;
-                case (Keys.Q):
-
-                    _aggregator.PublishFrom(view,
-                        new BuildRandomVariableFunctionEventArgs(
-                            RandomVariableFunction.PMF, ImageContainer.Source
-                        )
-                    );
-
-                    return true;
-                case (Keys.Q | Keys.Control):
-
-                    _aggregator.PublishFrom(view,
-                        new BuildRandomVariableFunctionEventArgs(
-                            RandomVariableFunction.PMF, ImageContainer.Destination
-                        )
-                    );
-
-                    return true;
-                case (Keys.W):
-
-                    _aggregator.PublishFrom(view,
-                        new BuildRandomVariableFunctionEventArgs(
-                            RandomVariableFunction.CDF, ImageContainer.Source
-                        )
-                    );
-
-                    return true;
-                case (Keys.W | Keys.Control):
-
-                    _aggregator.PublishFrom(view,
-                        new BuildRandomVariableFunctionEventArgs(
-                            RandomVariableFunction.CDF, ImageContainer.Destination
-                        )
                     );
 
                     return true;

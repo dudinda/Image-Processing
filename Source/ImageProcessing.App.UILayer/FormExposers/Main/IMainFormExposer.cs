@@ -51,14 +51,19 @@ namespace ImageProcessing.App.UILayer.FormExposers.Main
         ZoomTrackBar ZoomDstTrackBar { get; }
 
         /// <summary>
-        /// Show convolution control panel.
+        /// Show the convolution control panel.
         /// </summary>
-        ToolStripMenuItem ConvolutionMenu { get; }
+        ToolStripMenuItem ConvolutionMenuButton { get; }
 
         /// <summary>
-        /// Show rgb control panel.
+        /// Show the rgb control panel.
         /// </summary>
         ToolStripMenuItem RgbMenuButton { get; }
+
+        /// <summary>
+        /// Show the distribution control panel.
+        /// </summary>
+        ToolStripMenuItem DistributionMenuButton { get; }
 
         /// <summary>
         /// Replace a destination container image by a source.

@@ -13,9 +13,6 @@ namespace ImageProcessing.App.UILayer.Form.Histogram
     /// <inheritdoc cref="IHistogramView"/>
     internal sealed partial class HistogramForm : BaseForm, IHistogramView
     {
-        private static readonly Dictionary<string, CommandAttribute>
-          _command = typeof(HistogramForm).GetCommands();
-
         public HistogramForm(IAppController controller)
             : base(controller)
         {
