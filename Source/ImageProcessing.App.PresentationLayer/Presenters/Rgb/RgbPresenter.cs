@@ -3,9 +3,10 @@ using System.Drawing;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
+using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModel.Rgb;
 using ImageProcessing.App.PresentationLayer.Views.Rgb;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.RgbFilters;
@@ -45,20 +46,20 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
                             () => new Bitmap(ViewModel.Source)
                          ).ConfigureAwait(true);
 
-                    var block = new PipelineBlock(copy)
-                        .Add<Bitmap, Bitmap>(
-                           (bmp) => _provider.Apply(bmp, filter)
-                        );
-
-                    Controller.Aggregator.PublishFromPresenter(
+                    Controller.Aggregator.PublishFromAll(
                         e.Publisher,
-                        new AttachToRendererEventArgs(block)
+                        new AttachBlockToRendererEventArgs(
+                            new PipelineBlock(copy)
+                                .Add<Bitmap, Bitmap>(
+                                    (bmp) => _provider.Apply(bmp, filter)
+                                )
+                        )
                      );
                 }
             }
             catch (Exception ex)
             {
-                
+                View.Tooltip(Errors.ApplyRgbFilter);
             }
         }
 
@@ -75,21 +76,28 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
                             () => new Bitmap(ViewModel.Source)
                          ).ConfigureAwait(true);
 
-                    var block = new PipelineBlock(copy)
-                        .Add<Bitmap, Bitmap>(
-                           (bmp) => _provider.Apply(bmp, color)
-                        );
-
-                    Controller.Aggregator.PublishFromPresenter(
+                    Controller.Aggregator.PublishFromAll(
                         e.Publisher,
-                        new AttachToRendererEventArgs(block)
+                        new AttachBlockToRendererEventArgs(
+                            new PipelineBlock(copy)
+                                .Add<Bitmap, Bitmap>(
+                                    (bmp) => _provider.Apply(bmp, color)
+                                )
+                        )
                      );
                 }
             }
             catch (Exception ex)
             {
-
+                View.Tooltip(Errors.ApplyColorFilter);
             }
+        }
+
+        public Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
+        {
+            View.Tooltip(e.Error);
+
+            return Task.CompletedTask;
         }
     }
 }

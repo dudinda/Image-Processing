@@ -1,10 +1,10 @@
 using ImageProcessing.App.DomainLayer.DomainEvent.Base;
 
-namespace ImageProcessing.App.DomainLayer.DomainEvent.MainArgs
+namespace ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs
 {
-    public sealed class AttachToRendererEventArgs : BaseEventArgs
+    public sealed class AttachBlockToRendererEventArgs : BaseEventArgs
     {
-        public AttachToRendererEventArgs(object block)
+        public AttachBlockToRendererEventArgs(object block)
             : base()
         {
             Block = block;

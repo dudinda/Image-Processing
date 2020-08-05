@@ -17,7 +17,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
             = new Dictionary<Type, HashSet<(object, object)>>();
 
         /// <inheritdoc cref="IEventAggregator.PublishFrom{TEventArgs}(object, TEventArgs)"
-        public void PublishFromForm<TEventArgs>(object publisher, TEventArgs args)
+        public void PublishFrom<TEventArgs>(object publisher, TEventArgs args)
         {
             var subsriberType = typeof(ISubscriber<>).MakeGenericType(typeof(TEventArgs));
 
@@ -38,8 +38,8 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
         }
 
 
-        /// <inheritdoc cref="IEventAggregator.PublishFromAll{TEventArgs}(TEventArgs)"
-        public void PublishFromPresenter<TEventArgs>(object publisher, TEventArgs args)
+        /// <inheritdoc cref="IEventAggregator.PublishFromAll{TEventArgs}(object, TEventArgs)"
+        public void PublishFromAll<TEventArgs>(object publisher, TEventArgs args)
         {
             var subsriberType = typeof(ISubscriber<>).MakeGenericType(typeof(TEventArgs));
 
@@ -80,7 +80,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
             }
         }
 
-        /// <inheritdoc cref="IEventAggregator.Unsubscribe(Type, publisher))"/>
+        /// <inheritdoc cref="IEventAggregator.Unsubscribe(Type, object))"/>
         public void Unsubscribe(Type subscriber, object publisher)
         {
             var subsriberTypes = subscriber.GetInterfaces()

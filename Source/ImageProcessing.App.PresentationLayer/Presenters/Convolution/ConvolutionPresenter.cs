@@ -3,8 +3,8 @@ using System.Drawing;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
-using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
@@ -21,15 +21,15 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
           ISubscriber<ApplyConvolutionFilterEventArgs>,
           ISubscriber<ShowTooltipOnErrorEventArgs>
     {
-		private readonly IConvolutionServiceProvider _convolutionProvider;
+		private readonly IConvolutionServiceProvider _provider;
 		private readonly IAsyncOperationLocker _operationLocker;
 
         public ConvolutionPresenter(
             IAppController controller,
-            IConvolutionServiceProvider convolutionServiceProvider,
+            IConvolutionServiceProvider provider,
             IAsyncOperationLocker operationLocker) : base(controller)
         {
-            _convolutionProvider = convolutionServiceProvider;
+            _provider = provider;
             _operationLocker = operationLocker;
         }
 
@@ -46,16 +46,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
                             () => new Bitmap(ViewModel.Source)
                          ).ConfigureAwait(true);
 
-                    var block = new PipelineBlock(copy)
-                        .Add<Bitmap, Bitmap>(
-                            (bmp) => _convolutionProvider
-                                .ApplyFilter(bmp, filter)
-                        );
-
-                    Controller.Aggregator.PublishFromPresenter(
+                    Controller.Aggregator.PublishFromAll(
                         e.Publisher,
-                        new AttachToRendererEventArgs(
-                           block
+                        new AttachBlockToRendererEventArgs(
+                           new PipelineBlock(copy)
+                               .Add<Bitmap, Bitmap>(
+                                   (bmp) => _provider.ApplyFilter(bmp, filter)
+                                )
                         )
                     );
                 }

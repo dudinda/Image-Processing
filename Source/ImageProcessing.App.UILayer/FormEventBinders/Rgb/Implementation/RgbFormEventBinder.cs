@@ -20,22 +20,22 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Rgb.Implementation
         public void OnElementExpose(IRgbFormExposer source)
         {
             source.ApplyFilterButton.Click += (sender, args)
-                 => _aggregator.PublishFromForm(source,
+                 => _aggregator.PublishFrom(source,
                      new ApplyRgbFilterEventArgs(source)
                  );
 
             source.RedButton.Click += (sender, args)
-                => _aggregator.PublishFromForm(source,
+                => _aggregator.PublishFrom(source,
                     new ApplyRgbColorFilterEventArgs(RgbColors.Red, source)
                 );
 
             source.GreenButton.Click += (sender, args)
-                => _aggregator.PublishFromForm(source,
+                => _aggregator.PublishFrom(source,
                     new ApplyRgbColorFilterEventArgs(RgbColors.Green, source)
                 );
 
             source.BlueButton.Click += (sender, args)
-               => _aggregator.PublishFromForm(source,
+               => _aggregator.PublishFrom(source,
                    new ApplyRgbColorFilterEventArgs(RgbColors.Blue, source)
                );
         }

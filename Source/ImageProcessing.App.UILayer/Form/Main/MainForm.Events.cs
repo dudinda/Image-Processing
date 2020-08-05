@@ -32,7 +32,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         {
            
             FormClosing += (sender, args)
-                => Controller.Aggregator.PublishFromForm(this,
+                => Controller.Aggregator.PublishFrom(this,
                     new CloseFormEventArgs()
                 );
         }
@@ -43,47 +43,47 @@ namespace ImageProcessing.App.UILayer.Form.Main
         private void BindToolbar()
         {
             ShuffleSrc.Click += (sender, args)
-                => Controller.Aggregator.PublishFromForm(this,
+                => Controller.Aggregator.PublishFrom(this,
                     new ShuffleEventArgs(this)
                 );
 
             PMF.Click += (sender, args)
-                => Controller.Aggregator.PublishFromForm(this,
+                => Controller.Aggregator.PublishFrom(this,
                     new BuildRandomVariableFunctionEventArgs(
                         RandomVariableFunction.PMF, ImageContainer.Source
                     )
                 );
 
             CDF.Click += (sender, args)
-                => Controller.Aggregator.PublishFromForm(this,
+                => Controller.Aggregator.PublishFrom(this,
                     new BuildRandomVariableFunctionEventArgs(
                         RandomVariableFunction.CDF, ImageContainer.Source
                     )
                 );
 
             Expectation.Click += (sender, args)
-                => Controller.Aggregator.PublishFromForm(this,
+                => Controller.Aggregator.PublishFrom(this,
                     new GetRandomVariableInfoEventArgs(
                         RandomVariableInfo.Expectation, ImageContainer.Source
                     )
                 );
 
             Variance.Click += (sender, args)
-                => Controller.Aggregator.PublishFromForm(this,
+                => Controller.Aggregator.PublishFrom(this,
                     new GetRandomVariableInfoEventArgs(
                         RandomVariableInfo.Variance, ImageContainer.Source
                     )
                 );
 
             StandardDeviation.Click += (sender, args)
-                => Controller.Aggregator.PublishFromForm(this,
+                => Controller.Aggregator.PublishFrom(this,
                     new GetRandomVariableInfoEventArgs(
                         RandomVariableInfo.StandardDeviation, ImageContainer.Source
                     )
                 );
 
             Entropy.Click += (sender, args)
-                => Controller.Aggregator.PublishFromForm(this,
+                => Controller.Aggregator.PublishFrom(this,
                     new GetRandomVariableInfoEventArgs(
                         RandomVariableInfo.Entropy, ImageContainer.Source
                     )
@@ -91,12 +91,12 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
             
             QualityMeasure.Click += (sender, args)
-                => Controller.Aggregator.PublishFromForm(this,
+                => Controller.Aggregator.PublishFrom(this,
                     new ShowQualityMeasureMenuEventArgs()
                 );
 
             RgbMenu.Click += (sender, args)
-                => Controller.Aggregator.PublishFromForm(this,
+                => Controller.Aggregator.PublishFrom(this,
                     new ShowRgbMenuEventArgs()
                 );
         }
@@ -107,7 +107,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         private void BindConvolutionFilters()
         {
             ConvolutionFiltersMenu.Click += (sender, args)
-                => Controller.Aggregator.PublishFromForm(this,
+                => Controller.Aggregator.PublishFrom(this,
                     new ShowConvolutionMenuEventArgs()
                 );
         }

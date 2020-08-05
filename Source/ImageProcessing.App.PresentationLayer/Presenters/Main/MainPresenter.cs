@@ -9,7 +9,6 @@ using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
-using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Show;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Convolution;
@@ -19,7 +18,6 @@ using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
 using ImageProcessing.App.PresentationLayer.ViewModel.Rgb;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.ServiceLayer.Facades.MainPresenterLockers.Interface;
-using ImageProcessing.App.ServiceLayer.Facades.MainPresenterProviders.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline;
@@ -32,14 +30,15 @@ using ImageProcessing.Microkernel.MVP.Controller.Interface;
 namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 {
     internal sealed partial class MainPresenter : BasePresenter<IMainView>,
-          ISubscriber<AttachToRendererEventArgs>,
+          ISubscriber<AttachBlockToRendererEventArgs>,
           ISubscriber<ShowConvolutionMenuEventArgs>,
           ISubscriber<ReplaceImageEventArgs>,
           ISubscriber<ZoomEventArgs>,
           ISubscriber<OpenFileDialogEventArgs>,
           ISubscriber<SaveAsFileDialogEventArgs>,
           ISubscriber<SaveWithoutFileDialogEventArgs>,
-          ISubscriber<ShowRgbMenuEventArgs>
+          ISubscriber<ShowRgbMenuEventArgs>,
+          ISubscriber<ShowTooltipOnErrorEventArgs>
     {
         private readonly ICacheService<Bitmap> _cache;
         private readonly INonBlockDialogService _nonBlock;
@@ -73,14 +72,16 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                     await Render(
                         new PipelineBlock(result.Image)
-                            .Add<Bitmap>((bmp) => View.SetPathToFile(result.Path)),
+                            .Add<Bitmap>(
+                                (bmp) => View.SetPathToFile(result.Path)
+                             ),
                         ImageContainer.Source
                     ).ConfigureAwait(true);
                 }
             }
             catch(Exception ex)
             {
-                OnError(Errors.OpenFile);
+                OnError(publisher, Errors.OpenFile);
             }
         }
 
@@ -101,7 +102,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch(Exception ex)
             {
-                OnError(Errors.SaveFile);
+                OnError(publisher, Errors.SaveFile);
             }
         }
 
@@ -122,7 +123,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch(Exception ex)
             {
-                OnError(Errors.SaveFile);
+                OnError(publisher, Errors.SaveFile);
             }
         }
 
@@ -144,7 +145,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (Exception ex)
             {
-                OnError(Errors.ApplyRgbFilter);
+                OnError(publisher, Errors.ApplyRgbFilter);
             }
         }
 
@@ -165,11 +166,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (Exception ex)
             {
-                OnError(Errors.ShowConvolutionMenu);
+                OnError(publisher, Errors.ShowConvolutionMenu);
             }
         }
 
-        public async Task OnEventHandler(object publisher, AttachToRendererEventArgs e)
+        public async Task OnEventHandler(object publisher, AttachBlockToRendererEventArgs e)
         {
             try
             {
@@ -189,11 +190,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (OperationCanceledException cancel)
             {
-                OnError(Errors.CancelOperation);
+                OnError(publisher, Errors.CancelOperation);
             }
             catch (Exception ex)
             {
-                OnError(Errors.ApplyConvolutionFilter);
+                OnError(publisher, Errors.ApplyConvolutionFilter);
             }
         }
 
@@ -219,11 +220,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (OperationCanceledException cancel)
             {
-                OnError(Errors.CancelOperation);
+                OnError(publisher, Errors.CancelOperation);
             }
             catch (Exception ex)
             {
-                OnError(Errors.ReplaceImage);
+                OnError(publisher, Errors.ReplaceImage);
             }        
         }
     
@@ -245,7 +246,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch(Exception ex)
             {
-                OnError(Errors.Zoom);
+                OnError(publisher, Errors.Zoom);
             }
         }
 
@@ -301,10 +302,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             throw new InvalidOperationException();
         }
 
-        private void OnError(string error)
+        private void OnError(object publisher, string error)
         {
-            View.Tooltip(error);
-
             if (!_pipeline.Any())
             {
                 View.SetCursor(CursorType.Default);
@@ -313,9 +312,19 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             {
                 View.SetCursor(CursorType.Wait);
             }
+
+            Controller.Aggregator.PublishFrom(publisher,
+                new ShowTooltipOnErrorEventArgs(error));
         }
 
         public void CloseForm(CloseFormEventArgs e)
             => Controller.Dispose();
+
+        public Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
+        {
+            View.Tooltip(e.Error);
+
+            return Task.CompletedTask;
+        }
     }
 }

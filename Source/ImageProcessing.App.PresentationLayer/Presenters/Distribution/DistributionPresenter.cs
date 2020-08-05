@@ -1,24 +1,24 @@
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
+using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
-using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.ToolbarArgs;
+using ImageProcessing.App.DomainLayer.DomainEvents.QualityMeasureArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
+using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModel.Distribution;
 using ImageProcessing.App.PresentationLayer.ViewModel.Histogram;
+using ImageProcessing.App.PresentationLayer.ViewModel.QualityMeasure;
 using ImageProcessing.App.PresentationLayer.Views.Distribution;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
-using ImageProcessing.Microkernel.MVP.Controller.Interface;
-using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
-using ImageProcessing.App.DomainLayer.DomainEvents.QualityMeasureArgs;
-using ImageProcessing.App.PresentationLayer.ViewModel.QualityMeasure;
-using ImageProcessing.App.PresentationLayer.Properties;
-using System.Globalization;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
+using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
 {
@@ -27,7 +27,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
         ISubscriber<ShuffleEventArgs>,
         ISubscriber<BuildRandomVariableFunctionEventArgs>,
         ISubscriber<ShowQualityMeasureMenuEventArgs>,
-        ISubscriber<GetRandomVariableInfoEventArgs>
+        ISubscriber<GetRandomVariableInfoEventArgs>,
+        ISubscriber<ShowTooltipOnErrorEventArgs>
     {
         private readonly IAsyncOperationLocker _locker;
         private readonly IBitmapLuminanceDistributionServiceProvider _provider;
@@ -52,15 +53,19 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
 
                 copy.Tag = e.Distribution.ToString();
 
-                var block = new PipelineBlock(copy)
-                    .Add<Bitmap, Bitmap>((bmp) => _provider.Transform(bmp, e.Distribution, e.Parameters))
-                    .Add<Bitmap>((bmp) => View.AddToQualityMeasureContainer(bmp))
-                    .Add<Bitmap>((bmp) => View.EnableQualityQueue(true));
-
-                Controller.Aggregator.PublishFromPresenter(
+                Controller.Aggregator.PublishFromAll(
                     e.Publisher,
-                    new AttachToRendererEventArgs(
-                       block
+                    new AttachBlockToRendererEventArgs(
+                       new PipelineBlock(copy)
+                           .Add<Bitmap, Bitmap>(
+                               (bmp) => _provider.Transform(bmp, e.Distribution, e.Parameters)
+                            )
+                           .Add<Bitmap>(
+                               (bmp) => View.AddToQualityMeasureContainer(bmp)
+                            )
+                           .Add<Bitmap>(
+                               (bmp) => View.EnableQualityQueue(true)
+                            )
                     )
                 );
             }
@@ -79,13 +84,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
                         () => new Bitmap(ViewModel.Source)
                      ).ConfigureAwait(true);
 
-                var block = new PipelineBlock(copy)
-                   .Add<Bitmap, Bitmap>((bmp) => bmp.Shuffle());
-
-                Controller.Aggregator.PublishFromPresenter(
+                Controller.Aggregator.PublishFromAll(
                     e.Publisher,
-                    new AttachToRendererEventArgs(
-                       block
+                    new AttachBlockToRendererEventArgs(
+                        new PipelineBlock(copy)
+                            .Add<Bitmap, Bitmap>(
+                                (bmp) => bmp.Shuffle()
+                            )
                     )
                  );                     
             }
@@ -100,9 +105,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             try
             {
                 var copy = await _locker
-                .LockOperationAsync(
-                    () => new Bitmap(ViewModel.Source)
-                 ).ConfigureAwait(true);
+                    .LockOperationAsync(
+                        () => new Bitmap(ViewModel.Source)
+                     ).ConfigureAwait(true);
 
                 Controller.Run<HistogramPresenter, HistogramViewModel>(
                     new HistogramViewModel(copy, e.Action)
@@ -151,6 +156,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             {
                 View.Tooltip(Errors.RandomVariableInfo);
             }
+        }
+
+        public Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
+        {
+            View.Tooltip(e.Error);
+
+            return Task.CompletedTask;
         }
     }
 }

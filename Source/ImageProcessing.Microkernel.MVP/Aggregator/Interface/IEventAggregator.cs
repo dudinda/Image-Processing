@@ -10,19 +10,20 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Interface
     {
         /// <summary>
         /// Publish a message to all subscribers from a concrete <paramref name="publisher"/>
-        /// with <typeparamref name="TEventType"/> event args.
+        /// with <typeparamref name="TEventArgs"/> event args.
         /// </summary>
-        void PublishFromForm<TEventArgs>(object publisher, TEventArgs args);
+        void PublishFrom<TEventArgs>(object publisher, TEventArgs args);
 
         /// <summary>
         /// Publish a message to all subscribers from all the publishers
-        /// with <typeparamref name="TEventType"/> event args.
+        /// with <typeparamref name="TEventArgs"/> event args. Can be used to
+        /// send a message from presenter to presenter.
         /// </summary>
-        void PublishFromPresenter<TEventArgs>(object publisher, TEventArgs args);
+        void PublishFromAll<TEventArgs>(object publisher, TEventArgs args);
 
         /// <summary>
         /// Subscribe a specified object with handlers
-        /// to all messages with <typeparamref name="TEventType"/>  args.
+        /// to all messages with <typeparamref name="TEventArgs"/>  args.
         /// </summary>
         void Subscribe(object subscriber, object publisher);
 
