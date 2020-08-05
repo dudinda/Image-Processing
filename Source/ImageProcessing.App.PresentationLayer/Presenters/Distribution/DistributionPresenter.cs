@@ -60,14 +60,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
                     new AttachBlockToRendererEventArgs(
                        block: new PipelineBlock(copy)
                            .Add<Bitmap, Bitmap>(
-                               (bmp) => _provider.Transform(bmp, distribution, e.Parameters)
-                            )
+                               (bmp) => _provider.Transform(bmp, distribution, e.Parameters))
                            .Add<Bitmap>(
-                               (bmp) => View.AddToQualityMeasureContainer(bmp)
-                            )
+                               (bmp) => View.AddToQualityMeasureContainer(bmp))
                            .Add<Bitmap>(
-                               (bmp) => View.EnableQualityQueue(true)
-                            )
+                               (bmp) => View.EnableQualityQueue(true))
                     )
                 );
             }
@@ -91,8 +88,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
                     new AttachBlockToRendererEventArgs(
                         block: new PipelineBlock(copy)
                             .Add<Bitmap, Bitmap>(
-                                (bmp) => bmp.Shuffle()
-                            )
+                                (bmp) => bmp.Shuffle())
                     )
                  );                     
             }

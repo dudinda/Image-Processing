@@ -51,8 +51,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
                         new AttachBlockToRendererEventArgs(
                             block: new PipelineBlock(copy)
                                 .Add<Bitmap, Bitmap>(
-                                    (bmp) => _provider.Apply(bmp, filter)
-                                )
+                                    (bmp) => _provider.Apply(bmp, filter))
                         )
                      );
                 }
@@ -81,8 +80,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
                         new AttachBlockToRendererEventArgs(
                             block: new PipelineBlock(copy)
                                 .Add<Bitmap, Bitmap>(
-                                    (bmp) => _provider.Apply(bmp, color)
-                                )
+                                    (bmp) => _provider.Apply(bmp, color))
                         )
                      );
                 }

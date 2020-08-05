@@ -91,7 +91,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
         /// <inheritdoc/>
         public ToolStripMenuItem ConvolutionMenuButton
-            => ConvolutionFiltersMenu;
+            => ConvolutionMenu;
 
         /// <inheritdoc/>
         public ToolStripMenuItem RgbMenuButton
@@ -99,7 +99,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
         /// <inheritdoc/>
         public ToolStripMenuItem DistributionMenuButton
-            => DistributionsMenu;
+            => DistributionMenu;
 
         public Image SourceImageCopy
         {

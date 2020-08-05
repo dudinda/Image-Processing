@@ -73,8 +73,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     await Render(
                         block: new PipelineBlock(result.Image)
                             .Add<Bitmap>(
-                                (bmp) => View.SetPathToFile(result.Path)
-                             ),
+                                (bmp) => View.SetPathToFile(result.Path)),
                         ImageContainer.Source
                     ).ConfigureAwait(true);
                 }

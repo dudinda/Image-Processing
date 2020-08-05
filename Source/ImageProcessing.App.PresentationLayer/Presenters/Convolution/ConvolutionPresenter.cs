@@ -51,8 +51,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
                         new AttachBlockToRendererEventArgs(
                            block: new PipelineBlock(copy)
                                .Add<Bitmap, Bitmap>(
-                                   (bmp) => _provider.ApplyFilter(bmp, filter)
-                                )
+                                   (bmp) => _provider.ApplyFilter(bmp, filter))
                         )
                     );
                 }
