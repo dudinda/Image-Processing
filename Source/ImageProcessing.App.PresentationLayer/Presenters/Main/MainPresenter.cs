@@ -71,7 +71,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     View.SetCursor(CursorType.Wait);
 
                     await Render(
-                        new PipelineBlock(result.Image)
+                        block: new PipelineBlock(result.Image)
                             .Add<Bitmap>(
                                 (bmp) => View.SetPathToFile(result.Path)
                              ),

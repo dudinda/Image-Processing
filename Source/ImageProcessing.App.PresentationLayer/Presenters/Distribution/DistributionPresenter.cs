@@ -56,7 +56,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
                 Controller.Aggregator.PublishFromAll(
                     e.Publisher,
                     new AttachBlockToRendererEventArgs(
-                       new PipelineBlock(copy)
+                       block: new PipelineBlock(copy)
                            .Add<Bitmap, Bitmap>(
                                (bmp) => _provider.Transform(bmp, e.Distribution, e.Parameters)
                             )
@@ -87,7 +87,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
                 Controller.Aggregator.PublishFromAll(
                     e.Publisher,
                     new AttachBlockToRendererEventArgs(
-                        new PipelineBlock(copy)
+                        block: new PipelineBlock(copy)
                             .Add<Bitmap, Bitmap>(
                                 (bmp) => bmp.Shuffle()
                             )

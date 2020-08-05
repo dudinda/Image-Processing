@@ -22,8 +22,6 @@ using ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Implementation;
 using ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Interface;
 using ImageProcessing.App.ServiceLayer.Facades.MainPresenterLockers.Implementation;
 using ImageProcessing.App.ServiceLayer.Facades.MainPresenterLockers.Interface;
-using ImageProcessing.App.ServiceLayer.Facades.MainPresenterProviders.Implementation;
-using ImageProcessing.App.ServiceLayer.Facades.MainPresenterProviders.Interface;
 using ImageProcessing.App.ServiceLayer.NonBlockDialog.Implementation;
 using ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Providers.Implementation.Convolution;
@@ -122,7 +120,6 @@ namespace ImageProcessing.App.UILayer
                 .RegisterTransient<IQualityMeasureService, QualityMeasureService>()
                 .RegisterTransient<IHistogramService, HistogramService>()
                 .RegisterTransient<IMainPresenterLockersFacade, MainPresenterLockersFacade>()
-                .RegisterTransient<IMainPresenterProvidersFacade, MainPresenterProvidersFacade>()
                 .RegisterTransient<IRgbFormEventBinder, RgbFormEventBinder>()
                 .RegisterTransient<IConvolutionFormEventBinder, ConvolutionFormEventBinder>()
                 .RegisterTransient<IMainFormEventBinder, MainFormEventBinder>()

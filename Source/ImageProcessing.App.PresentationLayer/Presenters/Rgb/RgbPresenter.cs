@@ -49,7 +49,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
                     Controller.Aggregator.PublishFromAll(
                         e.Publisher,
                         new AttachBlockToRendererEventArgs(
-                            new PipelineBlock(copy)
+                            block: new PipelineBlock(copy)
                                 .Add<Bitmap, Bitmap>(
                                     (bmp) => _provider.Apply(bmp, filter)
                                 )
@@ -79,7 +79,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
                     Controller.Aggregator.PublishFromAll(
                         e.Publisher,
                         new AttachBlockToRendererEventArgs(
-                            new PipelineBlock(copy)
+                            block: new PipelineBlock(copy)
                                 .Add<Bitmap, Bitmap>(
                                     (bmp) => _provider.Apply(bmp, color)
                                 )

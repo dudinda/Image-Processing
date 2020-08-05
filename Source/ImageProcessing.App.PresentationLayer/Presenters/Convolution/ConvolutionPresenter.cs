@@ -49,7 +49,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
                     Controller.Aggregator.PublishFromAll(
                         e.Publisher,
                         new AttachBlockToRendererEventArgs(
-                           new PipelineBlock(copy)
+                           block: new PipelineBlock(copy)
                                .Add<Bitmap, Bitmap>(
                                    (bmp) => _provider.ApplyFilter(bmp, filter)
                                 )
