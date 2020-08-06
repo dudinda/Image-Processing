@@ -64,12 +64,8 @@
     <Compile Include="Fakes\EventAggregatorFake.cs" />
     <Compile Include="Fakes\MainSystemFake.cs" />
     <Compile Include="Fakes\MockSynchronizationContext.cs" />
-    <Compile Include="InternalsVisibleTo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\MainPresenterTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Source\ImageProcessing.App.DomainLayer\ImageProcessing.App.DomainLayer.csproj">
