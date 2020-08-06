@@ -41,19 +41,19 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
           ISubscriber<ShowTooltipOnErrorEventArgs>
     {
         private readonly ICacheService<Bitmap> _cache;
-        private readonly INonBlockDialogService _nonBlock;
+        private readonly INonBlockDialogService _dialog;
         private readonly IMainPresenterLockersFacade _locker;
         private readonly IAwaitablePipeline _pipeline;
 
         public MainPresenter(
             IAppController controller,
             ICacheService<Bitmap> cache,
-            INonBlockDialogService nonBlock,
+            INonBlockDialogService dialog,
             IAwaitablePipeline pipeline,
             IMainPresenterLockersFacade locker) : base(controller)
         {
             _cache = cache;
-            _nonBlock = nonBlock;
+            _dialog = dialog;
             _locker = locker;
             _pipeline = pipeline;
         }
@@ -62,7 +62,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                var result = await _nonBlock.NonBlockOpen(
+                var result = await _dialog.NonBlockOpen(
                     ConfigurationManager.AppSettings["Filters"]
                 ).ConfigureAwait(true);
 
@@ -94,7 +94,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         ImageContainer.Source
                     ).ConfigureAwait(true);
 
-                    await _nonBlock.NonBlockSaveAs(copy,
+                    await _dialog.NonBlockSaveAs(copy,
                          ConfigurationManager.AppSettings["Filters"]
                     ).ConfigureAwait(true);
                 }

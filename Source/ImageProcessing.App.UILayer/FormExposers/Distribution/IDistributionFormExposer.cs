@@ -5,7 +5,7 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.UILayer.FormExposers.Distribution
 {
-    public interface IDistributionFormExposer : IDistributionView
+    internal interface IDistributionFormExposer : IDistributionView
     {
         /// <summary>
         /// Apply an rgb filter.

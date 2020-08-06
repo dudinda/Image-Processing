@@ -6,7 +6,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Interface
     /// Responds to any event from a source object
     /// by propagating that event to target objects.
     /// </summary>
-    public interface IEventAggregator
+    public interface IEventAggregator 
     {
         /// <summary>
         /// Publish a message to all subscribers from a concrete <paramref name="publisher"/>

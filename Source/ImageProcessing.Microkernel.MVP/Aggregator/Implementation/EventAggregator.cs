@@ -9,7 +9,7 @@ using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
 {
     /// <inheritdoc cref="IEventAggregator"/>
-    internal sealed class EventAggregator : IEventAggregator
+    internal class EventAggregator : IEventAggregator
     {
         private readonly object _syncRoot = new object();
 
@@ -104,10 +104,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
             ISubscriber<TEventArgs> subscriber,
             object publisher)
         {
-            var syncContext = SynchronizationContext.Current
-                ?? new SynchronizationContext();
-
-            syncContext.Post(s => subscriber.OnEventHandler(publisher, args), null);
+            Post(s => subscriber.OnEventHandler(publisher, args), null);
         }
 
         private HashSet<(object Subscriber, object Publisher)> GetSubscribers(Type subsriberType)
@@ -128,6 +125,14 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
 
                 return subsribers;
             }
+        }
+
+        internal virtual void Post(SendOrPostCallback d, object state)
+        {
+            var syncContext = SynchronizationContext.Current
+                ?? new SynchronizationContext();
+
+            syncContext.Post(d, state);
         }
     }
 }
