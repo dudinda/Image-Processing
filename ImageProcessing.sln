@@ -48,7 +48,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing.App.DomainL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing.Utility.DataStructure.UnitTests", "Tests\ImageProcessing.Utility.DataStructure.UnitTests\ImageProcessing.Utility.DataStructure.UnitTests.csproj", "{EB8B8B19-5EC3-44A6-B69E-D14599AB82FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing.App.PresentationLayer.IntegrationTests", "Tests\ImageProcessing.App.PresentationLayer.UnitTests\ImageProcessing.App.PresentationLayer.IntegrationTests.csproj", "{917AC26D-ECBD-4968-83D0-4D29B692D8B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing.App.PresentationLayer.IntegrationTests", "Tests\ImageProcessing.App.PresentationLayer.IntegrationTests\ImageProcessing.App.PresentationLayer.IntegrationTests.csproj", "{917AC26D-ECBD-4968-83D0-4D29B692D8B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
