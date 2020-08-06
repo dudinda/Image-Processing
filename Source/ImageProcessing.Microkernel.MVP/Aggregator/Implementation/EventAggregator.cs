@@ -31,12 +31,11 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
 
                     if (subscriber != null)
                     {
-                        InvokeSubscriberEvent(args, subscriber, pair.Publisher);
+                        Post(s => subscriber.OnEventHandler(pair.Publisher, args), null);
                     }
                 }
             }
         }
-
 
         /// <inheritdoc cref="IEventAggregator.PublishFromAll{TEventArgs}(object, TEventArgs)"
         public void PublishFromAll<TEventArgs>(object publisher, TEventArgs args)
@@ -51,7 +50,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
 
                     if (subscriber != null)
                     {
-                        InvokeSubscriberEvent(args, subscriber, publisher);
+                        Post(s => subscriber.OnEventHandler(publisher, args), null);
                     }
                 }
             }
@@ -60,15 +59,11 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
         /// <inheritdoc cref="IEventAggregator.Subscribe(object, object)"/>
         public void Subscribe(object subscriber, object publisher)
         {
-            var subscriberType = subscriber.GetType();
-
-            var subsriberTypes = subscriberType.GetInterfaces()
-                .Where(i => i.IsGenericType &&
-                       i.GetGenericTypeDefinition() == typeof(ISubscriber<>));
+            var types = GetSubsciberTypes(subscriber.GetType());
 
             lock (_syncRoot)
             {
-                foreach (var subsriberType in subsriberTypes)
+                foreach (var subsriberType in types)
                 {
                     var subscribers = GetSubscribers(subsriberType);
 
@@ -83,13 +78,11 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
         /// <inheritdoc cref="IEventAggregator.Unsubscribe(Type, object))"/>
         public void Unsubscribe(Type subscriber, object publisher)
         {
-            var subsriberTypes = subscriber.GetInterfaces()
-                .Where(i => i.IsGenericType &&
-                       i.GetGenericTypeDefinition() == typeof(ISubscriber<>));
+            var types = GetSubsciberTypes(subscriber);
 
             lock (_syncRoot)
             {
-                foreach (var subsriberType in subsriberTypes)
+                foreach (var subsriberType in types)
                 {
                     var subscribers = GetSubscribers(subsriberType);
                         subscribers.RemoveWhere(
@@ -99,40 +92,36 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
             }
         }
 
-        private void InvokeSubscriberEvent<TEventArgs>(
-            TEventArgs args,
-            ISubscriber<TEventArgs> subscriber,
-            object publisher)
+        internal virtual void Post(SendOrPostCallback callback, object state)
         {
-            Post(s => subscriber.OnEventHandler(publisher, args), null);
+            var syncContext = SynchronizationContext.Current
+                ?? new SynchronizationContext();
+
+            syncContext.Post(callback, state);
         }
 
         private HashSet<(object Subscriber, object Publisher)> GetSubscribers(Type subsriberType)
         {
             lock (_syncRoot)
             {
-                var isFound = _eventSubscribers
-                    .TryGetValue(
-                        subsriberType, out var subsribers
-                     );
+                var isFound = _eventSubscribers.TryGetValue(
+                        subsriberType, out var subscribers);
 
                 if (!isFound)
                 {
-                    subsribers = new HashSet<(object, object)>();
+                    subscribers = new HashSet<(object, object)>();
 
-                    _eventSubscribers.Add(subsriberType, subsribers);
+                    _eventSubscribers.Add(subsriberType, subscribers);
                 }
 
-                return subsribers;
+                return subscribers;
             }
         }
 
-        internal virtual void Post(SendOrPostCallback d, object state)
-        {
-            var syncContext = SynchronizationContext.Current
-                ?? new SynchronizationContext();
-
-            syncContext.Post(d, state);
-        }
+        private IEnumerable<Type> GetSubsciberTypes(Type subscriberType)
+            => subscriberType.GetInterfaces().Where(
+                i => i.IsGenericType &&
+                i.GetGenericTypeDefinition() == typeof(ISubscriber<>)
+            );    
     }
 }
