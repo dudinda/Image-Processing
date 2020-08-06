@@ -30,8 +30,8 @@ namespace ImageProcessing.App.DomainLayer.UnitTests.Factory.Rgb
         [Test, TestCaseSource(
                typeof(DomainLayerFactoriesCaseFactory),
                nameof(RgbFiltersFactoryTestCases))]
-        public void FactoryReturnsBinaryFilterByEnum(RgbFilter filter, Type returnType)
-            =>  Assert.That(_rgbFilterFactory.Get(filter), Is.TypeOf(returnType));
+        public void FactoryReturnsBinaryFilterByEnum((RgbFilter Input, Type Result) args)
+            =>  Assert.That(_rgbFilterFactory.Get(args.Input), Is.TypeOf(args.Result));
 
         [Test]
         public void FactoryThrowsNotImplementedExceptionOnUnknownEnum()

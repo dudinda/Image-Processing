@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainLayer.Convolution.Implemetation.Blur.BoxBlur;
@@ -21,61 +23,60 @@ namespace ImageProcessing.App.DomainLayer.UnitTests.CaseFactory
 {
     public static class DomainLayerFactoriesCaseFactory
     {
-        public static IEnumerable ColorFactoryTestCases
+        public static IEnumerable<(RgbColors Input, Type Result)> ColorFactoryTestCases
         {
             get
             {
-                yield return new TestCaseData(RgbColors.Red, typeof(RColor));
-                yield return new TestCaseData(RgbColors.Blue, typeof(BColor));
-                yield return new TestCaseData(RgbColors.Green, typeof(GColor));
-                yield return new TestCaseData(RgbColors.Red | RgbColors.Green, typeof(RGColor));
-                yield return new TestCaseData(RgbColors.Blue | RgbColors.Green, typeof(BGColor));
-                yield return new TestCaseData(RgbColors.Red | RgbColors.Blue, typeof(RBColor));
-                yield return new TestCaseData(RgbColors.Red | RgbColors.Green | RgbColors.Blue, typeof(RGBColor));
-                yield return new TestCaseData(RgbColors.Red, typeof(RColor)).Returns(new RColor());
+                yield return (RgbColors.Red, typeof(RColor));
+                yield return (RgbColors.Blue, typeof(BColor));
+                yield return (RgbColors.Green, typeof(GColor));
+                yield return (RgbColors.Red | RgbColors.Green, typeof(RGColor));
+                yield return (RgbColors.Blue | RgbColors.Green, typeof(BGColor));
+                yield return (RgbColors.Red | RgbColors.Blue, typeof(RBColor));
+                yield return (RgbColors.Red | RgbColors.Green | RgbColors.Blue, typeof(RGBColor));
             }
         }
 
-        public static IEnumerable ConvolutionFactoryTestCases
+        public static IEnumerable<(ConvolutionFilter Input, Type Result)> ConvolutionFactoryTestCases
         {
             get
             {
-                yield return new TestCaseData(ConvolutionFilter.BoxBlur3x3, typeof(BoxBlur3x3));
-                yield return new TestCaseData(ConvolutionFilter.BoxBlur5x5, typeof(BoxBlur5x5));
-                yield return new TestCaseData(ConvolutionFilter.EmbossOperator3x3, typeof(Emboss3x3));
-                yield return new TestCaseData(ConvolutionFilter.GaussianBlur3x3, typeof(GaussianBlur3x3));
-                yield return new TestCaseData(ConvolutionFilter.GaussianBlur5x5, typeof(GaussianBlur5x5));
-                yield return new TestCaseData(ConvolutionFilter.LaplacianOperator3x3, typeof(LaplacianOperator3x3));
-                yield return new TestCaseData(ConvolutionFilter.LaplacianOperator5x5, typeof(LaplacianOperator5x5));
-                yield return new TestCaseData(ConvolutionFilter.MotionBlur9x9, typeof(MotionBlur9x9));
-                yield return new TestCaseData(ConvolutionFilter.SharpenOperator3x3, typeof(Sharpen3x3));
-                yield return new TestCaseData(ConvolutionFilter.SobelOperatorHorizontal3x3, typeof(SobelOperatorHorizontal));
-                yield return new TestCaseData(ConvolutionFilter.SobelOperatorVertical3x3, typeof(SobelOperatorVertical));
+                yield return (ConvolutionFilter.BoxBlur3x3, typeof(BoxBlur3x3));
+                yield return (ConvolutionFilter.BoxBlur5x5, typeof(BoxBlur5x5));
+                yield return (ConvolutionFilter.EmbossOperator3x3, typeof(Emboss3x3));
+                yield return (ConvolutionFilter.GaussianBlur3x3, typeof(GaussianBlur3x3));
+                yield return (ConvolutionFilter.GaussianBlur5x5, typeof(GaussianBlur5x5));
+                yield return (ConvolutionFilter.LaplacianOperator3x3, typeof(LaplacianOperator3x3));
+                yield return (ConvolutionFilter.LaplacianOperator5x5, typeof(LaplacianOperator5x5));
+                yield return (ConvolutionFilter.MotionBlur9x9, typeof(MotionBlur9x9));
+                yield return (ConvolutionFilter.SharpenOperator3x3, typeof(Sharpen3x3));
+                yield return (ConvolutionFilter.SobelOperatorHorizontal3x3, typeof(SobelOperatorHorizontal));
+                yield return (ConvolutionFilter.SobelOperatorVertical3x3, typeof(SobelOperatorVertical));
             }
         }
 
-        public static IEnumerable DistributionFactoryTestCases
+        public static IEnumerable<(Distributions Input, Type Result)> DistributionFactoryTestCases
         {
             get
             {
-                yield return new TestCaseData(Distributions.Rayleigh, typeof(RayleighDistribution));
-                yield return new TestCaseData(Distributions.Exponential, typeof(ExponentialDistribution));
-                yield return new TestCaseData(Distributions.Cauchy, typeof(CauchyDistribution));
-                yield return new TestCaseData(Distributions.Laplace, typeof(LaplaceDistribution));
-                yield return new TestCaseData(Distributions.Normal, typeof(NormalDistribution));
-                yield return new TestCaseData(Distributions.Parabola, typeof(ParabolaDistribution));
-                yield return new TestCaseData(Distributions.Uniform, typeof(UniformDistribution));
-                yield return new TestCaseData(Distributions.Weibull, typeof(WeibullDistribution));
+                yield return (Distributions.Rayleigh, typeof(RayleighDistribution));
+                yield return (Distributions.Exponential, typeof(ExponentialDistribution));
+                yield return (Distributions.Cauchy, typeof(CauchyDistribution));
+                yield return (Distributions.Laplace, typeof(LaplaceDistribution));
+                yield return (Distributions.Normal, typeof(NormalDistribution));
+                yield return (Distributions.Parabola, typeof(ParabolaDistribution));
+                yield return (Distributions.Uniform, typeof(UniformDistribution));
+                yield return (Distributions.Weibull, typeof(WeibullDistribution));
             }
         }
 
-        public static IEnumerable RgbFiltersFactoryTestCases
+        public static IEnumerable<(RgbFilter Input, Type Result)> RgbFiltersFactoryTestCases
         {
             get
             {
-                yield return new TestCaseData(RgbFilter.Binary, typeof(BinaryFilter));
-                yield return new TestCaseData(RgbFilter.Grayscale, typeof(GrayscaleFilter));
-                yield return new TestCaseData(RgbFilter.Inversion, typeof(InversionFilter));
+                yield return (RgbFilter.Binary, typeof(BinaryFilter));
+                yield return (RgbFilter.Grayscale, typeof(GrayscaleFilter));
+                yield return (RgbFilter.Inversion, typeof(InversionFilter));
             }
         }
     }

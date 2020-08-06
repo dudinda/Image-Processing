@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 
 using ImageProcessing.Microkernel.MVP.Aggregator.Implementation;
-using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
-using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Fakes
 {

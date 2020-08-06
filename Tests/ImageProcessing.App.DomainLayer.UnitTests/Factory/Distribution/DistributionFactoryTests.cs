@@ -1,14 +1,15 @@
 using System;
 
-using ImageProcessing.App.DomainLayer.Factory.Distributions.Implementation;
-using ImageProcessing.App.DomainLayer.Factory.Distributions.Interface;
+using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Factory.Distribution.Implementation;
+using ImageProcessing.App.DomainLayer.Factory.Distribution.Interface;
 using ImageProcessing.App.DomainLayer.UnitTests.CaseFactory;
 
 using NUnit.Framework;
 
 using static ImageProcessing.App.DomainLayer.UnitTests.CaseFactory.DomainLayerFactoriesCaseFactory;
 
-namespace ImageProcessing.App.DomainLayer.UnitTests.Factory.Distributions
+namespace ImageProcessing.App.DomainLayer.UnitTests.Factory.Distribution
 {
     [TestFixture]
     internal sealed class DistributionFactoryTests
@@ -24,8 +25,8 @@ namespace ImageProcessing.App.DomainLayer.UnitTests.Factory.Distributions
         [Test, TestCaseSource(
                typeof(DomainLayerFactoriesCaseFactory),
                nameof(DistributionFactoryTestCases))]
-        public void FactoryReturnsRayleighByEnumValue(CommonLayer.Enums.Distributions distribution, Type returnType)
-            => Assert.That(_distributionFactory.Get(distribution), Is.TypeOf(returnType));
+        public void FactoryReturnsRayleighByEnumValue((Distributions Input, Type Result) args)
+            => Assert.That(_distributionFactory.Get(args.Input), Is.TypeOf(args.Result));
 
         [Test]
         public void FactoryThrowsNotImplementedExceptionOnUnknownEnum()

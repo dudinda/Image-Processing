@@ -7,10 +7,10 @@ using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Show;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Main;
+using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Services;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.ServiceLayer.Facades.MainPresenterLockers.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
-using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.App.UILayer.Form.Main;
 using ImageProcessing.App.UILayer.FormCommands.Main.Interface;
@@ -38,12 +38,15 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Fakes
 
         private readonly IEventAggregator _aggregator;
 
+        public NonBlockDialogServiceFake Dialog { get; }
         public IMainFormExposer Publisher { get; }
         public MainPresenter Subscriber { get; }
 
         public MainSystemFake() : base(Substitute.For<IAppController>())
         {
             _aggregator = new EventAggregatorFake();
+
+            Dialog = Substitute.For<NonBlockDialogServiceFake>();
 
             Publisher = new MainForm(
                 Substitute.For<IAppController>(),
@@ -53,7 +56,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Fakes
             Subscriber = new MainPresenter(
                 Substitute.For<IAppController>(),
                 Substitute.For<ICacheService<Bitmap>>(),
-                Substitute.For<INonBlockDialogService>(),
+                Dialog,
                 Substitute.For<IAwaitablePipeline>(),
                 Substitute.For<IMainPresenterLockersFacade>());
 
@@ -73,7 +76,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Fakes
 
         public async virtual Task OnEventHandler(object publisher, ReplaceImageEventArgs e)
         {
-
+            Subscriber.OnEventHandler(publisher, e);
         }
 
         public async virtual Task OnEventHandler(object publisher, ZoomEventArgs e)
@@ -83,7 +86,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Fakes
 
         public async virtual Task OnEventHandler(object publisher, OpenFileDialogEventArgs e)
         {
-
+            Subscriber.OnEventHandler(publisher, e);
         }
 
         public async virtual Task OnEventHandler(object publisher, SaveAsFileDialogEventArgs e)

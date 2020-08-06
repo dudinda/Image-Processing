@@ -26,8 +26,8 @@ namespace ImageProcessing.App.DomainLayer.UnitTests.Factory.Color
         [Test, TestCaseSource(
             typeof(DomainLayerFactoriesCaseFactory),
             nameof(ColorFactoryTestCases))]
-        public IColor FactoryReturnsRedColorOnRCombination(RgbColors color, Type returnType)
-            => _colorFactory.Get(color);
+        public void FactoryReturnsRedColorOnRCombination((RgbColors Input, Type Return) args)
+            => Assert.That(_colorFactory.Get(args.Input), Is.TypeOf(args.Return));
 
         [Test]
         public void FactoryThrowsNotImplementedExceptionOnUnknownEnum()

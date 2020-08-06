@@ -1,5 +1,7 @@
 using System;
-
+using System.Drawing;
+using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Fakes;
 
@@ -18,7 +20,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         [SetUp]
         public void SetUp()
         {
-            _system = Substitute.For<MainSystemFake>();
+            _system = Substitute.ForPartsOf<MainSystemFake>();
         }
 
 
@@ -30,6 +32,10 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
             _system.Received().OnEventHandler(
                 Arg.Is<object>(s => s == _system.Publisher),
                 Arg.Any<OpenFileDialogEventArgs>());
+
+            _system.Dialog.Received().NonBlockOpen(Arg.Any<string>());
+
+
         }
 
         [Test]
@@ -40,6 +46,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
             _system.Received().OnEventHandler(
                 Arg.Is<object>(s => s == _system.Publisher),
                 Arg.Any<SaveAsFileDialogEventArgs>());
+
         }
 
         [Test]
@@ -55,27 +62,33 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         [Test]
         public void ReplaceSourceImageClick()
         {
-            _system.Publisher.SaveFileMenu.PerformClick();
+            _system.Publisher.ReplaceSrcByDstButton.Enabled = true;
+            _system.Publisher.ReplaceSrcByDstButton.PerformClick();
+
+            var container = ImageContainer.Destination;
 
             _system.Received().OnEventHandler(
                 Arg.Is<object>(s => s == _system.Publisher),
-                Arg.Any<SaveWithoutFileDialogEventArgs>());
+                Arg.Is<ReplaceImageEventArgs>(arg => arg.Container == container));
         }
 
         [Test]
         public void ReplaceDestinationImageClick()
         {
-            _system.Publisher.SaveFileMenu.PerformClick();
+            _system.Publisher.ReplaceDstBySrcButton.Enabled = true;
+            _system.Publisher.ReplaceDstBySrcButton.PerformClick();
+
+            var container = ImageContainer.Source;
 
             _system.Received().OnEventHandler(
                 Arg.Is<object>(s => s == _system.Publisher),
-                Arg.Any<SaveWithoutFileDialogEventArgs>());
+                Arg.Is<ReplaceImageEventArgs>(arg => arg.Container == container));
         }
 
         [TearDown]
         public void Dispose()
         {
-           // _mainView.Dispose();
+           _system.Publisher.Dispose();
         }
     }
 }
