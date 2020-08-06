@@ -1,12 +1,11 @@
 using System;
-
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.Factory.Distributions.Interface;
+using ImageProcessing.App.DomainLayer.Factory.Distribution.Interface;
 using ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.OneParameter;
 using ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.TwoParameter;
 using ImageProcessing.App.DomainLayer.Model.Distributions.Interface;
 
-namespace ImageProcessing.App.DomainLayer.Factory.Distributions.Implementation
+namespace ImageProcessing.App.DomainLayer.Factory.Distribution.Implementation
 {
     /// <inheritdoc cref="IDistributionFactory" />
     public sealed class DistributionFactory : IDistributionFactory
@@ -20,21 +19,21 @@ namespace ImageProcessing.App.DomainLayer.Factory.Distributions.Implementation
             => distribution
         switch
         {
-            CommonLayer.Enums.Distributions.Exponential
+            Distributions.Exponential
                 => new ExponentialDistribution(),
-            CommonLayer.Enums.Distributions.Laplace
+            Distributions.Laplace
                 => new LaplaceDistribution(),
-            CommonLayer.Enums.Distributions.Rayleigh
+            Distributions.Rayleigh
                 => new RayleighDistribution(),
-            CommonLayer.Enums.Distributions.Cauchy
+            Distributions.Cauchy
                 => new CauchyDistribution(),
-            CommonLayer.Enums.Distributions.Normal
+            Distributions.Normal
                 => new NormalDistribution(),
-            CommonLayer.Enums.Distributions.Parabola
+            Distributions.Parabola
                 => new ParabolaDistribution(),
-            CommonLayer.Enums.Distributions.Uniform
+            Distributions.Uniform
                 => new UniformDistribution(),
-            CommonLayer.Enums.Distributions.Weibull
+            Distributions.Weibull
                 => new WeibullDistribution(),
 
             _   => throw new NotImplementedException(nameof(distribution))

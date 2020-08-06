@@ -4,7 +4,7 @@ using System.Drawing;
 using ImageProcessing.App.CommonLayer.Attributes;
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.TypeExt;
-using ImageProcessing.App.DomainLayer.Factory.Distributions.Interface;
+using ImageProcessing.App.DomainLayer.Factory.Distribution.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
 

@@ -3,8 +3,8 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Factory.Convolution.Implementation;
 using ImageProcessing.App.DomainLayer.Factory.Convolution.Interface;
-using ImageProcessing.App.DomainLayer.Factory.Distributions.Implementation;
-using ImageProcessing.App.DomainLayer.Factory.Distributions.Interface;
+using ImageProcessing.App.DomainLayer.Factory.Distribution.Implementation;
+using ImageProcessing.App.DomainLayer.Factory.Distribution.Interface;
 using ImageProcessing.App.DomainLayer.Factory.Morphology.Implementation;
 using ImageProcessing.App.DomainLayer.Factory.Morphology.Interface;
 using ImageProcessing.App.DomainLayer.Factory.Morphology.Interface.StructuringElement;
