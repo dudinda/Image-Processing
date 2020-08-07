@@ -7,8 +7,6 @@ using System.Windows.Forms;
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
 using ImageProcessing.App.PresentationLayer.Presenters.Distribution;
-using ImageProcessing.App.PresentationLayer.Views.Convolution;
-using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Distribution.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Distribution;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
@@ -16,9 +14,9 @@ using ImageProcessing.Utility.Interop.Wrapper;
 
 using MetroFramework.Controls;
 
-namespace ImageProcessing.App.UILayer.Form.Convolution
+namespace ImageProcessing.App.UILayer.Form.Distribution
 {
-    /// <inheritdoc cref="IConvolutionView"/>
+    /// <inheritdoc cref="IDistributionView"/>
     internal sealed partial class DistributionForm : BaseForm, IDistributionFormExposer
     {
         private readonly IDistributionFormEventBinder _binder;

@@ -34,16 +34,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.RgbMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ConvolutionMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.DistributionMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.OneParameterDistributions = new System.Windows.Forms.ToolStripMenuItem();
-            this.ExponentialDistribution = new System.Windows.Forms.ToolStripMenuItem();
-            this.RayleighDistribution = new System.Windows.Forms.ToolStripMenuItem();
-            this.TwoParameterDistributions = new System.Windows.Forms.ToolStripMenuItem();
-            this.UniformDistribution = new System.Windows.Forms.ToolStripMenuItem();
-            this.CauchyDistribution = new System.Windows.Forms.ToolStripMenuItem();
-            this.WeibullDistribution = new System.Windows.Forms.ToolStripMenuItem();
-            this.LaplaceDistribution = new System.Windows.Forms.ToolStripMenuItem();
-            this.NormalDistribution = new System.Windows.Forms.ToolStripMenuItem();
-            this.ParabolaDistribution = new System.Windows.Forms.ToolStripMenuItem();
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
             this.ToolBarMenu = new System.Windows.Forms.ToolStrip();
             this.Undo = new System.Windows.Forms.ToolStripButton();
@@ -136,90 +126,9 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // 
             // DistributionMenu
             // 
-            this.DistributionMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.OneParameterDistributions,
-            this.TwoParameterDistributions});
             this.DistributionMenu.Name = "DistributionMenu";
             this.DistributionMenu.Size = new System.Drawing.Size(81, 20);
             this.DistributionMenu.Text = "Distribution";
-            // 
-            // OneParameterDistributions
-            // 
-            this.OneParameterDistributions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ExponentialDistribution,
-            this.RayleighDistribution});
-            this.OneParameterDistributions.Name = "OneParameterDistributions";
-            this.OneParameterDistributions.Size = new System.Drawing.Size(180, 22);
-            this.OneParameterDistributions.Text = "One-parameter";
-            // 
-            // ExponentialDistribution
-            // 
-            this.ExponentialDistribution.Name = "ExponentialDistribution";
-            this.ExponentialDistribution.Size = new System.Drawing.Size(136, 22);
-            this.ExponentialDistribution.Tag = "Exponential";
-            this.ExponentialDistribution.Text = "Exponential";
-            // 
-            // RayleighDistribution
-            // 
-            this.RayleighDistribution.Name = "RayleighDistribution";
-            this.RayleighDistribution.Size = new System.Drawing.Size(136, 22);
-            this.RayleighDistribution.Tag = "Rayleigh";
-            this.RayleighDistribution.Text = "Rayleigh";
-            // 
-            // TwoParameterDistributions
-            // 
-            this.TwoParameterDistributions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.UniformDistribution,
-            this.CauchyDistribution,
-            this.WeibullDistribution,
-            this.LaplaceDistribution,
-            this.NormalDistribution,
-            this.ParabolaDistribution});
-            this.TwoParameterDistributions.Name = "TwoParameterDistributions";
-            this.TwoParameterDistributions.Size = new System.Drawing.Size(180, 22);
-            this.TwoParameterDistributions.Text = "Two-parameter";
-            // 
-            // UniformDistribution
-            // 
-            this.UniformDistribution.Name = "UniformDistribution";
-            this.UniformDistribution.Size = new System.Drawing.Size(120, 22);
-            this.UniformDistribution.Tag = "Uniform";
-            this.UniformDistribution.Text = "Uniform";
-            // 
-            // CauchyDistribution
-            // 
-            this.CauchyDistribution.Name = "CauchyDistribution";
-            this.CauchyDistribution.Size = new System.Drawing.Size(120, 22);
-            this.CauchyDistribution.Tag = "Cauchy";
-            this.CauchyDistribution.Text = "Cauchy";
-            // 
-            // WeibullDistribution
-            // 
-            this.WeibullDistribution.Name = "WeibullDistribution";
-            this.WeibullDistribution.Size = new System.Drawing.Size(120, 22);
-            this.WeibullDistribution.Tag = "Weibull";
-            this.WeibullDistribution.Text = "Weibull";
-            // 
-            // LaplaceDistribution
-            // 
-            this.LaplaceDistribution.Name = "LaplaceDistribution";
-            this.LaplaceDistribution.Size = new System.Drawing.Size(120, 22);
-            this.LaplaceDistribution.Tag = "Laplace";
-            this.LaplaceDistribution.Text = "Laplace";
-            // 
-            // NormalDistribution
-            // 
-            this.NormalDistribution.Name = "NormalDistribution";
-            this.NormalDistribution.Size = new System.Drawing.Size(120, 22);
-            this.NormalDistribution.Tag = "Normal";
-            this.NormalDistribution.Text = "Normal";
-            // 
-            // ParabolaDistribution
-            // 
-            this.ParabolaDistribution.Name = "ParabolaDistribution";
-            this.ParabolaDistribution.Size = new System.Drawing.Size(120, 22);
-            this.ParabolaDistribution.Tag = "Parabola";
-            this.ParabolaDistribution.Text = "Parabola";
             // 
             // miniToolStrip
             // 
@@ -448,17 +357,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         private System.Windows.Forms.ToolStripMenuItem OpenFile;
         private System.Windows.Forms.ToolStripMenuItem SaveFileAs;
         private System.Windows.Forms.ToolStripMenuItem DistributionMenu;
-        private System.Windows.Forms.ToolStripMenuItem OneParameterDistributions;
-        private System.Windows.Forms.ToolStripMenuItem ExponentialDistribution;
-        private System.Windows.Forms.ToolStripMenuItem RayleighDistribution;
-        private System.Windows.Forms.ToolStripMenuItem TwoParameterDistributions;
-        private System.Windows.Forms.ToolStripMenuItem UniformDistribution;
-        private System.Windows.Forms.ToolStripMenuItem CauchyDistribution;
-        private System.Windows.Forms.ToolStripMenuItem WeibullDistribution;
         private System.Windows.Forms.ToolStripMenuItem ConvolutionMenu;
-        private System.Windows.Forms.ToolStripMenuItem LaplaceDistribution;
-        private System.Windows.Forms.ToolStripMenuItem NormalDistribution;
-        private System.Windows.Forms.ToolStripMenuItem ParabolaDistribution;
         private System.Windows.Forms.ToolStrip miniToolStrip;
         private System.Windows.Forms.ToolStrip ToolBarMenu;
         private System.Windows.Forms.PictureBox Src;

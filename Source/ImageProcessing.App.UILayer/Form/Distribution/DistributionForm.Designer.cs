@@ -1,4 +1,4 @@
-namespace ImageProcessing.App.UILayer.Form.Convolution
+namespace ImageProcessing.App.UILayer.Form.Distribution
 { 
     partial class DistributionForm
     {
@@ -109,7 +109,7 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
             this.SecondParamLabel.Image = ((System.Drawing.Image)(resources.GetObject("SecondParamLabel.Image")));
             this.SecondParamLabel.Name = "SecondParamLabel";
             this.SecondParamLabel.Size = new System.Drawing.Size(20, 24);
-            this.SecondParamLabel.ToolTipText = "Второй параметр";
+            this.SecondParamLabel.ToolTipText = "Р’С‚РѕСЂРѕР№ РїР°СЂР°РјРµС‚СЂ";
             // 
             // SecondParam
             // 

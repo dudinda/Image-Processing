@@ -150,6 +150,12 @@
   <data name="ShowConvolutionMenu" xml:space="preserve">
     <value>Ошибка при открыии меню фильтров свертки.</value>
   </data>
+  <data name="ShowDistributionMenu" xml:space="preserve">
+    <value>Ошибка при открытии меню распределений.</value>
+  </data>
+  <data name="ShowRgbMenu" xml:space="preserve">
+    <value>Ошибка при открытии меню RGB - фильтров.</value>
+  </data>
   <data name="Shuffle" xml:space="preserve">
     <value>Ошибка при перемешивании изображения.</value>
   </data>

@@ -9,12 +9,15 @@ using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Menu;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Show;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Convolution;
+using ImageProcessing.App.PresentationLayer.Presenters.Distribution;
 using ImageProcessing.App.PresentationLayer.Presenters.Rgb;
 using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
+using ImageProcessing.App.PresentationLayer.ViewModel.Distribution;
 using ImageProcessing.App.PresentationLayer.ViewModel.Rgb;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.ServiceLayer.Facades.MainPresenterLockers.Interface;
@@ -37,6 +40,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
           ISubscriber<OpenFileDialogEventArgs>,
           ISubscriber<SaveAsFileDialogEventArgs>,
           ISubscriber<SaveWithoutFileDialogEventArgs>,
+          ISubscriber<ShowDistributionMenuEventArgs>,
           ISubscriber<ShowRgbMenuEventArgs>,
           ISubscriber<ShowTooltipOnErrorEventArgs>
     {
@@ -62,21 +66,21 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                var result = await _dialog.NonBlockOpen(
-                    ConfigurationManager.AppSettings["Filters"]
-                ).ConfigureAwait(true);
+                  var result = await _dialog.NonBlockOpen(
+                      ConfigurationManager.AppSettings["Filters"]
+                  ).ConfigureAwait(true);
 
-                if (result.Image != null)
-                {
-                    View.SetCursor(CursorType.Wait);
+                  if (result.Image != null)
+                  {
+                      View.SetCursor(CursorType.Wait);
 
-                    await Render(
-                        block: new PipelineBlock(result.Image)
-                            .Add<Bitmap>(
-                                (bmp) => View.SetPathToFile(result.Path)),
-                        ImageContainer.Source
-                    ).ConfigureAwait(true);
-                }
+                      await Render(
+                          block: new PipelineBlock(result.Image)
+                              .Add<Bitmap>(
+                                  (bmp) => View.SetPathToFile(result.Path)),
+                          ImageContainer.Source
+                      ).ConfigureAwait(true);
+                  }
             }
             catch(Exception ex)
             {
@@ -144,7 +148,29 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (Exception ex)
             {
-                OnError(publisher, Errors.ApplyRgbFilter);
+                OnError(publisher, Errors.ShowRgbMenu);
+            }
+        }
+
+        public async Task OnEventHandler(object publisher, ShowDistributionMenuEventArgs e)
+        {
+            try
+            {
+                if (!View.ImageIsNull(ImageContainer.Source))
+                {
+                    var copy = await GetImageCopy(
+                       ImageContainer.Source
+                   ).ConfigureAwait(true);
+
+                    Controller.Run<DistributionPresenter, DistributionViewModel>(
+                        new DistributionViewModel(copy)
+                    );
+
+                }
+            }
+            catch (Exception ex)
+            {
+                OnError(publisher, Errors.ShowDistributionMenu);
             }
         }
 
@@ -270,7 +296,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         private async Task Render(IPipelineBlock block, ImageContainer container)
         {
             if (
-                _pipeline
+                !_pipeline
                     .Register(block
                         .Add<Bitmap, Bitmap>(
                             (bmp) => DefaultPipelineBlock(bmp, container)
@@ -278,27 +304,26 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                      )
                  )
             {
-                var result = await _pipeline
+                throw new InvalidOperationException();
+            }
+
+            var result = await _pipeline
                 .AwaitResult()
                 .ConfigureAwait(true);
 
-                if (container == ImageContainer.Source)
-                {
-                    _cache.Reset();
-                }
-
-                View.SetImage(container, (Bitmap)result);
-                View.Refresh(container);
-                View.ResetTrackBarValue(container);
-
-                if (!_pipeline.Any())
-                {
-                    View.SetCursor(CursorType.Default);
-                }
-
+            if (container == ImageContainer.Source)
+            {
+                _cache.Reset();
             }
 
-            throw new InvalidOperationException();
+            View.SetImage(container, (Bitmap)result);
+            View.Refresh(container);
+            View.ResetTrackBarValue(container);
+
+            if (!_pipeline.Any())
+            {
+                View.SetCursor(CursorType.Default);
+            }
         }
 
         private void OnError(object publisher, string error)
@@ -324,6 +349,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             View.Tooltip(e.Error);
 
             return Task.CompletedTask;
-        }
+        }     
     }
 }

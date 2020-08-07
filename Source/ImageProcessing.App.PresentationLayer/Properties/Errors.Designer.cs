@@ -160,6 +160,24 @@ namespace ImageProcessing.App.PresentationLayer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error while opening a distributions filters menu..
+        /// </summary>
+        public static string ShowDistributionMenu {
+            get {
+                return ResourceManager.GetString("ShowDistributionMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while opening an rgb filters menu..
+        /// </summary>
+        public static string ShowRgbMenu {
+            get {
+                return ResourceManager.GetString("ShowRgbMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error while shuffling the image..
         /// </summary>
         public static string Shuffle {

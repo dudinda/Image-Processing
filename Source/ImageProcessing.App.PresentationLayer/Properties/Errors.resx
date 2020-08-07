@@ -150,6 +150,12 @@
   <data name="ShowConvolutionMenu" xml:space="preserve">
     <value>Error while opening a convolution filters menu.</value>
   </data>
+  <data name="ShowDistributionMenu" xml:space="preserve">
+    <value>Error while opening a distributions filters menu.</value>
+  </data>
+  <data name="ShowRgbMenu" xml:space="preserve">
+    <value>Error while opening an rgb filters menu.</value>
+  </data>
   <data name="Shuffle" xml:space="preserve">
     <value>Error while shuffling the image.</value>
   </data>
