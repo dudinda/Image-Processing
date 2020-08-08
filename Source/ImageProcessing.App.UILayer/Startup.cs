@@ -98,7 +98,7 @@ namespace ImageProcessing.App.UILayer
                 .RegisterSingleton<ICacheService<Bitmap>, CacheService<Bitmap>>()
                 .RegisterSingletonView<IMainView, MainForm>()
                 .RegisterTransientView<IHistogramView, HistogramForm>()
-                .RegisterTransientView<IConvolutionView, ConvolutionFilterForm>()
+                .RegisterTransientView<IConvolutionView, ConvolutionForm>()
                 .RegisterTransientView<IRgbView, RgbForm>()
                 .RegisterSingletonView<IQualityMeasureView, QualityMeasureForm>()
                 .RegisterTransient<IDistributionView, DistributionForm>()

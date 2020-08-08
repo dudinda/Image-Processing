@@ -1,6 +1,6 @@
 namespace ImageProcessing.App.UILayer.Form.Convolution
 { 
-    partial class ConvolutionFilterForm
+    partial class ConvolutionForm
     {
 		/// <summary>
 		/// Required designer variable.
@@ -33,7 +33,7 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
             // 
             this.ConvolutionFilterComboBox.FormattingEnabled = true;
             this.ConvolutionFilterComboBox.ItemHeight = 23;
-            this.ConvolutionFilterComboBox.Location = new System.Drawing.Point(23, 29);
+            this.ConvolutionFilterComboBox.Location = new System.Drawing.Point(23, 60);
             this.ConvolutionFilterComboBox.MaxDropDownItems = 100;
             this.ConvolutionFilterComboBox.Name = "ConvolutionFilterComboBox";
             this.ConvolutionFilterComboBox.Size = new System.Drawing.Size(254, 29);
@@ -42,14 +42,14 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
             // 
             // Apply
             // 
-            this.Apply.Location = new System.Drawing.Point(23, 84);
+            this.Apply.Location = new System.Drawing.Point(23, 95);
             this.Apply.Name = "Apply";
             this.Apply.Size = new System.Drawing.Size(254, 23);
             this.Apply.TabIndex = 1;
             this.Apply.Text = "Apply";
             this.Apply.UseSelectable = true;
             // 
-            // ConvolutionFilterForm
+            // ConvolutionForm
             // 
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(300, 130);
@@ -57,8 +57,9 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
             this.Controls.Add(this.Apply);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ConvolutionFilterForm";
+            this.Name = "ConvolutionForm";
             this.Resizable = false;
+            this.Text = "Convolution Filters";
             this.TopMost = true;
             this.ResumeLayout(false);
 
