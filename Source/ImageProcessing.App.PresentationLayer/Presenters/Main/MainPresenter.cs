@@ -74,8 +74,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                   if (result.Image != null)
                   {
-                      View.SetCursor(CursorType.Wait);
-
                       await Render(
                           block: new PipelineBlock(result.Image)
                               .Add<Bitmap>(
@@ -145,9 +143,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                    ).ConfigureAwait(true);
 
                     Controller.Run<RgbPresenter, RgbViewModel>(
-                        new RgbViewModel(copy)
-                    );
-
+                        new RgbViewModel(copy));
                 }
             }
             catch (Exception ex)
@@ -167,9 +163,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                    ).ConfigureAwait(true);
 
                     Controller.Run<DistributionPresenter, DistributionViewModel>(
-                        new DistributionViewModel(copy)
-                    );
-
+                        new DistributionViewModel(copy));
                 }
             }
             catch (Exception ex)
@@ -189,8 +183,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     ).ConfigureAwait(true);
 
                     Controller.Run<ConvolutionPresenter, ConvolutionFilterViewModel>(
-                        new ConvolutionFilterViewModel(copy)
-                    );
+                        new ConvolutionFilterViewModel(copy));
                 }
             }
             catch (Exception ex)
@@ -209,8 +202,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                     if (block != null)
                     {
-                        View.SetCursor(CursorType.Wait);
-
                         await Render(
                             block, ImageContainer.Destination
                         ).ConfigureAwait(true);
@@ -237,8 +228,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                 if (!View.ImageIsNull(From))
                 {
-                    View.SetCursor(CursorType.Wait);
-
                     var copy = await GetImageCopy(From)
                         .ConfigureAwait(true);
 
@@ -320,6 +309,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
         private async Task Render(IPipelineBlock block, ImageContainer container)
         {
+            View.SetCursor(CursorType.Wait);
+
             if (
                 !_pipeline
                     .Register(block

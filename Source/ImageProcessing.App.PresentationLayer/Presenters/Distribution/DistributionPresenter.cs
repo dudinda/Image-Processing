@@ -108,8 +108,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
                      ).ConfigureAwait(true);
 
                 Controller.Run<HistogramPresenter, HistogramViewModel>(
-                    new HistogramViewModel(copy, e.Action)
-                );
+                    new HistogramViewModel(copy, e.Action));
             }
             catch (Exception ex)
             {
@@ -122,8 +121,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             try
             {
                 Controller.Run<QualityMeasurePresenter, QualityMeasureViewModel>(
-                    new QualityMeasureViewModel(View.GetQualityQueue())
-                );
+                    new QualityMeasureViewModel(View.GetQualityQueue()));
 
                 View.EnableQualityQueue(false);
             }
