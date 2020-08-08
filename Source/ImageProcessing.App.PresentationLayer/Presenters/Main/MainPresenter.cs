@@ -119,7 +119,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         ImageContainer.Source
                     ).ConfigureAwait(true);
 
-                    var path = View.PathToFile;
+                    var path = string.Copy(View.PathToFile);
 
                     await Task.Run(
                         () => copy.SaveByPath(path)
