@@ -9,6 +9,7 @@ using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.ImageContainer;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Menu;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Show;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
@@ -42,7 +43,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
           ISubscriber<SaveWithoutFileDialogEventArgs>,
           ISubscriber<ShowDistributionMenuEventArgs>,
           ISubscriber<ShowRgbMenuEventArgs>,
-          ISubscriber<ShowTooltipOnErrorEventArgs>
+          ISubscriber<ShowTooltipOnErrorEventArgs>,
+          ISubscriber<UndoRedoEventArgs>
     {
         private readonly ICacheService<Bitmap> _cache;
         private readonly INonBlockDialogService _dialog;
@@ -277,12 +279,33 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
+        public async Task OnEventHandler(object publisher, UndoRedoEventArgs e)
+        {
+            var result = View.UndoRedo(e.Action);
+
+            if (result.HasValue)
+            {
+                var (Bmp, Container) = result.Value;
+
+                View.SetImageCopy(Container, Bmp);
+                View.SetImageToZoom(Container, Bmp);
+                View.SetImage(Container, (Bitmap)Bmp.Clone());
+                View.Refresh(Container);
+                View.ResetTrackBarValue(Container);
+            }
+        }
+
+        public async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
+        {
+            View.Tooltip(e.Error);
+        }
+
         private Bitmap DefaultPipelineBlock(Bitmap bmp, ImageContainer to)
         {
             lock (this)
             {
+                View.AddToUndoContainer((new Bitmap(View.GetImageCopy(to)), to));
                 View.SetImageCopy(to, new Bitmap(bmp));
-                View.AddToUndoContainer( (new Bitmap(View.GetImageCopy(to)), to) );
                 View.SetImageToZoom(to, new Bitmap(bmp));
 
                 return (Bitmap)View.GetImageCopy(to).Clone();
@@ -345,10 +368,5 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
         public void CloseForm(CloseFormEventArgs e)
             => Controller.Dispose();
-
-        public async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
-        {
-            View.Tooltip(e.Error);
-        }     
     }
 }

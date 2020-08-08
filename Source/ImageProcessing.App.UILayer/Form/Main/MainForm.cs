@@ -14,10 +14,13 @@ using ImageProcessing.Utility.Interop.Wrapper;
 namespace ImageProcessing.App.UILayer.Form.Main
 {
     /// <inheritdoc cref="IMainView"/>
-    internal sealed partial class MainForm : BaseForm, IMainView, IMainFormExposer
+    internal sealed partial class MainForm : BaseForm, IMainFormExposer
     {
         private readonly IMainFormEventBinder _binder;
         private readonly IMainFormCommand _command;
+
+        private Image? _srcImageCopy;
+        private Image? _dstImageCopy;
 
         public MainForm(
             IAppController controller,
@@ -34,10 +37,36 @@ namespace ImageProcessing.App.UILayer.Form.Main
         }
 
         /// <inheritdoc/>
-        public Image? SrcImageCopy { get; set; }
+        public Image SrcImageCopy
+        {
+            get
+            {
+                if (_srcImageCopy is null)
+                {
+                    _srcImageCopy = Src.InitialImage;
+                }
+
+                return _srcImageCopy;
+            }
+
+            set => _srcImageCopy = value;
+        }
 
         /// <inheritdoc/>
-        public Image? DstImageCopy { get; set; }
+        public Image DstImageCopy
+        {
+            get
+            {
+                if (_dstImageCopy is null)
+                {
+                    _dstImageCopy = Dst.InitialImage;
+                }
+
+                return _dstImageCopy;
+            }
+
+            set => _dstImageCopy = value;
+        }
 
         /// <inheritdoc/>
         public Image SrcImage
@@ -100,16 +129,8 @@ namespace ImageProcessing.App.UILayer.Form.Main
         public ToolStripMenuItem DistributionMenuButton
             => DistributionMenu;
 
-        public Image SourceImageCopy
-        {
-            get => SrcImageCopy;
-            set => SrcImageCopy = value;
-        }
-        public Image DestinationImageCopy
-        {
-            get => DstImageCopy;
-            set => DstImageCopy = value;
-        }
+        public UndoRedoSplitContainer SplitContainerCtr
+            => SplitContainer;
 
         public PictureBox SourceBox
             => Src;
@@ -118,7 +139,10 @@ namespace ImageProcessing.App.UILayer.Form.Main
             => Dst;
 
         public ToolStripButton UndoButton
-            => Undo;
+            => UndoBtn;
+
+        public ToolStripButton RedoButton
+            => RedoBtn;
 
         /// <inheritdoc/>
         public new void Show()
@@ -130,24 +154,10 @@ namespace ImageProcessing.App.UILayer.Form.Main
         /// <inheritdoc/>
         public void SetPathToFile(string path)
             => PathToFile = path;
-        
-        /// <inheritdoc/>
-        public void AddToUndoMainMetaInfo((Bitmap changed, ImageContainer from) action)
-            => Container.Add(action);
 
         /// <inheritdoc/>
-        public (Bitmap changed, ImageContainer from)? UndoAction()
-            => Container.Undo();
-
-        /// <inheritdoc/>
-        public (Bitmap changed, ImageContainer from)? RedoAction()
-            => Container.Redo();
-
-        /// <inheritdoc/>
-        public void ShowInfo(string info)
-            => RandomVariableInformation.Show(info, this, PointToClient(
-                CursorPosition.GetCursorPosition()), 2000
-            );
+        public (Bitmap Bmp, ImageContainer To)? UndoRedo(UndoRedoAction action)
+            => ((Bitmap Bmp, ImageContainer To)?)_command.Function(action.ToString());
 
         /// <inheritdoc/>
         public void Tooltip(string message)
@@ -205,7 +215,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         
         /// <inheritdoc/>
         public void AddToUndoContainer((Bitmap changed, ImageContainer from) action)
-            => Container.Add(action);
+            => SplitContainer.Add(action);
 
 
         /// <summary>

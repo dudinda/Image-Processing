@@ -1,10 +1,13 @@
 using System.Windows.Forms;
 
+using Castle.Core.Smtp;
+
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.ImageContainer;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Menu;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Show;
 using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
@@ -92,6 +95,16 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation
             source.DistributionMenuButton.Click += (sender, args)
                 => _aggregator.PublishFrom(source,
                     new ShowDistributionMenuEventArgs()
+                );
+
+            source.UndoButton.Click += (sender, args)
+                => _aggregator.PublishFrom(source,
+                    new UndoRedoEventArgs(UndoRedoAction.Undo)
+                );
+
+            source.RedoButton.Click += (sender, args)
+                => _aggregator.PublishFrom(source,
+                     new UndoRedoEventArgs(UndoRedoAction.Redo)
                 );
         }
 

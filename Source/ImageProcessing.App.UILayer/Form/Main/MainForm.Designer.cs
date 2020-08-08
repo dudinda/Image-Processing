@@ -36,8 +36,8 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.DistributionMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
             this.ToolBarMenu = new System.Windows.Forms.ToolStrip();
-            this.Undo = new System.Windows.Forms.ToolStripButton();
-            this.Redo = new System.Windows.Forms.ToolStripButton();
+            this.UndoBtn = new System.Windows.Forms.ToolStripButton();
+            this.RedoBtn = new System.Windows.Forms.ToolStripButton();
             this.ReplaceSrcByDst = new System.Windows.Forms.ToolStripButton();
             this.ReplaceDstBySrc = new System.Windows.Forms.ToolStripButton();
             this.PathToImage = new System.Windows.Forms.ToolStripLabel();
@@ -50,8 +50,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.TrackBarDstPanel = new System.Windows.Forms.Panel();
             this.DstZoom = new ImageProcessing.App.UILayer.Control.ZoomTrackBar();
             this.ErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.RandomVariableInformation = new MetroFramework.Components.MetroToolTip();
-            this.Container = new ImageProcessing.App.UILayer.Control.UndoRedoSplitContainer();
+            this.SplitContainer = new ImageProcessing.App.UILayer.Control.UndoRedoSplitContainer();
             this.MainMenu.SuspendLayout();
             this.ToolBarMenu.SuspendLayout();
             this.PictureBoxSrcPanel.SuspendLayout();
@@ -60,10 +59,10 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.PictureBoxDstPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Dst)).BeginInit();
             this.TrackBarDstPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Container)).BeginInit();
-            this.Container.Panel1.SuspendLayout();
-            this.Container.Panel2.SuspendLayout();
-            this.Container.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
+            this.SplitContainer.Panel1.SuspendLayout();
+            this.SplitContainer.Panel2.SuspendLayout();
+            this.SplitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainMenu
@@ -147,8 +146,8 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // 
             this.ToolBarMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.ToolBarMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Undo,
-            this.Redo,
+            this.UndoBtn,
+            this.RedoBtn,
             this.ReplaceSrcByDst,
             this.ReplaceDstBySrc,
             this.PathToImage});
@@ -158,25 +157,25 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.ToolBarMenu.Stretch = true;
             this.ToolBarMenu.TabIndex = 5;
             // 
-            // Undo
+            // UndoBtn
             // 
-            this.Undo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Undo.Enabled = false;
-            this.Undo.Image = ((System.Drawing.Image)(resources.GetObject("Undo.Image")));
-            this.Undo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Undo.Name = "Undo";
-            this.Undo.Size = new System.Drawing.Size(24, 24);
-            this.Undo.ToolTipText = "Undo last transformation";
+            this.UndoBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.UndoBtn.Enabled = false;
+            this.UndoBtn.Image = global::ImageProcessing.App.UILayer.Properties.Resources.Undo_Image;
+            this.UndoBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.UndoBtn.Name = "UndoBtn";
+            this.UndoBtn.Size = new System.Drawing.Size(24, 24);
+            this.UndoBtn.ToolTipText = "Undo last transformation";
             // 
-            // Redo
+            // RedoBtn
             // 
-            this.Redo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Redo.Enabled = false;
-            this.Redo.Image = ((System.Drawing.Image)(resources.GetObject("Redo.Image")));
-            this.Redo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Redo.Name = "Redo";
-            this.Redo.Size = new System.Drawing.Size(24, 24);
-            this.Redo.ToolTipText = "Redo last transformation";
+            this.RedoBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.RedoBtn.Enabled = false;
+            this.RedoBtn.Image = global::ImageProcessing.App.UILayer.Properties.Resources.Redo_Image;
+            this.RedoBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.RedoBtn.Name = "RedoBtn";
+            this.RedoBtn.Size = new System.Drawing.Size(24, 24);
+            this.RedoBtn.ToolTipText = "Redo last transformation";
             // 
             // ReplaceSrcByDst
             // 
@@ -217,9 +216,10 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // Src
             // 
             this.Src.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Src.InitialImage = global::ImageProcessing.App.UILayer.Properties.Resources.WhitePixel;
             this.Src.Location = new System.Drawing.Point(3, 3);
             this.Src.Name = "Src";
-            this.Src.Size = new System.Drawing.Size(160, 132);
+            this.Src.Size = new System.Drawing.Size(64, 64);
             this.Src.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.Src.TabIndex = 2;
             this.Src.TabStop = false;
@@ -262,9 +262,10 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // Dst
             // 
             this.Dst.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Dst.InitialImage = global::ImageProcessing.App.UILayer.Properties.Resources.WhitePixel;
             this.Dst.Location = new System.Drawing.Point(3, 3);
             this.Dst.Name = "Dst";
-            this.Dst.Size = new System.Drawing.Size(160, 132);
+            this.Dst.Size = new System.Drawing.Size(64, 64);
             this.Dst.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.Dst.TabIndex = 3;
             this.Dst.TabStop = false;
@@ -294,37 +295,31 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.DstZoom.TrackBarValue = 0;
             this.DstZoom.Value = 0;
             // 
-            // RandomVariableInformation
+            // SplitContainer
             // 
-            this.RandomVariableInformation.Style = MetroFramework.MetroColorStyle.Blue;
-            this.RandomVariableInformation.StyleManager = null;
-            this.RandomVariableInformation.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.SplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SplitContainer.Location = new System.Drawing.Point(20, 111);
+            this.SplitContainer.Name = "SplitContainer";
             // 
-            // Container
+            // SplitContainer.Panel1
             // 
-            this.Container.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Container.Location = new System.Drawing.Point(20, 111);
-            this.Container.Name = "Container";
+            this.SplitContainer.Panel1.Controls.Add(this.PictureBoxSrcPanel);
+            this.SplitContainer.Panel1.Controls.Add(this.TrackBarSrcPanel);
             // 
-            // Container.Panel1
+            // SplitContainer.Panel2
             // 
-            this.Container.Panel1.Controls.Add(this.PictureBoxSrcPanel);
-            this.Container.Panel1.Controls.Add(this.TrackBarSrcPanel);
-            // 
-            // Container.Panel2
-            // 
-            this.Container.Panel2.Controls.Add(this.PictureBoxDstPanel);
-            this.Container.Panel2.Controls.Add(this.TrackBarDstPanel);
-            this.Container.Size = new System.Drawing.Size(715, 370);
-            this.Container.SplitterDistance = 359;
-            this.Container.TabIndex = 10;
+            this.SplitContainer.Panel2.Controls.Add(this.PictureBoxDstPanel);
+            this.SplitContainer.Panel2.Controls.Add(this.TrackBarDstPanel);
+            this.SplitContainer.Size = new System.Drawing.Size(715, 370);
+            this.SplitContainer.SplitterDistance = 359;
+            this.SplitContainer.TabIndex = 10;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(755, 501);
-            this.Controls.Add(this.Container);
+            this.Controls.Add(this.SplitContainer);
             this.Controls.Add(this.ToolBarMenu);
             this.Controls.Add(this.MainMenu);
             this.MainMenuStrip = this.MainMenu;
@@ -342,10 +337,10 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.PictureBoxDstPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Dst)).EndInit();
             this.TrackBarDstPanel.ResumeLayout(false);
-            this.Container.Panel1.ResumeLayout(false);
-            this.Container.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Container)).EndInit();
-            this.Container.ResumeLayout(false);
+            this.SplitContainer.Panel1.ResumeLayout(false);
+            this.SplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).EndInit();
+            this.SplitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -363,7 +358,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         private System.Windows.Forms.PictureBox Src;
         private System.Windows.Forms.PictureBox Dst;
         private System.Windows.Forms.ToolStripButton ReplaceSrcByDst;
-        private System.Windows.Forms.ToolStripButton Undo;
+        private System.Windows.Forms.ToolStripButton UndoBtn;
         private System.Windows.Forms.ToolStripLabel PathToImage;
         private System.Windows.Forms.ToolStripButton ReplaceDstBySrc;
         private System.Windows.Forms.ToolStripMenuItem SaveFile;
@@ -373,9 +368,8 @@ namespace ImageProcessing.App.UILayer.Form.Main
         private Panel PictureBoxDstPanel;
         private Panel TrackBarDstPanel;
         private App.UILayer.Control.ZoomTrackBar SrcZoom;
-        private MetroFramework.Components.MetroToolTip RandomVariableInformation;
-        private App.UILayer.Control.UndoRedoSplitContainer Container;
-        private ToolStripButton Redo;
+        private App.UILayer.Control.UndoRedoSplitContainer SplitContainer;
+        private ToolStripButton RedoBtn;
         private App.UILayer.Control.ZoomTrackBar DstZoom;
         private ToolStripMenuItem RgbMenu;
     }

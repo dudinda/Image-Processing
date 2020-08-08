@@ -47,25 +47,25 @@ namespace ImageProcessing.App.UILayer.FormCommands.Main.Implementation
             nameof(ImageContainer.Source) +
             nameof(MainViewAction.GetCopy))]
         private Image GetSourceCopyCommand()
-            => _exposer.SourceImageCopy;
+            => _exposer.SrcImageCopy;
 
         [Command(
            nameof(ImageContainer.Source) +
            nameof(MainViewAction.SetCopy))]
         private void SetSourceCopyCommand(Image image)
-           => _exposer.SourceImageCopy = image;
+           => _exposer.SrcImageCopy = image;
 
         [Command(
            nameof(ImageContainer.Destination) +
            nameof(MainViewAction.SetCopy))]
         private void SetDestinationCopyCommand(Image image)
-           => _exposer.DestinationImageCopy = image;
+           => _exposer.DstImageCopy = image;
 
         [Command(
             nameof(ImageContainer.Destination) +
             nameof(MainViewAction.GetCopy))]
         private Image GetDestinationCopyCommand()
-            => _exposer.DestinationImageCopy;
+            => _exposer.DstImageCopy;
 
         [Command(
             nameof(ImageContainer.Source) +
@@ -136,6 +136,43 @@ namespace ImageProcessing.App.UILayer.FormCommands.Main.Implementation
             nameof(MainViewAction.SetToZoom))]
         private Image SetToZoomDestinationImageCommand(Image image)
            => _exposer.ZoomDstTrackBar.ImageToZoom = image;
+
+        [Command(nameof(UndoRedoAction.Undo))]
+        private (Bitmap Bmp, ImageContainer To)? UndoCommand()
+        {
+            var result = _exposer.SplitContainerCtr.Undo();
+
+            if(!_exposer.SplitContainerCtr.RedoIsEmpty)
+            {
+                _exposer.RedoButton.Enabled = true;
+            }
+
+            if(result is null)
+            {
+                _exposer.UndoButton.Enabled = false;
+            }
+
+            return result;
+        }
+      
+        [Command(nameof(UndoRedoAction.Redo))]
+        private (Bitmap Bmp, ImageContainer To)? RedoCommand()
+        {
+            var result = _exposer.SplitContainerCtr.Redo();
+
+            if(!_exposer.SplitContainerCtr.UndoIsEmpty)
+            {
+                _exposer.UndoButton.Enabled = true;
+            }
+
+            if(result is null)
+            {
+                _exposer.RedoButton.Enabled = false;
+            }
+
+
+            return result;
+        }
 
         public object Function(string command, params object[] args)
             => _command[command].Method.Invoke(this, args);

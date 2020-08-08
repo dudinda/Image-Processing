@@ -11,10 +11,12 @@ namespace ImageProcessing.App.UILayer.FormExposers.Main
     /// </summary>
     internal interface IMainFormExposer : IMainView
     {
-        Image? SourceImageCopy { get; set; }
-        Image? DestinationImageCopy { get; set; }
+        UndoRedoSplitContainer SplitContainerCtr { get; }
+
         PictureBox SourceBox { get; }
+
         PictureBox DestinationBox { get; }
+
         /// <summary>
         /// Save as dialog.
         /// </summary>
@@ -66,8 +68,13 @@ namespace ImageProcessing.App.UILayer.FormExposers.Main
         ToolStripMenuItem DistributionMenuButton { get; }
 
         /// <summary>
-        /// Replace a destination container image by a source.
+        /// Undo the last operation.
         /// </summary>
         ToolStripButton UndoButton { get; }
+
+        /// <summary>
+        /// Redo the last operation.
+        /// </summary>
+        ToolStripButton RedoButton { get; }
     }
 }

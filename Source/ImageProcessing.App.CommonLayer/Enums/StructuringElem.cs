@@ -7,7 +7,7 @@ namespace ImageProcessing.App.CommonLayer.Enums
         /// <summary>
         /// An unknown kernel type.
         /// </summary>
-        [Description("Kernel is not specified")]
+        [Description("Select a kernel type...")]
         Unknown     = 0,
 
         /// <summary>

@@ -10,7 +10,7 @@ namespace ImageProcessing.App.CommonLayer.Enums
         /// <summary>
         /// An unknown recommendation.
         /// </summary>
-        [Description("Recommendation is not specified")]
+        [Description("Select a recommendation...")]
         Unknown = 0,
 
         /// <summary>

@@ -18,7 +18,14 @@ namespace ImageProcessing.App.UILayer.Control
             _redo = new FixedStackSafe<(Bitmap returned, ImageContainer to)>(10);
         }
 
-        public void Add((Bitmap, ImageContainer) action)
+
+        public bool UndoIsEmpty
+            => _undo.IsEmpty;
+
+        public bool RedoIsEmpty
+            => _redo.IsEmpty;
+
+        public void Add((Bitmap Bmp, ImageContainer To) action)
             => _undo.Push(action);
         
         public (Bitmap, ImageContainer)? Undo()

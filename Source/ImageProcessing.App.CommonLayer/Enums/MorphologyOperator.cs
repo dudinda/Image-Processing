@@ -9,7 +9,7 @@ namespace ImageProcessing.App.CommonLayer.Enums
     {
         /// <summary>
         /// An unknown operation.
-        [Description("Operation is not specified")]
+        [Description("Select an operation...")]
         Unknown     = 0,
 
         /// <summary>
