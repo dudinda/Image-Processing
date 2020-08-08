@@ -67,23 +67,20 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
             try
             {
                 var color = View.GetSelectedColors(e.Color);
-            
-                if (color != RgbColors.Unknown)
-                {
-                    var copy = await _locker
-                        .LockOperationAsync(
-                            () => new Bitmap(ViewModel.Source)
-                         ).ConfigureAwait(true);
 
-                    Controller.Aggregator.PublishFromAll(
-                        e.Publisher,
-                        new AttachBlockToRendererEventArgs(
-                            block: new PipelineBlock(copy)
-                                .Add<Bitmap, Bitmap>(
-                                    (bmp) => _provider.Apply(bmp, color))
-                        )
-                     );
-                }
+                var copy = await _locker
+                    .LockOperationAsync(
+                        () => new Bitmap(ViewModel.Source)
+                     ).ConfigureAwait(true);
+
+                Controller.Aggregator.PublishFromAll(
+                    e.Publisher,
+                    new AttachBlockToRendererEventArgs(
+                        block: new PipelineBlock(copy)
+                            .Add<Bitmap, Bitmap>(
+                                (bmp) => _provider.Apply(bmp, color))
+                    )
+                 );
             }
             catch (Exception ex)
             {

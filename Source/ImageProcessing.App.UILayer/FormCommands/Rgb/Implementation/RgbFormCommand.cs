@@ -7,6 +7,8 @@ using ImageProcessing.App.UILayer.Code.Enums;
 using ImageProcessing.App.UILayer.Exposers.Rgb;
 using ImageProcessing.App.UILayer.FormCommands.Rgb.Interface;
 
+using static ImageProcessing.App.CommonLayer.Enums.RgbColors;
+
 namespace ImageProcessing.App.UILayer.FormCommands.Rgb.Implementation
 {
     internal sealed class RgbFormCommand : IRgbFormCommand
@@ -32,21 +34,26 @@ namespace ImageProcessing.App.UILayer.FormCommands.Rgb.Implementation
         [Command(nameof(RgbViewAction.GetColor))]
         private RgbColors GetColorCommand()
         {
-            var result = default(RgbColors);
+            var result = Unknown;
 
             if (_exposer.RedButton.Checked)
             {
-                result |= RgbColors.Red;
+                result |= Red;
             }
                 
             if (_exposer.BlueButton.Checked)
             {
-                result |= RgbColors.Blue;
+                result |= Blue;
             }
                 
             if (_exposer.GreenButton.Checked)
             {
-                result |= RgbColors.Green;
+                result |= Green;
+            }
+
+            if(result == Unknown)
+            {
+                result |= Green | Blue | Red;
             }
                
             return result;
