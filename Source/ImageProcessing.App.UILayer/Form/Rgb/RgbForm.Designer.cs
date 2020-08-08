@@ -23,62 +23,32 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.RadioColorGroup = new MetroFramework.Controls.MetroPanel();
-            this.BlueColor = new MetroFramework.Controls.MetroRadioButton();
-            this.GreenColor = new MetroFramework.Controls.MetroRadioButton();
-            this.RedColor = new MetroFramework.Controls.MetroRadioButton();
+            this.CheckboxColorGroup = new MetroFramework.Controls.MetroPanel();
             this.Palette = new MetroFramework.Controls.MetroButton();
             this.RgbFilterComboBox = new MetroFramework.Controls.MetroComboBox();
             this.ApplyFilter = new MetroFramework.Controls.MetroButton();
             this.ShowToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.RadioColorGroup.SuspendLayout();
+            this.RedColor = new MetroFramework.Controls.MetroCheckBox();
+            this.GreenColor = new MetroFramework.Controls.MetroCheckBox();
+            this.BlueColor = new MetroFramework.Controls.MetroCheckBox();
+            this.CheckboxColorGroup.SuspendLayout();
             this.SuspendLayout();
             // 
-            // RadioColorGroup
+            // CheckboxColorGroup
             // 
-            this.RadioColorGroup.Controls.Add(this.BlueColor);
-            this.RadioColorGroup.Controls.Add(this.GreenColor);
-            this.RadioColorGroup.Controls.Add(this.RedColor);
-            this.RadioColorGroup.HorizontalScrollbarBarColor = true;
-            this.RadioColorGroup.HorizontalScrollbarHighlightOnWheel = false;
-            this.RadioColorGroup.HorizontalScrollbarSize = 10;
-            this.RadioColorGroup.Location = new System.Drawing.Point(264, 62);
-            this.RadioColorGroup.Name = "RadioColorGroup";
-            this.RadioColorGroup.Size = new System.Drawing.Size(135, 88);
-            this.RadioColorGroup.TabIndex = 0;
-            this.RadioColorGroup.VerticalScrollbarBarColor = true;
-            this.RadioColorGroup.VerticalScrollbarHighlightOnWheel = false;
-            this.RadioColorGroup.VerticalScrollbarSize = 10;
-            // 
-            // BlueColor
-            // 
-            this.BlueColor.AutoSize = true;
-            this.BlueColor.Location = new System.Drawing.Point(41, 55);
-            this.BlueColor.Name = "BlueColor";
-            this.BlueColor.Size = new System.Drawing.Size(46, 15);
-            this.BlueColor.TabIndex = 5;
-            this.BlueColor.Text = "Blue";
-            this.BlueColor.UseSelectable = true;
-            // 
-            // GreenColor
-            // 
-            this.GreenColor.AutoSize = true;
-            this.GreenColor.Location = new System.Drawing.Point(41, 33);
-            this.GreenColor.Name = "GreenColor";
-            this.GreenColor.Size = new System.Drawing.Size(54, 15);
-            this.GreenColor.TabIndex = 4;
-            this.GreenColor.Text = "Green";
-            this.GreenColor.UseSelectable = true;
-            // 
-            // RedColor
-            // 
-            this.RedColor.AutoSize = true;
-            this.RedColor.Location = new System.Drawing.Point(41, 12);
-            this.RedColor.Name = "RedColor";
-            this.RedColor.Size = new System.Drawing.Size(43, 15);
-            this.RedColor.TabIndex = 2;
-            this.RedColor.Text = "Red";
-            this.RedColor.UseSelectable = true;
+            this.CheckboxColorGroup.Controls.Add(this.BlueColor);
+            this.CheckboxColorGroup.Controls.Add(this.GreenColor);
+            this.CheckboxColorGroup.Controls.Add(this.RedColor);
+            this.CheckboxColorGroup.HorizontalScrollbarBarColor = true;
+            this.CheckboxColorGroup.HorizontalScrollbarHighlightOnWheel = false;
+            this.CheckboxColorGroup.HorizontalScrollbarSize = 10;
+            this.CheckboxColorGroup.Location = new System.Drawing.Point(264, 62);
+            this.CheckboxColorGroup.Name = "CheckboxColorGroup";
+            this.CheckboxColorGroup.Size = new System.Drawing.Size(135, 88);
+            this.CheckboxColorGroup.TabIndex = 0;
+            this.CheckboxColorGroup.VerticalScrollbarBarColor = true;
+            this.CheckboxColorGroup.VerticalScrollbarHighlightOnWheel = false;
+            this.CheckboxColorGroup.VerticalScrollbarSize = 10;
             // 
             // Palette
             // 
@@ -108,30 +78,60 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
             this.ApplyFilter.Text = "Apply Filter";
             this.ApplyFilter.UseSelectable = true;
             // 
+            // RedColor
+            // 
+            this.RedColor.AutoSize = true;
+            this.RedColor.Location = new System.Drawing.Point(43, 14);
+            this.RedColor.Name = "RedColor";
+            this.RedColor.Size = new System.Drawing.Size(43, 15);
+            this.RedColor.TabIndex = 2;
+            this.RedColor.Text = "Red";
+            this.RedColor.UseSelectable = true;
+            // 
+            // GreenColor
+            // 
+            this.GreenColor.AutoSize = true;
+            this.GreenColor.Location = new System.Drawing.Point(43, 36);
+            this.GreenColor.Name = "GreenColor";
+            this.GreenColor.Size = new System.Drawing.Size(54, 15);
+            this.GreenColor.TabIndex = 3;
+            this.GreenColor.Text = "Green";
+            this.GreenColor.UseSelectable = true;
+            // 
+            // BlueColor
+            // 
+            this.BlueColor.AutoSize = true;
+            this.BlueColor.Location = new System.Drawing.Point(43, 57);
+            this.BlueColor.Name = "BlueColor";
+            this.BlueColor.Size = new System.Drawing.Size(46, 15);
+            this.BlueColor.TabIndex = 4;
+            this.BlueColor.Text = "Blue";
+            this.BlueColor.UseSelectable = true;
+            // 
             // RgbForm
             // 
             this.ClientSize = new System.Drawing.Size(422, 172);
             this.Controls.Add(this.ApplyFilter);
             this.Controls.Add(this.RgbFilterComboBox);
             this.Controls.Add(this.Palette);
-            this.Controls.Add(this.RadioColorGroup);
+            this.Controls.Add(this.CheckboxColorGroup);
             this.Name = "RgbForm";
             this.Resizable = false;
             this.Text = "Rgb Filters";
-            this.RadioColorGroup.ResumeLayout(false);
-            this.RadioColorGroup.PerformLayout();
+            this.CheckboxColorGroup.ResumeLayout(false);
+            this.CheckboxColorGroup.PerformLayout();
             this.ResumeLayout(false);
 
         }
         #endregion
 
-        private MetroFramework.Controls.MetroPanel RadioColorGroup;
+        private MetroFramework.Controls.MetroPanel CheckboxColorGroup;
         private MetroFramework.Controls.MetroButton Palette;
         private MetroFramework.Controls.MetroComboBox RgbFilterComboBox;
-        public MetroFramework.Controls.MetroRadioButton BlueColor;
-        public MetroFramework.Controls.MetroRadioButton GreenColor;
-        public MetroFramework.Controls.MetroRadioButton RedColor;
         public MetroFramework.Controls.MetroButton ApplyFilter;
         private System.Windows.Forms.ToolTip ShowToolTip;
+        private MetroFramework.Controls.MetroCheckBox BlueColor;
+        private MetroFramework.Controls.MetroCheckBox GreenColor;
+        private MetroFramework.Controls.MetroCheckBox RedColor;
     }
 }

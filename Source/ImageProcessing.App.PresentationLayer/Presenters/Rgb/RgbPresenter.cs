@@ -91,11 +91,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
             }
         }
 
-        public Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
+        public async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
             View.Tooltip(e.Error);
-
-            return Task.CompletedTask;
         }
     }
 }

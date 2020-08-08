@@ -12,17 +12,17 @@ namespace ImageProcessing.App.UILayer.Exposers.Rgb
         /// <summary>
         /// Select the filtering by the red channel.
         /// </summary>
-        MetroRadioButton RedButton { get; }
+        MetroCheckBox RedButton { get; }
 
         /// <summary>
         /// Select the filtering by the green channel.
         /// </summary>
-        MetroRadioButton GreenButton { get; }
+        MetroCheckBox GreenButton { get; }
 
         /// <summary>
         /// Select the filtering by the blue channel.
         /// </summary>
-        MetroRadioButton BlueButton { get; }
+        MetroCheckBox BlueButton { get; }
 
         /// <summary>
         /// Apply an rgb filter.

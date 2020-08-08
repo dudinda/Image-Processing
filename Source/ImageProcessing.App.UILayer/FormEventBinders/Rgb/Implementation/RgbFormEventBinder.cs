@@ -24,17 +24,17 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Rgb.Implementation
                      new ApplyRgbFilterEventArgs(source)
                  );
 
-            source.RedButton.Click += (sender, args)
+            source.RedButton.CheckedChanged += (sender, args)
                 => _aggregator.PublishFrom(source,
                     new ApplyRgbColorFilterEventArgs(RgbColors.Red, source)
                 );
 
-            source.GreenButton.Click += (sender, args)
+            source.GreenButton.CheckedChanged += (sender, args)
                 => _aggregator.PublishFrom(source,
                     new ApplyRgbColorFilterEventArgs(RgbColors.Green, source)
                 );
 
-            source.BlueButton.Click += (sender, args)
+            source.BlueButton.CheckedChanged += (sender, args)
                => _aggregator.PublishFrom(source,
                    new ApplyRgbColorFilterEventArgs(RgbColors.Blue, source)
                );
@@ -42,6 +42,16 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Rgb.Implementation
 
         public bool ProcessCmdKey(IRgbFormExposer view, Keys keyData)
         {
+            switch (keyData)
+            {
+                case Keys.R:
+                    {
+                        view.RedButton.Checked = !view.RedButton.Checked;
+
+                        return true;
+                    }
+            }
+
             return false;
         }
     }

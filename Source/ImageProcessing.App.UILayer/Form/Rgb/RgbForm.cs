@@ -54,15 +54,15 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
         }
 
         /// <inheritdoc/>
-        public MetroRadioButton RedButton
+        public MetroCheckBox RedButton
             => RedColor;
 
         /// <inheritdoc/>
-        public MetroRadioButton GreenButton
-            => RedColor;
+        public MetroCheckBox GreenButton
+            => GreenColor;
 
         /// <inheritdoc/>
-        public MetroRadioButton BlueButton
+        public MetroCheckBox BlueButton
             => BlueColor;
 
         /// <inheritdoc/>
@@ -71,19 +71,12 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
 
         /// <inheritdoc/>
         public RgbColors GetSelectedColors(RgbColors color)
-        {
-            _command.Procedure(color.ToString());
-
-            return (RgbColors)_command
-                .Function(nameof(RgbViewAction.GetColor));
-        }
-
+            => (RgbColors)_command.Function(nameof(RgbViewAction.GetColor));
+                 
         /// <inheritdoc/>
         public void Tooltip(string message)
            => ShowToolTip.Show(message, this, PointToClient(
-                 CursorPosition.GetCursorPosition()), 2000
-             );
-
+                 CursorPosition.GetCursorPosition()), 2000);
 
         /// <summary>
         /// Used by the generated <see cref="Dispose(bool)"/> call.
