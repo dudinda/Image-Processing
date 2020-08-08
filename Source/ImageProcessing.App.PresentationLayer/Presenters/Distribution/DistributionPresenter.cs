@@ -156,11 +156,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             }
         }
 
-        public Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
+        public async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
             View.Tooltip(e.Error);
-
-            return Task.CompletedTask;
         }
     }
 }

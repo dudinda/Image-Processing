@@ -99,20 +99,8 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation
         {
             switch (keyData)
             {
-                case (Keys.Right):
-
-                    _aggregator.PublishFrom(view,
-                        new ReplaceImageEventArgs(ImageContainer.Source)
-                    );
-
-                    return true;
-                case (Keys.Left):
-
-                    _aggregator.PublishFrom(view,
-                        new ReplaceImageEventArgs(ImageContainer.Destination)
-                    );
-
-                    return true;
+                case (Keys.Left): view.ReplaceSrcByDstButton.PerformClick(); return true;
+                case (Keys.Right):  view.ReplaceDstBySrcButton.PerformClick(); return true;
             }
 
             return false;

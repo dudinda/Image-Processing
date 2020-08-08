@@ -32,36 +32,13 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Convolution.Implementatio
 
         public bool ProcessCmdKey(IConvolutionFormExposer view, Keys keyData)
         {
-            var key = keyData.ToString();
-
-            if(_cmdCommand.ContainsKey(key))
+            switch (keyData)
             {
-                return (bool)_cmdCommand[key].Method.Invoke(
-                    this, new object[] { view });
+                case Keys.Q:     view.ApplyButton.PerformClick(); return true;             
+                case Keys.Enter: view.ApplyButton.PerformClick(); return true;                
             }
 
             return false;
-        }
-
-
-        [Command(nameof(Keys.Q))]
-        private bool ClickCommandQ(IConvolutionFormExposer source)
-        {
-            _aggregator.PublishFrom(source,
-                new ApplyConvolutionFilterEventArgs(source)
-            );
-
-            return true;
-        }
-
-        [Command(nameof(Keys.Enter))]
-        private bool ClickCommandEnter(IConvolutionFormExposer source)
-        {
-            _aggregator.PublishFrom(source,
-                new ApplyConvolutionFilterEventArgs(source)
-            );
-
-            return true;
         }
     }
 }

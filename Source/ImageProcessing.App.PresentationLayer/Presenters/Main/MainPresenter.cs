@@ -344,11 +344,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         public void CloseForm(CloseFormEventArgs e)
             => Controller.Dispose();
 
-        public Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
+        public async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
             View.Tooltip(e.Error);
-
-            return Task.CompletedTask;
         }     
     }
 }

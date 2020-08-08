@@ -222,5 +222,15 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
             base.Dispose(true);
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (_binder.ProcessCmdKey(this, keyData))
+            {
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
     }
 }

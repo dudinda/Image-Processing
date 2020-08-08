@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Windows.Forms;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
@@ -93,6 +94,16 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
                .Unsubscribe(typeof(RgbPresenter), this);
 
             base.Dispose(true);
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if(_binder.ProcessCmdKey(this, keyData))
+            {
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }
