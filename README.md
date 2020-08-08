@@ -15,8 +15,8 @@ Image filtration and contrast optimization.
 <p>The original purpose was to research the possible advantages of grayscale images contrast optimization using a normal distribution regarding a uniform distribution. Two parameters such as the expectation and std allow to control relative luminance and contrast, respectively.</p>
 
 <p align="center">
-    <img src="https://i.imgur.com/dUMCOy1.png" width="700" height = "400" alt="application window">
-    <p align="center">Fig. 1 - The main window.</p>
+    <img src="https://i.imgur.com/NIPOh1w.png" width="800" height = "550" alt="application window">
+    <p align="center">Fig. 1 - The main window and control panels.</p>
 </p>
 
 <p> Initially, for experimental purposes was chosen a group of underexposed images. </p>
