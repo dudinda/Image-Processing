@@ -17,7 +17,7 @@ using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
 {
-    internal sealed partial class ConvolutionPresenter : BasePresenter<IConvolutionView, ConvolutionFilterViewModel>,
+    internal sealed class ConvolutionPresenter : BasePresenter<IConvolutionView, ConvolutionFilterViewModel>,
           ISubscriber<ApplyConvolutionFilterEventArgs>,
           ISubscriber<ShowTooltipOnErrorEventArgs>
     {

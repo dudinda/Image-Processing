@@ -17,7 +17,7 @@ using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
 {
-    internal sealed partial class RgbPresenter : BasePresenter<IRgbView, RgbViewModel>,
+    internal sealed class RgbPresenter : BasePresenter<IRgbView, RgbViewModel>,
           ISubscriber<ApplyRgbFilterEventArgs>,
           ISubscriber<ApplyRgbColorFilterEventArgs>
     {

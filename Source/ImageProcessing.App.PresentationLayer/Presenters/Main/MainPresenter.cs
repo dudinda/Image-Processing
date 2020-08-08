@@ -32,7 +32,7 @@ using ImageProcessing.Microkernel.MVP.Controller.Interface;
 [assembly: InternalsVisibleTo("ImageProcessing.App.UILayer")]
 namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 {
-    internal sealed partial class MainPresenter : BasePresenter<IMainView>,
+    internal sealed class MainPresenter : BasePresenter<IMainView>,
           ISubscriber<AttachBlockToRendererEventArgs>,
           ISubscriber<ShowConvolutionMenuEventArgs>,
           ISubscriber<ReplaceImageEventArgs>,
@@ -119,8 +119,10 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         ImageContainer.Source
                     ).ConfigureAwait(true);
 
+                    var path = View.PathToFile;
+
                     await Task.Run(
-                        () => copy.SaveByPath(View.PathToFile)
+                        () => copy.SaveByPath(path)
                     ).ConfigureAwait(true);
                 }
             }
