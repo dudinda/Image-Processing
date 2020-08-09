@@ -112,8 +112,21 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation
         {
             switch (keyData)
             {
-                case (Keys.Left): view.ReplaceSrcByDstButton.PerformClick(); return true;
-                case (Keys.Right):  view.ReplaceDstBySrcButton.PerformClick(); return true;
+                case (Keys.Left):
+                    view.ReplaceSrcByDstButton.PerformClick();
+                    return true;
+
+                case (Keys.Right):
+                    view.ReplaceDstBySrcButton.PerformClick();
+                    return true;
+
+                case (Keys.Z | Keys.Control):
+                    view.UndoRedo(UndoRedoAction.Undo);
+                    return true;
+
+                case (Keys.Y | Keys.Control):
+                    view.UndoRedo(UndoRedoAction.Redo);
+                    return true;
             }
 
             return false;
