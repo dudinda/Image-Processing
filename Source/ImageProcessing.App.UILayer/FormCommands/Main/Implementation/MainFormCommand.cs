@@ -72,8 +72,16 @@ namespace ImageProcessing.App.UILayer.FormCommands.Main.Implementation
             nameof(MainViewAction.SetImage))]
         private void SetSourceImageCommand(Image image)
         {
-            _exposer.SourceBox.Image = image;
-            _exposer.UndoButton.Enabled = true;
+            if(image != null)
+            {
+                _exposer.SourceBox.Image = (Bitmap)image.Clone();
+                _exposer.UndoButton.Enabled = true;
+                return;
+            }
+
+            _exposer.SourceBox.Image = null;
+            _exposer.ZoomSrcTrackBar.Enabled = false;
+                  
         }
 
         [Command(
@@ -81,8 +89,15 @@ namespace ImageProcessing.App.UILayer.FormCommands.Main.Implementation
             nameof(MainViewAction.SetImage))]
         private void SetDestinationImageCommand(Image image)
         {
-            _exposer.DestinationBox.Image = image;
-            _exposer.UndoButton.Enabled = true;
+            if (image != null)
+            {
+                _exposer.DestinationBox.Image = (Bitmap)image.Clone();
+                _exposer.UndoButton.Enabled = true;
+                return;
+            }
+
+            _exposer.DestinationBox.Image = null;
+            _exposer.ZoomDstTrackBar.Enabled = false;
         }
 
         [Command(

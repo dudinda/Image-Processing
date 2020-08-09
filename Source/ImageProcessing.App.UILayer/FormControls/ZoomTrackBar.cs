@@ -46,7 +46,13 @@ namespace ImageProcessing.App.UILayer.Control
                 lock (_sync)
                 {
                     _image = value;
-                    _originalSize = _image.Size;
+
+                    _originalSize = _image?.Size ?? default;
+
+                    if(_image is null)
+                    {
+                        base.Enabled = false;
+                    }
                 }
             }
         }

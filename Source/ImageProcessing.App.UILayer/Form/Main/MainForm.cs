@@ -19,9 +19,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
         private readonly IMainFormEventBinder _binder;
         private readonly IMainFormCommand _command;
 
-        private Image? _srcImageCopy;
-        private Image? _dstImageCopy;
-
         public MainForm(
             IAppController controller,
             IMainFormEventBinder binder,
@@ -37,37 +34,11 @@ namespace ImageProcessing.App.UILayer.Form.Main
         }
 
         /// <inheritdoc/>
-        public Image SrcImageCopy
-        {
-            get
-            {
-                if (_srcImageCopy is null)
-                {
-                    _srcImageCopy = Src.InitialImage;
-                }
-
-                return _srcImageCopy;
-            }
-
-            set => _srcImageCopy = value;
-        }
-
+        public Image? SrcImageCopy { get; set; }
+      
         /// <inheritdoc/>
-        public Image DstImageCopy
-        {
-            get
-            {
-                if (_dstImageCopy is null)
-                {
-                    _dstImageCopy = Dst.InitialImage;
-                }
-
-                return _dstImageCopy;
-            }
-
-            set => _dstImageCopy = value;
-        }
-
+        public Image? DstImageCopy { get; set; }
+  
         /// <inheritdoc/>
         public Image SrcImage
         {
@@ -214,8 +185,18 @@ namespace ImageProcessing.App.UILayer.Form.Main
             => _command.Procedure(cursor.ToString());
         
         /// <inheritdoc/>
-        public void AddToUndoContainer((Bitmap changed, ImageContainer from) action)
-            => SplitContainer.Add(action);
+        public void AddToUndoContainer(ImageContainer to)
+        {
+            var copy = GetImageCopy(to);
+
+            if(copy != null)
+            {
+                SplitContainer.Add((new Bitmap(copy), to));
+            } 
+
+             SplitContainer.Add((null!, to));
+        }
+           
 
 
         /// <summary>

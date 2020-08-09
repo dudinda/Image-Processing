@@ -36,14 +36,14 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
     internal sealed class MainPresenter : BasePresenter<IMainView>,
           ISubscriber<AttachBlockToRendererEventArgs>,
           ISubscriber<ShowConvolutionMenuEventArgs>,
-          ISubscriber<ReplaceImageEventArgs>,
-          ISubscriber<ZoomEventArgs>,
+          ISubscriber<ShowDistributionMenuEventArgs>,
+          ISubscriber<ShowRgbMenuEventArgs>,
           ISubscriber<OpenFileDialogEventArgs>,
           ISubscriber<SaveAsFileDialogEventArgs>,
           ISubscriber<SaveWithoutFileDialogEventArgs>,
-          ISubscriber<ShowDistributionMenuEventArgs>,
-          ISubscriber<ShowRgbMenuEventArgs>,
           ISubscriber<ShowTooltipOnErrorEventArgs>,
+          ISubscriber<ReplaceImageEventArgs>,
+          ISubscriber<ZoomEventArgs>,
           ISubscriber<UndoRedoEventArgs>
     {
         private readonly ICacheService<Bitmap> _cache;
@@ -278,7 +278,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                 View.SetImageCopy(Container, Bmp);
                 View.SetImageToZoom(Container, Bmp);
-                View.SetImage(Container, (Bitmap)Bmp.Clone());
+                View.SetImage(Container, Bmp);
                 View.Refresh(Container);
                 View.ResetTrackBarValue(Container);
             }
@@ -293,7 +293,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             lock (this)
             {
-                View.AddToUndoContainer((new Bitmap(View.GetImageCopy(to)), to));
+                View.AddToUndoContainer(to);
                 View.SetImageCopy(to, new Bitmap(bmp));
                 View.SetImageToZoom(to, new Bitmap(bmp));
 
@@ -332,7 +332,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                 _cache.Reset();
             }
 
-            View.SetImage(container, (Bitmap)result);
+            View.SetImage(container, result as Bitmap);
             View.Refresh(container);
             View.ResetTrackBarValue(container);
 
@@ -356,8 +356,5 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             Controller.Aggregator.PublishFrom(publisher,
                 new ShowTooltipOnErrorEventArgs(error));
         }
-
-        public void CloseForm(CloseFormEventArgs e)
-            => Controller.Dispose();
     }
 }

@@ -25,13 +25,13 @@ namespace ImageProcessing.App.PresentationLayer.Views.ViewComponent.BitmapContai
         /// A copy of a rendered image at the
         /// <see cref="ImageContainer.Source"/>.
         /// </summary>
-        Image SrcImageCopy { get; set; }
+        Image? SrcImageCopy { get; set; }
 
         /// <summary>
         /// A copy of a rendered image at the
         /// <see cref="ImageContainer.Destination/>.
         /// </summary>
-        Image DstImageCopy { get; set; }
+        Image? DstImageCopy { get; set; }
 
         /// <summary>
         /// Get the specified image copy from
