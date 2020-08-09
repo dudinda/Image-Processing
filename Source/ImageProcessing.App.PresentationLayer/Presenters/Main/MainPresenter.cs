@@ -270,17 +270,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
         public async Task OnEventHandler(object publisher, UndoRedoEventArgs e)
         {
-            var result = View.UndoRedo(e.Action);
-
-            if (result.HasValue)
+            try
             {
-                var (Bmp, Container) = result.Value;
-
-                View.SetImageCopy(Container, Bmp);
-                View.SetImageToZoom(Container, Bmp);
-                View.SetImage(Container, Bmp);
-                View.Refresh(Container);
-                View.ResetTrackBarValue(Container);
+                View.UndoRedo(e.Action);
+            }
+            catch(Exception ex) 
+            {
+                OnError(publisher, Errors.UndoRedo);
             }
         }
 

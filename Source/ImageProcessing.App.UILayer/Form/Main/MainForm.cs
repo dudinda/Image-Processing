@@ -127,14 +127,28 @@ namespace ImageProcessing.App.UILayer.Form.Main
             => PathToFile = path;
 
         /// <inheritdoc/>
-        public (Bitmap Bmp, ImageContainer To)? UndoRedo(UndoRedoAction action)
-            => ((Bitmap Bmp, ImageContainer To)?)_command.Function(action.ToString());
+        public void UndoRedo(UndoRedoAction action)
+        {
+            var result = _command.Function(action.ToString())
+                as (Bitmap, ImageContainer)?;
+
+            if (result != null)
+            {
+                var (copy, to) = result.Value;
+
+                SetImageCopy(to, copy);
+                SetImageToZoom(to, copy);
+                SetImage(to, copy);
+                Refresh(to);
+                ResetTrackBarValue(to);
+            }          
+        }
+           
 
         /// <inheritdoc/>
         public void Tooltip(string message)
             => ErrorToolTip.Show(message, this, PointToClient(
-                CursorPosition.GetCursorPosition()), 2000
-            );
+                CursorPosition.GetCursorPosition()), 2000);
 
         /// <inheritdoc/>
         public void ResetTrackBarValue(ImageContainer container, int value = 0, bool isEnabled = true)
@@ -189,16 +203,15 @@ namespace ImageProcessing.App.UILayer.Form.Main
         {
             var copy = GetImageCopy(to);
 
-            if(copy != null)
+            if (copy != null)
             {
                 SplitContainer.Add((new Bitmap(copy), to));
+                return;
             } 
 
              SplitContainer.Add((null!, to));
         }
            
-
-
         /// <summary>
         /// Used by the generated <see cref="Dispose(bool)"/> call.
         /// Can be used by a DI container in a singleton scope on Release();
@@ -207,9 +220,8 @@ namespace ImageProcessing.App.UILayer.Form.Main
             if (components != null)
             {
                 components.Dispose();
-            }
-
-            Controller.Dispose();
+                Controller.Dispose();
+            }    
 
             base.Dispose(true);
         }

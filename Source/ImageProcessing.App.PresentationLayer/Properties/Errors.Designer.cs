@@ -196,6 +196,15 @@ namespace ImageProcessing.App.PresentationLayer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error while undo/redo the last operation..
+        /// </summary>
+        public static string UndoRedo {
+            get {
+                return ResourceManager.GetString("UndoRedo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error while zooming the image..
         /// </summary>
         public static string Zoom {

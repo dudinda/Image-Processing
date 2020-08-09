@@ -46,7 +46,7 @@ namespace ImageProcessing.App.UILayer.FormCommands.Main.Implementation
         [Command(
             nameof(ImageContainer.Source) +
             nameof(MainViewAction.GetCopy))]
-        private Image GetSourceCopyCommand()
+        private Image? GetSourceCopyCommand()
             => _exposer.SrcImageCopy;
 
         [Command(
@@ -64,7 +64,7 @@ namespace ImageProcessing.App.UILayer.FormCommands.Main.Implementation
         [Command(
             nameof(ImageContainer.Destination) +
             nameof(MainViewAction.GetCopy))]
-        private Image GetDestinationCopyCommand()
+        private Image? GetDestinationCopyCommand()
             => _exposer.DstImageCopy;
 
         [Command(

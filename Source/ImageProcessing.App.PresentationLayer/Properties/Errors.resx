@@ -162,6 +162,9 @@
   <data name="TransformHistogram" xml:space="preserve">
     <value>Error while applying a histogram transformation.</value>
   </data>
+  <data name="UndoRedo" xml:space="preserve">
+    <value>Error while undo/redo the last operation.</value>
+  </data>
   <data name="Zoom" xml:space="preserve">
     <value>Error while zooming the image.</value>
   </data>

@@ -27,6 +27,6 @@ namespace ImageProcessing.App.PresentationLayer.Views.Main
 
         void AddToUndoContainer(ImageContainer to);
 
-        (Bitmap Bmp, ImageContainer To)? UndoRedo(UndoRedoAction action);
+        void UndoRedo(UndoRedoAction action);
     }
 }

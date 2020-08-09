@@ -25,11 +25,11 @@ namespace ImageProcessing.App.UILayer.FormCommands.Rgb.Implementation
 
         [Command(nameof(RgbColors.Red))]
         private void SwitchRedColorCommand()
-            => _exposer.RedButton.Checked = !_exposer.RedButton.Checked;
+            => _exposer.RedButton.Checked   = !_exposer.RedButton.Checked;
 
         [Command(nameof(RgbColors.Blue))]
         private void SwitchBlueColorCommand()
-            => _exposer.BlueButton.Checked = !_exposer.BlueButton.Checked;
+            => _exposer.BlueButton.Checked  = !_exposer.BlueButton.Checked;
 
         [Command(nameof(RgbViewAction.GetColor))]
         private RgbColors GetColorCommand()
