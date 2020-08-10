@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -171,56 +172,56 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
         /// <inheritdoc/>
         public void SetPathToFile(string path)
-            => UpdateUI(() => PathToFile = path);
+            => Write(() => PathToFile = path);
                     
         /// <inheritdoc/>
         public void Tooltip(string message)
-            => ErrorToolTip.Show(message, this, PointToClient(
-                CursorPosition.GetCursorPosition()), 2000);
+            => Write(() => ErrorToolTip.Show(message, this, PointToClient(
+                CursorPosition.GetCursorPosition()), 2000));
 
         /// <inheritdoc/>
         public void ResetTrackBarValue(ImageContainer container, int value = 0, bool isEnabled = true)
-            => UpdateUI(() => _command.Procedure(container.ToString() + nameof(MainViewAction.ResetTrackBar), value, isEnabled));
+            => Write(() => _command.Procedure(container.ToString() + nameof(MainViewAction.ResetTrackBar), value, isEnabled));
 
         /// <inheritdoc/>
         public Image ZoomImage(ImageContainer container)
-            => (Image)_command.Function(container.ToString() + nameof(MainViewAction.Zoom));
+            => Read<Image>(() => _command.Function(container.ToString() + nameof(MainViewAction.Zoom), null));
 
         /// <inheritdoc/>
         public void SetImageToZoom(ImageContainer container, Image image)
-            => UpdateUI(() => _command.Procedure(container.ToString() + nameof(MainViewAction.SetToZoom), image));
+            => Write(() => _command.Procedure(container.ToString() + nameof(MainViewAction.SetToZoom), image) );
 
         /// <inheritdoc/>
         public Image GetImageCopy(ImageContainer container)
-            => (Image)_command.Function(container.ToString() + nameof(MainViewAction.GetCopy));
+            => Read<Image>(() =>_command.Function(container.ToString() + nameof(MainViewAction.GetCopy)));
 
         /// <inheritdoc/>
         public void SetImageCopy(ImageContainer container, Image copy)
-            => _command.Procedure(container.ToString() + nameof(MainViewAction.SetCopy), copy);
+            => Write(() => _command.Procedure(container.ToString() + nameof(MainViewAction.SetCopy), copy));
 
         /// <inheritdoc/>
         public void SetImage(ImageContainer container, Image image)
-            => UpdateUI(() =>_command.Procedure(container.ToString() + nameof(MainViewAction.SetImage), image));
+            => Write(() =>_command.Procedure(container.ToString() + nameof(MainViewAction.SetImage), image));
 
         /// <inheritdoc/>
         public bool ImageIsDefault(ImageContainer container)
-            => (bool)_command.Function(container.ToString() + nameof(MainViewAction.ImageIsNull));
+            => Read<bool>(() => _command.Function(container.ToString() + nameof(MainViewAction.ImageIsNull)));
 
         /// <inheritdoc/>
         public void Refresh(ImageContainer container)
-             => UpdateUI(() => _command.Procedure(container.ToString() + nameof(MainViewAction.Refresh)));
+            => Write(() => _command.Procedure(container.ToString() + nameof(MainViewAction.Refresh)));
 
         /// <inheritdoc/>
         public void SetCursor(CursorType cursor)
-            => _command.Procedure(cursor.ToString());
+            => Write(() =>_command.Procedure(cursor.ToString()));
 
         /// <inheritdoc/>
         public void AddToUndoRedo(ImageContainer to, Bitmap cpy, UndoRedoAction action)
-            => UpdateUI(() => _command.Procedure(action.ToString() + nameof(MainViewAction.AddToUndoRedo), to, cpy));
+            => Write(() => _command.Procedure(action.ToString() + nameof(MainViewAction.AddToUndoRedo), to, cpy));
 
         /// <inheritdoc/>
         public (Bitmap, ImageContainer) TryUndoRedo(UndoRedoAction action)
-            => ((Bitmap, ImageContainer))_command.Function(action.ToString());
+            => Read<(Bitmap, ImageContainer)>(() => _command.Function(action.ToString()));
                     
         /// <summary>
         /// Used by the generated <see cref="Dispose(bool)"/> call.

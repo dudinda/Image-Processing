@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Threading;
 using System.Windows.Forms;
 
 using ImageProcessing.App.UILayer.Code.Attributes;
@@ -52,7 +53,32 @@ namespace ImageProcessing.App.UILayer.Form
             }
         }
 
-        protected void UpdateUI(Action action)
-            => Invoke(action);
+        protected TElement Read<TElement>(Func<object> func)
+        {
+            object result = null!;
+
+            if (SynchronizationContext.Current is null)
+            {
+                Invoke((Action)(() => result = func() ));
+            }
+            else
+            {
+                result = func();
+            } 
+
+            return (TElement)result;
+        }
+
+        protected void Write(Action action)
+        {
+            if(SynchronizationContext.Current is null)
+            {
+                Invoke(action);
+            }
+            else
+            {
+                action();
+            } 
+        }
     }
 }
