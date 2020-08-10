@@ -31,24 +31,10 @@ namespace ImageProcessing.App.UILayer.Control
         public void AddToRedo((Bitmap Bmp, ImageContainer To) action)
            => _redo.Push(action);
 
-        public (Bitmap, ImageContainer)? Undo()
-        {
-            if (_undo.IsEmpty)
-            {
-                return null;
-            }
+        public (Bitmap Bmp, ImageContainer To) Undo()
+            => _undo.Pop();
 
-            return _undo.Pop();
-        }
-
-        public (Bitmap, ImageContainer)? Redo()
-        {
-            if (_redo.IsEmpty)
-            {
-                return null;
-            }
-
-            return _redo.Pop();
-        }
+        public (Bitmap Bmp, ImageContainer To) Redo()
+            => _redo.Pop();
     }
 }

@@ -92,7 +92,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                if (!View.ImageIsNull(ImageContainer.Source))
+                if (!View.ImageIsDefault(ImageContainer.Source))
                 {
                     var copy = await GetImageCopy(
                         ImageContainer.Source
@@ -113,7 +113,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                if (!View.ImageIsNull(ImageContainer.Source))
+                if (!View.ImageIsDefault(ImageContainer.Source))
                 {
                     var copy = await GetImageCopy(
                         ImageContainer.Source
@@ -136,7 +136,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                if (!View.ImageIsNull(ImageContainer.Source))
+                if (!View.ImageIsDefault(ImageContainer.Source))
                 {
                     var copy = await GetImageCopy(
                        ImageContainer.Source
@@ -156,7 +156,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                if (!View.ImageIsNull(ImageContainer.Source))
+                if (!View.ImageIsDefault(ImageContainer.Source))
                 {
                     var copy = await GetImageCopy(
                        ImageContainer.Source
@@ -176,7 +176,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                if (!View.ImageIsNull(ImageContainer.Source))
+                if (!View.ImageIsDefault(ImageContainer.Source))
                 {
                     var copy = await GetImageCopy(
                         ImageContainer.Source
@@ -196,7 +196,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                if (!View.ImageIsNull(ImageContainer.Source))
+                if (!View.ImageIsDefault(ImageContainer.Source))
                 {
                     var block = e.Block as IPipelineBlock;
 
@@ -226,7 +226,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     (ImageContainer.Destination, ImageContainer.Source) :
                     (ImageContainer.Source, ImageContainer.Destination);
 
-                if (!View.ImageIsNull(From))
+                if (!View.ImageIsDefault(From))
                 {
                     var copy = await GetImageCopy(From)
                         .ConfigureAwait(true);
@@ -252,7 +252,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             {
                 var container = e.Container;
 
-                if (!View.ImageIsNull(container))
+                if (!View.ImageIsDefault(container))
                 {
                     var image = await _locker.LockZoomAsync(() =>
                         View.ZoomImage(container)
@@ -272,19 +272,16 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                if(View.TryUndoRedo(e.Action, out var result))
-                {
-                    var (copy, to) = result;
+                var (copy, to) = View.TryUndoRedo(e.Action);
 
-                    View.AddToRedo(to);
-                    View.SetImageCopy(to, copy);
-                    View.SetImageToZoom(to, copy);
-                    View.SetImage(to, copy);
-                    View.Refresh(to);
-                    View.ResetTrackBarValue(to);
-                } 
+                var action = e.Action == UndoRedoAction.Redo ?
+                   UndoRedoAction.Undo : UndoRedoAction.Redo;
+                 
+                await Render(
+                    new PipelineBlock(copy), to, action
+                ).ConfigureAwait(true);
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 OnError(publisher, Errors.UndoRedo);
             }
@@ -295,11 +292,18 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             View.Tooltip(e.Error);
         }
 
-        private Bitmap DefaultPipelineBlock(Bitmap bmp, ImageContainer to)
+        private Bitmap DefaultPipelineBlock(Bitmap bmp, ImageContainer to, UndoRedoAction action)
         {
             lock (this)
             {
-                View.AddToUndo(to);
+                var cpy = View.GetImageCopy(to) as Bitmap;
+
+                if(!View.ImageIsDefault(to))
+                {
+                    cpy = new Bitmap(cpy);
+                }
+
+                View.AddToUndoRedo(to, cpy, action);
                 View.SetImageCopy(to, new Bitmap(bmp));
                 View.SetImageToZoom(to, new Bitmap(bmp));
 
@@ -313,7 +317,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             ).ConfigureAwait(true);
 
 
-        private async Task Render(IPipelineBlock block, ImageContainer container)
+        private async Task Render(
+            IPipelineBlock block, ImageContainer container,
+            UndoRedoAction action = UndoRedoAction.Undo)
         {
             View.SetCursor(CursorType.Wait);
 
@@ -321,7 +327,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                 !_pipeline
                     .Register(block
                         .Add<Bitmap, Bitmap>(
-                            (bmp) => DefaultPipelineBlock(bmp, container)
+                            (bmp) => DefaultPipelineBlock(bmp, container, action)
                          )
                      )
                  )

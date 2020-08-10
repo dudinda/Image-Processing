@@ -11,6 +11,8 @@ namespace ImageProcessing.App.UILayer.FormExposers.Main
     /// </summary>
     internal interface IMainFormExposer : IMainView
     {
+        Image? DefaultImage { get; }
+
         UndoRedoSplitContainer SplitContainerCtr { get; }
 
         PictureBox SourceBox { get; }

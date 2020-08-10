@@ -1,5 +1,4 @@
 using System.Drawing;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 using ImageProcessing.App.CommonLayer.Enums;
@@ -9,6 +8,7 @@ using ImageProcessing.App.UILayer.Control;
 using ImageProcessing.App.UILayer.FormCommands.Main.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Main;
+using ImageProcessing.App.UILayer.Properties;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Utility.Interop.Wrapper;
 
@@ -34,11 +34,54 @@ namespace ImageProcessing.App.UILayer.Form.Main
             _command.OnElementExpose(this);
         }
 
+        private Image? _default;
+        public Image? Default
+        {
+            get
+            {
+                if (_default is null)
+                {
+                    _default = Resources.DefaultImage;
+                }
+
+                return _default;
+            }
+        }
+
+
+        private Image? _srcCopy;
         /// <inheritdoc/>
-        public Image? SrcImageCopy { get; set; }
-      
+        public Image? SrcImageCopy
+        {
+            get
+            {
+                if(_srcCopy is null)
+                {
+                    _srcCopy = Default;
+                }
+
+                return _srcCopy;
+            }
+
+            set => _srcCopy = value;
+        }
+
+        private Image? _dstCopy;
         /// <inheritdoc/>
-        public Image? DstImageCopy { get; set; }
+        public Image? DstImageCopy
+        {
+            get
+            {
+                if(_dstCopy is null)
+                {
+                    _dstCopy = Default;
+                }
+
+                return _dstCopy;
+            }
+
+            set => _dstCopy = value;
+        }
   
         /// <inheritdoc/>
         public Image SrcImage
@@ -116,6 +159,9 @@ namespace ImageProcessing.App.UILayer.Form.Main
         public ToolStripButton RedoButton
             => RedoBtn;
 
+        public Image? DefaultImage
+            => Default;
+
         /// <inheritdoc/>
         public new void Show()
         {
@@ -125,7 +171,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
         /// <inheritdoc/>
         public void SetPathToFile(string path)
-            => PathToFile = path;
+            => UpdateUI(() => PathToFile = path);
                     
         /// <inheritdoc/>
         public void Tooltip(string message)
@@ -134,88 +180,48 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
         /// <inheritdoc/>
         public void ResetTrackBarValue(ImageContainer container, int value = 0, bool isEnabled = true)
-            => _command.Procedure(
-                container.ToString() + nameof(MainViewAction.ResetTrackBar),
-                value, isEnabled);
+            => UpdateUI(() => _command.Procedure(container.ToString() + nameof(MainViewAction.ResetTrackBar), value, isEnabled));
 
         /// <inheritdoc/>
         public Image ZoomImage(ImageContainer container)
-            => (Image)_command.Function(
-                container.ToString() + nameof(MainViewAction.Zoom));
+            => (Image)_command.Function(container.ToString() + nameof(MainViewAction.Zoom));
 
         /// <inheritdoc/>
         public void SetImageToZoom(ImageContainer container, Image image)
-            => _command.Procedure(
-                container.ToString() + nameof(MainViewAction.SetToZoom),
-                args: image);
+            => UpdateUI(() => _command.Procedure(container.ToString() + nameof(MainViewAction.SetToZoom), image));
 
         /// <inheritdoc/>
         public Image GetImageCopy(ImageContainer container)
-            => (Image)_command.Function(
-                container.ToString() + nameof(MainViewAction.GetCopy));
+            => (Image)_command.Function(container.ToString() + nameof(MainViewAction.GetCopy));
 
         /// <inheritdoc/>
         public void SetImageCopy(ImageContainer container, Image copy)
-            => _command.Procedure(
-                container.ToString() + nameof(MainViewAction.SetCopy),
-                args: copy);
+            => _command.Procedure(container.ToString() + nameof(MainViewAction.SetCopy), copy);
 
         /// <inheritdoc/>
         public void SetImage(ImageContainer container, Image image)
-            => _command.Procedure(
-                container.ToString() + nameof(MainViewAction.SetImage),
-                args: image);
+            => UpdateUI(() =>_command.Procedure(container.ToString() + nameof(MainViewAction.SetImage), image));
 
         /// <inheritdoc/>
-        public bool ImageIsNull(ImageContainer container)
-            => (bool)_command.Function(
-                container.ToString() + nameof(MainViewAction.ImageIsNull));
+        public bool ImageIsDefault(ImageContainer container)
+            => (bool)_command.Function(container.ToString() + nameof(MainViewAction.ImageIsNull));
 
         /// <inheritdoc/>
         public void Refresh(ImageContainer container)
-             => _command.Procedure(
-                 container.ToString() + nameof(MainViewAction.Refresh));
+             => UpdateUI(() => _command.Procedure(container.ToString() + nameof(MainViewAction.Refresh)));
 
         /// <inheritdoc/>
         public void SetCursor(CursorType cursor)
             => _command.Procedure(cursor.ToString());
-        
-        /// <inheritdoc/>
-        public void AddToUndo(ImageContainer to)
-        {
-            var copy = GetImageCopy(to);
-
-            _command.Procedure(
-                 nameof(UndoRedoAction.Undo) +
-                 nameof(MainViewAction.AddToUndoRedo), to, copy);
-        }
 
         /// <inheritdoc/>
-        public void AddToRedo(ImageContainer to)
-        {
-            var copy = GetImageCopy(to);
-
-            _command.Procedure(
-                nameof(UndoRedoAction.Redo) +
-                nameof(MainViewAction.AddToUndoRedo), to, copy);
-        }
+        public void AddToUndoRedo(ImageContainer to, Bitmap cpy, UndoRedoAction action)
+            => UpdateUI(() => _command.Procedure(action.ToString() + nameof(MainViewAction.AddToUndoRedo), to, cpy));
 
         /// <inheritdoc/>
-        public bool TryUndoRedo(UndoRedoAction action, out (Bitmap, ImageContainer) result)
-        {
-            var undoredo = _command.Function(action.ToString()) as (Bitmap, ImageContainer)?;
-
-            if(undoredo != null)
-            {
-                result = undoredo.Value;
-                return true;
-            }
-
-            result = default;
-            return false;
-        }
-           
-
+        public (Bitmap, ImageContainer) TryUndoRedo(UndoRedoAction action)
+            => ((Bitmap, ImageContainer))_command.Function(action.ToString());
+                    
         /// <summary>
         /// Used by the generated <see cref="Dispose(bool)"/> call.
         /// Can be used by a DI container in a singleton scope on Release();

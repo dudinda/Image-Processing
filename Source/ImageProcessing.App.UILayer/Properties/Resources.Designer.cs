@@ -93,6 +93,16 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap DefaultImage {
+            get {
+                object obj = ResourceManager.GetObject("DefaultImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Entropy_Image {
             get {
                 object obj = ResourceManager.GetObject("Entropy.Image", resourceCulture);
@@ -206,16 +216,6 @@ namespace ImageProcessing.App.UILayer.Properties {
         public static System.Drawing.Bitmap Variance_Image {
             get {
                 object obj = ResourceManager.GetObject("Variance.Image", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap WhitePixel {
-            get {
-                object obj = ResourceManager.GetObject("WhitePixel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

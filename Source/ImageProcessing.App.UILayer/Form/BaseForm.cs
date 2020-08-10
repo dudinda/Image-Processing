@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -50,5 +51,8 @@ namespace ImageProcessing.App.UILayer.Form
                 return _context;
             }
         }
+
+        protected void UpdateUI(Action action)
+            => Invoke(action);
     }
 }

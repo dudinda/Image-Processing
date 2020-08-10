@@ -22,14 +22,14 @@ namespace ImageProcessing.App.UILayer.FormCommands.Main.Implementation
         [Command(
            nameof(ImageContainer.Source) +
            nameof(MainViewAction.ImageIsNull))]
-        private bool SourceImageIsNullCommand()
-           => _exposer.SourceBox.Image is null;
+        private bool SourceImageIsDefaultCommand()
+           => _exposer.SrcImageCopy == _exposer.DefaultImage;
 
         [Command(
             nameof(ImageContainer.Destination) +
             nameof(MainViewAction.ImageIsNull))]
-        private bool DestinationImageIsNullCommand()
-            => _exposer.DestinationBox.Image is null;
+        private bool DestinationImageIsDefaultCommand()
+            => _exposer.DstImageCopy == _exposer.DefaultImage;
 
         [Command(
             nameof(ImageContainer.Source) +
@@ -158,13 +158,8 @@ namespace ImageProcessing.App.UILayer.FormCommands.Main.Implementation
             nameof(MainViewAction.AddToUndoRedo))]
         private void AddToUndoCommand(ImageContainer to, Bitmap bmp)
         {
-            if (bmp != null)
-            {
-                _exposer.SplitContainerCtr.AddToUndo((new Bitmap(bmp), to));
-                return;
-            }
-
-            _exposer.SplitContainerCtr.AddToUndo((null!, to));
+            _exposer.SplitContainerCtr.AddToUndo((bmp, to));       
+            _exposer.UndoButton.Enabled = !_exposer.SplitContainerCtr.UndoIsEmpty;
         }
 
         [Command(
@@ -172,50 +167,28 @@ namespace ImageProcessing.App.UILayer.FormCommands.Main.Implementation
           nameof(MainViewAction.AddToUndoRedo))]
         private void AddToRedoCommand(ImageContainer to, Bitmap bmp)
         {
-            if (bmp != null)
-            {
-                _exposer.SplitContainerCtr.AddToRedo((new Bitmap(bmp), to));
-                return;
-            }
-
-            _exposer.SplitContainerCtr.AddToRedo((null!, to));
+            _exposer.SplitContainerCtr.AddToRedo((bmp, to));
+            _exposer.RedoButton.Enabled = !_exposer.SplitContainerCtr.RedoIsEmpty;
         }
 
         [Command(nameof(UndoRedoAction.Undo))]
         private (Bitmap Bmp, ImageContainer To)? UndoCommand()
         {
-            var result = _exposer.SplitContainerCtr.Undo();
-           
-            if(!_exposer.SplitContainerCtr.RedoIsEmpty)
-            {
-                _exposer.RedoButton.Enabled = true;
-            }
+            var undo = _exposer.SplitContainerCtr.Undo();
 
-            if(result is null)
-            {
-                _exposer.UndoButton.Enabled = false;
-            }
+            _exposer.UndoButton.Enabled = !_exposer.SplitContainerCtr.UndoIsEmpty;
 
-            return result;
+            return undo;
         }
       
         [Command(nameof(UndoRedoAction.Redo))]
         private (Bitmap Bmp, ImageContainer To)? RedoCommand()
         {
-            var result = _exposer.SplitContainerCtr.Redo();
+            var redo = _exposer.SplitContainerCtr.Redo();
 
-            if(!_exposer.SplitContainerCtr.UndoIsEmpty)
-            {
-                _exposer.UndoButton.Enabled = true;
-            }
+            _exposer.RedoButton.Enabled = !_exposer.SplitContainerCtr.RedoIsEmpty;
 
-            if(result is null)
-            {
-                _exposer.RedoButton.Enabled = false;
-            }
-
-
-            return result;
+            return redo;
         }
 
         public object Function(string command, params object[] args)

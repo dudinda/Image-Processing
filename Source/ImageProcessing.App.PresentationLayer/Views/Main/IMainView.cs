@@ -25,10 +25,8 @@ namespace ImageProcessing.App.PresentationLayer.Views.Main
      
         void SetPathToFile(string path);
 
-        void AddToUndo(ImageContainer to);
+        void AddToUndoRedo(ImageContainer to, Bitmap bmp, UndoRedoAction action);
 
-        void AddToRedo(ImageContainer to);
-
-        bool TryUndoRedo(UndoRedoAction action, out (Bitmap, ImageContainer) result);
+        (Bitmap, ImageContainer) TryUndoRedo(UndoRedoAction action);
     }
 }

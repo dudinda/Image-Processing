@@ -55,7 +55,7 @@ namespace ImageProcessing.App.PresentationLayer.Views.ViewComponent.BitmapContai
         /// Check whether the specified image
         /// is null.
         /// </summary>
-        bool ImageIsNull(ImageContainer container);
+        bool ImageIsDefault(ImageContainer container);
 
         /// <summary>
         /// Refresh the specified <see cref="ImageContainer"/>.

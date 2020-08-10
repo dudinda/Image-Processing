@@ -216,7 +216,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // Src
             // 
             this.Src.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Src.InitialImage = global::ImageProcessing.App.UILayer.Properties.Resources.WhitePixel;
+            this.Src.InitialImage = global::ImageProcessing.App.UILayer.Properties.Resources.DefaultImage;
             this.Src.Location = new System.Drawing.Point(3, 3);
             this.Src.Name = "Src";
             this.Src.Size = new System.Drawing.Size(64, 64);
@@ -262,7 +262,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // Dst
             // 
             this.Dst.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Dst.InitialImage = global::ImageProcessing.App.UILayer.Properties.Resources.WhitePixel;
+            this.Dst.InitialImage = global::ImageProcessing.App.UILayer.Properties.Resources.DefaultImage;
             this.Dst.Location = new System.Drawing.Point(3, 3);
             this.Dst.Name = "Dst";
             this.Dst.Size = new System.Drawing.Size(64, 64);
