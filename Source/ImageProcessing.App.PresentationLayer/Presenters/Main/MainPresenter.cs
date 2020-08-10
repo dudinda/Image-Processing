@@ -272,7 +272,17 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                View.UndoRedo(e.Action);
+                if(View.TryUndoRedo(e.Action, out var result))
+                {
+                    var (copy, to) = result;
+
+                    View.AddToRedo(to);
+                    View.SetImageCopy(to, copy);
+                    View.SetImageToZoom(to, copy);
+                    View.SetImage(to, copy);
+                    View.Refresh(to);
+                    View.ResetTrackBarValue(to);
+                } 
             }
             catch(Exception ex) 
             {
@@ -289,7 +299,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             lock (this)
             {
-                View.AddToUndoContainer(to);
+                View.AddToUndo(to);
                 View.SetImageCopy(to, new Bitmap(bmp));
                 View.SetImageToZoom(to, new Bitmap(bmp));
 

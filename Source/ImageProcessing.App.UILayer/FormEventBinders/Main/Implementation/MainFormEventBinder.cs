@@ -121,11 +121,11 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation
                     return true;
 
                 case (Keys.Z | Keys.Control):
-                    view.UndoRedo(UndoRedoAction.Undo);
+                    view.UndoButton.PerformClick();
                     return true;
 
                 case (Keys.Y | Keys.Control):
-                    view.UndoRedo(UndoRedoAction.Redo);
+                    view.RedoButton.PerformClick();
                     return true;
             }
 

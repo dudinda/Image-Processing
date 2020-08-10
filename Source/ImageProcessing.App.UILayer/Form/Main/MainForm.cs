@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 using ImageProcessing.App.CommonLayer.Enums;
@@ -125,26 +126,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         /// <inheritdoc/>
         public void SetPathToFile(string path)
             => PathToFile = path;
-
-        /// <inheritdoc/>
-        public void UndoRedo(UndoRedoAction action)
-        {
-            var result = _command.Function(action.ToString())
-                as (Bitmap, ImageContainer)?;
-
-            if (result != null)
-            {
-                var (copy, to) = result.Value;
-
-                SetImageCopy(to, copy);
-                SetImageToZoom(to, copy);
-                SetImage(to, copy);
-                Refresh(to);
-                ResetTrackBarValue(to);
-            }          
-        }
-           
-
+                    
         /// <inheritdoc/>
         public void Tooltip(string message)
             => ErrorToolTip.Show(message, this, PointToClient(
@@ -199,19 +181,41 @@ namespace ImageProcessing.App.UILayer.Form.Main
             => _command.Procedure(cursor.ToString());
         
         /// <inheritdoc/>
-        public void AddToUndoContainer(ImageContainer to)
+        public void AddToUndo(ImageContainer to)
         {
             var copy = GetImageCopy(to);
 
-            if (copy != null)
-            {
-                SplitContainer.Add((new Bitmap(copy), to));
-                return;
-            } 
+            _command.Procedure(
+                 nameof(UndoRedoAction.Undo) +
+                 nameof(MainViewAction.AddToUndoRedo), to, copy);
+        }
 
-             SplitContainer.Add((null!, to));
+        /// <inheritdoc/>
+        public void AddToRedo(ImageContainer to)
+        {
+            var copy = GetImageCopy(to);
+
+            _command.Procedure(
+                nameof(UndoRedoAction.Redo) +
+                nameof(MainViewAction.AddToUndoRedo), to, copy);
+        }
+
+        /// <inheritdoc/>
+        public bool TryUndoRedo(UndoRedoAction action, out (Bitmap, ImageContainer) result)
+        {
+            var undoredo = _command.Function(action.ToString()) as (Bitmap, ImageContainer)?;
+
+            if(undoredo != null)
+            {
+                result = undoredo.Value;
+                return true;
+            }
+
+            result = default;
+            return false;
         }
            
+
         /// <summary>
         /// Used by the generated <see cref="Dispose(bool)"/> call.
         /// Can be used by a DI container in a singleton scope on Release();

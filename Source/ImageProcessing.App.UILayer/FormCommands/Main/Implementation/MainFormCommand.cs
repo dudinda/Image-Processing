@@ -152,11 +152,40 @@ namespace ImageProcessing.App.UILayer.FormCommands.Main.Implementation
         private Image SetToZoomDestinationImageCommand(Image image)
            => _exposer.ZoomDstTrackBar.ImageToZoom = image;
 
+
+        [Command(
+            nameof(UndoRedoAction.Undo) +
+            nameof(MainViewAction.AddToUndoRedo))]
+        private void AddToUndoCommand(ImageContainer to, Bitmap bmp)
+        {
+            if (bmp != null)
+            {
+                _exposer.SplitContainerCtr.AddToUndo((new Bitmap(bmp), to));
+                return;
+            }
+
+            _exposer.SplitContainerCtr.AddToUndo((null!, to));
+        }
+
+        [Command(
+          nameof(UndoRedoAction.Redo) +
+          nameof(MainViewAction.AddToUndoRedo))]
+        private void AddToRedoCommand(ImageContainer to, Bitmap bmp)
+        {
+            if (bmp != null)
+            {
+                _exposer.SplitContainerCtr.AddToRedo((new Bitmap(bmp), to));
+                return;
+            }
+
+            _exposer.SplitContainerCtr.AddToRedo((null!, to));
+        }
+
         [Command(nameof(UndoRedoAction.Undo))]
         private (Bitmap Bmp, ImageContainer To)? UndoCommand()
         {
             var result = _exposer.SplitContainerCtr.Undo();
-
+           
             if(!_exposer.SplitContainerCtr.RedoIsEmpty)
             {
                 _exposer.RedoButton.Enabled = true;

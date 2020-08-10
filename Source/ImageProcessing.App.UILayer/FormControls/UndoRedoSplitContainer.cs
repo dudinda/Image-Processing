@@ -25,9 +25,12 @@ namespace ImageProcessing.App.UILayer.Control
         public bool RedoIsEmpty
             => _redo.IsEmpty;
 
-        public void Add((Bitmap Bmp, ImageContainer To) action)
+        public void AddToUndo((Bitmap Bmp, ImageContainer To) action)
             => _undo.Push(action);
-        
+
+        public void AddToRedo((Bitmap Bmp, ImageContainer To) action)
+           => _redo.Push(action);
+
         public (Bitmap, ImageContainer)? Undo()
         {
             if (_undo.IsEmpty)
@@ -35,9 +38,7 @@ namespace ImageProcessing.App.UILayer.Control
                 return null;
             }
 
-            _redo.Push(_undo.Pop());
-
-            return _redo.Peek();
+            return _undo.Pop();
         }
 
         public (Bitmap, ImageContainer)? Redo()
@@ -47,9 +48,7 @@ namespace ImageProcessing.App.UILayer.Control
                 return null;
             }
 
-            _undo.Push(_redo.Pop());
-
-            return _undo.Peek();
+            return _redo.Pop();
         }
     }
 }

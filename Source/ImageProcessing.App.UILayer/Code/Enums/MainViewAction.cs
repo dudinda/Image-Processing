@@ -58,8 +58,8 @@ namespace ImageProcessing.App.UILayer.Code.Enums
         SetToZoom     = 9,
 
         /// <summary>
-        /// Get a <see cref="RgbColors"/> combination.
+        /// Add to a undo/redo container. 
         /// </summary>
-        GetColor      = 10
+        AddToUndoRedo      = 10
     }
 }
