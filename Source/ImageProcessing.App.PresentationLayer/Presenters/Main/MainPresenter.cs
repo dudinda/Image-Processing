@@ -119,10 +119,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         ImageContainer.Source
                     ).ConfigureAwait(true);
 
-                    var path = string.Copy(View.PathToFile);
-
                     await Task.Run(
-                        () => copy.SaveByPath(path)
+                        () => copy.SaveByPath(View.PathToFile)
                     ).ConfigureAwait(true);
                 }
             }
@@ -202,9 +200,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                     if (block != null)
                     {
-                        await Render(
-                            block, ImageContainer.Destination
-                        ).ConfigureAwait(true);
+                        await Render(block).ConfigureAwait(true);
                     }
                 }
             }
@@ -222,7 +218,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                var (To, From) = e.Container == ImageContainer.Source ?
+                var (To, From) = e.Container == ImageContainer.Source   ?
                     (ImageContainer.Destination, ImageContainer.Source) :
                     (ImageContainer.Source, ImageContainer.Destination);
 
@@ -254,8 +250,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                 if (!View.ImageIsDefault(container))
                 {
-                    var image = await _locker.LockZoomAsync(() =>
-                        View.ZoomImage(container)
+                    var image = await _locker.LockZoomAsync(
+                        () => View.ZoomImage(container)
                     ).ConfigureAwait(true);
 
                     View.SetImage(container, image);
@@ -312,13 +308,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         }
 
         private async Task<Bitmap> GetImageCopy(ImageContainer container)
-            => await _locker.LockOperationAsync(() =>
-                  new Bitmap(View.GetImageCopy(container))
+            => await _locker.LockOperationAsync(
+                () => new Bitmap(View.GetImageCopy(container))
             ).ConfigureAwait(true);
 
 
-        private async Task Render(
-            IPipelineBlock block, ImageContainer container,
+        private async Task Render(IPipelineBlock block,
+            ImageContainer container = ImageContainer.Destination,
             UndoRedoAction action = UndoRedoAction.Undo)
         {
             View.SetCursor(CursorType.Wait);
