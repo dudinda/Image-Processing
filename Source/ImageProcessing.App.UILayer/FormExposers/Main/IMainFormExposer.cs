@@ -11,12 +11,34 @@ namespace ImageProcessing.App.UILayer.FormExposers.Main
     /// </summary>
     internal interface IMainFormExposer : IMainView
     {
+        /// <summary>
+        /// Image by default.
+        /// </summary>
         Image? DefaultImage { get; }
 
+        /// <summary>
+        /// Container with the images to undo/redo. 
+        /// </summary>
         UndoRedoSplitContainer SplitContainerCtr { get; }
 
+        /// <summary>
+        /// The destination image.
+        /// </summary>
+        Image SourceImage { get; set; }
+
+        /// <summary>
+        /// The source image.
+        /// </summary>
+        Image DestinationImage { get; set; }
+
+        /// <summary>
+        /// The source picture box.
+        /// </summary>
         PictureBox SourceBox { get; }
 
+        /// <summary>
+        /// The destination picture box.
+        /// </summary>
         PictureBox DestinationBox { get; }
 
         /// <summary>

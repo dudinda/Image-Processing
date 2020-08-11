@@ -86,17 +86,47 @@ namespace ImageProcessing.App.UILayer.Form.Main
         }
   
         /// <inheritdoc/>
-        public Image SrcImage
+        public Image? SrcImage
         {
             get => Src.Image;
-            set => Src.Image = value;
+            set
+            {
+                var tag = value.Tag;
+
+                if (tag != null)
+                {
+                    if (tag.Equals(nameof(ImageIsDefault)))
+                    {
+                        _srcCopy = null;
+                        Src.Image = null!;
+                        return;
+                    }
+                }
+                
+                Src.Image = value;
+            }
         }
 
         /// <inheritdoc/>
-        public Image DstImage
+        public Image? DstImage
         {
             get => Dst.Image;
-            set => Dst.Image = value;
+            set
+            {
+                var tag = value.Tag;
+
+                if (tag != null)
+                {
+                    if (tag.Equals(nameof(ImageIsDefault)))
+                    {
+                        _dstCopy = null;
+                        Dst.Image = null!;
+                        return;
+                    }
+                }
+
+                Dst.Image = value;
+            }
         }
 
         /// <inheritdoc/>
@@ -142,11 +172,18 @@ namespace ImageProcessing.App.UILayer.Form.Main
         public UndoRedoSplitContainer SplitContainerCtr
             => SplitContainer;
 
-        public PictureBox SourceBox
-            => Src;
+        public Image? SourceImage
+        {
+            get => SrcImage;
+            set => SrcImage = value;
+        }
+           
 
-        public PictureBox DestinationBox
-            => Dst;
+        public Image? DestinationImage
+        {
+            get => DstImage;
+            set => DstImage = value;
+        }
 
         public ToolStripButton UndoButton
             => UndoBtn;
@@ -156,6 +193,12 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
         public Image? DefaultImage
             => Default;
+
+        public PictureBox SourceBox
+            => Src;
+
+        public PictureBox DestinationBox
+            => Dst;
 
         /// <inheritdoc/>
         public new void Show()
@@ -178,8 +221,8 @@ namespace ImageProcessing.App.UILayer.Form.Main
                 CursorPosition.GetCursorPosition()), 2000));
 
         /// <inheritdoc/>
-        public void ResetTrackBarValue(ImageContainer container, int value = 0, bool isEnabled = true)
-            => Write(() => _command.Procedure(container.ToString() + nameof(MainViewAction.ResetTrackBar), value, isEnabled));
+        public void ResetTrackBarValue(ImageContainer container, int value = 0)
+            => Write(() => _command.Procedure(container.ToString() + nameof(MainViewAction.ResetTrackBar), value));
 
         /// <inheritdoc/>
         public Image ZoomImage(ImageContainer container)

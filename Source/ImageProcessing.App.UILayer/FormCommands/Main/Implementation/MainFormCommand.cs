@@ -72,16 +72,7 @@ namespace ImageProcessing.App.UILayer.FormCommands.Main.Implementation
             nameof(MainViewAction.SetImage))]
         private void SetSourceImageCommand(Image image)
         {
-            if(image != null)
-            {
-                _exposer.SourceBox.Image = (Bitmap)image.Clone();
-                _exposer.UndoButton.Enabled = true;
-                return;
-            }
-
-            _exposer.SourceBox.Image = null;
-            _exposer.ZoomSrcTrackBar.Enabled = false;
-                  
+            _exposer.SourceImage = image;
         }
 
         [Command(
@@ -89,34 +80,26 @@ namespace ImageProcessing.App.UILayer.FormCommands.Main.Implementation
             nameof(MainViewAction.SetImage))]
         private void SetDestinationImageCommand(Image image)
         {
-            if (image != null)
-            {
-                _exposer.DestinationBox.Image = (Bitmap)image.Clone();
-                _exposer.UndoButton.Enabled = true;
-                return;
-            }
-
-            _exposer.DestinationBox.Image = null;
-            _exposer.ZoomDstTrackBar.Enabled = false;
+            _exposer.DestinationImage = image;
         }
 
         [Command(
             nameof(ImageContainer.Source) +
             nameof(MainViewAction.ResetTrackBar))]
-        private void ResetSourceTrackBarValueCommand(int value = 0, bool isEnabled = true)
+        private void ResetSourceTrackBarValueCommand(int value = 0)
         {
             _exposer.ZoomSrcTrackBar.TrackBarValue = value;
-            _exposer.ZoomSrcTrackBar.Enabled = isEnabled;
+            _exposer.ZoomSrcTrackBar.Enabled = _exposer.SourceImage != null;
             _exposer.ZoomSrcTrackBar.Focus();
         }
 
         [Command(
             nameof(ImageContainer.Destination) +
             nameof(MainViewAction.ResetTrackBar))]
-        private void ResetDestinationTrackBarValueCommand(int value = 0, bool isEnabled = true)
+        private void ResetDestinationTrackBarValueCommand(int value = 0)
         {
             _exposer.ZoomDstTrackBar.TrackBarValue = value;
-            _exposer.ZoomDstTrackBar.Enabled = isEnabled;
+            _exposer.ZoomDstTrackBar.Enabled = _exposer.DestinationImage != null;
             _exposer.ZoomDstTrackBar.Focus();
         }
 

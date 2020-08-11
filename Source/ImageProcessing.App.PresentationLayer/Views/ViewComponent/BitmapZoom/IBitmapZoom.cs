@@ -13,7 +13,7 @@ namespace ImageProcessing.App.PresentationLayer.Views.ViewComponent.BitmapZoom
         /// Reset a zoom trackbar value after
         /// an <see cref="ImageContainer"/> rendering. 
         /// </summary>
-        void ResetTrackBarValue(ImageContainer container, int value = 0, bool isEnabled = true);
+        void ResetTrackBarValue(ImageContainer container, int value = 0);
 
         /// <summary>
         /// Perform a zoom of the specified

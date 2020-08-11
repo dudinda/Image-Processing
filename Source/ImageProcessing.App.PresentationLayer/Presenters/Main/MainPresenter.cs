@@ -288,22 +288,23 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             View.Tooltip(e.Error);
         }
 
-        private Bitmap DefaultPipelineBlock(Bitmap bmp, ImageContainer to, UndoRedoAction action)
+        private void DefaultPipelineBlock(Bitmap bmp, ImageContainer to, UndoRedoAction action)
         {
             lock (this)
             {
-                var cpy = View.GetImageCopy(to) as Bitmap;
+                var toUndoRedo = new Bitmap(View.GetImageCopy(to));
 
-                if(!View.ImageIsDefault(to))
+                if(View.ImageIsDefault(to))
                 {
-                    cpy = new Bitmap(cpy);
+                    toUndoRedo.Tag = nameof(View.ImageIsDefault);
                 }
 
-                View.AddToUndoRedo(to, cpy, action);
+                View.AddToUndoRedo(to, toUndoRedo, action);
                 View.SetImageCopy(to, new Bitmap(bmp));
                 View.SetImageToZoom(to, new Bitmap(bmp));
-
-                return (Bitmap)View.GetImageCopy(to).Clone();
+                View.SetImage(to, bmp);
+                View.Refresh(to);
+                View.ResetTrackBarValue(to);
             }
         }
 
@@ -322,7 +323,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             if (
                 !_pipeline
                     .Register(block
-                        .Add<Bitmap, Bitmap>(
+                        .Add<Bitmap>(
                             (bmp) => DefaultPipelineBlock(bmp, container, action)
                          )
                      )
@@ -331,7 +332,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                 throw new InvalidOperationException();
             }
 
-            var result = await _pipeline
+            await _pipeline
                 .AwaitResult()
                 .ConfigureAwait(true);
 
@@ -340,10 +341,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                 _cache.Reset();
             }
 
-            View.SetImage(container, result as Bitmap);
-            View.Refresh(container);
-            View.ResetTrackBarValue(container);
-
+           
             if (!_pipeline.Any())
             {
                 View.SetCursor(CursorType.Default);
