@@ -1,4 +1,3 @@
-using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -33,6 +32,8 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
             _binder.OnElementExpose(this);
             _command.OnElementExpose(this);
+
+            FormClosed += (sender, args) => controller.Dispose();
         }
 
         private Image? _default;
@@ -96,13 +97,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
         {
             get => Dst.Image;
             set => Dst.Image = value;
-        }
-
-        /// <inheritdoc/>
-        public string PathToFile
-        {
-            get => PathToImage.Text;
-            set => PathToImage.Text = value;
         }
 
         /// <inheritdoc/>
@@ -171,8 +165,12 @@ namespace ImageProcessing.App.UILayer.Form.Main
         }
 
         /// <inheritdoc/>
+        public string GetPathToFile()
+            => Read<string>(() => PathToImage.Text );
+
+       /// <inheritdoc/>
         public void SetPathToFile(string path)
-            => Write(() => PathToFile = path);
+            => Write(() => PathToImage.Text = path);
                     
         /// <inheritdoc/>
         public void Tooltip(string message)
@@ -231,7 +229,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
             if (components != null)
             {
                 components.Dispose();
-                Controller.Dispose();
             }    
 
             base.Dispose(true);

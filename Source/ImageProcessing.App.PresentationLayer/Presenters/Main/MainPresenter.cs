@@ -120,7 +120,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     ).ConfigureAwait(true);
 
                     await Task.Run(
-                        () => copy.SaveByPath(View.PathToFile)
+                        () => copy.SaveByPath(View.GetPathToFile())
                     ).ConfigureAwait(true);
                 }
             }
@@ -315,7 +315,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
         private async Task Render(IPipelineBlock block,
             ImageContainer container = ImageContainer.Destination,
-            UndoRedoAction action = UndoRedoAction.Undo)
+            UndoRedoAction action    = UndoRedoAction.Undo)
         {
             View.SetCursor(CursorType.Wait);
 

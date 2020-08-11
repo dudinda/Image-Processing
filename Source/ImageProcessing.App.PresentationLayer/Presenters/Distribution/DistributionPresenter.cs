@@ -48,10 +48,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             {
                 var distribution = View.Dropdown;
 
-                var copy = await _locker
-                    .LockOperationAsync(
-                        () => new Bitmap(ViewModel.Source)
-                     ).ConfigureAwait(true);
+                var copy = await _locker.LockOperationAsync(
+                    () => new Bitmap(ViewModel.Source)
+                ).ConfigureAwait(true);
 
                 copy.Tag = distribution.ToString();
 
@@ -78,10 +77,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
         {
             try
             {
-                var copy = await _locker
-                    .LockOperationAsync(
-                        () => new Bitmap(ViewModel.Source)
-                     ).ConfigureAwait(true);
+                var copy = await _locker.LockOperationAsync(
+                    () => new Bitmap(ViewModel.Source)
+                ).ConfigureAwait(true);
 
                 Controller.Aggregator.PublishFromAll(
                     e.Publisher,
@@ -102,10 +100,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
         {
             try
             {
-                var copy = await _locker
-                    .LockOperationAsync(
-                        () => new Bitmap(ViewModel.Source)
-                     ).ConfigureAwait(true);
+                var copy = await _locker .LockOperationAsync(
+                    () => new Bitmap(ViewModel.Source)
+                ).ConfigureAwait(true);
 
                 Controller.Run<HistogramPresenter, HistogramViewModel>(
                     new HistogramViewModel(copy, e.Action));
@@ -137,10 +134,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             {
                 var container = e.Container;
 
-                var copy = await _locker
-                    .LockOperationAsync(
-                        () => new Bitmap(ViewModel.Source)
-                    ).ConfigureAwait(true);
+                var copy = await _locker.LockOperationAsync(
+                    () => new Bitmap(ViewModel.Source)
+                ).ConfigureAwait(true);
 
                 var result = await Task.Run(
                     () => _provider.GetInfo(copy, e.Action)

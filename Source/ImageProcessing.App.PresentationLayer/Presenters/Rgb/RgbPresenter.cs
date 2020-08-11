@@ -41,10 +41,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
 
                 if (filter != RgbFilter.Unknown)
                 {
-                    var copy = await _locker
-                        .LockOperationAsync(
-                            () => new Bitmap(ViewModel.Source)
-                         ).ConfigureAwait(true);
+                    var copy = await _locker.LockOperationAsync(
+                        () => new Bitmap(ViewModel.Source)
+                    ).ConfigureAwait(true);
 
                     Controller.Aggregator.PublishFromAll(
                         e.Publisher,
@@ -68,10 +67,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
             {
                 var color = View.GetSelectedColors(e.Color);
 
-                var copy = await _locker
-                    .LockOperationAsync(
-                        () => new Bitmap(ViewModel.Source)
-                     ).ConfigureAwait(true);
+                var copy = await _locker.LockOperationAsync(
+                    () => new Bitmap(ViewModel.Source)
+                ).ConfigureAwait(true);
 
                 Controller.Aggregator.PublishFromAll(
                     e.Publisher,

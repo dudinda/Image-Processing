@@ -19,14 +19,24 @@ namespace ImageProcessing.App.PresentationLayer.Views.Main
         ICursor, IDisposable
     {
         /// <summary>
-        /// Specifies a path to the opened file.
+        /// Set the path to the loaded image.
         /// </summary>
-        public string PathToFile { get; }
-     
         void SetPathToFile(string path);
+
+        /// <summary>
+        /// Get the path of the loaded image.
+        /// </summary>
+        string GetPathToFile();
+
+        /// <summary>
+        /// Add 
+        /// </summary>
 
         void AddToUndoRedo(ImageContainer to, Bitmap bmp, UndoRedoAction action);
 
+        /// <summary>
+        /// Undo/Redo the last operation.
+        /// </summary>
         (Bitmap, ImageContainer) TryUndoRedo(UndoRedoAction action);
     }
 }

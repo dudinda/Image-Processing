@@ -41,10 +41,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
 
                 if (filter != ConvolutionFilter.Unknown)
                 {
-                    var copy = await _operationLocker
-                        .LockOperationAsync(
-                            () => new Bitmap(ViewModel.Source)
-                         ).ConfigureAwait(true);
+                    var copy = await _operationLocker.LockOperationAsync(
+                        () => new Bitmap(ViewModel.Source)
+                    ).ConfigureAwait(true);
 
                     Controller.Aggregator.PublishFromAll(
                         e.Publisher,
