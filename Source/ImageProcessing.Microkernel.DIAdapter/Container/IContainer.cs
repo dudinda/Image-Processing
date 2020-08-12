@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace ImageProcessing.Microkernel.DI.Container
+namespace ImageProcessing.Microkernel.DIAdapter.Container
 {
     /// <summary>
     /// Provides access to the specified

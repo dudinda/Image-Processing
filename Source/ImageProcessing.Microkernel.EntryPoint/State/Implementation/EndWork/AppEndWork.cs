@@ -1,8 +1,8 @@
 using System;
 
 using ImageProcessing.Microkernel.AppConfig;
-using ImageProcessing.Microkernel.DI.Code.Enums;
 using ImageProcessing.Microkernel.DI.EntryPoint.State.Interface;
+using ImageProcessing.Microkernel.DIAdapter.Code.Enums;
 using ImageProcessing.Microkernel.EntryPoint;
 using ImageProcessing.Microkernel.EntryPoint.Code.Constants;
 using ImageProcessing.Microkernel.MVP.Presenter;

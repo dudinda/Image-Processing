@@ -119,7 +119,7 @@ namespace ImageProcessing.App.UILayer
                 .RegisterScoped<IAsyncOperationLocker, AsyncOperationLocker>()
                 .RegisterTransient<IConvolutionServiceProvider, ConvolutionServiceProvider>()
                 .RegisterTransient<IMorphologyServiceProvider, MorphologyServiceProvider>()
-                .RegisterTransient<IBitmapLuminanceDistributionServiceProvider, BitmapLuminanceDistributionServiceProvider>()
+                .RegisterTransient<IBitmapLuminanceServiceProvider, BitmapLuminanceServiceProvider>()
                 .RegisterTransient<IRgbFilterServiceProvider, RgbFilterServiceProvider>()
                 .RegisterScoped<IChartSeriesBuilder, ChartSeriesBuilder>()
                 .RegisterTransient<IQualityMeasureService, QualityMeasureService>()

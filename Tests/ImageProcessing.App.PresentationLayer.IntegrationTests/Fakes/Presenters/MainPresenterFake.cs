@@ -9,8 +9,9 @@ using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Main;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Services;
 using ImageProcessing.App.PresentationLayer.Views.Main;
-using ImageProcessing.App.ServiceLayer.Facades.MainPresenterLockers.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
+using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
+using ImageProcessing.App.ServiceLayer.Services.LockerService.Zoom.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.App.UILayer.Form.Main;
 using ImageProcessing.App.UILayer.FormCommands.Main.Interface;
@@ -41,6 +42,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Fakes
         public NonBlockDialogServiceFake Dialog { get; }
         public IMainFormExposer Publisher { get; }
         public MainPresenter Subscriber { get; }
+        public IAppController Controller { get; }
 
         public MainSystemFake() : base(Substitute.For<IAppController>())
         {
@@ -58,7 +60,8 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Fakes
                 Substitute.For<ICacheService<Bitmap>>(),
                 Dialog,
                 Substitute.For<IAwaitablePipeline>(),
-                Substitute.For<IMainPresenterLockersFacade>());
+                Substitute.For<IAsyncOperationLocker>(),
+                Substitute.For<IAsyncZoomLocker>());
 
             _aggregator.Subscribe(this, Publisher);
         }

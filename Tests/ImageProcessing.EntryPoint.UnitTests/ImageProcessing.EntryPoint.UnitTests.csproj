@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\NUnit3TestAdapter.3.17.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\..\packages\NUnit3TestAdapter.3.17.0\build\net35\NUnit3TestAdapter.props')" />
+  <Import Project="..\..\packages\NUnit3TestAdapter.4.0.0-alpha.1\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\..\packages\NUnit3TestAdapter.4.0.0-alpha.1\build\net35\NUnit3TestAdapter.props')" />
   <Import Project="..\..\packages\NUnit.3.12.0\build\NUnit.props" Condition="Exists('..\..\packages\NUnit.3.12.0\build\NUnit.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{917AC26D-ECBD-4968-83D0-4D29B692D8B9}</ProjectGuid>
+    <ProjectGuid>{77725913-B5A8-479A-8191-4F74F67FD09B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ImageProcessing.App.PresentationLayer.UnitTests</RootNamespace>
-    <AssemblyName>ImageProcessing.App.PresentationLayer.UnitTests</AssemblyName>
+    <RootNamespace>ImageProcessing.EntryPoint.UnitTests</RootNamespace>
+    <AssemblyName>ImageProcessing.EntryPoint.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -43,7 +43,6 @@
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Castle.Core.4.4.0\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NSubstitute, Version=4.2.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NSubstitute.4.2.2\lib\net46\NSubstitute.dll</HintPath>
@@ -54,48 +53,29 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fakes\Components\EventAggregatorFake.cs" />
-    <Compile Include="Fakes\Presenters\MainPresenterFake.cs" />
-    <Compile Include="Fakes\Components\SynchronizationContextFake.cs" />
-    <Compile Include="Fakes\Services\NonBlockDialogServiceFake.cs" />
+    <Compile Include="Fakes\MainPresenterFake.cs" />
+    <Compile Include="Fakes\StartupFake.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\MainPresenterTests.cs" />
+    <Compile Include="Tests\AppLifecycleIsNotBuiltStateTests.cs" />
+    <Compile Include="Tests\AppLyfecycleIsBuiltStateTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.CommonLayer\ImageProcessing.App.CommonLayer.csproj">
-      <Project>{4DC35D60-2801-481F-9600-832FFD5AE930}</Project>
-      <Name>ImageProcessing.App.CommonLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.DomainLayer\ImageProcessing.App.DomainLayer.csproj">
-      <Project>{03943CD9-C3EC-494E-B3FB-1B8BE4AEF91B}</Project>
-      <Name>ImageProcessing.App.DomainLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.PresentationLayer\ImageProcessing.App.PresentationLayer.csproj">
-      <Project>{9E019576-0EE0-4213-A8E5-1DA5A52457E1}</Project>
-      <Name>ImageProcessing.App.PresentationLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.ServiceLayer\ImageProcessing.App.ServiceLayer.csproj">
-      <Project>{94C3F770-5A06-4D18-AFF5-C4EB20CBB727}</Project>
-      <Name>ImageProcessing.App.ServiceLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.UILayer\ImageProcessing.App.UILayer.csproj">
-      <Project>{85454E80-493E-4746-A965-7D07654440FC}</Project>
-      <Name>ImageProcessing.App.UILayer</Name>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Source\ImageProcessing.Microkernel.EntryPoint\ImageProcessing.Microkernel.EntryPoint.csproj">
+      <Project>{1E702994-3838-4ACC-8A1D-CDAFF18E39DD}</Project>
+      <Name>ImageProcessing.Microkernel.EntryPoint</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.Microkernel.MVP\ImageProcessing.Microkernel.MVP.csproj">
       <Project>{E547BF84-7467-4AA0-A836-84BEAB772924}</Project>
       <Name>ImageProcessing.Microkernel.MVP</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -104,6 +84,6 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\NUnit.3.12.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NUnit.3.12.0\build\NUnit.props'))" />
-    <Error Condition="!Exists('..\..\packages\NUnit3TestAdapter.3.17.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NUnit3TestAdapter.3.17.0\build\net35\NUnit3TestAdapter.props'))" />
+    <Error Condition="!Exists('..\..\packages\NUnit3TestAdapter.4.0.0-alpha.1\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NUnit3TestAdapter.4.0.0-alpha.1\build\net35\NUnit3TestAdapter.props'))" />
   </Target>
 </Project>

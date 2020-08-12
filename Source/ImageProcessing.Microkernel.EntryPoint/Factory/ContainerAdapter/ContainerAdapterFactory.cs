@@ -1,9 +1,9 @@
 using System;
 
-using ImageProcessing.Microkernel.DI.Adapters.LightInject;
-using ImageProcessing.Microkernel.DI.Adapters.Ninject;
-using ImageProcessing.Microkernel.DI.Code.Enums;
-using ImageProcessing.Microkernel.DI.Container;
+using ImageProcessing.Microkernel.DIAdapter.Adapters.LightInject;
+using ImageProcessing.Microkernel.DIAdapter.Adapters.Ninject;
+using ImageProcessing.Microkernel.DIAdapter.Code.Enums;
+using ImageProcessing.Microkernel.DIAdapter.Container;
 
 namespace ImageProcessing.Microkernel.EntryPoint.Factory.ContainerAdapter
 {

@@ -1,7 +1,7 @@
 using System;
 
 using ImageProcessing.App.PresentationLayer.Presenters.Main;
-using ImageProcessing.Microkernel.DI.Code.Enums;
+using ImageProcessing.Microkernel.DIAdapter.Code.Enums;
 using ImageProcessing.Microkernel.EntryPoint;
 
 namespace ImageProcessing.App.UILayer

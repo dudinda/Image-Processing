@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-using ImageProcessing.Microkernel.DI.Container;
+using ImageProcessing.Microkernel.DIAdapter.Container;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
 using ImageProcessing.Microkernel.MVP.View;
 
