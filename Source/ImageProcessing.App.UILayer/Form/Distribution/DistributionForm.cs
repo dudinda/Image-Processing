@@ -40,7 +40,7 @@ namespace ImageProcessing.App.UILayer.Form.Distribution
 
             _binder = binder;
 
-            _binder.OnElementExpose(this);
+             _binder.OnElementExpose(this);
         }
 
         /// <inheritdoc/>
@@ -93,25 +93,20 @@ namespace ImageProcessing.App.UILayer.Form.Distribution
 
         /// <inheritdoc/>
         public void Tooltip(string message)
-             => ErrorToolTip.Show(message, this, PointToClient(
-                 CursorPosition.GetCursorPosition()), 2000
-             );
+            => Write(() => ErrorToolTip.Show(message, this, PointToClient(
+                 CursorPosition.GetCursorPosition()), 2000));
 
         /// <inheritdoc/>
         public void EnableQualityQueue(bool isEnabled)
-            => QualityMeasure.Enabled = isEnabled;
+            => Write(() => QualityMeasure.Enabled = isEnabled);
 
         /// <inheritdoc/>
         public void AddToQualityMeasureContainer(Bitmap transformed)
-            => QualityMeasure.TryAdd(transformed);
+            => Write(() => QualityMeasure.TryAdd(transformed));
 
         /// <inheritdoc/>
         public ConcurrentQueue<Bitmap> GetQualityQueue()
-            => QualityMeasure.Queue;
-
-        /// <inheritdoc/>
-        public void ClearQualityQueue()
-            => QualityMeasure.Reset();
+            => Read<ConcurrentQueue<Bitmap>>(() => QualityMeasure.Queue);
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {

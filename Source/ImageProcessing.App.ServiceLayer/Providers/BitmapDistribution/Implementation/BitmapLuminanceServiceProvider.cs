@@ -10,17 +10,17 @@ using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.In
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistribution
 {
-    /// <inheritdoc cref="IBitmapLuminanceDistributionServiceProvider"/>
-    public sealed class BitmapLuminanceDistributionServiceProvider
-        : IBitmapLuminanceDistributionServiceProvider
+    /// <inheritdoc cref="IBitmapLuminanceServiceProvider"/>
+    public sealed class BitmapLuminanceServiceProvider
+        : IBitmapLuminanceServiceProvider
     {
         private static readonly Dictionary<string, CommandAttribute>
-            _command = typeof(BitmapLuminanceDistributionServiceProvider).GetCommands();
+            _command = typeof(BitmapLuminanceServiceProvider).GetCommands();
 
         private readonly IBitmapLuminanceDistributionService _service;
         private readonly IDistributionFactory _factory;
 
-        public BitmapLuminanceDistributionServiceProvider
+        public BitmapLuminanceServiceProvider
             (IBitmapLuminanceDistributionService service,
              IDistributionFactory factory)
         {

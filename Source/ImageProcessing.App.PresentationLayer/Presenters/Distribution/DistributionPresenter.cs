@@ -31,12 +31,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
         ISubscriber<ShowTooltipOnErrorEventArgs>
     {
         private readonly IAsyncOperationLocker _locker;
-        private readonly IBitmapLuminanceDistributionServiceProvider _provider;
+        private readonly IBitmapLuminanceServiceProvider _provider;
         
         public DistributionPresenter(
             IAppController controller,
             IAsyncOperationLocker locker,
-            IBitmapLuminanceDistributionServiceProvider provider) : base(controller)
+            IBitmapLuminanceServiceProvider provider) : base(controller)
         {
             _locker = locker;
             _provider = provider;

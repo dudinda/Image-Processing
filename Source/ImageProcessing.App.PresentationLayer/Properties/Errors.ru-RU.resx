@@ -135,6 +135,9 @@
   <data name="OpenFile" xml:space="preserve">
     <value>Ошибка при открытии файла.</value>
   </data>
+  <data name="Pipeline" xml:space="preserve">
+    <value>Не удалось обработать последовательность операций.</value>
+  </data>
   <data name="QualityHistogram" xml:space="preserve">
     <value>Ошибка при построении гистограммы меры качества. </value>
   </data>

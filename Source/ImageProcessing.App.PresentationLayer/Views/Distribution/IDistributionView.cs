@@ -19,10 +19,14 @@ namespace ImageProcessing.App.PresentationLayer.Views.Distribution
         /// the quality measure container.
         /// </summary>
         void AddToQualityMeasureContainer(Bitmap transformed);
-        ConcurrentQueue<Bitmap> GetQualityQueue();
-        void ClearQualityQueue();
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Get the queue containing processed by a distribtuion
+        /// grayscale images.
+        /// </summary>
+        ConcurrentQueue<Bitmap> GetQualityQueue();
+
+        /// Get the specified parameters for a <see cref="Distributions"/>.
         public (string, string) Parameters { get; }
     }
 }

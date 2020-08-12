@@ -135,6 +135,9 @@
   <data name="OpenFile" xml:space="preserve">
     <value>Error while opening the file.</value>
   </data>
+  <data name="Pipeline" xml:space="preserve">
+    <value>Failed to process the sequence of the operation.</value>
+  </data>
   <data name="QualityHistogram" xml:space="preserve">
     <value>Error while building quality measure histogram.</value>
   </data>

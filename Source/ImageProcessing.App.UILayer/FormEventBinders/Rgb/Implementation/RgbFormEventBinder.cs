@@ -44,9 +44,20 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Rgb.Implementation
         {
             switch (keyData)
             {
-                case Keys.R: view.RedButton.Checked = !view.RedButton.Checked; return true;
-                case Keys.G: view.GreenButton.Checked = !view.GreenButton.Checked; return true;
-                case Keys.B: view.BlueButton.Checked = !view.BlueButton.Checked; return true;                    
+                case Keys.R:
+
+                    view.RedButton.Checked = !view.RedButton.Checked;
+                    return true;
+
+                case Keys.G:
+
+                    view.GreenButton.Checked = !view.GreenButton.Checked;
+                    return true;
+
+                case Keys.B:
+
+                    view.BlueButton.Checked = !view.BlueButton.Checked;
+                    return true;                    
             }
 
             return false;

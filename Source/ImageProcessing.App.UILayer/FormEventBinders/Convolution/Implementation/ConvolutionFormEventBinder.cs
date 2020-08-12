@@ -34,8 +34,15 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Convolution.Implementatio
         {
             switch (keyData)
             {
-                case Keys.Q:     view.ApplyButton.PerformClick(); return true;             
-                case Keys.Enter: view.ApplyButton.PerformClick(); return true;                
+                case Keys.Q:
+
+                    view.ApplyButton.PerformClick();
+                    return true;
+
+                case Keys.Enter:
+
+                    view.ApplyButton.PerformClick();
+                    return true;                
             }
 
             return false;

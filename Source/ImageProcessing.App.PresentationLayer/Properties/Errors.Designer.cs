@@ -115,6 +115,15 @@ namespace ImageProcessing.App.PresentationLayer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to process the sequence of the operation..
+        /// </summary>
+        public static string Pipeline {
+            get {
+                return ResourceManager.GetString("Pipeline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error while building quality measure histogram..
         /// </summary>
         public static string QualityHistogram {

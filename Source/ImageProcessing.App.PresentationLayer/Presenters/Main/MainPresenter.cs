@@ -21,8 +21,9 @@ using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
 using ImageProcessing.App.PresentationLayer.ViewModel.Distribution;
 using ImageProcessing.App.PresentationLayer.ViewModel.Rgb;
 using ImageProcessing.App.PresentationLayer.Views.Main;
-using ImageProcessing.App.ServiceLayer.Facades.MainPresenterLockers.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
+using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
+using ImageProcessing.App.ServiceLayer.Services.LockerService.Zoom.Interface;
 using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
@@ -48,7 +49,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
     {
         private readonly ICacheService<Bitmap> _cache;
         private readonly INonBlockDialogService _dialog;
-        private readonly IMainPresenterLockersFacade _locker;
+        private readonly IAsyncOperationLocker _operation;
+        private readonly IAsyncZoomLocker _zoom;
         private readonly IAwaitablePipeline _pipeline;
 
         public MainPresenter(
@@ -56,11 +58,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             ICacheService<Bitmap> cache,
             INonBlockDialogService dialog,
             IAwaitablePipeline pipeline,
-            IMainPresenterLockersFacade locker) : base(controller)
+            IAsyncOperationLocker operation,
+            IAsyncZoomLocker zoom) : base(controller)
         {
             _cache = cache;
             _dialog = dialog;
-            _locker = locker;
+            _operation = operation;
+            _zoom = zoom;
             _pipeline = pipeline;
         }
 
@@ -250,7 +254,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                 if (!View.ImageIsDefault(container))
                 {
-                    var image = await _locker.LockZoomAsync(
+                    var image = await _zoom.LockZoomAsync(
                         () => View.ZoomImage(container)
                     ).ConfigureAwait(true);
 
@@ -288,7 +292,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             View.Tooltip(e.Error);
         }
 
-        private void DefaultPipelineBlock(Bitmap bmp, ImageContainer to, UndoRedoAction action)
+        private void DefaultRenderBlock(Bitmap bmp, ImageContainer to, UndoRedoAction action)
         {
             lock (this)
             {
@@ -309,10 +313,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         }
 
         private async Task<Bitmap> GetImageCopy(ImageContainer container)
-            => await _locker.LockOperationAsync(
+            => await _operation.LockOperationAsync(
                 () => new Bitmap(View.GetImageCopy(container))
             ).ConfigureAwait(true);
-
 
         private async Task Render(IPipelineBlock block,
             ImageContainer container = ImageContainer.Destination,
@@ -324,24 +327,21 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                 !_pipeline
                     .Register(block
                         .Add<Bitmap>(
-                            (bmp) => DefaultPipelineBlock(bmp, container, action)
+                            (bmp) => DefaultRenderBlock(bmp, container, action)
                          )
                      )
                  )
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException(Errors.Pipeline);
             }
 
-            await _pipeline
-                .AwaitResult()
-                .ConfigureAwait(true);
+            await _pipeline.AwaitResult().ConfigureAwait(true);
 
             if (container == ImageContainer.Source)
             {
                 _cache.Reset();
             }
-
-           
+      
             if (!_pipeline.Any())
             {
                 View.SetCursor(CursorType.Default);
