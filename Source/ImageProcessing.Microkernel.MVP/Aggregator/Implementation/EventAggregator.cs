@@ -31,7 +31,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
 
                     if (subscriber != null)
                     {
-                        Post(s => subscriber.OnEventHandler(pair.Publisher, args), null);
+                        Post(s => subscriber.OnEventHandler(pair.Publisher, args), null!);
                     }
                 }
             }
@@ -50,7 +50,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
 
                     if (subscriber != null)
                     {
-                        Post(s => subscriber.OnEventHandler(publisher, args), null);
+                        Post(s => subscriber.OnEventHandler(publisher, args), null!);
                     }
                 }
             }

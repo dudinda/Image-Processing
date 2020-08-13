@@ -9,13 +9,13 @@ using ImageProcessing.Microkernel.MVP.Presenter;
 namespace ImageProcessing.Microkernel.MVP.Controller.Implementation
 {
     /// <inheritdoc cref="IAppController"/>
-    internal sealed class AppController : IAppController
+    internal class AppController : IAppController
     {
         /// <inheritdoc/>
         public IDependencyResolution IoC { get; }
 
         /// <inheritdoc/>
-        public IEventAggregator Aggregator { get; }
+        public IEventAggregator Aggregator { get; private set; }
 
         public AppController(IContainer container)
         {

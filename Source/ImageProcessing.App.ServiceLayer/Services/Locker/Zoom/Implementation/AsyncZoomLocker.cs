@@ -7,14 +7,14 @@ using ImageProcessing.App.ServiceLayer.Services.LockerService.Zoom.Interface;
 namespace ImageProcessing.App.ServiceLayer.Services.LockerService.Zoom.Implementation
 {
     /// <inheritdoc cref="IAsyncZoomLocker"/>
-    public sealed class AsyncZoomLocker : AsyncLockerBase, IAsyncZoomLocker
+    public class AsyncZoomLocker : AsyncLockerBase, IAsyncZoomLocker
     {
         /// <inheritdoc />
-        public async Task<TResult> LockZoomAsync<TResult>(Func<TResult> worker)
+        public virtual async Task<TResult> LockZoomAsync<TResult>(Func<TResult> worker)
             => await LockAsync(worker).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task LockZoomAsync(Action worker)
+        public virtual async Task LockZoomAsync(Action worker)
             => await LockAsync(worker).ConfigureAwait(false);   
     }
 }

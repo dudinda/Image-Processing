@@ -6,14 +6,14 @@ using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interfac
 namespace ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Implementation
 {
     /// <inheritdoc cref="IAsyncOperationLocker"/>
-    public sealed class AsyncOperationLocker : AsyncLockerBase, IAsyncOperationLocker
+    public class AsyncOperationLocker : AsyncLockerBase, IAsyncOperationLocker
     {
         /// <inheritdoc/>
-        public async Task<TResult> LockOperationAsync<TResult>(Func<TResult> worker)
+        public virtual async Task<TResult> LockOperationAsync<TResult>(Func<TResult> worker)
             => await LockAsync(worker).ConfigureAwait(false);
 
         /// <inheritdoc/>
-        public async Task LockOperationAsync(Action worker)
+        public virtual async Task LockOperationAsync(Action worker)
             => await LockAsync(worker).ConfigureAwait(false);
     }
 }

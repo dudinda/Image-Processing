@@ -34,7 +34,7 @@ using ImageProcessing.Microkernel.MVP.Controller.Interface;
 [assembly: InternalsVisibleTo("ImageProcessing.App.UILayer")]
 namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 {
-    internal sealed class MainPresenter : BasePresenter<IMainView>,
+    internal class MainPresenter : BasePresenter<IMainView>,
           ISubscriber<AttachBlockToRendererEventArgs>,
           ISubscriber<ShowConvolutionMenuEventArgs>,
           ISubscriber<ShowDistributionMenuEventArgs>,
@@ -68,7 +68,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             _pipeline = pipeline;
         }
 
-        public async Task OnEventHandler(object publisher, OpenFileDialogEventArgs e)
+        public virtual async Task OnEventHandler(object publisher, OpenFileDialogEventArgs e)
         {
             try
             {
@@ -92,7 +92,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public async Task OnEventHandler(object publisher, SaveAsFileDialogEventArgs e)
+        public virtual async Task OnEventHandler(object publisher, SaveAsFileDialogEventArgs e)
         {
             try
             {
@@ -113,7 +113,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public async Task OnEventHandler(object publisher, SaveWithoutFileDialogEventArgs e)
+        public virtual async Task OnEventHandler(object publisher, SaveWithoutFileDialogEventArgs e)
         {
             try
             {
@@ -134,7 +134,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public async Task OnEventHandler(object publisher, ShowRgbMenuEventArgs e)
+        public virtual async Task OnEventHandler(object publisher, ShowRgbMenuEventArgs e)
         {
             try
             {
@@ -154,7 +154,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public async Task OnEventHandler(object publisher, ShowDistributionMenuEventArgs e)
+        public virtual async Task OnEventHandler(object publisher, ShowDistributionMenuEventArgs e)
         {
             try
             {
@@ -174,7 +174,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public async Task OnEventHandler(object publisher, ShowConvolutionMenuEventArgs e)
+        public virtual async Task OnEventHandler(object publisher, ShowConvolutionMenuEventArgs e)
         {
             try
             {
@@ -194,7 +194,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public async Task OnEventHandler(object publisher, AttachBlockToRendererEventArgs e)
+        public virtual async Task OnEventHandler(object publisher, AttachBlockToRendererEventArgs e)
         {
             try
             {
@@ -218,7 +218,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public async Task OnEventHandler(object publisher, ReplaceImageEventArgs e)
+        public virtual async Task OnEventHandler(object publisher, ReplaceImageEventArgs e)
         {
             try
             {
@@ -246,7 +246,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }        
         }
     
-        public async Task OnEventHandler(object publisher, ZoomEventArgs e)
+        public virtual async Task OnEventHandler(object publisher, ZoomEventArgs e)
         {
             try
             {
@@ -268,7 +268,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public async Task OnEventHandler(object publisher, UndoRedoEventArgs e)
+        public virtual async Task OnEventHandler(object publisher, UndoRedoEventArgs e)
         {
             try
             {
@@ -287,7 +287,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
+        public virtual async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
             View.Tooltip(e.Error);
         }

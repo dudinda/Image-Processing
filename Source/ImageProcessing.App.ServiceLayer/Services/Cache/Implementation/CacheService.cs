@@ -1,4 +1,5 @@
 using System;
+using System.Configuration;
 using System.Threading;
 
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
@@ -9,17 +10,19 @@ using Microsoft.Extensions.Primitives;
 namespace ImageProcessing.App.ServiceLayer.Services.Cache.Implementation
 {
     /// <inheritdoc cref="ICacheService{TItem}"/>
-    public sealed class CacheService<TItem> : ICacheService<TItem>
+    public class CacheService<TItem> : ICacheService<TItem>
     {
         private static CancellationTokenSource _resetToken
             = new CancellationTokenSource();
 
         private IMemoryCache _cache = new MemoryCache(
-            new MemoryCacheOptions() { SizeLimit = 1 << 6 }
+            new MemoryCacheOptions() {
+                SizeLimit = 1 << 6
+            }
         );
 
         /// <inheritdoc/>
-        public TItem GetOrCreate(object key, Func<TItem> createItem)
+        public virtual TItem GetOrCreate(object key, Func<TItem> createItem)
         {
             // Look for a cache key.
             if (!_cache.TryGetValue(key, out var cacheEntry))
@@ -43,7 +46,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Cache.Implementation
         }
 
         /// <inheritdoc/>
-        public void Reset()
+        public virtual void Reset()
         {
             if (_resetToken != null &&
                !_resetToken.IsCancellationRequested &&

@@ -53,7 +53,7 @@ namespace ImageProcessing.App.UILayer.Form
             }
         }
 
-        protected TElement Read<TElement>(Func<object> func)
+        protected virtual TElement Read<TElement>(Func<object> func)
         {
             object result = null!;
 
@@ -69,7 +69,7 @@ namespace ImageProcessing.App.UILayer.Form
             return (TElement)result;
         }
 
-        protected void Write(Action action)
+        protected virtual void Write(Action action)
         {
             if(SynchronizationContext.Current is null)
             {

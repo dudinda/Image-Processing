@@ -7,7 +7,7 @@ using ImageProcessing.Utility.DataStructure.BlockingQueueSrc.Implementation;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Implementation
 {
-    public sealed class AwaitablePipeline : IAwaitablePipeline
+    public class AwaitablePipeline : IAwaitablePipeline
     {
         private readonly BlockingQueue<Task<object>> _queue
            = new BlockingQueue<Task<object>>(1 << 6);
@@ -15,7 +15,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Implement
         private readonly CancellationTokenSource _source 
             = new CancellationTokenSource();
 
-        public bool Register(IPipelineBlock output)
+        public virtual bool Register(IPipelineBlock output)
         {
             var task = new Task<object>(
                 () => output.Process(_source.Token), _source.Token
@@ -30,7 +30,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Implement
             return false;
         }
 
-        public async Task<object> AwaitResult()
+        public virtual async Task<object> AwaitResult()
         {
             if (_queue.TryDequeue(out var task))
             {
@@ -40,10 +40,10 @@ namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Implement
             throw new InvalidOperationException();
         }
 
-        public bool Any()
+        public virtual bool Any()
             => _queue.Any();
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             _source.Cancel();
             _source.Dispose();

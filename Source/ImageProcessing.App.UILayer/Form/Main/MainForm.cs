@@ -15,7 +15,7 @@ using ImageProcessing.Utility.Interop.Wrapper;
 namespace ImageProcessing.App.UILayer.Form.Main
 {
     /// <inheritdoc cref="IMainView"/>
-    internal sealed partial class MainForm : BaseForm, IMainFormExposer
+    internal partial class MainForm : BaseForm, IMainFormExposer
     {
         private readonly IMainFormEventBinder _binder;
         private readonly IMainFormCommand _command;
@@ -135,7 +135,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
         /// <inheritdoc/>
         public ToolStripMenuItem OpenFileMenu
-            => OpenFile;
+            => Read<ToolStripMenuItem>(() => OpenFile);
 
         /// <inheritdoc/>
         public ToolStripMenuItem SaveFileMenu
@@ -208,66 +208,66 @@ namespace ImageProcessing.App.UILayer.Form.Main
         }
 
         /// <inheritdoc/>
-        public string GetPathToFile()
+        public virtual string GetPathToFile()
             => Read<string>(() => PathToImage.Text );
 
        /// <inheritdoc/>
-        public void SetPathToFile(string path)
+        public virtual void SetPathToFile(string path)
             => Write(() => PathToImage.Text = path);
                     
         /// <inheritdoc/>
-        public void Tooltip(string message)
+        public virtual void Tooltip(string message)
             => Write(() => ErrorToolTip.Show(message, this, PointToClient(
                 CursorPosition.GetCursorPosition()), 2000));
 
         /// <inheritdoc/>
-        public void ResetTrackBarValue(ImageContainer container, int value = 0)
+        public virtual void ResetTrackBarValue(ImageContainer container, int value = 0)
             => Write(() => _command.Procedure(container.ToString() + nameof(MainViewAction.ResetTrackBar), value));
 
         /// <inheritdoc/>
-        public Image ZoomImage(ImageContainer container)
-            => Read<Image>(() => _command.Function(container.ToString() + nameof(MainViewAction.Zoom), null));
+        public virtual Image ZoomImage(ImageContainer container)
+            => Read<Image>(() => _command.Function(container.ToString() + nameof(MainViewAction.Zoom), null!));
 
         /// <inheritdoc/>
-        public void SetImageToZoom(ImageContainer container, Image image)
+        public virtual void SetImageToZoom(ImageContainer container, Image image)
             => Write(() => _command.Procedure(container.ToString() + nameof(MainViewAction.SetToZoom), image) );
 
         /// <inheritdoc/>
-        public Image GetImageCopy(ImageContainer container)
+        public virtual Image GetImageCopy(ImageContainer container)
             => Read<Image>(() =>_command.Function(container.ToString() + nameof(MainViewAction.GetCopy)));
 
         /// <inheritdoc/>
-        public void SetImageCopy(ImageContainer container, Image copy)
+        public virtual void SetImageCopy(ImageContainer container, Image copy)
             => Write(() => _command.Procedure(container.ToString() + nameof(MainViewAction.SetCopy), copy));
 
         /// <inheritdoc/>
-        public void SetImage(ImageContainer container, Image image)
+        public virtual void SetImage(ImageContainer container, Image image)
             => Write(() =>_command.Procedure(container.ToString() + nameof(MainViewAction.SetImage), image));
 
         /// <inheritdoc/>
-        public bool ImageIsDefault(ImageContainer container)
+        public virtual bool ImageIsDefault(ImageContainer container)
             => Read<bool>(() => _command.Function(container.ToString() + nameof(MainViewAction.ImageIsNull)));
 
         /// <inheritdoc/>
-        public void Refresh(ImageContainer container)
+        public virtual void Refresh(ImageContainer container)
             => Write(() => _command.Procedure(container.ToString() + nameof(MainViewAction.Refresh)));
 
         /// <inheritdoc/>
-        public void SetCursor(CursorType cursor)
+        public virtual void SetCursor(CursorType cursor)
             => Write(() =>_command.Procedure(cursor.ToString()));
 
         /// <inheritdoc/>
-        public void AddToUndoRedo(ImageContainer to, Bitmap cpy, UndoRedoAction action)
+        public virtual void AddToUndoRedo(ImageContainer to, Bitmap cpy, UndoRedoAction action)
             => Write(() => _command.Procedure(action.ToString() + nameof(MainViewAction.AddToUndoRedo), to, cpy));
 
         /// <inheritdoc/>
-        public (Bitmap, ImageContainer) TryUndoRedo(UndoRedoAction action)
+        public virtual (Bitmap, ImageContainer) TryUndoRedo(UndoRedoAction action)
             => Read<(Bitmap, ImageContainer)>(() => _command.Function(action.ToString()));
                     
         /// <summary>
         /// Used by the generated <see cref="Dispose(bool)"/> call.
         /// Can be used by a DI container in a singleton scope on Release();
-        public new void Dispose()
+        public virtual new void Dispose()
         {
             if (components != null)
             {

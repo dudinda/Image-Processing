@@ -11,7 +11,7 @@ using ImageProcessing.App.UILayer.FormExposers.Main;
 
 namespace ImageProcessing.App.UILayer.FormCommands.Main.Implementation
 {
-    internal sealed class MainFormCommand : IMainFormCommand
+    internal class MainFormCommand : IMainFormCommand
     {
         private static readonly Dictionary<string, CommandAttribute>
            _command = typeof(MainFormCommand).GetCommands();
@@ -174,13 +174,13 @@ namespace ImageProcessing.App.UILayer.FormCommands.Main.Implementation
             return redo;
         }
 
-        public object Function(string command, params object[] args)
+        public virtual object Function(string command, params object[] args)
             => _command[command].Method.Invoke(this, args);
 
-        public void Procedure(string command, params object[] args)
+        public virtual void Procedure(string command, params object[] args)
             => _command[command].Method.Invoke(this, args);
 
-        public void OnElementExpose(IMainFormExposer exposer)
+        public virtual void OnElementExpose(IMainFormExposer exposer)
             => _exposer = exposer;
     }
 }

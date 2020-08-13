@@ -1,9 +1,19 @@
 using System;
 using System.Drawing;
+using System.Threading.Tasks;
+
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Fakes;
+using ImageProcessing.App.PresentationLayer.Presenters.Main;
+using ImageProcessing.App.PresentationLayer.UnitTests;
+using ImageProcessing.App.PresentationLayer.UnitTests.Extensions;
+using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
+using ImageProcessing.App.PresentationLayer.UnitTests.Frames;
+using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
+using ImageProcessing.App.UILayer.FormExposers.Main;
+using ImageProcessing.Microkernel.DIAdapter.Code.Enums;
+using ImageProcessing.Microkernel.EntryPoint;
 
 using NSubstitute;
 using NSubstitute.ReceivedExtensions;
@@ -15,36 +25,55 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
     [TestFixture]
     public class MainPresenterTests : IDisposable
     {
-        private MainSystemFake _system;
+        private INonBlockDialogService _dialog;
+        private IEventAggregatorFake _aggregator;
+        private MainPresenter _presenter;
+        private IMainFormExposer _form;
 
         [SetUp]
         public void SetUp()
         {
-            _system = Substitute.ForPartsOf<MainSystemFake>();
+            AppLifecycle.Build<MainPresenterTestStartup>(DiContainer.Ninject);
+
+            _aggregator = AppLifecycle.Controller.IoC.Resolve<IEventAggregatorFake>();
+            _dialog = AppLifecycle.Controller.IoC.Resolve<INonBlockDialogService>();
+            _form = AppLifecycle.Controller.IoC.Resolve<IMainFormExposer>();
+            _presenter = AppLifecycle.Controller.IoC.Resolve<MainPresenter>();
+
+            _aggregator.Subscribe(_presenter, _form);
         }
 
 
         [Test]
         public void FileOpenMenuClick()
         {
-            _system.Publisher.OpenFileMenu.PerformClick();
+            _form.OpenFileMenu.PerformClick();
 
-            _system.Received().OnEventHandler(
-                Arg.Is<object>(s => s == _system.Publisher),
+            _presenter.Received().OnEventHandler(
+                Arg.Is<object>(s => s == _form),
                 Arg.Any<OpenFileDialogEventArgs>());
 
-            _system.Dialog.Received().NonBlockOpen(Arg.Any<string>());
+                _form.When(
+                    (form) =>  form.SetImage(
+                        Arg.Is<ImageContainer>(s => s == ImageContainer.Source),
+                        Arg.Any<Image>())
+                 ).Do((call) =>
+                 {
+                     _dialog.Received().NonBlockOpen(Arg.Any<string>());
+                     var image = _form.SourceImage as Bitmap;
 
-
+                     Assert.IsTrue(image != null);
+                     Assert.IsTrue(image.SameAs(Res._1920x1080frame));
+                 });
         }
 
         [Test]
         public void FileSaveAsMenuClick()
         {
-            _system.Publisher.SaveAsMenu.PerformClick();
+            _form.SaveAsMenu.PerformClick();
 
-            _system.Received().OnEventHandler(
-                Arg.Is<object>(s => s == _system.Publisher),
+            _presenter.Received().OnEventHandler(
+                Arg.Is<object>(s => s == _form),
                 Arg.Any<SaveAsFileDialogEventArgs>());
 
         }
@@ -52,43 +81,43 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         [Test]
         public void FileSaveMenuClick()
         {
-            _system.Publisher.SaveFileMenu.PerformClick();
+            _form.SaveFileMenu.PerformClick();
 
-            _system.Received().OnEventHandler(
-                Arg.Is<object>(s => s == _system.Publisher),
+            _presenter.Received().OnEventHandler(
+                Arg.Is<object>(s => s == _form),
                 Arg.Any<SaveWithoutFileDialogEventArgs>());
         }
 
         [Test]
         public void ReplaceSourceImageClick()
         {
-            _system.Publisher.ReplaceSrcByDstButton.Enabled = true;
-            _system.Publisher.ReplaceSrcByDstButton.PerformClick();
+            _form.ReplaceSrcByDstButton.Enabled = true;
+            _form.ReplaceSrcByDstButton.PerformClick();
 
             var container = ImageContainer.Destination;
 
-            _system.Received().OnEventHandler(
-                Arg.Is<object>(s => s == _system.Publisher),
+            _presenter.Received().OnEventHandler(
+                Arg.Is<object>(s => s == _form),
                 Arg.Is<ReplaceImageEventArgs>(arg => arg.Container == container));
         }
 
         [Test]
         public void ReplaceDestinationImageClick()
         {
-            _system.Publisher.ReplaceDstBySrcButton.Enabled = true;
-            _system.Publisher.ReplaceDstBySrcButton.PerformClick();
+            _form.ReplaceDstBySrcButton.Enabled = true;
+            _form.ReplaceDstBySrcButton.PerformClick();
 
             var container = ImageContainer.Source;
 
-            _system.Received().OnEventHandler(
-                Arg.Is<object>(s => s == _system.Publisher),
+            _presenter.Received().OnEventHandler(
+                Arg.Is<object>(s => s == _form),
                 Arg.Is<ReplaceImageEventArgs>(arg => arg.Container == container));
         }
 
         [TearDown]
         public void Dispose()
         {
-           _system.Publisher.Dispose();
+            AppLifecycle.Exit();
         }
     }
 }
