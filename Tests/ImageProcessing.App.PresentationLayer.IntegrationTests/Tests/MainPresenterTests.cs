@@ -12,6 +12,7 @@ using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
 using ImageProcessing.App.PresentationLayer.UnitTests.Frames;
 using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Main;
+using ImageProcessing.Microkernel.DI.State.IsNotBuilt;
 using ImageProcessing.Microkernel.DIAdapter.Code.Enums;
 using ImageProcessing.Microkernel.EntryPoint;
 
@@ -118,6 +119,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         public void Dispose()
         {
             AppLifecycle.Exit();
+            AppLifecycle.State = new AppIsNotBuilt();
         }
     }
 }
