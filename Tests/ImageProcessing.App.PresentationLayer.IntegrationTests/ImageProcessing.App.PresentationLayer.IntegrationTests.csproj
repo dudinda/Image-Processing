@@ -118,7 +118,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\AssemblyExtensions.cs" />
     <Compile Include="Extensions\BitmapExtensions.cs" />
     <Compile Include="Fakes\Components\AppController\AppControllerFake.cs" />
     <Compile Include="Fakes\Components\EventAggregator\EventAggregatorFake.cs" />
