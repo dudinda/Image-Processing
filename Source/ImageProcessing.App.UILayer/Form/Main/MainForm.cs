@@ -201,7 +201,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             => Dst;
 
         /// <inheritdoc/>
-        public new void Show()
+        public virtual new void Show()
         {
             Context.MainForm = this;
             Application.Run(Context);
