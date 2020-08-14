@@ -49,6 +49,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
 
 
         [Test]
+        [Timeout(5000)]
         public void FileOpenMenuClick()
         {
             _form.OpenFileMenu.PerformClick();
@@ -56,7 +57,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
            _synchronizer.Event.WaitOne();
 
             _presenter.Received().OnEventHandler(
-                Arg.Is<object>(s => s == _form),
+                Arg.Is<object>(arg => arg == _form),
                 Arg.Any<OpenFileDialogEventArgs>());
 
             _dialog.Received().NonBlockOpen(Arg.Any<string>());
@@ -68,30 +69,60 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         }
 
         [Test]
+        [Timeout(5000)]
         public void FileSaveAsMenuClick()
         {
             _form.OpenFileMenu.PerformClick();
-
-            _form.When(
-                    (form) => form.Refresh(
-                        Arg.Is<ImageContainer>(s => s == ImageContainer.Source)
-                     )
-                 ).Do((call) =>
-                 {
-                     _form.SaveAsMenu.PerformClick();
-                 });
-
             _synchronizer.Event.WaitOne();
+
+            _form.SaveAsMenu.PerformClick();
+
+            _presenter.Received().OnEventHandler(
+                Arg.Is<object>(arg => arg == _form),
+                Arg.Any<SaveAsFileDialogEventArgs>());
+
+            _dialog.Received().NonBlockSaveAs(
+                Arg.Is<Bitmap>(arg => arg.SameAs((Bitmap)_form.SrcImageCopy)),
+                Arg.Any<string>());           
         }
 
         [Test]
+        [Timeout(5000)]
         public void FileSaveMenuClick()
         {
+            _form.OpenFileMenu.PerformClick();
+            _synchronizer.Event.WaitOne();
+
             _form.SaveFileMenu.PerformClick();
 
             _presenter.Received().OnEventHandler(
-                Arg.Is<object>(s => s == _form),
+                Arg.Is<object>(arg => arg == _form),
                 Arg.Any<SaveWithoutFileDialogEventArgs>());
+        }
+
+        [Test]
+        [Timeout(5000)]
+        public void ReplaceDestinationImageClick()
+        {
+            _form.OpenFileMenu.PerformClick();
+            _synchronizer.Event.WaitOne();
+
+            _form.ReplaceDstBySrcButton.PerformClick();
+            _synchronizer.Event.WaitOne();
+
+            var container = ImageContainer.Source;
+
+            _presenter.Received().OnEventHandler(
+                Arg.Is<object>(arg => arg == _form),
+                Arg.Is<ReplaceImageEventArgs>(arg => arg.Container == container));
+
+            var destination = _form.DstImageCopy as Bitmap;
+            var source = _form.SrcImageCopy as Bitmap;
+
+            Assert.IsTrue(source != null);
+            Assert.IsTrue(destination != null);
+            Assert.IsTrue(_form.DestinationImage != null);
+            Assert.IsTrue(source.SameAs(destination));
         }
 
         [Test]
@@ -103,22 +134,11 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
             var container = ImageContainer.Destination;
 
             _presenter.Received().OnEventHandler(
-                Arg.Is<object>(s => s == _form),
+                Arg.Is<object>(arg => arg == _form),
                 Arg.Is<ReplaceImageEventArgs>(arg => arg.Container == container));
         }
 
-        [Test]
-        public void ReplaceDestinationImageClick()
-        {
-            _form.ReplaceDstBySrcButton.Enabled = true;
-            _form.ReplaceDstBySrcButton.PerformClick();
-
-            var container = ImageContainer.Source;
-
-            _presenter.Received().OnEventHandler(
-                Arg.Is<object>(s => s == _form),
-                Arg.Is<ReplaceImageEventArgs>(arg => arg.Container == container));
-        }
+        
 
         [TearDown]
         public void Dispose()

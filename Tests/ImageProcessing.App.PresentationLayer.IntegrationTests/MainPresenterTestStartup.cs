@@ -33,7 +33,6 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests
     {
         public void Build(IDependencyResolution builder)
         {
-
             builder.RegisterSingleton<IEventAggregatorFake, EventAggregatorFake>();
 
             var controller = builder.Resolve<IAppController>();
