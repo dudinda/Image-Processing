@@ -74,8 +74,10 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         {
             _form.OpenFileMenu.PerformClick();
             _synchronizer.Event.WaitOne();
+            _synchronizer.Event.Reset();
 
             _form.SaveAsMenu.PerformClick();
+            _synchronizer.Event.WaitOne();
 
             _presenter.Received().OnEventHandler(
                 Arg.Is<object>(arg => arg == _form),
@@ -106,6 +108,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         {
             _form.OpenFileMenu.PerformClick();
             _synchronizer.Event.WaitOne();
+            _synchronizer.Event.Reset();
 
             _form.ReplaceDstBySrcButton.PerformClick();
             _synchronizer.Event.WaitOne();

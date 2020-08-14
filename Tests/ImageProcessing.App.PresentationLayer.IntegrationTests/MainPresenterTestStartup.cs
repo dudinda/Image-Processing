@@ -34,20 +34,19 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests
         public void Build(IDependencyResolution builder)
         {
             builder.RegisterSingleton<IEventAggregatorFake, EventAggregatorFake>();
+            builder.RegisterSingleton<IManualResetEventService, ManualResetEventService>();
 
             var controller = builder.Resolve<IAppController>();
             var aggregator = builder.Resolve<IEventAggregatorFake>();
+            var synchronizer = builder.Resolve<IManualResetEventService>();
 
             controller
                 .GetType()
                 .GetProperty(nameof(controller.Aggregator))
                 .SetValue(controller, aggregator);
 
-            builder.RegisterSingleton<IManualResetEventService, ManualResetEventService>();
-
-
             builder.RegisterTransientInstance<IAppControllerFake>(Substitute.ForPartsOf<AppControllerFake>(controller))
-                   .RegisterSingletonInstance<INonBlockDialogService>(Substitute.ForPartsOf<NonBlockDialogServiceFake>())
+                   .RegisterSingletonInstance<INonBlockDialogService>(Substitute.ForPartsOf<NonBlockDialogServiceFake>(synchronizer))
                    .RegisterTransientInstance<ICacheService<Bitmap>>(Substitute.ForPartsOf<CacheService<Bitmap>>())
                    .RegisterTransientInstance<IAsyncOperationLocker>(Substitute.ForPartsOf<AsyncOperationLocker>())
                    .RegisterTransientInstance<IAsyncZoomLocker>(Substitute.ForPartsOf<AsyncZoomLocker>())
@@ -55,11 +54,9 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests
                    .RegisterTransientInstance<IMainFormEventBinder>(Substitute.ForPartsOf<MainFormEventBinder>(aggregator))
                    .RegisterTransientInstance<IMainFormCommand>(Substitute.ForPartsOf<MainFormCommand>());
 
-            var form = Substitute.ForPartsOf<MainFormFake>(
-                builder.Resolve<IManualResetEventService>(), controller,
+            var form = Substitute.ForPartsOf<MainFormFake>(synchronizer, controller,
                 builder.Resolve<IMainFormEventBinder>(),
-                builder.Resolve<IMainFormCommand>()
-            );
+                builder.Resolve<IMainFormCommand>());
 
             builder.RegisterSingletonInstance<IMainFormExposer>(form)
                    .RegisterSingletonInstance<IMainView>(form);
@@ -69,9 +66,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests
                 builder.Resolve<INonBlockDialogService>(),
                 builder.Resolve<IAwaitablePipeline>(),
                 builder.Resolve<IAsyncOperationLocker>(),
-                builder.Resolve<IAsyncZoomLocker>())
-            );
-
+                builder.Resolve<IAsyncZoomLocker>()));
         }
     }
 }

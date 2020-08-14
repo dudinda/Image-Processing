@@ -124,8 +124,6 @@
     <Compile Include="Fakes\Components\EventAggregator\EventAggregatorFake.cs" />
     <Compile Include="Fakes\Components\EventAggregator\IEventAggregatorFake.cs" />
     <Compile Include="Fakes\Components\AppController\IAppControllerFake.cs" />
-    <Compile Include="Fakes\Components\MainFormBinder\IMainFormEventBinderFake.cs" />
-    <Compile Include="Fakes\Components\MainFormBinder\MainFormEventBinderFake.cs" />
     <Compile Include="Fakes\Form\MainFormFake.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,9 +188,7 @@
       <LastGenOutput>Res.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Fakes\Presenters\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
