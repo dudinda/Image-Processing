@@ -5,6 +5,7 @@ using ImageProcessing.App.PresentationLayer.Presenters.Main;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Services;
+using ImageProcessing.App.PresentationLayer.UnitTests.Services;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
@@ -43,6 +44,8 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests
                 .GetProperty(nameof(controller.Aggregator))
                 .SetValue(controller, aggregator);
 
+            builder.RegisterSingleton<IManualResetEventService, ManualResetEventService>();
+
 
             builder.RegisterTransientInstance<IAppControllerFake>(Substitute.ForPartsOf<AppControllerFake>(controller))
                    .RegisterSingletonInstance<INonBlockDialogService>(Substitute.ForPartsOf<NonBlockDialogServiceFake>())
@@ -54,7 +57,10 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests
                    .RegisterTransientInstance<IMainFormCommand>(Substitute.ForPartsOf<MainFormCommand>());
 
             var form = Substitute.ForPartsOf<MainFormFake>(
-                controller, builder.Resolve<IMainFormEventBinder>(), builder.Resolve<IMainFormCommand>());
+                builder.Resolve<IManualResetEventService>(), controller,
+                builder.Resolve<IMainFormEventBinder>(),
+                builder.Resolve<IMainFormCommand>()
+            );
 
             builder.RegisterSingletonInstance<IMainFormExposer>(form)
                    .RegisterSingletonInstance<IMainView>(form);
@@ -64,7 +70,8 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests
                 builder.Resolve<INonBlockDialogService>(),
                 builder.Resolve<IAwaitablePipeline>(),
                 builder.Resolve<IAsyncOperationLocker>(),
-                builder.Resolve<IAsyncZoomLocker>()));
+                builder.Resolve<IAsyncZoomLocker>())
+            );
 
         }
     }
