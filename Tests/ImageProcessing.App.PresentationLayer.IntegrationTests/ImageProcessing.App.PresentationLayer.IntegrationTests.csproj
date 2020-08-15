@@ -119,8 +119,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestsComponents\Exposers\MainPresenterExposer.cs" />
     <Compile Include="TestsComponents\Extensions\BitmapExtensions.cs" />
+    <Compile Include="TestsComponents\Wrappers\Presenters\MainPresenterWrapper.cs" />
     <Compile Include="TestsComponents\Wrappers\Services\EventAggregator\Implementation\EventAggregatorWrapper.cs" />
     <Compile Include="TestsComponents\Wrappers\Services\EventAggregator\Interface\IEventAggregatorWrapper.cs" />
     <Compile Include="TestsComponents\Wrappers\Forms\MainFormWrapper.cs">

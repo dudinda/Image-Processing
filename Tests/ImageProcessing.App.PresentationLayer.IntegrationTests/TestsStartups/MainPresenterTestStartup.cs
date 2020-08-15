@@ -5,7 +5,7 @@ using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Services;
 using ImageProcessing.App.PresentationLayer.UnitTests.Services;
-using ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Exposers;
+using ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Presenters;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
@@ -63,7 +63,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests
             builder.RegisterSingletonInstance<IMainFormExposer>(form)
                    .RegisterSingletonInstance<IMainView>(form);
 
-            builder.RegisterTransientInstance(Substitute.ForPartsOf<MainPresenterExposer>(controller,
+            builder.RegisterTransientInstance(Substitute.ForPartsOf<MainPresenterWrapper>(controller,
                 builder.Resolve<ICacheService<Bitmap>>(),
                 builder.Resolve<INonBlockDialogService>(),
                 builder.Resolve<IAwaitablePipeline>(),

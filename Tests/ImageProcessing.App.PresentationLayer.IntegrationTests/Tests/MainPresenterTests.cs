@@ -9,7 +9,7 @@ using ImageProcessing.App.PresentationLayer.UnitTests;
 using ImageProcessing.App.PresentationLayer.UnitTests.Extensions;
 using ImageProcessing.App.PresentationLayer.UnitTests.Services;
 using ImageProcessing.App.PresentationLayer.UnitTests.TestResources;
-using ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Exposers;
+using ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Presenters;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline;
 using ImageProcessing.App.UILayer.FormExposers.Main;
 using ImageProcessing.Microkernel.DIAdapter.Code.Enums;
@@ -26,7 +26,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
     public class MainPresenterTests : IDisposable
     {
         private IManualResetEventService _synchronizer;
-        private MainPresenterExposer _presenter;
+        private MainPresenterWrapper _presenter;
         private IMainFormExposer _form;
 
         [SetUp]
@@ -36,7 +36,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
 
             _synchronizer = AppLifecycle.Controller.IoC.Resolve<IManualResetEventService>();
             _form = AppLifecycle.Controller.IoC.Resolve<IMainFormExposer>();
-            _presenter = AppLifecycle.Controller.IoC.Resolve<MainPresenterExposer>();
+            _presenter = AppLifecycle.Controller.IoC.Resolve<MainPresenterWrapper>();
 
             _presenter.Run();
         }
@@ -68,6 +68,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         public void RendererRecieveBlockTest()
         {
             _form.OpenFileMenu.PerformClick();
+
             _synchronizer.Event.WaitOne();
 
             _form.Received().SetCursor(Arg.Is<CursorType>(arg => arg == CursorType.Wait));
@@ -105,10 +106,12 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         public void FileSaveAsMenuClick()
         {
             _form.OpenFileMenu.PerformClick();
+
             _synchronizer.Event.WaitOne();
             _synchronizer.Event.Reset();
 
             _form.SaveAsMenu.PerformClick();
+
             _synchronizer.Event.WaitOne();
 
             _presenter.Received().OnEventHandler(
@@ -139,10 +142,12 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         public void ReplaceDestinationImageClick()
         {
             _form.OpenFileMenu.PerformClick();
+
             _synchronizer.Event.WaitOne();
             _synchronizer.Event.Reset();
 
             _form.ReplaceDstBySrcButton.PerformClick();
+
             _synchronizer.Event.WaitOne();
 
             var container = ImageContainer.Source;
