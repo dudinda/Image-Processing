@@ -48,7 +48,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests
             var dialog = Substitute.ForPartsOf<NonBlockDialogServiceWrapper>(synchronizer,
                 Substitute.For<IFileDialogService>(), Substitute.For<IStaTaskService>());
 
-            builder.RegisterSingletonInstance<INonBlockDialogService>(dialog)
+            builder.RegisterTransientInstance<INonBlockDialogService>(dialog)
                    .RegisterTransientInstance<ICacheService<Bitmap>>(Substitute.ForPartsOf<CacheService<Bitmap>>())
                    .RegisterTransientInstance<IAsyncOperationLocker>(Substitute.ForPartsOf<AsyncOperationLocker>())
                    .RegisterTransientInstance<IAsyncZoomLocker>(Substitute.ForPartsOf<AsyncZoomLocker>())
@@ -63,7 +63,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests
             builder.RegisterSingletonInstance<IMainFormExposer>(form)
                    .RegisterSingletonInstance<IMainView>(form);
 
-            builder.RegisterTransientInstance(Substitute.ForPartsOf<MainPresenterExposer>(controller,
+            builder.RegisterTransientInstance(Substitute.ForPartsOf<MainPresenterWrapper>(controller,
                 builder.Resolve<ICacheService<Bitmap>>(),
                 builder.Resolve<INonBlockDialogService>(),
                 builder.Resolve<IAwaitablePipeline>(),

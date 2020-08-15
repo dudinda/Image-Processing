@@ -26,7 +26,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
     public class MainPresenterTests : IDisposable
     {
         private IManualResetEventService _synchronizer;
-        private MainPresenterExposer _presenter;
+        private MainPresenterWrapper _presenter;
         private IMainFormExposer _form;
 
         [SetUp]
@@ -36,7 +36,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
 
             _synchronizer = AppLifecycle.Controller.IoC.Resolve<IManualResetEventService>();
             _form = AppLifecycle.Controller.IoC.Resolve<IMainFormExposer>();
-            _presenter = AppLifecycle.Controller.IoC.Resolve<MainPresenterExposer>();
+            _presenter = AppLifecycle.Controller.IoC.Resolve<MainPresenterWrapper>();
 
             _presenter.Run();
         }
@@ -98,7 +98,6 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         }
 
         [Test]
-        [Timeout(5000)]
         public void FileSaveAsMenuClick()
         {
             _form.OpenFileMenu.PerformClick();

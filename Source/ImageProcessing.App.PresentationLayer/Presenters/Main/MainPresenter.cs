@@ -34,7 +34,7 @@ using ImageProcessing.Microkernel.MVP.Controller.Interface;
 [assembly: InternalsVisibleTo("ImageProcessing.App.UILayer")]
 namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 {
-    internal class MainPresenter : BasePresenter<IMainView>,
+    internal sealed class MainPresenter : BasePresenter<IMainView>,
           ISubscriber<AttachBlockToRendererEventArgs>,
           ISubscriber<ShowConvolutionMenuEventArgs>,
           ISubscriber<ShowDistributionMenuEventArgs>,
@@ -47,11 +47,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
           ISubscriber<ZoomEventArgs>,
           ISubscriber<UndoRedoEventArgs>
     {
-        protected readonly ICacheService<Bitmap> _cache;
-        protected readonly INonBlockDialogService _dialog;
-        protected readonly IAsyncOperationLocker _operation;
-        protected readonly IAsyncZoomLocker _zoom;
-        protected readonly IAwaitablePipeline _pipeline;
+        private readonly ICacheService<Bitmap> _cache;
+        private readonly INonBlockDialogService _dialog;
+        private readonly IAsyncOperationLocker _operation;
+        private readonly IAsyncZoomLocker _zoom;
+        private readonly IAwaitablePipeline _pipeline;
 
         public MainPresenter(
             IAppController controller,
@@ -68,7 +68,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             _pipeline = pipeline;
         }
 
-        public virtual async Task OnEventHandler(object publisher, OpenFileDialogEventArgs e)
+        public async Task OnEventHandler(object publisher, OpenFileDialogEventArgs e)
         {
             try
             {
@@ -92,7 +92,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public virtual async Task OnEventHandler(object publisher, SaveAsFileDialogEventArgs e)
+        public async Task OnEventHandler(object publisher, SaveAsFileDialogEventArgs e)
         {
             try
             {
@@ -113,7 +113,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public virtual async Task OnEventHandler(object publisher, SaveWithoutFileDialogEventArgs e)
+        public async Task OnEventHandler(object publisher, SaveWithoutFileDialogEventArgs e)
         {
             try
             {
@@ -134,7 +134,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public virtual async Task OnEventHandler(object publisher, ShowRgbMenuEventArgs e)
+        public async Task OnEventHandler(object publisher, ShowRgbMenuEventArgs e)
         {
             try
             {
@@ -154,7 +154,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public virtual async Task OnEventHandler(object publisher, ShowDistributionMenuEventArgs e)
+        public async Task OnEventHandler(object publisher, ShowDistributionMenuEventArgs e)
         {
             try
             {
@@ -174,7 +174,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public virtual async Task OnEventHandler(object publisher, ShowConvolutionMenuEventArgs e)
+        public async Task OnEventHandler(object publisher, ShowConvolutionMenuEventArgs e)
         {
             try
             {
@@ -194,7 +194,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public virtual async Task OnEventHandler(object publisher, AttachBlockToRendererEventArgs e)
+        public async Task OnEventHandler(object publisher, AttachBlockToRendererEventArgs e)
         {
             try
             {
@@ -218,7 +218,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public virtual async Task OnEventHandler(object publisher, ReplaceImageEventArgs e)
+        public async Task OnEventHandler(object publisher, ReplaceImageEventArgs e)
         {
             try
             {
@@ -246,7 +246,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }        
         }
     
-        public virtual async Task OnEventHandler(object publisher, ZoomEventArgs e)
+        public async Task OnEventHandler(object publisher, ZoomEventArgs e)
         {
             try
             {
@@ -268,7 +268,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public virtual async Task OnEventHandler(object publisher, UndoRedoEventArgs e)
+        public async Task OnEventHandler(object publisher, UndoRedoEventArgs e)
         {
             try
             {
@@ -287,7 +287,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
-        public virtual async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
+        public async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
             View.Tooltip(e.Error);
         }
