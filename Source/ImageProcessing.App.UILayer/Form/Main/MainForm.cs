@@ -129,6 +129,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             }
         }
 
+
         /// <inheritdoc/>
         public ToolStripMenuItem SaveAsMenu
             => SaveFileAs;
@@ -258,12 +259,24 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
         /// <inheritdoc/>
         public virtual void AddToUndoRedo(ImageContainer to, Bitmap cpy, UndoRedoAction action)
-            => Write(() => _command.Procedure(action.ToString() + nameof(MainViewAction.AddToUndoRedo), to, cpy));
+        {
+            if (ImageIsDefault(to))
+            {
+                cpy.Tag = nameof(ImageIsDefault);
+            }
+
+            Write(() => _command.Procedure(action.ToString() + nameof(MainViewAction.AddToUndoRedo), to, cpy));
+        }
 
         /// <inheritdoc/>
         public virtual (Bitmap, ImageContainer) TryUndoRedo(UndoRedoAction action)
             => Read<(Bitmap, ImageContainer)>(() => _command.Function(action.ToString()));
-                    
+
+        public virtual void MarkIfDefault(ImageContainer to, Bitmap bmp)
+        {
+            
+        }
+
         /// <summary>
         /// Used by the generated <see cref="Dispose(bool)"/> call.
         /// Can be used by a DI container in a singleton scope on Release();

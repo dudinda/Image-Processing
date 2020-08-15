@@ -70,6 +70,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
             _form.OpenFileMenu.PerformClick();
             _synchronizer.Event.WaitOne();
 
+            _form.Received().SetCursor(Arg.Is<CursorType>(arg => arg == CursorType.Wait));
             _presenter.Pipeline.Received().Register(Arg.Any<IPipelineBlock>());
 
             var container = ImageContainer.Source;
@@ -91,9 +92,11 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
                 Arg.Any<Bitmap>());
             _form.Received().Refresh(Arg.Is<ImageContainer>(arg => arg == container));
             _form.Received().ResetTrackBarValue(Arg.Is<ImageContainer>(arg => arg == container));
+
             _presenter.Pipeline.Received().AwaitResult();
             _presenter.Cache.Received().Reset();
             _presenter.Pipeline.Received().Any();
+
             _form.Received().SetCursor(Arg.Is<CursorType>(arg => arg == CursorType.Default));
         }
 

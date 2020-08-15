@@ -295,15 +295,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         private void DefaultRenderBlock(Bitmap bmp, ImageContainer to, UndoRedoAction action)
         {
             lock (this)
-            {
-                var toUndoRedo = new Bitmap(View.GetImageCopy(to));
-
-                if(View.ImageIsDefault(to))
-                {
-                    toUndoRedo.Tag = nameof(View.ImageIsDefault);
-                }
-
-                View.AddToUndoRedo(to, toUndoRedo, action);
+            { 
+                View.AddToUndoRedo(to, new Bitmap(View.GetImageCopy(to)), action);
                 View.SetImageCopy(to, new Bitmap(bmp));
                 View.SetImageToZoom(to, new Bitmap(bmp));
                 View.SetImage(to, bmp);
