@@ -5,14 +5,13 @@ using System.Threading;
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
-using ImageProcessing.App.PresentationLayer.Presenters.Main;
 using ImageProcessing.App.PresentationLayer.UnitTests;
 using ImageProcessing.App.PresentationLayer.UnitTests.Extensions;
 using ImageProcessing.App.PresentationLayer.UnitTests.Services;
 using ImageProcessing.App.PresentationLayer.UnitTests.TestResources;
-using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
+using ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Exposers;
+using ImageProcessing.App.ServiceLayer.Services.Pipeline;
 using ImageProcessing.App.UILayer.FormExposers.Main;
-using ImageProcessing.Microkernel.DI.State.IsNotBuilt;
 using ImageProcessing.Microkernel.DIAdapter.Code.Enums;
 using ImageProcessing.Microkernel.EntryPoint;
 
@@ -27,8 +26,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
     public class MainPresenterTests : IDisposable
     {
         private IManualResetEventService _synchronizer;
-        private INonBlockDialogService _dialog;
-        private MainPresenter _presenter;
+        private MainPresenterExposer _presenter;
         private IMainFormExposer _form;
 
         [SetUp]
@@ -37,9 +35,8 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
             AppLifecycle.Build<MainPresenterTestStartup>(DiContainer.Ninject);
 
             _synchronizer = AppLifecycle.Controller.IoC.Resolve<IManualResetEventService>();
-            _dialog = AppLifecycle.Controller.IoC.Resolve<INonBlockDialogService>();
             _form = AppLifecycle.Controller.IoC.Resolve<IMainFormExposer>();
-            _presenter = AppLifecycle.Controller.IoC.Resolve<MainPresenter>();
+            _presenter = AppLifecycle.Controller.IoC.Resolve<MainPresenterExposer>();
 
             _presenter.Run();
         }
@@ -57,12 +54,47 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
                 Arg.Is<object>(arg => arg == _form),
                 Arg.Any<OpenFileDialogEventArgs>());
 
-            _dialog.Received().NonBlockOpen(Arg.Any<string>());
+            _presenter.Dialog.Received().NonBlockOpen(Arg.Any<string>());
 
             var image = _form.SourceImage as Bitmap;
 
             Assert.IsTrue(image != null);
             Assert.IsTrue(image.SameAs(Res._1920x1080frame));
+        }
+
+
+        [Test]
+        [Timeout(5000)]
+        public void RendererRecieveBlockTest()
+        {
+            _form.OpenFileMenu.PerformClick();
+            _synchronizer.Event.WaitOne();
+
+            _presenter.Pipeline.Received().Register(Arg.Any<IPipelineBlock>());
+
+            var container = ImageContainer.Source;
+
+            _form.Received().GetImageCopy(Arg.Is<ImageContainer>(arg => arg == container));
+            _form.Received().ImageIsDefault(Arg.Is<ImageContainer>(arg => arg == container));
+            _form.Received().AddToUndoRedo(
+                Arg.Is<ImageContainer>(arg => arg == container),
+                Arg.Any<Bitmap>(),
+                Arg.Is<UndoRedoAction>(arg => arg == UndoRedoAction.Undo));
+            _form.Received().SetImageCopy(
+                Arg.Is<ImageContainer>(arg => arg == container),
+                Arg.Any<Bitmap>());
+            _form.Received().SetImageToZoom(
+                Arg.Is<ImageContainer>(arg => arg == container),
+                Arg.Any<Bitmap>());
+            _form.Received().SetImage(
+                Arg.Is<ImageContainer>(arg => arg == container),
+                Arg.Any<Bitmap>());
+            _form.Received().Refresh(Arg.Is<ImageContainer>(arg => arg == container));
+            _form.Received().ResetTrackBarValue(Arg.Is<ImageContainer>(arg => arg == container));
+            _presenter.Pipeline.Received().AwaitResult();
+            _presenter.Cache.Received().Reset();
+            _presenter.Pipeline.Received().Any();
+            _form.Received().SetCursor(Arg.Is<CursorType>(arg => arg == CursorType.Default));
         }
 
         [Test]
@@ -80,7 +112,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
                 Arg.Is<object>(arg => arg == _form),
                 Arg.Any<SaveAsFileDialogEventArgs>());
 
-            _dialog.Received().NonBlockSaveAs(
+            _presenter.Dialog.Received().NonBlockSaveAs(
                 Arg.Is<Bitmap>(arg => arg.SameAs((Bitmap)_form.SrcImageCopy)),
                 Arg.Any<string>());           
         }

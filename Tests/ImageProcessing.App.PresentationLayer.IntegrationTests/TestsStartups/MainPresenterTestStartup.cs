@@ -1,11 +1,11 @@
 using System.Drawing;
 
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Fakes;
-using ImageProcessing.App.PresentationLayer.Presenters.Main;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Services;
 using ImageProcessing.App.PresentationLayer.UnitTests.Services;
+using ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Exposers;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
@@ -42,11 +42,8 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests
             var aggregator = builder.Resolve<IEventAggregatorWrapper>();
             var synchronizer = builder.Resolve<IManualResetEventService>();
 
-            controller
-                .GetType()
-                .GetProperty(nameof(controller.Aggregator))
+            controller.GetType().GetProperty(nameof(controller.Aggregator))
                 .SetValue(controller, aggregator);
-
 
             var dialog = Substitute.ForPartsOf<NonBlockDialogServiceWrapper>(synchronizer,
                 Substitute.For<IFileDialogService>(), Substitute.For<IStaTaskService>());
@@ -66,7 +63,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests
             builder.RegisterSingletonInstance<IMainFormExposer>(form)
                    .RegisterSingletonInstance<IMainView>(form);
 
-            builder.RegisterTransientInstance(Substitute.ForPartsOf<MainPresenter>(controller,
+            builder.RegisterTransientInstance(Substitute.ForPartsOf<MainPresenterExposer>(controller,
                 builder.Resolve<ICacheService<Bitmap>>(),
                 builder.Resolve<INonBlockDialogService>(),
                 builder.Resolve<IAwaitablePipeline>(),

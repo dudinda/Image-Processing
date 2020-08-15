@@ -47,11 +47,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
           ISubscriber<ZoomEventArgs>,
           ISubscriber<UndoRedoEventArgs>
     {
-        private readonly ICacheService<Bitmap> _cache;
-        private readonly INonBlockDialogService _dialog;
-        private readonly IAsyncOperationLocker _operation;
-        private readonly IAsyncZoomLocker _zoom;
-        private readonly IAwaitablePipeline _pipeline;
+        protected readonly ICacheService<Bitmap> _cache;
+        protected readonly INonBlockDialogService _dialog;
+        protected readonly IAsyncOperationLocker _operation;
+        protected readonly IAsyncZoomLocker _zoom;
+        protected readonly IAwaitablePipeline _pipeline;
 
         public MainPresenter(
             IAppController controller,
