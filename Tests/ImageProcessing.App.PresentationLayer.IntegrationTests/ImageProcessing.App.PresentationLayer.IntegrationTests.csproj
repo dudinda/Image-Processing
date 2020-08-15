@@ -119,7 +119,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestsComponents\Wrappers\Presenter\MainPresenterWrapper.cs" />
+    <Compile Include="TestsComponents\Exposers\MainPresenterExposer.cs" />
     <Compile Include="TestsComponents\Extensions\BitmapExtensions.cs" />
     <Compile Include="TestsComponents\Wrappers\Services\EventAggregator\Implementation\EventAggregatorWrapper.cs" />
     <Compile Include="TestsComponents\Wrappers\Services\EventAggregator\Interface\IEventAggregatorWrapper.cs" />
@@ -181,9 +181,7 @@
     <Content Include="TestResources\Static\1920x1080frame.jpg" />
     <Content Include="TestResources\Static\2560x1440frame.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TestsComponents\Exposers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="TestResources\Res.resx">
       <Generator>ResXFileCodeGenerator</Generator>
