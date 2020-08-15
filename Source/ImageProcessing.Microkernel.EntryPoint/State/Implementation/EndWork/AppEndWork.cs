@@ -1,10 +1,12 @@
 using System;
 
 using ImageProcessing.Microkernel.AppConfig;
+using ImageProcessing.Microkernel.Code.Enums;
 using ImageProcessing.Microkernel.DI.EntryPoint.State.Interface;
 using ImageProcessing.Microkernel.DIAdapter.Code.Enums;
 using ImageProcessing.Microkernel.EntryPoint;
 using ImageProcessing.Microkernel.EntryPoint.Code.Constants;
+using ImageProcessing.Microkernel.Factory.State;
 using ImageProcessing.Microkernel.MVP.Presenter;
 
 namespace ImageProcessing.Microkernel.State.EndWork
@@ -23,7 +25,14 @@ namespace ImageProcessing.Microkernel.State.EndWork
 
         /// <inheritdoc/>
         public void Exit()
-            => AppLifecycle.Controller.Dispose();
+        {
+            AppLifecycle.Controller.Dispose();
+
+            AppLifecycle.State = StateFactory.Get(
+                AppState.IsNotBuilt
+            );
+        }
+           
 
         /// <inheritdoc/>
         public void Run<TMainPresenter>()

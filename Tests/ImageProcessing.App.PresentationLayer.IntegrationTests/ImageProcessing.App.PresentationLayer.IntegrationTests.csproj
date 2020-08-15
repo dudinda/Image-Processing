@@ -119,25 +119,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\BitmapExtensions.cs" />
-    <Compile Include="Fakes\Components\AppController\AppControllerFake.cs" />
-    <Compile Include="Fakes\Components\EventAggregator\EventAggregatorFake.cs" />
-    <Compile Include="Fakes\Components\EventAggregator\IEventAggregatorFake.cs" />
-    <Compile Include="Fakes\Components\AppController\IAppControllerFake.cs" />
-    <Compile Include="Fakes\Form\MainFormFake.cs">
+    <Compile Include="TestsComponents\Extensions\BitmapExtensions.cs" />
+    <Compile Include="TestsComponents\Wrappers\Services\EventAggregator\Implementation\EventAggregatorWrapper.cs" />
+    <Compile Include="TestsComponents\Wrappers\Services\EventAggregator\Interface\IEventAggregatorWrapper.cs" />
+    <Compile Include="TestsComponents\Wrappers\Forms\MainFormWrapper.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Fakes\Components\SynchronizationContext\SynchronizationContextFake.cs" />
-    <Compile Include="Fakes\Services\NonBlockDialogServiceFake.cs" />
-    <Compile Include="Frames\Res.Designer.cs">
+    <Compile Include="TestsComponents\Wrappers\Services\SynchronizationContext\SynchronizationContextWrapper.cs" />
+    <Compile Include="TestsComponents\Wrappers\Services\NonBlockDialog\NonBlockDialogServiceWrapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestsStartups\MainPresenterTestStartup.cs" />
+    <Compile Include="TestsComponents\Services\IManualResetEventService.cs" />
+    <Compile Include="TestsComponents\Services\ManualResetEventService.cs" />
+    <Compile Include="TestResources\Res.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Res.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MainPresenterTestStartup.cs" />
-    <Compile Include="Services\IManualResetEventService.cs" />
-    <Compile Include="Services\ManualResetEventService.cs" />
     <Compile Include="Tests\MainPresenterTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -179,16 +177,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\1920x1080frame.jpg" />
-    <Content Include="Resources\2560x1440frame.jpg" />
+    <Content Include="TestResources\Static\1920x1080frame.jpg" />
+    <Content Include="TestResources\Static\2560x1440frame.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Frames\Res.resx">
+    <EmbeddedResource Include="TestResources\Res.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Res.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

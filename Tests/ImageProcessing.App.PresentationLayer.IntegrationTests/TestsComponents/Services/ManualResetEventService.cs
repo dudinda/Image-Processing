@@ -8,9 +8,6 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Services
             = new ManualResetEvent(false);
 
         public void Dispose()
-        {
-            Event.Dispose();
-            Event = new ManualResetEvent(false);
-        }
+            => Event.Dispose();
     }
 }

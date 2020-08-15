@@ -2,7 +2,7 @@ using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components
 {
-    internal interface IEventAggregatorFake : IEventAggregator
+    internal interface IEventAggregatorWrapper : IEventAggregator
     {
 
     }

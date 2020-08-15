@@ -1,7 +1,6 @@
 using System;
 using System.Drawing;
 using System.Threading;
-using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
@@ -9,10 +8,8 @@ using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Main;
 using ImageProcessing.App.PresentationLayer.UnitTests;
 using ImageProcessing.App.PresentationLayer.UnitTests.Extensions;
-using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
-using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form;
-using ImageProcessing.App.PresentationLayer.UnitTests.Frames;
 using ImageProcessing.App.PresentationLayer.UnitTests.Services;
+using ImageProcessing.App.PresentationLayer.UnitTests.TestResources;
 using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Main;
 using ImageProcessing.Microkernel.DI.State.IsNotBuilt;
@@ -140,14 +137,11 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
                 Arg.Is<object>(arg => arg == _form),
                 Arg.Is<ReplaceImageEventArgs>(arg => arg.Container == container));
         }
-
-        
-
+       
         [TearDown]
         public void Dispose()
         {
             AppLifecycle.Exit();
-            AppLifecycle.State = new AppIsNotBuilt();
         }
     }
 }
