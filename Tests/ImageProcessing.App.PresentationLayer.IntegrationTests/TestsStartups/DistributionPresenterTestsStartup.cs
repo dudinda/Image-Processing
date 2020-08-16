@@ -2,15 +2,13 @@ using ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents.Ext
 using ImageProcessing.Microkernel.AppConfig;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
-namespace ImageProcessing.App.PresentationLayer.UnitTests
+namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsStartups
 {
-    internal sealed class MainPresenterTestStartup : IStartup
+    internal sealed class DistributionPresenterTestsStartup : IStartup
     {
         public void Build(IDependencyResolution builder)
         {
             builder.BindMocksForMainPresenter();
-            builder.BindMocksForRgbPresenter();
-            builder.BindMocksForConvolutionPresenter();
             builder.BindMocksForDistributionPresenter();
         }
     }

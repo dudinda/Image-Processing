@@ -9,8 +9,8 @@
     <ProjectGuid>{917AC26D-ECBD-4968-83D0-4D29B692D8B9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ImageProcessing.App.PresentationLayer.UnitTests</RootNamespace>
-    <AssemblyName>ImageProcessing.App.PresentationLayer.UnitTests</AssemblyName>
+    <RootNamespace>ImageProcessing.App.PresentationLayer.IntegrationTests</RootNamespace>
+    <AssemblyName>ImageProcessing.App.PresentationLayer.IntegrationTests</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -120,7 +120,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestsComponents\Extensions\BitmapExtensions.cs" />
+    <Compile Include="TestsComponents\Extensions\DependencyResolutionExtensions.cs" />
+    <Compile Include="TestsComponents\Wrappers\Forms\ConvolutionFormWrapper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestsComponents\Wrappers\Forms\DistributionFormWrapper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestsComponents\Wrappers\Forms\RgbFormWrapper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestsComponents\Wrappers\Presenters\ConvolutionPresenterWrapper.cs" />
+    <Compile Include="TestsComponents\Wrappers\Presenters\DistributionPresenterWrapper.cs" />
     <Compile Include="TestsComponents\Wrappers\Presenters\MainPresenterWrapper.cs" />
+    <Compile Include="TestsComponents\Wrappers\Presenters\RgbPresenterWrapper.cs" />
     <Compile Include="TestsComponents\Wrappers\Services\EventAggregator\Implementation\EventAggregatorWrapper.cs" />
     <Compile Include="TestsComponents\Wrappers\Services\EventAggregator\Interface\IEventAggregatorWrapper.cs" />
     <Compile Include="TestsComponents\Wrappers\Forms\MainFormWrapper.cs">
@@ -129,6 +142,9 @@
     <Compile Include="TestsComponents\Wrappers\Services\SynchronizationContext\SynchronizationContextWrapper.cs" />
     <Compile Include="TestsComponents\Wrappers\Services\NonBlockDialog\NonBlockDialogServiceWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestsStartups\ConvolutionPresenterTestsStartup.cs" />
+    <Compile Include="TestsStartups\DistributionPresenterTestsStartup.cs" />
+    <Compile Include="TestsStartups\RgbPresenterTestsStartups.cs" />
     <Compile Include="TestsStartups\MainPresenterTestStartup.cs" />
     <Compile Include="TestsComponents\Services\IManualResetEventService.cs" />
     <Compile Include="TestsComponents\Services\ManualResetEventService.cs" />

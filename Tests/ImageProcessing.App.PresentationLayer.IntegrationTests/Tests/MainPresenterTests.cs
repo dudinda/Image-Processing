@@ -4,12 +4,21 @@ using System.Threading;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Menu;
+using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Show;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.TestResources;
+using ImageProcessing.App.PresentationLayer.Presenters.Convolution;
+using ImageProcessing.App.PresentationLayer.Presenters.Distribution;
+using ImageProcessing.App.PresentationLayer.Presenters.Rgb;
 using ImageProcessing.App.PresentationLayer.UnitTests;
 using ImageProcessing.App.PresentationLayer.UnitTests.Extensions;
 using ImageProcessing.App.PresentationLayer.UnitTests.Services;
-using ImageProcessing.App.PresentationLayer.UnitTests.TestResources;
 using ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Presenters;
+using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
+using ImageProcessing.App.PresentationLayer.ViewModel.Distribution;
+using ImageProcessing.App.PresentationLayer.ViewModel.Rgb;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline;
 using ImageProcessing.App.UILayer.FormExposers.Main;
 using ImageProcessing.Microkernel.DIAdapter.Code.Enums;
@@ -121,6 +130,58 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
             _presenter.Dialog.Received().NonBlockSaveAs(
                 Arg.Is<Bitmap>(arg => arg.SameAs((Bitmap)_form.SrcImageCopy)),
                 Arg.Any<string>());           
+        }
+
+
+        [Test]
+        [Timeout(5000)]
+        public void OpenRgbMenuClick()
+        {
+            _form.OpenFileMenu.PerformClick();
+
+            _synchronizer.Event.WaitOne();
+            _synchronizer.Event.Reset();
+
+            _form.RgbMenuButton.PerformClick();
+
+            _synchronizer.Event.WaitOne();
+
+            _presenter.OnEventHandler(Arg.Is<object>(arg => arg == _form),
+                 Arg.Any<ShowRgbMenuEventArgs>());
+        }
+
+        [Test]
+        [Timeout(5000)]
+        public void OpenConvolutionMenuClick()
+        {
+            _form.OpenFileMenu.PerformClick();
+
+            _synchronizer.Event.WaitOne();
+            _synchronizer.Event.Reset();
+
+            _form.ConvolutionMenuButton.PerformClick();
+
+            _synchronizer.Event.WaitOne();
+
+            _presenter.OnEventHandler(Arg.Is<object>(arg => arg == _form),
+                Arg.Any<ShowConvolutionMenuEventArgs>());
+        }
+
+        [Test]
+        [Timeout(5000)]
+        public void OpenDistributionMenuClick()
+        {
+            _form.OpenFileMenu.PerformClick();
+
+            _synchronizer.Event.WaitOne();
+            _synchronizer.Event.Reset();
+
+            _form.DistributionMenuButton.PerformClick();
+
+            _synchronizer.Event.WaitOne();
+
+            _presenter.OnEventHandler(Arg.Is<object>(arg => arg == _form),
+               Arg.Any<ShowDistributionMenuEventArgs>());
         }
 
         [Test]

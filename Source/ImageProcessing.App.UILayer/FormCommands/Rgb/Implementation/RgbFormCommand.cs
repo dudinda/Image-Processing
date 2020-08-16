@@ -11,7 +11,7 @@ using static ImageProcessing.App.CommonLayer.Enums.RgbColors;
 
 namespace ImageProcessing.App.UILayer.FormCommands.Rgb.Implementation
 {
-    internal sealed class RgbFormCommand : IRgbFormCommand
+    internal class RgbFormCommand : IRgbFormCommand
     {
         private static readonly Dictionary<string, CommandAttribute>
           _command = typeof(RgbFormCommand).GetCommands();

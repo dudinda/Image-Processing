@@ -184,8 +184,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         ImageContainer.Source
                     ).ConfigureAwait(true);
 
-                    Controller.Run<ConvolutionPresenter, ConvolutionFilterViewModel>(
-                        new ConvolutionFilterViewModel(copy));
+                    Controller.Run<ConvolutionPresenter, ConvolutionViewModel>(
+                        new ConvolutionViewModel(copy));
                 }
             }
             catch (Exception ex)

@@ -10,7 +10,7 @@ using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 
 namespace ImageProcessing.App.UILayer.FormEventBinders.Convolution.Implementation
 {
-    internal sealed class ConvolutionFormEventBinder : IConvolutionFormEventBinder
+    internal class ConvolutionFormEventBinder : IConvolutionFormEventBinder
     {
         private static readonly Dictionary<string, CommandAttribute>
                _cmdCommand = typeof(ConvolutionFormEventBinder).GetCommands();

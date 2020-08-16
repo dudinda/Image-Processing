@@ -1,7 +1,6 @@
 using System;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Tests;
 using ImageProcessing.App.PresentationLayer.UnitTests.Services;
 using ImageProcessing.App.UILayer.Form.Main;
 using ImageProcessing.App.UILayer.FormCommands.Main.Interface;
@@ -10,11 +9,11 @@ using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
 {
-    internal partial class MainFormFake : MainForm
+    internal partial class MainFormWrapper : MainForm
     {
         private IManualResetEventService _synchronizer;
 
-        public MainFormFake(
+        public MainFormWrapper(
             IManualResetEventService synchronizer,
             IAppController controller,
             IMainFormEventBinder binder,

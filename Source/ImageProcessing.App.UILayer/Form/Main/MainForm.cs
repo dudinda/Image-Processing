@@ -272,11 +272,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
         public virtual (Bitmap, ImageContainer) TryUndoRedo(UndoRedoAction action)
             => Read<(Bitmap, ImageContainer)>(() => _command.Function(action.ToString()));
 
-        public virtual void MarkIfDefault(ImageContainer to, Bitmap bmp)
-        {
-            
-        }
-
         /// <summary>
         /// Used by the generated <see cref="Dispose(bool)"/> call.
         /// Can be used by a DI container in a singleton scope on Release();

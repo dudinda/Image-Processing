@@ -10,7 +10,7 @@ using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 
 namespace ImageProcessing.App.UILayer.FormEventBinders.Distribution.Implementation
 {
-    internal sealed class DistributionFormEventBinder : IDistributionFormEventBinder
+    internal class DistributionFormEventBinder : IDistributionFormEventBinder
     {
         private readonly IEventAggregator _aggregator;
 

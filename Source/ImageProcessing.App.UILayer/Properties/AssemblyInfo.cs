@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
-[assembly: InternalsVisibleTo("ImageProcessing.App.PresentationLayer.UnitTests")]
+[assembly: InternalsVisibleTo("ImageProcessing.App.PresentationLayer.IntegrationTests")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]

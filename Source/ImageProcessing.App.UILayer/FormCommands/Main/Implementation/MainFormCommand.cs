@@ -180,7 +180,7 @@ namespace ImageProcessing.App.UILayer.FormCommands.Main.Implementation
         public virtual void Procedure(string command, params object[] args)
             => _command[command].Method.Invoke(this, args);
 
-        public virtual void OnElementExpose(IMainFormExposer exposer)
+        public virtual  void OnElementExpose(IMainFormExposer exposer)
             => _exposer = exposer;
     }
 }

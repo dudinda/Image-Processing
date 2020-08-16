@@ -2,9 +2,9 @@ using System.Drawing;
 
 namespace ImageProcessing.App.PresentationLayer.ViewModel.Convolution
 {
-    internal sealed class ConvolutionFilterViewModel
+    internal sealed class ConvolutionViewModel
     {
-        public ConvolutionFilterViewModel(Bitmap source)
+        public ConvolutionViewModel(Bitmap source)
             => Source = source;
        
         public Bitmap Source { get; }

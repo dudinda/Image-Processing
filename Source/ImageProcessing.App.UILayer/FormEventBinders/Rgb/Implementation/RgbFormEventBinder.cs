@@ -8,7 +8,7 @@ using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 
 namespace ImageProcessing.App.UILayer.FormEventBinders.Rgb.Implementation
 {
-    internal sealed class RgbFormEventBinder : IRgbFormEventBinder
+    internal class RgbFormEventBinder : IRgbFormEventBinder
     {
         private readonly IEventAggregator _aggregator;
 

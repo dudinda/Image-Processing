@@ -36,9 +36,6 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
 
         private readonly MainPresenter _presenter;
 
-        public IAppController Controller
-            => base.Controller;
-
         public ICacheService<Bitmap> Cache { get; }
         public INonBlockDialogService Dialog { get; }
         public IAwaitablePipeline Pipeline { get; }
