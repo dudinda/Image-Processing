@@ -4,7 +4,7 @@ using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsStartups
 {
-    internal sealed class ConvolutionPresenterTestsStartup : IStartup
+    internal sealed class ConvolutionPresenterTestStartup : IStartup
     {
         public void Build(IDependencyResolution builder)
         {

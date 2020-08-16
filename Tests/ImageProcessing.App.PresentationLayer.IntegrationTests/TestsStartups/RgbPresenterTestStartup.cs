@@ -4,7 +4,7 @@ using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsStartups
 {
-    internal sealed class RgbPresenterTestsStartups : IStartup
+    internal sealed class RgbPresenterTestStartup : IStartup
     {
         public void Build(IDependencyResolution builder)
         {

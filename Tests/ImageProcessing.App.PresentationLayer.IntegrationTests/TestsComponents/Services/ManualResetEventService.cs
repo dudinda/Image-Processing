@@ -4,8 +4,8 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Services
 {
     internal sealed class ManualResetEventService : IManualResetEventService
     {
-        private readonly ManualResetEvent _event
-            = new ManualResetEvent(false);
+        private readonly AutoResetEvent _event
+            = new AutoResetEvent(false);
 
         public void WaitSignal()
             => _event.WaitOne();
@@ -13,10 +13,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Services
         public void Signal()
             => _event.Set();
 
-        public void Reset()
-            => _event.Reset();
-
         public void Dispose()
-            => _event.Dispose();
+            => _event.Close();
     }
 }

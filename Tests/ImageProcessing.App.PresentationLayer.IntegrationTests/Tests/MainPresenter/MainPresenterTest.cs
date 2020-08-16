@@ -105,7 +105,6 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
             _form.OpenFileMenu.PerformClick();
 
             _synchronizer.WaitSignal();
-            _synchronizer.Reset();
 
             _form.SaveAsMenu.PerformClick();
 
@@ -128,7 +127,6 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
             _form.OpenFileMenu.PerformClick();
 
             _synchronizer.WaitSignal();
-            _synchronizer.Reset();
 
             _form.RgbMenuButton.PerformClick();
 
@@ -145,7 +143,6 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
             _form.OpenFileMenu.PerformClick();
 
             _synchronizer.WaitSignal();
-            _synchronizer.Reset();
 
             _form.ConvolutionMenuButton.PerformClick();
 
@@ -162,7 +159,6 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
             _form.OpenFileMenu.PerformClick();
 
             _synchronizer.WaitSignal();
-            _synchronizer.Reset();
 
             _form.DistributionMenuButton.PerformClick();
 
@@ -174,26 +170,11 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
 
         [Test]
         [Timeout(5000)]
-        public void FileSaveMenuClick()
-        {
-            _form.OpenFileMenu.PerformClick();
-            _synchronizer.WaitSignal();
-
-            _form.SaveFileMenu.PerformClick();
-
-            _presenter.Received().OnEventHandler(
-                Arg.Is<object>(arg => arg == _form),
-                Arg.Any<SaveWithoutFileDialogEventArgs>());
-        }
-
-        [Test]
-        [Timeout(5000)]
         public void ReplaceDestinationImageClick()
         {
             _form.OpenFileMenu.PerformClick();
 
             _synchronizer.WaitSignal();
-            _synchronizer.Reset();
 
             _form.ReplaceDstBySrcButton.PerformClick();
 
@@ -215,10 +196,13 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         }
 
         [Test]
+        [Timeout(5000)]
         public void ReplaceSourceImageClick()
         {
             _form.ReplaceSrcByDstButton.Enabled = true;
             _form.ReplaceSrcByDstButton.PerformClick();
+
+            _synchronizer.WaitSignal();
 
             var container = ImageContainer.Destination;
 
@@ -226,9 +210,5 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
                 Arg.Is<object>(arg => arg == _form),
                 Arg.Is<ReplaceImageEventArgs>(arg => arg.Container == container));
         }
-
-        [TearDown]
-        public void ResetSynchronizer()
-            => _synchronizer.Reset();
     }
 }

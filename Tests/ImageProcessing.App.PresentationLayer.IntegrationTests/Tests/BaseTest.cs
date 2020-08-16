@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
 {
     [SetUpFixture]
-    internal abstract class BaseTest<TStartup> 
+    internal abstract class BaseTest<TStartup> : IDisposable
         where TStartup : class, IStartup
     {
         [OneTimeSetUp]
@@ -19,8 +19,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
             BeforeStart();
         }
 
-        [OneTimeTearDown]
-        public void TearDown()
+        public void Dispose()
         {
             AppLifecycle.Exit();
         }

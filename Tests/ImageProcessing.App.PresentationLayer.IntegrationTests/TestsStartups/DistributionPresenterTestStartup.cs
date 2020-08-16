@@ -4,7 +4,7 @@ using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsStartups
 {
-    internal sealed class DistributionPresenterTestsStartup : IStartup
+    internal sealed class DistributionPresenterTestStartup : IStartup
     {
         public void Build(IDependencyResolution builder)
         {
