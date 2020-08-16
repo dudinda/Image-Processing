@@ -49,10 +49,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
             => _form.GetSelectedColors(color);
 
         public virtual void Show()
-        {
-            _synchronizer.Event.Set();
-        }
-           
+            => _synchronizer.Signal();
 
         public virtual void Tooltip(string message)
             => _form.Tooltip(message);

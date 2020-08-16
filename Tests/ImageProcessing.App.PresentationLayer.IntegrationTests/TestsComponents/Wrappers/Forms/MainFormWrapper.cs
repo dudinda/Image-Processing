@@ -32,7 +32,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
         public override void Refresh(ImageContainer container)
         {
             base.Refresh(container);
-            _synchronizer.Event.Set();
+            _synchronizer.Signal();
         }
 
         public override void Show()

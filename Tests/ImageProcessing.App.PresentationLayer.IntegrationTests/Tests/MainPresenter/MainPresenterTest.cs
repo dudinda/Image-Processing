@@ -1,4 +1,3 @@
-using System;
 using System.Drawing;
 using System.Threading;
 
@@ -9,19 +8,12 @@ using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Menu;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Show;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.TestResources;
-using ImageProcessing.App.PresentationLayer.Presenters.Convolution;
-using ImageProcessing.App.PresentationLayer.Presenters.Distribution;
-using ImageProcessing.App.PresentationLayer.Presenters.Rgb;
 using ImageProcessing.App.PresentationLayer.UnitTests;
 using ImageProcessing.App.PresentationLayer.UnitTests.Extensions;
 using ImageProcessing.App.PresentationLayer.UnitTests.Services;
 using ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Presenters;
-using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
-using ImageProcessing.App.PresentationLayer.ViewModel.Distribution;
-using ImageProcessing.App.PresentationLayer.ViewModel.Rgb;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline;
 using ImageProcessing.App.UILayer.FormExposers.Main;
-using ImageProcessing.Microkernel.DIAdapter.Code.Enums;
 using ImageProcessing.Microkernel.EntryPoint;
 
 using NSubstitute;
@@ -32,17 +24,14 @@ using NUnit.Framework;
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
 {
     [TestFixture]
-    public class MainPresenterTests : IDisposable
+    internal sealed class MainPresenterTest : BaseTest<MainPresenterTestStartup>
     {
         private IManualResetEventService _synchronizer;
         private MainPresenterWrapper _presenter;
         private IMainFormExposer _form;
 
-        [SetUp]
-        public void SetUp()
+        protected override void BeforeStart()
         {
-            AppLifecycle.Build<MainPresenterTestStartup>(DiContainer.Ninject);
-
             _synchronizer = AppLifecycle.Controller.IoC.Resolve<IManualResetEventService>();
             _form = AppLifecycle.Controller.IoC.Resolve<IMainFormExposer>();
             _presenter = AppLifecycle.Controller.IoC.Resolve<MainPresenterWrapper>();
@@ -50,14 +39,13 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
             _presenter.Run();
         }
 
-
         [Test]
         [Timeout(5000)]
         public void FileOpenMenuClick()
         {
             _form.OpenFileMenu.PerformClick();
 
-           _synchronizer.Event.WaitOne();
+            _synchronizer.WaitSignal();
 
             _presenter.Received().OnEventHandler(
                 Arg.Is<object>(arg => arg == _form),
@@ -78,7 +66,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         {
             _form.OpenFileMenu.PerformClick();
 
-            _synchronizer.Event.WaitOne();
+            _synchronizer.WaitSignal();
 
             _form.Received().SetCursor(Arg.Is<CursorType>(arg => arg == CursorType.Wait));
             _presenter.Pipeline.Received().Register(Arg.Any<IPipelineBlock>());
@@ -116,12 +104,12 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         {
             _form.OpenFileMenu.PerformClick();
 
-            _synchronizer.Event.WaitOne();
-            _synchronizer.Event.Reset();
+            _synchronizer.WaitSignal();
+            _synchronizer.Reset();
 
             _form.SaveAsMenu.PerformClick();
 
-            _synchronizer.Event.WaitOne();
+            _synchronizer.WaitSignal();
 
             _presenter.Received().OnEventHandler(
                 Arg.Is<object>(arg => arg == _form),
@@ -139,12 +127,12 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         {
             _form.OpenFileMenu.PerformClick();
 
-            _synchronizer.Event.WaitOne();
-            _synchronizer.Event.Reset();
+            _synchronizer.WaitSignal();
+            _synchronizer.Reset();
 
             _form.RgbMenuButton.PerformClick();
 
-            _synchronizer.Event.WaitOne();
+            _synchronizer.WaitSignal();
 
             _presenter.OnEventHandler(Arg.Is<object>(arg => arg == _form),
                  Arg.Any<ShowRgbMenuEventArgs>());
@@ -156,12 +144,12 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         {
             _form.OpenFileMenu.PerformClick();
 
-            _synchronizer.Event.WaitOne();
-            _synchronizer.Event.Reset();
+            _synchronizer.WaitSignal();
+            _synchronizer.Reset();
 
             _form.ConvolutionMenuButton.PerformClick();
 
-            _synchronizer.Event.WaitOne();
+            _synchronizer.WaitSignal();
 
             _presenter.OnEventHandler(Arg.Is<object>(arg => arg == _form),
                 Arg.Any<ShowConvolutionMenuEventArgs>());
@@ -173,12 +161,12 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         {
             _form.OpenFileMenu.PerformClick();
 
-            _synchronizer.Event.WaitOne();
-            _synchronizer.Event.Reset();
+            _synchronizer.WaitSignal();
+            _synchronizer.Reset();
 
             _form.DistributionMenuButton.PerformClick();
 
-            _synchronizer.Event.WaitOne();
+            _synchronizer.WaitSignal();
 
             _presenter.OnEventHandler(Arg.Is<object>(arg => arg == _form),
                Arg.Any<ShowDistributionMenuEventArgs>());
@@ -189,7 +177,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         public void FileSaveMenuClick()
         {
             _form.OpenFileMenu.PerformClick();
-            _synchronizer.Event.WaitOne();
+            _synchronizer.WaitSignal();
 
             _form.SaveFileMenu.PerformClick();
 
@@ -204,12 +192,12 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         {
             _form.OpenFileMenu.PerformClick();
 
-            _synchronizer.Event.WaitOne();
-            _synchronizer.Event.Reset();
+            _synchronizer.WaitSignal();
+            _synchronizer.Reset();
 
             _form.ReplaceDstBySrcButton.PerformClick();
 
-            _synchronizer.Event.WaitOne();
+            _synchronizer.WaitSignal();
 
             var container = ImageContainer.Source;
 
@@ -238,11 +226,9 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
                 Arg.Is<object>(arg => arg == _form),
                 Arg.Is<ReplaceImageEventArgs>(arg => arg.Container == container));
         }
-       
+
         [TearDown]
-        public void Dispose()
-        {
-            AppLifecycle.Exit();
-        }
+        public void ResetSynchronizer()
+            => _synchronizer.Reset();
     }
 }

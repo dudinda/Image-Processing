@@ -33,9 +33,9 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
        
         public virtual void Dispose()
             => _form.Dispose();
-    
+
         public virtual void Show()
-            => _synchronizer.Event.Set();
+            => _synchronizer.Signal();
 
         public virtual void Tooltip(string message)
             => _form.Tooltip(message);   

@@ -5,6 +5,8 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Services
 {
     internal interface IManualResetEventService : IDisposable
     {
-        ManualResetEvent Event { get; }      
+        void WaitSignal();
+        void Signal();
+        void Reset();
     }
 }

@@ -22,13 +22,9 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Services
         }
 
         public override Task<(Bitmap Image, string Path)> NonBlockOpen(string filters)
-        {
-            return Task.FromResult((Res._1920x1080frame, nameof(Res._1920x1080frame)));
-        }
+            => Task.FromResult((Res._1920x1080frame, nameof(Res._1920x1080frame)));
 
         public async override Task NonBlockSaveAs(Bitmap src, string filters)
-        {
-            _synchronizer.Event.Set();
-        }
+            => _synchronizer.Signal();
     }
 }

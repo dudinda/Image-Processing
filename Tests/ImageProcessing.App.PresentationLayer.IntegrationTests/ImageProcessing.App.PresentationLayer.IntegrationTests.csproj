@@ -153,7 +153,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Res.resx</DependentUpon>
     </Compile>
-    <Compile Include="Tests\MainPresenterTests.cs" />
+    <Compile Include="Tests\BaseTest.cs" />
+    <Compile Include="Tests\MainPresenter\MainPresenterTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Source\ImageProcessing.App.CommonLayer\ImageProcessing.App.CommonLayer.csproj">

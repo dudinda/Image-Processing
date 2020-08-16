@@ -36,7 +36,7 @@ namespace ImageProcessing.EntryPoint.UnitTests.Tests
 
         public void Dispose()
         {
-            AppLifecycle.Controller.Dispose();
+            AppLifecycle.Exit();
         }
     }
 }
