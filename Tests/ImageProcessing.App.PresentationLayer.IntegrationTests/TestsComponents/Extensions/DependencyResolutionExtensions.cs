@@ -55,21 +55,21 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
 {
     internal static class DependencyResolutionExtensions
     {
-        public static (IAppController, IEventAggregatorWrapper, IManualResetEventService) BindMocksForMvp(this IDependencyResolution builder)
+        public static (IAppController, IEventAggregatorWrapper, IAutoResetEventService) BindMocksForMvp(this IDependencyResolution builder)
         {
             if(!builder.IsRegistered<IEventAggregatorWrapper>())
             {
                 builder.RegisterSingleton<IEventAggregatorWrapper, EventAggregatorWrapper>();
             }
 
-            if(!builder.IsRegistered<IManualResetEventService>())
+            if(!builder.IsRegistered<IAutoResetEventService>())
             {
-                builder.RegisterSingleton<IManualResetEventService, ManualResetEventService>();
+                builder.RegisterSingleton<IAutoResetEventService, AutoResetEventService>();
             }
   
             var controller = builder.Resolve<IAppController>();
             var aggregator = builder.Resolve<IEventAggregatorWrapper>();
-            var synchronizer = builder.Resolve<IManualResetEventService>();
+            var synchronizer = builder.Resolve<IAutoResetEventService>();
 
             controller.GetType().GetProperty(nameof(controller.Aggregator))
                 .SetValue(controller, aggregator);

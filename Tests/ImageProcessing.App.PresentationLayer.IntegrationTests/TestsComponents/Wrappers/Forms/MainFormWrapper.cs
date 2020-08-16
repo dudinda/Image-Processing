@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.Contracts;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.PresentationLayer.UnitTests.Services;
@@ -11,10 +12,10 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
 {
     internal partial class MainFormWrapper : MainForm
     {
-        private IManualResetEventService _synchronizer;
+        private IAutoResetEventService _synchronizer;
 
         public MainFormWrapper(
-            IManualResetEventService synchronizer,
+            IAutoResetEventService synchronizer,
             IAppController controller,
             IMainFormEventBinder binder,
             IMainFormCommand command)
@@ -29,15 +30,19 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
         protected override void Write(Action action)
             => action();
 
-        public override void Refresh(ImageContainer container)
-        {
-            base.Refresh(container);
-            _synchronizer.Signal();
-        }
-
         public override void Show()
         {
 
+        }
+
+        public override void SetCursor(CursorType cursor)
+        {
+            if(cursor == CursorType.Default)
+            {
+                _synchronizer.Signal();
+            }
+
+            base.SetCursor(cursor);
         }
     }
 }

@@ -11,10 +11,10 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
 {
     internal class ConvolutionFormWrapper : IConvolutionFormExposer
     {
-        private readonly IManualResetEventService _synchronizer;
+        private readonly IAutoResetEventService _synchronizer;
         private readonly ConvolutionForm _form;
         public ConvolutionFormWrapper(
-          IManualResetEventService synchronzer,
+          IAutoResetEventService synchronzer,
           IAppController controller,
           IConvolutionFormEventBinder binder) 
         {

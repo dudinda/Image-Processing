@@ -8,6 +8,7 @@ using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Menu;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Show;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.TestResources;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents.Extensions;
 using ImageProcessing.App.PresentationLayer.UnitTests;
 using ImageProcessing.App.PresentationLayer.UnitTests.Extensions;
 using ImageProcessing.App.PresentationLayer.UnitTests.Services;
@@ -24,15 +25,18 @@ using NUnit.Framework;
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
 {
     [TestFixture]
+#if !DEBUG
+    [Timeout(5000)]
+#endif
     internal sealed class MainPresenterTest : BaseTest<MainPresenterTestStartup>
     {
-        private IManualResetEventService _synchronizer;
+        private IAutoResetEventService _synchronizer;
         private MainPresenterWrapper _presenter;
         private IMainFormExposer _form;
 
         protected override void BeforeStart()
         {
-            _synchronizer = AppLifecycle.Controller.IoC.Resolve<IManualResetEventService>();
+            _synchronizer = AppLifecycle.Controller.IoC.Resolve<IAutoResetEventService>();
             _form = AppLifecycle.Controller.IoC.Resolve<IMainFormExposer>();
             _presenter = AppLifecycle.Controller.IoC.Resolve<MainPresenterWrapper>();
 
@@ -40,12 +44,9 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         }
 
         [Test]
-        [Timeout(5000)]
         public void FileOpenMenuClick()
         {
-            _form.OpenFileMenu.PerformClick();
-
-            _synchronizer.WaitSignal();
+            _form.OpenFileMenu.ClickAndWaitSignal(_synchronizer);
 
             _presenter.Received().OnEventHandler(
                 Arg.Is<object>(arg => arg == _form),
@@ -61,12 +62,9 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
 
 
         [Test]
-        [Timeout(5000)]
         public void RendererRecieveBlockTest()
         {
-            _form.OpenFileMenu.PerformClick();
-
-            _synchronizer.WaitSignal();
+            _form.OpenFileMenu.ClickAndWaitSignal(_synchronizer);
 
             _form.Received().SetCursor(Arg.Is<CursorType>(arg => arg == CursorType.Wait));
             _presenter.Pipeline.Received().Register(Arg.Any<IPipelineBlock>());
@@ -99,16 +97,10 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         }
 
         [Test]
-        [Timeout(5000)]
         public void FileSaveAsMenuClick()
         {
-            _form.OpenFileMenu.PerformClick();
-
-            _synchronizer.WaitSignal();
-
-            _form.SaveAsMenu.PerformClick();
-
-            _synchronizer.WaitSignal();
+            _form.OpenFileMenu.ClickAndWaitSignal(_synchronizer);
+            _form.SaveAsMenu.ClickAndWaitSignal(_synchronizer);
 
             _presenter.Received().OnEventHandler(
                 Arg.Is<object>(arg => arg == _form),
@@ -121,64 +113,52 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
 
 
         [Test]
-        [Timeout(5000)]
         public void OpenRgbMenuClick()
         {
-            _form.OpenFileMenu.PerformClick();
-
-            _synchronizer.WaitSignal();
-
-            _form.RgbMenuButton.PerformClick();
-
-            _synchronizer.WaitSignal();
+            _form.OpenFileMenu.ClickAndWaitSignal(_synchronizer);
+            _form.RgbMenuButton.ClickAndWaitSignal(_synchronizer);
 
             _presenter.OnEventHandler(Arg.Is<object>(arg => arg == _form),
                  Arg.Any<ShowRgbMenuEventArgs>());
         }
 
         [Test]
-        [Timeout(5000)]
         public void OpenConvolutionMenuClick()
         {
-            _form.OpenFileMenu.PerformClick();
-
-            _synchronizer.WaitSignal();
-
-            _form.ConvolutionMenuButton.PerformClick();
-
-            _synchronizer.WaitSignal();
+            _form.OpenFileMenu.ClickAndWaitSignal(_synchronizer);
+            _form.ConvolutionMenuButton.ClickAndWaitSignal(_synchronizer);
 
             _presenter.OnEventHandler(Arg.Is<object>(arg => arg == _form),
                 Arg.Any<ShowConvolutionMenuEventArgs>());
         }
 
         [Test]
-        [Timeout(5000)]
         public void OpenDistributionMenuClick()
         {
-            _form.OpenFileMenu.PerformClick();
-
-            _synchronizer.WaitSignal();
-
-            _form.DistributionMenuButton.PerformClick();
-
-            _synchronizer.WaitSignal();
+            _form.OpenFileMenu.ClickAndWaitSignal(_synchronizer);
+            _form.DistributionMenuButton.ClickAndWaitSignal(_synchronizer);
 
             _presenter.OnEventHandler(Arg.Is<object>(arg => arg == _form),
                Arg.Any<ShowDistributionMenuEventArgs>());
         }
 
         [Test]
-        [Timeout(5000)]
+
+        public void FileSaveMenuClick()
+        {
+            _form.OpenFileMenu.ClickAndWaitSignal(_synchronizer);
+            _form.SaveFileMenu.ClickAndWaitSignal(_synchronizer);
+
+            _presenter.Received().OnEventHandler(
+                Arg.Is<object>(arg => arg == _form),
+                Arg.Any<SaveWithoutFileDialogEventArgs>());
+        }
+
+        [Test]
         public void ReplaceDestinationImageClick()
         {
-            _form.OpenFileMenu.PerformClick();
-
-            _synchronizer.WaitSignal();
-
-            _form.ReplaceDstBySrcButton.PerformClick();
-
-            _synchronizer.WaitSignal();
+            _form.OpenFileMenu.ClickAndWaitSignal(_synchronizer);
+            _form.ReplaceDstBySrcButton.ClickAndWaitSignal(_synchronizer);
 
             var container = ImageContainer.Source;
 
@@ -196,15 +176,25 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         }
 
         [Test]
-        [Timeout(5000)]
         public void ReplaceSourceImageClick()
         {
-            _form.ReplaceSrcByDstButton.Enabled = true;
-            _form.ReplaceSrcByDstButton.PerformClick();
+            _form.OpenFileMenu.ClickAndWaitSignal(_synchronizer);
+            _form.ReplaceDstBySrcButton.ClickAndWaitSignal(_synchronizer);
 
-            _synchronizer.WaitSignal();
+            var container = ImageContainer.Source;
 
-            var container = ImageContainer.Destination;
+            _form.SetImage(container, Res._2560x1440frame);
+            _form.SetImageCopy(container, Res._2560x1440frame);
+
+            _form.ReplaceSrcByDstButton.ClickAndWaitSignal(_synchronizer);
+
+            var destination = _form.DstImageCopy as Bitmap;
+            var source = _form.SrcImageCopy as Bitmap;
+
+            Assert.IsTrue(source != null);
+            Assert.IsTrue(destination != null);
+            Assert.IsTrue(_form.DestinationImage != null);
+            Assert.IsTrue(source.SameAs(destination));
 
             _presenter.Received().OnEventHandler(
                 Arg.Is<object>(arg => arg == _form),

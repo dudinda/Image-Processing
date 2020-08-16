@@ -11,10 +11,10 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Services
 {
     internal class NonBlockDialogServiceWrapper : NonBlockDialogService
     {
-        private readonly IManualResetEventService _synchronizer;
+        private readonly IAutoResetEventService _synchronizer;
 
         public NonBlockDialogServiceWrapper(
-            IManualResetEventService synchronizer,
+            IAutoResetEventService synchronizer,
             IFileDialogService service,
             IStaTaskService staService) : base(service, staService)
         {

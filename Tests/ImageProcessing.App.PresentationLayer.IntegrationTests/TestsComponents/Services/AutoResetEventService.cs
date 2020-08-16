@@ -2,7 +2,7 @@ using System.Threading;
 
 namespace ImageProcessing.App.PresentationLayer.UnitTests.Services
 {
-    internal sealed class ManualResetEventService : IManualResetEventService
+    internal sealed class AutoResetEventService : IAutoResetEventService
     {
         private readonly AutoResetEvent _event
             = new AutoResetEvent(false);

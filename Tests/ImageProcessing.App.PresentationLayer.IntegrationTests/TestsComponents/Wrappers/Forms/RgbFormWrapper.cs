@@ -12,10 +12,10 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
 {
     internal class RgbFormWrapper : IRgbFormExposer
     {
-        private readonly IManualResetEventService _synchronizer;
+        private readonly IAutoResetEventService _synchronizer;
         private readonly RgbForm _form;
         public RgbFormWrapper(
-            IManualResetEventService synchronizer,
+            IAutoResetEventService synchronizer,
             IAppController controller,
             IRgbFormEventBinder binder,
             IRgbFormCommand command)

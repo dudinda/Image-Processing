@@ -120,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestsComponents\Extensions\BitmapExtensions.cs" />
+    <Compile Include="TestsComponents\Extensions\ButtonExtensions.cs" />
     <Compile Include="TestsComponents\Extensions\DependencyResolutionExtensions.cs" />
     <Compile Include="TestsComponents\Wrappers\Forms\ConvolutionFormWrapper.cs">
       <SubType>Form</SubType>
@@ -146,8 +147,8 @@
     <Compile Include="TestsStartups\DistributionPresenterTestStartup.cs" />
     <Compile Include="TestsStartups\RgbPresenterTestStartup.cs" />
     <Compile Include="TestsStartups\MainPresenterTestStartup.cs" />
-    <Compile Include="TestsComponents\Services\IManualResetEventService.cs" />
-    <Compile Include="TestsComponents\Services\ManualResetEventService.cs" />
+    <Compile Include="TestsComponents\Services\IAutoResetEventService.cs" />
+    <Compile Include="TestsComponents\Services\AutoResetEventService.cs" />
     <Compile Include="TestResources\Res.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

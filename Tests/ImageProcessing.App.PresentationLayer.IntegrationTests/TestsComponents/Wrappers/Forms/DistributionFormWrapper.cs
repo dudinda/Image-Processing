@@ -16,11 +16,11 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
 {
     internal class DistributionFormWrapper : IDistributionFormExposer
     {
-        private readonly IManualResetEventService _synchronizer;
+        private readonly IAutoResetEventService _synchronizer;
         private readonly DistributionForm _form;
 
         public DistributionFormWrapper(
-           IManualResetEventService synchronizer,
+           IAutoResetEventService synchronizer,
            IAppController controller,
            IDistributionFormEventBinder binder) 
         {
