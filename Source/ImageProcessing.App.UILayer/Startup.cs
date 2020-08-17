@@ -67,8 +67,16 @@ using ImageProcessing.App.UILayer.Form.Histogram;
 using ImageProcessing.App.UILayer.Form.Main;
 using ImageProcessing.App.UILayer.Form.QualityMeasure;
 using ImageProcessing.App.UILayer.Form.Rgb;
+using ImageProcessing.App.UILayer.FormCommands.Main;
+using ImageProcessing.App.UILayer.FormCommands.Main.Container.Destination.Implementation;
+using ImageProcessing.App.UILayer.FormCommands.Main.Container.Destination.Interface;
+using ImageProcessing.App.UILayer.FormCommands.Main.Container.Source.Implementation;
+using ImageProcessing.App.UILayer.FormCommands.Main.Container.Source.Interface;
 using ImageProcessing.App.UILayer.FormCommands.Main.Implementation;
-using ImageProcessing.App.UILayer.FormCommands.Main.Interface;
+using ImageProcessing.App.UILayer.FormCommands.Main.UndoRedo.Redo.Implementation;
+using ImageProcessing.App.UILayer.FormCommands.Main.UndoRedo.Redo.Interface;
+using ImageProcessing.App.UILayer.FormCommands.Main.UndoRedo.Undo.Implementation;
+using ImageProcessing.App.UILayer.FormCommands.Main.UndoRedo.Undo.Interface;
 using ImageProcessing.App.UILayer.FormCommands.Rgb.Implementation;
 using ImageProcessing.App.UILayer.FormCommands.Rgb.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Implementation;
@@ -130,6 +138,10 @@ namespace ImageProcessing.App.UILayer
                 .RegisterTransient<IDistributionFormEventBinder, DistributionFormEventBinder>()
                 .RegisterTransient<IMainFormEventBinder, MainFormEventBinder>()
                 .RegisterTransient<IMainFormCommand, MainFormCommand>()
+                .RegisterTransient<IMainFormRedoCommand, MainFormRedoCommand>()
+                .RegisterTransient<IMainFormUndoCommand, MainFormUndoCommand>()
+                .RegisterTransient<IMainFormSourceContainerCommand, MainFormSourceContainerCommand>()
+                .RegisterTransient<IMainFormDestinationContainerCommand, MainFormDestinationContainerCommand>()
                 .RegisterTransient<IRgbFormCommand, RgbFormCommand>();      
         }      
     }

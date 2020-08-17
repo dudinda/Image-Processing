@@ -5,7 +5,7 @@ using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.UILayer.Code.Enums;
 using ImageProcessing.App.UILayer.Control;
-using ImageProcessing.App.UILayer.FormCommands.Main.Interface;
+using ImageProcessing.App.UILayer.FormCommands.Main;
 using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Main;
 using ImageProcessing.App.UILayer.Properties;
@@ -129,7 +129,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
             }
         }
 
-
         /// <inheritdoc/>
         public ToolStripMenuItem SaveAsMenu
             => SaveFileAs;
@@ -179,7 +178,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
             set => SrcImage = value;
         }
            
-
         public Image? DestinationImage
         {
             get => DstImage;
@@ -223,39 +221,39 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
         /// <inheritdoc/>
         public virtual void ResetTrackBarValue(ImageContainer container, int value = 0)
-            => Write(() => _command.Procedure(container.ToString() + nameof(MainViewAction.ResetTrackBar), value));
+            => Write(() => _command.Command(container).ResetTrackBarValue(value));
 
         /// <inheritdoc/>
         public virtual Image ZoomImage(ImageContainer container)
-            => Read<Image>(() => _command.Function(container.ToString() + nameof(MainViewAction.Zoom), null!));
+            => Read<Image>(() => _command.Command(container).ZoomImage());
 
         /// <inheritdoc/>
         public virtual void SetImageToZoom(ImageContainer container, Image image)
-            => Write(() => _command.Procedure(container.ToString() + nameof(MainViewAction.SetToZoom), image) );
+            => Write(() => _command.Command(container).SetZoomImage(image));
 
         /// <inheritdoc/>
         public virtual Image GetImageCopy(ImageContainer container)
-            => Read<Image>(() =>_command.Function(container.ToString() + nameof(MainViewAction.GetCopy)));
+            => Read<Image>(() =>_command.Command(container).GetCopy());
 
         /// <inheritdoc/>
         public virtual void SetImageCopy(ImageContainer container, Image copy)
-            => Write(() => _command.Procedure(container.ToString() + nameof(MainViewAction.SetCopy), copy));
+            => Write(() => _command.Command(container).SetCopy(copy));
 
         /// <inheritdoc/>
         public virtual void SetImage(ImageContainer container, Image image)
-            => Write(() =>_command.Procedure(container.ToString() + nameof(MainViewAction.SetImage), image));
+            => Write(() =>_command.Command(container).SetImage(image));
 
         /// <inheritdoc/>
         public virtual bool ImageIsDefault(ImageContainer container)
-            => Read<bool>(() => _command.Function(container.ToString() + nameof(MainViewAction.ImageIsNull)));
+            => Read<bool>(() => _command.Command(container).ImageIsDefault());
 
         /// <inheritdoc/>
         public virtual void Refresh(ImageContainer container)
-            => Write(() => _command.Procedure(container.ToString() + nameof(MainViewAction.Refresh)));
+            => Write(() => _command.Command(container).Refresh());
 
         /// <inheritdoc/>
         public virtual void SetCursor(CursorType cursor)
-            => Write(() =>_command.Procedure(cursor.ToString()));
+            => Write(() =>_command.SetCursor(cursor));
 
         /// <inheritdoc/>
         public virtual void AddToUndoRedo(ImageContainer to, Bitmap cpy, UndoRedoAction action)
@@ -265,12 +263,12 @@ namespace ImageProcessing.App.UILayer.Form.Main
                 cpy.Tag = nameof(ImageIsDefault);
             }
 
-            Write(() => _command.Procedure(action.ToString() + nameof(MainViewAction.AddToUndoRedo), to, cpy));
+            Write(() => _command.Command(action).Add(to, cpy));
         }
 
         /// <inheritdoc/>
         public virtual (Bitmap, ImageContainer) TryUndoRedo(UndoRedoAction action)
-            => Read<(Bitmap, ImageContainer)>(() => _command.Function(action.ToString()));
+            => Read<(Bitmap, ImageContainer)>(() => _command.Command(action).Pop());
 
         /// <summary>
         /// Used by the generated <see cref="Dispose(bool)"/> call.

@@ -34,6 +34,11 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         private MainPresenterWrapper _presenter;
         private IMainFormExposer _form;
 
+        public MainPresenterTest()
+        {
+            var test = 1;
+        }
+
         protected override void BeforeStart()
         {
             _synchronizer = AppLifecycle.Controller.IoC.Resolve<IAutoResetEventService>();
@@ -66,34 +71,37 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         {
             _form.OpenFileMenu.ClickAndWaitSignal(_synchronizer);
 
-            _form.Received().SetCursor(Arg.Is<CursorType>(arg => arg == CursorType.Wait));
-            _presenter.Pipeline.Received().Register(Arg.Any<IPipelineBlock>());
+            Received.InOrder(() =>
+            {
+                _form.Received().SetCursor(Arg.Is<CursorType>(arg => arg == CursorType.Wait));
+                _presenter.Pipeline.Received().Register(Arg.Any<IPipelineBlock>());
+                _presenter.Pipeline.Received().AwaitResult();
 
-            var container = ImageContainer.Source;
+                var container = ImageContainer.Source;
 
-            _form.Received().GetImageCopy(Arg.Is<ImageContainer>(arg => arg == container));
-            _form.Received().ImageIsDefault(Arg.Is<ImageContainer>(arg => arg == container));
-            _form.Received().AddToUndoRedo(
-                Arg.Is<ImageContainer>(arg => arg == container),
-                Arg.Any<Bitmap>(),
-                Arg.Is<UndoRedoAction>(arg => arg == UndoRedoAction.Undo));
-            _form.Received().SetImageCopy(
-                Arg.Is<ImageContainer>(arg => arg == container),
-                Arg.Any<Bitmap>());
-            _form.Received().SetImageToZoom(
-                Arg.Is<ImageContainer>(arg => arg == container),
-                Arg.Any<Bitmap>());
-            _form.Received().SetImage(
-                Arg.Is<ImageContainer>(arg => arg == container),
-                Arg.Any<Bitmap>());
-            _form.Received().Refresh(Arg.Is<ImageContainer>(arg => arg == container));
-            _form.Received().ResetTrackBarValue(Arg.Is<ImageContainer>(arg => arg == container));
+                _form.Received().GetImageCopy(Arg.Is<ImageContainer>(arg => arg == container));
+                _form.Received().AddToUndoRedo(
+                    Arg.Is<ImageContainer>(arg => arg == container),
+                    Arg.Any<Bitmap>(),
+                    Arg.Is<UndoRedoAction>(arg => arg == UndoRedoAction.Undo));
+                _form.Received().ImageIsDefault(Arg.Is<ImageContainer>(arg => arg == container));
+                _form.Received().SetImageCopy(
+                    Arg.Is<ImageContainer>(arg => arg == container),
+                    Arg.Any<Bitmap>());
+                _form.Received().SetImageToZoom(
+                    Arg.Is<ImageContainer>(arg => arg == container),
+                    Arg.Any<Bitmap>());
+                _form.Received().SetImage(
+                    Arg.Is<ImageContainer>(arg => arg == container),
+                    Arg.Any<Bitmap>());
+                _form.Received().Refresh(Arg.Is<ImageContainer>(arg => arg == container));
+                _form.Received().ResetTrackBarValue(Arg.Is<ImageContainer>(arg => arg == container));
 
-            _presenter.Pipeline.Received().AwaitResult();
-            _presenter.Cache.Received().Reset();
-            _presenter.Pipeline.Received().Any();
+                _presenter.Cache.Received().Reset();
+                _presenter.Pipeline.Received().Any();
 
-            _form.Received().SetCursor(Arg.Is<CursorType>(arg => arg == CursorType.Default));
+                _form.Received().SetCursor(Arg.Is<CursorType>(arg => arg == CursorType.Default));
+            });
         }
 
         [Test]
@@ -193,7 +201,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
 
             Assert.IsTrue(source != null);
             Assert.IsTrue(destination != null);
-            Assert.IsTrue(_form.DestinationImage != null);
+            Assert.IsTrue(_form.SourceImage != null);
             Assert.IsTrue(source.SameAs(destination));
 
             _presenter.Received().OnEventHandler(

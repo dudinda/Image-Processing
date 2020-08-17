@@ -18,6 +18,8 @@ using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
+using static System.Reflection.BindingFlags;
+
 namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Presenters
 {
     internal class MainPresenterWrapper : BasePresenter<IMainView>,

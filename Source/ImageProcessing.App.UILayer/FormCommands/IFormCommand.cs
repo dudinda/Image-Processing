@@ -6,7 +6,6 @@ namespace ImageProcessing.App.UILayer.FormCommands
     internal interface IFormCommand<in TExposer> : IFormExposer<TExposer>
         where TExposer: class, IView
     {
-        object Function(string command, params object[] args);
-        void Procedure(string command, params object[] args);
+
     }
 }

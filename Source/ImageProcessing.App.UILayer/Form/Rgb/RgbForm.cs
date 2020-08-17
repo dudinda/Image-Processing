@@ -72,7 +72,7 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
 
         /// <inheritdoc/>
         public RgbColors GetSelectedColors(RgbColors color)
-            => (RgbColors)_command.Function(nameof(RgbViewAction.GetColor));
+            => Read<RgbColors>(() => _command.GetSelectedColors(color));
                  
         /// <inheritdoc/>
         public void Tooltip(string message)

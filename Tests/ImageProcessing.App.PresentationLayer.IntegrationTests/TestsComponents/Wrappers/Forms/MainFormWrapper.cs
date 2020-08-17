@@ -1,10 +1,9 @@
 using System;
-using System.Diagnostics.Contracts;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.PresentationLayer.UnitTests.Services;
 using ImageProcessing.App.UILayer.Form.Main;
-using ImageProcessing.App.UILayer.FormCommands.Main.Interface;
+using ImageProcessing.App.UILayer.FormCommands.Main;
 using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
