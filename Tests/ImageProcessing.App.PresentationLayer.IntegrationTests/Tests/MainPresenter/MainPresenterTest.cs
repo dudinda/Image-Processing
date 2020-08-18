@@ -34,11 +34,6 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         private MainPresenterWrapper _presenter;
         private IMainFormExposer _form;
 
-        public MainPresenterTest()
-        {
-            var test = 1;
-        }
-
         protected override void BeforeStart()
         {
             _synchronizer = AppLifecycle.Controller.IoC.Resolve<IAutoResetEventService>();
