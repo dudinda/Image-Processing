@@ -63,7 +63,11 @@ namespace ImageProcessing.App.UILayer.Control
         }
 
         public Image Zoom()
-            => ImageToZoom.ResizeImage(_factorSize);
+        {
+            var image = ImageToZoom.ResizeImage(_factorSize);
+            base.Refresh();
+            return image;
+        }
 
         protected override void OnMouseEnter(EventArgs e)
             => Focus();
