@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
-
-using static System.Reflection.BindingFlags;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 using ImageProcessing.App.CommonLayer.Attributes;
+
+using static System.Reflection.BindingFlags;
 
 namespace ImageProcessing.App.CommonLayer.Extensions.TypeExt
 {
@@ -14,35 +17,6 @@ namespace ImageProcessing.App.CommonLayer.Extensions.TypeExt
     /// </summary>
     public static class TypeExtensions
     {
-        /// <summary>
-        /// Get all the methods, decorated by the <typeparamref name="TAttribute"/>
-        /// </summary>
-        public static IEnumerable<MethodInfo> GetMethodsByAttribute<TAttribute>(
-            this Type type, BindingFlags flags)
-            where TAttribute : Attribute
-            => type.GetMethods(flags).Where(
-                method => method.GetCustomAttribute(typeof(TAttribute), false) != null
-            );
-
-        /// <summary>
-        /// Get all the methods,
-        /// decorated by the <see cref="CommandAttribute"/>
-        /// as key-value pairs.
-        /// </summary>
-        public static Dictionary<string, CommandAttribute> GetCommands(this Type type)
-           => type
-               .GetMethodsByAttribute<CommandAttribute>(
-                   NonPublic | DeclaredOnly | Instance)
-               .ToDictionary(
-                   method => method.GetCustomAttribute<CommandAttribute>().Key,
-                   method =>
-                   {
-                       var attr = method.GetCustomAttribute<CommandAttribute>();
-                       attr.Method = method;
-
-                       return attr;
-                   });
-
         /// <summary>
         /// Get the specified <typeparamref name="TValue"/> from an <typeparamref name="TAttribute"/> 
         /// defined on a <see cref="Type"/>.

@@ -8,7 +8,7 @@ namespace ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Interface
     /// <summary>
     /// A builder for the <see cref="Series"/> components.
     /// </summary>
-    public interface IChartSeriesBuilder : IBuilder<Series>
+    internal interface IChartSeriesBuilder : IBuilder<Series>
     {
         /// <summary>
         /// Set the series name.

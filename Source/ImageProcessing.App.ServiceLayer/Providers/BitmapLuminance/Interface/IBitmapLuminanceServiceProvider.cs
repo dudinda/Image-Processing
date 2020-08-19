@@ -8,7 +8,7 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistributio
     /// Provides the <see cref="Distributions"/> and
     /// <see cref="RandomVariableInfo"/> implementation for a bitmap.
     /// </summary>
-    public interface IBitmapLuminanceServiceProvider
+    internal interface IBitmapLuminanceServiceProvider
     {
         /// <summary>
         /// Transfrom the specified bitmap to a <see cref="Distributions"/> with

@@ -7,7 +7,7 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Interface.Convolution
     /// <summary>
     /// Provides the <see cref="ConvolutionFilter"/> implementation.
     /// </summary>
-    public interface IConvolutionServiceProvider
+    internal interface IConvolutionServiceProvider
     {
         /// <summary>
         /// Choose the <see cref="ConvolutionFilter"/> implementation over

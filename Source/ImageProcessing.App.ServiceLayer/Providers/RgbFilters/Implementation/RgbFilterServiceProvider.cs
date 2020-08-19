@@ -9,7 +9,7 @@ using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Interface;
 namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.RgbFilters
 {
     /// <inheritdoc cref="IRgbFilterServiceProvider"/>
-    public sealed class RgbFilterServiceProvider : IRgbFilterServiceProvider
+    internal sealed class RgbFilterServiceProvider : IRgbFilterServiceProvider
     {
         private readonly IRgbFilterFactory _rgbFilterFactory;
         private readonly IRgbFilterService _rgbFilterService;

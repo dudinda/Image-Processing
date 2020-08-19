@@ -10,7 +10,7 @@ using ImageProcessing.App.ServiceLayer.Services.QualityMeasure.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.QualityMeasure.Implementation
 {
-    public sealed class QualityMeasureService : IQualityMeasureService
+    internal sealed class QualityMeasureService : IQualityMeasureService
     {
         private readonly IBitmapLuminanceDistributionService _distributionService;
         private readonly IChartSeriesBuilder _builder;

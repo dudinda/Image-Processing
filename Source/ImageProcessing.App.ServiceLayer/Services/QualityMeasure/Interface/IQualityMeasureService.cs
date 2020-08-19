@@ -5,7 +5,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace ImageProcessing.App.ServiceLayer.Services.QualityMeasure.Interface
 {
-    public interface IQualityMeasureService
+    internal interface IQualityMeasureService
     {
         Dictionary<string, Series> BuildIntervals(ConcurrentQueue<Bitmap> queue);
     }

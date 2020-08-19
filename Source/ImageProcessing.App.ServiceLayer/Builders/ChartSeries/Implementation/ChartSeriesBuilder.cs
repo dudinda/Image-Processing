@@ -6,7 +6,7 @@ using ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Interface;
 namespace ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Implementation
 {
     /// <inheritdoc/>
-    public sealed class ChartSeriesBuilder : IChartSeriesBuilder
+    internal sealed class ChartSeriesBuilder : IChartSeriesBuilder
     {
         private string? _name;
         private Color _color;

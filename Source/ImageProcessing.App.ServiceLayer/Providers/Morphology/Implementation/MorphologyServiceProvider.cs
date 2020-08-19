@@ -11,7 +11,7 @@ using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Morphology
 {
     /// <inheritdoc cref="IMorphologyServiceProvider"/>
-    public sealed class MorphologyServiceProvider : IMorphologyServiceProvider
+    internal sealed class MorphologyServiceProvider : IMorphologyServiceProvider
     {
         private readonly IMorphologyService _morphologyService;
         private readonly IMorphologyFactory _morphologyFactory;

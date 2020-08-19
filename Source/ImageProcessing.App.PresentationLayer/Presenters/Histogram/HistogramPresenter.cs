@@ -30,7 +30,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             var key = vm.Mode.ToString();
 
             var info = await Task.Run(
-                () => _histogramService.BuildPlot(key, vm.Source)
+                () => _histogramService.BuildPlot(vm.Mode, vm.Source)
             ).ConfigureAwait(true);
 
             chart.Series[key] = info.Plot;

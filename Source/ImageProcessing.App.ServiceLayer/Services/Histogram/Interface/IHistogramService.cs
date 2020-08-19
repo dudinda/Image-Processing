@@ -1,10 +1,12 @@
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
 
+using ImageProcessing.App.CommonLayer.Enums;
+
 namespace ImageProcessing.App.ServiceLayer.Services.Histogram.Interface
 {
-    public interface IHistogramService
+    internal interface IHistogramService
     {
-        (Series Plot, decimal Max) BuildPlot(string key, Bitmap bmp);
+        (Series Plot, decimal Max) BuildPlot(RandomVariableFunction function, Bitmap bmp);
     }
 }

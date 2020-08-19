@@ -12,9 +12,6 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Convolution.Implementatio
 {
     internal class ConvolutionFormEventBinder : IConvolutionFormEventBinder
     {
-        private static readonly Dictionary<string, CommandAttribute>
-               _cmdCommand = typeof(ConvolutionFormEventBinder).GetCommands();
-
         private readonly IEventAggregator _aggregator;
 
         public ConvolutionFormEventBinder(IEventAggregator aggregator)

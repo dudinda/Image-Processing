@@ -5,7 +5,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Interface
     /// <summary>
     /// Specifies some operations performed on a <see cref="Bitmap"/>.
     /// </summary>
-    public interface IBitmapService
+    internal interface IBitmapService
     {
         /// <summary>
         /// The gradient magnitude of an image.
