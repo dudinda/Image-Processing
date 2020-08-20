@@ -1,9 +1,9 @@
 using System;
 using System.Drawing;
 
-using ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Visitor.Interface;
+using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance.Interface;
 
-namespace ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Models.Variance
+namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.BitmapLuminance.Variance
 {
     internal sealed class BitmapLuminanceVarianceVisitable : IBitmapLuminanceVisitable
     {
@@ -18,6 +18,5 @@ namespace ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Models.Varia
         public decimal GetInfo(Bitmap bmp)
             => _visitor?.GetVariance(bmp)
                 ?? throw new ArgumentNullException(nameof(_visitor));
-
     }
 }

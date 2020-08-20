@@ -1,9 +1,9 @@
 using System.Drawing;
 
+using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
-using ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Visitor.Interface;
 
-namespace ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Visitor.Implementation
+namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance.Implementation
 {
     internal sealed class BitmapLuminanceVisitor : IBitmapLuminanceVisitor
     {

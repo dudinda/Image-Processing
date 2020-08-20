@@ -2,8 +2,7 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
-using ImageProcessing.App.DomainLayer.DomainEvent.ToolbarArgs;
-using ImageProcessing.App.DomainLayer.DomainEvents.QualityMeasureArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Menu;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Distribution;
 using ImageProcessing.App.PresentationLayer.ViewModel.Distribution;

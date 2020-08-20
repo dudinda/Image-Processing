@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainLayer.Factory.Convolution.Interface;
-using ImageProcessing.App.ServiceLayer.CompoundModels.Visitors.Convolution.Interface;
+using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Convolution.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interface;
 
-namespace ImageProcessing.App.ServiceLayer.CompoundModels.Visitors.Convolution.Implementation
+namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Convolution.Implementation
 {
     internal sealed class ConvolutionVisitor : IConvolutionVisitor
     {

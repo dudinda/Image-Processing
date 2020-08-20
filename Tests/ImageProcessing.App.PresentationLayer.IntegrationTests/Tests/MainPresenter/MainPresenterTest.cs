@@ -2,9 +2,8 @@ using System.Drawing;
 using System.Threading;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
-using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
-using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
+using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Container;
+using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.FileDialog;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Menu;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Show;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.TestResources;

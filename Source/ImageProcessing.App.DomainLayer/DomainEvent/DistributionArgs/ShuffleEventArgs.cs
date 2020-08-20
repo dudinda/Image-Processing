@@ -1,6 +1,4 @@
-using ImageProcessing.App.DomainLayer.DomainEvent.Base;
-
-namespace ImageProcessing.App.DomainLayer.DomainEvent.ToolbarArgs
+namespace ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs
 {
     public sealed class ShuffleEventArgs : BaseEventArgs
     { 

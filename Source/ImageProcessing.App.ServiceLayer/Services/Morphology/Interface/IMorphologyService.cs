@@ -1,7 +1,7 @@
 using System.Drawing;
 
-using ImageProcessing.App.DomainLayer.Model.Morphology.Interface.BinaryOperator;
-using ImageProcessing.App.DomainLayer.Model.Morphology.Interface.UnaryOperator;
+using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Interface.BinaryOperator;
+using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Interface.UnaryOperator;
 using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Morphology.Interface

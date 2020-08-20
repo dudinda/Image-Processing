@@ -2,9 +2,8 @@ using System.Drawing;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
-using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
-using ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs;
-using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.ImageContainer;
+using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Container;
+using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.FileDialog;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Menu;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Show;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
@@ -17,8 +16,6 @@ using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
-
-using static System.Reflection.BindingFlags;
 
 namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Presenters
 {

@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Visitor.Interface
+namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance.Interface
 {
     internal interface IBitmapLuminanceVisitor
     {

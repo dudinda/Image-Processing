@@ -2,7 +2,7 @@ using System.Drawing;
 
 using ImageProcessing.App.CommonLayer.Enums;
 
-namespace ImageProcessing.App.ServiceLayer.CompoundModels.Visitors.Convolution.Interface
+namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Convolution.Interface
 {
     internal interface IConvolutionVisitor
     {

@@ -2,9 +2,9 @@ using System;
 using System.Drawing;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.ServiceLayer.CompoundModels.Visitors.Convolution.Interface;
+using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Convolution.Interface;
 
-namespace ImageProcessing.App.ServiceLayer.Visitors.Convolution.Visitable.Operator
+namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.Convolution.Operator
 {
     internal sealed class ConvolutionOperatorVisitable : IConvolutionVisitable
     {

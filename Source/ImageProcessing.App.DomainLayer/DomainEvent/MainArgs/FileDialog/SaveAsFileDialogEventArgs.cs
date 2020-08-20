@@ -1,6 +1,4 @@
-using ImageProcessing.App.DomainLayer.DomainEvent.Base;
-
-namespace ImageProcessing.App.DomainLayer.DomainEvent.FileDialogArgs
+namespace ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.FileDialog
 {
     public sealed class SaveAsFileDialogEventArgs : BaseEventArgs
     {

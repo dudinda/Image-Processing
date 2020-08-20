@@ -3,19 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.Convolution.Implemetation.Blur.BoxBlur;
-using ImageProcessing.App.DomainLayer.Convolution.Implemetation.Blur.GaussianBlur;
-using ImageProcessing.App.DomainLayer.Convolution.Implemetation.Blur.MotionBlur;
-using ImageProcessing.App.DomainLayer.Convolution.Implemetation.EdgeDetection.LaplacianOperator;
-using ImageProcessing.App.DomainLayer.Convolution.Implemetation.EdgeDetection.SobelOperator;
-using ImageProcessing.App.DomainLayer.Convolution.Implemetation.Emboss;
-using ImageProcessing.App.DomainLayer.Convolution.Implemetation.Sharpen;
-using ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.OneParameter;
-using ImageProcessing.App.DomainLayer.Model.Distributions.Implementation.TwoParameter;
-using ImageProcessing.App.DomainLayer.Model.RgbFilters.Implementation.Binary;
-using ImageProcessing.App.DomainLayer.Model.RgbFilters.Implementation.Color.Colors;
-using ImageProcessing.App.DomainLayer.Model.RgbFilters.Implementation.Grayscale;
-using ImageProcessing.App.DomainLayer.Model.RgbFilters.Implementation.Inversion;
+using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Blur.BoxBlur;
+using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Blur.GaussianBlur;
+using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Blur.MotionBlur;
+using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.EdgeDetection.LaplacianOperator;
+using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.EdgeDetection.SobelOperator;
+using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Emboss;
+using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Sharpen;
+using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementation.OneParameter;
+using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementation.TwoParameter;
+using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation.Binary;
+using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation.Color.Colors;
+using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation.Grayscale;
+using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation.Inversion;
 
 using NUnit.Framework;
 

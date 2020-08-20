@@ -2,10 +2,6 @@ using System.Drawing;
 
 using ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Implementation;
 using ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Interface;
-using ImageProcessing.App.ServiceLayer.CompoundModels.VisitableFactory.Convolution.Implementation;
-using ImageProcessing.App.ServiceLayer.CompoundModels.VisitableFactory.Convolution.Interface;
-using ImageProcessing.App.ServiceLayer.CompoundModels.Visitors.Convolution.Implementation;
-using ImageProcessing.App.ServiceLayer.CompoundModels.Visitors.Convolution.Interface;
 using ImageProcessing.App.ServiceLayer.NonBlockDialog.Implementation;
 using ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Providers.Implementation.Convolution;
@@ -15,6 +11,18 @@ using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Convolution;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Morphology;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.RgbFilters;
+using ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.BitmapLuminance.Implementation;
+using ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.BitmapLuminance.Interface;
+using ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.Convolution.Implementation;
+using ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.Convolution.Interface;
+using ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.Histogram.Implementation;
+using ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.Histogram.Interface;
+using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance.Implementation;
+using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance.Interface;
+using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Convolution.Implementation;
+using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Convolution.Interface;
+using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Histogram.Implementation;
+using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Histogram.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Implementation;
@@ -44,10 +52,6 @@ using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Interface;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Interface;
-using ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Factory.Implementation;
-using ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Factory.Interface;
-using ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Visitor.Implementation;
-using ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Visitor.Interface;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
 namespace ImageProcessing.App.ServiceLayer
@@ -79,7 +83,9 @@ namespace ImageProcessing.App.ServiceLayer
                    .RegisterTransient<IBitmapLuminanceVisitableFactory, BitmapLuminanceVisitableFactory>()
                    .RegisterTransient<IBitmapLuminanceVisitor, BitmapLuminanceVisitor>()
                    .RegisterTransient<IConvolutionVisitor, ConvolutionVisitor>()
-                   .RegisterTransient<ICovolutionVisitableFactory, ConvolutionVisitableFactory>();
+                   .RegisterTransient<ICovolutionVisitableFactory, ConvolutionVisitableFactory>()
+                   .RegisterTransient<IHistogramVisitor, HistogramVisitor>()
+                   .RegisterTransient<IHistogramVisitableFactory, HistogramVisitableFactory>();
         }
     }
 }

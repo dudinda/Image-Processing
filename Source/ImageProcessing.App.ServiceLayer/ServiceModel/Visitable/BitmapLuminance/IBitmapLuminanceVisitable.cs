@@ -1,9 +1,8 @@
 using System.Drawing;
 
-using ImageProcessing.App.ServiceLayer.CompoundModels.Visitable;
-using ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Visitor.Interface;
+using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance.Interface;
 
-namespace ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Models
+namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.BitmapLuminance
 {
     internal interface IBitmapLuminanceVisitable
         : IVisitable<IBitmapLuminanceVisitable, IBitmapLuminanceVisitor>

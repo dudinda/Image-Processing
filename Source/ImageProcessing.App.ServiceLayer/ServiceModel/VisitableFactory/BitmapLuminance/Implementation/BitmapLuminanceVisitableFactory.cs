@@ -1,14 +1,14 @@
 using System;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Factory.Interface;
-using ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Models;
-using ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Models.Entropy;
-using ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Models.Expectation;
-using ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Models.StandardDeviation;
-using ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Models.Variance;
+using ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.BitmapLuminance;
+using ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.BitmapLuminance.Entropy;
+using ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.BitmapLuminance.Expectation;
+using ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.BitmapLuminance.StandardDeviation;
+using ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.BitmapLuminance.Variance;
+using ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.BitmapLuminance.Interface;
 
-namespace ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Factory.Implementation
+namespace ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.BitmapLuminance.Implementation
 {
     internal sealed class BitmapLuminanceVisitableFactory : IBitmapLuminanceVisitableFactory
     {

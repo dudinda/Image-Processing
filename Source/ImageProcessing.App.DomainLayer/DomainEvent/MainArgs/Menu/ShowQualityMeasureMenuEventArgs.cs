@@ -1,6 +1,4 @@
-using ImageProcessing.App.DomainLayer.DomainEvent.Base;
-
-namespace ImageProcessing.App.DomainLayer.DomainEvents.QualityMeasureArgs
+namespace ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Menu
 {
     public sealed class ShowQualityMeasureMenuEventArgs : BaseEventArgs
     {

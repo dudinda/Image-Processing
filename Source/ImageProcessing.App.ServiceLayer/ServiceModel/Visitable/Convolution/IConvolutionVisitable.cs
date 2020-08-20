@@ -1,9 +1,8 @@
 using System.Drawing;
 
-using ImageProcessing.App.ServiceLayer.CompoundModels.Visitable;
-using ImageProcessing.App.ServiceLayer.CompoundModels.Visitors.Convolution.Interface;
+using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Convolution.Interface;
 
-namespace ImageProcessing.App.ServiceLayer.Visitors.Convolution.Visitable
+namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.Convolution
 {
     internal interface IConvolutionVisitable
         : IVisitable<IConvolutionVisitable, IConvolutionVisitor>

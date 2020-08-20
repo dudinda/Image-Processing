@@ -1,9 +1,9 @@
 using System;
 using System.Drawing;
 
-using ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Visitor.Interface;
+using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance.Interface;
 
-namespace ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Models.Entropy
+namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.BitmapLuminance.Entropy
 {
     internal sealed class BitmapLuminanceEntropyVisitable : IBitmapLuminanceVisitable
     {

@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics.Contracts;
 using System.Linq;
 
-using ImageProcessing.App.DomainLayer.Model.Distributions.Interface;
+using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable.Interface;
 using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.RealAxis;
 using ImageProcessing.Utility.DecimalMath.RealAxis;

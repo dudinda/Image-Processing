@@ -1,14 +1,11 @@
-using System.Collections.Generic;
 using System.Drawing;
 
-using ImageProcessing.App.CommonLayer.Attributes;
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.CommonLayer.Extensions.TypeExt;
 using ImageProcessing.App.DomainLayer.Factory.Distribution.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
+using ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.BitmapLuminance.Interface;
+using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
-using ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Factory.Interface;
-using ImageProcessing.App.ServiceLayer.Visitors.BitmapLuminance.Visitor.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistribution
 {

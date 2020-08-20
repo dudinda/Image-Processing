@@ -1,6 +1,6 @@
 using System;
 
-namespace ImageProcessing.App.DomainLayer.DomainEvent.Base
+namespace ImageProcessing.App.DomainLayer.DomainEvent
 {
     /// <summary>
     /// The base class for classes containing event metadata.
