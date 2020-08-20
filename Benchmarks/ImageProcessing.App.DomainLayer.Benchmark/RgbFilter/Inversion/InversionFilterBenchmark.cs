@@ -4,8 +4,8 @@ using System.IO;
 
 using BenchmarkDotNet.Attributes;
 
-using ImageProcessing.App.DomainLayer.Model.RgbFilters.Implementation.Inversion;
-using ImageProcessing.App.DomainLayer.Model.RgbFilters.Interface;
+using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation.Inversion;
+using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Interface;
 
 namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Inversion
 {

@@ -4,8 +4,8 @@ using System.IO;
 
 using BenchmarkDotNet.Attributes;
 
-using ImageProcessing.App.DomainLayer.Convolution.Implemetation.Blur.BoxBlur;
-using ImageProcessing.App.DomainLayer.Convolution.Interface;
+using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Blur.BoxBlur;
+using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interface;
 
