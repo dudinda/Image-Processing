@@ -10,7 +10,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Morphology.Interface
     /// Provides the morphology operators with
     /// the different arity.
     /// </summary>
-    public interface IMorphologyService
+    internal interface IMorphologyService
     {
         /// <summary>
         /// Perform a unary morphological filter

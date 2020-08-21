@@ -6,7 +6,7 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Interface.RgbFilters
     /// <summary>
     /// Provides the <see cref="RgbFilter"/> and <see cref="RgbColors"/> implementation.
     /// </summary>
-    internal interface IRgbFilterServiceProvider
+    public interface IRgbFilterServiceProvider
     {
         /// <summary>
         /// Choose the <see cref="RgbFilter"/> implementation over

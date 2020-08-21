@@ -8,7 +8,7 @@ using ImageProcessing.App.ServiceLayer.Services.StaTask.Interface;
 namespace ImageProcessing.App.ServiceLayer.NonBlockDialog.Implementation
 {
     /// <inheritdoc cref="INonBlockDialogService"/>
-    public class NonBlockDialogService : INonBlockDialogService
+    internal class NonBlockDialogService : INonBlockDialogService
     {
         private readonly IFileDialogService _service;
         private readonly IStaTaskService _staService;

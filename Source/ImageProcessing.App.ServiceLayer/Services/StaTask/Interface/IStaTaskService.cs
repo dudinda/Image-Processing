@@ -9,7 +9,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.StaTask.Interface
     /// apartment state. Mainly used to run
     /// non-blocking modal windows.
     /// </summary>
-    public interface IStaTaskService : IDisposable
+    internal interface IStaTaskService : IDisposable
     {
         /// <summary>
         /// Start the specified work

@@ -10,7 +10,7 @@ using Microsoft.Extensions.Primitives;
 namespace ImageProcessing.App.ServiceLayer.Services.Cache.Implementation
 {
     /// <inheritdoc cref="ICacheService{TItem}"/>
-    public class CacheService<TItem> : ICacheService<TItem>
+    internal class CacheService<TItem> : ICacheService<TItem>
     {
         private static CancellationTokenSource _resetToken
             = new CancellationTokenSource();

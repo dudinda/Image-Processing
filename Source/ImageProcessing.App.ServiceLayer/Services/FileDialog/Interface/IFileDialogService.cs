@@ -6,7 +6,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.FileDialog.Interface
     /// <summary>
     /// Service provides actions for the <see cref="System.Windows.Forms.FileDialog"/>. 
     /// </summary>
-    public interface IFileDialogService
+    internal interface IFileDialogService
     {
         /// <summary>
         /// Init the <see cref="System.Windows.Forms.OpenFileDialog"/>.

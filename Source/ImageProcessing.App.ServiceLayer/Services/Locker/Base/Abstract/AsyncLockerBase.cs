@@ -7,7 +7,7 @@ using ImageProcessing.App.ServiceLayer.Services.Locker.Base.Interface;
 namespace ImageProcessing.App.ServiceLayer.Services.Locker.Base.Abstract
 {
     /// <inheritdoc cref="IAsyncLocker" />
-    public abstract class AsyncLockerBase : IAsyncLocker
+    internal abstract class AsyncLockerBase : IAsyncLocker
     {
         private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
 

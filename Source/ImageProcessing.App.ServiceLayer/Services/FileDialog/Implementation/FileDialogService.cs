@@ -10,7 +10,7 @@ using ImageProcessing.App.ServiceLayer.Services.FileDialog.Interface;
 namespace ImageProcessing.App.ServiceLayer.Services.FileDialog.Implementation
 {
     /// <inheritdoc cref="IFileDialogService"/>
-    public sealed class FileDialogService : IFileDialogService
+    internal sealed class FileDialogService : IFileDialogService
     {
         /// <inheritdoc/>
         public async Task<(Bitmap? Image, string Path)> OpenFileDialog(string? filters)

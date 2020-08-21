@@ -6,7 +6,7 @@ using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interfac
 namespace ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Implementation
 {
     /// <inheritdoc cref="IAsyncOperationLocker"/>
-    public class AsyncOperationLocker : AsyncLockerBase, IAsyncOperationLocker
+    internal class AsyncOperationLocker : AsyncLockerBase, IAsyncOperationLocker
     {
         /// <inheritdoc/>
         public virtual async Task<TResult> LockOperationAsync<TResult>(Func<TResult> worker)

@@ -9,7 +9,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Locker.Base.Interface
     /// of the selected bitmap or to retrieve the actual copy
     /// during the application flow.
     /// </summary>
-    public interface IAsyncLocker
+    internal interface IAsyncLocker
     {
         /// <summary>
         /// Lock async during the specified work.

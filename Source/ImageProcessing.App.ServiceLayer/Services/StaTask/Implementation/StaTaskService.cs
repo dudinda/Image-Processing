@@ -9,7 +9,7 @@ using ImageProcessing.Utility.Interop.Wrapper;
 namespace ImageProcessing.App.ServiceLayer.Services.StaTask.Implementation
 {
     /// <inheritdoc cref="IStaTaskService"/>
-    public sealed class StaTaskService : IStaTaskService
+    internal sealed class StaTaskService : IStaTaskService
     {
         private readonly int _maxNumberOfModals;
 

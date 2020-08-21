@@ -8,7 +8,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.RgbFilters.Interface
     /// Provides a selected <see cref="IRgbFilter"/>
     /// on the specified bitmap.
     /// </summary>
-    public interface IRgbFilterService
+    internal interface IRgbFilterService
     {
         /// <summary>
         /// Apply RGB filter to the specified bitmap.
