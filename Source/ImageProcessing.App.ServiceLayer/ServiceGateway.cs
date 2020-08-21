@@ -1,5 +1,6 @@
 using System.Drawing;
 
+using ImageProcessing.App.DomainLayer;
 using ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Implementation;
 using ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Interface;
 using ImageProcessing.App.ServiceLayer.NonBlockDialog.Implementation;
@@ -56,10 +57,12 @@ using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
 namespace ImageProcessing.App.ServiceLayer
 {
-    public static class ServiceLayerBinder
+    public static class ServiceGateway
     {
         public static void Build(IDependencyResolution builder)
         {
+            DomainGateway.Build(builder);
+
             builder.RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
                    .RegisterSingleton<IStaTaskService, StaTaskService>()
                    .RegisterSingleton<IAsyncZoomLocker, AsyncZoomLocker>()

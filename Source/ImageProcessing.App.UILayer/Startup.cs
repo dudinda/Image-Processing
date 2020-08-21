@@ -1,6 +1,5 @@
 using System.Windows.Forms;
 
-using ImageProcessing.App.DomainLayer;
 using ImageProcessing.App.PresentationLayer.Views.Convolution;
 using ImageProcessing.App.PresentationLayer.Views.Distribution;
 using ImageProcessing.App.PresentationLayer.Views.Histogram;
@@ -46,8 +45,7 @@ namespace ImageProcessing.App.UILayer
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            DomainLayerBinder.Build(builder);
-            ServiceLayerBinder.Build(builder);
+            ServiceGateway.Build(builder);
 
             builder
                 .RegisterSingletonView<IMainView, MainForm>()
@@ -65,7 +63,7 @@ namespace ImageProcessing.App.UILayer
                 .RegisterTransient<IMainFormUndoCommand, MainFormUndoCommand>()
                 .RegisterTransient<IMainFormSourceContainerCommand, MainFormSourceContainerCommand>()
                 .RegisterTransient<IMainFormDestinationContainerCommand, MainFormDestinationContainerCommand>()
-                .RegisterTransient<IRgbFormCommand, RgbFormCommand>();      
+                .RegisterTransient<IRgbFormCommand, RgbFormCommand>();
         }      
     }
 }

@@ -15,7 +15,7 @@ using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
 namespace ImageProcessing.App.DomainLayer
 {
-    public static class DomainLayerBinder
+    public static class DomainGateway
     {
         public static void Build(IDependencyResolution builder)
         {

@@ -5,7 +5,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ApplicationIcon />
     <OutputType>WinExe</OutputType>
-    <StartupObject>ImageProcessing.App.UILayer.Program</StartupObject>
+    <StartupObject>ImageProcessing.App.UILayer.UIGateway</StartupObject>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Platforms>AnyCPU;x64;x86</Platforms>
     <LangVersion>8.0</LangVersion>

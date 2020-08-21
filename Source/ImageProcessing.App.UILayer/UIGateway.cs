@@ -6,7 +6,7 @@ using ImageProcessing.Microkernel.EntryPoint;
 
 namespace ImageProcessing.App.UILayer
 {
-    internal static class Program
+    internal static class UIGateway
     {    
         [STAThread]
         internal static void Main()
