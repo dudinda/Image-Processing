@@ -17,7 +17,7 @@ using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Interface.UnaryOper
 namespace ImageProcessing.App.DomainLayer.Factory.Morphology.Implementation
 {
     /// <inheritdoc cref="IMorphologyFactory" />
-    public sealed class MorphologyFactory : IMorphologyFactory
+    internal sealed class MorphologyFactory : IMorphologyFactory
     {
         /// <inheritdoc/>
         public IMorphologyBinary GetBinary(MorphologyOperator filter)

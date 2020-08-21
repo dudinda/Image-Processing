@@ -8,7 +8,7 @@ using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
 namespace ImageProcessing.App.DomainLayer.Factory.Distribution.Implementation
 {
     /// <inheritdoc cref="IDistributionFactory" />
-    public sealed class DistributionFactory : IDistributionFactory
+    internal sealed class DistributionFactory : IDistributionFactory
     {
         /// <summary>
         /// A factory method

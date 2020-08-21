@@ -13,7 +13,7 @@ namespace ImageProcessing.App.DomainLayer.Factory.RgbFilters.Rgb.Implementation
 {
 
     /// <inheritdoc cref="IRgbFilterFactory"/>
-    public sealed class RgbFilterFactory : IRgbFilterFactory
+    internal sealed class RgbFilterFactory : IRgbFilterFactory
     {
         private readonly IColorFactory _factory;
 

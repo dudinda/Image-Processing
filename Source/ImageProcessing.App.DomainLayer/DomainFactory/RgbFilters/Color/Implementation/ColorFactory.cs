@@ -8,7 +8,7 @@ using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Interface.Color;
 namespace ImageProcessing.App.DomainLayer.Factory.RgbFilters.Color.Implementation
 {
     /// <inheritdoc cref="IColorFactory"/>
-    public sealed class ColorFactory : IColorFactory
+    internal sealed class ColorFactory : IColorFactory
     {
         /// <summary>
         /// Provides a factory method for all the <see cref="RgbColors"/>

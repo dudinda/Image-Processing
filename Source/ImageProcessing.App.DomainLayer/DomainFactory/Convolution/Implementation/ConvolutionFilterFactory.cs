@@ -14,7 +14,7 @@ using ImageProcessing.App.DomainLayer.Factory.Convolution.Interface;
 namespace ImageProcessing.App.DomainLayer.Factory.Convolution.Implementation
 {
     /// <inheritdoc cref="IConvolutionFilterFactory" />
-    public sealed class ConvolutionFilterFactory : IConvolutionFilterFactory
+    internal sealed class ConvolutionFilterFactory : IConvolutionFilterFactory
     {
         /// <summary>
         /// A factory method
