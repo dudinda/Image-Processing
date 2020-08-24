@@ -41,9 +41,6 @@ namespace ImageProcessing.Microkernel.State.Implementation.IsBuilt
                 AppState.StartWork
             );
 
-            AppLifecycle.Controller.IoC
-                .RegisterTransient<TMainPresenter>();
-
             AppLifecycle.State.Run<TMainPresenter>();    
         }
     }

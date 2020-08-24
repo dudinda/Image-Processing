@@ -53,15 +53,16 @@ using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Interface;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Interface;
+using ImageProcessing.Microkernel.AppConfig;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
 namespace ImageProcessing.App.ServiceLayer
 {
-    public static class ServiceGateway
+    public sealed class ServiceStartup : IStartup
     {
-        public static void Build(IDependencyResolution builder)
+        public void Build(IDependencyResolution builder)
         {
-            DomainGateway.Build(builder);
+            new DomainStartup().Build(builder);
 
             builder.RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
                    .RegisterSingleton<IStaTaskService, StaTaskService>()

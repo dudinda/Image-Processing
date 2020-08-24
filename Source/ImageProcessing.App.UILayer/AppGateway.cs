@@ -6,14 +6,14 @@ using ImageProcessing.Microkernel.EntryPoint;
 
 namespace ImageProcessing.App.UILayer
 {
-    internal static class UIGateway
+    internal static class AppGateway
     {    
         [STAThread]
         internal static void Main()
         {
             try
             {
-                AppLifecycle.Build<Startup>(DiContainer.Ninject);
+                AppLifecycle.Build<UIStartup>(DiContainer.Ninject);
                 AppLifecycle.Run<MainPresenter>();
             }
             catch(Exception ex)

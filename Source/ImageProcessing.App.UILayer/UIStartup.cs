@@ -1,5 +1,6 @@
 using System.Windows.Forms;
 
+using ImageProcessing.App.PresentationLayer;
 using ImageProcessing.App.PresentationLayer.Views.Convolution;
 using ImageProcessing.App.PresentationLayer.Views.Distribution;
 using ImageProcessing.App.PresentationLayer.Views.Histogram;
@@ -38,14 +39,14 @@ using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
 namespace ImageProcessing.App.UILayer
 {
-    internal class Startup : IStartup
+    public sealed class UIStartup : IStartup
     {
         public void Build(IDependencyResolution builder)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            ServiceGateway.Build(builder);
+            new PresentationStartup().Build(builder);
 
             builder
                 .RegisterSingletonView<IMainView, MainForm>()

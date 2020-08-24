@@ -11,13 +11,14 @@ using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Color.Interface;
 using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Rgb.Implementation;
 using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Rgb.Interface;
 using ImageProcessing.App.DomainLayer.Factory.StructuringElement.Implementation;
+using ImageProcessing.Microkernel.AppConfig;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
 namespace ImageProcessing.App.DomainLayer
-{
-    public static class DomainGateway
+{ 
+    public sealed class DomainStartup : IStartup
     {
-        public static void Build(IDependencyResolution builder)
+        public void Build(IDependencyResolution builder)
         {
             builder.RegisterTransient<IConvolutionFilterFactory, ConvolutionFilterFactory>()
                    .RegisterTransient<IMorphologyFactory, MorphologyFactory>()
