@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace ImageProcessing.App.CommonLayer.Extensions.EnumExt
@@ -51,12 +49,7 @@ namespace ImageProcessing.App.CommonLayer.Extensions.EnumExt
             where TEnum : Enum
         {
             var type = typeof(TEnum);
-
-           if(!type.IsEnum)
-            {
-                throw new InvalidOperationException(nameof(type));
-            }
-
+ 
             foreach (var field in type.GetFields())
             {
                 var attribute = Attribute.GetCustomAttribute(field,
