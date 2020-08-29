@@ -1,10 +1,5 @@
-using System.Collections.Generic;
 using System.Windows.Forms.DataVisualization.Charting;
 
-using ImageProcessing.App.CommonLayer.Attributes;
-using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
-using ImageProcessing.App.CommonLayer.Extensions.TypeExt;
 using ImageProcessing.App.PresentationLayer.Views.Histogram;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 

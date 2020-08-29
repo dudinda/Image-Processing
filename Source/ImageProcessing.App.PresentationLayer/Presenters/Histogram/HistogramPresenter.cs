@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 
+using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.ViewModel.Histogram;
 using ImageProcessing.App.PresentationLayer.Views.Histogram;
@@ -27,13 +28,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             var chart = View.DataChart;
   
-            var key = vm.Mode.ToString();
+            var key = vm.Mode.GetDescription();
 
             var info = await Task.Run(
                 () => _histogramService.BuildPlot(vm.Mode, vm.Source)
             ).ConfigureAwait(true);
 
-            chart.Series[key] = info.Plot;
+            chart.Series.Add(info.Plot);
 
             View.YAxisMaximum = (double)info.Max;
             View.Show();

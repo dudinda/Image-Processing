@@ -26,30 +26,26 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Histogram.Imple
         public (Series Series, decimal Max) BuildCdf(Bitmap bmp)
         {
             var series = _builder
+                .SetName(RandomVariableFunction.CDF.GetDescription())
+                .SetChartType(SeriesChartType.StepLine)
+                .SetColor(Color.Red)
+                .SetBorderWidth(1)
+                .SetVisibleInLegend(true)
+                .Build();
+
+            return BuildSeries(series, _service.GetCDF(bmp));
+        }
+
+        public (Series Series, decimal Max) BuildPmf(Bitmap bmp)
+        {
+            var series = _builder
                 .SetName(RandomVariableFunction.PMF.GetDescription())
                 .SetColor(Color.Blue)
                 .SetChartType(SeriesChartType.Column)
                 .SetVisibleInLegend(true)
                 .Build();
 
-            var function =  _service.GetPMF(bmp);
-
-            return BuildSeries(series, function);
-        }
-
-        public (Series Series, decimal Max) BuildPmf(Bitmap bmp)
-        {
-            var series = _builder
-                .SetName(RandomVariableFunction.CDF.GetDescription())
-                .SetMarkerStyle(MarkerStyle.None)
-                .SetChartType(SeriesChartType.StepLine)
-                .SetColor(Color.Red)
-                .SetVisibleInLegend(true)
-                .Build();
-
-            var function = _service.GetCDF(bmp);
-
-            return BuildSeries(series, function);
+            return BuildSeries(series, _service.GetPMF(bmp));
         }
 
         private (Series, decimal) BuildSeries(Series series, decimal[] function)
