@@ -19,7 +19,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
 {
     internal sealed class RgbPresenter : BasePresenter<IRgbView, RgbViewModel>,
           ISubscriber<ApplyRgbFilterEventArgs>,
-          ISubscriber<ApplyRgbColorFilterEventArgs>
+          ISubscriber<ApplyRgbColorFilterEventArgs>,
+          ISubscriber<ContainerUpdatedEventArgs>
     {
         private readonly IRgbFilterServiceProvider _provider;
         private readonly IAsyncOperationLocker _locker;
@@ -89,6 +90,16 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
         public async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
             View.Tooltip(e.Error);
+        }
+
+        public async Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
+        {
+            if (e.Container == ImageContainer.Source)
+            {
+                await _locker.LockOperationAsync(() =>
+                    ViewModel = new RgbViewModel(new Bitmap(e.Bmp))
+                ).ConfigureAwait(true);
+            }
         }
     }
 }

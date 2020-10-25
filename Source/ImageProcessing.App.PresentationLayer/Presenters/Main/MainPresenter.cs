@@ -199,9 +199,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             {
                 if (!View.ImageIsDefault(ImageContainer.Source))
                 {
-                    var block = e.Block as IPipelineBlock;
-
-                    if (block != null)
+                    if (e.Block is IPipelineBlock block)
                     {
                         await Render(block).ConfigureAwait(true);
                     }
@@ -221,18 +219,21 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             try
             {
-                var (To, From) = e.Container == ImageContainer.Source   ?
+                var (to, from) = e.Container == ImageContainer.Source   ?
                     (ImageContainer.Destination, ImageContainer.Source) :
                     (ImageContainer.Source, ImageContainer.Destination);
 
-                if (!View.ImageIsDefault(From))
+                if (!View.ImageIsDefault(from))
                 {
-                    var copy = await GetImageCopy(From)
+                    var copy = await GetImageCopy(from)
                         .ConfigureAwait(true);
 
                     await Render(
-                        new PipelineBlock(copy), To
+                        new PipelineBlock(copy), to
                     ).ConfigureAwait(true);
+
+                    Controller.Aggregator.PublishFromAll(publisher,
+                        new ContainerUpdatedEventArgs(to, copy));
                 }
             }
             catch (OperationCanceledException cancel)
@@ -279,6 +280,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                 await Render(
                     new PipelineBlock(copy), to, action
                 ).ConfigureAwait(true);
+
+                Controller.Aggregator.PublishFromAll(publisher,
+                        new ContainerUpdatedEventArgs(to, copy));
             }
             catch (Exception ex)
             {

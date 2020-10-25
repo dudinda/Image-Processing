@@ -19,18 +19,19 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
 {
     internal sealed class ConvolutionPresenter : BasePresenter<IConvolutionView, ConvolutionViewModel>,
           ISubscriber<ApplyConvolutionFilterEventArgs>,
-          ISubscriber<ShowTooltipOnErrorEventArgs>
+          ISubscriber<ShowTooltipOnErrorEventArgs>,
+          ISubscriber<ContainerUpdatedEventArgs>
     {
 		private readonly IConvolutionServiceProvider _provider;
-		private readonly IAsyncOperationLocker _operationLocker;
+		private readonly IAsyncOperationLocker _locker;
 
         public ConvolutionPresenter(
             IAppController controller,
             IConvolutionServiceProvider provider,
-            IAsyncOperationLocker operationLocker) : base(controller)
+            IAsyncOperationLocker locker) : base(controller)
         {
             _provider = provider;
-            _operationLocker = operationLocker;
+            _locker = locker;
         }
 
 		public async Task OnEventHandler(object publisher, ApplyConvolutionFilterEventArgs e)
@@ -41,16 +42,17 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
 
                 if (filter != ConvolutionFilter.Unknown)
                 {
-                    var copy = await _operationLocker.LockOperationAsync(
+                    var copy = await _locker.LockOperationAsync(
                         () => new Bitmap(ViewModel.Source)
                     ).ConfigureAwait(true);
-
+               
                     Controller.Aggregator.PublishFromAll(
                         e.Publisher,
                         new AttachBlockToRendererEventArgs(
                            block: new PipelineBlock(copy)
                                .Add<Bitmap, Bitmap>(
-                                   (bmp) => _provider.ApplyFilter(bmp, filter))
+                                   (bmp) => _provider.ApplyFilter(bmp, filter)
+                            )
                         )
                     );
                 }
@@ -64,6 +66,16 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
         public async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
             View.Tooltip(e.Error);
-        }         
-	}
+        }
+
+        public async Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
+        {
+            if (e.Container == ImageContainer.Source)
+            {
+                await _locker.LockOperationAsync(() =>
+                    ViewModel = new ConvolutionViewModel(new Bitmap(e.Bmp))
+                ).ConfigureAwait(true);
+            }
+        }
+    }
 }

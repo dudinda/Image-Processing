@@ -1,4 +1,3 @@
-using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Microkernel.MVP.Presenter;
@@ -93,8 +92,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
         /// <summary>
         /// View model of a presenter.
         /// </summary>
-        protected TViewModel ViewModel { get; private set; }
+        protected TViewModel ViewModel { get; set; }
             = null!;
+
+        protected void UpdateViewModel(TViewModel vm)
+            => ViewModel = vm;
 
         protected BasePresenter(IAppController controller)
             => Controller = controller;
@@ -102,7 +104,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
         /// <inheritdoc/>
         public virtual void Run(TViewModel vm)
 		{
-            ViewModel = vm;
+            UpdateViewModel(vm);
             View.Show();
 		}
 	}
