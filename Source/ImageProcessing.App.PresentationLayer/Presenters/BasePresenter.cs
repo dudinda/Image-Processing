@@ -95,16 +95,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
         protected TViewModel ViewModel { get; set; }
             = null!;
 
-        protected void UpdateViewModel(TViewModel vm)
-            => ViewModel = vm;
-
         protected BasePresenter(IAppController controller)
             => Controller = controller;
 
         /// <inheritdoc/>
         public virtual void Run(TViewModel vm)
 		{
-            UpdateViewModel(vm);
+            ViewModel = vm;
             View.Show();
 		}
 	}
