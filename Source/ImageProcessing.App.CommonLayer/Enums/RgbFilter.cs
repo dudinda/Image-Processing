@@ -29,6 +29,18 @@ namespace ImageProcessing.App.CommonLayer.Enums
         /// Binary filter.
         /// </summary>
         [Description("Binary filter")]
-        Binary    = 3
+        Binary    = 3,
+
+        /// <summary>
+        /// Flopping filter.
+        /// </summary>
+        [Description("Flop the image")]
+        Flopping  = 4,
+
+        /// <summary>
+        /// Flipping filter.
+        /// </summary>
+        [Description("Flip the image")]
+        Flipping  = 5
     }
 }
