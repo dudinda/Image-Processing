@@ -62,6 +62,17 @@ namespace ImageProcessing.App.CommonLayer.Extensions.BitmapExt
             return bitmap;
         }
 
+        public static Bitmap DrawFilledRectangle(this Bitmap bmp, Brush brush)
+        {
+            using (var graph = Graphics.FromImage(bmp))
+            {
+                Rectangle ImageSize = new Rectangle(0, 0, bmp.Width, bmp.Height);
+                graph.FillRectangle(brush, ImageSize);
+            }
+
+            return bmp;
+        }
+
         /// <summary>
         /// Resize an image to a specified width and height.
         /// </summary>
