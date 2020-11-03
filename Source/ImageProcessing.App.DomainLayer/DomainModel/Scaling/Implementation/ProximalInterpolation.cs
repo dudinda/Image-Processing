@@ -39,8 +39,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
                 var dstStartPtr = (byte*)dstData.Scan0.ToPointer();
 
-                var yCoef = src.Height / (double)targetHeight;
-                var xCoef = src.Width / (double)targetWidth;
+                var yCoef = (src.Height - 1) / (double)targetHeight;
+                var xCoef = (src.Width - 1) / (double)targetWidth;
 
                 Parallel.For(0, targetHeight, options, y =>
                 {
