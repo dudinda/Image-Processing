@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Concurrent;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Net;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
@@ -10,14 +8,14 @@ using ImageProcessing.App.DomainLayer.DomainModel.Scaling.Interface;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 {
-    public sealed class ProximalInterpolation : IScaling
+    internal sealed class ProximalInterpolation : IScaling
     {
         public Bitmap Resize(Bitmap src, double yScale, double xScale)
         {
-            var targetWidth =  src.Size.Width + (int)(src.Size.Width  * xScale);
-            var targetHeight = src.Size.Height+ (int)(src.Size.Height * yScale);
+            var dstWidth  = src.Width  + (int)(src.Width  * xScale);
+            var dstHeight = src.Height + (int)(src.Height * yScale);
 
-            var dst = new Bitmap(targetWidth, targetHeight, src.PixelFormat)
+            var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
                 .DrawFilledRectangle(Brushes.White);
 
             var srcData = src.LockBits(
@@ -39,18 +37,18 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
                 var dstStartPtr = (byte*)dstData.Scan0.ToPointer();
 
-                var yCoef = (src.Height - 1) / (double)targetHeight;
-                var xCoef = (src.Width - 1) / (double)targetWidth;
+                var yCoef = src.Height / (double)dstHeight;
+                var xCoef = src.Width  / (double)dstWidth;
 
-                Parallel.For(0, targetHeight, options, y =>
+                Parallel.For(0, dstHeight, options, y =>
                 {
                     //get the address of a row
                     var dstRow = dstStartPtr + y * dstData.Stride;
                     var srcRow = srcStartPtr + (int)(y * yCoef) * srcData.Stride;
      
-                    for (var x = 0; x < targetWidth; ++x, dstRow += ptrStep)
+                    for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
                     {
-                        var srcPtr = srcRow + ((int)(x * xCoef) * ptrStep);
+                        var srcPtr = srcRow + (int)(x * xCoef) * ptrStep;
 
                         dstRow[0] = srcPtr[0];
                         dstRow[1] = srcPtr[1];
