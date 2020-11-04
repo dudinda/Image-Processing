@@ -12,10 +12,10 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
     {
         public Bitmap Resize(Bitmap src, double yScale, double xScale)
         {
-            var targetWidth = src.Size.Width + (int)(src.Size.Width * xScale);
-            var targetHeight = src.Size.Height + (int)(src.Size.Height * yScale);
+            var dstWidth = src.Size.Width + (int)(src.Size.Width * xScale);
+            var dstHeight = src.Size.Height + (int)(src.Size.Height * yScale);
 
-            var dst = new Bitmap(targetWidth, targetHeight, src.PixelFormat)
+            var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
                 .DrawFilledRectangle(Brushes.White);
 
             var srcData = src.LockBits(
@@ -37,39 +37,46 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
                 var dstStartPtr = (byte*)dstData.Scan0.ToPointer();
 
-                var yCoef = (src.Height - 1) / (double)targetHeight;
-                var xCoef = (src.Width - 1) / (double)targetWidth;
+                var yCoef = (src.Height - 1) / (double)dstHeight;
+                var xCoef = (src.Width - 1) / (double)dstWidth;
 
-                Parallel.For(0, targetHeight, options, y =>
+                var srcWidth = src.Size.Width - 1;
+                var srcHeight = src.Size.Height - 1;
+
+                Parallel.For(0, dstHeight, options, y =>
                 {
-                    var newY = (int)(y * yCoef);
+                    var newY      = y * yCoef;
+                    var newYFloor = (int)newY;
+                    var newYFrac  = newY - newYFloor;
+
+                    if (newY >= srcHeight) { newY = srcHeight - 1; }
+
                     //get the address of a row
                     var dstRow = dstStartPtr + y * dstData.Stride;
 
-                    var srcUpRow = srcStartPtr + newY       * srcData.Stride;
-                    var srcLoRow = srcStartPtr + (newY + 1) * srcData.Stride;
+                    var i0 = srcStartPtr + newYFloor       * srcData.Stride;
+                    var i1 = srcStartPtr + (newYFloor + 1) * srcData.Stride;
                     
-                    for (var x = 0; x < targetWidth; ++x, dstRow += ptrStep)
-                    {
-                        var xFrac = xCoef % 1;
-                        var yFrac = yCoef % 1;
+                    for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
+                    { 
+                        var newX      = x * xCoef;
+                        var newXFloor = (int)newX;
+                        var newXFrac  = newX - newXFloor;
 
-                        var newX = (int)(x * xCoef);
+                        if (newXFloor >= srcWidth) { newXFloor = srcWidth - 1; }
 
-                        var srcLeCol = newX       * ptrStep;
-                        var srcRaCol = (newX + 1) * ptrStep;
+                        var j0 = newXFloor       * ptrStep;
+                        var j1 = (newXFloor + 1) * ptrStep;
 
-                        var p00 = srcLeCol + srcUpRow; // (0, 0)
-                        var p10 = srcRaCol + srcUpRow; // (1, 0)
-                        var p01 = srcLeCol + srcLoRow; // (0, 1)
-                        var p11 = srcRaCol + srcLoRow; // (1, 1)
+                        var p00 = i0 + j0; var p10 = i1 + j0;                      
+                        var p01 = i0 + j1; var p11 = i1 + j1;
 
                         for(var index = 0; index < 3; ++index)
                         {
-                            var col0 = p00[index] * (1 - xFrac) + p10[index] * xFrac;
-                            var col1 = p01[index] * (1 - xFrac) + p11[index] * xFrac;
+                            var col0 = p00[index] * (1 - newXFrac) + p10[index] * newXFrac;
+                            var col1 = p01[index] * (1 - newXFrac) + p11[index] * newXFrac;
 
-                            var point = col0 * (1 - yFrac) + col1 * yFrac;
+                            var point = col0 * (1 - newYFrac) + col1 * newYFrac;
 
                             if (point > 255)
                             {
