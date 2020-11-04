@@ -79,16 +79,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 
                             var point = col0 * (1 - newYFrac) + col1 * newYFrac;
 
-                            if (point > 255)
-                            {
-                                point = 255;
-                            }
-                               
-                            if (point < 0)
-                            {
-                                point = 0;
-                            }
-
+                            if (point > 255) { point = 255; } if(point < 0) { point = 0; }
+                           
                             dstRow[index] = (byte)point;
                         } 
                     }
