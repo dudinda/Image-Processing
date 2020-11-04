@@ -8,7 +8,7 @@ using ImageProcessing.App.DomainLayer.DomainModel.Scaling.Interface;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 {
-    public sealed class BilinearInterpolation : IScaling
+    internal sealed class BilinearInterpolation : IScaling
     {
         public Bitmap Resize(Bitmap src, double yScale, double xScale)
         {
@@ -37,9 +37,11 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
                 var dstStartPtr = (byte*)dstData.Scan0.ToPointer();
 
+                // guarantees that on coordinate transform
+                // the pointer of the source image will not reach
+                // the rightmost column and the lowest row
                 var srcWidth = src.Width - 1;
                 var srcHeight = src.Height - 1;
-
 
                 var yCoef = srcHeight / (double)dstHeight;
                 var xCoef = srcWidth / (double)dstWidth;
@@ -49,8 +51,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                     var newY      = y * yCoef;
                     var newYFloor = (int)newY;
                     var newYFrac  = newY - newYFloor;
-
-                    if (newY >= srcHeight) { newY = srcHeight; }
 
                     //get the address of a row
                     var dstRow = dstStartPtr + y * dstData.Stride;
@@ -63,8 +63,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                         var newX      = x * xCoef;
                         var newXFloor = (int)newX;
                         var newXFrac  = newX - newXFloor;
-
-                        if (newXFloor >= srcWidth) { newXFloor = srcWidth; }
 
                         var j0 = newXFloor       * ptrStep;
                         var j1 = (newXFloor + 1) * ptrStep;
