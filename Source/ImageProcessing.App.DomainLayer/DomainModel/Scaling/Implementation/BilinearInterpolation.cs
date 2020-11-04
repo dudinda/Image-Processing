@@ -37,11 +37,12 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
                 var dstStartPtr = (byte*)dstData.Scan0.ToPointer();
 
-                var yCoef = (src.Height - 1) / (double)dstHeight;
-                var xCoef = (src.Width - 1) / (double)dstWidth;
+                var srcWidth = src.Width - 1;
+                var srcHeight = src.Height - 1;
 
-                var srcWidth = src.Size.Width - 1;
-                var srcHeight = src.Size.Height - 1;
+
+                var yCoef = srcHeight / (double)dstHeight;
+                var xCoef = srcWidth / (double)dstWidth;
 
                 Parallel.For(0, dstHeight, options, y =>
                 {
@@ -49,7 +50,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                     var newYFloor = (int)newY;
                     var newYFrac  = newY - newYFloor;
 
-                    if (newY >= srcHeight) { newY = srcHeight - 1; }
+                    if (newY >= srcHeight) { newY = srcHeight; }
 
                     //get the address of a row
                     var dstRow = dstStartPtr + y * dstData.Stride;
@@ -63,7 +64,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                         var newXFloor = (int)newX;
                         var newXFrac  = newX - newXFloor;
 
-                        if (newXFloor >= srcWidth) { newXFloor = srcWidth - 1; }
+                        if (newXFloor >= srcWidth) { newXFloor = srcWidth; }
 
                         var j0 = newXFloor       * ptrStep;
                         var j1 = (newXFloor + 1) * ptrStep;
