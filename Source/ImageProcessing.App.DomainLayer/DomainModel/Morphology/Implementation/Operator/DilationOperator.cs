@@ -7,12 +7,12 @@ using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Interface.UnaryOperator;
 using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
-namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.Erosion
+namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.Operator
 {
     /// <summary>
     /// Implements the <see cref="IMorphologyUnary"/>.
     /// </summary>
-    internal sealed class ErosionOperator : IMorphologyUnary
+    internal sealed class DilationOperator : IMorphologyUnary
     {
         /// <inheritdoc />
         public Bitmap Filter(Bitmap bitmap, BitMatrix kernel)
@@ -21,13 +21,13 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.
 
             var source = bitmap.AdjustBorder(kernel.ColumnCount / 2, Color.Black);
 
-            var sourceBitmapData = source.LockBits(new Rectangle(0, 0, source.Width, source.Height),
-                                                 ImageLockMode.ReadOnly,
-                                                 source.PixelFormat);
+            var sourceBitmapData = source.LockBits(
+                new Rectangle(0, 0, source.Width, source.Height),
+                ImageLockMode.ReadOnly, source.PixelFormat);
 
-            var destinationBitmapData = destination.LockBits(new Rectangle(0, 0, source.Width, source.Height),
-                                                             ImageLockMode.WriteOnly,
-                                                             destination.PixelFormat);
+            var destinationBitmapData = destination.LockBits(
+                new Rectangle(0, 0, source.Width, source.Height),
+                ImageLockMode.WriteOnly, destination.PixelFormat);
 
             var size = source.Size;
             var ptrStep = source.GetBitsPerPixel() / 8;
@@ -64,15 +64,16 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.
                                 //get the address of a current element
                                 elementPtr = sourcePtr + kernelColumn * ptrStep + kernelRow * sourceBitmapData.Stride;
 
-                                if (mask[kernelRow + kernelOffset, kernelColumn + kernelOffset] && elementPtr[0] != 255)
+                                if (mask[kernelRow + kernelOffset, kernelColumn + kernelOffset] && elementPtr[0] == 255)
                                 {
-                                    destinationPtr[0] = destinationPtr[1] = destinationPtr[2] = 0;
-                                    goto IsEroded;
+                                    destinationPtr[0] = destinationPtr[1] = destinationPtr[2] = 255;
+                                    goto IsDilated;
                                 }
+
                             }
                         }
 
-                        IsEroded:;
+                        IsDilated:;
                     }
                 });
             }
@@ -82,7 +83,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.
 
             source.Dispose();
 
-            return destination;
+            return destination;         
         }
     }
 }

@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Interface;
 
-namespace ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation.Flopping
+namespace ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation
 {
-    internal sealed class FloppingFilter : IRgbFilter
+    internal sealed class FlippingFilter : IRgbFilter
     {
         public Bitmap Filter(Bitmap bitmap)
         {
-            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                                              ImageLockMode.ReadWrite,
-                                              bitmap.PixelFormat);
-
             var size = bitmap.Size;
+
+            var bitmapData = bitmap.LockBits(
+                new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                ImageLockMode.ReadWrite, bitmap.PixelFormat);
+
             var ptrStep = bitmap.GetBitsPerPixel() / 8;
             var options = new ParallelOptions()
             {
@@ -26,12 +27,12 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation.
             unsafe
             {
                 var startPtr = (byte*)bitmapData.Scan0.ToPointer();
-                
-                Parallel.For(0, size.Height - 1, options, y =>
+
+                Parallel.For(0, size.Width, options, x =>
                 {
-                    //get the address of a row
-                    var ptr = startPtr + y * bitmapData.Stride;
-                    var endPtr = ptr + bitmapData.Stride;
+                    //get the address of a column
+                    var ptr = startPtr + x * ptrStep;
+                    var endPtr = ptr + bitmapData.Stride * (size.Height - 1);
 
                     do
                     {
@@ -39,8 +40,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation.
                         (ptr[1], endPtr[1]) = (endPtr[1], ptr[1]);
                         (ptr[2], endPtr[2]) = (endPtr[2], ptr[2]);
 
-                        ptr += ptrStep;
-                        endPtr -= ptrStep;
+                        ptr += bitmapData.Stride;
+                        endPtr -= bitmapData.Stride;
 
                     } while (ptr < endPtr);
                 });

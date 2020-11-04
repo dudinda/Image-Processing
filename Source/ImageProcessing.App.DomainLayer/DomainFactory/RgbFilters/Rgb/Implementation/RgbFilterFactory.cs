@@ -1,12 +1,8 @@
 using System;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation.Binary;
+using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation;
 using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation.Color;
-using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation.Flipping;
-using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation.Flopping;
-using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation.Grayscale;
-using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation.Inversion;
 using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Interface;
 using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Color.Interface;
 using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Rgb.Interface;

@@ -7,42 +7,42 @@ using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Interface.UnaryOperator;
 using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
-namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.Dilation
+namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.Operator
 {
     /// <summary>
     /// Implements the <see cref="IMorphologyUnary"/>.
     /// </summary>
-    internal sealed class DilationOperator : IMorphologyUnary
+    internal sealed class ErosionOperator : IMorphologyUnary
     {
         /// <inheritdoc />
         public Bitmap Filter(Bitmap bitmap, BitMatrix kernel)
         {
             var destination = new Bitmap(bitmap);
 
-            var source = bitmap.AdjustBorder(kernel.ColumnCount / 2, Color.Black);
+            var kernelOffset = (byte)(kernel.ColumnCount / 2);
 
-            var sourceBitmapData = source.LockBits(new Rectangle(0, 0, source.Width, source.Height),
-                                                 ImageLockMode.ReadOnly,
-                                                 source.PixelFormat);
-
-            var destinationBitmapData = destination.LockBits(new Rectangle(0, 0, source.Width, source.Height),
-                                                             ImageLockMode.WriteOnly,
-                                                             destination.PixelFormat);
+            var source = bitmap.AdjustBorder(kernelOffset, Color.Black);
 
             var size = source.Size;
+
+            var sourceBitmapData = source.LockBits(
+                new Rectangle(0, 0, source.Width, source.Height),
+                ImageLockMode.ReadOnly, source.PixelFormat);
+
+            var destinationBitmapData = destination.LockBits(
+                new Rectangle(0, 0, source.Width, source.Height),
+                ImageLockMode.WriteOnly,  destination.PixelFormat);
+     
             var ptrStep = source.GetBitsPerPixel() / 8;
+            var options = new ParallelOptions()
+            {
+                MaxDegreeOfParallelism = Environment.ProcessorCount - 1
+            };
 
             unsafe
             {
                 var sourceStartPtr      = (byte*)sourceBitmapData.Scan0.ToPointer();
                 var destinationStartPtr = (byte*)destinationBitmapData.Scan0.ToPointer();
-
-                var kernelOffset = (byte)(kernel.ColumnCount / 2);
-
-                var options = new ParallelOptions()
-                {
-                    MaxDegreeOfParallelism = Environment.ProcessorCount - 1
-                };
 
                 var mask = kernel.To2DArray();
 
@@ -64,16 +64,15 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.
                                 //get the address of a current element
                                 elementPtr = sourcePtr + kernelColumn * ptrStep + kernelRow * sourceBitmapData.Stride;
 
-                                if (mask[kernelRow + kernelOffset, kernelColumn + kernelOffset] && elementPtr[0] == 255)
+                                if (mask[kernelRow + kernelOffset, kernelColumn + kernelOffset] && elementPtr[0] != 255)
                                 {
-                                    destinationPtr[0] = destinationPtr[1] = destinationPtr[2] = 255;
-                                    goto IsDilated;
+                                    destinationPtr[0] = destinationPtr[1] = destinationPtr[2] = 0;
+                                    goto IsEroded;
                                 }
-
                             }
                         }
 
-                        IsDilated:;
+                        IsEroded:;
                     }
                 });
             }
@@ -83,7 +82,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.
 
             source.Dispose();
 
-            return destination;         
+            return destination;
         }
     }
 }

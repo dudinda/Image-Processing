@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Interface.BinaryOperator;
 
-namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.Addition
+namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.Operator
 {
     /// <summary>
     /// Implements the <see cref="IMorphologyBinary"/>.
@@ -18,31 +18,31 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.
         {
             var result = new Bitmap(lvalue);
 
-            var lvalueBitmapData = lvalue.LockBits(new Rectangle(0, 0, lvalue.Width, lvalue.Height),
-                                                   ImageLockMode.ReadOnly,
-                                                   lvalue.PixelFormat);
-
-            var rvalueBitmapData = rvalue.LockBits(new Rectangle(0, 0, rvalue.Width, rvalue.Height),
-                                                   ImageLockMode.ReadOnly,
-                                                   rvalue.PixelFormat);
-
-            var resultBitmapData = result.LockBits(new Rectangle(0, 0, result.Width, result.Height),
-                                                   ImageLockMode.WriteOnly,
-                                                   result.PixelFormat);
-
             var size = result.Size;
+
+            var lvalueBitmapData = lvalue.LockBits(
+                new Rectangle(0, 0, lvalue.Width, lvalue.Height),
+                ImageLockMode.ReadOnly, lvalue.PixelFormat);
+
+            var rvalueBitmapData = rvalue.LockBits(
+                new Rectangle(0, 0, rvalue.Width, rvalue.Height),
+                ImageLockMode.ReadOnly, rvalue.PixelFormat);
+
+            var resultBitmapData = result.LockBits(
+                new Rectangle(0, 0, result.Width, result.Height),
+                ImageLockMode.WriteOnly, result.PixelFormat);
+
             var ptrStep = result.GetBitsPerPixel() / 8;
+            var options = new ParallelOptions()
+            {
+                MaxDegreeOfParallelism = Environment.ProcessorCount
+            };
 
             unsafe
             {
                 var rvalueStartPtr = (byte*)rvalueBitmapData.Scan0.ToPointer();
                 var lvalueStartPtr = (byte*)lvalueBitmapData.Scan0.ToPointer();
                 var resultStartPtr = (byte*)resultBitmapData.Scan0.ToPointer();
-
-                var options = new ParallelOptions()
-                {
-                    MaxDegreeOfParallelism = Environment.ProcessorCount
-                };
 
                 Parallel.For(0, size.Height, options, y =>
                 {

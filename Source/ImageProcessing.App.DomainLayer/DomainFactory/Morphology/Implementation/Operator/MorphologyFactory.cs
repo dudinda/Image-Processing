@@ -1,18 +1,10 @@
 using System;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.Factory.Morphology.Interface;
-using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.Addition;
-using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.BlackHat;
-using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.Closing;
-using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.Dilation;
-using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.Erosion;
-using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.MorphologicalGradient;
-using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.Opening;
-using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.Subtraction;
-using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.TopHat;
+using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.Operator;
 using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Interface.BinaryOperator;
 using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Interface.UnaryOperator;
+using ImageProcessing.App.DomainLayer.Factory.Morphology.Interface;
 
 namespace ImageProcessing.App.DomainLayer.Factory.Morphology.Implementation
 {

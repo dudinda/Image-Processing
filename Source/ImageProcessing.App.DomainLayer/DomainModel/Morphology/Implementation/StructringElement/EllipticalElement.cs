@@ -3,7 +3,7 @@ using System;
 using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Interface.StructuringElement;
 using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
-namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.StructringElement.Elliptical
+namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.StructringElement
 {
     /// <summary>
     /// Implements the <see cref="IStructuringElement"/>.

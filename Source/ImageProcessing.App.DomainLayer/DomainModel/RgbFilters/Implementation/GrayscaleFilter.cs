@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
-using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Recommendation.Implementation;
 using ImageProcessing.App.DomainLayer.DomainModel.Recommendation.Interface;
 using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Interface;
+using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Recommendation.Implementation;
 
-namespace ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation.Grayscale
+namespace ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation
 {
     /// <summary>
     /// Implements the <see cref="IRgbFilter"/>.
@@ -22,11 +22,12 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation.
         /// <inheritdoc />
         public Bitmap Filter(Bitmap bitmap)
         {
-            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                                             ImageLockMode.ReadWrite,
-                                             bitmap.PixelFormat);
-
             var size = bitmap.Size;
+
+            var bitmapData = bitmap.LockBits(
+                new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                ImageLockMode.ReadWrite, bitmap.PixelFormat);
+
             var ptrStep = bitmap.GetBitsPerPixel() / 8;
             var options = new ParallelOptions()
             {

@@ -8,7 +8,7 @@ using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Interface;
 
-namespace ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation.Inversion
+namespace ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation
 {
     /// <summary>
     /// Implements the <see cref="IRgbFilter"/>.
@@ -21,13 +21,13 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation.
         /// <inheritdoc />
         public Bitmap Filter(Bitmap bitmap)
         {
-            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                                             ImageLockMode.ReadWrite,
-                                             bitmap.PixelFormat);
-
             var inverse = GetReversedByteOrder();
-
             var size = bitmap.Size;
+
+            var bitmapData = bitmap.LockBits(
+                new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                ImageLockMode.ReadWrite, bitmap.PixelFormat);
+
             var ptrStep = bitmap.GetBitsPerPixel() / 8;
             var options = new ParallelOptions()
             {

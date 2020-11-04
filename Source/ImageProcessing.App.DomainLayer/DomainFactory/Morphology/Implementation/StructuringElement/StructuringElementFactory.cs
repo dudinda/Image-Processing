@@ -1,11 +1,9 @@
 using System;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.Factory.Morphology.Interface.StructuringElement;
-using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.StructringElement.CrossShaped;
-using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.StructringElement.Elliptical;
-using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.StructringElement.Rectangular;
+using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.StructringElement;
 using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Interface.StructuringElement;
+using ImageProcessing.App.DomainLayer.Factory.Morphology.Interface.StructuringElement;
 
 namespace ImageProcessing.App.DomainLayer.Factory.StructuringElement.Implementation
 {

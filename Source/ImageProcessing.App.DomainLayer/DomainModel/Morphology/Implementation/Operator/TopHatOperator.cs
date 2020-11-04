@@ -1,11 +1,9 @@
 using System.Drawing;
 
-using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.Opening;
-using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.Subtraction;
 using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Interface.UnaryOperator;
 using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
-namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.TopHat
+namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.Operator
 {
     /// <summary>
     /// Implements the <see cref="IMorphologyUnary"/>.
