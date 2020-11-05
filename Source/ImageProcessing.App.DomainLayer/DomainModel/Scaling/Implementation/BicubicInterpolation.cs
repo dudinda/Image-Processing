@@ -80,7 +80,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                         var p20 = i2 + j0; var p21 = i2 + j1; var p22 = i2 + j2; var p23 = i2 + j3;
                         var p30 = i3 + j0; var p31 = i3 + j1; var p32 = i3 + j2; var p33 = i3 + j3;
 
-                        for (var index = 0; index < 3; ++index)
+                        for (var index = 0; index < ptrStep; ++index)
                         {
                             var p1 = Interpolate(p00[index], p01[index], p02[index], p03[index], ref xFrc);
                             var p2 = Interpolate(p10[index], p11[index], p12[index], p13[index], ref xFrc);
