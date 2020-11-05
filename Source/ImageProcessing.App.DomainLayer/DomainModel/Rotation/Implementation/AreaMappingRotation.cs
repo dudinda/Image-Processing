@@ -84,7 +84,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                             var p00 = i0 + j0; var p01 = i0 + j1;
                             var p10 = i1 + j0; var p11 = i1 + j1;
 
-                            for (var index = 0; index < 3; ++index)
+                            for (var index = 0; index < ptrStep; ++index)
                             {
                                 var col0 = p00[index] * (1 - xFrac) + p10[index] * xFrac;
                                 var col1 = p01[index] * (1 - xFrac) + p11[index] * xFrac;
