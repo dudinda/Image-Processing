@@ -46,6 +46,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                 var yCoef = srcHeight / (double)dstHeight;
                 var xCoef = srcWidth / (double)dstWidth;
 
+
+                var setStep = ptrStep;
+
                 Parallel.For(0, dstHeight, options, y =>
                 {
                     var newY      = y * yCoef;
@@ -70,17 +73,37 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                         var p00 = i0 + j0; var p10 = i1 + j0;                      
                         var p01 = i0 + j1; var p11 = i1 + j1;
 
-                        for(var index = 0; index < ptrStep; ++index)
-                        {
-                            var col0 = p00[index] * (1 - newXFrac) + p10[index] * newXFrac;
-                            var col1 = p01[index] * (1 - newXFrac) + p11[index] * newXFrac;
+                        var invXFrac = 1 - newXFrac;
+                        var invYFrac = 1 - newYFrac;
 
-                            var point = col0 * (1 - newYFrac) + col1 * newYFrac;
+                        double col0, col1, point;
 
-                            if (point > 255) { point = 255; } else if(point < 0) { point = 0; }
-                           
-                            dstRow[index] = (byte)point;
-                        } 
+                        col0 = p00[0] * invXFrac + p10[0] * newXFrac;
+                        col1 = p01[0] * invXFrac + p11[0] * newXFrac;
+
+                        point = col0 * invYFrac + col1 * newYFrac;
+
+                        if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
+
+                        dstRow[0] = (byte)point;
+
+                        col0 = p00[1] * invXFrac + p10[1] * newXFrac;
+                        col1 = p01[1] * invXFrac + p11[1] * newXFrac;
+
+                        point = col0 * invYFrac + col1 * newYFrac;
+
+                        if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
+
+                        dstRow[1] = (byte)point;
+
+                        col0 = p00[2] * invXFrac + p10[2] * newXFrac;
+                        col1 = p01[2] * invXFrac + p11[2] * newXFrac;
+
+                        point = col0 * invYFrac + col1 * newYFrac;
+
+                        if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
+
+                        dstRow[2] = (byte)point;
                     }
                 });
             }
