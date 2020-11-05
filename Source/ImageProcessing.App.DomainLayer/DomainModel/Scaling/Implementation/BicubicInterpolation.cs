@@ -37,7 +37,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
                 var dstStartPtr = (byte*)dstData.Scan0.ToPointer();
 
-                // guarantees that on coordinate transform
+                // guarantees that on coordinate transform (x, y) -> (ax, ay)
                 // the pointer of the source image will not reach
                 // the two rightmost columns and the two lowest rows
                 var srcWidth = src.Width - 2;
@@ -52,7 +52,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                     var yFlr = (int)newY;
                     var yFrc = newY - yFlr;
 
-                    if (yFlr <= 0) { yFlr = 1; }
+                    if (yFlr <= 0) { yFlr = 1; } 
 
                     //get the address of a row
                     var dstRow = dstStartPtr + y * dstData.Stride;
