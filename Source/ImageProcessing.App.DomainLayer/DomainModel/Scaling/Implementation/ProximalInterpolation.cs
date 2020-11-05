@@ -50,10 +50,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                     {
                         var srcPtr = srcRow + (int)(x * xCoef) * ptrStep;
 
-                        for(var index = 0; index < ptrStep; ++index)
-                        {
-                            dstRow[index] = srcPtr[index];
-                        }
+                        dstRow[0] = srcPtr[0];
+                        dstRow[1] = srcPtr[1];
+                        dstRow[2] = srcPtr[2];
                     }
                 });
             }
