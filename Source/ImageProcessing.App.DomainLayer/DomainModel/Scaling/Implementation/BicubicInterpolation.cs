@@ -80,24 +80,57 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                         var p20 = i2 + j0; var p21 = i2 + j1; var p22 = i2 + j2; var p23 = i2 + j3;
                         var p30 = i3 + j0; var p31 = i3 + j1; var p32 = i3 + j2; var p33 = i3 + j3;
 
-                        for (var index = 0; index < ptrStep; ++index)
-                        {
-                            var p1 = Interpolate(p00[index], p01[index], p02[index], p03[index], ref xFrc);
-                            var p2 = Interpolate(p10[index], p11[index], p12[index], p13[index], ref xFrc);
-                            var p3 = Interpolate(p20[index], p21[index], p22[index], p23[index], ref xFrc);
-                            var p4 = Interpolate(p30[index], p31[index], p32[index], p33[index], ref xFrc);
+                        double p0, p1, p2, p3;
+                        double a, b, c, d;
 
-                            var a = 0.5 * (-p1 + 3 * p2 - 3 * p3 + p4);
-                            var b = p1 + 2 * p3 - 0.5 * (5 * p2 + p4);
-                            var c = 0.5 * (-p1 + p3);
-                            var d = p4;
+                        p0 = Interpolate(p00[0], p01[0], p02[0], p03[0], ref xFrc);
+                        p1 = Interpolate(p10[0], p11[0], p12[0], p13[0], ref xFrc);
+                        p2 = Interpolate(p20[0], p21[0], p22[0], p23[0], ref xFrc);
+                        p3 = Interpolate(p30[0], p31[0], p32[0], p33[0], ref xFrc);
 
-                            var point = yFrc * (yFrc * (a * yFrc + b) + c) + d;
+                        a = 0.5 * (-p0 + 3 * p1 - 3 * p2 + p3);
+                        b = p0 + 2 * p2 - 0.5 * (5 * p1 + p3);
+                        c = 0.5 * (-p0 + p2);
+                        d = p3;
 
-                            if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
+                        var blue = yFrc * (yFrc * (a * yFrc + b) + c) + d;
 
-                            dstRow[index] = (byte)point;
-                        }
+                        if (blue > 255) { blue = 255; } else if (blue < 0) { blue = 0; }
+
+                        dstRow[0] = (byte)blue;
+
+                        p0 = Interpolate(p00[1], p01[1], p02[1], p03[1], ref xFrc);
+                        p1 = Interpolate(p10[1], p11[1], p12[1], p13[1], ref xFrc);
+                        p2 = Interpolate(p20[1], p21[1], p22[1], p23[1], ref xFrc);
+                        p3 = Interpolate(p30[1], p31[1], p32[1], p33[1], ref xFrc);
+
+                        a = 0.5 * (-p0 + 3 * p1 - 3 * p2 + p3);
+                        b = p0 + 2 * p2 - 0.5 * (5 * p1 + p3);
+                        c = 0.5 * (-p0 + p2);
+                        d = p3;
+
+                        var green = yFrc * (yFrc * (a * yFrc + b) + c) + d;
+
+                        if (green > 255) { green = 255; } else if (green < 0) { green = 0; }
+
+                        dstRow[1] = (byte)green;
+
+                        p0 = Interpolate(p00[2], p01[2], p02[2], p03[2], ref xFrc);
+                        p1 = Interpolate(p10[2], p11[2], p12[2], p13[2], ref xFrc);
+                        p2 = Interpolate(p20[2], p21[2], p22[2], p23[2], ref xFrc);
+                        p3 = Interpolate(p30[2], p31[2], p32[2], p33[2], ref xFrc);
+
+                        a = 0.5 * (-p0 + 3 * p1 - 3 * p2 + p3);
+                        b = p0 + 2 * p2 - 0.5 * (5 * p1 + p3);
+                        c = 0.5 * (-p0 + p2);
+                        d = p3;
+
+                        var red = yFrc * (yFrc * (a * yFrc + b) + c) + d;
+
+                        if (red > 255) { red = 255; } else if (red < 0) { red = 0; }
+
+                        dstRow[2] = (byte)red;
+
                     }
                 });
             }
