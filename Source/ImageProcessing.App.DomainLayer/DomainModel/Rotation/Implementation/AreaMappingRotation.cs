@@ -8,7 +8,7 @@ using ImageProcessing.App.DomainLayer.DomainModel.Rotation.Interface;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 {
-    internal sealed class ForwardAffineRotation : IRotation
+    internal sealed class AreaMappingRotation : IRotation
     {
         public Bitmap Rotate(Bitmap src, double rad)
         {
@@ -29,7 +29,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 
             var (dstHeight, dstWidth) = ((int)(yMax - yMin), (int)(xMax - xMin));
 
-            var (xCenter, yCenter) = (dstWidth  / 2, dstHeight / 2);
+            var (xCenter, yCenter) = ((dstWidth - 1) / 2.0, (dstHeight - 1) / 2.0);
+            var (xSrcCenter, ySrcCenter) = ((srcWidth - 1) / 2.0, (srcHeight - 1) / 2.0);
 
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
                .DrawFilledRectangle(Brushes.White);
@@ -60,8 +61,10 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                     
                     for (var x = 0; x < dstWidth; ++x, dstPtr += ptrStep)
                     {
-                        var newX = cos * (x - xCenter) - sin * (y - yCenter) + srcWidth  / 2.0;
-                        var newY = sin * (x - xCenter) + cos * (y - yCenter) + srcHeight / 2.0;
+                        var xShift = x - xCenter; var yShift = y - yCenter;
+
+                        var newX = cos * xShift - sin * yShift + xSrcCenter;
+                        var newY = sin * xShift + cos * yShift + ySrcCenter;
 
                         var xFloor = (int)newX;
                         var yFloor = (int)newY;
