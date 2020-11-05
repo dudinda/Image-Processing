@@ -18,6 +18,11 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
                 .DrawFilledRectangle(Brushes.White);
 
+            if(src.PixelFormat == PixelFormat.Format8bppIndexed)
+            {
+                return Resize8bpp(src, dst, yScale, xScale);
+            }
+
             var srcData = src.LockBits(
                 new Rectangle(0, 0, src.Width, src.Height),
                 ImageLockMode.ReadOnly, src.PixelFormat);
@@ -58,7 +63,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                     var dstRow = dstStartPtr + y * dstData.Stride;
 
                     var i0 = srcStartPtr + (yFlr - 1) * srcData.Stride;
-                    var i1 = srcStartPtr + yFlr * srcData.Stride;
+                    var i1 = srcStartPtr +  yFlr      * srcData.Stride;
                     var i2 = srcStartPtr + (yFlr + 1) * srcData.Stride;
                     var i3 = srcStartPtr + (yFlr + 2) * srcData.Stride;
 
@@ -75,7 +80,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                         if (xFlr <= 0) { xFlr = 1; }
 
                         var j0 = (xFlr - 1) * ptrStep;
-                        var j1 = xFlr * ptrStep;
+                        var j1 =  xFlr      * ptrStep;
                         var j2 = (xFlr + 1) * ptrStep;
                         var j3 = (xFlr + 2) * ptrStep;
 
@@ -128,7 +133,103 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                         if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
 
                         dstRow[2] = (byte)point;
+                    }
+                });
+            }
 
+            src.UnlockBits(srcData);
+            dst.UnlockBits(dstData);
+
+            return dst;
+        }
+
+        private Bitmap Resize8bpp(
+            Bitmap src, Bitmap dst,
+            double yScale, double xScale)
+        {
+            var dstWidth = dst.Width;
+            var dstHeight = dst.Height;
+
+            var srcData = src.LockBits(
+             new Rectangle(0, 0, src.Width, src.Height),
+             ImageLockMode.ReadOnly, src.PixelFormat);
+
+            var dstData = dst.LockBits(
+                new Rectangle(0, 0, dst.Width, dst.Height),
+                ImageLockMode.WriteOnly, dst.PixelFormat);
+
+            var ptrStep = dst.GetBitsPerPixel() / 8;
+            var options = new ParallelOptions()
+            {
+                MaxDegreeOfParallelism = Environment.ProcessorCount
+            };
+
+            unsafe
+            {
+                var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
+                var dstStartPtr = (byte*)dstData.Scan0.ToPointer();
+
+                // guarantees that on coordinate transform (x, y) -> (ax, ay)
+                // the pointer of the source image will not reach
+                // the two rightmost columns and the two lowest rows
+                var srcWidth = src.Width - 2;
+                var srcHeight = src.Height - 2;
+
+                var yCoef = srcHeight / (double)dstHeight;
+                var xCoef = srcWidth / (double)dstWidth;
+
+                Parallel.For(0, dstHeight, options, y =>
+                {
+                    var newY = y * yCoef;
+                    var yFlr = (int)newY;
+                    var yFrc = newY - yFlr;
+
+                    if (yFlr <= 0) { yFlr = 1; }
+
+                    //get the address of a row
+                    var dstRow = dstStartPtr + y * dstData.Stride;
+
+                    var i0 = srcStartPtr + (yFlr - 1) * srcData.Stride;
+                    var i1 = srcStartPtr +  yFlr      * srcData.Stride;
+                    var i2 = srcStartPtr + (yFlr + 1) * srcData.Stride;
+                    var i3 = srcStartPtr + (yFlr + 2) * srcData.Stride;
+
+                    double point;
+                    double p0, p1, p2, p3;
+                    double a, b, c, d;
+
+                    for (var x = 0; x < dstWidth; ++x, ++dstRow)
+                    {
+                        var newX = x * xCoef;
+                        var xFlr = (int)newX;
+                        var xFrc = newX - xFlr;
+
+                        if (xFlr <= 0) { xFlr = 1; }
+
+                        var j0 = (xFlr - 1) * ptrStep;
+                        var j1 =  xFlr      * ptrStep;
+                        var j2 = (xFlr + 1) * ptrStep;
+                        var j3 = (xFlr + 2) * ptrStep;
+
+                        var p00 = i0 + j0; var p01 = i0 + j1; var p02 = i0 + j2; var p03 = i0 + j3;
+                        var p10 = i1 + j0; var p11 = i1 + j1; var p12 = i1 + j2; var p13 = i1 + j3;
+                        var p20 = i2 + j0; var p21 = i2 + j1; var p22 = i2 + j2; var p23 = i2 + j3;
+                        var p30 = i3 + j0; var p31 = i3 + j1; var p32 = i3 + j2; var p33 = i3 + j3;
+
+                        p0 = Interpolate(p00[0], p01[0], p02[0], p03[0], ref xFrc);
+                        p1 = Interpolate(p10[0], p11[0], p12[0], p13[0], ref xFrc);
+                        p2 = Interpolate(p20[0], p21[0], p22[0], p23[0], ref xFrc);
+                        p3 = Interpolate(p30[0], p31[0], p32[0], p33[0], ref xFrc);
+
+                        a = 0.5 * (-p0 + 3 * p1 - 3 * p2 + p3);
+                        b = p0 + 2 * p2 - 0.5 * (5 * p1 + p3);
+                        c = 0.5 * (-p0 + p2); d = p3;
+
+                        point = yFrc * (yFrc * (a * yFrc + b) + c) + d;
+
+                        if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
+
+                        dstRow[0] = (byte)point;
                     }
                 });
             }

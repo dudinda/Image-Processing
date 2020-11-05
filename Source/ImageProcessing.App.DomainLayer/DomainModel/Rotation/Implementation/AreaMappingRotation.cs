@@ -29,11 +29,16 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 
             var (dstHeight, dstWidth) = ((int)(yMax - yMin), (int)(xMax - xMin));
 
-            var (xCenter, yCenter) = ((dstWidth - 1) / 2.0, (dstHeight - 1) / 2.0);
-            var (xSrcCenter, ySrcCenter) = ((srcWidth - 1) / 2.0, (srcHeight - 1) / 2.0);
-
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
                .DrawFilledRectangle(Brushes.White);
+
+            if(src.PixelFormat == PixelFormat.Format8bppIndexed)
+            {
+                return Rotate8bpp(src, dst, cos, sin);
+            }
+
+            var (xCenter, yCenter) = ((dstWidth - 1) / 2.0, (dstHeight - 1) / 2.0);
+            var (xSrcCenter, ySrcCenter) = ((srcWidth - 1) / 2.0, (srcHeight - 1) / 2.0);
 
             var srcData = src.LockBits(
                 new Rectangle(0, 0, srcWidth, srcHeight),
@@ -115,6 +120,88 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                             if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
 
                             dstPtr[2] = (byte)point;
+                        }
+                    }
+                });
+            }
+
+            src.UnlockBits(srcData);
+            dst.UnlockBits(dstData);
+
+            return dst;
+        }
+
+        private Bitmap Rotate8bpp(Bitmap src, Bitmap dst, double cos, double sin)
+        {
+            var (srcWidth, srcHeight) = (src.Width, src.Height);
+            var (dstWidth, dstHeight) = (dst.Width, dst.Height);
+
+            var (xCenter, yCenter) = ((dstWidth - 1) / 2.0, (dstHeight - 1) / 2.0);
+            var (xSrcCenter, ySrcCenter) = ((srcWidth - 1) / 2.0, (srcHeight - 1) / 2.0);
+
+            var srcData = src.LockBits(
+               new Rectangle(0, 0, srcWidth, srcHeight),
+               ImageLockMode.ReadOnly, src.PixelFormat);
+
+            var dstData = dst.LockBits(
+                new Rectangle(0, 0, dstWidth, dstHeight),
+                ImageLockMode.WriteOnly, dst.PixelFormat);
+
+            var ptrStep = src.GetBitsPerPixel() / 8;
+            var options = new ParallelOptions()
+            {
+                MaxDegreeOfParallelism = Environment.ProcessorCount
+            };
+
+            unsafe
+            {
+                var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
+                var dstStartPtr = (byte*)dstData.Scan0.ToPointer();
+
+                Parallel.For(0, dstWidth, options, y =>
+                {
+                    //get the address of a row
+                    var dstPtr = dstStartPtr + y * dstData.Stride;
+
+                    double col0, col1, point;
+
+                    for (var x = 0; x < dstWidth; ++x, ++dstPtr)
+                    {
+                        var xShift = x - xCenter;
+                        var yShift = y - yCenter;
+
+                        var newX = cos * xShift - sin * yShift + xSrcCenter;
+                        var newY = sin * xShift + cos * yShift + ySrcCenter;
+
+                        var xFloor = (int)newX;
+                        var yFloor = (int)newY;
+
+                        var xFrac = newX - xFloor;
+                        var yFrac = newY - yFloor;
+
+                        if (xFloor < srcWidth - 1 && xFloor > 0 &&
+                            yFloor < srcHeight - 1 && yFloor > 0)
+                        {
+                            var i0 = srcStartPtr + yFloor * srcData.Stride;
+                            var i1 = srcStartPtr + (yFloor + 1) * srcData.Stride;
+
+                            var j0 = xFloor * ptrStep;
+                            var j1 = (xFloor + 1) * ptrStep;
+
+                            var p00 = i0 + j0; var p01 = i0 + j1;
+                            var p10 = i1 + j0; var p11 = i1 + j1;
+
+                            var invXFrac = 1 - xFrac;
+                            var invYFrac = 1 - yFrac;
+
+                            col0 = p00[0] * invXFrac + p10[0] * xFrac;
+                            col1 = p01[0] * invXFrac + p11[0] * xFrac;
+
+                            point = col0 * invYFrac + col1 * yFrac;
+
+                            if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
+
+                            dstPtr[0] = (byte)point;
                         }
                     }
                 });
