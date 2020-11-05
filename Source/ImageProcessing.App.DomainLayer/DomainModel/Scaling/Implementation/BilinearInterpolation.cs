@@ -46,7 +46,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                 var yCoef = srcHeight / (double)dstHeight;
                 var xCoef = srcWidth / (double)dstWidth;
 
-
                 var setStep = ptrStep;
 
                 Parallel.For(0, dstHeight, options, y =>
@@ -60,7 +59,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 
                     var i0 = srcStartPtr + newYFloor       * srcData.Stride;
                     var i1 = srcStartPtr + (newYFloor + 1) * srcData.Stride;
-                    
+
+                    double col0, col1, point;
+
                     for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
                     { 
                         var newX      = x * xCoef;
@@ -75,8 +76,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 
                         var invXFrac = 1 - newXFrac;
                         var invYFrac = 1 - newYFrac;
-
-                        double col0, col1, point;
 
                         col0 = p00[0] * invXFrac + p10[0] * newXFrac;
                         col1 = p01[0] * invXFrac + p11[0] * newXFrac;

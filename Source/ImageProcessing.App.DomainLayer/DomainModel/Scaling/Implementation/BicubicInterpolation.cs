@@ -52,18 +52,22 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                     var yFlr = (int)newY;
                     var yFrc = newY - yFlr;
 
-                    if (yFlr <= 0) { yFlr = 1; } 
+                    if (yFlr <= 0) { yFlr = 1; }
 
                     //get the address of a row
                     var dstRow = dstStartPtr + y * dstData.Stride;
 
                     var i0 = srcStartPtr + (yFlr - 1) * srcData.Stride;
-                    var i1 = srcStartPtr +  yFlr      * srcData.Stride;
+                    var i1 = srcStartPtr + yFlr * srcData.Stride;
                     var i2 = srcStartPtr + (yFlr + 1) * srcData.Stride;
                     var i3 = srcStartPtr + (yFlr + 2) * srcData.Stride;
 
+                    double point;
+                    double p0, p1, p2, p3;
+                    double a, b, c, d;
+
                     for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
-                    {                      
+                    {
                         var newX = x * xCoef;
                         var xFlr = (int)newX;
                         var xFrc = newX - xFlr;
@@ -71,7 +75,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                         if (xFlr <= 0) { xFlr = 1; }
 
                         var j0 = (xFlr - 1) * ptrStep;
-                        var j1 =  xFlr      * ptrStep;
+                        var j1 = xFlr * ptrStep;
                         var j2 = (xFlr + 1) * ptrStep;
                         var j3 = (xFlr + 2) * ptrStep;
 
@@ -80,9 +84,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                         var p20 = i2 + j0; var p21 = i2 + j1; var p22 = i2 + j2; var p23 = i2 + j3;
                         var p30 = i3 + j0; var p31 = i3 + j1; var p32 = i3 + j2; var p33 = i3 + j3;
 
-                        double p0, p1, p2, p3;
-                        double a, b, c, d;
-
                         p0 = Interpolate(p00[0], p01[0], p02[0], p03[0], ref xFrc);
                         p1 = Interpolate(p10[0], p11[0], p12[0], p13[0], ref xFrc);
                         p2 = Interpolate(p20[0], p21[0], p22[0], p23[0], ref xFrc);
@@ -90,14 +91,13 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 
                         a = 0.5 * (-p0 + 3 * p1 - 3 * p2 + p3);
                         b = p0 + 2 * p2 - 0.5 * (5 * p1 + p3);
-                        c = 0.5 * (-p0 + p2);
-                        d = p3;
+                        c = 0.5 * (-p0 + p2); d = p3;
 
-                        var blue = yFrc * (yFrc * (a * yFrc + b) + c) + d;
+                        point = yFrc * (yFrc * (a * yFrc + b) + c) + d;
 
-                        if (blue > 255) { blue = 255; } else if (blue < 0) { blue = 0; }
+                        if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
 
-                        dstRow[0] = (byte)blue;
+                        dstRow[0] = (byte)point;
 
                         p0 = Interpolate(p00[1], p01[1], p02[1], p03[1], ref xFrc);
                         p1 = Interpolate(p10[1], p11[1], p12[1], p13[1], ref xFrc);
@@ -106,14 +106,13 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 
                         a = 0.5 * (-p0 + 3 * p1 - 3 * p2 + p3);
                         b = p0 + 2 * p2 - 0.5 * (5 * p1 + p3);
-                        c = 0.5 * (-p0 + p2);
-                        d = p3;
+                        c = 0.5 * (-p0 + p2); d = p3;
 
-                        var green = yFrc * (yFrc * (a * yFrc + b) + c) + d;
+                        point = yFrc * (yFrc * (a * yFrc + b) + c) + d;
 
-                        if (green > 255) { green = 255; } else if (green < 0) { green = 0; }
+                        if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
 
-                        dstRow[1] = (byte)green;
+                        dstRow[1] = (byte)point;
 
                         p0 = Interpolate(p00[2], p01[2], p02[2], p03[2], ref xFrc);
                         p1 = Interpolate(p10[2], p11[2], p12[2], p13[2], ref xFrc);
@@ -122,14 +121,13 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 
                         a = 0.5 * (-p0 + 3 * p1 - 3 * p2 + p3);
                         b = p0 + 2 * p2 - 0.5 * (5 * p1 + p3);
-                        c = 0.5 * (-p0 + p2);
-                        d = p3;
+                        c = 0.5 * (-p0 + p2); d = p3;
 
-                        var red = yFrc * (yFrc * (a * yFrc + b) + c) + d;
+                        point = yFrc * (yFrc * (a * yFrc + b) + c) + d;
 
-                        if (red > 255) { red = 255; } else if (red < 0) { red = 0; }
+                        if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
 
-                        dstRow[2] = (byte)red;
+                        dstRow[2] = (byte)point;
 
                     }
                 });
@@ -139,16 +137,19 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
             dst.UnlockBits(dstData);
 
             return dst;
+        }
 
-            double Interpolate(double p0, double p1, double p2, double p3, ref double t)
-            {
-                var a = 0.5 * (-p0 + 3 * p1 - 3 * p2 + p3);
-                var b = p0 + 2 * p2 - 0.5 * (5 * p1 + p3);
-                var c = 0.5 * (-p0 + p2);
-                var d = p3;
+        private double Interpolate(
+            double p0, double p1,
+            double p2, double p3,
+            ref double t)
+        {
+            var a = 0.5 * (-p0 + 3 * p1 - 3 * p2 + p3);
+            var b = p0 + 2 * p2 - 0.5 * (5 * p1 + p3);
+            var c = 0.5 * (-p0 + p2);
+            var d = p3;
 
-                return t * (t * (a * t + b) + c) + d;
-            }
+            return t * (t * (a * t + b) + c) + d;
         }
     }
 }

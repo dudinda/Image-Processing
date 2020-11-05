@@ -58,7 +58,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                 {
                     //get the address of a row
                     var dstPtr = dstStartPtr + y * dstData.Stride;
-                    
+
+                    double col0, col1, point;
+
                     for (var x = 0; x < dstWidth; ++x, dstPtr += ptrStep)
                     {
                         var xShift = x - xCenter; var yShift = y - yCenter;
@@ -83,8 +85,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 
                             var p00 = i0 + j0; var p01 = i0 + j1;
                             var p10 = i1 + j0; var p11 = i1 + j1;
-
-                            double col0, col1, point;
 
                             var invXFrac = 1 - xFrac;
                             var invYFrac = 1 - yFrac;
