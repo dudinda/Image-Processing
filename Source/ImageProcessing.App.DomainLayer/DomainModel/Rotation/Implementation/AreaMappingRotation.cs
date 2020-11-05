@@ -18,8 +18,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 
             var (cos, sin) = (Math.Cos(rad), Math.Sin(rad));
       
-            var (xUpRight, yUpRight) = ( srcWidth * cos, srcWidth * sin);
-            var (xDoRight, yDoRight) = ( srcWidth * cos - srcHeight * sin, srcWidth * sin + srcHeight * cos);
+            var (xUpRight, yUpRight) = (srcWidth * cos, srcWidth * sin);
+            var (xDoRight, yDoRight) = (srcWidth * cos - srcHeight * sin, srcWidth * sin + srcHeight * cos);
             var (xDoLeft, yDoLeft) = (-srcHeight* sin, srcHeight * cos);
             
             var xMax = Math.Max(0, Math.Max(xUpRight, Math.Max(xDoRight, xDoLeft)));
@@ -84,17 +84,37 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                             var p00 = i0 + j0; var p01 = i0 + j1;
                             var p10 = i1 + j0; var p11 = i1 + j1;
 
-                            for (var index = 0; index < ptrStep; ++index)
-                            {
-                                var col0 = p00[index] * (1 - xFrac) + p10[index] * xFrac;
-                                var col1 = p01[index] * (1 - xFrac) + p11[index] * xFrac;
+                            double col0, col1, point;
 
-                                var point = col0 * (1 - yFrac) + col1 * yFrac;
+                            var invXFrac = 1 - xFrac;
+                            var invYFrac = 1 - yFrac;
 
-                                if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
+                            col0 = p00[0] * invXFrac + p10[0] * xFrac;
+                            col1 = p01[0] * invXFrac + p11[0] * xFrac;
 
-                                dstPtr[index] = (byte)point;
-                            }
+                            point = col0 * invYFrac + col1 * yFrac;
+
+                            if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
+
+                            dstPtr[0] = (byte)point;
+
+                            col0 = p00[1] * invXFrac + p10[1] * xFrac;
+                            col1 = p01[1] * invXFrac + p11[1] * xFrac;
+
+                            point = col0 * invYFrac + col1 * yFrac;
+
+                            if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
+
+                            dstPtr[1] = (byte)point;
+
+                            col0 = p00[2] * invXFrac + p10[2] * xFrac;
+                            col1 = p01[2] * invXFrac + p11[2] * xFrac;
+
+                            point = col0 * invYFrac + col1 * yFrac;
+
+                            if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
+
+                            dstPtr[2] = (byte)point;
                         }
                     }
                 });
