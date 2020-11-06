@@ -160,7 +160,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 
                 Parallel.For(0, dstHeight, options, y =>
                 {
-                    var newY = y * yCoef;
+                    var newY = y * yCoef + 0.5;
                     var yFlr = (int)newY;
                     var yFrc = newY - yFlr;
 
@@ -176,7 +176,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 
                     for (var x = 0; x < dstWidth; ++x, ++dstRow)
                     {
-                        var newX = x * xCoef;
+                        var newX = x * xCoef + 0.5;
                         var xFlr = (int)newX;
                         var xFrc = newX - xFlr;
 
