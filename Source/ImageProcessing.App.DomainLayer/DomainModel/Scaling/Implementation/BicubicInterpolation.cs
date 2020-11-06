@@ -12,6 +12,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
     {
         public Bitmap Resize(Bitmap src, double yScale, double xScale)
         {
+            if(yScale == 0 && xScale == 0) { return src; }
+
             var dstWidth = src.Width + (int)(src.Width * xScale);
             var dstHeight = src.Height + (int)(src.Height * yScale);
 
@@ -42,22 +44,20 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
                 var dstStartPtr = (byte*)dstData.Scan0.ToPointer();
 
-                // guarantees that on coordinate transform (x, y) -> (ax, ay)
-                // the pointer of the source image will not reach
-                // the two rightmost columns and the two lowest rows
-                var srcWidth = src.Width - 2;
-                var srcHeight = src.Height - 2;
+                var (srcWidth, srcHeight) = (src.Width, src.Height);
+                var (xBound, yBound) = (srcWidth - 3, srcHeight - 3);
 
+                //(x, y) -> (ax, ay)
                 var yCoef = srcHeight / (double)dstHeight;
                 var xCoef = srcWidth / (double)dstWidth;
 
                 Parallel.For(0, dstHeight, options, y =>
                 {
-                    var newY = y * yCoef;
+                    var newY = y * yCoef + 0.5;
                     var yFlr = (int)newY;
                     var yFrc = newY - yFlr;
 
-                    if (yFlr <= 0) { yFlr = 1; }
+                    if (yFlr <= 0) { yFlr = 1; } else if (yFlr > yBound) { yFlr = yBound; }
 
                     //get the address of a row
                     var dstRow = dstStartPtr + y * dstData.Stride;
@@ -73,11 +73,11 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 
                     for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
                     {
-                        var newX = x * xCoef;
+                        var newX = x * xCoef + 0.5;
                         var xFlr = (int)newX;
                         var xFrc = newX - xFlr;
 
-                        if (xFlr <= 0) { xFlr = 1; }
+                        if (xFlr <= 0) { xFlr = 1; } else if (xFlr > xBound ) { xFlr = xBound; }
 
                         var j0 = (xFlr - 1) * ptrStep;
                         var j1 =  xFlr      * ptrStep;
@@ -169,22 +169,20 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
                 var dstStartPtr = (byte*)dstData.Scan0.ToPointer();
 
-                // guarantees that on coordinate transform (x, y) -> (ax, ay)
-                // the pointer of the source image will not reach
-                // the two rightmost columns and the two lowest rows
-                var srcWidth = src.Width - 2;
-                var srcHeight = src.Height - 2;
+                var (srcWidth, srcHeight) = (src.Width, src.Height);
+                var (xBound, yBound) = (srcWidth - 3, srcHeight - 3);
 
+                // (x, y) -> (ax, ay)
                 var yCoef = srcHeight / (double)dstHeight;
                 var xCoef = srcWidth / (double)dstWidth;
 
                 Parallel.For(0, dstHeight, options, y =>
                 {
-                    var newY = y * yCoef;
+                    var newY = y * yCoef + 0.5;
                     var yFlr = (int)newY;
                     var yFrc = newY - yFlr;
 
-                    if (yFlr <= 0) { yFlr = 1; }
+                    if (yFlr <= 0) { yFlr = 1; } else if (yFlr > yBound) { yFlr = yBound; }
 
                     //get the address of a row
                     var dstRow = dstStartPtr + y * dstData.Stride;
@@ -200,11 +198,11 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 
                     for (var x = 0; x < dstWidth; ++x, ++dstRow)
                     {
-                        var newX = x * xCoef;
+                        var newX = x * xCoef + 0.5;
                         var xFlr = (int)newX;
                         var xFrc = newX - xFlr;
 
-                        if (xFlr <= 0) { xFlr = 1; }
+                        if (xFlr <= 0) { xFlr = 1; } else if (xFlr > xBound) { xFlr = xBound; }
 
                         var j0 = (xFlr - 1) * ptrStep;
                         var j1 =  xFlr      * ptrStep;
