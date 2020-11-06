@@ -12,10 +12,10 @@ namespace ImageProcessing.App.DomainLayer.Factory.Distribution.Implementation
     {
         /// <summary>
         /// A factory method
-        /// where the <see cref="CommonLayer.Enums.Distributions"/> represents an
+        /// where the <see cref="Distributions"/> represents an
         /// enumeration for the types implementing the <see cref="IDistribution"/>.
         /// </summary>
-        public IDistribution Get(CommonLayer.Enums.Distributions distribution)
+        public IDistribution Get(Distributions distribution)
             => distribution
         switch
         {
