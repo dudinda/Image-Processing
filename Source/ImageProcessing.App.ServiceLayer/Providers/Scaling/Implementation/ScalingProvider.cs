@@ -27,6 +27,6 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Scaling.Implementation
         public async Task<Bitmap> Scale(Bitmap bmp, double yScale, double xScale)
             => await _locker.LockZoomAsync(
                 () => _factory.Get(_settings.Scaling).Resize(bmp, yScale, xScale)
-            ).ConfigureAwait(true);       
+            ).ConfigureAwait(false);       
     }
 }
