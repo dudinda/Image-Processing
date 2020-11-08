@@ -300,8 +300,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
         }
 
         public double GetTrackBarValue(ImageContainer container)
-        {
-            throw new System.NotImplementedException();
-        }
+            => Read<double>(() => _zoom.Get(container).OnElementExpose(this).GetFactor());      
     }
 }

@@ -4,6 +4,9 @@ namespace ImageProcessing.App.UILayer.FormModel.Model.Zoom.DestinationContainer.
 {
     internal sealed class ZoomDestinationContainer : ZoomContainer
     {
+        public override double GetFactor()
+            => Exposer.ZoomDstTrackBar.Factor;
+       
         public override void ResetTrackBarValue(int value = 0)
         {
             Exposer.ZoomDstTrackBar.TrackBarValue = value;

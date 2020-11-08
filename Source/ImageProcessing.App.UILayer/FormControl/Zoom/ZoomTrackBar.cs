@@ -16,7 +16,8 @@ namespace ImageProcessing.App.UILayer.Control
 
         private readonly static object _sync = new object();
 
-        private double _factor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public double Factor
            => 2 * Convert.ToDouble(Value)  /
               Convert.ToDouble(Maximum - Minimum);
 

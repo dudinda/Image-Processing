@@ -1,6 +1,8 @@
 using System;
 using System.Drawing;
 
+using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.PresentationLayer.Views.ViewComponent.BitmapZoom;
 using ImageProcessing.App.UILayer.FormExposers;
 using ImageProcessing.App.UILayer.FormExposers.Main;
 
@@ -30,6 +32,7 @@ namespace ImageProcessing.App.UILayer.FormModel.Model.Zoom
 
         public abstract void SetZoomImage(Image image);
         public abstract void ResetTrackBarValue(int value = 0);
+        public abstract double GetFactor();
 
         public ZoomContainer OnElementExpose(IMainFormExposer form)
         {

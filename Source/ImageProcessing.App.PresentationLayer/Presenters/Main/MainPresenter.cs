@@ -272,14 +272,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                 if (!View.ImageIsDefault(container))
                 {
-                   // var factor = View.GetTrackBarValue(container);
+                   var factor = View.GetTrackBarValue(container);
 
                     var image =  await _scale.Scale(
-                        (Bitmap)View.GetImageCopy(container), 1, 1
+                        (Bitmap)View.GetImageCopy(container), factor, factor
                     ).ConfigureAwait(true);
 
                     View.SetImage(container, image);
-                    View.SetImageCopy(container, image);
                     View.Refresh(container);
                 }
             }
