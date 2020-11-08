@@ -68,17 +68,11 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
                 {
                     var ptr = startPtr + y * bitmapData.Stride;
 
-                    var luminance = 0.0;
-
                     for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
-                        luminance = _rec.GetLuma(
-                            ref ptr[2], ref ptr[1], ref ptr[0]
-                        );
-
                         //if relative luminance greater or equal than average
                         //set it to white
-                        if (luminance >= average)
+                        if (_rec.GetLuma(ref ptr[2], ref ptr[1], ref ptr[0]) >= average)
                         {
                             ptr[0] = ptr[1] = ptr[2] = 255;
                         }

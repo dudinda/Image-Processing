@@ -48,8 +48,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
                     for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
                         ptr[0] = ptr[1] = ptr[2] = (byte)_rec.GetLuma(
-                            ref ptr[2], ref ptr[1], ref ptr[0]
-                        );
+                            ref ptr[2], ref ptr[1], ref ptr[0]);
                     }
                 });
             }

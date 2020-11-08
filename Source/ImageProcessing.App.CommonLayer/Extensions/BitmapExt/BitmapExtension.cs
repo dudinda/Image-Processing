@@ -114,9 +114,6 @@ namespace ImageProcessing.App.CommonLayer.Extensions.BitmapExt
         {
             switch (bitmap.PixelFormat)
             {
-                case PixelFormat.Format8bppIndexed:
-                    return 8;
-
                 case PixelFormat.Format24bppRgb:
                     return 24;
 
@@ -125,7 +122,7 @@ namespace ImageProcessing.App.CommonLayer.Extensions.BitmapExt
                 case PixelFormat.Format32bppRgb:
                     return 32;
 
-                default: throw new NotSupportedException("Only 8, 24 and 32 bit images are supported.");
+                default: throw new NotSupportedException("Only 24 and 32 bit images are supported.");
             }
         }
 
