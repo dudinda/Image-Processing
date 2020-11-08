@@ -4,7 +4,7 @@ Image filtration and contrast optimization.
 [![Build Status](https://dev.azure.com/dudin0da/Image%20Processing/_apis/build/status/Softenraged.Image-Processing?branchName=master)](https://dev.azure.com/dudin0da/Image%20Processing/_build/latest?definitionId=2&branchName=master)
 
 1. [Thesis](#Thesis)
-2. [Solutions]()
+2. [Solutions](#)
    - [Application General Architecture](#Architecture)
    - [Navigation by using a DI container](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.Microkernel.MVP/Controller/Implementation/AppController.cs#L31)
    - [Closures propagation by using a pipeline and event aggregator](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.App.PresentationLayer/Presenters/Rgb/RgbPresenter.cs#L49)
