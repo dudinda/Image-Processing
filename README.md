@@ -11,11 +11,6 @@ Image filtration and contrast optimization.
    - [Mocks registration via a DI container to test the internal infrastructure](https://github.com/dudinda/Image-Processing/blob/master/Tests/ImageProcessing.App.PresentationLayer.IntegrationTests/TestsComponents/Extensions/DependencyResolutionExtensions.cs#L91)
    - [Yielding a sequence to test a collection traverse order](https://github.com/dudinda/Image-Processing/blob/master/Tests/ImageProcessing.Utility.DataStructure.UnitTests/CaseFactory/BitMatrixCaseFactory.cs#L17)
 3. [Benchmarks](#benchmarks-cpu)
-   - [Rgb](#)
-   - [Rotation](#)
-   - [Scaling](#)
-   - [Convolution](#)
-   - [Contrast](#)
 ***
 
 ## Thesis
