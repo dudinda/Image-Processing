@@ -44,7 +44,7 @@ namespace ImageProcessing.App.UILayer.Form.Settings
             // 
             this.LumaComboBox.FormattingEnabled = true;
             this.LumaComboBox.ItemHeight = 23;
-            this.LumaComboBox.Location = new System.Drawing.Point(23, 166);
+            this.LumaComboBox.Location = new System.Drawing.Point(23, 238);
             this.LumaComboBox.Name = "LumaComboBox";
             this.LumaComboBox.Size = new System.Drawing.Size(235, 29);
             this.LumaComboBox.TabIndex = 9;
@@ -54,7 +54,7 @@ namespace ImageProcessing.App.UILayer.Form.Settings
             // 
             this.RotationComboBox.FormattingEnabled = true;
             this.RotationComboBox.ItemHeight = 23;
-            this.RotationComboBox.Location = new System.Drawing.Point(23, 238);
+            this.RotationComboBox.Location = new System.Drawing.Point(23, 166);
             this.RotationComboBox.Name = "RotationComboBox";
             this.RotationComboBox.Size = new System.Drawing.Size(235, 29);
             this.RotationComboBox.TabIndex = 10;
@@ -101,6 +101,7 @@ namespace ImageProcessing.App.UILayer.Form.Settings
             this.Controls.Add(this.RotationComboBox);
             this.Controls.Add(this.LumaComboBox);
             this.Controls.Add(this.ScalingComboBox);
+            this.MaximizeBox = false;
             this.Name = "SettingsForm";
             this.Text = "Settings";
             this.ResumeLayout(false);
