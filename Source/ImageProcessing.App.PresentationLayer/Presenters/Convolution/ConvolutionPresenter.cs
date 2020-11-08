@@ -40,7 +40,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
 			{
                 var filter = View.Dropdown;
 
-                if (filter != ConvolutionFilter.Unknown)
+                if (filter != ConvKernel.Unknown)
                 {
                     var copy = await _locker.LockOperationAsync(
                         () => new Bitmap(ViewModel.Source)
@@ -73,7 +73,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
             if (e.Container == ImageContainer.Source)
             {
                 await _locker.LockOperationAsync(() =>
-                    ViewModel = new ConvolutionViewModel(new Bitmap(e.Bmp))
+                    ViewModel.Source = new Bitmap(e.Bmp)
                 ).ConfigureAwait(true);
             }
         }

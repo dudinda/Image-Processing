@@ -1,7 +1,7 @@
 using System.Drawing;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Rgb.Interface;
+using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.RgbFilters;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Interface;
@@ -25,7 +25,7 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.RgbFilters
         }
 
         /// <inheritdoc/>
-        public Bitmap Apply(Bitmap bmp, RgbFilter filter)
+        public Bitmap Apply(Bitmap bmp, RgbFltr filter)
             => _cache.GetOrCreate(filter,
                () => _rgbFilterService
                    .Filter(bmp,

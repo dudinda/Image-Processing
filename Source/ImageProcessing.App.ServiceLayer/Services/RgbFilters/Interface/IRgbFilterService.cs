@@ -1,6 +1,6 @@
 using System.Drawing;
 
-using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Interface;
+using ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.RgbFilters.Interface
 {

@@ -31,11 +31,11 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistri
         }
 
         /// <inheritdoc/>
-        public Bitmap Transform(Bitmap bmp, Distributions distribution, (string, string) parms)
+        public Bitmap Transform(Bitmap bmp, PrDistribution distribution, (string, string) parms)
             =>  _service.Transform(bmp, _factory.Get(distribution).SetParams(parms));
 
         /// <inheritdoc/>
-        public decimal GetInfo(Bitmap bmp, RandomVariableInfo info)
+        public decimal GetInfo(Bitmap bmp, RndInfo info)
             => _info.Get(info).Accept(_visitor).GetInfo(bmp);
     }
 }

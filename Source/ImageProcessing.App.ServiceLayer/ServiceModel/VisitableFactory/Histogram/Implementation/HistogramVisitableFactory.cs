@@ -10,13 +10,13 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.Histogr
 {
     internal sealed class HistogramVisitableFactory : IHistogramVisitableFactory
     {
-        public IHistogramVisitable Get(RandomVariableFunction filter)
+        public IHistogramVisitable Get(RndFunction filter)
             => filter
         switch
         {
-            RandomVariableFunction.PMF
+            RndFunction.PMF
                 => new PmfHistogramVisitable(),
-            RandomVariableFunction.CDF
+            RndFunction.CDF
                 => new CdfHistogramVisitable(),
 
             _ => throw new NotImplementedException(nameof(filter))

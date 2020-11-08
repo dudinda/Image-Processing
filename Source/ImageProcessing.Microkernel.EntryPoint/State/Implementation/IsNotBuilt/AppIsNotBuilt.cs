@@ -44,7 +44,7 @@ namespace ImageProcessing.Microkernel.DI.State.IsNotBuilt
                     AppState.IsBuilt
                 );
             }
-            catch
+            catch(Exception ex)
             {
                 AppLifecycle.State = StateFactory.Get(
                     AppState.EndWork

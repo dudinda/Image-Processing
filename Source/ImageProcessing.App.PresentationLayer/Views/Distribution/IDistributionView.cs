@@ -10,7 +10,7 @@ using ImageProcessing.Microkernel.MVP.View;
 namespace ImageProcessing.App.PresentationLayer.Views.Distribution
 {
     public interface IDistributionView : IView,
-         IDisposable, ITooltip, IDropdown<Distributions>
+         IDisposable, ITooltip, IDropdown<PrDistribution>
     {
         void EnableQualityQueue(bool isEnabled);
 
@@ -25,8 +25,5 @@ namespace ImageProcessing.App.PresentationLayer.Views.Distribution
         /// grayscale images.
         /// </summary>
         ConcurrentQueue<Bitmap> GetQualityQueue();
-
-        /// Get the specified parameters for a <see cref="Distributions"/>.
-        public (string, string) Parameters { get; }
     }
 }

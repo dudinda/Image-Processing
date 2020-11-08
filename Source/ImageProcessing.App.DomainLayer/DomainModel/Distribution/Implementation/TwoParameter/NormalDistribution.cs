@@ -28,7 +28,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
         }
 
         /// <inheritdoc/>
-        public string Name => nameof(Distributions.Normal);
+        public string Name => nameof(PrDistribution.Normal);
 
         /// <inheritdoc/>
         public decimal FirstParameter => _mu;

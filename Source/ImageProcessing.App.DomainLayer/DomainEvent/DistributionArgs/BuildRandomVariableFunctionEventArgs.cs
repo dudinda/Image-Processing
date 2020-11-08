@@ -5,15 +5,15 @@ namespace ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs
     public class BuildRandomVariableFunctionEventArgs : BaseEventArgs
     {
         public BuildRandomVariableFunctionEventArgs(
-            RandomVariableFunction action,
+            RndFunction action,
             ImageContainer container) : base()
         {
             Action = action;
             Container = container;
         }
 
-        /// <inheritdoc cref="RandomVariableFunction"/>
-        public RandomVariableFunction Action { get; }
+        /// <inheritdoc cref="RndFunction"/>
+        public RndFunction Action { get; }
 
         /// <inheritdoc cref="ImageContainer"/>
         public ImageContainer Container { get; }

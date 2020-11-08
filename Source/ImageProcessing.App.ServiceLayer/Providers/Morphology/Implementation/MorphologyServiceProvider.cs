@@ -30,21 +30,21 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Morphology
         }
 
         /// <inheritdoc/>
-        public Bitmap ApplyBinary(Bitmap lvalue, Bitmap rvalue, MorphologyOperator filter)
+        public Bitmap ApplyBinary(Bitmap lvalue, Bitmap rvalue, MorphOperator filter)
             => _morphologyService
                     .ApplyOperator(lvalue, rvalue,
                         _morphologyFactory.GetBinary(filter)         
             );
 
         /// <inheritdoc/>
-        public Bitmap ApplyCustomUnary(Bitmap bmp, BitMatrix kernel, MorphologyOperator filter)
+        public Bitmap ApplyCustomUnary(Bitmap bmp, BitMatrix kernel, MorphOperator filter)
             => _morphologyService
                     .ApplyOperator(bmp, kernel,
                         _morphologyFactory.Get(filter)
             );
 
         /// <inheritdoc/>
-        public Bitmap ApplyUnary(Bitmap bmp, StructuringElem kernel, (int width, int height) dim, MorphologyOperator filter)
+        public Bitmap ApplyUnary(Bitmap bmp, StructElem kernel, (int width, int height) dim, MorphOperator filter)
         {
             return _cache.GetOrCreate(filter,
                 () =>

@@ -1,9 +1,10 @@
 using System;
+
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.Factory.Distribution.Interface;
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementation.OneParameter;
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementation.TwoParameter;
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
+using ImageProcessing.App.DomainLayer.Factory.Distribution.Interface;
 
 namespace ImageProcessing.App.DomainLayer.Factory.Distribution.Implementation
 {
@@ -15,25 +16,25 @@ namespace ImageProcessing.App.DomainLayer.Factory.Distribution.Implementation
         /// where the <see cref="Distributions"/> represents an
         /// enumeration for the types implementing the <see cref="IDistribution"/>.
         /// </summary>
-        public IDistribution Get(Distributions distribution)
+        public IDistribution Get(PrDistribution distribution)
             => distribution
         switch
         {
-            Distributions.Exponential
+            PrDistribution.Exponential
                 => new ExponentialDistribution(),
-            Distributions.Laplace
+            PrDistribution.Laplace
                 => new LaplaceDistribution(),
-            Distributions.Rayleigh
+            PrDistribution.Rayleigh
                 => new RayleighDistribution(),
-            Distributions.Cauchy
+            PrDistribution.Cauchy
                 => new CauchyDistribution(),
-            Distributions.Normal
+            PrDistribution.Normal
                 => new NormalDistribution(),
-            Distributions.Parabola
+            PrDistribution.Parabola
                 => new ParabolaDistribution(),
-            Distributions.Uniform
+            PrDistribution.Uniform
                 => new UniformDistribution(),
-            Distributions.Weibull
+            PrDistribution .Weibull
                 => new WeibullDistribution(),
 
             _   => throw new NotImplementedException(nameof(distribution))

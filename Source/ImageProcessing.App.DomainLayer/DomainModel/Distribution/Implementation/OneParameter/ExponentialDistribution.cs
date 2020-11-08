@@ -25,7 +25,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
         }
 
         /// <inheritdoc/>
-        public string Name => nameof(Distributions.Exponential);
+        public string Name => nameof(PrDistribution.Exponential);
 
         /// <inheritdoc/>
         public decimal FirstParameter => _lambda;

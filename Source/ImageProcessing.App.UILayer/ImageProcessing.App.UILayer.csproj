@@ -20,6 +20,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="FormCommands\**" />
+    <Compile Remove="UIModel\**" />
+    <EmbeddedResource Remove="FormCommands\**" />
+    <EmbeddedResource Remove="UIModel\**" />
+    <None Remove="FormCommands\**" />
+    <None Remove="UIModel\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MetroModernUI" Version="1.4.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
       <PrivateAssets>all</PrivateAssets>
@@ -42,6 +51,9 @@
   <ItemGroup>
     <Compile Update="Form\BaseForm.cs" />
     <Compile Update="Form\Distribution\DistributionForm.cs" />
+    <Compile Update="Form\Settings\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

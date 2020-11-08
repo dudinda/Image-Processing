@@ -1,5 +1,6 @@
 using System.Windows.Forms.DataVisualization.Charting;
 
+using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.Views.Histogram;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
@@ -41,6 +42,10 @@ namespace ImageProcessing.App.UILayer.Form.Histogram
             {
                 components.Dispose();
             }
+
+            Controller
+               .Aggregator
+               .Unsubscribe(typeof(HistogramPresenter), this);
 
             base.Dispose(true);
         }

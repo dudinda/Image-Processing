@@ -12,18 +12,18 @@ namespace ImageProcessing.App.DomainLayer.Factory.StructuringElement.Implementat
     {
         /// <summary>
         /// A factory method
-        /// where the <see cref="StructuringElem"/> represents an
+        /// where the <see cref="StructElem"/> represents an
         /// enumeration for the types implementing the <see cref="IStructuringElementFactory"/>.
         /// </summary>
-        public IStructuringElement Get(StructuringElem filter)
+        public IStructuringElement Get(StructElem filter)
             => filter
         switch
         {
-            StructuringElem.CrossShaped
+            StructElem.CrossShaped
                 => new CrossShapedElement(),
-            StructuringElem.Elliptical
+            StructElem.Elliptical
                 => new EllipticalElement(),
-            StructuringElem.Rectangular
+            StructElem.Rectangular
                 => new RectangularElement(),
 
             _   => throw new NotImplementedException(nameof(filter))

@@ -92,7 +92,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
         /// <summary>
         /// View model of a presenter.
         /// </summary>
-        protected TViewModel ViewModel { get; set; }
+        protected TViewModel ViewModel { get; private set; }
             = null!;
 
         protected BasePresenter(IAppController controller)

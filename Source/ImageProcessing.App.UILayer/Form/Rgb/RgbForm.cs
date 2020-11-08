@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
 using ImageProcessing.App.PresentationLayer.Presenters.Rgb;
-using ImageProcessing.App.UILayer.Code.Enums;
+using ImageProcessing.App.PresentationLayer.Views.Rgb;
 using ImageProcessing.App.UILayer.Exposers.Rgb;
 using ImageProcessing.App.UILayer.FormCommands.Rgb.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface;
@@ -16,28 +16,20 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.UILayer.Form.Rgb
 {
-    internal sealed partial class RgbForm : BaseForm, IRgbFormExposer
+    internal sealed partial class RgbForm : BaseForm,
+        IRgbFormExposer, IRgbView
     {
-        private readonly IRgbFormCommand _command;
+        private readonly IRgbFormColor _command;
         private readonly IRgbFormEventBinder _binder;
 
         public RgbForm(
             IAppController controller,
             IRgbFormEventBinder binder,
-            IRgbFormCommand command) : base(controller)
+            IRgbFormColor command) : base(controller)
         {
             InitializeComponent();
 
-            var values = default(RgbFilter)
-                .GetAllEnumValues()
-                .Select(val => val.GetDescription())
-                .ToArray();
-
-            RgbFilterComboBox.Items.AddRange(
-                 Array.ConvertAll(values, item => (object)item)
-             );
-
-            RgbFilterComboBox.SelectedIndex = 0;
+            PopulateComboBox<RgbFltr>(RgbFilterComboBox);
 
             _binder = binder;
             _command = command;
@@ -47,11 +39,11 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
         }
 
         /// <inheritdoc/>
-        public RgbFilter Dropdown
+        public RgbFltr Dropdown
         {
             get => RgbFilterComboBox
                 .SelectedItem.ToString()
-                .GetValueFromDescription<RgbFilter>();
+                .GetValueFromDescription<RgbFltr>();
         }
 
         /// <inheritdoc/>

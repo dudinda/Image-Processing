@@ -12,7 +12,7 @@ namespace ImageProcessing.App.PresentationLayer.Views.Convolution
     /// convolution filter window.
     /// </summary>
     public interface IConvolutionView : IView,
-        ITooltip, IDisposable, IDropdown<ConvolutionFilter>
+        ITooltip, IDisposable, IDropdown<ConvKernel>
     {
 
     }

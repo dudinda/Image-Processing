@@ -11,13 +11,13 @@ namespace ImageProcessing.App.DomainLayer.Factory.Morphology.Interface
     /// implementing the <see cref="IMorphologyUnary"/>
     /// and <see cref="IMorphologyBinary"/>.
     /// </summary>
-    public interface IMorphologyFactory : IModelFactory<IMorphologyUnary, MorphologyOperator>
+    public interface IMorphologyFactory : IModelFactory<IMorphologyUnary, MorphOperator>
     {
         /// <summary>
         /// A factory method
-        /// where the <see cref="MorphologyOperator"/> represents an
+        /// where the <see cref="MorphOperator"/> represents an
         /// enumeration for the types implementing the <see cref="IMorphologyBinary"/>.
         /// </summary>
-        IMorphologyBinary GetBinary(MorphologyOperator filter);
+        IMorphologyBinary GetBinary(MorphOperator filter);
     }
 }

@@ -16,8 +16,8 @@ using MetroFramework.Controls;
 namespace ImageProcessing.App.UILayer.Form.Convolution
 {
     /// <inheritdoc cref="IConvolutionView"/>
-    internal sealed partial class ConvolutionForm
-        : BaseForm, IConvolutionFormExposer
+    internal sealed partial class ConvolutionForm : BaseForm,
+        IConvolutionFormExposer, IConvolutionView
     {
         private readonly IConvolutionFormEventBinder _binder;
 
@@ -27,16 +27,7 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
         {
             InitializeComponent();
 
-            var values = default(ConvolutionFilter)
-                .GetAllEnumValues()
-                .Select(val => val.GetDescription())
-                .ToArray();
-
-            ConvolutionFilterComboBox.Items.AddRange(
-                 Array.ConvertAll(values, item => (object)item)
-             );
-
-            ConvolutionFilterComboBox.SelectedIndex = 0;
+            PopulateComboBox<ConvKernel>(ConvolutionFilterComboBox);
 
             _binder = binder;
 
@@ -44,11 +35,11 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
         }
 
         /// <inheritdoc/>
-        public ConvolutionFilter Dropdown
+        public ConvKernel Dropdown
         {
             get => ConvolutionFilterComboBox
                 .SelectedItem.ToString()
-                .GetValueFromDescription<ConvolutionFilter>();
+                .GetValueFromDescription<ConvKernel>();
         }
 
         public MetroButton ApplyButton
@@ -57,8 +48,7 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
         /// <inheritdoc/>
         public void Tooltip(string message)
              => ErrorToolTip.Show(message, this, PointToClient(
-                 CursorPosition.GetCursorPosition()), 2000
-             );
+                 CursorPosition.GetCursorPosition()), 2000);
 
         /// <summary>
         /// Used by the generated <see cref="Dispose(bool)"/> call.

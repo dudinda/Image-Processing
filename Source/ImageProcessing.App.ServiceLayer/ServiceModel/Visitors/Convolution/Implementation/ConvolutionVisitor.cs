@@ -31,10 +31,10 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Convolution.Imp
 
         public Bitmap LoGOperator3x3(Bitmap bmp)
              => Operator(
-                   Operator(bmp, ConvolutionFilter.GaussianBlur3x3),
-                   ConvolutionFilter.LaplacianOperator3x3);
+                   Operator(bmp, ConvKernel.GaussianBlur3x3),
+                   ConvKernel.LaplacianOperator3x3);
 
-        public Bitmap Operator(Bitmap bmp, ConvolutionFilter filter)
+        public Bitmap Operator(Bitmap bmp, ConvKernel filter)
         => _cache.GetOrCreate(filter,
             () => _convolution.Convolution(bmp, _factory.Get(filter))
         );
@@ -44,14 +44,14 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Convolution.Imp
             using (var copy = new Bitmap(bmp))
             {
                 var yDerivative = Task.Run(
-                    () => Operator(bmp, ConvolutionFilter.SobelOperatorHorizontal3x3)
+                    () => Operator(bmp, ConvKernel.SobelOperatorHorizontal3x3)
                 );
 
                 var xDerivative = Task.Run(
-                    () => Operator(copy, ConvolutionFilter.SobelOperatorVertical3x3)
+                    () => Operator(copy, ConvKernel.SobelOperatorVertical3x3)
                 );
 
-                return _cache.GetOrCreate(ConvolutionFilter.SobelOperator3x3,
+                return _cache.GetOrCreate(ConvKernel.SobelOperator3x3,
                     () => _service.Magnitude(xDerivative.Result, yDerivative.Result)
                 );
             }

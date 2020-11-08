@@ -59,9 +59,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.
                         g = lvaluePtr[1] + rvaluePtr[1];
                         r = lvaluePtr[2] + rvaluePtr[2];
 
-                        resultPtr[0] = GetByteValue(ref b);
-                        resultPtr[1] = GetByteValue(ref g);
-                        resultPtr[2] = GetByteValue(ref r);
+                        resultPtr[0] = (byte)GetByteValue(ref b);
+                        resultPtr[1] = (byte)GetByteValue(ref g);
+                        resultPtr[2] = (byte)GetByteValue(ref r);
                     }
                 });
             }
@@ -72,7 +72,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.
 
             return result;
 
-            byte GetByteValue(ref int value)
+            ref int GetByteValue(ref int value)
             {
                 if (value > 255)
                 {
@@ -83,7 +83,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.
                     value = 0;
                 }
 
-                return (byte)value;
+                return ref value;
             };
         }
     }

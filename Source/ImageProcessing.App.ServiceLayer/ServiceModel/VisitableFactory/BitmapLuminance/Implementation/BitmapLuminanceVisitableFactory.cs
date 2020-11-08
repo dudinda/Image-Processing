@@ -12,17 +12,17 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.BitmapL
 {
     internal sealed class BitmapLuminanceVisitableFactory : IBitmapLuminanceVisitableFactory
     {
-        public IBitmapLuminanceVisitable Get(RandomVariableInfo filter)
+        public IBitmapLuminanceVisitable Get(RndInfo filter)
             => filter
         switch
         {
-            RandomVariableInfo.Entropy
+            RndInfo.Entropy
                 => new BitmapLuminanceEntropyVisitable(),
-            RandomVariableInfo.Expectation
+            RndInfo.Expectation
                 => new BitmapLuminanceExpectationVisitable(),
-            RandomVariableInfo.Variance
+            RndInfo.Variance
                 => new BitmapLuminanceVarianceVisitable(),
-            RandomVariableInfo.StandardDeviation
+            RndInfo.StandardDeviation
                 => new BitmapLuminanceStandardDeviationVisitable(),
 
             _ => throw new NotImplementedException(nameof(filter))

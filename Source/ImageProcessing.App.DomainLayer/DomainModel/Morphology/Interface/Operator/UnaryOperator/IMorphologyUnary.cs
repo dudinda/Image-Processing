@@ -11,7 +11,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Interface.Unary
     public interface IMorphologyUnary 
     {
         /// <summary>
-        /// Transform the specifed bitmap by the <see cref="StructuringElem"/> operation,
+        /// Transform the specifed bitmap by the <see cref="StructElem"/> operation,
         /// with the specified <see cref="BitMatrix"/> kernel.
         /// </summary>
         Bitmap Filter(Bitmap bitmap, BitMatrix kernel);

@@ -7,6 +7,6 @@ namespace ImageProcessing.App.PresentationLayer.ViewModel.Convolution
         public ConvolutionViewModel(Bitmap source)
             => Source = source;
        
-        public Bitmap Source { get; }
+        public Bitmap Source { get; set; }
     }
 }

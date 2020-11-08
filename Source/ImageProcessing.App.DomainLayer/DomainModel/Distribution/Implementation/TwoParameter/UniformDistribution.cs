@@ -26,7 +26,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
         }
 
         /// <inheritdoc/>
-        public string Name => nameof(Distributions.Uniform);
+        public string Name => nameof(PrDistribution.Uniform);
 
         /// <inheritdoc/>
         public decimal FirstParameter => _a;

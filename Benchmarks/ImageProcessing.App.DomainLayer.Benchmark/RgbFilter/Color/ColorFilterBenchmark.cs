@@ -4,9 +4,9 @@ using System.IO;
 
 using BenchmarkDotNet.Attributes;
 
-using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation.Color;
-using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Implementation.Color.Colors;
-using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Interface;
+using ImageProcessing.App.DomainLayer.DomainModel.Rgb.Color.Implementation;
+using ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementation;
+using ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Interface;
 
 namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Color
 {

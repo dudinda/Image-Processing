@@ -9,7 +9,7 @@ namespace ImageProcessing.Microkernel.MVP.View
         /// <summary>
         /// Show a view.
         /// </summary>
-        void Show();
+        void  Show();
 
         /// <summary>
         /// Close a view.

@@ -8,11 +8,11 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.Convolution.Op
 {
     internal sealed class ConvolutionOperatorVisitable : IConvolutionVisitable
     {
-        private readonly ConvolutionFilter _filter;
+        private readonly ConvKernel _filter;
 
         private IConvolutionVisitor _visitor = null!;
 
-        public ConvolutionOperatorVisitable(ConvolutionFilter filter)
+        public ConvolutionOperatorVisitable(ConvKernel filter)
         {
             _filter = filter;
         }

@@ -2,7 +2,6 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
 
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Scaling.Interface;
@@ -20,11 +19,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
                 .DrawFilledRectangle(Brushes.White);
-
-            if(src.PixelFormat == PixelFormat.Format8bppIndexed)
-            {
-                return Resize8bpp(src, dst, yScale, xScale);
-            } 
 
             var srcData = src.LockBits(
                 new Rectangle(0, 0, src.Width, src.Height),
@@ -49,16 +43,16 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                 var (xBound, yBound) = (srcWidth - 2, srcHeight - 2);
 
                 //(x, y) -> (ax, ay)
-                var yCoef = srcHeight / (double)dstHeight;
-                var xCoef = srcWidth / (double)dstWidth;
+                var dy = srcHeight / (double)dstHeight;
+                var dx = srcWidth / (double)dstWidth;
 
                 var setStep = ptrStep;
 
                 Parallel.For(0, dstHeight, options, y =>
                 {
-                    var newY      = y * yCoef;
+                    var newY = y * dy + 0.5;
                     var yFlr = (int)newY;
-                    var yFrc  = newY - yFlr;
+                    var yFrc = newY - yFlr;
 
                     if (yFlr > yBound) { yFlr = yBound; }
 
@@ -71,10 +65,10 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                     double col0, col1, point;
 
                     for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
-                    { 
-                        var newX      = x * xCoef;
+                    {  
+                        var newX = x * dx + 0.5;
                         var xFlr = (int)newX;
-                        var xFrc  = newX - xFlr;
+                        var xFrc = newX - xFlr;
 
                         if (xFlr > xBound) { xFlr = xBound; }
 
@@ -113,92 +107,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                         if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
 
                         dstRow[2] = (byte)point;
-                    }
-                });
-            }
-
-            src.UnlockBits(srcData);
-            dst.UnlockBits(dstData);
-
-            return dst;
-        }
-
-        private Bitmap Resize8bpp(
-            Bitmap src, Bitmap dst,
-            double yScale, double xScale)
-        {
-            var dstWidth = dst.Width;
-            var dstHeight = dst.Height;
-
-            var srcData = src.LockBits(
-                new Rectangle(0, 0, src.Width, src.Height),
-                ImageLockMode.ReadOnly, src.PixelFormat);
-
-            var dstData = dst.LockBits(
-                new Rectangle(0, 0, dst.Width, dst.Height),
-                ImageLockMode.WriteOnly, dst.PixelFormat);
-
-            var ptrStep = dst.GetBitsPerPixel() / 8;
-            var options = new ParallelOptions()
-            {
-                MaxDegreeOfParallelism = Environment.ProcessorCount
-            };
-
-            unsafe
-            {
-                var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
-                var dstStartPtr = (byte*)dstData.Scan0.ToPointer();
-
-                var (srcWidth, srcHeight) = (src.Width, src.Height);
-                var (xBound, yBound) = (srcWidth - 2, srcHeight - 2);
-
-                //(x, y) -> (ax, ay)
-                var yCoef = srcHeight / (double)dstHeight;
-                var xCoef = srcWidth / (double)dstWidth;
-
-                var setStep = ptrStep;
-
-                Parallel.For(0, dstHeight, options, y =>
-                {
-                    var newY = y * yCoef + 0.5;
-                    var yFlr = (int)newY;
-                    var yFrc = newY - yFlr;
-
-                    if(yFlr > yBound) { yFlr = yBound; }
-
-                    //get the address of a row
-                    var dstRow = dstStartPtr + y * dstData.Stride;
-
-                    var i0 = srcStartPtr +  yFlr      * srcData.Stride;
-                    var i1 = srcStartPtr + (yFlr + 1) * srcData.Stride;
-
-                    double col0, col1, point;
-
-                    for (var x = 0; x < dstWidth; ++x, ++dstRow)
-                    {
-                        var newX = x * xCoef + 0.5;
-                        var xFlr = (int)newX;
-                        var xFrc = newX - xFlr;
-
-                        if (xFlr > xBound) { xFlr = xBound; }
-
-                        var j0 =  xFlr      * ptrStep;
-                        var j1 = (xFlr + 1) * ptrStep;
-
-                        var p00 = i0 + j0; var p10 = i1 + j0;
-                        var p01 = i0 + j1; var p11 = i1 + j1;
-
-                        var invXFrac = 1 - xFrc;
-                        var invYFrac = 1 - yFrc;
-
-                        col0 = p00[0] * invXFrac + p10[0] * xFrc;
-                        col1 = p01[0] * invXFrac + p11[0] * xFrc;
-
-                        point = col0 * invYFrac + col1 * yFrc;
-
-                        if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
-
-                        dstRow[0] = (byte)point;
                     }
                 });
             }

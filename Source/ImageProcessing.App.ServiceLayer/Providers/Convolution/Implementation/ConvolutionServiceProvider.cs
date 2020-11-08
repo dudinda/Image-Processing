@@ -22,7 +22,7 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Convolution
         }
 
         /// <inheritdoc/>
-        public Bitmap ApplyFilter(Bitmap bmp, ConvolutionFilter filter)
+        public Bitmap ApplyFilter(Bitmap bmp, ConvKernel filter)
             => _factory.Get(filter).Accept(_visitor).Filter(bmp);
     }
 }

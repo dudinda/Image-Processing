@@ -30,7 +30,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
         }
 
         /// <inheritdoc/>
-        public string Name => nameof(Distributions.Weibull);
+        public string Name => nameof(PrDistribution.Weibull);
 
         /// <inheritdoc/>
         public decimal FirstParameter => _lambda;

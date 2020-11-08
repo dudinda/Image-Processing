@@ -16,10 +16,9 @@ namespace ImageProcessing.App.PresentationLayer.Views.ViewComponent.BitmapZoom
         void ResetTrackBarValue(ImageContainer container, int value = 0);
 
         /// <summary>
-        /// Perform a zoom of the specified
-        /// <see cref="ImageContainer"/>.
+        /// Get a zoom factor value from the <see cref="ImageContainer"/>. 
         /// </summary>
-        Image ZoomImage(ImageContainer container);
+        double GetTrackBarValue(ImageContainer container);
 
         /// <summary>
         /// Set the specified <see cref="Image"/> to

@@ -9,6 +9,6 @@ namespace ImageProcessing.App.PresentationLayer.ViewModel.Rgb
             Source = source;
         }
 
-        public Bitmap Source;
+        public Bitmap Source { get; set; }
     }
 }

@@ -15,14 +15,15 @@ using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Convolution;
 using ImageProcessing.App.PresentationLayer.Presenters.Distribution;
 using ImageProcessing.App.PresentationLayer.Presenters.Rgb;
+using ImageProcessing.App.PresentationLayer.Presenters.Settings;
 using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
 using ImageProcessing.App.PresentationLayer.ViewModel.Distribution;
 using ImageProcessing.App.PresentationLayer.ViewModel.Rgb;
 using ImageProcessing.App.PresentationLayer.Views.Main;
+using ImageProcessing.App.ServiceLayer.Providers.Scaling.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
-using ImageProcessing.App.ServiceLayer.Services.LockerService.Zoom.Interface;
 using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
@@ -38,6 +39,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
           ISubscriber<ShowConvolutionMenuEventArgs>,
           ISubscriber<ShowDistributionMenuEventArgs>,
           ISubscriber<ShowRgbMenuEventArgs>,
+          ISubscriber<ShowSettingsMenuEventArgs>,
           ISubscriber<OpenFileDialogEventArgs>,
           ISubscriber<SaveAsFileDialogEventArgs>,
           ISubscriber<SaveWithoutFileDialogEventArgs>,
@@ -49,7 +51,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         private readonly ICacheService<Bitmap> _cache;
         private readonly INonBlockDialogService _dialog;
         private readonly IAsyncOperationLocker _operation;
-        private readonly IAsyncZoomLocker _zoom;
+        private readonly IScalingProvider _scale;
         private readonly IAwaitablePipeline _pipeline;
 
         public MainPresenter(
@@ -58,12 +60,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             INonBlockDialogService dialog,
             IAwaitablePipeline pipeline,
             IAsyncOperationLocker operation,
-            IAsyncZoomLocker zoom) : base(controller)
+            IScalingProvider scale) : base(controller)
         {
             _cache = cache;
             _dialog = dialog;
             _operation = operation;
-            _zoom = zoom;
+            _scale = scale;
             _pipeline = pipeline;
         }
 
@@ -83,7 +85,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                                   (bmp) => View.SetPathToFile(result.Path)),
                           ImageContainer.Source
                       ).ConfigureAwait(true);
-                  }
+
+                    Controller.Aggregator.PublishFromAll(publisher,
+                       new ContainerUpdatedEventArgs(
+                           ImageContainer.Source, result.Image));
+                }
             }
             catch(Exception ex)
             {
@@ -193,6 +199,18 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
+        public async Task OnEventHandler(object publisher, ShowSettingsMenuEventArgs e)
+        {
+            try
+            {
+                Controller.Run<SettingsPresenter>();
+            }
+            catch (Exception ex)
+            {
+                OnError(publisher, Errors.ShowConvolutionMenu);
+            }
+        }
+
         public async Task OnEventHandler(object publisher, AttachBlockToRendererEventArgs e)
         {
             try
@@ -231,7 +249,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     await Render(
                         new PipelineBlock(copy), to
                     ).ConfigureAwait(true);
-
+                  
                     Controller.Aggregator.PublishFromAll(publisher,
                         new ContainerUpdatedEventArgs(to, copy));
                 }
@@ -254,11 +272,14 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                 if (!View.ImageIsDefault(container))
                 {
-                    var image = await _zoom.LockZoomAsync(
-                        () => View.ZoomImage(container)
+                   // var factor = View.GetTrackBarValue(container);
+
+                    var image =  await _scale.Scale(
+                        (Bitmap)View.GetImageCopy(container), 1, 1
                     ).ConfigureAwait(true);
 
                     View.SetImage(container, image);
+                    View.SetImageCopy(container, image);
                     View.Refresh(container);
                 }
             }

@@ -5,7 +5,7 @@ using ImageProcessing.Microkernel.MVP.Model;
 namespace ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.Histogram.Interface
 {
     internal interface IHistogramVisitableFactory
-        : IModelFactory<IHistogramVisitable, RandomVariableFunction>
+        : IModelFactory<IHistogramVisitable, RndFunction>
     {
 
     }

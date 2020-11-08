@@ -27,7 +27,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
         }
 
         /// <inheritdoc/>
-        public string Name => nameof(Distributions.Cauchy);
+        public string Name => nameof(PrDistribution.Cauchy);
 
         /// <inheritdoc/>
         public decimal FirstParameter => _x0;

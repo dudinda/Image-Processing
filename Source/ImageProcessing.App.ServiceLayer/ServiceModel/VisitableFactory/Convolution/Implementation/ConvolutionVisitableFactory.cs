@@ -9,13 +9,13 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.Convolu
 {
     internal sealed class ConvolutionVisitableFactory : ICovolutionVisitableFactory
     {
-        public IConvolutionVisitable Get(ConvolutionFilter filter)
+        public IConvolutionVisitable Get(ConvKernel filter)
             => filter
         switch
         {
-            ConvolutionFilter.LoGOperator3x3
+            ConvKernel.LoGOperator3x3
                 => new ConvolutionLoGOperator3x3Visitable(),
-            ConvolutionFilter.SobelOperator3x3
+            ConvKernel.SobelOperator3x3
                 => new ConvolutionSobelOperator3x3Visitable(),
 
             _ => new ConvolutionOperatorVisitable(filter)

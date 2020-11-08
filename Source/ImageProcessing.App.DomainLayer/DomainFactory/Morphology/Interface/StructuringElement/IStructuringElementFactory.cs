@@ -8,7 +8,7 @@ namespace ImageProcessing.App.DomainLayer.Factory.Morphology.Interface.Structuri
     /// Provides a factory method for all the types
     /// implementing the <see cref="IStructuringElement"/>.
     /// </summary>
-    public interface IStructuringElementFactory : IModelFactory<IStructuringElement, StructuringElem>
+    public interface IStructuringElementFactory : IModelFactory<IStructuringElement, StructElem>
     {
 
     }

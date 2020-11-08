@@ -5,15 +5,15 @@ namespace ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs
     public sealed class GetRandomVariableInfoEventArgs : BaseEventArgs
     {
         public GetRandomVariableInfoEventArgs(
-            RandomVariableInfo action,
+            RndInfo action,
             ImageContainer container)  : base()
         {
             Action = action;
             Container = container;
         }
 
-        /// <inheritdoc cref="RandomVariableInfo"/>
-        public RandomVariableInfo Action { get; }
+        /// <inheritdoc cref="RndInfo"/>
+        public RndInfo Action { get; }
 
         /// <inheritdoc cref="ImageContainer"/>
         public ImageContainer Container { get; }

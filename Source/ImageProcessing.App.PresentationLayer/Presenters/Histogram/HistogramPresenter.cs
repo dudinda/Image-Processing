@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 
-using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.ViewModel.Histogram;
 using ImageProcessing.App.PresentationLayer.Views.Histogram;
@@ -12,13 +11,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
     internal sealed class HistogramPresenter
         : BasePresenter<IHistogramView, HistogramViewModel>
     {
-        private readonly IHistogramService _histogramService;
+        private readonly IHistogramService _service;
 
         public HistogramPresenter(
             IAppController controller,
-            IHistogramService histogramService) : base(controller)
+            IHistogramService service) : base(controller)
         {
-            _histogramService = histogramService;
+            _service = service;
         }
 
         public override void Run(HistogramViewModel vm)
@@ -26,16 +25,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
 
         private async Task DoWorkBeforeShow(HistogramViewModel vm)
         {
-            var chart = View.DataChart;
-  
-            var key = vm.Mode.GetDescription();
-
             var info = await Task.Run(
-                () => _histogramService.BuildPlot(vm.Mode, vm.Source)
+                () => _service.BuildPlot(vm.Mode, vm.Source)
             ).ConfigureAwait(true);
 
-            chart.Series.Add(info.Plot);
-
+            View.DataChart.Series.Add(info.Plot);
             View.YAxisMaximum = (double)info.Max;
             View.Show();
         }   

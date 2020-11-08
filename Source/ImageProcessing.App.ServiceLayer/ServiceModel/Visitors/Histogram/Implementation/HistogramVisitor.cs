@@ -26,7 +26,7 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Histogram.Imple
         public (Series Series, decimal Max) BuildCdf(Bitmap bmp)
         {
             var series = _builder
-                .SetName(RandomVariableFunction.CDF.GetDescription())
+                .SetName(RndFunction.CDF.GetDescription())
                 .SetChartType(SeriesChartType.StepLine)
                 .SetColor(Color.Red)
                 .SetBorderWidth(1)
@@ -39,7 +39,7 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Histogram.Imple
         public (Series Series, decimal Max) BuildPmf(Bitmap bmp)
         {
             var series = _builder
-                .SetName(RandomVariableFunction.PMF.GetDescription())
+                .SetName(RndFunction.PMF.GetDescription())
                 .SetColor(Color.Blue)
                 .SetChartType(SeriesChartType.Column)
                 .SetVisibleInLegend(true)

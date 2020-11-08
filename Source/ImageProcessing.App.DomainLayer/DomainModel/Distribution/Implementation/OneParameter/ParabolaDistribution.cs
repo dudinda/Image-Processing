@@ -25,7 +25,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
         }
 
         /// <inheritdoc/>
-        public string Name => nameof(Distributions.Parabola);
+        public string Name => nameof(PrDistribution.Parabola);
 
         /// <inheritdoc/>
         public decimal FirstParameter => _k;

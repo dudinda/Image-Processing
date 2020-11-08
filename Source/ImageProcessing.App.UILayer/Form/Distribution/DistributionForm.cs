@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
 using ImageProcessing.App.PresentationLayer.Presenters.Distribution;
+using ImageProcessing.App.PresentationLayer.Views.Distribution;
 using ImageProcessing.App.UILayer.FormEventBinders.Distribution.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Distribution;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
@@ -17,7 +18,8 @@ using MetroFramework.Controls;
 namespace ImageProcessing.App.UILayer.Form.Distribution
 {
     /// <inheritdoc cref="IDistributionView"/>
-    internal sealed partial class DistributionForm : BaseForm, IDistributionFormExposer
+    internal sealed partial class DistributionForm : BaseForm,
+        IDistributionFormExposer, IDistributionView
     {
         private readonly IDistributionFormEventBinder _binder;
 
@@ -27,16 +29,7 @@ namespace ImageProcessing.App.UILayer.Form.Distribution
         {
             InitializeComponent();
 
-            var values = default(Distributions)
-                .GetAllEnumValues()
-                .Select(val => val.GetDescription())
-                .ToArray();
-
-            DistributionsComboBox.Items.AddRange(
-                 Array.ConvertAll(values, item => (object)item)
-             );
-
-            DistributionsComboBox.SelectedIndex = 0;
+            PopulateComboBox<PrDistribution>(DistributionsComboBox);
 
             _binder = binder;
 
@@ -48,11 +41,11 @@ namespace ImageProcessing.App.UILayer.Form.Distribution
             => (FirstParam.Text, SecondParam.Text);
 
         /// <inheritdoc/>
-        public Distributions Dropdown
+        public PrDistribution Dropdown
         {
             get => DistributionsComboBox
                 .SelectedItem.ToString()
-                .GetValueFromDescription<Distributions>();
+                .GetValueFromDescription<PrDistribution>();
         }
 
         /// <inheritdoc cref="IDistributionFormExposer"/>

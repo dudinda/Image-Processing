@@ -53,6 +53,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.DstZoom = new ImageProcessing.App.UILayer.Control.ZoomTrackBar();
             this.ErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SplitContainer = new ImageProcessing.App.UILayer.Control.UndoRedoSplitContainer();
+            this.SettingsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.ToolBarMenu.SuspendLayout();
             this.PictureBoxSrcPanel.SuspendLayout();
@@ -74,7 +75,8 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.FileMenu,
             this.RgbMenu,
             this.ConvolutionMenu,
-            this.DistributionMenu});
+            this.DistributionMenu,
+            this.SettingsMenu});
             this.MainMenu.Location = new System.Drawing.Point(20, 60);
             this.MainMenu.Name = "MainMenu";
             this.MainMenu.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
@@ -316,6 +318,12 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.SplitContainer.SplitterDistance = 359;
             this.SplitContainer.TabIndex = 10;
             // 
+            // SettingsMenu
+            // 
+            this.SettingsMenu.Name = "SettingsMenu";
+            this.SettingsMenu.Size = new System.Drawing.Size(61, 20);
+            this.SettingsMenu.Text = "Settings";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -374,6 +382,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         private ToolStripButton RedoBtn;
         private App.UILayer.Control.ZoomTrackBar DstZoom;
         private ToolStripMenuItem RgbMenu;
+        private ToolStripMenuItem SettingsMenu;
     }
 }
 

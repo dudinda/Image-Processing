@@ -8,6 +8,6 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Convolution.Int
     {
         Bitmap LoGOperator3x3(Bitmap bmp);
         Bitmap SobelOverator3x3(Bitmap bmp);
-        Bitmap Operator(Bitmap bmp, ConvolutionFilter filter);
+        Bitmap Operator(Bitmap bmp, ConvKernel filter);
     }
 }

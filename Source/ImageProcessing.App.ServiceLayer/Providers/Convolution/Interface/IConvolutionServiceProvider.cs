@@ -5,14 +5,14 @@ using ImageProcessing.App.CommonLayer.Enums;
 namespace ImageProcessing.App.ServiceLayer.Providers.Interface.Convolution
 {
     /// <summary>
-    /// Provides the <see cref="ConvolutionFilter"/> implementation.
+    /// Provides the <see cref="ConvKernel"/> implementation.
     /// </summary>
     public interface IConvolutionServiceProvider
     {
         /// <summary>
-        /// Choose the <see cref="ConvolutionFilter"/> implementation over
+        /// Choose the <see cref="ConvKernel"/> implementation over
         /// the specified <see cref="Bitmap"/>.
         /// </summary>
-        Bitmap ApplyFilter(Bitmap bmp, ConvolutionFilter filter);
+        Bitmap ApplyFilter(Bitmap bmp, ConvKernel filter);
     }
 }

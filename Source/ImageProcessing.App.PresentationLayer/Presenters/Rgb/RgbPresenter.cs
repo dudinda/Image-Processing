@@ -40,7 +40,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
             {
                 var filter = View.Dropdown;
 
-                if (filter != RgbFilter.Unknown)
+                if (filter != RgbFltr.Unknown)
                 {
                     var copy = await _locker.LockOperationAsync(
                         () => new Bitmap(ViewModel.Source)
@@ -97,7 +97,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
             if (e.Container == ImageContainer.Source)
             {
                 await _locker.LockOperationAsync(() =>
-                    ViewModel = new RgbViewModel(new Bitmap(e.Bmp))
+                    ViewModel.Source = new Bitmap(e.Bmp)
                 ).ConfigureAwait(true);
             }
         }

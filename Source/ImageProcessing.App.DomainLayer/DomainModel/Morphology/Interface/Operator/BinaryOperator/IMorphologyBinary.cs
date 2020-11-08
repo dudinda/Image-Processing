@@ -10,8 +10,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Interface.Binar
     public interface IMorphologyBinary 
     {
         /// <summary>
-        /// Get the result of a <see cref="MorphologyOperator.Addition" /> opertaion
-        /// or <see cref="MorphologyOperator.Subtraction"/>. 
+        /// Get the result of a <see cref="MorphOperator.Addition" /> opertaion
+        /// or <see cref="MorphOperator.Subtraction"/>. 
         /// </summary>
         Bitmap Filter(Bitmap lvalue, Bitmap rvalue);
     }

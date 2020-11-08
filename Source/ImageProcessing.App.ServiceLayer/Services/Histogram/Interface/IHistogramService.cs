@@ -7,6 +7,6 @@ namespace ImageProcessing.App.ServiceLayer.Services.Histogram.Interface
 {
     public interface IHistogramService
     {
-        (Series Plot, decimal Max) BuildPlot(RandomVariableFunction function, Bitmap bmp);
+        (Series Plot, decimal Max) BuildPlot(RndFunction function, Bitmap bmp);
     }
 }

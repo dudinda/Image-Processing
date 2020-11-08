@@ -21,7 +21,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Histogram.Implementation
             _visitor = visitor;
         }
 
-        public (Series Plot, decimal Max) BuildPlot(RandomVariableFunction function, Bitmap bmp)
+        public (Series Plot, decimal Max) BuildPlot(RndFunction function, Bitmap bmp)
             => _factory.Get(function).Accept(_visitor).BuildHistogram(bmp);
     } 
 }

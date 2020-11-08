@@ -8,7 +8,7 @@ using ImageProcessing.Microkernel.MVP.View;
 namespace ImageProcessing.App.PresentationLayer.Views.Rgb
 {
     public interface IRgbView : IView,
-        IDisposable, IDropdown<RgbFilter>, ITooltip
+        IDisposable, IDropdown<RgbFltr>, ITooltip
         
     {
         /// <summary>

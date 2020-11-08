@@ -9,10 +9,10 @@ namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Implement
 {
     internal class AwaitablePipeline : IAwaitablePipeline
     {
-        private readonly BlockingQueue<Task<object>> _queue
+        private protected readonly BlockingQueue<Task<object>> _queue
            = new BlockingQueue<Task<object>>(1 << 6);
 
-        private readonly CancellationTokenSource _source 
+        private protected readonly CancellationTokenSource _source 
             = new CancellationTokenSource();
 
         public virtual bool Register(IPipelineBlock output)

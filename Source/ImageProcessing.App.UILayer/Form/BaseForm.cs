@@ -1,12 +1,15 @@
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
+using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
 using ImageProcessing.App.UILayer.Code.Attributes;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Microkernel.MVP.View;
 
+using MetroFramework.Controls;
 using MetroFramework.Forms;
 
 namespace ImageProcessing.App.UILayer.Form
@@ -79,6 +82,16 @@ namespace ImageProcessing.App.UILayer.Form
             {
                 action();
             } 
+        }
+
+        protected void PopulateComboBox<TEnum>(MetroComboBox box)
+           where TEnum : Enum
+        {
+            var values = EnumExtensions.GetAllEnumValues<TEnum>()
+             .Select(val => val.GetDescription()).ToArray();
+
+            box.Items.AddRange(Array.ConvertAll(values, item => (object)item));
+            box.SelectedIndex = 0;
         }
     }
 }

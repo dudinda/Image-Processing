@@ -10,7 +10,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
@@ -54,6 +54,12 @@
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
       <_Parameter1>ImageProcessing.App.ServiceLayer.Benchmark</_Parameter1>
     </AssemblyAttribute>
+</ItemGroup>
+
+<ItemGroup>
+  <Folder Include="DomainFactory\Scaling\Implementation\" />
+  <Folder Include="DomainFactory\Scaling\Interface\" />
+  <Folder Include="DomainModel\Rotation\Interface\" />
 </ItemGroup>
 
 </Project>

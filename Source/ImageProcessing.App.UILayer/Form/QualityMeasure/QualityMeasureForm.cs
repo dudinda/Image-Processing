@@ -6,7 +6,8 @@ using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 namespace ImageProcessing.App.UILayer.Form.QualityMeasure
 {
-    internal sealed partial class QualityMeasureForm : BaseForm, IQualityMeasureView
+    internal sealed partial class QualityMeasureForm : BaseForm,
+        IQualityMeasureView
     {
         public QualityMeasureForm(IAppController controller)
             : base(controller)

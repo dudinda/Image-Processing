@@ -27,7 +27,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
         }
 
         /// <inheritdoc/>
-        public string Name => nameof(Distributions.Laplace);
+        public string Name => nameof(PrDistribution.Laplace);
 
         /// <inheritdoc/>
         public decimal FirstParameter => _mu;

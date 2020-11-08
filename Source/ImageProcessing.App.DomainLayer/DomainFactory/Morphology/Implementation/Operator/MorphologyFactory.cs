@@ -12,13 +12,13 @@ namespace ImageProcessing.App.DomainLayer.Factory.Morphology.Implementation
     internal sealed class MorphologyFactory : IMorphologyFactory
     {
         /// <inheritdoc/>
-        public IMorphologyBinary GetBinary(MorphologyOperator filter)
+        public IMorphologyBinary GetBinary(MorphOperator filter)
             => filter
         switch
         {
-            MorphologyOperator.Addition
+            MorphOperator.Addition
                 => new AdditionOperator(),
-            MorphologyOperator.Subtraction
+            MorphOperator.Subtraction
                 => new SubtractionOperator(),
 
             _   => throw new NotImplementedException(nameof(filter))
@@ -26,26 +26,26 @@ namespace ImageProcessing.App.DomainLayer.Factory.Morphology.Implementation
 
         /// <summary>
         /// A factory method
-        /// where the <see cref="MorphologyOperator"/> represents an
+        /// where the <see cref="MorphologyOperators"/> represents an
         /// enumeration for the types implementing the <see cref="IMorphologyUnary"/>.
         /// </summary>
-        public IMorphologyUnary Get(MorphologyOperator filter)
+        public IMorphologyUnary Get(MorphOperator filter)
             => filter
         switch
         {
-            MorphologyOperator.Dilation
+            MorphOperator.Dilation
                 => new DilationOperator(),
-            MorphologyOperator.Erosion
+            MorphOperator.Erosion
                 => new ErosionOperator(),
-            MorphologyOperator.Opening
+            MorphOperator.Opening
                 => new OpeningOperator(),
-            MorphologyOperator.Closing
+            MorphOperator.Closing
                 => new ClosingOperator(),
-            MorphologyOperator.TopHat
+            MorphOperator.TopHat
                 => new TopHatOperator(),
-            MorphologyOperator.BlackHat
+            MorphOperator.BlackHat
                 => new BlackHatOperator(),
-            MorphologyOperator.Gradient
+            MorphOperator.Gradient
                 => new MorphologicalGradientOperator(),
 
             _   => throw new NotImplementedException(nameof(filter))

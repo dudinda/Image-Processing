@@ -7,25 +7,19 @@ using ImageProcessing.App.PresentationLayer.Views.Histogram;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.PresentationLayer.Views.QualityMeasure;
 using ImageProcessing.App.PresentationLayer.Views.Rgb;
-using ImageProcessing.App.ServiceLayer;
+using ImageProcessing.App.PresentationLayer.Views.Settings;
 using ImageProcessing.App.UILayer.Form.Convolution;
 using ImageProcessing.App.UILayer.Form.Distribution;
 using ImageProcessing.App.UILayer.Form.Histogram;
 using ImageProcessing.App.UILayer.Form.Main;
 using ImageProcessing.App.UILayer.Form.QualityMeasure;
 using ImageProcessing.App.UILayer.Form.Rgb;
+using ImageProcessing.App.UILayer.Form.Settings;
 using ImageProcessing.App.UILayer.FormCommands.Main;
-using ImageProcessing.App.UILayer.FormCommands.Main.Container.Destination.Implementation;
-using ImageProcessing.App.UILayer.FormCommands.Main.Container.Destination.Interface;
-using ImageProcessing.App.UILayer.FormCommands.Main.Container.Source.Implementation;
-using ImageProcessing.App.UILayer.FormCommands.Main.Container.Source.Interface;
-using ImageProcessing.App.UILayer.FormCommands.Main.Implementation;
-using ImageProcessing.App.UILayer.FormCommands.Main.UndoRedo.Redo.Implementation;
-using ImageProcessing.App.UILayer.FormCommands.Main.UndoRedo.Redo.Interface;
-using ImageProcessing.App.UILayer.FormCommands.Main.UndoRedo.Undo.Implementation;
-using ImageProcessing.App.UILayer.FormCommands.Main.UndoRedo.Undo.Interface;
 using ImageProcessing.App.UILayer.FormCommands.Rgb.Implementation;
 using ImageProcessing.App.UILayer.FormCommands.Rgb.Interface;
+using ImageProcessing.App.UILayer.FormEventBinder.Settings.Implementation;
+using ImageProcessing.App.UILayer.FormEventBinder.Settings.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Implementation;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Distribution.Implementation;
@@ -34,6 +28,11 @@ using ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation;
 using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Implementation;
 using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface;
+using ImageProcessing.App.UILayer.FormModel.Factory.MainContainer.Implementation;
+using ImageProcessing.App.UILayer.FormModel.Factory.MainFormUndoRedo.Implementation;
+using ImageProcessing.App.UILayer.FormModel.Factory.MainFormZoom.Implementation;
+using ImageProcessing.App.UILayer.FormModel.Factory.MainFormZoom.Interface;
+using ImageProcessing.App.UILayer.FormModel.MainFormUndoRedo.Interface;
 using ImageProcessing.Microkernel.AppConfig;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
@@ -53,18 +52,18 @@ namespace ImageProcessing.App.UILayer
                 .RegisterTransientView<IHistogramView, HistogramForm>()
                 .RegisterTransientView<IConvolutionView, ConvolutionForm>()
                 .RegisterTransientView<IRgbView, RgbForm>()
+                .RegisterSingletonView<ISettingsView, SettingsForm>()
                 .RegisterSingletonView<IQualityMeasureView, QualityMeasureForm>()
-                .RegisterTransient<IDistributionView, DistributionForm>()          
+                .RegisterTransient<IDistributionView, DistributionForm>()
                 .RegisterTransient<IRgbFormEventBinder, RgbFormEventBinder>()
                 .RegisterTransient<IConvolutionFormEventBinder, ConvolutionFormEventBinder>()
                 .RegisterTransient<IDistributionFormEventBinder, DistributionFormEventBinder>()
+                .RegisterTransient<ISettingsFormEventBinder, SettingsFormEventBinder>()
                 .RegisterTransient<IMainFormEventBinder, MainFormEventBinder>()
-                .RegisterTransient<IMainFormCommand, MainFormCommand>()
-                .RegisterTransient<IMainFormRedoCommand, MainFormRedoCommand>()
-                .RegisterTransient<IMainFormUndoCommand, MainFormUndoCommand>()
-                .RegisterTransient<IMainFormSourceContainerCommand, MainFormSourceContainerCommand>()
-                .RegisterTransient<IMainFormDestinationContainerCommand, MainFormDestinationContainerCommand>()
-                .RegisterTransient<IRgbFormCommand, RgbFormCommand>();
+                .RegisterTransient<IMainFormContainerFactory, MainFormContainerFactory>()
+                .RegisterTransient<IMainFormUndoRedoFactory, MainFormUndoRedoFactory>()
+                .RegisterTransient<IRgbFormColor, RgbFormColor>()
+                .RegisterTransient<IMainFormZoomFactory, MainFormZoomFactory>();
         }      
     }
 }

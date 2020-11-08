@@ -42,7 +42,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Cache.Implementation
                 _cache.Set(key, cacheEntry, options);
             }
 
-            return (TItem)cacheEntry;
+            return (TItem)cacheEntry!;
         }
 
         /// <inheritdoc/>
