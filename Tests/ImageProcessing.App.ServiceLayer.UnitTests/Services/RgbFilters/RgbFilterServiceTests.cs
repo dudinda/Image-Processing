@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 
-using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Rgb.Interface;
+using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Interface;
 using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Interface;
 

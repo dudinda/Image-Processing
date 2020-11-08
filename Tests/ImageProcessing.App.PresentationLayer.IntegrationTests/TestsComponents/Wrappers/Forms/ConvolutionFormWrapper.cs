@@ -1,5 +1,6 @@
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.PresentationLayer.UnitTests.Services;
+using ImageProcessing.App.PresentationLayer.Views.Convolution;
 using ImageProcessing.App.UILayer.Form.Convolution;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Convolution;
@@ -9,7 +10,7 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Forms
 {
-    internal class ConvolutionFormWrapper : IConvolutionFormExposer
+    internal class ConvolutionFormWrapper : IConvolutionFormExposer, IConvolutionView
     {
         private readonly IAutoResetEventService _synchronizer;
         private readonly ConvolutionForm _form;
@@ -22,7 +23,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
             _form = new ConvolutionForm(controller, binder);
         }
 
-        public virtual ConvolutionFilter Dropdown
+        public virtual ConvKernel Dropdown
             => _form.Dropdown;
 
         public virtual MetroButton ApplyButton

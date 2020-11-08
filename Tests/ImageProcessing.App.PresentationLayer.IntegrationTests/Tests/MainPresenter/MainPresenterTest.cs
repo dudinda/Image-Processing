@@ -10,6 +10,7 @@ using ImageProcessing.App.PresentationLayer.IntegrationTests.TestResources;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents.Extensions;
 using ImageProcessing.App.PresentationLayer.UnitTests;
 using ImageProcessing.App.PresentationLayer.UnitTests.Extensions;
+using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form;
 using ImageProcessing.App.PresentationLayer.UnitTests.Services;
 using ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Presenters;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline;
@@ -31,12 +32,12 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
     {
         private IAutoResetEventService _synchronizer;
         private MainPresenterWrapper _presenter;
-        private IMainFormExposer _form;
+        private MainFormWrapper _form;
 
         protected override void BeforeStart()
         {
             _synchronizer = AppLifecycle.Controller.IoC.Resolve<IAutoResetEventService>();
-            _form = AppLifecycle.Controller.IoC.Resolve<IMainFormExposer>();
+            _form = AppLifecycle.Controller.IoC.Resolve<MainFormWrapper>();
             _presenter = AppLifecycle.Controller.IoC.Resolve<MainPresenterWrapper>();
 
             _presenter.Run();

@@ -25,13 +25,13 @@ namespace ImageProcessing.App.DomainLayer.UnitTests.Factory.Convolution
         [Test, TestCaseSource(
                typeof(DomainLayerFactoriesCaseFactory),
                nameof(ConvolutionFactoryTestCases))]
-        public void FactoryReturnsBoxBlur3x3ByEnumValue((ConvolutionFilter Input, Type Result) args)
+        public void FactoryReturnsBoxBlur3x3ByEnumValue((ConvKernel Input, Type Result) args)
             => Assert.That(_convolutionFactory.Get(args.Input), Is.TypeOf(args.Result));
 
         [Test]
         public void FactoryThrowsNotImplementedExceptionOnUnknownEnum()
             => Assert.Throws<NotImplementedException>(
-                () => _convolutionFactory.Get(ConvolutionFilter.Unknown)
+                () => _convolutionFactory.Get(ConvKernel.Unknown)
             );
     }
 }

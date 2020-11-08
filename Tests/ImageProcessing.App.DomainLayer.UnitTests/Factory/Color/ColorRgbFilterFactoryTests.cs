@@ -1,9 +1,8 @@
 using System;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Color.Implementation;
-using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Color.Interface;
-using ImageProcessing.App.DomainLayer.DomainModel.RgbFilters.Interface.Color;
+using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.Color.Implementation;
+using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.Color.Interface;
 using ImageProcessing.App.DomainLayer.UnitTests.CaseFactory;
 
 using NUnit.Framework;

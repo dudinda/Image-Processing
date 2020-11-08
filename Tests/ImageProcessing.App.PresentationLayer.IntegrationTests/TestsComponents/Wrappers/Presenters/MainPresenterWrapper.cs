@@ -9,9 +9,9 @@ using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Show;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Main;
 using ImageProcessing.App.PresentationLayer.Views.Main;
+using ImageProcessing.App.ServiceLayer.Providers.Scaling.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
-using ImageProcessing.App.ServiceLayer.Services.LockerService.Zoom.Interface;
 using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
@@ -39,7 +39,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         public INonBlockDialogService Dialog { get; }
         public IAwaitablePipeline Pipeline { get; }
         public IAsyncOperationLocker Operation { get; }
-        public IAsyncZoomLocker Zoom { get; }
+        public IScalingProvider Zoom { get; }
          
         public MainPresenterWrapper(
             IAppController controller,
@@ -47,7 +47,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
             INonBlockDialogService dialog,
             IAwaitablePipeline pipeline,
             IAsyncOperationLocker operation,
-            IAsyncZoomLocker zoom) : base(controller)
+            IScalingProvider zoom) : base(controller)
         {
             Cache = cache;
             Dialog = dialog;

@@ -1,5 +1,6 @@
 using System.Drawing;
 
+using ImageProcessing.App.DomainLayer.DomainFactory.Scaling.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Fakes;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents.Wrappers.Presenters;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
@@ -15,6 +16,8 @@ using ImageProcessing.App.PresentationLayer.Views.Rgb;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Convolution;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.RgbFilters;
+using ImageProcessing.App.ServiceLayer.Providers.Scaling.Implementation;
+using ImageProcessing.App.ServiceLayer.Providers.Scaling.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.App.ServiceLayer.Services.FileDialog.Interface;
@@ -25,14 +28,10 @@ using ImageProcessing.App.ServiceLayer.Services.LockerService.Zoom.Interface;
 using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Interface;
 using ImageProcessing.App.UILayer.Exposers.Rgb;
 using ImageProcessing.App.UILayer.FormCommands.Main;
-using ImageProcessing.App.UILayer.FormCommands.Main.Container.Destination.Implementation;
-using ImageProcessing.App.UILayer.FormCommands.Main.Container.Source.Implementation;
-using ImageProcessing.App.UILayer.FormCommands.Main.Implementation;
-using ImageProcessing.App.UILayer.FormCommands.Main.UndoRedo.Redo.Implementation;
-using ImageProcessing.App.UILayer.FormCommands.Main.UndoRedo.Undo.Implementation;
 using ImageProcessing.App.UILayer.FormCommands.Rgb.Implementation;
 using ImageProcessing.App.UILayer.FormCommands.Rgb.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Implementation;
@@ -46,6 +45,11 @@ using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Convolution;
 using ImageProcessing.App.UILayer.FormExposers.Distribution;
 using ImageProcessing.App.UILayer.FormExposers.Main;
+using ImageProcessing.App.UILayer.FormModel.Factory.MainContainer.Implementation;
+using ImageProcessing.App.UILayer.FormModel.Factory.MainFormUndoRedo.Implementation;
+using ImageProcessing.App.UILayer.FormModel.Factory.MainFormZoom.Implementation;
+using ImageProcessing.App.UILayer.FormModel.Factory.MainFormZoom.Interface;
+using ImageProcessing.App.UILayer.FormModel.MainFormUndoRedo.Interface;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
@@ -84,25 +88,26 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
             var dialog = Substitute.ForPartsOf<NonBlockDialogServiceWrapper>(synchronizer,
               Substitute.For<IFileDialogService>(), Substitute.For<IStaTaskService>());
 
-            var command = Substitute.ForPartsOf<MainFormCommand>(
-                Substitute.For<MainFormDestinationContainerCommand>(),
-                Substitute.For<MainFormSourceContainerCommand>(),
-                Substitute.For<MainFormUndoCommand>(),
-                Substitute.For<MainFormRedoCommand>());
+            builder
+                .RegisterSingletonInstance<INonBlockDialogService>(dialog)
+                .RegisterTransientInstance<ICacheService<Bitmap>>(Substitute.ForPartsOf<CacheService<Bitmap>>())
+                .RegisterTransientInstance<IAsyncOperationLocker>(Substitute.ForPartsOf<AsyncOperationLocker>())
+                .RegisterTransientInstance<IAsyncZoomLocker>(Substitute.ForPartsOf<AsyncZoomLocker>())
+                .RegisterTransientInstance<IAwaitablePipeline>(Substitute.ForPartsOf<AwaitablePipeline>())
+                .RegisterTransientInstance<IMainFormEventBinder>(Substitute.ForPartsOf<MainFormEventBinder>(aggregator))
+                .RegisterTransientInstance<IMainFormContainerFactory>(Substitute.ForPartsOf<MainFormContainerFactory>())
+                .RegisterTransientInstance<IMainFormUndoRedoFactory>(Substitute.ForPartsOf<MainFormUndoRedoFactory>())
+                .RegisterTransientInstance<IMainFormZoomFactory>(Substitute.ForPartsOf<MainFormZoomFactory>())
+                .RegisterTransientInstance<IScalingProvider>(Substitute.For<IScalingProvider>());
 
-            builder.RegisterSingletonInstance<INonBlockDialogService>(dialog)
-                   .RegisterTransientInstance<ICacheService<Bitmap>>(Substitute.ForPartsOf<CacheService<Bitmap>>())
-                   .RegisterTransientInstance<IAsyncOperationLocker>(Substitute.ForPartsOf<AsyncOperationLocker>())
-                   .RegisterTransientInstance<IAsyncZoomLocker>(Substitute.ForPartsOf<AsyncZoomLocker>())
-                   .RegisterTransientInstance<IAwaitablePipeline>(Substitute.ForPartsOf<AwaitablePipeline>())
-                   .RegisterTransientInstance<IMainFormEventBinder>(Substitute.ForPartsOf<MainFormEventBinder>(aggregator))
-                   .RegisterTransientInstance<IMainFormCommand>(command);
 
             var form = Substitute.ForPartsOf<MainFormWrapper>(synchronizer, controller,
                 builder.Resolve<IMainFormEventBinder>(),
-                builder.Resolve<IMainFormCommand>());
+                builder.Resolve<IMainFormContainerFactory>(),
+                builder.Resolve<IMainFormUndoRedoFactory>(),
+                builder.Resolve<IMainFormZoomFactory>());
 
-            builder.RegisterSingletonInstance<IMainFormExposer>(form)
+            builder.RegisterSingletonInstance(form)
                    .RegisterSingletonInstance<IMainView>(form);
 
             builder.RegisterTransientInstance(Substitute.ForPartsOf<MainPresenterWrapper>(controller,
@@ -110,7 +115,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
                 builder.Resolve<INonBlockDialogService>(),
                 builder.Resolve<IAwaitablePipeline>(),
                 builder.Resolve<IAsyncOperationLocker>(),
-                builder.Resolve<IAsyncZoomLocker>()));
+                builder.Resolve<IScalingProvider>()));
 
         }
 
@@ -119,11 +124,11 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
             var (controller, aggregator, synchronizer) = builder.BindMocksForMvp();
 
             builder.RegisterTransientInstance<IRgbFormEventBinder>(Substitute.ForPartsOf<RgbFormEventBinder>(aggregator))
-                   .RegisterTransientInstance<IRgbFormCommand>(Substitute.ForPartsOf<RgbFormCommand>());
+                   .RegisterTransientInstance<IRgbFormColor>(Substitute.ForPartsOf<RgbFormColor>());
 
             var form = Substitute.ForPartsOf<RgbFormWrapper>(synchronizer, controller,
                 builder.Resolve<IRgbFormEventBinder>(),
-                builder.Resolve<IRgbFormCommand>());
+                builder.Resolve<IRgbFormColor>());
 
             builder.RegisterTransientInstance<IRgbView>(form)
                    .RegisterTransientInstance<IRgbFormExposer>(form);

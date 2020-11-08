@@ -1,5 +1,6 @@
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.PresentationLayer.UnitTests.Services;
+using ImageProcessing.App.PresentationLayer.Views.Rgb;
 using ImageProcessing.App.UILayer.Exposers.Rgb;
 using ImageProcessing.App.UILayer.Form.Rgb;
 using ImageProcessing.App.UILayer.FormCommands.Rgb.Interface;
@@ -10,7 +11,7 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Forms
 {
-    internal class RgbFormWrapper : IRgbFormExposer
+    internal class RgbFormWrapper : IRgbFormExposer, IRgbView
     {
         private readonly IAutoResetEventService _synchronizer;
         private readonly RgbForm _form;
@@ -18,13 +19,13 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
             IAutoResetEventService synchronizer,
             IAppController controller,
             IRgbFormEventBinder binder,
-            IRgbFormCommand command)
+            IRgbFormColor command)
         {
             _synchronizer = synchronizer;
             _form = new RgbForm(controller, binder, command);
         }
 
-        public virtual RgbFilter Dropdown
+        public virtual RgbFltr Dropdown
             => _form.Dropdown;
 
         public virtual MetroCheckBox RedButton

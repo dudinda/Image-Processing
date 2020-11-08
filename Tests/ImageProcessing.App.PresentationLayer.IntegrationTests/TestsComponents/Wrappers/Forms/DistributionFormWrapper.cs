@@ -5,6 +5,7 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.PresentationLayer.UnitTests.Services;
+using ImageProcessing.App.PresentationLayer.Views.Distribution;
 using ImageProcessing.App.UILayer.Form.Distribution;
 using ImageProcessing.App.UILayer.FormEventBinders.Distribution.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Distribution;
@@ -14,7 +15,7 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Forms
 {
-    internal class DistributionFormWrapper : IDistributionFormExposer
+    internal class DistributionFormWrapper : IDistributionFormExposer, IDistributionView
     {
         private readonly IAutoResetEventService _synchronizer;
         private readonly DistributionForm _form;
@@ -31,7 +32,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         public virtual (string, string) Parameters
             => _form.Parameters;
 
-        public virtual Distributions Dropdown
+        public virtual PrDistribution Dropdown
             => _form.Dropdown;
 
         public virtual MetroButton ApplyTransformButton

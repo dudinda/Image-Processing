@@ -1,10 +1,13 @@
 using System;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Color.Interface;
-using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Rgb.Implementation;
-using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Rgb.Interface;
+using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.Color.Interface;
+using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Implementation;
+using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Interface;
+using ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Interface;
+using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Recommendation.Interface;
 using ImageProcessing.App.DomainLayer.UnitTests.CaseFactory;
+using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
 
 using NSubstitute;
 
@@ -23,20 +26,22 @@ namespace ImageProcessing.App.DomainLayer.UnitTests.Factory.Rgb
         public void SetUp()
         {
             _rgbFilterFactory = new RgbFilterFactory(
-                Substitute.For<IColorFactory>()
+                Substitute.For<IRecommendationFactory>(),
+                Substitute.For<IColorFactory>(),
+                Substitute.For<IAppSettings>()
             );
         }
 
         [Test, TestCaseSource(
                typeof(DomainLayerFactoriesCaseFactory),
                nameof(RgbFiltersFactoryTestCases))]
-        public void FactoryReturnsBinaryFilterByEnum((RgbFilter Input, Type Result) args)
+        public void FactoryReturnsBinaryFilterByEnum((RgbFltr Input, Type Result) args)
             =>  Assert.That(_rgbFilterFactory.Get(args.Input), Is.TypeOf(args.Result));
 
         [Test]
         public void FactoryThrowsNotImplementedExceptionOnUnknownEnum()
             => Assert.Throws<NotImplementedException>(
-                () => _rgbFilterFactory.Get(RgbFilter.Unknown)
+                () => _rgbFilterFactory.Get(RgbFltr.Unknown)
             );
     }
 }

@@ -25,13 +25,13 @@ namespace ImageProcessing.App.DomainLayer.UnitTests.Factory.Distribution
         [Test, TestCaseSource(
                typeof(DomainLayerFactoriesCaseFactory),
                nameof(DistributionFactoryTestCases))]
-        public void FactoryReturnsRayleighByEnumValue((Distributions Input, Type Result) args)
+        public void FactoryReturnsRayleighByEnumValue((PrDistribution Input, Type Result) args)
             => Assert.That(_distributionFactory.Get(args.Input), Is.TypeOf(args.Result));
 
         [Test]
         public void FactoryThrowsNotImplementedExceptionOnUnknownEnum()
             => Assert.Throws<NotImplementedException>(
-                () => _distributionFactory.Get(CommonLayer.Enums.Distributions.Unknown)
+                () => _distributionFactory.Get(PrDistribution.Unknown)
             );       
     }
 }
