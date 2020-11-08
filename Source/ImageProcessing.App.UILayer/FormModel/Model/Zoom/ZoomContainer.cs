@@ -8,7 +8,7 @@ namespace ImageProcessing.App.UILayer.FormModel.Model.Zoom
 {
     internal abstract class ZoomContainer : IFormExposer<IMainFormExposer, ZoomContainer>
     {
-        private IMainFormExposer _exposer = null!;
+        private IMainFormExposer? _exposer;
 
         protected IMainFormExposer Exposer
         {

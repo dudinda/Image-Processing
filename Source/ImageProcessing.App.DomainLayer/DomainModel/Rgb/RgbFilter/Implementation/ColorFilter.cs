@@ -23,9 +23,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
         /// <inheritdoc />
         public Bitmap Filter(Bitmap bitmap)
         {
-            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                                             ImageLockMode.ReadWrite,
-                                             bitmap.PixelFormat);
+            var bitmapData = bitmap.LockBits(
+                new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                ImageLockMode.ReadWrite, bitmap.PixelFormat);
 
             var size = bitmap.Size;
             var ptrStep = bitmap.GetBitsPerPixel() / 8;
@@ -37,6 +37,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
             unsafe
             {
                 var startPtr = (byte*)bitmapData.Scan0.ToPointer();
+
+                _filter.SetPixelColor(startPtr);
 
                 Parallel.For(0, size.Height, options, y =>
                 {

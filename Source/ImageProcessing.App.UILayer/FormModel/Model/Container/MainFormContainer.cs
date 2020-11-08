@@ -8,7 +8,7 @@ namespace ImageProcessing.App.UILayer.FormModel.Model.Container
 {
     internal abstract class MainFormContainer : IFormExposer<IMainFormExposer, MainFormContainer>
     {
-        private IMainFormExposer _exposer = null!;
+        private IMainFormExposer? _exposer;
 
         protected IMainFormExposer Exposer
         {

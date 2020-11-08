@@ -9,7 +9,7 @@ namespace ImageProcessing.App.UILayer.FormModel.Model.UndoRedo
 {
     internal abstract class UndoRedoButton : IFormExposer<IMainFormExposer, UndoRedoButton>
     {
-        protected IMainFormExposer _exposer = null!;
+        protected IMainFormExposer? _exposer;
 
         protected IMainFormExposer Exposer
         {

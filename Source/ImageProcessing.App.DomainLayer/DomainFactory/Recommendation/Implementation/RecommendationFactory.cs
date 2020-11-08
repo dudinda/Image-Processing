@@ -12,9 +12,9 @@ namespace ImageProcessing.App.DomainLayer.Factory.RgbFilters.Recommendation.Impl
         /// <summary>
         /// A factory method
         /// where the <see cref="Luma"/> represents an
-        /// enumeration for the types implementing the <see cref="Rec"/>.
+        /// enumeration for the types implementing the <see cref="IRecommendation"/>.
         /// </summary>
-        public Rec Get(Luma filter)
+        public IRecommendation Get(Luma filter)
             => filter
         switch
         {

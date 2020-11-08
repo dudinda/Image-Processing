@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Concurrent;
+using System.Configuration;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
@@ -16,9 +17,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
     /// </summary>
     internal sealed class BinaryFilter : IRgbFilter
     {
-        private readonly Rec _rec;
+        private readonly IRecommendation _rec;
 
-        public BinaryFilter(Rec rec)
+        public BinaryFilter(IRecommendation rec)
         {
             _rec = rec;
         }

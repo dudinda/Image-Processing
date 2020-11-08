@@ -6,9 +6,9 @@ namespace ImageProcessing.App.DomainLayer.Factory.RgbFilters.Recommendation.Inte
 {
     /// <summary>
     /// Provides a factory method for all the types
-    /// implementing the <see cref="Rec"/>.
+    /// implementing the <see cref="IRecommendation"/>.
     /// </summary>
-    public interface IRecommendationFactory : IModelFactory<Rec, Luma>
+    public interface IRecommendationFactory : IModelFactory<IRecommendation, Luma>
     {
 
     }

@@ -14,9 +14,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
     /// </summary>
     internal sealed class GrayscaleFilter : IRgbFilter
     {
-        private readonly Rec _rec;
+        private readonly IRecommendation _rec;
 
-        public GrayscaleFilter(Rec rec)
+        public GrayscaleFilter(IRecommendation rec)
         {
             _rec = rec;
         }

@@ -19,10 +19,7 @@ namespace ImageProcessing.App.CommonLayer.Attributes
             SecondParamter = secondParameter;
         }
 
-        public string FirstParamter { get; }
-            = null!;
-
-        public string SecondParamter { get; }
-            = null!;
+        public string? FirstParamter { get; }
+        public string? SecondParamter { get; }
     }
 }

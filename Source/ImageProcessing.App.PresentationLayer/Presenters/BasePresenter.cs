@@ -16,8 +16,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
     internal abstract class BasePresenter<TView> : IPresenter
 		where TView : class, IView
 	{
-        private TView _view
-            = null!;
+        private TView? _view;
 
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller { get; }
@@ -63,8 +62,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
 		where TView : class, IView
 		where TViewModel : class
 	{
-        private TView _view
-            = null!;
+        private TView? _view;
 
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller { get; }
@@ -92,8 +90,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
         /// <summary>
         /// View model of a presenter.
         /// </summary>
-        protected TViewModel ViewModel { get; private set; }
-            = null!;
+        protected TViewModel? ViewModel { get; private set; }
 
         protected BasePresenter(IAppController controller)
             => Controller = controller;
