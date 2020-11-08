@@ -22,12 +22,10 @@ namespace ImageProcessing.App.UILayer.Form
         typeof(AbstractFormDescriptionProvider<BaseForm, MetroForm>))]
     internal abstract class BaseForm : MetroForm, IView
     {
-        private ApplicationContext _context
-            = null!;
+        private ApplicationContext? _context;
 
         /// <inheritdoc cref="IAppController"/>
-        protected IAppController Controller { get; }
-            = null!;
+        protected IAppController? Controller { get; }
 
         protected BaseForm(IAppController controller)
             : base() => Controller = controller;
@@ -42,6 +40,11 @@ namespace ImageProcessing.App.UILayer.Form
             {
                 if(_context is null)
                 {
+                    if(Controller is null)
+                    {
+                        throw new ArgumentNullException(nameof(Controller));
+                    }
+
                     var ioc = Controller.IoC;
 
                     if(!ioc.IsRegistered<ApplicationContext>())
@@ -58,7 +61,7 @@ namespace ImageProcessing.App.UILayer.Form
 
         protected virtual TElement Read<TElement>(Func<object> func)
         {
-            object result = null!;
+            object? result = null;
 
             if (SynchronizationContext.Current is null)
             {
