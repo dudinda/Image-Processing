@@ -220,7 +220,7 @@ namespace ImageProcessing.App.UILayer.Form.Distribution
             this.MinimizeBox = false;
             this.Name = "DistributionForm";
             this.Resizable = false;
-            this.Text = "Distributions";
+            this.Text = "Distribution";
             this.TopMost = true;
             this.ToolBarMenu.ResumeLayout(false);
             this.ToolBarMenu.PerformLayout();

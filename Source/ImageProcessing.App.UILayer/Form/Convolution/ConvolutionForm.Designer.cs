@@ -59,7 +59,7 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
             this.MinimizeBox = false;
             this.Name = "ConvolutionForm";
             this.Resizable = false;
-            this.Text = "Convolution Filters";
+            this.Text = "Convolution Kernel";
             this.TopMost = true;
             this.ResumeLayout(false);
 

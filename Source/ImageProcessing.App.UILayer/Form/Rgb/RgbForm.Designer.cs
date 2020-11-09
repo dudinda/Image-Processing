@@ -119,7 +119,7 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
             this.MinimizeBox = false;
             this.Name = "RgbForm";
             this.Resizable = false;
-            this.Text = "Rgb Filters";
+            this.Text = "Rgb";
             this.CheckboxColorGroup.ResumeLayout(false);
             this.CheckboxColorGroup.PerformLayout();
             this.ResumeLayout(false);

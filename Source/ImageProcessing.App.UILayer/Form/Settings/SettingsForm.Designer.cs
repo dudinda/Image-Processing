@@ -102,7 +102,9 @@ namespace ImageProcessing.App.UILayer.Form.Settings
             this.Controls.Add(this.LumaComboBox);
             this.Controls.Add(this.ScalingComboBox);
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SettingsForm";
+            this.Resizable = false;
             this.Text = "Settings";
             this.ResumeLayout(false);
             this.PerformLayout();
