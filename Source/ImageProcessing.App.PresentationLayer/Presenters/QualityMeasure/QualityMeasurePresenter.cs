@@ -11,13 +11,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
     internal sealed class QualityMeasurePresenter
         : BasePresenter<IQualityMeasureView, QualityMeasureViewModel>
     {
-        private readonly IQualityMeasureService _qualityService;
+        private readonly IQualityMeasureService _quality;
 
         public QualityMeasurePresenter(
             IAppController controller, 
-            IQualityMeasureService qualityService) : base(controller) 
+            IQualityMeasureService quality) : base(controller) 
         {
-            _qualityService = qualityService;
+            _quality = quality;
         }
 
         public override void Run(QualityMeasureViewModel vm)
@@ -28,7 +28,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             var chart = View.DataChart;
           
             var map = await Task.Run(
-                () => _qualityService.BuildIntervals(vm.Queue)
+                () => _quality.BuildIntervals(vm.Queue)
             ).ConfigureAwait(true);
 
             foreach(var pair in map)

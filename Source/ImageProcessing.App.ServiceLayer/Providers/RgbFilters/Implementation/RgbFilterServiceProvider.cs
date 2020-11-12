@@ -11,37 +11,30 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.RgbFilters
     /// <inheritdoc cref="IRgbFilterServiceProvider"/>
     internal sealed class RgbFilterServiceProvider : IRgbFilterServiceProvider
     {
-        private readonly IRgbFilterFactory _rgbFilterFactory;
-        private readonly IRgbFilterService _rgbFilterService;
+        private readonly IRgbFilterFactory _factory;
+        private readonly IRgbFilterService _service;
         private readonly ICacheService<Bitmap> _cache;
 
-        public RgbFilterServiceProvider(IRgbFilterFactory rgbFilterFactory,
-                                        IRgbFilterService rgbFilterService,
-                                        ICacheService<Bitmap> cache)
+        public RgbFilterServiceProvider(
+            IRgbFilterFactory factory,
+            IRgbFilterService service,
+            ICacheService<Bitmap> cache)
         {
-            _rgbFilterFactory = rgbFilterFactory;
-            _rgbFilterService = rgbFilterService;
+            _factory = factory;
+            _service = service;
             _cache = cache;
         }
 
         /// <inheritdoc/>
         public Bitmap Apply(Bitmap bmp, RgbFltr filter)
             => _cache.GetOrCreate(filter,
-               () => _rgbFilterService
-                   .Filter(bmp,
-                       _rgbFilterFactory
-                           .Get(filter)
-               )
-           );
+               () => _service.Filter(bmp, _factory.Get(filter))
+            );
 
         /// <inheritdoc/>
         public Bitmap Apply(Bitmap bmp, RgbColors filter)
             => _cache.GetOrCreate(filter,
-               () => _rgbFilterService
-                   .Filter(bmp,
-                       _rgbFilterFactory
-                           .Get(filter)
-               )
-           );
+               () => _service.Filter(bmp, _factory.Get(filter))
+            );
     }
 }

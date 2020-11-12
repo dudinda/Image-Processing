@@ -17,13 +17,13 @@ namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
         {
             var destination = new Bitmap(source);
 
-            var sourceBitmapData = source.LockBits(new Rectangle(0, 0, source.Width, source.Height),
-                                                   ImageLockMode.ReadOnly,
-                                                   source.PixelFormat);
+            var sourceBitmapData = source.LockBits(
+                new Rectangle(0, 0, source.Width, source.Height),
+                ImageLockMode.ReadOnly, source.PixelFormat);
 
-            var destinationBitmapData = destination.LockBits(new Rectangle(0, 0, source.Width, source.Height),
-                                                             ImageLockMode.WriteOnly,
-                                                             destination.PixelFormat);
+            var destinationBitmapData = destination.LockBits(
+                new Rectangle(0, 0, source.Width, source.Height),
+                ImageLockMode.WriteOnly, destination.PixelFormat);
 
             var size = source.Size;
             var ptrStep = source.GetBitsPerPixel() / 8;
@@ -53,9 +53,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
                     for (int x = kernelOffset; x < size.Width - kernelOffset; ++x, sourcePtr += ptrStep, destinationPtr += ptrStep)
                     {
                         //set accumulators to 0
-                        r = 0;
-                        g = 0;
-                        b = 0;
+                        r = 0; g = 0; b = 0;
 
                         for (var kernelRow = -kernelOffset; kernelRow <= kernelOffset; ++kernelRow)
                         {
@@ -75,9 +73,13 @@ namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
                         g = g * filter.Factor + filter.Bias;
                         r = r * filter.Factor + filter.Bias;
 
-                        destinationPtr[0] = GetByteValue(ref b);
-                        destinationPtr[1] = GetByteValue(ref g);
-                        destinationPtr[2] = GetByteValue(ref r);
+                        if (b > 255) { b = 255; } else if (b < 0) { b = 0; }
+                        if (g > 255) { g = 255; } else if (g < 0) { g = 0; }
+                        if (r > 255) { r = 255; } else if (r < 0) { r = 0; }
+
+                        destinationPtr[0] = (byte)b;
+                        destinationPtr[1] = (byte)g;
+                        destinationPtr[2] = (byte)r;
                     }                   
                 });          
             }
@@ -86,20 +88,6 @@ namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
             destination.UnlockBits(destinationBitmapData);
 
             return destination;
-
-            byte GetByteValue(ref double value)
-            {
-                if (value > 255)
-                {
-                    value = 255;
-                }
-                else if (value < 0)
-                {
-                    value = 0;
-                }
-
-                return (byte)value;
-            };
         }
     }
 }
