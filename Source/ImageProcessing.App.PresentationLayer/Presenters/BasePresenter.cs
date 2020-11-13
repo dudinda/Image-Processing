@@ -1,3 +1,5 @@
+using System;
+
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Microkernel.MVP.Presenter;
@@ -63,6 +65,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
 		where TViewModel : class
 	{
         private TView? _view;
+        private TViewModel? _vm;
 
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller { get; }
@@ -90,7 +93,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
         /// <summary>
         /// View model of a presenter.
         /// </summary>
-        protected TViewModel? ViewModel { get; private set; }
+        protected TViewModel ViewModel
+        {
+            get => _vm ?? throw new ArgumentNullException(nameof(_vm));
+            set => _vm = value;        
+        }
 
         protected BasePresenter(IAppController controller)
             => Controller = controller;
@@ -98,7 +105,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
         /// <inheritdoc/>
         public virtual void Run(TViewModel vm)
 		{
-            ViewModel = vm;
+            _vm = vm;
             View.Show();
 		}
 	}
