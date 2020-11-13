@@ -7,9 +7,16 @@ namespace ImageProcessing.App.DomainLayer.DomainEvent
     /// </summary>
     public abstract class BaseEventArgs
     {
+        private object? _publisher;
+
         public DateTime PublishedOn { get; }
 
-        public object? Publisher { get; }
+        public object Publisher
+        {
+            get => _publisher ??
+                new ArgumentNullException(nameof(_publisher));
+            
+        }
 
         public BaseEventArgs()
         {
@@ -18,7 +25,7 @@ namespace ImageProcessing.App.DomainLayer.DomainEvent
 
         public BaseEventArgs(object publisher) : base()
         {
-            Publisher = publisher;
+            _publisher = publisher;
         }
            
     }
