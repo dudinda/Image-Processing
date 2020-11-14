@@ -13,8 +13,6 @@ namespace ImageProcessing.App.DomainLayer.DomainFactory.ColorMatrix.Implementati
             => matrix
         switch
          {
-             ClrMatrix.Custom
-                 => new CustomColorMatrix(),
              ClrMatrix.Grayscale240M
                  => new GrayscaleSmpte240MColorMatrix(),
              ClrMatrix.Grayscale601

@@ -45,11 +45,5 @@ namespace ImageProcessing.App.CommonLayer.Enums
         /// </summary>
         [Description("Inverse")]
         Inverse       = 6,
-
-        /// <summary>
-        /// Custom color matrix.
-        /// </summary>
-        [Description("Custom")]
-        Custom        = 7
     }
 }
