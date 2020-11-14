@@ -8,7 +8,7 @@ using ImageProcessing.App.DomainLayer.DomainModel.AffineTransformation.Interface
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.AffineTransformation.Implementation
 {
-    internal sealed class TranslationTransformation : ITransformation
+    public sealed class TranslationTransformation : ITransformation
     {
         public Bitmap Transform(Bitmap src, double x, double y)
         {
@@ -33,6 +33,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.AffineTransformation.Imple
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
+            //(x, y) -> (x + x', y + y')
             var (dx, dy) = (x, y);
 
             unsafe
@@ -42,25 +43,25 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.AffineTransformation.Imple
 
                 Parallel.For(0, srcHeight, options, y =>
                 {
-                    var newY = (int)(y - dy);
+                    var newY = (int)(y + dy);
 
                     if (newY < srcHeight && newY >= 0)
                     {
                         //get the address of a row
-                        var dstRow = dstStartPtr + y * dstData.Stride;
-                        var srcRow = srcStartPtr + newY * srcData.Stride;
+                        var dstRow = dstStartPtr + newY * dstData.Stride;
+                        var srcRow = srcStartPtr + y    * srcData.Stride;
 
-                        for (var x = 0; x < srcWidth; ++x, dstRow += ptrStep)
+                        for (var x = 0; x < srcWidth; ++x, srcRow += ptrStep)
                         {
-                            var newX = (int)(x - dx);
+                            var newX = (int)(x + dx);
 
                             if (newX < srcWidth && newX >= 0)
                             {
-                                var srcPtr = srcRow + newX * ptrStep;
+                                var dstPtr = dstRow + newX * ptrStep;
 
-                                dstRow[0] = srcPtr[0];
-                                dstRow[1] = srcPtr[1];
-                                dstRow[2] = srcPtr[2];
+                                dstPtr[0] = srcRow[0];
+                                dstPtr[1] = srcRow[1];
+                                dstPtr[2] = srcRow[2];
                             }
                         }
 
