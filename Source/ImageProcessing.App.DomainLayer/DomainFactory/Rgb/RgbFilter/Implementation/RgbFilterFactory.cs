@@ -48,6 +48,8 @@ namespace ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Implementa
                     => new FloppingFilter(),
                 RgbFltr.Flipping
                     => new FlippingFilter(),
+                RgbFltr.SepiaTone
+                    => new SepiaToneFilter(),
 
                 _ => throw new NotImplementedException(nameof(filter))
             };

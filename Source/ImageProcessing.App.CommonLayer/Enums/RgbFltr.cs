@@ -41,6 +41,12 @@ namespace ImageProcessing.App.CommonLayer.Enums
         /// Flipping filter.
         /// </summary>
         [Description("Flip the image")]
-        Flipping  = 5
+        Flipping  = 5,
+
+        /// <summary>
+        /// Sepia tone filter.
+        /// </summary>
+        [Description("Sepia tone")]
+        SepiaTone = 6
     }
 }
