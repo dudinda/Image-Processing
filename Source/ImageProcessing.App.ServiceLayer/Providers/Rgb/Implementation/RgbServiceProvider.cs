@@ -44,7 +44,7 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Rgb.Implementation
         /// <inheritdoc/>
         public Bitmap Apply(Bitmap bmp, ClrMatrix matrix)
             => _cache.GetOrCreate(matrix,
-               () => _service.Apply(bmp, _matrix.Get(matrix))
+               () => _service.Apply(bmp, _matrix.Get(matrix).Matrix)
             );
     }
 }

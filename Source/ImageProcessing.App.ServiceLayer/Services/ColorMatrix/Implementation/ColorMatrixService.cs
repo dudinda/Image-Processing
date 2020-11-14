@@ -4,8 +4,8 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
-using ImageProcessing.App.DomainLayer.DomainModel.ColorMatrix.Interface;
 using ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Interface;
+using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
 namespace ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Implementation
 {
@@ -13,7 +13,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Implementation
     internal sealed class ColorMatrixService : IColorMatrixService
     {
         /// <inheritdoc/>
-        public Bitmap Apply(Bitmap source, IColorMatrix filter)
+        public Bitmap Apply(Bitmap source, ReadOnly2DArray<double> mtx)
         {
             var bitmapData = source.LockBits(
               new Rectangle(0, 0, source.Width, source.Height),
@@ -26,8 +26,6 @@ namespace ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Implementation
             {
                 throw new InvalidOperationException($"{source.PixelFormat} is not supported.");
             }
-
-            var mtx = filter.Matrix;
 
             var options = new ParallelOptions()
             {
