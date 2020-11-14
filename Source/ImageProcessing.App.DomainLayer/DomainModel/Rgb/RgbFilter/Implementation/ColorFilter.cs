@@ -38,8 +38,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
             {
                 var startPtr = (byte*)bitmapData.Scan0.ToPointer();
 
-                _filter.SetPixelColor(startPtr);
-
                 Parallel.For(0, size.Height, options, y =>
                 {
                     //get the address of a row
