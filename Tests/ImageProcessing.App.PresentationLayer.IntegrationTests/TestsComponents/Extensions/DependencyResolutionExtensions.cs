@@ -1,6 +1,5 @@
 using System.Drawing;
 
-using ImageProcessing.App.DomainLayer.DomainFactory.Scaling.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Fakes;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents.Wrappers.Presenters;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
@@ -15,8 +14,7 @@ using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.PresentationLayer.Views.Rgb;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Convolution;
-using ImageProcessing.App.ServiceLayer.Providers.Interface.RgbFilters;
-using ImageProcessing.App.ServiceLayer.Providers.Scaling.Implementation;
+using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Scaling.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
@@ -28,7 +26,6 @@ using ImageProcessing.App.ServiceLayer.Services.LockerService.Zoom.Interface;
 using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Interface;
 using ImageProcessing.App.UILayer.Exposers.Rgb;
 using ImageProcessing.App.UILayer.FormCommands.Main;
@@ -44,7 +41,6 @@ using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Implementation;
 using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Convolution;
 using ImageProcessing.App.UILayer.FormExposers.Distribution;
-using ImageProcessing.App.UILayer.FormExposers.Main;
 using ImageProcessing.App.UILayer.FormModel.Factory.MainContainer.Implementation;
 using ImageProcessing.App.UILayer.FormModel.Factory.MainFormUndoRedo.Implementation;
 using ImageProcessing.App.UILayer.FormModel.Factory.MainFormZoom.Implementation;
@@ -134,11 +130,11 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
                    .RegisterTransientInstance<IRgbFormExposer>(form);
 
             builder.RegisterTransientInstance(
-               Substitute.For<IRgbFilterServiceProvider>());
+               Substitute.For<IRgbServiceProvider>());
 
             builder.RegisterTransientInstance(
               Substitute.For<RgbPresenterWrapper>(controller,
-                  builder.Resolve<IRgbFilterServiceProvider>(),
+                  builder.Resolve<IRgbServiceProvider>(),
                   builder.Resolve<IAsyncOperationLocker>()
               ));
         }

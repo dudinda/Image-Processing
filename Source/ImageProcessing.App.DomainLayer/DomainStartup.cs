@@ -1,3 +1,5 @@
+using ImageProcessing.App.DomainLayer.DomainFactory.ColorMatrix.Implementation;
+using ImageProcessing.App.DomainLayer.DomainFactory.ColorMatrix.Interface;
 using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.Color.Implementation;
 using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.Color.Interface;
 using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Implementation;
@@ -33,6 +35,7 @@ namespace ImageProcessing.App.DomainLayer
                 .RegisterTransient<IDistributionFactory, DistributionFactory>()
                 .RegisterTransient<IRgbFilterFactory, RgbFilterFactory>()
                 .RegisterTransient<IScalingFactory, ScalingFactory>()
+                .RegisterTransient<IColorMatrixFactory, ColorMatrixFactory>()
                 .RegisterTransient<IRecommendationFactory, RecommendationFactory>()
                 .RegisterScoped<IColorFactory, ColorFactory>();
         }

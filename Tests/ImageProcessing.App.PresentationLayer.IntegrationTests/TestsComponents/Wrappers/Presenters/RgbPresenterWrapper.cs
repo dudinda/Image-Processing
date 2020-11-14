@@ -5,7 +5,7 @@ using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Rgb;
 using ImageProcessing.App.PresentationLayer.ViewModel.Rgb;
 using ImageProcessing.App.PresentationLayer.Views.Rgb;
-using ImageProcessing.App.ServiceLayer.Providers.Interface.RgbFilters;
+using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
@@ -18,12 +18,12 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
     {
         private readonly RgbPresenter _presenter;
 
-        public IRgbFilterServiceProvider Provider { get; }
+        public IRgbServiceProvider Provider { get; }
         public IAsyncOperationLocker Operation { get; }
 
         public RgbPresenterWrapper(
             IAppController controller,
-            IRgbFilterServiceProvider provider,
+            IRgbServiceProvider provider,
             IAsyncOperationLocker locker) : base(controller)
         {
             Provider = provider;

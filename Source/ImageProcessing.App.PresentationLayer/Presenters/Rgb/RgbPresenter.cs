@@ -9,7 +9,7 @@ using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModel.Rgb;
 using ImageProcessing.App.PresentationLayer.Views.Rgb;
-using ImageProcessing.App.ServiceLayer.Providers.Interface.RgbFilters;
+using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
@@ -22,12 +22,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
           ISubscriber<ApplyRgbColorFilterEventArgs>,
           ISubscriber<ContainerUpdatedEventArgs>
     {
-        private readonly IRgbFilterServiceProvider _provider;
+        private readonly IRgbServiceProvider _provider;
         private readonly IAsyncOperationLocker _locker;
 
         public RgbPresenter(
             IAppController controller,
-            IRgbFilterServiceProvider provider,
+            IRgbServiceProvider provider,
             IAsyncOperationLocker locker) : base(controller)
         {
             _provider = provider;

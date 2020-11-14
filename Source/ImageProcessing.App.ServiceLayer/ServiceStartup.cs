@@ -7,11 +7,11 @@ using ImageProcessing.App.ServiceLayer.NonBlockDialog.Implementation;
 using ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Providers.Implementation.Convolution;
 using ImageProcessing.App.ServiceLayer.Providers.Implementation.Morphology;
-using ImageProcessing.App.ServiceLayer.Providers.Implementation.RgbFilters;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Convolution;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Morphology;
-using ImageProcessing.App.ServiceLayer.Providers.Interface.RgbFilters;
+using ImageProcessing.App.ServiceLayer.Providers.Rgb.Implementation;
+using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Scaling.Implementation;
 using ImageProcessing.App.ServiceLayer.Providers.Scaling.Interface;
 using ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.BitmapLuminance.Implementation;
@@ -30,6 +30,8 @@ using ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
+using ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Implementation;
+using ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Implementation;
@@ -51,10 +53,6 @@ using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Implementatio
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.App.ServiceLayer.Services.QualityMeasure.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.QualityMeasure.Interface;
-using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Implementation;
-using ImageProcessing.App.ServiceLayer.Services.RgbFilters.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Settings.Implementation;
-using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Interface;
 using ImageProcessing.Microkernel.AppConfig;
@@ -80,12 +78,12 @@ namespace ImageProcessing.App.ServiceLayer
                 .RegisterTransient<IBitmapLuminanceDistributionService, BitmapLuminanceDistributionService>()
                 .RegisterTransient<IFileDialogService, FileDialogService>()
                 .RegisterScoped<INonBlockDialogService, NonBlockDialogService>()
-                .RegisterTransient<IRgbFilterService, RgbFilterService>()
+                .RegisterTransient<IColorMatrixService, ColorMatrixService>()
                 .RegisterScoped<IAsyncOperationLocker, AsyncOperationLocker>()
                 .RegisterTransient<IConvolutionServiceProvider, ConvolutionServiceProvider>()
                 .RegisterTransient<IMorphologyServiceProvider, MorphologyServiceProvider>()
                 .RegisterTransient<IBitmapLuminanceServiceProvider, BitmapLuminanceServiceProvider>()
-                .RegisterTransient<IRgbFilterServiceProvider, RgbFilterServiceProvider>()
+                .RegisterTransient<IRgbServiceProvider, RgbServiceProvider>()
                 .RegisterTransient<IScalingProvider, ScalingProvider>()
                 .RegisterScoped<IChartSeriesBuilder, ChartSeriesBuilder>()
                 .RegisterTransient<IQualityMeasureService, QualityMeasureService>()
