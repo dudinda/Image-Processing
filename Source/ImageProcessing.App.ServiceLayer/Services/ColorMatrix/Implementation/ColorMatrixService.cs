@@ -43,18 +43,21 @@ namespace ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Implementation
                 var (a10, a11, a12, a13, a14) = (mtx[1, 0], mtx[1, 1], mtx[1, 2], mtx[1, 3], mtx[1, 4] * 255);
                 var (a20, a21, a22, a23, a24) = (mtx[2, 0], mtx[2, 1], mtx[2, 2], mtx[2, 3], mtx[2, 4] * 255);
                 var (a30, a31, a32, a33, a34) = (mtx[3, 0], mtx[3, 1], mtx[3, 2], mtx[3, 3], mtx[3, 4] * 255);
-             
+
+                //Ax = x'
                 Parallel.For(0, size.Height, options, y =>
                 {
                     //get the address of a row
                     var ptr = startPtr + y * bitmapData.Stride;
 
+                    double r, g, b, a;
+
                     for (var x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
-                        var r = a00 * ptr[2] + a01 * ptr[1] + a02 * ptr[2] + a03 * ptr[3] + a04;
-                        var g = a10 * ptr[2] + a11 * ptr[1] + a12 * ptr[2] + a13 * ptr[3] + a14;
-                        var b = a20 * ptr[2] + a21 * ptr[1] + a22 * ptr[2] + a23 * ptr[3] + a24;
-                        var a = a30 * ptr[2] + a31 * ptr[1] + a32 * ptr[2] + a33 * ptr[3] + a34;
+                        r = a00 * ptr[2] + a01 * ptr[1] + a02 * ptr[2] + a03 * ptr[3] + a04;
+                        g = a10 * ptr[2] + a11 * ptr[1] + a12 * ptr[2] + a13 * ptr[3] + a14;
+                        b = a20 * ptr[2] + a21 * ptr[1] + a22 * ptr[2] + a23 * ptr[3] + a24;
+                        a = a30 * ptr[2] + a31 * ptr[1] + a32 * ptr[2] + a33 * ptr[3] + a34;
 
                         if (r > 255) { r = 255; } else if (r < 0) { r = 0; }
                         if (g > 255) { g = 255; } else if (g < 0) { g = 0; }
