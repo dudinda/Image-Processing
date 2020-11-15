@@ -53,9 +53,27 @@ namespace ImageProcessing.App.CommonLayer.Enums
         RgbToYiq      = 7,
 
         /// <summary>
-        /// YIQ to RGB color matrix
+        /// YIQ to RGB color matrix.
         /// </summary>
         [Description("YIQ to RGB")]
-        YiqToRgb      = 8
+        YiqToRgb      = 8,
+
+        /// <summary>
+        /// RGB to XYZ color matrix.
+        /// </summary>
+        [Description("RGB to XYZ (E)")]
+        RgbToXyz      = 9,
+
+        /// <summary>
+        /// XYZ to RGB color matrix.
+        /// </summary>
+        [Description("XYZ (E) to RGB")]
+        XyzToRgb      = 10,
+
+        /// <summary>
+        /// Polaroid tone color matrix.
+        /// </summary>
+        [Description("Polaroid tone")]
+        PolaroidTone  = 11
     }
 }

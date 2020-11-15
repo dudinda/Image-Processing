@@ -29,6 +29,12 @@ namespace ImageProcessing.App.DomainLayer.DomainFactory.ColorMatrix.Implementati
                  => new RgbToYiqColorMatrix(),
              ClrMatrix.YiqToRgb
                  => new YiqToRgbColorMatrix(),
+             ClrMatrix.XyzToRgb
+                 => new XyzEToRgbColorMatrix(),
+             ClrMatrix.RgbToXyz
+                 => new RgbToXyzEColorMatrix(),
+             ClrMatrix.PolaroidTone
+                 => new PolaroidToneColorMatrix(),
 
              _   => throw new NotImplementedException(nameof(matrix))
          };
