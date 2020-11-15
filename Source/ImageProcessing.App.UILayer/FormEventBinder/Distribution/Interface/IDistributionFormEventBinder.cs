@@ -6,6 +6,6 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Distribution.Interface
 {
     internal interface IDistributionFormEventBinder : IFormEventBinder<IDistributionFormExposer>
     {
-        public bool ProcessCmdKey(IDistributionFormExposer view, Keys keyData);
+        bool ProcessCmdKey(IDistributionFormExposer view, Keys keyData);
     }
 }

@@ -7,6 +7,6 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface
 {
     internal interface IRgbFormEventBinder : IFormEventBinder<IRgbFormExposer>
     {
-        public bool ProcessCmdKey(IRgbFormExposer view, Keys keyData);
+        bool ProcessCmdKey(IRgbFormExposer view, Keys keyData);
     }
 }

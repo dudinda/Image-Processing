@@ -6,6 +6,6 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Interface
 {
     internal interface IMainFormEventBinder : IFormEventBinder<IMainFormExposer>
     {
-        public bool ProcessCmdKey(IMainFormExposer view, Keys keyData);
+        bool ProcessCmdKey(IMainFormExposer view, Keys keyData);
     }
 }
