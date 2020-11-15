@@ -27,7 +27,7 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
             this.BlueColor = new MetroFramework.Controls.MetroCheckBox();
             this.GreenColor = new MetroFramework.Controls.MetroCheckBox();
             this.RedColor = new MetroFramework.Controls.MetroCheckBox();
-            this.Palette = new MetroFramework.Controls.MetroButton();
+            this.ColorMatrixMenu = new MetroFramework.Controls.MetroButton();
             this.RgbFilterComboBox = new MetroFramework.Controls.MetroComboBox();
             this.ApplyFilter = new MetroFramework.Controls.MetroButton();
             this.ShowToolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -80,14 +80,14 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
             this.RedColor.Text = "Red";
             this.RedColor.UseSelectable = true;
             // 
-            // Palette
+            // ColorMatrixMenu
             // 
-            this.Palette.Location = new System.Drawing.Point(23, 127);
-            this.Palette.Name = "Palette";
-            this.Palette.Size = new System.Drawing.Size(235, 23);
-            this.Palette.TabIndex = 6;
-            this.Palette.Text = "Select color";
-            this.Palette.UseSelectable = true;
+            this.ColorMatrixMenu.Location = new System.Drawing.Point(23, 127);
+            this.ColorMatrixMenu.Name = "ColorMatrixMenu";
+            this.ColorMatrixMenu.Size = new System.Drawing.Size(235, 23);
+            this.ColorMatrixMenu.TabIndex = 6;
+            this.ColorMatrixMenu.Text = "Color Matrix";
+            this.ColorMatrixMenu.UseSelectable = true;
             // 
             // RgbFilterComboBox
             // 
@@ -113,7 +113,7 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
             this.ClientSize = new System.Drawing.Size(422, 172);
             this.Controls.Add(this.ApplyFilter);
             this.Controls.Add(this.RgbFilterComboBox);
-            this.Controls.Add(this.Palette);
+            this.Controls.Add(this.ColorMatrixMenu);
             this.Controls.Add(this.CheckboxColorGroup);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -128,7 +128,7 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
         #endregion
 
         private MetroFramework.Controls.MetroPanel CheckboxColorGroup;
-        private MetroFramework.Controls.MetroButton Palette;
+        private MetroFramework.Controls.MetroButton ColorMatrixMenu;
         private MetroFramework.Controls.MetroComboBox RgbFilterComboBox;
         public MetroFramework.Controls.MetroButton ApplyFilter;
         private System.Windows.Forms.ToolTip ShowToolTip;

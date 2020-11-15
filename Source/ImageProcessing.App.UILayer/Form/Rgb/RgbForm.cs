@@ -63,6 +63,10 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
             => ApplyFilter;
 
         /// <inheritdoc/>
+        public MetroButton ColorMatrixMenuButton
+            => ColorMatrixMenu;
+
+        /// <inheritdoc/>
         public RgbColors GetSelectedColors(RgbColors color)
             => Read<RgbColors>(() => _command.GetSelectedColors(color));
                  

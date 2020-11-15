@@ -26,5 +26,10 @@ namespace ImageProcessing.App.UILayer.Exposers.Rgb
         /// Apply an rgb filter.
         /// </summary>
         MetroButton ApplyFilterButton { get; }
+
+        /// <summary>
+        /// Show the color matrix menu.
+        /// </summary>
+        MetroButton ColorMatrixMenuButton { get; }
     }
 }

@@ -40,6 +40,9 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         public virtual MetroButton ApplyFilterButton
             => _form.ApplyFilterButton;
 
+        public virtual MetroButton ColorMatrixMenuButton
+            => _form.ColorMatrixMenuButton;
+
         public virtual void Close()
             => _form.Close();
 

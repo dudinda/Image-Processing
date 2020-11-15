@@ -24,6 +24,11 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Rgb.Implementation
                      new ApplyRgbFilterEventArgs(source)
                  );
 
+            source.ColorMatrixMenuButton.Click += (sender, args)
+                => _aggregator.PublishFrom(source,
+                    new ShowColorMatrixMenuEventArgs()
+                );
+
             source.RedButton.CheckedChanged += (sender, args)
                 => _aggregator.PublishFrom(source,
                     new ApplyRgbColorFilterEventArgs(RgbColors.Red, source)

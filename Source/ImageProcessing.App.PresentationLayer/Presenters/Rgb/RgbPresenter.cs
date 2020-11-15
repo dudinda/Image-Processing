@@ -6,7 +6,9 @@ using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
+using ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix;
 using ImageProcessing.App.PresentationLayer.Properties;
+using ImageProcessing.App.PresentationLayer.ViewModel.ColorMatrix;
 using ImageProcessing.App.PresentationLayer.ViewModel.Rgb;
 using ImageProcessing.App.PresentationLayer.Views.Rgb;
 using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
@@ -20,7 +22,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
     internal sealed class RgbPresenter : BasePresenter<IRgbView, RgbViewModel>,
           ISubscriber<ApplyRgbFilterEventArgs>,
           ISubscriber<ApplyRgbColorFilterEventArgs>,
-          ISubscriber<ContainerUpdatedEventArgs>
+          ISubscriber<ContainerUpdatedEventArgs>,
+          ISubscriber<ShowColorMatrixMenuEventArgs>
     {
         private readonly IRgbServiceProvider _provider;
         private readonly IAsyncOperationLocker _locker;
@@ -99,6 +102,23 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
                 await _locker.LockOperationAsync(() =>
                     ViewModel.Source = new Bitmap(e.Bmp)
                 ).ConfigureAwait(true);
+            }
+        }
+
+        public async Task OnEventHandler(object publisher, ShowColorMatrixMenuEventArgs e)
+        {
+            try
+            {
+                var copy = await _locker.LockOperationAsync(
+                    () => new Bitmap(ViewModel.Source)
+                ).ConfigureAwait(true);
+
+                Controller.Run<ColorMatrixPresenter, ColorMatrixViewModel>(
+                    new ColorMatrixViewModel(copy));
+            }
+            catch(Exception ex)
+            {
+
             }
         }
     }
