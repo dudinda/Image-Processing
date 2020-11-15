@@ -18,7 +18,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix
 {
     internal sealed class ColorMatrixPresenter : BasePresenter<IColorMatrixView, ColorMatrixViewModel>,
         ISubscriber<ApplyColorMatrixEventArgs>,
-        ISubscriber<ContainerUpdatedEventArgs>
+        ISubscriber<ContainerUpdatedEventArgs>,
+        ISubscriber<CustomColorMatrixEventArgs>
     {
         private readonly IRgbServiceProvider _provider;
         private readonly IAsyncOperationLocker _locker;
@@ -67,6 +68,21 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix
                 await _locker.LockOperationAsync(() =>
                     ViewModel.Source = new Bitmap(e.Bmp)
                 ).ConfigureAwait(true);
+            }
+        }
+
+        public async Task OnEventHandler(object publisher, CustomColorMatrixEventArgs e)
+        {
+            try
+            {
+                View.SetEnabledCells(!e.UseCustom);
+                View.SetEnabledDropDown(!e.UseCustom);
+                View.SetVisibleApply(!e.UseCustom);
+                View.SetVisibleApplyCustom(e.UseCustom);
+            }
+            catch(Exception ex)
+            {
+
             }
         }
     }

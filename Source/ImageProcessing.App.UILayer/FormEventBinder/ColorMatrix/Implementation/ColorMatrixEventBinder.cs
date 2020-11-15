@@ -22,6 +22,11 @@ namespace ImageProcessing.App.UILayer.FormEventBinder.ColorMatrix.Implementation
                  => _aggregator.PublishFrom(source,
                      new ApplyColorMatrixEventArgs()
                  );
+
+            source.CustomCheckBox.CheckedChanged += (sender, args)
+                => _aggregator.PublishFrom(source,
+                    new CustomColorMatrixEventArgs(source.CustomCheckBox.Checked)
+                );
         }
 
         public bool ProcessCmdKey(IColorMatrixFormExposer view, Keys keyData)

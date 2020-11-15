@@ -1,8 +1,6 @@
-using System.Windows.Forms;
 
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
-using ImageProcessing.App.DomainLayer.DomainModel.ColorMatrix.Implementation;
 using ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix;
 using ImageProcessing.App.PresentationLayer.Views.ColorMatrix;
 using ImageProcessing.App.UILayer.FormEventBinder.ColorMatrix.Interface;
@@ -28,6 +26,12 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
 
             _binder = binder;
             _binder.OnElementExpose(this);
+
+            for(var row = 0; row < ColorMatrixGrid.ColumnCount; ++row)
+            {
+                ColorMatrixGrid.Rows.Add(0, 0, 0, 0, 0);
+                ColorMatrixGrid.Rows[row].HeaderCell.Value = row.ToString();
+            }
         }
           
         public ClrMatrix Dropdown
@@ -40,24 +44,32 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
         public MetroButton ApplyButton
             => ApplyColorMatrixButton;
 
-        public ReadOnly2DArray<double> GetGrid()
+        public MetroCheckBox CustomCheckBox
+            => CustomColorMatrix;
+
+        public void SetEnabledCells(bool isReadOnly)
         {
             var rows = ColorMatrixGrid.Rows.Count;
-            var cols = ColorMatrixGrid.Columns.Count;
+            var cols = ColorMatrixGrid.ColumnCount;
 
-            var array = new double[rows, cols];
-
-            for(var i = 0; i < ColorMatrixGrid.Rows.Count; ++i)
+            for(var row = 0; row < rows; ++row)
             {
-                for(var j = 0; j < ColorMatrixGrid.Columns.Count; ++j)
+                for(var col = 0; col < cols; ++col)
                 {
-                    array[i, j] = (double)ColorMatrixGrid[j, i].Value;
+                    ColorMatrixGrid[col, row].ReadOnly = isReadOnly;
                 }
-            }
-
-            return new ReadOnly2DArray<double>(array);
+            } 
         }
-      
+           
+        public void SetEnabledDropDown(bool isEnabled)
+            => ColorMatrixComboBox.Enabled = isEnabled;
+
+        public void SetVisibleApply(bool isVisible)
+            => ApplyColorMatrixButton.Visible = isVisible;
+
+        public void SetVisibleApplyCustom(bool isVisible)
+            => ApplyCustomColorMatrixButton.Visible = isVisible;
+     
         public new void Show()
         {
             Focus();
