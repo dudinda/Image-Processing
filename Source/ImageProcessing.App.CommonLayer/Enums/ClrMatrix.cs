@@ -45,5 +45,17 @@ namespace ImageProcessing.App.CommonLayer.Enums
         /// </summary>
         [Description("Inverse")]
         Inverse       = 6,
+
+        /// <summary>
+        /// RGB to YIQ color matrix.
+        /// </summary>
+        [Description("RGB to YIQ")]
+        RgbToYiq      = 7,
+
+        /// <summary>
+        /// YIQ to RGB color matrix
+        /// </summary>
+        [Description("YIQ to RGB")]
+        YiqToRgb      = 8
     }
 }

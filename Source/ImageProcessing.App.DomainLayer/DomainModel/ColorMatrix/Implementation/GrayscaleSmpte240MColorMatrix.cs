@@ -1,5 +1,3 @@
-using System;
-
 using ImageProcessing.App.DomainLayer.DomainModel.ColorMatrix.Interface;
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 

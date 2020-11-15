@@ -24,9 +24,13 @@ namespace ImageProcessing.App.DomainLayer.DomainFactory.ColorMatrix.Implementati
              ClrMatrix.Inverse
                  => new InversionColorMatrix(),
              ClrMatrix.SepiaTone
-                 => new SepiaToneMatrix(),
+                 => new SepiaToneColorMatrix(),
+             ClrMatrix.RgbToYiq
+                 => new RgbToYiqColorMatrix(),
+             ClrMatrix.YiqToRgb
+                 => new YiqToRgbColorMatrix(),
 
-             _ => throw new NotImplementedException(nameof(matrix))
+             _   => throw new NotImplementedException(nameof(matrix))
          };
     }
 }

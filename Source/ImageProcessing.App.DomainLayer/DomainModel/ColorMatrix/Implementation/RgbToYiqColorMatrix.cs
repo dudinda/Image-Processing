@@ -3,16 +3,16 @@ using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.ColorMatrix.Implementation
 {
-    internal sealed class GrayscaleRec709ColorMatrix : IColorMatrix
+    internal sealed class RgbToYiqColorMatrix : IColorMatrix
     {
         public ReadOnly2DArray<double> Matrix { get; }
             = new ReadOnly2DArray<double>(
                 new double[,] {
-                    { 0.2126, 0.7152, 0.0722, 0, 0 },
-                    { 0.2126, 0.7152, 0.0722, 0, 0 },
-                    { 0.2126, 0.7152, 0.0722, 0, 0 },
-                    { 0.0000, 0.0000, 0.0000, 1, 0 },
-                    { 0.0000, 0.0000, 0.0000, 0, 1 }
+                    { 0.299, 0.587, 0.114, 0, 0 },
+                    { 0.596,-0.274,-0.322, 0, 0 },
+                    { 0.211,-0.522, 0.311, 0, 0 },
+                    { 0.000, 0.000, 0.000, 1, 0 },
+                    { 0.000, 0.000, 0.000, 0, 1 }
                 });
     }
 }
