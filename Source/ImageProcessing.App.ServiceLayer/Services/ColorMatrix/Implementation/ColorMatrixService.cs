@@ -52,21 +52,17 @@ namespace ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Implementation
 
                     for (var x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
-                        r = a00 * ptr[2] + a01 * ptr[1] + a02 * ptr[2] + a03 * ptr[3] + a04;
-                        g = a10 * ptr[2] + a11 * ptr[1] + a12 * ptr[2] + a13 * ptr[3] + a14;
-                        b = a20 * ptr[2] + a21 * ptr[1] + a22 * ptr[2] + a23 * ptr[3] + a24;
-                        a = a30 * ptr[2] + a31 * ptr[1] + a32 * ptr[2] + a33 * ptr[3] + a34;
+                        r = a00 * ptr[2] + a01 * ptr[1] + a02 * ptr[0] + a03 * ptr[3] + a04;
+                        g = a10 * ptr[2] + a11 * ptr[1] + a12 * ptr[0] + a13 * ptr[3] + a14;
+                        b = a20 * ptr[2] + a21 * ptr[1] + a22 * ptr[0] + a23 * ptr[3] + a24;
+                        a = a30 * ptr[2] + a31 * ptr[1] + a32 * ptr[0] + a33 * ptr[3] + a34;
 
                         if (r > 255) { r = 255; } else if (r < 0) { r = 0; }
                         if (g > 255) { g = 255; } else if (g < 0) { g = 0; }
                         if (b > 255) { b = 255; } else if (b < 0) { b = 0; }
                         if (a > 255) { a = 255; } else if (a < 0) { a = 0; }
 
-                        ptr[0] = (byte)b;
-                        ptr[1] = (byte)g;
-                        ptr[2] = (byte)r;
-                        ptr[4] = (byte)a;
-
+                        ptr[0] = (byte)b;  ptr[1] = (byte)g;  ptr[2] = (byte)r;  ptr[3] = (byte)a;
                     }
                 });
             }
