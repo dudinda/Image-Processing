@@ -23,9 +23,19 @@ namespace ImageProcessing.App.UILayer.FormEventBinder.ColorMatrix.Implementation
                      new ApplyColorMatrixEventArgs()
                  );
 
+            source.ApplyCustomButton.Click += (sender, args)
+                 => _aggregator.PublishFrom(source,
+                     new ApplyCustomColorMatrixEventArgs()
+                 );
+
             source.CustomCheckBox.CheckedChanged += (sender, args)
                 => _aggregator.PublishFrom(source,
                     new CustomColorMatrixEventArgs(source.CustomCheckBox.Checked)
+                );
+
+            source.ColorMatrixDropDown.SelectionChangeCommitted += (sender, args)
+                => _aggregator.PublishFrom(source,
+                    new ChangeColorMatrixEventArgs()
                 );
         }
 

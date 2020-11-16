@@ -1,3 +1,5 @@
+using System;
+
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
 using ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix;
@@ -5,6 +7,7 @@ using ImageProcessing.App.PresentationLayer.Views.ColorMatrix;
 using ImageProcessing.App.UILayer.FormEventBinder.ColorMatrix.Interface;
 using ImageProcessing.App.UILayer.FormExposer.ColorMatrix;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
+using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 using ImageProcessing.Utility.Interop.Wrapper;
 
 using MetroFramework.Controls;
@@ -26,11 +29,7 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
             _binder = binder;
             _binder.OnElementExpose(this);
 
-            for(var row = 0; row < ColorMatrixGrid.ColumnCount; ++row)
-            {
-                ColorMatrixGrid.Rows.Add(0, 0, 0, 0, 0);
-                ColorMatrixGrid.Rows[row].HeaderCell.Value = row.ToString();
-            }
+            ResetGrid();
         }
           
         public ClrMatrix Dropdown
@@ -40,11 +39,21 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
                 .GetValueFromDescription<ClrMatrix>();
         }
 
+        /// <inheritdoc/>
         public MetroButton ApplyButton
             => ApplyColorMatrixButton;
 
+        /// <inheritdoc/>
         public MetroCheckBox CustomCheckBox
             => CustomColorMatrix;
+
+        /// <inheritdoc/>
+        public MetroComboBox ColorMatrixDropDown
+            => ColorMatrixComboBox;
+
+        /// <inheritdoc/>
+        public MetroButton ApplyCustomButton
+            => ApplyCustomColorMatrixButton;
 
         public void SetEnabledCells(bool isReadOnly)
         {
@@ -95,6 +104,46 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
                .Unsubscribe(typeof(ColorMatrixPresenter), this);
 
             base.Dispose(true);
+        }
+
+        public void ResetGrid()
+        {
+            ColorMatrixGrid.Rows.Clear();
+
+            for (var row = 0; row < ColorMatrixGrid.ColumnCount; ++row)
+            {
+                ColorMatrixGrid.Rows.Add(0, 0, 0, 0, 0);
+                ColorMatrixGrid.Rows[row].HeaderCell.Value = row.ToString();
+            }
+        }
+
+        public void SetGrid(ReadOnly2DArray<double> matrix)
+        {
+            for(var row = 0; row < matrix.RowCount; ++row)
+            {
+                for(var col = 0; col < matrix.ColumnCount; ++col)
+                {
+                    ColorMatrixGrid[col, row].Value = matrix[row, col];
+                }
+            } 
+        }
+
+        public ReadOnly2DArray<double> GetGrid()
+        {
+            var rows = ColorMatrixGrid.RowCount;
+            var cols = ColorMatrixGrid.ColumnCount;
+
+            var matrix = new double[rows, cols];
+
+            for (var row = 0; row < rows; ++row)
+            {
+                for (var col = 0; col < cols; ++col)
+                {
+                    matrix[row, col] = Convert.ToDouble(ColorMatrixGrid[col, row].Value);
+                }
+            }
+
+            return new ReadOnly2DArray<double>(matrix);
         }
     }
 }

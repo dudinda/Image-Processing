@@ -6,6 +6,7 @@ using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Interface;
+using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Rgb.Implementation
 {
@@ -46,5 +47,9 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Rgb.Implementation
             => _cache.GetOrCreate(matrix,
                () => _service.Apply(bmp, _matrix.Get(matrix).Matrix)
             );
+
+        /// <inheritdoc/>
+        public Bitmap Apply(Bitmap bmp, ReadOnly2DArray<double> matrix)
+            => _service.Apply(bmp, matrix);
     }
 }
