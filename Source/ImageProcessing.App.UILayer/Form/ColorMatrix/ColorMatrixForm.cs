@@ -29,7 +29,11 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
             _binder = binder;
             _binder.OnElementExpose(this);
 
-            ResetGrid();
+            for (var row = 0; row < ColorMatrixGrid.ColumnCount; ++row)
+            {
+                ColorMatrixGrid.Rows.Add(0, 0, 0, 0, 0);
+                ColorMatrixGrid.Rows[row].HeaderCell.Value = row.ToString();
+            }
         }
           
         public ClrMatrix Dropdown
@@ -104,17 +108,6 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
                .Unsubscribe(typeof(ColorMatrixPresenter), this);
 
             base.Dispose(true);
-        }
-
-        public void ResetGrid()
-        {
-            ColorMatrixGrid.Rows.Clear();
-
-            for (var row = 0; row < ColorMatrixGrid.ColumnCount; ++row)
-            {
-                ColorMatrixGrid.Rows.Add(0, 0, 0, 0, 0);
-                ColorMatrixGrid.Rows[row].HeaderCell.Value = row.ToString();
-            }
         }
 
         public void SetGrid(ReadOnly2DArray<double> matrix)

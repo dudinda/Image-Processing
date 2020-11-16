@@ -9,12 +9,23 @@ namespace ImageProcessing.App.PresentationLayer.Views.ColorMatrix
     public interface IColorMatrixView : IView,
         IDropdown<ClrMatrix>, ITooltip
     {
-        void ResetGrid();
+        /// <summary>
+        /// Set a color matrix.
+        /// </summary>
+        /// <param name="matrix"></param>
         void SetGrid(ReadOnly2DArray<double> matrix);
+
+        /// <summary>
+        /// Get a color matrix as a <see cref="ReadOnly2DArray{T}"/>.
+        /// </summary>
         ReadOnly2DArray<double> GetGrid();
+
         void SetEnabledCells(bool isEnabled);
+
         void SetEnabledDropDown(bool isEnabled);
+
         void SetVisibleApply(bool isVisible);
+
         void SetVisibleApplyCustom(bool isVisible);
     }
 }
