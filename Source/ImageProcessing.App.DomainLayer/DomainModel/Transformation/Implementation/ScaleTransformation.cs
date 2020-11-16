@@ -1,9 +1,9 @@
 using System.Drawing;
 
-using ImageProcessing.App.DomainLayer.DomainModel.AffineTransformation.Interface;
 using ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation;
+using ImageProcessing.App.DomainLayer.DomainModel.Transformation.Interface;
 
-namespace ImageProcessing.App.DomainLayer.DomainModel.AffineTransformation.Implementation
+namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementation
 {
     internal sealed class ScaleTransformation : ITransformation
     {

@@ -37,6 +37,7 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
             this.j4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CustomColorMatrix = new MetroFramework.Controls.MetroCheckBox();
             this.ApplyCustomColorMatrixButton = new MetroFramework.Controls.MetroButton();
+            this.ErrorToolTip = new MetroFramework.Components.MetroToolTip();
             ((System.ComponentModel.ISupportInitialize)(this.ColorMatrixGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -186,6 +187,12 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
             this.ApplyCustomColorMatrixButton.UseSelectable = true;
             this.ApplyCustomColorMatrixButton.Visible = false;
             // 
+            // ErrorToolTip
+            // 
+            this.ErrorToolTip.Style = MetroFramework.MetroColorStyle.Blue;
+            this.ErrorToolTip.StyleManager = null;
+            this.ErrorToolTip.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
             // ColorMatrixForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -219,5 +226,6 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
         private System.Windows.Forms.DataGridViewTextBoxColumn j4;
         private MetroFramework.Controls.MetroCheckBox CustomColorMatrix;
         private MetroFramework.Controls.MetroButton ApplyCustomColorMatrixButton;
+        private MetroFramework.Components.MetroToolTip ErrorToolTip;
     }
 }

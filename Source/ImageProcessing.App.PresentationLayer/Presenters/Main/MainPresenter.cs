@@ -207,7 +207,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (Exception ex)
             {
-                OnError(publisher, Errors.ShowConvolutionMenu);
+                OnError(publisher, Errors.ShowSettingsMenu);
             }
         }
 

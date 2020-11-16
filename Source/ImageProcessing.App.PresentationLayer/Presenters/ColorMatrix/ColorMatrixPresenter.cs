@@ -6,6 +6,7 @@ using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainLayer.DomainEvent.ColorMatrix;
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
+using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModel.ColorMatrix;
 using ImageProcessing.App.PresentationLayer.Views.ColorMatrix;
 using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
@@ -57,17 +58,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix
             }
             catch (Exception ex)
             {
-                
-            }
-        }
-
-        public async Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
-        {
-            if (e.Container == ImageContainer.Source)
-            {
-                await _locker.LockOperationAsync(() =>
-                    ViewModel.Source = new Bitmap(e.Bmp)
-                ).ConfigureAwait(true);
+                View.Tooltip(Errors.ApplyColorMatrix);
             }
         }
 
@@ -82,7 +73,17 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix
             }
             catch(Exception ex)
             {
+                View.Tooltip(Errors.CustomColorMatrix);
+            }
+        }
 
+        public async Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
+        {
+            if (e.Container == ImageContainer.Source)
+            {
+                await _locker.LockOperationAsync(() =>
+                    ViewModel.Source = new Bitmap(e.Bmp)
+                ).ConfigureAwait(true);
             }
         }
     }

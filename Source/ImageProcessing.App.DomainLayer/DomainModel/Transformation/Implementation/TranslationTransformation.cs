@@ -4,9 +4,9 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
-using ImageProcessing.App.DomainLayer.DomainModel.AffineTransformation.Interface;
+using ImageProcessing.App.DomainLayer.DomainModel.Transformation.Interface;
 
-namespace ImageProcessing.App.DomainLayer.DomainModel.AffineTransformation.Implementation
+namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementation
 {
     public sealed class TranslationTransformation : ITransformation
     {

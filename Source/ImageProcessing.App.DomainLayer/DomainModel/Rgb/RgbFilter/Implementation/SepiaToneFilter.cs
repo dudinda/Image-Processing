@@ -43,9 +43,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
                         if (g > 255) { g = 255; } 
                         if (r > 255) { r = 255; }
 
-                        ptr[2] = (byte)r;
-                        ptr[1] = (byte)g;
-                        ptr[0] = (byte)b;
+                        ptr[2] = (byte)r; ptr[1] = (byte)g; ptr[0] = (byte)b;
                     }
                 });
             }

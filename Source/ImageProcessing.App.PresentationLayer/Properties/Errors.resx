@@ -120,6 +120,9 @@
   <data name="ApplyColorFilter" xml:space="preserve">
     <value>Error while applying a filter by the color channel.</value>
   </data>
+  <data name="ApplyColorMatrix" xml:space="preserve">
+    <value>Error while applying the color matrix.</value>
+  </data>
   <data name="ApplyConvolutionFilter" xml:space="preserve">
     <value>Error while applying a convolution filter.</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="CancelOperation" xml:space="preserve">
     <value>The operation has been canceled.</value>
+  </data>
+  <data name="CustomColorMatrix" xml:space="preserve">
+    <value>Error while choosing a custom color matrix.</value>
   </data>
   <data name="OpenFile" xml:space="preserve">
     <value>Error while opening the file.</value>
@@ -150,6 +156,9 @@
   <data name="SaveFile" xml:space="preserve">
     <value>Error while saving the file.</value>
   </data>
+  <data name="ShowColorMatrixMenu" xml:space="preserve">
+    <value>Error while opening a color matrix menu.</value>
+  </data>
   <data name="ShowConvolutionMenu" xml:space="preserve">
     <value>Error while opening a convolution filters menu.</value>
   </data>
@@ -158,6 +167,9 @@
   </data>
   <data name="ShowRgbMenu" xml:space="preserve">
     <value>Error while opening an rgb filters menu.</value>
+  </data>
+  <data name="ShowSettingsMenu" xml:space="preserve">
+    <value>Error while opening a settings menu.</value>
   </data>
   <data name="Shuffle" xml:space="preserve">
     <value>Error while shuffling the image.</value>

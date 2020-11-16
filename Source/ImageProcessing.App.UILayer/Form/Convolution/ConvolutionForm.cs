@@ -1,5 +1,3 @@
-using System;
-using System.Linq;
 using System.Windows.Forms;
 
 using ImageProcessing.App.CommonLayer.Enums;
@@ -47,8 +45,8 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
 
         /// <inheritdoc/>
         public void Tooltip(string message)
-             => ErrorToolTip.Show(message, this, PointToClient(
-                 CursorPosition.GetCursorPosition()), 2000);
+            => ErrorToolTip.Show(message, this, PointToClient(
+                CursorPosition.GetCursorPosition()), 2000);
 
         /// <summary>
         /// Used by the generated <see cref="Dispose(bool)"/> call.

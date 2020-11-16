@@ -70,6 +70,15 @@ namespace ImageProcessing.App.PresentationLayer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error while applying the color matrix..
+        /// </summary>
+        public static string ApplyColorMatrix {
+            get {
+                return ResourceManager.GetString("ApplyColorMatrix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error while applying a convolution filter..
         /// </summary>
         public static string ApplyConvolutionFilter {
@@ -102,6 +111,15 @@ namespace ImageProcessing.App.PresentationLayer.Properties {
         public static string CancelOperation {
             get {
                 return ResourceManager.GetString("CancelOperation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while choosing a custom color matrix..
+        /// </summary>
+        public static string CustomColorMatrix {
+            get {
+                return ResourceManager.GetString("CustomColorMatrix", resourceCulture);
             }
         }
         
@@ -160,6 +178,15 @@ namespace ImageProcessing.App.PresentationLayer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error while opening a color matrix menu..
+        /// </summary>
+        public static string ShowColorMatrixMenu {
+            get {
+                return ResourceManager.GetString("ShowColorMatrixMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error while opening a convolution filters menu..
         /// </summary>
         public static string ShowConvolutionMenu {
@@ -183,6 +210,15 @@ namespace ImageProcessing.App.PresentationLayer.Properties {
         public static string ShowRgbMenu {
             get {
                 return ResourceManager.GetString("ShowRgbMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while opening a settings menu..
+        /// </summary>
+        public static string ShowSettingsMenu {
+            get {
+                return ResourceManager.GetString("ShowSettingsMenu", resourceCulture);
             }
         }
         

@@ -120,6 +120,9 @@
   <data name="ApplyColorFilter" xml:space="preserve">
     <value>Ошибка при применении цветового фильтра.</value>
   </data>
+  <data name="ApplyColorMatrix" xml:space="preserve">
+    <value>Ошибка при обработке матрицей цвета.</value>
+  </data>
   <data name="ApplyConvolutionFilter" xml:space="preserve">
     <value>Ошибка при обработке фильтром свертки.</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="CancelOperation" xml:space="preserve">
     <value>Операция была отменена.</value>
+  </data>
+  <data name="CustomColorMatrix" xml:space="preserve">
+    <value>Ошибка при использовании произвольной матрицы цвета.</value>
   </data>
   <data name="OpenFile" xml:space="preserve">
     <value>Ошибка при открытии файла.</value>
@@ -150,6 +156,9 @@
   <data name="SaveFile" xml:space="preserve">
     <value>Ошибка при сохранении файла.</value>
   </data>
+  <data name="ShowColorMatrixMenu" xml:space="preserve">
+    <value>Ошибка при открытии меню матрицы цвета.</value>
+  </data>
   <data name="ShowConvolutionMenu" xml:space="preserve">
     <value>Ошибка при открыии меню фильтров свертки.</value>
   </data>
@@ -158,6 +167,9 @@
   </data>
   <data name="ShowRgbMenu" xml:space="preserve">
     <value>Ошибка при открытии меню RGB - фильтров.</value>
+  </data>
+  <data name="ShowSettingsMenu" xml:space="preserve">
+    <value>Ошибка при открытии меню настроек.</value>
   </data>
   <data name="Shuffle" xml:space="preserve">
     <value>Ошибка при перемешивании изображения.</value>

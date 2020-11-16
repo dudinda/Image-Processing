@@ -1,11 +1,11 @@
 namespace ImageProcessing.App.UILayer.Form.Convolution
-{ 
+{
     partial class ConvolutionForm
     {
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		private System.ComponentModel.IContainer components = null;
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -13,15 +13,15 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
             => Dispose();
-       
-	
-		#region Windows Form Designer generated code
 
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
             this.ErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -65,7 +65,7 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
 
         }
 
-		#endregion
+        #endregion
         private System.Windows.Forms.ToolTip ErrorToolTip;
         private MetroFramework.Controls.MetroComboBox ConvolutionFilterComboBox;
         private MetroFramework.Controls.MetroButton Apply;

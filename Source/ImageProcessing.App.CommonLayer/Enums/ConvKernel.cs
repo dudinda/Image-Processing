@@ -90,7 +90,5 @@ namespace ImageProcessing.App.CommonLayer.Enums
         /// </summary>
         [Description("Laplacian of Gaussian operator 3x3")]
         LoGOperator3x3             = 13,
-
-
     }
 }

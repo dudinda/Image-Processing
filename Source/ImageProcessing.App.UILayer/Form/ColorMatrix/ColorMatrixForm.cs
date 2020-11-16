@@ -1,4 +1,3 @@
-
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
 using ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix;
@@ -6,7 +5,7 @@ using ImageProcessing.App.PresentationLayer.Views.ColorMatrix;
 using ImageProcessing.App.UILayer.FormEventBinder.ColorMatrix.Interface;
 using ImageProcessing.App.UILayer.FormExposer.ColorMatrix;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
-using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
+using ImageProcessing.Utility.Interop.Wrapper;
 
 using MetroFramework.Controls;
 
@@ -69,7 +68,12 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
 
         public void SetVisibleApplyCustom(bool isVisible)
             => ApplyCustomColorMatrixButton.Visible = isVisible;
-     
+
+        /// <inheritdoc/>
+        public void Tooltip(string message)
+            => ErrorToolTip.Show(message, this, PointToClient(
+                CursorPosition.GetCursorPosition()), 2000);
+
         public new void Show()
         {
             Focus();
@@ -77,8 +81,8 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
         }
 
         /// <summary>
-        /// Used by a DI container to dispose the singleton form
-        /// on Release().
+        /// Used by the generated <see cref="Dispose(bool)"/> call.
+        /// Can be used by a DI container in a singleton scope on Release();
         public new void Dispose()
         {
             if (components != null)
@@ -92,6 +96,9 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
 
             base.Dispose(true);
         }
+
+        /// <inheritdoc/>
+        public void Tooltip(string message) { }
     }
 }
 

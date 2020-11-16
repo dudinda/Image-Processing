@@ -118,7 +118,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
             }
             catch(Exception ex)
             {
-
+                View.Tooltip(Errors.ShowColorMatrixMenu);
             }
         }
     }
