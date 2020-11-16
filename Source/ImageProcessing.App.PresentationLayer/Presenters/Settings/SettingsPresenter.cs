@@ -24,12 +24,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Settings
         }
 
         public async Task OnEventHandler(object publisher, ChangeRotationEventArgs e)
-            => _settings.Rotation = e.Rotation;
+            => _settings.Rotation = View.FirstDropdown;
 
         public async Task OnEventHandler(object publisher, ChangeScalingEventArgs e)
-            => _settings.Scaling = e.Scaling;
+            => _settings.Scaling = View.SecondDropdown;
 
         public async Task OnEventHandler(object publisher, ChangeLumaEventArgs e)
-            => _settings.Rec = e.Rec;
+            => _settings.Rec = View.ThirdDropdown;
     }
 }

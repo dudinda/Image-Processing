@@ -126,6 +126,9 @@
   <data name="ApplyConvolutionFilter" xml:space="preserve">
     <value>Error while applying a convolution filter.</value>
   </data>
+  <data name="ApplyCustomColorMatrix" xml:space="preserve">
+    <value>Error while applying a custom color matrix.</value>
+  </data>
   <data name="ApplyRgbFilter" xml:space="preserve">
     <value>Error while applying an RGB filter.</value>
   </data>
@@ -179,6 +182,9 @@
   </data>
   <data name="UndoRedo" xml:space="preserve">
     <value>Error while undo/redo the last operation.</value>
+  </data>
+  <data name="UpdateColorMatrix" xml:space="preserve">
+    <value>Error while updating the color matrix.</value>
   </data>
   <data name="Zoom" xml:space="preserve">
     <value>Error while zooming the image.</value>

@@ -88,6 +88,15 @@ namespace ImageProcessing.App.PresentationLayer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error while applying a custom color matrix..
+        /// </summary>
+        public static string ApplyCustomColorMatrix {
+            get {
+                return ResourceManager.GetString("ApplyCustomColorMatrix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error while applying an RGB filter..
         /// </summary>
         public static string ApplyRgbFilter {
@@ -246,6 +255,15 @@ namespace ImageProcessing.App.PresentationLayer.Properties {
         public static string UndoRedo {
             get {
                 return ResourceManager.GetString("UndoRedo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while updating the color matrix..
+        /// </summary>
+        public static string UpdateColorMatrix {
+            get {
+                return ResourceManager.GetString("UpdateColorMatrix", resourceCulture);
             }
         }
         

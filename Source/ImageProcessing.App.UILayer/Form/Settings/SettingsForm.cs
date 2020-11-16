@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
 using ImageProcessing.App.PresentationLayer.Views.Settings;
-using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
 using ImageProcessing.App.UILayer.FormEventBinder.Settings.Interface;
 using ImageProcessing.App.UILayer.FormExposer.Settings;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
@@ -15,13 +14,11 @@ namespace ImageProcessing.App.UILayer.Form.Settings
     internal sealed partial class SettingsForm : BaseForm,
         ISettingsView, ISettingsFormExposer
     {
-        private readonly IAppSettings _settings;
         private readonly ISettingsFormEventBinder _binder;
 
         public SettingsForm(
             IAppController controller,
-            ISettingsFormEventBinder binder,
-            IAppSettings settings) : base(controller)
+            ISettingsFormEventBinder binder) : base(controller)
         {
             InitializeComponent();
 
@@ -30,8 +27,6 @@ namespace ImageProcessing.App.UILayer.Form.Settings
             PopulateComboBox<ScalingMethod>(ScalingComboBox);
 
             _binder = binder;
-            _settings = settings;
-
             _binder.OnElementExpose(this);
         }
           
@@ -64,15 +59,6 @@ namespace ImageProcessing.App.UILayer.Form.Settings
 
         public MetroComboBox RotationDropDown
             => RotationComboBox;
-
-        public Luma Rec
-            => ThirdDropdown;
-
-        public RotationMethod Rotation
-            => FirstDropdown;
-
-        public ScalingMethod Scaling
-            => SecondDropdown;
 
         public new void Show()
         {

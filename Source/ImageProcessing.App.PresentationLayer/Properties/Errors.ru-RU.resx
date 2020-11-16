@@ -126,6 +126,9 @@
   <data name="ApplyConvolutionFilter" xml:space="preserve">
     <value>Ошибка при обработке фильтром свертки.</value>
   </data>
+  <data name="ApplyCustomColorMatrix" xml:space="preserve">
+    <value>Ошибка при применении произвольной матрицы цвета.</value>
+  </data>
   <data name="ApplyRgbFilter" xml:space="preserve">
     <value>Ошибка при применении RGB-фильтра.</value>
   </data>
@@ -176,6 +179,9 @@
   </data>
   <data name="TransformHistogram" xml:space="preserve">
     <value>Ошибка при преобразовании гистограммы.</value>
+  </data>
+  <data name="UpdateColorMatrix" xml:space="preserve">
+    <value>Ошибка при обновлении матрицы цвета.</value>
   </data>
   <data name="Zoom" xml:space="preserve">
     <value>Ошибка при приближении изображения.</value>

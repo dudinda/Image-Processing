@@ -1,4 +1,3 @@
-
 using ImageProcessing.App.DomainLayer.DomainEvent.SettingsArgs;
 using ImageProcessing.App.UILayer.FormEventBinder.Settings.Interface;
 using ImageProcessing.App.UILayer.FormExposer.Settings;
@@ -19,17 +18,17 @@ namespace ImageProcessing.App.UILayer.FormEventBinder.Settings.Implementation
         {
             form.LumaDropDown.SelectionChangeCommitted += (sender, args)
                 => _aggregator.PublishFrom(form,
-                    new ChangeLumaEventArgs(form.Rec, form)
+                    new ChangeLumaEventArgs()
                 );
 
             form.ScalingDropDown.SelectionChangeCommitted += (sender, args)
                 => _aggregator.PublishFrom(form,
-                    new ChangeScalingEventArgs(form.Scaling, form)
+                    new ChangeScalingEventArgs()
                 );
 
             form.RotationDropDown.SelectionChangeCommitted += (sender, args)
                 => _aggregator.PublishFrom(form,
-                    new ChangeRotationEventArgs(form.Rotation, form)
+                    new ChangeRotationEventArgs()
                 );
         }
     }
