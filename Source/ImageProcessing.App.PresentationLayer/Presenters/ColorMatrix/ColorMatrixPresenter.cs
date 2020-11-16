@@ -101,11 +101,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix
                 View.SetEnabledDropDown(!e.UseCustom);
                 View.SetVisibleApply(!e.UseCustom);
                 View.SetVisibleApplyCustom(e.UseCustom);
-
-                if(!e.UseCustom)
-                {
-                    View.SetGrid(_factory.Get(View.Dropdown).Matrix);
-                }
+                View.SetGrid(_factory.Get(View.Dropdown).Matrix);              
             }
             catch(Exception ex)
             {
@@ -117,17 +113,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix
         {
             try
             {
-                var matrix = View.Dropdown;
-
-                if (matrix == ClrMatrix.Unknown)
-                {
-                    View.ResetGrid();
-                }
-
-                if (matrix != ClrMatrix.Unknown)
-                {
-                    View.SetGrid(_factory.Get(matrix).Matrix);
-                }
+                View.SetGrid(_factory.Get(View.Dropdown).Matrix);
             }
             catch(Exception ex)
             {

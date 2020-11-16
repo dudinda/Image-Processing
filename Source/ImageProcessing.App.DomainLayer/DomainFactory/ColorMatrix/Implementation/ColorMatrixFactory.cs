@@ -35,6 +35,8 @@ namespace ImageProcessing.App.DomainLayer.DomainFactory.ColorMatrix.Implementati
                  => new RgbToXyzEColorMatrix(),
              ClrMatrix.PolaroidTone
                  => new PolaroidToneColorMatrix(),
+             ClrMatrix.Unknown
+                 => new UnknownColorMatrix(),
 
              _   => throw new NotImplementedException(nameof(matrix))
          };
