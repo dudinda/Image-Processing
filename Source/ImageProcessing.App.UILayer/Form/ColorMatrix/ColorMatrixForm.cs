@@ -96,9 +96,6 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
 
             base.Dispose(true);
         }
-
-        /// <inheritdoc/>
-        public void Tooltip(string message) { }
     }
 }
 
