@@ -132,6 +132,9 @@
   <data name="ApplyRgbFilter" xml:space="preserve">
     <value>Ошибка при применении RGB-фильтра.</value>
   </data>
+  <data name="ApplyTransformation" xml:space="preserve">
+    <value>Ошибка при применении афинного преобразования.</value>
+  </data>
   <data name="BuildFunction" xml:space="preserve">
     <value>Ошибка при построении графика функции.</value>
   </data>
@@ -182,6 +185,9 @@
   </data>
   <data name="UpdateColorMatrix" xml:space="preserve">
     <value>Ошибка при обновлении матрицы цвета.</value>
+  </data>
+  <data name="UpdatingViewModel" xml:space="preserve">
+    <value>Ошибка при обновлении модели представления.</value>
   </data>
   <data name="Zoom" xml:space="preserve">
     <value>Ошибка при приближении изображения.</value>

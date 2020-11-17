@@ -132,6 +132,9 @@
   <data name="ApplyRgbFilter" xml:space="preserve">
     <value>Error while applying an RGB filter.</value>
   </data>
+  <data name="ApplyTransformation" xml:space="preserve">
+    <value>Error while applying an affine transformation.</value>
+  </data>
   <data name="BuildFunction" xml:space="preserve">
     <value>Error while buiding the plot.</value>
   </data>
@@ -188,6 +191,9 @@
   </data>
   <data name="UpdateColorMatrix" xml:space="preserve">
     <value>Error while updating the color matrix.</value>
+  </data>
+  <data name="UpdatingViewModel" xml:space="preserve">
+    <value>Error while updating a view model.</value>
   </data>
   <data name="Zoom" xml:space="preserve">
     <value>Error while zooming the image.</value>

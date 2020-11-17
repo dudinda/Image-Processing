@@ -106,6 +106,15 @@ namespace ImageProcessing.App.PresentationLayer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error while applying an affine transformation..
+        /// </summary>
+        public static string ApplyTransformation {
+            get {
+                return ResourceManager.GetString("ApplyTransformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error while buiding the plot..
         /// </summary>
         public static string BuildFunction {
@@ -273,6 +282,15 @@ namespace ImageProcessing.App.PresentationLayer.Properties {
         public static string UpdateColorMatrix {
             get {
                 return ResourceManager.GetString("UpdateColorMatrix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while updating a view model..
+        /// </summary>
+        public static string UpdatingViewModel {
+            get {
+                return ResourceManager.GetString("UpdatingViewModel", resourceCulture);
             }
         }
         

@@ -6,6 +6,7 @@ using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.TransformationArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
+using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModel.Transformation;
 using ImageProcessing.App.PresentationLayer.Views.Transformation;
 using ImageProcessing.App.ServiceLayer.Providers.Transformation.Interface;
@@ -58,17 +59,24 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Transformation
             }
             catch(Exception ex)
             {
-
+                View.Tooltip(Errors.ApplyTransformation);
             }
         }
 
         public async Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
         {
-            if (e.Container == ImageContainer.Source)
+            try
             {
-                await _locker.LockOperationAsync(() =>
-                    ViewModel.Source = new Bitmap(e.Bmp)
-                ).ConfigureAwait(true);
+                if (e.Container == ImageContainer.Source)
+                {
+                    await _locker.LockOperationAsync(() =>
+                        ViewModel.Source = new Bitmap(e.Bmp)
+                    ).ConfigureAwait(true);
+                }
+            }
+            catch(Exception ex)
+            {
+                View.Tooltip(Errors.UpdatingViewModel);
             }
         }
 

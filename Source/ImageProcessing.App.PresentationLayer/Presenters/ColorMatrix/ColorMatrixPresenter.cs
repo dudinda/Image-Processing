@@ -124,11 +124,18 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix
 
         public async Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
         {
-            if (e.Container == ImageContainer.Source)
+            try
             {
-                await _locker.LockOperationAsync(() =>
-                    ViewModel.Source = new Bitmap(e.Bmp)
-                ).ConfigureAwait(true);
+                if (e.Container == ImageContainer.Source)
+                {
+                    await _locker.LockOperationAsync(() =>
+                        ViewModel.Source = new Bitmap(e.Bmp)
+                    ).ConfigureAwait(true);
+                }
+            }
+            catch(Exception ex)
+            {
+                View.Tooltip(Errors.UpdatingViewModel);
             }
         }
 
