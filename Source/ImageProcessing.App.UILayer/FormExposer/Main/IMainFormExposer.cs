@@ -101,6 +101,11 @@ namespace ImageProcessing.App.UILayer.FormExposers.Main
         ToolStripMenuItem DistributionMenuButton { get; }
 
         /// <summary>
+        /// Show the affine transformation control panel.
+        /// </summary>
+        ToolStripMenuItem AffineTransformationMenuButton { get; }
+
+        /// <summary>
         /// Show the settings control panel.
         /// </summary>
         ToolStripMenuItem SettingsMenuButton { get; }

@@ -64,7 +64,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                                 dstPtr[2] = srcRow[2];
                             }
                         }
-
                     }
                 });
             }

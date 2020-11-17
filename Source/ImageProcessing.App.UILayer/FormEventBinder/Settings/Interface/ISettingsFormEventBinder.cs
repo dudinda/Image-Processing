@@ -3,7 +3,7 @@ using ImageProcessing.App.UILayer.FormExposer.Settings;
 
 namespace ImageProcessing.App.UILayer.FormEventBinder.Settings.Interface
 {
-    interface ISettingsFormEventBinder : IFormEventBinder<ISettingsFormExposer>
+    internal interface ISettingsFormEventBinder : IFormEventBinder<ISettingsFormExposer>
     {
 
     }

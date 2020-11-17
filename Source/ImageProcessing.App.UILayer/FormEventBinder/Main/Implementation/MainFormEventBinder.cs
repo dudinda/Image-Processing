@@ -82,6 +82,11 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation
                    new ShowRgbMenuEventArgs()
                );
 
+            source.AffineTransformationMenuButton.Click += (sender, args)
+               => _aggregator.PublishFrom(source,
+                   new ShowTransformationMenuEventArgs()
+               );
+
             source.SettingsMenuButton.Click += (sender, args)
                => _aggregator.PublishFrom(source,
                    new ShowSettingsMenuEventArgs()

@@ -36,6 +36,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.RgbMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ConvolutionMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.DistributionMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.SettingsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
             this.ToolBarMenu = new System.Windows.Forms.ToolStrip();
             this.UndoBtn = new System.Windows.Forms.ToolStripButton();
@@ -53,7 +54,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.DstZoom = new ImageProcessing.App.UILayer.Control.ZoomTrackBar();
             this.ErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SplitContainer = new ImageProcessing.App.UILayer.Control.UndoRedoSplitContainer();
-            this.SettingsMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.AffineTransformationMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.ToolBarMenu.SuspendLayout();
             this.PictureBoxSrcPanel.SuspendLayout();
@@ -76,6 +77,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.RgbMenu,
             this.ConvolutionMenu,
             this.DistributionMenu,
+            this.AffineTransformationMenu,
             this.SettingsMenu});
             this.MainMenu.Location = new System.Drawing.Point(20, 60);
             this.MainMenu.Name = "MainMenu";
@@ -132,6 +134,12 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.DistributionMenu.Name = "DistributionMenu";
             this.DistributionMenu.Size = new System.Drawing.Size(81, 20);
             this.DistributionMenu.Text = "Distribution";
+            // 
+            // SettingsMenu
+            // 
+            this.SettingsMenu.Name = "SettingsMenu";
+            this.SettingsMenu.Size = new System.Drawing.Size(61, 20);
+            this.SettingsMenu.Text = "Settings";
             // 
             // miniToolStrip
             // 
@@ -318,11 +326,11 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.SplitContainer.SplitterDistance = 359;
             this.SplitContainer.TabIndex = 10;
             // 
-            // SettingsMenu
+            // AffineTransformationMenu
             // 
-            this.SettingsMenu.Name = "SettingsMenu";
-            this.SettingsMenu.Size = new System.Drawing.Size(61, 20);
-            this.SettingsMenu.Text = "Settings";
+            this.AffineTransformationMenu.Name = "AffineTransformationMenu";
+            this.AffineTransformationMenu.Size = new System.Drawing.Size(134, 20);
+            this.AffineTransformationMenu.Text = "Affine Transformation";
             // 
             // MainForm
             // 
@@ -383,6 +391,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
         private App.UILayer.Control.ZoomTrackBar DstZoom;
         private ToolStripMenuItem RgbMenu;
         private ToolStripMenuItem SettingsMenu;
+        private ToolStripMenuItem AffineTransformationMenu;
     }
 }
 

@@ -14,6 +14,8 @@ using ImageProcessing.App.ServiceLayer.Providers.Rgb.Implementation;
 using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Scaling.Implementation;
 using ImageProcessing.App.ServiceLayer.Providers.Scaling.Interface;
+using ImageProcessing.App.ServiceLayer.Providers.Transformation.Implementation;
+using ImageProcessing.App.ServiceLayer.Providers.Transformation.Interface;
 using ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.BitmapLuminance.Implementation;
 using ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.BitmapLuminance.Interface;
 using ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.Convolution.Implementation;
@@ -77,15 +79,16 @@ namespace ImageProcessing.App.ServiceLayer
                 .RegisterTransient<IRandomVariableDistributionService, RandomVariableDistributionService>()
                 .RegisterTransient<IBitmapLuminanceDistributionService, BitmapLuminanceDistributionService>()
                 .RegisterTransient<IFileDialogService, FileDialogService>()
-                .RegisterScoped<INonBlockDialogService, NonBlockDialogService>()
+                .RegisterTransient<INonBlockDialogService, NonBlockDialogService>()
                 .RegisterTransient<IColorMatrixService, ColorMatrixService>()
-                .RegisterScoped<IAsyncOperationLocker, AsyncOperationLocker>()
+                .RegisterTransient<IAsyncOperationLocker, AsyncOperationLocker>()
                 .RegisterTransient<IConvolutionServiceProvider, ConvolutionServiceProvider>()
                 .RegisterTransient<IMorphologyServiceProvider, MorphologyServiceProvider>()
                 .RegisterTransient<IBitmapLuminanceServiceProvider, BitmapLuminanceServiceProvider>()
                 .RegisterTransient<IRgbServiceProvider, RgbServiceProvider>()
                 .RegisterTransient<IScalingProvider, ScalingProvider>()
-                .RegisterScoped<IChartSeriesBuilder, ChartSeriesBuilder>()
+                .RegisterTransient<ITransformationProvider, TransformationProvider>()
+                .RegisterTransient<IChartSeriesBuilder, ChartSeriesBuilder>()
                 .RegisterTransient<IQualityMeasureService, QualityMeasureService>()
                 .RegisterTransient<IHistogramService, HistogramService>()
                 .RegisterTransient<IBitmapLuminanceVisitableFactory, BitmapLuminanceVisitableFactory>()

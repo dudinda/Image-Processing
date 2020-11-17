@@ -223,6 +223,26 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap xAxis_Image {
+            get {
+                object obj = ResourceManager.GetObject("xAxis.Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap yAxis_Image {
+            get {
+                object obj = ResourceManager.GetObject("yAxis.Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap ZoomInDstBtn_Image {
             get {
                 object obj = ResourceManager.GetObject("ZoomInDstBtn.Image", resourceCulture);

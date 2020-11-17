@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,79 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ApplyColorFilter" xml:space="preserve">
-    <value>Error while applying a filter by the color channel.</value>
+  <metadata name="ErrorToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAAoAAAAQCAYAAAAvf+5AAAAABGdBTUEAALGPC/xhBQAAANVJREFUKFON
+        kcERRUAQRDclJQtiEAIRiIAEBCABdwG4C8Dd2X3+f21n/zr8Kl21ZfW0npkW7CXeC6dpsq7rbBzHSP0w
+        z7Nqfd9b2PfdQgg627ZFidlxHIlfluVujStEXdd2XZeEbduK4wkkpFhVlQq0W9c1uZ3n+RMC2nqxLMv0
+        keOxtYaO4qZpInvjIcxbMneOJGROb+mHzR1J6Juz1DAMupOhQ8I8S+64F0WhdzKUEJL8IHFyKOQvxzhE
+        FIgAAgcP28Hm1BhBv5CTD+7AyeuPeP7D7AP34etN9ONP/gAAAABJRU5ErkJggg==
+</value>
   </data>
-  <data name="ApplyColorMatrix" xml:space="preserve">
-    <value>Error while applying the color matrix.</value>
-  </data>
-  <data name="ApplyConvolutionFilter" xml:space="preserve">
-    <value>Error while applying a convolution filter.</value>
-  </data>
-  <data name="ApplyCustomColorMatrix" xml:space="preserve">
-    <value>Error while applying a custom color matrix.</value>
-  </data>
-  <data name="ApplyRgbFilter" xml:space="preserve">
-    <value>Error while applying an RGB filter.</value>
-  </data>
-  <data name="BuildFunction" xml:space="preserve">
-    <value>Error while buiding the plot.</value>
-  </data>
-  <data name="CancelOperation" xml:space="preserve">
-    <value>The operation has been canceled.</value>
-  </data>
-  <data name="CustomColorMatrix" xml:space="preserve">
-    <value>Error while choosing a custom color matrix.</value>
-  </data>
-  <data name="OpenFile" xml:space="preserve">
-    <value>Error while opening the file.</value>
-  </data>
-  <data name="Pipeline" xml:space="preserve">
-    <value>Failed to process the sequence of the operation.</value>
-  </data>
-  <data name="QualityHistogram" xml:space="preserve">
-    <value>Error while building quality measure histogram.</value>
-  </data>
-  <data name="RandomVariableInfo" xml:space="preserve">
-    <value>Error while getting the information about random variable.</value>
-  </data>
-  <data name="ReplaceImage" xml:space="preserve">
-    <value>Error while replacing the image.</value>
-  </data>
-  <data name="SaveFile" xml:space="preserve">
-    <value>Error while saving the file.</value>
-  </data>
-  <data name="ShowColorMatrixMenu" xml:space="preserve">
-    <value>Error while opening a color matrix menu.</value>
-  </data>
-  <data name="ShowConvolutionMenu" xml:space="preserve">
-    <value>Error while opening a convolution filters menu.</value>
-  </data>
-  <data name="ShowDistributionMenu" xml:space="preserve">
-    <value>Error while opening a distributions filters menu.</value>
-  </data>
-  <data name="ShowRgbMenu" xml:space="preserve">
-    <value>Error while opening an rgb filters menu.</value>
-  </data>
-  <data name="ShowSettingsMenu" xml:space="preserve">
-    <value>Error while opening a settings menu.</value>
-  </data>
-  <data name="ShowTransformationMenu" xml:space="preserve">
-    <value>Errow while opening a transformation menu.</value>
-  </data>
-  <data name="Shuffle" xml:space="preserve">
-    <value>Error while shuffling the image.</value>
-  </data>
-  <data name="TransformHistogram" xml:space="preserve">
-    <value>Error while applying a histogram transformation.</value>
-  </data>
-  <data name="UndoRedo" xml:space="preserve">
-    <value>Error while undo/redo the last operation.</value>
-  </data>
-  <data name="UpdateColorMatrix" xml:space="preserve">
-    <value>Error while updating the color matrix.</value>
-  </data>
-  <data name="Zoom" xml:space="preserve">
-    <value>Error while zooming the image.</value>
+  <data name="YAxisLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAAkAAAAQCAYAAADESFVDAAAABGdBTUEAALGPC/xhBQAAAJRJREFUKFPF
+        ULENBCEMy0qILdgFBmECBmAMBqBnAHpq+twnd+ET6Yvr3lIkSBwbA/gC70gxRkwp4RjjaX3RWuMZkwCA
+        Lxp7b/Te8wzmnPfhU1qt1so959z9ppyzUdMqZMmktZZRE5UQAi+ddKWUoyYqvXeeHRJZsP+jSIEE5p/E
+        hkqHMCQaCEnjnyRKSEQqDbvyE4gXCEnMDy6+5/8AAAAASUVORK5CYII=
+</value>
   </data>
 </root>

@@ -347,4 +347,24 @@
         wwAADsMBx2+oZAAAAAxJREFUGFdj+P//PwAF/gL+pzWBhAAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="xAxis.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+      iVBORw0KGgoAAAANSUhEUgAAAAoAAAAQCAYAAAAvf+5AAAABYUlEQVQoU42Ssc/BUBTFT2dik1gk/AEGM
+      bCIDiYSNh2KtZaaWlu3Tt2w1EoNRk0wmSxImg4Va61YmZ+40n5pJF/c6ebd37vn3vMexxhj+CG4n0HTNN
+      n5fEY6nYaiKJHe8/kcx+MRiUQCnOd5LJfLEbDf71EsFim/XC7IZrOUL5dLkPRkMkGv10O9XsdisUAsFkO
+      /38d4PIYsyxiNRh/w+Xyi1WphvV7DsiykUilUq1XqdrvdkEwmP+D74HA4oFQqUbFQKMBxHLokiiKdRbbW
+      NA26rlOh0+lgOp2Gy0XA7XYbSpqmCUmSvsH3nJVKhSSD8H0fmUwmKh1sXqvVwPM8BoMBbT4cDv/A0+mEw
+      EvP88i/crkM13XJw0ajAe7xeDBBELBarWAYBlRVpQ62baPZbJIDm80GnGVZrN1uI5/PY7fbkdlBdLtdzG
+      YzGoGe8F2Ix+Ph4AF4v99xvV6/ffzvt70AxzCy6NpI3qEAAAAASUVORK5CYII=
+    </value>
+  </data>
+  <data name="yAxis.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>     
+      iVBORw0KGgoAAAANSUhEUgAAAAkAAAAQCAYAAADESFVDAAAA2ElEQVQoU8WSIQ6EMBBFfy+Bx4NAoQieM
+      2BJMEVyCRSgOAAXIMGBJMEQQsD3AGh0Nx2yXVizuK1qMq+vfzplUkqJH4s9gjjnkjGGKIpgWdbN2fc9mq
+      YBU1BZlkiSBHmea+g4Dvi+j2mawIQQ0jRNKq7rqm11XSMMQziOA8qUZRnSNNW2q6XruhPa9x2GYWjbsix
+      kCYIAbduekKpWVYU4jsk2DANlGccRrut+IHWF53mY55mMnHMURUH72zu9w343cYO2bYNt23T6Ooh/QqpD
+      IQRlus7x0S94AZwdpu4zCUyBAAAAAElFTkSuQmCC
+    </value>
+  </data>
 </root>

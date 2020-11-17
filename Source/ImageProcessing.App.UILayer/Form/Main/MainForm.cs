@@ -173,6 +173,10 @@ namespace ImageProcessing.App.UILayer.Form.Main
             => RgbMenu;
 
         /// <inheritdoc/>
+        public ToolStripMenuItem AffineTransformationMenuButton
+            => AffineTransformationMenu;
+
+        /// <inheritdoc/>
         public ToolStripMenuItem DistributionMenuButton
             => DistributionMenu;
 

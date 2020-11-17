@@ -232,6 +232,15 @@ namespace ImageProcessing.App.PresentationLayer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Errow while opening a transformation menu..
+        /// </summary>
+        public static string ShowTransformationMenu {
+            get {
+                return ResourceManager.GetString("ShowTransformationMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error while shuffling the image..
         /// </summary>
         public static string Shuffle {

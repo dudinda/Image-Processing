@@ -9,6 +9,7 @@ using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.PresentationLayer.Views.QualityMeasure;
 using ImageProcessing.App.PresentationLayer.Views.Rgb;
 using ImageProcessing.App.PresentationLayer.Views.Settings;
+using ImageProcessing.App.PresentationLayer.Views.Transformation;
 using ImageProcessing.App.UILayer.Form.ColorMatrix;
 using ImageProcessing.App.UILayer.Form.Convolution;
 using ImageProcessing.App.UILayer.Form.Distribution;
@@ -17,6 +18,7 @@ using ImageProcessing.App.UILayer.Form.Main;
 using ImageProcessing.App.UILayer.Form.QualityMeasure;
 using ImageProcessing.App.UILayer.Form.Rgb;
 using ImageProcessing.App.UILayer.Form.Settings;
+using ImageProcessing.App.UILayer.Form.Transformation;
 using ImageProcessing.App.UILayer.FormCommands.Main;
 using ImageProcessing.App.UILayer.FormCommands.Rgb.Implementation;
 using ImageProcessing.App.UILayer.FormCommands.Rgb.Interface;
@@ -24,6 +26,8 @@ using ImageProcessing.App.UILayer.FormEventBinder.ColorMatrix.Implementation;
 using ImageProcessing.App.UILayer.FormEventBinder.ColorMatrix.Interface;
 using ImageProcessing.App.UILayer.FormEventBinder.Settings.Implementation;
 using ImageProcessing.App.UILayer.FormEventBinder.Settings.Interface;
+using ImageProcessing.App.UILayer.FormEventBinder.Transformation.Implementation;
+using ImageProcessing.App.UILayer.FormEventBinder.Transformation.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Implementation;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Distribution.Implementation;
@@ -60,11 +64,13 @@ namespace ImageProcessing.App.UILayer
                 .RegisterSingletonView<IQualityMeasureView, QualityMeasureForm>()
                 .RegisterTransient<IDistributionView, DistributionForm>()
                 .RegisterTransient<IColorMatrixView, ColorMatrixForm>()
+                .RegisterTransient<ITransformationView, TransformationForm>()
                 .RegisterTransient<IRgbFormEventBinder, RgbFormEventBinder>()
                 .RegisterTransient<IColorMatrixEventBinder, ColorMatrixEventBinder>()
                 .RegisterTransient<IConvolutionFormEventBinder, ConvolutionFormEventBinder>()
                 .RegisterTransient<IDistributionFormEventBinder, DistributionFormEventBinder>()
                 .RegisterTransient<ISettingsFormEventBinder, SettingsFormEventBinder>()
+                .RegisterTransient<ITransformationFormEventBinder, TransformationFormEventBinder>()
                 .RegisterTransient<IMainFormEventBinder, MainFormEventBinder>()
                 .RegisterTransient<IMainFormContainerFactory, MainFormContainerFactory>()
                 .RegisterTransient<IMainFormUndoRedoFactory, MainFormUndoRedoFactory>()

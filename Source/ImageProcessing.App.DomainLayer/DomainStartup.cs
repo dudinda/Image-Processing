@@ -6,6 +6,8 @@ using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Implementation
 using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Interface;
 using ImageProcessing.App.DomainLayer.DomainFactory.Scaling.Implementation;
 using ImageProcessing.App.DomainLayer.DomainFactory.Scaling.Interface;
+using ImageProcessing.App.DomainLayer.DomainFactory.Transformation.Implementation;
+using ImageProcessing.App.DomainLayer.DomainFactory.Transformation.Interface;
 using ImageProcessing.App.DomainLayer.Factory.Convolution.Implementation;
 using ImageProcessing.App.DomainLayer.Factory.Convolution.Interface;
 using ImageProcessing.App.DomainLayer.Factory.Distribution.Implementation;
@@ -37,7 +39,8 @@ namespace ImageProcessing.App.DomainLayer
                 .RegisterTransient<IScalingFactory, ScalingFactory>()
                 .RegisterTransient<IColorMatrixFactory, ColorMatrixFactory>()
                 .RegisterTransient<IRecommendationFactory, RecommendationFactory>()
-                .RegisterScoped<IColorFactory, ColorFactory>();
+                .RegisterTransient<IColorFactory, ColorFactory>()
+                .RegisterTransient<ITransformationFactory, TransformationFactory>();
         }
     }
 }
