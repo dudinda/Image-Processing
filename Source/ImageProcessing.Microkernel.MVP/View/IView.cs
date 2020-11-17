@@ -15,5 +15,10 @@ namespace ImageProcessing.Microkernel.MVP.View
         /// Close a view.
         /// </summary>
         void Close();
+
+        /// <summary>
+        /// Focus a view.
+        /// </summary>
+        bool Focus();
     }
 }
