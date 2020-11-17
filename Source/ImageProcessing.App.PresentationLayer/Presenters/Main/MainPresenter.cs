@@ -244,7 +244,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     {
                         await Render(block).ConfigureAwait(true);
 
-                        Controller.Aggregator.PublishFromAll(publisher,
+                        Controller.Aggregator.PublishFrom(publisher,
                             new RestoreFocusEventArgs());
                     }
                 }
