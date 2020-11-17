@@ -16,10 +16,12 @@ using ImageProcessing.App.PresentationLayer.Presenters.Convolution;
 using ImageProcessing.App.PresentationLayer.Presenters.Distribution;
 using ImageProcessing.App.PresentationLayer.Presenters.Rgb;
 using ImageProcessing.App.PresentationLayer.Presenters.Settings;
+using ImageProcessing.App.PresentationLayer.Presenters.Transformation;
 using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
 using ImageProcessing.App.PresentationLayer.ViewModel.Distribution;
 using ImageProcessing.App.PresentationLayer.ViewModel.Rgb;
+using ImageProcessing.App.PresentationLayer.ViewModel.Transformation;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.ServiceLayer.Providers.Scaling.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
@@ -40,6 +42,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
           ISubscriber<ShowDistributionMenuEventArgs>,
           ISubscriber<ShowRgbMenuEventArgs>,
           ISubscriber<ShowSettingsMenuEventArgs>,
+          ISubscriber<ShowTransformationMenuEventArgs>,
           ISubscriber<OpenFileDialogEventArgs>,
           ISubscriber<SaveAsFileDialogEventArgs>,
           ISubscriber<SaveWithoutFileDialogEventArgs>,
@@ -199,6 +202,26 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
+        public async Task OnEventHandler(object publisher, ShowTransformationMenuEventArgs e)
+        {
+            try
+            {
+                if (!View.ImageIsDefault(ImageContainer.Source))
+                {
+                    var copy = await GetImageCopy(
+                        ImageContainer.Source
+                    ).ConfigureAwait(true);
+
+                    Controller.Run<TransformationPresenter, TransformationViewModel>(
+                        new TransformationViewModel(copy));
+                }
+            }
+            catch (Exception ex)
+            {
+                OnError(publisher, Errors.ShowTransformationMenu);
+            }
+        }
+
         public async Task OnEventHandler(object publisher, ShowSettingsMenuEventArgs e)
         {
             try
@@ -220,6 +243,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     if (e.Block is IPipelineBlock block)
                     {
                         await Render(block).ConfigureAwait(true);
+
+                        Controller.Aggregator.PublishFromAll(publisher,
+                            new RestoreFocusEventArgs());
                     }
                 }
             }

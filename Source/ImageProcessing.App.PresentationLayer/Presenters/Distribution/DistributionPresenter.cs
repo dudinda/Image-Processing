@@ -27,7 +27,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
         ISubscriber<BuildRandomVariableFunctionEventArgs>,
         ISubscriber<ShowQualityMeasureMenuEventArgs>,
         ISubscriber<GetRandomVariableInfoEventArgs>,
-        ISubscriber<ShowTooltipOnErrorEventArgs>
+        ISubscriber<ShowTooltipOnErrorEventArgs>,
+        ISubscriber<RestoreFocusEventArgs>
     {
         private readonly IAsyncOperationLocker _locker;
         private readonly IBitmapLuminanceServiceProvider _provider;
@@ -152,6 +153,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
         public async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
             View.Tooltip(e.Error);
+        }
+
+        public async Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
+        {
+            View.Focus();
         }
     }
 }

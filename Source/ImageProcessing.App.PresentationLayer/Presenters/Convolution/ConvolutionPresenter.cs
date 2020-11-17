@@ -20,7 +20,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
     internal sealed class ConvolutionPresenter : BasePresenter<IConvolutionView, ConvolutionViewModel>,
           ISubscriber<ApplyConvolutionFilterEventArgs>,
           ISubscriber<ShowTooltipOnErrorEventArgs>,
-          ISubscriber<ContainerUpdatedEventArgs>
+          ISubscriber<ContainerUpdatedEventArgs>,
+          ISubscriber<RestoreFocusEventArgs>
     {
 		private readonly IConvolutionServiceProvider _provider;
 		private readonly IAsyncOperationLocker _locker;
@@ -76,6 +77,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
                     ViewModel.Source = new Bitmap(e.Bmp)
                 ).ConfigureAwait(true);
             }
+        }
+
+        public async Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
+        {
+            View.Focus();
         }
     }
 }

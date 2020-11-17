@@ -18,7 +18,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Transformation
 {
     internal sealed class TransformationPresenter : BasePresenter<ITransformationView, TransformationViewModel>,
         ISubscriber<ApplyTransformationEventArgs>,
-        ISubscriber<ContainerUpdatedEventArgs>
+        ISubscriber<ContainerUpdatedEventArgs>,
+        ISubscriber<RestoreFocusEventArgs>
     {
         private readonly ITransformationProvider _provider;
         private readonly IAsyncOperationLocker _locker;
@@ -69,6 +70,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Transformation
                     ViewModel.Source = new Bitmap(e.Bmp)
                 ).ConfigureAwait(true);
             }
+        }
+
+        public async Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
+        {
+            View.Focus();
         }
     }
 }

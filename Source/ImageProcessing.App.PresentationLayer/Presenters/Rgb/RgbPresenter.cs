@@ -23,7 +23,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
           ISubscriber<ApplyRgbFilterEventArgs>,
           ISubscriber<ApplyRgbColorFilterEventArgs>,
           ISubscriber<ContainerUpdatedEventArgs>,
-          ISubscriber<ShowColorMatrixMenuEventArgs>
+          ISubscriber<ShowColorMatrixMenuEventArgs>,
+          ISubscriber<RestoreFocusEventArgs>
     {
         private readonly IRgbServiceProvider _provider;
         private readonly IAsyncOperationLocker _locker;
@@ -120,6 +121,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
             {
                 View.Tooltip(Errors.ShowColorMatrixMenu);
             }
+        }
+
+        public async Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
+        {
+            View.Focus();
         }
     }
 }

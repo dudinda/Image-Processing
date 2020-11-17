@@ -23,7 +23,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix
         ISubscriber<ContainerUpdatedEventArgs>,
         ISubscriber<CustomColorMatrixEventArgs>,
         ISubscriber<ChangeColorMatrixEventArgs>,
-        ISubscriber<ApplyCustomColorMatrixEventArgs>
+        ISubscriber<ApplyCustomColorMatrixEventArgs>,
+        ISubscriber<RestoreFocusEventArgs>
     {
         private readonly IRgbServiceProvider _provider;
         private readonly IAsyncOperationLocker _locker;
@@ -129,6 +130,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix
                     ViewModel.Source = new Bitmap(e.Bmp)
                 ).ConfigureAwait(true);
             }
+        }
+
+        public async Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
+        {
+            View.Focus();
         }
     }
 }
