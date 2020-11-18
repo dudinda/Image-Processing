@@ -27,17 +27,12 @@ namespace ImageProcessing.App.ServiceLayer.Services.FileDialog.Implementation
                 {
                     return await Task.Run(() =>
                     {
-                        using (var stream = File.OpenRead(dialog.FileName))
-                        {
-                            return (new Bitmap(
-                                Image.FromStream(stream)
-                            ), dialog.FileName);
-                        }
+                        return (new Bitmap(dialog.FileName), dialog.FileName);
+                        
                     }).ConfigureAwait(false);              
                 }
 
-                return await Task
-                    .FromResult<(Bitmap?, string)>(default)
+                return await Task.FromResult<(Bitmap?, string)>(default)
                     .ConfigureAwait(false);
             }
         }
@@ -54,8 +49,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.FileDialog.Implementation
                     await Task.Run(() =>
                     {
                        src.Save(dialog.FileName,
-                                Path.GetExtension(dialog.FileName)
-                                    .GetImageFormat());
+                           Path.GetExtension(dialog.FileName).GetImageFormat());
                     }).ConfigureAwait(false);
                 }
             }
