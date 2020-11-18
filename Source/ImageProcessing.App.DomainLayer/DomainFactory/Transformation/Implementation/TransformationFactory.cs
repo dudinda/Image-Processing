@@ -15,6 +15,8 @@ namespace ImageProcessing.App.DomainLayer.DomainFactory.Transformation.Implement
          {
              AffTransform.Translation
                  => new TranslationTransformation(),
+             AffTransform.CyclicTranslation
+                 => new CyclicTranslationTransformation(),
              AffTransform.Scale
                  => new ScaleTransformation(),
  

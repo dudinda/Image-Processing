@@ -8,24 +8,30 @@ namespace ImageProcessing.App.CommonLayer.Enums
         /// An unknown affine transformation.
         /// </summary>
         [Description("Select a transformation...")]
-        Unknown     = 0,
+        Unknown          = 0,
 
         /// <summary>
         /// Translation transformation.
         /// </summary>
         [Description("Translation transformation")]
-        Translation = 1,
+        Translation       = 1,
+
+        /// <summary>
+        /// Cyclic translation transformation.
+        /// </summary>
+        [Description("Cyclic translation transformation")]
+        CyclicTranslation = 2,
 
         /// <summary>
         /// Scale transformation.
         /// </summary>
         [Description("Scale transformation")]
-        Scale       = 2,
+        Scale             = 3,
 
         /// <summary>
         /// Shear transformation.
         /// </summary>
         [Description("Shear transformation")]
-        Shear       = 3
+        Shear             = 4
     }
 }
