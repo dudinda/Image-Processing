@@ -44,29 +44,29 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 
                 Parallel.For(0, srcHeight, options, y =>
                 {
-                    var deltaY = y + dy;
+                    var newY = y + dy;
 
-                    //delta mod height
-                    if (deltaY < 0 || deltaY >= srcHeight)
+                    //y' mod height
+                    if (newY < 0 || newY >= srcHeight)
                     {
-                        deltaY = deltaY - srcHeight * Math.Floor(deltaY / srcHeight);
+                        newY = newY - srcHeight * Math.Floor(newY / srcHeight);
                     }
 
                     //get the address of a row
-                    var dstRow = dstStartPtr + (int)deltaY * dstData.Stride;
+                    var dstRow = dstStartPtr + (int)newY * dstData.Stride;
                     var srcRow = srcStartPtr + y * srcData.Stride;
 
                     for (var x = 0; x < srcWidth; ++x, srcRow += ptrStep)
                     {
-                        var deltaX = x + dx;
+                        var newX = x + dx;
 
-                        //delta mod width
-                        if (deltaX < 0 || deltaX >= srcWidth)
+                        //x' mod width
+                        if (newX < 0 || newX >= srcWidth)
                         {
-                            deltaX = deltaX - srcWidth * Math.Floor(deltaX / srcWidth);
+                            newX = newX - srcWidth * Math.Floor(newX / srcWidth);
                         }
           
-                        var dstPtr = dstRow + (int)deltaX * ptrStep;
+                        var dstPtr = dstRow + (int)newX * ptrStep;
 
                         dstPtr[0] = srcRow[0];
                         dstPtr[1] = srcRow[1];
