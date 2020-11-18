@@ -35,6 +35,9 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         public virtual void Dispose()
             => _form.Dispose();
 
+        public bool Focus()
+            => _form.Focus();
+       
         public virtual void Show()
             => _synchronizer.Signal();
 

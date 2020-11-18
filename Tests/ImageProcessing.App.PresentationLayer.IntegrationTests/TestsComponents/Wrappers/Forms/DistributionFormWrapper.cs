@@ -74,6 +74,9 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         public virtual void EnableQualityQueue(bool isEnabled)
             => _form.EnableQualityQueue(isEnabled);
 
+        public bool Focus()
+            => _form.Focus();
+        
         public virtual ConcurrentQueue<Bitmap> GetQualityQueue()
             => _form.GetQualityQueue();
 

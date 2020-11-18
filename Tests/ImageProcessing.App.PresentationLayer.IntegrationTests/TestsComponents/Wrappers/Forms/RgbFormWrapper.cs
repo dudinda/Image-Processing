@@ -49,6 +49,10 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         public virtual void Dispose()
             => _form.Dispose();
 
+        public bool Focus()
+            => _form.Focus();
+        
+
         public virtual RgbColors GetSelectedColors(RgbColors color)
             => _form.GetSelectedColors(color);
 
