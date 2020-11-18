@@ -46,7 +46,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 {
                     var deltaY = y + dy;
 
-                    //ceil(delta mod height)
+                    //delta mod height
                     if (deltaY < 0 || deltaY >= srcHeight)
                     {
                         deltaY = deltaY - srcHeight * Math.Floor(deltaY / srcHeight);
@@ -60,7 +60,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                     {
                         var deltaX = x + dx;
 
-                        //ceil(delta mod width)
+                        //delta mod width
                         if (deltaX < 0 || deltaX >= srcWidth)
                         {
                             deltaX = deltaX - srcWidth * Math.Floor(deltaX / srcWidth);
