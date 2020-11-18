@@ -19,6 +19,8 @@ namespace ImageProcessing.App.DomainLayer.DomainFactory.Transformation.Implement
                  => new CyclicTranslationTransformation(),
              AffTransform.Scale
                  => new ScaleTransformation(),
+             AffTransform.Shear
+                 => new ShearTransformation(),
  
              _   => throw new NotImplementedException(nameof(transformation))
          };
