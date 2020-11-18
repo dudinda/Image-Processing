@@ -10,7 +10,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 {
     internal sealed class BicubicInterpolation : IScaling
     {
-        public Bitmap Resize(Bitmap src, double yScale, double xScale)
+        public Bitmap Resize(Bitmap src, double xScale, double yScale)
         {
             if(yScale == 0 && xScale == 0) { return src; }
 
@@ -48,7 +48,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 
                 Parallel.For(0, dstHeight, options, y =>
                 {
-                    var newY = y * dy + 0.5;
+                    var newY = y * dy;
                     var yFlr = (int)newY;
                     var yFrc = newY - yFlr;
 
@@ -68,7 +68,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 
                     for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
                     {
-                        var newX = x * dx + 0.5;
+                        var newX = (x + 0.5) * dx;
                         var xFlr = (int)newX;
                         var xFrc = newX - xFlr;
 

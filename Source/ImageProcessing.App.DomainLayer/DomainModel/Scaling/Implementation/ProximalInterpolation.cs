@@ -10,7 +10,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 {
     internal sealed class ProximalInterpolation : IScaling
     {
-        public Bitmap Resize(Bitmap src, double yScale, double xScale)
+        public Bitmap Resize(Bitmap src, double xScale, double yScale)
         {
             if(yScale == 0 && xScale == 0) { return src; } 
 
