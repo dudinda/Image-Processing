@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
 {
     internal sealed class FlippingFilter : IRgbFilter
     {
+
         public Bitmap Filter(Bitmap bitmap)
         {
             var size = bitmap.Size;
@@ -24,15 +26,17 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
+            var (width, height) = (size.Width, size.Height - 1);
+
             unsafe
             {
                 var startPtr = (byte*)bitmapData.Scan0.ToPointer();
 
-                Parallel.For(0, size.Width, options, x =>
+                Parallel.For(0, width, options, x =>
                 {
                     //get the address of a column
                     var ptr = startPtr + x * ptrStep;
-                    var endPtr = ptr + bitmapData.Stride * (size.Height - 1);
+                    var endPtr = ptr + bitmapData.Stride * height;
 
                     do
                     {
