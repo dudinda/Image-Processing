@@ -41,13 +41,14 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
-            //inv(A)v = v'
-            // where A is a shear matrix
-            var inverseCoef = dx * dy - 1;
             unsafe
             {
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
                 var dstStartPtr = (byte*)dstData.Scan0.ToPointer();
+
+                //inv(A)v = v'
+                // where A is a shear matrix
+                var detA = dx * dy - 1;
 
                 Parallel.For(0, dstHeight, options, y =>
                 {                 
@@ -56,8 +57,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 
                     for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
                     {
-                        var srcX = (int)((dx * y - x) / inverseCoef);
-                        var srcY = (int)((dy * x - y) / inverseCoef);
+                        var srcX = (int)((dx * y - x) / detA);
+                        var srcY = (int)((dy * x - y) / detA);
                 
                         if (srcX < srcWidth  && srcX >= 0 &&
                             srcY < srcHeight && srcY >= 0)
