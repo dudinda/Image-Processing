@@ -47,7 +47,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 var (srcWidth, srcHeight) = (src.Width, src.Height);
 
                 //inv(A)v = v'
-                // where A is a shear matrix
+                // where A is a scale matrix
                 Parallel.For(0, dstHeight, options, y =>
                 {
                     var srcY = y / dy;
