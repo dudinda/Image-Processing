@@ -142,6 +142,8 @@ namespace ImageProcessing.App.CommonLayer.Extensions.BitmapExt
                 => ImageFormat.Tiff,
             ImageExtension.Wmf
                 => ImageFormat.Wmf,
+            ImageExtension.Jpg
+                => ImageFormat.Jpeg,
 
             _ => throw new NotImplementedException(ext)
         };
