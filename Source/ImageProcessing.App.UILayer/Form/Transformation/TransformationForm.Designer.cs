@@ -44,18 +44,18 @@ namespace ImageProcessing.App.UILayer.Form.Transformation
             // 
             this.TransformationComboBox.FormattingEnabled = true;
             this.TransformationComboBox.ItemHeight = 23;
-            this.TransformationComboBox.Location = new System.Drawing.Point(49, 59);
+            this.TransformationComboBox.Location = new System.Drawing.Point(36, 59);
             this.TransformationComboBox.MaxDropDownItems = 100;
             this.TransformationComboBox.Name = "TransformationComboBox";
-            this.TransformationComboBox.Size = new System.Drawing.Size(183, 29);
+            this.TransformationComboBox.Size = new System.Drawing.Size(286, 29);
             this.TransformationComboBox.TabIndex = 0;
             this.TransformationComboBox.UseSelectable = true;
             // 
             // ApplyTransformation
             // 
-            this.ApplyTransformation.Location = new System.Drawing.Point(49, 129);
+            this.ApplyTransformation.Location = new System.Drawing.Point(36, 129);
             this.ApplyTransformation.Name = "ApplyTransformation";
-            this.ApplyTransformation.Size = new System.Drawing.Size(183, 31);
+            this.ApplyTransformation.Size = new System.Drawing.Size(286, 31);
             this.ApplyTransformation.TabIndex = 1;
             this.ApplyTransformation.Text = "Apply";
             this.ApplyTransformation.UseSelectable = true;
@@ -67,9 +67,9 @@ namespace ImageProcessing.App.UILayer.Form.Transformation
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(49, 94);
+            this.metroPanel1.Location = new System.Drawing.Point(36, 94);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(84, 29);
+            this.metroPanel1.Size = new System.Drawing.Size(142, 29);
             this.metroPanel1.TabIndex = 2;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
@@ -81,7 +81,7 @@ namespace ImageProcessing.App.UILayer.Form.Transformation
             // 
             // 
             this.XScaleTextBox.CustomButton.Image = null;
-            this.XScaleTextBox.CustomButton.Location = new System.Drawing.Point(39, 1);
+            this.XScaleTextBox.CustomButton.Location = new System.Drawing.Point(100, 1);
             this.XScaleTextBox.CustomButton.Name = "";
             this.XScaleTextBox.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.XScaleTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -99,7 +99,7 @@ namespace ImageProcessing.App.UILayer.Form.Transformation
             this.XScaleTextBox.SelectionLength = 0;
             this.XScaleTextBox.SelectionStart = 0;
             this.XScaleTextBox.ShortcutsEnabled = true;
-            this.XScaleTextBox.Size = new System.Drawing.Size(61, 23);
+            this.XScaleTextBox.Size = new System.Drawing.Size(122, 23);
             this.XScaleTextBox.TabIndex = 3;
             this.XScaleTextBox.UseSelectable = true;
             this.XScaleTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -121,9 +121,9 @@ namespace ImageProcessing.App.UILayer.Form.Transformation
             this.metroPanel2.HorizontalScrollbarBarColor = true;
             this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel2.HorizontalScrollbarSize = 10;
-            this.metroPanel2.Location = new System.Drawing.Point(139, 94);
+            this.metroPanel2.Location = new System.Drawing.Point(179, 94);
             this.metroPanel2.Name = "metroPanel2";
-            this.metroPanel2.Size = new System.Drawing.Size(93, 29);
+            this.metroPanel2.Size = new System.Drawing.Size(143, 29);
             this.metroPanel2.TabIndex = 3;
             this.metroPanel2.VerticalScrollbarBarColor = true;
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
@@ -135,7 +135,7 @@ namespace ImageProcessing.App.UILayer.Form.Transformation
             // 
             // 
             this.YScaleTextBox.CustomButton.Image = null;
-            this.YScaleTextBox.CustomButton.Location = new System.Drawing.Point(39, 1);
+            this.YScaleTextBox.CustomButton.Location = new System.Drawing.Point(100, 1);
             this.YScaleTextBox.CustomButton.Name = "";
             this.YScaleTextBox.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.YScaleTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -153,7 +153,7 @@ namespace ImageProcessing.App.UILayer.Form.Transformation
             this.YScaleTextBox.SelectionLength = 0;
             this.YScaleTextBox.SelectionStart = 0;
             this.YScaleTextBox.ShortcutsEnabled = true;
-            this.YScaleTextBox.Size = new System.Drawing.Size(61, 23);
+            this.YScaleTextBox.Size = new System.Drawing.Size(122, 23);
             this.YScaleTextBox.TabIndex = 4;
             this.YScaleTextBox.UseSelectable = true;
             this.YScaleTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -171,7 +171,7 @@ namespace ImageProcessing.App.UILayer.Form.Transformation
             // TransformationForm
             // 
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
-            this.ClientSize = new System.Drawing.Size(285, 172);
+            this.ClientSize = new System.Drawing.Size(358, 172);
             this.Controls.Add(this.metroPanel2);
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.TransformationComboBox);
