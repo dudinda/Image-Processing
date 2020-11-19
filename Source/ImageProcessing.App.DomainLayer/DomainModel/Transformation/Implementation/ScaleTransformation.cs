@@ -7,7 +7,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 {
     internal sealed class ScaleTransformation : ITransformation
     {
-        public Bitmap Transform(Bitmap src, double x, double y)
-            => new ProximalInterpolation().Resize(src, x, y);
+        public Bitmap Transform(Bitmap src, double dx, double dy)
+            => new ProximalInterpolation().Resize(src, dx, dy);
     }
 }

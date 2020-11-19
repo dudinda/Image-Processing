@@ -10,9 +10,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 {
     public sealed class TranslationTransformation : ITransformation
     {
-        public Bitmap Transform(Bitmap src, double x, double y)
+        public Bitmap Transform(Bitmap src, double dx, double dy)
         {
-            if (x == 0 && y == 0) { return src; }
+            if (dx == 0 && dy == 0) { return src; }
 
             var (srcWidth, srcHeight) = (src.Width, src.Height);
 
@@ -34,8 +34,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
             };
 
             //(x, y) -> (x + x', y + y')
-            var (dx, dy) = (x, y);
-
             unsafe
             {
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
