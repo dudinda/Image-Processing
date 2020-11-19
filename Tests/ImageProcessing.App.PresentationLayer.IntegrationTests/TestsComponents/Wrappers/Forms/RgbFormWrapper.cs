@@ -3,7 +3,6 @@ using ImageProcessing.App.PresentationLayer.UnitTests.Services;
 using ImageProcessing.App.PresentationLayer.Views.Rgb;
 using ImageProcessing.App.UILayer.Exposers.Rgb;
 using ImageProcessing.App.UILayer.Form.Rgb;
-using ImageProcessing.App.UILayer.FormCommands.Rgb.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
@@ -18,11 +17,10 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         public RgbFormWrapper(
             IAutoResetEventService synchronizer,
             IAppController controller,
-            IRgbFormEventBinder binder,
-            IRgbFormColor command)
+            IRgbFormEventBinder binder)
         {
             _synchronizer = synchronizer;
-            _form = new RgbForm(controller, binder, command);
+            _form = new RgbForm(controller, binder);
         }
 
         public virtual RgbFltr Dropdown
@@ -52,7 +50,6 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         public bool Focus()
             => _form.Focus();
         
-
         public virtual RgbColors GetSelectedColors(RgbColors color)
             => _form.GetSelectedColors(color);
 

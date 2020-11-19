@@ -32,8 +32,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.FileDialog.Implementation
                     }).ConfigureAwait(false);              
                 }
 
-                return await Task.FromResult<(Bitmap?, string)>(default)
-                    .ConfigureAwait(false);
+                return await Task.FromResult<(Bitmap?, string)>(default).ConfigureAwait(false);
             }
         }
 

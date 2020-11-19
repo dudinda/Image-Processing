@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Concurrent;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 using ImageProcessing.App.CommonLayer.Enums;
@@ -32,8 +30,7 @@ namespace ImageProcessing.App.UILayer.Form.Distribution
             PopulateComboBox<PrDistribution>(DistributionsComboBox);
 
             _binder = binder;
-
-             _binder.OnElementExpose(this);
+            _binder.OnElementExpose(this);
         }
 
         /// <inheritdoc/>

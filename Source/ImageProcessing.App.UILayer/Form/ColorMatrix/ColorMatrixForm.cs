@@ -58,21 +58,7 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
         /// <inheritdoc/>
         public MetroButton ApplyCustomButton
             => ApplyCustomColorMatrixButton;
-
-        public void SetEnabledCells(bool isReadOnly)
-        {
-            var rows = ColorMatrixGrid.Rows.Count;
-            var cols = ColorMatrixGrid.ColumnCount;
-
-            for(var row = 0; row < rows; ++row)
-            {
-                for(var col = 0; col < cols; ++col)
-                {
-                    ColorMatrixGrid[col, row].ReadOnly = isReadOnly;
-                }
-            } 
-        }
-           
+          
         public void SetEnabledDropDown(bool isEnabled)
             => ColorMatrixComboBox.Enabled = isEnabled;
 
@@ -86,6 +72,49 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
         public void Tooltip(string message)
             => ErrorToolTip.Show(message, this, PointToClient(
                 CursorPosition.GetCursorPosition()), 2000);
+
+        public void SetEnabledCells(bool isReadOnly)
+        {
+            var rows = ColorMatrixGrid.Rows.Count;
+            var cols = ColorMatrixGrid.ColumnCount;
+
+            for (var row = 0; row < rows; ++row)
+            {
+                for (var col = 0; col < cols; ++col)
+                {
+                    ColorMatrixGrid[col, row].ReadOnly = isReadOnly;
+                }
+            }
+        }
+
+        public void SetGrid(ReadOnly2DArray<double> matrix)
+        {
+            for (var row = 0; row < matrix.RowCount; ++row)
+            {
+                for (var col = 0; col < matrix.ColumnCount; ++col)
+                {
+                    ColorMatrixGrid[col, row].Value = matrix[row, col];
+                }
+            }
+        }
+
+        public ReadOnly2DArray<double> GetGrid()
+        {
+            var rows = ColorMatrixGrid.RowCount;
+            var cols = ColorMatrixGrid.ColumnCount;
+
+            var matrix = new double[rows, cols];
+
+            for (var row = 0; row < rows; ++row)
+            {
+                for (var col = 0; col < cols; ++col)
+                {
+                    matrix[row, col] = Convert.ToDouble(ColorMatrixGrid[col, row].Value);
+                }
+            }
+
+            return new ReadOnly2DArray<double>(matrix);
+        }
 
         public new void Show()
         {
@@ -108,35 +137,6 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
                .Unsubscribe(typeof(ColorMatrixPresenter), this);
 
             base.Dispose(true);
-        }
-
-        public void SetGrid(ReadOnly2DArray<double> matrix)
-        {
-            for(var row = 0; row < matrix.RowCount; ++row)
-            {
-                for(var col = 0; col < matrix.ColumnCount; ++col)
-                {
-                    ColorMatrixGrid[col, row].Value = matrix[row, col];
-                }
-            } 
-        }
-
-        public ReadOnly2DArray<double> GetGrid()
-        {
-            var rows = ColorMatrixGrid.RowCount;
-            var cols = ColorMatrixGrid.ColumnCount;
-
-            var matrix = new double[rows, cols];
-
-            for (var row = 0; row < rows; ++row)
-            {
-                for (var col = 0; col < cols; ++col)
-                {
-                    matrix[row, col] = Convert.ToDouble(ColorMatrixGrid[col, row].Value);
-                }
-            }
-
-            return new ReadOnly2DArray<double>(matrix);
         }
     }
 }
