@@ -42,7 +42,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                 var (srcWidth, srcHeight) = (src.Width, src.Height);
                 var (xBound, yBound) = (srcWidth - 2, srcHeight - 2);
 
-                //(x, y) -> (ax, ay)
                 var dy = srcHeight / (double)dstHeight;
                 var dx = srcWidth / (double)dstWidth;
 
@@ -78,31 +77,31 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                         var p00 = i0 + j0; var p10 = i1 + j0;                      
                         var p01 = i0 + j1; var p11 = i1 + j1;
 
-                        var invXFrac = 1 - xFrc;
-                        var invYFrac = 1 - yFrc;
+                        var xFrcCompl = 1 - xFrc;
+                        var yFrcCompl = 1 - yFrc;
 
-                        col0 = p00[0] * invXFrac + p10[0] * xFrc;
-                        col1 = p01[0] * invXFrac + p11[0] * xFrc;
+                        col0 = p00[0] * xFrcCompl + p10[0] * xFrc;
+                        col1 = p01[0] * xFrcCompl + p11[0] * xFrc;
 
-                        point = col0 * invYFrac + col1 * yFrc;
+                        point = col0 * yFrcCompl + col1 * yFrc;
 
                         if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
 
                         dstRow[0] = (byte)point;
 
-                        col0 = p00[1] * invXFrac + p10[1] * xFrc;
-                        col1 = p01[1] * invXFrac + p11[1] * xFrc;
+                        col0 = p00[1] * xFrcCompl + p10[1] * xFrc;
+                        col1 = p01[1] * xFrcCompl + p11[1] * xFrc;
 
-                        point = col0 * invYFrac + col1 * yFrc;
+                        point = col0 * yFrcCompl + col1 * yFrc;
 
                         if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
 
                         dstRow[1] = (byte)point;
 
-                        col0 = p00[2] * invXFrac + p10[2] * xFrc;
-                        col1 = p01[2] * invXFrac + p11[2] * xFrc;
+                        col0 = p00[2] * xFrcCompl + p10[2] * xFrc;
+                        col1 = p01[2] * xFrcCompl + p11[2] * xFrc;
 
-                        point = col0 * invYFrac + col1 * yFrc;
+                        point = col0 * yFrcCompl + col1 * yFrc;
 
                         if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
 

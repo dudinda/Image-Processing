@@ -42,7 +42,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                 var (srcWidth, srcHeight) = (src.Width, src.Height);
                 var (xBound, yBound) = (srcWidth - 3, srcHeight - 3);
 
-                //(x, y) -> (ax, ay)
                 var dy = srcHeight / (double)dstHeight;
                 var dx = srcWidth / (double)dstWidth;
 
