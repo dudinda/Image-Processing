@@ -41,7 +41,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
-            //inv(A)x = x'
+            //inv(A)v = v'
             // where A is a shear matrix
             var inverseCoef = dx * dy - 1;
             unsafe

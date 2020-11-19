@@ -33,7 +33,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
-            //(x, y) -> (x + x', y + y')
+            //inv(A)v  = v',
+            //where A is a translation matrix
+            // and v' = (x' mod width, y' mod height) 
             unsafe
             {
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
@@ -41,33 +43,33 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 
                 Parallel.For(0, srcHeight, options, y =>
                 {
-                    var newY = y + dy;
+                    var srcY = y - dy;
 
                     //y' mod height
-                    if (newY < 0 || newY >= srcHeight)
+                    if (srcY < 0 || srcY >= srcHeight)
                     {
-                        newY = newY - srcHeight * Math.Floor(newY / srcHeight);
+                        srcY = srcY - srcHeight * Math.Floor(srcY / srcHeight);
                     }
 
                     //get the address of a row
-                    var dstRow = dstStartPtr + (int)newY * dstData.Stride;
-                    var srcRow = srcStartPtr + y * srcData.Stride;
+                    var srcRow = srcStartPtr + (int)srcY * srcData.Stride;
+                    var dstRow = dstStartPtr +         y * dstData.Stride;
 
-                    for (var x = 0; x < srcWidth; ++x, srcRow += ptrStep)
+                    for (var x = 0; x < srcWidth; ++x, dstRow += ptrStep)
                     {
-                        var newX = x + dx;
+                        var srcX = x - dx;
 
                         //x' mod width
-                        if (newX < 0 || newX >= srcWidth)
+                        if (srcX < 0 || srcX >= srcWidth)
                         {
-                            newX = newX - srcWidth * Math.Floor(newX / srcWidth);
+                            srcX = srcX - srcWidth * Math.Floor(srcX / srcWidth);
                         }
           
-                        var dstPtr = dstRow + (int)newX * ptrStep;
+                        var srcPtr = srcRow + (int)srcX * ptrStep;
 
-                        dstPtr[0] = srcRow[0];
-                        dstPtr[1] = srcRow[1];
-                        dstPtr[2] = srcRow[2];
+                        dstRow[0] = srcPtr[0];
+                        dstRow[1] = srcPtr[1];
+                        dstRow[2] = srcPtr[2];
                     }
                 });
             }

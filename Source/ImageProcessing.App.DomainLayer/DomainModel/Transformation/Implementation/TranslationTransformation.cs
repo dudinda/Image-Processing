@@ -33,7 +33,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
-            //(x, y) -> (x + x', y + y')
+            //inv(A)v = v',
+            //where A is a translation matrix
             unsafe
             {
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
@@ -41,25 +42,25 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 
                 Parallel.For(0, srcHeight, options, y =>
                 {
-                    var newY = (int)(y + dy);
+                    var srcY = (int)(y - dy);
 
-                    if (newY < srcHeight && newY >= 0)
+                    if (srcY < srcHeight && srcY >= 0)
                     {
                         //get the address of a row
-                        var dstRow = dstStartPtr + newY * dstData.Stride;
-                        var srcRow = srcStartPtr + y    * srcData.Stride;
+                        var dstRow = dstStartPtr + y * dstData.Stride;
+                        var srcRow = srcStartPtr + srcY * srcData.Stride;
 
-                        for (var x = 0; x < srcWidth; ++x, srcRow += ptrStep)
+                        for (var x = 0; x < srcWidth; ++x, dstRow += ptrStep)
                         {
-                            var newX = (int)(x + dx);
+                            var srcX = (int)(x - dx);
 
-                            if (newX < srcWidth && newX >= 0)
+                            if (srcX < srcWidth && srcX >= 0)
                             {
-                                var dstPtr = dstRow + newX * ptrStep;
+                                var srcPtr = srcRow + srcX * ptrStep;
 
-                                dstPtr[0] = srcRow[0];
-                                dstPtr[1] = srcRow[1];
-                                dstPtr[2] = srcRow[2];
+                                dstRow[0] = srcPtr[0];
+                                dstRow[1] = srcPtr[1];
+                                dstRow[2] = srcPtr[2];
                             }
                         }
                     }
