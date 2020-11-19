@@ -12,14 +12,19 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 {
     internal sealed class ShearTransformation : ITransformation
     {
-        public Bitmap Transform(Bitmap src, double x, double y)
+        public Bitmap Transform(Bitmap src, double dx, double dy)
         {
-            if (x == 0 && y == 0)
-            { return src; }
+            if (dx == 0 && dy == 0) { return src; }
+
+            if(dx == 1 && dy == 1)
+            {
+                throw new InvalidOperationException();
+            }
 
             var (srcWidth, srcHeight) = (src.Width, src.Height);
+            var (dstWidth, dstHeight) = ((int)(srcWidth + dx * srcHeight), (int)(srcHeight + dy * srcWidth));
 
-            var dst = new Bitmap(srcWidth, srcHeight, src.PixelFormat)
+            var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
               .DrawFilledRectangle(Brushes.White);
 
             var srcData = src.LockBits(
@@ -27,7 +32,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
               ImageLockMode.ReadOnly, src.PixelFormat);
 
             var dstData = dst.LockBits(
-                new Rectangle(0, 0, srcWidth, srcHeight),
+                new Rectangle(0, 0, dstWidth, dstHeight),
                 ImageLockMode.WriteOnly, dst.PixelFormat);
 
             var ptrStep = src.GetBitsPerPixel() / 8;
@@ -36,30 +41,28 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
-            //(x, y) -> (x + t*y, y + t*x)
-            var (dx, dy) = (x, y);
-
+            //inv(A)x = x'
+            // where A is a shear matrix
+            var inverseCoef = dx * dy - 1;
             unsafe
             {
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
                 var dstStartPtr = (byte*)dstData.Scan0.ToPointer();
 
-                Parallel.For(0, srcHeight, options, y =>
+                Parallel.For(0, dstHeight, options, y =>
                 {                 
                     //get the address of a row
-                    var dstRow = dstStartPtr + y * srcData.Stride;
+                    var dstRow = dstStartPtr + y *dstData.Stride;
 
-                    for (var x = 0; x < srcWidth; ++x, dstRow += ptrStep)
+                    for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
                     {
-                        var newY = (int)(y + dy * x);
-                        var newX = (int)(x + dx * y);
-
-                        var srcRow = srcStartPtr + newY * dstData.Stride;
-
-                        if (newX < srcWidth  && newX >= 0 &&
-                            newY < srcHeight && newY >= 0)
+                        var srcX = (int)((dx * y - x) / inverseCoef);
+                        var srcY = (int)((dy * x - y) / inverseCoef);
+                
+                        if (srcX < srcWidth  && srcX >= 0 &&
+                            srcY < srcHeight && srcY >= 0)
                         {
-                            var srcPtr = srcRow + newX * ptrStep;
+                            var srcPtr = srcStartPtr + srcY * srcData.Stride + srcX * ptrStep;
 
                             dstRow[0] = srcPtr[0];
                             dstRow[1] = srcPtr[1];
