@@ -47,10 +47,8 @@ namespace ImageProcessing.App.ServiceLayer.Services.FileDialog.Implementation
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     await Task.Run(() =>
-                    {
-                       src.Save(dialog.FileName,
-                           Path.GetExtension(dialog.FileName).GetImageFormat());
-                    }).ConfigureAwait(false);
+                        src.Save(dialog.FileName, Path.GetExtension(dialog.FileName).GetImageFormat())
+                    ).ConfigureAwait(false);
                 }
             }
         }

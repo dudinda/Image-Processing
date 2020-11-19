@@ -71,8 +71,12 @@ namespace ImageProcessing.App.CommonLayer.Enums
         /// .Png
         /// </summary>
         [Description(".png")]
-        Png       = 10
+        Png       = 10,
 
-
+        /// <summary>
+        /// .Jpg
+        /// </summary>
+        [Description(".jpg")]
+        Jpg = 11
     }
 }
