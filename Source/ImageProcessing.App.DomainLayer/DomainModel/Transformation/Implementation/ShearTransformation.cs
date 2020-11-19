@@ -48,7 +48,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 
                 //inv(A)v = v'
                 // where A is a shear matrix
-                var detA = dx * dy - 1;
+                var detA = 1 - dx * dy;
 
                 Parallel.For(0, dstHeight, options, y =>
                 {                 
@@ -57,8 +57,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 
                     for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
                     {
-                        var srcX = (int)((dx * y - x) / detA);
-                        var srcY = (int)((dy * x - y) / detA);
+                        // 1 / det(A)  * adj(A)v = v'
+                        var srcX = (int)((x - dx * y) / detA);
+                        var srcY = (int)((y - dy * x) / detA);
                 
                         if (srcX < srcWidth  && srcX >= 0 &&
                             srcY < srcHeight && srcY >= 0)
