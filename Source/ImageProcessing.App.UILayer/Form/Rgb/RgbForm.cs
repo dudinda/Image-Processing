@@ -1,5 +1,3 @@
-using System;
-using System.Linq;
 using System.Windows.Forms;
 
 using ImageProcessing.App.CommonLayer.Enums;
@@ -7,35 +5,31 @@ using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
 using ImageProcessing.App.PresentationLayer.Presenters.Rgb;
 using ImageProcessing.App.PresentationLayer.Views.Rgb;
 using ImageProcessing.App.UILayer.Exposers.Rgb;
-using ImageProcessing.App.UILayer.FormCommands.Rgb.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Utility.Interop.Wrapper;
 
 using MetroFramework.Controls;
 
+using static ImageProcessing.App.CommonLayer.Enums.RgbColors;
+
 namespace ImageProcessing.App.UILayer.Form.Rgb
 {
     internal sealed partial class RgbForm : BaseForm,
         IRgbFormExposer, IRgbView
     {
-        private readonly IRgbFormColor _command;
         private readonly IRgbFormEventBinder _binder;
 
         public RgbForm(
             IAppController controller,
-            IRgbFormEventBinder binder,
-            IRgbFormColor command) : base(controller)
+            IRgbFormEventBinder binder) : base(controller)
         {
             InitializeComponent();
 
             PopulateComboBox<RgbFltr>(RgbFilterComboBox);
 
             _binder = binder;
-            _command = command;
-
             _binder.OnElementExpose(this);
-            _command.OnElementExpose(this);
         }
 
         /// <inheritdoc/>
@@ -65,15 +59,28 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
         /// <inheritdoc/>
         public MetroButton ColorMatrixMenuButton
             => ColorMatrixMenu;
-
-        /// <inheritdoc/>
-        public RgbColors GetSelectedColors(RgbColors color)
-            => Read<RgbColors>(() => _command.GetSelectedColors(color));
-                 
+             
         /// <inheritdoc/>
         public void Tooltip(string message)
            => ShowToolTip.Show(message, this, PointToClient(
                  CursorPosition.GetCursorPosition()), 2000);
+
+        /// <inheritdoc/>
+        public RgbColors GetSelectedColors(RgbColors color)
+        {
+            var result = Unknown;
+
+            if (RedButton.Checked) { result |= Red; }
+            if (BlueButton.Checked) { result |= Blue; }
+            if (GreenButton.Checked) { result |= Green; }
+
+            if (result == Unknown)
+            {
+                result |= Green | Blue | Red;
+            }
+
+            return result;
+        }
 
         /// <summary>
         /// Used by the generated <see cref="Dispose(bool)"/> call.

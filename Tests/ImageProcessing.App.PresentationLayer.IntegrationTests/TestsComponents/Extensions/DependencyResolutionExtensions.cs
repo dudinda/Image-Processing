@@ -29,8 +29,6 @@ using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Interface;
 using ImageProcessing.App.UILayer.Exposers.Rgb;
 using ImageProcessing.App.UILayer.FormCommands.Main;
-using ImageProcessing.App.UILayer.FormCommands.Rgb.Implementation;
-using ImageProcessing.App.UILayer.FormCommands.Rgb.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Implementation;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Distribution.Implementation;
@@ -119,12 +117,10 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
         {
             var (controller, aggregator, synchronizer) = builder.BindMocksForMvp();
 
-            builder.RegisterTransientInstance<IRgbFormEventBinder>(Substitute.ForPartsOf<RgbFormEventBinder>(aggregator))
-                   .RegisterTransientInstance<IRgbFormColor>(Substitute.ForPartsOf<RgbFormColor>());
+            builder.RegisterTransientInstance<IRgbFormEventBinder>(Substitute.ForPartsOf<RgbFormEventBinder>(aggregator));
 
             var form = Substitute.ForPartsOf<RgbFormWrapper>(synchronizer, controller,
-                builder.Resolve<IRgbFormEventBinder>(),
-                builder.Resolve<IRgbFormColor>());
+                builder.Resolve<IRgbFormEventBinder>());
 
             builder.RegisterTransientInstance<IRgbView>(form)
                    .RegisterTransientInstance<IRgbFormExposer>(form);

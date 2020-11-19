@@ -20,8 +20,6 @@ using ImageProcessing.App.UILayer.Form.Rgb;
 using ImageProcessing.App.UILayer.Form.Settings;
 using ImageProcessing.App.UILayer.Form.Transformation;
 using ImageProcessing.App.UILayer.FormCommands.Main;
-using ImageProcessing.App.UILayer.FormCommands.Rgb.Implementation;
-using ImageProcessing.App.UILayer.FormCommands.Rgb.Interface;
 using ImageProcessing.App.UILayer.FormEventBinder.ColorMatrix.Implementation;
 using ImageProcessing.App.UILayer.FormEventBinder.ColorMatrix.Interface;
 using ImageProcessing.App.UILayer.FormEventBinder.Settings.Implementation;
@@ -52,7 +50,6 @@ namespace ImageProcessing.App.UILayer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
             new PresentationStartup().Build(builder);
 
             builder
@@ -74,7 +71,6 @@ namespace ImageProcessing.App.UILayer
                 .RegisterTransient<IMainFormEventBinder, MainFormEventBinder>()
                 .RegisterTransient<IMainFormContainerFactory, MainFormContainerFactory>()
                 .RegisterTransient<IMainFormUndoRedoFactory, MainFormUndoRedoFactory>()
-                .RegisterTransient<IRgbFormColor, RgbFormColor>()
                 .RegisterTransient<IMainFormZoomFactory, MainFormZoomFactory>();
         }      
     }
