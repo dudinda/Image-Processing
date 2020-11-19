@@ -40,7 +40,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Transformation
             {
                 var (xStr, yStr) = e.Parameters;
 
-                var (x, y) = (Convert.ToDouble(xStr), Convert.ToDouble(yStr));
+                var x = Convert.ToDouble(xStr);
+                var y = Convert.ToDouble(yStr);
 
                 var copy = await _locker.LockOperationAsync(
                     () => new Bitmap(ViewModel.Source)
