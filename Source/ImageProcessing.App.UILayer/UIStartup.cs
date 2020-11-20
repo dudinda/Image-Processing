@@ -50,18 +50,19 @@ namespace ImageProcessing.App.UILayer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             new PresentationStartup().Build(builder);
 
             builder
                 .RegisterSingletonView<IMainView, MainForm>()
+                .RegisterSingletonView<ISettingsView, SettingsForm>()
+                .RegisterSingletonView<IQualityMeasureView, QualityMeasureForm>()
                 .RegisterTransientView<IHistogramView, HistogramForm>()
                 .RegisterTransientView<IConvolutionView, ConvolutionForm>()
                 .RegisterTransientView<IRgbView, RgbForm>()
-                .RegisterSingletonView<ISettingsView, SettingsForm>()
-                .RegisterSingletonView<IQualityMeasureView, QualityMeasureForm>()
-                .RegisterTransient<IDistributionView, DistributionForm>()
-                .RegisterTransient<IColorMatrixView, ColorMatrixForm>()
-                .RegisterTransient<ITransformationView, TransformationForm>()
+                .RegisterTransientView<IDistributionView, DistributionForm>()
+                .RegisterTransientView<IColorMatrixView, ColorMatrixForm>()
+                .RegisterTransientView<ITransformationView, TransformationForm>()
                 .RegisterTransient<IRgbFormEventBinder, RgbFormEventBinder>()
                 .RegisterTransient<IColorMatrixEventBinder, ColorMatrixEventBinder>()
                 .RegisterTransient<IConvolutionFormEventBinder, ConvolutionFormEventBinder>()
