@@ -38,5 +38,10 @@ namespace ImageProcessing.App.PresentationLayer.Views.Main
         /// Undo/Redo the last operation.
         /// </summary>
         (Bitmap, ImageContainer) TryUndoRedo(UndoRedoAction action);
+
+        /// <summary>
+        /// Center an <see cref="ImageContainer"/> after a scaling.
+        /// </summary>
+        void SetImageCenter(ImageContainer to, Size size);
     }
 }

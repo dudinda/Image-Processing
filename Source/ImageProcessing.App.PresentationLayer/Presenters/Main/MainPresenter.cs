@@ -280,7 +280,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                         new ContainerUpdatedEventArgs(to, copy));
                 }
             }
-            catch (OperationCanceledException cancel)
+            catch (OperationCanceledException ex)
             {
                 OnError(publisher, Errors.CancelOperation);
             }
@@ -300,11 +300,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                 {
                    var factor = View.GetTrackBarValue(container);
 
-                    var image =  await _scale.Scale(
+                    var image = await _scale.Scale(
                         (Bitmap)View.GetImageCopy(container), factor, factor
                     ).ConfigureAwait(true);
 
                     View.SetImage(container, image);
+                    View.SetImageCenter(container, image.Size);
                     View.Refresh(container);
                 }
             }
@@ -344,14 +345,15 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         private void DefaultRenderBlock(Bitmap bmp, ImageContainer to, UndoRedoAction action)
         {
             lock (this)
-            { 
+            {
                 View.AddToUndoRedo(to, new Bitmap(View.GetImageCopy(to)), action);
                 View.SetImageCopy(to, new Bitmap(bmp));
                 View.SetImageToZoom(to, new Bitmap(bmp));
                 View.SetImage(to, bmp);
+                View.SetImageCenter(to, bmp.Size);
                 View.Refresh(to);
                 View.ResetTrackBarValue(to);
-            }
+            }          
         }
 
         private async Task<Bitmap> GetImageCopy(ImageContainer container)

@@ -36,6 +36,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.RgbMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ConvolutionMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.DistributionMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.AffineTransformationMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.SettingsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
             this.ToolBarMenu = new System.Windows.Forms.ToolStrip();
@@ -54,7 +55,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.DstZoom = new ImageProcessing.App.UILayer.Control.ZoomTrackBar();
             this.ErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SplitContainer = new ImageProcessing.App.UILayer.Control.UndoRedoSplitContainer();
-            this.AffineTransformationMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.ToolBarMenu.SuspendLayout();
             this.PictureBoxSrcPanel.SuspendLayout();
@@ -134,6 +134,12 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.DistributionMenu.Name = "DistributionMenu";
             this.DistributionMenu.Size = new System.Drawing.Size(81, 20);
             this.DistributionMenu.Text = "Distribution";
+            // 
+            // AffineTransformationMenu
+            // 
+            this.AffineTransformationMenu.Name = "AffineTransformationMenu";
+            this.AffineTransformationMenu.Size = new System.Drawing.Size(134, 20);
+            this.AffineTransformationMenu.Text = "Affine Transformation";
             // 
             // SettingsMenu
             // 
@@ -227,6 +233,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // 
             // Src
             // 
+            this.Src.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Src.Cursor = System.Windows.Forms.Cursors.Default;
             this.Src.InitialImage = global::ImageProcessing.App.UILayer.Properties.Resources.DefaultImage;
             this.Src.Location = new System.Drawing.Point(3, 3);
@@ -273,6 +280,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // 
             // Dst
             // 
+            this.Dst.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Dst.Cursor = System.Windows.Forms.Cursors.Default;
             this.Dst.InitialImage = global::ImageProcessing.App.UILayer.Properties.Resources.DefaultImage;
             this.Dst.Location = new System.Drawing.Point(3, 3);
@@ -325,12 +333,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.SplitContainer.Size = new System.Drawing.Size(715, 370);
             this.SplitContainer.SplitterDistance = 359;
             this.SplitContainer.TabIndex = 10;
-            // 
-            // AffineTransformationMenu
-            // 
-            this.AffineTransformationMenu.Name = "AffineTransformationMenu";
-            this.AffineTransformationMenu.Size = new System.Drawing.Size(134, 20);
-            this.AffineTransformationMenu.Text = "Affine Transformation";
             // 
             // MainForm
             // 

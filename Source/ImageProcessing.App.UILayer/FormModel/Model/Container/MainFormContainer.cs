@@ -12,20 +12,8 @@ namespace ImageProcessing.App.UILayer.FormModel.Model.Container
 
         protected IMainFormExposer Exposer
         {
-            get
-            {
-                if (_exposer is null)
-                {
-                    throw new ArgumentNullException(nameof(_exposer));
-                }
-
-                return _exposer;
-            }
-
-            private set
-            {
-                _exposer = value;
-            }
+            get => _exposer ?? throw new ArgumentNullException(nameof(_exposer));
+            private set => _exposer = value;
         }
 
         public abstract Image? GetCopy();
@@ -33,6 +21,7 @@ namespace ImageProcessing.App.UILayer.FormModel.Model.Container
         public abstract void Refresh();
         public abstract void SetCopy(Image image);
         public abstract  void SetImage(Image image);
+        public abstract void SetImageCenter(Size size);
 
         public MainFormContainer OnElementExpose(IMainFormExposer form)
         {

@@ -20,5 +20,15 @@ namespace ImageProcessing.App.UILayer.FormCommands.Main.Container.Destination.Im
 
         public override void SetImage(Image image)
             => Exposer.DestinationImage = image;
+
+        public override void SetImageCenter(Size size)
+        {
+            var client = Exposer.DestinationBox.Parent.ClientSize;
+
+            var newX = (client.Width / 2) - (size.Width / 2);
+            var newY = (client.Height / 2) - (size.Height / 2);
+
+            Exposer.DestinationBox.Location = new Point(newX, newY);
+        }
     }
 }

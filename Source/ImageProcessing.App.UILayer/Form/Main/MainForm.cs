@@ -280,6 +280,12 @@ namespace ImageProcessing.App.UILayer.Form.Main
         public virtual (Bitmap, ImageContainer) TryUndoRedo(UndoRedoAction action)
             => Read<(Bitmap, ImageContainer)>(() => _undoRedo.Get(action).OnElementExpose(this).Pop());
 
+        public double GetTrackBarValue(ImageContainer container)
+            => Read<double>(() => _zoom.Get(container).OnElementExpose(this).GetFactor());
+
+        public void SetImageCenter(ImageContainer to, Size size)
+             => Write(() => _container.Get(to).OnElementExpose(this).SetImageCenter(size));
+
         /// <summary>
         /// Used by the generated <see cref="Dispose(bool)"/> call.
         /// Can be used by a DI container in a singleton scope on Release();
@@ -302,8 +308,5 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
-
-        public double GetTrackBarValue(ImageContainer container)
-            => Read<double>(() => _zoom.Get(container).OnElementExpose(this).GetFactor());      
     }
 }
