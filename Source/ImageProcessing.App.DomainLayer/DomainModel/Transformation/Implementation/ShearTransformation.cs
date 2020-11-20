@@ -22,8 +22,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
             }
 
             var (srcWidth, srcHeight) = (src.Width, src.Height);
-            var (dstWidth, dstHeight) = ((int)(srcWidth + dx * srcHeight), (int)(srcHeight + dy * srcWidth));
 
+            var dstWidth = (int)(srcWidth + Math.Abs(dx) * srcHeight);
+            var dstHeight = (int)(srcHeight + Math.Abs(dy) * srcWidth);
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
               .DrawFilledRectangle(Brushes.White);
 
@@ -41,6 +42,11 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
+            var (xOffset, yOffset) = ((int)(dx * srcHeight), (int)(dy * srcWidth));
+
+            if(dx > 0) { xOffset = 0; }
+            if(dy > 0) { yOffset = 0; }
+
             unsafe
             {
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
@@ -48,6 +54,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 
                 //inv(A)v = v'
                 // where A is a shear matrix
+                // if offset is negative, then translate
+                // source forward by inv(A)v = Bv'
+                // where B is a tranlation matrix
                 var detA = 1 - dx * dy;
 
                 Parallel.For(0, dstHeight, options, y =>
@@ -58,8 +67,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                     for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
                     {
                         // 1 / det(A)  * adj(A)v = v'
-                        var srcX = (int)((x - dx * y) / detA);
-                        var srcY = (int)((y - dy * x) / detA);
+                        var srcX = (int)((x - dx * y) / detA) + xOffset;
+                        var srcY = (int)((y - dy * x) / detA) + yOffset;
                 
                         if (srcX < srcWidth  && srcX >= 0 &&
                             srcY < srcHeight && srcY >= 0)
