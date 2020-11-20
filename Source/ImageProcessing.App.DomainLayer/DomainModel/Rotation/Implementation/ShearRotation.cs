@@ -18,7 +18,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
             var first  = shear.Transform(bmp, -Math.Tan(rad / 2), 0);
             var second = shear.Transform(first, 0, Math.Sin(rad));
 
-            if (rad < 0.05) { return second; }
+            if (Math.Abs(rad) < 0.05) { return second; }
 
             return shear.Transform(second, -Math.Tan(rad / 2), 0);
         }
