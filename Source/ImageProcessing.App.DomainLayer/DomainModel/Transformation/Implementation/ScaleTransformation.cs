@@ -52,18 +52,17 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 {
                     var srcY = y / dy;
 
-                    //get the address of a row
-                    var dstRow = dstStartPtr + y * dstData.Stride;
-
-                    if (srcY < srcHeight)
+                    if (srcY < srcHeight && srcY >= 0)
                     {
+                        //get the address of a row
+                        var dstRow = dstStartPtr +         y * dstData.Stride;
                         var srcRow = srcStartPtr + (int)srcY * srcData.Stride;
 
                         for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
                         {
                             var srcX = x / dx;
 
-                            if (srcX < srcWidth)
+                            if (srcX < srcWidth && srcX >= 0)
                             {
                                 var srcPtr = srcRow + (int)srcX * ptrStep;
 
