@@ -6,7 +6,7 @@ using ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementation;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 {
-    public sealed class ShearRotation : IRotation
+    internal sealed class ShearRotation : IRotation
     {
         public Bitmap Rotate(Bitmap bmp, double rad)
         {
