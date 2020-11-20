@@ -54,7 +54,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 
                 //inv(A)v = v'
                 // where A is a shear matrix
-                // if offset is negative, then translate
+                // if the offset is negative, then translate the
                 // source forward by inv(A)v = Bv'
                 // where B is a tranlation matrix
                 var detA = 1 - dx * dy;
