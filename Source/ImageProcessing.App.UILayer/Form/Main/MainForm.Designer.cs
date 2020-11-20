@@ -233,7 +233,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // 
             // Src
             // 
-            this.Src.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Src.Cursor = System.Windows.Forms.Cursors.Default;
             this.Src.InitialImage = global::ImageProcessing.App.UILayer.Properties.Resources.DefaultImage;
             this.Src.Location = new System.Drawing.Point(3, 3);
@@ -280,7 +279,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // 
             // Dst
             // 
-            this.Dst.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Dst.Cursor = System.Windows.Forms.Cursors.Default;
             this.Dst.InitialImage = global::ImageProcessing.App.UILayer.Properties.Resources.DefaultImage;
             this.Dst.Location = new System.Drawing.Point(3, 3);
