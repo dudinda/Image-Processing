@@ -30,8 +30,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
               .DrawFilledRectangle(Brushes.White);
 
             var srcData = src.LockBits(
-              new Rectangle(0, 0, srcWidth, srcHeight),
-              ImageLockMode.ReadOnly, src.PixelFormat);
+                new Rectangle(0, 0, srcWidth, srcHeight),
+                ImageLockMode.ReadOnly, src.PixelFormat);
 
             var dstData = dst.LockBits(
                 new Rectangle(0, 0, dstWidth, dstHeight),
@@ -56,8 +56,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 //inv(A)v = v'
                 // where A is a shear matrix
                 // if the offset is negative, then translate the
-                // destination forward by inv(A)v = Bv'
-                // where B is a tranlation matrix
+                // source forward by inv(A)Bv = v'
+                // where B is a translation matrix
                 var detA = 1 - dx * dy;
 
                 Parallel.For(0, dstHeight, options, y =>
@@ -67,9 +67,12 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 
                     for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
                     {
-                        // 1 / det(A)  * adj(A)v = v'
-                        var srcX = (int)((x - dx * y) / detA) + xOffset;
-                        var srcY = (int)((y - dy * x) / detA) + yOffset;
+                        var shiftX = x + xOffset;
+                        var shiftY = y + yOffset;
+
+                        // 1 / det(A)  * adj(A)Bv = v'
+                        var srcX = (int)((shiftX - dx * shiftY) / detA);
+                        var srcY = (int)((shiftY - dy * shiftX) / detA);
                 
                         if (srcX < srcWidth  && srcX >= 0 &&
                             srcY < srcHeight && srcY >= 0)
