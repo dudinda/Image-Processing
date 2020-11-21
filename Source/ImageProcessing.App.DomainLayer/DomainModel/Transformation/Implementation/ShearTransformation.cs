@@ -53,10 +53,10 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
                 var dstStartPtr = (byte*)dstData.Scan0.ToPointer();
 
-                //inv(A)v = v'
+                // inv(A)v = v'
                 // where A is a shear matrix
                 // if the offset is negative, then translate the
-                // source forward by inv(A)Bv = v'
+                // destination back by inv(A)Bv = v'
                 // where B is a translation matrix
                 var detA = 1 - dx * dy;
 
