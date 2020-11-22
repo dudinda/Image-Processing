@@ -28,7 +28,10 @@ namespace ImageProcessing.App.UILayer.FormCommands.Main.Container.Destination.Im
             var newX = (client.Width  - size.Width) / 2;
             var newY = (client.Height - size.Height) / 2;
 
-            Exposer.DestinationBox.Location = new Point(newX, newY);
+            if (newX > 0 && newY > 0)
+            {
+                Exposer.DestinationBox.Location = new Point(newX, newY);
+            }
         }
     }
 }

@@ -28,7 +28,10 @@ namespace ImageProcessing.App.UILayer.FormCommands.Main.Container.Source.Impleme
             var newX = (client.Width - size.Width) / 2;
             var newY = (client.Height - size.Height) / 2;
 
-            Exposer.SourceBox.Location = new Point(newX, newY);
+            if (newX > 0 && newY > 0)
+            {
+                Exposer.SourceBox.Location = new Point(newX, newY);
+            }
         }
     }
 }
