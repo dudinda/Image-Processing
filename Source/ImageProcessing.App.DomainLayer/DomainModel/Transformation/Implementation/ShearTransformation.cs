@@ -71,8 +71,12 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                         var shiftY = y + yOffset;
 
                         // 1 / det(A)  * adj(A)Bv = v'
+                        // x' = (x - dx*y) / (1 - dx * dy) (1)
+                        // y' = (y - dy*x) / (1 - dx * dy) (2)
+                        //from (1) x = (1 - dx * dy)x' + dx * y (3)
+                        //substituting (3) in (2) y' = y - dy*x'
                         var srcX = (int)((shiftX - dx * shiftY) / detA);
-                        var srcY = (int)((shiftY - dy * shiftX) / detA);
+                        var srcY = (int)(shiftY - dy*srcX);
                 
                         if (srcX < srcWidth  && srcX >= 0 &&
                             srcY < srcHeight && srcY >= 0)
