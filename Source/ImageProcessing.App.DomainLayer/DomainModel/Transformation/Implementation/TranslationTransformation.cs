@@ -10,9 +10,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 {
     public sealed class TranslationTransformation : ITransformation
     {
-        public Bitmap Transform(Bitmap src, double dx, double dy)
+        public Bitmap Transform(Bitmap src, double tx, double ty)
         {
-            if (dx == 0 && dy == 0) { return src; }
+            if (tx == 0 && ty == 0) { return src; }
 
             var (srcWidth, srcHeight) = (src.Width, src.Height);
 
@@ -42,7 +42,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 
                 Parallel.For(0, srcHeight, options, y =>
                 {
-                    var srcY = (int)(y - dy);
+                    var srcY = (int)(y - ty);
 
                     if (srcY < srcHeight && srcY >= 0)
                     {
@@ -52,7 +52,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 
                         for (var x = 0; x < srcWidth; ++x, dstRow += ptrStep)
                         {
-                            var srcX = (int)(x - dx);
+                            var srcX = (int)(x - tx);
 
                             if (srcX < srcWidth && srcX >= 0)
                             {

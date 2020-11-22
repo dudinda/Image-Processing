@@ -12,19 +12,19 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 {
     internal sealed class ShearTransformation : ITransformation
     {
-        public Bitmap Transform(Bitmap src, double dx, double dy)
+        public Bitmap Transform(Bitmap src, double shx, double shy)
         {
-            if (dx == 0 && dy == 0) { return src; }
+            if (shx == 0 && shy == 0) { return src; }
 
-            if(dx == 1 && dy == 1)
+            if(shx == 1 && shy == 1)
             {
                 throw new InvalidOperationException();
             }
 
             var (srcWidth, srcHeight) = (src.Width, src.Height);
 
-            var dstWidth = (int)(srcWidth + Math.Abs(dx) * srcHeight);
-            var dstHeight = (int)(srcHeight + Math.Abs(dy) * srcWidth);
+            var dstWidth = (int)(srcWidth + Math.Abs(shx) * srcHeight);
+            var dstHeight = (int)(srcHeight + Math.Abs(shy) * srcWidth);
 
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
               .DrawFilledRectangle(Brushes.White);
@@ -43,10 +43,10 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
-            var (xOffset, yOffset) = ((int)(dx * srcHeight), (int)(dy * srcWidth));
+            var (tx, ty) = ((int)(shx * srcHeight), (int)(shy * srcWidth));
 
-            if(dx > 0) { xOffset = 0; }
-            if(dy > 0) { yOffset = 0; }
+            if(shx > 0) { tx = 0; }
+            if(shy > 0) { ty = 0; }
 
             unsafe
             {
@@ -58,7 +58,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 // if the offset is negative, then translate the
                 // destination back by inv(A)Bv = v'
                 // where B is a translation matrix
-                var detA = 1 - dx * dy;
+                var detA = 1 - shx * shy;
 
                 Parallel.For(0, dstHeight, options, y =>
                 {                 
@@ -67,16 +67,16 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 
                     for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
                     {
-                        var shiftX = x + xOffset;
-                        var shiftY = y + yOffset;
+                        var shiftX = x + tx;
+                        var shiftY = y + ty;
 
                         // 1 / det(A)  * adj(A)Bv = v'
                         // x' = (x - dx*y) / (1 - dx * dy) (1)
                         // y' = (y - dy*x) / (1 - dx * dy) (2)
                         //from (1) x = (1 - dx * dy)x' + dx * y (3)
                         //substituting (3) in (2) y' = y - dy*x'
-                        var srcX = (int)((shiftX - dx * shiftY) / detA);
-                        var srcY = (int)(shiftY - dy*srcX);
+                        var srcX = (int)((shiftX - shx * shiftY) / detA);
+                        var srcY = (int)(shiftY - shy * srcX);
                 
                         if (srcX < srcWidth  && srcX >= 0 &&
                             srcY < srcHeight && srcY >= 0)

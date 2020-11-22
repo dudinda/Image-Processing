@@ -4,6 +4,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Interface
 {
     public interface ITransformation
     {
-        Bitmap Transform(Bitmap src, double dx, double dy);
+        Bitmap Transform(Bitmap src, double x, double y);
     }
 }

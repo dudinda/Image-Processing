@@ -10,17 +10,17 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 {
     internal sealed class ScaleTransformation : ITransformation
     {
-        public Bitmap Transform(Bitmap src, double dx, double dy)
+        public Bitmap Transform(Bitmap src, double sx, double sy)
         {
-            if (dx == 1 && dx == 1) { return src; }
+            if (sx == 1 && sy == 1) { return src; }
 
-            if (dx == 0 || dy == 0)
+            if (sx == 0 || sy == 0)
             {
                 throw new ArgumentException();
             }
 
-            var dstWidth = src.Width + (int)(src.Width * dx);
-            var dstHeight = src.Height + (int)(src.Height * dy);
+            var dstWidth = src.Width + (int)(src.Width * sx);
+            var dstHeight = src.Height + (int)(src.Height * sy);
 
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
                 .DrawFilledRectangle(Brushes.White);
@@ -50,7 +50,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 // where A is a scale matrix
                 Parallel.For(0, dstHeight, options, y =>
                 {
-                    var srcY = y / dy;
+                    var srcY = y / sy;
 
                     if (srcY < srcHeight && srcY >= 0)
                     {
@@ -60,7 +60,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 
                         for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
                         {
-                            var srcX = x / dx;
+                            var srcX = x / sx;
 
                             if (srcX < srcWidth && srcX >= 0)
                             {
