@@ -255,7 +255,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
             catch (Exception ex)
             {
-                OnError(publisher, Errors.ApplyConvolutionFilter);
+                OnError(publisher, Errors.Pipeline);
             }
         }
 
