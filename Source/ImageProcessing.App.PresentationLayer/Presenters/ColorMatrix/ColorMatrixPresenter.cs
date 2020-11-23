@@ -55,7 +55,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix
                     ).ConfigureAwait(true);
 
                     Controller.Aggregator.PublishFromAll(
-                        e.Publisher,
+                        publisher,
                         new AttachBlockToRendererEventArgs(
                             block: new PipelineBlock(copy)
                                 .Add<Bitmap, Bitmap>(
@@ -82,7 +82,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix
                 var matrix = View.GetGrid();
 
                 Controller.Aggregator.PublishFromAll(
-                    e.Publisher,
+                    publisher,
                     new AttachBlockToRendererEventArgs(
                         block: new PipelineBlock(copy)
                             .Add<Bitmap, Bitmap>(
