@@ -15,8 +15,9 @@ namespace ImageProcessing.App.ServiceLayer.Services.QualityMeasure.Implementatio
         private readonly IBitmapLuminanceDistributionService _distributionService;
         private readonly IChartSeriesBuilder _builder;
 
-        public QualityMeasureService(IBitmapLuminanceDistributionService distibutionService,
-                                     IChartSeriesBuilder builder)
+        public QualityMeasureService(
+            IBitmapLuminanceDistributionService distibutionService,
+            IChartSeriesBuilder builder)
         {
             _distributionService = distibutionService;
             _builder = builder;

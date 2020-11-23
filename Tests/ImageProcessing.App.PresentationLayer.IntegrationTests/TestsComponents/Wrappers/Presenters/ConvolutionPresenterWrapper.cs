@@ -14,7 +14,7 @@ using ImageProcessing.Microkernel.MVP.Controller.Interface;
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents.Wrappers.Presenters
 {
     internal class ConvolutionPresenterWrapper : BasePresenter<IConvolutionView, ConvolutionViewModel>,
-          ISubscriber<ApplyConvolutionFilterEventArgs>,
+          ISubscriber<ApplyConvolutionKernelEventArgs>,
           ISubscriber<ShowTooltipOnErrorEventArgs>
     {
         private readonly ConvolutionPresenter _presenter;
@@ -39,7 +39,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
             _presenter.Run(vm);
         }
 
-        public virtual async Task OnEventHandler(object publisher, ApplyConvolutionFilterEventArgs e)
+        public virtual async Task OnEventHandler(object publisher, ApplyConvolutionKernelEventArgs e)
         {
           
         }

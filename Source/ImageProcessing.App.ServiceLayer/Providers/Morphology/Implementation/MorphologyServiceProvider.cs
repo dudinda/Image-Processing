@@ -18,10 +18,11 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Morphology
         private readonly IStructuringElementFactory _kernelFactory;
         private readonly ICacheService<Bitmap> _cache;
 
-        public MorphologyServiceProvider(IMorphologyService morphologyService,
-                                         IMorphologyFactory morphologyFactory,
-                                         ICacheService<Bitmap> cache,
-                                         IStructuringElementFactory kernelFactory)
+        public MorphologyServiceProvider(
+            IMorphologyService morphologyService,
+            IMorphologyFactory morphologyFactory,
+            ICacheService<Bitmap> cache,
+            IStructuringElementFactory kernelFactory)
         {
             _morphologyService = morphologyService;
             _morphologyFactory = morphologyFactory;

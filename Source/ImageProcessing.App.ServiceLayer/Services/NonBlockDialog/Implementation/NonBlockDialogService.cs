@@ -10,21 +10,22 @@ namespace ImageProcessing.App.ServiceLayer.NonBlockDialog.Implementation
     /// <inheritdoc cref="INonBlockDialogService"/>
     internal class NonBlockDialogService : INonBlockDialogService
     {
-        private readonly IFileDialogService _service;
-        private readonly IStaTaskService _staService;
+        private readonly IFileDialogService _dialog;
+        private readonly IStaTaskService _sta;
 
-        public NonBlockDialogService(IFileDialogService service,
-                                     IStaTaskService staService)
+        public NonBlockDialogService(
+            IFileDialogService dialog,
+            IStaTaskService sta)
         {
-            _service = service;
-            _staService = staService;
+            _dialog = dialog;
+            _sta = sta;
         }
 
         /// <inheritdoc/>
         public virtual async Task<(Bitmap? Image, string Path)> NonBlockOpen(string? filters)
         {
-            var result = await _staService.StartSTATask(
-                () => _service.OpenFileDialog(filters)
+            var result = await _sta.StartSTATask(
+                () => _dialog.OpenFileDialog(filters)
             ).ConfigureAwait(false);
 
             return await result.ConfigureAwait(false);
@@ -33,8 +34,8 @@ namespace ImageProcessing.App.ServiceLayer.NonBlockDialog.Implementation
         /// <inheritdoc/>
         public virtual async Task NonBlockSaveAs(Bitmap src, string filters)
         {
-            await _staService.StartSTATask(
-                 () => _service.SaveFileAsDialog(src, filters)
+            await _sta.StartSTATask(
+                 () => _dialog.SaveFileAsDialog(src, filters)
             ).ConfigureAwait(false);          
         }
     }
