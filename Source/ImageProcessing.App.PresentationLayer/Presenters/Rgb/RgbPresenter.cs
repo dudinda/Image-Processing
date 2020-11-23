@@ -38,6 +38,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
             _locker = locker;
         }
 
+        /// <inheritdoc cref="ApplyRgbFilterEventArgs"/>
         public async Task OnEventHandler(object publisher, ApplyRgbFilterEventArgs e)
         {
             try
@@ -66,6 +67,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
             }
         }
 
+        /// <inheritdoc cref="ApplyRgbColorFilterEventArgs"/>
         public async Task OnEventHandler(object publisher, ApplyRgbColorFilterEventArgs e)
         {
             try
@@ -91,6 +93,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
             }
         }
 
+        /// <inheritdoc cref="ContainerUpdatedEventArgs"/>
         public async Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
         {
             try
@@ -108,6 +111,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
             }
         }
 
+        /// <inheritdoc cref="ShowColorMatrixMenuEventArgs"/>
         public async Task OnEventHandler(object publisher, ShowColorMatrixMenuEventArgs e)
         {
             try
@@ -125,11 +129,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
             }
         }
 
+        /// <inheritdoc cref="ShowTooltipOnErrorEventArgs"/>
         public async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
             View.Tooltip(e.Error);
         }
 
+        /// <inheritdoc cref="RestoreFocusEventArgs"/>
         public async Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
         {
             View.Focus();

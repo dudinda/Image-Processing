@@ -72,6 +72,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             _pipeline = pipeline;
         }
 
+        /// <inheritdoc cref="OpenFileDialogEventArgs"/>
         public async Task OnEventHandler(object publisher, OpenFileDialogEventArgs e)
         {
             try
@@ -100,6 +101,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
+        /// <inheritdoc cref="SaveAsFileDialogEventArgs"/>
         public async Task OnEventHandler(object publisher, SaveAsFileDialogEventArgs e)
         {
             try
@@ -121,6 +123,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
+        /// <inheritdoc cref="SaveWithoutFileDialogEventArgs"/>
         public async Task OnEventHandler(object publisher, SaveWithoutFileDialogEventArgs e)
         {
             try
@@ -142,6 +145,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
+        /// <inheritdoc cref="ShowRgbMenuEventArgs"/>
         public async Task OnEventHandler(object publisher, ShowRgbMenuEventArgs e)
         {
             try
@@ -162,6 +166,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
+        /// <inheritdoc cref="ShowDistributionMenuEventArgs"/>
         public async Task OnEventHandler(object publisher, ShowDistributionMenuEventArgs e)
         {
             try
@@ -182,6 +187,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
+        /// <inheritdoc cref="ShowConvolutionMenuEventArgs"/>
         public async Task OnEventHandler(object publisher, ShowConvolutionMenuEventArgs e)
         {
             try
@@ -202,6 +208,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
+        /// <inheritdoc cref="ShowTransformationMenuEventArgs"/>
         public async Task OnEventHandler(object publisher, ShowTransformationMenuEventArgs e)
         {
             try
@@ -222,6 +229,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
+        /// <inheritdoc cref="ShowSettingsMenuEventArgs"/>
         public async Task OnEventHandler(object publisher, ShowSettingsMenuEventArgs e)
         {
             try
@@ -234,6 +242,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
+        /// <inheritdoc cref="AttachBlockToRendererEventArgs"/>
         public async Task OnEventHandler(object publisher, AttachBlockToRendererEventArgs e)
         {
             try
@@ -259,6 +268,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
+        /// <inheritdoc cref="ReplaceImageEventArgs"/>
         public async Task OnEventHandler(object publisher, ReplaceImageEventArgs e)
         {
             try
@@ -289,7 +299,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                 OnError(publisher, Errors.ReplaceImage);
             }        
         }
-    
+
+        /// <inheritdoc cref="ZoomEventArgs"/>
         public async Task OnEventHandler(object publisher, ZoomEventArgs e)
         {
             try
@@ -315,6 +326,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
+        /// <inheritdoc cref="UndoRedoEventArgs"/>
         public async Task OnEventHandler(object publisher, UndoRedoEventArgs e)
         {
             try
@@ -337,6 +349,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }
         }
 
+        /// <inheritdoc cref="ShowTooltipOnErrorEventArgs"/>
         public async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
             View.Tooltip(e.Error);

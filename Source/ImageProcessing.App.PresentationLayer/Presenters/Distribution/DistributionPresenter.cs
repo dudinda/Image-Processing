@@ -42,6 +42,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             _provider = provider;
         }
 
+        /// <inheritdoc cref="TransformHistogramEventArgs"/>
         public async Task OnEventHandler(object publisher, TransformHistogramEventArgs e)
         {
             try
@@ -73,6 +74,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             }
         }
 
+        /// <inheritdoc cref="ShuffleEventArgs"/>
         public async Task OnEventHandler(object publisher, ShuffleEventArgs e)
         {
             try
@@ -96,6 +98,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             }
         }
 
+        /// <inheritdoc cref="BuildRandomVariableFunctionEventArgs"/>
         public async Task OnEventHandler(object publisher, BuildRandomVariableFunctionEventArgs e)
         {
             try
@@ -113,6 +116,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             }
         }
 
+        /// <inheritdoc cref="ShowQualityMeasureMenuEventArgs"/>
         public async Task OnEventHandler(object publisher, ShowQualityMeasureMenuEventArgs e)
         {
             try
@@ -128,6 +132,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             }
         }
 
+        /// <inheritdoc cref="GetRandomVariableInfoEventArgs"/>
         public async Task OnEventHandler(object publisher, GetRandomVariableInfoEventArgs e)
         {
             try
@@ -150,11 +155,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             }
         }
 
+        /// <inheritdoc cref="ShowTooltipOnErrorEventArgs"/>
         public async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
             View.Tooltip(e.Error);
         }
 
+        /// <inheritdoc cref="RestoreFocusEventArgs"/>
         public async Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
         {
             View.Focus();

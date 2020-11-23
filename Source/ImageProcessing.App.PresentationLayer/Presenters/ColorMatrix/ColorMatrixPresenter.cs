@@ -41,6 +41,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix
             _locker = locker;         
         }
 
+        /// <inheritdoc cref="ApplyColorMatrixEventArgs"/>
         public async Task OnEventHandler(object publisher, ApplyColorMatrixEventArgs e)
         {
             try
@@ -69,6 +70,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix
             }
         }
 
+        /// <inheritdoc cref="ApplyCustomColorMatrixEventArgs"/>
         public async Task OnEventHandler(object publisher, ApplyCustomColorMatrixEventArgs e)
         {
             try
@@ -94,6 +96,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix
             }
         }
 
+        /// <inheritdoc cref="CustomColorMatrixEventArgs"/>
         public async Task OnEventHandler(object publisher, CustomColorMatrixEventArgs e)
         {
             try
@@ -110,6 +113,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix
             }
         }
 
+        /// <inheritdoc cref="ChangeColorMatrixEventArgs"/>
         public async Task OnEventHandler(object publisher, ChangeColorMatrixEventArgs e)
         {
             try
@@ -122,6 +126,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix
             }
         }
 
+        /// <inheritdoc cref="ContainerUpdatedEventArgs"/>
         public async Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
         {
             try
@@ -139,6 +144,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix
             }
         }
 
+        /// <inheritdoc cref="RestoreFocusEventArgs"/>
         public async Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
         {
             View.Focus();

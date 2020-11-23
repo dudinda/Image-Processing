@@ -23,12 +23,15 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Settings
             _settings = settings;
         }
 
+        /// <inheritdoc cref="ChangeRotationEventArgs"/>
         public async Task OnEventHandler(object publisher, ChangeRotationEventArgs e)
             => _settings.Rotation = View.FirstDropdown;
 
+        /// <inheritdoc cref="ChangeScalingEventArgs"/>
         public async Task OnEventHandler(object publisher, ChangeScalingEventArgs e)
             => _settings.Scaling = View.SecondDropdown;
 
+        /// <inheritdoc cref="ChangeLumaEventArgs"/>
         public async Task OnEventHandler(object publisher, ChangeLumaEventArgs e)
             => _settings.Rec = View.ThirdDropdown;
     }

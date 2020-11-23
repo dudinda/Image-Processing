@@ -34,6 +34,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Transformation
             _locker = locker;
         }
 
+        /// <inheritdoc cref="ApplyTransformationEventArgs"/>
         public async Task OnEventHandler(object publisher, ApplyTransformationEventArgs e)
         {
             try
@@ -64,6 +65,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Transformation
             }
         }
 
+        /// <inheritdoc cref="ContainerUpdatedEventArgs"/>
         public async Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
         {
             try
@@ -81,6 +83,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Transformation
             }
         }
 
+        /// <inheritdoc cref="RestoreFocusEventArgs"/>
         public async Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
         {
             View.Focus();

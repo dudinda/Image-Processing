@@ -35,6 +35,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
             _locker = locker;
         }
 
+        /// <inheritdoc cref="ApplyConvolutionFilterEventArgs"/>
 		public async Task OnEventHandler(object publisher, ApplyConvolutionFilterEventArgs e)
 		{
 			try
@@ -64,6 +65,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
 			}
 		}
 
+        /// <inheritdoc cref="ContainerUpdatedEventArgs"/>
         public async Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
         {
             try
@@ -81,11 +83,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
             }
         }
 
+        /// <inheritdoc cref="ShowTooltipOnErrorEventArgs"/>
         public async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
             View.Tooltip(e.Error);
         }
 
+        /// <inheritdoc cref="RestoreFocusEventArgs"/>
         public async Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
         {
             View.Focus();
