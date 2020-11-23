@@ -21,7 +21,7 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Rgb.Implementation
         {
             source.ApplyFilterButton.Click += (sender, args)
                  => _aggregator.PublishFrom(source,
-                     new ApplyRgbFilterEventArgs(source)
+                     new ApplyRgbFilterEventArgs()
                  );
 
             source.ColorMatrixMenuButton.Click += (sender, args)
@@ -31,17 +31,17 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Rgb.Implementation
 
             source.RedButton.CheckedChanged += (sender, args)
                 => _aggregator.PublishFrom(source,
-                    new ApplyRgbColorFilterEventArgs(RgbColors.Red, source)
+                    new ApplyRgbColorFilterEventArgs(RgbColors.Red)
                 );
 
             source.GreenButton.CheckedChanged += (sender, args)
                 => _aggregator.PublishFrom(source,
-                    new ApplyRgbColorFilterEventArgs(RgbColors.Green, source)
+                    new ApplyRgbColorFilterEventArgs(RgbColors.Green)
                 );
 
             source.BlueButton.CheckedChanged += (sender, args)
                => _aggregator.PublishFrom(source,
-                   new ApplyRgbColorFilterEventArgs(RgbColors.Blue, source)
+                   new ApplyRgbColorFilterEventArgs(RgbColors.Blue)
                );
         }
 

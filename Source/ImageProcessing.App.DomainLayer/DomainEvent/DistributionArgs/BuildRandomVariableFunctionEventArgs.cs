@@ -2,6 +2,9 @@ using ImageProcessing.App.CommonLayer.Enums;
 
 namespace ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs
 {
+    /// <summary>
+    /// Build a plot of a random variable function.
+    /// </summary>
     public class BuildRandomVariableFunctionEventArgs : BaseEventArgs
     {
         public BuildRandomVariableFunctionEventArgs(

@@ -1,16 +1,17 @@
 namespace ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs
 {
+    /// <summary>
+    /// Transform a histogram of an image with the specified parameters.
+    /// </summary>
     public sealed class TransformHistogramEventArgs : BaseEventArgs
     {
-        public TransformHistogramEventArgs(
-            object publisher,
-            (string, string) parameters) : base(publisher)
+        public TransformHistogramEventArgs((string, string) parms) : base()
         {
-            Parameters = parameters;
+            Parameters = parms;
         }
 
         /// <summary>
-        /// Parameters of the specified <see cref="Distribution"/>.
+        /// Parameters of the specified <see cref="PrDistribution"/>.
         /// </summary>
         public (string, string) Parameters { get; }
     }

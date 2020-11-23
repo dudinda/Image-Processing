@@ -1,8 +1,5 @@
-using System.Collections.Generic;
 using System.Windows.Forms;
 
-using ImageProcessing.App.CommonLayer.Attributes;
-using ImageProcessing.App.CommonLayer.Extensions.TypeExt;
 using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Convolution;
@@ -23,7 +20,7 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Convolution.Implementatio
         {
             source.ApplyButton.Click += (sender, args)
                 => _aggregator.PublishFrom(source,
-                    new ApplyConvolutionFilterEventArgs(source)
+                    new ApplyConvolutionKernelEventArgs()
                 );
         }
 

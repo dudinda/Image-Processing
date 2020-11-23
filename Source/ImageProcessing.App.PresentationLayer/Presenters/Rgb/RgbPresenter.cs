@@ -24,6 +24,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
           ISubscriber<ApplyRgbColorFilterEventArgs>,
           ISubscriber<ContainerUpdatedEventArgs>,
           ISubscriber<ShowColorMatrixMenuEventArgs>,
+          ISubscriber<ShowTooltipOnErrorEventArgs>,
           ISubscriber<RestoreFocusEventArgs>
     {
         private readonly IRgbServiceProvider _provider;
@@ -52,7 +53,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
                     ).ConfigureAwait(true);
 
                     Controller.Aggregator.PublishFromAll(
-                        e.Publisher,
+                        publisher,
                         new AttachBlockToRendererEventArgs(
                             block: new PipelineBlock(copy)
                                 .Add<Bitmap, Bitmap>(
@@ -79,7 +80,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
                 ).ConfigureAwait(true);
 
                 Controller.Aggregator.PublishFromAll(
-                    e.Publisher,
+                    publisher,
                     new AttachBlockToRendererEventArgs(
                         block: new PipelineBlock(copy)
                             .Add<Bitmap, Bitmap>(
@@ -132,7 +133,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
         /// <inheritdoc cref="ShowTooltipOnErrorEventArgs"/>
         public async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
-            View.Tooltip(e.Error);
+            View.Tooltip(e.Message);
         }
 
         /// <inheritdoc cref="RestoreFocusEventArgs"/>

@@ -1,12 +1,13 @@
 namespace ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs
 {
+    /// <summary>
+    /// Apply a channel filter.
+    /// </summary>
     public sealed class ApplyRgbFilterEventArgs : BaseEventArgs
     {
-        public ApplyRgbFilterEventArgs(object publisher)
-            : base(publisher)
+        public ApplyRgbFilterEventArgs() : base()
         {
+
         }
-
-
     }
 }

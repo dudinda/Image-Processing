@@ -56,7 +56,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
                 copy.Tag = distribution.ToString();
 
                 Controller.Aggregator.PublishFromAll(
-                    e.Publisher,
+                    publisher,
                     new AttachBlockToRendererEventArgs(
                        block: new PipelineBlock(copy)
                            .Add<Bitmap, Bitmap>(
@@ -84,7 +84,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
                 ).ConfigureAwait(true);
 
                 Controller.Aggregator.PublishFromAll(
-                    e.Publisher,
+                    publisher,
                     new AttachBlockToRendererEventArgs(
                         block: new PipelineBlock(copy)
                             .Add<Bitmap, Bitmap>(
@@ -158,7 +158,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
         /// <inheritdoc cref="ShowTooltipOnErrorEventArgs"/>
         public async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
-            View.Tooltip(e.Error);
+            View.Tooltip(e.Message);
         }
 
         /// <inheritdoc cref="RestoreFocusEventArgs"/>

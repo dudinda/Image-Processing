@@ -1,5 +1,8 @@
 namespace ImageProcessing.App.DomainLayer.DomainEvent.ColorMatrix
 {
+    /// <summary>
+    /// A checkbox for a custom color matrix has been changed.
+    /// </summary>
     public sealed class CustomColorMatrixEventArgs : BaseEventArgs
     {
         public CustomColorMatrixEventArgs(bool useCustom) : base()
@@ -7,6 +10,9 @@ namespace ImageProcessing.App.DomainLayer.DomainEvent.ColorMatrix
             UseCustom = useCustom;
         }
 
+        /// <summary>
+        /// Use a custom color matrix.
+        /// </summary>
         public bool UseCustom { get; }
     }
 }

@@ -352,7 +352,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         /// <inheritdoc cref="ShowTooltipOnErrorEventArgs"/>
         public async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
-            View.Tooltip(e.Error);
+            View.Tooltip(e.Message);
         }
 
         private void DefaultRenderBlock(Bitmap bmp, ImageContainer to, UndoRedoAction action)

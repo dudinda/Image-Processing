@@ -28,7 +28,6 @@ namespace ImageProcessing.App.UILayer.Form.Convolution
             PopulateComboBox<ConvKernel>(ConvolutionFilterComboBox);
 
             _binder = binder;
-
             _binder.OnElementExpose(this);
         }
 

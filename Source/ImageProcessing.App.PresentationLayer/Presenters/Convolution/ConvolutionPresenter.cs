@@ -18,7 +18,7 @@ using ImageProcessing.Microkernel.MVP.Controller.Interface;
 namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
 {
     internal sealed class ConvolutionPresenter : BasePresenter<IConvolutionView, ConvolutionViewModel>,
-          ISubscriber<ApplyConvolutionFilterEventArgs>,
+          ISubscriber<ApplyConvolutionKernelEventArgs>,
           ISubscriber<ShowTooltipOnErrorEventArgs>,
           ISubscriber<ContainerUpdatedEventArgs>,
           ISubscriber<RestoreFocusEventArgs>
@@ -35,8 +35,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
             _locker = locker;
         }
 
-        /// <inheritdoc cref="ApplyConvolutionFilterEventArgs"/>
-		public async Task OnEventHandler(object publisher, ApplyConvolutionFilterEventArgs e)
+        /// <inheritdoc cref="ApplyConvolutionKernelEventArgs"/>
+		public async Task OnEventHandler(object publisher, ApplyConvolutionKernelEventArgs e)
 		{
 			try
 			{
@@ -49,7 +49,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
                     ).ConfigureAwait(true);
                
                     Controller.Aggregator.PublishFromAll(
-                        e.Publisher,
+                        publisher,
                         new AttachBlockToRendererEventArgs(
                            block: new PipelineBlock(copy)
                                .Add<Bitmap, Bitmap>(
@@ -86,7 +86,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
         /// <inheritdoc cref="ShowTooltipOnErrorEventArgs"/>
         public async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
-            View.Tooltip(e.Error);
+            View.Tooltip(e.Message);
         }
 
         /// <inheritdoc cref="RestoreFocusEventArgs"/>

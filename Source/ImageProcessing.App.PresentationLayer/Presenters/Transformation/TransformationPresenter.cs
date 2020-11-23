@@ -51,7 +51,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Transformation
                 var transformation = View.Dropdown;
 
                 Controller.Aggregator.PublishFromAll(
-                    e.Publisher,
+                    publisher,
                     new AttachBlockToRendererEventArgs(
                         block: new PipelineBlock(copy)
                             .Add<Bitmap, Bitmap>(

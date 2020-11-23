@@ -21,7 +21,7 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Distribution.Implementati
         {
             source.ShuffleButton.Click += (sender, args)
                 => _aggregator.PublishFrom(source,
-                    new ShuffleEventArgs(source)
+                    new ShuffleEventArgs()
                 );
 
             source.PmfButton.Click += (sender, args)
@@ -73,9 +73,7 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Distribution.Implementati
 
             source.ApplyTransformButton.Click += (sender, args)
                => _aggregator.PublishFrom(source,
-                   new TransformHistogramEventArgs(source,
-                       source.Parameters
-                    )
+                   new TransformHistogramEventArgs(source.Parameters)
                );
         }
 

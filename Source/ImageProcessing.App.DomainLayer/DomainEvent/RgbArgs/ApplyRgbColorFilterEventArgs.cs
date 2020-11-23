@@ -2,10 +2,12 @@ using ImageProcessing.App.CommonLayer.Enums;
 
 namespace ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs
 {
+    /// <summary>
+    /// Filter bitmap by the specified channel.
+    /// </summary>
     public sealed class ApplyRgbColorFilterEventArgs : BaseEventArgs
     {
-        public ApplyRgbColorFilterEventArgs(RgbColors color, object publisher)
-            : base(publisher)
+        public ApplyRgbColorFilterEventArgs(RgbColors color): base()
         {
             Color = color;
         }
