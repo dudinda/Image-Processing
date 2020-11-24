@@ -27,12 +27,14 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
             unsafe
             {
                 var startPtr = (byte*)bitmapData.Scan0.ToPointer();
-                
+
+                var endStride = bitmapData.Stride - ptrStep;
+
                 Parallel.For(0, size.Height, options, y =>
                 {
                     //get the address of a row
                     var ptr = startPtr + y * bitmapData.Stride;
-                    var endPtr = ptr + bitmapData.Stride - ptrStep;
+                    var endPtr = ptr + endStride;
  
                     do
                     {
