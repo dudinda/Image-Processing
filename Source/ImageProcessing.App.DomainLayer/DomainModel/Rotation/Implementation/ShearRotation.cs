@@ -53,6 +53,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
+            //inv( T(x, y)Sh(alpha, 0)Sh(0, beta)Sh(gamma, 0)T(x', y') )v = v'
+            //where x and y are the center of a destination and x' and y' are the
+            //center of a source and Sh(sx, sy) is a shear matrix.
  
             unsafe
             {

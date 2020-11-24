@@ -8,7 +8,7 @@ using ImageProcessing.App.DomainLayer.DomainModel.Rotation.Interface;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 {
-    internal sealed class AreaMappingRotation : IRotation
+    public sealed class AreaMappingRotation : IRotation
     {
         public Bitmap Rotate(Bitmap src, double rad)
         {
@@ -48,6 +48,10 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
+
+            //inv( T(x, y)S(alpha)T(x', y') )v = v'
+            //where x and y are the center of a destination and x' and y' are the
+            //center of a source and S is a rotation matrix
 
             unsafe
             {
