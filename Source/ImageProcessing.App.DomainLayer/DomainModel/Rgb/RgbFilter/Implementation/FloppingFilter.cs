@@ -28,11 +28,11 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
             {
                 var startPtr = (byte*)bitmapData.Scan0.ToPointer();
                 
-                Parallel.For(0, size.Height - 1, options, y =>
+                Parallel.For(0, size.Height, options, y =>
                 {
                     //get the address of a row
                     var ptr = startPtr + y * bitmapData.Stride;
-                    var endPtr = ptr + bitmapData.Stride;
+                    var endPtr = ptr + bitmapData.Stride - ptrStep;
  
                     do
                     {
