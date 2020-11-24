@@ -71,10 +71,16 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 
                     for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
                     {
+                        //inv(T(x, y))v = m
                         var xShift = x - xCenter;
 
+                        //inv(Sh(alpha, 0))m = m'
                         var srcX = xShift + alpha * yShift;
+
+                        //inv(Sh(0, beta))m' = m''
                         var srcY = yShift + beta * srcX;
+
+                        //inv(Sh(gamma, 0))inv(T(x', y'))m'' = v'
                         srcX += alpha * srcY + xSrcCenter;
                         srcY += ySrcCenter;
 
