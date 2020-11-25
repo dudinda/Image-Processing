@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Text;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
@@ -27,7 +25,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
             var dstHeight = (int)(srcHeight + Math.Abs(shy) * srcWidth);
 
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
-              .DrawFilledRectangle(Brushes.White);
+              .DrawFilledRectangle(Brushes.Black);
 
             var srcData = src.LockBits(
                 new Rectangle(0, 0, srcWidth, srcHeight),

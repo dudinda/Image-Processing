@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Interface;
 using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.RealAxis;
 
-namespace ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Implementation
+namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Implementation
 {
     /// <see cref="IBitmapLuminanceDistributionService"/>
     internal sealed class BitmapLuminanceDistributionService : IBitmapLuminanceDistributionService

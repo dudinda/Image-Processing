@@ -13,13 +13,13 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Convolution.Imp
     internal sealed class ConvolutionVisitor : IConvolutionVisitor
     {
         private readonly IConvolutionFilterFactory _factory;
-        private readonly IConvolutionFilterService _convolution;
+        private readonly IConvolutionService _convolution;
         private readonly IBitmapService _service;
         private readonly ICacheService<Bitmap> _cache;
 
         public ConvolutionVisitor(
             IConvolutionFilterFactory factory,
-            IConvolutionFilterService convolution,
+            IConvolutionService convolution,
             IBitmapService service,
             ICacheService<Bitmap> cache)
         {

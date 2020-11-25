@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
 using ImageProcessing.App.ServiceLayer.Services.QualityMeasure.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.QualityMeasure.Implementation

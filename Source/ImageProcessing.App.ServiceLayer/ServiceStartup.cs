@@ -38,10 +38,10 @@ using ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Implementation;
-using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable.Implementation;
-using ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Implementation;
+using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Implementation;
+using ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Interface;
 using ImageProcessing.App.ServiceLayer.Services.FileDialog.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.FileDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Histogram.Implementation;
@@ -75,7 +75,7 @@ namespace ImageProcessing.App.ServiceLayer
                 .RegisterSingleton<IStaTaskService, StaTaskService>()
                 .RegisterSingleton<IAsyncZoomLocker, AsyncZoomLocker>()
                 .RegisterSingleton<ICacheService<Bitmap>, CacheService<Bitmap>>()
-                .RegisterTransient<IConvolutionFilterService, ConvolutionFilterService>()
+                .RegisterTransient<IConvolutionService, ConvolutionService>()
                 .RegisterTransient<IMorphologyService, MorphologyService>()
                 .RegisterTransient<IBitmapService, BitmapService>()
                 .RegisterTransient<IRandomVariableDistributionService, RandomVariableDistributionService>()

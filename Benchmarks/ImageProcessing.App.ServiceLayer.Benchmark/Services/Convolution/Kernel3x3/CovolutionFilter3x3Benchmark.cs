@@ -15,7 +15,7 @@ namespace ImageProcessing.App.ServiceLayer.Benchmark.Services.Convolution.Kernel
     public class CovolutionFilter5x5Benchmark : IDisposable
     {
         private IConvolutionFilter filter3x3 = new BoxBlur3x3();
-        private IConvolutionFilterService service = new ConvolutionFilterService();
+        private IConvolutionService service = new ConvolutionService();
 
         private Bitmap _frame1920x1080;
         private Bitmap _frame2560x1440;

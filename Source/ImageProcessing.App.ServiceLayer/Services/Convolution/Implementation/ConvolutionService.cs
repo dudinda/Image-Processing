@@ -9,8 +9,8 @@ using ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interf
 
 namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
 {
-    /// <inheritdoc cref="IConvolutionFilterService"/>
-    internal sealed class ConvolutionFilterService : IConvolutionFilterService
+    /// <inheritdoc cref="IConvolutionService"/>
+    internal sealed class ConvolutionService : IConvolutionService
     {
         /// <inheritdoc/>
         public Bitmap Convolution(Bitmap source, IConvolutionFilter filter) 

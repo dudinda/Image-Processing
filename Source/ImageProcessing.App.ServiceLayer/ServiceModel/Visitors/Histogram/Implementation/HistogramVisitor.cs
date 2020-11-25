@@ -6,7 +6,7 @@ using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
 using ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Interface;
 using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Histogram.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Histogram.Implementation
 {

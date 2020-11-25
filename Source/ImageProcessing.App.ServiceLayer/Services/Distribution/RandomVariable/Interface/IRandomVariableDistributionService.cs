@@ -1,6 +1,6 @@
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
 
-namespace ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable.Interface
+namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Interface
 {
     /// <summary>
     /// Provides the information about

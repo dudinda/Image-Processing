@@ -2,7 +2,7 @@ using System.Drawing;
 
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
 
-namespace ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Interface
+namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Interface
 {
     /// <summary>
     /// Provides the information about the distribution of the pixels luminance

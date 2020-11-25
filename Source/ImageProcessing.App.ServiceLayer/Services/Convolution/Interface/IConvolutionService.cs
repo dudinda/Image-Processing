@@ -7,7 +7,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.In
     /// <summary>
     /// Provides the kernel-dependent convolution.
     /// </summary>
-    internal interface IConvolutionFilterService
+    internal interface IConvolutionService
     {
         /// <summary>
         /// Perform a convolution of the specified <see cref="IConvolutionFilter"/>.

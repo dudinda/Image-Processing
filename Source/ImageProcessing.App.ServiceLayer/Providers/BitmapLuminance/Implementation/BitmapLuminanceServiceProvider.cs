@@ -5,7 +5,7 @@ using ImageProcessing.App.DomainLayer.Factory.Distribution.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.BitmapLuminance.Interface;
 using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistribution
 {

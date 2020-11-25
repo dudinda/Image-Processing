@@ -1,7 +1,7 @@
 using System.Drawing;
 
 using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Distributions.BitmapLuminance.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance.Implementation
 {

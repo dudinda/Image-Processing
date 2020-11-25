@@ -3,11 +3,11 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Interface;
 using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.RealAxis;
 using ImageProcessing.Utility.DecimalMath.RealAxis;
 
-namespace ImageProcessing.App.ServiceLayer.Services.Distributions.RandomVariable.Implementation
+namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Implementation
 {
     /// <inheritdoc cref="IRandomVariableDistributionService"/>
     internal sealed class RandomVariableDistributionService : IRandomVariableDistributionService
