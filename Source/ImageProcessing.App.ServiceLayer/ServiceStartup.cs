@@ -12,6 +12,8 @@ using ImageProcessing.App.ServiceLayer.Providers.Interface.Convolution;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Morphology;
 using ImageProcessing.App.ServiceLayer.Providers.Rgb.Implementation;
 using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
+using ImageProcessing.App.ServiceLayer.Providers.Rotation.Implementation;
+using ImageProcessing.App.ServiceLayer.Providers.Rotation.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Scaling.Implementation;
 using ImageProcessing.App.ServiceLayer.Providers.Scaling.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Transformation.Implementation;
@@ -87,6 +89,7 @@ namespace ImageProcessing.App.ServiceLayer
                 .RegisterTransient<IBitmapLuminanceServiceProvider, BitmapLuminanceServiceProvider>()
                 .RegisterTransient<IRgbServiceProvider, RgbServiceProvider>()
                 .RegisterTransient<IScalingProvider, ScalingProvider>()
+                .RegisterTransient<IRotationProvider, RotationProvider>()
                 .RegisterTransient<ITransformationProvider, TransformationProvider>()
                 .RegisterTransient<IChartSeriesBuilder, ChartSeriesBuilder>()
                 .RegisterTransient<IQualityMeasureService, QualityMeasureService>()
