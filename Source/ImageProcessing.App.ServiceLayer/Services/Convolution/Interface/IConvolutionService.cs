@@ -10,8 +10,8 @@ namespace ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.In
     internal interface IConvolutionService
     {
         /// <summary>
-        /// Perform a convolution of the specified <see cref="IConvolutionFilter"/>.
+        /// Perform a convolution of the specified <see cref="IConvolutionKernel"/>.
         /// </summary>
-        Bitmap Convolution(Bitmap source, IConvolutionFilter filter);
+        Bitmap Convolution(Bitmap source, IConvolutionKernel filter);
     }
 }

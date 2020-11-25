@@ -13,7 +13,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
     internal sealed class ConvolutionService : IConvolutionService
     {
         /// <inheritdoc/>
-        public Bitmap Convolution(Bitmap source, IConvolutionFilter filter) 
+        public Bitmap Convolution(Bitmap source, IConvolutionKernel filter) 
         {
             var destination = new Bitmap(source);
 

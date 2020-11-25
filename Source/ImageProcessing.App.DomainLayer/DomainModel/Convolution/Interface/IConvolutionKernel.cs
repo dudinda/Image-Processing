@@ -5,7 +5,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Convolution.Interface
     /// <summary>
     /// Specifies a convolution filter.
     /// </summary>
-    public interface IConvolutionFilter
+    public interface IConvolutionKernel
     {
         /// <summary>
         /// Specifies the name of a filter.
@@ -18,7 +18,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Convolution.Interface
         double Factor { get; }
 
         /// <summary>
-        /// Specifies a convolution matrix of the type implementing the <see cref="IConvolutionFilter"/>.
+        /// Specifies a convolution matrix of the type implementing the <see cref="IConvolutionKernel"/>.
         /// </summary>
         ReadOnly2DArray<double> Kernel { get; }
 

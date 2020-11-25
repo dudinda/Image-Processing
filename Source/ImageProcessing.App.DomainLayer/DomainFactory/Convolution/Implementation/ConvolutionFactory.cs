@@ -13,15 +13,15 @@ using ImageProcessing.App.DomainLayer.Factory.Convolution.Interface;
 
 namespace ImageProcessing.App.DomainLayer.Factory.Convolution.Implementation
 {
-    /// <inheritdoc cref="IConvolutionFilterFactory" />
-    internal sealed class ConvolutionFilterFactory : IConvolutionFilterFactory
+    /// <inheritdoc cref="IConvolutionFactory" />
+    internal sealed class ConvolutionFactory : IConvolutionFactory
     {
         /// <summary>
         /// A factory method
         /// where the <see cref="ConvolutionOperator"/> represents an
-        /// enumeration for the types implementing the <see cref="IConvolutionFilter"/>.
+        /// enumeration for the types implementing the <see cref="IConvolutionKernel"/>.
         /// </summary>
-        public IConvolutionFilter Get(ConvKernel filter)
+        public IConvolutionKernel Get(ConvKernel filter)
             => filter
         switch
         {

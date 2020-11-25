@@ -6,9 +6,9 @@ namespace ImageProcessing.App.DomainLayer.Factory.Convolution.Interface
 {
     /// <summary>
     /// Provides a factory method for all the types
-    /// implementing the <see cref="IConvolutionFilter"/>.
+    /// implementing the <see cref="IConvolutionKernel"/>.
     /// </summary>
-    public interface IConvolutionFilterFactory : IModelFactory<IConvolutionFilter, ConvKernel>
+    public interface IConvolutionFactory : IModelFactory<IConvolutionKernel, ConvKernel>
     {
 
     }

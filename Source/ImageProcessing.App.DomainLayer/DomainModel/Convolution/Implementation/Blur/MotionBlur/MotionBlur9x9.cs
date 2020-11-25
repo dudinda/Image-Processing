@@ -4,9 +4,9 @@ using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 namespace ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Blur.MotionBlur
 {
     /// <summary>
-    /// Implements the <see cref="IConvolutionFilter"/>.
+    /// Implements the <see cref="IConvolutionKernel"/>.
     /// </summary>
-    internal sealed class MotionBlur9x9 : IConvolutionFilter
+    internal sealed class MotionBlur9x9 : IConvolutionKernel
     {
         /// <inheritdoc />
         public double Bias { get; } = 0.0;

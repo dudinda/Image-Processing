@@ -4,9 +4,9 @@ using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 namespace ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Emboss
 {
     /// <summary>
-    /// Implements the <see cref="IConvolutionFilter"/>.
+    /// Implements the <see cref="IConvolutionKernel"/>.
     /// </summary>
-    internal sealed class Emboss3x3 : IConvolutionFilter
+    internal sealed class Emboss3x3 : IConvolutionKernel
     {
         /// <inheritdoc />
         public double Bias { get; } = 128.0;

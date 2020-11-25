@@ -33,7 +33,7 @@ namespace ImageProcessing.App.DomainLayer
         {
             builder
                 .RegisterSingleton<IAppSettings, AppSettings>()
-                .RegisterTransient<IConvolutionFilterFactory, ConvolutionFilterFactory>()
+                .RegisterTransient<IConvolutionFactory, ConvolutionFactory>()
                 .RegisterTransient<IMorphologyFactory, MorphologyFactory>()
                 .RegisterTransient<IStructuringElementFactory, StructuringElementFactory>()
                 .RegisterTransient<IDistributionFactory, DistributionFactory>()

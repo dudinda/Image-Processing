@@ -14,7 +14,7 @@ namespace ImageProcessing.App.ServiceLayer.Benchmark.Services.Convolution.Kernel
     [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
     public class CovolutionFilter9x9Benchmark : IDisposable
     {
-        private IConvolutionFilter filter9x9 = new MotionBlur9x9();
+        private IConvolutionKernel filter9x9 = new MotionBlur9x9();
         private IConvolutionService service = new ConvolutionService();
 
         private Bitmap _frame1920x1080;

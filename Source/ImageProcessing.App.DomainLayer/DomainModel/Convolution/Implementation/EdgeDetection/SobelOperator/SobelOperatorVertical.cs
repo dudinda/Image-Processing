@@ -4,9 +4,9 @@ using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 namespace ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.EdgeDetection.SobelOperator
 {
     /// <summary>
-    /// Implements the <see cref="IConvolutionFilter"/>.
+    /// Implements the <see cref="IConvolutionKernel"/>.
     /// </summary>
-    internal sealed class SobelOperatorVertical : IConvolutionFilter
+    internal sealed class SobelOperatorVertical : IConvolutionKernel
     {
         /// <inheritdoc />
         public double Bias { get; } = 0.0;

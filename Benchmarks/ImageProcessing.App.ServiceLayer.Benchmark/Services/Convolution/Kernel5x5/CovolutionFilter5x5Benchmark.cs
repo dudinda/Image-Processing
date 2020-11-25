@@ -14,7 +14,7 @@ namespace ImageProcessing.App.ServiceLayer.Benchmark.Services.Convolution.Kernel
     [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
     public class CovolutionFilter5x5Benchmark : IDisposable
     {
-        private IConvolutionFilter filter5x5 = new GaussianBlur5x5();
+        private IConvolutionKernel filter5x5 = new GaussianBlur5x5();
         private IConvolutionService service = new ConvolutionService();
 
         private Bitmap _frame1920x1080;

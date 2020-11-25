@@ -14,12 +14,12 @@ namespace ImageProcessing.App.DomainLayer.UnitTests.Factory.Convolution
     [TestFixture]
     internal sealed class ConvolutionFilterFactoryTests
     {
-        private IConvolutionFilterFactory _convolutionFactory;
+        private IConvolutionFactory _convolutionFactory;
 
         [SetUp]
         public void SetUp()
         {
-            _convolutionFactory = new ConvolutionFilterFactory();
+            _convolutionFactory = new ConvolutionFactory();
         }
 
         [Test, TestCaseSource(
