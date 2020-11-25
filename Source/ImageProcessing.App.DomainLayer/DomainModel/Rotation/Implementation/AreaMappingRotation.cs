@@ -8,7 +8,7 @@ using ImageProcessing.App.DomainLayer.DomainModel.Rotation.Interface;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 {
-    public sealed class AreaMappingRotation : IRotation
+    internal sealed class AreaMappingRotation : IRotation
     {
         public Bitmap Rotate(Bitmap src, double rad)
         {
