@@ -49,8 +49,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
-            var (xBound, yBound) = (srcWidth - 1, srcHeight - 1);
-
             //inv( T(x, y)S(alpha)inv(T(x', y')) )v = v'
             //where x and y are the center of a destination and x' and y' are the
             //center of a source and S is a rotation matrix
@@ -73,8 +71,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                         var srcX = cos * xShift - sin * yShift + xSrcCenter;
                         var srcY = sin * xShift + cos * yShift + ySrcCenter;
 
-                        if (srcX < xBound && srcX > 0 &&
-                            srcY < yBound && srcY > 0)
+                        if (srcX < srcWidth  && srcX > 0 &&
+                            srcY < srcHeight && srcY > 0)
                         {
                             var srcPtr = srcStartPtr + (int)srcY * srcData.Stride + (int)srcX * ptrStep;
 
