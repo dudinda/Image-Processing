@@ -96,7 +96,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
         protected TViewModel ViewModel
         {
             get => _vm ?? throw new ArgumentNullException(nameof(_vm));
-            set => _vm = value;        
+            private set => _vm = value;        
         }
 
         protected BasePresenter(IAppController controller)
@@ -105,7 +105,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
         /// <inheritdoc/>
         public virtual void Run(TViewModel vm)
 		{
-            _vm = vm;
+            ViewModel = vm;
             View.Show();
 		}
 	}
