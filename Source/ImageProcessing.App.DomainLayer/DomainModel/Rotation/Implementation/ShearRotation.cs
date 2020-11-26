@@ -13,6 +13,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
     {
         public Bitmap Rotate(Bitmap src, double rad)
         {
+            if(rad == 0) { return src; }
+
             var (srcWidth, srcHeight) = (src.Width, src.Height);
 
             var (cos, sin) = (Math.Cos(rad), Math.Sin(rad));
