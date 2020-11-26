@@ -30,14 +30,14 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
             this.ColorMatrixComboBox = new MetroFramework.Controls.MetroComboBox();
             this.ApplyColorMatrixButton = new MetroFramework.Controls.MetroButton();
             this.ColorMatrixGrid = new MetroFramework.Controls.MetroGrid();
+            this.CustomColorMatrix = new MetroFramework.Controls.MetroCheckBox();
+            this.ApplyCustomColorMatrixButton = new MetroFramework.Controls.MetroButton();
+            this.ErrorToolTip = new MetroFramework.Components.MetroToolTip();
             this.j0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.j1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.j2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.j3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.j4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CustomColorMatrix = new MetroFramework.Controls.MetroCheckBox();
-            this.ApplyCustomColorMatrixButton = new MetroFramework.Controls.MetroButton();
-            this.ErrorToolTip = new MetroFramework.Components.MetroToolTip();
             ((System.ComponentModel.ISupportInitialize)(this.ColorMatrixGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -117,56 +117,6 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
             this.ColorMatrixGrid.Size = new System.Drawing.Size(293, 145);
             this.ColorMatrixGrid.TabIndex = 13;
             // 
-            // j0
-            // 
-            this.j0.FillWeight = 50F;
-            this.j0.HeaderText = "0";
-            this.j0.MinimumWidth = 50;
-            this.j0.Name = "j0";
-            this.j0.ReadOnly = true;
-            this.j0.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.j0.Width = 50;
-            // 
-            // j1
-            // 
-            this.j1.FillWeight = 50F;
-            this.j1.HeaderText = "1";
-            this.j1.MinimumWidth = 50;
-            this.j1.Name = "j1";
-            this.j1.ReadOnly = true;
-            this.j1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.j1.Width = 50;
-            // 
-            // j2
-            // 
-            this.j2.FillWeight = 50F;
-            this.j2.HeaderText = "2";
-            this.j2.MinimumWidth = 50;
-            this.j2.Name = "j2";
-            this.j2.ReadOnly = true;
-            this.j2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.j2.Width = 50;
-            // 
-            // j3
-            // 
-            this.j3.FillWeight = 50F;
-            this.j3.HeaderText = "3";
-            this.j3.MinimumWidth = 50;
-            this.j3.Name = "j3";
-            this.j3.ReadOnly = true;
-            this.j3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.j3.Width = 50;
-            // 
-            // j4
-            // 
-            this.j4.FillWeight = 50F;
-            this.j4.HeaderText = "4";
-            this.j4.MinimumWidth = 50;
-            this.j4.Name = "j4";
-            this.j4.ReadOnly = true;
-            this.j4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.j4.Width = 50;
-            // 
             // CustomColorMatrix
             // 
             this.CustomColorMatrix.AutoSize = true;
@@ -192,6 +142,56 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
             this.ErrorToolTip.Style = MetroFramework.MetroColorStyle.Blue;
             this.ErrorToolTip.StyleManager = null;
             this.ErrorToolTip.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
+            // j0
+            // 
+            this.j0.FillWeight = 50F;
+            this.j0.HeaderText = "R";
+            this.j0.MinimumWidth = 50;
+            this.j0.Name = "j0";
+            this.j0.ReadOnly = true;
+            this.j0.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.j0.Width = 50;
+            // 
+            // j1
+            // 
+            this.j1.FillWeight = 50F;
+            this.j1.HeaderText = "G";
+            this.j1.MinimumWidth = 50;
+            this.j1.Name = "j1";
+            this.j1.ReadOnly = true;
+            this.j1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.j1.Width = 50;
+            // 
+            // j2
+            // 
+            this.j2.FillWeight = 50F;
+            this.j2.HeaderText = "B";
+            this.j2.MinimumWidth = 50;
+            this.j2.Name = "j2";
+            this.j2.ReadOnly = true;
+            this.j2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.j2.Width = 50;
+            // 
+            // j3
+            // 
+            this.j3.FillWeight = 50F;
+            this.j3.HeaderText = "A";
+            this.j3.MinimumWidth = 50;
+            this.j3.Name = "j3";
+            this.j3.ReadOnly = true;
+            this.j3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.j3.Width = 50;
+            // 
+            // j4
+            // 
+            this.j4.FillWeight = 50F;
+            this.j4.HeaderText = "W";
+            this.j4.MinimumWidth = 50;
+            this.j4.Name = "j4";
+            this.j4.ReadOnly = true;
+            this.j4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.j4.Width = 50;
             // 
             // ColorMatrixForm
             // 
@@ -219,13 +219,13 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
         private MetroFramework.Controls.MetroComboBox ColorMatrixComboBox;
         private MetroFramework.Controls.MetroButton ApplyColorMatrixButton;
         private MetroFramework.Controls.MetroGrid ColorMatrixGrid;
+        private MetroFramework.Controls.MetroCheckBox CustomColorMatrix;
+        private MetroFramework.Controls.MetroButton ApplyCustomColorMatrixButton;
+        private MetroFramework.Components.MetroToolTip ErrorToolTip;
         private System.Windows.Forms.DataGridViewTextBoxColumn j0;
         private System.Windows.Forms.DataGridViewTextBoxColumn j1;
         private System.Windows.Forms.DataGridViewTextBoxColumn j2;
         private System.Windows.Forms.DataGridViewTextBoxColumn j3;
         private System.Windows.Forms.DataGridViewTextBoxColumn j4;
-        private MetroFramework.Controls.MetroCheckBox CustomColorMatrix;
-        private MetroFramework.Controls.MetroButton ApplyCustomColorMatrixButton;
-        private MetroFramework.Components.MetroToolTip ErrorToolTip;
     }
 }

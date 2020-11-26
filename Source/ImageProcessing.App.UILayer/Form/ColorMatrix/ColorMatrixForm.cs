@@ -32,7 +32,7 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
             for (var row = 0; row < ColorMatrixGrid.ColumnCount; ++row)
             {
                 ColorMatrixGrid.Rows.Add(0, 0, 0, 0, 0);
-                ColorMatrixGrid.Rows[row].HeaderCell.Value = row.ToString();
+                ColorMatrixGrid.Rows[row].HeaderCell.Value = ColorMatrixGrid.Columns[row].HeaderCell.Value;
             }
         }
           
