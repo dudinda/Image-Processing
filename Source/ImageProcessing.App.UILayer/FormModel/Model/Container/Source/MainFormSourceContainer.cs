@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Windows.Forms;
 
 using ImageProcessing.App.UILayer.FormModel.Model.Container;
 
@@ -23,14 +24,29 @@ namespace ImageProcessing.App.UILayer.FormCommands.Main.Container.Source.Impleme
 
         public override void SetImageCenter(Size size)
         {
-            var client = Exposer.SourceBox.Parent.ClientSize;
-
-            var newX = (client.Width - size.Width) / 2;
-            var newY = (client.Height - size.Height) / 2;
-
-            if (newX > 0 && newY > 0)
+            if (Exposer.SourceBox.Parent is Panel panel)
             {
-                Exposer.SourceBox.Location = new Point(newX, newY);
+                var newX = (panel.ClientSize.Width - size.Width) / 2;
+                var newY = (panel.ClientSize.Height - size.Height) / 2;
+
+                var location = new Point(0, 0);
+
+                if (newX > 0 && newY > 0)
+                {
+                    (location.X, location.Y) = (newX, newY);
+                }
+
+                if (newX > 0 && newY < 0)
+                {
+                    (location.X, location.Y) = (newX, 0);
+                }
+
+                if (newX < 0 && newY > 0)
+                {
+                    (location.X, location.Y) = (newX, newY);
+                }
+
+                Exposer.SourceBox.Location = location;
             }
         }
     }
