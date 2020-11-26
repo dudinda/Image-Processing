@@ -55,10 +55,11 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
+            var (xBound, yBound) = (srcWidth - 1, srcHeight - 1);
+
             //inv( T(x, y)Sh(alpha, 0)Sh(0, beta)Sh(gamma, 0)inv(T(x', y')) )v = v'
             //where x and y are the center of a destination and x' and y' are the
             //center of a source and Sh(sx, sy) is a shear matrix.
- 
             unsafe
             {
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
@@ -86,8 +87,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                         srcX += alpha * srcY + xSrcCenter;
                         srcY += ySrcCenter;
 
-                        if (srcX < srcWidth - 1 && srcX > 0 &&
-                            srcY < srcHeight - 1 && srcY > 0)
+                        if (srcX < xBound && srcX > 0 &&
+                            srcY < yBound && srcY > 0)
                         {
                             var srcPtr = srcStartPtr + (int)srcY * srcData.Stride + (int)srcX * ptrStep;
 
