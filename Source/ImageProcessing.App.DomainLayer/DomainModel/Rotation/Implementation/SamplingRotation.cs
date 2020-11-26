@@ -70,13 +70,13 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                     {
                         var xShift = x - xCenter;
 
-                        var srcX = (int)(cos * xShift - sin * yShift + xSrcCenter);
-                        var srcY = (int)(sin * xShift + cos * yShift + ySrcCenter);
+                        var srcX = cos * xShift - sin * yShift + xSrcCenter;
+                        var srcY = sin * xShift + cos * yShift + ySrcCenter;
 
                         if (srcX < xBound && srcX > 0 &&
                             srcY < yBound && srcY > 0)
                         {
-                            var srcPtr = srcStartPtr + srcY * srcData.Stride + srcX * ptrStep;
+                            var srcPtr = srcStartPtr + (int)srcY * srcData.Stride + (int)srcX * ptrStep;
 
                             dstRow[0] = srcPtr[0];
                             dstRow[1] = srcPtr[1];
