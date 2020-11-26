@@ -359,7 +359,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
         private void RenderBlock(Bitmap bmp, ImageContainer to, UndoRedoAction action)
         {
-            lock (this)
+            lock (_cache)
             {
                 View.AddToUndoRedo(to, new Bitmap(View.GetImageCopy(to)), action);
                 View.SetImageCopy(to, new Bitmap(bmp));
@@ -373,7 +373,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
         private void PaintBlock(Bitmap bmp, ImageContainer to)
         {
-            lock (this)
+            lock (_scale)
             {
                 View.SetImage(to, bmp);
                 View.SetImageCenter(to, bmp.Size);
