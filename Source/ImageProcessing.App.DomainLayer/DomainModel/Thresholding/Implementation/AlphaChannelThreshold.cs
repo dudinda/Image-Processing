@@ -10,7 +10,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Thresholding.Implementatio
 {
     internal sealed class AlphaChannelThreshold : IThreshold
     {
-        public Bitmap Segment(Bitmap bitmap, int threshold)
+        public Bitmap Segment(Bitmap bitmap, byte threshold)
         {
             var bitmapData = bitmap.LockBits(
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
@@ -29,8 +29,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Thresholding.Implementatio
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
-            var newAlpha = (byte)threshold;
-
             unsafe
             {
                 var startPtr = (byte*)bitmapData.Scan0.ToPointer();
@@ -41,9 +39,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Thresholding.Implementatio
 
                     for (var x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
-                        if(ptr[3] > newAlpha)
+                        if(ptr[3] > threshold)
                         {
-                            ptr[3] = newAlpha;
+                            ptr[3] = threshold;
                         }
                     }
                 });

@@ -10,7 +10,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Thresholding.Implementatio
 {
     internal sealed class BinaryThreshold : IThreshold
     {
-        public Bitmap Segment(Bitmap bitmap, int threshold)
+        public Bitmap Segment(Bitmap bitmap, byte threshold)
         {
             var bitmapData = bitmap.LockBits(
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
