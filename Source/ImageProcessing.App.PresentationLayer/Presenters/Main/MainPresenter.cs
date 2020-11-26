@@ -309,15 +309,17 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                 if (!View.ImageIsDefault(container))
                 {
-                   var factor = View.GetTrackBarValue(container);
+                    var factor = View.GetTrackBarValue(container);
 
-                    var image = await _scale.Scale(
-                        (Bitmap)View.GetImageCopy(container), factor, factor
-                    ).ConfigureAwait(true);
+                    var copy = await GetImageCopy(container)
+                        .ConfigureAwait(true);
 
-                    View.SetImage(container, image);
-                    View.SetImageCenter(container, image.Size);
-                    View.Refresh(container);
+                    await Paint(
+                        new PipelineBlock(copy)
+                            .Add<Bitmap, Bitmap>(
+                                (bmp) => _scale.Scale(bmp, factor, factor)),
+                        container
+                     ).ConfigureAwait(true);
                 }
             }
             catch(Exception ex)
@@ -355,7 +357,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             View.Tooltip(e.Message);
         }
 
-        private void DefaultRenderBlock(Bitmap bmp, ImageContainer to, UndoRedoAction action)
+        private void RenderBlock(Bitmap bmp, ImageContainer to, UndoRedoAction action)
         {
             lock (this)
             {
@@ -369,10 +371,39 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             }          
         }
 
+        private void PaintBlock(Bitmap bmp, ImageContainer to)
+        {
+            lock (this)
+            {
+                View.SetImage(to, bmp);
+                View.SetImageCenter(to, bmp.Size);
+                View.Refresh(to);
+            }
+        }
+
         private async Task<Bitmap> GetImageCopy(ImageContainer container)
             => await _operation.LockOperationAsync(
                 () => new Bitmap(View.GetImageCopy(container))
             ).ConfigureAwait(true);
+
+
+        private async Task Paint(IPipelineBlock block,
+            ImageContainer container = ImageContainer.Destination)
+        {
+            if (
+                !_pipeline
+                    .Register(block
+                        .Add<Bitmap>(
+                            (bmp) => PaintBlock(bmp, container)
+                         )
+                     )
+                 )
+            {
+                throw new InvalidOperationException(Errors.Pipeline);
+            }
+
+            await _pipeline.AwaitResult().ConfigureAwait(true);
+        }
 
         private async Task Render(IPipelineBlock block,
             ImageContainer container = ImageContainer.Destination,
@@ -384,7 +415,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                 !_pipeline
                     .Register(block
                         .Add<Bitmap>(
-                            (bmp) => DefaultRenderBlock(bmp, container, action)
+                            (bmp) => RenderBlock(bmp, container, action)
                          )
                      )
                  )
