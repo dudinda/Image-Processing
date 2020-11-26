@@ -19,7 +19,7 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Scaling.Implementation
             _settings = settings;
         }
 
-        public Bitmap Scale(Bitmap bmp, double yScale, double xScale)
-            => _factory.Get(_settings.Scaling).Resize(bmp, yScale, xScale);
+        public Bitmap Scale(Bitmap bmp, double xScale, double yScale)
+            => _factory.Get(_settings.Scaling).Resize(bmp, xScale, yScale);
     }
 }
