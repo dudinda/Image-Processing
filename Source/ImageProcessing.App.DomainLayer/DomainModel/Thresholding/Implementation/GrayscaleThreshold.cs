@@ -8,7 +8,7 @@ using ImageProcessing.App.DomainLayer.DomainModel.Thresholding.Interface;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Thresholding.Implementation
 {
-    internal sealed class BinaryThreshold : IThreshold
+    internal sealed class GrayscaleThreshold : IThreshold
     {
         public Bitmap Segment(Bitmap bitmap, byte threshold)
         {
@@ -36,9 +36,14 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Thresholding.Implementatio
                     {
                         //if a threshold value is greater or equal than a pixel value
                         //set it to white; else to black
-                        if (threshold >= ptr[0]) { ptr[0] = 255; } else { ptr[0] = 0; }
-                        if (threshold >= ptr[1]) { ptr[0] = 255; } else { ptr[1] = 0; }
-                        if (threshold >= ptr[2]) { ptr[0] = 255; } else { ptr[2] = 0; }
+                        if (threshold >= ptr[0])
+                        {
+                            ptr[0] = ptr[1] = ptr[2] = 255;
+                        }
+                        else
+                        {
+                            ptr[0] = ptr[1] = ptr[2] = 0;
+                        } 
                     }
                 });
             }
