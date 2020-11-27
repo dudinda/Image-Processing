@@ -42,21 +42,21 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 
                 Parallel.For(0, srcHeight, options, y =>
                 {
-                    var srcY = (int)(y - ty);
+                    var srcY = y - ty;
 
                     if (srcY < srcHeight && srcY >= 0)
                     {
                         //get the address of a row
                         var dstRow = dstStartPtr + y * dstData.Stride;
-                        var srcRow = srcStartPtr + srcY * srcData.Stride;
+                        var srcRow = srcStartPtr + (int)srcY * srcData.Stride;
 
                         for (var x = 0; x < srcWidth; ++x, dstRow += ptrStep)
                         {
-                            var srcX = (int)(x - tx);
+                            var srcX = x - tx;
 
                             if (srcX < srcWidth && srcX >= 0)
                             {
-                                var srcPtr = srcRow + srcX * ptrStep;
+                                var srcPtr = srcRow + (int)srcX * ptrStep;
 
                                 dstRow[0] = srcPtr[0];
                                 dstRow[1] = srcPtr[1];

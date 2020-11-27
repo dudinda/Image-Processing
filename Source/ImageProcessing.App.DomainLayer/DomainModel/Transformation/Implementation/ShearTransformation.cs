@@ -25,7 +25,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
             var dstHeight = (int)(srcHeight + Math.Abs(shy) * srcWidth);
 
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
-              .DrawFilledRectangle(Brushes.Black);
+              .DrawFilledRectangle(Brushes.White);
 
             var srcData = src.LockBits(
                 new Rectangle(0, 0, srcWidth, srcHeight),
@@ -73,13 +73,13 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                         // y' = (y - dy*x) / (1 - dx * dy) (2)
                         //from (1) x = (1 - dx * dy)x' + dx * y (3)
                         //substituting (3) in (2) y' = y - dy*x'
-                        var srcX = (int)((shiftX - shx * shiftY) / detA);
-                        var srcY = (int)(shiftY - shy * srcX);
+                        var srcX = (shiftX - shx * shiftY) / detA;
+                        var srcY = shiftY - shy * srcX;
                 
                         if (srcX < srcWidth  && srcX >= 0 &&
                             srcY < srcHeight && srcY >= 0)
                         {
-                            var srcPtr = srcStartPtr + srcY * srcData.Stride + srcX * ptrStep;
+                            var srcPtr = srcStartPtr + (int)srcY * srcData.Stride + (int)srcX * ptrStep;
 
                             dstRow[0] = srcPtr[0];
                             dstRow[1] = srcPtr[1];
