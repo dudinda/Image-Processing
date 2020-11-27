@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
@@ -28,7 +29,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
         ISubscriber<ShowQualityMeasureMenuEventArgs>,
         ISubscriber<GetRandomVariableInfoEventArgs>,
         ISubscriber<ShowTooltipOnErrorEventArgs>,
-        ISubscriber<RestoreFocusEventArgs>
+        ISubscriber<RestoreFocusEventArgs>,
+        ISubscriber<ContainerUpdatedEventArgs>
     {
         private readonly IAsyncOperationLocker _locker;
         private readonly IBitmapLuminanceServiceProvider _provider;
@@ -152,6 +154,28 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
             catch (Exception ex)
             {
                 View.Tooltip(Errors.RandomVariableInfo);
+            }
+        }
+
+        /// <inheritdoc cref="ContainerUpdatedEventArgs"/>
+        public async Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
+        {
+            try
+            {
+                if (e.Container == ImageContainer.Source)
+                {
+                    await _locker.LockOperationAsync(() =>
+                    {
+                        lock (e.Bmp)
+                        {
+                            ViewModel.Source = new Bitmap(e.Bmp);
+                        }
+                    }).ConfigureAwait(true);
+                }
+            }
+            catch (Exception ex)
+            {
+                View.Tooltip(Errors.UpdatingViewModel);
             }
         }
 
