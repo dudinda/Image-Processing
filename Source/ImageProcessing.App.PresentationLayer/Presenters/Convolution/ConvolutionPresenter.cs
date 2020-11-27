@@ -73,8 +73,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
                 if (e.Container == ImageContainer.Source)
                 {
                     await _locker.LockOperationAsync(() =>
-                        ViewModel.Source = new Bitmap(e.Bmp)
-                    ).ConfigureAwait(true);
+                    {
+                        lock (e.Bmp)
+                        {
+                            ViewModel.Source = new Bitmap(e.Bmp);
+                        }
+                    }).ConfigureAwait(true);
                 }
             }
             catch(Exception ex)
