@@ -1,7 +1,7 @@
 using System;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.Color.Interface;
+using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.Channel.Interface;
 using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Interface;
 using ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementation;
 using ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Interface;
@@ -14,13 +14,13 @@ namespace ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Implementa
     /// <inheritdoc cref="IRgbFilterFactory"/>
     internal sealed class RgbFilterFactory : IRgbFilterFactory
     {
-        private readonly IColorFactory _color;
+        private readonly IChannelFactory _color;
         private readonly IRecommendationFactory _rec;
         private readonly IAppSettings _settings;
 
         public RgbFilterFactory(
             IRecommendationFactory rec,
-            IColorFactory color,
+            IChannelFactory color,
             IAppSettings settings)
         {
             _rec = rec;
@@ -57,7 +57,7 @@ namespace ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Implementa
            
           
         /// <inheritdoc />
-		public IRgbFilter Get(RgbColors color)
-            => new ColorFilter(_color.Get(color));     
+		public IRgbFilter Get(RgbChannels color)
+            => new ChannelFilter(_color.Get(color));     
     }
 }

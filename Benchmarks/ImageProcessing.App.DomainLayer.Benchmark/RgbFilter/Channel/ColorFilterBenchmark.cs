@@ -4,16 +4,16 @@ using System.IO;
 
 using BenchmarkDotNet.Attributes;
 
-using ImageProcessing.App.DomainLayer.DomainModel.Rgb.Color.Implementation;
+using ImageProcessing.App.DomainLayer.DomainModel.Rgb.Channel.Implementation;
 using ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementation;
 using ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Interface;
 
-namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Color
+namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Channel
 {
     [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
     public class ColorFilterBenchmark : IDisposable
     {
-        private IRgbFilter filter = new ColorFilter(new RGColor());
+        private IRgbFilter filter = new ChannelFilter(new RGChannel());
 
         private Bitmap _frame1920x1080;
         private Bitmap _frame2560x1440;

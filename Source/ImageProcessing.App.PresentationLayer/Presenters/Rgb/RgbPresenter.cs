@@ -21,7 +21,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
 {
     internal sealed class RgbPresenter : BasePresenter<IRgbView, RgbViewModel>,
           ISubscriber<ApplyRgbFilterEventArgs>,
-          ISubscriber<ApplyRgbColorFilterEventArgs>,
+          ISubscriber<ApplyRgbChannelFilterEventArgs>,
           ISubscriber<ContainerUpdatedEventArgs>,
           ISubscriber<ShowColorMatrixMenuEventArgs>,
           ISubscriber<ShowTooltipOnErrorEventArgs>,
@@ -68,12 +68,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
             }
         }
 
-        /// <inheritdoc cref="ApplyRgbColorFilterEventArgs"/>
-        public async Task OnEventHandler(object publisher, ApplyRgbColorFilterEventArgs e)
+        /// <inheritdoc cref="ApplyRgbChannelFilterEventArgs"/>
+        public async Task OnEventHandler(object publisher, ApplyRgbChannelFilterEventArgs e)
         {
             try
             {
-                var color = View.GetSelectedColors(e.Color);
+                var color = View.GetSelectedChannels(e.Channel);
 
                 var copy = await _locker.LockOperationAsync(
                     () => new Bitmap(ViewModel.Source)

@@ -37,7 +37,7 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Rgb.Implementation
             );
 
         /// <inheritdoc/>
-        public Bitmap Apply(Bitmap bmp, RgbColors color)
+        public Bitmap Apply(Bitmap bmp, RgbChannels color)
             => _cache.GetOrCreate(color,
                () => _rgb.Get(color).Filter(bmp)
             );

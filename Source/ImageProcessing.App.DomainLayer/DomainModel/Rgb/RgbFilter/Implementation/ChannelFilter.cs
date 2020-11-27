@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
-using ImageProcessing.App.DomainLayer.DomainModel.Rgb.Color.Interface;
+using ImageProcessing.App.DomainLayer.DomainModel.Rgb.Channel.Interface;
 using ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Interface;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementation
@@ -12,12 +12,12 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
     /// <summary>
     /// Implements the <see cref="IRgbFilter"/>.
     /// </summary>
-    internal sealed class ColorFilter : IRgbFilter
+    internal sealed class ChannelFilter : IRgbFilter
     {
-        /// <inheritdoc cref="IColor" />
-        private readonly IColor _filter;
+        /// <inheritdoc cref="IChannel" />
+        private readonly IChannel _filter;
 
-        public ColorFilter(IColor filter)
+        public ChannelFilter(IChannel filter)
             => _filter = filter;
 
         /// <inheritdoc />
@@ -43,9 +43,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
                     //get the address of a row
                     var ptr = startPtr + y * bitmapData.Stride;
 
-                    for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
+                    for (var x = 0; x < size.Width; ++x, ptr += ptrStep)
                     {
-                        _filter.SetPixelColor(ptr);
+                        _filter.GetChannel(ptr);
                     }
 
                 });

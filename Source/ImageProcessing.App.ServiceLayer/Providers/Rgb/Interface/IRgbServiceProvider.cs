@@ -6,21 +6,21 @@ using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 namespace ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface
 {
     /// <summary>
-    /// Provides the <see cref="CommonLayer.Enums.RgbFltr"/> and <see cref="RgbColors"/> implementation.
+    /// Provides the <see cref="RgbFltr"/> and <see cref="RgbChannels"/> implementation.
     /// </summary>
     public interface IRgbServiceProvider
     {
         /// <summary>
-        /// Choose the <see cref="CommonLayer.Enums.RgbFltr"/> implementation over
+        /// Choose the <see cref="RgbFltr"/> implementation over
         /// the specified <see cref="Bitmap"/>.
         /// </summary>
-        Bitmap Apply(Bitmap bmp, CommonLayer.Enums.RgbFltr filter);
+        Bitmap Apply(Bitmap bmp, RgbFltr filter);
 
         /// <summary>
-        /// Choose the <see cref="RgbColors"/> implementation over
+        /// Choose the <see cref="RgbChannels"/> implementation over
         /// the specified <see cref="Bitmap"/>.
         /// </summary>
-        Bitmap Apply(Bitmap bmp, RgbColors filter);
+        Bitmap Apply(Bitmap bmp, RgbChannels filter);
 
         /// <summary>
         /// Choose the <see cref="ClrMatrix"/> implementation over

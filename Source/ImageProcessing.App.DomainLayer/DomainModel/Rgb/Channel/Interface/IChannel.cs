@@ -1,14 +1,14 @@
-namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.Color.Interface
+namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.Channel.Interface
 {
     /// <summary>
-    /// Specifies a color alteration of an RGB pixel.
+    /// Specifies a channel of an RGB pixel.
     /// </summary>
-    public interface IColor
+    public interface IChannel
     {
         /// <summary>
         /// Change the source pixel rgb components.
         /// </summary>
         /// <param name="pixelPtr">The source pixel.</param>
-        unsafe void SetPixelColor(byte* pixelPtr);
+        unsafe void GetChannel(byte* pixelPtr);
     }
 }

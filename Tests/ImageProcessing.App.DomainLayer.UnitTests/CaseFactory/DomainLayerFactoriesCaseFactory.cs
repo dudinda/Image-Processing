@@ -11,24 +11,24 @@ using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Embo
 using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Sharpen;
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementation.OneParameter;
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementation.TwoParameter;
-using ImageProcessing.App.DomainLayer.DomainModel.Rgb.Color.Implementation;
+using ImageProcessing.App.DomainLayer.DomainModel.Rgb.Channel.Implementation;
 using ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementation;
 
 namespace ImageProcessing.App.DomainLayer.UnitTests.CaseFactory
 {
     public static class DomainLayerFactoriesCaseFactory
     {
-        public static IEnumerable<(RgbColors Input, Type Result)> ColorFactoryTestCases
+        public static IEnumerable<(RgbChannels Input, Type Result)> ColorFactoryTestCases
         {
             get
             {
-                yield return (RgbColors.Red, typeof(RColor));
-                yield return (RgbColors.Blue, typeof(BColor));
-                yield return (RgbColors.Green, typeof(GColor));
-                yield return (RgbColors.Red | RgbColors.Green, typeof(RGColor));
-                yield return (RgbColors.Blue | RgbColors.Green, typeof(BGColor));
-                yield return (RgbColors.Red | RgbColors.Blue, typeof(RBColor));
-                yield return (RgbColors.Red | RgbColors.Green | RgbColors.Blue, typeof(RGBColor));
+                yield return (RgbChannels.Red, typeof(RChannel));
+                yield return (RgbChannels.Blue, typeof(BChannel));
+                yield return (RgbChannels.Green, typeof(GChannel));
+                yield return (RgbChannels.Red | RgbChannels.Green, typeof(RGChannel));
+                yield return (RgbChannels.Blue | RgbChannels.Green, typeof(BGChannel));
+                yield return (RgbChannels.Red | RgbChannels.Blue, typeof(RBChannel));
+                yield return (RgbChannels.Red | RgbChannels.Green | RgbChannels.Blue, typeof(RGBChannel));
             }
         }
 

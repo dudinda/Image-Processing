@@ -1,7 +1,7 @@
 using ImageProcessing.App.DomainLayer.DomainFactory.ColorMatrix.Implementation;
 using ImageProcessing.App.DomainLayer.DomainFactory.ColorMatrix.Interface;
-using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.Color.Implementation;
-using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.Color.Interface;
+using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.Channel.Implementation;
+using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.Channel.Interface;
 using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Implementation;
 using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Interface;
 using ImageProcessing.App.DomainLayer.DomainFactory.Rotation.Implementation;
@@ -41,7 +41,7 @@ namespace ImageProcessing.App.DomainLayer
                 .RegisterTransient<IScalingFactory, ScalingFactory>()
                 .RegisterTransient<IColorMatrixFactory, ColorMatrixFactory>()
                 .RegisterTransient<IRecommendationFactory, RecommendationFactory>()
-                .RegisterTransient<IColorFactory, ColorFactory>()
+                .RegisterTransient<IChannelFactory, ChannelFactory>()
                 .RegisterTransient<IRotationFactory, RotationFactory>()
                 .RegisterTransient<ITransformationFactory, TransformationFactory>();
         }

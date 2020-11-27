@@ -11,7 +11,7 @@ using ImageProcessing.Utility.Interop.Wrapper;
 
 using MetroFramework.Controls;
 
-using static ImageProcessing.App.CommonLayer.Enums.RgbColors;
+using static ImageProcessing.App.CommonLayer.Enums.RgbChannels;
 
 namespace ImageProcessing.App.UILayer.Form.Rgb
 {
@@ -66,7 +66,7 @@ namespace ImageProcessing.App.UILayer.Form.Rgb
                  CursorPosition.GetCursorPosition()), 2000);
 
         /// <inheritdoc/>
-        public RgbColors GetSelectedColors(RgbColors color)
+        public RgbChannels GetSelectedChannels(RgbChannels channel)
         {
             var result = Unknown;
 

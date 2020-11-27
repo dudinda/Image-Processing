@@ -31,17 +31,17 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Rgb.Implementation
 
             source.RedButton.CheckedChanged += (sender, args)
                 => _aggregator.PublishFrom(source,
-                    new ApplyRgbColorFilterEventArgs(RgbColors.Red)
+                    new ApplyRgbChannelFilterEventArgs(RgbChannels.Red)
                 );
 
             source.GreenButton.CheckedChanged += (sender, args)
                 => _aggregator.PublishFrom(source,
-                    new ApplyRgbColorFilterEventArgs(RgbColors.Green)
+                    new ApplyRgbChannelFilterEventArgs(RgbChannels.Green)
                 );
 
             source.BlueButton.CheckedChanged += (sender, args)
                => _aggregator.PublishFrom(source,
-                   new ApplyRgbColorFilterEventArgs(RgbColors.Blue)
+                   new ApplyRgbChannelFilterEventArgs(RgbChannels.Blue)
                );
         }
 

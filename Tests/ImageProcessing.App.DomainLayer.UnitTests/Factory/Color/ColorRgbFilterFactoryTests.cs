@@ -1,8 +1,8 @@
 using System;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.Color.Implementation;
-using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.Color.Interface;
+using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.Channel.Implementation;
+using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.Channel.Interface;
 using ImageProcessing.App.DomainLayer.UnitTests.CaseFactory;
 
 using NUnit.Framework;
@@ -14,24 +14,24 @@ namespace ImageProcessing.App.DomainLayer.UnitTests.Factory.Color
     [TestFixture]
     internal sealed class ColorRgbFilterFactoryTests
     {
-        private IColorFactory _colorFactory;
+        private IChannelFactory _colorFactory;
 
         [SetUp]
         public void SetUp()
         {
-            _colorFactory = new ColorFactory();
+            _colorFactory = new ChannelFactory();
         }
 
         [Test, TestCaseSource(
             typeof(DomainLayerFactoriesCaseFactory),
             nameof(ColorFactoryTestCases))]
-        public void FactoryReturnsRedColorOnRCombination((RgbColors Input, Type Return) args)
+        public void FactoryReturnsRedColorOnRCombination((RgbChannels Input, Type Return) args)
             => Assert.That(_colorFactory.Get(args.Input), Is.TypeOf(args.Return));
 
         [Test]
         public void FactoryThrowsNotImplementedExceptionOnUnknownEnum()
             => Assert.Throws<NotSupportedException>(
-                () => _colorFactory.Get(RgbColors.Unknown)
+                () => _colorFactory.Get(RgbChannels.Unknown)
             );
     }
 }

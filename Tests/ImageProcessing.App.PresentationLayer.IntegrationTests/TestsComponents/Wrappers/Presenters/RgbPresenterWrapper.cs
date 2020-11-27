@@ -14,7 +14,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
 {
     internal class RgbPresenterWrapper : BasePresenter<IRgbView, RgbViewModel>,
           ISubscriber<ApplyRgbFilterEventArgs>,
-          ISubscriber<ApplyRgbColorFilterEventArgs>
+          ISubscriber<ApplyRgbChannelFilterEventArgs>
     {
         private readonly RgbPresenter _presenter;
 
@@ -39,7 +39,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
         }
 
 
-        public virtual async Task OnEventHandler(object publisher, ApplyRgbColorFilterEventArgs e)
+        public virtual async Task OnEventHandler(object publisher, ApplyRgbChannelFilterEventArgs e)
         {
             
         }
