@@ -57,7 +57,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
                 var dstStartPtr = (byte*)dstData.Scan0.ToPointer();
 
-                Parallel.For(0, dstWidth, options, y =>
+                Parallel.For(0, dstHeight, options, y =>
                 {
                     //get the address of a row
                     var dstRow = dstStartPtr + y * dstData.Stride;
