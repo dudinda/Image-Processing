@@ -23,6 +23,7 @@ using ImageProcessing.App.PresentationLayer.ViewModel.Distribution;
 using ImageProcessing.App.PresentationLayer.ViewModel.Rgb;
 using ImageProcessing.App.PresentationLayer.ViewModel.Transformation;
 using ImageProcessing.App.PresentationLayer.Views.Main;
+using ImageProcessing.App.ServiceLayer.Providers.Rotation.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Scaling.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
@@ -55,6 +56,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         private readonly INonBlockDialogService _dialog;
         private readonly IAsyncOperationLocker _operation;
         private readonly IScalingProvider _scale;
+        private readonly IRotationProvider _rotation;
         private readonly IAwaitablePipeline _pipeline;
 
         public MainPresenter(
@@ -63,12 +65,14 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             INonBlockDialogService dialog,
             IAwaitablePipeline pipeline,
             IAsyncOperationLocker operation,
-            IScalingProvider scale) : base(controller)
+            IScalingProvider scale,
+            IRotationProvider rotation) : base(controller)
         {
             _cache = cache;
             _dialog = dialog;
             _operation = operation;
             _scale = scale;
+            _rotation = rotation;
             _pipeline = pipeline;
         }
 
@@ -309,7 +313,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 
                 if (!View.ImageIsDefault(container))
                 {
-                    var factor = View.GetTrackBarValue(container);
+                    var scale = View.GetZoomFactor(container);
+                    var rad   = View.GetRotationFactor(container);
 
                     var copy = await GetImageCopy(container)
                         .ConfigureAwait(true);
@@ -317,7 +322,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     await Paint(
                         new PipelineBlock(copy)
                             .Add<Bitmap, Bitmap>(
-                                (bmp) => _scale.Scale(bmp, factor, factor)),
+                                (bmp) => _scale.Scale(bmp, scale, scale))
+                            .Add<Bitmap, Bitmap>(
+                                (bmp) => _rotation.Rotate(bmp, rad)),
                         container
                      ).ConfigureAwait(true);
                 }

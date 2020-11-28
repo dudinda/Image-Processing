@@ -25,12 +25,12 @@ namespace ImageProcessing.App.UILayer.FormControl.TrackBar
         {
             if (e.Delta > 0)
             {
-                base.Value = Math.Min(base.Value + 25, Maximum);
+                base.Value = Math.Min(base.Value + 15, Maximum);
             }
 
             if (e.Delta < 0)
             {
-                base.Value = Math.Max(base.Value - 25, Minimum);
+                base.Value = Math.Max(base.Value - 15, Minimum);
             }
 
             base.OnMouseWheel(e);
@@ -45,11 +45,11 @@ namespace ImageProcessing.App.UILayer.FormControl.TrackBar
             switch (e.KeyCode)
             {
                 case Keys.Add:
-                    base.Value = Math.Min(base.Value + 50, Maximum);
+                    base.Value = Math.Min(base.Value + 30, Maximum);
                     e.IsInputKey = true;
                     break;
                 case Keys.Subtract:
-                    base.Value = Math.Max(base.Value - 50, Minimum);
+                    base.Value = Math.Max(base.Value - 30, Minimum);
                     e.IsInputKey = true;
                     break;
             }

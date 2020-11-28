@@ -5,8 +5,10 @@ using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.UILayer.Control;
 using ImageProcessing.App.UILayer.FormCommands.Main;
+using ImageProcessing.App.UILayer.FormControl.TrackBar;
 using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Main;
+using ImageProcessing.App.UILayer.FormModel.Factory.MainFormRotation.Interface;
 using ImageProcessing.App.UILayer.FormModel.Factory.MainFormZoom.Interface;
 using ImageProcessing.App.UILayer.FormModel.MainFormUndoRedo.Interface;
 using ImageProcessing.App.UILayer.Properties;
@@ -23,19 +25,22 @@ namespace ImageProcessing.App.UILayer.Form.Main
         private readonly IMainFormContainerFactory _container;
         private readonly IMainFormUndoRedoFactory _undoRedo;
         private readonly IMainFormZoomFactory _zoom;
+        private readonly IMainFormRotationFactory _rotation;
 
         public MainForm(
             IAppController controller,
             IMainFormEventBinder binder,
             IMainFormContainerFactory container,
             IMainFormUndoRedoFactory  undoRedo,
-            IMainFormZoomFactory zoom) : base(controller)
+            IMainFormZoomFactory zoom,
+            IMainFormRotationFactory rotation) : base(controller)
         {
             InitializeComponent();
 
             _zoom = zoom;
             _binder = binder;
             _undoRedo = undoRedo;
+            _rotation = rotation;
             _container = container;
                    
             _binder.OnElementExpose(this);
@@ -213,6 +218,12 @@ namespace ImageProcessing.App.UILayer.Form.Main
         public ToolStripMenuItem SettingsMenuButton
             => SettingsMenu;
 
+        public RotationTrackBar RotationSrcTrackBar
+            => SrcRotation;
+
+        public RotationTrackBar RotationDstTrackBar
+            => DstRotation;
+
         /// <inheritdoc/>
         public virtual new void Show()
         {
@@ -235,7 +246,11 @@ namespace ImageProcessing.App.UILayer.Form.Main
 
         /// <inheritdoc/>
         public virtual void ResetTrackBarValue(ImageContainer container, int value = 0)
-            => Write(() => _zoom.Get(container).OnElementExpose(this).ResetTrackBarValue(value));
+            => Write(() =>
+            {
+                _zoom.Get(container).OnElementExpose(this).ResetTrackBarValue(value);
+                _rotation.Get(container).OnElementExpose(this).ResetTrackBarValue(value);
+            });
 
         /// <inheritdoc/>
         public virtual Image GetImageCopy(ImageContainer container)
@@ -276,8 +291,10 @@ namespace ImageProcessing.App.UILayer.Form.Main
         public virtual (Bitmap, ImageContainer) TryUndoRedo(UndoRedoAction action)
             => Read<(Bitmap, ImageContainer)>(() => _undoRedo.Get(action).OnElementExpose(this).Pop());
 
-        public double GetTrackBarValue(ImageContainer container)
-            => Read<double>(() => _zoom.Get(container).OnElementExpose(this).GetFactor());
+        public double GetZoomFactor(ImageContainer container)
+            => _zoom.Get(container).OnElementExpose(this).GetFactor();
+        public double GetRotationFactor(ImageContainer container)
+           =>  _rotation.Get(container).OnElementExpose(this).GetFactor();
 
         public void SetImageCenter(ImageContainer to, Size size)
              => Write(() => _container.Get(to).OnElementExpose(this).SetImageCenter(size));

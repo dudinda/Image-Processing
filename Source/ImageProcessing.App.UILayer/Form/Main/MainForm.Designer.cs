@@ -49,10 +49,12 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.Src = new System.Windows.Forms.PictureBox();
             this.TrackBarSrcPanel = new System.Windows.Forms.Panel();
             this.SrcZoom = new ImageProcessing.App.UILayer.Control.ScaleTrackBar();
+            this.SrcRotation = new ImageProcessing.App.UILayer.FormControl.TrackBar.RotationTrackBar();
             this.PictureBoxDstPanel = new System.Windows.Forms.Panel();
             this.Dst = new System.Windows.Forms.PictureBox();
             this.TrackBarDstPanel = new System.Windows.Forms.Panel();
             this.DstZoom = new ImageProcessing.App.UILayer.Control.ScaleTrackBar();
+            this.DstRotation = new ImageProcessing.App.UILayer.FormControl.TrackBar.RotationTrackBar();
             this.ErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SplitContainer = new ImageProcessing.App.UILayer.Control.UndoRedoSplitContainer();
             this.MainMenu.SuspendLayout();
@@ -228,7 +230,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.PictureBoxSrcPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PictureBoxSrcPanel.Location = new System.Drawing.Point(0, 0);
             this.PictureBoxSrcPanel.Name = "PictureBoxSrcPanel";
-            this.PictureBoxSrcPanel.Size = new System.Drawing.Size(359, 336);
+            this.PictureBoxSrcPanel.Size = new System.Drawing.Size(359, 299);
             this.PictureBoxSrcPanel.TabIndex = 4;
             // 
             // Src
@@ -246,26 +248,41 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // TrackBarSrcPanel
             // 
             this.TrackBarSrcPanel.Controls.Add(this.SrcZoom);
+            this.TrackBarSrcPanel.Controls.Add(this.SrcRotation);
             this.TrackBarSrcPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TrackBarSrcPanel.Location = new System.Drawing.Point(0, 336);
+            this.TrackBarSrcPanel.Location = new System.Drawing.Point(0, 299);
             this.TrackBarSrcPanel.Name = "TrackBarSrcPanel";
-            this.TrackBarSrcPanel.Size = new System.Drawing.Size(359, 34);
+            this.TrackBarSrcPanel.Size = new System.Drawing.Size(359, 61);
             this.TrackBarSrcPanel.TabIndex = 3;
             // 
             // SrcZoom
             // 
             this.SrcZoom.BackColor = System.Drawing.Color.Transparent;
-            this.SrcZoom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SrcZoom.Dock = System.Windows.Forms.DockStyle.Top;
             this.SrcZoom.Enabled = false;
             this.SrcZoom.Location = new System.Drawing.Point(0, 0);
             this.SrcZoom.Maximum = 200;
             this.SrcZoom.Minimum = -200;
             this.SrcZoom.Name = "SrcZoom";
-            this.SrcZoom.Size = new System.Drawing.Size(359, 34);
+            this.SrcZoom.Size = new System.Drawing.Size(359, 31);
             this.SrcZoom.TabIndex = 0;
             this.SrcZoom.Tag = "Source";
             this.SrcZoom.TrackBarValue = 0;
             this.SrcZoom.Value = 0;
+            // 
+            // SrcRotation
+            // 
+            this.SrcRotation.BackColor = System.Drawing.Color.Transparent;
+            this.SrcRotation.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.SrcRotation.Enabled = false;
+            this.SrcRotation.Location = new System.Drawing.Point(0, 27);
+            this.SrcRotation.Maximum = 360;
+            this.SrcRotation.Minimum = -360;
+            this.SrcRotation.Name = "SrcRotation";
+            this.SrcRotation.Size = new System.Drawing.Size(359, 34);
+            this.SrcRotation.TabIndex = 1;
+            this.SrcRotation.TrackBarValue = 0;
+            this.SrcRotation.Value = 0;
             // 
             // PictureBoxDstPanel
             // 
@@ -274,7 +291,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.PictureBoxDstPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PictureBoxDstPanel.Location = new System.Drawing.Point(0, 0);
             this.PictureBoxDstPanel.Name = "PictureBoxDstPanel";
-            this.PictureBoxDstPanel.Size = new System.Drawing.Size(352, 336);
+            this.PictureBoxDstPanel.Size = new System.Drawing.Size(352, 299);
             this.PictureBoxDstPanel.TabIndex = 5;
             // 
             // Dst
@@ -292,26 +309,41 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // TrackBarDstPanel
             // 
             this.TrackBarDstPanel.Controls.Add(this.DstZoom);
+            this.TrackBarDstPanel.Controls.Add(this.DstRotation);
             this.TrackBarDstPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TrackBarDstPanel.Location = new System.Drawing.Point(0, 336);
+            this.TrackBarDstPanel.Location = new System.Drawing.Point(0, 299);
             this.TrackBarDstPanel.Name = "TrackBarDstPanel";
-            this.TrackBarDstPanel.Size = new System.Drawing.Size(352, 34);
+            this.TrackBarDstPanel.Size = new System.Drawing.Size(352, 61);
             this.TrackBarDstPanel.TabIndex = 4;
             // 
             // DstZoom
             // 
             this.DstZoom.BackColor = System.Drawing.Color.Transparent;
-            this.DstZoom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DstZoom.Dock = System.Windows.Forms.DockStyle.Top;
             this.DstZoom.Enabled = false;
             this.DstZoom.Location = new System.Drawing.Point(0, 0);
             this.DstZoom.Maximum = 200;
             this.DstZoom.Minimum = -200;
             this.DstZoom.Name = "DstZoom";
-            this.DstZoom.Size = new System.Drawing.Size(352, 34);
+            this.DstZoom.Size = new System.Drawing.Size(352, 31);
             this.DstZoom.TabIndex = 0;
             this.DstZoom.Tag = "Destination";
             this.DstZoom.TrackBarValue = 0;
             this.DstZoom.Value = 0;
+            // 
+            // DstRotation
+            // 
+            this.DstRotation.BackColor = System.Drawing.Color.Transparent;
+            this.DstRotation.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.DstRotation.Enabled = false;
+            this.DstRotation.Location = new System.Drawing.Point(0, 27);
+            this.DstRotation.Maximum = 360;
+            this.DstRotation.Minimum = -360;
+            this.DstRotation.Name = "DstRotation";
+            this.DstRotation.Size = new System.Drawing.Size(352, 34);
+            this.DstRotation.TabIndex = 11;
+            this.DstRotation.TrackBarValue = 0;
+            this.DstRotation.Value = 0;
             // 
             // SplitContainer
             // 
@@ -328,7 +360,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // 
             this.SplitContainer.Panel2.Controls.Add(this.PictureBoxDstPanel);
             this.SplitContainer.Panel2.Controls.Add(this.TrackBarDstPanel);
-            this.SplitContainer.Size = new System.Drawing.Size(715, 370);
+            this.SplitContainer.Size = new System.Drawing.Size(715, 360);
             this.SplitContainer.SplitterDistance = 359;
             this.SplitContainer.TabIndex = 10;
             // 
@@ -336,7 +368,7 @@ namespace ImageProcessing.App.UILayer.Form.Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(755, 501);
+            this.ClientSize = new System.Drawing.Size(755, 491);
             this.Controls.Add(this.SplitContainer);
             this.Controls.Add(this.ToolBarMenu);
             this.Controls.Add(this.MainMenu);
@@ -392,6 +424,8 @@ namespace ImageProcessing.App.UILayer.Form.Main
         private ToolStripMenuItem RgbMenu;
         private ToolStripMenuItem SettingsMenu;
         private ToolStripMenuItem AffineTransformationMenu;
+        private FormControl.TrackBar.RotationTrackBar SrcRotation;
+        private FormControl.TrackBar.RotationTrackBar DstRotation;
     }
 }
 

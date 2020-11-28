@@ -35,6 +35,8 @@ using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Implementation;
 using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface;
 using ImageProcessing.App.UILayer.FormModel.Factory.MainContainer.Implementation;
+using ImageProcessing.App.UILayer.FormModel.Factory.MainFormRotation.Implementation;
+using ImageProcessing.App.UILayer.FormModel.Factory.MainFormRotation.Interface;
 using ImageProcessing.App.UILayer.FormModel.Factory.MainFormUndoRedo.Implementation;
 using ImageProcessing.App.UILayer.FormModel.Factory.MainFormZoom.Implementation;
 using ImageProcessing.App.UILayer.FormModel.Factory.MainFormZoom.Interface;
@@ -72,7 +74,8 @@ namespace ImageProcessing.App.UILayer
                 .RegisterTransient<IMainFormEventBinder, MainFormEventBinder>()
                 .RegisterTransient<IMainFormContainerFactory, MainFormContainerFactory>()
                 .RegisterTransient<IMainFormUndoRedoFactory, MainFormUndoRedoFactory>()
-                .RegisterTransient<IMainFormZoomFactory, MainFormZoomFactory>();
+                .RegisterTransient<IMainFormZoomFactory, MainFormZoomFactory>()
+                .RegisterTransient<IMainFormRotationFactory, MainFormRotationFactory>();
         }      
     }
 }

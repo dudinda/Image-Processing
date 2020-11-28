@@ -1,7 +1,6 @@
 using System.Windows.Forms;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Container;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.FileDialog;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Menu;
@@ -63,14 +62,24 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation
                     new ZoomEventArgs(ImageContainer.Source)
                 );
 
+            source.RotationSrcTrackBar.MouseWheel += (sender, args)
+             => _aggregator.PublishFrom(source,
+                 new ZoomEventArgs(ImageContainer.Source)
+             );
+
+            source.RotationSrcTrackBar.MouseUp += (secnder, args)
+                => _aggregator.PublishFrom(source,
+                    new ZoomEventArgs(ImageContainer.Source)
+                );
+
+            source.RotationSrcTrackBar.KeyPress += (secnder, args)
+                => _aggregator.PublishFrom(source,
+                    new ZoomEventArgs(ImageContainer.Source)
+                );
+
             source.ZoomDstTrackBar.MouseWheel += (sender, args)
                 => _aggregator.PublishFrom(source,
                     new ZoomEventArgs(ImageContainer.Destination)
-                );
-
-            source.ZoomDstTrackBar.ValueChanged += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new ShowTooltipOnErrorEventArgs($"{source.ZoomDstTrackBar.Factor * 100}%")
                 );
 
             source.ZoomDstTrackBar.MouseUp += (sender, args)
@@ -79,6 +88,21 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation
                 );
 
             source.ZoomDstTrackBar.KeyPress += (sender, args)
+                => _aggregator.PublishFrom(source,
+                    new ZoomEventArgs(ImageContainer.Destination)
+                );
+
+            source.RotationDstTrackBar.MouseWheel += (sender, args)
+              => _aggregator.PublishFrom(source,
+                  new ZoomEventArgs(ImageContainer.Destination)
+              );
+
+            source.RotationDstTrackBar.MouseUp += (sender, args)
+                => _aggregator.PublishFrom(source,
+                    new ZoomEventArgs(ImageContainer.Destination)
+                );
+
+            source.RotationDstTrackBar.KeyPress += (sender, args)
                 => _aggregator.PublishFrom(source,
                     new ZoomEventArgs(ImageContainer.Destination)
                 );

@@ -2,6 +2,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using ImageProcessing.App.UILayer.Control;
+using ImageProcessing.App.UILayer.FormControl.TrackBar;
 
 namespace ImageProcessing.App.UILayer.FormExposers.Main
 {
@@ -84,6 +85,16 @@ namespace ImageProcessing.App.UILayer.FormExposers.Main
         /// Zoom a destination image.
         /// </summary>
         ScaleTrackBar ZoomDstTrackBar { get; }
+
+        /// <summary>
+        /// Rotate a source image.
+        /// </summary>
+        RotationTrackBar RotationSrcTrackBar { get; }
+
+        /// <summary>
+        /// Rotate a destination image.
+        /// </summary>
+        RotationTrackBar RotationDstTrackBar { get; }
 
         /// <summary>
         /// Show the convolution control panel.

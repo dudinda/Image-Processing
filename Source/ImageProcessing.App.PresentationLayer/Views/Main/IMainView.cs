@@ -14,7 +14,7 @@ namespace ImageProcessing.App.PresentationLayer.Views.Main
     /// Represents the base behavior
     /// of the main window.
     /// </summary>
-    public interface IMainView : IView, IBitmapZoom,
+    public interface IMainView : IView, ITrackBarContainer,
         ITooltip, IBitmapContainer,
         ICursor, IDisposable
     {
