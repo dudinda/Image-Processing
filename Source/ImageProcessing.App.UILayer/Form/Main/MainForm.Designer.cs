@@ -48,11 +48,11 @@ namespace ImageProcessing.App.UILayer.Form.Main
             this.PictureBoxSrcPanel = new System.Windows.Forms.Panel();
             this.Src = new System.Windows.Forms.PictureBox();
             this.TrackBarSrcPanel = new System.Windows.Forms.Panel();
-            this.SrcZoom = new ImageProcessing.App.UILayer.Control.ZoomTrackBar();
+            this.SrcZoom = new ImageProcessing.App.UILayer.Control.ScaleTrackBar();
             this.PictureBoxDstPanel = new System.Windows.Forms.Panel();
             this.Dst = new System.Windows.Forms.PictureBox();
             this.TrackBarDstPanel = new System.Windows.Forms.Panel();
-            this.DstZoom = new ImageProcessing.App.UILayer.Control.ZoomTrackBar();
+            this.DstZoom = new ImageProcessing.App.UILayer.Control.ScaleTrackBar();
             this.ErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SplitContainer = new ImageProcessing.App.UILayer.Control.UndoRedoSplitContainer();
             this.MainMenu.SuspendLayout();
@@ -385,10 +385,10 @@ namespace ImageProcessing.App.UILayer.Form.Main
         private Panel TrackBarSrcPanel;
         private Panel PictureBoxDstPanel;
         private Panel TrackBarDstPanel;
-        private App.UILayer.Control.ZoomTrackBar SrcZoom;
+        private App.UILayer.Control.ScaleTrackBar SrcZoom;
         private App.UILayer.Control.UndoRedoSplitContainer SplitContainer;
         private ToolStripButton RedoBtn;
-        private App.UILayer.Control.ZoomTrackBar DstZoom;
+        private App.UILayer.Control.ScaleTrackBar DstZoom;
         private ToolStripMenuItem RgbMenu;
         private ToolStripMenuItem SettingsMenu;
         private ToolStripMenuItem AffineTransformationMenu;

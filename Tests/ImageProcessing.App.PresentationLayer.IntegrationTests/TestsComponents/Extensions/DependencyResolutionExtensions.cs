@@ -21,8 +21,6 @@ using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.App.ServiceLayer.Services.FileDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
-using ImageProcessing.App.ServiceLayer.Services.LockerService.Zoom.Implementation;
-using ImageProcessing.App.ServiceLayer.Services.LockerService.Zoom.Interface;
 using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
@@ -86,7 +84,6 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
                 .RegisterSingletonInstance<INonBlockDialogService>(dialog)
                 .RegisterTransientInstance<ICacheService<Bitmap>>(Substitute.ForPartsOf<CacheService<Bitmap>>())
                 .RegisterTransientInstance<IAsyncOperationLocker>(Substitute.ForPartsOf<AsyncOperationLocker>())
-                .RegisterTransientInstance<IAsyncZoomLocker>(Substitute.ForPartsOf<AsyncZoomLocker>())
                 .RegisterTransientInstance<IAwaitablePipeline>(Substitute.ForPartsOf<AwaitablePipeline>())
                 .RegisterTransientInstance<IMainFormEventBinder>(Substitute.ForPartsOf<MainFormEventBinder>(aggregator))
                 .RegisterTransientInstance<IMainFormContainerFactory>(Substitute.ForPartsOf<MainFormContainerFactory>())

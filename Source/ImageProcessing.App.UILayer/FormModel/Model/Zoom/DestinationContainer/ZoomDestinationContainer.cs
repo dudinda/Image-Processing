@@ -13,8 +13,5 @@ namespace ImageProcessing.App.UILayer.FormModel.Model.Zoom.DestinationContainer.
             Exposer.ZoomDstTrackBar.Enabled = Exposer.DestinationImage != null;
             Exposer.ZoomDstTrackBar.Focus();
         }
-
-        public override void SetZoomImage(Image image)
-            => Exposer.ZoomDstTrackBar.ImageToZoom = image;
     }
 }

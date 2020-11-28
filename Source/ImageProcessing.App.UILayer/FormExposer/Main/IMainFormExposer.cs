@@ -78,12 +78,12 @@ namespace ImageProcessing.App.UILayer.FormExposers.Main
         /// <summary>
         /// Zoom a source image.
         /// </summary>
-        ZoomTrackBar ZoomSrcTrackBar { get; }
+        ScaleTrackBar ZoomSrcTrackBar { get; }
 
         /// <summary>
         /// Zoom a destination image.
         /// </summary>
-        ZoomTrackBar ZoomDstTrackBar { get; }
+        ScaleTrackBar ZoomDstTrackBar { get; }
 
         /// <summary>
         /// Show the convolution control panel.

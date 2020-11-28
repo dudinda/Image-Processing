@@ -17,7 +17,5 @@ namespace ImageProcessing.App.UILayer.FormModel.Model.Zoom.SourceContainer.Imple
             Exposer.ZoomSrcTrackBar.Focus();
         }
 
-        public override void SetZoomImage(Image image)
-            => Exposer.ZoomSrcTrackBar.ImageToZoom = image;
     }
 }

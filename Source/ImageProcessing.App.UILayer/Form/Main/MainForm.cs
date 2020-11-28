@@ -157,11 +157,11 @@ namespace ImageProcessing.App.UILayer.Form.Main
             => ReplaceDstBySrc;
 
         /// <inheritdoc/>
-        public ZoomTrackBar ZoomSrcTrackBar
+        public ScaleTrackBar ZoomSrcTrackBar
             => SrcZoom;
 
         /// <inheritdoc/>
-        public ZoomTrackBar ZoomDstTrackBar
+        public ScaleTrackBar ZoomDstTrackBar
             => DstZoom;
 
         /// <inheritdoc/>
@@ -236,10 +236,6 @@ namespace ImageProcessing.App.UILayer.Form.Main
         /// <inheritdoc/>
         public virtual void ResetTrackBarValue(ImageContainer container, int value = 0)
             => Write(() => _zoom.Get(container).OnElementExpose(this).ResetTrackBarValue(value));
-
-        /// <inheritdoc/>
-        public virtual void SetImageToZoom(ImageContainer container, Image image)
-            => Write(() => _zoom.Get(container).OnElementExpose(this).SetZoomImage(image));
 
         /// <inheritdoc/>
         public virtual Image GetImageCopy(ImageContainer container)

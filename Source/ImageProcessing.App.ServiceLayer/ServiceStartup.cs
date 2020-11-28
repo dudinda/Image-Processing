@@ -48,8 +48,6 @@ using ImageProcessing.App.ServiceLayer.Services.Histogram.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Histogram.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
-using ImageProcessing.App.ServiceLayer.Services.LockerService.Zoom.Implementation;
-using ImageProcessing.App.ServiceLayer.Services.LockerService.Zoom.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Morphology.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Morphology.Interface;
 using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
@@ -73,7 +71,6 @@ namespace ImageProcessing.App.ServiceLayer
             builder
                 .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
                 .RegisterSingleton<IStaTaskService, StaTaskService>()
-                .RegisterSingleton<IAsyncZoomLocker, AsyncZoomLocker>()
                 .RegisterSingleton<ICacheService<Bitmap>, CacheService<Bitmap>>()
                 .RegisterTransient<IConvolutionService, ConvolutionService>()
                 .RegisterTransient<IMorphologyService, MorphologyService>()

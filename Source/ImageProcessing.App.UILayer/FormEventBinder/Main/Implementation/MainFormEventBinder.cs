@@ -1,6 +1,7 @@
 using System.Windows.Forms;
 
 using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Container;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.FileDialog;
 using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Menu;
@@ -65,6 +66,11 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation
             source.ZoomDstTrackBar.MouseWheel += (sender, args)
                 => _aggregator.PublishFrom(source,
                     new ZoomEventArgs(ImageContainer.Destination)
+                );
+
+            source.ZoomDstTrackBar.ValueChanged += (sender, args)
+                => _aggregator.PublishFrom(source,
+                    new ShowTooltipOnErrorEventArgs($"{source.ZoomDstTrackBar.Factor * 100}%")
                 );
 
             source.ZoomDstTrackBar.MouseUp += (sender, args)

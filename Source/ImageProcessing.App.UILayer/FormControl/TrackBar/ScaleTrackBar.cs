@@ -10,40 +10,13 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.UILayer.Control
 {
-    public class ZoomTrackBar : MetroTrackBar
+    public class ScaleTrackBar : MetroTrackBar
     {
-        private Image _image;
-
-        private readonly static object _sync = new object();
-
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Factor
            => 2 * Convert.ToDouble(Value)  /
               Convert.ToDouble(Maximum - Minimum);
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Image ImageToZoom {
-            get 
-            {
-                lock (_sync)
-                {
-                    return _image;
-                }
-            } 
-            set
-            {
-                lock (_sync)
-                {
-                    _image = value;
-
-                    if(_image is null)
-                    {
-                        base.Enabled = false;
-                    }
-                }
-            }
-        }
- 
         public int TrackBarValue { 
             get => base.Value;
             set => base.Value = value;

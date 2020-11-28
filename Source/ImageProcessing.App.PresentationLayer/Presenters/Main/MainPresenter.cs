@@ -363,8 +363,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             {
                 View.AddToUndoRedo(to, new Bitmap(View.GetImageCopy(to)), action);
                 View.SetImageCopy(to, new Bitmap(bmp));
-                View.SetImageToZoom(to, new Bitmap(bmp));
-                View.SetImage(to, bmp);
+                View.SetImage(to, new Bitmap(bmp));
                 View.SetImageCenter(to, bmp.Size);
                 View.Refresh(to);
                 View.ResetTrackBarValue(to);
