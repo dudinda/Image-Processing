@@ -29,24 +29,20 @@ namespace ImageProcessing.App.UILayer.FormCommands.Main.Container.Destination.Im
                 var newX = (panel.ClientSize.Width - size.Width) / 2;
                 var newY = (panel.ClientSize.Height - size.Height) / 2;
 
-                var location = new Point(0, 0);
-
                 if (newX > 0 && newY > 0)
                 {
-                    (location.X, location.Y) = (newX, newY);
+                    Exposer.DestinationBox.Location = new Point(newX, newY);
                 }
 
                 if (newX > 0 && newY < 0)
                 {
-                    (location.X, location.Y) = (newX, 0);
+                    Exposer.DestinationBox.Location = new Point(newX, 0);
                 }
 
                 if (newX < 0 && newY > 0)
                 {
-                    (location.X, location.Y) = (newX, newY);
+                    Exposer.DestinationBox.Location  = new Point(0, newY);
                 }
-
-                Exposer.DestinationBox.Location = location;
             }
         }
     }
