@@ -49,7 +49,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
-            var (xBound, yBound) = (srcWidth - 1, srcHeight - 1);
+            var (xBound, yBound) = (srcWidth - 2, srcHeight - 2);
 
             //inv( T(x, y)S(alpha)inv(T(x', y')) )v = v'
             //where x and y are the center of a destination and x' and y' are the
@@ -59,7 +59,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
                 var dstStartPtr = (byte*)dstData.Scan0.ToPointer();
 
-                Parallel.For(0, dstWidth, options, y =>
+                Parallel.For(0, dstHeight, options, y =>
                 {
                     //get the address of a row
                     var dstPtr = dstStartPtr + y * dstData.Stride;
