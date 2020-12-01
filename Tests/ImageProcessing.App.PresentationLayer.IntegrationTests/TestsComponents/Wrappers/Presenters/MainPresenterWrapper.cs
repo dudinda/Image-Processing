@@ -9,6 +9,7 @@ using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Show;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Main;
 using ImageProcessing.App.PresentationLayer.Views.Main;
+using ImageProcessing.App.ServiceLayer.Providers.Rotation.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Scaling.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
@@ -29,7 +30,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
           ISubscriber<SaveWithoutFileDialogEventArgs>,
           ISubscriber<ShowTooltipOnErrorEventArgs>,
           ISubscriber<ReplaceImageEventArgs>,
-          ISubscriber<ZoomEventArgs>,
+          ISubscriber<TrackBarEventArgs>,
           ISubscriber<UndoRedoEventArgs>
     {
 
@@ -40,6 +41,8 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         public IAwaitablePipeline Pipeline { get; }
         public IAsyncOperationLocker Operation { get; }
         public IScalingProvider Zoom { get; }
+        public IRotationProvider Rotation { get; }
+
          
         public MainPresenterWrapper(
             IAppController controller,
@@ -47,7 +50,8 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
             INonBlockDialogService dialog,
             IAwaitablePipeline pipeline,
             IAsyncOperationLocker operation,
-            IScalingProvider zoom) : base(controller)
+            IScalingProvider zoom,
+            IRotationProvider rotation) : base(controller)
         {
             Cache = cache;
             Dialog = dialog;
@@ -55,7 +59,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
             Operation = operation;
             Zoom = zoom;
 
-            _presenter = new MainPresenter(controller, cache, dialog, pipeline, operation, zoom);
+            _presenter = new MainPresenter(controller, cache, dialog, pipeline, operation, zoom, rotation);
         }
 
         public override void Run()
@@ -74,7 +78,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
             
         }
 
-        public virtual async Task OnEventHandler(object publisher, ZoomEventArgs e)
+        public virtual async Task OnEventHandler(object publisher, TrackBarEventArgs e)
         {
            
         }

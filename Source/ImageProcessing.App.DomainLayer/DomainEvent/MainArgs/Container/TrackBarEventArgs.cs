@@ -5,9 +5,9 @@ namespace ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Container
     /// <summary>
     /// Zoom the specified <see cref="ImageContainer"/>.
     /// </summary>
-    public sealed class ZoomEventArgs : BaseEventArgs
+    public sealed class TrackBarEventArgs : BaseEventArgs
     {
-        public ZoomEventArgs(ImageContainer container) : base()
+        public TrackBarEventArgs(ImageContainer container) : base()
         {
             Container = container;
 

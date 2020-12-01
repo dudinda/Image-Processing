@@ -49,7 +49,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
           ISubscriber<SaveWithoutFileDialogEventArgs>,
           ISubscriber<ShowTooltipOnErrorEventArgs>,
           ISubscriber<ReplaceImageEventArgs>,
-          ISubscriber<ZoomEventArgs>,
+          ISubscriber<TrackBarEventArgs>,
           ISubscriber<UndoRedoEventArgs>
     {
         private readonly ICacheService<Bitmap> _cache;
@@ -305,7 +305,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         }
 
         /// <inheritdoc cref="ZoomEventArgs"/>
-        public async Task OnEventHandler(object publisher, ZoomEventArgs e)
+        public async Task OnEventHandler(object publisher, TrackBarEventArgs e)
         {
             try
             {

@@ -18,7 +18,7 @@ namespace ImageProcessing.App.DomainLayer.Factory.Convolution.Implementation
     {
         /// <summary>
         /// A factory method
-        /// where the <see cref="ConvolutionOperator"/> represents an
+        /// where the <see cref="ConvKernel"/> represents an
         /// enumeration for the types implementing the <see cref="IConvolutionKernel"/>.
         /// </summary>
         public IConvolutionKernel Get(ConvKernel filter)

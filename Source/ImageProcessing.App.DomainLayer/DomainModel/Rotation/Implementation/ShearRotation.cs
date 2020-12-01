@@ -36,8 +36,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
               .DrawFilledRectangle(Brushes.White);
 
-            var shear = new ShearTransformation();
-
             // inv(Sh(a, 0)) = Sh(-a , 0)
             // inv(Sh(0, b)) = Sh(0, -b)
             var alpha = Math.Tan(rad / 2);

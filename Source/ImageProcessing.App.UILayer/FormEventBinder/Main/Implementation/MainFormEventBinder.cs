@@ -48,63 +48,63 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation
                 );
 
             source.ZoomSrcTrackBar.MouseWheel += (sender, args)
-             => _aggregator.PublishFrom(source,
-                 new ZoomEventArgs(ImageContainer.Source)
-             );
+                => _aggregator.PublishFrom(source,
+                    new TrackBarEventArgs(ImageContainer.Source)
+                );
 
             source.ZoomSrcTrackBar.MouseUp += (secnder, args)
                 => _aggregator.PublishFrom(source,
-                    new ZoomEventArgs(ImageContainer.Source)
+                    new TrackBarEventArgs(ImageContainer.Source)
                 );
 
             source.ZoomSrcTrackBar.KeyPress += (secnder, args)
                 => _aggregator.PublishFrom(source,
-                    new ZoomEventArgs(ImageContainer.Source)
+                    new TrackBarEventArgs(ImageContainer.Source)
                 );
 
             source.RotationSrcTrackBar.MouseWheel += (sender, args)
-             => _aggregator.PublishFrom(source,
-                 new ZoomEventArgs(ImageContainer.Source)
-             );
+                => _aggregator.PublishFrom(source,
+                    new TrackBarEventArgs(ImageContainer.Source)
+                );
 
             source.RotationSrcTrackBar.MouseUp += (secnder, args)
                 => _aggregator.PublishFrom(source,
-                    new ZoomEventArgs(ImageContainer.Source)
+                    new TrackBarEventArgs(ImageContainer.Source)
                 );
 
             source.RotationSrcTrackBar.KeyPress += (secnder, args)
                 => _aggregator.PublishFrom(source,
-                    new ZoomEventArgs(ImageContainer.Source)
+                    new TrackBarEventArgs(ImageContainer.Source)
                 );
 
             source.ZoomDstTrackBar.MouseWheel += (sender, args)
                 => _aggregator.PublishFrom(source,
-                    new ZoomEventArgs(ImageContainer.Destination)
+                    new TrackBarEventArgs(ImageContainer.Destination)
                 );
 
             source.ZoomDstTrackBar.MouseUp += (sender, args)
                 => _aggregator.PublishFrom(source,
-                    new ZoomEventArgs(ImageContainer.Destination)
+                    new TrackBarEventArgs(ImageContainer.Destination)
                 );
 
             source.ZoomDstTrackBar.KeyPress += (sender, args)
                 => _aggregator.PublishFrom(source,
-                    new ZoomEventArgs(ImageContainer.Destination)
+                    new TrackBarEventArgs(ImageContainer.Destination)
                 );
 
             source.RotationDstTrackBar.MouseWheel += (sender, args)
-              => _aggregator.PublishFrom(source,
-                  new ZoomEventArgs(ImageContainer.Destination)
-              );
+                => _aggregator.PublishFrom(source,
+                    new TrackBarEventArgs(ImageContainer.Destination)
+                );
 
             source.RotationDstTrackBar.MouseUp += (sender, args)
                 => _aggregator.PublishFrom(source,
-                    new ZoomEventArgs(ImageContainer.Destination)
+                    new TrackBarEventArgs(ImageContainer.Destination)
                 );
 
             source.RotationDstTrackBar.KeyPress += (sender, args)
                 => _aggregator.PublishFrom(source,
-                    new ZoomEventArgs(ImageContainer.Destination)
+                    new TrackBarEventArgs(ImageContainer.Destination)
                 );
 
             source.RgbMenuButton.Click += (sender, args)

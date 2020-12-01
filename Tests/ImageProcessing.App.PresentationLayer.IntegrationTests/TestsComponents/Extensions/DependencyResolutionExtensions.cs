@@ -15,6 +15,7 @@ using ImageProcessing.App.PresentationLayer.Views.Rgb;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Convolution;
 using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
+using ImageProcessing.App.ServiceLayer.Providers.Rotation.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Scaling.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
@@ -38,6 +39,8 @@ using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Convolution;
 using ImageProcessing.App.UILayer.FormExposers.Distribution;
 using ImageProcessing.App.UILayer.FormModel.Factory.MainContainer.Implementation;
+using ImageProcessing.App.UILayer.FormModel.Factory.MainFormRotation.Implementation;
+using ImageProcessing.App.UILayer.FormModel.Factory.MainFormRotation.Interface;
 using ImageProcessing.App.UILayer.FormModel.Factory.MainFormUndoRedo.Implementation;
 using ImageProcessing.App.UILayer.FormModel.Factory.MainFormZoom.Implementation;
 using ImageProcessing.App.UILayer.FormModel.Factory.MainFormZoom.Interface;
@@ -89,14 +92,17 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
                 .RegisterTransientInstance<IMainFormContainerFactory>(Substitute.ForPartsOf<MainFormContainerFactory>())
                 .RegisterTransientInstance<IMainFormUndoRedoFactory>(Substitute.ForPartsOf<MainFormUndoRedoFactory>())
                 .RegisterTransientInstance<IMainFormZoomFactory>(Substitute.ForPartsOf<MainFormZoomFactory>())
-                .RegisterTransientInstance<IScalingProvider>(Substitute.For<IScalingProvider>());
+                .RegisterTransientInstance<IMainFormRotationFactory>(Substitute.ForPartsOf<MainFormRotationFactory>())
+                .RegisterTransientInstance<IScalingProvider>(Substitute.For<IScalingProvider>())
+                .RegisterTransientInstance<IRotationProvider>(Substitute.For<IRotationProvider>());
 
 
             var form = Substitute.ForPartsOf<MainFormWrapper>(synchronizer, controller,
                 builder.Resolve<IMainFormEventBinder>(),
                 builder.Resolve<IMainFormContainerFactory>(),
                 builder.Resolve<IMainFormUndoRedoFactory>(),
-                builder.Resolve<IMainFormZoomFactory>());
+                builder.Resolve<IMainFormZoomFactory>(),
+                builder.Resolve<IMainFormRotationFactory>());
 
             builder.RegisterSingletonInstance(form)
                    .RegisterSingletonInstance<IMainView>(form);
@@ -106,7 +112,8 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
                 builder.Resolve<INonBlockDialogService>(),
                 builder.Resolve<IAwaitablePipeline>(),
                 builder.Resolve<IAsyncOperationLocker>(),
-                builder.Resolve<IScalingProvider>()));
+                builder.Resolve<IScalingProvider>(),
+                builder.Resolve<IRotationProvider>()));
 
         }
 
