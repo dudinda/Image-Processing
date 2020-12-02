@@ -32,8 +32,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
                .DrawFilledRectangle(Brushes.White);
 
-            var (xCenter, yCenter) = ((dstWidth + 1) / 2.0, (dstHeight + 1) / 2.0);
-            var (xSrcCenter, ySrcCenter) = ((srcWidth + 1) / 2.0, (srcHeight + 1) / 2.0);
+            var (xCenter, yCenter) = ((dstWidth - 1) / 2.0, (dstHeight - 1) / 2.0);
+            var (xSrcCenter, ySrcCenter) = ((srcWidth - 1) / 2.0, (srcHeight - 1) / 2.0);
 
             var srcData = src.LockBits(
                 new Rectangle(0, 0, srcWidth, srcHeight),

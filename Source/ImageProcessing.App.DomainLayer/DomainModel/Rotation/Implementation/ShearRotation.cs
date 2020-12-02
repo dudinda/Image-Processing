@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Rotation.Interface;
-using ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementation;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 {
@@ -30,8 +29,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 
             var (dstHeight, dstWidth) = ((int)(yMax - yMin), (int)(xMax - xMin));
 
-            var (xCenter, yCenter) = ((dstWidth + 1) / 2.0, (dstHeight + 1) / 2.0);
-            var (xSrcCenter, ySrcCenter) = ((srcWidth + 1) / 2.0, (srcHeight + 1) / 2.0);
+            var (xCenter, yCenter) = ((dstWidth - 1) / 2.0, (dstHeight - 1) / 2.0);
+            var (xSrcCenter, ySrcCenter) = ((srcWidth - 1) / 2.0, (srcHeight - 1) / 2.0);
 
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
               .DrawFilledRectangle(Brushes.White);
