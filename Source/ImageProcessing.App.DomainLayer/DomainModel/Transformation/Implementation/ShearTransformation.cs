@@ -69,10 +69,10 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                         var shiftY = y + ty;
 
                         // 1 / det(A)  * adj(A)Bv = v'
-                        // x' = (x - dx*y) / (1 - dx * dy) (1)
-                        // y' = (y - dy*x) / (1 - dx * dy) (2)
-                        //from (1) x = (1 - dx * dy)x' + dx * y (3)
-                        //substituting (3) in (2) y' = y - dy*x'
+                        // x' = (x - shx * y) / (1 - shx * shy) (1)
+                        // y' = (y - shy * x) / (1 - shx * shy) (2)
+                        //from (1) x = (1 - shx * shy)x' + shx * y (3)
+                        //substituting (3) in (2) y' = y - shy * x'
                         var srcX = (shiftX - shx * shiftY) / detA;
                         var srcY = shiftY - shy * srcX;
                 
