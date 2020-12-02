@@ -43,8 +43,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 
             // inv(Sh(a, 0)) = Sh(-a , 0)
             // inv(Sh(0, b)) = Sh(0, -b)
-            var alpha = Math.Tan(rad / 2);
-            var beta = -Math.Sin(rad);
+            var alpha = -Math.Tan(rad / 2);
+            var beta  = Math.Sin(rad);
 
             var srcData = src.LockBits(
                  new Rectangle(0, 0, srcWidth, srcHeight),
