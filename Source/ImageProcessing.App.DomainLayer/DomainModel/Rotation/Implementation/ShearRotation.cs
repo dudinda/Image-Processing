@@ -35,6 +35,12 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
               .DrawFilledRectangle(Brushes.White);
 
+            //if tan(rad/2) tends to inf, substract the epsilon value 
+            if(rad - Math.PI * (rad / Math.PI) < 10e-12)
+            {
+                rad = Math.Sign(rad) * (Math.Abs(rad) - 10e-12);
+            }  
+
             // inv(Sh(a, 0)) = Sh(-a , 0)
             // inv(Sh(0, b)) = Sh(0, -b)
             var alpha = Math.Tan(rad / 2);
