@@ -14,23 +14,23 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
         {
             if(yScale == 0 && xScale == 0) { return src; }
 
-            if(xScale == -1 && yScale == -1)
-            {
-                
-            } 
+            if (xScale == -1) { throw new ArgumentException(nameof(xScale)); }
+            if (yScale == -1) { throw new ArgumentException(nameof(yScale)); } 
 
-            var dstWidth = src.Width + (int)(src.Width * xScale);
-            var dstHeight = src.Height + (int)(src.Height * yScale);
+            var (srcWidth, srcHeight) = (src.Width, src.Height);
+
+            var dstWidth = srcWidth + (int)(srcWidth * xScale);
+            var dstHeight = srcHeight + (int)(srcHeight * yScale);
 
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
                 .DrawFilledRectangle(Brushes.White);
 
             var srcData = src.LockBits(
-                new Rectangle(0, 0, src.Width, src.Height),
+                new Rectangle(0, 0, srcWidth, srcHeight),
                 ImageLockMode.ReadOnly, src.PixelFormat);
 
             var dstData = dst.LockBits(
-                new Rectangle(0, 0, dst.Width, dst.Height),
+                new Rectangle(0, 0, dstWidth, dstHeight),
                 ImageLockMode.WriteOnly, dst.PixelFormat);
 
             var ptrStep = dst.GetBitsPerPixel() / 8;
@@ -44,7 +44,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
                 var dstStartPtr = (byte*)dstData.Scan0.ToPointer();
 
-                var (srcWidth, srcHeight) = (src.Width, src.Height);
                 var (xBound, yBound) = (srcWidth - 3, srcHeight - 3);
 
                 var dy = srcHeight / (double)dstHeight;
