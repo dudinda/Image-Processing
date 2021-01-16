@@ -381,8 +381,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         {
             lock (_scale)
             {
+                var size = bmp.Size;
                 View.SetImage(to, bmp);
-                View.SetImageCenter(to, bmp.Size);
+                View.SetImageCenter(to, size);
                 View.Refresh(to);
             }
         }
