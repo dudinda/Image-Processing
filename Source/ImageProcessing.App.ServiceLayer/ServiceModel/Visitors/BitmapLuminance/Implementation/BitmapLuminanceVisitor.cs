@@ -5,7 +5,7 @@ using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Int
 
 namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance.Implementation
 {
-    internal sealed class BitmapLuminanceVisitor : IBitmapLuminanceVisitor
+    public sealed class BitmapLuminanceVisitor : IBitmapLuminanceVisitor
     {
         private IBitmapLuminanceDistributionService _service;
 

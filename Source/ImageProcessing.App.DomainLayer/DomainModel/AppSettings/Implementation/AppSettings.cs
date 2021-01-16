@@ -4,7 +4,7 @@ using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
 namespace ImageProcessing.App.ServiceLayer.Services.Settings.Implementation
 {
     /// <inheritdoc cref="IAppSettings"/>
-    internal sealed class AppSettings : IAppSettings
+    public sealed class AppSettings : IAppSettings
     {
         /// <inheritdoc />
         public RotationMethod Rotation { get; set; }

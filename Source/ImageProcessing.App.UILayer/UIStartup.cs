@@ -53,7 +53,7 @@ namespace ImageProcessing.App.UILayer
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            new PresentationStartup().Build(builder);
+            new Startup().Build(builder);
 
             builder
                 .RegisterSingletonView<IMainView, MainForm>()

@@ -6,7 +6,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
     /// Provides the information about
     /// the distribution of a discrete random variable.
     /// </summary>
-    internal interface IRandomVariableDistributionService
+    public interface IRandomVariableDistributionService
     {
         /// <summary>
         /// Approximate the specified cdf to

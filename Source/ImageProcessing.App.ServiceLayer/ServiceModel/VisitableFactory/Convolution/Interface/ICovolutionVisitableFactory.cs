@@ -4,7 +4,7 @@ using ImageProcessing.Microkernel.MVP.Model;
 
 namespace ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.Convolution.Interface
 {
-    internal interface ICovolutionVisitableFactory : IModelFactory<IConvolutionVisitable, ConvKernel>
+    public interface ICovolutionVisitableFactory : IModelFactory<IConvolutionVisitable, ConvKernel>
     {
 
     }

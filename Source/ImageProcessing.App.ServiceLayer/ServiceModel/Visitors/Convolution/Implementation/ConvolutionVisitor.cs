@@ -10,7 +10,7 @@ using ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interf
 
 namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Convolution.Implementation
 {
-    internal sealed class ConvolutionVisitor : IConvolutionVisitor
+    public sealed class ConvolutionVisitor : IConvolutionVisitor
     {
         private readonly IConvolutionFactory _factory;
         private readonly IConvolutionService _convolution;

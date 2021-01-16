@@ -33,8 +33,8 @@ using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
+using ImageProcessing.App.ServiceLayer.Win.Code.Extensions.BitmapExt;
 
-[assembly: InternalsVisibleTo("ImageProcessing.App.UILayer")]
 namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 {
     internal sealed class MainPresenter : BasePresenter<IMainView>,

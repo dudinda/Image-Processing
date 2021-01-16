@@ -11,7 +11,7 @@ using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
 {
     /// <inheritdoc cref="IBitmapService"/>
-    internal sealed class BitmapService : IBitmapService
+    public sealed class BitmapService : IBitmapService
     {
         /// <inheritdoc/>
         public Bitmap Normalize(Bitmap bitmap)

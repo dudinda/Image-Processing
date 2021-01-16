@@ -1,5 +1,4 @@
 using System;
-using System.Drawing;
 
 using ImageProcessing.App.UILayer.FormExposers;
 using ImageProcessing.App.UILayer.FormExposers.Main;

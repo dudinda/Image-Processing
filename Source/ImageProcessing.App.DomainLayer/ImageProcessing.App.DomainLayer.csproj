@@ -31,11 +31,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ImageProcessing.App.CommonLayer\ImageProcessing.App.CommonLayer.csproj" />
-    <ProjectReference Include="..\ImageProcessing.Microkernel.EntryPoint\ImageProcessing.Microkernel.EntryPoint.csproj" />
     <ProjectReference Include="..\ImageProcessing.Utility.DataStructure\ImageProcessing.Utility.DataStructure.csproj" />
     <ProjectReference Include="..\ImageProcessing.Utility.DecimalMath\ImageProcessing.Utility.DecimalMath.csproj" />
-    <ProjectReference Include="..\ImageProcessing.Utility.Interop\ImageProcessing.Utility.Interop.csproj" />
   </ItemGroup>
 
 <ItemGroup>
@@ -59,6 +56,7 @@
 <ItemGroup>
   <Folder Include="DomainFactory\Scaling\Implementation\" />
   <Folder Include="DomainFactory\Scaling\Interface\" />
+  <Folder Include="DomainModel\ColorSpace\Implementation\" />
   <Folder Include="DomainModel\Rotation\Interface\" />
 </ItemGroup>
 

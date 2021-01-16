@@ -7,7 +7,7 @@ using ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.Convolution
 
 namespace ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.Convolution.Implementation
 {
-    internal sealed class ConvolutionVisitableFactory : ICovolutionVisitableFactory
+    public sealed class ConvolutionVisitableFactory : ICovolutionVisitableFactory
     {
         public IConvolutionVisitable Get(ConvKernel filter)
             => filter

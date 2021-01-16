@@ -6,7 +6,7 @@ using ImageProcessing.App.ServiceLayer.Providers.Transformation.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Transformation.Implementation
 {
-    internal sealed class TransformationProvider : ITransformationProvider
+    public sealed class TransformationProvider : ITransformationProvider
     {
         private readonly ITransformationFactory _factory;
 

@@ -8,7 +8,7 @@ using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Convolution.Interfa
 namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Convolution
 {
     /// <inheritdoc cref="IConvolutionServiceProvider"/>
-    internal sealed class ConvolutionServiceProvider : IConvolutionServiceProvider
+    public sealed class ConvolutionServiceProvider : IConvolutionServiceProvider
     {
         private readonly ICovolutionVisitableFactory _factory;
         private readonly IConvolutionVisitor _visitor;

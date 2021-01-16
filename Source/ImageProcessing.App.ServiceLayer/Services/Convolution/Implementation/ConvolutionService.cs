@@ -10,7 +10,7 @@ using ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interf
 namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
 {
     /// <inheritdoc cref="IConvolutionService"/>
-    internal sealed class ConvolutionService : IConvolutionService
+    public sealed class ConvolutionService : IConvolutionService
     {
         /// <inheritdoc/>
         public Bitmap Convolution(Bitmap source, IConvolutionKernel filter) 

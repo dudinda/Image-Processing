@@ -1,5 +1,4 @@
 using System;
-using System.Configuration;
 using System.Threading;
 
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
@@ -10,7 +9,7 @@ using Microsoft.Extensions.Primitives;
 namespace ImageProcessing.App.ServiceLayer.Services.Cache.Implementation
 {
     /// <inheritdoc cref="ICacheService{TItem}"/>
-    internal class CacheService<TItem> : ICacheService<TItem>
+    public class CacheService<TItem> : ICacheService<TItem>
     {
         private static CancellationTokenSource _resetToken
             = new CancellationTokenSource();

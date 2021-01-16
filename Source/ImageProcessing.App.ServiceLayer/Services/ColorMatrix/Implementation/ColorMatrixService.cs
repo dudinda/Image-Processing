@@ -10,7 +10,7 @@ using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 namespace ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Implementation
 {
     /// <inheritdoc cref="IColorMatrixService"/>
-    internal sealed class ColorMatrixService : IColorMatrixService
+    public sealed class ColorMatrixService : IColorMatrixService
     {
         /// <inheritdoc/>
         public Bitmap Apply(Bitmap source, ReadOnly2DArray<double> mtx)

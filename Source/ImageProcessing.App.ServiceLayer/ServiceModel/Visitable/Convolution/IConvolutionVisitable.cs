@@ -4,7 +4,7 @@ using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Convolution.Interfa
 
 namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.Convolution
 {
-    internal interface IConvolutionVisitable
+    public interface IConvolutionVisitable
         : IVisitable<IConvolutionVisitable, IConvolutionVisitor>
     {
         Bitmap Filter(Bitmap bmp);

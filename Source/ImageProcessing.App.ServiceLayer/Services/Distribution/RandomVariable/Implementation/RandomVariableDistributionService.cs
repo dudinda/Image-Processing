@@ -10,7 +10,7 @@ using ImageProcessing.Utility.DecimalMath.RealAxis;
 namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Implementation
 {
     /// <inheritdoc cref="IRandomVariableDistributionService"/>
-    internal sealed class RandomVariableDistributionService : IRandomVariableDistributionService
+    public sealed class RandomVariableDistributionService : IRandomVariableDistributionService
     {
         /// <inheritdoc/>
         public decimal[] TransformToDecimal(decimal[] cdf, IDistribution distribution)

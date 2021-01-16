@@ -7,7 +7,7 @@ using ImageProcessing.App.DomainLayer.DomainModel.ColorMatrix.Interface;
 
 namespace ImageProcessing.App.DomainLayer.DomainFactory.ColorMatrix.Implementation
 {
-    internal sealed class ColorMatrixFactory : IColorMatrixFactory
+    public sealed class ColorMatrixFactory : IColorMatrixFactory
     {
         public IColorMatrix Get(ClrMatrix matrix)
             => matrix

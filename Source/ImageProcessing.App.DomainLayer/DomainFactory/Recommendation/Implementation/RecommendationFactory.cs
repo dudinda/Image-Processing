@@ -7,7 +7,7 @@ using ImageProcessing.App.DomainLayer.DomainModel.Recommendation.Interface;
 
 namespace ImageProcessing.App.DomainLayer.Factory.RgbFilters.Recommendation.Implementation
 {
-    internal sealed class RecommendationFactory : IRecommendationFactory
+    public sealed class RecommendationFactory : IRecommendationFactory
     {
         /// <summary>
         /// A factory method

@@ -11,7 +11,7 @@ using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 namespace ImageProcessing.App.ServiceLayer.Providers.Rgb.Implementation
 {
     /// <inheritdoc cref="IRgbServiceProvider"/>
-    internal sealed class RgbServiceProvider : IRgbServiceProvider
+    public sealed class RgbServiceProvider : IRgbServiceProvider
     {
         private readonly IRgbFilterFactory _rgb;
         private readonly IColorMatrixService _service;

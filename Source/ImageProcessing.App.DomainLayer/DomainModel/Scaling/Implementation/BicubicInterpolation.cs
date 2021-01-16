@@ -14,6 +14,11 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
         {
             if(yScale == 0 && xScale == 0) { return src; }
 
+            if(xScale == -1 && yScale == -1)
+            {
+                
+            } 
+
             var dstWidth = src.Width + (int)(src.Width * xScale);
             var dstHeight = src.Height + (int)(src.Height * yScale);
 

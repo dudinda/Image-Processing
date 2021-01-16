@@ -9,7 +9,7 @@ using ImageProcessing.App.DomainLayer.Factory.Morphology.Interface;
 namespace ImageProcessing.App.DomainLayer.Factory.Morphology.Implementation
 {
     /// <inheritdoc cref="IMorphologyFactory" />
-    internal sealed class MorphologyFactory : IMorphologyFactory
+    public sealed class MorphologyFactory : IMorphologyFactory
     {
         /// <inheritdoc/>
         public IMorphologyBinary GetBinary(MorphOperator filter)

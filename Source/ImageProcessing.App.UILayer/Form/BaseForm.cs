@@ -72,7 +72,8 @@ namespace ImageProcessing.App.UILayer.Form
                 result = func();
             } 
 
-            return (TElement)result;
+            return (TElement)(result
+                ?? throw new ArgumentNullException(nameof(result)));
         }
 
         protected virtual void Write(Action action)

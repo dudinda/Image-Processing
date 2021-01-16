@@ -7,7 +7,7 @@ using ImageProcessing.App.DomainLayer.DomainModel.Transformation.Interface;
 
 namespace ImageProcessing.App.DomainLayer.DomainFactory.Transformation.Implementation
 {
-    internal sealed class TransformationFactory : ITransformationFactory
+    public sealed class TransformationFactory : ITransformationFactory
     {
         public ITransformation Get(AffTransform transformation)
             => transformation

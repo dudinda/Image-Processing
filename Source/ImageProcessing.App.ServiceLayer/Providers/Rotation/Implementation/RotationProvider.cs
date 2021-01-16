@@ -6,7 +6,7 @@ using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Rotation.Implementation
 {
-    internal sealed class RotationProvider : IRotationProvider
+    public sealed class RotationProvider : IRotationProvider
     {
         private readonly IRotationFactory _rotation;
         private readonly IAppSettings _settings;

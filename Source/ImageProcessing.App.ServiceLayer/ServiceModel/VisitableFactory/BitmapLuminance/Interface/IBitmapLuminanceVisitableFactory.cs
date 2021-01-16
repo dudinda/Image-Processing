@@ -4,7 +4,7 @@ using ImageProcessing.Microkernel.MVP.Model;
 
 namespace ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.BitmapLuminance.Interface
 {
-    internal interface IBitmapLuminanceVisitableFactory
+    public interface IBitmapLuminanceVisitableFactory
         : IModelFactory<IBitmapLuminanceVisitable, RndInfo>
     {
 

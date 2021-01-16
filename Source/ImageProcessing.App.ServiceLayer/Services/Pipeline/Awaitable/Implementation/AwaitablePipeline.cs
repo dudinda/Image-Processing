@@ -7,7 +7,7 @@ using ImageProcessing.Utility.DataStructure.BlockingQueueSrc.Implementation;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Implementation
 {
-    internal class AwaitablePipeline : IAwaitablePipeline
+    public class AwaitablePipeline : IAwaitablePipeline
     {
         private protected readonly BlockingQueue<Task<object>> _queue
            = new BlockingQueue<Task<object>>(1 << 6);

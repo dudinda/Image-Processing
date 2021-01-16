@@ -7,7 +7,7 @@ using ImageProcessing.App.DomainLayer.DomainModel.Scaling.Interface;
 
 namespace ImageProcessing.App.DomainLayer.DomainFactory.Scaling.Implementation
 {
-    internal sealed class ScalingFactory : IScalingFactory
+    public sealed class ScalingFactory : IScalingFactory
     {
         public IScaling Get(ScalingMethod scaling)
             => scaling

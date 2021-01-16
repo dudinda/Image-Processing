@@ -2,7 +2,7 @@ using System.Drawing;
 
 namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance.Interface
 {
-    internal interface IBitmapLuminanceVisitor
+    public interface IBitmapLuminanceVisitor
     {
         decimal GetVariance(Bitmap bmp);
         decimal GetEntropy(Bitmap bmp);

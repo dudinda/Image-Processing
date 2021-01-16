@@ -4,7 +4,7 @@ using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance.Int
 
 namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.BitmapLuminance
 {
-    internal interface IBitmapLuminanceVisitable
+    public interface IBitmapLuminanceVisitable
         : IVisitable<IBitmapLuminanceVisitable, IBitmapLuminanceVisitor>
     {
         decimal GetInfo(Bitmap bmp);

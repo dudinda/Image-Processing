@@ -6,7 +6,7 @@ using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Scaling.Implementation
 {
-    internal sealed class ScalingProvider : IScalingProvider
+    public sealed class ScalingProvider : IScalingProvider
     {
         private readonly IScalingFactory _factory;
         private readonly IAppSettings _settings;

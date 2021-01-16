@@ -8,7 +8,7 @@ using ImageProcessing.App.DomainLayer.DomainModel.Rgb.Channel.Interface;
 namespace ImageProcessing.App.DomainLayer.DomainFactory.Rgb.Channel.Implementation
 {
     /// <inheritdoc cref="IChannelFactory"/>
-    internal sealed class ChannelFactory : IChannelFactory
+    public sealed class ChannelFactory : IChannelFactory
     {
         /// <summary>
         /// Provides a factory method for all the <see cref="RgbChannels"/>

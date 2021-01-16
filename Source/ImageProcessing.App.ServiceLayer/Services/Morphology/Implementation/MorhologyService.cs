@@ -8,7 +8,7 @@ using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 namespace ImageProcessing.App.ServiceLayer.Services.Morphology.Implementation
 {
     /// <inheritdoc  cref="IMorphologyService"/>
-    internal sealed class MorphologyService : IMorphologyService
+    public sealed class MorphologyService : IMorphologyService
     {
         /// <inheritdoc />
         public Bitmap ApplyOperator(Bitmap bmp, BitMatrix kernel, IMorphologyUnary filter)

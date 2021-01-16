@@ -13,7 +13,7 @@ using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.
 namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Implementation
 {
     /// <see cref="IBitmapLuminanceDistributionService"/>
-    internal sealed class BitmapLuminanceDistributionService : IBitmapLuminanceDistributionService
+    public sealed class BitmapLuminanceDistributionService : IBitmapLuminanceDistributionService
     {
         private readonly IRandomVariableDistributionService _service;
 

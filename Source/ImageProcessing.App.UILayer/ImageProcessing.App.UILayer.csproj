@@ -10,6 +10,7 @@
     <Platforms>AnyCPU;x64;x86</Platforms>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
+      <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -30,15 +31,13 @@
 
   <ItemGroup>
     <PackageReference Include="MetroModernUI" Version="1.4.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ImageProcessing.App.CommonLayer\ImageProcessing.App.CommonLayer.csproj" />
     <ProjectReference Include="..\ImageProcessing.App.PresentationLayer\ImageProcessing.App.PresentationLayer.csproj" />
   </ItemGroup>
 
@@ -50,10 +49,10 @@
 
   <ItemGroup>
     <Compile Update="Form\BaseForm.cs" />
+    <Compile Update="Form\ColorMatrix\ColorMatrixForm.cs" />
     <Compile Update="Form\Distribution\DistributionForm.cs" />
-    <Compile Update="Form\Settings\SettingsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="Form\Settings\SettingsForm.cs" />
+    <Compile Update="Form\Transformation\TransformationForm.cs" />
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

@@ -10,7 +10,7 @@ using ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.BitmapLumin
 
 namespace ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.BitmapLuminance.Implementation
 {
-    internal sealed class BitmapLuminanceVisitableFactory : IBitmapLuminanceVisitableFactory
+    public sealed class BitmapLuminanceVisitableFactory : IBitmapLuminanceVisitableFactory
     {
         public IBitmapLuminanceVisitable Get(RndInfo filter)
             => filter

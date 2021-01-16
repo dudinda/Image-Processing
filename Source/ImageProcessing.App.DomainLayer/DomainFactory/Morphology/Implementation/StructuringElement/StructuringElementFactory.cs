@@ -8,7 +8,7 @@ using ImageProcessing.App.DomainLayer.Factory.Morphology.Interface.StructuringEl
 namespace ImageProcessing.App.DomainLayer.Factory.StructuringElement.Implementation
 {
     /// <inheritdoc cref="IStructuringElementFactory"/>
-    internal sealed class StructuringElementFactory : IStructuringElementFactory
+    public sealed class StructuringElementFactory : IStructuringElementFactory
     {
         /// <summary>
         /// A factory method

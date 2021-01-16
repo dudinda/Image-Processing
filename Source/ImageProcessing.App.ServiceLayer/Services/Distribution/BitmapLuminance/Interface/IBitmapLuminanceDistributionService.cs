@@ -8,7 +8,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
     /// Provides the information about the distribution of the pixels luminance
     /// on the specified bitmap.
     /// </summary>
-    internal interface IBitmapLuminanceDistributionService
+    public interface IBitmapLuminanceDistributionService
     {
         /// <summary>
         /// Transform the luminance histogram of
