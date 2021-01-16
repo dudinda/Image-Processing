@@ -14,8 +14,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
         {
             if(yScale == 0 && xScale == 0) { return src; }
 
-            if (xScale == -1) { throw new ArgumentException(nameof(xScale)); }
-            if (yScale == -1) { throw new ArgumentException(nameof(yScale)); } 
+            if (xScale <= -1) { throw new ArgumentException(nameof(xScale)); }
+            if (yScale <= -1) { throw new ArgumentException(nameof(yScale)); } 
 
             var (srcWidth, srcHeight) = (src.Width, src.Height);
 

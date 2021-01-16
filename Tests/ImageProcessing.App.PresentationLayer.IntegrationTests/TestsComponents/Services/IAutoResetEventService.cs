@@ -7,5 +7,6 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Services
     {
         void WaitSignal();
         void Signal();
+        void Reset();
     }
 }

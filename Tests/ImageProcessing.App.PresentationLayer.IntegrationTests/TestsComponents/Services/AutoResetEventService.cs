@@ -9,11 +9,14 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Services
 
         public void WaitSignal()
             => _event.WaitOne();
-
+        
         public void Signal()
             => _event.Set();
 
         public void Dispose()
             => _event.Close();
+
+        public void Reset()
+            => _event.Reset();
     }
 }

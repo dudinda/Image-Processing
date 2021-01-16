@@ -76,10 +76,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.CommonLayer\ImageProcessing.App.CommonLayer.csproj">
-      <Project>{4DC35D60-2801-481F-9600-832FFD5AE930}</Project>
-      <Name>ImageProcessing.App.CommonLayer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.App.DomainLayer\ImageProcessing.App.DomainLayer.csproj">
       <Project>{03943cd9-c3ec-494e-b3fb-1b8be4aef91b}</Project>
       <Name>ImageProcessing.App.DomainLayer</Name>

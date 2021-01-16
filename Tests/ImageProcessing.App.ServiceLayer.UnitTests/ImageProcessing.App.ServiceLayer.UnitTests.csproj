@@ -87,10 +87,6 @@
     <None Include="Resources\1920x1080frame.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.CommonLayer\ImageProcessing.App.CommonLayer.csproj">
-      <Project>{4DC35D60-2801-481F-9600-832FFD5AE930}</Project>
-      <Name>ImageProcessing.App.CommonLayer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.App.DomainLayer\ImageProcessing.App.DomainLayer.csproj">
       <Project>{03943CD9-C3EC-494E-B3FB-1B8BE4AEF91B}</Project>
       <Name>ImageProcessing.App.DomainLayer</Name>

@@ -47,6 +47,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         public void FileOpenMenuClick()
         {
             _form.OpenFileMenu.ClickAndWaitSignal(_synchronizer);
+            _synchronizer.Reset();
 
             _presenter.Received().OnEventHandler(
                 Arg.Is<object>(arg => arg == _form),
@@ -65,6 +66,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         public void RendererRecieveBlockTest()
         {
             _form.OpenFileMenu.ClickAndWaitSignal(_synchronizer);
+            _synchronizer.Reset();
 
             Received.InOrder(() =>
             {
@@ -83,12 +85,12 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
                 _form.Received().SetImageCopy(
                     Arg.Is<ImageContainer>(arg => arg == container),
                     Arg.Any<Bitmap>());
-                _form.Received().SetImageToZoom(
-                    Arg.Is<ImageContainer>(arg => arg == container),
-                    Arg.Any<Bitmap>());
                 _form.Received().SetImage(
                     Arg.Is<ImageContainer>(arg => arg == container),
                     Arg.Any<Bitmap>());
+                _form.SetImageCenter(
+                    Arg.Is<ImageContainer>(arg => arg == container),
+                    Arg.Is<Size>(arg => arg == Res._1920x1080frame.Size));
                 _form.Received().Refresh(Arg.Is<ImageContainer>(arg => arg == container));
                 _form.Received().ResetTrackBarValue(Arg.Is<ImageContainer>(arg => arg == container));
 
@@ -103,7 +105,9 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         public void FileSaveAsMenuClick()
         {
             _form.OpenFileMenu.ClickAndWaitSignal(_synchronizer);
+            _synchronizer.Reset();
             _form.SaveAsMenu.ClickAndWaitSignal(_synchronizer);
+            _synchronizer.Reset();
 
             _presenter.Received().OnEventHandler(
                 Arg.Is<object>(arg => arg == _form),
@@ -121,17 +125,21 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
             _form.OpenFileMenu.ClickAndWaitSignal(_synchronizer);
             _form.RgbMenuButton.ClickAndWaitSignal(_synchronizer);
 
-            _presenter.OnEventHandler(Arg.Is<object>(arg => arg == _form),
-                 Arg.Any<ShowRgbMenuEventArgs>());
+            _presenter.OnEventHandler(
+                Arg.Is<object>(arg => arg == _form),
+                Arg.Any<ShowRgbMenuEventArgs>());
         }
 
         [Test]
         public void OpenConvolutionMenuClick()
         {
             _form.OpenFileMenu.ClickAndWaitSignal(_synchronizer);
+            _synchronizer.Reset();
             _form.ConvolutionMenuButton.ClickAndWaitSignal(_synchronizer);
+            _synchronizer.Reset();
 
-            _presenter.OnEventHandler(Arg.Is<object>(arg => arg == _form),
+            _presenter.OnEventHandler(
+                Arg.Is<object>(arg => arg == _form),
                 Arg.Any<ShowConvolutionMenuEventArgs>());
         }
 
@@ -161,6 +169,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         public void ReplaceDestinationImageClick()
         {
             _form.OpenFileMenu.ClickAndWaitSignal(_synchronizer);
+      
             _form.ReplaceDstBySrcButton.ClickAndWaitSignal(_synchronizer);
 
             var container = ImageContainer.Source;
@@ -182,6 +191,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         public void ReplaceSourceImageClick()
         {
             _form.OpenFileMenu.ClickAndWaitSignal(_synchronizer);
+            _synchronizer.Reset();
             _form.ReplaceDstBySrcButton.ClickAndWaitSignal(_synchronizer);
 
             var container = ImageContainer.Source;

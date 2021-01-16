@@ -158,10 +158,6 @@
     <Compile Include="Tests\MainPresenter\MainPresenterTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.CommonLayer\ImageProcessing.App.CommonLayer.csproj">
-      <Project>{4DC35D60-2801-481F-9600-832FFD5AE930}</Project>
-      <Name>ImageProcessing.App.CommonLayer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.App.DomainLayer\ImageProcessing.App.DomainLayer.csproj">
       <Project>{03943CD9-C3EC-494E-B3FB-1B8BE4AEF91B}</Project>
       <Name>ImageProcessing.App.DomainLayer</Name>
@@ -173,10 +169,6 @@
     <ProjectReference Include="..\..\Source\ImageProcessing.App.ServiceLayer\ImageProcessing.App.ServiceLayer.csproj">
       <Project>{94C3F770-5A06-4D18-AFF5-C4EB20CBB727}</Project>
       <Name>ImageProcessing.App.ServiceLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.UILayer\ImageProcessing.App.UILayer.csproj">
-      <Project>{85454e80-493e-4746-a965-7d07654440fc}</Project>
-      <Name>ImageProcessing.App.UILayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.Microkernel.DIAdapter\ImageProcessing.Microkernel.DIAdapter.csproj">
       <Project>{987AD585-AB5E-4394-B8B1-A9F0655A939C}</Project>
