@@ -1,5 +1,4 @@
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.PresentationLayer.UnitTests.Services;
 using ImageProcessing.App.PresentationLayer.Views.Rgb;
 using ImageProcessing.App.UILayer.Exposers.Rgb;
 using ImageProcessing.App.UILayer.Form.Rgb;
@@ -12,14 +11,11 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
 {
     internal class RgbFormWrapper : IRgbFormExposer, IRgbView
     {
-        private readonly IAutoResetEventService _synchronizer;
         private readonly RgbForm _form;
         public RgbFormWrapper(
-            IAutoResetEventService synchronizer,
             IAppController controller,
             IRgbFormEventBinder binder)
         {
-            _synchronizer = synchronizer;
             _form = new RgbForm(controller, binder);
         }
 
@@ -54,7 +50,10 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
             => _form.GetSelectedChannels(color);
 
         public virtual void Show()
-            => _synchronizer.Signal();
+        {
+
+        }
+
 
         public virtual void Tooltip(string message)
             => _form.Tooltip(message);

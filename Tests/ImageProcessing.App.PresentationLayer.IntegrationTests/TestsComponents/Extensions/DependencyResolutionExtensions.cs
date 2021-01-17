@@ -5,7 +5,6 @@ using ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents.Wra
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Services;
-using ImageProcessing.App.PresentationLayer.UnitTests.Services;
 using ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Forms;
 using ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Presenters;
 using ImageProcessing.App.PresentationLayer.Views.Convolution;
@@ -54,33 +53,27 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
 {
     internal static class DependencyResolutionExtensions
     {
-        public static (IAppController, IEventAggregatorWrapper, IAutoResetEventService) BindMocksForMvp(this IDependencyResolution builder)
+        public static (IAppController, IEventAggregatorWrapper) BindMocksForMvp(this IDependencyResolution builder)
         {
             if(!builder.IsRegistered<IEventAggregatorWrapper>())
             {
                 builder.RegisterSingleton<IEventAggregatorWrapper, EventAggregatorWrapper>();
             }
 
-            if(!builder.IsRegistered<IAutoResetEventService>())
-            {
-                builder.RegisterSingleton<IAutoResetEventService, AutoResetEventService>();
-            }
-  
             var controller = builder.Resolve<IAppController>();
             var aggregator = builder.Resolve<IEventAggregatorWrapper>();
-            var synchronizer = builder.Resolve<IAutoResetEventService>();
 
             controller.GetType().GetProperty(nameof(controller.Aggregator))
                 .SetValue(controller, aggregator);
 
-            return (controller, aggregator, synchronizer);
+            return (controller, aggregator);
         }
 
         public static void BindMocksForMainPresenter(this IDependencyResolution builder)
         {
-            var (controller, aggregator, synchronizer) = builder.BindMocksForMvp();
+            var (controller, aggregator) = builder.BindMocksForMvp();
 
-            var dialog = Substitute.ForPartsOf<NonBlockDialogServiceWrapper>(synchronizer,
+            var dialog = Substitute.ForPartsOf<NonBlockDialogServiceWrapper>(
               Substitute.For<IFileDialogService>(), Substitute.For<IStaTaskService>());
 
             builder
@@ -97,7 +90,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
                 .RegisterTransientInstance<IRotationProvider>(Substitute.For<IRotationProvider>());
 
 
-            var form = Substitute.ForPartsOf<MainFormWrapper>(synchronizer, controller,
+            var form = Substitute.ForPartsOf<MainFormWrapper>(controller,
                 builder.Resolve<IMainFormEventBinder>(),
                 builder.Resolve<IMainFormContainerFactory>(),
                 builder.Resolve<IMainFormUndoRedoFactory>(),
@@ -119,11 +112,11 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
 
         public static void BindMocksForRgbPresenter(this IDependencyResolution builder)
         {
-            var (controller, aggregator, synchronizer) = builder.BindMocksForMvp();
+            var (controller, aggregator) = builder.BindMocksForMvp();
 
             builder.RegisterTransientInstance<IRgbFormEventBinder>(Substitute.ForPartsOf<RgbFormEventBinder>(aggregator));
 
-            var form = Substitute.ForPartsOf<RgbFormWrapper>(synchronizer, controller,
+            var form = Substitute.ForPartsOf<RgbFormWrapper>(controller,
                 builder.Resolve<IRgbFormEventBinder>());
 
             builder.RegisterTransientInstance<IRgbView>(form)
@@ -141,12 +134,12 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
 
         public static void BindMocksForConvolutionPresenter(this IDependencyResolution builder)
         {
-            var (controller, aggregator, synchronizer) = builder.BindMocksForMvp();
+            var (controller, aggregator) = builder.BindMocksForMvp();
 
             builder.RegisterTransientInstance<IConvolutionFormEventBinder>(
                 Substitute.ForPartsOf<ConvolutionFormEventBinder>(aggregator));
 
-            var form = Substitute.ForPartsOf<ConvolutionFormWrapper>(synchronizer, controller,
+            var form = Substitute.ForPartsOf<ConvolutionFormWrapper>(controller,
                     builder.Resolve<IConvolutionFormEventBinder>());
 
             builder.RegisterTransientInstance<IConvolutionView>(form)
@@ -164,12 +157,12 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
 
         public static void BindMocksForDistributionPresenter(this IDependencyResolution builder)
         {
-            var (controller, aggregator, synchronizer) = builder.BindMocksForMvp();
+            var (controller, aggregator) = builder.BindMocksForMvp();
 
             builder.RegisterTransientInstance<IDistributionFormEventBinder>(
                 Substitute.ForPartsOf<DistributionFormEventBinder>(aggregator));
 
-            var form = Substitute.ForPartsOf<DistributionFormWrapper>(synchronizer, controller,
+            var form = Substitute.ForPartsOf<DistributionFormWrapper>(controller,
                     builder.Resolve<IDistributionFormEventBinder>());
 
             builder.RegisterTransientInstance<IDistributionView>(form)

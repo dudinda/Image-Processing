@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.PresentationLayer.UnitTests.Services;
 using ImageProcessing.App.PresentationLayer.Views.Distribution;
 using ImageProcessing.App.UILayer.Form.Distribution;
 using ImageProcessing.App.UILayer.FormEventBinders.Distribution.Interface;
@@ -17,15 +16,12 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
 {
     internal class DistributionFormWrapper : IDistributionFormExposer, IDistributionView
     {
-        private readonly IAutoResetEventService _synchronizer;
         private readonly DistributionForm _form;
 
         public DistributionFormWrapper(
-           IAutoResetEventService synchronizer,
            IAppController controller,
            IDistributionFormEventBinder binder) 
         {
-            _synchronizer = synchronizer;
             _form = new DistributionForm(controller, binder);
         }
 
@@ -81,8 +77,10 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
             => _form.GetQualityQueue();
 
         public virtual void Show()
-            => _synchronizer.Signal();
+        {
 
+        }
+           
         public virtual void Tooltip(string message)
             => _form.Tooltip(message);
     }

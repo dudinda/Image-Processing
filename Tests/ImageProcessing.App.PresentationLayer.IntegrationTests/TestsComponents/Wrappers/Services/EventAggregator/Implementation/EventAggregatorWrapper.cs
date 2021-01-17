@@ -14,7 +14,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Fakes
             var thisSyncContext = new SynchronizationContextWrapper();
             SynchronizationContext.SetSynchronizationContext(thisSyncContext);
 
-            thisSyncContext.Post(d, _state);
+            thisSyncContext.Send(d, _state);
         }
     }
 }

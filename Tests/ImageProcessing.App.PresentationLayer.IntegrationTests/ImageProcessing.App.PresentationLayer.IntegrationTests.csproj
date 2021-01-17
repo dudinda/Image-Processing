@@ -120,7 +120,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestsComponents\Extensions\BitmapExtensions.cs" />
-    <Compile Include="TestsComponents\Extensions\ButtonExtensions.cs" />
     <Compile Include="TestsComponents\Extensions\DependencyResolutionExtensions.cs" />
     <Compile Include="TestsComponents\Wrappers\Forms\ConvolutionFormWrapper.cs">
       <SubType>Form</SubType>
@@ -147,8 +146,6 @@
     <Compile Include="TestsStartups\DistributionPresenterTestStartup.cs" />
     <Compile Include="TestsStartups\RgbPresenterTestStartup.cs" />
     <Compile Include="TestsStartups\MainPresenterTestStartup.cs" />
-    <Compile Include="TestsComponents\Services\IAutoResetEventService.cs" />
-    <Compile Include="TestsComponents\Services\AutoResetEventService.cs" />
     <Compile Include="TestResources\Res.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -166,9 +163,17 @@
       <Project>{9E019576-0EE0-4213-A8E5-1DA5A52457E1}</Project>
       <Name>ImageProcessing.App.PresentationLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Source\ImageProcessing.App.ServiceLayer.Win\ImageProcessing.App.ServiceLayer.Win.csproj">
+      <Project>{FF6D8DE5-9811-4DD6-9CC4-14162E0B7991}</Project>
+      <Name>ImageProcessing.App.ServiceLayer.Win</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.App.ServiceLayer\ImageProcessing.App.ServiceLayer.csproj">
       <Project>{94C3F770-5A06-4D18-AFF5-C4EB20CBB727}</Project>
       <Name>ImageProcessing.App.ServiceLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\ImageProcessing.App.UILayer\ImageProcessing.App.UILayer.csproj">
+      <Project>{588AD9F0-3AC2-49CE-99C8-BC5A341B91D5}</Project>
+      <Name>ImageProcessing.App.UILayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.Microkernel.DIAdapter\ImageProcessing.Microkernel.DIAdapter.csproj">
       <Project>{987AD585-AB5E-4394-B8B1-A9F0655A939C}</Project>
