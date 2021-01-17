@@ -14,10 +14,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
         {
             if (shx == 0 && shy == 0) { return src; }
 
-            if(shx == 1 && shy == 1)
-            {
-                throw new InvalidOperationException();
-            }
+            if(shx * shy == 1) { throw new InvalidOperationException("det(A) is zero."); }
 
             var (srcWidth, srcHeight) = (src.Width, src.Height);
 
