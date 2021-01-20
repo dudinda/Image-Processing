@@ -14,10 +14,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
         {
             if (sx == 1 && sy == 1) { return src; }
 
-            if (sx == 0 || sy == 0)
-            {
-                throw new ArgumentException();
-            }
+            if (sx <= -1 || sx == 0) { throw new ArgumentException(nameof(sx)); }
+            if (sy <= -1 || sy == 0) { throw new ArgumentException(nameof(sy)); }
 
             var dstWidth = src.Width + (int)(src.Width * sx);
             var dstHeight = src.Height + (int)(src.Height * sy);
