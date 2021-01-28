@@ -18,9 +18,6 @@ namespace ImageProcessing.App.UILayer.FormControl.TrackBar
             set => base.Value = value;
         }
 
-        protected override void OnMouseEnter(EventArgs e)
-            => Focus();
-
         protected override void OnMouseWheel(MouseEventArgs e)
         {
             if (e.Delta > 0)
