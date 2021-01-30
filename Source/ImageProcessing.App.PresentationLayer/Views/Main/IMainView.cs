@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.BitmapContainer;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.BitmapZoom;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.Cursor;

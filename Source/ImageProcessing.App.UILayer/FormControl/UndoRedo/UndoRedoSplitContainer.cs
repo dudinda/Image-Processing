@@ -1,7 +1,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Safe;
 using ImageProcessing.Utility.DataStructure.FixedStackSrc.Interface;
 
@@ -17,7 +17,6 @@ namespace ImageProcessing.App.UILayer.Control
             _undo = new FixedStackSafe<(Bitmap changed, ImageContainer from)>(10);
             _redo = new FixedStackSafe<(Bitmap returned, ImageContainer to)>(10);
         }
-
 
         public bool UndoIsEmpty
             => _undo.IsEmpty;

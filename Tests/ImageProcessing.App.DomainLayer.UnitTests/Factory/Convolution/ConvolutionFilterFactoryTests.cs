@@ -1,8 +1,8 @@
 using System;
 
-using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.Factory.Convolution.Implementation;
-using ImageProcessing.App.DomainLayer.Factory.Convolution.Interface;
+using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.DomainLayer.DomainFactory.Convolution.Implementation;
+using ImageProcessing.App.DomainLayer.DomainFactory.Convolution.Interface;
 using ImageProcessing.App.DomainLayer.UnitTests.CaseFactory;
 
 using NUnit.Framework;

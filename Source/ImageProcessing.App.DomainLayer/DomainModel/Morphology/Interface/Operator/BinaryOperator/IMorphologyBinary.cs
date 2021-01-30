@@ -1,6 +1,6 @@
 using System.Drawing;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Code.Enums;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Interface.BinaryOperator
 {

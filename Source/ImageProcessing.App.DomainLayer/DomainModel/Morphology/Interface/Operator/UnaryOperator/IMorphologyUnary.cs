@@ -1,6 +1,6 @@
 using System.Drawing;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Interface.UnaryOperator

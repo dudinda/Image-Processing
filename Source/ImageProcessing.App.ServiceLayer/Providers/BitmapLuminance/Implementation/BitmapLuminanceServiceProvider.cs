@@ -1,7 +1,8 @@
 using System.Drawing;
 
-using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.Factory.Distribution.Interface;
+using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.DomainLayer.DomainFactory.Distribution.Interface;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.BitmapLuminance.Interface;
 using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance.Interface;

@@ -2,9 +2,9 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms.DataVisualization.Charting;
 
-using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
+using ImageProcessing.App.DomainLayer.Code.Extensions.EnumExt;
 using ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Interface;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
 using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Histogram.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
 

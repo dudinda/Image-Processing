@@ -1,6 +1,4 @@
-using System.Drawing;
-
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.PresentationLayer.Code.Enums;
 
 namespace ImageProcessing.App.PresentationLayer.Views.ViewComponent.BitmapZoom
 {

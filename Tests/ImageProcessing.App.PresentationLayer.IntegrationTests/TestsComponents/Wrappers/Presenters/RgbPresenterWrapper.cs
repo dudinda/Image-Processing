@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 
-using ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs;
+using ImageProcessing.App.PresentationLayer.DomainEvents.RgbArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Rgb;
-using ImageProcessing.App.PresentationLayer.ViewModel.Rgb;
+using ImageProcessing.App.PresentationLayer.ViewModels.Rgb;
 using ImageProcessing.App.PresentationLayer.Views.Rgb;
 using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
@@ -37,7 +37,6 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
             base.Run(vm);
             _presenter.Run(vm);
         }
-
 
         public virtual async Task OnEventHandler(object publisher, ApplyRgbChannelFilterEventArgs e)
         {

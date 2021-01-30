@@ -1,7 +1,7 @@
 using System.Windows.Forms;
 
-using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.DomainEvent.RgbArgs;
+using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.PresentationLayer.DomainEvents.RgbArgs;
 using ImageProcessing.App.UILayer.Exposers.Rgb;
 using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;

@@ -1,7 +1,7 @@
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
 using ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.Histogram.Interface;
 using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Histogram.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Histogram.Interface;

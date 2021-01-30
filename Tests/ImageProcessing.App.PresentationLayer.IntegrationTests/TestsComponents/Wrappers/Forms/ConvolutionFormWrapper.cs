@@ -1,4 +1,4 @@
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Views.Convolution;
 using ImageProcessing.App.UILayer.Form.Convolution;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Interface;

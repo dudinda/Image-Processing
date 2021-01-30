@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
 using ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.Histogram;
 using ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.Histogram.Cdf;
 using ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.Histogram.Pmf;
@@ -19,7 +19,7 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.Histogr
             RndFunction.CDF
                 => new CdfHistogramVisitable(),
 
-            _ => throw new NotImplementedException(nameof(filter))
+            _   => throw new NotImplementedException(nameof(filter))
         };    
     }
 }

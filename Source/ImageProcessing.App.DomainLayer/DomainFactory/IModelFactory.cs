@@ -1,6 +1,6 @@
 using System;
 
-namespace ImageProcessing.Microkernel.MVP.Model
+namespace ImageProcessing.App.DomainLayer.DomainFactory
 {
     /// <summary>
     /// A base factory method provider for all the types

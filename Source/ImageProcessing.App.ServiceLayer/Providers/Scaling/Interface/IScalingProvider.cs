@@ -1,5 +1,4 @@
 using System.Drawing;
-using System.Threading.Tasks;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Scaling.Interface
 {

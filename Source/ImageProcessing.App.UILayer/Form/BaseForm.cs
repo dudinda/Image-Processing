@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
-using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
+using ImageProcessing.App.DomainLayer.Code.Extensions.EnumExt;
 using ImageProcessing.App.UILayer.Code.Attributes;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Microkernel.MVP.View;
@@ -72,8 +72,7 @@ namespace ImageProcessing.App.UILayer.Form
                 result = func();
             } 
 
-            return (TElement)(result
-                ?? throw new ArgumentNullException(nameof(result)));
+            return (TElement)(result ?? throw new ArgumentNullException(nameof(result)));
         }
 
         protected virtual void Write(Action action)

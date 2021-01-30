@@ -1,10 +1,10 @@
 using System.Windows.Forms;
 
-using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Container;
-using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.FileDialog;
-using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Menu;
-using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Show;
+using ImageProcessing.App.PresentationLayer.Code.Enums;
+using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Container;
+using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.FileDialog;
+using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
+using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Show;
 using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Main;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;

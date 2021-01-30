@@ -1,10 +1,10 @@
 using System;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.Channel.Interface;
 using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Implementation;
 using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Interface;
-using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Recommendation.Interface;
+using ImageProcessing.App.DomainLayer.DomainFactory.RgbFilters.Recommendation.Interface;
 using ImageProcessing.App.DomainLayer.UnitTests.CaseFactory;
 using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
 

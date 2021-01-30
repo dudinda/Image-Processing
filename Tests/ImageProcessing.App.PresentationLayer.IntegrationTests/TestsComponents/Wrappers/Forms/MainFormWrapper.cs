@@ -1,6 +1,5 @@
 using System;
 
-using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.UILayer.Form.Main;
 using ImageProcessing.App.UILayer.FormCommands.Main;
 using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
@@ -34,11 +33,6 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
         public override void Show()
         {
 
-        }
-
-        public override void SetCursor(CursorType cursor)
-        {
-            base.SetCursor(cursor);
         }
     }
 }

@@ -1,4 +1,4 @@
-using ImageProcessing.App.DomainLayer.DomainEvent.SettingsArgs;
+using ImageProcessing.App.PresentationLayer.DomainEvents.SettingsArgs;
 using ImageProcessing.App.UILayer.FormEventBinder.Settings.Interface;
 using ImageProcessing.App.UILayer.FormExposer.Settings;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;

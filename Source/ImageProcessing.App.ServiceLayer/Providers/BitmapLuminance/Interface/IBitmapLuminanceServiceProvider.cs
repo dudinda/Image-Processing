@@ -1,6 +1,7 @@
 using System.Drawing;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution
 {

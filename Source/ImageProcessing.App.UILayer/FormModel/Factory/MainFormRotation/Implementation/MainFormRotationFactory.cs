@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.UILayer.FormModel.Factory.MainFormRotation.Interface;
 using ImageProcessing.App.UILayer.FormModel.Model.Rotate;
 using ImageProcessing.App.UILayer.FormModel.Model.Rotate.DestinationContainer.Implementation;
@@ -19,7 +19,7 @@ namespace ImageProcessing.App.UILayer.FormModel.Factory.MainFormRotation.Impleme
              ImageContainer.Destination
                  => new RotateDestinationContainer(),
 
-             _ => throw new NotSupportedException(nameof(container))
+             _   => throw new NotSupportedException(nameof(container))
         };
     }
 }

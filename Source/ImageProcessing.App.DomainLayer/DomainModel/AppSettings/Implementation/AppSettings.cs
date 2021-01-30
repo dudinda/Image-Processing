@@ -1,4 +1,4 @@
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Settings.Implementation

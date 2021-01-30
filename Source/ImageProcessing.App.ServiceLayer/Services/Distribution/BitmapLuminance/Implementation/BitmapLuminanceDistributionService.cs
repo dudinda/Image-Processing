@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
+using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Interface;
@@ -28,9 +28,9 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
             //get the new pixel values, according to a selected distribution
             var newPixels = _service.TransformToByte(cdf, distribution);
 
-            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                                             ImageLockMode.ReadWrite,
-                                             bitmap.PixelFormat);
+            var bitmapData = bitmap.LockBits(
+                new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                ImageLockMode.ReadWrite, bitmap.PixelFormat);
 
             var options = new ParallelOptions()
             {
@@ -93,9 +93,9 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
         /// <inheritdoc />
         public int[] GetFrequencies(Bitmap bitmap)
         {
-            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                                            ImageLockMode.ReadWrite,
-                                            bitmap.PixelFormat);
+            var bitmapData = bitmap.LockBits(
+                new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                ImageLockMode.ReadWrite, bitmap.PixelFormat);
 
             var frequencies = new int[256];
             var ptrStep = bitmap.GetBitsPerPixel() / 8;

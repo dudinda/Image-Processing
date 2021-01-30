@@ -1,14 +1,9 @@
-using System.Drawing;
-
-using ImageProcessing.App.CommonLayer.Enums;
-
 namespace ImageProcessing.App.UILayer.FormModel.Model.Zoom.SourceContainer.Implementation
 {
     internal sealed class ZoomSourceContainer : ZoomContainer
     {
         public override double GetFactor()
             => Exposer.ZoomSrcTrackBar.Factor;
-       
 
         public override void ResetTrackBarValue(int value = 0)
         {
@@ -16,6 +11,5 @@ namespace ImageProcessing.App.UILayer.FormModel.Model.Zoom.SourceContainer.Imple
             Exposer.ZoomSrcTrackBar.Enabled = Exposer.SourceImage != null;
             Exposer.ZoomSrcTrackBar.Focus();
         }
-
     }
 }

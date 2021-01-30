@@ -5,7 +5,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
+using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
 using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
@@ -29,7 +29,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
                                                        bitmap.PixelFormat);
 
             var size = bitmap.Size;
-            var ptrStep = bitmap.GetBitsPerPixel() / 8;
+            var ptrStep = bitmap. GetBitsPerPixel() / 8;
 
             var options = new ParallelOptions()
             {

@@ -1,6 +1,5 @@
 using System;
 
-using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.DataChart;
 using ImageProcessing.Microkernel.MVP.View;
 

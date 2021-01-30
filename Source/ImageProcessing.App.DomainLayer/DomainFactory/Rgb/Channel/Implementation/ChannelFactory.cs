@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.Channel.Interface;
 using ImageProcessing.App.DomainLayer.DomainModel.Rgb.Channel.Implementation;
 using ImageProcessing.App.DomainLayer.DomainModel.Rgb.Channel.Interface;
@@ -33,7 +33,7 @@ namespace ImageProcessing.App.DomainLayer.DomainFactory.Rgb.Channel.Implementati
             RgbChannels.Green | RgbChannels.Blue | RgbChannels.Red
                 => new RGBChannel(),
 
-            _ => throw new NotSupportedException(nameof(filter))
+            _   => throw new NotSupportedException(nameof(filter))
         };
     }
 }

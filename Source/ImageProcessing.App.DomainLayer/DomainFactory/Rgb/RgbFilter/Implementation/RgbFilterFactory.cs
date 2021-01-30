@@ -1,11 +1,11 @@
 using System;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.Channel.Interface;
 using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Interface;
+using ImageProcessing.App.DomainLayer.DomainFactory.RgbFilters.Recommendation.Interface;
 using ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementation;
 using ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Interface;
-using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Recommendation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
 
 namespace ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Implementation
@@ -14,17 +14,17 @@ namespace ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Implementa
     /// <inheritdoc cref="IRgbFilterFactory"/>
     public sealed class RgbFilterFactory : IRgbFilterFactory
     {
-        private readonly IChannelFactory _color;
+        private readonly IChannelFactory _factory;
         private readonly IRecommendationFactory _rec;
         private readonly IAppSettings _settings;
 
         public RgbFilterFactory(
             IRecommendationFactory rec,
-            IChannelFactory color,
+            IChannelFactory factory,
             IAppSettings settings)
         {
             _rec = rec;
-            _color = color;
+            _factory = factory;
             _settings = settings;
         }
 
@@ -51,13 +51,13 @@ namespace ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Implementa
                 RgbFltr.SepiaTone
                     => new SepiaToneFilter(),
 
-                _ => throw new NotImplementedException(nameof(filter))
+                _   => throw new NotImplementedException(nameof(filter))
             };
         }
            
           
         /// <inheritdoc />
-		public IRgbFilter Get(RgbChannels color)
-            => new ChannelFilter(_color.Get(color));     
+		public IRgbFilter Get(RgbChannels channel)
+            => new ChannelFilter(_factory.Get(channel));     
     }
 }

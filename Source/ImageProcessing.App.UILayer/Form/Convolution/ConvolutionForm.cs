@@ -1,9 +1,9 @@
 using System.Windows.Forms;
 
-using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
+using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Presenters.Convolution;
 using ImageProcessing.App.PresentationLayer.Views.Convolution;
+using ImageProcessing.App.ServiceLayer.Win.Code.Extensions.EnumExt;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Convolution;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;

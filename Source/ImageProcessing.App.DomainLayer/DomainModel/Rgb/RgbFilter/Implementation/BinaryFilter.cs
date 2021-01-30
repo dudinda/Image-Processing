@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Concurrent;
-using System.Configuration;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
+using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Recommendation.Interface;
 using ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Interface;
 

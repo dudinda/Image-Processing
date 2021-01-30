@@ -1,4 +1,4 @@
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Views.Rgb;
 using ImageProcessing.App.UILayer.Exposers.Rgb;
 using ImageProcessing.App.UILayer.Form.Rgb;
@@ -12,6 +12,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
     internal class RgbFormWrapper : IRgbFormExposer, IRgbView
     {
         private readonly RgbForm _form;
+
         public RgbFormWrapper(
             IAppController controller,
             IRgbFormEventBinder binder)

@@ -1,6 +1,6 @@
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.DomainFactory;
+using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.UILayer.FormModel.Model.UndoRedo;
-using ImageProcessing.Microkernel.MVP.Model;
 
 namespace ImageProcessing.App.UILayer.FormModel.MainFormUndoRedo.Interface
 {

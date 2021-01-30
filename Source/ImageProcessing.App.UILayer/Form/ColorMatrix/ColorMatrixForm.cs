@@ -1,9 +1,9 @@
 using System;
 
-using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
+using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix;
 using ImageProcessing.App.PresentationLayer.Views.ColorMatrix;
+using ImageProcessing.App.ServiceLayer.Win.Code.Extensions.EnumExt;
 using ImageProcessing.App.UILayer.FormEventBinder.ColorMatrix.Interface;
 using ImageProcessing.App.UILayer.FormExposer.ColorMatrix;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
@@ -140,4 +140,3 @@ namespace ImageProcessing.App.UILayer.Form.ColorMatrix
         }
     }
 }
-

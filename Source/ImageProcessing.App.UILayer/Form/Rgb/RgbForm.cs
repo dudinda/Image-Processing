@@ -1,9 +1,9 @@
 using System.Windows.Forms;
 
-using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.CommonLayer.Extensions.EnumExt;
+using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Presenters.Rgb;
 using ImageProcessing.App.PresentationLayer.Views.Rgb;
+using ImageProcessing.App.ServiceLayer.Win.Code.Extensions.EnumExt;
 using ImageProcessing.App.UILayer.Exposers.Rgb;
 using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
@@ -11,7 +11,7 @@ using ImageProcessing.Utility.Interop.Wrapper;
 
 using MetroFramework.Controls;
 
-using static ImageProcessing.App.CommonLayer.Enums.RgbChannels;
+using static ImageProcessing.App.DomainLayer.Code.Enums.RgbChannels;
 
 namespace ImageProcessing.App.UILayer.Form.Rgb
 {

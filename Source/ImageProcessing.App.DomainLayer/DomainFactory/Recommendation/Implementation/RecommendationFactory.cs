@@ -1,11 +1,11 @@
 using System;
 
-using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.Factory.RgbFilters.Recommendation.Interface;
+using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.DomainLayer.DomainFactory.RgbFilters.Recommendation.Interface;
 using ImageProcessing.App.DomainLayer.DomainModel.Recommendation.Implementation;
 using ImageProcessing.App.DomainLayer.DomainModel.Recommendation.Interface;
 
-namespace ImageProcessing.App.DomainLayer.Factory.RgbFilters.Recommendation.Implementation
+namespace ImageProcessing.App.DomainLayer.DomainFactory.RgbFilters.Recommendation.Implementation
 {
     public sealed class RecommendationFactory : IRecommendationFactory
     {
@@ -25,7 +25,7 @@ namespace ImageProcessing.App.DomainLayer.Factory.RgbFilters.Recommendation.Impl
             Luma.Rec240
                 => new Smpte240M(),
 
-            _ => throw new NotImplementedException(nameof(filter))
+            _   => throw new NotImplementedException(nameof(filter))
         };
     }
 }

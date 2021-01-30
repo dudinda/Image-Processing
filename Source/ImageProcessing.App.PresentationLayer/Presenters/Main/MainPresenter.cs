@@ -1,16 +1,14 @@
 using System;
 using System.Configuration;
 using System.Drawing;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
-using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
-using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Container;
-using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.FileDialog;
-using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Menu;
-using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Show;
+using ImageProcessing.App.PresentationLayer.Code.Enums;
+using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
+using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Container;
+using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.FileDialog;
+using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
+using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Show;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Convolution;
 using ImageProcessing.App.PresentationLayer.Presenters.Distribution;
@@ -18,10 +16,10 @@ using ImageProcessing.App.PresentationLayer.Presenters.Rgb;
 using ImageProcessing.App.PresentationLayer.Presenters.Settings;
 using ImageProcessing.App.PresentationLayer.Presenters.Transformation;
 using ImageProcessing.App.PresentationLayer.Properties;
-using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
-using ImageProcessing.App.PresentationLayer.ViewModel.Distribution;
-using ImageProcessing.App.PresentationLayer.ViewModel.Rgb;
-using ImageProcessing.App.PresentationLayer.ViewModel.Transformation;
+using ImageProcessing.App.PresentationLayer.ViewModels.Convolution;
+using ImageProcessing.App.PresentationLayer.ViewModels.Distribution;
+using ImageProcessing.App.PresentationLayer.ViewModels.Rgb;
+using ImageProcessing.App.PresentationLayer.ViewModels.Transformation;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.ServiceLayer.Providers.Rotation.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Scaling.Interface;
@@ -31,9 +29,9 @@ using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
+using ImageProcessing.App.ServiceLayer.Win.Code.Extensions.BitmapExt;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
-using ImageProcessing.App.ServiceLayer.Win.Code.Extensions.BitmapExt;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 {

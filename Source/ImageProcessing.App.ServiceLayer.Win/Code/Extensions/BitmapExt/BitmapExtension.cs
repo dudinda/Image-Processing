@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.SerivceLayer.Win.Enums;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions.EnumExt;
 
 namespace ImageProcessing.App.ServiceLayer.Win.Code.Extensions.BitmapExt

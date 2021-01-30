@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.DomainFactory.Rotation.Interface;
 using ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation;
 using ImageProcessing.App.DomainLayer.DomainModel.Rotation.Interface;
@@ -20,7 +20,7 @@ namespace ImageProcessing.App.DomainLayer.DomainFactory.Rotation.Implementation
              RotationMethod.Sampling
                  => new SamplingRotation(),
 
-             _ => throw new NotImplementedException(nameof(rotation))
+             _   => throw new NotImplementedException(nameof(rotation))
          };
     }
 }

@@ -1,10 +1,6 @@
 using System;
 using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
-
-using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
-using ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation;
 
 using MetroFramework.Controls;
 

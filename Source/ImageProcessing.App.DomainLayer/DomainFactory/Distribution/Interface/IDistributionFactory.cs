@@ -1,8 +1,7 @@
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
-using ImageProcessing.Microkernel.MVP.Model;
 
-namespace ImageProcessing.App.DomainLayer.Factory.Distribution.Interface
+namespace ImageProcessing.App.DomainLayer.DomainFactory.Distribution.Interface
 {
     /// <summary>
     /// Provides a factory method for all the types

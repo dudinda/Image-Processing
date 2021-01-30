@@ -1,8 +1,9 @@
 using System.Windows.Forms;
 
-using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
-using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Menu;
+using ImageProcessing.App.PresentationLayer.Code.Enums;
+using ImageProcessing.App.PresentationLayer.DomainEvents.DistributionArgs;
+using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
 using ImageProcessing.App.UILayer.FormEventBinders.Distribution.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Distribution;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;

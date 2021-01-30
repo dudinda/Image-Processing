@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.DomainFactory.Transformation.Interface;
 using ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementation;
 using ImageProcessing.App.DomainLayer.DomainModel.Transformation.Interface;

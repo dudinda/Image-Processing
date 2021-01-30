@@ -1,6 +1,6 @@
 using System.Drawing;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.UILayer.FormModel.Model.UndoRedo;
 
 namespace ImageProcessing.App.UILayer.FormModel.Model.RedoButton.Implementation

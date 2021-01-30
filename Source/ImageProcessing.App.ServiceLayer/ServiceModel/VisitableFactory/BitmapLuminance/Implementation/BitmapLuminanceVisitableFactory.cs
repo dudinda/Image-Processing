@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
 using ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.BitmapLuminance;
 using ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.BitmapLuminance.Entropy;
 using ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.BitmapLuminance.Expectation;
@@ -25,7 +25,7 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.BitmapL
             RndInfo.StandardDeviation
                 => new BitmapLuminanceStandardDeviationVisitable(),
 
-            _ => throw new NotImplementedException(nameof(filter))
+            _   => throw new NotImplementedException(nameof(filter))
         }; 
     }
 }

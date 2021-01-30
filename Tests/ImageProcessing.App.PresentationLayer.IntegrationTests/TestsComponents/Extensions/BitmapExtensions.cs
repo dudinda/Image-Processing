@@ -5,7 +5,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
+using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
 
 namespace ImageProcessing.App.PresentationLayer.UnitTests.Extensions
 {
@@ -13,13 +13,13 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Extensions
     {
         public static bool SameAs(this Bitmap bitmap, Bitmap toCompare)
         {
-            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                                                       ImageLockMode.ReadWrite,
-                                                       bitmap.PixelFormat);
+            var bitmapData = bitmap.LockBits(
+                new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                ImageLockMode.ReadWrite, bitmap.PixelFormat);
 
-            var toCompareData = toCompare.LockBits(new Rectangle(0, 0, toCompare.Width, toCompare.Height),
-                                                       ImageLockMode.ReadWrite,
-                                                       toCompare.PixelFormat);
+            var toCompareData = toCompare.LockBits(
+                new Rectangle(0, 0, toCompare.Width, toCompare.Height),
+                ImageLockMode.ReadWrite, toCompare.PixelFormat);
 
             if(bitmap.Width != toCompare.Width)
             {

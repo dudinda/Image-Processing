@@ -1,8 +1,7 @@
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Interface;
-using ImageProcessing.Microkernel.MVP.Model;
 
-namespace ImageProcessing.App.DomainLayer.Factory.Convolution.Interface
+namespace ImageProcessing.App.DomainLayer.DomainFactory.Convolution.Interface
 {
     /// <summary>
     /// Provides a factory method for all the types

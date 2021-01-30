@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.DomainFactory.ColorMatrix.Interface;
 using ImageProcessing.App.DomainLayer.DomainModel.ColorMatrix.Implementation;
 using ImageProcessing.App.DomainLayer.DomainModel.ColorMatrix.Interface;

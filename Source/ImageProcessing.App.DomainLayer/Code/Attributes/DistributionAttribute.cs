@@ -1,6 +1,6 @@
 using System;
 
-namespace ImageProcessing.App.CommonLayer.Attributes
+namespace ImageProcessing.App.DomainLayer.Code.Attributes
 {
     [AttributeUsage(AttributeTargets.Field)]
     public sealed class DistributionAttribute : Attribute

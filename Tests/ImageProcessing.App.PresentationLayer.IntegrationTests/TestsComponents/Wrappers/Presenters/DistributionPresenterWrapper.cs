@@ -1,11 +1,11 @@
 using System.Threading.Tasks;
 
-using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
-using ImageProcessing.App.DomainLayer.DomainEvent.DistributionArgs;
-using ImageProcessing.App.DomainLayer.DomainEvent.MainArgs.Menu;
+using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
+using ImageProcessing.App.PresentationLayer.DomainEvents.DistributionArgs;
+using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Distribution;
-using ImageProcessing.App.PresentationLayer.ViewModel.Distribution;
+using ImageProcessing.App.PresentationLayer.ViewModels.Distribution;
 using ImageProcessing.App.PresentationLayer.Views.Distribution;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;

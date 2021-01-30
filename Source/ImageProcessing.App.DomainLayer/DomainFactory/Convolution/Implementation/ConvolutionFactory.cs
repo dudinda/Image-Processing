@@ -1,6 +1,7 @@
 using System;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.DomainLayer.DomainFactory.Convolution.Interface;
 using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Blur.BoxBlur;
 using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Blur.GaussianBlur;
 using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Blur.MotionBlur;
@@ -9,9 +10,8 @@ using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Edge
 using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Emboss;
 using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Sharpen;
 using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Interface;
-using ImageProcessing.App.DomainLayer.Factory.Convolution.Interface;
 
-namespace ImageProcessing.App.DomainLayer.Factory.Convolution.Implementation
+namespace ImageProcessing.App.DomainLayer.DomainFactory.Convolution.Implementation
 {
     /// <inheritdoc cref="IConvolutionFactory" />
     public sealed class ConvolutionFactory : IConvolutionFactory

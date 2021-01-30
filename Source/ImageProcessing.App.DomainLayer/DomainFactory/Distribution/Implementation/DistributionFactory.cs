@@ -1,10 +1,10 @@
 using System;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.DomainLayer.DomainFactory.Distribution.Interface;
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementation.OneParameter;
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementation.TwoParameter;
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
-using ImageProcessing.App.DomainLayer.Factory.Distribution.Interface;
 
 namespace ImageProcessing.App.DomainLayer.Factory.Distribution.Implementation
 {

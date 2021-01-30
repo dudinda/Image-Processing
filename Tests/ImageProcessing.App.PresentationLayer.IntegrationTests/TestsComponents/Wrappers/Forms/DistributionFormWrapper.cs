@@ -1,9 +1,8 @@
-
 using System.Collections.Concurrent;
 using System.Drawing;
 using System.Windows.Forms;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Views.Distribution;
 using ImageProcessing.App.UILayer.Form.Distribution;
 using ImageProcessing.App.UILayer.FormEventBinders.Distribution.Interface;

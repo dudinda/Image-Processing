@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
-using ImageProcessing.App.PresentationLayer.ViewModel.QualityMeasure;
+using ImageProcessing.App.PresentationLayer.ViewModels.QualityMeasure;
 using ImageProcessing.App.PresentationLayer.Views.QualityMeasure;
 using ImageProcessing.App.ServiceLayer.Services.QualityMeasure.Interface;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;

@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Convolution.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.Convolution.Operator
@@ -10,7 +10,7 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.Convolution.Op
     {
         private readonly ConvKernel _filter;
 
-        private IConvolutionVisitor _visitor = null!;
+        private IConvolutionVisitor? _visitor;
 
         public ConvolutionOperatorVisitable(ConvKernel filter)
         {
@@ -19,8 +19,7 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.Convolution.Op
 
         public IConvolutionVisitable Accept(IConvolutionVisitor visitor)
         {
-            _visitor = visitor;
-            return this;
+            _visitor = visitor; return this;
         }
 
         public Bitmap Filter(Bitmap bmp)

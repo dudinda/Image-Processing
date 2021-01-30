@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.CommonLayer.Enums;
 using ImageProcessing.App.ServiceLayer.Services.Locker.Base.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface

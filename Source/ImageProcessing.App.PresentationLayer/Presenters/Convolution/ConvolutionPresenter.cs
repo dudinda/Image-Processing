@@ -2,12 +2,13 @@ using System;
 using System.Drawing;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
-using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
+using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.PresentationLayer.Code.Enums;
+using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
+using ImageProcessing.App.PresentationLayer.DomainEvents.ConvolutionArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Properties;
-using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
+using ImageProcessing.App.PresentationLayer.ViewModels.Convolution;
 using ImageProcessing.App.PresentationLayer.Views.Convolution;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Convolution;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
@@ -23,8 +24,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
           ISubscriber<ContainerUpdatedEventArgs>,
           ISubscriber<RestoreFocusEventArgs>
     {
-		private readonly IConvolutionServiceProvider _provider;
-		private readonly IAsyncOperationLocker _locker;
+        private readonly IConvolutionServiceProvider _provider;
+        private readonly IAsyncOperationLocker _locker;
 
         public ConvolutionPresenter(
             IAppController controller,
@@ -36,10 +37,10 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
         }
 
         /// <inheritdoc cref="ApplyConvolutionKernelEventArgs"/>
-		public async Task OnEventHandler(object publisher, ApplyConvolutionKernelEventArgs e)
-		{
-			try
-			{
+        public async Task OnEventHandler(object publisher, ApplyConvolutionKernelEventArgs e)
+        {
+            try
+            {
                 var filter = View.Dropdown;
 
                 if (filter != ConvKernel.Unknown)
@@ -58,12 +59,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
                         )
                     );
                 }
-			}
-			catch(Exception ex)
-			{
-				View.Tooltip(Errors.ApplyConvolutionFilter);
-			}
-		}
+            }
+            catch(Exception ex)
+            {
+                View.Tooltip(Errors.ApplyConvolutionFilter);
+            }
+        }
 
         /// <inheritdoc cref="ContainerUpdatedEventArgs"/>
         public async Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)

@@ -1,16 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 
-using ImageProcessing.App.CommonLayer.Attributes;
-
-using static System.Reflection.BindingFlags;
-
-namespace ImageProcessing.App.CommonLayer.Extensions.TypeExt
+namespace ImageProcessing.App.DomainLayer.Code.Extensions.TypeExt
 {
     /// <summary>
     /// Extension methods for a <see cref="Type"> class.

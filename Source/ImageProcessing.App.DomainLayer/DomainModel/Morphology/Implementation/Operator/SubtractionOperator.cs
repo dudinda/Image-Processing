@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
+using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Interface.BinaryOperator;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.Operator

@@ -1,6 +1,6 @@
 using System.Windows.Forms;
 
-using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
+using ImageProcessing.App.PresentationLayer.DomainEvents.ConvolutionArgs;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Convolution;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;

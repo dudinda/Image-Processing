@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.CommonLayer.Extensions.BitmapExt;
+using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Rotation.Interface;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
@@ -35,7 +35,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
               .DrawFilledRectangle(Brushes.White);
 
-            //if tan(rad/2) tends to inf, substract the epsilon value 
+            //if tan(rad) tends to inf, substract the epsilon value 
             if(rad - Math.PI * (rad / Math.PI) < 10e-12)
             {
                 rad = Math.Sign(rad) * (Math.Abs(rad) - 10e-12);

@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.UILayer.FormModel.Factory.MainFormZoom.Interface;
 using ImageProcessing.App.UILayer.FormModel.Model.Zoom;
 using ImageProcessing.App.UILayer.FormModel.Model.Zoom.DestinationContainer.Implementation;

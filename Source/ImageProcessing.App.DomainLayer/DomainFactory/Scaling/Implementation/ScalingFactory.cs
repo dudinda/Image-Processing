@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.DomainFactory.Scaling.Interface;
 using ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation;
 using ImageProcessing.App.DomainLayer.DomainModel.Scaling.Interface;

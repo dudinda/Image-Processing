@@ -1,6 +1,5 @@
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.DomainModel.Rgb.Channel.Interface;
-using ImageProcessing.Microkernel.MVP.Model;
 
 namespace ImageProcessing.App.DomainLayer.DomainFactory.Rgb.Channel.Interface
 {

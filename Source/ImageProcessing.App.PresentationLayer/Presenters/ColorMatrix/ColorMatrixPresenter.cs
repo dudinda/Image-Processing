@@ -2,13 +2,14 @@ using System;
 using System.Drawing;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.CommonLayer.Enums;
-using ImageProcessing.App.DomainLayer.DomainEvent.ColorMatrix;
-using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
+using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.DomainFactory.ColorMatrix.Interface;
+using ImageProcessing.App.PresentationLayer.Code.Enums;
+using ImageProcessing.App.PresentationLayer.DomainEvents.ColorMatrix;
+using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Properties;
-using ImageProcessing.App.PresentationLayer.ViewModel.ColorMatrix;
+using ImageProcessing.App.PresentationLayer.ViewModels.ColorMatrix;
 using ImageProcessing.App.PresentationLayer.Views.ColorMatrix;
 using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;

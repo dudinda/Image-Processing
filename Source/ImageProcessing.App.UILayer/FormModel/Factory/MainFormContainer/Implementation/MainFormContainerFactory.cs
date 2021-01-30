@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.App.CommonLayer.Enums;
+using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.UILayer.FormCommands.Main;
 using ImageProcessing.App.UILayer.FormCommands.Main.Container.Destination.Implementation;
 using ImageProcessing.App.UILayer.FormCommands.Main.Container.Source.Implementation;

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-using ImageProcessing.App.DomainLayer.DomainEvent.SettingsArgs;
+using ImageProcessing.App.PresentationLayer.DomainEvents.SettingsArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Views.Settings;
 using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;

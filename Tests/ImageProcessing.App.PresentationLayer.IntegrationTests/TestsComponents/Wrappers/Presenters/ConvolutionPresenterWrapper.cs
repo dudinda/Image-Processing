@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 
-using ImageProcessing.App.DomainLayer.DomainEvent.CommonArgs;
-using ImageProcessing.App.DomainLayer.DomainEvent.ConvolutionArgs;
+using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
+using ImageProcessing.App.PresentationLayer.DomainEvents.ConvolutionArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Convolution;
-using ImageProcessing.App.PresentationLayer.ViewModel.Convolution;
+using ImageProcessing.App.PresentationLayer.ViewModels.Convolution;
 using ImageProcessing.App.PresentationLayer.Views.Convolution;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Convolution;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
