@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Drawing;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.PresentationLayer.Code.Constants;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Container;
@@ -80,7 +81,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             try
             {
                   var result = await _dialog.NonBlockOpen(
-                      ConfigurationManager.AppSettings["Filters"]
+                      ConfigurationManager.AppSettings[AppSettingsKeys.Filters]
                   ).ConfigureAwait(true);
 
                   if (result.Image != null)
@@ -115,7 +116,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
                     ).ConfigureAwait(true);
 
                     await _dialog.NonBlockSaveAs(copy,
-                         ConfigurationManager.AppSettings["Filters"]
+                         ConfigurationManager.AppSettings[AppSettingsKeys.Filters]
                     ).ConfigureAwait(true);
                 }
             }

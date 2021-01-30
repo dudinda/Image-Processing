@@ -3,6 +3,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
+using ImageProcessing.App.ServiceLayer.Code.Constants;
 using ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Interface;
 using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.RealAxis;
 using ImageProcessing.Utility.DecimalMath.RealAxis;
@@ -58,11 +59,11 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         {
             Contract.Requires(
                 pmf.Any(value => value > 0),
-                "Probability mass function is always positive.");
+                RandomVariableErrors.PmfIsPositive);
 
             Contract.Requires(
                 (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
-                "The pmf must be normalized.");
+                RandomVariableErrors.PmfNotNormalized);
 
             var total = 0.0M;
 
@@ -79,11 +80,11 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         {
             Contract.Requires(
                 pmf.Any(value => value > 0),
-                "Probability mass function is always positive.");
+                RandomVariableErrors.PmfIsPositive);
 
             Contract.Requires(
                 (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
-                "The pmf must be normalized.");
+                RandomVariableErrors.PmfNotNormalized);
 
             var total = 0.0M;
 
@@ -102,11 +103,11 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         {
             Contract.Requires(
                 pmf.Any(value => value > 0),
-                "Probability mass function is always positive.");
+                RandomVariableErrors.PmfIsPositive);
 
             Contract.Requires(
                 (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
-                "The pmf must be normalized.");
+                RandomVariableErrors.PmfNotNormalized);
 
             return GetVariance(pmf).Sqrt();
         }
@@ -116,11 +117,11 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         {
             Contract.Requires(
                 pmf.Any(value => value > 0),
-                "Probability mass function is always positive.");
+                RandomVariableErrors.PmfIsPositive);
 
             Contract.Requires(
                 (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
-                "The pmf must be normalized.");
+                RandomVariableErrors.PmfNotNormalized);
 
             var uvalue = 0.0M;
             var lvalue = 0.0M;
@@ -144,7 +145,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         {
             Contract.Requires(
                 frequencies.Any(value => value > 0),
-                "Frequencies are always positive.");
+                RandomVariableErrors.FrequenciesNotPositive);
 
             var mean = GetConditionalExpectation(interval, frequencies);
 
@@ -170,11 +171,11 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         {
             Contract.Requires(
                 pmf.Any(value => value > 0),
-                "Probability mass function is always positive.");
+                RandomVariableErrors.PmfIsPositive);
 
             Contract.Requires(
                 (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
-                "The pmf must be normalized.");
+                RandomVariableErrors.PmfNotNormalized);
 
             var cdf = pmf.Clone() as decimal[];
 
@@ -196,14 +197,12 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         {
             Contract.Requires(
                 frequencies.Any(value => value > 0),
-                "Frequencies are always positive.");
+                RandomVariableErrors.FrequenciesNotPositive);
 
             var total = frequencies.Sum();
 
-            return frequencies
-                .AsParallel()
-                .Select(x => (decimal)x / total)
-                .ToArray();
+            return frequencies.AsParallel()
+                .Select(x => (decimal)x / total).ToArray();
         }
 
         /// <inheritdoc/>
@@ -211,11 +210,11 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         {
             Contract.Requires(
                 pmf.Any(value => value > 0),
-                "Probability mass function is always positive.");
+                RandomVariableErrors.PmfIsPositive);
 
             Contract.Requires(
                 (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
-                "The pmf must be normalized.");
+                RandomVariableErrors.PmfNotNormalized);
 
             var entropy = 0.0M;
 
@@ -228,4 +227,3 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         }  
     }
 }
-

@@ -106,7 +106,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix
                 View.SetEnabledDropDown(!e.UseCustom);
                 View.SetVisibleApply(!e.UseCustom);
                 View.SetVisibleApplyCustom(e.UseCustom);
-                View.SetGrid(_factory.Get(View.Dropdown).Matrix);              
+                View.SetGrid(_factory.Get(View.Dropdown).Matrix);
             }
             catch(Exception ex)
             {

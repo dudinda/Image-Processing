@@ -8,6 +8,7 @@ using ImageProcessing.App.PresentationLayer.Presenters.Distribution;
 using ImageProcessing.App.PresentationLayer.ViewModels.Distribution;
 using ImageProcessing.App.PresentationLayer.Views.Distribution;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
+using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
@@ -26,16 +27,19 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
 
         public IAsyncOperationLocker Operation { get; }
         public IBitmapLuminanceServiceProvider Provider { get; }
+        public IBitmapService Service { get; }
 
         public DistributionPresenterWrapper(
             IAppController controller,
+            IBitmapService service,
             IAsyncOperationLocker locker,
             IBitmapLuminanceServiceProvider provider) : base(controller)
         {
             Operation = locker;
             Provider = provider;
+            Service = service;
 
-            _presenter = new DistributionPresenter(controller, locker, provider);
+            _presenter = new DistributionPresenter(controller, service, locker, provider);
         }
 
         public override void Run(DistributionViewModel vm)

@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Globalization;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.DistributionArgs;
@@ -15,6 +14,7 @@ using ImageProcessing.App.PresentationLayer.ViewModels.Histogram;
 using ImageProcessing.App.PresentationLayer.ViewModels.QualityMeasure;
 using ImageProcessing.App.PresentationLayer.Views.Distribution;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
+using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
@@ -32,15 +32,18 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
         ISubscriber<RestoreFocusEventArgs>,
         ISubscriber<ContainerUpdatedEventArgs>
     {
+        private readonly IBitmapService _service;
         private readonly IAsyncOperationLocker _locker;
         private readonly IBitmapLuminanceServiceProvider _provider;
         
         public DistributionPresenter(
             IAppController controller,
+            IBitmapService service,
             IAsyncOperationLocker locker,
             IBitmapLuminanceServiceProvider provider) : base(controller)
         {
             _locker = locker;
+            _service = service;
             _provider = provider;
         }
 
@@ -90,7 +93,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
                     new AttachBlockToRendererEventArgs(
                         block: new PipelineBlock(copy)
                             .Add<Bitmap, Bitmap>(
-                                (bmp) => bmp.Shuffle())
+                                (bmp) => _service.Shuffle(bmp))
                     )
                  );                     
             }

@@ -9,54 +9,6 @@ namespace ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt
     /// </summary>
     public static class BitmapExtension
     {
-        /// <summary>
-        /// Perform the Fisher–Yates shuffle on a selected bitmap.
-        /// </summary>
-        /// <param name="bitmap">A bitmap.</param>
-        /// <returns>The shuffled bitmap.</returns>
-        public static Bitmap Shuffle(this Bitmap bitmap)
-        {
-            var bitmapData = bitmap.LockBits(
-                new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                ImageLockMode.ReadWrite, bitmap.PixelFormat);
-
-            var resolution = bitmap.Width * bitmap.Height;
-            var ptrStep = bitmap.GetBitsPerPixel() / 8;
-
-            var random = new Random(Guid.NewGuid().GetHashCode());
-
-            unsafe
-            {
-                var startPtr = (byte*)bitmapData.Scan0.ToPointer();
-
-                byte r, g, b;
-
-                var ptr = startPtr;
-
-                for (var index = resolution - 1; index > 1; --index, ptr += ptrStep)
-                {
-                    var newPtr = startPtr + random.Next(index) * ptrStep;
-
-                    r = ptr[0];
-                    g = ptr[1];
-                    b = ptr[2];
-
-                    ptr[0] = newPtr[0];
-                    ptr[1] = newPtr[1];
-                    ptr[2] = newPtr[2];
-
-                    newPtr[0] = r;
-                    newPtr[1] = g;
-                    newPtr[2] = b;
-
-                }
-            }
-
-            bitmap.UnlockBits(bitmapData);
-
-            return bitmap;
-        }
-
         public static Bitmap DrawFilledRectangle(this Bitmap bmp, Brush brush)
         {
             using (var graph = Graphics.FromImage(bmp))

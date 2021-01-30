@@ -27,6 +27,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
 
             var size = source.Size;
             var ptrStep = source.GetBitsPerPixel() / 8;
+
             unsafe
             {
                 var sourceStartPtr      = (byte*)sourceBitmapData.Scan0.ToPointer();

@@ -40,16 +40,18 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
             var ptrStep = bitmap.GetBitsPerPixel() / 8;
             var size = bitmap.Size;
 
+            var (dstWidth, dstHeight) = (size.Width, size.Height);
+
             unsafe
             {
                 var startPtr = (byte*)bitmapData.Scan0.ToPointer();
 
-                Parallel.For(0, size.Height, options, y =>
+                Parallel.For(0, dstHeight, options, y =>
                 {
                     //get a start address
                     var ptr = startPtr + y * bitmapData.Stride;
 
-                    for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
+                    for (int x = 0; x < dstWidth; ++x, ptr += ptrStep)
                     {
                         //get a new pixel value, transofrming by a quantile
                         ptr[0] = ptr[1] = ptr[2] = newPixels[ptr[0]];
@@ -104,6 +106,8 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
             {
                 var size = bitmap.Size;
 
+                var (dstWidth, dstHeight) = (size.Width, size.Height);
+
                 var options = new ParallelOptions()
                 {
                     MaxDegreeOfParallelism = Environment.ProcessorCount
@@ -114,11 +118,11 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
                 var bag = new ConcurrentBag<int[]>();
 
                 //get N partial frequency arrays
-                Parallel.For(0, size.Height, options, () => new int[256], (y, state, partial) =>
+                Parallel.For(0, dstHeight, options, () => new int[256], (y, state, partial) =>
                 {
                     var ptr = startPtr + y * bitmapData.Stride;
 
-                    for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
+                    for (int x = 0; x < dstWidth; ++x, ptr += ptrStep)
                     {
                         partial[ptr[0]]++;
                     }

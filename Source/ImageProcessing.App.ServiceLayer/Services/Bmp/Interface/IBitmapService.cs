@@ -13,7 +13,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Interface
         Bitmap Magnitude(Bitmap xDerivative, Bitmap yDerivative);
 
         /// <summary>
-        /// Get the maxima value of luma.
+        /// Get the minima value of luma.
         /// </summary>
         byte Min(Bitmap bitmap);
 
@@ -26,5 +26,11 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Interface
         /// Change the range of pixel intensity values.
         /// </summary>
         Bitmap Normalize(Bitmap bitmap);
+
+
+        /// <summary>
+        /// Perform the Fisher–Yates shuffle on a selected bitmap.
+        /// </summary>
+        Bitmap Shuffle(Bitmap bitmap);
     }
 }
