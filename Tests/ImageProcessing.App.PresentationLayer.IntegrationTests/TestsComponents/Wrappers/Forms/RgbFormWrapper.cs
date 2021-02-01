@@ -1,8 +1,8 @@
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Views.Rgb;
-using ImageProcessing.App.UILayer.Exposers.Rgb;
-using ImageProcessing.App.UILayer.Form.Rgb;
 using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface;
+using ImageProcessing.App.UILayer.FormExposers.Rgb;
+using ImageProcessing.App.UILayer.Forms.Rgb;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 using MetroFramework.Controls;

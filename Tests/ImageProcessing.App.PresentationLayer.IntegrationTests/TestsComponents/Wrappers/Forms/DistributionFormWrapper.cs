@@ -4,9 +4,9 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Views.Distribution;
-using ImageProcessing.App.UILayer.Form.Distribution;
 using ImageProcessing.App.UILayer.FormEventBinders.Distribution.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Distribution;
+using ImageProcessing.App.UILayer.Forms.Distribution;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 using MetroFramework.Controls;
