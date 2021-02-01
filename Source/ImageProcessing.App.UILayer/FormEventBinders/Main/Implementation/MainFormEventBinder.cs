@@ -1,6 +1,7 @@
 using System.Windows.Forms;
 
 using ImageProcessing.App.PresentationLayer.Code.Enums;
+using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Container;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.FileDialog;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
@@ -140,6 +141,11 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation
             source.RedoButton.Click += (sender, args)
                 => _aggregator.PublishFrom(source,
                      new UndoRedoEventArgs(UndoRedoAction.Redo)
+                );
+
+            source.FormClosed += (sender, args)
+                => _aggregator.PublishFrom(source,
+                    new FormIsClosedEventArgs()
                 );
         }
 

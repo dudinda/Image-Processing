@@ -49,7 +49,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
           ISubscriber<ShowTooltipOnErrorEventArgs>,
           ISubscriber<ReplaceImageEventArgs>,
           ISubscriber<TrackBarEventArgs>,
-          ISubscriber<UndoRedoEventArgs>
+          ISubscriber<UndoRedoEventArgs>,
+          ISubscriber<FormIsClosedEventArgs>
     {
         private readonly ICacheService<Bitmap> _cache;
         private readonly INonBlockDialogService _dialog;
@@ -363,6 +364,10 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
             View.Tooltip(e.Message);
         }
 
+        public async Task OnEventHandler(object publisher, FormIsClosedEventArgs e)
+        {
+            Controller.Dispose();
+        }
         private void RenderBlock(Bitmap bmp, ImageContainer to, UndoRedoAction action)
         {
             lock (_cache)

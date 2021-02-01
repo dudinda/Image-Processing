@@ -130,5 +130,8 @@ namespace ImageProcessing.App.UILayer.FormExposers.Main
         /// Redo the last operation.
         /// </summary>
         ToolStripButton RedoButton { get; }
+
+        ///<inheritdoc cref="FormClosedEventHandler"/>
+        event FormClosedEventHandler FormClosed;
     }
 }

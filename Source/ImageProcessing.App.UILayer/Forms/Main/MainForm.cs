@@ -44,8 +44,6 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             _container = container;
                    
             _binder.OnElementExpose(this);
-
-            FormClosed += (sender, args) => controller.Dispose();
         }
 
         private Image? _default;
