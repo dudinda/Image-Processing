@@ -22,11 +22,6 @@ using ImageProcessing.App.DomainLayer.DomainFactory.StructuringElement.Implement
 using ImageProcessing.App.DomainLayer.DomainFactory.Transformation.Implementation;
 using ImageProcessing.App.DomainLayer.DomainFactory.Transformation.Interface;
 using ImageProcessing.App.DomainLayer.Factory.Distribution.Implementation;
-using ImageProcessing.App.PresentationLayer.Presenters.Convolution;
-using ImageProcessing.App.PresentationLayer.Presenters.Distribution;
-using ImageProcessing.App.PresentationLayer.Presenters.Main;
-using ImageProcessing.App.PresentationLayer.Presenters.Rgb;
-using ImageProcessing.App.PresentationLayer.Presenters.Settings;
 using ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Implementation;
 using ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Interface;
 using ImageProcessing.App.ServiceLayer.NonBlockDialog.Implementation;
@@ -88,8 +83,6 @@ using ImageProcessing.App.ServiceLayer.Services.StaTask.Interface;
 using ImageProcessing.Microkernel.AppConfig;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
-
-
 namespace ImageProcessing.App.PresentationLayer
 {
     public sealed class Startup : IStartup
@@ -108,9 +101,7 @@ namespace ImageProcessing.App.PresentationLayer
                 .RegisterTransient<IRecommendationFactory, RecommendationFactory>()
                 .RegisterTransient<IChannelFactory, ChannelFactory>()
                 .RegisterTransient<IRotationFactory, RotationFactory>()
-                .RegisterTransient<ITransformationFactory, TransformationFactory>();
-
-            builder
+                .RegisterTransient<ITransformationFactory, TransformationFactory>()
                 .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
                 .RegisterSingleton<IStaTaskService, StaTaskService>()
                 .RegisterSingleton<ICacheService<Bitmap>, CacheService<Bitmap>>()
@@ -139,13 +130,6 @@ namespace ImageProcessing.App.PresentationLayer
                 .RegisterTransient<ICovolutionVisitableFactory, ConvolutionVisitableFactory>()
                 .RegisterTransient<IHistogramVisitor, HistogramVisitor>()
                 .RegisterTransient<IHistogramVisitableFactory, HistogramVisitableFactory>();
-
-            builder
-                .RegisterTransient<MainPresenter>()
-                .RegisterTransient<RgbPresenter>()
-                .RegisterTransient<DistributionPresenter>()
-                .RegisterTransient<ConvolutionPresenter>()
-                .RegisterTransient<SettingsPresenter>();
         }
     }
 }
