@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Extensions.EnumExt;
 using ImageProcessing.App.UILayer.Code.Attributes;
+using ImageProcessing.App.UILayer.FormEventBinders;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Microkernel.MVP.View;
 
@@ -22,16 +23,25 @@ namespace ImageProcessing.App.UILayer.Forms
         typeof(AbstractFormDescriptionProvider<BaseForm, MetroForm>))]
     internal abstract class BaseForm : MetroForm, IView
     {
+        private IAppController? _controller;
         private ApplicationContext? _context;
 
         /// <inheritdoc cref="IAppController"/>
-        protected IAppController? Controller { get; }
+        protected IAppController Controller
+        {
+            get => _controller ?? throw new ArgumentNullException();
+            set => _controller = value;
+        }
 
-        protected BaseForm(IAppController controller)
-            : base() => Controller = controller;
+        protected BaseForm(IAppController controller) : base()
+        {
+            Controller = controller;
+        }
+            
+        protected BaseForm() : base()
+        {
 
-        protected BaseForm()
-            : base() { }
+        }
 
         /// <inheritdoc cref="ApplicationContext"/>
         protected ApplicationContext Context
@@ -40,11 +50,6 @@ namespace ImageProcessing.App.UILayer.Forms
             {
                 if(_context is null)
                 {
-                    if(Controller is null)
-                    {
-                        throw new ArgumentNullException(nameof(Controller));
-                    }
-
                     var ioc = Controller.IoC;
 
                     if(!ioc.IsRegistered<ApplicationContext>())
@@ -91,7 +96,7 @@ namespace ImageProcessing.App.UILayer.Forms
            where TEnum : Enum
         {
             var values = EnumExtensions.GetAllEnumValues<TEnum>()
-             .Select(val => val.GetDescription()).ToArray();
+                .Select(val => val.GetDescription()).ToArray();
 
             box.Items.AddRange(Array.ConvertAll(values, item => (object)item));
             box.SelectedIndex = 0;

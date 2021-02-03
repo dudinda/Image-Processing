@@ -47,7 +47,7 @@ namespace ImageProcessing.App.UILayer.Forms.ColorMatrix
         public MetroButton ApplyButton
             => ApplyColorMatrixButton;
 
-        /// <inheritdoc/>
+        /// <inheritdoc/> 
         public MetroCheckBox CustomCheckBox
             => CustomColorMatrix;
 
