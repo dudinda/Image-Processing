@@ -27,6 +27,10 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         private readonly IMainFormZoomFactory _zoom;
         private readonly IMainFormRotationFactory _rotation;
 
+        private Image? _default;
+        private Image? _srcCopy;
+        private Image? _dstCopy;
+
         public MainForm(
             IAppController controller,
             IMainFormEventBinder binder,
@@ -46,73 +50,19 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             _binder.OnElementExpose(this);
         }
 
-        private Image? _default;
-        public Image? Default
-        {
-            get
-            {
-                if (_default is null)
-                {
-                    _default = Resources.DefaultImage;
-                }
-
-                return _default;
-            }
-        }
-
-
-        private Image? _srcCopy;
-        /// <inheritdoc/>
-        public Image? SrcImageCopy
-        {
-            get
-            {
-                if(_srcCopy is null)
-                {
-                    _srcCopy = Default;
-                }
-
-                return _srcCopy;
-            }
-
-            set => _srcCopy = value;
-        }
-
-        private Image? _dstCopy;
-        /// <inheritdoc/>
-        public Image? DstImageCopy
-        {
-            get
-            {
-                if(_dstCopy is null)
-                {
-                    _dstCopy = Default;
-                }
-
-                return _dstCopy;
-            }
-
-            set => _dstCopy = value;
-        }
-  
         /// <inheritdoc/>
         public Image? SrcImage
         {
             get => Src.Image;
             set
             {
-                var tag = value.Tag;
-
-                if (tag != null)
+                if (value?.Tag == nameof(ImageIsDefault))
                 {
-                    if (tag.Equals(nameof(ImageIsDefault)))
-                    {
-                        _srcCopy = null;
-                        Src.Image = null!;
-                        return;
-                    }
+                    _srcCopy  = null;
+                    Src.Image = null!;
+                    return;
                 }
-                
+
                 Src.Image = value;
             }
         }
@@ -123,20 +73,35 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             get => Dst.Image;
             set
             {
-                var tag = value.Tag;
-
-                if (tag != null)
+                if (value?.Tag == nameof(ImageIsDefault))
                 {
-                    if (tag.Equals(nameof(ImageIsDefault)))
-                    {
-                        _dstCopy = null;
-                        Dst.Image = null!;
-                        return;
-                    }
+                    _dstCopy  = null;
+                    Dst.Image = null!;
+                    return;
                 }
 
                 Dst.Image = value;
             }
+        }
+
+        /// <inheritdoc/>
+        public Image? Default
+        {
+            get => _default ??= Resources.DefaultImage;
+        }
+
+        /// <inheritdoc/>
+        public Image? SrcImageCopy
+        {
+            get => _srcCopy ??= Default;
+            set => _srcCopy = value;
+        }
+
+        /// <inheritdoc/>
+        public Image? DstImageCopy
+        {
+            get => _dstCopy ??= Default;
+            set => _dstCopy = value;
         }
 
         /// <inheritdoc/>
@@ -186,39 +151,49 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         public UndoRedoSplitContainer SplitContainerCtr
             => SplitContainer;
 
+        /// <inheritdoc/>
         public Image? SourceImage
         {
             get => SrcImage;
             set => SrcImage = value;
         }
-           
+
+        /// <inheritdoc/>
         public Image? DestinationImage
         {
             get => DstImage;
             set => DstImage = value;
         }
 
+        /// <inheritdoc/>
         public ToolStripButton UndoButton
             => UndoBtn;
 
+        /// <inheritdoc/>
         public ToolStripButton RedoButton
             => RedoBtn;
 
+        /// <inheritdoc/>
         public Image? DefaultImage
             => Default;
 
+        /// <inheritdoc/>
         public PictureBox SourceBox
             => Src;
 
+        /// <inheritdoc/>
         public PictureBox DestinationBox
             => Dst;
 
+        /// <inheritdoc/>
         public ToolStripMenuItem SettingsMenuButton
             => SettingsMenu;
 
+        /// <inheritdoc/>
         public RotationTrackBar RotationSrcTrackBar
             => SrcRotation;
 
+        /// <inheritdoc/>
         public RotationTrackBar RotationDstTrackBar
             => DstRotation;
 
@@ -277,10 +252,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         /// <inheritdoc/>
         public virtual void AddToUndoRedo(ImageContainer to, Bitmap cpy, UndoRedoAction action)
         {
-            if (ImageIsDefault(to))
-            {
-                cpy.Tag = nameof(ImageIsDefault);
-            }
+            if (ImageIsDefault(to)) { cpy.Tag = nameof(ImageIsDefault); }
 
             Write(() => _undoRedo.Get(action).OnElementExpose(this).Add(to, cpy));
         }
@@ -291,6 +263,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
 
         public double GetZoomFactor(ImageContainer container)
             => _zoom.Get(container).OnElementExpose(this).GetFactor();
+
         public double GetRotationFactor(ImageContainer container)
            =>  _rotation.Get(container).OnElementExpose(this).GetFactor();
 
