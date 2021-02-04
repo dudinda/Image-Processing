@@ -121,26 +121,26 @@
   <ItemGroup>
     <Compile Include="TestsComponents\Extensions\BitmapExtensions.cs" />
     <Compile Include="TestsComponents\Extensions\DependencyResolutionExtensions.cs" />
-    <Compile Include="TestsComponents\Wrappers\Forms\ConvolutionFormWrapper.cs">
+    <Compile Include="App.UILayer\ConvolutionFormWrapper.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TestsComponents\Wrappers\Forms\DistributionFormWrapper.cs">
+    <Compile Include="App.UILayer\DistributionFormWrapper.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TestsComponents\Wrappers\Forms\RgbFormWrapper.cs">
+    <Compile Include="App.UILayer\RgbFormWrapper.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TestsComponents\Wrappers\Presenters\ConvolutionPresenterWrapper.cs" />
-    <Compile Include="TestsComponents\Wrappers\Presenters\DistributionPresenterWrapper.cs" />
-    <Compile Include="TestsComponents\Wrappers\Presenters\MainPresenterWrapper.cs" />
-    <Compile Include="TestsComponents\Wrappers\Presenters\RgbPresenterWrapper.cs" />
-    <Compile Include="TestsComponents\Wrappers\Services\EventAggregator\Implementation\EventAggregatorWrapper.cs" />
-    <Compile Include="TestsComponents\Wrappers\Services\EventAggregator\Interface\IEventAggregatorWrapper.cs" />
-    <Compile Include="TestsComponents\Wrappers\Forms\MainFormWrapper.cs">
+    <Compile Include="App.PresentationLayer\ConvolutionPresenterWrapper.cs" />
+    <Compile Include="App.PresentationLayer\DistributionPresenterWrapper.cs" />
+    <Compile Include="App.PresentationLayer\MainPresenterWrapper.cs" />
+    <Compile Include="App.PresentationLayer\RgbPresenterWrapper.cs" />
+    <Compile Include="Microkernel.MVP\EventAggregator\Implementation\EventAggregatorWrapper.cs" />
+    <Compile Include="Microkernel.MVP\EventAggregator\Interface\IEventAggregatorWrapper.cs" />
+    <Compile Include="App.UILayer\MainFormWrapper.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TestsComponents\Wrappers\Services\SynchronizationContext\SynchronizationContextWrapper.cs" />
-    <Compile Include="TestsComponents\Wrappers\Services\NonBlockDialog\NonBlockDialogServiceWrapper.cs" />
+    <Compile Include="Microkernel.MVP\SynchronizationContext\SynchronizationContextWrapper.cs" />
+    <Compile Include="App.ServiceLayer\NonBlockDialog\NonBlockDialogServiceWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestsStartups\ConvolutionPresenterTestStartup.cs" />
     <Compile Include="TestsStartups\DistributionPresenterTestStartup.cs" />
@@ -196,7 +196,9 @@
     <Content Include="TestResources\Static\1920x1080frame.jpg" />
     <Content Include="TestResources\Static\2560x1440frame.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App.DomainLayer\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TestResources\Res.resx">
       <Generator>ResXFileCodeGenerator</Generator>
