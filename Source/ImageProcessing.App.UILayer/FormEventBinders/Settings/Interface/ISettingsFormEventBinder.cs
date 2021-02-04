@@ -1,8 +1,9 @@
+using ImageProcessing.App.UILayer.FormExposers;
 using ImageProcessing.App.UILayer.FormExposers.Settings;
 
 namespace ImageProcessing.App.UILayer.FormEventBinders.Settings.Interface
 {
-    internal interface ISettingsFormEventBinder : IFormEventBinder<ISettingsFormExposer>
+    internal interface ISettingsFormEventBinder : IFormExposer<ISettingsFormExposer>
     {
 
     }
