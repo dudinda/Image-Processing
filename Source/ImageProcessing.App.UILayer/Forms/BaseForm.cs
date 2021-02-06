@@ -6,7 +6,6 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Extensions.EnumExt;
 using ImageProcessing.App.UILayer.Code.Attributes;
-using ImageProcessing.App.UILayer.FormEventBinders;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Microkernel.MVP.View;
 
@@ -29,7 +28,7 @@ namespace ImageProcessing.App.UILayer.Forms
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller
         {
-            get => _controller ?? throw new ArgumentNullException();
+            get => _controller ?? throw new ArgumentNullException(nameof(_controller));
             set => _controller = value;
         }
 
