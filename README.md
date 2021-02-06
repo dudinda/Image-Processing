@@ -65,7 +65,7 @@
 </p>
 
 <p align="center">
-   <img src="https://i.imgur.com/S3QjD7O.png"  width="1400" height = "230" alt="metrcis">
+   <img src="https://i.imgur.com/c4v7BfU.png"  width="1400" height = "230" alt="metrcis">
    <p align="center">Fig. 7 - The application code metrics.</p>
 </p>
 
