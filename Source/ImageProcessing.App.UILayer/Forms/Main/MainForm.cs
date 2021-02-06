@@ -56,10 +56,10 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             get => Src.Image;
             set
             {
-                if (value?.Tag == nameof(ImageIsDefault))
+                if (value?.Tag is string tag &&
+                    tag == nameof(ImageIsDefault))
                 {
-                    _srcCopy  = null;
-                    Src.Image = null!;
+                    _srcCopy = null; Src.Image = null!;
                     return;
                 }
 
@@ -73,10 +73,10 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             get => Dst.Image;
             set
             {
-                if (value?.Tag == nameof(ImageIsDefault))
+                if (value?.Tag is string tag &&
+                    tag == nameof(ImageIsDefault))
                 {
-                    _dstCopy  = null;
-                    Dst.Image = null!;
+                    _dstCopy = null; Dst.Image = null!;
                     return;
                 }
 
@@ -205,6 +205,14 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         }
 
         /// <inheritdoc/>
+        public double GetZoomFactor(ImageContainer container)
+            => _zoom.Get(container).OnElementExpose(this).GetFactor();
+
+        /// <inheritdoc/>
+        public double GetRotationFactor(ImageContainer container)
+            => _rotation.Get(container).OnElementExpose(this).GetFactor();
+
+        /// <inheritdoc/>
         public virtual string GetPathToFile()
             => Read<string>(() => PathToImage.Text );
 
@@ -260,12 +268,6 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         /// <inheritdoc/>
         public virtual (Bitmap, ImageContainer) TryUndoRedo(UndoRedoAction action)
             => Read<(Bitmap, ImageContainer)>(() => _undoRedo.Get(action).OnElementExpose(this).Pop());
-
-        public double GetZoomFactor(ImageContainer container)
-            => _zoom.Get(container).OnElementExpose(this).GetFactor();
-
-        public double GetRotationFactor(ImageContainer container)
-           =>  _rotation.Get(container).OnElementExpose(this).GetFactor();
 
         public void SetImageCenter(ImageContainer to, Size size)
              => Write(() => _container.Get(to).OnElementExpose(this).SetImageCenter(size));
