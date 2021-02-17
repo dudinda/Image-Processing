@@ -33,19 +33,29 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
                 Parallel.For(0, size.Height, options, y =>
                 {
                     //get the address of a row
-                    var ptr = startPtr + y * bitmapData.Stride;
-                    var endPtr = ptr + endStride;
+                    var start = startPtr + y * bitmapData.Stride;
+                    var end = start + endStride;
+
+                    byte tmp;
  
                     do
                     {
-                        (ptr[0], endPtr[0]) = (endPtr[0], ptr[0]);
-                        (ptr[1], endPtr[1]) = (endPtr[1], ptr[1]);
-                        (ptr[2], endPtr[2]) = (endPtr[2], ptr[2]);
+                        tmp = end[0];
+                        end[0] = start[0];
+                        start[0] = tmp;
 
-                        ptr += ptrStep;
-                        endPtr -= ptrStep;
+                        tmp = end[1];
+                        end[1] = start[1];
+                        start[1] = tmp;
 
-                    } while (ptr < endPtr);
+                        tmp = end[2];
+                        end[2] = start[2];
+                        start[2] = tmp;
+
+                        start += ptrStep;
+                        end -= ptrStep;
+
+                    } while (start < end);
                 });
             }
 
