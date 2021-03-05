@@ -62,7 +62,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 
             //inv( T(x, y)Sh(alpha, 0)Sh(0, beta)Sh(gamma, 0)inv(T(x', y')) )v = v'
             //where x and y are the center of a destination and x' and y' are the
-            //center of a source and Sh(sx, sy) is a shear matrix.
+            //center of a source and Sh(shx, shy) is a shear matrix and T(x, y) is
+            //a translation matrix.
             unsafe
             {
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
