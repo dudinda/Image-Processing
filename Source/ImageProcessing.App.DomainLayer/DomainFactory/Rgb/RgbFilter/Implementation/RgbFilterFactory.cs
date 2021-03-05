@@ -50,6 +50,10 @@ namespace ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Implementa
                     => new FlippingFilter(),
                 RgbFltr.SepiaTone
                     => new SepiaToneFilter(),
+                RgbFltr.MirrorLeft
+                    => new MirrorLeftFilter(),
+                RgbFltr.MirrorRight
+                    => new MirrorRightFilter(),
 
                 _   => throw new NotImplementedException(nameof(filter))
             };

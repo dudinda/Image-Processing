@@ -47,6 +47,18 @@ namespace ImageProcessing.App.DomainLayer.Code.Enums
         /// Sepia tone filter.
         /// </summary>
         [Description("Sepia tone")]
-        SepiaTone = 6
+        SepiaTone = 6,
+
+        /// <summary>
+        /// Mirror left filter.
+        /// </summary>
+        [Description("Mirror left")]
+        MirrorLeft = 7,
+
+        /// <summary>
+        /// Mirror right filter.
+        /// </summary>
+        [Description("Mirror right")]
+        MirrorRight = 8
     }
 }
