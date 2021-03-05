@@ -32,7 +32,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
             
             var ptrStep = bitmap.GetBitsPerPixel() / 8;
 
-            var size = bitmap.Size;
+            var (width, height) = (bitmap.Width, bitmap.Height);
             var options = new ParallelOptions()
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount
@@ -45,11 +45,11 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
                 var bag = new ConcurrentBag<double>();
 
                 //get N luminance partial sums
-                Parallel.For(0, size.Height, options, () => 0.0, (y, state, partial) =>
+                Parallel.For(0, height, options, () => 0.0, (y, state, partial) =>
                 {
                     var ptr = startPtr + y * bitmapData.Stride;
 
-                    for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
+                    for (var x = 0; x < width; ++x, ptr += ptrStep)
                     {
                         partial += _rec.GetLuma(
                             ref ptr[2], ref ptr[1], ref ptr[0]
@@ -61,13 +61,13 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
                 (x) => bag.Add(x));
 
                 //get luminance average
-                var average = bag.Sum() / (size.Width * size.Height);
+                var average = bag.Sum() / (width * height);
 
-                Parallel.For(0, size.Height, options, y =>
+                Parallel.For(0, height, options, y =>
                 {
                     var ptr = startPtr + y * bitmapData.Stride;
 
-                    for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
+                    for (var x = 0; x < width; ++x, ptr += ptrStep)
                     {
                         //if relative luminance greater or equal than average
                         //set it to white

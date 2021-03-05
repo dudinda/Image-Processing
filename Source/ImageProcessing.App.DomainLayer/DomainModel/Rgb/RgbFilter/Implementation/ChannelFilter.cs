@@ -27,7 +27,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                 ImageLockMode.ReadWrite, bitmap.PixelFormat);
 
-            var size = bitmap.Size;
+            var (width, height) = (bitmap.Width, bitmap.Height);
             var ptrStep = bitmap.GetBitsPerPixel() / 8;
             var options = new ParallelOptions()
             {
@@ -38,12 +38,12 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
             {
                 var startPtr = (byte*)bitmapData.Scan0.ToPointer();
 
-                Parallel.For(0, size.Height, options, y =>
+                Parallel.For(0, height, options, y =>
                 {
                     //get the address of a row
                     var ptr = startPtr + y * bitmapData.Stride;
 
-                    for (var x = 0; x < size.Width; ++x, ptr += ptrStep)
+                    for (var x = 0; x < width; ++x, ptr += ptrStep)
                     {
                         _filter.GetChannel(ptr);
                     }

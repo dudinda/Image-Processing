@@ -12,13 +12,12 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
     {
         public Bitmap Filter(Bitmap bitmap)
         {
-            var size = bitmap.Size;
-
             var bitmapData = bitmap.LockBits(
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                 ImageLockMode.ReadWrite, bitmap.PixelFormat);
 
             var ptrStep = bitmap.GetBitsPerPixel() / 8;
+            var height = bitmap.Height;
             var options = new ParallelOptions()
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount
@@ -30,7 +29,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
 
                 var endStride = bitmapData.Stride - ptrStep;
 
-                Parallel.For(0, size.Height, options, y =>
+                Parallel.For(0, height, options, y =>
                 {
                     //get the address of a row
                     var start = startPtr + y * bitmapData.Stride;
