@@ -37,8 +37,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
                     var start = startPtr + y * bitmapData.Stride;
                     var end = start + endStride;
 
-                    byte tmp;
-
                     do
                     {
                         start[0] = end[0];
