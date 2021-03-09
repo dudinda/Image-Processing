@@ -68,6 +68,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                     double point;
                     double p0, p1, p2, p3;
                     double a, b, c, d;
+                    double b0, b1, b2, b3;
 
                     for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
                     {
@@ -92,10 +93,33 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                         //      b = (p0 - 2.5p1 + 2p2 - 0.5p3),
                         //      c = (-0.5p0 + 0.5p2), d = p1
 
-                        p0 = Interpolate(p00[0], p01[0], p02[0], p03[0], ref xFrc);
-                        p1 = Interpolate(p10[0], p11[0], p12[0], p13[0], ref xFrc);
-                        p2 = Interpolate(p20[0], p21[0], p22[0], p23[0], ref xFrc);
-                        p3 = Interpolate(p30[0], p31[0], p32[0], p33[0], ref xFrc);
+                        b0 = p00[0]; b1 = p01[0]; b2 = p02[0]; b3 = p03[0];
+
+                        p0 = xFrc * (xFrc * (
+                             0.5 * xFrc * (-b0 + 3.0 * b1 - 3.0 * b2 + b3) +
+                             b0 + 2.0 * b2 - 0.5 * (5.0 * b1 + b3))
+                             + 0.5 * (-b0 + b2)) + b1;
+
+                        b0 = p10[0]; b1 = p11[0]; b2 = p12[0]; b3 = p13[0];
+
+                        p1 = xFrc * (xFrc * (
+                            0.5 * xFrc * (-b0 + 3.0 * b1 - 3.0 * b2 + b3) +
+                            b0 + 2.0 * b2 - 0.5 * (5.0 * b1 + b3))
+                            + 0.5 * (-b0 + b2)) + b1;
+
+                        b0 = p20[0]; b1 = p21[0]; b2 = p22[0]; b3 = p23[0];
+
+                        p2 = xFrc * (xFrc * (
+                            0.5 * xFrc * (-b0 + 3.0 * b1 - 3.0 * b2 + b3) +
+                            b0 + 2.0 * b2 - 0.5 * (5.0 * b1 + b3))
+                            + 0.5 * (-b0 + b2)) + b1;
+
+                        b0 = p30[0]; b1 = p31[0]; b2 = p32[0]; b3 = p33[0];
+
+                        p3 = xFrc * (xFrc * (
+                            0.5 * xFrc * (-b0 + 3.0 * b1 - 3.0 * b2 + b3) +
+                            b0 + 2.0 * b2 - 0.5 * (5.0 * b1 + b3))
+                            + 0.5 * (-b0 + b2)) + b1;
 
                         a = 0.5 * (-p0 + 3.0 * p1 - 3.0 * p2 + p3);
                         b = p0 + 2.0 * p2 - 0.5 * (5.0 * p1 + p3);
@@ -107,10 +131,33 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 
                         dstRow[0] = (byte)point;
 
-                        p0 = Interpolate(p00[1], p01[1], p02[1], p03[1], ref xFrc);
-                        p1 = Interpolate(p10[1], p11[1], p12[1], p13[1], ref xFrc);
-                        p2 = Interpolate(p20[1], p21[1], p22[1], p23[1], ref xFrc);
-                        p3 = Interpolate(p30[1], p31[1], p32[1], p33[1], ref xFrc);
+                        b0 = p00[1]; b1 = p01[1]; b2 = p02[1]; b3 = p03[1];
+
+                        p0 = xFrc * (xFrc * (
+                             0.5 * xFrc * (-b0 + 3.0 * b1 - 3.0 * b2 + b3) +
+                             b0 + 2.0 * b2 - 0.5 * (5.0 * b1 + b3))
+                             + 0.5 * (-b0 + b2)) + b1;
+
+                        b0 = p10[1]; b1 = p11[1]; b2 = p12[1]; b3 = p13[1];
+
+                        p1 = xFrc * (xFrc * (
+                            0.5 * xFrc * (-b0 + 3.0 * b1 - 3.0 * b2 + b3) +
+                            b0 + 2.0 * b2 - 0.5 * (5.0 * b1 + b3))
+                            + 0.5 * (-b0 + b2)) + b1;
+
+                        b0 = p20[1]; b1 = p21[1]; b2 = p22[1]; b3 = p23[1];
+
+                        p2 = xFrc * (xFrc * (
+                            0.5 * xFrc * (-b0 + 3.0 * b1 - 3.0 * b2 + b3) +
+                            b0 + 2.0 * b2 - 0.5 * (5.0 * b1 + b3))
+                            + 0.5 * (-b0 + b2)) + b1;
+
+                        b0 = p30[1]; b1 = p31[1]; b2 = p32[1]; b3 = p33[1];
+
+                        p3 = xFrc * (xFrc * (
+                            0.5 * xFrc * (-b0 + 3.0 * b1 - 3.0 * b2 + b3) +
+                            b0 + 2.0 * b2 - 0.5 * (5.0 * b1 + b3))
+                            + 0.5 * (-b0 + b2)) + b1;
 
                         a = 0.5 * (-p0 + 3.0 * p1 - 3.0 * p2 + p3);
                         b = p0 + 2.0 * p2 - 0.5 * (5.0 * p1 + p3);
@@ -122,10 +169,33 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 
                         dstRow[1] = (byte)point;
 
-                        p0 = Interpolate(p00[2], p01[2], p02[2], p03[2], ref xFrc);
-                        p1 = Interpolate(p10[2], p11[2], p12[2], p13[2], ref xFrc);
-                        p2 = Interpolate(p20[2], p21[2], p22[2], p23[2], ref xFrc);
-                        p3 = Interpolate(p30[2], p31[2], p32[2], p33[2], ref xFrc);
+                        b0 = p00[2]; b1 = p01[2]; b2 = p02[2]; b3 = p03[2];
+
+                        p0 = xFrc * (xFrc * (
+                             0.5 * xFrc * (-b0 + 3.0 * b1 - 3.0 * b2 + b3) +
+                             b0 + 2.0 * b2 - 0.5 * (5.0 * b1 + b3))
+                             + 0.5 * (-b0 + b2)) + b1;
+
+                        b0 = p10[2]; b1 = p11[2]; b2 = p12[2]; b3 = p13[2];
+
+                        p1 = xFrc * (xFrc * (
+                            0.5 * xFrc * (-b0 + 3.0 * b1 - 3.0 * b2 + b3) +
+                            b0 + 2.0 * b2 - 0.5 * (5.0 * b1 + b3))
+                            + 0.5 * (-b0 + b2)) + b1;
+
+                        b0 = p20[2]; b1 = p21[2]; b2 = p22[2]; b3 = p23[2];
+
+                        p2 = xFrc * (xFrc * (
+                            0.5 * xFrc * (-b0 + 3.0 * b1 - 3.0 * b2 + b3) +
+                            b0 + 2.0 * b2 - 0.5 * (5.0 * b1 + b3))
+                            + 0.5 * (-b0 + b2)) + b1;
+
+                        b0 = p30[2]; b1 = p31[2]; b2 = p32[2]; b3 = p33[2];
+
+                        p3 = xFrc * (xFrc * (
+                            0.5 * xFrc * (-b0 + 3.0 * b1 - 3.0 * b2 + b3) +
+                            b0 + 2.0 * b2 - 0.5 * (5.0 * b1 + b3))
+                            + 0.5 * (-b0 + b2)) + b1;
 
                         a = 0.5 * (-p0 + 3.0 * p1 - 3.0 * p2 + p3);
                         b = p0 + 2.0 * p2 - 0.5 * (5.0 * p1 + p3);
@@ -144,17 +214,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
             dst.UnlockBits(dstData);
 
             return dst;
-        }
-
-        private double Interpolate(
-            double p0, double p1,
-            double p2, double p3,
-            ref double t)
-        {
-            return t * (t * (
-                0.5 * (-p0 + 3 * p1 - 3 * p2 + p3) * t +
-                p0 + 2 * p2 - 0.5 * (5 * p1 + p3))
-                + 0.5 * (-p0 + p2)) + p1;
         }
     }
 }
