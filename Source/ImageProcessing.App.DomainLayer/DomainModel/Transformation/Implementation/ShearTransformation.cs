@@ -60,23 +60,27 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                     //get the address of a row
                     var dstRow = dstStartPtr + y *dstData.Stride;
 
+                    int shiftX, shiftY;
+                    double srcX, srcY;
+                    byte* srcPtr;
+
                     for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
                     {
-                        var shiftX = x + tx;
-                        var shiftY = y + ty;
+                        shiftX = x + tx;
+                        shiftY = y + ty;
 
                         // 1 / det(A)  * adj(A)Bv = v'
                         // x' = (x - shx * y) / (1 - shx * shy) (1)
                         // y' = (y - shy * x) / (1 - shx * shy) (2)
                         //from (1) x = (1 - shx * shy)x' + shx * y (3)
                         //substituting (3) in (2) y' = y - shy * x'
-                        var srcX = (shiftX - shx * shiftY) / detA;
-                        var srcY = shiftY - shy * srcX;
+                        srcX = (shiftX - shx * shiftY) / detA;
+                        srcY = shiftY - shy * srcX;
                 
                         if (srcX < srcWidth  && srcX >= 0 &&
                             srcY < srcHeight && srcY >= 0)
                         {
-                            var srcPtr = srcStartPtr + (int)srcY * srcData.Stride + (int)srcX * ptrStep;
+                            srcPtr = srcStartPtr + (int)srcY * srcData.Stride + (int)srcX * ptrStep;
 
                             dstRow[0] = srcPtr[0];
                             dstRow[1] = srcPtr[1];

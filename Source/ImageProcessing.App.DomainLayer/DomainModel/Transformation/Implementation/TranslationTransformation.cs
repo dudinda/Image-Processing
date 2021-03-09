@@ -50,13 +50,16 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                         var dstRow = dstStartPtr + y * dstData.Stride;
                         var srcRow = srcStartPtr + (int)srcY * srcData.Stride;
 
+                        double srcX;
+                        byte* srcPtr;
+
                         for (var x = 0; x < srcWidth; ++x, dstRow += ptrStep)
                         {
-                            var srcX = x - tx;
+                            srcX = x - tx;
 
                             if (srcX < srcWidth && srcX >= 0)
                             {
-                                var srcPtr = srcRow + (int)srcX * ptrStep;
+                                srcPtr = srcRow + (int)srcX * ptrStep;
 
                                 dstRow[0] = srcPtr[0];
                                 dstRow[1] = srcPtr[1];

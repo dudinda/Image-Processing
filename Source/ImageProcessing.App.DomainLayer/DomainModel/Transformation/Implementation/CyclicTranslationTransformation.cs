@@ -55,9 +55,12 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                     var srcRow = srcStartPtr + (int)srcY * srcData.Stride;
                     var dstRow = dstStartPtr +         y * dstData.Stride;
 
+                    double srcX;
+                    byte* srcPtr;
+
                     for (var x = 0; x < srcWidth; ++x, dstRow += ptrStep)
                     {
-                        var srcX = x - tx;
+                        srcX = x - tx;
 
                         //x' mod width
                         if (srcX < 0 || srcX >= srcWidth)
@@ -65,7 +68,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                             srcX = srcX - srcWidth * Math.Floor(srcX / srcWidth);
                         }
           
-                        var srcPtr = srcRow + (int)srcX * ptrStep;
+                        srcPtr = srcRow + (int)srcX * ptrStep;
 
                         dstRow[0] = srcPtr[0];
                         dstRow[1] = srcPtr[1];
