@@ -65,28 +65,35 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                     var i2 = srcStartPtr + (yFlr + 1) * srcData.Stride;
                     var i3 = srcStartPtr + (yFlr + 2) * srcData.Stride;
 
-                    double point;
+                    double point, newX, xFrc;
                     double p0, p1, p2, p3;
                     double a, b, c, d;
                     double b0, b1, b2, b3;
 
+                    byte* p00, p01, p02, p03;
+                    byte* p10, p11, p12, p13;
+                    byte* p20, p21, p22, p23;
+                    byte* p30, p31, p32, p33;
+
+                    int j0, j1, j2, j3, xFlr;
+
                     for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
                     {
-                        var newX = x * dx + 0.5;
-                        var xFlr = (int)newX;
-                        var xFrc = newX - xFlr;
+                        newX = x * dx + 0.5;
+                        xFlr = (int)newX;
+                        xFrc = newX - xFlr;
 
                         if (xFlr <= 0) { xFlr = 1; } else if (xFlr > xBound ) { xFlr = xBound; }
 
-                        var j0 = (xFlr - 1) * ptrStep;
-                        var j1 =  xFlr      * ptrStep;
-                        var j2 = (xFlr + 1) * ptrStep;
-                        var j3 = (xFlr + 2) * ptrStep;
+                        j0 = (xFlr - 1) * ptrStep;
+                        j1 =  xFlr      * ptrStep;
+                        j2 = (xFlr + 1) * ptrStep;
+                        j3 = (xFlr + 2) * ptrStep;
 
-                        var p00 = i0 + j0; var p01 = i0 + j1; var p02 = i0 + j2; var p03 = i0 + j3;
-                        var p10 = i1 + j0; var p11 = i1 + j1; var p12 = i1 + j2; var p13 = i1 + j3;
-                        var p20 = i2 + j0; var p21 = i2 + j1; var p22 = i2 + j2; var p23 = i2 + j3;
-                        var p30 = i3 + j0; var p31 = i3 + j1; var p32 = i3 + j2; var p33 = i3 + j3;
+                        p00 = i0 + j0; p01 = i0 + j1; p02 = i0 + j2; p03 = i0 + j3;
+                        p10 = i1 + j0; p11 = i1 + j1; p12 = i1 + j2; p13 = i1 + j3;
+                        p20 = i2 + j0; p21 = i2 + j1; p22 = i2 + j2; p23 = i2 + j3;
+                        p30 = i3 + j0; p31 = i3 + j1; p32 = i3 + j2; p33 = i3 + j3;
 
                         //ax^3 + bx^2 + cx + d -> x * (x * (ax + b) + c) + d
                         //where a = (-0.5p0 + 1.5p1 - 1.5p2 + 0.5p3),
