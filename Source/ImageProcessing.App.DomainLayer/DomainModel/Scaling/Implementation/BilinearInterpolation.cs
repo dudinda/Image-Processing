@@ -65,13 +65,13 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                     var i0 = srcStartPtr +  yFlr      * srcData.Stride;
                     var i1 = srcStartPtr + (yFlr + 1) * srcData.Stride;
 
-                    double col0, col1, point;
-                    double newX, xFrc, xFrcCompl, yFrcCompl;
+                    double col0, col1, point,
+                           newX, xFrc, xFrcCompl, yFrcCompl;
 
                     int xFlr, j0, j1;
 
-                    byte* p00, p01;
-                    byte* p10, p11;
+                    byte* p00, p01,
+                          p10, p11;
 
                     for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
                     {  

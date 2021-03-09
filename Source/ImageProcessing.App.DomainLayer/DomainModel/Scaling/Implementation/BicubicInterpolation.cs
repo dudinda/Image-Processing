@@ -65,15 +65,15 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                     var i2 = srcStartPtr + (yFlr + 1) * srcData.Stride;
                     var i3 = srcStartPtr + (yFlr + 2) * srcData.Stride;
 
-                    double point, newX, xFrc;
-                    double p0, p1, p2, p3;
-                    double a, b, c, d;
-                    double b0, b1, b2, b3;
+                    double point, newX, xFrc,
+                           p0, p1, p2, p3,
+                           a, b, c, d,
+                           b0, b1, b2, b3;
 
-                    byte* p00, p01, p02, p03;
-                    byte* p10, p11, p12, p13;
-                    byte* p20, p21, p22, p23;
-                    byte* p30, p31, p32, p33;
+                    byte* p00, p01, p02, p03,
+                          p10, p11, p12, p13,
+                          p20, p21, p22, p23,
+                          p30, p31, p32, p33;
 
                     int j0, j1, j2, j3, xFlr;
 

@@ -77,6 +77,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                     var yShift = y - yCenter;
 
                     double xShift, srcX, srcY;
+
                     byte* srcPtr;
 
                     for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)

@@ -66,58 +66,65 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 
                     var yShift = y - yCenter;
 
-                    double col0, col1, point;
+                    double col0, col1, point,
+                           newX, newY, xFrac, yFrac,
+                           xFracCompl, yFracCompl, xShift;
+
+                    int xFloor, yFloor, j0, j1;
+
+                    byte* p00, p01, i0,
+                          p10, p11, i1;
 
                     for (var x = 0; x < dstWidth; ++x, dstPtr += ptrStep)
                     {
-                        var xShift = x - xCenter; 
+                        xShift = x - xCenter; 
 
-                        var newX = cos * xShift - sin * yShift + xSrcCenter;
-                        var newY = sin * xShift + cos * yShift + ySrcCenter;
+                        newX = cos * xShift - sin * yShift + xSrcCenter;
+                        newY = sin * xShift + cos * yShift + ySrcCenter;
 
-                        var xFloor = (int)newX;
-                        var yFloor = (int)newY;
+                        xFloor = (int)newX;
+                        yFloor = (int)newY;
 
-                        var xFrac = newX - xFloor;
-                        var yFrac = newY - yFloor;
+                        xFrac = newX - xFloor;
+                        yFrac = newY - yFloor;
 
                         if (xFloor < xBound  && xFloor > 0 &&
                             yFloor < yBound && yFloor > 0)
                         {
-                            var i0 = srcStartPtr + yFloor       * srcData.Stride;
-                            var i1 = srcStartPtr + (yFloor + 1) * srcData.Stride;
+                            i0 = srcStartPtr + yFloor       * srcData.Stride;
+                            i1 = srcStartPtr + (yFloor + 1) * srcData.Stride;
 
-                            var j0 = xFloor * ptrStep;
-                            var j1 = (xFloor + 1) * ptrStep;
+                            j0 = xFloor * ptrStep;
+                            j1 = (xFloor + 1) * ptrStep;
 
-                            var p00 = i0 + j0; var p01 = i0 + j1;
-                            var p10 = i1 + j0; var p11 = i1 + j1;
+                            p00 = i0 + j0; p01 = i0 + j1;
+                            p10 = i1 + j0; p11 = i1 + j1;
 
-                            var invXFrac = 1 - xFrac;
-                            var invYFrac = 1 - yFrac;
+                            xFracCompl = 1 - xFrac;
+                            yFracCompl = 1 - yFrac;
 
-                            col0 = p00[0] * invXFrac + p10[0] * xFrac;
-                            col1 = p01[0] * invXFrac + p11[0] * xFrac;
+                            col0 = p00[0] * xFracCompl + p10[0] * xFrac;
+                            col1 = p01[0] * xFracCompl + p11[0] * xFrac;
 
-                            point = col0 * invYFrac + col1 * yFrac;
+                            point = col0 * yFracCompl + col1 * yFrac;
 
                             if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
 
                             dstPtr[0] = (byte)point;
 
-                            col0 = p00[1] * invXFrac + p10[1] * xFrac;
-                            col1 = p01[1] * invXFrac + p11[1] * xFrac;
+                            col0 = p00[1] * xFracCompl + p10[1] * xFrac;
+                            col1 = p01[1] * xFracCompl + p11[1] * xFrac;
 
-                            point = col0 * invYFrac + col1 * yFrac;
+                            point = col0 * yFracCompl + col1 * yFrac;
 
                             if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
 
                             dstPtr[1] = (byte)point;
 
-                            col0 = p00[2] * invXFrac + p10[2] * xFrac;
-                            col1 = p01[2] * invXFrac + p11[2] * xFrac;
+                            col0 = p00[2] * xFracCompl + p10[2] * xFrac;
+                            col1 = p01[2] * xFracCompl + p11[2] * xFrac;
 
-                            point = col0 * invYFrac + col1 * yFrac;
+                            point = col0 * yFracCompl + col1 * yFrac;
 
                             if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
 
