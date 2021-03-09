@@ -1,4 +1,4 @@
-namespace ImageProcessing.App.PresentationLayer.DomainEvents.ColorMatrix
+namespace ImageProcessing.App.PresentationLayer.DomainEvents.ColorMatrixArgs
 {
     /// <summary>
     /// Color matrix has been changed.

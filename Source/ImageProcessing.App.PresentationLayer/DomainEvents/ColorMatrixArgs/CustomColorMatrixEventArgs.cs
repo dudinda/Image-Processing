@@ -1,4 +1,4 @@
-namespace ImageProcessing.App.PresentationLayer.DomainEvents.ColorMatrix
+namespace ImageProcessing.App.PresentationLayer.DomainEvents.ColorMatrixArgs
 {
     /// <summary>
     /// A checkbox for a custom color matrix has been changed.

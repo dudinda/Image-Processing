@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.DomainFactory.ColorMatrix.Interface;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
-using ImageProcessing.App.PresentationLayer.DomainEvents.ColorMatrix;
+using ImageProcessing.App.PresentationLayer.DomainEvents.ColorMatrixArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Properties;
