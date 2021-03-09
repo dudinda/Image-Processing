@@ -52,10 +52,12 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                     //get the address of a row
                     var dstRow = dstStartPtr + y * dstData.Stride;
                     var srcRow = srcStartPtr + (int)(y * dy) * srcData.Stride;
+
+                    byte* srcPtr;
      
                     for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
                     {
-                        var srcPtr = srcRow + (int)(x * dx) * ptrStep;
+                        srcPtr = srcRow + (int)(x * dx) * ptrStep;
 
                         dstRow[0] = srcPtr[0];
                         dstRow[1] = srcPtr[1];
