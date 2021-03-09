@@ -64,17 +64,20 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 
                     var yShift = y - yCenter;
 
+                    double xShift, srcX, srcY;
+                    byte* srcPtr;
+
                     for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
                     {
-                        var xShift = x - xCenter;
+                        xShift = x - xCenter;
 
-                        var srcX = cos * xShift - sin * yShift + xSrcCenter;
-                        var srcY = sin * xShift + cos * yShift + ySrcCenter;
+                        srcX = cos * xShift - sin * yShift + xSrcCenter;
+                        srcY = sin * xShift + cos * yShift + ySrcCenter;
 
                         if (srcX < srcWidth  && srcX > 0 &&
                             srcY < srcHeight && srcY > 0)
                         {
-                            var srcPtr = srcStartPtr + (int)srcY * srcData.Stride + (int)srcX * ptrStep;
+                            srcPtr = srcStartPtr + (int)srcY * srcData.Stride + (int)srcX * ptrStep;
 
                             dstRow[0] = srcPtr[0];
                             dstRow[1] = srcPtr[1];

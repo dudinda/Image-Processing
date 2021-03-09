@@ -76,16 +76,19 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 
                     var yShift = y - yCenter;
 
+                    double xShift, srcX, srcY;
+                    byte* srcPtr;
+
                     for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
                     {
                         //inv(T(x, y))v = m
-                        var xShift = x - xCenter;
+                        xShift = x - xCenter;
 
                         //inv(Sh(alpha, 0))m = m'
-                        var srcX = xShift + alpha * yShift;
+                        srcX = xShift + alpha * yShift;
 
                         //inv(Sh(0, beta))m' = m''
-                        var srcY = yShift + beta * srcX;
+                        srcY = yShift + beta * srcX;
 
                         //inv(Sh(gamma, 0))inv(T(x', y'))m'' = v'
                         srcX += alpha * srcY + xSrcCenter;
@@ -94,7 +97,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                         if (srcX < srcWidth  && srcX > 0 &&
                             srcY < srcHeight && srcY > 0)
                         {
-                            var srcPtr = srcStartPtr + (int)srcY * srcData.Stride + (int)srcX * ptrStep;
+                            srcPtr = srcStartPtr + (int)srcY * srcData.Stride + (int)srcX * ptrStep;
 
                             dstRow[0] = srcPtr[0];
                             dstRow[1] = srcPtr[1];
