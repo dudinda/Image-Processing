@@ -28,9 +28,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Convolution
         private readonly IAsyncOperationLocker _locker;
 
         public ConvolutionPresenter(
-            IAppController controller,
             IConvolutionServiceProvider provider,
-            IAsyncOperationLocker locker) : base(controller)
+            IAsyncOperationLocker locker) 
         {
             _provider = provider;
             _locker = locker;

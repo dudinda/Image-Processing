@@ -1,6 +1,7 @@
 using System;
 
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
+using ImageProcessing.Microkernel.MVP.Controller.Implementation;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Microkernel.MVP.Presenter;
 using ImageProcessing.Microkernel.MVP.View;
@@ -15,13 +16,15 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
     /// via the <see cref="IAppController"/> and provides messaging between forms
     /// and presenters via the <see cref="IEventAggregator"/>.
     /// </summary>
-    internal abstract class BasePresenter<TView> : IPresenter
+    public abstract class BasePresenter<TView> : IPresenter
 		where TView : class, IView
 	{
         private TView? _view;
+        private IAppController? _controller;
 
         /// <inheritdoc cref="IAppController"/>
-        protected IAppController Controller { get; }
+        protected IAppController Controller
+            => _controller ??= AppController.Controller;
 
         /// <summary>
         /// Access point to the UI layer components.
@@ -43,9 +46,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
             }
         }
 
-        protected BasePresenter(IAppController controller)
-            => Controller = controller;
-
         /// <inheritdoc/>
         public virtual void Run()
             => View.Show();
@@ -60,15 +60,17 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
     /// via the <see cref="IAppController"/> and provides messaging between forms
     /// and presenters via the <see cref="IEventAggregator"/>.
     /// </summary>
-    internal abstract class BasePresenter<TView, TViewModel> : IPresenter<TViewModel>
+    public abstract class BasePresenter<TView, TViewModel> : IPresenter<TViewModel>
 		where TView : class, IView
 		where TViewModel : class
 	{
         private TView? _view;
         private TViewModel? _vm;
+        private IAppController? _controller;
 
         /// <inheritdoc cref="IAppController"/>
-        protected IAppController Controller { get; }
+        protected IAppController Controller
+            => _controller ??= AppController.Controller;
 
         /// <summary>
         /// Access point to the UI layer components.
@@ -79,7 +81,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
             {
                 if (_view is null)
                 {
-                    _view = Controller.IoC.Resolve<TView>();
+                    _view = Controller
+                        .IoC.Resolve<TView>();
 
                     Controller
                         .Aggregator
@@ -98,9 +101,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
             get => _vm ?? throw new ArgumentNullException(nameof(_vm));
             private set => _vm = value;        
         }
-
-        protected BasePresenter(IAppController controller)
-            => Controller = controller;
 
         /// <inheritdoc/>
         public virtual void Run(TViewModel vm)

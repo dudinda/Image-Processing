@@ -18,7 +18,6 @@ using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
-using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
 {
@@ -37,10 +36,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
         private readonly IBitmapLuminanceServiceProvider _provider;
         
         public DistributionPresenter(
-            IAppController controller,
             IBitmapService service,
             IAsyncOperationLocker locker,
-            IBitmapLuminanceServiceProvider provider) : base(controller)
+            IBitmapLuminanceServiceProvider provider)
         {
             _locker = locker;
             _service = service;

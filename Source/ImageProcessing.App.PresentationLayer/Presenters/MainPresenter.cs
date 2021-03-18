@@ -32,7 +32,6 @@ using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions.BitmapExt;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
-using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 {
@@ -60,13 +59,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Main
         private readonly IAwaitablePipeline _pipeline;
 
         public MainPresenter(
-            IAppController controller,
             ICacheService<Bitmap> cache,
             INonBlockDialogService dialog,
             IAwaitablePipeline pipeline,
             IAsyncOperationLocker operation,
             IScalingProvider scale,
-            IRotationProvider rotation) : base(controller)
+            IRotationProvider rotation)
         {
             _cache = cache;
             _dialog = dialog;

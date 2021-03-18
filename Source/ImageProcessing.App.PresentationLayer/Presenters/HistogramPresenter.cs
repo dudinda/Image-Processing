@@ -4,7 +4,6 @@ using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.ViewModels.Histogram;
 using ImageProcessing.App.PresentationLayer.Views.Histogram;
 using ImageProcessing.App.ServiceLayer.Services.Histogram.Interface;
-using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters
 {
@@ -14,8 +13,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         private readonly IHistogramService _service;
 
         public HistogramPresenter(
-            IAppController controller,
-            IHistogramService service) : base(controller)
+            IHistogramService service) 
         {
             _service = service;
         }

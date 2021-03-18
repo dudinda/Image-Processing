@@ -32,10 +32,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix
         private readonly IColorMatrixFactory _factory;
 
         public ColorMatrixPresenter(
-            IAppController controller,
             IRgbServiceProvider provider,
             IAsyncOperationLocker locker,
-            IColorMatrixFactory factory) : base(controller)
+            IColorMatrixFactory factory)
         {
             _provider = provider;
             _factory = factory;

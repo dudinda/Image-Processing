@@ -5,7 +5,6 @@ using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Views.Settings;
 using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
-using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Settings
 {
@@ -17,8 +16,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Settings
         private readonly IAppSettings _settings;
 
         public SettingsPresenter(
-            IAppController controller,
-            IAppSettings settings) : base(controller)
+            IAppSettings settings)
         {
             _settings = settings;
         }

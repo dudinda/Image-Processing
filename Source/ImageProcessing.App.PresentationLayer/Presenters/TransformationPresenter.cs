@@ -26,9 +26,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Transformation
         private readonly IAsyncOperationLocker _locker;
 
         public TransformationPresenter(
-            IAppController controller,
             ITransformationProvider provider,
-            IAsyncOperationLocker locker) : base(controller)
+            IAsyncOperationLocker locker) 
         {
             _provider = provider;
             _locker = locker;

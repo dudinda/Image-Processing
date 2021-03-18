@@ -16,7 +16,6 @@ using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
-using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
 {
@@ -32,9 +31,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
         private readonly IAsyncOperationLocker _locker;
 
         public RgbPresenter(
-            IAppController controller,
             IRgbServiceProvider provider,
-            IAsyncOperationLocker locker) : base(controller)
+            IAsyncOperationLocker locker) 
         {
             _provider = provider;
             _locker = locker;
