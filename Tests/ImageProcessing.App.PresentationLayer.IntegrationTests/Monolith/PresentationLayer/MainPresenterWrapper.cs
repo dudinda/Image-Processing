@@ -6,7 +6,6 @@ using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Container;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.FileDialog;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Show;
-using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Main;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.ServiceLayer.Providers.Rotation.Interface;
@@ -16,7 +15,7 @@ using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interfac
 using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
-using ImageProcessing.Microkernel.MVP.Controller.Interface;
+using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
 namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Presenters
 {
@@ -45,13 +44,12 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
 
          
         public MainPresenterWrapper(
-            IAppController controller,
             ICacheService<Bitmap> cache,
             INonBlockDialogService dialog,
             IAwaitablePipeline pipeline,
             IAsyncOperationLocker operation,
             IScalingProvider zoom,
-            IRotationProvider rotation) : base(controller)
+            IRotationProvider rotation) 
         {
             Cache = cache;
             Dialog = dialog;
@@ -59,7 +57,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
             Operation = operation;
             Zoom = zoom;
 
-            _presenter = new MainPresenter(controller, cache, dialog, pipeline, operation, zoom, rotation);
+            _presenter = new MainPresenter(cache, dialog, pipeline, operation, zoom, rotation);
         }
 
         public override void Run()

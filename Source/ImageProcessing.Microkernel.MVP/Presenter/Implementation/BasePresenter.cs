@@ -3,10 +3,10 @@ using System;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 using ImageProcessing.Microkernel.MVP.Controller.Implementation;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
-using ImageProcessing.Microkernel.MVP.Presenter;
+using ImageProcessing.Microkernel.MVP.Presenter.Interface;
 using ImageProcessing.Microkernel.MVP.View;
 
-namespace ImageProcessing.App.PresentationLayer.Presenters.Base
+namespace ImageProcessing.Microkernel.MVP.Presenter.Implementation
 {
     /// <summary>
     /// Provides base functionality for
@@ -81,8 +81,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters.Base
             {
                 if (_view is null)
                 {
-                    _view = Controller
-                        .IoC.Resolve<TView>();
+                    _view = Controller.IoC.Resolve<TView>();
 
                     Controller
                         .Aggregator

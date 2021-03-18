@@ -1,6 +1,4 @@
-using System.Threading.Tasks;
-
-namespace ImageProcessing.Microkernel.MVP.Presenter
+namespace ImageProcessing.Microkernel.MVP.Presenter.Interface
 {
     /// <summary>
     /// Represents the base behavior of

@@ -10,7 +10,6 @@ using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Container;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.FileDialog;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Show;
-using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Convolution;
 using ImageProcessing.App.PresentationLayer.Presenters.Distribution;
 using ImageProcessing.App.PresentationLayer.Presenters.Rgb;
@@ -32,6 +31,7 @@ using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions.BitmapExt;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
+using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Main
 {

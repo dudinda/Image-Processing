@@ -7,7 +7,7 @@ using ImageProcessing.Microkernel.DIAdapter.Code.Enums;
 using ImageProcessing.Microkernel.EntryPoint;
 using ImageProcessing.Microkernel.EntryPoint.Code.Constants;
 using ImageProcessing.Microkernel.Factory.State;
-using ImageProcessing.Microkernel.MVP.Presenter;
+using ImageProcessing.Microkernel.MVP.Presenter.Interface;
 
 namespace ImageProcessing.Microkernel.State.Implementation.IsBuilt
 {

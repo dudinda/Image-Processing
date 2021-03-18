@@ -4,7 +4,7 @@ using ImageProcessing.Microkernel.DI.EntryPoint.State.Interface;
 using ImageProcessing.Microkernel.DIAdapter.Code.Enums;
 using ImageProcessing.Microkernel.Factory.State;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
-using ImageProcessing.Microkernel.MVP.Presenter;
+using ImageProcessing.Microkernel.MVP.Presenter.Interface;
 
 namespace ImageProcessing.Microkernel.EntryPoint
 {

@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.DistributionArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
-using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.Distribution;
 using ImageProcessing.App.PresentationLayer.ViewModels.Distribution;
 using ImageProcessing.App.PresentationLayer.Views.Distribution;
@@ -12,6 +11,7 @@ using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
+using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents.Wrappers.Presenters
 {
@@ -30,16 +30,15 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
         public IBitmapService Service { get; }
 
         public DistributionPresenterWrapper(
-            IAppController controller,
             IBitmapService service,
             IAsyncOperationLocker locker,
-            IBitmapLuminanceServiceProvider provider) : base(controller)
+            IBitmapLuminanceServiceProvider provider) 
         {
             Operation = locker;
             Provider = provider;
             Service = service;
 
-            _presenter = new DistributionPresenter(controller, service, locker, provider);
+            _presenter = new DistributionPresenter(service, locker, provider);
         }
 
         public override void Run(DistributionViewModel vm)

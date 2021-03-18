@@ -9,7 +9,7 @@ using ImageProcessing.Microkernel.EntryPoint.Code.Constants;
 using ImageProcessing.Microkernel.EntryPoint.Factory.ContainerAdapter;
 using ImageProcessing.Microkernel.Factory.State;
 using ImageProcessing.Microkernel.MVP.Controller.Implementation;
-using ImageProcessing.Microkernel.MVP.Presenter;
+using ImageProcessing.Microkernel.MVP.Presenter.Interface;
 
 namespace ImageProcessing.Microkernel.DI.State.IsNotBuilt
 {

@@ -1,9 +1,8 @@
 using System;
-using System.Threading.Tasks;
 
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
-using ImageProcessing.Microkernel.MVP.Presenter;
+using ImageProcessing.Microkernel.MVP.Presenter.Interface;
 
 namespace ImageProcessing.Microkernel.MVP.Controller.Interface
 {

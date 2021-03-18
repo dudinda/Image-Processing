@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 
 using ImageProcessing.App.PresentationLayer.DomainEvents.SettingsArgs;
-using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Views.Settings;
 using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
+using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Settings
 {

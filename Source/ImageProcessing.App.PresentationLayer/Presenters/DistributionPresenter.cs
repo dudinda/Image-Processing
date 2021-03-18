@@ -7,7 +7,6 @@ using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.DistributionArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
-using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModels.Distribution;
 using ImageProcessing.App.PresentationLayer.ViewModels.Histogram;
@@ -18,6 +17,7 @@ using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
+using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Distribution
 {

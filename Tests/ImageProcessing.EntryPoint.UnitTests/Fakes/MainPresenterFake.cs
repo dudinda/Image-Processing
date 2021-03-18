@@ -1,4 +1,4 @@
-using ImageProcessing.Microkernel.MVP.Presenter;
+using ImageProcessing.Microkernel.MVP.Presenter.Interface;
 
 namespace ImageProcessing.EntryPoint.UnitTests.Fakes
 {

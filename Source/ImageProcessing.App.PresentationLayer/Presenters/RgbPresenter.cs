@@ -6,7 +6,6 @@ using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.RgbArgs;
-using ImageProcessing.App.PresentationLayer.Presenters.Base;
 using ImageProcessing.App.PresentationLayer.Presenters.ColorMatrix;
 using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModels.ColorMatrix;
@@ -16,6 +15,7 @@ using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
+using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters.Rgb
 {
