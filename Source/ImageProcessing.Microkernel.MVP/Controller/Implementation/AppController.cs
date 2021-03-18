@@ -1,3 +1,5 @@
+using System;
+
 using ImageProcessing.Microkernel.DIAdapter.Container;
 using ImageProcessing.Microkernel.MVP.Aggregator.Implementation;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
@@ -9,21 +11,34 @@ using ImageProcessing.Microkernel.MVP.Presenter;
 namespace ImageProcessing.Microkernel.MVP.Controller.Implementation
 {
     /// <inheritdoc cref="IAppController"/>
-    internal class AppController : IAppController
+    public class AppController : IAppController
     {
+        private static AppController? _controller;
+
+        public static AppController Controller
+        {
+            get => _controller ?? throw new ArgumentNullException(nameof(_controller));
+            private set => _controller = value;
+        }
+
+        private AppController()
+        {
+
+        }
+
         /// <inheritdoc/>
         public IDependencyResolution IoC { get; }
 
         /// <inheritdoc/>
         public IEventAggregator Aggregator { get; private set; }
 
-        public AppController(IContainer container)
+        /// It is declared with the internal to restrict a client
+        /// to create an instance from the application side.
+        internal AppController(IContainer container)
         {
             IoC = new DependencyResolution(container);
-
-            IoC.RegisterSingletonInstance<IAppController>(this);
+            IoC.RegisterSingletonInstance<IAppController>(Controller = this);
             IoC.RegisterSingleton<IEventAggregator, EventAggregator>();
-
             Aggregator = IoC.Resolve<IEventAggregator>();
         }
 
