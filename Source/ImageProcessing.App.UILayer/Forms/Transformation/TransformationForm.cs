@@ -6,7 +6,6 @@ using ImageProcessing.App.PresentationLayer.Views.Transformation;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions.EnumExt;
 using ImageProcessing.App.UILayer.FormEventBinders.Transformation.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Transformation;
-using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Utility.Interop.Wrapper;
 
 using MetroFramework.Controls;
@@ -20,8 +19,7 @@ namespace ImageProcessing.App.UILayer.Forms.Transformation
         private readonly ITransformationFormEventBinder _binder;
 
         public TransformationForm(
-            IAppController controller,
-            ITransformationFormEventBinder binder) : base(controller)
+            ITransformationFormEventBinder binder) : base()
         {
             InitializeComponent();
 

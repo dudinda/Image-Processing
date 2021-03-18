@@ -6,6 +6,8 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Extensions.EnumExt;
 using ImageProcessing.App.UILayer.Code.Attributes;
+using ImageProcessing.App.UILayer.FormExposers;
+using ImageProcessing.Microkernel.MVP.Controller.Implementation;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Microkernel.MVP.View;
 
@@ -22,25 +24,14 @@ namespace ImageProcessing.App.UILayer.Forms
         typeof(AbstractFormDescriptionProvider<BaseForm, MetroForm>))]
     internal abstract class BaseForm : MetroForm, IView
     {
+        private readonly IFormExposer<IView> _exposer;
+
         private IAppController? _controller;
         private ApplicationContext? _context;
 
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller
-        {
-            get => _controller ?? throw new ArgumentNullException(nameof(_controller));
-            set => _controller = value;
-        }
-
-        protected BaseForm(IAppController controller) : base()
-        {
-            Controller = controller;
-        }
-            
-        protected BaseForm() : base()
-        {
-
-        }
+            => _controller ??= AppController.Controller;
 
         /// <inheritdoc cref="ApplicationContext"/>
         protected ApplicationContext Context

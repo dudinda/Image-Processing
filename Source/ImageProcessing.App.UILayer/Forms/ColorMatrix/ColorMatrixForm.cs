@@ -6,7 +6,6 @@ using ImageProcessing.App.PresentationLayer.Views.ColorMatrix;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions.EnumExt;
 using ImageProcessing.App.UILayer.FormEventBinders.ColorMatrix.Interface;
 using ImageProcessing.App.UILayer.FormExposers.ColorMatrix;
-using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 using ImageProcessing.Utility.Interop.Wrapper;
 
@@ -20,8 +19,7 @@ namespace ImageProcessing.App.UILayer.Forms.ColorMatrix
         private readonly IColorMatrixEventBinder _binder;
 
         public ColorMatrixForm(
-            IAppController controller,
-            IColorMatrixEventBinder binder) : base(controller)
+            IColorMatrixEventBinder binder) : base()
         {
             InitializeComponent();  
             PopulateComboBox<ClrMatrix>(ColorMatrixComboBox);

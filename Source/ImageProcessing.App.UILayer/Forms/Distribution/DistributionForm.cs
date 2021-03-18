@@ -8,7 +8,6 @@ using ImageProcessing.App.PresentationLayer.Views.Distribution;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions.EnumExt;
 using ImageProcessing.App.UILayer.FormEventBinders.Distribution.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Distribution;
-using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Utility.Interop.Wrapper;
 
 using MetroFramework.Controls;
@@ -22,8 +21,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
         private readonly IDistributionFormEventBinder _binder;
 
         public DistributionForm(
-            IAppController controller,
-            IDistributionFormEventBinder binder) : base(controller)
+            IDistributionFormEventBinder binder) : base()
         {
             InitializeComponent();
 

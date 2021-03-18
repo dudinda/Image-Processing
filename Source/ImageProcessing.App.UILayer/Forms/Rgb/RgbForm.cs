@@ -6,7 +6,6 @@ using ImageProcessing.App.PresentationLayer.Views.Rgb;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions.EnumExt;
 using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Rgb;
-using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Utility.Interop.Wrapper;
 
 using MetroFramework.Controls;
@@ -21,8 +20,7 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
         private readonly IRgbFormEventBinder _binder;
 
         public RgbForm(
-            IAppController controller,
-            IRgbFormEventBinder binder) : base(controller)
+            IRgbFormEventBinder binder) : base()
         {
             InitializeComponent();
 

@@ -6,7 +6,6 @@ using ImageProcessing.App.PresentationLayer.Views.Convolution;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions.EnumExt;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Convolution;
-using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Utility.Interop.Wrapper;
 
 using MetroFramework.Controls;
@@ -20,8 +19,7 @@ namespace ImageProcessing.App.UILayer.Forms.Convolution
         private readonly IConvolutionFormEventBinder _binder;
 
         public ConvolutionForm(
-            IAppController controller,
-            IConvolutionFormEventBinder binder) : base(controller)
+            IConvolutionFormEventBinder binder) : base()
         {
             InitializeComponent();
 

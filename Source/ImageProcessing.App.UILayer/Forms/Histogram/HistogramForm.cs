@@ -2,15 +2,13 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.Views.Histogram;
-using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 namespace ImageProcessing.App.UILayer.Forms.Histogram
 {
     /// <inheritdoc cref="IHistogramView"/>
     internal sealed partial class HistogramForm : BaseForm, IHistogramView
     {
-        public HistogramForm(IAppController controller)
-            : base(controller)
+        public HistogramForm() : base()
         {
             InitializeComponent();
         }

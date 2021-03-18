@@ -2,15 +2,13 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.App.PresentationLayer.Views.QualityMeasure;
-using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 namespace ImageProcessing.App.UILayer.Forms.QualityMeasure
 {
     internal sealed partial class QualityMeasureForm : BaseForm,
         IQualityMeasureView
     {
-        public QualityMeasureForm(IAppController controller)
-            : base(controller)
+        public QualityMeasureForm() : base()
         {
             InitializeComponent();
         }

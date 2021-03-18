@@ -12,7 +12,6 @@ using ImageProcessing.App.UILayer.FormModel.Factory.MainFormRotation.Interface;
 using ImageProcessing.App.UILayer.FormModel.Factory.MainFormZoom.Interface;
 using ImageProcessing.App.UILayer.FormModel.MainFormUndoRedo.Interface;
 using ImageProcessing.App.UILayer.Properties;
-using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Utility.Interop.Wrapper;
 
 namespace ImageProcessing.App.UILayer.Forms.Main
@@ -32,12 +31,11 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         private Image? _dstCopy;
 
         public MainForm(
-            IAppController controller,
             IMainFormEventBinder binder,
             IMainFormContainerFactory container,
             IMainFormUndoRedoFactory  undoRedo,
             IMainFormZoomFactory zoom,
-            IMainFormRotationFactory rotation) : base(controller)
+            IMainFormRotationFactory rotation) : base()
         {
             InitializeComponent();
 

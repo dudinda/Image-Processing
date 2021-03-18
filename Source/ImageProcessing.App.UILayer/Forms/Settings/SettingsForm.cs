@@ -5,7 +5,6 @@ using ImageProcessing.App.PresentationLayer.Views.Settings;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions.EnumExt;
 using ImageProcessing.App.UILayer.FormEventBinders.Settings.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Settings;
-using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 using MetroFramework.Controls;
 
@@ -17,8 +16,7 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
         private readonly ISettingsFormEventBinder _binder;
 
         public SettingsForm(
-            IAppController controller,
-            ISettingsFormEventBinder binder) : base(controller)
+            ISettingsFormEventBinder binder) : base()
         {
             InitializeComponent();
 
