@@ -14,10 +14,9 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         private readonly RgbForm _form;
 
         public RgbFormWrapper(
-            IAppController controller,
             IRgbFormEventBinder binder)
         {
-            _form = new RgbForm(controller, binder);
+            _form = new RgbForm(binder);
         }
 
         public virtual RgbFltr Dropdown

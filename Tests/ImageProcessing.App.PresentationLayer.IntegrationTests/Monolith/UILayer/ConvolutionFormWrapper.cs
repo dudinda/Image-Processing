@@ -13,10 +13,9 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
     {
         private readonly ConvolutionForm _form;
         public ConvolutionFormWrapper(
-          IAppController controller,
           IConvolutionFormEventBinder binder) 
         {
-            _form = new ConvolutionForm(controller, binder);
+            _form = new ConvolutionForm(binder);
         }
 
         public virtual ConvKernel Dropdown

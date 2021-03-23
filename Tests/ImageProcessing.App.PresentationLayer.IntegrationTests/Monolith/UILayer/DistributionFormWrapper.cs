@@ -18,10 +18,9 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         private readonly DistributionForm _form;
 
         public DistributionFormWrapper(
-           IAppController controller,
            IDistributionFormEventBinder binder) 
         {
-            _form = new DistributionForm(controller, binder);
+            _form = new DistributionForm(binder);
         }
 
         public virtual (string, string) Parameters

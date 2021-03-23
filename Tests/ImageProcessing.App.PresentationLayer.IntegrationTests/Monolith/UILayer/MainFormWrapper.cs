@@ -13,13 +13,12 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
     internal partial class MainFormWrapper : MainForm
     {
         public MainFormWrapper(
-            IAppController controller,
             IMainFormEventBinder binder,
             IMainFormContainerFactory container,
             IMainFormUndoRedoFactory undoRedo,
             IMainFormZoomFactory zoom,
             IMainFormRotationFactory rotation)
-            : base(controller, binder, container, undoRedo, zoom, rotation)
+            : base(binder, container, undoRedo, zoom, rotation)
         {
             
         }
