@@ -48,7 +48,7 @@ namespace ImageProcessing.App.UILayer
 {
     public sealed class UIStartup : IStartup
     {
-        public void Build(IDependencyResolution builder)
+        public void Build(IComponentProvider builder)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -6,7 +6,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests
 {
     internal sealed class MainPresenterTestStartup : IStartup
     {
-        public void Build(IDependencyResolution builder)
+        public void Build(IComponentProvider builder)
         {
             builder.BindMocksForMainPresenter();
             builder.BindMocksForRgbPresenter();

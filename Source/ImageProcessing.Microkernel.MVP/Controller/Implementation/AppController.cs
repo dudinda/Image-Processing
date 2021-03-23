@@ -27,7 +27,7 @@ namespace ImageProcessing.Microkernel.MVP.Controller.Implementation
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution IoC { get; }
+        public IComponentProvider IoC { get; }
 
         /// <inheritdoc/>
         public IEventAggregator Aggregator { get; private set; }
@@ -36,7 +36,7 @@ namespace ImageProcessing.Microkernel.MVP.Controller.Implementation
         /// to create an instance from the application side.
         internal AppController(IContainer container)
         {
-            IoC = new DependencyResolution(container);
+            IoC = new ComponentProvider(container);
             IoC.RegisterSingletonInstance<IAppController>(Controller = this);
             IoC.RegisterSingleton<IEventAggregator, EventAggregator>();
             Aggregator = IoC.Resolve<IEventAggregator>();

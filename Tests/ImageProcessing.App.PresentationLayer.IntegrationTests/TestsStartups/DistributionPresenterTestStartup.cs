@@ -6,7 +6,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsStartups
 {
     internal sealed class DistributionPresenterTestStartup : IStartup
     {
-        public void Build(IDependencyResolution builder)
+        public void Build(IComponentProvider builder)
         {
             builder.BindMocksForMainPresenter();
             builder.BindMocksForDistributionPresenter();

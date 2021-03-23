@@ -6,7 +6,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsStartups
 {
     internal sealed class ConvolutionPresenterTestStartup : IStartup
     {
-        public void Build(IDependencyResolution builder)
+        public void Build(IComponentProvider builder)
         {
             builder.BindMocksForMainPresenter();
             builder.BindMocksForConvolutionPresenter();

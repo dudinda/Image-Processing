@@ -34,7 +34,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain
 {
     internal sealed class DomainStartup : IStartup
     {
-        public void Build(IDependencyResolution builder)
+        public void Build(IComponentProvider builder)
         {
             builder
                  .RegisterSingleton<IAppSettings, AppSettings>()

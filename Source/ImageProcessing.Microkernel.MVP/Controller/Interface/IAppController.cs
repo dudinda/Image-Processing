@@ -15,8 +15,8 @@ namespace ImageProcessing.Microkernel.MVP.Controller.Interface
     /// </summary>
     public interface IAppController : IDisposable
     {
-        /// <inheritdoc cref="IDependencyResolution"/>
-        IDependencyResolution IoC { get; }
+        /// <inheritdoc cref="IComponentProvider"/>
+        IComponentProvider IoC { get; }
 
         /// <inheritdoc cref="IEventAggregator"/>
         IEventAggregator Aggregator { get; }

@@ -7,13 +7,13 @@ using ImageProcessing.Microkernel.MVP.View;
 
 namespace ImageProcessing.Microkernel.MVP.IoC.Implementation
 {
-    /// <inheritdoc cref="IDependencyResolution"/>
-    internal sealed class DependencyResolution : IDependencyResolution
+    /// <inheritdoc cref="IComponentProvider"/>
+    internal sealed class ComponentProvider : IComponentProvider
     {
         /// <inheritdoc cref="IContainer"/>
         private readonly IContainer _container;
 
-        public DependencyResolution(IContainer container)
+        public ComponentProvider(IContainer container)
         {
             if(container is null)
             {
@@ -24,7 +24,7 @@ namespace ImageProcessing.Microkernel.MVP.IoC.Implementation
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterTransientView<TView, TImplementation>()
+        public IComponentProvider RegisterTransientView<TView, TImplementation>()
                 where TImplementation : class, TView
                 where TView : IView
         {
@@ -33,7 +33,7 @@ namespace ImageProcessing.Microkernel.MVP.IoC.Implementation
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterSingletonView<TView, TImplementation>()
+        public IComponentProvider RegisterSingletonView<TView, TImplementation>()
                 where TImplementation : class, TView
                 where TView : IView, IDisposable
         {
@@ -42,7 +42,7 @@ namespace ImageProcessing.Microkernel.MVP.IoC.Implementation
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterTransient<TService, TImplementation>()
+        public IComponentProvider RegisterTransient<TService, TImplementation>()
             where TImplementation : TService
         {
             _container.RegisterTransient<TService, TImplementation>();
@@ -50,7 +50,7 @@ namespace ImageProcessing.Microkernel.MVP.IoC.Implementation
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterScoped<TService, TImplementation>()
+        public IComponentProvider RegisterScoped<TService, TImplementation>()
             where TImplementation : TService
         {
             _container.RegisterScoped<TService, TImplementation>();
@@ -58,7 +58,7 @@ namespace ImageProcessing.Microkernel.MVP.IoC.Implementation
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterSingleton<TService, TImplementation>()
+        public IComponentProvider RegisterSingleton<TService, TImplementation>()
             where TImplementation : TService
         {
             _container.RegisterSingleton<TService, TImplementation>();
@@ -66,28 +66,28 @@ namespace ImageProcessing.Microkernel.MVP.IoC.Implementation
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterTransient<TService>()
+        public IComponentProvider RegisterTransient<TService>()
         {
             _container.RegisterTransient<TService>();
             return this;
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterSingleton<TService>()
+        public IComponentProvider RegisterSingleton<TService>()
         {
             _container.RegisterSingleton<TService>();
             return this;
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterScoped<TService>()
+        public IComponentProvider RegisterScoped<TService>()
         {
             _container.RegisterScoped<TService>();
             return this;
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterNamedTransient<TService, TImplementation>(string serviceName)
+        public IComponentProvider RegisterNamedTransient<TService, TImplementation>(string serviceName)
             where TImplementation : TService
         {
             _container.RegisterTransient<TService, TImplementation>(serviceName);
@@ -95,7 +95,7 @@ namespace ImageProcessing.Microkernel.MVP.IoC.Implementation
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterNamedScoped<TService, TImplementation>(string serviceName)
+        public IComponentProvider RegisterNamedScoped<TService, TImplementation>(string serviceName)
             where TImplementation : TService
         {
             _container.RegisterScoped<TService, TImplementation>(serviceName);
@@ -103,7 +103,7 @@ namespace ImageProcessing.Microkernel.MVP.IoC.Implementation
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterNamedSingleton<TService, TImplementation>(string serviceName)
+        public IComponentProvider RegisterNamedSingleton<TService, TImplementation>(string serviceName)
             where TImplementation : TService
         {
             _container.RegisterSingleton<TService, TImplementation>(serviceName);
@@ -111,84 +111,84 @@ namespace ImageProcessing.Microkernel.MVP.IoC.Implementation
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterTransientInstance<TService>(TService instance)
+        public IComponentProvider RegisterTransientInstance<TService>(TService instance)
         {
             _container.RegisterTransient(instance);
             return this;
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterScopedInstance<TService>(TService instance)
+        public IComponentProvider RegisterScopedInstance<TService>(TService instance)
         {
             _container.RegisterScoped(instance);
             return this;
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterSingletonInstance<TService>(TService instance)
+        public IComponentProvider RegisterSingletonInstance<TService>(TService instance)
         {
             _container.RegisterSingleton(instance);
             return this;
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterTransientNamedInstance<TService>(TService instance, string serviceName)
+        public IComponentProvider RegisterTransientNamedInstance<TService>(TService instance, string serviceName)
         {
             _container.RegisterTransient(instance, serviceName);
             return this;
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterScopedNamedInstance<TService>(TService instance, string serviceName)
+        public IComponentProvider RegisterScopedNamedInstance<TService>(TService instance, string serviceName)
         {
             _container.RegisterScoped(instance, serviceName);
             return this;
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterSingletonNamedInstance<TService>(TService instance, string serviceName)
+        public IComponentProvider RegisterSingletonNamedInstance<TService>(TService instance, string serviceName)
         {
             _container.RegisterSingleton(instance, serviceName);
             return this;
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterTransientFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
+        public IComponentProvider RegisterTransientFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
         {
             _container.RegisterTransient(factory);
             return this;
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterScopedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
+        public IComponentProvider RegisterScopedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
         {
             _container.RegisterScoped(factory);
             return this;
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterSingletonFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
+        public IComponentProvider RegisterSingletonFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
         {
             _container.RegisterSingleton(factory);
             return this;
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterTransientNamedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name)
+        public IComponentProvider RegisterTransientNamedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name)
         {
             _container.RegisterTransient(factory, name);
             return this;
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterScopedNamedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name)
+        public IComponentProvider RegisterScopedNamedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name)
         {
             _container.RegisterScoped(factory, name);
             return this;
         }
 
         /// <inheritdoc/>
-        public IDependencyResolution RegisterSingletonNamedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name)
+        public IComponentProvider RegisterSingletonNamedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name)
         {
             _container.RegisterSingleton(factory, name);
             return this;

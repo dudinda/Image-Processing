@@ -87,7 +87,7 @@ namespace ImageProcessing.App.PresentationLayer
 {
     public sealed class Startup : IStartup
     {
-        public void Build(IDependencyResolution builder)
+        public void Build(IComponentProvider builder)
         {
             builder
                 .RegisterSingleton<IAppSettings, AppSettings>()

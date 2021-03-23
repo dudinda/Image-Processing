@@ -5,7 +5,7 @@ namespace ImageProcessing.EntryPoint.UnitTests.Fakes
 {
     internal class StartupFake : IStartup
     {
-        public virtual void Build(IDependencyResolution builder)
+        public virtual void Build(IComponentProvider builder)
         {
             
         }

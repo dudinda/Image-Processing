@@ -3,15 +3,15 @@ using ImageProcessing.Microkernel.MVP.IoC.Interface;
 namespace ImageProcessing.Microkernel.AppConfig
 {
     /// <summary>
-    /// Used to create the
+    /// It is used to create the
     /// initial configuration of an application.
     /// </summary>
     public interface IStartup
     {
         /// <summary>
-        /// Setup an application and register its dependencies to a
+        /// Set up an application and register its components with a
         /// selected DI - container.
         /// </summary>
-        void Build(IDependencyResolution builder);
+        void Build(IComponentProvider builder);
     }
 }

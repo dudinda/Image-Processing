@@ -53,7 +53,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
 {
     internal static class DependencyResolutionExtensions
     {
-        public static (IAppController, IEventAggregatorWrapper) BindMocksForMvp(this IDependencyResolution builder)
+        public static (IAppController, IEventAggregatorWrapper) BindMocksForMvp(this IComponentProvider builder)
         {
             if(!builder.IsRegistered<IEventAggregatorWrapper>())
             {
@@ -69,7 +69,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
             return (controller, aggregator);
         }
 
-        public static void BindMocksForMainPresenter(this IDependencyResolution builder)
+        public static void BindMocksForMainPresenter(this IComponentProvider builder)
         {
             var (controller, aggregator) = builder.BindMocksForMvp();
 
@@ -110,7 +110,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
 
         }
 
-        public static void BindMocksForRgbPresenter(this IDependencyResolution builder)
+        public static void BindMocksForRgbPresenter(this IComponentProvider builder)
         {
             var (controller, aggregator) = builder.BindMocksForMvp();
 
@@ -132,7 +132,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
               ));
         }
 
-        public static void BindMocksForConvolutionPresenter(this IDependencyResolution builder)
+        public static void BindMocksForConvolutionPresenter(this IComponentProvider builder)
         {
             var (controller, aggregator) = builder.BindMocksForMvp();
 
@@ -155,7 +155,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
                 ));
         }
 
-        public static void BindMocksForDistributionPresenter(this IDependencyResolution builder)
+        public static void BindMocksForDistributionPresenter(this IComponentProvider builder)
         {
             var (controller, aggregator) = builder.BindMocksForMvp();
 
