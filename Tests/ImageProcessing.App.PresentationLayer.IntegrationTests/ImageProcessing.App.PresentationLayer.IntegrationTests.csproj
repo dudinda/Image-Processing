@@ -123,7 +123,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Monolith\DomainLayer\ColorMatrixWrapper.cs" />
+    <Compile Include="Monolith\DomainLayer\ColorMatrix\Implementation\ColorMatrixFactoryWrapper.cs" />
+    <Compile Include="Monolith\DomainLayer\ColorMatrix\Interface\IColorMatrixFactoryWrapper.cs" />
+    <Compile Include="Monolith\DomainLayer\Convolution\Implementation\ConvoltuionFactoryWrapper.cs" />
+    <Compile Include="Monolith\DomainLayer\Convolution\Interface\IConvolutionFactoryWrapper.cs" />
+    <Compile Include="Monolith\DomainLayer\DomainStartup.cs" />
     <Compile Include="TestsComponents\Extensions\BitmapExtensions.cs" />
     <Compile Include="TestsComponents\Extensions\DependencyResolutionExtensions.cs" />
     <Compile Include="Monolith\UILayer\ConvolutionFormWrapper.cs">
@@ -201,7 +205,22 @@
     <Content Include="TestResources\Static\1920x1080frame.jpg" />
     <Content Include="TestResources\Static\2560x1440frame.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Monolith\DomainLayer\Distribution\Implementation\" />
+    <Folder Include="Monolith\DomainLayer\Distribution\Interface\" />
+    <Folder Include="Monolith\DomainLayer\Morphology\Implementation\" />
+    <Folder Include="Monolith\DomainLayer\Morphology\Interface\" />
+    <Folder Include="Monolith\DomainLayer\Recommendation\Implementation\" />
+    <Folder Include="Monolith\DomainLayer\Recommendation\Interface\" />
+    <Folder Include="Monolith\DomainLayer\Rgb\Implementation\" />
+    <Folder Include="Monolith\DomainLayer\Rgb\Interface\" />
+    <Folder Include="Monolith\DomainLayer\Rotation\Implementation\" />
+    <Folder Include="Monolith\DomainLayer\Rotation\Interface\" />
+    <Folder Include="Monolith\DomainLayer\Scaling\Implementation\" />
+    <Folder Include="Monolith\DomainLayer\Scaling\Interface\" />
+    <Folder Include="Monolith\DomainLayer\Transformation\Implementation\" />
+    <Folder Include="Monolith\DomainLayer\Transformation\Interface\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TestResources\Res.resx">
       <Generator>ResXFileCodeGenerator</Generator>
