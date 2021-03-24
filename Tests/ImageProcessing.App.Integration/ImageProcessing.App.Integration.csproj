@@ -9,8 +9,8 @@
     <ProjectGuid>{917AC26D-ECBD-4968-83D0-4D29B692D8B9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ImageProcessing.App.PresentationLayer.IntegrationTests</RootNamespace>
-    <AssemblyName>ImageProcessing.App.PresentationLayer.IntegrationTests</AssemblyName>
+    <RootNamespace>ImageProcessing.App.Integration</RootNamespace>
+    <AssemblyName>ImageProcessing.App.Integration</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -127,7 +127,26 @@
     <Compile Include="Monolith\DomainLayer\ColorMatrix\Interface\IColorMatrixFactoryWrapper.cs" />
     <Compile Include="Monolith\DomainLayer\Convolution\Implementation\ConvoltuionFactoryWrapper.cs" />
     <Compile Include="Monolith\DomainLayer\Convolution\Interface\IConvolutionFactoryWrapper.cs" />
+    <Compile Include="Monolith\DomainLayer\Distribution\Implementation\DistributionFactoryWrapper.cs" />
+    <Compile Include="Monolith\DomainLayer\Distribution\Interface\IDistributionFactoryWrapper.cs" />
     <Compile Include="Monolith\DomainLayer\DomainStartup.cs" />
+    <Compile Include="Monolith\DomainLayer\Morphology\Implementation\MorphologyFactoryWrapper.cs" />
+    <Compile Include="Monolith\DomainLayer\Morphology\Interface\IMorphologyFactoryWrapper.cs" />
+    <Compile Include="Monolith\DomainLayer\Recommendation\Implementation\RecommendationFactoryWrapper.cs" />
+    <Compile Include="Monolith\DomainLayer\Recommendation\Interface\IRecommendationFactoryWrapper.cs" />
+    <Compile Include="Monolith\DomainLayer\Rgb\Implementation\RgbFactoryWrapper.cs" />
+    <Compile Include="Monolith\DomainLayer\Rgb\Interface\IRgbFactoryWrapper.cs" />
+    <Compile Include="Monolith\DomainLayer\Rotation\Implementation\RotationFactoryWrapper.cs" />
+    <Compile Include="Monolith\DomainLayer\Rotation\Interface\IRotationFactoryWrapper.cs" />
+    <Compile Include="Monolith\DomainLayer\Scaling\Implementation\ScalingFactoryWrapper.cs" />
+    <Compile Include="Monolith\DomainLayer\Scaling\Interface\IScalingFactoryWrapper.cs" />
+    <Compile Include="Monolith\DomainLayer\Transformation\Implementation\TransformationFactoryWrapper.cs" />
+    <Compile Include="Monolith\DomainLayer\Transformation\Interface\ITransformationFactoryWrapper.cs" />
+    <Compile Include="Monolith\Microkernel.MVP\MicrokernelStartup.cs" />
+    <Compile Include="Monolith\PresentationLayer\PresentationStartup.cs" />
+    <Compile Include="Monolith\ServiceLayer\ServiceStartup.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\ColorMatrix\Implementation\ColorMatrixServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\ColorMatrix\Interface\IColorMatrixServiceWrapper.cs" />
     <Compile Include="TestsComponents\Extensions\BitmapExtensions.cs" />
     <Compile Include="TestsComponents\Extensions\DependencyResolutionExtensions.cs" />
     <Compile Include="Monolith\UILayer\ConvolutionFormWrapper.cs">
@@ -139,17 +158,17 @@
     <Compile Include="Monolith\UILayer\RgbFormWrapper.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Monolith\PresentationLayer\ConvolutionPresenterWrapper.cs" />
-    <Compile Include="Monolith\PresentationLayer\DistributionPresenterWrapper.cs" />
-    <Compile Include="Monolith\PresentationLayer\MainPresenterWrapper.cs" />
-    <Compile Include="Monolith\PresentationLayer\RgbPresenterWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\Presenters\ConvolutionPresenterWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\Presenters\DistributionPresenterWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\Presenters\MainPresenterWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\Presenters\RgbPresenterWrapper.cs" />
     <Compile Include="Monolith\Microkernel.MVP\EventAggregator\Implementation\EventAggregatorWrapper.cs" />
     <Compile Include="Monolith\Microkernel.MVP\EventAggregator\Interface\IEventAggregatorWrapper.cs" />
     <Compile Include="Monolith\UILayer\MainFormWrapper.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Monolith\Microkernel.MVP\SynchronizationContext\SynchronizationContextWrapper.cs" />
-    <Compile Include="Monolith\ServiceLayer\NonBlockDialog\NonBlockDialogServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\NonBlockDialog\NonBlockDialogServiceWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestsStartups\ConvolutionPresenterTestStartup.cs" />
     <Compile Include="TestsStartups\DistributionPresenterTestStartup.cs" />
@@ -164,40 +183,6 @@
     <Compile Include="Tests\MainPresenter\MainPresenterTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.DomainLayer\ImageProcessing.App.DomainLayer.csproj">
-      <Project>{03943CD9-C3EC-494E-B3FB-1B8BE4AEF91B}</Project>
-      <Name>ImageProcessing.App.DomainLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.PresentationLayer\ImageProcessing.App.PresentationLayer.csproj">
-      <Project>{9E019576-0EE0-4213-A8E5-1DA5A52457E1}</Project>
-      <Name>ImageProcessing.App.PresentationLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.ServiceLayer.Win\ImageProcessing.App.ServiceLayer.Win.csproj">
-      <Project>{FF6D8DE5-9811-4DD6-9CC4-14162E0B7991}</Project>
-      <Name>ImageProcessing.App.ServiceLayer.Win</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.ServiceLayer\ImageProcessing.App.ServiceLayer.csproj">
-      <Project>{94C3F770-5A06-4D18-AFF5-C4EB20CBB727}</Project>
-      <Name>ImageProcessing.App.ServiceLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.UILayer\ImageProcessing.App.UILayer.csproj">
-      <Project>{588AD9F0-3AC2-49CE-99C8-BC5A341B91D5}</Project>
-      <Name>ImageProcessing.App.UILayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.Microkernel.DIAdapter\ImageProcessing.Microkernel.DIAdapter.csproj">
-      <Project>{987AD585-AB5E-4394-B8B1-A9F0655A939C}</Project>
-      <Name>ImageProcessing.Microkernel.DIAdapter</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.Microkernel.EntryPoint\ImageProcessing.Microkernel.EntryPoint.csproj">
-      <Project>{1E702994-3838-4ACC-8A1D-CDAFF18E39DD}</Project>
-      <Name>ImageProcessing.Microkernel.EntryPoint</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.Microkernel.MVP\ImageProcessing.Microkernel.MVP.csproj">
-      <Project>{E547BF84-7467-4AA0-A836-84BEAB772924}</Project>
-      <Name>ImageProcessing.Microkernel.MVP</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -206,26 +191,64 @@
     <Content Include="TestResources\Static\2560x1440frame.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Monolith\DomainLayer\Distribution\Implementation\" />
-    <Folder Include="Monolith\DomainLayer\Distribution\Interface\" />
-    <Folder Include="Monolith\DomainLayer\Morphology\Implementation\" />
-    <Folder Include="Monolith\DomainLayer\Morphology\Interface\" />
-    <Folder Include="Monolith\DomainLayer\Recommendation\Implementation\" />
-    <Folder Include="Monolith\DomainLayer\Recommendation\Interface\" />
-    <Folder Include="Monolith\DomainLayer\Rgb\Implementation\" />
-    <Folder Include="Monolith\DomainLayer\Rgb\Interface\" />
-    <Folder Include="Monolith\DomainLayer\Rotation\Implementation\" />
-    <Folder Include="Monolith\DomainLayer\Rotation\Interface\" />
-    <Folder Include="Monolith\DomainLayer\Scaling\Implementation\" />
-    <Folder Include="Monolith\DomainLayer\Scaling\Interface\" />
-    <Folder Include="Monolith\DomainLayer\Transformation\Implementation\" />
-    <Folder Include="Monolith\DomainLayer\Transformation\Interface\" />
+    <Folder Include="Monolith\ServiceLayer\Providers\" />
+    <Folder Include="Monolith\ServiceLayer\ServiceModel\" />
+    <Folder Include="Monolith\ServiceLayer\Services\Bmp\" />
+    <Folder Include="Monolith\ServiceLayer\Services\Cache\Implementation\" />
+    <Folder Include="Monolith\ServiceLayer\Services\Cache\Interface\" />
+    <Folder Include="Monolith\ServiceLayer\Services\Convolution\" />
+    <Folder Include="Monolith\ServiceLayer\Services\Distribution\" />
+    <Folder Include="Monolith\ServiceLayer\Services\FileDialog\" />
+    <Folder Include="Monolith\ServiceLayer\Services\Histogram\" />
+    <Folder Include="Monolith\ServiceLayer\Services\Locker\" />
+    <Folder Include="Monolith\ServiceLayer\Services\Morphology\" />
+    <Folder Include="Monolith\ServiceLayer\Services\Pipeline\" />
+    <Folder Include="Monolith\ServiceLayer\Services\QualityMeasure\" />
+    <Folder Include="Monolith\ServiceLayer\Services\StaTask\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TestResources\Res.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Res.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Source\ImageProcessing.App.DomainLayer\ImageProcessing.App.DomainLayer.csproj">
+      <Project>{03943cd9-c3ec-494e-b3fb-1b8be4aef91b}</Project>
+      <Name>ImageProcessing.App.DomainLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\ImageProcessing.App.PresentationLayer\ImageProcessing.App.PresentationLayer.csproj">
+      <Project>{9e019576-0ee0-4213-a8e5-1da5a52457e1}</Project>
+      <Name>ImageProcessing.App.PresentationLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\ImageProcessing.App.ServiceLayer.Win\ImageProcessing.App.ServiceLayer.Win.csproj">
+      <Project>{ff6d8de5-9811-4dd6-9cc4-14162e0b7991}</Project>
+      <Name>ImageProcessing.App.ServiceLayer.Win</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\ImageProcessing.App.ServiceLayer\ImageProcessing.App.ServiceLayer.csproj">
+      <Project>{94c3f770-5a06-4d18-aff5-c4eb20cbb727}</Project>
+      <Name>ImageProcessing.App.ServiceLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\ImageProcessing.App.UILayer\ImageProcessing.App.UILayer.csproj">
+      <Project>{588ad9f0-3ac2-49ce-99c8-bc5a341b91d5}</Project>
+      <Name>ImageProcessing.App.UILayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\ImageProcessing.Microkernel.DIAdapter\ImageProcessing.Microkernel.DIAdapter.csproj">
+      <Project>{987ad585-ab5e-4394-b8b1-a9f0655a939c}</Project>
+      <Name>ImageProcessing.Microkernel.DIAdapter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\ImageProcessing.Microkernel.EntryPoint\ImageProcessing.Microkernel.EntryPoint.csproj">
+      <Project>{1e702994-3838-4acc-8a1d-cdaff18e39dd}</Project>
+      <Name>ImageProcessing.Microkernel.EntryPoint</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\ImageProcessing.Microkernel.MVP\ImageProcessing.Microkernel.MVP.csproj">
+      <Project>{e547bf84-7467-4aa0-a836-84beab772924}</Project>
+      <Name>ImageProcessing.Microkernel.MVP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\ImageProcessing.Utility.DataStructure\ImageProcessing.Utility.DataStructure.csproj">
+      <Project>{a843b66d-ba38-4568-93f0-a6a577167273}</Project>
+      <Name>ImageProcessing.Utility.DataStructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

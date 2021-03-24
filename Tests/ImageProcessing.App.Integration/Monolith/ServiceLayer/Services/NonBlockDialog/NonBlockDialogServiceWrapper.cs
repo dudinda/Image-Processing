@@ -1,7 +1,7 @@
 using System.Drawing;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.PresentationLayer.IntegrationTests.TestResources;
+using ImageProcessing.App.Integration.TestResources;
 using ImageProcessing.App.ServiceLayer.NonBlockDialog.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.FileDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Services.StaTask.Interface;

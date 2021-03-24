@@ -40,7 +40,7 @@
 
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>$(MSBuildProjectName).IntegrationTests</_Parameter1>
+      <_Parameter1>ImageProcessing.App.Integration</_Parameter1>
     </AssemblyAttribute>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
       <_Parameter1>ImageProcessing.App.UILayer</_Parameter1>

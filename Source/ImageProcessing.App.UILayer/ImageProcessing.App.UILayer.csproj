@@ -22,11 +22,11 @@
 
   <ItemGroup>
     <Compile Remove="FormCommands\**" />
-    <Compile Remove="UIModel\**" />
+    <Compile Remove="Form\**" />
     <EmbeddedResource Remove="FormCommands\**" />
-    <EmbeddedResource Remove="UIModel\**" />
+    <EmbeddedResource Remove="Form\**" />
     <None Remove="FormCommands\**" />
-    <None Remove="UIModel\**" />
+    <None Remove="Form\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,17 +42,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>$(MSBuildProjectName).Benchmark</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>ImageProcessing.App.Integration</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>DynamicProxyGenAssembly2</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Windows.Forms.DataVisualization.Design" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Form\BaseForm.cs" />
-    <Compile Update="Form\ColorMatrix\ColorMatrixForm.cs" />
-    <Compile Update="Form\Distribution\DistributionForm.cs" />
-    <Compile Update="Form\Settings\SettingsForm.cs" />
-    <Compile Update="Form\Transformation\TransformationForm.cs" />
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -80,7 +87,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Form\Morphology\" />
+    <Folder Include="Forms\Wpf\" />
   </ItemGroup>
 
 </Project>

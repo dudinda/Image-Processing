@@ -35,6 +35,7 @@ using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLaye
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Scaling.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Transformation.Implementation;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Transformation.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Microkernel.MVP;
 using ImageProcessing.App.ServiceLayer.Services.Settings.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
 using ImageProcessing.Microkernel.AppConfig;
@@ -48,6 +49,8 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain
     {
         public void Build(IComponentProvider builder)
         {
+            new MicrokernelStartup().Build(builder);
+
             builder
                  .RegisterSingleton<IAppSettings, AppSettings>()
                  .RegisterTransient<IConvolutionFactory, ConvolutionFactory>()
@@ -62,14 +65,14 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain
                  .RegisterTransient<IRotationFactory, RotationFactory>()
                  .RegisterTransient<ITransformationFactory, TransformationFactory>();
 
-            var colorMatrix    = Substitute.ForPartsOf<ColorMatrixFactoryWrapper>(builder.Resolve<IColorMatrixFactory>());
-            var convolution    = Substitute.ForPartsOf<ConvoltuionFactoryWrapper>(builder.Resolve<IConvolutionFactory>());
-            var distribution   = Substitute.ForPartsOf<DistributionFactoryWrapper>(builder.Resolve<IConvolutionFactory>());
-            var morphology     = Substitute.ForPartsOf<MorphologyFactoryWrapper>(builder.Resolve<IConvolutionFactory>());
-            var rgb            = Substitute.ForPartsOf<RgbFactoryWrapper>(builder.Resolve<IConvolutionFactory>());
-            var rotation       = Substitute.ForPartsOf<RotationFactoryWrapper>(builder.Resolve<IConvolutionFactory>());
-            var scaling        = Substitute.ForPartsOf<ScalingFactoryWrapper>(builder.Resolve<IConvolutionFactory>());
-            var transformation = Substitute.ForPartsOf<TransformationFactoryWrapper>(builder.Resolve<IConvolutionFactory>());
+            var colorMatrix = Substitute.ForPartsOf<ColorMatrixFactoryWrapper>(builder.Resolve<IColorMatrixFactory>());
+            var convolution = Substitute.ForPartsOf<ConvoltuionFactoryWrapper>(builder.Resolve<IConvolutionFactory>());
+            var distribution = Substitute.ForPartsOf<DistributionFactoryWrapper>(builder.Resolve<IDistributionFactory>());
+            var morphology = Substitute.ForPartsOf<MorphologyFactoryWrapper>(builder.Resolve<IMorphologyFactory>());
+            var rgb = Substitute.ForPartsOf<RgbFactoryWrapper>(builder.Resolve<IRgbFilterFactory>());
+            var rotation = Substitute.ForPartsOf<RotationFactoryWrapper>(builder.Resolve<IRotationFactory>());
+            var scaling = Substitute.ForPartsOf<ScalingFactoryWrapper>(builder.Resolve<IScalingFactory>());
+            var transformation = Substitute.ForPartsOf<TransformationFactoryWrapper>(builder.Resolve<ITransformationFactory>());
 
             builder
                 .RegisterTransientInstance<IColorMatrixFactoryWrapper>(colorMatrix)

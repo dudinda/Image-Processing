@@ -15,7 +15,7 @@
       <_Parameter1>ImageProcessing.EntryPoint.UnitTests</_Parameter1>
     </AssemblyAttribute>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>ImageProcessing.App.PresentationLayer.IntegrationTests</_Parameter1>
+      <_Parameter1>ImageProcessing.App.Integration</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
 
