@@ -35,7 +35,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
               .DrawFilledRectangle(Brushes.White);
 
-            //if tan(rad) tends to inf, substract the epsilon value
+            //if tan(rad/2) tends to inf, substract the epsilon value
             //alpha is computed as tan(rad/2) so calculate tan(rad mod pi) instead
             if(rad - Math.PI * (rad / Math.PI) < 10e-12)
             {
