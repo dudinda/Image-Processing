@@ -23,6 +23,18 @@ using ImageProcessing.App.DomainLayer.Factory.Distribution.Implementation;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.ColorMatrix.Implementation;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.ColorMatrix.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Convolution.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Distribution.Implementation;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Distribution.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Morphology.Implementation;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Morphology.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Rgb.Implementation;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Rgb.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Rotation.Implementation;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Rotation.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Scaling.Implementation;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Scaling.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Transformation.Implementation;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Transformation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Settings.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
 using ImageProcessing.Microkernel.AppConfig;
@@ -50,12 +62,24 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain
                  .RegisterTransient<IRotationFactory, RotationFactory>()
                  .RegisterTransient<ITransformationFactory, TransformationFactory>();
 
-            var colorMatrix = Substitute.ForPartsOf<ColorMatrixFactoryWrapper>(builder.Resolve<IColorMatrixFactory>());
-            var convolution = Substitute.ForPartsOf<ConvoltuionFactoryWrapper>(builder.Resolve<IConvolutionFactory>());
+            var colorMatrix    = Substitute.ForPartsOf<ColorMatrixFactoryWrapper>(builder.Resolve<IColorMatrixFactory>());
+            var convolution    = Substitute.ForPartsOf<ConvoltuionFactoryWrapper>(builder.Resolve<IConvolutionFactory>());
+            var distribution   = Substitute.ForPartsOf<DistributionFactoryWrapper>(builder.Resolve<IConvolutionFactory>());
+            var morphology     = Substitute.ForPartsOf<MorphologyFactoryWrapper>(builder.Resolve<IConvolutionFactory>());
+            var rgb            = Substitute.ForPartsOf<RgbFactoryWrapper>(builder.Resolve<IConvolutionFactory>());
+            var rotation       = Substitute.ForPartsOf<RotationFactoryWrapper>(builder.Resolve<IConvolutionFactory>());
+            var scaling        = Substitute.ForPartsOf<ScalingFactoryWrapper>(builder.Resolve<IConvolutionFactory>());
+            var transformation = Substitute.ForPartsOf<TransformationFactoryWrapper>(builder.Resolve<IConvolutionFactory>());
 
             builder
                 .RegisterTransientInstance<IColorMatrixFactoryWrapper>(colorMatrix)
-                .RegisterTransientInstance<IConvolutionFactoryWrapper>(convolution);
+                .RegisterTransientInstance<IConvolutionFactoryWrapper>(convolution)
+                .RegisterTransientInstance<IDistributionFactoryWrapper>(distribution)
+                .RegisterTransientInstance<IMorphologyFactoryWrapper>(morphology)
+                .RegisterTransientInstance<IRgbFactoryWrapper>(rgb)
+                .RegisterTransientInstance<IRotationFactoryWrapper>(rotation)
+                .RegisterTransientInstance<IScalingFactoryWrapper>(scaling)
+                .RegisterTransientInstance<ITransformationFactoryWrapper>(transformation);
         }
     }
 }
