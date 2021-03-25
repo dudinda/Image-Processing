@@ -8,7 +8,7 @@ using ImageProcessing.App.PresentationLayer.Views.ViewComponent.Cursor;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.Error;
 using ImageProcessing.Microkernel.MVP.View;
 
-namespace ImageProcessing.App.PresentationLayer.Views.Main
+namespace ImageProcessing.App.PresentationLayer.Views
 {
     /// <summary>
     /// Represents the base behavior

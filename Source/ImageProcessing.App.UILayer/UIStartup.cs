@@ -1,15 +1,7 @@
 using System.Windows.Forms;
 
 using ImageProcessing.App.PresentationLayer;
-using ImageProcessing.App.PresentationLayer.Views.ColorMatrix;
-using ImageProcessing.App.PresentationLayer.Views.Convolution;
-using ImageProcessing.App.PresentationLayer.Views.Distribution;
-using ImageProcessing.App.PresentationLayer.Views.Histogram;
-using ImageProcessing.App.PresentationLayer.Views.Main;
-using ImageProcessing.App.PresentationLayer.Views.QualityMeasure;
-using ImageProcessing.App.PresentationLayer.Views.Rgb;
-using ImageProcessing.App.PresentationLayer.Views.Settings;
-using ImageProcessing.App.PresentationLayer.Views.Transformation;
+using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.FormCommands.Main;
 using ImageProcessing.App.UILayer.FormEventBinders.ColorMatrix.Implementation;
 using ImageProcessing.App.UILayer.FormEventBinders.ColorMatrix.Interface;

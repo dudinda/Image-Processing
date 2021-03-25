@@ -3,7 +3,7 @@ using ImageProcessing.App.PresentationLayer.Views.ViewComponent.Dropdown;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.Error;
 using ImageProcessing.Microkernel.MVP.View;
 
-namespace ImageProcessing.App.PresentationLayer.Views.Transformation
+namespace ImageProcessing.App.PresentationLayer.Views
 {
     public interface ITransformationView : IView,
         IDropdown<AffTransform>, ITooltip

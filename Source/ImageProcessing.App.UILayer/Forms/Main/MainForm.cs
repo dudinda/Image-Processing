@@ -2,7 +2,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using ImageProcessing.App.PresentationLayer.Code.Enums;
-using ImageProcessing.App.PresentationLayer.Views.Main;
+using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.Control;
 using ImageProcessing.App.UILayer.FormCommands.Main;
 using ImageProcessing.App.UILayer.FormControl.TrackBar;

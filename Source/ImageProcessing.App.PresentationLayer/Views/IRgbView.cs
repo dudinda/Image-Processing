@@ -5,7 +5,7 @@ using ImageProcessing.App.PresentationLayer.Views.ViewComponent.Dropdown;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.Error;
 using ImageProcessing.Microkernel.MVP.View;
 
-namespace ImageProcessing.App.PresentationLayer.Views.Rgb
+namespace ImageProcessing.App.PresentationLayer.Views
 {
     public interface IRgbView : IView,
         IDisposable, IDropdown<RgbFltr>, ITooltip

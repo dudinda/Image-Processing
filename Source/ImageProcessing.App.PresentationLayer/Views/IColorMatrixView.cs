@@ -4,7 +4,7 @@ using ImageProcessing.App.PresentationLayer.Views.ViewComponent.Error;
 using ImageProcessing.Microkernel.MVP.View;
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
-namespace ImageProcessing.App.PresentationLayer.Views.ColorMatrix
+namespace ImageProcessing.App.PresentationLayer.Views
 {
     public interface IColorMatrixView : IView,
         IDropdown<ClrMatrix>, ITooltip

@@ -1,9 +1,8 @@
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.PresentationLayer.Views.Convolution;
+using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Convolution;
 using ImageProcessing.App.UILayer.Forms.Convolution;
-using ImageProcessing.Microkernel.MVP.Controller.Interface;
 
 using MetroFramework.Controls;
 

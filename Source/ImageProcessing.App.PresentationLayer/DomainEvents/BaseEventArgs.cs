@@ -13,6 +13,5 @@ namespace ImageProcessing.App.PresentationLayer.DomainEvents
         {
             PublishedOn = DateTime.UtcNow;
         }
-          
     }
 }

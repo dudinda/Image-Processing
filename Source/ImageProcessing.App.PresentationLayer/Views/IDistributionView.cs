@@ -7,7 +7,7 @@ using ImageProcessing.App.PresentationLayer.Views.ViewComponent.Dropdown;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponent.Error;
 using ImageProcessing.Microkernel.MVP.View;
 
-namespace ImageProcessing.App.PresentationLayer.Views.Distribution
+namespace ImageProcessing.App.PresentationLayer.Views
 {
     public interface IDistributionView : IView,
          IDisposable, ITooltip, IDropdown<PrDistribution>

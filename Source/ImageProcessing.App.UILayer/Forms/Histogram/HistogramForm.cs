@@ -1,7 +1,7 @@
 using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.App.PresentationLayer.Presenters;
-using ImageProcessing.App.PresentationLayer.Views.Histogram;
+using ImageProcessing.App.PresentationLayer.Views;
 
 namespace ImageProcessing.App.UILayer.Forms.Histogram
 {
