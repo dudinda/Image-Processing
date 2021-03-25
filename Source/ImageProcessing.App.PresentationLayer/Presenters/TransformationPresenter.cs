@@ -6,7 +6,7 @@ using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.TransformationArgs;
 using ImageProcessing.App.PresentationLayer.Properties;
-using ImageProcessing.App.PresentationLayer.ViewModels.Transformation;
+using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views.Transformation;
 using ImageProcessing.App.ServiceLayer.Providers.Transformation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
@@ -14,7 +14,7 @@ using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
-namespace ImageProcessing.App.PresentationLayer.Presenters.Transformation
+namespace ImageProcessing.App.PresentationLayer.Presenters
 {
     internal sealed class TransformationPresenter : BasePresenter<ITransformationView, TransformationViewModel>,
         ISubscriber<ApplyTransformationEventArgs>,

@@ -6,7 +6,7 @@ using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Container;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.FileDialog;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Show;
-using ImageProcessing.App.PresentationLayer.Presenters.Main;
+using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.ServiceLayer.Providers.Rotation.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Scaling.Interface;

@@ -145,8 +145,18 @@
     <Compile Include="Monolith\Microkernel.MVP\MicrokernelStartup.cs" />
     <Compile Include="Monolith\PresentationLayer\PresentationStartup.cs" />
     <Compile Include="Monolith\ServiceLayer\ServiceStartup.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\Bmp\Implementation\BitmapServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\Bmp\Interface\IBitmapServiceWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\ColorMatrix\Implementation\ColorMatrixServiceWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\ColorMatrix\Interface\IColorMatrixServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\Convolution\Implementation\ConvolutionServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\Convolution\Interface\IConvolutionServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\Distribution\BitmapLuminance\Implementation\BitmapLuminanceServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\Distribution\BitmapLuminance\Interface\IBitmapLuminanceServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\Distribution\RandomVariable\Implementation\RandomVariableServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\Distribution\RandomVariable\Interface\IRandomVariableServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\FileDialog\Implementation\FileDialogServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\FileDialog\Interface\IFileDialogServiceWrapper.cs" />
     <Compile Include="TestsComponents\Extensions\BitmapExtensions.cs" />
     <Compile Include="TestsComponents\Extensions\DependencyResolutionExtensions.cs" />
     <Compile Include="Monolith\UILayer\ConvolutionFormWrapper.cs">
@@ -193,12 +203,8 @@
   <ItemGroup>
     <Folder Include="Monolith\ServiceLayer\Providers\" />
     <Folder Include="Monolith\ServiceLayer\ServiceModel\" />
-    <Folder Include="Monolith\ServiceLayer\Services\Bmp\" />
     <Folder Include="Monolith\ServiceLayer\Services\Cache\Implementation\" />
     <Folder Include="Monolith\ServiceLayer\Services\Cache\Interface\" />
-    <Folder Include="Monolith\ServiceLayer\Services\Convolution\" />
-    <Folder Include="Monolith\ServiceLayer\Services\Distribution\" />
-    <Folder Include="Monolith\ServiceLayer\Services\FileDialog\" />
     <Folder Include="Monolith\ServiceLayer\Services\Histogram\" />
     <Folder Include="Monolith\ServiceLayer\Services\Locker\" />
     <Folder Include="Monolith\ServiceLayer\Services\Morphology\" />

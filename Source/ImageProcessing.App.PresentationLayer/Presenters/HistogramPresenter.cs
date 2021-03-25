@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-using ImageProcessing.App.PresentationLayer.ViewModels.Histogram;
+using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views.Histogram;
 using ImageProcessing.App.ServiceLayer.Services.Histogram.Interface;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;

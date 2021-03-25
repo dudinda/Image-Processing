@@ -10,16 +10,8 @@ using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Container;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.FileDialog;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Show;
-using ImageProcessing.App.PresentationLayer.Presenters.Convolution;
-using ImageProcessing.App.PresentationLayer.Presenters.Distribution;
-using ImageProcessing.App.PresentationLayer.Presenters.Rgb;
-using ImageProcessing.App.PresentationLayer.Presenters.Settings;
-using ImageProcessing.App.PresentationLayer.Presenters.Transformation;
 using ImageProcessing.App.PresentationLayer.Properties;
-using ImageProcessing.App.PresentationLayer.ViewModels.Convolution;
-using ImageProcessing.App.PresentationLayer.ViewModels.Distribution;
-using ImageProcessing.App.PresentationLayer.ViewModels.Rgb;
-using ImageProcessing.App.PresentationLayer.ViewModels.Transformation;
+using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views.Main;
 using ImageProcessing.App.ServiceLayer.Providers.Rotation.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Scaling.Interface;
@@ -33,7 +25,7 @@ using ImageProcessing.App.ServiceLayer.Win.Code.Extensions.BitmapExt;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
-namespace ImageProcessing.App.PresentationLayer.Presenters.Main
+namespace ImageProcessing.App.PresentationLayer.Presenters
 {
     internal sealed class MainPresenter : BasePresenter<IMainView>,
           ISubscriber<AttachBlockToRendererEventArgs>,

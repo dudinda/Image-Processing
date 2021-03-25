@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace ImageProcessing.App.PresentationLayer.ViewModels.Distribution
+namespace ImageProcessing.App.PresentationLayer.ViewModels
 {
     public sealed class DistributionViewModel
     {

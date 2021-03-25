@@ -1,7 +1,7 @@
 using System.Collections.Concurrent;
 using System.Drawing;
 
-namespace ImageProcessing.App.PresentationLayer.ViewModels.QualityMeasure
+namespace ImageProcessing.App.PresentationLayer.ViewModels
 {
     internal sealed class QualityMeasureViewModel
     {

@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace ImageProcessing.App.PresentationLayer.ViewModels.ColorMatrix
+namespace ImageProcessing.App.PresentationLayer.ViewModels
 {
     internal sealed class ColorMatrixViewModel
     {

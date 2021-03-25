@@ -1,13 +1,12 @@
 using System.Threading.Tasks;
 
 using ImageProcessing.App.PresentationLayer.DomainEvents.RgbArgs;
-using ImageProcessing.App.PresentationLayer.Presenters.Rgb;
-using ImageProcessing.App.PresentationLayer.ViewModels.Rgb;
+using ImageProcessing.App.PresentationLayer.Presenters;
+using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views.Rgb;
 using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
-using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents.Wrappers.Presenters

@@ -6,7 +6,7 @@ using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
-namespace ImageProcessing.App.PresentationLayer.Presenters.Settings
+namespace ImageProcessing.App.PresentationLayer.Presenters
 {
     internal sealed class SettingsPresenter : BasePresenter<ISettingsView>,
         ISubscriber<ChangeLumaEventArgs>,
