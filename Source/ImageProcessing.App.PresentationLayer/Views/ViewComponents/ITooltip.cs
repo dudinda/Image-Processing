@@ -1,4 +1,4 @@
-namespace ImageProcessing.App.PresentationLayer.Views.ViewComponent.Error
+namespace ImageProcessing.App.PresentationLayer.Views.ViewComponents
 {
     /// <summary>
     /// Represents a view component with an error.

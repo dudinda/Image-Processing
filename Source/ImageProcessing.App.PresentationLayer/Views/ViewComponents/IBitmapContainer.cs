@@ -2,7 +2,7 @@ using System.Drawing;
 
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 
-namespace ImageProcessing.App.PresentationLayer.Views.ViewComponent.BitmapContainer
+namespace ImageProcessing.App.PresentationLayer.Views.ViewComponents
 {
     /// <summary>
     /// Represents a view component with bitmap containers.

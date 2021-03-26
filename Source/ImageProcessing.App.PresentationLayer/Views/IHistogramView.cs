@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.App.PresentationLayer.Views.ViewComponent.DataChart;
+using ImageProcessing.App.PresentationLayer.Views.ViewComponents;
 using ImageProcessing.Microkernel.MVP.View;
 
 namespace ImageProcessing.App.PresentationLayer.Views

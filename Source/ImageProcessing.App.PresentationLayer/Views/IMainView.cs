@@ -2,10 +2,7 @@ using System;
 using System.Drawing;
 
 using ImageProcessing.App.PresentationLayer.Code.Enums;
-using ImageProcessing.App.PresentationLayer.Views.ViewComponent.BitmapContainer;
-using ImageProcessing.App.PresentationLayer.Views.ViewComponent.BitmapZoom;
-using ImageProcessing.App.PresentationLayer.Views.ViewComponent.Cursor;
-using ImageProcessing.App.PresentationLayer.Views.ViewComponent.Error;
+using ImageProcessing.App.PresentationLayer.Views.ViewComponents;
 using ImageProcessing.Microkernel.MVP.View;
 
 namespace ImageProcessing.App.PresentationLayer.Views
@@ -15,8 +12,7 @@ namespace ImageProcessing.App.PresentationLayer.Views
     /// of the main window.
     /// </summary>
     public interface IMainView : IView, ITrackBarContainer,
-        ITooltip, IBitmapContainer,
-        ICursor, IDisposable
+        ITooltip, IBitmapContainer, ICursor, IDisposable
     {
         /// <summary>
         /// Set the path to the loaded image.
