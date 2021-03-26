@@ -12,15 +12,15 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
     {
         public Bitmap Resize(Bitmap src, double xScale, double yScale)
         {
-            if(yScale == 0 && xScale == 0) { return src; }
-
-            if (xScale <= -1) { throw new ArgumentException(nameof(xScale)); }
-            if (yScale <= -1) { throw new ArgumentException(nameof(yScale)); }
+            if(yScale == 0d && xScale == 0d) { return src; }
 
             var (srcWidth, srcHeight) = (src.Width, src.Height);
 
             var dstWidth  = srcWidth  + (int)(srcWidth  * xScale);
             var dstHeight = srcHeight + (int)(srcHeight * yScale);
+
+            if (dstWidth  <= 0) { throw new ArgumentException(nameof(xScale)); }
+            if (dstHeight <= 0) { throw new ArgumentException(nameof(yScale)); }
 
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
                 .DrawFilledRectangle(Brushes.White);
