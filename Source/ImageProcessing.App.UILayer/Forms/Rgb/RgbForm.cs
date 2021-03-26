@@ -64,7 +64,7 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
                  CursorPosition.GetCursorPosition()), 2000);
 
         /// <inheritdoc/>
-        public RgbChannels GetSelectedChannels(RgbChannels channel)
+        public RgbChannels GetSelectedChannels()
         {
             var result = Unknown;
 

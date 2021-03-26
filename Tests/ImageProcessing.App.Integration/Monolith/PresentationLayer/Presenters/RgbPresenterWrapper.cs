@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 
+using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.RgbArgs;
 using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.ViewModels;
@@ -19,15 +20,18 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
 
         public IRgbServiceProvider Provider { get; }
         public IAsyncOperationLocker Operation { get; }
+        public IRgbFilterFactory Factory { get; }
 
         public RgbPresenterWrapper(
             IRgbServiceProvider provider,
+            IRgbFilterFactory factory,
             IAsyncOperationLocker locker)
         {
             Provider = provider;
+            Factory = factory;
             Operation = locker;
 
-            _presenter = new RgbPresenter(provider, locker);
+            _presenter = new RgbPresenter(provider, factory, locker);
         }
 
         public override void Run(RgbViewModel vm)

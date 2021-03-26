@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Interface;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.RgbArgs;
@@ -26,13 +27,16 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
           ISubscriber<RestoreFocusEventArgs>
     {
         private readonly IRgbServiceProvider _provider;
+        private readonly IRgbFilterFactory _factory;
         private readonly IAsyncOperationLocker _locker;
 
         public RgbPresenter(
             IRgbServiceProvider provider,
+            IRgbFilterFactory factory,
             IAsyncOperationLocker locker) 
         {
             _provider = provider;
+            _factory = factory;
             _locker = locker;
         }
 
@@ -45,6 +49,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
 
                 if (filter != RgbFltr.Unknown)
                 {
+                    var color = View.GetSelectedChannels();
+
                     var copy = await _locker.LockOperationAsync(
                         () => new Bitmap(ViewModel.Source)
                     ).ConfigureAwait(true);
@@ -54,7 +60,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                         new AttachBlockToRendererEventArgs(
                             block: new PipelineBlock(copy)
                                 .Add<Bitmap, Bitmap>(
-                                    (bmp) => _provider.Apply(bmp, filter))
+                                    (bmp) => _factory.Get(color).Filter(bmp))
+                                .Add<Bitmap, Bitmap>(
+                                    (bmp) => _factory.Get(filter).Filter(bmp))
                         )
                      );
                 }
@@ -70,7 +78,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             try
             {
-                var color = View.GetSelectedChannels(e.Channel);
+                var color = View.GetSelectedChannels();
 
                 var copy = await _locker.LockOperationAsync(
                     () => new Bitmap(ViewModel.Source)

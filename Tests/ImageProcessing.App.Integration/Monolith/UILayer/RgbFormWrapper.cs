@@ -45,8 +45,8 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         public bool Focus()
             => _form.Focus();
         
-        public virtual RgbChannels GetSelectedChannels(RgbChannels color)
-            => _form.GetSelectedChannels(color);
+        public virtual RgbChannels GetSelectedChannels()
+            => _form.GetSelectedChannels();
 
         public virtual void Show()
         {

@@ -14,6 +14,6 @@ namespace ImageProcessing.App.PresentationLayer.Views
         /// Get a color combination from the
         /// rgb colors menu.
         /// </summary>
-        RgbChannels GetSelectedChannels(RgbChannels color);
+        RgbChannels GetSelectedChannels();
     }
 }
