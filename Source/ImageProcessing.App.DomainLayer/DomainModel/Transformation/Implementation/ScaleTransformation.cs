@@ -12,13 +12,12 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
     {
         public Bitmap Transform(Bitmap src, double sx, double sy)
         {
-            if (sx == 1 && sy == 1) { return src; }
+            if (sx == 1d && sy == 1d) { return src; }
 
-            if (sx <= -1 || sx == 0) { throw new ArgumentException(nameof(sx)); }
-            if (sy <= -1 || sy == 0) { throw new ArgumentException(nameof(sy)); }
+            var (dstWidth, dstHeight) = ((int)(src.Width * sx), (int)(src.Height * sy));
 
-            var dstWidth = src.Width + (int)(src.Width * sx);
-            var dstHeight = src.Height + (int)(src.Height * sy);
+            if (dstWidth  <= 0) { throw new ArgumentException(nameof(sx)); }
+            if (dstHeight <= 0) { throw new ArgumentException(nameof(sy)); }
 
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
                 .DrawFilledRectangle(Brushes.White);
@@ -50,7 +49,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 {
                     var srcY = y / sy;
 
-                    if (srcY < srcHeight && srcY >= 0)
+                    if (srcY < srcHeight && srcY >= 0d)
                     {
                         //get the address of a row
                         var dstRow = dstStartPtr +         y * dstData.Stride;
@@ -64,7 +63,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                         {
                             srcX = x / sx;
 
-                            if (srcX < srcWidth && srcX >= 0)
+                            if (srcX < srcWidth && srcX >= 0d)
                             {
                                 srcPtr = srcRow + (int)srcX * ptrStep;
 

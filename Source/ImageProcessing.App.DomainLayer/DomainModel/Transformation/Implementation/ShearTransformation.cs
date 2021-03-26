@@ -12,9 +12,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
     {
         public Bitmap Transform(Bitmap src, double shx, double shy)
         {
-            if (shx == 0 && shy == 0) { return src; }
+            if (shx == 0d && shy == 0d) { return src; }
 
-            if(shx * shy == 1) { throw new InvalidOperationException("det(A) is zero."); }
+            if(shx * shy == 1d) { throw new InvalidOperationException("det(A) is zero."); }
 
             var (srcWidth, srcHeight) = (src.Width, src.Height);
 
@@ -40,8 +40,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 
             var (tx, ty) = ((int)(shx * srcHeight), (int)(shy * srcWidth));
 
-            if(shx > 0) { tx = 0; }
-            if(shy > 0) { ty = 0; }
+            if(shx > 0d) { tx = 0; }
+            if(shy > 0d) { ty = 0; }
 
             unsafe
             {
@@ -53,7 +53,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 // if the offset is negative, then translate the
                 // destination back by inv(A)Bv = v'
                 // where B is a translation matrix
-                var detA = 1 - shx * shy;
+                var detA = 1d - shx * shy;
 
                 Parallel.For(0, dstHeight, options, y =>
                 {                 
@@ -79,8 +79,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                         srcX = (shiftX - shx * shiftY) / detA;
                         srcY = shiftY - shy * srcX;
                 
-                        if (srcX < srcWidth  && srcX >= 0 &&
-                            srcY < srcHeight && srcY >= 0)
+                        if (srcX < srcWidth  && srcX >= 0d &&
+                            srcY < srcHeight && srcY >= 0d)
                         {
                             srcPtr = srcStartPtr + (int)srcY * srcData.Stride + (int)srcX * ptrStep;
 

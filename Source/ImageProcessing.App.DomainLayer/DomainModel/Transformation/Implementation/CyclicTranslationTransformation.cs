@@ -12,7 +12,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
     {
         public Bitmap Transform(Bitmap src, double tx, double ty)
         {
-            if (tx == 0 && ty == 0) { return src; }
+            if (tx == 0d && ty == 0d) { return src; }
 
             var (srcWidth, srcHeight) = (src.Width, src.Height);
 
@@ -46,7 +46,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                     var srcY = y - ty;
 
                     //y' mod height
-                    if (srcY < 0 || srcY >= srcHeight)
+                    if (srcY < 0d || srcY >= srcHeight)
                     {
                         srcY = srcY - srcHeight * Math.Floor(srcY / srcHeight);
                     }
@@ -64,7 +64,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                         srcX = x - tx;
 
                         //x' mod width
-                        if (srcX < 0 || srcX >= srcWidth)
+                        if (srcX < 0d || srcX >= srcWidth)
                         {
                             srcX = srcX - srcWidth * Math.Floor(srcX / srcWidth);
                         }

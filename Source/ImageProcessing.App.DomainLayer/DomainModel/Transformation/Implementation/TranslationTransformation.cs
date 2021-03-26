@@ -12,7 +12,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
     {
         public Bitmap Transform(Bitmap src, double tx, double ty)
         {
-            if (tx == 0 && ty == 0) { return src; }
+            if (tx == 0d && ty == 0d) { return src; }
 
             var (srcWidth, srcHeight) = (src.Width, src.Height);
 
@@ -44,7 +44,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 {
                     var srcY = y - ty;
 
-                    if (srcY < srcHeight && srcY >= 0)
+                    if (srcY < srcHeight && srcY >= 0d)
                     {
                         //get the address of a row
                         var dstRow = dstStartPtr + y * dstData.Stride;
@@ -58,7 +58,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                         {
                             srcX = x - tx;
 
-                            if (srcX < srcWidth && srcX >= 0)
+                            if (srcX < srcWidth && srcX >= 0d)
                             {
                                 srcPtr = srcRow + (int)srcX * ptrStep;
 
