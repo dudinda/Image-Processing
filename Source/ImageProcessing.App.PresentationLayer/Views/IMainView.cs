@@ -15,6 +15,11 @@ namespace ImageProcessing.App.PresentationLayer.Views
         ITooltip, IBitmapContainer, ICursor, IDisposable
     {
         /// <summary>
+        /// Default an image inside an <see cref="ImageContainer"./>
+        /// </summary>
+        void SetDefaultImage(ImageContainer container);
+
+        /// <summary>
         /// Set the path to the loaded image.
         /// </summary>
         void SetPathToFile(string path);

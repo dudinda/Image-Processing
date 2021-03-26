@@ -294,12 +294,14 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             }        
         }
 
-        /// <inheritdoc cref="ZoomEventArgs"/>
+        /// <inheritdoc cref="TrackBarEventArgs"/>
         public async Task OnEventHandler(object publisher, TrackBarEventArgs e)
         {
+            var container = ImageContainer.Unknown;
+
             try
             {
-                var container = e.Container;
+                container = e.Container;
 
                 if (!View.ImageIsDefault(container))
                 {
@@ -318,6 +320,10 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                         container
                      ).ConfigureAwait(true);
                 }
+            }
+            catch(ArgumentException ex)
+            {
+                View.SetDefaultImage(container);
             }
             catch(Exception ex)
             {

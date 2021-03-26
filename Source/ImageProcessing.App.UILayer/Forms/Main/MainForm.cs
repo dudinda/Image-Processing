@@ -203,6 +203,10 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         }
 
         /// <inheritdoc/>
+        public void SetDefaultImage(ImageContainer container)
+            => _container.Get(container).OnElementExpose(this).SetImage(Default);
+
+        /// <inheritdoc/>
         public double GetZoomFactor(ImageContainer container)
             => _zoom.Get(container).OnElementExpose(this).GetFactor();
 
