@@ -134,7 +134,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 
                         point = yFrc * (yFrc * (a * yFrc + b) + c) + d;
 
-                        if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
+                        if (point > 255d) { point = 255d; } else if (point < 0d) { point = 0d; }
 
                         dstRow[0] = (byte)point;
 
@@ -172,7 +172,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 
                         point = yFrc * (yFrc * (a * yFrc + b) + c) + d;
 
-                        if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
+                        if (point > 255d) { point = 255d; } else if (point < 0d) { point = 0d; }
 
                         dstRow[1] = (byte)point;
 
@@ -210,7 +210,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 
                         point = yFrc * (yFrc * (a * yFrc + b) + c) + d;
 
-                        if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
+                        if (point > 255d) { point = 255d; } else if (point < 0d) { point = 0d; }
 
                         dstRow[2] = (byte)point;
                     }

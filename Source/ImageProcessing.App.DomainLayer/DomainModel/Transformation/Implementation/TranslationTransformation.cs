@@ -15,6 +15,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
             if (tx == 0d && ty == 0d) { return src; }
 
             var (srcWidth, srcHeight) = (src.Width, src.Height);
+            var (dSrcWidth, dSrcHeight) = ((double)srcWidth, (double)srcHeight);
 
             var dst = new Bitmap(srcWidth, srcHeight, src.PixelFormat)
               .DrawFilledRectangle(Brushes.White);
@@ -44,7 +45,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 {
                     var srcY = y - ty;
 
-                    if (srcY < srcHeight && srcY >= 0d)
+                    if (srcY < dSrcHeight && srcY >= 0d)
                     {
                         //get the address of a row
                         var dstRow = dstStartPtr + y * dstData.Stride;
@@ -58,7 +59,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                         {
                             srcX = x - tx;
 
-                            if (srcX < srcWidth && srcX >= 0d)
+                            if (srcX < dSrcWidth && srcX >= 0d)
                             {
                                 srcPtr = srcRow + (int)srcX * ptrStep;
 

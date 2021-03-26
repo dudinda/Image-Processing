@@ -12,7 +12,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
     {
         public Bitmap Rotate(Bitmap src, double rad)
         {
-            if (rad == 0) { return src; }
+            if (rad == 0d) { return src; }
 
             var (srcWidth, srcHeight) = (src.Width, src.Height);
 
@@ -28,6 +28,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
             var yMin = Math.Min(0, Math.Min(yUpRight, Math.Min(yDoRight, yDoLeft)));
 
             var (dstHeight, dstWidth) = ((int)(yMax - yMin), (int)(xMax - xMin));
+            var (dSrcWidth, dSrcHeight) = ((double)srcWidth, (double)srcHeight);
 
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
                .DrawFilledRectangle(Brushes.White);
@@ -75,8 +76,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                         srcX = cos * xShift - sin * yShift + xSrcCenter;
                         srcY = sin * xShift + cos * yShift + ySrcCenter;
 
-                        if (srcX < srcWidth  && srcX > 0 &&
-                            srcY < srcHeight && srcY > 0)
+                        if (srcX < dSrcWidth  && srcX > 0d &&
+                            srcY < dSrcHeight && srcY > 0d)
                         {
                             srcPtr = srcStartPtr + (int)srcY * srcData.Stride + (int)srcX * ptrStep;
 

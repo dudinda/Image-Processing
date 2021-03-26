@@ -42,6 +42,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 var dstStartPtr = (byte*)dstData.Scan0.ToPointer();
 
                 var (srcWidth, srcHeight) = (src.Width, src.Height);
+                var (dSrcWidth, dSrcHeight) = ((double)srcWidth, (double)srcHeight);
 
                 //inv(A)v = v'
                 // where A is a scale matrix
@@ -49,7 +50,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 {
                     var srcY = y / sy;
 
-                    if (srcY < srcHeight && srcY >= 0d)
+                    if (srcY < dSrcHeight && srcY >= 0d)
                     {
                         //get the address of a row
                         var dstRow = dstStartPtr +         y * dstData.Stride;
@@ -63,7 +64,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                         {
                             srcX = x / sx;
 
-                            if (srcX < srcWidth && srcX >= 0d)
+                            if (srcX < dSrcWidth && srcX >= 0d)
                             {
                                 srcPtr = srcRow + (int)srcX * ptrStep;
 

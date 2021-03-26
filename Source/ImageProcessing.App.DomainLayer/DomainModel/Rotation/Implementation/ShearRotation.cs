@@ -28,6 +28,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
             var yMin = Math.Min(0, Math.Min(yUpRight, Math.Min(yDoRight, yDoLeft)));
 
             var (dstHeight, dstWidth) = ((int)(yMax - yMin), (int)(xMax - xMin));
+            var (dSrcWidth, dSrcHeight) = ((double)srcWidth, (double)srcHeight);
 
             var (xCenter, yCenter) = ((dstWidth - 1) / 2.0, (dstHeight - 1) / 2.0);
             var (xSrcCenter, ySrcCenter) = ((srcWidth - 1) / 2.0, (srcHeight - 1) / 2.0);
@@ -96,8 +97,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                         srcX += alpha * srcY + xSrcCenter;
                         srcY += ySrcCenter;
 
-                        if (srcX < srcWidth  && srcX > 0 &&
-                            srcY < srcHeight && srcY > 0)
+                        if (srcX < dSrcWidth  && srcX > 0d &&
+                            srcY < dSrcHeight && srcY > 0d)
                         {
                             srcPtr = srcStartPtr + (int)srcY * srcData.Stride + (int)srcX * ptrStep;
 

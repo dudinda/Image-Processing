@@ -17,9 +17,10 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
             if(shx * shy == 1d) { throw new InvalidOperationException("det(A) is zero."); }
 
             var (srcWidth, srcHeight) = (src.Width, src.Height);
+            var (dSrcWidth, dSrcHeight) = ((double)srcWidth, (double)srcHeight);
 
-            var dstWidth = (int)(srcWidth + Math.Abs(shx) * srcHeight);
-            var dstHeight = (int)(srcHeight + Math.Abs(shy) * srcWidth);
+            var dstWidth = (int)(dSrcWidth + Math.Abs(shx) * dSrcHeight);
+            var dstHeight = (int)(dSrcHeight + Math.Abs(shy) * dSrcWidth);
 
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
               .DrawFilledRectangle(Brushes.White);
@@ -38,7 +39,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
-            var (tx, ty) = ((int)(shx * srcHeight), (int)(shy * srcWidth));
+            var (tx, ty) = ((int)(shx * dSrcHeight), (int)(shy * dSrcWidth));
 
             if(shx > 0d) { tx = 0; }
             if(shy > 0d) { ty = 0; }
@@ -79,8 +80,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                         srcX = (shiftX - shx * shiftY) / detA;
                         srcY = shiftY - shy * srcX;
                 
-                        if (srcX < srcWidth  && srcX >= 0d &&
-                            srcY < srcHeight && srcY >= 0d)
+                        if (srcX < dSrcWidth  && srcX >= 0d &&
+                            srcY < dSrcHeight && srcY >= 0d)
                         {
                             srcPtr = srcStartPtr + (int)srcY * srcData.Stride + (int)srcX * ptrStep;
 

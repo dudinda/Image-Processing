@@ -12,7 +12,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
     {
         public Bitmap Rotate(Bitmap src, double rad)
         {
-            if(rad == 0) { return src; }
+            if(rad == 0d) { return src; }
 
             var (srcWidth, srcHeight) = (src.Width, src.Height);
 
@@ -100,15 +100,15 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                             p00 = i0 + j0; p01 = i0 + j1;
                             p10 = i1 + j0; p11 = i1 + j1;
 
-                            xFracCompl = 1 - xFrac;
-                            yFracCompl = 1 - yFrac;
+                            xFracCompl = 1d - xFrac;
+                            yFracCompl = 1d - yFrac;
 
                             col0 = p00[0] * xFracCompl + p10[0] * xFrac;
                             col1 = p01[0] * xFracCompl + p11[0] * xFrac;
 
                             point = col0 * yFracCompl + col1 * yFrac;
 
-                            if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
+                            if (point > 255d) { point = 255d; } else if (point < 0d) { point = 0d; }
 
                             dstPtr[0] = (byte)point;
 
@@ -117,7 +117,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 
                             point = col0 * yFracCompl + col1 * yFrac;
 
-                            if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
+                            if (point > 255d) { point = 255d; } else if (point < 0d) { point = 0d; }
 
                             dstPtr[1] = (byte)point;
 
@@ -126,7 +126,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 
                             point = col0 * yFracCompl + col1 * yFrac;
 
-                            if (point > 255) { point = 255; } else if (point < 0) { point = 0; }
+                            if (point > 255d) { point = 255d; } else if (point < 0d) { point = 0d; }
 
                             dstPtr[2] = (byte)point;
                         }
