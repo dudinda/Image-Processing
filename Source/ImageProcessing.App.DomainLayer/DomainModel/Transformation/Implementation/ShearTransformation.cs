@@ -44,6 +44,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
             if(shx > 0d) { tx = 0; }
             if(shy > 0d) { ty = 0; }
 
+            var (srcStride, dstStride) = (srcData.Stride, dstData.Stride);
+
             unsafe
             {
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
@@ -59,7 +61,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 Parallel.For(0, dstHeight, options, y =>
                 {                 
                     //get the address of a row
-                    var dstRow = dstStartPtr + y *dstData.Stride;
+                    var dstRow = dstStartPtr + y * dstStride;
 
                     int shiftX, shiftY;
 
@@ -83,7 +85,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                         if (srcX < dSrcWidth  && srcX >= 0d &&
                             srcY < dSrcHeight && srcY >= 0d)
                         {
-                            srcPtr = srcStartPtr + (int)srcY * srcData.Stride + (int)srcX * ptrStep;
+                            srcPtr = srcStartPtr + (int)srcY * srcStride + (int)srcX * ptrStep;
 
                             dstRow[0] = srcPtr[0];
                             dstRow[1] = srcPtr[1];

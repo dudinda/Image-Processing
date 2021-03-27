@@ -41,13 +41,14 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
             unsafe
             {
                 var startPtr = (byte*)bitmapData.Scan0.ToPointer();
+                var stride = bitmapData.Stride;
 
                 var bag = new ConcurrentBag<double>();
 
                 //get N luminance partial sums
                 Parallel.For(0, height, options, () => 0.0, (y, state, partial) =>
                 {
-                    var ptr = startPtr + y * bitmapData.Stride;
+                    var ptr = startPtr + y * stride;
 
                     for (var x = 0; x < width; ++x, ptr += ptrStep)
                     {
@@ -65,7 +66,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
 
                 Parallel.For(0, height, options, y =>
                 {
-                    var ptr = startPtr + y * bitmapData.Stride;
+                    var ptr = startPtr + y * stride;
 
                     for (var x = 0; x < width; ++x, ptr += ptrStep)
                     {

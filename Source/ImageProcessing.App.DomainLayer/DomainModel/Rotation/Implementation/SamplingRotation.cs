@@ -45,6 +45,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                 ImageLockMode.WriteOnly, dst.PixelFormat);
 
             var ptrStep = src.GetBitsPerPixel() / 8;
+            var (srcStride, dstStride) = (srcData.Stride, dstData.Stride);
+
             var options = new ParallelOptions()
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount
@@ -61,7 +63,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                 Parallel.For(0, dstHeight, options, y =>
                 {
                     //get the address of a row
-                    var dstRow = dstStartPtr + y * dstData.Stride;
+                    var dstRow = dstStartPtr + y * dstStride;
 
                     var yShift = y - yCenter;
 
@@ -79,7 +81,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                         if (srcX < dSrcWidth  && srcX > 0d &&
                             srcY < dSrcHeight && srcY > 0d)
                         {
-                            srcPtr = srcStartPtr + (int)srcY * srcData.Stride + (int)srcX * ptrStep;
+                            srcPtr = srcStartPtr + (int)srcY * srcStride + (int)srcX * ptrStep;
 
                             dstRow[0] = srcPtr[0];
                             dstRow[1] = srcPtr[1];

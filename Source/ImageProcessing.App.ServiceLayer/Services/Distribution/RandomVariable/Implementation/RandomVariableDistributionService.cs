@@ -37,14 +37,14 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
             {
                 if (distribution.Quantile(cdf[index], out var pixel))
                 {
-                    if (pixel > 255)
+                    if (pixel > 255M)
                     {
-                        pixel = 255;
+                        pixel = 255M;
                     }
 
-                    if (pixel < 0)
+                    if (pixel < 0M)
                     {
-                        pixel = 0;
+                        pixel = 0M;
                     }
                 }
 
@@ -58,7 +58,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         public decimal GetExpectation(decimal[] pmf)
         {
             Contract.Requires(
-                pmf.Any(value => value > 0),
+                pmf.Any(value => value > 0M),
                 RandomVariableErrors.PmfIsPositive);
 
             Contract.Requires(
@@ -79,7 +79,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         public decimal GetVariance(decimal[] pmf)
         {
             Contract.Requires(
-                pmf.Any(value => value > 0),
+                pmf.Any(value => value > 0M),
                 RandomVariableErrors.PmfIsPositive);
 
             Contract.Requires(
@@ -102,7 +102,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         public decimal GetStandardDeviation(decimal[] pmf)
         {
             Contract.Requires(
-                pmf.Any(value => value > 0),
+                pmf.Any(value => value > 0M),
                 RandomVariableErrors.PmfIsPositive);
 
             Contract.Requires(
@@ -116,7 +116,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         public decimal GetConditionalExpectation((int x1, int x2) interval, decimal[] pmf)
         {
             Contract.Requires(
-                pmf.Any(value => value > 0),
+                pmf.Any(value => value > 0M),
                 RandomVariableErrors.PmfIsPositive);
 
             Contract.Requires(
@@ -144,7 +144,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         public decimal GetConditionalVariance((int x1, int x2) interval, decimal[] frequencies)
         {
             Contract.Requires(
-                frequencies.Any(value => value > 0),
+                frequencies.Any(value => value > 0M),
                 RandomVariableErrors.FrequenciesNotPositive);
 
             var mean = GetConditionalExpectation(interval, frequencies);
@@ -170,7 +170,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         public decimal[] GetCDF(decimal[] pmf)
         {
             Contract.Requires(
-                pmf.Any(value => value > 0),
+                pmf.Any(value => value > 0M),
                 RandomVariableErrors.PmfIsPositive);
 
             Contract.Requires(
@@ -183,9 +183,9 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
             {
                 cdf[x] += cdf[x - 1];
 
-                if (cdf[x] > 1)
+                if (cdf[x] > 1M)
                 {
-                    cdf[x] = 1;
+                    cdf[x] = 1M;
                 }
             }
 
@@ -196,7 +196,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         public decimal[] GetPMF(int[] frequencies)
         {
             Contract.Requires(
-                frequencies.Any(value => value > 0),
+                frequencies.Any(value => value > 0M),
                 RandomVariableErrors.FrequenciesNotPositive);
 
             var total = frequencies.Sum();
@@ -209,7 +209,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         public decimal GetEntropy(decimal[] pmf)
         {
             Contract.Requires(
-                pmf.Any(value => value > 0),
+                pmf.Any(value => value > 0M),
                 RandomVariableErrors.PmfIsPositive);
 
             Contract.Requires(

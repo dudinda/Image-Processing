@@ -34,6 +34,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
+            var (srcStride, dstStride) = (srcData.Stride, dstData.Stride);
+
             //inv(A)v  = v',
             //where A is a translation matrix
             // and v' = (x' mod width, y' mod height) 
@@ -53,8 +55,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                     }
 
                     //get the address of a row
-                    var srcRow = srcStartPtr + (int)srcY * srcData.Stride;
-                    var dstRow = dstStartPtr +         y * dstData.Stride;
+                    var srcRow = srcStartPtr + (int)srcY * srcStride;
+                    var dstRow = dstStartPtr +         y * dstStride;
 
                     double srcX;
 

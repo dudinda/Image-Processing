@@ -50,6 +50,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
             };
 
             var (xBound, yBound) = (srcWidth - 2, srcHeight - 2);
+            var (srcStride, dstStride) = (srcData.Stride, dstData.Stride);
 
             //inv( T(x, y)S(alpha)inv(T(x', y')) )v = v'
             //where x and y are the center of a destination and x' and y' are the
@@ -62,7 +63,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                 Parallel.For(0, dstHeight, options, y =>
                 {
                     //get the address of a row
-                    var dstPtr = dstStartPtr + y * dstData.Stride;
+                    var dstPtr = dstStartPtr + y * dstStride;
 
                     var yShift = y - yCenter;
 
@@ -89,13 +90,15 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                         yFrac = newY - yFloor;
 
                         if (xFloor < xBound  && xFloor > 0 &&
-                            yFloor < yBound && yFloor > 0)
+                            yFloor < yBound  && yFloor > 0)
                         {
-                            i0 = srcStartPtr + yFloor       * srcData.Stride;
-                            i1 = srcStartPtr + (yFloor + 1) * srcData.Stride;
+                            i0 = srcStartPtr + yFloor * srcStride;
+                            //srcStartPtr + (yFloor + 1) * srcStride
+                            i1 = i0 + srcStride;
 
                             j0 = xFloor * ptrStep;
-                            j1 = (xFloor + 1) * ptrStep;
+                            // (xFloor + 1) * ptrStep
+                            j1 = j0 + ptrStep;
 
                             p00 = i0 + j0; p01 = i0 + j1;
                             p10 = i1 + j0; p11 = i1 + j1;

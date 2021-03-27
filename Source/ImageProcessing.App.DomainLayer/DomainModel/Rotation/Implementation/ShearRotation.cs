@@ -12,7 +12,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
     {
         public Bitmap Rotate(Bitmap src, double rad)
         {
-            if(rad == 0) { return src; }
+            if(rad == 0d) { return src; }
 
             var (srcWidth, srcHeight) = (src.Width, src.Height);
 
@@ -45,7 +45,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 
             // inv(Sh(a, 0)) = Sh(-a , 0)
             // inv(Sh(0, b)) = Sh(0, -b)
-            var alpha = -Math.Tan(rad / 2);
+            var alpha = -Math.Tan(rad / 2d);
             var beta  = Math.Sin(rad);
 
             var srcData = src.LockBits(
@@ -57,6 +57,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                 ImageLockMode.WriteOnly, dst.PixelFormat);
 
             var ptrStep = src.GetBitsPerPixel() / 8;
+            var (srcStride, dstStride) = (srcData.Stride, dstData.Stride);
+
             var options = new ParallelOptions()
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount
@@ -74,7 +76,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                 Parallel.For(0, dstHeight, options, y =>
                 {
                     //get the address of a row
-                    var dstRow = dstStartPtr + y * dstData.Stride;
+                    var dstRow = dstStartPtr + y * dstStride;
 
                     var yShift = y - yCenter;
 
@@ -100,7 +102,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                         if (srcX < dSrcWidth  && srcX > 0d &&
                             srcY < dSrcHeight && srcY > 0d)
                         {
-                            srcPtr = srcStartPtr + (int)srcY * srcData.Stride + (int)srcX * ptrStep;
+                            srcPtr = srcStartPtr + (int)srcY * srcStride + (int)srcX * ptrStep;
 
                             dstRow[0] = srcPtr[0];
                             dstRow[1] = srcPtr[1];
@@ -115,7 +117,5 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 
             return dst;
         }
-            
-        
     }
 }

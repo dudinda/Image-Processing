@@ -25,14 +25,15 @@ namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
                 new Rectangle(0, 0, source.Width, source.Height),
                 ImageLockMode.WriteOnly, destination.PixelFormat);
 
-            var size = source.Size;
+            var (width, height) = (source.Width, source.Height);
             var ptrStep = source.GetBitsPerPixel() / 8;
 
             unsafe
             {
                 var sourceStartPtr      = (byte*)sourceBitmapData.Scan0.ToPointer();
                 var destinationStartPtr = (byte*)destinationBitmapData.Scan0.ToPointer();
-                
+                var (srcStride, dstStride) = (sourceBitmapData.Stride, destinationBitmapData.Stride);
+
                 var kernelOffset = (byte)((filter.Kernel.ColumnCount - 1) / 2);
 
                 var options = new ParallelOptions()
@@ -40,21 +41,21 @@ namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
                     MaxDegreeOfParallelism = Environment.ProcessorCount
                 };
 
-                Parallel.For(kernelOffset, size.Height - kernelOffset, options, y =>
+                Parallel.For(kernelOffset, height - kernelOffset, options, y =>
                 {
                     //get the address of a new line, considering a kernel offset
-                    var sourcePtr      = sourceStartPtr      + y * sourceBitmapData.Stride      + kernelOffset * ptrStep;
-                    var destinationPtr = destinationStartPtr + y * destinationBitmapData.Stride + kernelOffset * ptrStep;
+                    var sourcePtr      = sourceStartPtr      + y * srcStride + kernelOffset * ptrStep;
+                    var destinationPtr = destinationStartPtr + y * dstStride + kernelOffset * ptrStep;
 
                     //accumulators of R, G, B components 
                     double r, g, b;
                     //a pointer, which gets addresses of elements in the radius of a convolution kernel
-                    byte* elementPtr = null;
+                    byte* elementPtr;
 
-                    for (int x = kernelOffset; x < size.Width - kernelOffset; ++x, sourcePtr += ptrStep, destinationPtr += ptrStep)
+                    for (int x = kernelOffset; x < width - kernelOffset; ++x, sourcePtr += ptrStep, destinationPtr += ptrStep)
                     {
                         //set accumulators to 0
-                        r = 0; g = 0; b = 0;
+                        r = 0d; g = 0d; b = 0d;
 
                         for (var kernelRow = -kernelOffset; kernelRow <= kernelOffset; ++kernelRow)
                         {
@@ -74,9 +75,9 @@ namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
                         g = g * filter.Factor + filter.Bias;
                         r = r * filter.Factor + filter.Bias;
 
-                        if (b > 255) { b = 255; } else if (b < 0) { b = 0; }
-                        if (g > 255) { g = 255; } else if (g < 0) { g = 0; }
-                        if (r > 255) { r = 255; } else if (r < 0) { r = 0; }
+                        if (b > 255d) { b = 255d; } else if (b < 0d) { b = 0d; }
+                        if (g > 255d) { g = 255d; } else if (g < 0d) { g = 0d; }
+                        if (r > 255d) { r = 255d; } else if (r < 0d) { r = 0d; }
 
                         destinationPtr[0] = (byte)b;
                         destinationPtr[1] = (byte)g;

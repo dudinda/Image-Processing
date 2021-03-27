@@ -25,16 +25,17 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
+            var stride = bitmapData.Stride;
+            var endStride = stride - ptrStep;
+
             unsafe
             {
                 var startPtr = (byte*)bitmapData.Scan0.ToPointer();
-
-                var endStride = bitmapData.Stride - ptrStep;
-
+                
                 Parallel.For(0, height, options, y =>
                 {
                     //get the address of a row
-                    var start = startPtr + y * bitmapData.Stride;
+                    var start = startPtr + y * stride;
                     var end = start + endStride;
 
                     do

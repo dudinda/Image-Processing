@@ -45,6 +45,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                 var dstStartPtr = (byte*)dstData.Scan0.ToPointer();
 
                 var (xBound, yBound) = (srcWidth - 3, srcHeight - 3);
+                var (srcStride, dstStride) = (srcData.Stride, dstData.Stride);
 
                 var dy = srcHeight / (double)dstHeight;
                 var dx = srcWidth / (double)dstWidth;
@@ -58,12 +59,13 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                     if (yFlr <= 0) { yFlr = 1; } else if (yFlr > yBound) { yFlr = yBound; }
 
                     //get the address of a row
-                    var dstRow = dstStartPtr + y * dstData.Stride;
+                    var dstRow = dstStartPtr + y * dstStride;
 
-                    var i0 = srcStartPtr + (yFlr - 1) * srcData.Stride;
-                    var i1 = srcStartPtr +  yFlr      * srcData.Stride;
-                    var i2 = srcStartPtr + (yFlr + 1) * srcData.Stride;
-                    var i3 = srcStartPtr + (yFlr + 2) * srcData.Stride;
+                    var i0 = srcStartPtr + (yFlr - 1) * srcStride;
+                    //srcStartPtr + yFlr * srcStide
+                    var i1 = i0 + srcStride;
+                    var i2 = i1 + srcStride;
+                    var i3 = i2 + srcStride;
 
                     double point, newX, xFrc,
                            p0, p1, p2, p3,
@@ -86,9 +88,10 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                         if (xFlr <= 0) { xFlr = 1; } else if (xFlr > xBound ) { xFlr = xBound; }
 
                         j0 = (xFlr - 1) * ptrStep;
-                        j1 =  xFlr      * ptrStep;
-                        j2 = (xFlr + 1) * ptrStep;
-                        j3 = (xFlr + 2) * ptrStep;
+                        //xFlr * ptrStrp
+                        j1 = j0 + ptrStep;
+                        j2 = j1 + ptrStep;
+                        j3 = j2 + ptrStep;
 
                         p00 = i0 + j0; p01 = i0 + j1; p02 = i0 + j2; p03 = i0 + j3;
                         p10 = i1 + j0; p11 = i1 + j1; p12 = i1 + j2; p13 = i1 + j3;

@@ -44,14 +44,16 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
                 var dstStartPtr = (byte*)dstData.Scan0.ToPointer();
 
+                var (srcStride, dstStride) = (srcData.Stride, dstData.Stride);
+
                 var dy = srcHeight / (double)dstHeight;
                 var dx = srcWidth  / (double)dstWidth;
 
                 Parallel.For(0, dstHeight, options, y =>
                 {
                     //get the address of a row
-                    var dstRow = dstStartPtr + y * dstData.Stride;
-                    var srcRow = srcStartPtr + (int)(y * dy) * srcData.Stride;
+                    var dstRow = dstStartPtr + y             * dstStride;
+                    var srcRow = srcStartPtr + (int)(y * dy) * srcStride;
 
                     byte* srcPtr;
      

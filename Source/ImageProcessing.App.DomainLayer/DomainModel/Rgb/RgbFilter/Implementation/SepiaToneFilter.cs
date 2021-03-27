@@ -23,6 +23,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
+            var stride = bitmapData.Stride;
+
             unsafe
             {
                 var startPtr = (byte*)bitmapData.Scan0.ToPointer();
@@ -30,17 +32,19 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
                 Parallel.For(0, height, options, y =>
                 {
                     //get the address of a row
-                    var ptr = startPtr + y * bitmapData.Stride;
+                    var ptr = startPtr + y * stride;
+
                     double r, g, b;
-                    for (int x = 0; x < width; ++x, ptr += ptrStep)
+
+                    for (var x = 0; x < width; ++x, ptr += ptrStep)
                     {
                         r = ptr[2] * 0.393 + ptr[1] * 0.769 + ptr[0] * 0.189;
                         g = ptr[2] * 0.349 + ptr[1] * 0.686 + ptr[0] * 0.168;
                         b = ptr[2] * 0.272 + ptr[1] * 0.534 + ptr[0] * 0.131;
 
-                        if (b > 255) { b = 255; }
-                        if (g > 255) { g = 255; } 
-                        if (r > 255) { r = 255; }
+                        if (b > 255d) { b = 255d; }
+                        if (g > 255d) { g = 255d; } 
+                        if (r > 255d) { r = 255d; }
 
                         ptr[2] = (byte)r; ptr[1] = (byte)g; ptr[0] = (byte)b;
                     }
