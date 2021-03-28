@@ -89,8 +89,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                         xFrac = newX - xFloor;
                         yFrac = newY - yFloor;
 
-                        if (xFloor < xBound  && xFloor > 0 &&
-                            yFloor < yBound  && yFloor > 0)
+                        if (xFloor < xBound  && xFloor >= 0 &&
+                            yFloor < yBound  && yFloor >= 0)
                         {
                             i0 = srcStartPtr + yFloor * srcStride;
                             //srcStartPtr + (yFloor + 1) * srcStride

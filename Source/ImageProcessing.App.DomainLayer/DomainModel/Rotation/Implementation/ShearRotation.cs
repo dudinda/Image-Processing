@@ -99,8 +99,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                         srcX += alpha * srcY + xSrcCenter;
                         srcY += ySrcCenter;
 
-                        if (srcX < dSrcWidth  && srcX > 0d &&
-                            srcY < dSrcHeight && srcY > 0d)
+                        if (srcX < dSrcWidth  && srcX >= 0d &&
+                            srcY < dSrcHeight && srcY >= 0d)
                         {
                             srcPtr = srcStartPtr + (int)srcY * srcStride + (int)srcX * ptrStep;
 
