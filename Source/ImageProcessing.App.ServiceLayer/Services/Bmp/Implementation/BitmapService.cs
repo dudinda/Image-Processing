@@ -30,7 +30,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
 
             var size = bitmap.Size;
             var ptrStep = bitmap. GetBitsPerPixel() / 8;
-
+            var stride = bitmapData.Stride;
             var options = new ParallelOptions()
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount
@@ -44,7 +44,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
 
                 Parallel.For(0, dstHeight, options, y =>
                 {
-                    var ptr = startPtr + y * bitmapData.Stride;
+                    var ptr = startPtr + y * stride;
 
                     for (int x = 0; x < dstWidth; ++x, ptr += ptrStep)
                     {
@@ -70,12 +70,14 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
 
             var size = result.Size;
             var ptrStep = bitmap.GetBitsPerPixel() / 8;
+            var stride = resultData.Stride;
+            var options = new ParallelOptions()
+            {
+                MaxDegreeOfParallelism = Environment.ProcessorCount
+            };
 
             unsafe
             {
-                var options = new ParallelOptions();
-                options.MaxDegreeOfParallelism = Environment.ProcessorCount;
-
                 //get a pointer to the start of an image
                 var startPtr = (byte*)resultData.Scan0.ToPointer();
 
@@ -86,7 +88,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
                 //take N partial sums
                 Parallel.For<byte>(0, dstHeight, options, () => 0, (y, state, max) =>
                 {
-                    var ptr = startPtr + y * resultData.Stride;
+                    var ptr = startPtr + y * stride;
 
                     for (var x = 0; x < dstWidth; ++x, ptr += ptrStep)
                     {
@@ -114,14 +116,14 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
 
             var size = result.Size;
             var ptrStep = bitmap.GetBitsPerPixel() / 8;
+            var stride = resultData.Stride;
+            var options = new ParallelOptions()
+            {
+                MaxDegreeOfParallelism = Environment.ProcessorCount
+            };
 
             unsafe
             {
-                var options = new ParallelOptions()
-                {
-                    MaxDegreeOfParallelism = Environment.ProcessorCount
-                };
-
                 var startPtr = (byte*)resultData.Scan0.ToPointer();
 
                 var bag = new ConcurrentBag<byte>();
@@ -130,7 +132,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
 
                 Parallel.For<byte>(0, dstHeight, options, () => 255, (y, state, min) =>
                 {
-                    var ptr = startPtr + y * resultData.Stride;
+                    var ptr = startPtr + y * stride;
 
                     for (var x = 0; x < dstWidth; ++x, ptr += ptrStep)
                     {
@@ -212,6 +214,9 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
             var size = result.Size;
             var ptrStep = result.GetBitsPerPixel() / 8;
 
+            var (yStride, xStride) = (yDerivativeData.Stride, xDerivativeData.Stride);
+            var stride = resultData.Stride;
+
             unsafe
             {
                 var xDerivativeStartPtr = (byte*)xDerivativeData.Scan0.ToPointer();
@@ -227,9 +232,9 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
 
                 Parallel.For(0, dstHeight, options, y =>
                 {
-                    var resultPtr      = resultStartPtr      + y * resultData.Stride;
-                    var xDerivativePtr = xDerivativeStartPtr + y * xDerivativeData.Stride;
-                    var yDerivativePtr = yDerivativeStartPtr + y * yDerivativeData.Stride;
+                    var resultPtr      = resultStartPtr      + y * stride;
+                    var xDerivativePtr = xDerivativeStartPtr + y * xStride;
+                    var yDerivativePtr = yDerivativeStartPtr + y * yStride;
 
                     for (var x = 0; x < dstWidth; ++x, resultPtr += ptrStep, xDerivativePtr += ptrStep, yDerivativePtr += ptrStep)
                     {
@@ -238,9 +243,9 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
 
                         var magnitude = Math.Sqrt(Gx * Gx + Gy * Gy);
 
-                        if (magnitude > 255)
+                        if (magnitude > 255d)
                         {
-                            magnitude = 255;
+                            magnitude = 255d;
                         }
 
                         resultPtr[0] = resultPtr[1] = resultPtr[2] = (byte)magnitude;

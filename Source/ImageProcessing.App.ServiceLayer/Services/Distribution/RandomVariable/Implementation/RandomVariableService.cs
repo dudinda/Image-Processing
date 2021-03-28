@@ -10,8 +10,8 @@ using ImageProcessing.Utility.DecimalMath.RealAxis;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Implementation
 {
-    /// <inheritdoc cref="IRandomVariableDistributionService"/>
-    public sealed class RandomVariableDistributionService : IRandomVariableDistributionService
+    /// <inheritdoc cref="IRandomVariableService"/>
+    public sealed class RandomVariableService : IRandomVariableService
     {
         /// <inheritdoc/>
         public decimal[] TransformToDecimal(decimal[] cdf, IDistribution distribution)
@@ -134,7 +134,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
 
             if (uvalue == 0.0M && lvalue == 0.0M)
             {
-                return 0;
+                return 0M;
             }
 
             return uvalue / lvalue;
@@ -160,7 +160,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
 
             if(uvalue == 0.0M && lvalue == 0.0M)
             {
-                return 0;
+                return 0M;
             }
 
             return uvalue / lvalue;

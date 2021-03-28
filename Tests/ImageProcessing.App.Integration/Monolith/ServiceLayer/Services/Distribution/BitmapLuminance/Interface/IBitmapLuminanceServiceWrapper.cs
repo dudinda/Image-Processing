@@ -3,7 +3,7 @@ using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Int
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distribution.BitmapLuminance.Interface
 {
-    internal interface IBitmapLuminanceServiceWrapper : IBitmapLuminanceDistributionService
+    internal interface IBitmapLuminanceServiceWrapper : IBitmapLuminanceService
     {
 
     }

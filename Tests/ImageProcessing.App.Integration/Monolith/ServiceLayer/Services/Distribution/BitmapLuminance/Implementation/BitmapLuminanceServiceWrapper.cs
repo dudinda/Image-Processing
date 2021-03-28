@@ -9,9 +9,9 @@ namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distrib
 {
     internal class BitmapLuminanceServiceWrapper : IBitmapLuminanceServiceWrapper
     {
-        private readonly IBitmapLuminanceDistributionService _service;
+        private readonly IBitmapLuminanceService _service;
 
-        public BitmapLuminanceServiceWrapper(IBitmapLuminanceDistributionService service)
+        public BitmapLuminanceServiceWrapper(IBitmapLuminanceService service)
         {
             _service = service;
         }

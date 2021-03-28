@@ -14,13 +14,13 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistri
     public sealed class BitmapLuminanceServiceProvider
         : IBitmapLuminanceServiceProvider
     {
-        private readonly IBitmapLuminanceDistributionService _service;
+        private readonly IBitmapLuminanceService _service;
         private readonly IDistributionFactory _factory;
         private readonly IBitmapLuminanceVisitor _visitor;
         private readonly IBitmapLuminanceVisitableFactory _info;
 
         public BitmapLuminanceServiceProvider(
-            IBitmapLuminanceDistributionService service,
+            IBitmapLuminanceService service,
             IBitmapLuminanceVisitableFactory info,
             IBitmapLuminanceVisitor visitor,
             IDistributionFactory factory)

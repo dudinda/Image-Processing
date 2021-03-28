@@ -12,12 +12,12 @@ using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.
 
 namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Implementation
 {
-    /// <see cref="IBitmapLuminanceDistributionService"/>
-    public sealed class BitmapLuminanceDistributionService : IBitmapLuminanceDistributionService
+    /// <see cref="IBitmapLuminanceService"/>
+    public sealed class BitmapLuminanceService : IBitmapLuminanceService
     {
-        private readonly IRandomVariableDistributionService _service;
+        private readonly IRandomVariableService _service;
 
-        public BitmapLuminanceDistributionService(IRandomVariableDistributionService service)
+        public BitmapLuminanceService(IRandomVariableService service)
             => _service = service;
         
         /// <inheritdoc />
@@ -39,7 +39,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
 
             var ptrStep = bitmap.GetBitsPerPixel() / 8;
             var size = bitmap.Size;
-
+            var stride = bitmapData.Stride;
             var (dstWidth, dstHeight) = (size.Width, size.Height);
 
             unsafe
@@ -49,7 +49,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
                 Parallel.For(0, dstHeight, options, y =>
                 {
                     //get a start address
-                    var ptr = startPtr + y * bitmapData.Stride;
+                    var ptr = startPtr + y * stride;
 
                     for (int x = 0; x < dstWidth; ++x, ptr += ptrStep)
                     {
@@ -66,31 +66,23 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
 
         /// <inheritdoc />
         public decimal[] GetPMF(Bitmap bitmap)
-            => _service.GetPMF(
-                GetFrequencies(bitmap)
-            );
+            => _service.GetPMF(GetFrequencies(bitmap));
 
         /// <inheritdoc />
         public decimal[] GetCDF(Bitmap bitmap)
-            => _service.GetCDF(
-                GetPMF(bitmap)
-            );
+            => _service.GetCDF(GetPMF(bitmap));
 
         /// <inheritdoc />
         public decimal GetExpectation(Bitmap bitmap)
             => _service.GetExpectation(
-                   _service.GetPMF(
-                       GetFrequencies(bitmap)
-                   )
+                   _service.GetPMF(GetFrequencies(bitmap))
             );
 
         /// <inheritdoc />
         public decimal GetVariance(Bitmap bitmap)
             => _service.GetVariance(
-                   _service.GetPMF(
-                       GetFrequencies(bitmap)
-               )
-           );
+                   _service.GetPMF(GetFrequencies(bitmap))
+            );
 
         /// <inheritdoc />
         public int[] GetFrequencies(Bitmap bitmap)
@@ -107,7 +99,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
                 var size = bitmap.Size;
 
                 var (dstWidth, dstHeight) = (size.Width, size.Height);
-
+                var stride = bitmapData.Stride;
                 var options = new ParallelOptions()
                 {
                     MaxDegreeOfParallelism = Environment.ProcessorCount
@@ -120,7 +112,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
                 //get N partial frequency arrays
                 Parallel.For(0, dstHeight, options, () => new int[256], (y, state, partial) =>
                 {
-                    var ptr = startPtr + y * bitmapData.Stride;
+                    var ptr = startPtr + y * stride;
 
                     for (int x = 0; x < dstWidth; ++x, ptr += ptrStep)
                     {
@@ -149,9 +141,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
         /// <inheritdoc />
         public decimal GetEntropy(Bitmap bitmap)
             => _service.GetEntropy(
-                   _service.GetPMF(
-                       GetFrequencies(bitmap)
-               )
+                   _service.GetPMF(GetFrequencies(bitmap))
             );
 
         /// <inheritdoc />
@@ -160,14 +150,10 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
         
         /// <inheritdoc />
         public decimal GetConditionalExpectation((int x1, int x2) interval, Bitmap bitmap)
-            => _service.GetConditionalExpectation(interval,
-                   GetPMF(bitmap)
-            );
+            => _service.GetConditionalExpectation(interval, GetPMF(bitmap));
 
         /// <inheritdoc />
         public decimal GetConditionalVariance((int x1, int x2) interval, Bitmap bitmap)
-            => _service.GetConditionalVariance(interval,
-                   GetPMF(bitmap)
-            );
+            => _service.GetConditionalVariance(interval, GetPMF(bitmap));
     }
 }

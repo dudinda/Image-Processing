@@ -12,11 +12,11 @@ namespace ImageProcessing.App.ServiceLayer.Services.QualityMeasure.Implementatio
 {
     public sealed class QualityMeasureService : IQualityMeasureService
     {
-        private readonly IBitmapLuminanceDistributionService _distributionService;
+        private readonly IBitmapLuminanceService _distributionService;
         private readonly IChartSeriesBuilder _builder;
 
         public QualityMeasureService(
-            IBitmapLuminanceDistributionService distibutionService,
+            IBitmapLuminanceService distibutionService,
             IChartSeriesBuilder builder)
         {
             _distributionService = distibutionService;

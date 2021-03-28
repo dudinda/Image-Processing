@@ -13,11 +13,11 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Histogram.Imple
     public sealed class HistogramVisitor : IHistogramVisitor
     {
         private readonly IChartSeriesBuilder _builder;
-        private readonly IBitmapLuminanceDistributionService _service;
+        private readonly IBitmapLuminanceService _service;
 
         public HistogramVisitor(
             IChartSeriesBuilder builder,
-            IBitmapLuminanceDistributionService service)
+            IBitmapLuminanceService service)
         {
             _builder = builder;
             _service = service;

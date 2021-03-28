@@ -6,9 +6,9 @@ namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distrib
 {
     internal class RandomVariableServiceWrapper : IRandomVariableServiceWrapper
     {
-        private readonly IRandomVariableDistributionService _service;
+        private readonly IRandomVariableService _service;
 
-        public RandomVariableServiceWrapper(IRandomVariableDistributionService service)
+        public RandomVariableServiceWrapper(IRandomVariableService service)
         {
             _service = service;
         }

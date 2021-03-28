@@ -2,7 +2,7 @@ using ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Inte
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distribution.RandomVariable.Interface
 {
-    internal interface IRandomVariableServiceWrapper : IRandomVariableDistributionService
+    internal interface IRandomVariableServiceWrapper : IRandomVariableService
     {
 
     }

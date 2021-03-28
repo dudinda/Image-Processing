@@ -7,9 +7,9 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance
 {
     public sealed class BitmapLuminanceVisitor : IBitmapLuminanceVisitor
     {
-        private IBitmapLuminanceDistributionService _service;
+        private IBitmapLuminanceService _service;
 
-        public BitmapLuminanceVisitor(IBitmapLuminanceDistributionService service)
+        public BitmapLuminanceVisitor(IBitmapLuminanceService service)
         {
             _service = service;
         }
