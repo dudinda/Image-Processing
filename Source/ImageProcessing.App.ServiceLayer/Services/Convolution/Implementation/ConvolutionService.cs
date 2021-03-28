@@ -52,6 +52,8 @@ namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
                     //a pointer, which gets addresses of elements in the radius of a convolution kernel
                     byte* elementPtr;
 
+                    byte* tmp;
+
                     for (int x = kernelOffset; x < width - kernelOffset; ++x, sourcePtr += ptrStep, destinationPtr += ptrStep)
                     {
                         //set accumulators to 0
@@ -59,10 +61,12 @@ namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
 
                         for (var kernelRow = -kernelOffset; kernelRow <= kernelOffset; ++kernelRow)
                         {
+                            tmp = sourcePtr + kernelRow * srcStride;
+
                             for (var kernelColumn = -kernelOffset; kernelColumn <= kernelOffset; ++kernelColumn)
                             {
                                 //get the address of a current element
-                                elementPtr = sourcePtr + kernelColumn * ptrStep + kernelRow * sourceBitmapData.Stride;
+                                elementPtr = tmp + kernelColumn * ptrStep;
 
                                 //sum
                                 b += elementPtr[0] * filter.Kernel[kernelRow + kernelOffset, kernelColumn + kernelOffset];
