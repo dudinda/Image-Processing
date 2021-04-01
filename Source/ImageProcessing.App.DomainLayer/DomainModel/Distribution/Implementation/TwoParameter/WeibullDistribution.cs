@@ -3,10 +3,8 @@ using System;
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Code.Extensions.StringExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
-using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.RealAxis;
-using ImageProcessing.Utility.DecimalMath.RealAxis;
-
-using static ImageProcessing.Utility.DecimalMath.SpecialFunctions.DecimalMathSpecial;
+using ImageProcessing.Utility.DecimalMath.Real;
+using ImageProcessing.Utility.DecimalMath.SpecialFunctions;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementation.TwoParameter
 {
@@ -15,6 +13,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
     /// </summary>
     internal sealed class WeibullDistribution : IDistribution
     {
+        private static readonly DecimalSpecial _special = new DecimalSpecial();
+        private static readonly DecimalReal _real = new DecimalReal();
+
         private decimal _lambda;
         private decimal _k;
 
@@ -40,19 +41,19 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
 
         /// <inheritdoc/>
         public decimal GetMean()
-            => _lambda * Gamma((1 / _k, 0)).Re;
+            => _lambda * _special.Gamma((1 / _k, 0)).Re;
 
         /// <inheritdoc/>
         public decimal GetVariance()
             => _lambda * _lambda *
-            Gamma((2 / _k, 0)).Re - GetMean() * GetMean();
+            _special.Gamma((2 / _k, 0)).Re - GetMean() * GetMean();
 
         /// <inheritdoc/>
         public bool Quantile(decimal p, out decimal quantile)
         {
             if (p < 1 && _k != 0)
             {
-                quantile = _lambda * -(DecimalMathReal.Log(1 - p).Pow(1.0M / _k));
+                quantile = _lambda * _real.Pow(-_real.Log(1 - p), 1.0M / _k);
 
                 return true;
             }

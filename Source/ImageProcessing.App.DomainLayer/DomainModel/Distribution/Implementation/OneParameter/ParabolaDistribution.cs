@@ -3,7 +3,7 @@ using System;
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Code.Extensions.StringExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
-using ImageProcessing.Utility.DecimalMath.RealAxis;
+using ImageProcessing.Utility.DecimalMath.Real;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementation.OneParameter
 {
@@ -12,6 +12,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
     /// </summary>
     internal sealed class ParabolaDistribution : IDistribution
     {
+        private static readonly DecimalReal _math = new DecimalReal();
+
         private decimal _k;
 
         public ParabolaDistribution()
@@ -38,7 +40,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
         {
             if (p < 1)
             {
-                quantile = _k * (1M - DecimalMathReal.Pow(1M - p, 0.3M));
+                quantile = _k * (1M - _math.Pow(1M - p, 0.3M));
 
                 return true;
             }

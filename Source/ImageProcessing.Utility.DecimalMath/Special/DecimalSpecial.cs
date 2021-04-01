@@ -1,15 +1,17 @@
 using System;
 
-using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.RealAxis;
-using ImageProcessing.Utility.DecimalMath.Code.Structs;
+using ImageProcessing.Utility.DecimalMath.Complex;
+using ImageProcessing.Utility.DecimalMath.Real;
 
-using static ImageProcessing.Utility.DecimalMath.ComplexPlane.DecimalMathComplex;
-using static ImageProcessing.Utility.DecimalMath.RealAxis.DecimalMathReal;
+using static ImageProcessing.Utility.DecimalMath.Real.DecimalReal;
 
 namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
 {
-    public static class DecimalMathSpecial
+    public class DecimalSpecial
     {
+        private static readonly DecimalComplex _complex = new DecimalComplex();
+        private static readonly DecimalReal _real = new DecimalReal();
+
         #region Gamma constants
         private const int g = 7;
 
@@ -42,9 +44,9 @@ namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
-        public static decimal Li(decimal x)
+        public decimal Li(decimal x)
         {
-            return Ei(Log(x));
+            return Ei(_real.Log(x));
         }
 
         /// <summary>
@@ -52,17 +54,17 @@ namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
-        public static decimal Ei(decimal x)
+        public decimal Ei(decimal x)
         {
-            var result = Euler + Log(Abs(x));
+            var result = DecimalReal.Euler + _real.Log(_real.Abs(x));
             var total = x;
 
             result += total;
 
-            for (var k = 0; Abs(total) > Epsilon; ++k)
+            for (var k = 0; _real.Abs(total) > DecimalReal.Epsilon; ++k)
             {
                 total = total * x * k
-                       / (k * (k + 2) + 1);
+                       / (k * (k + 2M) + 1M);
 
                 result += total;
             }
@@ -75,17 +77,17 @@ namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
-        public static decimal Ci(decimal x)
+        public decimal Ci(decimal x)
         {
-            var result = Euler + Log(x);
-            var total = -x * x / 4;
+            var result = Euler + _real.Log(x);
+            var total = -x * x / 4M;
 
             result += total;
 
-            for (var k = 1; Abs(total) > Epsilon; ++k)
+            for (var k = 1; _real.Abs(total) > Epsilon; ++k)
             {
-                total = -total * x * x * (2 * k + -1)
-                       / (k * (k * (4 * k + 10) + 8) + 2);
+                total = -total * x * x * (2M * k + -1M)
+                       / (k * (k * (4M * k + 10M) + 8M) + 2M);
 
                 result += total;
             }
@@ -99,15 +101,15 @@ namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
         /// <param name="x"></param>
         /// <returns></returns>
 
-        public static decimal Si(decimal x)
+        public decimal Si(decimal x)
         {
             var total = x;
             var result = total;
 
-            for (var k = 1; Abs(total) > Epsilon; ++k)
+            for (var k = 1; _real.Abs(total) > Epsilon; ++k)
             {
-                total = -total * x * x * (2 * k + -1)
-                       / (k * (k * (8 * k + 8) + 2));
+                total = -total * x * x * (2M * k + -1M)
+                       / (k * (k * (8M * k + 8M) + 2M));
 
                 result += total;
             }
@@ -120,15 +122,15 @@ namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
-        public static decimal ErfInv(decimal x)
+        public decimal ErfInv(decimal x)
         {
-            if(x.Abs() >= 1)
+            if(_real.Abs(x) >= 1M)
             {
                 throw new ArgumentException("NaN");
             }
 
             decimal  p;
-            var w = -Log((1.0M - x) * (1.0M + x));
+            var w = -_real.Log((1.0M - x) * (1.0M + x));
 
             if (w < 5.000000M)
             {
@@ -145,7 +147,7 @@ namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
             }
             else
             {
-                w = Sqrt(w) - 3.000000M;
+                w = (decimal)Math.Sqrt((double)w) - 3.000000M;
                 p = -0.000200214257M;
                 p = (p * w + 0.000100950558M);
                 p = (p * w + 0.00134934322M);
@@ -165,7 +167,7 @@ namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
         /// </summary>
         /// <param name="z">x + iy</param>
         /// <returns>Γ(1 + z)</returns>
-        public static (decimal Re, decimal Im) Gamma((decimal x, decimal y) z)
+        public (decimal Re, decimal Im) Gamma((decimal x, decimal y) z)
         {
             if(z.x < 0)
             {
@@ -176,7 +178,7 @@ namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
 
             if (z.x < 0.5M)
             {
-                return PI / (ComplexOperator)Sin(w * PI) *  Gamma(w - 1);
+                return PI / (ComplexOperator)_complex.Sin(w * PI) *  Gamma(w - 1);
 
             }
             else
@@ -192,7 +194,7 @@ namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
 
                 var t = w + g + 0.5M;
 
-               return Sqrt(2M * PI) * ( t ^ (w + 0.5M) ) * Exp(-t) * x;
+               return (decimal)Math.Sqrt((double)(2M * DecimalReal.PI)) * ( t ^ (w + 0.5M) ) * _complex.Exp(-t) * x;
             }
         }
 
@@ -202,7 +204,7 @@ namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
         /// <param name="z1">x + iy</param>
         /// <param name="z2">x' + iy'</param>
         /// <returns>B(z1, z2)</returns>
-        public static (decimal Re, decimal Im) Beta(
+        public (decimal Re, decimal Im) Beta(
             (decimal x, decimal y) z1,
             (decimal x, decimal y) z2)
         {
@@ -218,14 +220,14 @@ namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
         /// <param name="z1">x + iy</param>
         /// <param name="z2">x' + iy'</param>
         /// <returns>Binom(z1, z2)</returns>
-        public static (decimal Re, decimal Im) Binom(
+        public (decimal Re, decimal Im) Binom(
             (decimal x, decimal y) z1,
             (decimal x, decimal y) z2)
         {
             var n = (ComplexOperator)z1;
             var k = (ComplexOperator)z2;
 
-            return Reciprocal((n + 1) * Beta(n - k + 1, k + 1));
+            return _complex.Reciprocal((n + 1) * Beta(n - k + 1, k + 1));
         }
     }
 }

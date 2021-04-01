@@ -3,7 +3,7 @@ using System;
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Code.Extensions.StringExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
-using ImageProcessing.Utility.DecimalMath.RealAxis;
+using ImageProcessing.Utility.DecimalMath.Real;
 using ImageProcessing.Utility.DecimalMath.SpecialFunctions;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementation.TwoParameter
@@ -13,6 +13,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
     /// </summary>
     internal sealed class NormalDistribution : IDistribution
     {
+        private static readonly DecimalSpecial _special = new DecimalSpecial();
+        private static readonly DecimalReal _real = new DecimalReal();
+        
         private decimal _mu;
         private decimal _sigma;
 
@@ -47,9 +50,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
         {
             var erfArg = 2 * p - 1;
 
-            if (DecimalMathReal.Abs(erfArg) < 1)
+            if (_real.Abs(erfArg) < 1)
             {
-                quantile = _mu + _sigma * DecimalMathReal.Sqrt2 * DecimalMathSpecial.ErfInv(2 * p - 1);
+                quantile = _mu + _sigma * DecimalReal.Sqrt2 * _special.ErfInv(2 * p - 1);
 
                 return true;
             }

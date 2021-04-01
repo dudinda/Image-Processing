@@ -3,7 +3,7 @@ using System;
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Code.Extensions.StringExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
-using ImageProcessing.Utility.DecimalMath.RealAxis;
+using ImageProcessing.Utility.DecimalMath.Real;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementation.OneParameter
 {
@@ -12,6 +12,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
     /// </summary>
     internal sealed class ExponentialDistribution : IDistribution
     {
+        private static readonly DecimalReal _math  = new DecimalReal();
+
         private decimal _lambda;
 
         public ExponentialDistribution()
@@ -44,7 +46,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
         {
             if (p < 1 && _lambda != 0)
             {
-                quantile = -DecimalMathReal.Log(1 - p) / _lambda;
+                quantile = -_math.Log(1 - p) / _lambda;
 
                 return true;
             }

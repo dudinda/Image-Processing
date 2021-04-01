@@ -3,7 +3,7 @@ using System;
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Code.Extensions.StringExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
-using ImageProcessing.Utility.DecimalMath.RealAxis;
+using ImageProcessing.Utility.DecimalMath.Real;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementation.OneParameter
 {
@@ -12,6 +12,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
     /// </summary>
     internal sealed class RayleighDistribution : IDistribution
     {
+        private static readonly DecimalReal _math = new DecimalReal();
+
         private decimal _sigma;
 
         public RayleighDistribution()
@@ -34,17 +36,17 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
         public decimal SecondParameter => throw new NotSupportedException();
 
         /// <inheritdoc/>
-        public decimal GetMean() => _sigma * DecimalMathReal.Sqrt(DecimalMathReal.PiOver2);
+        public decimal GetMean() => _sigma * (decimal)Math.Sqrt((double)DecimalReal.PiOver2);
 
         /// <inheritdoc/>
-        public decimal GetVariance() => (2M - DecimalMathReal.PiOver2) * _sigma * _sigma;
+        public decimal GetVariance() => (2M - DecimalReal.PiOver2) * _sigma * _sigma;
 
         /// <inheritdoc/>
         public bool Quantile(decimal p, out decimal quantile)
         {
             if (p >= 0 && p < 1)
             {
-                quantile = _sigma * DecimalMathReal.Sqrt(-2M * DecimalMathReal.Log(1M - p));
+                quantile = _sigma * (decimal)Math.Sqrt((double)(-2M * _math.Log(1M - p)));
                 return true;
             }
 

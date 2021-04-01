@@ -1,12 +1,14 @@
-using System;
 
-using Complex = ImageProcessing.Utility.DecimalMath.ComplexPlane.DecimalMathComplex;
-using Real = ImageProcessing.Utility.DecimalMath.RealAxis.DecimalMathReal;
+using ImageProcessing.Utility.DecimalMath.Complex;
+using ImageProcessing.Utility.DecimalMath.Real;
 
-namespace ImageProcessing.Utility.DecimalMath.Code.Structs
+namespace ImageProcessing.Utility.DecimalMath.Complex
 {
-    internal struct ComplexOperator
+    internal sealed class ComplexOperator
     {
+        private static readonly DecimalComplex _complex  = new DecimalComplex();
+        private static readonly DecimalReal _real = new DecimalReal();
+
         internal (decimal Re, decimal Im) Z { get; }
 
         internal ComplexOperator((decimal re, decimal im) z)
@@ -97,7 +99,7 @@ namespace ImageProcessing.Utility.DecimalMath.Code.Structs
             var c = z2.Z.Re;
             var d = z2.Z.Im;
 
-            if (Real.Abs(d) < Real.Abs(c))
+            if (_real.Abs(d) < _real.Abs(c))
             {
                 var r = d / c;
                 var den = c + d * r;
@@ -135,23 +137,23 @@ namespace ImageProcessing.Utility.DecimalMath.Code.Structs
 
         public static ComplexOperator operator ^(
             decimal c, ComplexOperator z)
-            => new ComplexOperator(Complex.Pow(c, z.Z));
+            => new ComplexOperator(_complex.Pow(c, z.Z));
 
         public static ComplexOperator operator ^(
             ComplexOperator z, decimal c)
-            => new ComplexOperator(Complex.Pow(z.Z, c));
+            => new ComplexOperator(_complex.Pow(z.Z, c));
 
         public static ComplexOperator operator ^(
             ComplexOperator z1, ComplexOperator z2)
         {
-            var (r, phi) = Complex.Polar(z1);
+            var (r, phi) = _complex.Polar(z1);
 
             //evaluate as exp(log(r)(x' + iy') + i*phi(x' + iy'))
 
-            var re = Real.Log(r) * z2;
+            var re = _real.Log(r) * z2;
             var im = phi * z2;
 
-            return (ComplexOperator)Complex.Exp(re + im);
+            return (ComplexOperator)_complex.Exp(re + im);
         }
 
         public static ComplexOperator operator ^(

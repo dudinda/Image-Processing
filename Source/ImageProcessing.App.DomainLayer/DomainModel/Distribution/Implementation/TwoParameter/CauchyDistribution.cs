@@ -3,7 +3,7 @@ using System;
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Code.Extensions.StringExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
-using ImageProcessing.Utility.DecimalMath.RealAxis;
+using ImageProcessing.Utility.DecimalMath.Real;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementation.TwoParameter
 {
@@ -12,6 +12,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
     /// </summary>
     internal sealed class CauchyDistribution : IDistribution
     {
+        private static readonly DecimalReal _math = new DecimalReal();
+
         private decimal _x0;
         private decimal _gamma;
 
@@ -46,7 +48,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
         {
             if(p > 0 && p < 1)
             {
-                quantile = _x0 + _gamma * DecimalMathReal.Tan(DecimalMathReal.PI * (p - 0.5M));
+                quantile = _x0 + _gamma * _math.Tan(DecimalReal.PI * (p - 0.5M));
 
                 return true;
             }

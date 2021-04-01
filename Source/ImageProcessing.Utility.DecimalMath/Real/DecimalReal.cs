@@ -1,12 +1,12 @@
 using System;
 
-namespace ImageProcessing.Utility.DecimalMath.RealAxis
+namespace ImageProcessing.Utility.DecimalMath.Real
 {
     /// <summary>
     /// The class contains functions of a real variable,
     /// where each argument is represented as the <see cref="decimal"> value.
     /// </summary>
-    public static class DecimalMathReal
+    public class DecimalReal
     {
         public const decimal E       = 2.71828182845905M;
         public const decimal Epsilon = 1.0E-26M;
@@ -20,7 +20,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// Taylor series of exp(x) throws overflow exception
         /// during the loop when x > 65.370524. 
         /// </summary>
-        private const decimal ExpOverFlow       = 65.370524M;
+        private const decimal ExpOverflow       = 65.370524M;
 
         /// <summary>
         /// x ** 2 throws overflow exception
@@ -33,7 +33,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <returns>sgn(x)</returns>
-        public static int Sign(decimal x)
+        public int Sign(decimal x)
         {
             if (x == 0.0M)
             {
@@ -49,7 +49,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">The left-hand value</param>
         /// <param name="y">The right-hand value</param>
         /// <returns>max{x, y}</returns>
-        public static decimal Max(decimal x, decimal y)
+        public decimal Max(decimal x, decimal y)
             => x >= y ? x : y;
         
         /// <summary>
@@ -58,7 +58,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">The left-hand value</param>
         /// <param name="y">The right-hand value</param>
         /// <returns>min{x, y}</returns>
-        public static decimal Min(decimal x, decimal y)
+        public decimal Min(decimal x, decimal y)
             => x <= y ? x : y;
         
         /// <summary>
@@ -67,18 +67,18 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">The left-hand value</param>
         /// <param name="y">The right-hand value</param>
         /// <returns>hypot(x, y)</returns>
-        public static decimal Hypot(decimal x, decimal y)
+        public decimal Hypot(decimal x, decimal y)
         {
             if (x > y)
             {
                 var d = y / x;
-                return Abs(x) * Sqrt(1.0M + d * d);
+                return Abs(x) * (decimal)Math.Sqrt((double)(1.0M + d * d));
             }
 
             if (x < y)
             {
                 var d = x / y;
-                return Abs(y) * Sqrt(d * d + 1.0M);
+                return Abs(y) * (decimal)Math.Sqrt((double)(d * d + 1.0M));
             }
 
             if (x == 0.0M && y == 0.0M)
@@ -95,7 +95,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <returns>|x|</returns>
-        public static decimal Abs(decimal x)
+        public decimal Abs(decimal x)
             => x >= 0.0M ? x : -x;
         
         /// <summary>
@@ -104,7 +104,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">An argument of a function</param>
         /// <returns>ceil(x)</returns>
         [Obsolete("Use Math.Ceiling(x) instead.")]
-        public static decimal Ceil(decimal x)
+        public decimal Ceil(decimal x)
             => -Floor(-x);
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">An argument of the function</param>
         /// <returns>floor(x)</returns>
         [Obsolete("Use Math.Floor(x) instead.")]
-        public static decimal Floor(decimal x)
+        public decimal Floor(decimal x)
         {
             if (x == 0.0M)
             {
@@ -141,7 +141,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">An argument of the function</param>
         /// <returns>{x}</returns>
         [Obsolete("Use Decimal.Remainder(x, 1.0M) instead.")]
-        public static decimal Frac(decimal x)
+        public decimal Frac(decimal x)
             => x % 1.0M;
 
         /// <summary>
@@ -150,19 +150,11 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">An argument of the function</param>
         /// <param name="mod"></param>
         /// <returns>x mod b</returns>
-        public static decimal Mod(decimal x, decimal mod)
+        public decimal Mod(decimal x, decimal mod)
             => x - mod * Math.Floor(x / mod);
 
         #region Log and exp functions
 
-        /// <summary>
-        /// Evaluate sqrt(x).
-        /// </summary>
-        /// <param name="x">An argument of the function</param>
-        /// <returns>sqrt(x)</returns>
-        public static decimal Sqrt(decimal x)
-            => (decimal)Math.Sqrt((double)x);
-        
         /// <summary>
         /// Evaluate x ** power with a specified precision.
         /// </summary>
@@ -170,7 +162,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="power">A power</param>
         /// <param name="precision">A error</param>
         /// <returns>x ** power</returns>
-        public static decimal Pow(
+        public decimal Pow(
             decimal x,
             decimal power,
             decimal precision = Epsilon)
@@ -195,9 +187,9 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
         /// <returns>exp(x)</returns>
-        public static decimal Exp(decimal x, decimal precision = Epsilon)
+        public decimal Exp(decimal x, decimal precision = Epsilon)
         {
-            if (x > ExpOverFlow)
+            if (x > ExpOverflow)
             {
                 throw new OverflowException(nameof(x));
             }
@@ -228,7 +220,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
         /// <returns>log(x)</returns>
-        public static decimal Log(
+        public decimal Log(
             decimal x,
             decimal lbase = E,
             decimal precision = Epsilon)
@@ -259,13 +251,13 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
             }
 
             var a0 = (1.0M + x) * 0.5M;
-            var b0 = Sqrt(x);
+            var b0 = (decimal)Math.Sqrt((double)x);
 
                 
             while (Abs(a0 - b0) > precision)
             {
                 a0 = (a0 + b0) * 0.5M;
-                b0 = Sqrt(a0 * b0);
+                b0 = (decimal)Math.Sqrt((double)(a0 * b0));
             }
 
             return 2.0M * (x - 1.0M) / (a0 + b0);
@@ -281,7 +273,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
         /// <returns>sin(x)</returns>
-        public static decimal Sin(decimal x, decimal precision = Epsilon)
+        public decimal Sin(decimal x, decimal precision = Epsilon)
         {
             if(x == 0.0M)
             {
@@ -311,7 +303,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
         /// <returns>cos(x)</returns>
-        public static decimal Cos(decimal x, decimal precision = Epsilon)
+        public decimal Cos(decimal x, decimal precision = Epsilon)
         {
             x = Mod(x, 2.0M * PI);
 
@@ -336,7 +328,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
         /// <returns>cot(x)</returns>
-        public static decimal Cot(decimal x, decimal precision = Epsilon)
+        public decimal Cot(decimal x, decimal precision = Epsilon)
         {
             var sign = Sign(x);
 
@@ -367,7 +359,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
         /// <returns>tan(x)</returns>
-        public static decimal Tan(decimal x, decimal precision = Epsilon)
+        public decimal Tan(decimal x, decimal precision = Epsilon)
         {
             var sign = Sign(x);
 
@@ -397,7 +389,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <returns>atan(x)</returns>
-        public static decimal Arctan(decimal x)
+        public decimal Arctan(decimal x)
         {
             if (x == 0.0M)
             {
@@ -417,7 +409,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <returns>arccot(x)</returns>
-        public static decimal Arccot(decimal x)
+        public decimal Arccot(decimal x)
         {
             if (x == 0.0M)
             {
@@ -432,14 +424,14 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <returns>arcsin(x)</returns>
-        public static decimal Arcsin(decimal x)
+        public decimal Arcsin(decimal x)
         {
             if (Abs(x) > 1.0M)
             {
                 throw new ArgumentException("NaN");
             }
 
-            return Arctan(x / Sqrt(1.0M - x * x));
+            return Arctan(x / (decimal)Math.Sqrt((double)(1.0M - x * x)));
         }
 
         /// <summary>
@@ -447,14 +439,14 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <returns>arccos(x)</returns>
-        public static decimal Arccos(decimal x)
+        public decimal Arccos(decimal x)
             => PiOver2 - Arcsin(x);
         
         /// <summary>
         /// Approximate atan(x) in the range [0, 0.66].
         /// </summary>
         /// <param name="x">An argument of the function</param>
-        private static decimal ArctanImpl(decimal x)
+        private decimal ArctanImpl(decimal x)
         {
             var p0 = -8.750608600031904122785e-01M;
             var p1 = -1.615753718733365076637e+01M;
@@ -481,7 +473,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// Reduce a positive argument to the [0, 0.66].
         /// </summary>
         /// <param name="x">An argument of a function to be reduced</param>
-        private static decimal ArctanReduce(decimal x)
+        private decimal ArctanReduce(decimal x)
         {
 
             var bits = 6.123233995736765886130e-17M; // pi/2 = PIO2 + bits
@@ -511,7 +503,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
         /// <returns>cosh(x)</returns>
-        public static decimal Cosh(decimal x, decimal precision = Epsilon)
+        public decimal Cosh(decimal x, decimal precision = Epsilon)
         {
             x = Abs(x);
             //|cosh(x) - (e ** x) / 2| < 3.8 * 10 ** -10 for all x > 21
@@ -530,7 +522,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
         /// <returns>sinh(x)</returns>
-        public static decimal Sinh(decimal x, decimal precision = Epsilon)
+        public decimal Sinh(decimal x, decimal precision = Epsilon)
         {
             var sign = Sign(x);
 
@@ -550,7 +542,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
         /// <returns>tanh(x)</returns>
-        public static decimal Tanh(decimal x, decimal precision = Epsilon)
+        public decimal Tanh(decimal x, decimal precision = Epsilon)
             => Sinh(x, precision) / Cosh(x, precision);
         
         /// <summary>
@@ -559,7 +551,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
         /// <returns>coth(x)</returns>
-        public static decimal Coth(decimal x, decimal precision = Epsilon)
+        public decimal Coth(decimal x, decimal precision = Epsilon)
         {
             //x infinitely small to 0
             if (Abs(x) < precision)
@@ -583,7 +575,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <returns>arcosh(x)</returns>
-        public static decimal Arcosh(decimal x, decimal precision = Epsilon)
+        public decimal Arcosh(decimal x, decimal precision = Epsilon)
         {
             if (x > SquareOfXOverflow)
             {
@@ -595,7 +587,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
                 throw new ArgumentException("NaN");
             }
 
-            return Log(x + Sqrt(x * x - 1.0M), precision: precision);
+            return Log(x + (decimal)Math.Sqrt((double)(x * x - 1.0M)), precision: precision);
         }
 
         /// <summary>
@@ -603,14 +595,14 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <returns>arcsinh(x)</returns>
-        public static decimal Arsinh(decimal x, decimal precision = Epsilon)
+        public decimal Arsinh(decimal x, decimal precision = Epsilon)
         {
             if (x > SquareOfXOverflow)
             {
                 throw new OverflowException(nameof(x));
             }
 
-            return Log(x + Sqrt(x * x + 1.0M), precision: precision); 
+            return Log(x + (decimal)Math.Sqrt((double)(x * x + 1.0M)), precision: precision); 
         }
 
         /// <summary>
@@ -618,7 +610,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <returns>artanh(x)</returns>
-        public static decimal Artanh(decimal x, decimal precision = Epsilon)
+        public decimal Artanh(decimal x, decimal precision = Epsilon)
         {
             if (Abs(x) >= 1.0M)
             {
@@ -633,7 +625,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <returns>arcoth(x)</returns>
-        public static decimal Arcoth(decimal x, decimal precision = Epsilon)
+        public decimal Arcoth(decimal x, decimal precision = Epsilon)
         {
             if (Abs(x) <= 1.0M)
             {
@@ -648,7 +640,7 @@ namespace ImageProcessing.Utility.DecimalMath.RealAxis
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <returns>cos(x), sin(x)</returns>
-        public static (decimal sin, decimal cos) CosSin(decimal x)
+        public (decimal sin, decimal cos) CosSin(decimal x)
             => (Cos(x), Sin(x));
         
         #endregion

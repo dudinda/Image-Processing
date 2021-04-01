@@ -1,12 +1,15 @@
 using System.Collections.Generic;
 
 using static ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory.RealDomainCasesFactory;
-using static ImageProcessing.Utility.DecimalMath.RealAxis.DecimalMathReal;
+using static ImageProcessing.Utility.DecimalMath.Real.DecimalReal;
+using ImageProcessing.Utility.DecimalMath.Real;
 
 namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
 {
     public static class RealFunctionCasesFactory
     {
+        private static readonly DecimalReal _real = new DecimalReal();
+
         public static IEnumerable<decimal>  GetArccotValues()
         {
             foreach(var argument in GetRealAxis())
@@ -35,7 +38,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
         {
             foreach(var argument in GetTrigonometryPoints())
             {
-                if(Mod(argument, PI) > Epsilon)
+                if(_real.Mod(argument, PI) > Epsilon)
                 {
                     yield return argument;
                 }
@@ -46,7 +49,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
         {
             foreach (var argument in GetRealAxis())
             {
-                if (Mod(argument, PI) > Epsilon)
+                if (_real.Mod(argument, PI) > Epsilon)
                 {
                     yield return argument;
                 }
@@ -57,7 +60,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
         {
             foreach (var argument in GetTrigonometryPoints())
             {
-                if (Abs(Mod(argument, PI) - PiOver2) > Epsilon)
+                if (_real.Abs(_real.Mod(argument, PI) - PiOver2) > Epsilon)
                 {
                     yield return argument;
                 }
@@ -68,7 +71,7 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
         {
             foreach (var argument in GetRealAxis())
             {
-                if (Abs(Mod(argument, PI) - PiOver2) > Epsilon)
+                if (_real.Abs(_real.Mod(argument, PI) - PiOver2) > Epsilon)
                 {
                     yield return argument;
                 }

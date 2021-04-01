@@ -5,14 +5,17 @@ using System.Linq;
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
 using ImageProcessing.App.ServiceLayer.Code.Constants;
 using ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Interface;
-using ImageProcessing.Utility.DecimalMath.Code.Extensions.DecimalMathExtensions.RealAxis;
-using ImageProcessing.Utility.DecimalMath.RealAxis;
+using ImageProcessing.Utility.DecimalMath.Real;
+
+using static ImageProcessing.Utility.DecimalMath.Real.DecimalReal;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Implementation
 {
     /// <inheritdoc cref="IRandomVariableService"/>
     public sealed class RandomVariableService : IRandomVariableService
     {
+        private static readonly DecimalReal _real = new DecimalReal();
+
         /// <inheritdoc/>
         public decimal[] TransformToDecimal(decimal[] cdf, IDistribution distribution)
         {
@@ -62,7 +65,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
                 RandomVariableErrors.PmfIsPositive);
 
             Contract.Requires(
-                (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
+                _real.Abs(pmf.Sum() - 1.0M) < Epsilon,
                 RandomVariableErrors.PmfNotNormalized);
 
             var total = 0.0M;
@@ -83,7 +86,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
                 RandomVariableErrors.PmfIsPositive);
 
             Contract.Requires(
-                (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
+                _real.Abs(pmf.Sum() - 1.0M) < Epsilon,
                 RandomVariableErrors.PmfNotNormalized);
 
             var total = 0.0M;
@@ -106,10 +109,10 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
                 RandomVariableErrors.PmfIsPositive);
 
             Contract.Requires(
-                (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
+                _real.Abs(pmf.Sum() - 1.0M) < Epsilon,
                 RandomVariableErrors.PmfNotNormalized);
 
-            return GetVariance(pmf).Sqrt();
+            return (decimal)Math.Sqrt((double)(GetVariance(pmf)));
         }
 
         /// <inheritdoc/>
@@ -120,7 +123,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
                 RandomVariableErrors.PmfIsPositive);
 
             Contract.Requires(
-                (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
+                _real.Abs(pmf.Sum() - 1.0M) < Epsilon,
                 RandomVariableErrors.PmfNotNormalized);
 
             var uvalue = 0.0M;
@@ -174,7 +177,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
                 RandomVariableErrors.PmfIsPositive);
 
             Contract.Requires(
-                (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
+                _real.Abs(pmf.Sum() - 1.0M) < Epsilon,
                 RandomVariableErrors.PmfNotNormalized);
 
             var cdf = pmf.Clone() as decimal[];
@@ -213,14 +216,14 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
                 RandomVariableErrors.PmfIsPositive);
 
             Contract.Requires(
-                (pmf.Sum() - 1.0M).Abs() < DecimalMathReal.Epsilon,
+                _real.Abs(pmf.Sum() - 1.0M) < Epsilon,
                 RandomVariableErrors.PmfNotNormalized);
 
             var entropy = 0.0M;
 
             for (var index = 0; index < 256; ++index)
             {
-                entropy += (pmf[index] * pmf[index].Log(2));
+                entropy += pmf[index] * _real.Log(pmf[index], 2);
             }
 
             return -entropy;
