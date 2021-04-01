@@ -15,8 +15,8 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.ComplexNumbers
     [TestFixture]
     public class DecimalMathComplexTests
     {
-        private static readonly DecimalComplex _complex = new DecimalComplex();
-        private static readonly DecimalReal _real = new DecimalReal();
+        private readonly DecimalComplex _complex = new DecimalComplex();
+        private readonly DecimalReal _real = new DecimalReal();
 
         [Test, TestCaseSource(
              typeof(ComplexDomainCasesFactory),

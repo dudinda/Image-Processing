@@ -9,8 +9,8 @@ namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
 {
     public class DecimalSpecial
     {
-        private static readonly DecimalComplex _complex = new DecimalComplex();
-        private static readonly DecimalReal _real = new DecimalReal();
+        private readonly DecimalComplex _complex = new DecimalComplex();
+        private readonly DecimalReal _real = new DecimalReal();
 
         #region Gamma constants
         private const int g = 7;

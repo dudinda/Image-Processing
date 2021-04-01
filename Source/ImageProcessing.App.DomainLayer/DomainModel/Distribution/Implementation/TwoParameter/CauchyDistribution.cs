@@ -12,7 +12,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
     /// </summary>
     internal sealed class CauchyDistribution : IDistribution
     {
-        private static readonly DecimalReal _math = new DecimalReal();
+        private readonly DecimalReal _math = new DecimalReal();
 
         private decimal _x0;
         private decimal _gamma;

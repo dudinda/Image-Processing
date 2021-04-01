@@ -14,7 +14,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
     /// <inheritdoc cref="IRandomVariableService"/>
     public sealed class RandomVariableService : IRandomVariableService
     {
-        private static readonly DecimalReal _real = new DecimalReal();
+        private readonly DecimalReal _real = new DecimalReal();
 
         /// <inheritdoc/>
         public decimal[] TransformToDecimal(decimal[] cdf, IDistribution distribution)

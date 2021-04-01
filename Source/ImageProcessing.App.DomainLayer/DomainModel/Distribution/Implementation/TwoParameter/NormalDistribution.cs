@@ -13,8 +13,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
     /// </summary>
     internal sealed class NormalDistribution : IDistribution
     {
-        private static readonly DecimalSpecial _special = new DecimalSpecial();
-        private static readonly DecimalReal _real = new DecimalReal();
+        private readonly DecimalSpecial _special = new DecimalSpecial();
+        private readonly DecimalReal _real = new DecimalReal();
         
         private decimal _mu;
         private decimal _sigma;

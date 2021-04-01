@@ -7,7 +7,7 @@ namespace ImageProcessing.Utility.DecimalMath.Complex
 {
     public class DecimalComplex
     {
-        private readonly static DecimalReal _real = new DecimalReal();
+        private readonly DecimalReal _real = new DecimalReal();
 
         /// <summary>
         /// Evaluate Re(z).

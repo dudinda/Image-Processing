@@ -13,7 +13,7 @@ namespace ImageProcessing.Tests.Utility
     [TestFixture]
     public class DecimalMathRealTests
     {
-        private static readonly DecimalReal _real = new DecimalReal();
+        private readonly DecimalReal _real = new DecimalReal();
 
         [Test, TestCaseSource(
             typeof(RealDomainCasesFactory),
