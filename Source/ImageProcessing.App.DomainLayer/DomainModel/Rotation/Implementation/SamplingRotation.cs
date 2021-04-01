@@ -12,6 +12,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
     {
         public Bitmap Rotate(Bitmap src, double rad)
         {
+            src.IsSupported();
+
             if (rad == 0d) { return src; }
 
             var (srcWidth, srcHeight) = (src.Width, src.Height);
@@ -31,7 +33,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
             var (dSrcWidth, dSrcHeight) = ((double)srcWidth, (double)srcHeight);
 
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
-               .DrawFilledRectangle(Brushes.White);
+                .DrawFilledRectangle(Brushes.White);
 
             var (xCenter, yCenter) = ((dstWidth - 1) / 2.0, (dstHeight - 1) / 2.0);
             var (xSrcCenter, ySrcCenter) = ((srcWidth - 1) / 2.0, (srcHeight - 1) / 2.0);
@@ -44,7 +46,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                 new Rectangle(0, 0, dstWidth, dstHeight),
                 ImageLockMode.WriteOnly, dst.PixelFormat);
 
-            var ptrStep = src.GetBitsPerPixel() / 8;
+            var step = sizeof(int);
             var (srcStride, dstStride) = (srcData.Stride, dstData.Stride);
 
             var options = new ParallelOptions()
@@ -71,7 +73,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 
                     byte* srcPtr;
 
-                    for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
+                    for (var x = 0; x < dstWidth; ++x, dstRow += step)
                     {
                         xShift = x - xCenter;
 
@@ -81,11 +83,12 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                         if (srcX < dSrcWidth  && srcX >= 0d &&
                             srcY < dSrcHeight && srcY >= 0d)
                         {
-                            srcPtr = srcStartPtr + (int)srcY * srcStride + (int)srcX * ptrStep;
+                            srcPtr = srcStartPtr + (int)srcY * srcStride + (int)srcX * step;
 
                             dstRow[0] = srcPtr[0];
                             dstRow[1] = srcPtr[1];
                             dstRow[2] = srcPtr[2];
+                            dstRow[3] = srcPtr[3];
                         }
                     }
                 });

@@ -12,11 +12,13 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Thresholding.Implementatio
     {
         public Bitmap Segment(Bitmap bitmap, byte threshold)
         {
+            bitmap.IsSupported();
+
             var bitmapData = bitmap.LockBits(
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                 ImageLockMode.ReadWrite, bitmap.PixelFormat);
 
-            var ptrStep = bitmap.GetBitsPerPixel() / 8;
+            var step = sizeof(int);
 
             var size = bitmap.Size;
             var options = new ParallelOptions()
@@ -32,7 +34,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Thresholding.Implementatio
                 {
                     var ptr = startPtr + y * bitmapData.Stride;
 
-                    for (int x = 0; x < size.Width; ++x, ptr += ptrStep)
+                    for (int x = 0; x < size.Width; ++x, ptr += step)
                     {
                         //if a threshold value is greater or equal than a pixel value
                         //set it to white; else to black

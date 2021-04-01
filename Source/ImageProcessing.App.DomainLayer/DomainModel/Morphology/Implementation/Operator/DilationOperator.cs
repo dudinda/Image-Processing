@@ -17,6 +17,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.
         /// <inheritdoc />
         public Bitmap Filter(Bitmap bitmap, BitMatrix kernel)
         {
+            bitmap.IsSupported();
+
             var destination = new Bitmap(bitmap);
 
             var source = bitmap.AdjustBorder(kernel.ColumnCount / 2, Color.Black);
@@ -30,7 +32,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.
                 ImageLockMode.WriteOnly, destination.PixelFormat);
 
             var size = source.Size;
-            var ptrStep = source.GetBitsPerPixel() / 8;
+            var step = sizeof(int);
 
             unsafe
             {
@@ -49,20 +51,20 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.
                 Parallel.For(kernelOffset, size.Height - kernelOffset, options, y =>
                 {
                     //get the address of a new line, considering a kernel offset
-                    var sourcePtr      = sourceStartPtr + y * sourceBitmapData.Stride + kernelOffset * ptrStep;
-                    var destinationPtr = destinationStartPtr + y * destinationBitmapData.Stride + kernelOffset * ptrStep;
+                    var sourcePtr      = sourceStartPtr + y * sourceBitmapData.Stride + kernelOffset * step;
+                    var destinationPtr = destinationStartPtr + y * destinationBitmapData.Stride + kernelOffset * step;
 
                     //a pointer, which gets addresses of the elements in the radius of a structured element
-                    byte* elementPtr = null;
+                    byte* elementPtr;
 
-                    for (int x = kernelOffset; x < size.Width - kernelOffset; ++x, sourcePtr += ptrStep, destinationPtr += ptrStep)
+                    for (int x = kernelOffset; x < size.Width - kernelOffset; ++x, sourcePtr += step, destinationPtr += step)
                     {
                         for (int kernelRow = -kernelOffset; kernelRow <= kernelOffset; ++kernelRow)
                         {
                             for (int kernelColumn = -kernelOffset; kernelColumn <= kernelOffset; ++kernelColumn)
                             {
                                 //get the address of a current element
-                                elementPtr = sourcePtr + kernelColumn * ptrStep + kernelRow * sourceBitmapData.Stride;
+                                elementPtr = sourcePtr + kernelColumn * step + kernelRow * sourceBitmapData.Stride;
 
                                 if (mask[kernelRow + kernelOffset, kernelColumn + kernelOffset] && elementPtr[0] == 255)
                                 {

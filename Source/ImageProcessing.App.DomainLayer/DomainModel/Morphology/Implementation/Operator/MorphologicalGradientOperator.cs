@@ -1,5 +1,6 @@
 using System.Drawing;
 
+using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Interface.UnaryOperator;
 using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
@@ -13,6 +14,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.
         /// <inheritdoc />
         public Bitmap Filter(Bitmap bitmap, BitMatrix kernel)
         {
+            bitmap.IsSupported();
+
             var subtraction = new SubtractionOperator();
             var dilation    = new DilationOperator();
             var erosion     = new ErosionOperator();

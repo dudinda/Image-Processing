@@ -2,6 +2,8 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 
+using ImageProcessing.App.DomainLayer.Code.Constants;
+
 namespace ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt
 {
     /// <summary>
@@ -21,23 +23,16 @@ namespace ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt
         }
 
         /// <summary>
-        /// Get a number of bits per pixel of a selected image.
+        /// Throws not supported exception
+        /// if a pixel format differs from 32bppArgb.
         /// </summary>
-        /// <param name="bitmap">A bitmap.</param>
-        /// <returns>A number of bits per pixel.</returns>
-        public static byte GetBitsPerPixel(this Bitmap bitmap)
+        public static void IsSupported(this Bitmap bitmap)
         {
-            switch (bitmap.PixelFormat)
+            var format = bitmap.PixelFormat;
+
+            if (format != PixelFormat.Format32bppArgb)
             {
-                case PixelFormat.Format24bppRgb:
-                    return 24;
-
-                case PixelFormat.Format32bppArgb:
-                case PixelFormat.Format32bppPArgb:
-                case PixelFormat.Format32bppRgb:
-                    return 32;
-
-                default: throw new NotSupportedException("Only 24 and 32 bit images are supported.");
+                throw new NotSupportedException(string.Format(Errors.NotSupported, format));
             }
         }
 

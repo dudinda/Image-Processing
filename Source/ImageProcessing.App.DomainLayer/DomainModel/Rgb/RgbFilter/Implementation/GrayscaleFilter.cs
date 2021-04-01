@@ -24,18 +24,18 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
         /// <inheritdoc />
         public Bitmap Filter(Bitmap bitmap)
         {
+            bitmap.IsSupported();
+
             var bitmapData = bitmap.LockBits(
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                 ImageLockMode.ReadWrite, bitmap.PixelFormat);
-
-            var ptrStep = bitmap.GetBitsPerPixel() / 8;
 
             var (width, height) = (bitmap.Width, bitmap.Height);
             var options = new ParallelOptions()
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
-
+            var step = sizeof(int);
             unsafe
             {
                 var startPtr = (byte*)bitmapData.Scan0.ToPointer();
@@ -46,7 +46,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
                     //get the address of a row
                     var ptr = startPtr + y * stride;
 
-                    for (int x = 0; x < width; ++x, ptr += ptrStep)
+                    for (int x = 0; x < width; ++x, ptr += step)
                     {
                         ptr[0] = ptr[1] = ptr[2] = (byte)_rec.GetLuma(
                             ref ptr[2], ref ptr[1], ref ptr[0]);

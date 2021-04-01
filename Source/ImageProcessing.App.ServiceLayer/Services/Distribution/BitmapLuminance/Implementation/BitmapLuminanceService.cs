@@ -23,6 +23,8 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
         /// <inheritdoc />
         public Bitmap Transform(Bitmap bitmap, IDistribution distribution)
         {
+            bitmap.IsSupported();
+
             var cdf = GetCDF(bitmap);
 
             //get the new pixel values, according to a selected distribution
@@ -37,7 +39,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
-            var ptrStep = bitmap.GetBitsPerPixel() / 8;
+            var step = sizeof(int);
             var size = bitmap.Size;
             var stride = bitmapData.Stride;
             var (dstWidth, dstHeight) = (size.Width, size.Height);
@@ -51,7 +53,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
                     //get a start address
                     var ptr = startPtr + y * stride;
 
-                    for (int x = 0; x < dstWidth; ++x, ptr += ptrStep)
+                    for (int x = 0; x < dstWidth; ++x, ptr += step)
                     {
                         //get a new pixel value, transofrming by a quantile
                         ptr[0] = ptr[1] = ptr[2] = newPixels[ptr[0]];
@@ -87,12 +89,14 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
         /// <inheritdoc />
         public int[] GetFrequencies(Bitmap bitmap)
         {
+            bitmap.IsSupported();
+
             var bitmapData = bitmap.LockBits(
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                 ImageLockMode.ReadWrite, bitmap.PixelFormat);
 
             var frequencies = new int[256];
-            var ptrStep = bitmap.GetBitsPerPixel() / 8;
+            var step = sizeof(int);
 
             unsafe
             {
@@ -114,7 +118,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
                 {
                     var ptr = startPtr + y * stride;
 
-                    for (int x = 0; x < dstWidth; ++x, ptr += ptrStep)
+                    for (int x = 0; x < dstWidth; ++x, ptr += step)
                     {
                         partial[ptr[0]]++;
                     }

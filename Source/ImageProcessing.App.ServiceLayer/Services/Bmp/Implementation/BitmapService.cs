@@ -16,6 +16,8 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
         /// <inheritdoc/>
         public Bitmap Normalize(Bitmap bitmap)
         {
+            bitmap.IsSupported();
+
             var max = Max(bitmap);
             var min = Min(bitmap);
 
@@ -29,7 +31,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
                 ImageLockMode.ReadWrite, bitmap.PixelFormat);
 
             var size = bitmap.Size;
-            var ptrStep = bitmap. GetBitsPerPixel() / 8;
+            var step = sizeof(int);
             var stride = bitmapData.Stride;
             var options = new ParallelOptions()
             {
@@ -46,7 +48,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
                 {
                     var ptr = startPtr + y * stride;
 
-                    for (int x = 0; x < dstWidth; ++x, ptr += ptrStep)
+                    for (int x = 0; x < dstWidth; ++x, ptr += step)
                     {
                         ptr[0] = (byte)(((ptr[0] - min) * divisor) + newMin);
                         ptr[1] = (byte)(((ptr[1] - min) * divisor) + newMin);
@@ -63,13 +65,15 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
         /// <inheritdoc/>
         public byte Max(Bitmap bitmap)
         {
+            bitmap.IsSupported();
+
             var result = new Bitmap(bitmap);
             var resultData = result.LockBits(
                 new Rectangle(0, 0, result.Width, result.Height),
                 ImageLockMode.ReadOnly, bitmap.PixelFormat);
 
             var size = result.Size;
-            var ptrStep = bitmap.GetBitsPerPixel() / 8;
+            var step = sizeof(int);
             var stride = resultData.Stride;
             var options = new ParallelOptions()
             {
@@ -90,7 +94,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
                 {
                     var ptr = startPtr + y * stride;
 
-                    for (var x = 0; x < dstWidth; ++x, ptr += ptrStep)
+                    for (var x = 0; x < dstWidth; ++x, ptr += step)
                     {
                         if (max < ptr[0])
                         {
@@ -109,13 +113,15 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
         /// <inheritdoc/>
         public byte Min(Bitmap bitmap)
         {
+            bitmap.IsSupported();
+
             var result = new Bitmap(bitmap);
             var resultData = result.LockBits(
                 new Rectangle(0, 0, result.Width, result.Height),
                 ImageLockMode.ReadOnly, bitmap.PixelFormat);
 
             var size = result.Size;
-            var ptrStep = bitmap.GetBitsPerPixel() / 8;
+            var step = sizeof(int);
             var stride = resultData.Stride;
             var options = new ParallelOptions()
             {
@@ -134,7 +140,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
                 {
                     var ptr = startPtr + y * stride;
 
-                    for (var x = 0; x < dstWidth; ++x, ptr += ptrStep)
+                    for (var x = 0; x < dstWidth; ++x, ptr += step)
                     {
                         if (min > ptr[0])
                         {
@@ -153,12 +159,14 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
         /// <inheritdoc/>
         public  Bitmap Shuffle(Bitmap bitmap)
         {
+            bitmap.IsSupported();
+
             var bitmapData = bitmap.LockBits(
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                 ImageLockMode.ReadWrite, bitmap.PixelFormat);
 
             var resolution = bitmap.Width * bitmap.Height;
-            var ptrStep = bitmap.GetBitsPerPixel() / 8;
+            var step = sizeof(int);
 
             var random = new Random(Guid.NewGuid().GetHashCode());
 
@@ -170,14 +178,14 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
 
                 var ptr = startPtr;
 
-                for (var index = resolution - 1; index > 1; --index, ptr += ptrStep)
+                for (var index = resolution - 1; index > 1; --index, ptr += step)
                 {
-                    var newPtr = startPtr + random.Next(index) * ptrStep;
+                    var newPtr = startPtr + random.Next(index) * step;
 
                     r = ptr[0];
                     g = ptr[1];
                     b = ptr[2];
-
+                   
                     ptr[0] = newPtr[0];
                     ptr[1] = newPtr[1];
                     ptr[2] = newPtr[2];
@@ -197,6 +205,8 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
         /// <inheritdoc/>
         public Bitmap Magnitude(Bitmap xDerivative, Bitmap yDerivative)
         {
+            xDerivative.IsSupported(); yDerivative.IsSupported();
+
             var result = new Bitmap(xDerivative);
 
             var xDerivativeData = xDerivative.LockBits(
@@ -212,7 +222,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
                 ImageLockMode.WriteOnly, result.PixelFormat);
 
             var size = result.Size;
-            var ptrStep = result.GetBitsPerPixel() / 8;
+            var step = sizeof(int);
 
             var (yStride, xStride) = (yDerivativeData.Stride, xDerivativeData.Stride);
             var stride = resultData.Stride;
@@ -236,7 +246,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
                     var xDerivativePtr = xDerivativeStartPtr + y * xStride;
                     var yDerivativePtr = yDerivativeStartPtr + y * yStride;
 
-                    for (var x = 0; x < dstWidth; ++x, resultPtr += ptrStep, xDerivativePtr += ptrStep, yDerivativePtr += ptrStep)
+                    for (var x = 0; x < dstWidth; ++x, resultPtr += step, xDerivativePtr += step, yDerivativePtr += step)
                     {
                         double Gx = xDerivativePtr[0];
                         double Gy = yDerivativePtr[0];

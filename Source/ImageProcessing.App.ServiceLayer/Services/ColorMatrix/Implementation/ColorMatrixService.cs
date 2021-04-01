@@ -15,17 +15,14 @@ namespace ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Implementation
         /// <inheritdoc/>
         public Bitmap Apply(Bitmap source, ReadOnly2DArray<double> mtx)
         {
+            source.IsSupported();
+
             var bitmapData = source.LockBits(
               new Rectangle(0, 0, source.Width, source.Height),
               ImageLockMode.ReadWrite, source.PixelFormat);
 
             var (width, height) = (source.Width, source.Height);
-            var ptrStep = source.GetBitsPerPixel() / 8;
-
-            if(ptrStep != 4)
-            {
-                throw new InvalidOperationException($"{source.PixelFormat} is not supported.");
-            }
+            var step = sizeof(int);
 
             var options = new ParallelOptions()
             {
@@ -50,7 +47,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Implementation
 
                     double r, g, b, a;
 
-                    for (var x = 0; x < width; ++x, ptr += ptrStep)
+                    for (var x = 0; x < width; ++x, ptr += step)
                     {
                         r = a00 * ptr[2] + a01 * ptr[1] + a02 * ptr[0] + a03 * ptr[3] + a04;
                         g = a10 * ptr[2] + a11 * ptr[1] + a12 * ptr[0] + a13 * ptr[3] + a14;

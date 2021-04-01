@@ -12,6 +12,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
     {
         public Bitmap Transform(Bitmap src, double sx, double sy)
         {
+            src.IsSupported();
+
             if (sx == 1d && sy == 1d) { return src; }
 
             var (dstWidth, dstHeight) = ((int)(src.Width * sx), (int)(src.Height * sy));
@@ -30,7 +32,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 new Rectangle(0, 0, dst.Width, dst.Height),
                 ImageLockMode.WriteOnly, dst.PixelFormat);
 
-            var ptrStep = dst.GetBitsPerPixel() / 8;
+            var step = sizeof(int);
             var options = new ParallelOptions()
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount
@@ -61,17 +63,18 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 
                         byte* srcPtr;
 
-                        for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
+                        for (var x = 0; x < dstWidth; ++x, dstRow += step)
                         {
                             srcX = x / sx;
 
                             if (srcX < dSrcWidth && srcX >= 0d)
                             {
-                                srcPtr = srcRow + (int)srcX * ptrStep;
+                                srcPtr = srcRow + (int)srcX * step;
 
                                 dstRow[0] = srcPtr[0];
                                 dstRow[1] = srcPtr[1];
                                 dstRow[2] = srcPtr[2];
+                                dstRow[3] = srcPtr[3];
                             }
                         }
                     }

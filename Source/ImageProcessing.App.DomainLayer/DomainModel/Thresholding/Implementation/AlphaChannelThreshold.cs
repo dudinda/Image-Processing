@@ -12,16 +12,13 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Thresholding.Implementatio
     {
         public Bitmap Segment(Bitmap bitmap, byte threshold)
         {
+            bitmap.IsSupported();
+
             var bitmapData = bitmap.LockBits(
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                 ImageLockMode.ReadWrite, bitmap.PixelFormat);
 
-            var ptrStep = bitmap.GetBitsPerPixel() / 8;
-
-            if(ptrStep != 4)
-            {
-                throw new NotSupportedException($"{bitmap.PixelFormat} is not supported");
-            }
+            var step = sizeof(int);
 
             var size = bitmap.Size;
             var options = new ParallelOptions()
@@ -37,7 +34,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Thresholding.Implementatio
                 {
                     var ptr = startPtr + y * bitmapData.Stride;
 
-                    for (var x = 0; x < size.Width; ++x, ptr += ptrStep)
+                    for (var x = 0; x < size.Width; ++x, ptr += step)
                     {
                         if(ptr[3] > threshold)
                         {

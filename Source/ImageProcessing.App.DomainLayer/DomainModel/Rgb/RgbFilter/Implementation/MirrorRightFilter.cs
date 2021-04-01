@@ -13,20 +13,20 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
         /// <inheritdoc />
         public Bitmap Filter(Bitmap bitmap)
         {
+            bitmap.IsSupported();
+
             var bitmapData = bitmap.LockBits(
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                 ImageLockMode.ReadWrite, bitmap.PixelFormat);
-
-            var ptrStep = bitmap.GetBitsPerPixel() / 8;
 
             var (width, height) = (bitmap.Width, bitmap.Height);
             var options = new ParallelOptions()
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
-
+            var step = sizeof(int);
             var stride = bitmapData.Stride;
-            var endStride = stride - ptrStep;
+            var endStride = stride - step;
 
             unsafe
             {
@@ -43,9 +43,10 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
                         start[0] = end[0];
                         start[1] = end[1];
                         start[2] = end[2];
+                        start[3] = end[3];
 
-                        start += ptrStep;
-                        end -= ptrStep;
+                        start += step;
+                        end -= step;
 
                     } while (start < end);
                 });

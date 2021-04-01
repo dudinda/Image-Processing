@@ -12,7 +12,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
     {
         public Bitmap Resize(Bitmap src, double xScale, double yScale)
         {
-            if(yScale == 0d && xScale == 0d) { return src; }
+            src.IsSupported();
+
+            if (yScale == 0d && xScale == 0d) { return src; }
 
             var (srcWidth, srcHeight) = (src.Width, src.Height);
 
@@ -33,7 +35,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                 new Rectangle(0, 0, dstWidth, dstHeight),
                 ImageLockMode.WriteOnly, dst.PixelFormat);
 
-            var ptrStep = dst.GetBitsPerPixel() / 8;
+            var step = sizeof(int);
             var options = new ParallelOptions()
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount
@@ -79,7 +81,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 
                     int j0, j1, j2, j3, xFlr;
 
-                    for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
+                    for (var x = 0; x < dstWidth; ++x, dstRow += step)
                     {
                         newX = x * dx + 0.5;
                         xFlr = (int)newX;
@@ -87,11 +89,11 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 
                         if (xFlr <= 0) { xFlr = 1; } else if (xFlr > xBound ) { xFlr = xBound; }
 
-                        j0 = (xFlr - 1) * ptrStep;
+                        j0 = (xFlr - 1) * step;
                         //xFlr * ptrStrp
-                        j1 = j0 + ptrStep;
-                        j2 = j1 + ptrStep;
-                        j3 = j2 + ptrStep;
+                        j1 = j0 + step;
+                        j2 = j1 + step;
+                        j3 = j2 + step;
 
                         p00 = i0 + j0; p01 = i0 + j1; p02 = i0 + j2; p03 = i0 + j3;
                         p10 = i1 + j0; p11 = i1 + j1; p12 = i1 + j2; p13 = i1 + j3;
@@ -216,6 +218,44 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                         if (point > 255d) { point = 255d; } else if (point < 0d) { point = 0d; }
 
                         dstRow[2] = (byte)point;
+
+                        b0 = p00[3]; b1 = p01[3]; b2 = p02[3]; b3 = p03[3];
+
+                        p0 = xFrc * (xFrc * (
+                             0.5 * xFrc * (-b0 + 3.0 * b1 - 3.0 * b2 + b3) +
+                             b0 + 2.0 * b2 - 0.5 * (5.0 * b1 + b3))
+                             + 0.5 * (-b0 + b2)) + b1;
+
+                        b0 = p10[3]; b1 = p11[3]; b2 = p12[3]; b3 = p13[3];
+
+                        p1 = xFrc * (xFrc * (
+                            0.5 * xFrc * (-b0 + 3.0 * b1 - 3.0 * b2 + b3) +
+                            b0 + 2.0 * b2 - 0.5 * (5.0 * b1 + b3))
+                            + 0.5 * (-b0 + b2)) + b1;
+
+                        b0 = p20[3]; b1 = p21[3]; b2 = p22[3]; b3 = p23[3];
+
+                        p2 = xFrc * (xFrc * (
+                            0.5 * xFrc * (-b0 + 3.0 * b1 - 3.0 * b2 + b3) +
+                            b0 + 2.0 * b2 - 0.5 * (5.0 * b1 + b3))
+                            + 0.5 * (-b0 + b2)) + b1;
+
+                        b0 = p30[3]; b1 = p31[3]; b2 = p32[3]; b3 = p33[3];
+
+                        p3 = xFrc * (xFrc * (
+                            0.5 * xFrc * (-b0 + 3.0 * b1 - 3.0 * b2 + b3) +
+                            b0 + 2.0 * b2 - 0.5 * (5.0 * b1 + b3))
+                            + 0.5 * (-b0 + b2)) + b1;
+
+                        a = 0.5 * (-p0 + 3.0 * p1 - 3.0 * p2 + p3);
+                        b = p0 + 2.0 * p2 - 0.5 * (5.0 * p1 + p3);
+                        c = 0.5 * (-p0 + p2); d = p1;
+
+                        point = yFrc * (yFrc * (a * yFrc + b) + c) + d;
+
+                        if (point > 255d) { point = 255d; } else if (point < 0d) { point = 0d; }
+
+                        dstRow[3] = (byte)point;
                     }
                 });
             }

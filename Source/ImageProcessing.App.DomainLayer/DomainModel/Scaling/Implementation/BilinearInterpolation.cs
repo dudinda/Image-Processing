@@ -12,7 +12,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
     {
         public Bitmap Resize(Bitmap src, double xScale, double yScale)
         {
-            if(yScale == 0d && xScale == 0d) { return src; }
+            src.IsSupported();
+
+            if (yScale == 0d && xScale == 0d) { return src; }
 
             var (srcWidth, srcHeight) = (src.Width, src.Height);
 
@@ -33,7 +35,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                 new Rectangle(0, 0, dstWidth, dstHeight),
                 ImageLockMode.WriteOnly, dst.PixelFormat);
 
-            var ptrStep = dst.GetBitsPerPixel() / 8;
+            var step = sizeof(int);
             var options = new ParallelOptions()
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount
@@ -73,7 +75,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                     byte* p00, p01,
                           p10, p11;
 
-                    for (var x = 0; x < dstWidth; ++x, dstRow += ptrStep)
+                    for (var x = 0; x < dstWidth; ++x, dstRow += step)
                     {  
                         newX = x * dx + 0.5;
                         xFlr = (int)newX;
@@ -81,9 +83,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 
                         if (xFlr > xBound) { xFlr = xBound; }
 
-                        j0 =  xFlr * ptrStep;
+                        j0 =  xFlr * step;
                         //(xFlr + 1) * ptrStep
-                        j1 = j0 + ptrStep;
+                        j1 = j0 + step;
 
                         p00 = i0 + j0; p10 = i1 + j0;
                         p01 = i0 + j1; p11 = i1 + j1;
@@ -117,6 +119,15 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
                         if (point > 255d) { point = 255d; } else if (point < 0d) { point = 0d; }
 
                         dstRow[2] = (byte)point;
+
+                        col0 = p00[3] * xFrcCompl + p10[3] * xFrc;
+                        col1 = p01[3] * xFrcCompl + p11[3] * xFrc;
+
+                        point = col0 * yFrcCompl + col1 * yFrc;
+
+                        if (point > 255d) { point = 255d; } else if (point < 0d) { point = 0d; }
+
+                        dstRow[3] = (byte)point;
                     }
                 });
             }

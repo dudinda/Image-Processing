@@ -16,6 +16,8 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.
         /// <inheritdoc />
         public Bitmap Filter(Bitmap lvalue, Bitmap rvalue)
         {
+            lvalue.IsSupported(); rvalue.IsSupported();
+
             var result = new Bitmap(lvalue);
 
             var size = result.Size;
@@ -32,7 +34,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.
                 new Rectangle(0, 0, result.Width, result.Height),
                 ImageLockMode.WriteOnly, result.PixelFormat);
 
-            var ptrStep = result.GetBitsPerPixel() / 8;
+            var step = sizeof(int);
             var options = new ParallelOptions()
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount
@@ -53,7 +55,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.
 
                     int b, g, r;
 
-                    for (var x = 0; x < size.Width; ++x, rvaluePtr += ptrStep, lvaluePtr += ptrStep, resultPtr += ptrStep)
+                    for (var x = 0; x < size.Width; ++x, rvaluePtr += step, lvaluePtr += step, resultPtr += step)
                     {
                         b = lvaluePtr[0] + rvaluePtr[0];
                         g = lvaluePtr[1] + rvaluePtr[1];

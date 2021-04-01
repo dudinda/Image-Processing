@@ -5,6 +5,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.DomainLayer.Code.Constants;
 using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Recommendation.Interface;
 using ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Interface;
@@ -26,18 +27,18 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
         /// <inheritdoc />
         public Bitmap Filter(Bitmap bitmap)
         {
+            bitmap.IsSupported();
+
             var bitmapData = bitmap.LockBits(
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                 ImageLockMode.ReadWrite, bitmap.PixelFormat);
-            
-            var ptrStep = bitmap.GetBitsPerPixel() / 8;
 
             var (width, height) = (bitmap.Width, bitmap.Height);
             var options = new ParallelOptions()
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
-
+            var step = sizeof(int);
             unsafe
             {
                 var startPtr = (byte*)bitmapData.Scan0.ToPointer();
@@ -50,7 +51,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
                 {
                     var ptr = startPtr + y * stride;
 
-                    for (var x = 0; x < width; ++x, ptr += ptrStep)
+                    for (var x = 0; x < width; ++x, ptr += step)
                     {
                         partial += _rec.GetLuma(
                             ref ptr[2], ref ptr[1], ref ptr[0]
@@ -68,7 +69,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
                 {
                     var ptr = startPtr + y * stride;
 
-                    for (var x = 0; x < width; ++x, ptr += ptrStep)
+                    for (var x = 0; x < width; ++x, ptr += step)
                     {
                         //if relative luminance greater or equal than average
                         //set it to white

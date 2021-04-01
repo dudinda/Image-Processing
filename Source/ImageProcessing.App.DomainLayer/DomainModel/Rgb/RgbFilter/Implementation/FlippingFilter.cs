@@ -12,19 +12,18 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
     {
         public Bitmap Filter(Bitmap bitmap)
         {
-            var size = bitmap.Size;
+            bitmap.IsSupported();
 
             var bitmapData = bitmap.LockBits(
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                 ImageLockMode.ReadWrite, bitmap.PixelFormat);
 
-            var ptrStep = bitmap.GetBitsPerPixel() / 8;
             var options = new ParallelOptions()
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
-
-            var (width, height) = (size.Width, size.Height - 1);
+            var step = sizeof(int);
+            var (width, height) = (bitmap.Width, bitmap.Height - 1);
 
             var stride = bitmapData.Stride;
             var endStride = stride * height;
@@ -36,7 +35,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
                 Parallel.For(0, width, options, x =>
                 {
                     //get the address of a column
-                    var start = startPtr + x * ptrStep;
+                    var start = startPtr + x * step;
                     var end = start + endStride;
 
                     byte tmp;
@@ -54,6 +53,10 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
                         tmp = end[2];
                         end[2] = start[2];
                         start[2] = tmp;
+
+                        tmp = end[3];
+                        end[3] = start[3];
+                        start[3] = tmp;
 
                         start += stride;
                         end -= stride;

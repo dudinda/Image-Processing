@@ -12,7 +12,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
     {
         public Bitmap Rotate(Bitmap src, double rad)
         {
-            if(rad == 0d) { return src; }
+            src.IsSupported();
+
+            if (rad == 0d) { return src; }
 
             var (srcWidth, srcHeight) = (src.Width, src.Height);
 
@@ -30,7 +32,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
             var (dstHeight, dstWidth) = ((int)(yMax - yMin), (int)(xMax - xMin));
 
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
-               .DrawFilledRectangle(Brushes.White);
+                .DrawFilledRectangle(Brushes.White);
 
             var (xCenter, yCenter) = ((dstWidth - 1) / 2.0, (dstHeight - 1) / 2.0);
             var (xSrcCenter, ySrcCenter) = ((srcWidth - 1) / 2.0, (srcHeight - 1) / 2.0);
@@ -43,12 +45,11 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                 new Rectangle(0, 0, dstWidth, dstHeight),
                 ImageLockMode.WriteOnly, dst.PixelFormat);
 
-            var ptrStep = src.GetBitsPerPixel() / 8;
             var options = new ParallelOptions()
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
-
+            var step = sizeof(int);
             var (xBound, yBound) = (srcWidth - 2, srcHeight - 2);
             var (srcStride, dstStride) = (srcData.Stride, dstData.Stride);
 
@@ -76,7 +77,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                     byte* p00, p01, i0,
                           p10, p11, i1;
 
-                    for (var x = 0; x < dstWidth; ++x, dstPtr += ptrStep)
+                    for (var x = 0; x < dstWidth; ++x, dstPtr += step)
                     {
                         xShift = x - xCenter; 
 
@@ -96,9 +97,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                             //srcStartPtr + (yFloor + 1) * srcStride
                             i1 = i0 + srcStride;
 
-                            j0 = xFloor * ptrStep;
+                            j0 = xFloor * step;
                             // (xFloor + 1) * ptrStep
-                            j1 = j0 + ptrStep;
+                            j1 = j0 + step;
 
                             p00 = i0 + j0; p01 = i0 + j1;
                             p10 = i1 + j0; p11 = i1 + j1;
@@ -132,6 +133,15 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                             if (point > 255d) { point = 255d; } else if (point < 0d) { point = 0d; }
 
                             dstPtr[2] = (byte)point;
+
+                            col0 = p00[3] * xFracCompl + p10[3] * xFrac;
+                            col1 = p01[3] * xFracCompl + p11[3] * xFrac;
+
+                            point = col0 * yFracCompl + col1 * yFrac;
+
+                            if (point > 255d) { point = 255d; } else if (point < 0d) { point = 0d; }
+
+                            dstPtr[3] = (byte)point;
                         }
                     }
                 });
