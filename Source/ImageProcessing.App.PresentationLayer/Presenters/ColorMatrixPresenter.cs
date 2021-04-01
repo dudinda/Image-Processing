@@ -26,12 +26,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         ISubscriber<ApplyCustomColorMatrixEventArgs>,
         ISubscriber<RestoreFocusEventArgs>
     {
-        private readonly IRgbServiceProvider _provider;
+        private readonly IRgbProvider _provider;
         private readonly IAsyncOperationLocker _locker;
         private readonly IColorMatrixFactory _factory;
 
         public ColorMatrixPresenter(
-            IRgbServiceProvider provider,
+            IRgbProvider provider,
             IAsyncOperationLocker locker,
             IColorMatrixFactory factory)
         {

@@ -18,11 +18,11 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
     {
         private readonly ConvolutionPresenter _presenter;
 
-        public IConvolutionServiceProvider Provider { get; }
+        public IConvolutionProvider Provider { get; }
         public IAsyncOperationLocker Operation { get; }
 
         public ConvolutionPresenterWrapper(
-            IConvolutionServiceProvider provider,
+            IConvolutionProvider provider,
             IAsyncOperationLocker operationLocker)
         {
             Provider = provider;

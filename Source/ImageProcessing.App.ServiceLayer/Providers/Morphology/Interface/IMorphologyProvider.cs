@@ -8,7 +8,7 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Interface.Morphology
     /// <summary>
     /// Provides the <see cref="MorphOperator"/> implementation.
     /// </summary>
-    public interface IMorphologyServiceProvider
+    public interface IMorphologyProvider
     {
         /// <summary>
         /// Apply an unary <see cref="MorphOperator"/> with

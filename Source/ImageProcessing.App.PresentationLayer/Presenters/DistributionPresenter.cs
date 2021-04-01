@@ -31,12 +31,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
     {
         private readonly IBitmapService _service;
         private readonly IAsyncOperationLocker _locker;
-        private readonly IBitmapLuminanceServiceProvider _provider;
+        private readonly IBitmapLuminanceProvider _provider;
         
         public DistributionPresenter(
             IBitmapService service,
             IAsyncOperationLocker locker,
-            IBitmapLuminanceServiceProvider provider)
+            IBitmapLuminanceProvider provider)
         {
             _locker = locker;
             _service = service;

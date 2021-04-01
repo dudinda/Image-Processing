@@ -26,12 +26,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
           ISubscriber<ShowTooltipOnErrorEventArgs>,
           ISubscriber<RestoreFocusEventArgs>
     {
-        private readonly IRgbServiceProvider _provider;
+        private readonly IRgbProvider _provider;
         private readonly IRgbFilterFactory _factory;
         private readonly IAsyncOperationLocker _locker;
 
         public RgbPresenter(
-            IRgbServiceProvider provider,
+            IRgbProvider provider,
             IRgbFilterFactory factory,
             IAsyncOperationLocker locker) 
         {

@@ -31,16 +31,8 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Extensions
                 return false;
             }
 
-            var bitmapBits = bitmap.GetBitsPerPixel();
-            var toCompareBits = toCompare.GetBitsPerPixel();
-
-            if(bitmapBits != toCompareBits)
-            {
-                return false;
-            }
-
             var resolution = bitmap.Width * bitmap.Height;
-            var ptrStep = bitmap.GetBitsPerPixel() / 8;
+            var ptrStep = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
             var size = bitmap.Size;
 
             var options = new ParallelOptions()

@@ -8,7 +8,7 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface
     /// <summary>
     /// Provides the <see cref="RgbFltr"/> and <see cref="RgbChannels"/> implementation.
     /// </summary>
-    public interface IRgbServiceProvider
+    public interface IRgbProvider
     {
         /// <summary>
         /// Choose the <see cref="RgbFltr"/> implementation over

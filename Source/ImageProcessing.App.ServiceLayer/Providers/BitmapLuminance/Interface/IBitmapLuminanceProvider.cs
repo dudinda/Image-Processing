@@ -9,7 +9,7 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistributio
     /// Provides the <see cref="PrDistribution"/> and
     /// <see cref="RndInfo"/> implementation for a bitmap.
     /// </summary>
-    public interface IBitmapLuminanceServiceProvider
+    public interface IBitmapLuminanceProvider
     {
         /// <summary>
         /// Transfrom the specified bitmap to a <see cref="PrDistribution"/> with

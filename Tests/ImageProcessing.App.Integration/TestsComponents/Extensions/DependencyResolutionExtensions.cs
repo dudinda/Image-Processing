@@ -120,11 +120,11 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
                    .RegisterTransientInstance<IRgbFormExposer>(form);
 
             builder.RegisterTransientInstance(
-               Substitute.For<IRgbServiceProvider>());
+               Substitute.For<IRgbProvider>());
 
             builder.RegisterTransientInstance(
               Substitute.For<RgbPresenterWrapper>(controller,
-                  builder.Resolve<IRgbServiceProvider>(),
+                  builder.Resolve<IRgbProvider>(),
                   builder.Resolve<IAsyncOperationLocker>()
               ));
         }
@@ -142,12 +142,12 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
             builder.RegisterTransientInstance<IConvolutionView>(form)
                    .RegisterTransientInstance<IConvolutionFormExposer>(form);
 
-            builder.RegisterTransientInstance<IConvolutionServiceProvider>(
-                Substitute.For<IConvolutionServiceProvider>());
+            builder.RegisterTransientInstance<IConvolutionProvider>(
+                Substitute.For<IConvolutionProvider>());
 
             builder.RegisterTransientInstance(
                 Substitute.For<ConvolutionPresenterWrapper>(controller,
-                    builder.Resolve<IConvolutionServiceProvider>(),
+                    builder.Resolve<IConvolutionProvider>(),
                     builder.Resolve<IAsyncOperationLocker>()
                 ));
         }
@@ -165,13 +165,13 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
             builder.RegisterTransientInstance<IDistributionView>(form)
                    .RegisterTransientInstance<IDistributionFormExposer>(form);
 
-            builder.RegisterTransientInstance<IBitmapLuminanceServiceProvider>(
-                Substitute.For<IBitmapLuminanceServiceProvider>());
+            builder.RegisterTransientInstance<IBitmapLuminanceProvider>(
+                Substitute.For<IBitmapLuminanceProvider>());
 
             builder.RegisterTransientInstance(
                 Substitute.For<DistributionPresenterWrapper>(controller,
                     builder.Resolve<IAsyncOperationLocker>(),
-                    builder.Resolve<IBitmapLuminanceServiceProvider>()
+                    builder.Resolve<IBitmapLuminanceProvider>()
                 ));
         }
     }

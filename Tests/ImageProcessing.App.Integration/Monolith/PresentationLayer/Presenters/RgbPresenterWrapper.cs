@@ -18,12 +18,12 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
     {
         private readonly RgbPresenter _presenter;
 
-        public IRgbServiceProvider Provider { get; }
+        public IRgbProvider Provider { get; }
         public IAsyncOperationLocker Operation { get; }
         public IRgbFilterFactory Factory { get; }
 
         public RgbPresenterWrapper(
-            IRgbServiceProvider provider,
+            IRgbProvider provider,
             IRgbFilterFactory factory,
             IAsyncOperationLocker locker)
         {

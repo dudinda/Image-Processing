@@ -10,15 +10,15 @@ using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Morphology
 {
-    /// <inheritdoc cref="IMorphologyServiceProvider"/>
-    public sealed class MorphologyServiceProvider : IMorphologyServiceProvider
+    /// <inheritdoc cref="IMorphologyProvider"/>
+    public sealed class MorphologyProvider : IMorphologyProvider
     {
         private readonly IMorphologyService _morphologyService;
         private readonly IMorphologyFactory _morphologyFactory;
         private readonly IStructuringElementFactory _kernelFactory;
         private readonly ICacheService<Bitmap> _cache;
 
-        public MorphologyServiceProvider(
+        public MorphologyProvider(
             IMorphologyService morphologyService,
             IMorphologyFactory morphologyFactory,
             ICacheService<Bitmap> cache,

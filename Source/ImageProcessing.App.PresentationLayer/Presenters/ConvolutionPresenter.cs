@@ -23,11 +23,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
           ISubscriber<ContainerUpdatedEventArgs>,
           ISubscriber<RestoreFocusEventArgs>
     {
-        private readonly IConvolutionServiceProvider _provider;
+        private readonly IConvolutionProvider _provider;
         private readonly IAsyncOperationLocker _locker;
 
         public ConvolutionPresenter(
-            IConvolutionServiceProvider provider,
+            IConvolutionProvider provider,
             IAsyncOperationLocker locker) 
         {
             _provider = provider;

@@ -25,13 +25,13 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
         private readonly DistributionPresenter _presenter;
 
         public IAsyncOperationLocker Operation { get; }
-        public IBitmapLuminanceServiceProvider Provider { get; }
+        public IBitmapLuminanceProvider Provider { get; }
         public IBitmapService Service { get; }
 
         public DistributionPresenterWrapper(
             IBitmapService service,
             IAsyncOperationLocker locker,
-            IBitmapLuminanceServiceProvider provider) 
+            IBitmapLuminanceProvider provider) 
         {
             Operation = locker;
             Provider = provider;

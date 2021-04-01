@@ -10,15 +10,15 @@ using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Rgb.Implementation
 {
-    /// <inheritdoc cref="IRgbServiceProvider"/>
-    public sealed class RgbServiceProvider : IRgbServiceProvider
+    /// <inheritdoc cref="IRgbProvider"/>
+    public sealed class RgbProvider : IRgbProvider
     {
         private readonly IRgbFilterFactory _rgb;
         private readonly IColorMatrixService _service;
         private readonly IColorMatrixFactory _matrix;
         private readonly ICacheService<Bitmap> _cache;
 
-        public RgbServiceProvider(
+        public RgbProvider(
             IRgbFilterFactory rgb,
             IColorMatrixService service,
             IColorMatrixFactory matrix,

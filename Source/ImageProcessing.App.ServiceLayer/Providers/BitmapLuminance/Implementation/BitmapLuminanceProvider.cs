@@ -10,16 +10,16 @@ using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Int
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistribution
 {
-    /// <inheritdoc cref="IBitmapLuminanceServiceProvider"/>
-    public sealed class BitmapLuminanceServiceProvider
-        : IBitmapLuminanceServiceProvider
+    /// <inheritdoc cref="IBitmapLuminanceProvider"/>
+    public sealed class BitmapLuminanceProvider
+        : IBitmapLuminanceProvider
     {
         private readonly IBitmapLuminanceService _service;
         private readonly IDistributionFactory _factory;
         private readonly IBitmapLuminanceVisitor _visitor;
         private readonly IBitmapLuminanceVisitableFactory _info;
 
-        public BitmapLuminanceServiceProvider(
+        public BitmapLuminanceProvider(
             IBitmapLuminanceService service,
             IBitmapLuminanceVisitableFactory info,
             IBitmapLuminanceVisitor visitor,
