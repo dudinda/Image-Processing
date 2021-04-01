@@ -8,12 +8,14 @@ using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Interface;
+using ImageProcessing.Utility.DecimalMath.Real;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Implementation
 {
     /// <see cref="IBitmapLuminanceService"/>
     public sealed class BitmapLuminanceService : IBitmapLuminanceService
     {
+        private readonly DecimalReal _real = new DecimalReal();
         private readonly IRandomVariableService _service;
 
         public BitmapLuminanceService(IRandomVariableService service)
@@ -149,7 +151,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
 
         /// <inheritdoc />
         public decimal GetStandardDeviation(Bitmap bitmap)
-            => (decimal)Math.Sqrt((double)(GetVariance(bitmap)));
+            => _real.Sqrt(GetVariance(bitmap));
         
         /// <inheritdoc />
         public decimal GetConditionalExpectation((int x1, int x2) interval, Bitmap bitmap)

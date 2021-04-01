@@ -53,6 +53,15 @@ namespace ImageProcessing.Tests.Utility
         }
 
         [Test, TestCaseSource(
+           typeof(RealDomainCasesFactory),
+            nameof(GetNonNegativeRealAxis))]
+        public void SqrtTests(decimal value)
+           => Assert.That(
+               _real.Abs(_real.Sqrt(value) - (decimal)Math.Sqrt((double)value)),
+               Is.LessThan(0.00001M)
+           );
+
+        [Test, TestCaseSource(
             typeof(RealDomainCasesFactory),
             nameof(GetRealAxis))]
         public void SignTest(decimal value)

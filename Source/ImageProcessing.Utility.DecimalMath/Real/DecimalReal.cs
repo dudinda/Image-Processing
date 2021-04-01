@@ -72,13 +72,13 @@ namespace ImageProcessing.Utility.DecimalMath.Real
             if (x > y)
             {
                 var d = y / x;
-                return Abs(x) * (decimal)Math.Sqrt((double)(1.0M + d * d));
+                return Abs(x) * Sqrt(1.0M + d * d);
             }
 
             if (x < y)
             {
                 var d = x / y;
-                return Abs(y) * (decimal)Math.Sqrt((double)(d * d + 1.0M));
+                return Abs(y) * Sqrt(d * d + 1.0M);
             }
 
             if (x == 0.0M && y == 0.0M)
@@ -154,6 +154,14 @@ namespace ImageProcessing.Utility.DecimalMath.Real
             => x - mod * Math.Floor(x / mod);
 
         #region Log and exp functions
+
+        /// <summary>
+        /// Evaluate sqrt(x).
+        /// </summary>
+        /// <param name="x">An argument of the function</param>
+        /// <returns>sqrt(x)</returns>
+        public decimal Sqrt(decimal x)
+            => (decimal)Math.Sqrt((double)x);
 
         /// <summary>
         /// Evaluate x ** power with a specified precision.

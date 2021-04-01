@@ -112,7 +112,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
                 _real.Abs(pmf.Sum() - 1.0M) < Epsilon,
                 RandomVariableErrors.PmfNotNormalized);
 
-            return (decimal)Math.Sqrt((double)(GetVariance(pmf)));
+            return _real.Sqrt(GetVariance(pmf));
         }
 
         /// <inheritdoc/>

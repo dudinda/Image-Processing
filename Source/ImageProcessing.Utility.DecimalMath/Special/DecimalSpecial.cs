@@ -13,8 +13,6 @@ namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
         private readonly DecimalReal _real = new DecimalReal();
 
         #region Gamma constants
-        private const int g = 7;
-
         private static decimal[] p =
         {
              0.99999999999980993M, 676.5203681218851M,     -1259.1392167224028M,
@@ -22,22 +20,6 @@ namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
             -0.13857109526572012M, 9.9843695780195716e-6M, 1.5056327351493116e-7M
         };
         #endregion
-
-        #region Cordic constans
-
-        private const decimal K = 0.6072529351031M;
-
-        private static decimal[] _angles = new decimal[]
-        {
-            0.785398163M, 0.463647608M, 0.244978663M, 0.124354992M,
-            0.062418807M, 0.03123983M,  0.015623726M, 0.00781234M,
-            0.003906228M, 0.001953121M, 0.000976559M, 0.000488278M,
-            0.000244137M, 0.000122067M, 0.000061031M, 0.000030514M,
-            0.000015255M, 0.000007626M, 0.000003815M, 0.000001904M
-        };
-
-        #endregion
-
 
         /// <summary>
         /// Evaluate Li(x).
@@ -169,6 +151,8 @@ namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
         /// <returns>Γ(1 + z)</returns>
         public (decimal Re, decimal Im) Gamma((decimal x, decimal y) z)
         {
+            const int g = 7;
+
             if(z.x < 0)
             {
                 throw new ArgumentException("NaN");
@@ -194,7 +178,7 @@ namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
 
                 var t = w + g + 0.5M;
 
-               return (decimal)Math.Sqrt((double)(2M * DecimalReal.PI)) * ( t ^ (w + 0.5M) ) * _complex.Exp(-t) * x;
+               return _real.Sqrt(PI) * ( t ^ (w + 0.5M) ) * _complex.Exp(-t) * x;
             }
         }
 

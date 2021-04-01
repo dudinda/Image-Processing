@@ -36,7 +36,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
         public decimal SecondParameter => throw new NotSupportedException();
 
         /// <inheritdoc/>
-        public decimal GetMean() => _sigma * (decimal)Math.Sqrt((double)DecimalReal.PiOver2);
+        public decimal GetMean() => _sigma * _math.Sqrt(DecimalReal.PiOver2);
 
         /// <inheritdoc/>
         public decimal GetVariance() => (2M - DecimalReal.PiOver2) * _sigma * _sigma;
@@ -46,7 +46,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
         {
             if (p >= 0 && p < 1)
             {
-                quantile = _sigma * (decimal)Math.Sqrt((double)(-2M * _math.Log(1M - p)));
+                quantile = _sigma * _math.Sqrt(-2M * _math.Log(1M - p));
                 return true;
             }
 
