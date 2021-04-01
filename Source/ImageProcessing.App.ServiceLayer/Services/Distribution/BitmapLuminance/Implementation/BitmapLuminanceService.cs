@@ -39,7 +39,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
-            var step = sizeof(int);
+            var step = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
             var size = bitmap.Size;
             var stride = bitmapData.Stride;
             var (dstWidth, dstHeight) = (size.Width, size.Height);
@@ -96,7 +96,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
                 ImageLockMode.ReadWrite, bitmap.PixelFormat);
 
             var frequencies = new int[256];
-            var step = sizeof(int);
+            var step = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
 
             unsafe
             {

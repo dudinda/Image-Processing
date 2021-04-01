@@ -49,7 +49,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
-            var step = sizeof(int);
+            var step = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
             var (xBound, yBound) = (srcWidth - 2, srcHeight - 2);
             var (srcStride, dstStride) = (srcData.Stride, dstData.Stride);
 

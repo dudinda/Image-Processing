@@ -28,7 +28,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
                 ImageLockMode.WriteOnly, destination.PixelFormat);
 
             var (width, height) = (source.Width, source.Height);
-            var step = sizeof(int);
+            var step = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
 
             unsafe
             {

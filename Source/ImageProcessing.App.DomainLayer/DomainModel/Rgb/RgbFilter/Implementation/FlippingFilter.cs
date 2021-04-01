@@ -22,7 +22,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
-            var step = sizeof(int);
+            var step = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
             var (width, height) = (bitmap.Width, bitmap.Height - 1);
 
             var stride = bitmapData.Stride;

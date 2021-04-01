@@ -18,7 +18,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Thresholding.Implementatio
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                 ImageLockMode.ReadWrite, bitmap.PixelFormat);
 
-            var step = sizeof(int);
+            var step = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
 
             var size = bitmap.Size;
             var options = new ParallelOptions()

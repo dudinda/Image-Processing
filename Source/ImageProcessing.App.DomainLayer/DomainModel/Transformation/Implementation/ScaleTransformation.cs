@@ -32,7 +32,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
                 new Rectangle(0, 0, dst.Width, dst.Height),
                 ImageLockMode.WriteOnly, dst.PixelFormat);
 
-            var step = sizeof(int);
+            var step = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
             var options = new ParallelOptions()
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount

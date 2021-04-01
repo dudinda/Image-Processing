@@ -31,7 +31,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
                 ImageLockMode.ReadWrite, bitmap.PixelFormat);
 
             var size = bitmap.Size;
-            var step = sizeof(int);
+            var step = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
             var stride = bitmapData.Stride;
             var options = new ParallelOptions()
             {
@@ -73,7 +73,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
                 ImageLockMode.ReadOnly, bitmap.PixelFormat);
 
             var size = result.Size;
-            var step = sizeof(int);
+            var step = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
             var stride = resultData.Stride;
             var options = new ParallelOptions()
             {
@@ -121,7 +121,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
                 ImageLockMode.ReadOnly, bitmap.PixelFormat);
 
             var size = result.Size;
-            var step = sizeof(int);
+            var step = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
             var stride = resultData.Stride;
             var options = new ParallelOptions()
             {
@@ -166,7 +166,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
                 ImageLockMode.ReadWrite, bitmap.PixelFormat);
 
             var resolution = bitmap.Width * bitmap.Height;
-            var step = sizeof(int);
+            var step = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
 
             var random = new Random(Guid.NewGuid().GetHashCode());
 
@@ -222,7 +222,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
                 ImageLockMode.WriteOnly, result.PixelFormat);
 
             var size = result.Size;
-            var step = sizeof(int);
+            var step = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
 
             var (yStride, xStride) = (yDerivativeData.Stride, xDerivativeData.Stride);
             var stride = resultData.Stride;

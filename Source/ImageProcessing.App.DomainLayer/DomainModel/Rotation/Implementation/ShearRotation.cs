@@ -58,7 +58,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
                 new Rectangle(0, 0, dstWidth, dstHeight),
                 ImageLockMode.WriteOnly, dst.PixelFormat);
 
-            var step = sizeof(int);
+            var step = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
             var (srcStride, dstStride) = (srcData.Stride, dstData.Stride);
 
             var options = new ParallelOptions()

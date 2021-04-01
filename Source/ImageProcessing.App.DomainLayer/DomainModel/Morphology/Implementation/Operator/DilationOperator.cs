@@ -32,7 +32,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.
                 ImageLockMode.WriteOnly, destination.PixelFormat);
 
             var size = source.Size;
-            var step = sizeof(int);
+            var step = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
 
             unsafe
             {

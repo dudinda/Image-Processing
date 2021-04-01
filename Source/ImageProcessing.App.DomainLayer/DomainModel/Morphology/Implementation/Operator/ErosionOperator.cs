@@ -35,7 +35,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.
                 new Rectangle(0, 0, source.Width, source.Height),
                 ImageLockMode.WriteOnly,  destination.PixelFormat);
      
-            var step = sizeof(int);
+            var step = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
             var options = new ParallelOptions()
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount - 1
