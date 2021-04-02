@@ -27,27 +27,30 @@ namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
                 new Rectangle(0, 0, dst.Width, dst.Height),
                 ImageLockMode.WriteOnly, dst.PixelFormat);
 
-            var (width, height) = (src.Width, src.Height);
-            var step = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
+            var kernelOffset = (byte)((filter.Kernel.ColumnCount - 1) / 2);
 
+            var (width, height) = (src.Width, src.Height);
+            var (widthOffset, heightOffset) = (width - kernelOffset, height - kernelOffset);
+            var (kernel, bias, factor) = (filter.Kernel, filter.Bias, filter.Factor);
+            var (srcStride, dstStride) = (srcData.Stride, dstData.Stride);
+
+            var step = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
+            var rowStep = step * kernelOffset;
             unsafe
             {
                 var srcStartPtr = (byte*)srcData.Scan0.ToPointer();
                 var dstStartPtr = (byte*)dstData.Scan0.ToPointer();
-                var (srcStride, dstStride) = (srcData.Stride, dstData.Stride);
-
-                var kernelOffset = (byte)((filter.Kernel.ColumnCount - 1) / 2);
 
                 var options = new ParallelOptions()
                 {
                     MaxDegreeOfParallelism = Environment.ProcessorCount
                 };
 
-                Parallel.For(kernelOffset, height - kernelOffset, options, y =>
+                Parallel.For(kernelOffset, heightOffset, options, y =>
                 {
                     //get the address of a new line, considering a kernel offset
-                    var srcPtr = srcStartPtr + y * srcStride + kernelOffset * step;
-                    var dstPtr = dstStartPtr + y * dstStride + kernelOffset * step;
+                    var srcPtr = srcStartPtr + y * srcStride + rowStep;
+                    var dstPtr = dstStartPtr + y * dstStride + rowStep;
 
                     //accumulators of R, G, B components 
                     double r, g, b;
@@ -56,7 +59,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
                     byte* rowPtr, colPtr;
                     int rowIdx, colIdx;
 
-                    for (int x = kernelOffset; x < width - kernelOffset; ++x, srcPtr += step, dstPtr += step)
+                    for (int x = kernelOffset; x < widthOffset; ++x, srcPtr += step, dstPtr += step)
                     {
                         r = 0d; g = 0d; b = 0d;
 
@@ -71,15 +74,15 @@ namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
                                 colPtr = rowPtr + kernelColumn * step;
                                 colIdx = kernelColumn + kernelOffset;
                                 
-                                b += colPtr[0] * filter.Kernel[rowIdx, colIdx];
-                                g += colPtr[1] * filter.Kernel[rowIdx, colIdx];
-                                r += colPtr[2] * filter.Kernel[rowIdx, colIdx];
+                                b += colPtr[0] * kernel[rowIdx, colIdx];
+                                g += colPtr[1] * kernel[rowIdx, colIdx];
+                                r += colPtr[2] * kernel[rowIdx, colIdx];
                             }
                         }
-                        //multiply each component by the kernel factor
-                        b = b * filter.Factor + filter.Bias;
-                        g = g * filter.Factor + filter.Bias;
-                        r = r * filter.Factor + filter.Bias;
+
+                        b = b * factor + bias;
+                        g = g * factor + bias;
+                        r = r * factor + bias;
 
                         if (b > 255d) { b = 255d; } else if (b < 0d) { b = 0d; }
                         if (g > 255d) { g = 255d; } else if (g < 0d) { g = 0d; }
