@@ -156,12 +156,37 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         #region Log and exp functions
 
         /// <summary>
-        /// Evaluate sqrt(x).
+        /// Evaluate sqrt(x) digit - by - digit.
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <returns>sqrt(x)</returns>
-        public decimal Sqrt(decimal x)
-            => (decimal)Math.Sqrt((double)x);
+        public decimal Sqrt(decimal x, decimal precision = Epsilon)
+        {
+            if(x < 0m)
+            {
+                throw new ArgumentException(nameof(x));
+            }
+
+            if(x == 0m) { return x; }
+
+            var sqrt = 0m; var @base = 1m;
+
+            decimal step;
+
+            while (Abs(x - sqrt * sqrt) > precision)
+            {
+                step = 0m;
+                do
+                {
+                    ++step;
+                } while ((sqrt + (step * @base)) * (sqrt + (step * @base)) <= x);
+
+                sqrt += (step - 1) * @base;
+                @base /= 10m;
+            }
+
+            return sqrt;
+        }
 
         /// <summary>
         /// Evaluate x ** power with a specified precision.
@@ -259,13 +284,13 @@ namespace ImageProcessing.Utility.DecimalMath.Real
             }
 
             var a0 = (1.0M + x) * 0.5M;
-            var b0 = (decimal)Math.Sqrt((double)x);
+            var b0 = Sqrt(x, precision);
 
                 
             while (Abs(a0 - b0) > precision)
             {
                 a0 = (a0 + b0) * 0.5M;
-                b0 = (decimal)Math.Sqrt((double)(a0 * b0));
+                b0 = Sqrt(a0 * b0, precision);
             }
 
             return 2.0M * (x - 1.0M) / (a0 + b0);
@@ -439,7 +464,7 @@ namespace ImageProcessing.Utility.DecimalMath.Real
                 throw new ArgumentException("NaN");
             }
 
-            return Arctan(x / (decimal)Math.Sqrt((double)(1.0M - x * x)));
+            return Arctan(x / Sqrt(1.0M - x * x));
         }
 
         /// <summary>
@@ -594,8 +619,8 @@ namespace ImageProcessing.Utility.DecimalMath.Real
             {
                 throw new ArgumentException("NaN");
             }
-
-            return Log(x + (decimal)Math.Sqrt((double)(x * x - 1.0M)), precision: precision);
+            
+            return Log(x + Sqrt(x * x - 1.0M, precision), precision: precision);
         }
 
         /// <summary>
@@ -610,7 +635,7 @@ namespace ImageProcessing.Utility.DecimalMath.Real
                 throw new OverflowException(nameof(x));
             }
 
-            return Log(x + (decimal)Math.Sqrt((double)(x * x + 1.0M)), precision: precision); 
+            return Log(x + Sqrt(x * x + 1.0M), precision: precision); 
         }
 
         /// <summary>

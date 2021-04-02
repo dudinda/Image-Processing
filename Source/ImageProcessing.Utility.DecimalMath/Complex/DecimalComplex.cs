@@ -274,7 +274,7 @@ namespace ImageProcessing.Utility.DecimalMath.Complex
         /// <param name="z">x + iy</param>
         /// <returns>sqrt(z)</returns>
         public (decimal Re, decimal Im) PrincipalSqrt((decimal x, decimal y) z)
-            => FromPolar(((decimal)Math.Sqrt((double)Abs(z)), Polar(z).phi / 2.0M));
+            => FromPolar((_real.Sqrt(Abs(z)), Polar(z).phi / 2.0M));
        
         /// <summary>
         /// Evaluate z ** 1/k.

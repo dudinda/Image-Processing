@@ -129,7 +129,7 @@ namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
             }
             else
             {
-                w = (decimal)Math.Sqrt((double)w) - 3.000000M;
+                w = _real.Sqrt(w) - 3.000000M;
                 p = -0.000200214257M;
                 p = (p * w + 0.000100950558M);
                 p = (p * w + 0.00134934322M);
