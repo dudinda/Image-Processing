@@ -8,7 +8,7 @@ using ImageProcessing.App.DomainLayer.DomainModel.Transformation.Interface;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementation
 {
-    public sealed class CyclicTranslationTransformation : ITransformation
+    internal sealed class CyclicTranslationTransformation : ITransformation
     {
         public Bitmap Transform(Bitmap src, double tx, double ty)
         {
