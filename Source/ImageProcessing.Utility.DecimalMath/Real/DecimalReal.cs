@@ -35,10 +35,7 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// <returns>sgn(x)</returns>
         public int Sign(decimal x)
         {
-            if (x == 0.0M)
-            {
-                return 0;
-            }
+            if (x == 0.0M) { return 0; }
      
             return x > 0.0M ? 1 : -1;
         }
@@ -103,7 +100,7 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// </summary>
         /// <param name="x">An argument of a function</param>
         /// <returns>ceil(x)</returns>
-        [Obsolete("Use Math.Ceiling(x) instead.")]
+        [Obsolete("Use Decimal.Ceiling(x) instead.")]
         public decimal Ceil(decimal x)
             => -Floor(-x);
 
@@ -112,22 +109,16 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <returns>floor(x)</returns>
-        [Obsolete("Use Math.Floor(x) instead.")]
+        [Obsolete("Use Decimal.Floor(x) instead.")]
         public decimal Floor(decimal x)
         {
-            if (x == 0.0M)
-            {
-                return x;
-            }
-
+            if (x == 0.0M) { return x; }
+           
             var result = x - decimal.Remainder(x, 1.0M);
 
             if (x < 0.0M)
             {
-                if(result == x)
-                {
-                    return result;
-                }
+                if(result == x) { return result; }
 
                 return result - 1.0M;
             }
@@ -162,7 +153,10 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// <returns>sqrt(x)</returns>
         public decimal Sqrt(decimal x, decimal precision = Epsilon)
         {
-            if (x < 0M) { throw new ArgumentException(nameof(x)); }
+            if (x < 0M)
+            {
+                throw new ArgumentException(nameof(x));
+            }
 
             if(x == 1.0M || x == 0M) { return x; }
 
@@ -294,10 +288,7 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// <returns>sin(x)</returns>
         public decimal Sin(decimal x, decimal precision = Epsilon)
         {
-            if(x == 0.0M)
-            {
-                return 0;
-            }
+            if(x == 0.0M) { return 0; }
 
             x = Mod(x, 2.0M * PI);
 
@@ -524,14 +515,8 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// <returns>cosh(x)</returns>
         public decimal Cosh(decimal x, decimal precision = Epsilon)
         {
-            x = Abs(x);
-            //|cosh(x) - (e ** x) / 2| < 3.8 * 10 ** -10 for all x > 21
-            if (x > 21.0M)
-            {
-                return Exp(x, precision) * 0.5M;
-            }
+            var exp = Exp(Abs(x), precision);
 
-            var exp = Exp(x, precision);
             return (exp + 1.0M / exp) * 0.5M;
         }
 
@@ -546,11 +531,6 @@ namespace ImageProcessing.Utility.DecimalMath.Real
             var sign = Sign(x);
 
             var result = Exp(Abs(x), precision);
-            //||sinh(x)| - (e ** x) / 2| < 3.8 * 10 ** -10 for all x > 21
-            if (x > 21.0M)
-            {
-                return sign * result * 0.5M;
-            }
 
             return sign * (result - 1.0M / result) * 0.5M;
         }
