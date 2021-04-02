@@ -13,21 +13,21 @@ namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
     public sealed class ConvolutionService : IConvolutionService
     {
         /// <inheritdoc/>
-        public Bitmap Convolution(Bitmap source, IConvolutionKernel filter) 
+        public Bitmap Convolution(Bitmap src, IConvolutionKernel filter) 
         {
-            source.IsSupported();
+            src.IsSupported();
 
-            var destination = new Bitmap(source);
+            var dst = new Bitmap(src);
 
-            var srcData = source.LockBits(
-                new Rectangle(0, 0, source.Width, source.Height),
-                ImageLockMode.ReadOnly, source.PixelFormat);
+            var srcData = src.LockBits(
+                new Rectangle(0, 0, src.Width, src.Height),
+                ImageLockMode.ReadOnly, src.PixelFormat);
 
-            var dstData = destination.LockBits(
-                new Rectangle(0, 0, source.Width, source.Height),
-                ImageLockMode.WriteOnly, destination.PixelFormat);
+            var dstData = dst.LockBits(
+                new Rectangle(0, 0, dst.Width, dst.Height),
+                ImageLockMode.WriteOnly, dst.PixelFormat);
 
-            var (width, height) = (source.Width, source.Height);
+            var (width, height) = (src.Width, src.Height);
             var step = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
 
             unsafe
@@ -90,10 +90,10 @@ namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
                 });          
             }
 
-            source.UnlockBits(srcData);
-            destination.UnlockBits(dstData);
+            src.UnlockBits(srcData);
+            dst.UnlockBits(dstData);
 
-            return destination;
+            return dst;
         }
     }
 }
