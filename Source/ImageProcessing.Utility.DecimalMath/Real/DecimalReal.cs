@@ -162,30 +162,22 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// <returns>sqrt(x)</returns>
         public decimal Sqrt(decimal x, decimal precision = Epsilon)
         {
-            if(x < 0m)
+            if (x < 0M) { throw new ArgumentException(nameof(x)); }
+
+            if(x == 1.0M || x == 0M) { return x; }
+
+            var current = (decimal)Math.Sqrt((double)x);
+            decimal previous;
+
+            do
             {
-                throw new ArgumentException(nameof(x));
+                previous = current;
+
+                current = (previous + x / previous) * 0.5M;
             }
+            while (Math.Abs(previous - current) > Epsilon);
 
-            if(x == 0m) { return x; }
-
-            var sqrt = 0m; var @base = 1m;
-
-            decimal step;
-
-            while (Abs(x - sqrt * sqrt) > precision)
-            {
-                step = 0m;
-                do
-                {
-                    ++step;
-                } while ((sqrt + (step * @base)) * (sqrt + (step * @base)) <= x);
-
-                sqrt += (step - 1) * @base;
-                @base /= 10m;
-            }
-
-            return sqrt;
+            return current;
         }
 
         /// <summary>
@@ -195,10 +187,7 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// <param name="power">A power</param>
         /// <param name="precision">A error</param>
         /// <returns>x ** power</returns>
-        public decimal Pow(
-            decimal x,
-            decimal power,
-            decimal precision = Epsilon)
+        public decimal Pow(decimal x, decimal power, decimal precision = Epsilon)
         {
             if (x < 0.0M)
             {
@@ -253,10 +242,7 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// <param name="x">An argument of the function</param>
         /// <param name="precision">A error</param>
         /// <returns>log(x)</returns>
-        public decimal Log(
-            decimal x,
-            decimal lbase = E,
-            decimal precision = Epsilon)
+        public decimal Log(decimal x, decimal lbase = E, decimal precision = Epsilon)
         {
             if(x < 0.0M)
             {
@@ -273,10 +259,7 @@ namespace ImageProcessing.Utility.DecimalMath.Real
                 throw new ArgumentException("A logarithm base must be in (0, 1) U (1, +inf)");
             }
 
-            if(x == 1.0M)
-            {
-                return 0.0M;
-            }
+            if(x == 1.0M) { return 0.0M; }
    
             if (Abs(E - lbase) > precision)
             {
@@ -286,11 +269,14 @@ namespace ImageProcessing.Utility.DecimalMath.Real
             var a0 = (1.0M + x) * 0.5M;
             var b0 = Sqrt(x, precision);
 
-                
-            while (Abs(a0 - b0) > precision)
+            var eps = a0 - b0;
+
+            while (Abs(eps) > precision)
             {
                 a0 = (a0 + b0) * 0.5M;
                 b0 = Sqrt(a0 * b0, precision);
+
+                if(eps == (eps = a0 - b0)) { break; }
             }
 
             return 2.0M * (x - 1.0M) / (a0 + b0);
