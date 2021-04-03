@@ -19,7 +19,8 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.Convolution.Op
 
         public IConvolutionVisitable Accept(IConvolutionVisitor visitor)
         {
-            _visitor = visitor; return this;
+            _visitor = visitor;
+            return this;
         }
 
         public Bitmap Filter(Bitmap bmp)

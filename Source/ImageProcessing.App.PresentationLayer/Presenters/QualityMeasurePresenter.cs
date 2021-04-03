@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.ServiceLayer.Services.QualityMeasure.Interface;
+using ImageProcessing.App.ServiceLayer.Win.Services.QualityMeasure.Interface;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters

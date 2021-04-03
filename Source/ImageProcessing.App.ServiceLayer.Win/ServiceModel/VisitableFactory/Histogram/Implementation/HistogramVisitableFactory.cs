@@ -1,12 +1,12 @@
 using System;
 
 using ImageProcessing.App.ServiceLayer.Code.Enums;
-using ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.Histogram;
-using ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.Histogram.Cdf;
-using ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.Histogram.Pmf;
-using ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.Histogram.Interface;
+using ImageProcessing.App.ServiceLayer.Win.ServiceModel.Visitable.Histogram;
+using ImageProcessing.App.ServiceLayer.Win.ServiceModel.Visitable.Histogram.Cdf;
+using ImageProcessing.App.ServiceLayer.Win.ServiceModel.Visitable.Histogram.Pmf;
+using ImageProcessing.App.ServiceLayer.Win.ServiceModel.VisitableFactory.Histogram.Interface;
 
-namespace ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.Histogram.Implementation
+namespace ImageProcessing.App.ServiceLayer.Win.ServiceModel.VisitableFactory.Histogram.Implementation
 {
     public sealed class HistogramVisitableFactory : IHistogramVisitableFactory
     {

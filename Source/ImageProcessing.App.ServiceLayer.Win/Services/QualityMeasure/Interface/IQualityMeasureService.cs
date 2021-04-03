@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
 
-namespace ImageProcessing.App.ServiceLayer.Services.QualityMeasure.Interface
+namespace ImageProcessing.App.ServiceLayer.Win.Services.QualityMeasure.Interface
 {
     public interface IQualityMeasureService
     {

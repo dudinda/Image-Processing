@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 
-namespace ImageProcessing.App.ServiceLayer.Win.Code.Extensions.EnumExt
+namespace ImageProcessing.App.ServiceLayer.Win.Code.Extensions
 {
     /// <summary>
     /// Extension methods for a <see cref="Enum"/> value.

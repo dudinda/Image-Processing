@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.ServiceLayer.Services.StaTask.Interface;
+using ImageProcessing.App.ServiceLayer.Win.Services.StaTask.Interface;
 using ImageProcessing.Utility.Interop.Wrapper;
 
-namespace ImageProcessing.App.ServiceLayer.Services.StaTask.Implementation
+namespace ImageProcessing.App.ServiceLayer.Win.Services.StaTask.Implementation
 {
     /// <inheritdoc cref="IStaTaskService"/>
     public sealed class StaTaskService : IStaTaskService
@@ -116,7 +116,6 @@ namespace ImageProcessing.App.ServiceLayer.Services.StaTask.Implementation
             {
                 Dialog.Close(threadId);
             }
-
         }
     }
 }

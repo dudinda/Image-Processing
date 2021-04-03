@@ -1,4 +1,4 @@
-namespace ImageProcessing.App.ServiceLayer.Builders.Base
+namespace ImageProcessing.App.ServiceLayer.Win.Builders
 {
     /// <summary>
     /// Provides a base interface for builders.

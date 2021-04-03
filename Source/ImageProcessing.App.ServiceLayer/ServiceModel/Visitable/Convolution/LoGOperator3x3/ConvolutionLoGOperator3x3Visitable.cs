@@ -7,7 +7,7 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.Convolution.Lo
 {
     internal sealed class ConvolutionLoGOperator3x3Visitable : IConvolutionVisitable
     {
-        private IConvolutionVisitor _visitor = null!;
+        private IConvolutionVisitor? _visitor;
 
         public IConvolutionVisitable Accept(IConvolutionVisitor visitor)
         {

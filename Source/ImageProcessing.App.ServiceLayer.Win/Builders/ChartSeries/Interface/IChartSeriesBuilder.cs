@@ -1,9 +1,7 @@
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
 
-using ImageProcessing.App.ServiceLayer.Builders.Base;
-
-namespace ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Interface
+namespace ImageProcessing.App.ServiceLayer.Win.Builders.ChartBuilder.Interface
 {
     /// <summary>
     /// A builder for the <see cref="Series"/> components.

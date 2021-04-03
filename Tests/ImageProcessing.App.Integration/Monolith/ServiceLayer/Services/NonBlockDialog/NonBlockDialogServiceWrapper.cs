@@ -2,9 +2,9 @@ using System.Drawing;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Integration.TestResources;
-using ImageProcessing.App.ServiceLayer.NonBlockDialog.Implementation;
-using ImageProcessing.App.ServiceLayer.Services.FileDialog.Interface;
-using ImageProcessing.App.ServiceLayer.Services.StaTask.Interface;
+using ImageProcessing.App.ServiceLayer.Win.NonBlockDialog.Implementation;
+using ImageProcessing.App.ServiceLayer.Win.Services.FileDialog.Interface;
+using ImageProcessing.App.ServiceLayer.Win.Services.StaTask.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Services
 {

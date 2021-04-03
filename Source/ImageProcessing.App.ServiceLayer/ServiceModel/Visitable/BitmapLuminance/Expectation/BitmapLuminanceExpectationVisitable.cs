@@ -7,7 +7,7 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.BitmapLuminanc
 {
     internal sealed class BitmapLuminanceExpectationVisitable : IBitmapLuminanceVisitable
     {
-        private IBitmapLuminanceVisitor _visitor = null!;
+        private IBitmapLuminanceVisitor? _visitor;
 
         public IBitmapLuminanceVisitable Accept(IBitmapLuminanceVisitor visitor)
         {
@@ -16,7 +16,7 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.BitmapLuminanc
         }
         
         public decimal GetInfo(Bitmap bmp)
-        => _visitor?.GetExpectation(bmp)
+            => _visitor?.GetExpectation(bmp)
                 ?? throw new ArgumentNullException(nameof(_visitor));
     }
 }

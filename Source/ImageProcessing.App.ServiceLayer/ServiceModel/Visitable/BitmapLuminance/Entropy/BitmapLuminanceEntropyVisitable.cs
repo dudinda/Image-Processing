@@ -7,7 +7,7 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.BitmapLuminanc
 {
     internal sealed class BitmapLuminanceEntropyVisitable : IBitmapLuminanceVisitable
     {
-        private IBitmapLuminanceVisitor _visitor = null!;
+        private IBitmapLuminanceVisitor? _visitor;
 
         public IBitmapLuminanceVisitable Accept(IBitmapLuminanceVisitor visitor)
         {
@@ -17,6 +17,6 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.BitmapLuminanc
            
         public decimal GetInfo(Bitmap bmp)
             => _visitor?.GetEntropy(bmp)
-                ?? throw new ArgumentNullException(nameof(_visitor));        
+                ?? throw new ArgumentNullException(nameof(_visitor));
     }
 }

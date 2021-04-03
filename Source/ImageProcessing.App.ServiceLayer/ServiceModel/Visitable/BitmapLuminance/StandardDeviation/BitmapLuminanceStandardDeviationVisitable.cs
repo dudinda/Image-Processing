@@ -7,7 +7,7 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.BitmapLuminanc
 {
     internal sealed class BitmapLuminanceStandardDeviationVisitable : IBitmapLuminanceVisitable
     {
-        private IBitmapLuminanceVisitor _visitor = null!;
+        private IBitmapLuminanceVisitor? _visitor;
 
         public IBitmapLuminanceVisitable Accept(IBitmapLuminanceVisitor visitor)
         {

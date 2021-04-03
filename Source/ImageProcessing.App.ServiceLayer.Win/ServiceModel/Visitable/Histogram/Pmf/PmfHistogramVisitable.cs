@@ -2,13 +2,13 @@ using System;
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
 
-using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Histogram.Interface;
+using ImageProcessing.App.ServiceLayer.Win.ServiceModel.Visitors.Histogram.Interface;
 
-namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.Histogram.Pmf
+namespace ImageProcessing.App.ServiceLayer.Win.ServiceModel.Visitable.Histogram.Pmf
 {
     public sealed class PmfHistogramVisitable : IHistogramVisitable
     {
-        private IHistogramVisitor _visitor = null!;
+        private IHistogramVisitor? _visitor;
 
         public IHistogramVisitable Accept(IHistogramVisitor visitor)
         {

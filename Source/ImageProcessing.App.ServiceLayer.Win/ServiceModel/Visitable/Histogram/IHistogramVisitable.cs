@@ -1,9 +1,10 @@
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
 
-using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Histogram.Interface;
+using ImageProcessing.App.ServiceLayer.ServiceModel.Visitable;
+using ImageProcessing.App.ServiceLayer.Win.ServiceModel.Visitors.Histogram.Interface;
 
-namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.Histogram
+namespace ImageProcessing.App.ServiceLayer.Win.ServiceModel.Visitable.Histogram
 {
     public interface IHistogramVisitable : IVisitable<IHistogramVisitable, IHistogramVisitor>
     {

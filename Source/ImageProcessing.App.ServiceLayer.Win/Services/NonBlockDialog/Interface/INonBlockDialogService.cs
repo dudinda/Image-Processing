@@ -1,9 +1,9 @@
 using System.Drawing;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.ServiceLayer.Services.FileDialog.Interface;
+using ImageProcessing.App.ServiceLayer.Win.Services.FileDialog.Interface;
 
-namespace ImageProcessing.App.ServiceLayer.Services.NonBlockDialog.Interface
+namespace ImageProcessing.App.ServiceLayer.Win.Services.NonBlockDialog.Interface
 {
     /// <summary>
     /// Bridge over the <see cref="IFileDialogService"/> to call modal windows

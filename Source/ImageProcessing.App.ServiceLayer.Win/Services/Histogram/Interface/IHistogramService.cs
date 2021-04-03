@@ -3,7 +3,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.App.ServiceLayer.Code.Enums;
 
-namespace ImageProcessing.App.ServiceLayer.Services.Histogram.Interface
+namespace ImageProcessing.App.ServiceLayer.Win.Services.Histogram.Interface
 {
     public interface IHistogramService
     {

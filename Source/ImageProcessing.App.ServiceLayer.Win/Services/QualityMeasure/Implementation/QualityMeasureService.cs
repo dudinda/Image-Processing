@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
 
-using ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
-using ImageProcessing.App.ServiceLayer.Services.QualityMeasure.Interface;
+using ImageProcessing.App.ServiceLayer.Win.Builders.ChartBuilder.Interface;
+using ImageProcessing.App.ServiceLayer.Win.Services.QualityMeasure.Interface;
 
-namespace ImageProcessing.App.ServiceLayer.Services.QualityMeasure.Implementation
+namespace ImageProcessing.App.ServiceLayer.Win.Services.QualityMeasure.Implementation
 {
     public sealed class QualityMeasureService : IQualityMeasureService
     {
@@ -43,10 +43,10 @@ namespace ImageProcessing.App.ServiceLayer.Services.QualityMeasure.Implementatio
                 var key = bitmap.Tag.ToString();
 
                 _builder.SetName(key)
-                        .SetColor(Color.FromArgb(random.Next(0, 256),
-                                                 random.Next(0, 256),
-                                                 random.Next(0, 256))
-                        )
+                        .SetColor(Color.FromArgb(
+                            random.Next(0, 256),
+                            random.Next(0, 256),
+                            random.Next(0, 256)))
                         .SetMarkerStyle(MarkerStyle.None)
                         .SetChartType(SeriesChartType.Column)
                         .SetLabelAngle(-90)

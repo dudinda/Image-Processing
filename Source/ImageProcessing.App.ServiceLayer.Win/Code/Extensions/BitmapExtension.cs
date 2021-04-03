@@ -3,10 +3,9 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
-using ImageProcessing.App.SerivceLayer.Win.Enums;
-using ImageProcessing.App.ServiceLayer.Win.Code.Extensions.EnumExt;
+using ImageProcessing.App.SerivceLayer.Win.Code.Enums;
 
-namespace ImageProcessing.App.ServiceLayer.Win.Code.Extensions.BitmapExt
+namespace ImageProcessing.App.ServiceLayer.Win.Code.Extensions
 {
     /// <summary>
     /// Extension methods for a <see cref="Bitmap"> class.
@@ -52,6 +51,6 @@ namespace ImageProcessing.App.ServiceLayer.Win.Code.Extensions.BitmapExt
         /// Save an image to the specified path.
         /// </summary>
         public static void SaveByPath(this Image image, string path)
-            => image.Save(path, Path.GetExtension(path).GetImageFormat());      
+            => image.Save(path, Path.GetExtension(path).GetImageFormat());
     }
 }

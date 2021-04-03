@@ -3,12 +3,12 @@ using System.Linq;
 using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.App.DomainLayer.Code.Extensions.EnumExt;
-using ImageProcessing.App.ServiceLayer.Builders.ChartBuilder.Interface;
 using ImageProcessing.App.ServiceLayer.Code.Enums;
-using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Histogram.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
+using ImageProcessing.App.ServiceLayer.Win.Builders.ChartBuilder.Interface;
+using ImageProcessing.App.ServiceLayer.Win.ServiceModel.Visitors.Histogram.Interface;
 
-namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Histogram.Implementation
+namespace ImageProcessing.App.ServiceLayer.Win.ServiceModel.Visitors.Histogram.Implementation
 {
     public sealed class HistogramVisitor : IHistogramVisitor
     {
