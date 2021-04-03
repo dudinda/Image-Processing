@@ -12,12 +12,12 @@ namespace ImageProcessing.App.ServiceLayer.Win.Services.NonBlockDialog.Interface
     public interface INonBlockDialogService
     {
         /// <summary>
-        ///Init the <see cref="System.Windows.Forms.OpenFileDialog"/> without block.
+        ///Init the open file dialog without block.
         /// </summary>
         Task<(Bitmap? Image, string Path)> NonBlockOpen(string filters);
 
         /// <summary>
-        ///Init the <see cref="System.Windows.Forms.SaveFileDialog"/> without block.
+        ///Init the save file dialog without block.
         /// </summary>
         Task NonBlockSaveAs(Bitmap src, string filters);
     }
