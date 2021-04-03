@@ -2,7 +2,6 @@ using System;
 
 using ImageProcessing.Microkernel.DIAdapter.Adapters.Implementation;
 using ImageProcessing.Microkernel.DIAdapter.Adapters.Interface;
-using ImageProcessing.Microkernel.DIAdapter.Code.Enums;
 
 namespace ImageProcessing.Microkernel.DIAdapter.Factory
 {

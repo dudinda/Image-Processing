@@ -1,4 +1,4 @@
-namespace ImageProcessing.Microkernel.DIAdapter.Code.Enums
+namespace ImageProcessing.Microkernel.DIAdapter
 {
     /// <summary>
     /// Specifies a DI container.
