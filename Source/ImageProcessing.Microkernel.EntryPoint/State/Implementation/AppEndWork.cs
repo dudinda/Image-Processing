@@ -1,15 +1,15 @@
 using System;
 
 using ImageProcessing.Microkernel.AppConfig;
-using ImageProcessing.Microkernel.Code.Enums;
 using ImageProcessing.Microkernel.DI.EntryPoint.State.Interface;
 using ImageProcessing.Microkernel.DIAdapter.Code.Enums;
-using ImageProcessing.Microkernel.EntryPoint;
 using ImageProcessing.Microkernel.EntryPoint.Code.Constants;
-using ImageProcessing.Microkernel.Factory.State;
+using ImageProcessing.Microkernel.EntryPoint.Code.Enums;
 using ImageProcessing.Microkernel.MVP.Presenter.Interface;
 
-namespace ImageProcessing.Microkernel.State.EndWork
+using static ImageProcessing.Microkernel.EntryPoint.Factory.StateFactory;
+
+namespace ImageProcessing.Microkernel.EntryPoint.State.Implementation
 {
     /// <summary>
     ///An application ends its work state.
@@ -20,25 +20,19 @@ namespace ImageProcessing.Microkernel.State.EndWork
         public void Build<TStartup>(DiContainer container)
             where TStartup : class, IStartup
             => throw new InvalidOperationException(
-                Exceptions.ApplicationIsBuilt
-            );
+                Exceptions.ApplicationIsBuilt);
 
         /// <inheritdoc/>
         public void Exit()
         {
             AppLifecycle.Controller.Dispose();
-
-            AppLifecycle.State = StateFactory.Get(
-                AppState.IsNotBuilt
-            );
+            AppLifecycle.State = GetState(AppState.IsNotBuilt);
         }
            
-
         /// <inheritdoc/>
         public void Run<TMainPresenter>()
             where TMainPresenter : class, IPresenter
             => throw new InvalidOperationException(
-                Exceptions.ApplicationIsRunning
-            );      
+                Exceptions.ApplicationIsRunning);
     }
 }

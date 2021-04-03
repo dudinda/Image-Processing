@@ -1,8 +1,8 @@
 using System;
 
-using ImageProcessing.Microkernel.Code.Enums;
 using ImageProcessing.Microkernel.EntryPoint;
-using ImageProcessing.Microkernel.Factory.State;
+using ImageProcessing.Microkernel.EntryPoint.Code.Enums;
+using ImageProcessing.Microkernel.EntryPoint.Factory;
 
 using NUnit.Framework;
 
@@ -14,14 +14,14 @@ namespace ImageProcessing.EntryPoint.UnitTests.Tests
         [SetUp]
         public void SetUp()
         {
-            AppLifecycle.State = StateFactory.Get(AppState.IsBuilt);
+            AppLifecycle.State = StateFactory.GetState(AppState.IsBuilt);
         }
 
 
         [TearDown]
         public void Dispose()
         {
-            AppLifecycle.State = StateFactory.Get(AppState.IsNotBuilt);
+            AppLifecycle.State = StateFactory.GetState(AppState.IsNotBuilt);
         }
     }
 }

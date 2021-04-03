@@ -5,19 +5,18 @@ using ImageProcessing.Microkernel.DIAdapter.Adapters.Ninject;
 using ImageProcessing.Microkernel.DIAdapter.Code.Enums;
 using ImageProcessing.Microkernel.DIAdapter.Container;
 
-namespace ImageProcessing.Microkernel.EntryPoint.Factory.ContainerAdapter
+namespace ImageProcessing.Microkernel.EntryPoint.Factory
 {
     /// <summary>
-    /// A factory method provider for all the types
+    /// A factory method for all the types
     /// implementing the <see cref="IContainer"/>.
     /// </summary>
-    internal static class ContainerAdapterFactory
+    internal static class AdapterFactory
     {
-
         /// <summary>
         /// Get the adapter for the specified <see cref="DiContainer"/>.
         /// </summary>
-        internal static IContainer Get(DiContainer container)
+        internal static IContainer GetAdapter(DiContainer container)
             => container
             switch
             {

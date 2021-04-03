@@ -5,7 +5,7 @@ using ImageProcessing.Microkernel.MVP.Presenter.Interface;
 namespace ImageProcessing.Microkernel.DI.EntryPoint.State.Interface
 {
     /// <summary>
-    /// Represents an application state.
+    /// Represents a state of the application.
     /// </summary>
     internal interface IAppState
     {
@@ -13,7 +13,7 @@ namespace ImageProcessing.Microkernel.DI.EntryPoint.State.Interface
         /// Build an application. Use the specified
         /// <see cref="DiContainer"/> and use
         /// a <typeparamref name="TStartup"/> class
-        /// as an entry configuration for dependencies.
+        /// as the initial configuration for components.
         /// </summary>
         void Build<TStartup>(DiContainer container)
             where TStartup : class, IStartup;

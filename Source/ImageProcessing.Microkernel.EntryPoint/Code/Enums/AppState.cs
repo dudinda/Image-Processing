@@ -1,4 +1,4 @@
-namespace ImageProcessing.Microkernel.Code.Enums
+namespace ImageProcessing.Microkernel.EntryPoint.Code.Enums
 {
     /// <summary>
     /// Represents a state of an application.

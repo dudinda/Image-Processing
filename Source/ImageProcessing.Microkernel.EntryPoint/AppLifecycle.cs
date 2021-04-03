@@ -1,8 +1,8 @@
 using ImageProcessing.Microkernel.AppConfig;
-using ImageProcessing.Microkernel.Code.Enums;
 using ImageProcessing.Microkernel.DI.EntryPoint.State.Interface;
 using ImageProcessing.Microkernel.DIAdapter.Code.Enums;
-using ImageProcessing.Microkernel.Factory.State;
+using ImageProcessing.Microkernel.EntryPoint.Code.Enums;
+using ImageProcessing.Microkernel.EntryPoint.Factory;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Microkernel.MVP.Presenter.Interface;
 
@@ -14,12 +14,11 @@ namespace ImageProcessing.Microkernel.EntryPoint
     public static class AppLifecycle
     {
         /// <inheritdoc cref="IAppController"/>
-        internal static IAppController Controller { get; set; }
-            = null!;
+        internal static IAppController? Controller { get; set; }
 
         /// <inheritdoc cref="IAppState"/>
         internal static IAppState State { get; set; }
-            = StateFactory.Get(AppState.IsNotBuilt);
+            = StateFactory.GetState(AppState.IsNotBuilt);
 
         /// <inheritdoc cref="IAppState.Build{TStartup}(DiContainer)"/>
         public static void Build<TStartup>(DiContainer container)

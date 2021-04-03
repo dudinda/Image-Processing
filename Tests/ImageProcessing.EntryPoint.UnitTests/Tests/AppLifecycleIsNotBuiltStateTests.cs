@@ -1,13 +1,10 @@
 using System;
 
 using ImageProcessing.EntryPoint.UnitTests.Fakes;
-using ImageProcessing.Microkernel.Code.Enums;
 using ImageProcessing.Microkernel.EntryPoint;
 using ImageProcessing.Microkernel.EntryPoint.Code.Constants;
-using ImageProcessing.Microkernel.Factory.State;
-using ImageProcessing.Microkernel.MVP.Controller.Interface;
-
-using NSubstitute;
+using ImageProcessing.Microkernel.EntryPoint.Code.Enums;
+using ImageProcessing.Microkernel.EntryPoint.Factory;
 
 using NUnit.Framework;
 
@@ -19,7 +16,7 @@ namespace ImageProcessing.EntryPoint.UnitTests.Tests
         [SetUp]
         public void SetUp()
         {
-            AppLifecycle.State = StateFactory.Get(AppState.IsNotBuilt);
+            AppLifecycle.State = StateFactory.GetState(AppState.IsNotBuilt);
         }
 
         [Test]

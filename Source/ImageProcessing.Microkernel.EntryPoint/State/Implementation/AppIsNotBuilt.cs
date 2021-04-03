@@ -1,17 +1,17 @@
 using System;
 
 using ImageProcessing.Microkernel.AppConfig;
-using ImageProcessing.Microkernel.Code.Enums;
 using ImageProcessing.Microkernel.DI.EntryPoint.State.Interface;
 using ImageProcessing.Microkernel.DIAdapter.Code.Enums;
-using ImageProcessing.Microkernel.EntryPoint;
 using ImageProcessing.Microkernel.EntryPoint.Code.Constants;
-using ImageProcessing.Microkernel.EntryPoint.Factory.ContainerAdapter;
-using ImageProcessing.Microkernel.Factory.State;
+using ImageProcessing.Microkernel.EntryPoint.Code.Enums;
 using ImageProcessing.Microkernel.MVP.Controller.Implementation;
 using ImageProcessing.Microkernel.MVP.Presenter.Interface;
 
-namespace ImageProcessing.Microkernel.DI.State.IsNotBuilt
+using static ImageProcessing.Microkernel.EntryPoint.Factory.AdapterFactory;
+using static ImageProcessing.Microkernel.EntryPoint.Factory.StateFactory;
+
+namespace ImageProcessing.Microkernel.EntryPoint.State.Implementation
 {
     /// <summary>
     /// An application has not been built state.
@@ -24,31 +24,24 @@ namespace ImageProcessing.Microkernel.DI.State.IsNotBuilt
         {
             try
             {
-                AppLifecycle.Controller = new AppController(
-                    ContainerAdapterFactory.Get(container)
-                );
+                AppLifecycle.Controller = new AppController(GetAdapter(container));
 
                 var ioc = AppLifecycle.Controller.IoC;
 
                 if (ioc.IsRegistered<TStartup>())
                 {
                     throw new InvalidOperationException(
-                        Exceptions.StartupIsDefined
-                    );
+                        Exceptions.StartupIsDefined);
                 }
 
                 ioc.RegisterSingleton<TStartup>()
                    .Resolve<TStartup>().Build(ioc);
 
-                AppLifecycle.State = StateFactory.Get(
-                    AppState.IsBuilt
-                );
+                AppLifecycle.State = GetState(AppState.IsBuilt);
             }
             catch(Exception ex)
             {
-                AppLifecycle.State = StateFactory.Get(
-                    AppState.EndWork
-                );
+                AppLifecycle.State = GetState(AppState.EndWork);
                 throw;
             }
      
@@ -57,15 +50,12 @@ namespace ImageProcessing.Microkernel.DI.State.IsNotBuilt
         /// <inheritdoc/>
         public void Exit()
             => throw new InvalidOperationException(
-                Exceptions.ApplicationIsNotBuilt
-            );
+                Exceptions.ApplicationIsNotBuilt);
 
         /// <inheritdoc/>
         public void Run<TMainPresenter>()
             where TMainPresenter : class, IPresenter
             => throw new InvalidOperationException(
-                Exceptions.ApplicationIsNotBuilt
-            );
-        
+                Exceptions.ApplicationIsNotBuilt);
     }
 }
