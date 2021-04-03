@@ -8,7 +8,7 @@ using ImageProcessing.Microkernel.EntryPoint.Code.Enums;
 using ImageProcessing.Microkernel.MVP.Controller.Implementation;
 using ImageProcessing.Microkernel.MVP.Presenter.Interface;
 
-using static ImageProcessing.Microkernel.EntryPoint.Factory.AdapterFactory;
+using static ImageProcessing.Microkernel.DIAdapter.Factory.AdapterFactory;
 using static ImageProcessing.Microkernel.EntryPoint.Factory.StateFactory;
 
 namespace ImageProcessing.Microkernel.EntryPoint.State.Implementation

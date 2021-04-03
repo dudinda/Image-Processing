@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.Microkernel.DIAdapter.Container;
+using ImageProcessing.Microkernel.DIAdapter.Adapters.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Implementation;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;

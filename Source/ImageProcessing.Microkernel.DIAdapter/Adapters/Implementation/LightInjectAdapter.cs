@@ -1,11 +1,11 @@
 using System;
 using System.Linq.Expressions;
 
-using ImageProcessing.Microkernel.DIAdapter.Container;
+using ImageProcessing.Microkernel.DIAdapter.Adapters.Interface;
 
 using LightInject;
 
-namespace ImageProcessing.Microkernel.DIAdapter.Adapters.LightInject
+namespace ImageProcessing.Microkernel.DIAdapter.Adapters.Implementation
 {
     /// <summary>
     /// Provides access to the LightInject <see cref="ServiceContainer"/>

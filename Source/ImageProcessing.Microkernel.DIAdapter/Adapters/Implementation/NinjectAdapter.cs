@@ -1,12 +1,12 @@
 using System;
 using System.Linq.Expressions;
 
-using ImageProcessing.Microkernel.DIAdapter.Container;
+using ImageProcessing.Microkernel.DIAdapter.Adapters.Interface;
 
 using Ninject;
 using Ninject.Extensions.NamedScope;
 
-namespace ImageProcessing.Microkernel.DIAdapter.Adapters.Ninject
+namespace ImageProcessing.Microkernel.DIAdapter.Adapters.Implementation
 {
     /// <summary>
     /// Provides access to the Ninject <see cref="StandardKernel"/>
