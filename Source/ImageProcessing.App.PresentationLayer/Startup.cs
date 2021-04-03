@@ -56,14 +56,17 @@ using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Imp
 using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Interface;
+using ImageProcessing.App.ServiceLayer.Services.FileDialog;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Morphology.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Morphology.Interface;
+using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Settings.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
+using ImageProcessing.App.ServiceLayer.Services.StaTask;
 using ImageProcessing.App.ServiceLayer.Win.Builders.ChartBuilder.Implementation;
 using ImageProcessing.App.ServiceLayer.Win.Builders.ChartBuilder.Interface;
 using ImageProcessing.App.ServiceLayer.Win.NonBlockDialog.Implementation;
@@ -71,15 +74,10 @@ using ImageProcessing.App.ServiceLayer.Win.ServiceModel.VisitableFactory.Histogr
 using ImageProcessing.App.ServiceLayer.Win.ServiceModel.VisitableFactory.Histogram.Interface;
 using ImageProcessing.App.ServiceLayer.Win.ServiceModel.Visitors.Histogram.Implementation;
 using ImageProcessing.App.ServiceLayer.Win.ServiceModel.Visitors.Histogram.Interface;
-using ImageProcessing.App.ServiceLayer.Win.Services.FileDialog.Implementation;
-using ImageProcessing.App.ServiceLayer.Win.Services.FileDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Win.Services.Histogram.Implementation;
 using ImageProcessing.App.ServiceLayer.Win.Services.Histogram.Interface;
-using ImageProcessing.App.ServiceLayer.Win.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.ServiceLayer.Win.Services.QualityMeasure.Implementation;
 using ImageProcessing.App.ServiceLayer.Win.Services.QualityMeasure.Interface;
-using ImageProcessing.App.ServiceLayer.Win.Services.StaTask.Implementation;
-using ImageProcessing.App.ServiceLayer.Win.Services.StaTask.Interface;
 using ImageProcessing.Microkernel.AppConfig;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
 

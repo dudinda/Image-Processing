@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace ImageProcessing.App.ServiceLayer.Win.Services.StaTask.Interface
+namespace ImageProcessing.App.ServiceLayer.Services.StaTask
 {
     /// <summary>
     /// Provides functionality to run the

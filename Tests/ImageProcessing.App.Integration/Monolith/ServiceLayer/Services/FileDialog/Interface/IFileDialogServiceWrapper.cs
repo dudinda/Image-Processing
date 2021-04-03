@@ -1,4 +1,4 @@
-using ImageProcessing.App.ServiceLayer.Win.Services.FileDialog.Interface;
+using ImageProcessing.App.ServiceLayer.Services.FileDialog;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.FileDialog.Interface
 {

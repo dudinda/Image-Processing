@@ -1,9 +1,9 @@
 using System.Drawing;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.ServiceLayer.Win.Services.FileDialog.Interface;
-using ImageProcessing.App.ServiceLayer.Win.Services.NonBlockDialog.Interface;
-using ImageProcessing.App.ServiceLayer.Win.Services.StaTask.Interface;
+using ImageProcessing.App.ServiceLayer.Services.FileDialog;
+using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog;
+using ImageProcessing.App.ServiceLayer.Services.StaTask;
 
 namespace ImageProcessing.App.ServiceLayer.Win.NonBlockDialog.Implementation
 {

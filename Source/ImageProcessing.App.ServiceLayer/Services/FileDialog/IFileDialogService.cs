@@ -1,10 +1,10 @@
 using System.Drawing;
 using System.Threading.Tasks;
 
-namespace ImageProcessing.App.ServiceLayer.Win.Services.FileDialog.Interface
+namespace ImageProcessing.App.ServiceLayer.Services.FileDialog
 {
     /// <summary>
-    /// Service provides actions for the <see cref="System.Windows.Forms.FileDialog"/>. 
+    /// Service provides actions for the System.Widnows.Forms.FileDialog. 
     /// </summary>
     public interface IFileDialogService
     {

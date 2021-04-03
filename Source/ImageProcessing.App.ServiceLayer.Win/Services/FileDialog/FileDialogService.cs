@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions;
-using ImageProcessing.App.ServiceLayer.Win.Services.FileDialog.Interface;
 
-namespace ImageProcessing.App.ServiceLayer.Win.Services.FileDialog.Implementation
+namespace ImageProcessing.App.ServiceLayer.Services.FileDialog
 {
     /// <inheritdoc cref="IFileDialogService"/>
     public sealed class FileDialogService : IFileDialogService
