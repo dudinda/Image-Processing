@@ -19,11 +19,6 @@ namespace ImageProcessing.App.ServiceLayer.Win.Builders.ChartBuilder.Interface
         IChartSeriesBuilder SetColor(Color color);
 
         /// <summary>
-        /// Set the series legend visibility.
-        /// </summary>
-        IChartSeriesBuilder SetLegendVisibility(bool isVisible);
-
-        /// <summary>
         /// Set the series chart type.
         /// </summary>
         IChartSeriesBuilder SetChartType(SeriesChartType chartType);

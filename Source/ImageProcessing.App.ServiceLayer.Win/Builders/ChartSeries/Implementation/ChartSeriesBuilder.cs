@@ -10,13 +10,12 @@ namespace ImageProcessing.App.ServiceLayer.Win.Builders.ChartBuilder.Implementat
     {
         private string? _name;
         private Color _color;
-        private bool _IsVisibleInLegend;
+        private bool _isVisibleInLegend;
         private SeriesChartType _chartType;
         private MarkerStyle _markerStyle;
         private int _borderWidth;
         private Color _borderColor;
         private int _labelAngle;
-        private bool _isVisibleInLegend;
 
         /// <inheritdoc/>
         public IChartSeriesBuilder SetName(string name)
@@ -29,13 +28,6 @@ namespace ImageProcessing.App.ServiceLayer.Win.Builders.ChartBuilder.Implementat
         public IChartSeriesBuilder SetColor(Color color)
         {
             _color = color;
-            return this;
-        }
-
-        /// <inheritdoc/>
-        public IChartSeriesBuilder SetLegendVisibility(bool isVisible)
-        {
-            _IsVisibleInLegend = isVisible;
             return this;
         }
 
@@ -91,7 +83,6 @@ namespace ImageProcessing.App.ServiceLayer.Win.Builders.ChartBuilder.Implementat
 
             series.Color = _color;
             series.BorderColor = _borderColor;
-            series.IsVisibleInLegend = _IsVisibleInLegend;
             series.ChartType = _chartType;
             series.MarkerStyle = _markerStyle;
             series.BorderWidth = _borderWidth;
