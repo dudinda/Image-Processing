@@ -13,7 +13,7 @@ namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Binary
     [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
     public class BinaryFilterBenchmark : IDisposable
     {
-        private IRgbFilter filter = new BinaryFilter(new Rec709());
+        private BinaryFilter filter = new BinaryFilter(new Rec709());
 
         private Bitmap _frame1920x1080;
         private Bitmap _frame2560x1440;

@@ -13,12 +13,12 @@ namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Grayscale
     [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
     public class GrayscaleFilterBenchmark : IDisposable
     {
-        private IRgbFilter filter = new GrayscaleFilter(new Rec709());
+        private GrayscaleFilter _filter = new GrayscaleFilter(new Rec709());
 
         private Bitmap _frame1920x1080;
         private Bitmap _frame2560x1440;
 
-        private int frameRate = 60;
+        private int _frameRate = 60;
 
         [GlobalSetup]
         public void Setup()
@@ -37,27 +37,27 @@ namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Grayscale
 
         [Benchmark]
         public Bitmap ApplyGrayscaleFilterTo1920x1080Frame()
-            => filter.Filter(_frame1920x1080);
+            => _filter.Filter(_frame1920x1080);
 
         [Benchmark]
         public void ApplyGrayscaleFilterTo1920x1080Frame60Fps()
         {
-            for (var start = 0; start < frameRate; ++start)
+            for (var start = 0; start < _frameRate; ++start)
             {
-                filter.Filter(_frame1920x1080);
+                _filter.Filter(_frame1920x1080);
             }
         }
 
         [Benchmark]
         public Bitmap ApplyGrayscaleFilterTo2560x1440Frame()
-            => filter.Filter(_frame2560x1440);
+            => _filter.Filter(_frame2560x1440);
 
         [Benchmark]
         public void ApplyGrayscaleFilterTo2560x1440Frame60Fps()
         {
-            for (var start = 0; start < frameRate; ++start)
+            for (var start = 0; start < _frameRate; ++start)
             {
-                filter.Filter(_frame2560x1440);
+                _filter.Filter(_frame2560x1440);
             }
         }
 

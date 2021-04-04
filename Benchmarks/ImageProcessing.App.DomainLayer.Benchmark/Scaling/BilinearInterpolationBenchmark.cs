@@ -4,20 +4,22 @@ using System.IO;
 
 using BenchmarkDotNet.Attributes;
 
-using ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementation;
-using ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Interface;
+using ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation;
 
-namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Inversion
+namespace ImageProcessing.App.DomainLayer.Benchmark.Rotation.AreaMapping
 {
     [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
-    public class InversionFilterBenchmark : IDisposable
+    public class BilinearInterpolationBenchmark
     {
-        private IRgbFilter filter = new InversionFilter();
+        private BilinearInterpolation _scaling = new BilinearInterpolation();
 
         private Bitmap _frame1920x1080;
         private Bitmap _frame2560x1440;
 
-        private int frameRate = 60;
+        private double _scaleX = 2;
+        private double _scaleY = 2;
+
+        private int _frameRate = 60;
 
         [GlobalSetup]
         public void Setup()
@@ -31,31 +33,32 @@ namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Inversion
             {
                 _frame2560x1440 = new Bitmap(Image.FromStream(ms));
             }
+
         }
 
         [Benchmark]
-        public Bitmap ApplyInversionFilterTo1920x1080Frame()
-            => filter.Filter(_frame1920x1080);
+        public Bitmap Resize1920x1080Frame()
+            => _scaling.Resize(_frame1920x1080, _scaleX, _scaleY);
 
         [Benchmark]
-        public void ApplyInversionFilterTo1920x1080Frame60Fps()
+        public void Resize1920x1080Frame60Fps()
         {
-            for (var start = 0; start < frameRate; ++start)
+            for (var start = 0; start < _frameRate; ++start)
             {
-                filter.Filter(_frame1920x1080);
+                _scaling.Resize(_frame1920x1080, _scaleX, _scaleY);
             }
         }
 
         [Benchmark]
-        public Bitmap ApplyInversionFilterTo2560x1440Frame()
-            => filter.Filter(_frame2560x1440);
+        public Bitmap Resize2560x1440Frame()
+          => _scaling.Resize(_frame2560x1440, _scaleX, _scaleY);
 
         [Benchmark]
-        public void ApplyInversionFilterTo2560x1440Frame60Fps()
+        public void Resize2560x1440Frame60Fps()
         {
-            for (var start = 0; start < frameRate; ++start)
+            for (var start = 0; start < _frameRate; ++start)
             {
-                filter.Filter(_frame2560x1440);
+                _scaling.Resize(_frame2560x1440, _scaleX, _scaleY);
             }
         }
 

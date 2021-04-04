@@ -5,21 +5,20 @@ using System.IO;
 using BenchmarkDotNet.Attributes;
 
 using ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation;
-using ImageProcessing.App.DomainLayer.DomainModel.Rotation.Interface;
 
-namespace ImageProcessing.App.DomainLayer.Benchmark.Rotation.AreaMapping
+namespace ImageProcessing.App.DomainLayer.Benchmark.Rotation.Sampling
 {
     [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
-    public class AreaMappingRotationBenchmark
+    public class SamplingRotationBenchmark
     {
-        private AreaMappingRotation rotation = new AreaMappingRotation();
+        private SamplingRotation _rotation = new SamplingRotation();
 
         private Bitmap _frame1920x1080;
         private Bitmap _frame2560x1440;
 
         private double _45degreesToRad = 45 * Math.PI / 180;
 
-        private int frameRate = 60;
+        private int _frameRate = 60;
 
         [GlobalSetup]
         public void Setup()
@@ -38,27 +37,27 @@ namespace ImageProcessing.App.DomainLayer.Benchmark.Rotation.AreaMapping
 
         [Benchmark]
         public Bitmap Rotate45Degrees1920x1080Frame()
-            => rotation.Rotate(_frame1920x1080, _45degreesToRad);
+            => _rotation.Rotate(_frame1920x1080, _45degreesToRad);
 
         [Benchmark]
-        public void ApplyColorFilterTo1920x1080Frame60Fps()
+        public void Rotate45Degrees1920x1080Frame60Fps()
         {
-            for (var start = 0; start < frameRate; ++start)
+            for (var start = 0; start < _frameRate; ++start)
             {
-                rotation.Rotate(_frame1920x1080, _45degreesToRad);
+                _rotation.Rotate(_frame1920x1080, _45degreesToRad);
             }
         }
 
         [Benchmark]
-        public Bitmap ApplyColorFilterTo2560x1440Frame()
-          => rotation.Rotate(_frame2560x1440, _45degreesToRad);
+        public Bitmap Rotate45Degrees2560x1440Frame()
+          => _rotation.Rotate(_frame2560x1440, _45degreesToRad);
 
         [Benchmark]
-        public void ApplyColorFilterTo2560x1440Frame60Fps()
+        public void Rotate45Degrees2560x1440Frame60Fps()
         {
-            for (var start = 0; start < frameRate; ++start)
+            for (var start = 0; start < _frameRate; ++start)
             {
-                rotation.Rotate(_frame2560x1440, _45degreesToRad);
+                _rotation.Rotate(_frame2560x1440, _45degreesToRad);
             }
         }
 
