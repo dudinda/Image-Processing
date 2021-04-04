@@ -359,7 +359,7 @@ namespace ImageProcessing.Utility.DecimalMath.Real
                 }
             }
 
-            return Cos(x) / Sin(x);
+            return Cos(x, precision) / Sin(x, precision);
         }
 
         
@@ -387,7 +387,7 @@ namespace ImageProcessing.Utility.DecimalMath.Real
                 }
             }
 
-            return Sin(x) / Cos(x);
+            return Sin(x, precision) / Cos(x, precision);
         }
 
         #endregion
@@ -434,14 +434,14 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <returns>arcsin(x)</returns>
-        public decimal Arcsin(decimal x)
+        public decimal Arcsin(decimal x, decimal precision = Epsilon)
         {
             if (Abs(x) > 1.0M)
             {
                 throw new ArgumentException("NaN");
             }
 
-            return Arctan(x / Sqrt(1.0M - x * x));
+            return Arctan(x / Sqrt(1.0M - x * x, precision));
         }
 
         /// <summary>
@@ -449,8 +449,8 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <returns>arccos(x)</returns>
-        public decimal Arccos(decimal x)
-            => PiOver2 - Arcsin(x);
+        public decimal Arccos(decimal x, decimal precision = Epsilon)
+            => PiOver2 - Arcsin(x, precision);
         
         /// <summary>
         /// Approximate atan(x) in the range [0, 0.66].
@@ -601,7 +601,7 @@ namespace ImageProcessing.Utility.DecimalMath.Real
                 throw new OverflowException(nameof(x));
             }
 
-            return Log(x + Sqrt(x * x + 1.0M), precision: precision); 
+            return Log(x + Sqrt(x * x + 1.0M, precision), precision: precision); 
         }
 
         /// <summary>
@@ -639,8 +639,8 @@ namespace ImageProcessing.Utility.DecimalMath.Real
         /// </summary>
         /// <param name="x">An argument of the function</param>
         /// <returns>cos(x), sin(x)</returns>
-        public (decimal sin, decimal cos) CosSin(decimal x)
-            => (Cos(x), Sin(x));
+        public (decimal sin, decimal cos) CosSin(decimal x, decimal precision = Epsilon)
+            => (Cos(x, precision), Sin(x, precision));
         
         #endregion
     }
