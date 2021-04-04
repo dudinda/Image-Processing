@@ -6,6 +6,17 @@
     <Platforms>AnyCPU;x64;x86</Platforms>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
+    <SignAssembly>false</SignAssembly>
+    <Authors>Daniil Dudin</Authors>
+    <Company>Image Processing</Company>
+    <Description>Provides adapters for di-containers</Description>
+    <PackageProjectUrl>https://github.com/dudinda/Image-Processing</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/dudinda/Image-Processing</RepositoryUrl>
+    <PackageTags>di adapter microkernel dependency-injection di-container</PackageTags>
+    <Product>Microkernel</Product>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyOriginatorKeyFile>ImageProcessing.pfx</AssemblyOriginatorKeyFile>
+    <Copyright>Copyright (c) 2018-2020 Daniil Dudin</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

@@ -4,6 +4,16 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
+    <Authors>Daniil Dudin</Authors>
+    <Company>Image Processing</Company>
+    <Product>Microkernel</Product>
+    <Description>Provides base components for the model-view-presenter pattern</Description>
+    <PackageTags>mvp event-aggregator application-controller di-container</PackageTags>
+    <RepositoryType></RepositoryType>
+    <PackageProjectUrl>https://github.com/dudinda/Image-Processing</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/dudinda/Image-Processing</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Copyright>Copyright (c) 2018-2020 Daniil Dudin</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
