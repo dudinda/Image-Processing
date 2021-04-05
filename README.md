@@ -12,7 +12,7 @@
    - [Reference a microkernel from a presentation to move a domain between applications](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.App.PresentationLayer/ImageProcessing.App.PresentationLayer.csproj#L60)
    - [Yielding a sequence to test a collection traverse order](https://github.com/dudinda/Image-Processing/blob/master/Tests/ImageProcessing.Utility.DataStructure.UnitTests/CaseFactory/BitMatrixCaseFactory.cs#L17)
 3. [Benchmarks](#benchmarks-cpu)
-4. [NuGet](#nuget-gallery)
+4. [NuGet](#nuget)
 ***
 
 ## Thesis
