@@ -11,10 +11,13 @@
     <PackageProjectUrl>https://github.com/dudinda/Image-Processing</PackageProjectUrl>
     <RepositoryUrl>https://github.com/dudinda/Image-Processing</RepositoryUrl>
     <PackageTags>microkernel mvp entry-point</PackageTags>
-    <Description>Provides entry point as a state machine to control application lifecycle and load a module with application components</Description>
+    <Description>Provides the entry point as a state machine to control the application lifecycle and to load a startup with the application components</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Copyright>Copyright (c) 2018-2020 Daniil Dudin</Copyright>
+    <Copyright>Copyright (c) 2018-2021 Daniil Dudin</Copyright>
     <PackageIcon></PackageIcon>
+    <Version>1.0.1</Version>
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <PackageLicenseFile>LICENSE.TXT</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,6 +35,13 @@
 
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE.TXT">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
