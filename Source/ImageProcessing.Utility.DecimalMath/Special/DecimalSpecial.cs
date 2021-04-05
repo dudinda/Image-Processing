@@ -13,7 +13,7 @@ namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
         private readonly DecimalReal _real = new DecimalReal();
 
         #region Gamma constants
-        private static decimal[] p =
+        private static decimal[] _p =
         {
              0.99999999999980993M, 676.5203681218851M,     -1259.1392167224028M,
              771.32342877765313M,  -176.61502916214059M,   12.507343278686905M,
@@ -169,11 +169,11 @@ namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
             {
                 w -= 1;
 
-                var x = (ComplexOperator)p[0];
+                var x = (ComplexOperator)_p[0];
 
                 for (var i = 1; i < g + 2; ++i)
                 {
-                    x += p[i] / (w + i);
+                    x += _p[i] / (w + i);
                 }
 
                 var t = w + g + 0.5M;
