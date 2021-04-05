@@ -12,6 +12,7 @@
    - [Reference a microkernel from a presentation to move a domain between applications](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.App.PresentationLayer/ImageProcessing.App.PresentationLayer.csproj#L60)
    - [Yielding a sequence to test a collection traverse order](https://github.com/dudinda/Image-Processing/blob/master/Tests/ImageProcessing.Utility.DataStructure.UnitTests/CaseFactory/BitMatrixCaseFactory.cs#L17)
 3. [Benchmarks](#benchmarks-cpu)
+4. [NuGet](#nuget-gallery)
 ***
 
 ## Thesis
@@ -66,7 +67,7 @@
 </p>
 
 <p align="center">
-   <img src="https://i.imgur.com/c4v7BfU.png"  width="1400" height = "230" alt="metrcis">
+   <img src="https://i.imgur.com/c4v7BfU.png"  width="1400" height = "230" alt="metrics">
    <p align="center">Fig. 7 - The application code metrics.</p>
 </p>
 
@@ -77,4 +78,14 @@
 [RGB Filters](https://github.com/Softenraged/Image-Processing/blob/master/Benchmarks/ImageProcessing.App.DomainLayer.Benchmark/LocalBenchmark.md#rgb-filters)
 
 [Convolution](https://github.com/Softenraged/Image-Processing/blob/master/Benchmarks/ImageProcessing.App.ServiceLayer.Benchmark/LocalBenchmark.md#convolution)
+
+***
+
+## NuGet
+
+[ImageProcessing.Microkernel.DIAdapter](https://www.nuget.org/packages/ImageProcessing.Microkernel.DIAdapter/)
+
+[ImageProcessing.Microkernel.MVP](https://www.nuget.org/packages/ImageProcessing.Microkernel.MVP/)
+
+[ImageProcessing.Microkernel.EntryPoint](https://www.nuget.org/packages/ImageProcessing.Microkernel.EntryPoint/)
 
