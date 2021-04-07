@@ -14,10 +14,14 @@
     <Description>Provides the entry point as a state machine to control the application lifecycle and to load a startup with the application components</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Copyright>Copyright (c) 2018-2021 Daniil Dudin</Copyright>
-    <PackageIcon></PackageIcon>
-    <Version>1.0.1</Version>
+    <PackageIcon>icon.png</PackageIcon>
+    <Version>1.0.2</Version>
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE.TXT</PackageLicenseFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -39,6 +43,10 @@
 
   <ItemGroup>
     <None Include="..\..\LICENSE.TXT">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\ImageProcessing.Microkernel.DIAdapter\icon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>

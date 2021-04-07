@@ -9,7 +9,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Fakes
     {
         private object _state = new object();
 
-        internal override void Post(SendOrPostCallback d, object state)
+        protected override void Post(SendOrPostCallback d, object state)
         {
             var thisSyncContext = new SynchronizationContextWrapper();
             SynchronizationContext.SetSynchronizationContext(thisSyncContext);

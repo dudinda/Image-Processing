@@ -118,7 +118,6 @@ namespace ImageProcessing.Microkernel.DIAdapter.Adapters.Implementation
         /// </summary>
         public void Dispose()
             => _container.Dispose();
-        
     }
 }
 

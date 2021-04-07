@@ -8,19 +8,15 @@ using ImageProcessing.Microkernel.MVP.View;
 namespace ImageProcessing.Microkernel.MVP.IoC.Implementation
 {
     /// <inheritdoc cref="IComponentProvider"/>
-    internal sealed class ComponentProvider : IComponentProvider
+    public sealed class ComponentProvider : IComponentProvider
     {
         /// <inheritdoc cref="IContainer"/>
         private readonly IContainer _container;
 
         public ComponentProvider(IContainer container)
         {
-            if(container is null)
-            {
-                throw new ArgumentNullException(nameof(container));
-            }
-
-            _container = container;
+            _container = container ??
+                throw new ArgumentException(nameof(container));
         }
 
         /// <inheritdoc/>

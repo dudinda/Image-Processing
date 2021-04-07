@@ -9,7 +9,7 @@ using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
 {
     /// <inheritdoc cref="IEventAggregator"/>
-    internal class EventAggregator : IEventAggregator
+    public class EventAggregator : IEventAggregator
     {
         private readonly object _syncRoot = new object();
 
@@ -92,7 +92,11 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
             }
         }
 
-        internal virtual void Post(SendOrPostCallback callback, object state)
+        /// <summary>
+        /// To override inside the integration
+        /// to run tests synchronously. 
+        /// </summary>
+        protected virtual void Post(SendOrPostCallback callback, object state)
         {
             var syncContext = SynchronizationContext.Current
                 ?? new SynchronizationContext();
@@ -121,7 +125,6 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
         private IEnumerable<Type> GetSubsciberTypes(Type subscriberType)
             => subscriberType.GetInterfaces().Where(
                 i => i.IsGenericType &&
-                i.GetGenericTypeDefinition() == typeof(ISubscriber<>)
-            );    
+                i.GetGenericTypeDefinition() == typeof(ISubscriber<>));
     }
 }
