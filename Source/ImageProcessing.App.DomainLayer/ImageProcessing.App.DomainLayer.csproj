@@ -6,6 +6,19 @@
     <Platforms>AnyCPU;x64;x86</Platforms>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
+    <Authors>Daniil Dudin</Authors>
+    <Company>Image Processing</Company>
+    <PackageTags>color-matrix convolution distribution image-rotation image-scaling affine-transformation parallel</PackageTags>
+    <Version>1.0.0-preview</Version>
+    <Description>Provides models and parallel cpu algorithms of the digital image processing domain</Description>
+    <Product>Digital Image Processing Domain</Product>
+    <Copyright>Copyright (c) 2018-2021 Daniil Dudin</Copyright>
+    <PackageLicenseFile>LICENSE.TXT</PackageLicenseFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <RepositoryUrl>https://github.com/dudinda/Image-Processing</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/dudinda/Image-Processing</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -18,17 +31,38 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="3.7.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
-    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+    <None Include="..\..\LICENSE.TXT">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
+
+  <Choose>
+    <When Condition="'$(Configuration)'=='Debug'">
+      <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="3.7.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+        <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+        <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
 
   <ItemGroup>
     <ProjectReference Include="..\ImageProcessing.Utility.DataStructure\ImageProcessing.Utility.DataStructure.csproj" />
@@ -51,12 +85,6 @@
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
       <_Parameter1>ImageProcessing.App.ServiceLayer.Benchmark</_Parameter1>
     </AssemblyAttribute>
-</ItemGroup>
-
-<ItemGroup>
-  <Folder Include="DomainFactory\Scaling\Implementation\" />
-  <Folder Include="DomainFactory\Scaling\Interface\" />
-  <Folder Include="DomainModel\Rotation\Interface\" />
 </ItemGroup>
 
 </Project>
