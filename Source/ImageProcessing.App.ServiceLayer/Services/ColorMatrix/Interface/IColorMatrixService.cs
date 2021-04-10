@@ -14,6 +14,6 @@ namespace ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Interface
         /// <summary>
         /// Apply a color matrix to the specified bitmap.
         /// </summary>
-        Bitmap Apply(Bitmap source, ReadOnly2DArray<double> mtx);
+        Bitmap Apply(Bitmap src, ReadOnly2DArray<double> mtx);
     }
 }

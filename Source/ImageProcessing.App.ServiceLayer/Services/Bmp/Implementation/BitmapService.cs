@@ -5,7 +5,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
+using ImageProcessing.App.ServiceLayer.Code.Constants;
 using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
@@ -16,7 +16,11 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
         /// <inheritdoc/>
         public Bitmap Normalize(Bitmap bitmap)
         {
-            bitmap.IsSupported();
+            if (bitmap is null) { throw new ArgumentNullException(nameof(bitmap)); }
+            if (bitmap.PixelFormat != PixelFormat.Format32bppArgb)
+            {
+                throw new NotSupportedException(Errors.NotSupported);
+            }
 
             var max = Max(bitmap);
             var min = Min(bitmap);
@@ -65,7 +69,11 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
         /// <inheritdoc/>
         public byte Max(Bitmap bitmap)
         {
-            bitmap.IsSupported();
+            if (bitmap is null) { throw new ArgumentNullException(nameof(bitmap)); }
+            if (bitmap.PixelFormat != PixelFormat.Format32bppArgb)
+            {
+                throw new NotSupportedException(Errors.NotSupported);
+            }
 
             var result = new Bitmap(bitmap);
             var resultData = result.LockBits(
@@ -113,7 +121,11 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
         /// <inheritdoc/>
         public byte Min(Bitmap bitmap)
         {
-            bitmap.IsSupported();
+            if (bitmap is null) { throw new ArgumentNullException(nameof(bitmap)); }
+            if (bitmap.PixelFormat != PixelFormat.Format32bppArgb)
+            {
+                throw new NotSupportedException(Errors.NotSupported);
+            }
 
             var result = new Bitmap(bitmap);
             var resultData = result.LockBits(
@@ -159,7 +171,11 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
         /// <inheritdoc/>
         public  Bitmap Shuffle(Bitmap bitmap)
         {
-            bitmap.IsSupported();
+            if (bitmap is null) { throw new ArgumentNullException(nameof(bitmap)); }
+            if (bitmap.PixelFormat != PixelFormat.Format32bppArgb)
+            {
+                throw new NotSupportedException(Errors.NotSupported);
+            }
 
             var bitmapData = bitmap.LockBits(
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
@@ -205,7 +221,16 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
         /// <inheritdoc/>
         public Bitmap Magnitude(Bitmap xDerivative, Bitmap yDerivative)
         {
-            xDerivative.IsSupported(); yDerivative.IsSupported();
+            if (xDerivative is null) { throw new ArgumentNullException(nameof(xDerivative)); }
+            if (yDerivative is null) { throw new ArgumentNullException(nameof(yDerivative)); }
+            if (xDerivative.PixelFormat != PixelFormat.Format32bppArgb)
+            {
+                throw new NotSupportedException(Errors.NotSupported);
+            }
+            if (yDerivative.PixelFormat != PixelFormat.Format32bppArgb)
+            {
+                throw new NotSupportedException(Errors.NotSupported);
+            }
 
             var result = new Bitmap(xDerivative);
 

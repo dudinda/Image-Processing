@@ -4,8 +4,8 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
+using ImageProcessing.App.ServiceLayer.Code.Constants;
 using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Interface;
 using ImageProcessing.Utility.DecimalMath.Real;
@@ -19,12 +19,18 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
         private readonly IRandomVariableService _service;
 
         public BitmapLuminanceService(IRandomVariableService service)
-            => _service = service;
+        {
+            _service = service;
+        }
         
         /// <inheritdoc />
         public Bitmap Transform(Bitmap bitmap, IDistribution distribution)
         {
-            bitmap.IsSupported();
+            if (bitmap is null) { throw new ArgumentNullException(nameof(bitmap)); }
+            if (bitmap.PixelFormat != PixelFormat.Format32bppArgb)
+            {
+                throw new NotSupportedException(Errors.NotSupported);
+            }
 
             var cdf = GetCDF(bitmap);
 
@@ -77,20 +83,20 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
 
         /// <inheritdoc />
         public decimal GetExpectation(Bitmap bitmap)
-            => _service.GetExpectation(
-                   _service.GetPMF(GetFrequencies(bitmap))
-            );
+            => _service.GetExpectation(_service.GetPMF(GetFrequencies(bitmap)));
 
         /// <inheritdoc />
         public decimal GetVariance(Bitmap bitmap)
-            => _service.GetVariance(
-                   _service.GetPMF(GetFrequencies(bitmap))
-            );
+            => _service.GetVariance(_service.GetPMF(GetFrequencies(bitmap)));
 
         /// <inheritdoc />
         public int[] GetFrequencies(Bitmap bitmap)
         {
-            bitmap.IsSupported();
+            if (bitmap is null) { throw new ArgumentNullException(nameof(bitmap)); }
+            if (bitmap.PixelFormat != PixelFormat.Format32bppArgb)
+            {
+                throw new NotSupportedException(Errors.NotSupported);
+            }
 
             var bitmapData = bitmap.LockBits(
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
@@ -145,9 +151,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance
 
         /// <inheritdoc />
         public decimal GetEntropy(Bitmap bitmap)
-            => _service.GetEntropy(
-                   _service.GetPMF(GetFrequencies(bitmap))
-            );
+            => _service.GetEntropy(_service.GetPMF(GetFrequencies(bitmap)));
 
         /// <inheritdoc />
         public decimal GetStandardDeviation(Bitmap bitmap)

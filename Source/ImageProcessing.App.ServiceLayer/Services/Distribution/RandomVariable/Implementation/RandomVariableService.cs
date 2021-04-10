@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics.Contracts;
 using System.Linq;
 
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
@@ -19,6 +18,9 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         /// <inheritdoc/>
         public decimal[] TransformToDecimal(decimal[] cdf, IDistribution distribution)
         {
+            if (cdf is null) { throw new ArgumentNullException(nameof(cdf)); }
+            if (distribution is null) { throw new ArgumentNullException(nameof(distribution)); }
+
             var result = new decimal[cdf.Length];
 
             //transform an array by a quantile function
@@ -33,6 +35,9 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         /// <inheritdoc/>
         public byte[] TransformToByte(decimal[] cdf, IDistribution distribution)
         {
+            if (cdf is null) { throw new ArgumentNullException(nameof(cdf)); }
+            if (distribution is null) { throw new ArgumentNullException(nameof(distribution)); }
+
             var result = new byte[256];
 
             //transform an array by a quantile function
@@ -60,13 +65,15 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         /// <inheritdoc/>
         public decimal GetExpectation(decimal[] pmf)
         {
-            Contract.Requires(
-                pmf.Any(value => value > 0M),
-                RandomVariableErrors.PmfIsPositive);
-
-            Contract.Requires(
-                _real.Abs(pmf.Sum() - 1.0M) < Epsilon,
-                RandomVariableErrors.PmfNotNormalized);
+            if (pmf is null) { throw new ArgumentNullException(nameof(pmf)); }
+            if (pmf.Any(val => val < 0M))
+            {
+                throw new ArgumentException(RandomVariableErrors.PmfIsPositive);
+            }
+            if (_real.Abs(pmf.Sum() - 1.0M) > Epsilon)
+            {
+                throw new ArgumentException(RandomVariableErrors.PmfNotNormalized);
+            }
 
             var total = 0.0M;
 
@@ -81,13 +88,15 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         /// <inheritdoc/>
         public decimal GetVariance(decimal[] pmf)
         {
-            Contract.Requires(
-                pmf.Any(value => value > 0M),
-                RandomVariableErrors.PmfIsPositive);
-
-            Contract.Requires(
-                _real.Abs(pmf.Sum() - 1.0M) < Epsilon,
-                RandomVariableErrors.PmfNotNormalized);
+            if (pmf is null) { throw new ArgumentNullException(nameof(pmf)); }
+            if (pmf.Any(val => val < 0M))
+            {
+                throw new ArgumentException(RandomVariableErrors.PmfIsPositive);
+            }
+            if (_real.Abs(pmf.Sum() - 1.0M) > Epsilon)
+            {
+                throw new ArgumentException(RandomVariableErrors.PmfNotNormalized);
+            }
 
             var total = 0.0M;
 
@@ -104,13 +113,15 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         /// <inheritdoc/>
         public decimal GetStandardDeviation(decimal[] pmf)
         {
-            Contract.Requires(
-                pmf.Any(value => value > 0M),
-                RandomVariableErrors.PmfIsPositive);
-
-            Contract.Requires(
-                _real.Abs(pmf.Sum() - 1.0M) < Epsilon,
-                RandomVariableErrors.PmfNotNormalized);
+            if(pmf is null) { throw new ArgumentNullException(nameof(pmf)); }
+            if(pmf.Any(val => val < 0M))
+            {
+                throw new ArgumentException(RandomVariableErrors.PmfIsPositive);
+            }
+            if(_real.Abs(pmf.Sum() - 1.0M) > Epsilon)
+            {
+                throw new ArgumentException(RandomVariableErrors.PmfNotNormalized);
+            }
 
             return _real.Sqrt(GetVariance(pmf));
         }
@@ -118,13 +129,15 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         /// <inheritdoc/>
         public decimal GetConditionalExpectation((int x1, int x2) interval, decimal[] pmf)
         {
-            Contract.Requires(
-                pmf.Any(value => value > 0M),
-                RandomVariableErrors.PmfIsPositive);
-
-            Contract.Requires(
-                _real.Abs(pmf.Sum() - 1.0M) < Epsilon,
-                RandomVariableErrors.PmfNotNormalized);
+            if (pmf is null) { throw new ArgumentNullException(nameof(pmf)); }
+            if (pmf.Any(val => val < 0M))
+            {
+                throw new ArgumentException(RandomVariableErrors.PmfIsPositive);
+            }
+            if (_real.Abs(pmf.Sum() - 1.0M) > Epsilon)
+            {
+                throw new ArgumentException(RandomVariableErrors.PmfNotNormalized);
+            }
 
             var uvalue = 0.0M;
             var lvalue = 0.0M;
@@ -146,9 +159,11 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         /// <inheritdoc/>
         public decimal GetConditionalVariance((int x1, int x2) interval, decimal[] frequencies)
         {
-            Contract.Requires(
-                frequencies.Any(value => value > 0M),
-                RandomVariableErrors.FrequenciesNotPositive);
+            if (frequencies is null) { throw new ArgumentNullException(nameof(frequencies)); }
+            if (frequencies.Any(val => val < 0M))
+            {
+                throw new ArgumentException(RandomVariableErrors.FrequenciesNotPositive);
+            }
 
             var mean = GetConditionalExpectation(interval, frequencies);
 
@@ -172,13 +187,15 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         /// <inheritdoc/>
         public decimal[] GetCDF(decimal[] pmf)
         {
-            Contract.Requires(
-                pmf.Any(value => value > 0M),
-                RandomVariableErrors.PmfIsPositive);
-
-            Contract.Requires(
-                _real.Abs(pmf.Sum() - 1.0M) < Epsilon,
-                RandomVariableErrors.PmfNotNormalized);
+            if (pmf is null) { throw new ArgumentNullException(nameof(pmf)); }
+            if (pmf.Any(val => val < 0M))
+            {
+                throw new ArgumentException(RandomVariableErrors.PmfIsPositive);
+            }
+            if (_real.Abs(pmf.Sum() - 1.0M) > Epsilon)
+            {
+                throw new ArgumentException(RandomVariableErrors.PmfNotNormalized);
+            }
 
             var cdf = pmf.Clone() as decimal[];
 
@@ -198,32 +215,38 @@ namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.
         /// <inheritdoc/>
         public decimal[] GetPMF(int[] frequencies)
         {
-            Contract.Requires(
-                frequencies.Any(value => value > 0M),
-                RandomVariableErrors.FrequenciesNotPositive);
+            if (frequencies is null) { throw new ArgumentNullException(nameof(frequencies)); }
+            if (frequencies.Any(val => val < 0M))
+            {
+                throw new ArgumentException(RandomVariableErrors.FrequenciesNotPositive);
+            }
 
             var total = frequencies.Sum();
 
-            return frequencies.AsParallel()
-                .Select(x => (decimal)x / total).ToArray();
+            return frequencies.Select(x => (decimal)x / total).ToArray();
         }
 
         /// <inheritdoc/>
         public decimal GetEntropy(decimal[] pmf)
         {
-            Contract.Requires(
-                pmf.Any(value => value > 0M),
-                RandomVariableErrors.PmfIsPositive);
-
-            Contract.Requires(
-                _real.Abs(pmf.Sum() - 1.0M) < Epsilon,
-                RandomVariableErrors.PmfNotNormalized);
+            if (pmf is null) { throw new ArgumentNullException(nameof(pmf)); }
+            if (pmf.Any(val => val < 0M))
+            {
+                throw new ArgumentException(RandomVariableErrors.PmfIsPositive);
+            }
+            if (_real.Abs(pmf.Sum() - 1.0M) > Epsilon)
+            {
+                throw new ArgumentException(RandomVariableErrors.PmfNotNormalized);
+            }
 
             var entropy = 0.0M;
 
             for (var index = 0; index < 256; ++index)
             {
-                entropy += pmf[index] * _real.Log(pmf[index], 2);
+                if (pmf[index] != 0M)
+                {
+                    entropy += pmf[index] * _real.Log(pmf[index], 2);
+                }
             }
 
             return -entropy;

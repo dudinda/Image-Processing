@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
+using ImageProcessing.App.ServiceLayer.Code.Constants;
 using ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Interface;
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
@@ -13,15 +13,20 @@ namespace ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Implementation
     public sealed class ColorMatrixService : IColorMatrixService
     {
         /// <inheritdoc/>
-        public Bitmap Apply(Bitmap source, ReadOnly2DArray<double> mtx)
+        public Bitmap Apply(Bitmap src, ReadOnly2DArray<double> mtx)
         {
-            source.IsSupported();
+            if (src is null) { throw new ArgumentNullException(nameof(src)); }
+            if (mtx is null) { throw new ArgumentNullException(nameof(mtx)); }
+            if (src.PixelFormat != PixelFormat.Format32bppArgb)
+            {
+                throw new NotSupportedException(Errors.NotSupported);
+            }
 
-            var bitmapData = source.LockBits(
-              new Rectangle(0, 0, source.Width, source.Height),
-              ImageLockMode.ReadWrite, source.PixelFormat);
+            var bitmapData = src.LockBits(
+              new Rectangle(0, 0, src.Width, src.Height),
+              ImageLockMode.ReadWrite, src.PixelFormat);
 
-            var (width, height) = (source.Width, source.Height);
+            var (width, height) = (src.Width, src.Height);
             var step = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
 
             var options = new ParallelOptions()
@@ -64,9 +69,9 @@ namespace ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Implementation
                 });
             }
 
-            source.UnlockBits(bitmapData);
+            src.UnlockBits(bitmapData);
 
-            return source;
+            return src;
         }         
     }
 }

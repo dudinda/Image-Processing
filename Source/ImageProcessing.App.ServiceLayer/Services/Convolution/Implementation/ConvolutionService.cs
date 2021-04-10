@@ -3,8 +3,8 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Interface;
+using ImageProcessing.App.ServiceLayer.Code.Constants;
 using ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
@@ -15,7 +15,12 @@ namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
         /// <inheritdoc/>
         public Bitmap Convolution(Bitmap src, IConvolutionKernel filter) 
         {
-            src.IsSupported();
+            if (src is null) { throw new ArgumentNullException(nameof(src)); }
+            if (filter is null) { throw new ArgumentNullException(nameof(filter)); }
+            if (src.PixelFormat != PixelFormat.Format32bppArgb)
+            {
+                throw new NotSupportedException(Errors.NotSupported);
+            }
 
             var dst = new Bitmap(src);
 
@@ -27,7 +32,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
                 new Rectangle(0, 0, dst.Width, dst.Height),
                 ImageLockMode.WriteOnly, dst.PixelFormat);
 
-            var kernelOffset = (byte)((filter.Kernel.ColumnCount - 1) / 2);
+            var kernelOffset = (filter.Kernel.ColumnCount - 1) / 2;
 
             var (width, height) = (src.Width, src.Height);
             var (widthOffset, heightOffset) = (width - kernelOffset, height - kernelOffset);
