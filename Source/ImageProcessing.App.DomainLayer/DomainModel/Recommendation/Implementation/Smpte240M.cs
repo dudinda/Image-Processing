@@ -3,7 +3,7 @@ using ImageProcessing.App.DomainLayer.DomainModel.Recommendation.Interface;
 namespace ImageProcessing.App.DomainLayer.DomainModel.Recommendation.Implementation
 {
     /// <inheritdoc cref="IRecommendation"/>
-    internal sealed class Smpte240M : IRecommendation
+    public sealed class Smpte240M : IRecommendation
     {
         /// <summary>
         /// Evaluate relative luminance by SMPTE 240M.

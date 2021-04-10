@@ -3,22 +3,27 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.DomainLayer.Code.Constants;
 using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Transformation.Interface;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementation
 {
-    internal sealed class ScaleTransformation : ITransformation
+    public sealed class ScaleTransformation : ITransformation
     {
         public Bitmap Transform(Bitmap src, double sx, double sy)
         {
-            src.IsSupported();
+            if (src is null) { throw new ArgumentNullException(nameof(src)); }
+            if (src.PixelFormat != PixelFormat.Format32bppArgb)
+            {
+                throw new NotSupportedException(Errors.NotSupported);
+            }
 
             if (sx == 1d && sy == 1d) { return src; }
 
             var (dstWidth, dstHeight) = ((int)(src.Width * sx), (int)(src.Height * sy));
 
-            if (dstWidth  <= 0) { throw new ArgumentException(nameof(sx)); }
+            if (dstWidth <= 0) { throw new ArgumentException(nameof(sx)); }
             if (dstHeight <= 0) { throw new ArgumentException(nameof(sy)); }
 
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)

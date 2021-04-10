@@ -3,20 +3,28 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.DomainLayer.Code.Constants;
 using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Transformation.Interface;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementation
 {
-    internal sealed class ShearTransformation : ITransformation
+    public sealed class ShearTransformation : ITransformation
     {
         public Bitmap Transform(Bitmap src, double shx, double shy)
         {
-            src.IsSupported();
+            if (src is null) { throw new ArgumentNullException(nameof(src)); }
+            if (src.PixelFormat != PixelFormat.Format32bppArgb)
+            {
+                throw new NotSupportedException(Errors.NotSupported);
+            }
 
             if (shx == 0d && shy == 0d) { return src; }
 
-            if(shx * shy == 1d) { throw new InvalidOperationException("det(A) is zero."); }
+            if (shx * shy == 1d)
+            {
+                throw new InvalidOperationException(Errors.Singular);
+            }
 
             var (srcWidth, srcHeight) = (src.Width, src.Height);
             var (dSrcWidth, dSrcHeight) = ((double)srcWidth, (double)srcHeight);

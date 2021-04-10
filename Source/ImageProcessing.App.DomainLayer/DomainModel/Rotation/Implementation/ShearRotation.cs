@@ -3,16 +3,21 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.DomainLayer.Code.Constants;
 using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Rotation.Interface;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation
 {
-    internal sealed class ShearRotation : IRotation
+    public sealed class ShearRotation : IRotation
     {
         public Bitmap Rotate(Bitmap src, double rad)
         {
-            src.IsSupported();
+            if (src is null) { throw new ArgumentNullException(nameof(src)); }
+            if (src.PixelFormat != PixelFormat.Format32bppArgb)
+            {
+                throw new NotSupportedException(Errors.NotSupported);
+            }
 
             if (rad == 0d) { return src; }
 

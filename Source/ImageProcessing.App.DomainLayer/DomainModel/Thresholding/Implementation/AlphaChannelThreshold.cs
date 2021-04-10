@@ -3,24 +3,28 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
+using ImageProcessing.App.DomainLayer.Code.Constants;
 using ImageProcessing.App.DomainLayer.DomainModel.Thresholding.Interface;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Thresholding.Implementation
 {
-    internal sealed class AlphaChannelThreshold : IThreshold
+    public sealed class AlphaChannelThreshold : IThreshold
     {
-        public Bitmap Segment(Bitmap bitmap, byte threshold)
+        public Bitmap Segment(Bitmap src, byte threshold)
         {
-            bitmap.IsSupported();
+            if (src is null) { throw new ArgumentNullException(nameof(src)); }
+            if (src.PixelFormat != PixelFormat.Format32bppArgb)
+            {
+                throw new NotSupportedException(Errors.NotSupported);
+            }
 
-            var bitmapData = bitmap.LockBits(
-                new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                ImageLockMode.ReadWrite, bitmap.PixelFormat);
+            var bitmapData = src.LockBits(
+                new Rectangle(0, 0, src.Width, src.Height),
+                ImageLockMode.ReadWrite, src.PixelFormat);
 
             var step = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
 
-            var size = bitmap.Size;
+            var size = src.Size;
             var options = new ParallelOptions()
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount
@@ -44,9 +48,9 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Thresholding.Implementatio
                 });
             }
 
-            bitmap.UnlockBits(bitmapData);
+            src.UnlockBits(bitmapData);
 
-            return bitmap;
+            return src;
         }
     }
 }

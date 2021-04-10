@@ -6,7 +6,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.
     /// <summary>
     /// Implements the <see cref="IConvolutionKernel"/>.
     /// </summary>
-    internal sealed class MotionBlur9x9 : IConvolutionKernel
+    public sealed class MotionBlur9x9 : IConvolutionKernel
     {
         /// <inheritdoc />
         public double Bias { get; } = 0.0;

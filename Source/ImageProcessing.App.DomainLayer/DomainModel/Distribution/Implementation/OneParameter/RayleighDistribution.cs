@@ -10,7 +10,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
     /// <summary>
     /// Implements the <see cref="IDistribution"/>.
     /// </summary>
-    internal sealed class RayleighDistribution : IDistribution
+    public sealed class RayleighDistribution : IDistribution
     {
         private readonly DecimalReal _math = new DecimalReal();
 

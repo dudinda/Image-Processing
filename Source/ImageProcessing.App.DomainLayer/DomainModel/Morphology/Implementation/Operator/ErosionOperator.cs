@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.DomainLayer.Code.Constants;
 using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Interface.UnaryOperator;
 using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
@@ -17,7 +18,12 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.
         /// <inheritdoc />
         public Bitmap Filter(Bitmap bitmap, BitMatrix kernel)
         {
-            bitmap.IsSupported();
+            if (bitmap is null) { throw new ArgumentNullException(nameof(bitmap)); }
+            if (kernel is null) { throw new ArgumentNullException(nameof(kernel)); }
+            if (bitmap.PixelFormat != PixelFormat.Format32bppArgb)
+            {
+                throw new NotSupportedException(Errors.NotSupported);
+            }
 
             var destination = new Bitmap(bitmap);
 

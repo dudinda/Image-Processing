@@ -4,8 +4,8 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.DomainLayer.Code.Constants;
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Interface;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementation
@@ -13,22 +13,26 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
     /// <summary>
     /// Implements the <see cref="IRgbFilter"/>.
     /// </summary>
-    internal sealed class InversionFilter : IRgbFilter
+    public sealed class InversionFilter : IRgbFilter
     {
         private static readonly ConcurrentDictionary<RgbFltr, byte[]>
-            _inverseCache = new ConcurrentDictionary<RgbFltr, byte[]>();
+            _cache = new ConcurrentDictionary<RgbFltr, byte[]>();
 
         /// <inheritdoc />
-        public Bitmap Filter(Bitmap bitmap)
+        public Bitmap Filter(Bitmap src)
         {
-            bitmap.IsSupported();
+            if (src is null) { throw new ArgumentNullException(nameof(src)); }
+            if (src.PixelFormat != PixelFormat.Format32bppArgb)
+            {
+                throw new NotSupportedException(Errors.NotSupported);
+            }
 
             var inverse = GetReversedByteOrder();
-            var (width, height) = (bitmap.Width, bitmap.Height);
+            var (width, height) = (src.Width, src.Height);
 
-            var bitmapData = bitmap.LockBits(
-                new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                ImageLockMode.ReadWrite, bitmap.PixelFormat);
+            var bitmapData = src.LockBits(
+                new Rectangle(0, 0, src.Width, src.Height),
+                ImageLockMode.ReadWrite, src.PixelFormat);
 
             var options = new ParallelOptions()
             {
@@ -54,14 +58,14 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
                 });
             }
 
-            bitmap.UnlockBits(bitmapData);
+            src.UnlockBits(bitmapData);
 
-            return bitmap;
+            return src;
         }
 
-        private byte[] GetReversedByteOrder()
+        private static byte[] GetReversedByteOrder()
         {
-            if (_inverseCache.TryGetValue(RgbFltr.Inversion, out var bytes))
+            if (_cache.TryGetValue(RgbFltr.Inversion, out var bytes))
             {
                 return bytes;
             }
@@ -73,12 +77,12 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementati
                 result[index] = (byte)(255 - index);
             }
 
-            if (_inverseCache.TryAdd(RgbFltr.Inversion, result))
+            if (_cache.TryAdd(RgbFltr.Inversion, result))
             {
                 return result;
             }
 
-            throw new InvalidOperationException(nameof(_inverseCache));
+            return result;
         }
     }
 }

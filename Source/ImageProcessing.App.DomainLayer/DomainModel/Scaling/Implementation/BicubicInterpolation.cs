@@ -3,16 +3,21 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.DomainLayer.Code.Constants;
 using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Scaling.Interface;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
 {
-    internal sealed class BicubicInterpolation : IScaling
+    public sealed class BicubicInterpolation : IScaling
     {
         public Bitmap Resize(Bitmap src, double xScale, double yScale)
         {
-            src.IsSupported();
+            if (src is null) { throw new ArgumentNullException(nameof(src)); }
+            if (src.PixelFormat != PixelFormat.Format32bppArgb)
+            {
+                throw new NotSupportedException(Errors.NotSupported);
+            }
 
             if (yScale == 0d && xScale == 0d) { return src; }
 
@@ -21,7 +26,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation
             var dstWidth = srcWidth + (int)(srcWidth * xScale);
             var dstHeight = srcHeight + (int)(srcHeight * yScale);
 
-            if (dstWidth  <= 0) { throw new ArgumentException(nameof(xScale)); }
+            if (dstWidth <= 0) { throw new ArgumentException(nameof(xScale)); }
             if (dstHeight <= 0) { throw new ArgumentException(nameof(yScale)); }
 
             var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)

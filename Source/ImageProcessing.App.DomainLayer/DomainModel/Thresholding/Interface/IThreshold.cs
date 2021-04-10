@@ -4,6 +4,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Thresholding.Interface
 {
     public interface IThreshold
     {
-        Bitmap Segment(Bitmap bmp, byte threshold);
+        Bitmap Segment(Bitmap src, byte threshold);
     }
 }

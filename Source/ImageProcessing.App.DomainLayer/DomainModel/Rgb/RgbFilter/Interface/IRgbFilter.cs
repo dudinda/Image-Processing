@@ -10,6 +10,6 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Interface
         /// <summary>
         /// Apply a filter to the specified bitmap. 
         /// </summary>
-        Bitmap Filter(Bitmap bitmap);
+        Bitmap Filter(Bitmap src);
     }
 }

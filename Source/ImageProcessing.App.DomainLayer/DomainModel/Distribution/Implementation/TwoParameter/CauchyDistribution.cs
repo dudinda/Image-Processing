@@ -10,7 +10,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
     /// <summary>
     /// Implements the <see cref="IDistribution"/>.
     /// </summary>
-    internal sealed class CauchyDistribution : IDistribution
+    public sealed class CauchyDistribution : IDistribution
     {
         private readonly DecimalReal _math = new DecimalReal();
 

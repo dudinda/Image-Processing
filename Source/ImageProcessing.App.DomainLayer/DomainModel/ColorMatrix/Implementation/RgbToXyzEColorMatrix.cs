@@ -6,7 +6,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.ColorMatrix.Implementation
     /// <summary>
     /// XYZ of the E reference illuminant.
     /// </summary>
-    internal sealed class RgbToXyzEColorMatrix : IColorMatrix
+    public sealed class RgbToXyzEColorMatrix : IColorMatrix
     {
         public ReadOnly2DArray<double> Matrix { get; }
             = new ReadOnly2DArray<double>(

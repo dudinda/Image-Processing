@@ -11,7 +11,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
     /// <summary>
     /// Implements the <see cref="IDistribution"/>.
     /// </summary>
-    internal sealed class WeibullDistribution : IDistribution
+    public sealed class WeibullDistribution : IDistribution
     {
         private readonly DecimalSpecial _special = new DecimalSpecial();
         private readonly DecimalReal _real = new DecimalReal();

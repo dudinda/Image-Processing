@@ -3,7 +3,7 @@ using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.ColorMatrix.Implementation
 {
-    internal sealed class IdentityColorMatrix : IColorMatrix
+    public sealed class IdentityColorMatrix : IColorMatrix
     {
         public ReadOnly2DArray<double> Matrix { get; }
             = new ReadOnly2DArray<double>(

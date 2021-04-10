@@ -6,7 +6,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.
     /// <summary>
     /// Implements the <see cref="IConvolutionKernel"/>.
     /// </summary>
-    internal sealed class SobelOperatorVertical : IConvolutionKernel
+    public sealed class SobelOperatorVertical : IConvolutionKernel
     {
         /// <inheritdoc />
         public double Bias { get; } = 0.0;

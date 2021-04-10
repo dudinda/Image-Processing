@@ -10,7 +10,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
     /// <summary>
     /// Implements the <see cref="IDistribution"/>.
     /// </summary>
-    internal sealed class ParabolaDistribution : IDistribution
+    public sealed class ParabolaDistribution : IDistribution
     {
         private readonly DecimalReal _math = new DecimalReal();
 

@@ -3,7 +3,7 @@ using ImageProcessing.App.DomainLayer.DomainModel.Recommendation.Interface;
 namespace ImageProcessing.App.DomainLayer.DomainModel.Recommendation.Implementation
 {
     /// <inheritdoc cref="IRecommendation"/>
-    internal sealed class Rec709 : IRecommendation
+    public sealed class Rec709 : IRecommendation
     {
         /// <summary>
         /// Evaluate relative luminance by Rec. 709.

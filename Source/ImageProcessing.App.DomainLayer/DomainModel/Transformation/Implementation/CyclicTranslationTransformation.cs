@@ -3,16 +3,21 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.DomainLayer.Code.Constants;
 using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
 using ImageProcessing.App.DomainLayer.DomainModel.Transformation.Interface;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementation
 {
-    internal sealed class CyclicTranslationTransformation : ITransformation
+    public sealed class CyclicTranslationTransformation : ITransformation
     {
         public Bitmap Transform(Bitmap src, double tx, double ty)
         {
-            src.IsSupported();
+            if (src is null) { throw new ArgumentNullException(nameof(src)); }
+            if (src.PixelFormat != PixelFormat.Format32bppArgb)
+            {
+                throw new NotSupportedException(Errors.NotSupported);
+            }
 
             if (tx == 0d && ty == 0d) { return src; }
 
@@ -89,6 +94,5 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Transformation.Implementat
 
             return dst;
         }
-
     }
 }

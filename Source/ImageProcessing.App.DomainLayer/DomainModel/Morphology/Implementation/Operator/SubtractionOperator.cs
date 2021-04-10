@@ -1,9 +1,10 @@
 using System;
+using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
+using ImageProcessing.App.DomainLayer.Code.Constants;
 using ImageProcessing.App.DomainLayer.DomainModel.Morphology.Interface.BinaryOperator;
 
 namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.Operator
@@ -16,7 +17,16 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Morphology.Implementation.
         /// <inheritdoc />
         public Bitmap Filter(Bitmap lvalue, Bitmap rvalue)
         {
-            lvalue.IsSupported(); rvalue.IsSupported();
+            if (lvalue is null) { throw new ArgumentNullException(nameof(lvalue)); }
+            if (rvalue is null) { throw new ArgumentNullException(nameof(rvalue)); }
+            if (lvalue.PixelFormat != PixelFormat.Format32bppArgb)
+            {
+                throw new NotSupportedException(Errors.NotSupported);
+            }
+            if (rvalue.PixelFormat != PixelFormat.Format32bppArgb)
+            {
+                throw new NotSupportedException(Errors.NotSupported);
+            }
 
             var result = new Bitmap(lvalue);
 

@@ -5,7 +5,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Rgb.Channel.Implementation
     /// <summary>
     /// Blue. Implements the <see cref="IChannel"/>.
     /// </summary>
-    internal sealed class BChannel : IChannel
+    public sealed class BChannel : IChannel
     {
         /// <inheritdoc/>
         public unsafe void GetChannel(byte* ptr)

@@ -6,7 +6,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.
     /// <summary>
     /// Implements the <see cref="IConvolutionKernel"/>.
     /// </summary>
-	internal sealed class GaussianBlur5x5 : IConvolutionKernel
+	public sealed class GaussianBlur5x5 : IConvolutionKernel
 	{
         /// <inheritdoc />
 		public double Bias { get; } = 0.0;

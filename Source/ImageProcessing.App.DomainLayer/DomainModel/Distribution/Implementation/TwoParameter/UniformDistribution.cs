@@ -9,7 +9,7 @@ namespace ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementatio
     /// <summary>
     /// Implements the <see cref="IDistribution"/>.
     /// </summary>
-    internal sealed class UniformDistribution : IDistribution
+    public sealed class UniformDistribution : IDistribution
     {
         private decimal _a;
         private decimal _b;
