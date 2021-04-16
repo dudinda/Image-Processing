@@ -27,9 +27,11 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
 
             lock (_sync)
             {
+                ISubscriber<TEventArgs>? subscriber;
+
                 foreach (var sub in GetSubscribers(subsriberType)[publisher])
                 {
-                    var subscriber = sub as ISubscriber<TEventArgs>;
+                    subscriber = sub as ISubscriber<TEventArgs>;
 
                     if (subscriber != null)
                     {
@@ -46,9 +48,11 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
 
             lock (_sync)
             {
+                ISubscriber<TEventArgs>? subscriber;
+
                 foreach (var sub in GetSubscribers(subscriberType).Values.SelectMany(_ => _))
                 {
-                    var subscriber = sub as ISubscriber<TEventArgs>;
+                    subscriber = sub as ISubscriber<TEventArgs>;
 
                     if (subscriber != null)
                     {
@@ -65,14 +69,16 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
 
             lock (_sync)
             {
+                Dictionary<object, HashSet<object>> pubsToSubs;
+
                 foreach (var subscriberType in types)
                 {
-                    var map = GetSubscribers(subscriberType);
+                    pubsToSubs = GetSubscribers(subscriberType);
 
-                    if(!map.TryGetValue(publisher, out var subs))
+                    if(!pubsToSubs.TryGetValue(publisher, out var subs))
                     {
                         subs = new HashSet<object>();
-                        map.Add(publisher, subs);
+                        pubsToSubs.Add(publisher, subs);
                     }
 
                     if (!subs.Contains(subscriber))
@@ -83,16 +89,18 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
             }
         }
 
-        /// <inheritdoc cref="IEventAggregator.Unsubscribe(Type, object))"/>
+        /// <inheritdoc cref="IEventAggregator.Unsubscribe(Type, object)"/>
         public void Unsubscribe(Type subscriber, object publisher)
         {
             var types = GetSubsciberTypes(subscriber);
 
             lock (_sync)
             {
+                Dictionary<object, HashSet<object>> pubsToSubs;
+
                 foreach (var subscriberType in types)
                 {
-                    var pubsToSubs = GetSubscribers(subscriberType);
+                    pubsToSubs = GetSubscribers(subscriberType);
                     pubsToSubs.Remove(publisher);
 
                     if(pubsToSubs.Count == 0)
