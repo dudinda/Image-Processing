@@ -15,7 +15,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
 
         /// <summary>
         /// Partition a presenter with a subscriber interface cast and
-        /// when queue it as a callback on the syncronization context.
+        /// then queue it as a callback on the syncronization context.
         /// </summary>
         private readonly Dictionary<Type, Dictionary<object, HashSet<object>>> _map
             = new Dictionary<Type, Dictionary<object, HashSet<object>>>();
