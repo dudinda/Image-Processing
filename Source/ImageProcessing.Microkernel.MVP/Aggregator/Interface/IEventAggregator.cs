@@ -22,13 +22,13 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Interface
         void PublishFromAll<TEventArgs>(object publisher, TEventArgs args);
 
         /// <summary>
-        /// Subscribe a specified object with handlers
-        /// to all messages with <typeparamref name="TEventArgs"/>  args.
+        /// Subscribe the specified <paramref name="subscriber"/>
+        /// with the message handlers from the <paramref name="publisher"/>.
         /// </summary>
         void Subscribe(object subscriber, object publisher);
 
         /// <summary>
-        /// Unsubscribe from the specified <paramref name="subscriber"/>.
+        /// Unsubscribe <paramref name="publisher"/> from the specified <paramref name="subscriber"/>.
         /// </summary>
         void Unsubscribe(Type subscriber, object publisher);
     }

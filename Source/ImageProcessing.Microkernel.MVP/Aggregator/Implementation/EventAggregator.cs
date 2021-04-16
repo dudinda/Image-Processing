@@ -14,7 +14,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
          private readonly object _sync= new object();
 
         /// <summary>
-        /// Partition a presenter with a cast subscriber interface cast and
+        /// Partition a presenter with a subscriber interface cast and
         /// when queue it as a callback on the syncronization context.
         /// </summary>
         private readonly Dictionary<Type, Dictionary<object, HashSet<object>>> _map
