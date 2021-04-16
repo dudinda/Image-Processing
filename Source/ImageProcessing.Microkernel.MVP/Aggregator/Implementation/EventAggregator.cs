@@ -11,27 +11,29 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
     /// <inheritdoc cref="IEventAggregator"/>
     public class EventAggregator : IEventAggregator
     {
-        private readonly object _syncRoot = new object();
+         private readonly object _sync= new object();
 
-        private readonly Dictionary<Type, HashSet<(object, object)>> _eventSubscribers
-            = new Dictionary<Type, HashSet<(object, object)>>();
+        /// <summary>
+        /// Partition a presenter with a subscriber interface cast and
+        /// when queue it as a callback on the syncronization context.
+        /// </summary>
+        private readonly Dictionary<Type, Dictionary<object, HashSet<object>>> _map
+            = new Dictionary<Type, Dictionary<object, HashSet<object>>>();
 
         /// <inheritdoc cref="IEventAggregator.PublishFrom{TEventArgs}(object, TEventArgs)"
         public void PublishFrom<TEventArgs>(object publisher, TEventArgs args)
         {
             var subsriberType = typeof(ISubscriber<>).MakeGenericType(typeof(TEventArgs));
 
-            lock (_syncRoot)
+            lock (_sync)
             {
-                var pairs = GetSubscribers(subsriberType).Where((pair) => pair.Publisher == publisher);
-
-                foreach (var pair in pairs)
+                foreach (var sub in GetSubscribers(subsriberType)[publisher])
                 {
-                    var subscriber = pair.Subscriber as ISubscriber<TEventArgs>;
+                    var subscriber = sub as ISubscriber<TEventArgs>;
 
                     if (subscriber != null)
                     {
-                        Post(s => subscriber.OnEventHandler(pair.Publisher, args), null!);
+                        Post(s => subscriber.OnEventHandler(publisher, args), null!);
                     }
                 }
             }
@@ -40,13 +42,13 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
         /// <inheritdoc cref="IEventAggregator.PublishFromAll{TEventArgs}(object, TEventArgs)"
         public void PublishFromAll<TEventArgs>(object publisher, TEventArgs args)
         {
-            var subsriberType = typeof(ISubscriber<>).MakeGenericType(typeof(TEventArgs));
+            var subscriberType = typeof(ISubscriber<>).MakeGenericType(typeof(TEventArgs));
 
-            lock (_syncRoot)
+            lock (_sync)
             {
-                foreach (var pair in GetSubscribers(subsriberType))
+                foreach (var sub in GetSubscribers(subscriberType).Values.SelectMany(_ => _))
                 {
-                    var subscriber = pair.Subscriber as ISubscriber<TEventArgs>;
+                    var subscriber = sub as ISubscriber<TEventArgs>;
 
                     if (subscriber != null)
                     {
@@ -61,15 +63,21 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
         {
             var types = GetSubsciberTypes(subscriber.GetType());
 
-            lock (_syncRoot)
+            lock (_sync)
             {
-                foreach (var subsriberType in types)
+                foreach (var subscriberType in types)
                 {
-                    var subscribers = GetSubscribers(subsriberType);
+                    var map = GetSubscribers(subscriberType);
 
-                    if (!subscribers.Any(pair => pair.Subscriber == subscriber))
+                    if(!map.TryGetValue(publisher, out var subs))
                     {
-                        subscribers.Add((subscriber, publisher));
+                        subs = new HashSet<object>();
+                        map.Add(publisher, subs);
+                    }
+
+                    if (!subs.Contains(subscriber))
+                    {
+                        subs.Add(subscriber);
                     }             
                 }
             }
@@ -80,14 +88,17 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
         {
             var types = GetSubsciberTypes(subscriber);
 
-            lock (_syncRoot)
+            lock (_sync)
             {
-                foreach (var subsriberType in types)
+                foreach (var subscriberType in types)
                 {
-                    var subscribers = GetSubscribers(subsriberType);
-                        subscribers.RemoveWhere(
-                            pair => pair.Publisher == publisher
-                        );
+                    var pubsToSubs = GetSubscribers(subscriberType);
+                    pubsToSubs.Remove(publisher);
+
+                    if(pubsToSubs.Count == 0)
+                    {
+                        _map.Remove(subscriberType);
+                    }
                 }
             }
         }
@@ -104,21 +115,18 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
             syncContext.Post(callback, state);
         }
 
-        private HashSet<(object Subscriber, object Publisher)> GetSubscribers(Type subsriberType)
+        private Dictionary<object, HashSet<object>> GetSubscribers(Type subsriberType)
         {
-            lock (_syncRoot)
+            lock (_sync)
             {
-                var isFound = _eventSubscribers.TryGetValue(
-                        subsriberType, out var subscribers);
-
-                if (!isFound)
+                if (!_map.TryGetValue(subsriberType, out var pubsToSubs))
                 {
-                    subscribers = new HashSet<(object, object)>();
+                    pubsToSubs = new Dictionary<object, HashSet<object>>();
 
-                    _eventSubscribers.Add(subsriberType, subscribers);
+                    _map.Add(subsriberType, pubsToSubs);
                 }
 
-                return subscribers;
+                return pubsToSubs;
             }
         }
 
