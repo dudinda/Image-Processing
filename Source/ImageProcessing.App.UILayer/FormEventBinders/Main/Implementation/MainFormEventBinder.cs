@@ -1,6 +1,5 @@
 using System.Windows.Forms;
 
-using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Container;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.FileDialog;
@@ -9,6 +8,9 @@ using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Show;
 using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Main;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
+
+using static ImageProcessing.App.PresentationLayer.Code.Enums.ImageContainer;
+using static ImageProcessing.App.PresentationLayer.Code.Enums.UndoRedoAction;
 
 namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation
 {
@@ -24,129 +26,79 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation
         public void OnElementExpose(IMainFormExposer source)
         {
             source.OpenFileMenu.Click += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new OpenFileDialogEventArgs()
-                );
+                => _aggregator.PublishFrom(source, new OpenFileDialogEventArgs());
 
             source.SaveFileMenu.Click += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new SaveWithoutFileDialogEventArgs()
-                );
+                => _aggregator.PublishFrom(source, new SaveWithoutFileDialogEventArgs());
 
             source.SaveAsMenu.Click += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new SaveAsFileDialogEventArgs()
-                );
+                => _aggregator.PublishFrom(source, new SaveAsFileDialogEventArgs());
 
-            source.ReplaceSrcByDstButton.Click += (sernder, args)
-                => _aggregator.PublishFrom(source,
-                    new ReplaceImageEventArgs(ImageContainer.Destination)
-                );
+            source.ReplaceSrcByDstButton.Click += (sender, args)
+                => _aggregator.PublishFrom(source, new ReplaceImageEventArgs(Destination));
 
-            source.ReplaceDstBySrcButton.Click += (sernder, args)
-                => _aggregator.PublishFrom(source,
-                    new ReplaceImageEventArgs(ImageContainer.Source)
-                );
+            source.ReplaceDstBySrcButton.Click += (sender, args)
+                => _aggregator.PublishFrom(source, new ReplaceImageEventArgs(Source));
 
             source.ZoomSrcTrackBar.MouseWheel += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new TrackBarEventArgs(ImageContainer.Source)
-                );
+                => _aggregator.PublishFrom(source, new TrackBarEventArgs(Source));
 
-            source.ZoomSrcTrackBar.MouseUp += (secnder, args)
-                => _aggregator.PublishFrom(source,
-                    new TrackBarEventArgs(ImageContainer.Source)
-                );
+            source.ZoomSrcTrackBar.MouseUp += (sender, args)
+                => _aggregator.PublishFrom(source, new TrackBarEventArgs(Source));
 
-            source.ZoomSrcTrackBar.KeyPress += (secnder, args)
-                => _aggregator.PublishFrom(source,
-                    new TrackBarEventArgs(ImageContainer.Source)
-                );
+            source.ZoomSrcTrackBar.KeyPress += (sender, args)
+                => _aggregator.PublishFrom(source, new TrackBarEventArgs(Source));
 
             source.RotationSrcTrackBar.MouseWheel += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new TrackBarEventArgs(ImageContainer.Source)
-                );
+                => _aggregator.PublishFrom(source, new TrackBarEventArgs(Source));
 
-            source.RotationSrcTrackBar.MouseUp += (secnder, args)
-                => _aggregator.PublishFrom(source,
-                    new TrackBarEventArgs(ImageContainer.Source)
-                );
+            source.RotationSrcTrackBar.MouseUp += (sender, args)
+                => _aggregator.PublishFrom(source, new TrackBarEventArgs(Source));
 
-            source.RotationSrcTrackBar.KeyPress += (secnder, args)
-                => _aggregator.PublishFrom(source,
-                    new TrackBarEventArgs(ImageContainer.Source)
-                );
+            source.RotationSrcTrackBar.KeyPress += (sender, args)
+                => _aggregator.PublishFrom(source, new TrackBarEventArgs(Source));
 
             source.ZoomDstTrackBar.MouseWheel += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new TrackBarEventArgs(ImageContainer.Destination)
-                );
+                => _aggregator.PublishFrom(source, new TrackBarEventArgs(Destination));
 
             source.ZoomDstTrackBar.MouseUp += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new TrackBarEventArgs(ImageContainer.Destination)
-                );
+                => _aggregator.PublishFrom(source, new TrackBarEventArgs(Destination));
 
             source.ZoomDstTrackBar.KeyPress += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new TrackBarEventArgs(ImageContainer.Destination)
-                );
+                => _aggregator.PublishFrom(source, new TrackBarEventArgs(Destination));
 
             source.RotationDstTrackBar.MouseWheel += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new TrackBarEventArgs(ImageContainer.Destination)
-                );
+                => _aggregator.PublishFrom(source, new TrackBarEventArgs(Destination));
 
             source.RotationDstTrackBar.MouseUp += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new TrackBarEventArgs(ImageContainer.Destination)
-                );
+                => _aggregator.PublishFrom(source, new TrackBarEventArgs(Destination));
 
             source.RotationDstTrackBar.KeyPress += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new TrackBarEventArgs(ImageContainer.Destination)
-                );
+                => _aggregator.PublishFrom(source, new TrackBarEventArgs(Destination));
 
             source.RgbMenuButton.Click += (sender, args)
-               => _aggregator.PublishFrom(source,
-                   new ShowRgbMenuEventArgs()
-               );
+                => _aggregator.PublishFrom(source, new ShowRgbMenuEventArgs());
 
             source.AffineTransformationMenuButton.Click += (sender, args)
-               => _aggregator.PublishFrom(source,
-                   new ShowTransformationMenuEventArgs()
-               );
+                => _aggregator.PublishFrom(source, new ShowTransformationMenuEventArgs());
 
             source.SettingsMenuButton.Click += (sender, args)
-               => _aggregator.PublishFrom(source,
-                   new ShowSettingsMenuEventArgs()
-               );
+                => _aggregator.PublishFrom(source, new ShowSettingsMenuEventArgs());
 
             source.ConvolutionMenuButton.Click += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new ShowConvolutionMenuEventArgs()
-                );
+                => _aggregator.PublishFrom(source, new ShowConvolutionMenuEventArgs());
 
             source.DistributionMenuButton.Click += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new ShowDistributionMenuEventArgs()
-                );
+                => _aggregator.PublishFrom(source, new ShowDistributionMenuEventArgs());
 
             source.UndoButton.Click += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new UndoRedoEventArgs(UndoRedoAction.Undo)
-                );
+                => _aggregator.PublishFrom(source, new UndoRedoEventArgs(Undo));
 
             source.RedoButton.Click += (sender, args)
-                => _aggregator.PublishFrom(source,
-                     new UndoRedoEventArgs(UndoRedoAction.Redo)
-                );
+                => _aggregator.PublishFrom(source, new UndoRedoEventArgs(Redo));
 
             source.FormClosed += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new FormIsClosedEventArgs()
-                );
+                => _aggregator.PublishFrom(source, new FormIsClosedEventArgs());
         }
 
         public bool ProcessCmdKey(IMainFormExposer view, Keys keyData)

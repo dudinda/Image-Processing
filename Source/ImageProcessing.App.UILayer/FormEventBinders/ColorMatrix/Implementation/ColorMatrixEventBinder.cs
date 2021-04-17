@@ -19,24 +19,16 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.ColorMatrix.Implementatio
         public void OnElementExpose(IColorMatrixFormExposer source)
         {
             source.ApplyButton.Click += (sender, args)
-                 => _aggregator.PublishFrom(source,
-                     new ApplyColorMatrixEventArgs()
-                 );
+                 => _aggregator.PublishFrom(source, new ApplyColorMatrixEventArgs());
 
             source.ApplyCustomButton.Click += (sender, args)
-                 => _aggregator.PublishFrom(source,
-                     new ApplyCustomColorMatrixEventArgs()
-                 );
+                 => _aggregator.PublishFrom(source, new ApplyCustomColorMatrixEventArgs());
 
             source.CustomCheckBox.CheckedChanged += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new CustomColorMatrixEventArgs(source.CustomCheckBox.Checked)
-                );
+                => _aggregator.PublishFrom(source, new CustomColorMatrixEventArgs(source.CustomCheckBox.Checked));
 
             source.ColorMatrixDropDown.SelectionChangeCommitted += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new ChangeColorMatrixEventArgs()
-                );
+                => _aggregator.PublishFrom(source, new ChangeColorMatrixEventArgs());
         }
 
         public bool ProcessCmdKey(IColorMatrixFormExposer view, Keys keyData)

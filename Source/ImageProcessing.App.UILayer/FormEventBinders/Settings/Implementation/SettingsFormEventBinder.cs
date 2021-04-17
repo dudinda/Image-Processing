@@ -17,19 +17,13 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Settings.Implementation
         public void OnElementExpose(ISettingsFormExposer form)
         {
             form.LumaDropDown.SelectionChangeCommitted += (sender, args)
-                => _aggregator.PublishFrom(form,
-                    new ChangeLumaEventArgs()
-                );
+                => _aggregator.PublishFrom(form, new ChangeLumaEventArgs());
 
             form.ScalingDropDown.SelectionChangeCommitted += (sender, args)
-                => _aggregator.PublishFrom(form,
-                    new ChangeScalingEventArgs()
-                );
+                => _aggregator.PublishFrom(form, new ChangeScalingEventArgs());
 
             form.RotationDropDown.SelectionChangeCommitted += (sender, args)
-                => _aggregator.PublishFrom(form,
-                    new ChangeRotationEventArgs()
-                );
+                => _aggregator.PublishFrom(form, new ChangeRotationEventArgs());
         }
     }
 }

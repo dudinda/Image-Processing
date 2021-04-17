@@ -1,10 +1,11 @@
 using System.Windows.Forms;
 
-using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.DomainEvents.RgbArgs;
 using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Rgb;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
+
+using static ImageProcessing.App.DomainLayer.Code.Enums.RgbChannels;
 
 namespace ImageProcessing.App.UILayer.FormEventBinders.Rgb.Implementation
 {
@@ -20,29 +21,19 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Rgb.Implementation
         public void OnElementExpose(IRgbFormExposer source)
         {
             source.ApplyFilterButton.Click += (sender, args)
-                 => _aggregator.PublishFrom(source,
-                     new ApplyRgbFilterEventArgs()
-                 );
+                => _aggregator.PublishFrom(source, new ApplyRgbFilterEventArgs());
 
             source.ColorMatrixMenuButton.Click += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new ShowColorMatrixMenuEventArgs()
-                );
+                => _aggregator.PublishFrom(source, new ShowColorMatrixMenuEventArgs());
 
             source.RedButton.CheckedChanged += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new ApplyRgbChannelFilterEventArgs(RgbChannels.Red)
-                );
+                => _aggregator.PublishFrom(source, new ApplyRgbChannelFilterEventArgs(Red));
 
             source.GreenButton.CheckedChanged += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new ApplyRgbChannelFilterEventArgs(RgbChannels.Green)
-                );
+                => _aggregator.PublishFrom(source, new ApplyRgbChannelFilterEventArgs(Green));
 
             source.BlueButton.CheckedChanged += (sender, args)
-               => _aggregator.PublishFrom(source,
-                   new ApplyRgbChannelFilterEventArgs(RgbChannels.Blue)
-               );
+                => _aggregator.PublishFrom(source, new ApplyRgbChannelFilterEventArgs(Blue));
         }
 
         public bool ProcessCmdKey(IRgbFormExposer view, Keys keyData)
@@ -62,7 +53,7 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Rgb.Implementation
                 case Keys.B:
 
                     view.BlueButton.Checked = !view.BlueButton.Checked;
-                    return true;                    
+                    return true;
             }
 
             return false;

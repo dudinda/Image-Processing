@@ -19,9 +19,7 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Transformation.Implementa
         public void OnElementExpose(ITransformationFormExposer source)
         {
             source.ApplyButton.Click += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new ApplyTransformationEventArgs(source.Parameters)
-                );
+                => _aggregator.PublishFrom(source, new ApplyTransformationEventArgs(source.Parameters));
         }
 
         public bool ProcessCmdKey(ITransformationFormExposer view, Keys keyData)

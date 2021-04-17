@@ -19,9 +19,7 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Convolution.Implementatio
         public void OnElementExpose(IConvolutionFormExposer source)
         {
             source.ApplyButton.Click += (sender, args)
-                => _aggregator.PublishFrom(source,
-                    new ApplyConvolutionKernelEventArgs()
-                );
+                => _aggregator.PublishFrom(source, new ApplyConvolutionKernelEventArgs());
         }
 
         public bool ProcessCmdKey(IConvolutionFormExposer view, Keys keyData)
