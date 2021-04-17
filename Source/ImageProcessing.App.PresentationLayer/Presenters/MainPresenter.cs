@@ -84,9 +84,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                           ImageContainer.Source
                       ).ConfigureAwait(true);
 
-                    Controller.Aggregator.PublishFromAll(publisher,
-                       new ContainerUpdatedEventArgs(
-                           ImageContainer.Source, result.Image));
+                    Aggregator.PublishFromAll(publisher,
+                       new ContainerUpdatedEventArgs(ImageContainer.Source, result.Image));
                 }
             }
             catch(Exception ex)
@@ -247,8 +246,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                     {
                         await Render(block).ConfigureAwait(true);
 
-                        Controller.Aggregator.PublishFrom(publisher,
-                            new RestoreFocusEventArgs());
+                        Aggregator.PublishFrom(publisher, new RestoreFocusEventArgs());
                     }
                 }
             }
@@ -280,7 +278,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                         new PipelineBlock(copy), to
                     ).ConfigureAwait(true);
                   
-                    Controller.Aggregator.PublishFromAll(publisher,
+                    Aggregator.PublishFromAll(publisher,
                         new ContainerUpdatedEventArgs(to, copy));
                 }
             }
@@ -345,8 +343,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                     new PipelineBlock(copy), to, action
                 ).ConfigureAwait(true);
 
-                Controller.Aggregator.PublishFromAll(publisher,
-                        new ContainerUpdatedEventArgs(to, copy));
+                Aggregator.PublishFromAll(publisher,
+                    new ContainerUpdatedEventArgs(to, copy));
             }
             catch (Exception ex)
             {
@@ -392,7 +390,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             => await _operation.LockOperationAsync(
                 () => new Bitmap(View.GetImageCopy(container))
             ).ConfigureAwait(true);
-
 
         private async Task Paint(IPipelineBlock block,
             ImageContainer container = ImageContainer.Destination)
@@ -454,7 +451,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 View.SetCursor(CursorType.Wait);
             }
 
-            Controller.Aggregator.PublishFrom(publisher,
+            Aggregator.PublishFrom(publisher,
                 new ShowTooltipOnErrorEventArgs(error));
         }
     }

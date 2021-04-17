@@ -56,7 +56,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
 
                 copy.Tag = distribution.ToString();
 
-                Controller.Aggregator.PublishFromAll(
+                Aggregator.PublishFromAll(
                     publisher,
                     new AttachBlockToRendererEventArgs(
                        block: new PipelineBlock(copy)
@@ -84,7 +84,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                     () => new Bitmap(ViewModel.Source)
                 ).ConfigureAwait(true);
 
-                Controller.Aggregator.PublishFromAll(
+                Aggregator.PublishFromAll(
                     publisher,
                     new AttachBlockToRendererEventArgs(
                         block: new PipelineBlock(copy)

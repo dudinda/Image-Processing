@@ -53,7 +53,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                         () => new Bitmap(ViewModel.Source)
                     ).ConfigureAwait(true);
 
-                    Controller.Aggregator.PublishFromAll(
+                    Aggregator.PublishFromAll(
                         publisher,
                         new AttachBlockToRendererEventArgs(
                             block: new PipelineBlock(copy)
@@ -80,7 +80,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
 
                 var matrix = View.GetGrid();
 
-                Controller.Aggregator.PublishFromAll(
+                Aggregator.PublishFromAll(
                     publisher,
                     new AttachBlockToRendererEventArgs(
                         block: new PipelineBlock(copy)

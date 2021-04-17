@@ -20,7 +20,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
         private readonly Dictionary<Type, Dictionary<object, HashSet<object>>> _map
             = new Dictionary<Type, Dictionary<object, HashSet<object>>>();
 
-        /// <inheritdoc cref="IEventAggregator.PublishFrom{TEventArgs}(object, TEventArgs)"
+        /// <inheritdoc cref="IEventAggregator.PublishFrom{TEventArgs}(object, TEventArgs)"/>
         public void PublishFrom<TEventArgs>(object publisher, TEventArgs args)
         {
             var subsriberType = typeof(ISubscriber<>).MakeGenericType(typeof(TEventArgs));

@@ -26,6 +26,10 @@ namespace ImageProcessing.Microkernel.MVP.Presenter.Implementation
         protected IAppController Controller
             => _controller ??= AppController.Controller;
 
+        /// <inheritdoc cref="IEventAggregator"/>
+        protected IEventAggregator Aggregator
+            => Controller.Aggregator;
+
         /// <summary>
         /// Access point to the UI layer components.
         /// </summary>
@@ -71,6 +75,10 @@ namespace ImageProcessing.Microkernel.MVP.Presenter.Implementation
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller
             => _controller ??= AppController.Controller;
+
+        /// <inheritdoc cref="IEventAggregator"/>
+        protected IEventAggregator Aggregator
+            => Controller.Aggregator;
 
         /// <summary>
         /// Access point to the UI layer components.
