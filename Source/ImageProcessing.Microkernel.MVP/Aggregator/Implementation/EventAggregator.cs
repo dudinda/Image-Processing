@@ -11,7 +11,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
     /// <inheritdoc cref="IEventAggregator"/>
     public class EventAggregator : IEventAggregator
     {
-         private readonly object _sync= new object();
+         private readonly object _sync = new object();
 
         /// <summary>
         /// Partition a presenter with a subscriber interface cast and
@@ -23,19 +23,22 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
         /// <inheritdoc cref="IEventAggregator.PublishFrom{TEventArgs}(object, TEventArgs)"/>
         public void PublishFrom<TEventArgs>(object publisher, TEventArgs args)
         {
-            var subsriberType = typeof(ISubscriber<>).MakeGenericType(typeof(TEventArgs));
+            var subscriberType = typeof(ISubscriber<>).MakeGenericType(typeof(TEventArgs));
 
             lock (_sync)
             {
-                ISubscriber<TEventArgs>? subscriber;
-
-                foreach (var sub in GetSubscribers(subsriberType)[publisher])
+                if (GetSubscribers(subscriberType).TryGetValue(publisher, out var subs))
                 {
-                    subscriber = sub as ISubscriber<TEventArgs>;
+                    ISubscriber<TEventArgs>? subscriber;
 
-                    if (subscriber != null)
+                    foreach (var sub in subs)
                     {
-                        Post(s => subscriber.OnEventHandler(publisher, args), null!);
+                        subscriber = sub as ISubscriber<TEventArgs>;
+
+                        if (subscriber != null)
+                        {
+                            Post(s => subscriber.OnEventHandler(publisher, args), null!);
+                        }
                     }
                 }
             }
@@ -84,7 +87,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
                     if (!subs.Contains(subscriber))
                     {
                         subs.Add(subscriber);
-                    }             
+                    }
                 }
             }
         }
