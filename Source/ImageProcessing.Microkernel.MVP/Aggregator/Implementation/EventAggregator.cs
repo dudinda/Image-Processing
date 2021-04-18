@@ -11,7 +11,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
     /// <inheritdoc cref="IEventAggregator"/>
     public class EventAggregator : IEventAggregator
     {
-         private readonly object _sync = new object();
+          private readonly object _sync = new object();
 
         /// <summary>
         /// Partition a presenter with a subscriber interface cast and
@@ -68,6 +68,9 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
         /// <inheritdoc cref="IEventAggregator.Subscribe(object, object)"/>
         public void Subscribe(object subscriber, object publisher)
         {
+            if (subscriber is null) { throw new ArgumentNullException(nameof(subscriber)); }
+            if (publisher is null) { throw new ArgumentNullException(nameof(publisher)); }
+
             var types = GetSubsciberTypes(subscriber.GetType());
 
             lock (_sync)
@@ -95,6 +98,9 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
         /// <inheritdoc cref="IEventAggregator.Unsubscribe(Type, object)"/>
         public void Unsubscribe(Type subscriber, object publisher)
         {
+            if (subscriber is null) { throw new ArgumentNullException(nameof(subscriber)); }
+            if (publisher is null) { throw new ArgumentNullException(nameof(publisher)); }
+
             var types = GetSubsciberTypes(subscriber);
 
             lock (_sync)
