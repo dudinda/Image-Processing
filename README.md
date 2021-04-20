@@ -1,4 +1,5 @@
-# Image Processing
+# Image Processing 
+[Microkernel Demo for WPF/Winforms](https://github.com/dudinda/MVPTemplate)
 
 [![Build Status](https://dev.azure.com/dudin0da/Image%20Processing/_apis/build/status/Softenraged.Image-Processing?branchName=master)](https://dev.azure.com/dudin0da/Image%20Processing/_build/latest?definitionId=2&branchName=master)
 
@@ -13,7 +14,6 @@
    - [Yielding a sequence to test a collection traverse order](https://github.com/dudinda/Image-Processing/blob/master/Tests/ImageProcessing.Utility.DataStructure.UnitTests/CaseFactory/BitMatrixCaseFactory.cs#L17)
 3. [Benchmarks](#benchmarks-cpu)
 4. [NuGet](#nuget)
-5. [Microkernel Demo for WPF/Winforms](https://github.com/dudinda/MVPTemplate)
 ***
 
 ## Thesis
