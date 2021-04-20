@@ -1,7 +1,12 @@
+using ImageProcessing.App.UILayer.Forms.ColorMatrix;
+
 using MetroFramework.Controls;
 
 namespace ImageProcessing.App.UILayer.FormExposers.ColorMatrix
 {
+    /// <summary>
+    /// Expose elements from the <see cref="ColorMatrixForm"/>
+    /// </summary>
     internal interface IColorMatrixFormExposer
     {
         /// <summary>

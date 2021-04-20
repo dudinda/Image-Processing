@@ -3,11 +3,12 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.UILayer.Control;
 using ImageProcessing.App.UILayer.FormControl.TrackBar;
+using ImageProcessing.App.UILayer.Forms.Main;
 
 namespace ImageProcessing.App.UILayer.FormExposers.Main
 {
     /// <summary>
-    /// Expose elements from the main form.
+    /// Expose elements from the <see cref="MainForm"/>.
     /// </summary>
     internal interface IMainFormExposer 
     {

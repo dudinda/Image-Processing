@@ -1,9 +1,11 @@
+using ImageProcessing.App.UILayer.Forms.Rgb;
+
 using MetroFramework.Controls;
 
 namespace ImageProcessing.App.UILayer.FormExposers.Rgb
 {
     /// <summary>
-    /// Expose elements from the rgb form.
+    /// Expose elements from the <see cref="RgbForm"/>.
     /// </summary>
     internal interface IRgbFormExposer 
     {

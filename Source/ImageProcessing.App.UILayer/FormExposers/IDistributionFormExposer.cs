@@ -1,9 +1,14 @@
 using System.Windows.Forms;
 
+using ImageProcessing.App.UILayer.Forms.Distribution;
+
 using MetroFramework.Controls;
 
 namespace ImageProcessing.App.UILayer.FormExposers.Distribution
 {
+    /// <summary>
+    /// Expose elements from the <see cref="DistributionForm"/>.
+    /// </summary>
     internal interface IDistributionFormExposer 
     {
         /// <summary>
@@ -25,7 +30,6 @@ namespace ImageProcessing.App.UILayer.FormExposers.Distribution
         /// Show E[X] of the source image.
         /// </summary>
         ToolStripButton ExpectactionButton { get; }
-
 
         /// <summary>
         /// Show Var[X] of the source image.

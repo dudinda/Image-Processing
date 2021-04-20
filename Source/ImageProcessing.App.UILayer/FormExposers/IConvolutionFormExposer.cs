@@ -1,9 +1,11 @@
+using ImageProcessing.App.UILayer.Forms.Convolution;
+
 using MetroFramework.Controls;
 
 namespace ImageProcessing.App.UILayer.FormExposers.Convolution
 {
     /// <summary>
-    /// Expose elements from the convolution form.
+    /// Expose elements from the <see cref="ConvolutionForm"/>.
     /// </summary>
     internal interface IConvolutionFormExposer 
     {
