@@ -1,6 +1,6 @@
 # Image Processing
 
-[![Build Status](https://dev.azure.com/dudin0da/Image%20Processing/_apis/build/status/Softenraged.Image-Processing?branchName=master)](https://dev.azure.com/dudin0da/Image%20Processing/_build/latest?definitionId=2&branchName=master)
+[![Build Status](https://dev.azure.com/dudin0da/Image%20Processing/_apis/build/status/Softenraged.Image-Processing?branchName=master)](https://dev.azure.com/dudin0da/Image%20Processing/_build/latest?definitionId=2&branchName=master) [Microkernel Demo for WPF/Winforms](https://github.com/dudinda/MVPTemplate)
 
 1. [Thesis](#Thesis)
 2. [Solutions](#)
