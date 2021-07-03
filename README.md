@@ -59,7 +59,7 @@
 <p> Thus, one may conclude that a normal distribution may represent better result regarding a uniform distribution on a group of underexposed images.</p>
 
 ***
-Introducing a front controller and http-context to accept a web request it may be possible to unify mvp, mvc and mvvm under the single abstraction. The microkernel components belong to the netstandard2.0 environment. There is no need for a cross-platform static or xaml/xml-based forms.                   
+Introducing a front controller and http-context to accept a web request it may be possible to unify mvp, mvc and mvvm under the single abstraction. The microkernel components belong to the netstandard2.0 environment. There is no need for cross-platform static or xaml/xml-based forms.                   
 ***                      
 
 ## Architecture
