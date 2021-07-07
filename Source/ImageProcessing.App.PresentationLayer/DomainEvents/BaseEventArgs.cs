@@ -9,7 +9,7 @@ namespace ImageProcessing.App.PresentationLayer.DomainEvents
     {
         public DateTime PublishedOn { get; }
 
-        public BaseEventArgs()
+        protected BaseEventArgs()
         {
             PublishedOn = DateTime.UtcNow;
         }
