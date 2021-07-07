@@ -109,36 +109,42 @@ namespace ImageProcessing.Microkernel.DIAdapter.Adapters.Interface
         /// Registers the <typeparamref name="TService"/> as the factory that describes.
         /// the dependencies of the service with a transient scope.
         /// </summary>
+        [Obsolete("The implementation will not be provided. Will be removed.")]
         void RegisterTransient<TService, TArgument>(Expression<Func<TArgument, TService>> factory);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes.
         /// the dependencies of the service with the caller-name scope.
         /// </summary>
+        [Obsolete("The implementation will not be provided. Will be removed.")]
         void RegisterScoped<TService, TArgument>(Expression<Func<TArgument, TService>> factory);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes
         /// the dependencies of the service with a singleton scope.
         /// </summary>
+        [Obsolete("The implementation will not be provided. Will be removed.")]
         void RegisterSingleton<TService, TArgument>(Expression<Func<TArgument, TService>> factory);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes
         /// the named dependencies of the service with a transient scope.
         /// </summary>
+        [Obsolete("The implementation will not be provided. Will be removed.")]
         void RegisterTransient<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes
         /// the named dependencies of the service with the caller-name scope.
         /// </summary>
+        [Obsolete("The implementation will not be provided. Will be removed.")]
         void RegisterScoped<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes
         /// the named dependencies of the service with a singleton scope.
         /// </summary>
+        [Obsolete("The implementation will not be provided. Will be removed.")]
         void RegisterSingleton<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name);
 
         /// <summary>
