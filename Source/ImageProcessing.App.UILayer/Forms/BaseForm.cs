@@ -1,11 +1,10 @@
 using System;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Extensions.EnumExt;
-using ImageProcessing.App.UILayer.Code.Attributes;
+using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 using ImageProcessing.Microkernel.MVP.Controller.Implementation;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
 using ImageProcessing.Microkernel.MVP.View;
@@ -19,8 +18,7 @@ namespace ImageProcessing.App.UILayer.Forms
     /// Represents the base form with the contextual
     /// information about an application thread.
     /// </summary>
-    [TypeDescriptionProvider(typeof(AbstractFormDescriptionProvider<BaseForm, MetroForm>))]
-    internal abstract class BaseForm : MetroForm, IView
+    internal class BaseForm : MetroForm, IView
     {
         private IAppController? _controller;
         private ApplicationContext? _context;
@@ -28,6 +26,10 @@ namespace ImageProcessing.App.UILayer.Forms
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller
             => _controller ??= AppController.Controller;
+
+        /// <inheritdoc cref="IEventAggregator"/>
+        protected IEventAggregator Aggregator
+            => Controller.Aggregator;
 
         /// <inheritdoc cref="ApplicationContext"/>
         protected ApplicationContext Context
