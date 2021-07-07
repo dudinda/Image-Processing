@@ -54,13 +54,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         private readonly INonBlockDialogService _dialog;
 
         public MainPresenter(
-            ILoggerService logger,
-            IScalingProvider scale,
-            IRotationProvider rotation,
-            IAwaitablePipeline pipeline,
-            ICacheService<Bitmap> cache,
+            INonBlockDialogService dialog,
             IAsyncOperationLocker operation,
-            INonBlockDialogService dialog)
+            ICacheService<Bitmap> cache,
+            IAwaitablePipeline pipeline,
+            IRotationProvider rotation,
+            IScalingProvider scale,
+            ILoggerService logger)
         {
             _scale = scale;
             _cache = cache;

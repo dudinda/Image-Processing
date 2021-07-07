@@ -17,8 +17,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         private readonly IQualityMeasureService _quality;
 
         public QualityMeasurePresenter(
-            ILoggerService logger,
-            IQualityMeasureService quality) 
+            IQualityMeasureService quality,
+            ILoggerService logger) 
         {
             _logger = logger;
             _quality = quality;

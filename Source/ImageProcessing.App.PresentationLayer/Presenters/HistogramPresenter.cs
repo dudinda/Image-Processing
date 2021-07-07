@@ -17,8 +17,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         private readonly IHistogramService _service;
 
         public HistogramPresenter(
-            ILoggerService logger,
-            IHistogramService service) 
+            IHistogramService service,
+            ILoggerService logger) 
         {
             _logger = logger;
             _service = service;

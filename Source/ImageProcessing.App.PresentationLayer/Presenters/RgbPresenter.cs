@@ -34,10 +34,10 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         private readonly IAsyncOperationLocker _locker;
 
         public RgbPresenter(
-            IRgbProvider provider,
-            ILoggerService logger,
+            IAsyncOperationLocker locker,
             IRgbFilterFactory factory,
-            IAsyncOperationLocker locker) 
+            ILoggerService logger,
+            IRgbProvider provider) 
         {
             _provider = provider;
             _factory = factory;

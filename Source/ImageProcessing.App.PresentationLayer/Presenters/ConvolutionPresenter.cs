@@ -30,9 +30,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         private readonly IAsyncOperationLocker _locker;
 
         public ConvolutionPresenter(
-            ILoggerService logger,
+            IAsyncOperationLocker locker,
             IConvolutionProvider provider,
-            IAsyncOperationLocker locker) 
+            ILoggerService logger) 
         {
             _provider = provider;
             _logger = logger;

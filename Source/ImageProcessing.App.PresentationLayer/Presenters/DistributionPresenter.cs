@@ -37,10 +37,10 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         private readonly IBitmapLuminanceProvider _provider;
         
         public DistributionPresenter(
-            IBitmapService service,
-            ILoggerService logger,
+            IBitmapLuminanceProvider provider,
             IAsyncOperationLocker locker,
-            IBitmapLuminanceProvider provider)
+            IBitmapService service,
+            ILoggerService logger)
         {
             _locker = locker;
             _logger = logger;

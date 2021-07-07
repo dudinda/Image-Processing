@@ -28,9 +28,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         private readonly ITransformationProvider _provider;
 
         public TransformationPresenter(
-            ILoggerService logger,
+            ITransformationProvider provider,
             IAsyncOperationLocker locker,
-            ITransformationProvider provider) 
+            ILoggerService logger) 
         {
             _logger = logger;
             _locker = locker;
