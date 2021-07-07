@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 
@@ -12,6 +13,7 @@ using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Convolution;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
+using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
@@ -23,14 +25,17 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
           ISubscriber<ContainerUpdatedEventArgs>,
           ISubscriber<RestoreFocusEventArgs>
     {
+        private readonly ILoggerService _logger;
         private readonly IConvolutionProvider _provider;
         private readonly IAsyncOperationLocker _locker;
 
         public ConvolutionPresenter(
+            ILoggerService logger,
             IConvolutionProvider provider,
             IAsyncOperationLocker locker) 
         {
             _provider = provider;
+            _logger = logger;
             _locker = locker;
         }
 
@@ -60,6 +65,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch(Exception ex)
             {
                 View.Tooltip(Errors.ApplyConvolutionFilter);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -82,6 +88,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch(Exception ex)
             {
                 View.Tooltip(Errors.UpdatingViewModel);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 

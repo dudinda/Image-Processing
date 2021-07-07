@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
+using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
@@ -30,15 +32,18 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         ISubscriber<ContainerUpdatedEventArgs>
     {
         private readonly IBitmapService _service;
+        private readonly ILoggerService _logger;
         private readonly IAsyncOperationLocker _locker;
         private readonly IBitmapLuminanceProvider _provider;
         
         public DistributionPresenter(
             IBitmapService service,
+            ILoggerService logger,
             IAsyncOperationLocker locker,
             IBitmapLuminanceProvider provider)
         {
             _locker = locker;
+            _logger = logger;
             _service = service;
             _provider = provider;
         }
@@ -71,6 +76,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch (Exception ex)
             {
                 View.Tooltip(Errors.TransformHistogram);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -94,6 +100,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch(Exception ex)
             {
                 View.Tooltip(Errors.Shuffle);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -112,6 +119,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch (Exception ex)
             {
                 View.Tooltip(Errors.BuildFunction);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -128,6 +136,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch (Exception ex)
             {
                 View.Tooltip(Errors.QualityHistogram);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -151,6 +160,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch (Exception ex)
             {
                 View.Tooltip(Errors.RandomVariableInfo);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -173,6 +183,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch (Exception ex)
             {
                 View.Tooltip(Errors.UpdatingViewModel);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 

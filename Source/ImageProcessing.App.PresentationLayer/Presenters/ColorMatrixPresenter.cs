@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 
@@ -13,6 +14,7 @@ using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
+using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
@@ -27,15 +29,18 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         ISubscriber<RestoreFocusEventArgs>
     {
         private readonly IRgbProvider _provider;
-        private readonly IAsyncOperationLocker _locker;
+        private readonly ILoggerService _logger;
         private readonly IColorMatrixFactory _factory;
+        private readonly IAsyncOperationLocker _locker;
 
         public ColorMatrixPresenter(
-            IRgbProvider provider,
             IAsyncOperationLocker locker,
-            IColorMatrixFactory factory)
+            IColorMatrixFactory factory,
+            ILoggerService logger,
+            IRgbProvider provider)
         {
             _provider = provider;
+            _logger = logger;
             _factory = factory;
             _locker = locker;         
         }
@@ -65,6 +70,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch (Exception ex)
             {
                 View.Tooltip(Errors.ApplyColorMatrix);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -90,6 +96,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch (Exception ex)
             {
                 View.Tooltip(Errors.ApplyCustomColorMatrix);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -107,6 +114,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch(Exception ex)
             {
                 View.Tooltip(Errors.CustomColorMatrix);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -120,6 +128,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch(Exception ex)
             {
                 View.Tooltip(Errors.UpdateColorMatrix);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -142,6 +151,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch(Exception ex)
             {
                 View.Tooltip(Errors.UpdatingViewModel);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 

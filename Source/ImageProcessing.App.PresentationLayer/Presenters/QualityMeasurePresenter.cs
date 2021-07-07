@@ -1,7 +1,10 @@
+using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
+using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.App.ServiceLayer.Win.Services.QualityMeasure.Interface;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
@@ -10,11 +13,14 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
     internal sealed class QualityMeasurePresenter
         : BasePresenter<IQualityMeasureView, QualityMeasureViewModel>
     {
+        private readonly ILoggerService _logger;
         private readonly IQualityMeasureService _quality;
 
         public QualityMeasurePresenter(
+            ILoggerService logger,
             IQualityMeasureService quality) 
         {
+            _logger = logger;
             _quality = quality;
         }
 
@@ -23,18 +29,25 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         
         private async Task DoWorkBeforeShow(QualityMeasureViewModel vm)
         {
-            var chart = View.DataChart;
-          
-            var map = await Task.Run(
-                () => _quality.BuildIntervals(vm.Queue)
-            ).ConfigureAwait(true);
-
-            foreach(var pair in map)
+            try
             {
-                chart.Series[pair.Key] = pair.Value;
-            }
+                var chart = View.DataChart;
 
-            View.Show();
+                var map = await Task.Run(
+                    () => _quality.BuildIntervals(vm.Queue)
+                ).ConfigureAwait(true);
+
+                foreach (var pair in map)
+                {
+                    chart.Series[pair.Key] = pair.Value;
+                }
+
+                View.Show();
+            }
+            catch(Exception ex)
+            {
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+            }
         }
     }
 }

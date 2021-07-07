@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 
@@ -13,6 +14,7 @@ using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
+using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
@@ -27,16 +29,19 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
           ISubscriber<RestoreFocusEventArgs>
     {
         private readonly IRgbProvider _provider;
+        private readonly ILoggerService _logger;
         private readonly IRgbFilterFactory _factory;
         private readonly IAsyncOperationLocker _locker;
 
         public RgbPresenter(
             IRgbProvider provider,
+            ILoggerService logger,
             IRgbFilterFactory factory,
             IAsyncOperationLocker locker) 
         {
             _provider = provider;
             _factory = factory;
+            _logger = logger;
             _locker = locker;
         }
 
@@ -69,6 +74,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch (Exception ex)
             {
                 View.Tooltip(Errors.ApplyRgbFilter);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -94,6 +100,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch (Exception ex)
             {
                 View.Tooltip(Errors.ApplyColorFilter);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -116,6 +123,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch(Exception ex)
             {
                 View.Tooltip(Errors.UpdatingViewModel);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -134,6 +142,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch(Exception ex)
             {
                 View.Tooltip(Errors.ShowColorMatrixMenu);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 

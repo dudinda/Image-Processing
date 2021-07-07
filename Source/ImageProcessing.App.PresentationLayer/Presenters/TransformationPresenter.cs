@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 
@@ -11,6 +12,7 @@ using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Providers.Transformation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
+using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
@@ -21,15 +23,18 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         ISubscriber<ContainerUpdatedEventArgs>,
         ISubscriber<RestoreFocusEventArgs>
     {
-        private readonly ITransformationProvider _provider;
+        private readonly ILoggerService _logger;
         private readonly IAsyncOperationLocker _locker;
+        private readonly ITransformationProvider _provider;
 
         public TransformationPresenter(
-            ITransformationProvider provider,
-            IAsyncOperationLocker locker) 
+            ILoggerService logger,
+            IAsyncOperationLocker locker,
+            ITransformationProvider provider) 
         {
-            _provider = provider;
+            _logger = logger;
             _locker = locker;
+            _provider = provider;
         }
 
         /// <inheritdoc cref="ApplyTransformationEventArgs"/>
@@ -59,6 +64,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch(Exception ex)
             {
                 View.Tooltip(Errors.ApplyTransformation);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -81,6 +87,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch(Exception ex)
             {
                 View.Tooltip(Errors.UpdatingViewModel);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 

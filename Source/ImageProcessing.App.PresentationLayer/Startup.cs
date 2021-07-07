@@ -76,6 +76,8 @@ using ImageProcessing.App.ServiceLayer.Win.ServiceModel.Visitors.Histogram.Imple
 using ImageProcessing.App.ServiceLayer.Win.ServiceModel.Visitors.Histogram.Interface;
 using ImageProcessing.App.ServiceLayer.Win.Services.Histogram.Implementation;
 using ImageProcessing.App.ServiceLayer.Win.Services.Histogram.Interface;
+using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Implementation;
+using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.App.ServiceLayer.Win.Services.QualityMeasure.Implementation;
 using ImageProcessing.App.ServiceLayer.Win.Services.QualityMeasure.Interface;
 using ImageProcessing.Microkernel.AppConfig;
@@ -89,6 +91,10 @@ namespace ImageProcessing.App.PresentationLayer
         {
             builder
                 .RegisterSingleton<IAppSettings, AppSettings>()
+                .RegisterSingleton<ILoggerService, LoggerService>()
+                .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
+                .RegisterSingleton<IStaTaskService, StaTaskService>()
+                .RegisterSingleton<ICacheService<Bitmap>, CacheService<Bitmap>>()
                 .RegisterTransient<IConvolutionFactory, ConvolutionFactory>()
                 .RegisterTransient<IMorphologyFactory, MorphologyFactory>()
                 .RegisterTransient<IStructuringElementFactory, StructuringElementFactory>()
@@ -100,9 +106,6 @@ namespace ImageProcessing.App.PresentationLayer
                 .RegisterTransient<IChannelFactory, ChannelFactory>()
                 .RegisterTransient<IRotationFactory, RotationFactory>()
                 .RegisterTransient<ITransformationFactory, TransformationFactory>()
-                .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
-                .RegisterSingleton<IStaTaskService, StaTaskService>()
-                .RegisterSingleton<ICacheService<Bitmap>, CacheService<Bitmap>>()
                 .RegisterTransient<IConvolutionService, ConvolutionService>()
                 .RegisterTransient<IMorphologyService, MorphologyService>()
                 .RegisterTransient<IBitmapService, BitmapService>()

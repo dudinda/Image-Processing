@@ -1,5 +1,6 @@
 using System;
 using System.Configuration;
+using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 
@@ -22,6 +23,7 @@ using ImageProcessing.App.ServiceLayer.Services.Pipeline;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions;
+using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
@@ -43,27 +45,30 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
           ISubscriber<UndoRedoEventArgs>,
           ISubscriber<FormIsClosedEventArgs>
     {
-        private readonly ICacheService<Bitmap> _cache;
-        private readonly INonBlockDialogService _dialog;
-        private readonly IAsyncOperationLocker _operation;
+        private readonly ILoggerService _logger;
         private readonly IScalingProvider _scale;
         private readonly IRotationProvider _rotation;
         private readonly IAwaitablePipeline _pipeline;
+        private readonly ICacheService<Bitmap> _cache;
+        private readonly IAsyncOperationLocker _operation;
+        private readonly INonBlockDialogService _dialog;
 
         public MainPresenter(
-            ICacheService<Bitmap> cache,
-            INonBlockDialogService dialog,
-            IAwaitablePipeline pipeline,
-            IAsyncOperationLocker operation,
+            ILoggerService logger,
             IScalingProvider scale,
-            IRotationProvider rotation)
+            IRotationProvider rotation,
+            IAwaitablePipeline pipeline,
+            ICacheService<Bitmap> cache,
+            IAsyncOperationLocker operation,
+            INonBlockDialogService dialog)
         {
-            _cache = cache;
-            _dialog = dialog;
-            _operation = operation;
             _scale = scale;
+            _cache = cache;
+            _logger = logger;
+            _dialog = dialog;
             _rotation = rotation;
             _pipeline = pipeline;
+            _operation = operation;
         }
 
         /// <inheritdoc cref="OpenFileDialogEventArgs"/>
@@ -91,6 +96,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch(Exception ex)
             {
                 OnError(publisher, Errors.OpenFile);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -113,6 +119,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch(Exception ex)
             {
                 OnError(publisher, Errors.SaveFile);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -135,6 +142,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch(Exception ex)
             {
                 OnError(publisher, Errors.SaveFile);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -156,6 +164,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch (Exception ex)
             {
                 OnError(publisher, Errors.ShowRgbMenu);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -177,6 +186,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch (Exception ex)
             {
                 OnError(publisher, Errors.ShowDistributionMenu);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -198,6 +208,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch (Exception ex)
             {
                 OnError(publisher, Errors.ShowConvolutionMenu);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -219,6 +230,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch (Exception ex)
             {
                 OnError(publisher, Errors.ShowTransformationMenu);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -232,6 +244,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch (Exception ex)
             {
                 OnError(publisher, Errors.ShowSettingsMenu);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -250,13 +263,15 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                     }
                 }
             }
-            catch (OperationCanceledException cancel)
+            catch (OperationCanceledException ex)
             {
                 OnError(publisher, Errors.CancelOperation);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Information);
             }
             catch (Exception ex)
             {
                 OnError(publisher, Errors.Pipeline);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -285,10 +300,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch (OperationCanceledException ex)
             {
                 OnError(publisher, Errors.CancelOperation);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Information);
             }
             catch (Exception ex)
             {
                 OnError(publisher, Errors.ReplaceImage);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }        
         }
 
@@ -326,6 +343,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch(Exception ex)
             {
                 OnError(publisher, Errors.Zoom);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
@@ -349,6 +367,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             catch (Exception ex)
             {
                 OnError(publisher, Errors.UndoRedo);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
         }
 
