@@ -9,7 +9,6 @@ namespace ImageProcessing.App.PresentationLayer.Views.ViewComponents
         /// Show the error occured during
         /// the operation.
         /// </summary>
-        /// <param name="message"></param>
         void Tooltip(string message);
     }
 }

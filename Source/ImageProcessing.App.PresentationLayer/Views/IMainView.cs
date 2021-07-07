@@ -32,7 +32,6 @@ namespace ImageProcessing.App.PresentationLayer.Views
         /// <summary>
         /// Add the processed result of the <see cref="ImageContainer"/>.
         /// </summary>
-
         void AddToUndoRedo(ImageContainer to, Bitmap bmp, UndoRedoAction action);
 
         /// <summary>

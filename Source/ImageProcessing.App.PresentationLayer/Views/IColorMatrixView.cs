@@ -15,7 +15,6 @@ namespace ImageProcessing.App.PresentationLayer.Views
         /// <summary>
         /// Set a color matrix.
         /// </summary>
-        /// <param name="matrix"></param>
         void SetGrid(ReadOnly2DArray<double> matrix);
 
         /// <summary>
@@ -26,7 +25,6 @@ namespace ImageProcessing.App.PresentationLayer.Views
         /// <summary>
         /// Enable cells of a color matrix.
         /// </summary>
-        /// <param name="isEnabled"></param>
         void SetEnabledCells(bool isEnabled);
 
         /// <summary>
