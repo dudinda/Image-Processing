@@ -1,4 +1,5 @@
-# Image Processing
+# Image Processing 
+[Microkernel Demo for both WPF and Winforms](https://github.com/dudinda/MVPTemplate)
 
 [![Build Status](https://dev.azure.com/dudin0da/Image%20Processing/_apis/build/status/Softenraged.Image-Processing?branchName=master)](https://dev.azure.com/dudin0da/Image%20Processing/_build/latest?definitionId=2&branchName=master)
 
@@ -58,6 +59,8 @@
 <p> Thus, one may conclude that a normal distribution may represent better result regarding a uniform distribution on a group of underexposed images.</p>
 
 ***
+Introducing a front controller and http-context to accept a web request it may be possible to unify mvp, mvc and mvvm under the single abstraction.                   
+***                      
 
 ## Architecture
 
