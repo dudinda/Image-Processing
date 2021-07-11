@@ -65,7 +65,7 @@ Introducing a front controller and http-context to accept a web request it may b
 ## Architecture
 
 <p align="center">
-   <img src="https://i.imgur.com/nBwIK3A.png"  width="800" height = "800" alt="architecture">
+   <img src="https://i.imgur.com/p8A6B6p.png"  width="800" height = "800" alt="architecture">
    <p align="center">Fig. 6 - The application architecture.</p>
 </p>
 
