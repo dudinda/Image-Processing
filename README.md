@@ -1,5 +1,5 @@
 # Image Processing 
-[Microkernel Demo for the WPF, Winforms and Console](https://github.com/dudinda/MVPTemplate)
+[Microkernel Demo for WPF, Winforms and Console apps](https://github.com/dudinda/MVPTemplate)
 
 [![Build Status](https://dev.azure.com/dudin0da/Image%20Processing/_apis/build/status/Softenraged.Image-Processing?branchName=master)](https://dev.azure.com/dudin0da/Image%20Processing/_build/latest?definitionId=2&branchName=master)
 
