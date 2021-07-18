@@ -59,7 +59,7 @@
 <p> Thus, one may conclude that a normal distribution may represent better result regarding a uniform distribution on a group of underexposed images.</p>
 
 ***
-Introducing a front controller and http-context to accept a web request it may be possible to unify mvp, mvc and mvvm under the single abstraction.                   
+Introducing a front controller and http-context to accept a web request it may be possible to unify mvp, mvc and mvvm under the single abstraction. Using .NET and COM interoperability there is no need for cross-platform xaml forms.                   
 ***                      
 
 ## Architecture
