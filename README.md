@@ -61,13 +61,13 @@
 ## Architecture
 
 <p align="center">
-   <img src="https://i.imgur.com/p8A6B6p.png"  width="800" height = "800" alt="architecture">
+   <img src="https://i.imgur.com/QZ6smlT.png"  width="800" height = "800" alt="architecture">
    <p align="center">Fig. 6 - The process architecture.</p>
 </p>
 
 <p align="center">
    <img src="https://i.imgur.com/c4v7BfU.png"  width="1400" height = "230" alt="metrics">
-   <p align="center">Fig. 7 - The application code metrics.</p>
+   <p align="center">Fig. 7 - The process code metrics.</p>
 </p>
 
 ***
