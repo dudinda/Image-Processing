@@ -5,7 +5,7 @@
 
 1. [Thesis](#Thesis)
 2. [Solutions](#)
-   - [General architecture of the process](#Architecture)
+   - [General architecture of the transient process](#Architecture)
    - [Navigation by using a DI container](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.Microkernel.MVP/Controller/Implementation/AppController.cs#L45)
    - [Closures propagation by using a pipeline and event aggregator](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.App.PresentationLayer/Presenters/RgbPresenter.cs#L53)
    - [Linking a transient presenter and a view](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.Microkernel.MVP/Presenter/Implementation/BasePresenter.cs#L36)
