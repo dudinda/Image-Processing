@@ -61,7 +61,7 @@
 ## Architecture
 
 <p align="center">
-   <img src="https://i.imgur.com/ECG7vdZ.png"  width="800" height = "800" alt="architecture">
+   <img src="https://i.imgur.com/3SOGAEO.png"  width="800" height = "800" alt="architecture">
    <p align="center">Fig. 6 - The process architecture.</p>
 </p>
 
