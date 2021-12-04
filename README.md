@@ -1,16 +1,16 @@
 # Image Processing 
-[Microkernel Demo for both WPF and Winforms](https://github.com/dudinda/MVPTemplate)
+[Microkernel Demo for WPF, Winforms and Console processes](https://github.com/dudinda/MVPTemplate)
 
 [![Build Status](https://dev.azure.com/dudin0da/Image%20Processing/_apis/build/status/Softenraged.Image-Processing?branchName=master)](https://dev.azure.com/dudin0da/Image%20Processing/_build/latest?definitionId=2&branchName=master)
 
 1. [Thesis](#Thesis)
 2. [Solutions](#)
-   - [Application general architecture](#Architecture)
+   - [General architecture of the transient process](#Architecture)
    - [Navigation by using a DI container](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.Microkernel.MVP/Controller/Implementation/AppController.cs#L45)
    - [Closures propagation by using a pipeline and event aggregator](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.App.PresentationLayer/Presenters/RgbPresenter.cs#L53)
    - [Linking a transient presenter and a view](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.Microkernel.MVP/Presenter/Implementation/BasePresenter.cs#L36)
    - [Mocks registration via a DI container to test the internal infrastructure](https://github.com/dudinda/Image-Processing/blob/master/Tests/ImageProcessing.App.Integration/Monolith/DomainLayer/DomainStartup.cs#L77)
-   - [Reference a microkernel from a presentation to move a domain between applications](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.App.PresentationLayer/ImageProcessing.App.PresentationLayer.csproj#L60)
+   - [Reference a microkernel from a presentation to move a domain between processes](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.App.PresentationLayer/ImageProcessing.App.PresentationLayer.csproj#L60)
    - [Yielding a sequence to test a collection traverse order](https://github.com/dudinda/Image-Processing/blob/master/Tests/ImageProcessing.Utility.DataStructure.UnitTests/CaseFactory/BitMatrixCaseFactory.cs#L17)
 3. [Benchmarks](#benchmarks-cpu)
 4. [NuGet](#nuget)
@@ -58,20 +58,16 @@
 
 <p> Thus, one may conclude that a normal distribution may represent better result regarding a uniform distribution on a group of underexposed images.</p>
 
-***
-Introducing a front controller and http-context to accept a web request it may be possible to unify mvp, mvc and mvvm under the single abstraction.                   
-***                      
-
 ## Architecture
 
 <p align="center">
-   <img src="https://i.imgur.com/fyZiMjp.png"  width="800" height = "800" alt="architecture">
-   <p align="center">Fig. 6 - The application architecture.</p>
+   <img src="https://i.imgur.com/gWjiEET.png"  width="800" height = "800" alt="architecture">
+   <p align="center">Fig. 6 - The process architecture.</p>
 </p>
 
 <p align="center">
    <img src="https://i.imgur.com/c4v7BfU.png"  width="1400" height = "230" alt="metrics">
-   <p align="center">Fig. 7 - The application code metrics.</p>
+   <p align="center">Fig. 7 - The process code metrics.</p>
 </p>
 
 ***
