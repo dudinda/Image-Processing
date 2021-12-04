@@ -15,7 +15,7 @@ namespace ImageProcessing.App.UILayer.FormExposers.Transformation
         MetroButton ApplyButton { get; }
 
         /// <summary>
-        /// Distribution parameters.
+        /// Input paramteres of an affine transformation.
         /// </summary>
         (string, string) Parameters { get; }
     }

@@ -14,7 +14,7 @@ using static ImageProcessing.App.PresentationLayer.Code.Enums.UndoRedoAction;
 
 namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation
 {
-    internal class MainFormEventBinder : IMainFormEventBinder
+    internal sealed class MainFormEventBinder : IMainFormEventBinder
     {
         private readonly IEventAggregator _aggregator;
 

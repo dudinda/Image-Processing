@@ -12,7 +12,7 @@ using static ImageProcessing.App.ServiceLayer.Code.Enums.RndInfo;
 
 namespace ImageProcessing.App.UILayer.FormEventBinders.Distribution.Implementation
 {
-    internal class DistributionFormEventBinder : IDistributionFormEventBinder
+    internal sealed class DistributionFormEventBinder : IDistributionFormEventBinder
     {
         private readonly IEventAggregator _aggregator;
 

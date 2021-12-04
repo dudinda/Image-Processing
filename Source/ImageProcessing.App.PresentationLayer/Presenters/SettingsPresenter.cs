@@ -1,8 +1,11 @@
+using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.PresentationLayer.DomainEvents.SettingsArgs;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
+using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
@@ -13,24 +16,60 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         ISubscriber<ChangeRotationEventArgs>,
         ISubscriber<ChangeScalingEventArgs>
     {
+        private readonly ILoggerService _logger;
         private readonly IAppSettings _settings;
 
         public SettingsPresenter(
+            ILoggerService logger,
             IAppSettings settings)
         {
             _settings = settings;
+            _logger = logger;
         }
 
         /// <inheritdoc cref="ChangeRotationEventArgs"/>
-        public async Task OnEventHandler(object publisher, ChangeRotationEventArgs e)
-            => _settings.Rotation = View.FirstDropdown;
+        public Task OnEventHandler(object publisher, ChangeRotationEventArgs e)
+        {
+            try
+            {
+                _settings.Rotation = View.FirstDropdown;
+            }
+            catch(Exception ex)
+            {
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+            }
+
+            return Task.CompletedTask;
+        } 
 
         /// <inheritdoc cref="ChangeScalingEventArgs"/>
-        public async Task OnEventHandler(object publisher, ChangeScalingEventArgs e)
-            => _settings.Scaling = View.SecondDropdown;
+        public Task OnEventHandler(object publisher, ChangeScalingEventArgs e)
+        {
+            try
+            {
+                _settings.Scaling = View.SecondDropdown;
+            }
+            catch (Exception ex)
+            {
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+            }
+
+            return Task.CompletedTask;
+        } 
 
         /// <inheritdoc cref="ChangeLumaEventArgs"/>
-        public async Task OnEventHandler(object publisher, ChangeLumaEventArgs e)
-            => _settings.Rec = View.ThirdDropdown;
+        public Task OnEventHandler(object publisher, ChangeLumaEventArgs e)
+        {
+            try
+            {
+                _settings.Rec = View.ThirdDropdown;
+            }
+            catch(Exception ex)
+            {
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+            }
+
+            return Task.CompletedTask;
+        }
     }
 }

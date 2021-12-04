@@ -20,7 +20,7 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters
 {
-    internal sealed class ColorMatrixPresenter : BasePresenter<IColorMatrixView, ColorMatrixViewModel>,
+    internal sealed class ColorMatrixPresenter : BasePresenter<IColorMatrixView, BitmapViewModel>,
         ISubscriber<ApplyColorMatrixEventArgs>,
         ISubscriber<ContainerUpdatedEventArgs>,
         ISubscriber<CustomColorMatrixEventArgs>,
@@ -101,7 +101,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         }
 
         /// <inheritdoc cref="CustomColorMatrixEventArgs"/>
-        public async Task OnEventHandler(object publisher, CustomColorMatrixEventArgs e)
+        public Task OnEventHandler(object publisher, CustomColorMatrixEventArgs e)
         {
             try
             {
@@ -116,10 +116,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 View.Tooltip(Errors.CustomColorMatrix);
                 _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
+
+            return Task.CompletedTask;
         }
 
         /// <inheritdoc cref="ChangeColorMatrixEventArgs"/>
-        public async Task OnEventHandler(object publisher, ChangeColorMatrixEventArgs e)
+        public Task OnEventHandler(object publisher, ChangeColorMatrixEventArgs e)
         {
             try
             {
@@ -130,6 +132,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 View.Tooltip(Errors.UpdateColorMatrix);
                 _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
+
+            return Task.CompletedTask;
         }
 
         /// <inheritdoc cref="ContainerUpdatedEventArgs"/>
@@ -156,9 +160,18 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         }
 
         /// <inheritdoc cref="RestoreFocusEventArgs"/>
-        public async Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
+        public Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
         {
-            View.Focus();
+            try
+            {
+                View.Focus();
+            }
+            catch(Exception ex)
+            {
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+            }
+
+            return Task.CompletedTask;
         }
     }
 }

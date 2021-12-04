@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.PresentationLayer
+namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
 {
-    class PresentationStartup
+    class QualityMeasurePresenterWrapper
     {
     }
 }

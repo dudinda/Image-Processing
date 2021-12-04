@@ -157,8 +157,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                        ImageContainer.Source
                    ).ConfigureAwait(true);
 
-                    Controller.Run<RgbPresenter, RgbViewModel>(
-                        new RgbViewModel(copy));
+                    Controller.Run<RgbPresenter, BitmapViewModel>(
+                        new BitmapViewModel(copy));
                 }
             }
             catch (Exception ex)
@@ -179,8 +179,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                        ImageContainer.Source
                    ).ConfigureAwait(true);
 
-                    Controller.Run<DistributionPresenter, DistributionViewModel>(
-                        new DistributionViewModel(copy));
+                    Controller.Run<DistributionPresenter, BitmapViewModel>(
+                        new BitmapViewModel(copy));
                 }
             }
             catch (Exception ex)
@@ -201,8 +201,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                         ImageContainer.Source
                     ).ConfigureAwait(true);
 
-                    Controller.Run<ConvolutionPresenter, ConvolutionViewModel>(
-                        new ConvolutionViewModel(copy));
+                    Controller.Run<ConvolutionPresenter, BitmapViewModel>(
+                        new BitmapViewModel(copy));
                 }
             }
             catch (Exception ex)
@@ -223,8 +223,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                         ImageContainer.Source
                     ).ConfigureAwait(true);
 
-                    Controller.Run<TransformationPresenter, TransformationViewModel>(
-                        new TransformationViewModel(copy));
+                    Controller.Run<TransformationPresenter, BitmapViewModel>(
+                        new BitmapViewModel(copy));
                 }
             }
             catch (Exception ex)
@@ -235,7 +235,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         }
 
         /// <inheritdoc cref="ShowSettingsMenuEventArgs"/>
-        public async Task OnEventHandler(object publisher, ShowSettingsMenuEventArgs e)
+        public Task OnEventHandler(object publisher, ShowSettingsMenuEventArgs e)
         {
             try
             {
@@ -246,6 +246,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 OnError(publisher, Errors.ShowSettingsMenu);
                 _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
+
+            return Task.CompletedTask;
         }
 
         /// <inheritdoc cref="AttachBlockToRendererEventArgs"/>
@@ -323,8 +325,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                     var scale = View.GetZoomFactor(container);
                     var rad   = View.GetRotationFactor(container);
 
-                    var copy = await GetImageCopy(container)
-                        .ConfigureAwait(true);
+                    var copy = await GetImageCopy(container).ConfigureAwait(true);
 
                     await Paint(
                         new PipelineBlock(copy)
@@ -372,15 +373,25 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         }
 
         /// <inheritdoc cref="ShowTooltipOnErrorEventArgs"/>
-        public async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
+        public Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
-            View.Tooltip(e.Message);
+            try
+            {
+                View.Tooltip(e.Message);
+            }
+            catch(Exception ex)
+            {
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+            }
+            
+            return Task.CompletedTask;
         }
 
         public async Task OnEventHandler(object publisher, FormIsClosedEventArgs e)
         {
             Controller.Dispose();
         }
+
         private void RenderBlock(Bitmap bmp, ImageContainer to, UndoRedoAction action)
         {
             lock (_cache)

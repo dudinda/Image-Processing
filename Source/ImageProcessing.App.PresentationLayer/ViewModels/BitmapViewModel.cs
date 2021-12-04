@@ -2,9 +2,9 @@ using System.Drawing;
 
 namespace ImageProcessing.App.PresentationLayer.ViewModels
 {
-    internal sealed class ColorMatrixViewModel
+    internal sealed class BitmapViewModel
     {
-        public ColorMatrixViewModel(Bitmap source)
+        public BitmapViewModel(Bitmap source)
         {
             Source = source;
         }

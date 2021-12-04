@@ -107,7 +107,8 @@ namespace ImageProcessing.App.ServiceLayer.Services.StaTask
 
         /// <summary>
         /// Close all modal windows belonging
-        /// to the pool on disposing.
+        /// to the pool on disposing. Used by a DI-container
+        /// in a singleton scope.
         /// </summary>
         public void Dispose()
         {

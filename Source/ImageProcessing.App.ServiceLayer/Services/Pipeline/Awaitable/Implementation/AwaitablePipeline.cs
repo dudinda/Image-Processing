@@ -9,17 +9,16 @@ namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Implement
 {
     public class AwaitablePipeline : IAwaitablePipeline
     {
-        private protected readonly BlockingQueue<Task<object>> _queue
-           = new BlockingQueue<Task<object>>(1 << 6);
+        private readonly BlockingQueue<Task<object>> _queue
+           = new BlockingQueue<Task<object>>(32);
 
-        private protected readonly CancellationTokenSource _source 
+        private readonly CancellationTokenSource _source 
             = new CancellationTokenSource();
 
-        public virtual bool Register(IPipelineBlock output)
+        public bool Register(IPipelineBlock output)
         {
             var task = new Task<object>(
-                () => output.Process(_source.Token), _source.Token
-            );
+                () => output.Process(_source.Token), _source.Token);
             
             if (_queue.TryEnqueue(task))
             {
@@ -30,7 +29,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Implement
             return false;
         }
 
-        public virtual async Task<object> AwaitResult()
+        public async Task<object> AwaitResult()
         {
             if (_queue.TryDequeue(out var task))
             {
@@ -40,10 +39,10 @@ namespace ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Implement
             throw new InvalidOperationException();
         }
 
-        public virtual bool Any()
+        public bool Any()
             => _queue.Any();
 
-        public virtual void Dispose()
+        public void Dispose()
         {
             _source.Cancel();
             _source.Dispose();

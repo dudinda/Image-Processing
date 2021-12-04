@@ -21,7 +21,7 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters
 {
-    internal sealed class DistributionPresenter : BasePresenter<IDistributionView, DistributionViewModel>,
+    internal sealed class DistributionPresenter : BasePresenter<IDistributionView, BitmapViewModel>,
         ISubscriber<TransformHistogramEventArgs>,
         ISubscriber<ShuffleEventArgs>,
         ISubscriber<BuildRandomVariableFunctionEventArgs>,
@@ -124,7 +124,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         }
 
         /// <inheritdoc cref="ShowQualityMeasureMenuEventArgs"/>
-        public async Task OnEventHandler(object publisher, ShowQualityMeasureMenuEventArgs e)
+        public Task OnEventHandler(object publisher, ShowQualityMeasureMenuEventArgs e)
         {
             try
             {
@@ -138,6 +138,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 View.Tooltip(Errors.QualityHistogram);
                 _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
+
+            return Task.CompletedTask;
         }
 
         /// <inheritdoc cref="GetRandomVariableInfoEventArgs"/>
@@ -188,15 +190,33 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         }
 
         /// <inheritdoc cref="ShowTooltipOnErrorEventArgs"/>
-        public async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
+        public Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
-            View.Tooltip(e.Message);
+            try
+            {
+                View.Tooltip(e.Message);
+            }
+            catch(Exception ex)
+            {
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+            }
+
+            return Task.CompletedTask;
         }
 
         /// <inheritdoc cref="RestoreFocusEventArgs"/>
-        public async Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
+        public Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
         {
-            View.Focus();
+            try
+            {
+                View.Focus();
+            }
+            catch(Exception ex)
+            {
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error); 
+            }
+
+            return Task.CompletedTask;
         }
     }
 }

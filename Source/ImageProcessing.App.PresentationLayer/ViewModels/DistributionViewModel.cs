@@ -2,7 +2,7 @@ using System.Drawing;
 
 namespace ImageProcessing.App.PresentationLayer.ViewModels
 {
-    public sealed class DistributionViewModel
+    internal sealed class DistributionViewModel
     {
         public DistributionViewModel(Bitmap source)
         {

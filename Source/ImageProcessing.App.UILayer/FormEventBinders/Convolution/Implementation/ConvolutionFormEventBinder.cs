@@ -7,7 +7,7 @@ using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 
 namespace ImageProcessing.App.UILayer.FormEventBinders.Convolution.Implementation
 {
-    internal class ConvolutionFormEventBinder : IConvolutionFormEventBinder
+    internal sealed class ConvolutionFormEventBinder : IConvolutionFormEventBinder
     {
         private readonly IEventAggregator _aggregator;
 

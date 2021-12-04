@@ -18,7 +18,7 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters
 {
-    internal sealed class TransformationPresenter : BasePresenter<ITransformationView, TransformationViewModel>,
+    internal sealed class TransformationPresenter : BasePresenter<ITransformationView, BitmapViewModel>,
         ISubscriber<ApplyTransformationEventArgs>,
         ISubscriber<ContainerUpdatedEventArgs>,
         ISubscriber<RestoreFocusEventArgs>
@@ -92,9 +92,18 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         }
 
         /// <inheritdoc cref="RestoreFocusEventArgs"/>
-        public async Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
+        public Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
         {
-            View.Focus();
+            try
+            {
+                View.Focus();
+            }
+            catch(Exception ex)
+            {
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+            }
+
+            return Task.CompletedTask;
         }
     }
 }

@@ -144,10 +144,18 @@
     <Compile Include="Monolith\DomainLayer\Transformation\Implementation\TransformationFactoryWrapper.cs" />
     <Compile Include="Monolith\DomainLayer\Transformation\Interface\ITransformationFactoryWrapper.cs" />
     <Compile Include="Monolith\Microkernel.MVP\MicrokernelStartup.cs" />
-    <Compile Include="Monolith\PresentationLayer\PresentationStartup.cs" />
+    <Compile Include="Monolith\PresentationLayer\ColorMatrixPresenterWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\HistogramPresenterWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\QualityMeasurePresenterWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\RotationPresenterWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\ScalingPresenterWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\SettingsPresenterWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\TransformationPresenterWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\ServiceStartup.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\Bmp\Implementation\BitmapServiceWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\Bmp\Interface\IBitmapServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\Cache\Implementation\CacheServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\Cache\Interface\ICacheServiceWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\ColorMatrix\Implementation\ColorMatrixServiceWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\ColorMatrix\Interface\IColorMatrixServiceWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\Convolution\Implementation\ConvolutionServiceWrapper.cs" />
@@ -164,24 +172,22 @@
     <Compile Include="Monolith\UILayer\FormEventBinders\Convolution\Interface\IConvolutionFormEventBinderWrapper.cs" />
     <Compile Include="TestsComponents\Extensions\BitmapExtensions.cs" />
     <Compile Include="TestsComponents\Extensions\DependencyResolutionExtensions.cs" />
-    <Compile Include="Monolith\UILayer\ConvolutionFormWrapper.cs">
+    <Compile Include="Monolith\UILayer\Forms\ConvolutionFormWrapper.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Monolith\UILayer\DistributionFormWrapper.cs">
+    <Compile Include="Monolith\UILayer\Forms\DistributionFormWrapper.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Monolith\UILayer\RgbFormWrapper.cs">
+    <Compile Include="Monolith\UILayer\Forms\RgbFormWrapper.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Monolith\PresentationLayer\Presenters\ConvolutionPresenterWrapper.cs" />
-    <Compile Include="Monolith\PresentationLayer\Presenters\DistributionPresenterWrapper.cs" />
-    <Compile Include="Monolith\PresentationLayer\Presenters\MainPresenterWrapper.cs" />
-    <Compile Include="Monolith\PresentationLayer\Presenters\RgbPresenterWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\ConvolutionPresenterWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\DistributionPresenterWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\MainPresenterWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\RgbPresenterWrapper.cs" />
     <Compile Include="Monolith\Microkernel.MVP\EventAggregator\Implementation\EventAggregatorWrapper.cs" />
     <Compile Include="Monolith\Microkernel.MVP\EventAggregator\Interface\IEventAggregatorWrapper.cs" />
-    <Compile Include="Monolith\UILayer\MainFormWrapper.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Monolith\UILayer\MainFormWrapper.cs" />
     <Compile Include="Monolith\Microkernel.MVP\SynchronizationContext\SynchronizationContextWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\NonBlockDialog\NonBlockDialogServiceWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -208,9 +214,8 @@
   <ItemGroup>
     <Folder Include="Monolith\ServiceLayer\Providers\" />
     <Folder Include="Monolith\ServiceLayer\ServiceModel\" />
-    <Folder Include="Monolith\ServiceLayer\Services\Cache\Implementation\" />
-    <Folder Include="Monolith\ServiceLayer\Services\Cache\Interface\" />
-    <Folder Include="Monolith\ServiceLayer\Services\Locker\" />
+    <Folder Include="Monolith\ServiceLayer\Services\Locker\Implementation\" />
+    <Folder Include="Monolith\ServiceLayer\Services\Locker\Interface\" />
     <Folder Include="Monolith\ServiceLayer\Services\Morphology\" />
     <Folder Include="Monolith\ServiceLayer\Services\Pipeline\" />
     <Folder Include="Monolith\ServiceLayer\Services\QualityMeasure\" />
@@ -221,7 +226,6 @@
     <Folder Include="Monolith\UILayer\FormEventBinders\Main\Interface\" />
     <Folder Include="Monolith\UILayer\FormEventBinders\Rgb\Implementation\" />
     <Folder Include="Monolith\UILayer\FormEventBinders\Rgb\Interface\" />
-    <Folder Include="Monolith\UILayer\Forms\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TestResources\Res.resx">

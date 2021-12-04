@@ -11,6 +11,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
     internal class ConvolutionFormWrapper : IConvolutionFormExposer, IConvolutionView
     {
         private readonly ConvolutionForm _form;
+
         public ConvolutionFormWrapper(
           IConvolutionFormEventBinder binder) 
         {

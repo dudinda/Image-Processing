@@ -9,7 +9,7 @@ using static ImageProcessing.App.DomainLayer.Code.Enums.RgbChannels;
 
 namespace ImageProcessing.App.UILayer.FormEventBinders.Rgb.Implementation
 {
-    internal class RgbFormEventBinder : IRgbFormEventBinder
+    internal sealed class RgbFormEventBinder : IRgbFormEventBinder
     {
         private readonly IEventAggregator _aggregator;
 

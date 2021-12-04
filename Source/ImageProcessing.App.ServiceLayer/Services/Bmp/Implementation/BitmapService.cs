@@ -193,10 +193,11 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
                 byte r, g, b;
 
                 var ptr = startPtr;
+                byte* newPtr;
 
                 for (var index = resolution - 1; index > 1; --index, ptr += step)
                 {
-                    var newPtr = startPtr + random.Next(index) * step;
+                    newPtr = startPtr + random.Next(index) * step;
 
                     r = ptr[0];
                     g = ptr[1];
@@ -271,12 +272,14 @@ namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
                     var xDerivativePtr = xDerivativeStartPtr + y * xStride;
                     var yDerivativePtr = yDerivativeStartPtr + y * yStride;
 
+                    double Gx, Gy, magnitude;
+
                     for (var x = 0; x < dstWidth; ++x, resultPtr += step, xDerivativePtr += step, yDerivativePtr += step)
                     {
-                        double Gx = xDerivativePtr[0];
-                        double Gy = yDerivativePtr[0];
+                        Gx = xDerivativePtr[0];
+                        Gy = yDerivativePtr[0];
 
-                        var magnitude = Math.Sqrt(Gx * Gx + Gy * Gy);
+                        magnitude = Math.Sqrt(Gx * Gx + Gy * Gy);
 
                         if (magnitude > 255d)
                         {

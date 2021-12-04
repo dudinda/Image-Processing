@@ -20,7 +20,7 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters
 {
-    internal sealed class RgbPresenter : BasePresenter<IRgbView, RgbViewModel>,
+    internal sealed class RgbPresenter : BasePresenter<IRgbView, BitmapViewModel>,
           ISubscriber<ApplyRgbFilterEventArgs>,
           ISubscriber<ApplyRgbChannelFilterEventArgs>,
           ISubscriber<ContainerUpdatedEventArgs>,
@@ -136,8 +136,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                     () => new Bitmap(ViewModel.Source)
                 ).ConfigureAwait(true);
 
-                Controller.Run<ColorMatrixPresenter, ColorMatrixViewModel>(
-                    new ColorMatrixViewModel(copy));
+                Controller.Run<ColorMatrixPresenter, BitmapViewModel>(
+                    new BitmapViewModel(copy));
             }
             catch(Exception ex)
             {
@@ -147,15 +147,33 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         }
 
         /// <inheritdoc cref="ShowTooltipOnErrorEventArgs"/>
-        public async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
+        public Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
-            View.Tooltip(e.Message);
+            try
+            {
+                View.Tooltip(e.Message);
+            }
+            catch(Exception ex)
+            {
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+            }
+
+            return Task.CompletedTask;
         }
 
         /// <inheritdoc cref="RestoreFocusEventArgs"/>
-        public async Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
+        public Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
         {
-            View.Focus();
+            try
+            {
+                View.Focus();
+            }
+            catch(Exception ex)
+            {
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+            }
+
+            return Task.CompletedTask;
         }
     }
 }

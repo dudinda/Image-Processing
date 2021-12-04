@@ -9,38 +9,44 @@ using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
+using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents.Wrappers.Presenters
 {
-    internal class DistributionPresenterWrapper : BasePresenter<IDistributionView, DistributionViewModel>,
+    internal class DistributionPresenterWrapper : BasePresenter<IDistributionView, BitmapViewModel>,
         ISubscriber<TransformHistogramEventArgs>,
         ISubscriber<ShuffleEventArgs>,
         ISubscriber<BuildRandomVariableFunctionEventArgs>,
         ISubscriber<ShowQualityMeasureMenuEventArgs>,
         ISubscriber<GetRandomVariableInfoEventArgs>,
-        ISubscriber<ShowTooltipOnErrorEventArgs>
+        ISubscriber<ShowTooltipOnErrorEventArgs>,
+        ISubscriber<RestoreFocusEventArgs>,
+        ISubscriber<ContainerUpdatedEventArgs>
     {
         private readonly DistributionPresenter _presenter;
 
         public IAsyncOperationLocker Operation { get; }
         public IBitmapLuminanceProvider Provider { get; }
         public IBitmapService Service { get; }
+        public ILoggerService Logger { get; }
 
         public DistributionPresenterWrapper(
-            IBitmapService service,
+            IBitmapLuminanceProvider provider,
             IAsyncOperationLocker locker,
-            IBitmapLuminanceProvider provider) 
+            IBitmapService service,
+            ILoggerService logger) 
         {
             Operation = locker;
             Provider = provider;
             Service = service;
+            Logger = logger;
 
-            _presenter = new DistributionPresenter(service, locker, provider);
+            _presenter = new DistributionPresenter(provider, locker, service, logger);
         }
 
-        public override void Run(DistributionViewModel vm)
+        public override void Run(BitmapViewModel vm)
         {
             base.Run(vm);
             _presenter.Run(vm);
@@ -72,6 +78,16 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
         }
 
         public virtual async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
+        {
+            
+        }
+
+        public virtual async Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
+        {
+            
+        }
+
+        public virtual async Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
         {
             
         }
