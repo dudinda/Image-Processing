@@ -17,7 +17,7 @@ using ImageProcessing.Utility.Interop.Wrapper;
 namespace ImageProcessing.App.UILayer.Forms.Main
 {
     /// <inheritdoc cref="IMainView"/>
-    internal partial class MainForm : BaseForm,
+    internal sealed partial class MainForm : BaseForm,
         IMainFormExposer, IMainView
     {
         private readonly IMainFormEventBinder _binder;
@@ -38,7 +38,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             IMainFormRotationFactory rotation) : base()
         {
             InitializeComponent();
-
+            
             _zoom = zoom;
             _binder = binder;
             _undoRedo = undoRedo;
@@ -195,8 +195,13 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         public RotationTrackBar RotationDstTrackBar
             => DstRotation;
 
+        public System.Windows.Forms.Control.ControlCollection Control
+            => Controls;
+
+        public TabControl TabsCtrl => Tabs;
+
         /// <inheritdoc/>
-        public virtual new void Show()
+        public new void Show()
         {
             Context.MainForm = this;
             Application.Run(Context);
@@ -215,20 +220,20 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             => _rotation.Get(container).OnElementExpose(this).GetFactor();
 
         /// <inheritdoc/>
-        public virtual string GetPathToFile()
+        public string GetPathToFile()
             => Read<string>(() => PathToImage.Text );
 
        /// <inheritdoc/>
-        public virtual void SetPathToFile(string path)
+        public void SetPathToFile(string path)
             => Write(() => PathToImage.Text = path);
                     
         /// <inheritdoc/>
-        public virtual void Tooltip(string message)
+        public void Tooltip(string message)
             => Write(() => ErrorToolTip.Show(message, this, PointToClient(
                 CursorPosition.GetCursorPosition()), 2000));
 
         /// <inheritdoc/>
-        public virtual void ResetTrackBarValue(ImageContainer container, int value = 0)
+        public void ResetTrackBarValue(ImageContainer container, int value = 0)
             => Write(() =>
             {
                 _zoom.Get(container).OnElementExpose(this).ResetTrackBarValue(value);
@@ -236,31 +241,31 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             });
 
         /// <inheritdoc/>
-        public virtual Image GetImageCopy(ImageContainer container)
+        public Image GetImageCopy(ImageContainer container)
             => Read<Image>(() =>_container.Get(container).OnElementExpose(this).GetCopy()!);
 
         /// <inheritdoc/>
-        public virtual void SetImageCopy(ImageContainer container, Image copy)
+        public void SetImageCopy(ImageContainer container, Image copy)
             => Write(() => _container.Get(container).OnElementExpose(this).SetCopy(copy));
 
         /// <inheritdoc/>
-        public virtual void SetImage(ImageContainer container, Image image)
+        public void SetImage(ImageContainer container, Image image)
             => Write(() =>_container.Get(container).OnElementExpose(this).SetImage(image));
 
         /// <inheritdoc/>
-        public virtual bool ImageIsDefault(ImageContainer container)
+        public bool ImageIsDefault(ImageContainer container)
             => Read<bool>(() => _container.Get(container).OnElementExpose(this).ImageIsDefault());
 
         /// <inheritdoc/>
-        public virtual void Refresh(ImageContainer container)
+        public void Refresh(ImageContainer container)
             => Write(() => _container.Get(container).OnElementExpose(this).Refresh());
 
         /// <inheritdoc/>
-        public virtual void SetCursor(CursorType cursor)
+        public void SetCursor(CursorType cursor)
             => Write(() => Application.UseWaitCursor = cursor == CursorType.Wait);
 
         /// <inheritdoc/>
-        public virtual void AddToUndoRedo(ImageContainer to, Bitmap cpy, UndoRedoAction action)
+        public void AddToUndoRedo(ImageContainer to, Bitmap cpy, UndoRedoAction action)
         {
             if (ImageIsDefault(to)) { cpy.Tag = nameof(ImageIsDefault); }
 
@@ -268,7 +273,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         }
 
         /// <inheritdoc/>
-        public virtual (Bitmap, ImageContainer) TryUndoRedo(UndoRedoAction action)
+        public (Bitmap, ImageContainer) TryUndoRedo(UndoRedoAction action)
             => Read<(Bitmap, ImageContainer)>(() => _undoRedo.Get(action).OnElementExpose(this).Pop());
 
         public void SetImageCenter(ImageContainer to, Size size)
@@ -277,7 +282,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         /// <summary>
         /// Used by the generated <see cref="Dispose(bool)"/> call.
         /// Can be used by a DI container in a singleton scope on Release();
-        public virtual new void Dispose()
+        public new void Dispose()
         {
             if (components != null)
             {
@@ -295,6 +300,11 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void MainForm_Load(object sender, System.EventArgs e)
+        {
+
         }
     }
 }

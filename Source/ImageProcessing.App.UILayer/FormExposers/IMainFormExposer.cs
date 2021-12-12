@@ -132,6 +132,8 @@ namespace ImageProcessing.App.UILayer.FormExposers.Main
         /// </summary>
         ToolStripButton RedoButton { get; }
 
+        TabControl TabsCtrl { get; }
+
         ///<inheritdoc cref="FormClosedEventHandler"/>
         event FormClosedEventHandler FormClosed;
     }

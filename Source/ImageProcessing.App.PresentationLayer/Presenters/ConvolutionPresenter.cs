@@ -23,7 +23,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
           ISubscriber<ApplyConvolutionKernelEventArgs>,
           ISubscriber<ShowTooltipOnErrorEventArgs>,
           ISubscriber<ContainerUpdatedEventArgs>,
-          ISubscriber<RestoreFocusEventArgs>
+          ISubscriber<RestoreFocusEventArgs>,
+          ISubscriber<FormIsClosedEventArgs>
     {
         private readonly ILoggerService _logger;
         private readonly IConvolutionProvider _provider;
@@ -116,6 +117,21 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             }
             catch(Exception ex)
             {
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+            }
+
+            return Task.CompletedTask;
+        }
+
+        public Task OnEventHandler(object publisher, FormIsClosedEventArgs e)
+        {
+            try
+            {
+                View.Close();
+            }
+            catch(Exception ex)
+            {
+                View.Tooltip(Errors.UpdatingViewModel);
                 _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
 

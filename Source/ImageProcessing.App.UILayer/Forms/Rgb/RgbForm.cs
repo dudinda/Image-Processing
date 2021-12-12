@@ -5,6 +5,7 @@ using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions;
 using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface;
+using ImageProcessing.App.UILayer.FormExposers.Main;
 using ImageProcessing.App.UILayer.FormExposers.Rgb;
 using ImageProcessing.Utility.Interop.Wrapper;
 
@@ -18,13 +19,25 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
         IRgbFormExposer, IRgbView
     {
         private readonly IRgbFormEventBinder _binder;
+        private readonly IMainFormExposer _main;
+        private readonly TabPage _tab = new TabPage();
 
         public RgbForm(
+            IMainView main,
             IRgbFormEventBinder binder) : base()
         {
             InitializeComponent();
 
             PopulateComboBox<RgbFltr>(RgbFilterComboBox);
+
+            _main = main as IMainFormExposer;
+
+            TopLevel = false;
+            Dock = DockStyle.Fill;
+            Parent = _tab;
+
+            _tab.Controls.Add(this);
+            _tab.Text = Text;
 
             _binder = binder;
             _binder.OnElementExpose(this);
@@ -78,6 +91,19 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
             }
 
             return result;
+        }
+
+        public new void Show()
+        {
+            _main.TabsCtrl.TabPages.Add(_tab);
+            _main.TabsCtrl.SelectedTab = _tab;
+            base.Show();
+        }
+
+        public new void Close()
+        {
+            _main.TabsCtrl.TabPages.Remove(_main.TabsCtrl.SelectedTab);
+            base.Close();
         }
 
         /// <summary>
