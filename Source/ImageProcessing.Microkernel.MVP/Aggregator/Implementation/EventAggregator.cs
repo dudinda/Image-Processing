@@ -29,11 +29,9 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
             {
                 if (GetSubscribers(subscriberType).TryGetValue(publisher, out var subs))
                 {
-                    ISubscriber<TEventArgs>? subscriber;
-
                     foreach (var sub in subs)
                     {
-                        subscriber = sub as ISubscriber<TEventArgs>;
+                        var subscriber = sub as ISubscriber<TEventArgs>;
 
                         if (subscriber != null)
                         {
@@ -51,12 +49,10 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
 
             lock (_sync)
             {
-                ISubscriber<TEventArgs>? subscriber;
-
                 foreach (var sub in GetSubscribers(subscriberType).Values.SelectMany(_ => _))
                 {
-                    subscriber = sub as ISubscriber<TEventArgs>;
-
+                    var subscriber = sub as ISubscriber<TEventArgs>;
+                  
                     if (subscriber != null)
                     {
                         Post(s => subscriber.OnEventHandler(publisher, args), null!);
