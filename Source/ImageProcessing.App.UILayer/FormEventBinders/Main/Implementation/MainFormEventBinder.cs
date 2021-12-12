@@ -88,6 +88,12 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation
             source.ConvolutionMenuButton.Click += (sender, args)
                 => _aggregator.PublishFrom(source, new ShowConvolutionMenuEventArgs());
 
+            source.RotationMenuButton.Click += (sender, args)
+                => _aggregator.PublishFrom(source, new ShowRotationMenuEventArgs());
+
+            source.ScalingMenuButton.Click += (sender, args)
+                => _aggregator.PublishFrom(source, new ShowScalingMenuEventArgs());
+
             source.DistributionMenuButton.Click += (sender, args)
                 => _aggregator.PublishFrom(source, new ShowDistributionMenuEventArgs());
 

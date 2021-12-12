@@ -49,7 +49,15 @@ namespace ImageProcessing.App.UILayer.Forms.Convolution
 
         public new void Close()
         {
-            _main.TabsCtrl.TabPages.Remove(_main.TabsCtrl.SelectedTab);
+            var idx = _main.TabsCtrl.SelectedIndex;
+
+            if (_main.TabsCtrl.SelectedIndex != 0)
+            {
+                _main.TabsCtrl.SelectedTab = _main.TabsCtrl.TabPages[idx - 1];
+            }
+
+            _main.TabsCtrl.TabPages.RemoveAt(idx);
+
             base.Close();
         }
 

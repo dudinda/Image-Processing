@@ -123,6 +123,7 @@ namespace ImageProcessing.App.UILayer.Forms.Rotation
             this.Controls.Add(this.RotationComboBox);
             this.Controls.Add(this.ApplyRotation);
             this.Name = "RotationForm";
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
             this.Text = "Rotation";
             this.metroPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DegreesText)).EndInit();

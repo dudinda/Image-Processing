@@ -8,11 +8,11 @@ using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 
 namespace ImageProcessing.App.UILayer.FormEventBinders.Rotation.Implementation
 {
-    internal sealed class RotationEventBinder : IRotationEventBinder
+    internal sealed class RotationFormEventBinder : IRotationFormEventBinder
     {
         private readonly IEventAggregator _aggregator;
 
-        public RotationEventBinder(IEventAggregator aggregator)
+        public RotationFormEventBinder(IEventAggregator aggregator)
         {
             _aggregator = aggregator;
         }

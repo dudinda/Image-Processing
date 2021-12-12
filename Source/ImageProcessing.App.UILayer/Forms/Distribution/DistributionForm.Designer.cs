@@ -26,8 +26,6 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DistributionForm));
             this.ErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.DistributionsComboBox = new MetroFramework.Controls.MetroComboBox();
-            this.Transform = new MetroFramework.Controls.MetroButton();
             this.ToolBarMenu = new System.Windows.Forms.ToolStrip();
             this.FirstParamLabel = new System.Windows.Forms.ToolStripLabel();
             this.FirstParam = new System.Windows.Forms.ToolStripTextBox();
@@ -42,34 +40,16 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             this.PathToImage = new System.Windows.Forms.ToolStripLabel();
             this.ShuffleSrc = new System.Windows.Forms.ToolStripButton();
             this.QualityMeasure = new ImageProcessing.App.UILayer.Control.QualityMeasureToolStripButton();
+            this.DistributionsComboBox = new MetroFramework.Controls.MetroComboBox();
+            this.Transform = new MetroFramework.Controls.MetroButton();
             this.ToolBarMenu.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // DistributionsComboBox
-            // 
-            this.DistributionsComboBox.FormattingEnabled = true;
-            this.DistributionsComboBox.ItemHeight = 23;
-            this.DistributionsComboBox.Location = new System.Drawing.Point(188, 63);
-            this.DistributionsComboBox.MaxDropDownItems = 100;
-            this.DistributionsComboBox.Name = "DistributionsComboBox";
-            this.DistributionsComboBox.Size = new System.Drawing.Size(310, 29);
-            this.DistributionsComboBox.TabIndex = 0;
-            this.DistributionsComboBox.UseSelectable = true;
-            // 
-            // Transform
-            // 
-            this.Transform.Location = new System.Drawing.Point(23, 63);
-            this.Transform.Name = "Transform";
-            this.Transform.Size = new System.Drawing.Size(159, 29);
-            this.Transform.TabIndex = 1;
-            this.Transform.Text = "Transform";
-            this.Transform.UseSelectable = true;
             // 
             // ToolBarMenu
             // 
             this.ToolBarMenu.AutoSize = false;
             this.ToolBarMenu.CanOverflow = false;
-            this.ToolBarMenu.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ToolBarMenu.Dock = System.Windows.Forms.DockStyle.None;
             this.ToolBarMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.ToolBarMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FirstParamLabel,
@@ -85,7 +65,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             this.PathToImage,
             this.ShuffleSrc,
             this.QualityMeasure});
-            this.ToolBarMenu.Location = new System.Drawing.Point(20, 111);
+            this.ToolBarMenu.Location = new System.Drawing.Point(20, 95);
             this.ToolBarMenu.Name = "ToolBarMenu";
             this.ToolBarMenu.Size = new System.Drawing.Size(478, 27);
             this.ToolBarMenu.Stretch = true;
@@ -209,10 +189,29 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             this.QualityMeasure.Name = "QualityMeasure";
             this.QualityMeasure.Size = new System.Drawing.Size(24, 24);
             // 
+            // DistributionsComboBox
+            // 
+            this.DistributionsComboBox.FormattingEnabled = true;
+            this.DistributionsComboBox.ItemHeight = 23;
+            this.DistributionsComboBox.Location = new System.Drawing.Point(224, 63);
+            this.DistributionsComboBox.MaxDropDownItems = 100;
+            this.DistributionsComboBox.Name = "DistributionsComboBox";
+            this.DistributionsComboBox.Size = new System.Drawing.Size(274, 29);
+            this.DistributionsComboBox.TabIndex = 0;
+            this.DistributionsComboBox.UseSelectable = true;
+            // 
+            // Transform
+            // 
+            this.Transform.Location = new System.Drawing.Point(17, 63);
+            this.Transform.Name = "Transform";
+            this.Transform.Size = new System.Drawing.Size(201, 29);
+            this.Transform.TabIndex = 1;
+            this.Transform.Text = "Transform";
+            this.Transform.UseSelectable = true;
+            // 
             // DistributionForm
             // 
-            this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
-            this.ClientSize = new System.Drawing.Size(518, 158);
+            this.ClientSize = new System.Drawing.Size(518, 145);
             this.Controls.Add(this.ToolBarMenu);
             this.Controls.Add(this.DistributionsComboBox);
             this.Controls.Add(this.Transform);

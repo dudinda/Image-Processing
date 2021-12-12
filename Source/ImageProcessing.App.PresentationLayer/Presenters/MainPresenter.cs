@@ -30,20 +30,14 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 namespace ImageProcessing.App.PresentationLayer.Presenters
 {
     internal sealed class MainPresenter : BasePresenter<IMainView>,
-          ISubscriber<AttachBlockToRendererEventArgs>,
-          ISubscriber<ShowConvolutionMenuEventArgs>,
-          ISubscriber<ShowDistributionMenuEventArgs>,
-          ISubscriber<ShowRgbMenuEventArgs>,
-          ISubscriber<ShowSettingsMenuEventArgs>,
-          ISubscriber<ShowTransformationMenuEventArgs>,
-          ISubscriber<OpenFileDialogEventArgs>,
-          ISubscriber<SaveAsFileDialogEventArgs>,
-          ISubscriber<SaveWithoutFileDialogEventArgs>,
-          ISubscriber<ShowTooltipOnErrorEventArgs>,
-          ISubscriber<ReplaceImageEventArgs>,
-          ISubscriber<TrackBarEventArgs>,
-          ISubscriber<UndoRedoEventArgs>,
-          ISubscriber<FormIsClosedEventArgs>
+          ISubscriber<AttachBlockToRendererEventArgs>, ISubscriber<ShowConvolutionMenuEventArgs>,
+          ISubscriber<ShowDistributionMenuEventArgs>, ISubscriber<ShowRgbMenuEventArgs>,
+          ISubscriber<ShowSettingsMenuEventArgs>, ISubscriber<ShowTransformationMenuEventArgs>,
+          ISubscriber<OpenFileDialogEventArgs>, ISubscriber<SaveAsFileDialogEventArgs>,
+          ISubscriber<SaveWithoutFileDialogEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
+          ISubscriber<ReplaceImageEventArgs>, ISubscriber<TrackBarEventArgs>,
+          ISubscriber<UndoRedoEventArgs>, ISubscriber<FormIsClosedEventArgs>,
+          ISubscriber<ShowRotationMenuEventArgs>, ISubscriber<ShowScalingMenuEventArgs>
     {
         private readonly ILoggerService _logger;
         private readonly IScalingProvider _scale;
@@ -158,6 +152,50 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                    ).ConfigureAwait(true);
 
                     Controller.Run<RgbPresenter, BitmapViewModel>(
+                        new BitmapViewModel(copy));
+                }
+            }
+            catch (Exception ex)
+            {
+                OnError(publisher, Errors.ShowRgbMenu);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+            }
+        }
+
+        /// <inheritdoc cref="ShowScalingMenuEventArgs"/>
+        public async Task OnEventHandler(object publisher, ShowScalingMenuEventArgs e)
+        {
+            try
+            {
+                if (!View.ImageIsDefault(ImageContainer.Source))
+                {
+                    var copy = await GetImageCopy(
+                       ImageContainer.Source
+                   ).ConfigureAwait(true);
+
+                    Controller.Run<ScalingPresenter, BitmapViewModel>(
+                        new BitmapViewModel(copy));
+                }
+            }
+            catch (Exception ex)
+            {
+                OnError(publisher, Errors.ShowRgbMenu);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+            }
+        }
+
+        /// <inheritdoc cref="ShowRotationMenuEventArgs"/>
+        public async Task OnEventHandler(object publisher, ShowRotationMenuEventArgs e)
+        {
+            try
+            {
+                if (!View.ImageIsDefault(ImageContainer.Source))
+                {
+                    var copy = await GetImageCopy(
+                       ImageContainer.Source
+                   ).ConfigureAwait(true);
+
+                    Controller.Run<RotationPresenter, BitmapViewModel>(
                         new BitmapViewModel(copy));
                 }
             }
