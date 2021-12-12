@@ -22,7 +22,7 @@
 <p>The original purpose was to research the possible advantages of grayscale images contrast optimization using a normal distribution regarding a uniform distribution. Two parameters such as the expectation and std allow to control relative luminance and contrast, respectively.</p>
 
 <p align="center">
-    <img src="https://i.imgur.com/AmbTMYV.png" width="1400" height = "900" alt="application window">
+    <img src="https://i.imgur.com/Q7jma4W.png" width="1400" height = "900" alt="application window">
     <p align="center">Fig. 1 - The main window and control panels.</p>
 </p>
 
