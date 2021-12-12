@@ -108,6 +108,16 @@ namespace ImageProcessing.App.UILayer.FormExposers.Main
         ToolStripMenuItem RgbMenuButton { get; }
 
         /// <summary>
+        /// Show the rotation control panel.
+        /// </summary>
+        ToolStripMenuItem RotationMenuButton { get; }
+
+        /// <summary>
+        /// Show the scaling control panel.
+        /// </summary>
+        ToolStripMenuItem ScalingMenuButton { get; }
+
+        /// <summary>
         /// Show the distribution control panel.
         /// </summary>
         ToolStripMenuItem DistributionMenuButton { get; }

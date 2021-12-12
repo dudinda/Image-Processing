@@ -37,8 +37,8 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.ConvolutionMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.DistributionMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.AffineTransformationMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.rotationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.scalingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RotationMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.ScalingMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.morphologyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SettingsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
@@ -84,8 +84,8 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.ConvolutionMenu,
             this.DistributionMenu,
             this.AffineTransformationMenu,
-            this.rotationToolStripMenuItem,
-            this.scalingToolStripMenuItem,
+            this.RotationMenu,
+            this.ScalingMenu,
             this.morphologyToolStripMenuItem,
             this.SettingsMenu});
             this.MainMenu.Location = new System.Drawing.Point(20, 60);
@@ -150,17 +150,17 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.AffineTransformationMenu.Size = new System.Drawing.Size(134, 20);
             this.AffineTransformationMenu.Text = "Affine Transformation";
             // 
-            // rotationToolStripMenuItem
+            // RotationMenu
             // 
-            this.rotationToolStripMenuItem.Name = "rotationToolStripMenuItem";
-            this.rotationToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
-            this.rotationToolStripMenuItem.Text = "Rotation";
+            this.RotationMenu.Name = "RotationMenu";
+            this.RotationMenu.Size = new System.Drawing.Size(64, 20);
+            this.RotationMenu.Text = "Rotation";
             // 
-            // scalingToolStripMenuItem
+            // ScalingMenu
             // 
-            this.scalingToolStripMenuItem.Name = "scalingToolStripMenuItem";
-            this.scalingToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
-            this.scalingToolStripMenuItem.Text = "Scaling";
+            this.ScalingMenu.Name = "ScalingMenu";
+            this.ScalingMenu.Size = new System.Drawing.Size(57, 20);
+            this.ScalingMenu.Text = "Scaling";
             // 
             // morphologyToolStripMenuItem
             // 
@@ -464,8 +464,8 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         private ToolStripMenuItem AffineTransformationMenu;
         private FormControl.TrackBar.RotationTrackBar SrcRotation;
         private FormControl.TrackBar.RotationTrackBar DstRotation;
-        private ToolStripMenuItem rotationToolStripMenuItem;
-        private ToolStripMenuItem scalingToolStripMenuItem;
+        private ToolStripMenuItem RotationMenu;
+        private ToolStripMenuItem ScalingMenu;
         private ToolStripMenuItem morphologyToolStripMenuItem;
         private TabControl Tabs;
     }

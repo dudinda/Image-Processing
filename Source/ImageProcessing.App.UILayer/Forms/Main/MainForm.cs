@@ -200,6 +200,12 @@ namespace ImageProcessing.App.UILayer.Forms.Main
 
         public TabControl TabsCtrl => Tabs;
 
+        public ToolStripMenuItem RotationMenuButton
+            => RotationMenu;
+
+        public ToolStripMenuItem ScalingMenuButton
+            => ScalingMenu;
+
         /// <inheritdoc/>
         public new void Show()
         {

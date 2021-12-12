@@ -17,15 +17,16 @@ namespace ImageProcessing.App.UILayer.Forms.Rotation
     internal sealed partial class RotationForm : BaseForm,
         IRotationView, IRotationFormExposer
     {
-        private readonly IRotationEventBinder _binder;
+        private readonly IRotationFormEventBinder _binder;
         private readonly IMainFormExposer _main;
         private readonly TabPage _tab = new TabPage();
 
         public RotationForm(
             IMainView main,
-            IRotationEventBinder binder)
+            IRotationFormEventBinder binder)
         {
             InitializeComponent();
+            PopulateComboBox<RotationMethod>(RotationComboBox);
 
             _main = main as IMainFormExposer;
 
@@ -44,12 +45,21 @@ namespace ImageProcessing.App.UILayer.Forms.Rotation
         {
             _main.TabsCtrl.TabPages.Add(_tab);
             _main.TabsCtrl.SelectedTab = _tab;
+
             base.Show();
         }
 
         public new void Close()
         {
-            _main.TabsCtrl.TabPages.Remove(_main.TabsCtrl.SelectedTab);
+            var idx = _main.TabsCtrl.SelectedIndex;
+
+            if (_main.TabsCtrl.SelectedIndex != 0)
+            {
+                _main.TabsCtrl.SelectedTab = _main.TabsCtrl.TabPages[idx - 1];
+            }
+
+            _main.TabsCtrl.TabPages.RemoveAt(idx);
+
             base.Close();
         }
 
@@ -64,7 +74,7 @@ namespace ImageProcessing.App.UILayer.Forms.Rotation
             => ApplyRotation;
 
         public double Radians
-            => Math.PI * Convert.ToDouble(DegreesText) / 180;
+            => Math.PI * Convert.ToDouble(DegreesTextBox.Text) / 180;
 
         public void Tooltip(string message)
             => ShowToolTip.Show(message, this, PointToClient(

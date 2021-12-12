@@ -117,18 +117,16 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
 
         public new void Close()
         {
-            _main.TabsCtrl.TabPages.Remove(_main.TabsCtrl.SelectedTab);
-            base.Close();
-        }
+            var idx = _main.TabsCtrl.SelectedIndex;
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (_binder.ProcessCmdKey(this, keyData))
+            if (_main.TabsCtrl.SelectedIndex != 0)
             {
-                return true;
+                _main.TabsCtrl.SelectedTab = _main.TabsCtrl.TabPages[idx - 1];
             }
 
-            return base.ProcessCmdKey(ref msg, keyData);
+            _main.TabsCtrl.TabPages.RemoveAt(idx);
+
+            base.Close();
         }
 
         /// <summary>
@@ -146,6 +144,33 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
                 .Unsubscribe(typeof(DistributionPresenter), this);
 
             base.Dispose(true);
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (_binder.ProcessCmdKey(this, keyData))
+            {
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+        protected override void WndProc(ref Message m)
+        {
+            const int WM_SYSCOMMAND = 0x0112;
+            const int SC_MOVE = 0xF010;
+
+            switch (m.Msg)
+            {
+                case WM_SYSCOMMAND:
+
+                    var command = m.WParam.ToInt32() & 0xfff0;
+                    if (command == SC_MOVE) { return; }
+
+                    break;
+            }
+
+            base.WndProc(ref m);
         }
     }
 }

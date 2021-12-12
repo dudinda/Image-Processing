@@ -4,7 +4,7 @@ using ImageProcessing.App.UILayer.FormExposers;
 
 namespace ImageProcessing.App.UILayer.FormEventBinders.Rotation.Interface
 {
-    internal interface IRotationEventBinder : IFormExposer<IRotationFormExposer>
+    internal interface IRotationFormEventBinder : IFormExposer<IRotationFormExposer>
     {
         bool ProcessCmdKey(IRotationFormExposer view, Keys keyData);
     }
