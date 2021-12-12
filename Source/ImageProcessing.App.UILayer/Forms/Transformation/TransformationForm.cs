@@ -5,6 +5,7 @@ using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions;
 using ImageProcessing.App.UILayer.FormEventBinders.Transformation.Interface;
+using ImageProcessing.App.UILayer.FormExposers.Main;
 using ImageProcessing.App.UILayer.FormExposers.Transformation;
 using ImageProcessing.Utility.Interop.Wrapper;
 
@@ -17,13 +18,26 @@ namespace ImageProcessing.App.UILayer.Forms.Transformation
         ITransformationFormExposer, ITransformationView
     {
         private readonly ITransformationFormEventBinder _binder;
+        private readonly IMainFormExposer _main;
+        private readonly TabPage _tab = new TabPage();
 
         public TransformationForm(
+            IMainView main,
             ITransformationFormEventBinder binder) : base()
         {
             InitializeComponent();
 
             PopulateComboBox<AffTransform>(TransformationComboBox);
+
+            _main = main as IMainFormExposer;
+
+            TopLevel = false;
+            Dock = DockStyle.Fill;
+            Parent = _tab;
+
+            _tab.Controls.Add(this);
+            _tab.Text = Text;
+
 
             _binder = binder;
             _binder.OnElementExpose(this);
@@ -35,6 +49,19 @@ namespace ImageProcessing.App.UILayer.Forms.Transformation
             get => TransformationComboBox
                 .SelectedItem.ToString()
                 .GetValueFromDescription<AffTransform>();
+        }
+
+        public new void Show()
+        {
+            _main.TabsCtrl.TabPages.Add(_tab);
+            _main.TabsCtrl.SelectedTab = _tab;
+            base.Show();
+        }
+
+        public new void Close()
+        {
+            _main.TabsCtrl.TabPages.Remove(_main.TabsCtrl.SelectedTab);
+            base.Close();
         }
 
         public MetroButton ApplyButton

@@ -1,3 +1,5 @@
+using System.Windows.Forms;
+
 using ImageProcessing.App.UILayer.Forms.ColorMatrix;
 
 using MetroFramework.Controls;
@@ -28,5 +30,8 @@ namespace ImageProcessing.App.UILayer.FormExposers.ColorMatrix
         /// Color matrix drop down.
         /// </summary>
         MetroComboBox ColorMatrixDropDown { get; }
+
+        ///<inheritdoc cref="FormClosedEventHandler"/>
+        event FormClosedEventHandler FormClosed;
     }
 }

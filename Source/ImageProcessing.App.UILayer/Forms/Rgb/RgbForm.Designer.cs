@@ -23,16 +23,44 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.ShowToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.ApplyFilter = new MetroFramework.Controls.MetroButton();
+            this.RgbFilterComboBox = new MetroFramework.Controls.MetroComboBox();
+            this.ColorMatrixMenu = new MetroFramework.Controls.MetroButton();
             this.CheckboxColorGroup = new MetroFramework.Controls.MetroPanel();
             this.BlueColor = new MetroFramework.Controls.MetroCheckBox();
             this.GreenColor = new MetroFramework.Controls.MetroCheckBox();
             this.RedColor = new MetroFramework.Controls.MetroCheckBox();
-            this.ColorMatrixMenu = new MetroFramework.Controls.MetroButton();
-            this.RgbFilterComboBox = new MetroFramework.Controls.MetroComboBox();
-            this.ApplyFilter = new MetroFramework.Controls.MetroButton();
-            this.ShowToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.CheckboxColorGroup.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // ApplyFilter
+            // 
+            this.ApplyFilter.Location = new System.Drawing.Point(23, 98);
+            this.ApplyFilter.Name = "ApplyFilter";
+            this.ApplyFilter.Size = new System.Drawing.Size(235, 23);
+            this.ApplyFilter.TabIndex = 8;
+            this.ApplyFilter.Text = "Apply ";
+            this.ApplyFilter.UseSelectable = true;
+            // 
+            // RgbFilterComboBox
+            // 
+            this.RgbFilterComboBox.FormattingEnabled = true;
+            this.RgbFilterComboBox.ItemHeight = 23;
+            this.RgbFilterComboBox.Location = new System.Drawing.Point(23, 62);
+            this.RgbFilterComboBox.Name = "RgbFilterComboBox";
+            this.RgbFilterComboBox.Size = new System.Drawing.Size(235, 29);
+            this.RgbFilterComboBox.TabIndex = 7;
+            this.RgbFilterComboBox.UseSelectable = true;
+            // 
+            // ColorMatrixMenu
+            // 
+            this.ColorMatrixMenu.Location = new System.Drawing.Point(23, 127);
+            this.ColorMatrixMenu.Name = "ColorMatrixMenu";
+            this.ColorMatrixMenu.Size = new System.Drawing.Size(235, 23);
+            this.ColorMatrixMenu.TabIndex = 6;
+            this.ColorMatrixMenu.Text = "Color Matrix";
+            this.ColorMatrixMenu.UseSelectable = true;
             // 
             // CheckboxColorGroup
             // 
@@ -80,34 +108,6 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
             this.RedColor.Text = "Red";
             this.RedColor.UseSelectable = true;
             // 
-            // ColorMatrixMenu
-            // 
-            this.ColorMatrixMenu.Location = new System.Drawing.Point(23, 127);
-            this.ColorMatrixMenu.Name = "ColorMatrixMenu";
-            this.ColorMatrixMenu.Size = new System.Drawing.Size(235, 23);
-            this.ColorMatrixMenu.TabIndex = 6;
-            this.ColorMatrixMenu.Text = "Color Matrix";
-            this.ColorMatrixMenu.UseSelectable = true;
-            // 
-            // RgbFilterComboBox
-            // 
-            this.RgbFilterComboBox.FormattingEnabled = true;
-            this.RgbFilterComboBox.ItemHeight = 23;
-            this.RgbFilterComboBox.Location = new System.Drawing.Point(23, 62);
-            this.RgbFilterComboBox.Name = "RgbFilterComboBox";
-            this.RgbFilterComboBox.Size = new System.Drawing.Size(235, 29);
-            this.RgbFilterComboBox.TabIndex = 7;
-            this.RgbFilterComboBox.UseSelectable = true;
-            // 
-            // ApplyFilter
-            // 
-            this.ApplyFilter.Location = new System.Drawing.Point(23, 98);
-            this.ApplyFilter.Name = "ApplyFilter";
-            this.ApplyFilter.Size = new System.Drawing.Size(235, 23);
-            this.ApplyFilter.TabIndex = 8;
-            this.ApplyFilter.Text = "Apply ";
-            this.ApplyFilter.UseSelectable = true;
-            // 
             // RgbForm
             // 
             this.ClientSize = new System.Drawing.Size(422, 172);
@@ -119,6 +119,7 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
             this.MinimizeBox = false;
             this.Name = "RgbForm";
             this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
             this.Text = "Rgb";
             this.CheckboxColorGroup.ResumeLayout(false);
             this.CheckboxColorGroup.PerformLayout();

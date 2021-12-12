@@ -61,5 +61,9 @@ namespace ImageProcessing.App.UILayer.FormExposers.Distribution
         /// Get the specified parameters for a <see cref="PrDistribution"/>.
         /// </summary>
        (string, string) Parameters { get; }
+
+
+        ///<inheritdoc cref="FormClosedEventHandler"/>
+        event FormClosedEventHandler FormClosed;
     }
 }

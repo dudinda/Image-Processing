@@ -2,7 +2,7 @@ using System.Windows.Forms;
 
 namespace ImageProcessing.App.UILayer.Forms.Main
 {
-    partial class MainForm
+    internal sealed partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -37,6 +37,9 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.ConvolutionMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.DistributionMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.AffineTransformationMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.rotationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scalingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.morphologyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SettingsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
             this.ToolBarMenu = new System.Windows.Forms.ToolStrip();
@@ -57,6 +60,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.DstRotation = new ImageProcessing.App.UILayer.FormControl.TrackBar.RotationTrackBar();
             this.ErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SplitContainer = new ImageProcessing.App.UILayer.Control.UndoRedoSplitContainer();
+            this.Tabs = new System.Windows.Forms.TabControl();
             this.MainMenu.SuspendLayout();
             this.ToolBarMenu.SuspendLayout();
             this.PictureBoxSrcPanel.SuspendLayout();
@@ -80,6 +84,9 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.ConvolutionMenu,
             this.DistributionMenu,
             this.AffineTransformationMenu,
+            this.rotationToolStripMenuItem,
+            this.scalingToolStripMenuItem,
+            this.morphologyToolStripMenuItem,
             this.SettingsMenu});
             this.MainMenu.Location = new System.Drawing.Point(20, 60);
             this.MainMenu.Name = "MainMenu";
@@ -142,6 +149,24 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.AffineTransformationMenu.Name = "AffineTransformationMenu";
             this.AffineTransformationMenu.Size = new System.Drawing.Size(134, 20);
             this.AffineTransformationMenu.Text = "Affine Transformation";
+            // 
+            // rotationToolStripMenuItem
+            // 
+            this.rotationToolStripMenuItem.Name = "rotationToolStripMenuItem";
+            this.rotationToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.rotationToolStripMenuItem.Text = "Rotation";
+            // 
+            // scalingToolStripMenuItem
+            // 
+            this.scalingToolStripMenuItem.Name = "scalingToolStripMenuItem";
+            this.scalingToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.scalingToolStripMenuItem.Text = "Scaling";
+            // 
+            // morphologyToolStripMenuItem
+            // 
+            this.morphologyToolStripMenuItem.Name = "morphologyToolStripMenuItem";
+            this.morphologyToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
+            this.morphologyToolStripMenuItem.Text = "Morphology";
             // 
             // SettingsMenu
             // 
@@ -230,7 +255,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.PictureBoxSrcPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PictureBoxSrcPanel.Location = new System.Drawing.Point(0, 0);
             this.PictureBoxSrcPanel.Name = "PictureBoxSrcPanel";
-            this.PictureBoxSrcPanel.Size = new System.Drawing.Size(359, 299);
+            this.PictureBoxSrcPanel.Size = new System.Drawing.Size(349, 246);
             this.PictureBoxSrcPanel.TabIndex = 4;
             // 
             // Src
@@ -250,9 +275,9 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.TrackBarSrcPanel.Controls.Add(this.SrcZoom);
             this.TrackBarSrcPanel.Controls.Add(this.SrcRotation);
             this.TrackBarSrcPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TrackBarSrcPanel.Location = new System.Drawing.Point(0, 299);
+            this.TrackBarSrcPanel.Location = new System.Drawing.Point(0, 246);
             this.TrackBarSrcPanel.Name = "TrackBarSrcPanel";
-            this.TrackBarSrcPanel.Size = new System.Drawing.Size(359, 61);
+            this.TrackBarSrcPanel.Size = new System.Drawing.Size(349, 61);
             this.TrackBarSrcPanel.TabIndex = 3;
             // 
             // SrcZoom
@@ -264,7 +289,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.SrcZoom.Maximum = 200;
             this.SrcZoom.Minimum = -200;
             this.SrcZoom.Name = "SrcZoom";
-            this.SrcZoom.Size = new System.Drawing.Size(359, 31);
+            this.SrcZoom.Size = new System.Drawing.Size(349, 31);
             this.SrcZoom.TabIndex = 0;
             this.SrcZoom.Tag = "Source";
             this.SrcZoom.TrackBarValue = 0;
@@ -279,7 +304,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.SrcRotation.Maximum = 360;
             this.SrcRotation.Minimum = -360;
             this.SrcRotation.Name = "SrcRotation";
-            this.SrcRotation.Size = new System.Drawing.Size(359, 34);
+            this.SrcRotation.Size = new System.Drawing.Size(349, 34);
             this.SrcRotation.TabIndex = 1;
             this.SrcRotation.TrackBarValue = 0;
             this.SrcRotation.Value = 0;
@@ -291,7 +316,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.PictureBoxDstPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PictureBoxDstPanel.Location = new System.Drawing.Point(0, 0);
             this.PictureBoxDstPanel.Name = "PictureBoxDstPanel";
-            this.PictureBoxDstPanel.Size = new System.Drawing.Size(352, 299);
+            this.PictureBoxDstPanel.Size = new System.Drawing.Size(362, 246);
             this.PictureBoxDstPanel.TabIndex = 5;
             // 
             // Dst
@@ -311,9 +336,9 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.TrackBarDstPanel.Controls.Add(this.DstZoom);
             this.TrackBarDstPanel.Controls.Add(this.DstRotation);
             this.TrackBarDstPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TrackBarDstPanel.Location = new System.Drawing.Point(0, 299);
+            this.TrackBarDstPanel.Location = new System.Drawing.Point(0, 246);
             this.TrackBarDstPanel.Name = "TrackBarDstPanel";
-            this.TrackBarDstPanel.Size = new System.Drawing.Size(352, 61);
+            this.TrackBarDstPanel.Size = new System.Drawing.Size(362, 61);
             this.TrackBarDstPanel.TabIndex = 4;
             // 
             // DstZoom
@@ -325,7 +350,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.DstZoom.Maximum = 200;
             this.DstZoom.Minimum = -200;
             this.DstZoom.Name = "DstZoom";
-            this.DstZoom.Size = new System.Drawing.Size(352, 31);
+            this.DstZoom.Size = new System.Drawing.Size(362, 31);
             this.DstZoom.TabIndex = 0;
             this.DstZoom.Tag = "Destination";
             this.DstZoom.TrackBarValue = 0;
@@ -340,7 +365,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.DstRotation.Maximum = 360;
             this.DstRotation.Minimum = -360;
             this.DstRotation.Name = "DstRotation";
-            this.DstRotation.Size = new System.Drawing.Size(352, 34);
+            this.DstRotation.Size = new System.Drawing.Size(362, 34);
             this.DstRotation.TabIndex = 11;
             this.DstRotation.TrackBarValue = 0;
             this.DstRotation.Value = 0;
@@ -360,21 +385,34 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             // 
             this.SplitContainer.Panel2.Controls.Add(this.PictureBoxDstPanel);
             this.SplitContainer.Panel2.Controls.Add(this.TrackBarDstPanel);
-            this.SplitContainer.Size = new System.Drawing.Size(715, 360);
-            this.SplitContainer.SplitterDistance = 359;
+            this.SplitContainer.Size = new System.Drawing.Size(715, 307);
+            this.SplitContainer.SplitterDistance = 349;
             this.SplitContainer.TabIndex = 10;
+            // 
+            // Tabs
+            // 
+            this.Tabs.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.Tabs.Location = new System.Drawing.Point(20, 418);
+            this.Tabs.Name = "Tabs";
+            this.Tabs.SelectedIndex = 0;
+            this.Tabs.Size = new System.Drawing.Size(715, 262);
+            this.Tabs.TabIndex = 12;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(755, 491);
+            this.ClientSize = new System.Drawing.Size(755, 700);
             this.Controls.Add(this.SplitContainer);
             this.Controls.Add(this.ToolBarMenu);
             this.Controls.Add(this.MainMenu);
+            this.Controls.Add(this.Tabs);
+            this.IsMdiContainer = true;
             this.MainMenuStrip = this.MainMenu;
             this.Name = "MainForm";
             this.Text = "Image Processing";
+            this.TransparencyKey = System.Drawing.Color.Empty;
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.MainMenu.ResumeLayout(false);
             this.MainMenu.PerformLayout();
             this.ToolBarMenu.ResumeLayout(false);
@@ -426,6 +464,10 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         private ToolStripMenuItem AffineTransformationMenu;
         private FormControl.TrackBar.RotationTrackBar SrcRotation;
         private FormControl.TrackBar.RotationTrackBar DstRotation;
+        private ToolStripMenuItem rotationToolStripMenuItem;
+        private ToolStripMenuItem scalingToolStripMenuItem;
+        private ToolStripMenuItem morphologyToolStripMenuItem;
+        private TabControl Tabs;
     }
 }
 

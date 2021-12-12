@@ -1,5 +1,6 @@
 using System.Windows.Forms;
 
+using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.DistributionArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.UILayer.FormEventBinders.Distribution.Interface;
@@ -48,6 +49,9 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Distribution.Implementati
 
             source.ApplyTransformButton.Click += (sender, args)
                 => _aggregator.PublishFrom(source, new TransformHistogramEventArgs(source.Parameters));
+
+            source.FormClosed += (sender, args)
+               => _aggregator.PublishFrom(source, new FormIsClosedEventArgs());
         }
 
         public bool ProcessCmdKey(IDistributionFormExposer view, Keys keyData)

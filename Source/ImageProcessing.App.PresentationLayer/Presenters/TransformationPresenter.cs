@@ -21,7 +21,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
     internal sealed class TransformationPresenter : BasePresenter<ITransformationView, BitmapViewModel>,
         ISubscriber<ApplyTransformationEventArgs>,
         ISubscriber<ContainerUpdatedEventArgs>,
-        ISubscriber<RestoreFocusEventArgs>
+        ISubscriber<RestoreFocusEventArgs>,
+        ISubscriber<FormIsClosedEventArgs>
     {
         private readonly ILoggerService _logger;
         private readonly IAsyncOperationLocker _locker;
@@ -100,6 +101,21 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             }
             catch(Exception ex)
             {
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+            }
+
+            return Task.CompletedTask;
+        }
+
+        public Task OnEventHandler(object publisher, FormIsClosedEventArgs e)
+        {
+            try
+            {
+                View.Close();
+            }
+            catch (Exception ex)
+            {
+                View.Tooltip(Errors.UpdatingViewModel);
                 _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
 

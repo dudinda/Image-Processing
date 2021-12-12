@@ -59,6 +59,7 @@ namespace ImageProcessing.App.UILayer.Forms.Convolution
             this.MinimizeBox = false;
             this.Name = "ConvolutionForm";
             this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
             this.Text = "Convolution Kernel";
             this.TopMost = true;
             this.ResumeLayout(false);

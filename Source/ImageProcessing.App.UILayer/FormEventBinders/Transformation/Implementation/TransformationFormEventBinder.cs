@@ -1,5 +1,6 @@
 using System.Windows.Forms;
 
+using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.TransformationArgs;
 using ImageProcessing.App.UILayer.FormEventBinders.Transformation.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Transformation;
@@ -20,6 +21,9 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Transformation.Implementa
         {
             source.ApplyButton.Click += (sender, args)
                 => _aggregator.PublishFrom(source, new ApplyTransformationEventArgs(source.Parameters));
+
+            source.FormClosed += (sender, args)
+               => _aggregator.PublishFrom(source, new FormIsClosedEventArgs());
         }
 
         public bool ProcessCmdKey(ITransformationFormExposer view, Keys keyData)

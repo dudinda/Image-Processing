@@ -1,5 +1,6 @@
 using System.Windows.Forms;
 
+using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.RgbArgs;
 using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Rgb;
@@ -34,6 +35,9 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Rgb.Implementation
 
             source.BlueButton.CheckedChanged += (sender, args)
                 => _aggregator.PublishFrom(source, new ApplyRgbChannelFilterEventArgs(Blue));
+
+            source.FormClosed += (sender, args)
+               => _aggregator.PublishFrom(source, new FormIsClosedEventArgs());
         }
 
         public bool ProcessCmdKey(IRgbFormExposer view, Keys keyData)

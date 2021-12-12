@@ -1,3 +1,5 @@
+using System.Windows.Forms;
+
 using ImageProcessing.App.UILayer.Forms.Rgb;
 
 using MetroFramework.Controls;
@@ -33,5 +35,8 @@ namespace ImageProcessing.App.UILayer.FormExposers.Rgb
         /// Show the color matrix menu.
         /// </summary>
         MetroButton ColorMatrixMenuButton { get; }
+
+        ///<inheritdoc cref="FormClosedEventHandler"/>
+        event FormClosedEventHandler FormClosed;
     }
 }

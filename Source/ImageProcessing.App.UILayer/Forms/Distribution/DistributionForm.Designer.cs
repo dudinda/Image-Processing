@@ -220,6 +220,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             this.MinimizeBox = false;
             this.Name = "DistributionForm";
             this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
             this.Text = "Distribution";
             this.TopMost = true;
             this.ToolBarMenu.ResumeLayout(false);

@@ -1,4 +1,5 @@
 using System;
+using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Presenters;
@@ -6,6 +7,7 @@ using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions;
 using ImageProcessing.App.UILayer.FormEventBinders.ColorMatrix.Interface;
 using ImageProcessing.App.UILayer.FormExposers.ColorMatrix;
+using ImageProcessing.App.UILayer.FormExposers.Main;
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 using ImageProcessing.Utility.Interop.Wrapper;
 
@@ -17,12 +19,23 @@ namespace ImageProcessing.App.UILayer.Forms.ColorMatrix
         IColorMatrixView, IColorMatrixFormExposer
     {
         private readonly IColorMatrixEventBinder _binder;
+        private readonly IMainFormExposer _main;
+        private readonly TabPage _tab = new TabPage();
 
         public ColorMatrixForm(
+            IMainView main,
             IColorMatrixEventBinder binder) : base()
         {
             InitializeComponent();  
             PopulateComboBox<ClrMatrix>(ColorMatrixComboBox);
+            _main = main as IMainFormExposer;
+
+            TopLevel = false;
+            Dock = DockStyle.Fill;
+            Parent = _tab;
+
+            _tab.Controls.Add(this);
+            _tab.Text = Text;
 
             _binder = binder;
             _binder.OnElementExpose(this);
@@ -116,8 +129,15 @@ namespace ImageProcessing.App.UILayer.Forms.ColorMatrix
 
         public new void Show()
         {
-            Focus();
+            _main.TabsCtrl.TabPages.Add(_tab);
+            _main.TabsCtrl.SelectedTab = _tab;
             base.Show();
+        }
+
+        public new void Close()
+        {
+            _main.TabsCtrl.TabPages.Remove(_main.TabsCtrl.SelectedTab);
+            base.Close();
         }
 
         /// <summary>

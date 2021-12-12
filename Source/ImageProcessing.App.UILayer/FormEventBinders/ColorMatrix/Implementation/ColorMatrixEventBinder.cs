@@ -1,6 +1,7 @@
 using System.Windows.Forms;
 
 using ImageProcessing.App.PresentationLayer.DomainEvents.ColorMatrixArgs;
+using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.UILayer.FormEventBinders.ColorMatrix.Interface;
 using ImageProcessing.App.UILayer.FormExposers.ColorMatrix;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
@@ -29,6 +30,9 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.ColorMatrix.Implementatio
 
             source.ColorMatrixDropDown.SelectionChangeCommitted += (sender, args)
                 => _aggregator.PublishFrom(source, new ChangeColorMatrixEventArgs());
+
+            source.FormClosed += (sender, args)
+               => _aggregator.PublishFrom(source, new FormIsClosedEventArgs());
         }
 
         public bool ProcessCmdKey(IColorMatrixFormExposer view, Keys keyData)

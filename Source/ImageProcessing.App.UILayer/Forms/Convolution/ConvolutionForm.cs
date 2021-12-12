@@ -6,6 +6,7 @@ using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Convolution;
+using ImageProcessing.App.UILayer.FormExposers.Main;
 using ImageProcessing.Utility.Interop.Wrapper;
 
 using MetroFramework.Controls;
@@ -17,16 +18,39 @@ namespace ImageProcessing.App.UILayer.Forms.Convolution
         IConvolutionFormExposer, IConvolutionView
     {
         private readonly IConvolutionFormEventBinder _binder;
+        private readonly IMainFormExposer _main;
+        private readonly TabPage _tab = new TabPage();
 
         public ConvolutionForm(
+            IMainView main,
             IConvolutionFormEventBinder binder) : base()
         {
             InitializeComponent();
-
             PopulateComboBox<ConvKernel>(ConvolutionFilterComboBox);
+            _main = main as IMainFormExposer;
+
+            TopLevel = false;
+            Dock = DockStyle.Fill;
+            Parent = _tab;
+
+            _tab.Controls.Add(this);
+            _tab.Text = Text;
 
             _binder = binder;
             _binder.OnElementExpose(this);
+        }
+
+        public new void Show()
+        {
+            _main.TabsCtrl.TabPages.Add(_tab);
+            _main.TabsCtrl.SelectedTab = _tab;
+            base.Show();
+        }
+
+        public new void Close()
+        {
+            _main.TabsCtrl.TabPages.Remove(_main.TabsCtrl.SelectedTab);
+            base.Close();
         }
 
         /// <inheritdoc/>

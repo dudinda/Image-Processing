@@ -26,93 +26,19 @@ namespace ImageProcessing.App.UILayer.Forms.Transformation
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransformationForm));
             this.ErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.TransformationComboBox = new MetroFramework.Controls.MetroComboBox();
-            this.ApplyTransformation = new MetroFramework.Controls.MetroButton();
-            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.XScaleTextBox = new MetroFramework.Controls.MetroTextBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.YScaleTextBox = new MetroFramework.Controls.MetroTextBox();
             this.YAxisLabel = new System.Windows.Forms.PictureBox();
-            this.metroPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.XScaleTextBox = new MetroFramework.Controls.MetroTextBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.TransformationComboBox = new MetroFramework.Controls.MetroComboBox();
+            this.ApplyTransformation = new MetroFramework.Controls.MetroButton();
             this.metroPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.YAxisLabel)).BeginInit();
+            this.metroPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
-            // 
-            // TransformationComboBox
-            // 
-            this.TransformationComboBox.FormattingEnabled = true;
-            this.TransformationComboBox.ItemHeight = 23;
-            this.TransformationComboBox.Location = new System.Drawing.Point(36, 59);
-            this.TransformationComboBox.MaxDropDownItems = 100;
-            this.TransformationComboBox.Name = "TransformationComboBox";
-            this.TransformationComboBox.Size = new System.Drawing.Size(286, 29);
-            this.TransformationComboBox.TabIndex = 0;
-            this.TransformationComboBox.UseSelectable = true;
-            // 
-            // ApplyTransformation
-            // 
-            this.ApplyTransformation.Location = new System.Drawing.Point(36, 129);
-            this.ApplyTransformation.Name = "ApplyTransformation";
-            this.ApplyTransformation.Size = new System.Drawing.Size(286, 31);
-            this.ApplyTransformation.TabIndex = 1;
-            this.ApplyTransformation.Text = "Apply";
-            this.ApplyTransformation.UseSelectable = true;
-            // 
-            // metroPanel1
-            // 
-            this.metroPanel1.Controls.Add(this.XScaleTextBox);
-            this.metroPanel1.Controls.Add(this.pictureBox2);
-            this.metroPanel1.HorizontalScrollbarBarColor = true;
-            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(36, 94);
-            this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(142, 29);
-            this.metroPanel1.TabIndex = 2;
-            this.metroPanel1.VerticalScrollbarBarColor = true;
-            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 10;
-            // 
-            // XScaleTextBox
-            // 
-            // 
-            // 
-            // 
-            this.XScaleTextBox.CustomButton.Image = null;
-            this.XScaleTextBox.CustomButton.Location = new System.Drawing.Point(100, 1);
-            this.XScaleTextBox.CustomButton.Name = "";
-            this.XScaleTextBox.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.XScaleTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.XScaleTextBox.CustomButton.TabIndex = 1;
-            this.XScaleTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.XScaleTextBox.CustomButton.UseSelectable = true;
-            this.XScaleTextBox.CustomButton.Visible = false;
-            this.XScaleTextBox.Lines = new string[0];
-            this.XScaleTextBox.Location = new System.Drawing.Point(19, 1);
-            this.XScaleTextBox.MaxLength = 32767;
-            this.XScaleTextBox.Name = "XScaleTextBox";
-            this.XScaleTextBox.PasswordChar = '\0';
-            this.XScaleTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.XScaleTextBox.SelectedText = "";
-            this.XScaleTextBox.SelectionLength = 0;
-            this.XScaleTextBox.SelectionStart = 0;
-            this.XScaleTextBox.ShortcutsEnabled = true;
-            this.XScaleTextBox.Size = new System.Drawing.Size(122, 23);
-            this.XScaleTextBox.TabIndex = 3;
-            this.XScaleTextBox.UseSelectable = true;
-            this.XScaleTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.XScaleTextBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(6, 4);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(10, 16);
-            this.pictureBox2.TabIndex = 2;
-            this.pictureBox2.TabStop = false;
             // 
             // metroPanel2
             // 
@@ -168,6 +94,80 @@ namespace ImageProcessing.App.UILayer.Forms.Transformation
             this.YAxisLabel.TabIndex = 2;
             this.YAxisLabel.TabStop = false;
             // 
+            // metroPanel1
+            // 
+            this.metroPanel1.Controls.Add(this.XScaleTextBox);
+            this.metroPanel1.Controls.Add(this.pictureBox2);
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(36, 94);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(142, 29);
+            this.metroPanel1.TabIndex = 2;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
+            // XScaleTextBox
+            // 
+            // 
+            // 
+            // 
+            this.XScaleTextBox.CustomButton.Image = null;
+            this.XScaleTextBox.CustomButton.Location = new System.Drawing.Point(100, 1);
+            this.XScaleTextBox.CustomButton.Name = "";
+            this.XScaleTextBox.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.XScaleTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.XScaleTextBox.CustomButton.TabIndex = 1;
+            this.XScaleTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.XScaleTextBox.CustomButton.UseSelectable = true;
+            this.XScaleTextBox.CustomButton.Visible = false;
+            this.XScaleTextBox.Lines = new string[0];
+            this.XScaleTextBox.Location = new System.Drawing.Point(19, 1);
+            this.XScaleTextBox.MaxLength = 32767;
+            this.XScaleTextBox.Name = "XScaleTextBox";
+            this.XScaleTextBox.PasswordChar = '\0';
+            this.XScaleTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.XScaleTextBox.SelectedText = "";
+            this.XScaleTextBox.SelectionLength = 0;
+            this.XScaleTextBox.SelectionStart = 0;
+            this.XScaleTextBox.ShortcutsEnabled = true;
+            this.XScaleTextBox.Size = new System.Drawing.Size(122, 23);
+            this.XScaleTextBox.TabIndex = 3;
+            this.XScaleTextBox.UseSelectable = true;
+            this.XScaleTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.XScaleTextBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(6, 4);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(10, 16);
+            this.pictureBox2.TabIndex = 2;
+            this.pictureBox2.TabStop = false;
+            // 
+            // TransformationComboBox
+            // 
+            this.TransformationComboBox.FormattingEnabled = true;
+            this.TransformationComboBox.ItemHeight = 23;
+            this.TransformationComboBox.Location = new System.Drawing.Point(36, 59);
+            this.TransformationComboBox.MaxDropDownItems = 100;
+            this.TransformationComboBox.Name = "TransformationComboBox";
+            this.TransformationComboBox.Size = new System.Drawing.Size(286, 29);
+            this.TransformationComboBox.TabIndex = 0;
+            this.TransformationComboBox.UseSelectable = true;
+            // 
+            // ApplyTransformation
+            // 
+            this.ApplyTransformation.Location = new System.Drawing.Point(36, 129);
+            this.ApplyTransformation.Name = "ApplyTransformation";
+            this.ApplyTransformation.Size = new System.Drawing.Size(286, 31);
+            this.ApplyTransformation.TabIndex = 1;
+            this.ApplyTransformation.Text = "Apply";
+            this.ApplyTransformation.UseSelectable = true;
+            // 
             // TransformationForm
             // 
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
@@ -180,12 +180,13 @@ namespace ImageProcessing.App.UILayer.Forms.Transformation
             this.MinimizeBox = false;
             this.Name = "TransformationForm";
             this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
             this.Text = "Affine Transformation";
             this.TopMost = true;
-            this.metroPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.metroPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.YAxisLabel)).EndInit();
+            this.metroPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }

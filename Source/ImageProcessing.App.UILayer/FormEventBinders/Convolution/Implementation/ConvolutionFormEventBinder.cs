@@ -1,5 +1,6 @@
 using System.Windows.Forms;
 
+using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.ConvolutionArgs;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Convolution;
@@ -20,6 +21,9 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Convolution.Implementatio
         {
             source.ApplyButton.Click += (sender, args)
                 => _aggregator.PublishFrom(source, new ApplyConvolutionKernelEventArgs());
+
+            source.FormClosed += (sender, args)
+                => _aggregator.PublishFrom(source, new FormIsClosedEventArgs());
         }
 
         public bool ProcessCmdKey(IConvolutionFormExposer view, Keys keyData)
