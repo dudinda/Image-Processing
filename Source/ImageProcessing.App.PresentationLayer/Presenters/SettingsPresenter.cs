@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.SettingsArgs;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
@@ -14,7 +15,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
     internal sealed class SettingsPresenter : BasePresenter<ISettingsView>,
         ISubscriber<ChangeLumaEventArgs>,
         ISubscriber<ChangeRotationEventArgs>,
-        ISubscriber<ChangeScalingEventArgs>
+        ISubscriber<ChangeScalingEventArgs>,
+        ISubscriber<FormIsClosedEventArgs>
     {
         private readonly ILoggerService _logger;
         private readonly IAppSettings _settings;
@@ -65,6 +67,20 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 _settings.Rec = View.ThirdDropdown;
             }
             catch(Exception ex)
+            {
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+            }
+
+            return Task.CompletedTask;
+        }
+
+        public Task OnEventHandler(object publisher, FormIsClosedEventArgs e)
+        {
+            try
+            {
+                View.Close();
+            }
+            catch (Exception ex)
             {
                 _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
