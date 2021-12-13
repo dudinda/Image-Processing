@@ -20,7 +20,7 @@ namespace ImageProcessing.App.UILayer.Forms.ColorMatrix
     {
         private readonly IColorMatrixEventBinder _binder;
         private readonly IMainFormExposer _main;
-        private readonly TabPage _tab = new TabPage();
+        private readonly MetroTabPage _tab = new MetroTabPage();
 
         public ColorMatrixForm(
             IMainView main,
@@ -131,6 +131,7 @@ namespace ImageProcessing.App.UILayer.Forms.ColorMatrix
         {
             _main.TabsCtrl.TabPages.Add(_tab);
             _main.TabsCtrl.SelectedTab = _tab;
+
             base.Show();
         }
 

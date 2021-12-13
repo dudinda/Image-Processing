@@ -19,7 +19,7 @@ namespace ImageProcessing.App.UILayer.Forms.Convolution
     {
         private readonly IConvolutionFormEventBinder _binder;
         private readonly IMainFormExposer _main;
-        private readonly TabPage _tab = new TabPage();
+        private readonly MetroTabPage _tab = new MetroTabPage();
 
         public ConvolutionForm(
             IMainView main,

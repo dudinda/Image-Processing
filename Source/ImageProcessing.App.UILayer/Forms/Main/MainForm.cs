@@ -14,6 +14,8 @@ using ImageProcessing.App.UILayer.FormModel.MainFormUndoRedo.Interface;
 using ImageProcessing.App.UILayer.Properties;
 using ImageProcessing.Utility.Interop.Wrapper;
 
+using MetroFramework.Controls;
+
 namespace ImageProcessing.App.UILayer.Forms.Main
 {
     /// <inheritdoc cref="IMainView"/>
@@ -198,7 +200,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         public System.Windows.Forms.Control.ControlCollection Control
             => Controls;
 
-        public TabControl TabsCtrl => Tabs;
+        public MetroTabControl TabsCtrl => Tabs;
 
         public ToolStripMenuItem RotationMenuButton
             => RotationMenu;

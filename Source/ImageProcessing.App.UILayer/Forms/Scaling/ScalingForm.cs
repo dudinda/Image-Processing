@@ -17,7 +17,7 @@ namespace ImageProcessing.App.UILayer.Forms.Scaling
     {
         private readonly IMainFormExposer _main;
         private readonly IScalingFormEventBinder _binder;
-        private readonly TabPage _tab = new TabPage();
+        private readonly MetroTabPage _tab = new MetroTabPage();
 
         public ScalingForm(
             IMainView main,
