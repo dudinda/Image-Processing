@@ -1,3 +1,4 @@
+using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.SettingsArgs;
 using ImageProcessing.App.UILayer.FormEventBinders.Settings.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Settings;
@@ -24,6 +25,9 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Settings.Implementation
 
             form.RotationDropDown.SelectionChangeCommitted += (sender, args)
                 => _aggregator.PublishFrom(form, new ChangeRotationEventArgs());
+
+            form.FormClosed += (sender, args)
+                => _aggregator.PublishFrom(form, new FormIsClosedEventArgs());
         }
     }
 }

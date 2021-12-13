@@ -1,3 +1,5 @@
+using System.Windows.Forms;
+
 using ImageProcessing.App.UILayer.Forms.Settings;
 
 using MetroFramework.Controls;
@@ -23,5 +25,8 @@ namespace ImageProcessing.App.UILayer.FormExposers.Settings
         /// Rotation drop down.
         /// </summary>
         MetroComboBox RotationDropDown { get; }
+
+        ///<inheritdoc cref="FormClosedEventHandler"/>
+        event FormClosedEventHandler FormClosed;
     }
 }

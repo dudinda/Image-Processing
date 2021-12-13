@@ -4,6 +4,7 @@ using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions;
 using ImageProcessing.App.UILayer.FormEventBinders.Settings.Interface;
+using ImageProcessing.App.UILayer.FormExposers.Main;
 using ImageProcessing.App.UILayer.FormExposers.Settings;
 
 using MetroFramework.Controls;
@@ -14,8 +15,11 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
         ISettingsView, ISettingsFormExposer
     {
         private readonly ISettingsFormEventBinder _binder;
+        private readonly IMainFormExposer _main;
+        private readonly MetroTabPage _tab = new MetroTabPage();
 
         public SettingsForm(
+            IMainView main,
             ISettingsFormEventBinder binder) : base()
         {
             InitializeComponent();
@@ -23,6 +27,15 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
             PopulateComboBox<Luma>(LumaComboBox);
             PopulateComboBox<RotationMethod>(RotationComboBox);
             PopulateComboBox<ScalingMethod>(ScalingComboBox);
+
+            _main = main as IMainFormExposer;
+
+            TopLevel = false;
+            Dock = DockStyle.Fill;
+            Parent = _tab;
+
+            _tab.Controls.Add(this);
+            _tab.Text = Text;
 
             _binder = binder;
             _binder.OnElementExpose(this);
@@ -60,8 +73,27 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
 
         public new void Show()
         {
-            Focus();
+            if (!_main.TabsCtrl.TabPages.Contains(_tab))
+            {
+                _main.TabsCtrl.TabPages.Add(_tab);
+                _main.TabsCtrl.SelectedTab = _tab;
+            }
+
             base.Show();
+        }
+
+        public new void Hide()
+        {
+            var idx = _main.TabsCtrl.SelectedIndex;
+
+            if (_main.TabsCtrl.SelectedIndex != 0)
+            {
+                _main.TabsCtrl.SelectedTab = _main.TabsCtrl.TabPages[idx - 1];
+            }
+
+            _main.TabsCtrl.TabPages.RemoveAt(idx);
+
+            base.Hide();
         }
 
         /// <summary>
