@@ -5,6 +5,8 @@ using ImageProcessing.App.UILayer.Control;
 using ImageProcessing.App.UILayer.FormControl.TrackBar;
 using ImageProcessing.App.UILayer.Forms.Main;
 
+using MetroFramework.Controls;
+
 namespace ImageProcessing.App.UILayer.FormExposers.Main
 {
     /// <summary>
@@ -142,7 +144,7 @@ namespace ImageProcessing.App.UILayer.FormExposers.Main
         /// </summary>
         ToolStripButton RedoButton { get; }
 
-        TabControl TabsCtrl { get; }
+        MetroTabControl TabsCtrl { get; }
 
         ///<inheritdoc cref="FormClosedEventHandler"/>
         event FormClosedEventHandler FormClosed;

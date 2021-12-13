@@ -20,7 +20,7 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
     {
         private readonly IRgbFormEventBinder _binder;
         private readonly IMainFormExposer _main;
-        private readonly TabPage _tab = new TabPage();
+        private readonly MetroTabPage _tab = new MetroTabPage();
 
         public RgbForm(
             IMainView main,

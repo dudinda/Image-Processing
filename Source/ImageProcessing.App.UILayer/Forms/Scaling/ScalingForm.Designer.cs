@@ -187,7 +187,10 @@ namespace ImageProcessing.App.UILayer.Forms.Scaling
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.ScaleComboBox);
             this.Controls.Add(this.ResizeButton);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ScalingForm";
+            this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
             this.Text = "Scale";
             this.metroPanel2.ResumeLayout(false);

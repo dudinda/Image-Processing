@@ -21,7 +21,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
     {
         private readonly IDistributionFormEventBinder _binder;
         private readonly IMainFormExposer _main;
-        private readonly TabPage _tab = new TabPage();
+        private readonly MetroTabPage _tab = new MetroTabPage();
 
         public DistributionForm(
             IMainView main,
@@ -155,22 +155,6 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
-        protected override void WndProc(ref Message m)
-        {
-            const int WM_SYSCOMMAND = 0x0112;
-            const int SC_MOVE = 0xF010;
 
-            switch (m.Msg)
-            {
-                case WM_SYSCOMMAND:
-
-                    var command = m.WParam.ToInt32() & 0xfff0;
-                    if (command == SC_MOVE) { return; }
-
-                    break;
-            }
-
-            base.WndProc(ref m);
-        }
     }
 }
