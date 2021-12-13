@@ -30,14 +30,14 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 namespace ImageProcessing.App.PresentationLayer.Presenters
 {
     internal sealed class MainPresenter : BasePresenter<IMainView>,
-          ISubscriber<AttachBlockToRendererEventArgs>, ISubscriber<ShowConvolutionMenuEventArgs>,
-          ISubscriber<ShowDistributionMenuEventArgs>, ISubscriber<ShowRgbMenuEventArgs>,
-          ISubscriber<ShowSettingsMenuEventArgs>, ISubscriber<ShowTransformationMenuEventArgs>,
-          ISubscriber<OpenFileDialogEventArgs>, ISubscriber<SaveAsFileDialogEventArgs>,
-          ISubscriber<SaveWithoutFileDialogEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
-          ISubscriber<ReplaceImageEventArgs>, ISubscriber<TrackBarEventArgs>,
-          ISubscriber<UndoRedoEventArgs>, ISubscriber<FormIsClosedEventArgs>,
-          ISubscriber<ShowRotationMenuEventArgs>, ISubscriber<ShowScalingMenuEventArgs>
+        ISubscriber<AttachBlockToRendererEventArgs>, ISubscriber<ShowConvolutionMenuEventArgs>,
+        ISubscriber<ShowDistributionMenuEventArgs>, ISubscriber<ShowRgbMenuEventArgs>,
+        ISubscriber<ShowSettingsMenuEventArgs>, ISubscriber<ShowTransformationMenuEventArgs>,
+        ISubscriber<OpenFileDialogEventArgs>, ISubscriber<SaveAsFileDialogEventArgs>,
+        ISubscriber<SaveWithoutFileDialogEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
+        ISubscriber<ReplaceImageEventArgs>, ISubscriber<TrackBarEventArgs>,
+        ISubscriber<UndoRedoEventArgs>, ISubscriber<FormIsClosedEventArgs>,
+        ISubscriber<ShowRotationMenuEventArgs>, ISubscriber<ShowScalingMenuEventArgs>
     {
         private readonly ILoggerService _logger;
         private readonly IScalingProvider _scale;

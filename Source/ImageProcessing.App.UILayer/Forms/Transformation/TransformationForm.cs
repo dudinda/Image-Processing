@@ -38,7 +38,6 @@ namespace ImageProcessing.App.UILayer.Forms.Transformation
             _tab.Controls.Add(this);
             _tab.Text = Text;
 
-
             _binder = binder;
             _binder.OnElementExpose(this);
         }
@@ -55,6 +54,7 @@ namespace ImageProcessing.App.UILayer.Forms.Transformation
         {
             _main.TabsCtrl.TabPages.Add(_tab);
             _main.TabsCtrl.SelectedTab = _tab;
+
             base.Show();
         }
 

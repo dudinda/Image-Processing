@@ -51,7 +51,7 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Distribution.Implementati
                 => _aggregator.PublishFrom(source, new TransformHistogramEventArgs(source.Parameters));
 
             source.FormClosed += (sender, args)
-               => _aggregator.PublishFrom(source, new FormIsClosedEventArgs());
+                => _aggregator.PublishFrom(source, new FormIsClosedEventArgs());
         }
 
         public bool ProcessCmdKey(IDistributionFormExposer view, Keys keyData)

@@ -13,7 +13,7 @@ namespace ImageProcessing.App.PresentationLayer.Views
     /// get the information about a bitmap luminance.
     /// </summary>
     public interface IDistributionView : IView,
-         IDisposable, ITooltip, IDropdown<PrDistribution>
+        IDisposable, ITooltip, IDropdown<PrDistribution>
     {
         /// <summary>
         /// Enable the button to show the quality measure view.

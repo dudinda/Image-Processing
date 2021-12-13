@@ -1,4 +1,4 @@
-﻿
+
 namespace ImageProcessing.App.UILayer.Forms.Scaling
 {
     partial class ScalingForm
@@ -13,13 +13,7 @@ namespace ImageProcessing.App.UILayer.Forms.Scaling
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+            => Dispose();
 
         #region Windows Form Designer generated code
 
@@ -38,6 +32,7 @@ namespace ImageProcessing.App.UILayer.Forms.Scaling
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.ScaleComboBox = new MetroFramework.Controls.MetroComboBox();
             this.ResizeButton = new MetroFramework.Controls.MetroButton();
+            this.ScalingComboBox = new MetroFramework.Controls.MetroComboBox();
             this.metroPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.YAxisLabel)).BeginInit();
             this.metroPanel1.SuspendLayout();
@@ -172,16 +167,28 @@ namespace ImageProcessing.App.UILayer.Forms.Scaling
             this.ResizeButton.Text = "Resize";
             this.ResizeButton.UseSelectable = true;
             // 
+            // ScalingComboBox
+            // 
+            this.ScalingComboBox.FormattingEnabled = true;
+            this.ScalingComboBox.ItemHeight = 23;
+            this.ScalingComboBox.Location = new System.Drawing.Point(23, 63);
+            this.ScalingComboBox.Name = "ScalingComboBox";
+            this.ScalingComboBox.Size = new System.Drawing.Size(284, 29);
+            this.ScalingComboBox.TabIndex = 8;
+            this.ScalingComboBox.UseSelectable = true;
+            // 
             // ScalingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(331, 190);
+            this.Controls.Add(this.ScalingComboBox);
             this.Controls.Add(this.metroPanel2);
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.ScaleComboBox);
             this.Controls.Add(this.ResizeButton);
             this.Name = "ScalingForm";
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
             this.Text = "Scale";
             this.metroPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.YAxisLabel)).EndInit();
@@ -201,5 +208,6 @@ namespace ImageProcessing.App.UILayer.Forms.Scaling
         private System.Windows.Forms.PictureBox pictureBox2;
         private MetroFramework.Controls.MetroComboBox ScaleComboBox;
         private MetroFramework.Controls.MetroButton ResizeButton;
+        private MetroFramework.Controls.MetroComboBox ScalingComboBox;
     }
 }

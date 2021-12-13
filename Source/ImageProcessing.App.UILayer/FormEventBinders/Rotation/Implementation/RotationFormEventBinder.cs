@@ -1,6 +1,6 @@
-
 using System.Windows.Forms;
 
+using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.RotationArgs;
 using ImageProcessing.App.UILayer.FormEventBinders.Rotation.Interface;
 using ImageProcessing.App.UILayer.FormExposers;
@@ -20,7 +20,10 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Rotation.Implementation
         public void OnElementExpose(IRotationFormExposer source)
         {
             source.RotateButton.Click += (sender, args)
-                 => _aggregator.PublishFrom(source, new RotateEventArgs());
+                => _aggregator.PublishFrom(source, new RotateEventArgs());
+
+            source.FormClosed += (sender, args)
+                => _aggregator.PublishFrom(source, new FormIsClosedEventArgs());
         }
 
         public bool ProcessCmdKey(IRotationFormExposer view, Keys keyData)

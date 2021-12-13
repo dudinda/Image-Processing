@@ -37,7 +37,7 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Rgb.Implementation
                 => _aggregator.PublishFrom(source, new ApplyRgbChannelFilterEventArgs(Blue));
 
             source.FormClosed += (sender, args)
-               => _aggregator.PublishFrom(source, new FormIsClosedEventArgs());
+                => _aggregator.PublishFrom(source, new FormIsClosedEventArgs());
         }
 
         public bool ProcessCmdKey(IRgbFormExposer view, Keys keyData)

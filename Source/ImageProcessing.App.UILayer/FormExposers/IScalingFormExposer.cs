@@ -16,6 +16,11 @@ namespace ImageProcessing.App.UILayer.FormExposers
         /// </summary>
         MetroButton ScaleButton { get; }
 
+        /// <summary>
+        /// Input paramteres of a scale method.
+        /// </summary>
+        (string, string) Parameters { get; }
+
         ///<inheritdoc cref="FormClosedEventHandler"/>
         event FormClosedEventHandler FormClosed;
     }
