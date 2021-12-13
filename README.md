@@ -23,7 +23,7 @@
 
 <p align="center">
     <img src="https://i.imgur.com/ux6WDWx.png" width="900" height = "800" alt="application window">
-    <p align="center">Fig. 1 - The main window and transient panels as tabs. The opened settings tab is a singleton panel.</p>
+    <p align="center">Fig. 1 - The main window and transient panels as tabs. The opened settings tab is a singleton panel. The frame is taken from "Thomas the Tank Engine" series.</p>
 </p>
 
 <p> Initially, for experimental purposes was chosen a group of underexposed images. </p>
