@@ -23,7 +23,7 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Transformation.Implementa
                 => _aggregator.PublishFrom(source, new ApplyTransformationEventArgs(source.Parameters));
 
             source.FormClosed += (sender, args)
-               => _aggregator.PublishFrom(source, new FormIsClosedEventArgs());
+                => _aggregator.PublishFrom(source, new FormIsClosedEventArgs());
         }
 
         public bool ProcessCmdKey(ITransformationFormExposer view, Keys keyData)

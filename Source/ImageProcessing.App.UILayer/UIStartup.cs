@@ -13,6 +13,10 @@ using ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation;
 using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Implementation;
 using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface;
+using ImageProcessing.App.UILayer.FormEventBinders.Rotation.Implementation;
+using ImageProcessing.App.UILayer.FormEventBinders.Rotation.Interface;
+using ImageProcessing.App.UILayer.FormEventBinders.Scaling.Implementation;
+using ImageProcessing.App.UILayer.FormEventBinders.Scaling.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Settings.Implementation;
 using ImageProcessing.App.UILayer.FormEventBinders.Settings.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Transformation.Implementation;
@@ -31,6 +35,8 @@ using ImageProcessing.App.UILayer.Forms.Histogram;
 using ImageProcessing.App.UILayer.Forms.Main;
 using ImageProcessing.App.UILayer.Forms.QualityMeasure;
 using ImageProcessing.App.UILayer.Forms.Rgb;
+using ImageProcessing.App.UILayer.Forms.Rotation;
+using ImageProcessing.App.UILayer.Forms.Scaling;
 using ImageProcessing.App.UILayer.Forms.Settings;
 using ImageProcessing.App.UILayer.Forms.Transformation;
 using ImageProcessing.Microkernel.AppConfig;
@@ -54,6 +60,8 @@ namespace ImageProcessing.App.UILayer
                 .RegisterTransient<IHistogramView, HistogramForm>()
                 .RegisterTransient<IConvolutionView, ConvolutionForm>()
                 .RegisterTransient<IRgbView, RgbForm>()
+                .RegisterTransient<IRotationView, RotationForm>()
+                .RegisterTransient<IScalingView, ScalingForm>()
                 .RegisterTransient<IDistributionView, DistributionForm>()
                 .RegisterTransient<IColorMatrixView, ColorMatrixForm>()
                 .RegisterTransient<ITransformationView, TransformationForm>()
@@ -63,6 +71,8 @@ namespace ImageProcessing.App.UILayer
                 .RegisterTransient<IDistributionFormEventBinder, DistributionFormEventBinder>()
                 .RegisterTransient<ISettingsFormEventBinder, SettingsFormEventBinder>()
                 .RegisterTransient<ITransformationFormEventBinder, TransformationFormEventBinder>()
+                .RegisterTransient<IRotationFormEventBinder, RotationFormEventBinder>()
+                .RegisterTransient<IScalingFormEventBinder, ScalingFormEventBinder>()
                 .RegisterTransient<IMainFormEventBinder, MainFormEventBinder>()
                 .RegisterTransient<IMainFormContainerFactory, MainFormContainerFactory>()
                 .RegisterTransient<IMainFormUndoRedoFactory, MainFormUndoRedoFactory>()

@@ -32,7 +32,7 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.ColorMatrix.Implementatio
                 => _aggregator.PublishFrom(source, new ChangeColorMatrixEventArgs());
 
             source.FormClosed += (sender, args)
-               => _aggregator.PublishFrom(source, new FormIsClosedEventArgs());
+                => _aggregator.PublishFrom(source, new FormIsClosedEventArgs());
         }
 
         public bool ProcessCmdKey(IColorMatrixFormExposer view, Keys keyData)

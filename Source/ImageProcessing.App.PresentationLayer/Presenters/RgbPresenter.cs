@@ -21,13 +21,13 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 namespace ImageProcessing.App.PresentationLayer.Presenters
 {
     internal sealed class RgbPresenter : BasePresenter<IRgbView, BitmapViewModel>,
-          ISubscriber<ApplyRgbFilterEventArgs>,
-          ISubscriber<ApplyRgbChannelFilterEventArgs>,
-          ISubscriber<ContainerUpdatedEventArgs>,
-          ISubscriber<ShowColorMatrixMenuEventArgs>,
-          ISubscriber<ShowTooltipOnErrorEventArgs>,
-          ISubscriber<RestoreFocusEventArgs>,
-          ISubscriber<FormIsClosedEventArgs>
+        ISubscriber<ApplyRgbFilterEventArgs>,
+        ISubscriber<ApplyRgbChannelFilterEventArgs>,
+        ISubscriber<ContainerUpdatedEventArgs>,
+        ISubscriber<ShowColorMatrixMenuEventArgs>,
+        ISubscriber<ShowTooltipOnErrorEventArgs>,
+        ISubscriber<RestoreFocusEventArgs>,
+        ISubscriber<FormIsClosedEventArgs>
     {
         private readonly IRgbProvider _provider;
         private readonly ILoggerService _logger;
