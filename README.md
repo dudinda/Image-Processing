@@ -2,7 +2,7 @@
 [Microkernel Guide&Demo for WPF (SDI), Winforms (MDI/SDI/TDI) and Console processes](https://github.com/dudinda/MVPTemplate)
 
 [![Build Status](https://dev.azure.com/dudin0da/Image%20Processing/_apis/build/status/Softenraged.Image-Processing?branchName=master)](https://dev.azure.com/dudin0da/Image%20Processing/_build/latest?definitionId=2&branchName=master)
-
+![Nuget](https://img.shields.io/nuget/v/ImageProcessing.Microkernel.EntryPoint)
 1. [Thesis](#Thesis)
 2. [Solutions](#)
    - [General architecture of the transient process](#Architecture)
