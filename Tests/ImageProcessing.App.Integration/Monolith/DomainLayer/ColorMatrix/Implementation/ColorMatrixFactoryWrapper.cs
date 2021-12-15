@@ -13,6 +13,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain
         {
             _factory = factory;
         }
+
         public virtual IColorMatrix Get(ClrMatrix matrix)
             => _factory.Get(matrix);
     }

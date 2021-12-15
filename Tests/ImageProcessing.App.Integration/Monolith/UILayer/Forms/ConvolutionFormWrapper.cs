@@ -1,4 +1,7 @@
+using System.Windows.Forms;
+
 using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Convolution;
@@ -13,9 +16,10 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         private readonly ConvolutionForm _form;
 
         public ConvolutionFormWrapper(
-          IConvolutionFormEventBinder binder) 
+          IMainView main,
+          IConvolutionFormEventBinderWrapper wrapper) 
         {
-            _form = new ConvolutionForm(binder);
+            _form = new ConvolutionForm(main, wrapper);
         }
 
         public virtual ConvKernel Dropdown
@@ -23,6 +27,8 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
 
         public virtual MetroButton ApplyButton
             => _form.ApplyButton;
+
+        public event FormClosedEventHandler FormClosed;
 
         public virtual void Close()
             => _form.Close();

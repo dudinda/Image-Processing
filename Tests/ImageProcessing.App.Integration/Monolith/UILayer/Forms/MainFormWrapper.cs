@@ -14,13 +14,15 @@ using ImageProcessing.App.UILayer.FormModel.Factory.MainFormZoom.Interface;
 using ImageProcessing.App.UILayer.FormModel.MainFormUndoRedo.Interface;
 using ImageProcessing.App.UILayer.Forms.Main;
 
+using MetroFramework.Controls;
+
 namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
 {
     internal partial class MainFormWrapper : IMainView, IMainFormExposer
     {
         private readonly MainForm _form;
 
-        public event FormClosedEventHandler FormClosed
+        public virtual event FormClosedEventHandler FormClosed
         {
             add
             {
@@ -33,53 +35,59 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
         }
 
 
-        public Image SrcImage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Image DstImage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Image SrcImageCopy { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Image DstImageCopy { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public virtual Image SrcImage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public virtual Image DstImage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public virtual Image SrcImageCopy { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public virtual Image DstImageCopy { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public Image DefaultImage => throw new NotImplementedException();
+        public virtual Image DefaultImage => throw new NotImplementedException();
 
-        public UndoRedoSplitContainer SplitContainerCtr => throw new NotImplementedException();
+        public virtual UndoRedoSplitContainer SplitContainerCtr => throw new NotImplementedException();
 
-        public Image SourceImage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Image DestinationImage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public virtual Image SourceImage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public virtual Image DestinationImage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public PictureBox SourceBox => throw new NotImplementedException();
+        public virtual PictureBox SourceBox => throw new NotImplementedException();
 
-        public PictureBox DestinationBox => throw new NotImplementedException();
+        public virtual PictureBox DestinationBox => throw new NotImplementedException();
 
-        public ToolStripMenuItem SaveAsMenu => throw new NotImplementedException();
+        public virtual ToolStripMenuItem SaveAsMenu => throw new NotImplementedException();
 
-        public ToolStripMenuItem OpenFileMenu => throw new NotImplementedException();
+        public virtual ToolStripMenuItem OpenFileMenu => throw new NotImplementedException();
 
-        public ToolStripMenuItem SaveFileMenu => throw new NotImplementedException();
+        public virtual ToolStripMenuItem SaveFileMenu => throw new NotImplementedException();
 
-        public ToolStripButton ReplaceSrcByDstButton => throw new NotImplementedException();
+        public virtual ToolStripButton ReplaceSrcByDstButton => throw new NotImplementedException();
 
-        public ToolStripButton ReplaceDstBySrcButton => throw new NotImplementedException();
+        public virtual ToolStripButton ReplaceDstBySrcButton => throw new NotImplementedException();
 
-        public ScaleTrackBar ZoomSrcTrackBar => throw new NotImplementedException();
+        public virtual ScaleTrackBar ZoomSrcTrackBar => throw new NotImplementedException();
 
-        public ScaleTrackBar ZoomDstTrackBar => throw new NotImplementedException();
+        public virtual ScaleTrackBar ZoomDstTrackBar => throw new NotImplementedException();
 
-        public RotationTrackBar RotationSrcTrackBar => throw new NotImplementedException();
+        public virtual RotationTrackBar RotationSrcTrackBar => throw new NotImplementedException();
 
-        public RotationTrackBar RotationDstTrackBar => throw new NotImplementedException();
+        public virtual RotationTrackBar RotationDstTrackBar => throw new NotImplementedException();
 
-        public ToolStripMenuItem ConvolutionMenuButton => throw new NotImplementedException();
+        public virtual ToolStripMenuItem ConvolutionMenuButton => throw new NotImplementedException();
 
-        public ToolStripMenuItem RgbMenuButton => throw new NotImplementedException();
+        public virtual ToolStripMenuItem RgbMenuButton => throw new NotImplementedException();
 
-        public ToolStripMenuItem DistributionMenuButton => throw new NotImplementedException();
+        public virtual ToolStripMenuItem DistributionMenuButton => throw new NotImplementedException();
 
-        public ToolStripMenuItem AffineTransformationMenuButton => throw new NotImplementedException();
+        public virtual ToolStripMenuItem AffineTransformationMenuButton => throw new NotImplementedException();
 
-        public ToolStripMenuItem SettingsMenuButton => throw new NotImplementedException();
+        public virtual ToolStripMenuItem SettingsMenuButton => throw new NotImplementedException();
 
-        public ToolStripButton UndoButton => throw new NotImplementedException();
+        public virtual ToolStripButton UndoButton => throw new NotImplementedException();
 
-        public ToolStripButton RedoButton => throw new NotImplementedException();
+        public virtual ToolStripButton RedoButton => throw new NotImplementedException();
+
+        public ToolStripMenuItem RotationMenuButton => throw new NotImplementedException();
+
+        public ToolStripMenuItem ScalingMenuButton => throw new NotImplementedException();
+
+        public MetroTabControl TabsCtrl => throw new NotImplementedException();
 
         public MainFormWrapper(
             IMainFormEventBinder binder,

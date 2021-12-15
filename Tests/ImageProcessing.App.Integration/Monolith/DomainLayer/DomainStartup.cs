@@ -49,21 +49,8 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain
     {
         public void Build(IComponentProvider builder)
         {
+            new Startup().Build(builder);
             new MicrokernelStartup().Build(builder);
-
-            builder
-                 .RegisterSingleton<IAppSettings, AppSettings>()
-                 .RegisterTransient<IConvolutionFactory, ConvolutionFactory>()
-                 .RegisterTransient<IMorphologyFactory, MorphologyFactory>()
-                 .RegisterTransient<IStructuringElementFactory, StructuringElementFactory>()
-                 .RegisterTransient<IDistributionFactory, DistributionFactory>()
-                 .RegisterTransient<IRgbFilterFactory, RgbFilterFactory>()
-                 .RegisterTransient<IScalingFactory, ScalingFactory>()
-                 .RegisterTransient<IColorMatrixFactory, ColorMatrixFactory>()
-                 .RegisterTransient<IRecommendationFactory, RecommendationFactory>()
-                 .RegisterTransient<IChannelFactory, ChannelFactory>()
-                 .RegisterTransient<IRotationFactory, RotationFactory>()
-                 .RegisterTransient<ITransformationFactory, TransformationFactory>();
 
             var colorMatrix = Substitute.ForPartsOf<ColorMatrixFactoryWrapper>(builder.Resolve<IColorMatrixFactory>());
             var convolution = Substitute.ForPartsOf<ConvoltuionFactoryWrapper>(builder.Resolve<IConvolutionFactory>());

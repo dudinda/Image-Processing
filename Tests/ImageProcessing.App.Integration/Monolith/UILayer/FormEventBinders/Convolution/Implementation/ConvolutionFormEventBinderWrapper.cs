@@ -3,6 +3,7 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
+using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Convolution;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Convolution.Implementation
@@ -10,21 +11,23 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Conv
     internal class ConvolutionFormEventBinderWrapper
         : IConvolutionFormEventBinderWrapper
     {
+        private readonly IConvolutionFormEventBinder _binder;
+
         public ConvolutionFormEventBinderWrapper(
-            IEventAggregatorWrapper aggregator)
+            IConvolutionFormEventBinder binder)
         {
 
         }
 
         public virtual void OnElementExpose(IConvolutionFormExposer form)
         {
-
+            _binder.OnElementExpose(form);
         }
 
 
-        public bool ProcessCmdKey(IConvolutionFormExposer view, Keys keyData)
+        public virtual bool ProcessCmdKey(IConvolutionFormExposer view, Keys keyData)
         {
-            throw new NotImplementedException();
+            return _binder.ProcessCmdKey(view, keyData);
         }
     }
 }

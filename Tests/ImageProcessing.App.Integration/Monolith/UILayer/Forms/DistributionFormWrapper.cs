@@ -3,8 +3,8 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Distribution.Interface;
 using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.UILayer.FormEventBinders.Distribution.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Distribution;
 using ImageProcessing.App.UILayer.Forms.Distribution;
 
@@ -17,9 +17,10 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         private readonly DistributionForm _form;
 
         public DistributionFormWrapper(
-           IDistributionFormEventBinder binder) 
+           IMainView main,
+           IDistributionFormEventBinderWrapper wrapper) 
         {
-            _form = new DistributionForm(binder);
+            _form = new DistributionForm(main, wrapper);
         }
 
         public virtual (string, string) Parameters
@@ -54,6 +55,8 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
 
         public virtual ToolStripButton QualityButton
             => _form.QualityButton;
+
+        public event FormClosedEventHandler FormClosed;
 
         public virtual void AddToQualityMeasureContainer(Bitmap transformed)
             => _form.AddToQualityMeasureContainer(transformed);

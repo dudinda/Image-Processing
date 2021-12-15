@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ImageProcessing.App.Integration.TestResources {
+namespace ImageProcessing.App.Integration.Code.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace ImageProcessing.App.Integration.TestResources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ImageProcessing.App.Integration.TestResources.Res", typeof(Res).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ImageProcessing.App.Integration.Code.Resources.Res", typeof(Res).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

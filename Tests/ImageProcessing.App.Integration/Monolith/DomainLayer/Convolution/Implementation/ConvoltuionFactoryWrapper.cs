@@ -1,4 +1,3 @@
-
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.DomainFactory.Convolution.Interface;
 using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Interface;

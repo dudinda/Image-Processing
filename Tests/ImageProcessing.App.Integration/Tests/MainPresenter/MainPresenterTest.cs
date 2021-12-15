@@ -1,12 +1,12 @@
 using System.Drawing;
 
-using ImageProcessing.App.Integration.TestResources;
+using ImageProcessing.App.Integration.Monolith.UILayer;
+using ImageProcessing.App.Integration.Code.Resources;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Container;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.FileDialog;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Show;
-using ImageProcessing.App.PresentationLayer.UnitTests;
 using ImageProcessing.App.PresentationLayer.UnitTests.Extensions;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form;
 using ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Presenters;
@@ -24,7 +24,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
 #if !DEBUG
     [Timeout(5000)]
 #endif
-    internal sealed class MainPresenterTest : BaseTest<MainPresenterTestStartup>
+    internal sealed class MainPresenterTest : BaseTest<UIStartup>
     {
         private MainPresenterWrapper _presenter;
         private MainFormWrapper _form;

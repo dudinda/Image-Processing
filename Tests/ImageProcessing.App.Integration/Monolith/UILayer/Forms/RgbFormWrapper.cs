@@ -1,6 +1,8 @@
+using System.Windows.Forms;
+
 using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Rgb.Interface;
 using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Rgb;
 using ImageProcessing.App.UILayer.Forms.Rgb;
 
@@ -13,9 +15,10 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         private readonly RgbForm _form;
 
         public RgbFormWrapper(
-            IRgbFormEventBinder binder)
+            IMainView main,
+            IRgbFormEventBinderWrapper wrapper)
         {
-            _form = new RgbForm(binder);
+            _form = new RgbForm(main, wrapper);
         }
 
         public virtual RgbFltr Dropdown
@@ -35,6 +38,18 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
 
         public virtual MetroButton ColorMatrixMenuButton
             => _form.ColorMatrixMenuButton;
+
+        public virtual event FormClosedEventHandler FormClosed
+        {
+            add
+            {
+                _form.FormClosed += value;
+            }
+            remove
+            {
+                _form.FormClosed -= value;
+            }
+        }
 
         public virtual void Close()
             => _form.Close();
