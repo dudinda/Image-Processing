@@ -2,7 +2,9 @@
 [Microkernel Guide&Demo for WPF (SDI), Winforms (MDI/SDI/TDI) and Console processes](https://github.com/dudinda/MVPTemplate)
 
 [![Build Status](https://dev.azure.com/dudin0da/Image%20Processing/_apis/build/status/Softenraged.Image-Processing?branchName=master)](https://dev.azure.com/dudin0da/Image%20Processing/_build/latest?definitionId=2&branchName=master)
-
+[![Nuget](https://img.shields.io/badge/ImageProcessing.Microkernel.EntryPoint-1.1.0-orange)](https://www.nuget.org/packages/ImageProcessing.Microkernel.EntryPoint)
+[![Nuget](https://img.shields.io/badge/ImageProcessing.Microkernel.MVP-1.1.0-orange)](https://www.nuget.org/packages/ImageProcessing.Microkernel.MVP)
+[![Nuget](https://img.shields.io/badge/ImageProcessing.Microkernel.DIAdapter-1.1.0-orange)](https://www.nuget.org/packages/ImageProcessing.Microkernel.DIAdapter)
 1. [Thesis](#Thesis)
 2. [Solutions](#)
    - [General architecture of the transient process](#Architecture)
@@ -22,10 +24,10 @@
 <p>The original purpose was to research the possible advantages of grayscale images contrast optimization using a normal distribution regarding a uniform distribution. Two parameters such as the expectation and std allow to control relative luminance and contrast, respectively.</p>
 
 <p align="center">
-    <img src="https://i.imgur.com/ux6WDWx.png" width="900" height = "800" alt="application window">
-    <p align="center">Fig. 1 - The main window and transient panels as tabs. The opened settings tab is a singleton panel. The frame is taken from "Thomas the Tank Engine" series.</p>
+    <img src="https://i.imgur.com/aRBtlvJ.png" width="900" height = "800" alt="application window">
+    <p align="center">Fig. 1 - The main view and transient views as tabs. The opened settings tab is a singleton view. The frame is taken from "Thomas the Tank Engine" series.</p>
 </p>
-
+<br/><br/>
 <p> Initially, for experimental purposes was chosen a group of underexposed images. </p>
 <p align="center">
     <img src="https://i.imgur.com/vvRrqaG.png" width="500" height = "400" alt="original underexposed image">
