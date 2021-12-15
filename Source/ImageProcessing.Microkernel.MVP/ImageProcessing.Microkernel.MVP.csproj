@@ -13,14 +13,15 @@
     <PackageProjectUrl>https://github.com/dudinda/Image-Processing</PackageProjectUrl>
     <RepositoryUrl>https://github.com/dudinda/Image-Processing</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Copyright>Copyright (c) 2018-2021 Daniil Dudin</Copyright>
+    <Copyright>Copyright (c) 2018-2022 Daniil Dudin</Copyright>
     <Version>1.1.0</Version>
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE.TXT</PackageLicenseFile>
     <AssemblyVersion>1.1.0.0</AssemblyVersion>
     <FileVersion>1.1.0.0</FileVersion>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReleaseNotes>updated the internal implemetation of the event aggregator</PackageReleaseNotes>
+    <PackageReleaseNotes>-fixed closures capture inside the publish from all
+-exposed the Aggregator property inside the base presenter</PackageReleaseNotes>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 

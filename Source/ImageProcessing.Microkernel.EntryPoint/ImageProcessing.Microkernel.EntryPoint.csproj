@@ -13,12 +13,13 @@
     <PackageTags>microkernel mvp entry-point</PackageTags>
     <Description>Provides the entry point as a state machine to control the application lifecycle and to load a startup with the application components</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Copyright>Copyright (c) 2018-2021 Daniil Dudin</Copyright>
+    <Copyright>Copyright (c) 2018-2022 Daniil Dudin</Copyright>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>1.0.3</Version>
+    <Version>1.1.0</Version>
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE.TXT</PackageLicenseFile>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageReleaseNotes>-updated dependent assembly</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
