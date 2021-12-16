@@ -168,18 +168,24 @@
     <Compile Include="Monolith\ServiceLayer\Services\FileDialog\Interface\IFileDialogServiceWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\Histogram\Implementation\HistogramServiceWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\Histogram\Interface\IHistogramServiceWrapper.cs" />
-    <Compile Include="Monolith\UILayer\FormEventBinders\ColorMatrix\Implementation\ColorMatrixEventBinderWrapper.cs" />
-    <Compile Include="Monolith\UILayer\FormEventBinders\ColorMatrix\Interface\IColorMatrixEventBinderWrapper.cs" />
+    <Compile Include="Monolith\UILayer\FormEventBinders\ColorMatrix\Implementation\ColorMatrixFormEventBinderWrapper.cs" />
+    <Compile Include="Monolith\UILayer\FormEventBinders\ColorMatrix\Interface\IColorMatrixFormEventBinderWrapper.cs" />
     <Compile Include="Monolith\UILayer\FormEventBinders\Convolution\Implementation\ConvolutionFormEventBinderWrapper.cs" />
     <Compile Include="Monolith\UILayer\FormEventBinders\Convolution\Interface\IConvolutionFormEventBinderWrapper.cs" />
     <Compile Include="Monolith\UILayer\FormEventBinders\Distribution\Implementation\DistributionFormEventBinderWrapper.cs" />
     <Compile Include="Monolith\UILayer\FormEventBinders\Distribution\Interface\IDistributionFormEventBinderWrapper.cs" />
+    <Compile Include="Monolith\UILayer\FormEventBinders\Main\Implementation\MainFormEventBinderWrapper.cs" />
+    <Compile Include="Monolith\UILayer\FormEventBinders\Main\Interface\IMainFormEventBinderWrapper.cs" />
     <Compile Include="Monolith\UILayer\FormEventBinders\Rgb\Implementation\RgbFormEventBinderWrapper.cs" />
     <Compile Include="Monolith\UILayer\FormEventBinders\Rgb\Interface\IRgbFormEventBinderWrapper.cs" />
     <Compile Include="Monolith\UILayer\FormEventBinders\Rotation\Implementation\RotationFormEventBinderWrapper.cs" />
     <Compile Include="Monolith\UILayer\FormEventBinders\Rotation\Interface\IRotationFormEventBinderWrapper.cs" />
     <Compile Include="Monolith\UILayer\FormEventBinders\Scaling\Implementation\ScalingFormEventBinderWrapper.cs" />
     <Compile Include="Monolith\UILayer\FormEventBinders\Scaling\Interface\IScalingFormEventBinderWrapper.cs" />
+    <Compile Include="Monolith\UILayer\FormEventBinders\Settings\Implementation\SettingsFormEventBinderWrapper.cs" />
+    <Compile Include="Monolith\UILayer\FormEventBinders\Settings\Interface\ISettingsFormEventBinderWrapper.cs" />
+    <Compile Include="Monolith\UILayer\FormEventBinders\Transformation\Implementation\TransformationFormEventBinderWrapper.cs" />
+    <Compile Include="Monolith\UILayer\FormEventBinders\Transformation\Interface\ITransformationFormEventBinderWrapper.cs" />
     <Compile Include="Monolith\UILayer\Forms\ColorMatrixFormWrapper.cs" />
     <Compile Include="Monolith\UILayer\Forms\RotationFormWrapper.cs" />
     <Compile Include="Monolith\UILayer\Forms\ScalingFormWrapper.cs" />
@@ -232,11 +238,7 @@
     <Folder Include="Monolith\ServiceLayer\Services\Pipeline\" />
     <Folder Include="Monolith\ServiceLayer\Services\QualityMeasure\" />
     <Folder Include="Monolith\ServiceLayer\Services\StaTask\" />
-    <Folder Include="Monolith\UILayer\FormEventBinders\Main\Implementation\" />
-    <Folder Include="Monolith\UILayer\FormEventBinders\Main\Interface\" />
-    <Folder Include="Monolith\UILayer\FormEventBinders\Settings\Implementation\" />
-    <Folder Include="Monolith\UILayer\FormEventBinders\Settings\Interface\" />
-    <Folder Include="Monolith\UILayer\FormEventBinders\Transformation\" />
+    <Folder Include="Monolith\UILayer\UIModel\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Code\Resources\Res.resx">

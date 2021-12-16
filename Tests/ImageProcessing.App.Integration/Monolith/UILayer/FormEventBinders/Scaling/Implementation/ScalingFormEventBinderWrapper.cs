@@ -1,12 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
+
+using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Scaling.Interface;
+using ImageProcessing.App.UILayer.FormEventBinders.Scaling.Interface;
+using ImageProcessing.App.UILayer.FormExposers;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Scaling.Implementation
 {
-    class ScalingFormEventBinderWrapper
+    internal class ScalingFormEventBinderWrapper : IScalingFormEventBinderWrapper
     {
+        private readonly IScalingFormEventBinder _binder;
+
+        public ScalingFormEventBinderWrapper(
+            IScalingFormEventBinder binder)
+        {
+            _binder = binder;
+        }
+
+        public virtual void OnElementExpose(IScalingFormExposer form)
+        {
+            _binder.OnElementExpose(form);
+        }
+
+        public virtual bool ProcessCmdKey(IScalingFormExposer view, Keys keyData)
+        {
+            return _binder.ProcessCmdKey(view, keyData);
+        }
     }
 }

@@ -1,8 +1,6 @@
-using System;
 using System.Windows.Forms;
 
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Convolution.Interface;
-using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Convolution;
 
@@ -16,7 +14,7 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Conv
         public ConvolutionFormEventBinderWrapper(
             IConvolutionFormEventBinder binder)
         {
-
+            _binder = binder;
         }
 
         public virtual void OnElementExpose(IConvolutionFormExposer form)

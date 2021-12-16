@@ -1,20 +1,29 @@
 using System.Windows.Forms;
 
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Distribution.Interface;
+using ImageProcessing.App.UILayer.FormEventBinders.Distribution.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Distribution;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Distribution.Implementation
 {
     internal class DistributionFormEventBinderWrapper : IDistributionFormEventBinderWrapper
     {
-        public void OnElementExpose(IDistributionFormExposer form)
+        private readonly IDistributionFormEventBinder _binder;
+
+        public DistributionFormEventBinderWrapper(
+            IDistributionFormEventBinder binder)
         {
-            throw new System.NotImplementedException();
+            _binder = binder;
         }
 
-        public bool ProcessCmdKey(IDistributionFormExposer view, Keys keyData)
+        public virtual void OnElementExpose(IDistributionFormExposer form)
         {
-            throw new System.NotImplementedException();
+            _binder.OnElementExpose(form);
+        }
+
+        public virtual bool ProcessCmdKey(IDistributionFormExposer view, Keys keyData)
+        {
+            return _binder.ProcessCmdKey(view, keyData);
         }
     }
 }
