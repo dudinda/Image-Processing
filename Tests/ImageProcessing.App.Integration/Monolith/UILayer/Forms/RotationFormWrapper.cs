@@ -21,37 +21,42 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
             _form = new RotationForm(main, binder);
         }
 
-        public double Radians => throw new System.NotImplementedException();
+        public virtual double Radians
+            => _form.Radians;
 
-        public RotationMethod Dropdown => throw new System.NotImplementedException();
+        public virtual RotationMethod Dropdown
+            => _form.Dropdown;
 
-        public MetroButton RotateButton => throw new System.NotImplementedException();
+        public virtual MetroButton RotateButton
+            => _form.RotateButton;
 
-        public event FormClosedEventHandler FormClosed;
-
-        public void Close()
+        public virtual event FormClosedEventHandler FormClosed
         {
-            throw new System.NotImplementedException();
+            add
+            {
+                _form.FormClosed += value;
+            }
+            remove
+            {
+                _form.FormClosed -= value;
+            }
         }
 
-        public void Dispose()
+        public virtual void Close()
+            => _form.Close();
+
+        public virtual void Dispose()
+            => _form.Dispose();
+
+        public virtual bool Focus()
+            => _form.Focus();
+    
+        public virtual void Show()
         {
-            throw new System.NotImplementedException();
+            
         }
 
-        public bool Focus()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Show()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Tooltip(string message)
-        {
-            throw new System.NotImplementedException();
-        }
+        public virtual void Tooltip(string message)
+            => _form.Tooltip(message);
     }
 }

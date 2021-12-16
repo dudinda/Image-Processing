@@ -38,7 +38,7 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
             }
             remove
             {
-                _form.FormClosed += value;
+                _form.FormClosed -= value;
             }
         }
 

@@ -1,4 +1,3 @@
-using System;
 using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
@@ -15,7 +14,7 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
     internal class ColorMatrixFormWrapper : IColorMatrixView, IColorMatrixFormExposer
     {
         private readonly ColorMatrixForm _form;
-
+ 
         public ColorMatrixFormWrapper(
             IMainView main,
             IColorMatrixFormEventBinderWrapper binder)
@@ -23,66 +22,63 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
             _form = new ColorMatrixForm(main, binder);
         }
 
-        public ClrMatrix Dropdown => throw new NotImplementedException();
+        public virtual ClrMatrix Dropdown
+            => _form.Dropdown;
 
-        public MetroButton ApplyButton => throw new NotImplementedException();
+        public virtual MetroButton ApplyButton
+            => _form.ApplyButton;
 
-        public MetroButton ApplyCustomButton => throw new NotImplementedException();
+        public virtual MetroButton ApplyCustomButton
+            => _form.ApplyCustomButton;
 
-        public MetroCheckBox CustomCheckBox => throw new NotImplementedException();
+        public virtual MetroCheckBox CustomCheckBox
+            => _form.CustomCheckBox;
 
-        public MetroComboBox ColorMatrixDropDown => throw new NotImplementedException();
+        public virtual MetroComboBox ColorMatrixDropDown
+            => _form.ColorMatrixDropDown;
 
-        public event FormClosedEventHandler FormClosed;
-
-        public void Close()
+        public virtual event FormClosedEventHandler FormClosed
         {
-            throw new NotImplementedException();
+            add
+            {
+                _form.FormClosed += value;
+            }
+            remove
+            {
+                _form.FormClosed -= value;
+            }
         }
 
-        public bool Focus()
+        public virtual void Close()
+            => _form.Close();
+
+        public virtual bool Focus()
+            => _form.Focus();
+
+        public virtual ReadOnly2DArray<double> GetGrid()
+            => _form.GetGrid();
+
+        public virtual void SetEnabledCells(bool isEnabled)
+            => _form.SetEnabledCells(isEnabled);
+
+        public virtual void SetEnabledDropDown(bool isEnabled)
+            => _form.SetEnabledDropDown(isEnabled);
+
+        public virtual void SetGrid(ReadOnly2DArray<double> matrix)
+            => _form.SetGrid(matrix);
+
+        public virtual void SetVisibleApply(bool isVisible)
+            => _form.SetVisibleApply(isVisible);
+
+        public virtual void SetVisibleApplyCustom(bool isVisible)
+            => _form.SetVisibleApplyCustom(isVisible);
+ 
+        public virtual void Show()
         {
-            throw new NotImplementedException();
+            
         }
 
-        public ReadOnly2DArray<double> GetGrid()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetEnabledCells(bool isEnabled)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetEnabledDropDown(bool isEnabled)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetGrid(ReadOnly2DArray<double> matrix)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetVisibleApply(bool isVisible)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetVisibleApplyCustom(bool isVisible)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Show()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Tooltip(string message)
-        {
-            throw new NotImplementedException();
-        }
+        public virtual void Tooltip(string message)
+            => _form.Tooltip(message);
     }
 }

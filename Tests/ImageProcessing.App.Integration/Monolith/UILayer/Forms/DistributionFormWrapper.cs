@@ -56,7 +56,17 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         public virtual ToolStripButton QualityButton
             => _form.QualityButton;
 
-        public event FormClosedEventHandler FormClosed;
+        public virtual event FormClosedEventHandler FormClosed
+        {
+            add
+            {
+                _form.FormClosed += value;
+            }
+            remove
+            {
+                _form.FormClosed -= value;
+            }
+        }
 
         public virtual void AddToQualityMeasureContainer(Bitmap transformed)
             => _form.AddToQualityMeasureContainer(transformed);

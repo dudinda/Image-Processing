@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
@@ -26,32 +21,39 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
             _form = new ScalingForm(main, binder);
         }
 
-        public (string, string) Parameters => throw new NotImplementedException();
+        public virtual (string, string) Parameters
+            => _form.Parameters;
 
-        public ScalingMethod Dropdown => throw new NotImplementedException();
+        public virtual ScalingMethod Dropdown
+            => _form.Dropdown;
 
-        public MetroButton ScaleButton => throw new NotImplementedException();
+        public virtual MetroButton ScaleButton
+            => _form.ScaleButton;
 
-        public event FormClosedEventHandler FormClosed;
-
-        public void Close()
+        public virtual event FormClosedEventHandler FormClosed
         {
-            throw new NotImplementedException();
+            add
+            {
+                _form.FormClosed += value;
+            }
+            remove
+            {
+                _form.FormClosed -= value;
+            }
         }
 
-        public bool Focus()
+        public virtual void Close()
+            => _form.Close();
+        
+        public virtual bool Focus()
+            => _form.Focus();
+       
+        public virtual void Show()
         {
-            throw new NotImplementedException();
+            
         }
 
-        public void Show()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Tooltip(string message)
-        {
-            throw new NotImplementedException();
-        }
+        public virtual void Tooltip(string message)
+            => _form.Tooltip(message);
     }
 }

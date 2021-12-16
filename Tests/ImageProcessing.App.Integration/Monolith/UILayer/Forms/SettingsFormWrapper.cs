@@ -22,38 +22,49 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
             _form = new SettingsForm(main, binder);
         }
 
-        public RotationMethod FirstDropdown => throw new NotImplementedException();
+        public virtual RotationMethod FirstDropdown
+            => _form.FirstDropdown;
 
-        public ScalingMethod SecondDropdown => throw new NotImplementedException();
+        public virtual ScalingMethod SecondDropdown
+            => _form.SecondDropdown;
 
-        public Luma ThirdDropdown => throw new NotImplementedException();
+        public virtual Luma ThirdDropdown
+            => _form.ThirdDropdown;
 
-        public MetroComboBox LumaDropDown => throw new NotImplementedException();
+        public virtual MetroComboBox LumaDropDown
+            => _form.LumaDropDown;
 
-        public MetroComboBox ScalingDropDown => throw new NotImplementedException();
+        public virtual MetroComboBox ScalingDropDown
+            => _form.ScalingDropDown;
 
-        public MetroComboBox RotationDropDown => throw new NotImplementedException();
+        public virtual MetroComboBox RotationDropDown
+            => _form.RotationDropDown;
 
-        public event FormClosedEventHandler FormClosed;
-
-        public void Close()
+        public virtual event FormClosedEventHandler FormClosed
         {
-            throw new NotImplementedException();
+            add
+            {
+                _form.FormClosed += value;
+            }
+            remove
+            {
+                _form.FormClosed -= value;
+            }
         }
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+        public virtual void Close()
+            => _form.Close();
 
-        public bool Focus()
-        {
-            throw new NotImplementedException();
-        }
 
-        public void Show()
+        public virtual void Dispose()
+            => _form.Dispose();
+
+        public virtual bool Focus()
+            => _form.Focus();
+     
+        public virtual void Show()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
