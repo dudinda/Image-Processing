@@ -2,8 +2,10 @@ using System;
 using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.ColorMatrix.Interface;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.FormExposers.ColorMatrix;
+using ImageProcessing.App.UILayer.Forms.ColorMatrix;
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
 using MetroFramework.Controls;
@@ -12,6 +14,15 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
 {
     internal class ColorMatrixFormWrapper : IColorMatrixView, IColorMatrixFormExposer
     {
+        private readonly ColorMatrixForm _form;
+
+        public ColorMatrixFormWrapper(
+            IMainView main,
+            IColorMatrixFormEventBinderWrapper binder)
+        {
+            _form = new ColorMatrixForm(main, binder);
+        }
+
         public ClrMatrix Dropdown => throw new NotImplementedException();
 
         public MetroButton ApplyButton => throw new NotImplementedException();
