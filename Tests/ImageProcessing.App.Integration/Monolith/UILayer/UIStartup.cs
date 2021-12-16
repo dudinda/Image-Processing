@@ -17,8 +17,19 @@ using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Settings
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Transformation.Implementation;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Transformation.Interface;
 using ImageProcessing.App.Integration.Monolith.UILayer.Forms;
+using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.MainFormContainer.Implementation;
+using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.MainFormContainer.Interface;
+using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.MainFormRotation.Implementation;
+using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.MainFormRotation.Interface;
+using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.MainFormUndoRedo.Implementation;
+using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.MainFormUndoRedo.Interface;
+using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.MainFormZoom.Implementation;
+using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.MainFormZoom.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer;
+using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form;
 using ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Forms;
+using ImageProcessing.App.PresentationLayer.Views;
+using ImageProcessing.App.UILayer.FormCommands.Main;
 using ImageProcessing.App.UILayer.FormEventBinders.ColorMatrix.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Distribution.Interface;
@@ -28,6 +39,9 @@ using ImageProcessing.App.UILayer.FormEventBinders.Rotation.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Scaling.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Settings.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Transformation.Interface;
+using ImageProcessing.App.UILayer.FormModel.Factory.MainFormRotation.Interface;
+using ImageProcessing.App.UILayer.FormModel.Factory.MainFormZoom.Interface;
+using ImageProcessing.App.UILayer.FormModel.MainFormUndoRedo.Interface;
 using ImageProcessing.Microkernel.AppConfig;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
@@ -41,41 +55,53 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer
         {
             new ServiceStartup().Build(builder);
 
-            builder.RegisterTransientInstance<IColorMatrixFormEventBinderWrapper>(
+            builder
+                .RegisterTransientInstance<IColorMatrixFormEventBinderWrapper>(
                 Substitute.ForPartsOf<ColorMatrixFormEventBinderWrapper>(
-                    builder.Resolve<IColorMatrixFormEventBinder>()));
-            builder.RegisterTransientInstance<IConvolutionFormEventBinderWrapper>(
+                    builder.Resolve<IColorMatrixFormEventBinder>()))
+                .RegisterTransientInstance<IConvolutionFormEventBinderWrapper>(
                 Substitute.ForPartsOf<ConvolutionFormEventBinderWrapper>(
-                    builder.Resolve<IConvolutionFormEventBinder>()));
-            builder.RegisterTransientInstance<IDistributionFormEventBinderWrapper>(
+                    builder.Resolve<IConvolutionFormEventBinder>()))
+                .RegisterTransientInstance<IDistributionFormEventBinderWrapper>(
                 Substitute.ForPartsOf<DistributionFormEventBinderWrapper>(
-                    builder.Resolve<IDistributionFormEventBinder>()));
-            builder.RegisterTransientInstance<IRgbFormEventBinderWrapper>(
+                    builder.Resolve<IDistributionFormEventBinder>()))
+                .RegisterTransientInstance<IRgbFormEventBinderWrapper>(
                 Substitute.ForPartsOf<RgbFormEventBinderWrapper>(
-                    builder.Resolve<IRgbFormEventBinder>()));
-            builder.RegisterTransientInstance<IMainFormEventBinderWrapper>(
+                    builder.Resolve<IRgbFormEventBinder>()))
+                .RegisterTransientInstance<IMainFormEventBinderWrapper>(
                 Substitute.ForPartsOf<MainFormEventBinderWrapper>(
-                    builder.Resolve<IMainFormEventBinder>()));
-            builder.RegisterTransientInstance<IRotationFormEventBinderWrapper>(
+                    builder.Resolve<IMainFormEventBinder>()))
+                .RegisterTransientInstance<IRotationFormEventBinderWrapper>(
                 Substitute.ForPartsOf<RotationFormEventBinderWrapper>(
-                    builder.Resolve<IRotationFormEventBinder>()));
-            builder.RegisterTransientInstance<IScalingFormEventBinderWrapper>(
+                    builder.Resolve<IRotationFormEventBinder>()))
+                .RegisterTransientInstance<IScalingFormEventBinderWrapper>(
                 Substitute.ForPartsOf<ScalingFormEventBinderWrapper>(
-                    builder.Resolve<IScalingFormEventBinder>()));
-            builder.RegisterTransientInstance<ITransformationFormEventBinderWrapper>(
+                    builder.Resolve<IScalingFormEventBinder>()))
+                .RegisterTransientInstance<ITransformationFormEventBinderWrapper>(
                 Substitute.ForPartsOf<TransformationFormEventBinderWrapper>(
-                    builder.Resolve<ITransformationFormEventBinder>()));
-            builder.RegisterTransientInstance<ISettingsFormEventBinderWrapper>(
+                    builder.Resolve<ITransformationFormEventBinder>()))
+                .RegisterTransientInstance<ISettingsFormEventBinderWrapper>(
                 Substitute.ForPartsOf<SettingsFormEventBinderWrapper>(
-                    builder.Resolve<ISettingsFormEventBinder>()));
-
-            var colorMatrix = Substitute.ForPartsOf<ColorMatrixFormWrapper>();
-            var convolution = Substitute.ForPartsOf<ConvolutionFormWrapper>();
-            var distribution = Substitute.ForPartsOf<DistributionFormWrapper>();
-            var rgb = Substitute.ForPartsOf<RgbFormWrapper>();
-            var rotation = Substitute.ForPartsOf<RotationFormWrapper>();
-            var scaling = Substitute.ForPartsOf<ScalingFormWrapper>();
-            var transformation = Substitute.ForPartsOf<TransformationFormWrapper>();
+                    builder.Resolve<ISettingsFormEventBinder>()))
+                .RegisterTransientInstance<IMainFormContainerFactoryWrapper>(
+                Substitute.ForPartsOf<MainFormContainerFactoryWrapper>(
+                    builder.Resolve<IMainFormContainerFactory>()))
+                .RegisterTransientInstance<IMainFormRotationFactoryWrapper>(
+                Substitute.ForPartsOf<MainFormRotationFactoryWrapper>(
+                    builder.Resolve<IMainFormRotationFactory>()))
+                .RegisterTransientInstance<IMainFormUndoRedoFactoryWrapper>(
+                Substitute.ForPartsOf<MainFormUndoRedoFactoryWrapper>(
+                    builder.Resolve<IMainFormUndoRedoFactory>()))
+                .RegisterTransientInstance<IMainFormZoomFactoryWrapper>(
+                Substitute.ForPartsOf<MainFormZoomFactoryWrapper>(
+                    builder.Resolve<IMainFormZoomFactory>()))
+                .RegisterTransientInstance<IMainView>(
+                Substitute.ForPartsOf<MainFormWrapper>(
+                    builder.Resolve<IMainFormEventBinderWrapper>(),
+                    builder.Resolve<IMainFormContainerFactoryWrapper>(),
+                    builder.Resolve<IMainFormUndoRedoFactoryWrapper>(),
+                    builder.Resolve<IMainFormZoomFactoryWrapper>(),
+                    builder.Resolve<IMainFormRotationFactoryWrapper>()));
         }
     }
 }

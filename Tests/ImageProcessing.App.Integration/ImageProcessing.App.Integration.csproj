@@ -191,6 +191,14 @@
     <Compile Include="Monolith\UILayer\Forms\ScalingFormWrapper.cs" />
     <Compile Include="Monolith\UILayer\Forms\SettingsFormWrapper.cs" />
     <Compile Include="Monolith\UILayer\Forms\TransformationFormWrapper.cs" />
+    <Compile Include="Monolith\UILayer\UIModel\Factories\MainFormContainer\Implementation\MainFormContainerFactoryWrapper.cs" />
+    <Compile Include="Monolith\UILayer\UIModel\Factories\MainFormContainer\Interface\IMainFormContainerFactoryWrapper.cs" />
+    <Compile Include="Monolith\UILayer\UIModel\Factories\MainFormRotation\Implementation\MainFormRotationFactoryWrapper.cs" />
+    <Compile Include="Monolith\UILayer\UIModel\Factories\MainFormRotation\Interface\IMainFormRotationFactoryWrapper.cs" />
+    <Compile Include="Monolith\UILayer\UIModel\Factories\MainFormUndoRedo\Implementation\MainFormUndoRedoFactoryWrapper.cs" />
+    <Compile Include="Monolith\UILayer\UIModel\Factories\MainFormUndoRedo\Interface\IMainFormUndoRedoFactoryWrapper.cs" />
+    <Compile Include="Monolith\UILayer\UIModel\Factories\MainFormZoom\Implementation\MainFormZoomFactoryWrapper.cs" />
+    <Compile Include="Monolith\UILayer\UIModel\Factories\MainFormZoom\Interface\IMainFormZoomFactoryWrapper.cs" />
     <Compile Include="Monolith\UILayer\UIStartup.cs" />
     <Compile Include="Code\Extensions\BitmapExtensions.cs" />
     <Compile Include="Code\Extensions\DependencyResolutionExtensions.cs" />
@@ -238,7 +246,6 @@
     <Folder Include="Monolith\ServiceLayer\Services\Pipeline\" />
     <Folder Include="Monolith\ServiceLayer\Services\QualityMeasure\" />
     <Folder Include="Monolith\ServiceLayer\Services\StaTask\" />
-    <Folder Include="Monolith\UILayer\UIModel\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Code\Resources\Res.resx">
