@@ -18,13 +18,13 @@ namespace ImageProcessing.App.UILayer.Forms.ColorMatrix
     internal sealed partial class ColorMatrixForm : BaseForm,
         IColorMatrixView, IColorMatrixFormExposer
     {
-        private readonly IColorMatrixEventBinder _binder;
+        private readonly IColorMatrixFormEventBinder _binder;
         private readonly IMainFormExposer _main;
         private readonly MetroTabPage _tab = new MetroTabPage();
 
         public ColorMatrixForm(
             IMainView main,
-            IColorMatrixEventBinder binder) : base()
+            IColorMatrixFormEventBinder binder) : base()
         {
             InitializeComponent();  
             PopulateComboBox<ClrMatrix>(ColorMatrixComboBox);

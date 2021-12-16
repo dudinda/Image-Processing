@@ -66,7 +66,7 @@ namespace ImageProcessing.App.UILayer
                 .RegisterTransient<IColorMatrixView, ColorMatrixForm>()
                 .RegisterTransient<ITransformationView, TransformationForm>()
                 .RegisterTransient<IRgbFormEventBinder, RgbFormEventBinder>()
-                .RegisterTransient<IColorMatrixEventBinder, ColorMatrixEventBinder>()
+                .RegisterTransient<IColorMatrixFormEventBinder, ColorMatrixFormEventBinder>()
                 .RegisterTransient<IConvolutionFormEventBinder, ConvolutionFormEventBinder>()
                 .RegisterTransient<IDistributionFormEventBinder, DistributionFormEventBinder>()
                 .RegisterTransient<ISettingsFormEventBinder, SettingsFormEventBinder>()

@@ -8,11 +8,11 @@ using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 
 namespace ImageProcessing.App.UILayer.FormEventBinders.ColorMatrix.Implementation
 {
-    internal sealed class ColorMatrixEventBinder : IColorMatrixEventBinder
+    internal sealed class ColorMatrixFormEventBinder : IColorMatrixFormEventBinder
     {
         private readonly IEventAggregator _aggregator;
 
-        public ColorMatrixEventBinder(IEventAggregator aggregator)
+        public ColorMatrixFormEventBinder(IEventAggregator aggregator)
         {
             _aggregator = aggregator;
         }
