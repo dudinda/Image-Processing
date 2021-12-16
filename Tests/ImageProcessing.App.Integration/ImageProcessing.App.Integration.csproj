@@ -156,6 +156,8 @@
     <Compile Include="Monolith\ServiceLayer\Services\Bmp\Interface\IBitmapServiceWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\Cache\Implementation\CacheServiceWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\Cache\Interface\ICacheServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\ChartSeries\Implementation\ChartSeriesBuilderWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\ChartSeries\Interface\IChartSeriesBuilderWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\ColorMatrix\Implementation\ColorMatrixServiceWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\ColorMatrix\Interface\IColorMatrixServiceWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\Convolution\Implementation\ConvolutionServiceWrapper.cs" />
@@ -168,6 +170,15 @@
     <Compile Include="Monolith\ServiceLayer\Services\FileDialog\Interface\IFileDialogServiceWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\Histogram\Implementation\HistogramServiceWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\Histogram\Interface\IHistogramServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\Locker\Implementation\AsyncOperationLockerWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\Locker\Interface\IAsyncOperationLockerWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\Logger\Implementation\LoggerServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\Logger\Interface\ILoggerServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\NonBlockDialog\Interface\INonBlockDialogServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\Pipeline\Implementation\AwaitablePipelineServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\Pipeline\Interface\IAwaitablePipelineServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\StaTask\Implementation\StaTaskServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\StaTask\Interface\IStaTaskServiceWrapper.cs" />
     <Compile Include="Monolith\UILayer\FormEventBinders\ColorMatrix\Implementation\ColorMatrixFormEventBinderWrapper.cs" />
     <Compile Include="Monolith\UILayer\FormEventBinders\ColorMatrix\Interface\IColorMatrixFormEventBinderWrapper.cs" />
     <Compile Include="Monolith\UILayer\FormEventBinders\Convolution\Implementation\ConvolutionFormEventBinderWrapper.cs" />
@@ -219,7 +230,7 @@
     <Compile Include="Monolith\Microkernel.MVP\EventAggregator\Interface\IEventAggregatorWrapper.cs" />
     <Compile Include="Monolith\UILayer\Forms\MainFormWrapper.cs" />
     <Compile Include="Monolith\Microkernel.MVP\SynchronizationContext\SynchronizationContextWrapper.cs" />
-    <Compile Include="Monolith\ServiceLayer\Services\NonBlockDialog\NonBlockDialogServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\NonBlockDialog\Implementation\NonBlockDialogServiceWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Code\Resources\Res.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -240,12 +251,9 @@
   <ItemGroup>
     <Folder Include="Monolith\ServiceLayer\Providers\" />
     <Folder Include="Monolith\ServiceLayer\ServiceModel\" />
-    <Folder Include="Monolith\ServiceLayer\Services\Locker\Implementation\" />
-    <Folder Include="Monolith\ServiceLayer\Services\Locker\Interface\" />
     <Folder Include="Monolith\ServiceLayer\Services\Morphology\" />
-    <Folder Include="Monolith\ServiceLayer\Services\Pipeline\" />
-    <Folder Include="Monolith\ServiceLayer\Services\QualityMeasure\" />
-    <Folder Include="Monolith\ServiceLayer\Services\StaTask\" />
+    <Folder Include="Monolith\ServiceLayer\Services\QualityMeasure\Implementation\" />
+    <Folder Include="Monolith\ServiceLayer\Services\QualityMeasure\Interface\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Code\Resources\Res.resx">

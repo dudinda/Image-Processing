@@ -8,7 +8,7 @@ using ImageProcessing.App.ServiceLayer.Services.StaTask;
 namespace ImageProcessing.App.ServiceLayer.Win.NonBlockDialog.Implementation
 {
     /// <inheritdoc cref="INonBlockDialogService"/>
-    public class NonBlockDialogService : INonBlockDialogService
+    public sealed class NonBlockDialogService : INonBlockDialogService
     {
         private readonly IFileDialogService _dialog;
         private readonly IStaTaskService _sta;
@@ -22,7 +22,7 @@ namespace ImageProcessing.App.ServiceLayer.Win.NonBlockDialog.Implementation
         }
 
         /// <inheritdoc/>
-        public virtual async Task<(Bitmap? Image, string Path)> NonBlockOpen(string? filters)
+        public async Task<(Bitmap? Image, string Path)> NonBlockOpen(string? filters)
         {
             var result = await _sta.StartSTATask(
                 () => _dialog.OpenFileDialog(filters)
@@ -32,7 +32,7 @@ namespace ImageProcessing.App.ServiceLayer.Win.NonBlockDialog.Implementation
         }
 
         /// <inheritdoc/>
-        public virtual async Task NonBlockSaveAs(Bitmap src, string filters)
+        public async Task NonBlockSaveAs(Bitmap src, string filters)
         {
             await _sta.StartSTATask(
                  () => _dialog.SaveFileAsDialog(src, filters)
