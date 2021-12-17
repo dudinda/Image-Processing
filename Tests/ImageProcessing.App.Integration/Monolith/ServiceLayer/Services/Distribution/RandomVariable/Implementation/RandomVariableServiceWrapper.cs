@@ -1,17 +1,14 @@
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distribution.RandomVariable.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Interface;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distribution.RandomVariable.Implementation
 {
     internal class RandomVariableServiceWrapper : IRandomVariableServiceWrapper
     {
-        private readonly IRandomVariableService _service;
-
-        public RandomVariableServiceWrapper(IRandomVariableService service)
-        {
-            _service = service;
-        }
+        private readonly RandomVariableService _service
+            = new RandomVariableService();
 
         public virtual decimal[] GetCDF(decimal[] pmf)
             => _service.GetCDF(pmf);

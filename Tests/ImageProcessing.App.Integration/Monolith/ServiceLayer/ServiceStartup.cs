@@ -17,6 +17,8 @@ using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Inte
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Pipeline.Implementation;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Pipeline.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.QualityMeasure.Implementation;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.QualityMeasure.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.StaTask.Implementation;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.StaTask.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer;
@@ -45,10 +47,11 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Servic
                 Substitute.ForPartsOf<ColorMatrixServiceWrapper>())
                 .RegisterTransientInstance<IConvolutionServiceWrapper>(
                 Substitute.ForPartsOf<ConvolutionServiceWrapper>())
-                .RegisterTransientInstance<IBitmapLuminanceServiceWrapper>(
-                Substitute.ForPartsOf<BitmapLuminanceServiceWrapper>())
                 .RegisterTransientInstance<IRandomVariableServiceWrapper>(
                 Substitute.ForPartsOf<RandomVariableServiceWrapper>())
+                .RegisterTransientInstance<IBitmapLuminanceServiceWrapper>(
+                Substitute.ForPartsOf<BitmapLuminanceServiceWrapper>(
+                    builder.Resolve<IRandomVariableServiceWrapper>()))
                 .RegisterTransientInstance<IFileDialogServiceWrapper>(
                 Substitute.ForPartsOf<FileDialogServiceWrapper>())
                 .RegisterSingletonInstance<IStaTaskServiceWrapper>(
@@ -62,7 +65,11 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Servic
                 .RegisterSingletonInstance<IAwaitablePipelineServiceWrapper>(
                 Substitute.ForPartsOf<AwaitablePipelineServiceWrapper>())
                 .RegisterSingletonInstance<ILoggerServiceWrapper>(
-                Substitute.ForPartsOf<LoggerServiceWrapper>());
+                Substitute.ForPartsOf<LoggerServiceWrapper>())
+                .RegisterTransientInstance<IQualityMeasureServiceWrapper>(
+                Substitute.ForPartsOf<QualityMeasureServiceWrapper>(
+                    builder.Resolve<IBitmapLuminanceServiceWrapper>(),
+                    builder.Resolve<IChartSeriesBuilderWrapper>()));
         }
     }
 }

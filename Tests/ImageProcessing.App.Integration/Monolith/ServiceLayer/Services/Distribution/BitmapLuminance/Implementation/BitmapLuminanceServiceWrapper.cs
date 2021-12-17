@@ -3,17 +3,23 @@ using System.Drawing;
 
 using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distribution.RandomVariable.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distribution.BitmapLuminance.Implementation
 {
     internal class BitmapLuminanceServiceWrapper : IBitmapLuminanceServiceWrapper
     {
-        private readonly IBitmapLuminanceService _service;
+        private readonly BitmapLuminanceService _service;
 
-        public BitmapLuminanceServiceWrapper(IBitmapLuminanceService service)
+        public IRandomVariableServiceWrapper RandomVariable { get; }
+
+        public BitmapLuminanceServiceWrapper(
+            IRandomVariableServiceWrapper rnd)
         {
-            _service = service;
+            RandomVariable = rnd;
+            _service = new BitmapLuminanceService(rnd);
         }
 
         public virtual decimal[] GetCDF(Bitmap bitmap)

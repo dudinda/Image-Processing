@@ -12,15 +12,10 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Microk
     {
         public void Build(IComponentProvider builder)
         {
-            builder.RegisterSingleton<IEventAggregatorWrapper, EventAggregatorWrapper>();
-            
-
-            var controller = builder.Resolve<IAppController>();
-            var aggregator = builder.Resolve<IEventAggregatorWrapper>();
-
-            controller.GetType()
-                .GetProperty(nameof(controller.Aggregator))
-                .SetValue(controller, aggregator);
+            builder
+                .RegisterSingleton<IEventAggregatorWrapper, EventAggregatorWrapper>()
+                .Resolve<IAppController>().GetType().GetProperty(nameof(IAppController.Aggregator))
+                .SetValue(builder.Resolve<IAppController>(), builder.Resolve<IEventAggregatorWrapper>());
         }
     }
 }

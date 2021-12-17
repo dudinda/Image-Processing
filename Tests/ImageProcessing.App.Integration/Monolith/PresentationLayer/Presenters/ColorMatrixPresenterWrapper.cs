@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.ColorMatrixArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.ColorMatrix.Interface;
@@ -32,7 +33,7 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
         public ColorMatrixPresenterWrapper(
             IAsyncOperationLockerWrapper locker,
             IColorMatrixFactoryWrapper factory,
-            ILoggerService logger,
+            ILoggerServiceWrapper logger,
             IRgbProvider provider)
         {
             Provider = provider;

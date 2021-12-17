@@ -1,5 +1,7 @@
 using System.Threading.Tasks;
 
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.ConvolutionArgs;
 using ImageProcessing.App.PresentationLayer.Presenters;
@@ -26,9 +28,9 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
         public ILoggerService Logger { get; }
 
         public ConvolutionPresenterWrapper(
-            IAsyncOperationLocker locker,
+            IAsyncOperationLockerWrapper locker,
             IConvolutionProvider provider,
-            ILoggerService logger)
+            ILoggerServiceWrapper logger)
         {
             Provider = provider;
             Locker = locker;

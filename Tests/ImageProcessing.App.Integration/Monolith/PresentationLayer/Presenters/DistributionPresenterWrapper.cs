@@ -1,5 +1,8 @@
 using System.Threading.Tasks;
 
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Bmp.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.DistributionArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
@@ -34,9 +37,9 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
 
         public DistributionPresenterWrapper(
             IBitmapLuminanceProvider provider,
-            IAsyncOperationLocker locker,
-            IBitmapService service,
-            ILoggerService logger) 
+            IAsyncOperationLockerWrapper locker,
+            IBitmapServiceWrapper service,
+            ILoggerServiceWrapper logger) 
         {
             Operation = locker;
             Provider = provider;
