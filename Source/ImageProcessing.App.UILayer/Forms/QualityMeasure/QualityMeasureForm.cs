@@ -5,7 +5,7 @@ using ImageProcessing.App.PresentationLayer.Views;
 
 namespace ImageProcessing.App.UILayer.Forms.QualityMeasure
 {
-    internal sealed partial class QualityMeasureForm : BaseForm,
+    internal partial class QualityMeasureForm : BaseForm,
         IQualityMeasureView
     {
         public QualityMeasureForm() : base()

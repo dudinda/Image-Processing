@@ -1,19 +1,20 @@
 using System.Windows.Forms;
 
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Transformation.Interface;
-using ImageProcessing.App.UILayer.FormEventBinders.Transformation.Interface;
+using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
+using ImageProcessing.App.UILayer.FormEventBinders.Transformation.Implementation;
 using ImageProcessing.App.UILayer.FormExposers.Transformation;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Transformation.Implementation
 {
     internal class TransformationFormEventBinderWrapper : ITransformationFormEventBinderWrapper
     {
-        private readonly ITransformationFormEventBinder _binder;
+        private readonly TransformationFormEventBinder _binder;
 
         public TransformationFormEventBinderWrapper(
-            ITransformationFormEventBinder binder)
+            IEventAggregatorWrapper aggregator)
         {
-            _binder = binder;
+            _binder = new TransformationFormEventBinder(aggregator);
         }
 
         public virtual void OnElementExpose(ITransformationFormExposer form)

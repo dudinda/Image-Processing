@@ -1,8 +1,9 @@
+using System;
 using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Rotation.Interface;
-using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.FormExposers;
 using ImageProcessing.App.UILayer.Forms.Rotation;
 
@@ -10,15 +11,30 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
 {
-    internal class RotationFormWrapper : IRotationView, IRotationFormExposer
+    internal class RotationFormWrapper : IRotationViewWrapper, IRotationFormExposer
     {
-        private readonly RotationForm _form;
+        private class NonUIRotationForm : RotationForm
+        {
+            public NonUIRotationForm(
+                IMainViewWrapper main,
+                IRotationFormEventBinderWrapper binder) : base(main, binder)
+            {
+
+            }
+
+            protected override void Write(Action action)
+                => action();
+            protected override TElement Read<TElement>(Func<object> func)
+                => (TElement)func();
+        }
+
+        private readonly NonUIRotationForm _form;
 
         public RotationFormWrapper(
-            IMainView main,
+            IMainViewWrapper main,
             IRotationFormEventBinderWrapper binder)
         {
-            _form = new RotationForm(main, binder);
+            _form = new NonUIRotationForm(main, binder);
         }
 
         public virtual double Radians

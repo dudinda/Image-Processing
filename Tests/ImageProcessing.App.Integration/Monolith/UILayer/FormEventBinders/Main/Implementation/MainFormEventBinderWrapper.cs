@@ -1,19 +1,20 @@
 using System.Windows.Forms;
 
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Main.Interface;
-using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
+using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
+using ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation;
 using ImageProcessing.App.UILayer.FormExposers.Main;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Main.Implementation
 {
     internal class MainFormEventBinderWrapper : IMainFormEventBinderWrapper
     {
-        private readonly IMainFormEventBinder _binder;
+        private readonly MainFormEventBinder _binder;
 
         public MainFormEventBinderWrapper(
-            IMainFormEventBinder binder)
+            IEventAggregatorWrapper aggregator)
         {
-            _binder = binder;
+            _binder = new MainFormEventBinder(aggregator);
         }
 
         public virtual void OnElementExpose(IMainFormExposer form)

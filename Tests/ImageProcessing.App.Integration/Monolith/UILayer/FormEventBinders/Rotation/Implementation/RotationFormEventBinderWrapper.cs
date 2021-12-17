@@ -1,19 +1,20 @@
 using System.Windows.Forms;
 
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Rotation.Interface;
-using ImageProcessing.App.UILayer.FormEventBinders.Rotation.Interface;
+using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
+using ImageProcessing.App.UILayer.FormEventBinders.Rotation.Implementation;
 using ImageProcessing.App.UILayer.FormExposers;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Rotation.Implementation
 {
     internal class RotationFormEventBinderWrapper : IRotationFormEventBinderWrapper
     {
-        private readonly IRotationFormEventBinder _binder;
+        private readonly RotationFormEventBinder _binder;
 
         public RotationFormEventBinderWrapper(
-            IRotationFormEventBinder binder)
+            IEventAggregatorWrapper aggregator)
         {
-            _binder = binder;
+            _binder = new RotationFormEventBinder(aggregator);
         }
 
         public virtual void OnElementExpose(IRotationFormExposer form)

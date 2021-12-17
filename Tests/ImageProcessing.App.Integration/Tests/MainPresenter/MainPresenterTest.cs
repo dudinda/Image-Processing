@@ -1,16 +1,19 @@
 using System.Drawing;
 
-using ImageProcessing.App.Integration.Monolith.UILayer;
 using ImageProcessing.App.Integration.Code.Resources;
+using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
+using ImageProcessing.App.Integration.Monolith.UILayer;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Container;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.FileDialog;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Show;
 using ImageProcessing.App.PresentationLayer.UnitTests.Extensions;
-using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form;
 using ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Presenters;
+using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline;
+using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
+using ImageProcessing.App.UILayer.FormExposers.Main;
 using ImageProcessing.Microkernel.EntryPoint;
 
 using NSubstitute;
@@ -27,11 +30,11 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
     internal sealed class MainPresenterTest : BaseTest<UIStartup>
     {
         private MainPresenterWrapper _presenter;
-        private MainFormWrapper _form;
+        private IMainFormExposer _form;
 
         protected override void BeforeStart()
         {
-            _form = AppLifecycle.Controller.IoC.Resolve<MainFormWrapper>();
+            _form = AppLifecycle.Controller.IoC.Resolve<IMainViewWrapper>() as IMainFormExposer;
             _presenter = AppLifecycle.Controller.IoC.Resolve<MainPresenterWrapper>();
 
             _presenter.Run();
@@ -51,45 +54,38 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
             var image = _form.SourceImage as Bitmap;
 
             Assert.IsTrue(image != null);
-            Assert.IsTrue(image.SameAs(Res._1920x1080frame));
+            Assert.IsTrue(image.SameAs(new Bitmap(Res._1920x1080frame)));
         }
-
 
         [Test]
         public void RendererRecieveBlockTest()
         {
             _form.OpenFileMenu.PerformClick();
-
+            var view = _form as IMainViewWrapper;
             Received.InOrder(() =>
             {
-                _form.Received().SetCursor(Arg.Is<CursorType>(arg => arg == CursorType.Wait));
-                _presenter.Pipeline.Received().Register(Arg.Any<IPipelineBlock>());
+                view.Received().SetCursor(CursorType.Wait);
+                _presenter.Pipeline.Received().Register(Arg.Any<PipelineBlock>());
                 _presenter.Pipeline.Received().AwaitResult();
 
                 var container = ImageContainer.Source;
 
-                _form.Received().GetImageCopy(Arg.Is<ImageContainer>(arg => arg == container));
-                _form.Received().AddToUndoRedo(
-                    Arg.Is<ImageContainer>(arg => arg == container),
-                    Arg.Any<Bitmap>(),
-                    Arg.Is<UndoRedoAction>(arg => arg == UndoRedoAction.Undo));
-                _form.Received().ImageIsDefault(Arg.Is<ImageContainer>(arg => arg == container));
-                _form.Received().SetImageCopy(
-                    Arg.Is<ImageContainer>(arg => arg == container),
+                view.Received().GetImageCopy(container);
+                view.Received().AddToUndoRedo(container,
+                    Arg.Is<Bitmap>(Res._1920x1080frame), UndoRedoAction.Undo);
+                view.Received().ImageIsDefault(container);
+                view.Received().SetImageCopy(container,
                     Arg.Any<Bitmap>());
-                _form.Received().SetImage(
-                    Arg.Is<ImageContainer>(arg => arg == container),
+                view.Received().SetImage(container,
                     Arg.Any<Bitmap>());
-                _form.SetImageCenter(
-                    Arg.Is<ImageContainer>(arg => arg == container),
-                    Arg.Is<Size>(arg => arg == Res._1920x1080frame.Size));
-                _form.Received().Refresh(Arg.Is<ImageContainer>(arg => arg == container));
-                _form.Received().ResetTrackBarValue(Arg.Is<ImageContainer>(arg => arg == container));
+                view.SetImageCenter(container, Res._1920x1080frame.Size);
+                view.Received().Refresh(container);
+                view.Received().ResetTrackBarValue(container);
 
                 _presenter.Cache.Received().Reset();
                 _presenter.Pipeline.Received().Any();
 
-                _form.Received().SetCursor(Arg.Is<CursorType>(arg => arg == CursorType.Default));
+                view.Received().SetCursor(CursorType.Default);
             });
         }
 
@@ -102,9 +98,8 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
             _presenter.Received().OnEventHandler(
                 Arg.Is<object>(arg => arg == _form),
                 Arg.Any<SaveAsFileDialogEventArgs>());
-
             _presenter.Dialog.Received().NonBlockSaveAs(
-                Arg.Is<Bitmap>(arg => arg.SameAs((Bitmap)_form.SrcImageCopy)),
+                Arg.Is<Bitmap>(bmp => bmp == _form.SrcImageCopy),
                 Arg.Any<string>());           
         }
 
@@ -180,10 +175,12 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
             _form.OpenFileMenu.PerformClick();
             _form.ReplaceDstBySrcButton.PerformClick();
 
+            var view = _form as IMainView;
+
             var container = ImageContainer.Source;
 
-            _form.SetImage(container, Res._2560x1440frame);
-            _form.SetImageCopy(container, Res._2560x1440frame);
+            view.SetImage(container, Res._2560x1440frame);
+            view.SetImageCopy(container, Res._2560x1440frame);
 
             _form.ReplaceSrcByDstButton.PerformClick();
 

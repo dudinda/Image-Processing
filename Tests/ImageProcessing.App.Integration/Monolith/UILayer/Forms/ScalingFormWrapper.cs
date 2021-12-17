@@ -1,8 +1,9 @@
+using System;
 using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Scaling.Interface;
-using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.FormExposers;
 using ImageProcessing.App.UILayer.Forms.Scaling;
 
@@ -10,15 +11,31 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
 {
-    internal class ScalingFormWrapper : IScalingView, IScalingFormExposer
+    internal class ScalingFormWrapper : IScalingViewWrapper, IScalingFormExposer
     {
-        private readonly ScalingForm _form;
+        private class NonUIScalingForm : ScalingForm
+        {
+            public NonUIScalingForm(
+                IMainViewWrapper main,
+                IScalingFormEventBinderWrapper binder) : base(main, binder)
+            {
+
+            }
+
+            protected override void Write(Action action)
+                => action();
+            protected override TElement Read<TElement>(Func<object> func)
+                => (TElement)func();
+
+        }
+
+        private readonly NonUIScalingForm _form;
 
         public ScalingFormWrapper(
-            IMainView main,
+            IMainViewWrapper main,
             IScalingFormEventBinderWrapper binder)
         {
-            _form = new ScalingForm(main, binder);
+            _form = new NonUIScalingForm(main, binder);
         }
 
         public virtual (string, string) Parameters

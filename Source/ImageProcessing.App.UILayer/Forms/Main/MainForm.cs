@@ -19,7 +19,7 @@ using MetroFramework.Controls;
 namespace ImageProcessing.App.UILayer.Forms.Main
 {
     /// <inheritdoc cref="IMainView"/>
-    internal sealed partial class MainForm : BaseForm,
+    internal partial class MainForm : BaseForm,
         IMainFormExposer, IMainView
     {
         private readonly IMainFormEventBinder _binder;
@@ -46,8 +46,6 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             _undoRedo = undoRedo;
             _rotation = rotation;
             _container = container;
-                   
-            _binder.OnElementExpose(this);
         }
 
         /// <inheritdoc/>
@@ -211,6 +209,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         /// <inheritdoc/>
         public new void Show()
         {
+            _binder.OnElementExpose(this);
             Context.MainForm = this;
             Application.Run(Context);
         }

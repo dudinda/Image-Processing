@@ -9,6 +9,7 @@ using ImageProcessing.App.DomainLayer.DomainFactory.Scaling.Interface;
 using ImageProcessing.App.DomainLayer.DomainFactory.Transformation.Interface;
 using ImageProcessing.App.Integration.Monolith.DomainLayer.StructuringElement.Implementation;
 using ImageProcessing.App.Integration.Monolith.DomainLayer.StructuringElement.Interface;
+using ImageProcessing.App.Integration.Monolith.UILayer;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.ColorMatrix.Implementation;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.ColorMatrix.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Convolution.Interface;
@@ -36,8 +37,8 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain
     {
         public void Build(IComponentProvider builder)
         {
-            new Startup().Build(builder);
             new MicrokernelStartup().Build(builder);
+            new Startup().Build(builder);
 
             builder
                 .RegisterTransientInstance<IColorMatrixFactoryWrapper>(

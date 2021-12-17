@@ -15,8 +15,8 @@ namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Pipelin
         public virtual bool Any()
             => _service.Any();
 
-        public virtual async Task<object> AwaitResult()
-            => await _service.AwaitResult().ConfigureAwait(false);
+        public virtual Task<object> AwaitResult()
+            => Task.FromResult(_service.AwaitResult().Result);
 
         public virtual void Dispose()
             => _service.Dispose();

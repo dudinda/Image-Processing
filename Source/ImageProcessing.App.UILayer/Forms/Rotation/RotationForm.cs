@@ -14,7 +14,7 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.UILayer.Forms.Rotation
 {
-    internal sealed partial class RotationForm : BaseForm,
+    internal partial class RotationForm : BaseForm,
         IRotationView, IRotationFormExposer
     {
         private readonly IRotationFormEventBinder _binder;

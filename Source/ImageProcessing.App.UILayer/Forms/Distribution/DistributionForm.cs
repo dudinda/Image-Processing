@@ -16,7 +16,7 @@ using MetroFramework.Controls;
 namespace ImageProcessing.App.UILayer.Forms.Distribution
 {
     /// <inheritdoc cref="IDistributionView"/>
-    internal sealed partial class DistributionForm : BaseForm,
+    internal partial class DistributionForm : BaseForm,
         IDistributionFormExposer, IDistributionView
     {
         private readonly IDistributionFormEventBinder _binder;

@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Concurrent;
 using System.Drawing;
 using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Distribution.Interface;
-using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.FormExposers.Distribution;
 using ImageProcessing.App.UILayer.Forms.Distribution;
 
@@ -12,15 +13,30 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Forms
 {
-    internal class DistributionFormWrapper : IDistributionFormExposer, IDistributionView
+    internal class DistributionFormWrapper : IDistributionFormExposer, IDistributionViewWrapper
     {
-        private readonly DistributionForm _form;
+        private class NonUIDistributionForm : DistributionForm
+        {
+            public NonUIDistributionForm(
+                IMainViewWrapper main,
+                IDistributionFormEventBinderWrapper wrapper) : base(main, wrapper)
+            {
+                
+            }
+
+            protected override void Write(Action action)
+              => action();
+            protected override TElement Read<TElement>(Func<object> func)
+                => (TElement)func();
+        }
+
+        private readonly NonUIDistributionForm _form;
 
         public DistributionFormWrapper(
-           IMainView main,
+           IMainViewWrapper main,
            IDistributionFormEventBinderWrapper wrapper) 
         {
-            _form = new DistributionForm(main, wrapper);
+            _form = new NonUIDistributionForm(main, wrapper);
         }
 
         public virtual (string, string) Parameters

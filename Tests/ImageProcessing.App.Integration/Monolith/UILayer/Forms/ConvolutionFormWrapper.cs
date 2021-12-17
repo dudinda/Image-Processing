@@ -1,6 +1,8 @@
+using System;
 using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.FormExposers.Convolution;
@@ -12,13 +14,28 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
 {
     internal class ConvolutionFormWrapper : IConvolutionFormExposer, IConvolutionView
     {
-        private readonly ConvolutionForm _form;
+        private class NonUIConvolutionForm : ConvolutionForm
+        {
+            public NonUIConvolutionForm(
+                IMainViewWrapper main,
+                IConvolutionFormEventBinderWrapper wrapper) : base(main, wrapper)
+            {
+               
+            }
+
+            protected override void Write(Action action)
+               => action();
+            protected override TElement Read<TElement>(Func<object> func)
+                => (TElement)func();
+        }
+
+        private readonly NonUIConvolutionForm _form;
 
         public ConvolutionFormWrapper(
-          IMainView main,
-          IConvolutionFormEventBinderWrapper wrapper) 
+            IMainViewWrapper main,
+            IConvolutionFormEventBinderWrapper wrapper) 
         {
-            _form = new ConvolutionForm(main, wrapper);
+            _form = new NonUIConvolutionForm(main, wrapper);
         }
 
         public virtual ConvKernel Dropdown

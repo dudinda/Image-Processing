@@ -2,14 +2,13 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
+using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Main.Interface;
 using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.MainFormContainer.Interface;
 using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.MainFormRotation.Interface;
 using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.MainFormUndoRedo.Interface;
 using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.MainFormZoom.Interface;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
-using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.PresentationLayer.Views.ViewComponents;
 using ImageProcessing.App.UILayer.Control;
 using ImageProcessing.App.UILayer.FormControl.TrackBar;
 using ImageProcessing.App.UILayer.FormExposers.Main;
@@ -19,9 +18,28 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
 {
-    internal partial class MainFormWrapper : IMainView, IMainFormExposer
+    internal partial class MainFormWrapper : IMainViewWrapper, IMainFormExposer
     {
-        private readonly MainForm _form;
+        private class NonUIMainForm : MainForm
+        {
+            public NonUIMainForm(
+               IMainFormEventBinderWrapper binder,
+               IMainFormContainerFactoryWrapper container,
+               IMainFormUndoRedoFactoryWrapper undoRedo,
+               IMainFormZoomFactoryWrapper zoom,
+               IMainFormRotationFactoryWrapper rotation) : base(binder, container, undoRedo, zoom, rotation)
+            {
+             
+            }
+
+            protected override void Write(Action action)
+                => action();
+            protected override TElement Read<TElement>(Func<object> func)
+                => (TElement)func();
+        }
+
+        private readonly IMainFormEventBinderWrapper _binder;
+        private readonly NonUIMainForm _form;
 
         public MainFormWrapper(
             IMainFormEventBinderWrapper binder,
@@ -30,7 +48,8 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
             IMainFormZoomFactoryWrapper zoom,
             IMainFormRotationFactoryWrapper rotation)
         {
-            _form = new MainForm(binder, container, undoRedo, zoom, rotation);
+            _form = new NonUIMainForm(binder, container, undoRedo, zoom, rotation);
+            _binder = binder;
         }
 
 
@@ -211,7 +230,8 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
        
         public virtual void Show()
         {
-            
+            _binder.OnElementExpose(this);
         }
+
     }
 }

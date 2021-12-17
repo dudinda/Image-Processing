@@ -1,8 +1,9 @@
+using System;
 using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Rgb.Interface;
-using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.FormExposers.Rgb;
 using ImageProcessing.App.UILayer.Forms.Rgb;
 
@@ -10,15 +11,30 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Forms
 {
-    internal class RgbFormWrapper : IRgbFormExposer, IRgbView
+    internal class RgbFormWrapper : IRgbFormExposer, IRgbViewWrapper
     {
-        private readonly RgbForm _form;
+        private class NonUIRgbForm : RgbForm
+        {
+            public NonUIRgbForm(
+                IMainViewWrapper main,
+                IRgbFormEventBinderWrapper wrapper) : base(main, wrapper)
+            {
+               
+            }
+
+            protected override void Write(Action action)
+              => action();
+            protected override TElement Read<TElement>(Func<object> func)
+                => (TElement)func();
+        }
+
+        private readonly NonUIRgbForm _form;
 
         public RgbFormWrapper(
-            IMainView main,
+            IMainViewWrapper main,
             IRgbFormEventBinderWrapper wrapper)
         {
-            _form = new RgbForm(main, wrapper);
+            _form = new NonUIRgbForm(main, wrapper);
         }
 
         public virtual RgbFltr Dropdown

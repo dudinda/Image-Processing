@@ -158,6 +158,15 @@
     <Compile Include="Monolith\PresentationLayer\Presenters\ScalingPresenterWrapper.cs" />
     <Compile Include="Monolith\PresentationLayer\Presenters\SettingsPresenterWrapper.cs" />
     <Compile Include="Monolith\PresentationLayer\Presenters\TransformationPresenterWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\Views\IColorMatrixViewWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\Views\IConvolutionViewWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\Views\IDistributionViewWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\Views\IMainViewWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\Views\IRgbViewWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\Views\IRotationViewWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\Views\IScalingViewWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\Views\ISettingsViewWrapper.cs" />
+    <Compile Include="Monolith\PresentationLayer\Views\ITransformationViewWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Providers\BitmapLuminance\Implementation\BitmapLuminanceProviderWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Providers\BitmapLuminance\Interface\IBitmapLuminanceProviderWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Providers\Convolution\Implementation\ConvolutionProviderWrapper.cs" />
@@ -249,7 +258,6 @@
     <Compile Include="Monolith\UILayer\UIModel\Factories\MainFormZoom\Interface\IMainFormZoomFactoryWrapper.cs" />
     <Compile Include="Monolith\UILayer\UIStartup.cs" />
     <Compile Include="Code\Extensions\BitmapExtensions.cs" />
-    <Compile Include="Code\Extensions\DependencyResolutionExtensions.cs" />
     <Compile Include="Monolith\UILayer\Forms\ConvolutionFormWrapper.cs">
       <SubType>Form</SubType>
     </Compile>

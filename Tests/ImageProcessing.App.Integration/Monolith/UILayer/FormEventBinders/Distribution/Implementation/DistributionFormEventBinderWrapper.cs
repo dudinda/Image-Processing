@@ -1,19 +1,20 @@
 using System.Windows.Forms;
 
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Distribution.Interface;
-using ImageProcessing.App.UILayer.FormEventBinders.Distribution.Interface;
+using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
+using ImageProcessing.App.UILayer.FormEventBinders.Distribution.Implementation;
 using ImageProcessing.App.UILayer.FormExposers.Distribution;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Distribution.Implementation
 {
     internal class DistributionFormEventBinderWrapper : IDistributionFormEventBinderWrapper
     {
-        private readonly IDistributionFormEventBinder _binder;
+        private readonly DistributionFormEventBinder _binder;
 
         public DistributionFormEventBinderWrapper(
-            IDistributionFormEventBinder binder)
+            IEventAggregatorWrapper aggregator)
         {
-            _binder = binder;
+            _binder = new DistributionFormEventBinder(aggregator);
         }
 
         public virtual void OnElementExpose(IDistributionFormExposer form)

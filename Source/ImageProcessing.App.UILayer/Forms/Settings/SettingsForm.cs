@@ -11,7 +11,7 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.UILayer.Forms.Settings
 {
-    internal sealed partial class SettingsForm : BaseForm,
+    internal partial class SettingsForm : BaseForm,
         ISettingsView, ISettingsFormExposer
     {
         private readonly ISettingsFormEventBinder _binder;

@@ -14,7 +14,7 @@ using MetroFramework.Controls;
 namespace ImageProcessing.App.UILayer.Forms.Transformation
 {
     /// <inheritdoc cref="ITransformationView"/>
-    internal sealed partial class TransformationForm : BaseForm,
+    internal partial class TransformationForm : BaseForm,
         ITransformationFormExposer, ITransformationView
     {
         private readonly ITransformationFormEventBinder _binder;

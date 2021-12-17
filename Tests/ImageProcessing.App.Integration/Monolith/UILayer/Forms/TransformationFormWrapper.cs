@@ -1,6 +1,8 @@
+using System;
 using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Transformation.Interface;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.FormExposers.Transformation;
@@ -10,15 +12,31 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
 {
-    internal class TransformationFormWrapper : ITransformationView, ITransformationFormExposer
+    internal class TransformationFormWrapper : ITransformationViewWrapper, ITransformationFormExposer
     {
-        private readonly TransformationForm _form;
+        private class NonUITransformationForm : TransformationForm
+        {
+            public NonUITransformationForm(
+                IMainViewWrapper main,
+                ITransformationFormEventBinderWrapper binder) : base(main, binder)
+            {
+
+            }
+
+            protected override void Write(Action action)
+                => action();
+            protected override TElement Read<TElement>(Func<object> func)
+                => (TElement)func();
+
+        }
+
+        private readonly NonUITransformationForm _form;
 
         public TransformationFormWrapper(
-            IMainView main,
+            IMainViewWrapper main,
             ITransformationFormEventBinderWrapper binder)
         {
-            _form = new TransformationForm(main, binder);
+            _form = new NonUITransformationForm(main, binder);
         }
 
         public virtual AffTransform Dropdown

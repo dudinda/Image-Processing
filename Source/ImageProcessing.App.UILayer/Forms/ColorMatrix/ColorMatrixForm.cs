@@ -15,7 +15,7 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.UILayer.Forms.ColorMatrix
 {
-    internal sealed partial class ColorMatrixForm : BaseForm,
+    internal partial class ColorMatrixForm : BaseForm,
         IColorMatrixView, IColorMatrixFormExposer
     {
         private readonly IColorMatrixFormEventBinder _binder;
@@ -38,8 +38,7 @@ namespace ImageProcessing.App.UILayer.Forms.ColorMatrix
             _tab.Text = Text;
 
             _binder = binder;
-            _binder.OnElementExpose(this);
-
+  
             for (var row = 0; row < ColorMatrixGrid.ColumnCount; ++row)
             {
                 ColorMatrixGrid.Rows.Add(0, 0, 0, 0, 0);
@@ -129,6 +128,8 @@ namespace ImageProcessing.App.UILayer.Forms.ColorMatrix
 
         public new void Show()
         {
+            _binder.OnElementExpose(this);
+
             _main.TabsCtrl.TabPages.Add(_tab);
             _main.TabsCtrl.SelectedTab = _tab;
 

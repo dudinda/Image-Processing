@@ -1,8 +1,9 @@
+using System;
 using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.ColorMatrix.Interface;
-using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.FormExposers.ColorMatrix;
 using ImageProcessing.App.UILayer.Forms.ColorMatrix;
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
@@ -11,15 +12,30 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
 {
-    internal class ColorMatrixFormWrapper : IColorMatrixView, IColorMatrixFormExposer
+    internal class ColorMatrixFormWrapper : IColorMatrixViewWrapper, IColorMatrixFormExposer
     {
-        private readonly ColorMatrixForm _form;
+        private class NonUIColorMatrixForm : ColorMatrixForm
+        {
+            public NonUIColorMatrixForm(
+                IMainViewWrapper main,
+                IColorMatrixFormEventBinderWrapper binder) : base(main, binder)
+            {
+                
+            }
+
+            protected override void Write(Action action)
+                => action();
+            protected override TElement Read<TElement>(Func<object> func)
+                => (TElement)func();
+        }
+
+        private readonly NonUIColorMatrixForm _form;
  
         public ColorMatrixFormWrapper(
-            IMainView main,
+            IMainViewWrapper main,
             IColorMatrixFormEventBinderWrapper binder)
         {
-            _form = new ColorMatrixForm(main, binder);
+            _form = new NonUIColorMatrixForm(main, binder);
         }
 
         public virtual ClrMatrix Dropdown

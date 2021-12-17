@@ -2,8 +2,8 @@ using System;
 using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Settings.Interface;
-using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.FormExposers.Settings;
 using ImageProcessing.App.UILayer.Forms.Settings;
 
@@ -11,15 +11,31 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
 {
-    internal class SettingsFormWrapper : ISettingsView, ISettingsFormExposer
+    internal class SettingsFormWrapper : ISettingsViewWrapper, ISettingsFormExposer
     {
-        private readonly SettingsForm _form;
+        private class NonUISettingsForm : SettingsForm
+        {
+            public NonUISettingsForm(
+                IMainViewWrapper main,
+                ISettingsFormEventBinderWrapper binder) : base(main, binder)
+            {
+
+            }
+
+            protected override void Write(Action action)
+                => action();
+            protected override TElement Read<TElement>(Func<object> func)
+                => (TElement)func();
+
+        }
+
+        private readonly NonUISettingsForm _form;
 
         public SettingsFormWrapper(
-            IMainView main,
+            IMainViewWrapper main,
             ISettingsFormEventBinderWrapper binder)
         {
-            _form = new SettingsForm(main, binder);
+            _form = new NonUISettingsForm(main, binder);
         }
 
         public virtual RotationMethod FirstDropdown

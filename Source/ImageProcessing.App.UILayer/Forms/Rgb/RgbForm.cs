@@ -15,7 +15,7 @@ using static ImageProcessing.App.DomainLayer.Code.Enums.RgbChannels;
 
 namespace ImageProcessing.App.UILayer.Forms.Rgb
 {
-    internal sealed partial class RgbForm : BaseForm,
+    internal partial class RgbForm : BaseForm,
         IRgbFormExposer, IRgbView
     {
         private readonly IRgbFormEventBinder _binder;

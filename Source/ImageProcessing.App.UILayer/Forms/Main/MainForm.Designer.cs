@@ -2,7 +2,7 @@ using System.Windows.Forms;
 
 namespace ImageProcessing.App.UILayer.Forms.Main
 {
-    internal sealed partial class MainForm
+    internal partial class MainForm
     {
         /// <summary>
         /// Required designer variable.

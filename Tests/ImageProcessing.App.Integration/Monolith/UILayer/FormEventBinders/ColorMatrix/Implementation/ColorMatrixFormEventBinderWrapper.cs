@@ -1,6 +1,8 @@
 using System.Windows.Forms;
 
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.ColorMatrix.Interface;
+using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
+using ImageProcessing.App.UILayer.FormEventBinders.ColorMatrix.Implementation;
 using ImageProcessing.App.UILayer.FormEventBinders.ColorMatrix.Interface;
 using ImageProcessing.App.UILayer.FormExposers.ColorMatrix;
 
@@ -8,12 +10,12 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Colo
 {
     internal class ColorMatrixFormEventBinderWrapper : IColorMatrixFormEventBinderWrapper
     {
-        private readonly IColorMatrixFormEventBinder _binder;
+        private readonly ColorMatrixFormEventBinder _binder;
 
         public ColorMatrixFormEventBinderWrapper(
-            IColorMatrixFormEventBinder binder)
+            IEventAggregatorWrapper aggregator)
         {
-            _binder = binder;
+            _binder = new ColorMatrixFormEventBinder(aggregator);
         }
 
         public virtual void OnElementExpose(IColorMatrixFormExposer form)

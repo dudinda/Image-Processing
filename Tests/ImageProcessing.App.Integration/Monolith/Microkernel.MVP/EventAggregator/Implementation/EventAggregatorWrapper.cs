@@ -11,10 +11,8 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Fakes
 
         protected override void Post(SendOrPostCallback d, object state)
         {
-            var thisSyncContext = new SynchronizationContextWrapper();
-            SynchronizationContext.SetSynchronizationContext(thisSyncContext);
-
-            thisSyncContext.Send(d, _state);
+            SynchronizationContext.SetSynchronizationContext(new SynchronizationContextWrapper());
+            SynchronizationContext.Current.Send(d, state);
         }
     }
 }

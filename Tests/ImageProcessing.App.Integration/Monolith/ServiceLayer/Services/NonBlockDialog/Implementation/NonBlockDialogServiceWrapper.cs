@@ -20,16 +20,26 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Services
             Sta = sta;
         }
 
-        public virtual async Task<(Bitmap Image, string Path)> NonBlockOpen(string filters)
+        public virtual Task<(Bitmap Image, string Path)> NonBlockOpen(string filters)
         {
-            var args = await Service.OpenFileDialog(filters).ConfigureAwait(false);
+            var args = Sta.StartSTATask(() =>
+            {
+                var args = Service.OpenFileDialog(filters).Result;
+                return Task.FromResult(args);
+            });
 
-            return await Task.FromResult(args);
+            return args.Result;
         }
 
-        public virtual async Task NonBlockSaveAs(Bitmap src, string filters)
+        public virtual Task NonBlockSaveAs(Bitmap src, string filters)
         {
+            var task = Sta.StartSTATask(() =>
+            {
+                Service.SaveFileAsDialog(src, filters);
+                return Task.CompletedTask;
+            });
 
+            return task.Result;
         }
     }
 }

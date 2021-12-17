@@ -12,7 +12,7 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.UILayer.Forms.Scaling
 {
-    internal sealed partial class ScalingForm : BaseForm,
+    internal partial class ScalingForm : BaseForm,
         IScalingView, IScalingFormExposer
     {
         private readonly IMainFormExposer _main;
