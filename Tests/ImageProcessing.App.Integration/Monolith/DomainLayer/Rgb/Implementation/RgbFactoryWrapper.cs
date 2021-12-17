@@ -14,10 +14,10 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain
             _factory = factory;
         }
 
-        public IRgbFilter Get(RgbChannels channel)
+        public virtual IRgbFilter Get(RgbChannels channel)
             => _factory.Get(channel);
 
-        public IRgbFilter Get(RgbFltr model)
+        public virtual IRgbFilter Get(RgbFltr model)
             => _factory.Get(model);
     }
 }

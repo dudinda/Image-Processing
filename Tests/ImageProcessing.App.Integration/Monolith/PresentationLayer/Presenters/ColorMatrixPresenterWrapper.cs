@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Rgb.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.ColorMatrixArgs;
@@ -8,8 +9,6 @@ using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLaye
 using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
-using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
@@ -25,16 +24,16 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
     {
         private readonly ColorMatrixPresenter _presenter;
 
-        public IRgbProvider Provider { get; }
+        public IRgbProviderWrapper Provider { get; }
         public IAsyncOperationLockerWrapper Locker { get; }
         public IColorMatrixFactoryWrapper Factory { get; }
-        public ILoggerService Logger { get; }
+        public ILoggerServiceWrapper Logger { get; }
 
         public ColorMatrixPresenterWrapper(
             IAsyncOperationLockerWrapper locker,
             IColorMatrixFactoryWrapper factory,
             ILoggerServiceWrapper logger,
-            IRgbProvider provider)
+            IRgbProviderWrapper provider)
         {
             Provider = provider;
             Factory = factory;

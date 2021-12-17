@@ -141,6 +141,8 @@
     <Compile Include="Monolith\DomainLayer\Rotation\Interface\IRotationFactoryWrapper.cs" />
     <Compile Include="Monolith\DomainLayer\Scaling\Implementation\ScalingFactoryWrapper.cs" />
     <Compile Include="Monolith\DomainLayer\Scaling\Interface\IScalingFactoryWrapper.cs" />
+    <Compile Include="Monolith\DomainLayer\StructuringElement\Implementation\StructuringElementFactoryWrapper.cs" />
+    <Compile Include="Monolith\DomainLayer\StructuringElement\Interface\IStructuringElementFactoryWrapper.cs" />
     <Compile Include="Monolith\DomainLayer\Transformation\Implementation\TransformationFactoryWrapper.cs" />
     <Compile Include="Monolith\DomainLayer\Transformation\Interface\ITransformationFactoryWrapper.cs" />
     <Compile Include="Monolith\Microkernel.MVP\MicrokernelStartup.cs" />
@@ -156,9 +158,26 @@
     <Compile Include="Monolith\PresentationLayer\Presenters\ScalingPresenterWrapper.cs" />
     <Compile Include="Monolith\PresentationLayer\Presenters\SettingsPresenterWrapper.cs" />
     <Compile Include="Monolith\PresentationLayer\Presenters\TransformationPresenterWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Providers\BitmapLuminance\Implementation\BitmapLuminanceProviderWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Providers\BitmapLuminance\Interface\IBitmapLuminanceProviderWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Providers\Convolution\Implementation\ConvolutionProviderWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Providers\Convolution\Interface\IConvolutionProviderWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Providers\Morphology\Implementation\MorphologyProviderWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Providers\Morphology\Interface\IMorphologyProviderWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Providers\Rgb\Implementation\RgbProviderWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Providers\Rgb\Interface\IRgbProviderWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Providers\Rotation\Implementation\RotationProviderWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Providers\Rotation\Interface\IRotationProviderWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Providers\Scaling\Implementation\ScalingProviderWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Providers\Scaling\Interface\IScalingProviderWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Providers\Transformation\Implementation\TransformationProviderWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Providers\Transformation\Interface\ITransformationProviderWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\ServiceModel\VisitableFactory\BitmapLuminance\Implementation\BitmapLuminanceVisitableFactoryWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\ServiceModel\VisitableFactory\BitmapLuminance\Interface\IBitmapLuminanceVisitableFactoryWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\ServiceModel\VisitableFactory\Convolution\Implementation\ConvolutionVisitableFactoryWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\ServiceModel\VisitableFactory\Convolution\Interface\IConvolutionVisitableFactoryWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\ServiceModel\VisitableFactory\Histogram\Implementation\HistogramVisitableFactoryWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\ServiceModel\VisitableFactory\Histogram\Interface\IHistogramVisitableFactoryWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\ServiceModel\Vistiors\BitmapLuminance\Implementation\BitmapLuminanceVisitorWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\ServiceModel\Vistiors\BitmapLuminance\Interface\IBitmapLuminanceVisitorWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\ServiceModel\Vistiors\Convolution\Implementation\ConvolutionVisitorWrapper.cs" />
@@ -188,6 +207,8 @@
     <Compile Include="Monolith\ServiceLayer\Services\Locker\Interface\IAsyncOperationLockerWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\Logger\Implementation\LoggerServiceWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\Logger\Interface\ILoggerServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\Morphology\Implementation\MorphologyServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\Morphology\Interface\IMorphologyServiceWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\NonBlockDialog\Interface\INonBlockDialogServiceWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\Pipeline\Implementation\AwaitablePipelineServiceWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\Pipeline\Interface\IAwaitablePipelineServiceWrapper.cs" />
@@ -260,13 +281,7 @@
     <Content Include="Code\Resources\Static\1920x1080frame.jpg" />
     <Content Include="Code\Resources\Static\2560x1440frame.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Monolith\ServiceLayer\Providers\" />
-    <Folder Include="Monolith\ServiceLayer\ServiceModel\VisitableFactory\BitmapLuminance\Interface\" />
-    <Folder Include="Monolith\ServiceLayer\ServiceModel\VisitableFactory\Convolution\Interface\" />
-    <Folder Include="Monolith\ServiceLayer\ServiceModel\VisitableFactory\Histogram\Interface\" />
-    <Folder Include="Monolith\ServiceLayer\Services\Morphology\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Code\Resources\Res.resx">
       <Generator>ResXFileCodeGenerator</Generator>

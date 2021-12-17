@@ -2,10 +2,13 @@ using ImageProcessing.App.DomainLayer.DomainFactory.ColorMatrix.Interface;
 using ImageProcessing.App.DomainLayer.DomainFactory.Convolution.Interface;
 using ImageProcessing.App.DomainLayer.DomainFactory.Distribution.Interface;
 using ImageProcessing.App.DomainLayer.DomainFactory.Morphology.Interface;
+using ImageProcessing.App.DomainLayer.DomainFactory.Morphology.Interface.StructuringElement;
 using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Interface;
 using ImageProcessing.App.DomainLayer.DomainFactory.Rotation.Interface;
 using ImageProcessing.App.DomainLayer.DomainFactory.Scaling.Interface;
 using ImageProcessing.App.DomainLayer.DomainFactory.Transformation.Interface;
+using ImageProcessing.App.Integration.Monolith.DomainLayer.StructuringElement.Implementation;
+using ImageProcessing.App.Integration.Monolith.DomainLayer.StructuringElement.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.ColorMatrix.Implementation;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.ColorMatrix.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Convolution.Interface;
@@ -40,6 +43,8 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain
                 .RegisterTransientInstance<IColorMatrixFactoryWrapper>(
                 Substitute.ForPartsOf<ColorMatrixFactoryWrapper>(
                     builder.Resolve<IColorMatrixFactory>()))
+                .RegisterTransientInstance<IStructuringElementFactoryWrapper>(
+                Substitute.ForPartsOf<StructuringElementFactoryWrapper>())
                 .RegisterTransientInstance<IConvolutionFactoryWrapper>(
                 Substitute.ForPartsOf<ConvoltuionFactoryWrapper>(
                     builder.Resolve<IConvolutionFactory>()))

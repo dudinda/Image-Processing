@@ -1,16 +1,13 @@
-using System;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Rotation.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.RgbArgs;
 using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
-using ImageProcessing.App.ServiceLayer.Providers.Rotation.Interface;
-using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
-using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
@@ -26,14 +23,14 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
     {
         private readonly RotationPresenter _presenter;
 
-        public IRotationProvider Provider { get; }
-        public ILoggerService Logger { get; }
-        public IAsyncOperationLocker Locker { get; }
+        public IRotationProviderWrapper Provider { get; }
+        public ILoggerServiceWrapper Logger { get; }
+        public IAsyncOperationLockerWrapper Locker { get; }
 
         public RotationPresenterWrapper(
-            IAsyncOperationLocker locker,
-            IRotationProvider provider,
-            ILoggerService logger)
+            IAsyncOperationLockerWrapper locker,
+            IRotationProviderWrapper provider,
+            ILoggerServiceWrapper logger)
         {
             Provider = provider;
             Logger = logger;

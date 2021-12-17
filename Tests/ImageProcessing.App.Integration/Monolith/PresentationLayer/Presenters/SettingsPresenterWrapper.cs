@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.SettingsArgs;
 using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
-using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
@@ -17,11 +17,11 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
     {
         private readonly SettingsPresenter _presenter;
 
-        public ILoggerService Logger { get; }
+        public ILoggerServiceWrapper Logger { get; }
         public IAppSettings Settings { get; }
 
         public SettingsPresenterWrapper(
-            ILoggerService logger,
+            ILoggerServiceWrapper logger,
             IAppSettings settings)
         {
             Settings = settings;

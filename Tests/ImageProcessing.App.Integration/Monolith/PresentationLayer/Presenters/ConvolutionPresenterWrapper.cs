@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Convolution.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
@@ -7,9 +8,6 @@ using ImageProcessing.App.PresentationLayer.DomainEvents.ConvolutionArgs;
 using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.ServiceLayer.Providers.Interface.Convolution;
-using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
-using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
@@ -23,13 +21,13 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
     {
         private readonly ConvolutionPresenter _presenter;
 
-        public IConvolutionProvider Provider { get; }
-        public IAsyncOperationLocker Locker { get; }
-        public ILoggerService Logger { get; }
+        public IConvolutionProviderWrapper Provider { get; }
+        public IAsyncOperationLockerWrapper Locker { get; }
+        public ILoggerServiceWrapper Logger { get; }
 
         public ConvolutionPresenterWrapper(
             IAsyncOperationLockerWrapper locker,
-            IConvolutionProvider provider,
+            IConvolutionProviderWrapper provider,
             ILoggerServiceWrapper logger)
         {
             Provider = provider;

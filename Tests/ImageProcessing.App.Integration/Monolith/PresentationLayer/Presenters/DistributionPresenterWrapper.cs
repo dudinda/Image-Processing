@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.BitmapLuminance.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
@@ -9,10 +10,6 @@ using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
-using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
-using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
-using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
@@ -30,13 +27,13 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
     {
         private readonly DistributionPresenter _presenter;
 
-        public IAsyncOperationLocker Operation { get; }
-        public IBitmapLuminanceProvider Provider { get; }
-        public IBitmapService Service { get; }
-        public ILoggerService Logger { get; }
+        public IAsyncOperationLockerWrapper Operation { get; }
+        public IBitmapLuminanceProviderWrapper Provider { get; }
+        public IBitmapServiceWrapper Service { get; }
+        public ILoggerServiceWrapper Logger { get; }
 
         public DistributionPresenterWrapper(
-            IBitmapLuminanceProvider provider,
+            IBitmapLuminanceProviderWrapper provider,
             IAsyncOperationLockerWrapper locker,
             IBitmapServiceWrapper service,
             ILoggerServiceWrapper logger) 
@@ -55,44 +52,44 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
             _presenter.Run(vm);
         }
 
-        public virtual async Task OnEventHandler(object publisher, TransformHistogramEventArgs e)
+        public virtual Task OnEventHandler(object publisher, TransformHistogramEventArgs e)
         {
-           
+            return Task.CompletedTask;
         }
 
-        public virtual async Task OnEventHandler(object publisher, ShuffleEventArgs e)
+        public virtual Task OnEventHandler(object publisher, ShuffleEventArgs e)
         {
-       
+            return Task.CompletedTask;
         }
 
-        public virtual async Task OnEventHandler(object publisher, BuildRandomVariableFunctionEventArgs e)
+        public virtual Task OnEventHandler(object publisher, BuildRandomVariableFunctionEventArgs e)
         {
-           
+            return Task.CompletedTask;
         }
 
-        public virtual async Task OnEventHandler(object publisher, ShowQualityMeasureMenuEventArgs e)
+        public virtual Task OnEventHandler(object publisher, ShowQualityMeasureMenuEventArgs e)
         {
-           
+            return Task.CompletedTask;
         }
 
-        public virtual async Task OnEventHandler(object publisher, GetRandomVariableInfoEventArgs e)
+        public virtual Task OnEventHandler(object publisher, GetRandomVariableInfoEventArgs e)
         {
-            
+            return Task.CompletedTask;
         }
 
-        public virtual async Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
+        public virtual Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
-            
+            return Task.CompletedTask;
         }
 
-        public virtual async Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
+        public virtual Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
         {
-            
+            return Task.CompletedTask;
         }
 
-        public virtual async Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
+        public virtual Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
         {
-            
+            return Task.CompletedTask;
         }
     }
 }

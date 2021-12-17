@@ -1,13 +1,13 @@
 using System.Threading.Tasks;
 
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Transformation.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.TransformationArgs;
 using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.ServiceLayer.Providers.Transformation.Interface;
-using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
-using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
@@ -20,14 +20,14 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
     {
         private readonly TransformationPresenter _presenter;
 
-        public ILoggerService Logger { get; }
-        public IAsyncOperationLocker Locker { get; }
-        public ITransformationProvider Provider { get; }
+        public ILoggerServiceWrapper Logger { get; }
+        public IAsyncOperationLockerWrapper Locker { get; }
+        public ITransformationProviderWrapper Provider { get; }
 
         public TransformationPresenterWrapper(
-            ITransformationProvider provider,
-            IAsyncOperationLocker locker,
-            ILoggerService logger)
+            ITransformationProviderWrapper provider,
+            IAsyncOperationLockerWrapper locker,
+            ILoggerServiceWrapper logger)
         {
             Logger = logger;
             Locker = locker;

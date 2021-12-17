@@ -1,6 +1,12 @@
-using System.Drawing;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Rotation.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Scaling.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Cache.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.NonBlockDialog.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Pipeline.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Container;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.FileDialog;
@@ -8,13 +14,6 @@ using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Show;
 using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.ServiceLayer.Providers.Rotation.Interface;
-using ImageProcessing.App.ServiceLayer.Providers.Scaling.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
-using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
-using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog;
-using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
-using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
@@ -39,22 +38,22 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
 
         private readonly MainPresenter _presenter;
 
-        public ICacheService<Bitmap> Cache { get; }
-        public INonBlockDialogService Dialog { get; }
-        public IAwaitablePipeline Pipeline { get; }
-        public IAsyncOperationLocker Locker { get; }
-        public IScalingProvider Scaling { get; }
-        public IRotationProvider Rotation { get; }
+        public ICacheServiceWrapper Cache { get; }
+        public INonBlockDialogServiceWrapper Dialog { get; }
+        public IAwaitablePipelineServiceWrapper Pipeline { get; }
+        public IAsyncOperationLockerWrapper Locker { get; }
+        public IScalingProviderWrapper Scaling { get; }
+        public IRotationProviderWrapper Rotation { get; }
 
          
         public MainPresenterWrapper(
-            ICacheService<Bitmap> cache,
-            INonBlockDialogService dialog,
-            IAwaitablePipeline pipeline,
-            IAsyncOperationLocker locker,
-            ILoggerService logger,
-            IScalingProvider scaling,
-            IRotationProvider rotation) 
+            ICacheServiceWrapper cache,
+            INonBlockDialogServiceWrapper dialog,
+            IAwaitablePipelineServiceWrapper pipeline,
+            IAsyncOperationLockerWrapper locker,
+            ILoggerServiceWrapper logger,
+            IScalingProviderWrapper scaling,
+            IRotationProviderWrapper rotation) 
         {
             Cache = cache;
             Dialog = dialog;
