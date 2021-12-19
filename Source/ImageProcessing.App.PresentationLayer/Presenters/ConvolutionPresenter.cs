@@ -20,10 +20,8 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 namespace ImageProcessing.App.PresentationLayer.Presenters
 {
     internal sealed class ConvolutionPresenter : BasePresenter<IConvolutionView, BitmapViewModel>,
-          ISubscriber<ApplyConvolutionKernelEventArgs>,
-          ISubscriber<ShowTooltipOnErrorEventArgs>,
-          ISubscriber<ContainerUpdatedEventArgs>,
-          ISubscriber<RestoreFocusEventArgs>,
+          ISubscriber<ApplyConvolutionKernelEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
+          ISubscriber<ContainerUpdatedEventArgs>, ISubscriber<RestoreFocusEventArgs>,
           ISubscriber<FormIsClosedEventArgs>
     {
         private readonly ILoggerService _logger;

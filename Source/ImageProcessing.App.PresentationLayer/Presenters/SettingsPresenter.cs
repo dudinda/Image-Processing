@@ -13,10 +13,8 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 namespace ImageProcessing.App.PresentationLayer.Presenters
 {
     internal sealed class SettingsPresenter : BasePresenter<ISettingsView>,
-        ISubscriber<ChangeLumaEventArgs>,
-        ISubscriber<ChangeRotationEventArgs>,
-        ISubscriber<ChangeScalingEventArgs>,
-        ISubscriber<FormIsClosedEventArgs>
+        ISubscriber<ChangeLumaEventArgs>, ISubscriber<ChangeRotationEventArgs>,
+        ISubscriber<ChangeScalingEventArgs>, ISubscriber<FormIsClosedEventArgs>
     {
         private readonly ILoggerService _logger;
         private readonly IAppSettings _settings;

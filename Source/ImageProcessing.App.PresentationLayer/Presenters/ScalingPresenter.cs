@@ -19,10 +19,8 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 namespace ImageProcessing.App.PresentationLayer.Presenters
 {
     internal sealed class ScalingPresenter : BasePresenter<IScalingView, BitmapViewModel>,
-        ISubscriber<ScaleEventArgs>,
-        ISubscriber<ShowTooltipOnErrorEventArgs>,
-        ISubscriber<ContainerUpdatedEventArgs>,
-        ISubscriber<RestoreFocusEventArgs>,
+        ISubscriber<ScaleEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
+        ISubscriber<ContainerUpdatedEventArgs>, ISubscriber<RestoreFocusEventArgs>,
         ISubscriber<FormIsClosedEventArgs>
 
     {

@@ -19,10 +19,8 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 namespace ImageProcessing.App.PresentationLayer.Presenters
 {
     internal sealed class RotationPresenter : BasePresenter<IRotationView, BitmapViewModel>,
-        ISubscriber<RotateEventArgs>,
-        ISubscriber<ShowTooltipOnErrorEventArgs>,
-        ISubscriber<ContainerUpdatedEventArgs>,
-        ISubscriber<RestoreFocusEventArgs>,
+        ISubscriber<RotateEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
+        ISubscriber<ContainerUpdatedEventArgs>, ISubscriber<RestoreFocusEventArgs>,
         ISubscriber<FormIsClosedEventArgs>
 
     {

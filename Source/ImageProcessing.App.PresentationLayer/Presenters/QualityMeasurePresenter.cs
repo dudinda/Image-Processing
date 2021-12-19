@@ -1,5 +1,3 @@
-using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.PresentationLayer.ViewModels;
@@ -25,29 +23,22 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         }
 
         public override void Run(QualityMeasureViewModel vm)
-            => DoWorkBeforeShow(vm);  
-        
+            => DoWorkBeforeShow(vm);
+
         private async Task DoWorkBeforeShow(QualityMeasureViewModel vm)
         {
-            try
+            var chart = View.DataChart;
+
+            var map = await Task.Run(
+                () => _quality.BuildIntervals(vm.Queue)
+            ).ConfigureAwait(true);
+
+            foreach (var pair in map)
             {
-                var chart = View.DataChart;
-
-                var map = await Task.Run(
-                    () => _quality.BuildIntervals(vm.Queue)
-                ).ConfigureAwait(true);
-
-                foreach (var pair in map)
-                {
-                    chart.Series[pair.Key] = pair.Value;
-                }
-
-                View.Show();
+                chart.Series[pair.Key] = pair.Value;
             }
-            catch(Exception ex)
-            {
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
-            }
+
+            View.Show();
         }
     }
 }

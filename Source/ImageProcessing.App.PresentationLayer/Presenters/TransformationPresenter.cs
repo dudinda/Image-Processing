@@ -19,10 +19,8 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 namespace ImageProcessing.App.PresentationLayer.Presenters
 {
     internal sealed class TransformationPresenter : BasePresenter<ITransformationView, BitmapViewModel>,
-        ISubscriber<ApplyTransformationEventArgs>,
-        ISubscriber<ContainerUpdatedEventArgs>,
-        ISubscriber<RestoreFocusEventArgs>,
-        ISubscriber<FormIsClosedEventArgs>
+        ISubscriber<ApplyTransformationEventArgs>, ISubscriber<ContainerUpdatedEventArgs>,
+        ISubscriber<RestoreFocusEventArgs>, ISubscriber<FormIsClosedEventArgs>
     {
         private readonly ILoggerService _logger;
         private readonly IAsyncOperationLocker _locker;

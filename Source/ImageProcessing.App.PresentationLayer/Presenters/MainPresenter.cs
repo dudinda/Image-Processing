@@ -425,9 +425,18 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             return Task.CompletedTask;
         }
 
-        public async Task OnEventHandler(object publisher, FormIsClosedEventArgs e)
+        public Task OnEventHandler(object publisher, FormIsClosedEventArgs e)
         {
-            Controller.Dispose();
+            try
+            {
+                Controller.Dispose();
+            }
+            catch(Exception ex)
+            {
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+            }
+
+            return Task.CompletedTask;
         }
 
         private void RenderBlock(Bitmap bmp, ImageContainer to, UndoRedoAction action)

@@ -22,14 +22,10 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 namespace ImageProcessing.App.PresentationLayer.Presenters
 {
     internal sealed class DistributionPresenter : BasePresenter<IDistributionView, BitmapViewModel>,
-        ISubscriber<TransformHistogramEventArgs>,
-        ISubscriber<ShuffleEventArgs>,
-        ISubscriber<BuildRandomVariableFunctionEventArgs>,
-        ISubscriber<ShowQualityMeasureMenuEventArgs>,
-        ISubscriber<GetRandomVariableInfoEventArgs>,
-        ISubscriber<ShowTooltipOnErrorEventArgs>,
-        ISubscriber<RestoreFocusEventArgs>,
-        ISubscriber<ContainerUpdatedEventArgs>,
+        ISubscriber<TransformHistogramEventArgs>, ISubscriber<ShuffleEventArgs>,
+        ISubscriber<BuildRandomVariableFunctionEventArgs>, ISubscriber<ShowQualityMeasureMenuEventArgs>,
+        ISubscriber<GetRandomVariableInfoEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
+        ISubscriber<RestoreFocusEventArgs>, ISubscriber<ContainerUpdatedEventArgs>,
         ISubscriber<FormIsClosedEventArgs>
     {
         private readonly IBitmapService _service;

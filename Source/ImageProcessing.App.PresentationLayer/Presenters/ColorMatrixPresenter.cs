@@ -21,12 +21,9 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 namespace ImageProcessing.App.PresentationLayer.Presenters
 {
     internal sealed class ColorMatrixPresenter : BasePresenter<IColorMatrixView, BitmapViewModel>,
-        ISubscriber<ApplyColorMatrixEventArgs>,
-        ISubscriber<ContainerUpdatedEventArgs>,
-        ISubscriber<CustomColorMatrixEventArgs>,
-        ISubscriber<ChangeColorMatrixEventArgs>,
-        ISubscriber<ApplyCustomColorMatrixEventArgs>,
-        ISubscriber<RestoreFocusEventArgs>,
+        ISubscriber<ApplyColorMatrixEventArgs>, ISubscriber<ContainerUpdatedEventArgs>,
+        ISubscriber<CustomColorMatrixEventArgs>, ISubscriber<ChangeColorMatrixEventArgs>,
+        ISubscriber<ApplyCustomColorMatrixEventArgs>, ISubscriber<RestoreFocusEventArgs>,
         ISubscriber<FormIsClosedEventArgs>
     {
         private readonly IRgbProvider _provider;
