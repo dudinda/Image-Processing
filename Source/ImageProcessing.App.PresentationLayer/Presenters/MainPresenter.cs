@@ -101,9 +101,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             {
                 if (!View.ImageIsDefault(ImageContainer.Source))
                 {
-                    var copy = await GetImageCopy(
-                        ImageContainer.Source
-                    ).ConfigureAwait(true);
+                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
 
                     await _dialog.NonBlockSaveAs(copy,
                          ConfigurationManager.AppSettings[AppSettingsKeys.Filters]
@@ -124,9 +122,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             {
                 if (!View.ImageIsDefault(ImageContainer.Source))
                 {
-                    var copy = await GetImageCopy(
-                        ImageContainer.Source
-                    ).ConfigureAwait(true);
+                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
 
                     await Task.Run(
                         () => copy.SaveByPath(View.GetPathToFile())
@@ -147,9 +143,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             {
                 if (!View.ImageIsDefault(ImageContainer.Source))
                 {
-                    var copy = await GetImageCopy(
-                       ImageContainer.Source
-                   ).ConfigureAwait(true);
+                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
 
                     Controller.Run<RgbPresenter, BitmapViewModel>(
                         new BitmapViewModel(copy));
@@ -169,9 +163,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             {
                 if (!View.ImageIsDefault(ImageContainer.Source))
                 {
-                    var copy = await GetImageCopy(
-                       ImageContainer.Source
-                   ).ConfigureAwait(true);
+                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
 
                     Controller.Run<ScalingPresenter, BitmapViewModel>(
                         new BitmapViewModel(copy));
@@ -191,9 +183,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             {
                 if (!View.ImageIsDefault(ImageContainer.Source))
                 {
-                    var copy = await GetImageCopy(
-                       ImageContainer.Source
-                   ).ConfigureAwait(true);
+                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
 
                     Controller.Run<RotationPresenter, BitmapViewModel>(
                         new BitmapViewModel(copy));
@@ -213,9 +203,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             {
                 if (!View.ImageIsDefault(ImageContainer.Source))
                 {
-                    var copy = await GetImageCopy(
-                       ImageContainer.Source
-                   ).ConfigureAwait(true);
+                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
 
                     Controller.Run<DistributionPresenter, BitmapViewModel>(
                         new BitmapViewModel(copy));
@@ -235,9 +223,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             {
                 if (!View.ImageIsDefault(ImageContainer.Source))
                 {
-                    var copy = await GetImageCopy(
-                        ImageContainer.Source
-                    ).ConfigureAwait(true);
+                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
 
                     Controller.Run<ConvolutionPresenter, BitmapViewModel>(
                         new BitmapViewModel(copy));
@@ -257,9 +243,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             {
                 if (!View.ImageIsDefault(ImageContainer.Source))
                 {
-                    var copy = await GetImageCopy(
-                        ImageContainer.Source
-                    ).ConfigureAwait(true);
+                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
 
                     Controller.Run<TransformationPresenter, BitmapViewModel>(
                         new BitmapViewModel(copy));
@@ -293,14 +277,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             try
             {
-                if (!View.ImageIsDefault(ImageContainer.Source))
+                if (!View.ImageIsDefault(ImageContainer.Source) && e.Block is IPipelineBlock block)
                 {
-                    if (e.Block is IPipelineBlock block)
-                    {
-                        await Render(block).ConfigureAwait(true);
+                    await Render(block).ConfigureAwait(true);
 
-                        Aggregator.PublishFrom(publisher, new RestoreFocusEventArgs());
-                    }
+                    Aggregator.PublishFrom(publisher, new RestoreFocusEventArgs());
                 }
             }
             catch (OperationCanceledException ex)
@@ -326,12 +307,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
 
                 if (!View.ImageIsDefault(from))
                 {
-                    var copy = await GetImageCopy(from)
-                        .ConfigureAwait(true);
+                    var copy = await GetImageCopy(from).ConfigureAwait(true);
 
-                    await Render(
-                        new PipelineBlock(copy), to
-                    ).ConfigureAwait(true);
+                    await Render(new PipelineBlock(copy), to).ConfigureAwait(true);
                   
                     Aggregator.PublishFromAll(publisher,
                         new ContainerUpdatedEventArgs(to, copy));
@@ -396,9 +374,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 var action = e.Action == UndoRedoAction.Redo ?
                    UndoRedoAction.Undo : UndoRedoAction.Redo;
                  
-                await Render(
-                    new PipelineBlock(copy), to, action
-                ).ConfigureAwait(true);
+                await Render(new PipelineBlock(copy), to, action).ConfigureAwait(true);
 
                 Aggregator.PublishFromAll(publisher,
                     new ContainerUpdatedEventArgs(to, copy));

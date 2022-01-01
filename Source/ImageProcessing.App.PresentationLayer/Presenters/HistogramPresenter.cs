@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Win.Services.Histogram.Interface;
-using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters
@@ -11,14 +10,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
     internal sealed class HistogramPresenter
         : BasePresenter<IHistogramView, HistogramViewModel>
     {
-        private readonly ILoggerService _logger;
         private readonly IHistogramService _service;
 
         public HistogramPresenter(
-            IHistogramService service,
-            ILoggerService logger) 
+            IHistogramService service) 
         {
-            _logger = logger;
             _service = service;
         }
 
