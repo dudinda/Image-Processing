@@ -45,9 +45,12 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.ToolBarMenu = new System.Windows.Forms.ToolStrip();
             this.UndoBtn = new System.Windows.Forms.ToolStripButton();
             this.RedoBtn = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ReplaceSrcByDst = new System.Windows.Forms.ToolStripButton();
             this.ReplaceDstBySrc = new System.Windows.Forms.ToolStripButton();
             this.PathToImage = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.SelectionBtn = new System.Windows.Forms.ToolStripButton();
             this.PictureBoxSrcPanel = new System.Windows.Forms.Panel();
             this.Src = new System.Windows.Forms.PictureBox();
             this.TrackBarSrcPanel = new System.Windows.Forms.Panel();
@@ -193,9 +196,12 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.ToolBarMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.UndoBtn,
             this.RedoBtn,
+            this.toolStripSeparator1,
             this.ReplaceSrcByDst,
             this.ReplaceDstBySrc,
-            this.PathToImage});
+            this.PathToImage,
+            this.toolStripSeparator2,
+            this.SelectionBtn});
             this.ToolBarMenu.Location = new System.Drawing.Point(20, 84);
             this.ToolBarMenu.Name = "ToolBarMenu";
             this.ToolBarMenu.Size = new System.Drawing.Size(715, 27);
@@ -206,7 +212,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             // 
             this.UndoBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.UndoBtn.Enabled = false;
-            this.UndoBtn.Image = global::ImageProcessing.App.UILayer.Properties.Resources.Undo_Image;
+            this.UndoBtn.Image = ((System.Drawing.Image)(resources.GetObject("UndoBtn.Image")));
             this.UndoBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.UndoBtn.Name = "UndoBtn";
             this.UndoBtn.Size = new System.Drawing.Size(24, 24);
@@ -216,11 +222,16 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             // 
             this.RedoBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.RedoBtn.Enabled = false;
-            this.RedoBtn.Image = global::ImageProcessing.App.UILayer.Properties.Resources.Redo_Image;
+            this.RedoBtn.Image = ((System.Drawing.Image)(resources.GetObject("RedoBtn.Image")));
             this.RedoBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.RedoBtn.Name = "RedoBtn";
             this.RedoBtn.Size = new System.Drawing.Size(24, 24);
             this.RedoBtn.ToolTipText = "Redo last transformation";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
             // ReplaceSrcByDst
             // 
@@ -248,6 +259,20 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.PathToImage.Size = new System.Drawing.Size(0, 24);
             this.PathToImage.Visible = false;
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
+            // 
+            // SelectionBtn
+            // 
+            this.SelectionBtn.CheckOnClick = true;
+            this.SelectionBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SelectionBtn.Image = ((System.Drawing.Image)(resources.GetObject("SelectionBtn.Image")));
+            this.SelectionBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SelectionBtn.Name = "SelectionBtn";
+            this.SelectionBtn.Size = new System.Drawing.Size(24, 24);
+            // 
             // PictureBoxSrcPanel
             // 
             this.PictureBoxSrcPanel.AutoScroll = true;
@@ -261,7 +286,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             // Src
             // 
             this.Src.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Src.InitialImage = global::ImageProcessing.App.UILayer.Properties.Resources.DefaultImage;
+            this.Src.InitialImage = ((System.Drawing.Image)(resources.GetObject("Src.InitialImage")));
             this.Src.Location = new System.Drawing.Point(3, 3);
             this.Src.Name = "Src";
             this.Src.Size = new System.Drawing.Size(64, 64);
@@ -322,7 +347,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             // Dst
             // 
             this.Dst.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Dst.InitialImage = global::ImageProcessing.App.UILayer.Properties.Resources.DefaultImage;
+            this.Dst.InitialImage = ((System.Drawing.Image)(resources.GetObject("Dst.InitialImage")));
             this.Dst.Location = new System.Drawing.Point(3, 3);
             this.Dst.Name = "Dst";
             this.Dst.Size = new System.Drawing.Size(64, 64);
@@ -468,6 +493,9 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         private ToolStripMenuItem morphologyToolStripMenuItem;
         private PictureBox Src;
         private MetroFramework.Controls.MetroTabControl Tabs;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripButton SelectionBtn;
     }
 }
 

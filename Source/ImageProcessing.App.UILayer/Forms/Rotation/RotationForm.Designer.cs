@@ -124,6 +124,7 @@ namespace ImageProcessing.App.UILayer.Forms.Rotation
             this.Controls.Add(this.ApplyRotation);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.Movable = false;
             this.Name = "RotationForm";
             this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;

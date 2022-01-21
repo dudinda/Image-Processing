@@ -163,6 +163,16 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap SelectionBtn_Image {
+            get {
+                object obj = ResourceManager.GetObject("SelectionBtn.Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap ShuffleSrc_Image {
             get {
                 object obj = ResourceManager.GetObject("ShuffleSrc.Image", resourceCulture);

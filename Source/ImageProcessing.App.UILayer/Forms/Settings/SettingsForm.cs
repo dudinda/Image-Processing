@@ -32,6 +32,7 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
 
             TopLevel = false;
             Dock = DockStyle.Fill;
+            AutoSize = false;
             Parent = _tab;
 
             _tab.Controls.Add(this);
@@ -94,6 +95,11 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
             _main.TabsCtrl.TabPages.RemoveAt(idx);
 
             base.Hide();
+        }
+
+        protected override void OnResize(System.EventArgs e)
+        {
+            base.OnResize(e);
         }
 
         /// <summary>

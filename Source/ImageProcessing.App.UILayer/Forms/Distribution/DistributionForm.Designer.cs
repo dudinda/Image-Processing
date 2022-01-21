@@ -42,7 +42,10 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             this.QualityMeasure = new ImageProcessing.App.UILayer.Control.QualityMeasureToolStripButton();
             this.DistributionsComboBox = new MetroFramework.Controls.MetroComboBox();
             this.Transform = new MetroFramework.Controls.MetroButton();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.selectedAreaControl1 = new ImageProcessing.App.UILayer.Controls.SelectedAreaControl();
             this.ToolBarMenu.SuspendLayout();
+            this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ToolBarMenu
@@ -65,7 +68,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             this.PathToImage,
             this.ShuffleSrc,
             this.QualityMeasure});
-            this.ToolBarMenu.Location = new System.Drawing.Point(20, 95);
+            this.ToolBarMenu.Location = new System.Drawing.Point(3, 35);
             this.ToolBarMenu.Name = "ToolBarMenu";
             this.ToolBarMenu.Size = new System.Drawing.Size(478, 27);
             this.ToolBarMenu.Stretch = true;
@@ -193,7 +196,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             // 
             this.DistributionsComboBox.FormattingEnabled = true;
             this.DistributionsComboBox.ItemHeight = 23;
-            this.DistributionsComboBox.Location = new System.Drawing.Point(224, 63);
+            this.DistributionsComboBox.Location = new System.Drawing.Point(207, 3);
             this.DistributionsComboBox.MaxDropDownItems = 100;
             this.DistributionsComboBox.Name = "DistributionsComboBox";
             this.DistributionsComboBox.Size = new System.Drawing.Size(274, 29);
@@ -202,21 +205,46 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             // 
             // Transform
             // 
-            this.Transform.Location = new System.Drawing.Point(17, 63);
+            this.Transform.Location = new System.Drawing.Point(3, 3);
             this.Transform.Name = "Transform";
             this.Transform.Size = new System.Drawing.Size(201, 29);
             this.Transform.TabIndex = 1;
             this.Transform.Text = "Transform";
             this.Transform.UseSelectable = true;
             // 
+            // metroPanel1
+            // 
+            this.metroPanel1.Controls.Add(this.selectedAreaControl1);
+            this.metroPanel1.Controls.Add(this.DistributionsComboBox);
+            this.metroPanel1.Controls.Add(this.ToolBarMenu);
+            this.metroPanel1.Controls.Add(this.Transform);
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(23, 63);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(874, 131);
+            this.metroPanel1.TabIndex = 7;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
+            // selectedAreaControl1
+            // 
+            this.selectedAreaControl1.Location = new System.Drawing.Point(484, 3);
+            this.selectedAreaControl1.Margin = new System.Windows.Forms.Padding(0);
+            this.selectedAreaControl1.Name = "selectedAreaControl1";
+            this.selectedAreaControl1.Size = new System.Drawing.Size(267, 123);
+            this.selectedAreaControl1.TabIndex = 7;
+            this.selectedAreaControl1.UseSelectable = true;
+            // 
             // DistributionForm
             // 
-            this.ClientSize = new System.Drawing.Size(518, 145);
-            this.Controls.Add(this.ToolBarMenu);
-            this.Controls.Add(this.DistributionsComboBox);
-            this.Controls.Add(this.Transform);
+            this.ClientSize = new System.Drawing.Size(922, 214);
+            this.Controls.Add(this.metroPanel1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.Movable = false;
             this.Name = "DistributionForm";
             this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
@@ -224,6 +252,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             this.TopMost = true;
             this.ToolBarMenu.ResumeLayout(false);
             this.ToolBarMenu.PerformLayout();
+            this.metroPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -246,5 +275,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
         private System.Windows.Forms.ToolStripLabel PathToImage;
         private System.Windows.Forms.ToolStripButton ShuffleSrc;
         private Control.QualityMeasureToolStripButton QualityMeasure;
+        private MetroFramework.Controls.MetroPanel metroPanel1;
+        private Controls.SelectedAreaControl selectedAreaControl1;
     }
 }

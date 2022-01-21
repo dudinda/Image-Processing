@@ -28,13 +28,16 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
             this.RotationComboBox = new MetroFramework.Controls.MetroComboBox();
             this.LumaComboBox = new MetroFramework.Controls.MetroComboBox();
             this.ScalingComboBox = new MetroFramework.Controls.MetroComboBox();
+            this.RectangleArea = new ImageProcessing.App.UILayer.Controls.SelectedAreaControl();
+            this.SettingsPanel = new MetroFramework.Controls.MetroPanel();
+            this.SettingsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // LumaLabel
             // 
             this.LumaLabel.AutoSize = true;
             this.LumaLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.LumaLabel.Location = new System.Drawing.Point(455, 60);
+            this.LumaLabel.Location = new System.Drawing.Point(439, 14);
             this.LumaLabel.Name = "LumaLabel";
             this.LumaLabel.Size = new System.Drawing.Size(146, 25);
             this.LumaLabel.TabIndex = 13;
@@ -44,7 +47,7 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
             // 
             this.RotationLabel.AutoSize = true;
             this.RotationLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.RotationLabel.Location = new System.Drawing.Point(239, 60);
+            this.RotationLabel.Location = new System.Drawing.Point(223, 14);
             this.RotationLabel.Name = "RotationLabel";
             this.RotationLabel.Size = new System.Drawing.Size(75, 25);
             this.RotationLabel.TabIndex = 12;
@@ -54,7 +57,7 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
             // 
             this.ScalingLabel.AutoSize = true;
             this.ScalingLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.ScalingLabel.Location = new System.Drawing.Point(23, 60);
+            this.ScalingLabel.Location = new System.Drawing.Point(3, 14);
             this.ScalingLabel.Name = "ScalingLabel";
             this.ScalingLabel.Size = new System.Drawing.Size(66, 25);
             this.ScalingLabel.TabIndex = 11;
@@ -64,7 +67,7 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
             // 
             this.RotationComboBox.FormattingEnabled = true;
             this.RotationComboBox.ItemHeight = 23;
-            this.RotationComboBox.Location = new System.Drawing.Point(239, 88);
+            this.RotationComboBox.Location = new System.Drawing.Point(223, 42);
             this.RotationComboBox.Name = "RotationComboBox";
             this.RotationComboBox.Size = new System.Drawing.Size(210, 29);
             this.RotationComboBox.TabIndex = 10;
@@ -74,7 +77,7 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
             // 
             this.LumaComboBox.FormattingEnabled = true;
             this.LumaComboBox.ItemHeight = 23;
-            this.LumaComboBox.Location = new System.Drawing.Point(455, 88);
+            this.LumaComboBox.Location = new System.Drawing.Point(439, 42);
             this.LumaComboBox.Name = "LumaComboBox";
             this.LumaComboBox.Size = new System.Drawing.Size(210, 29);
             this.LumaComboBox.TabIndex = 9;
@@ -84,31 +87,64 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
             // 
             this.ScalingComboBox.FormattingEnabled = true;
             this.ScalingComboBox.ItemHeight = 23;
-            this.ScalingComboBox.Location = new System.Drawing.Point(23, 88);
+            this.ScalingComboBox.Location = new System.Drawing.Point(3, 42);
             this.ScalingComboBox.Name = "ScalingComboBox";
-            this.ScalingComboBox.Size = new System.Drawing.Size(210, 29);
+            this.ScalingComboBox.Size = new System.Drawing.Size(214, 29);
             this.ScalingComboBox.TabIndex = 8;
             this.ScalingComboBox.UseSelectable = true;
+            // 
+            // RectangleArea
+            // 
+            this.RectangleArea.Location = new System.Drawing.Point(652, 14);
+            this.RectangleArea.Margin = new System.Windows.Forms.Padding(0);
+            this.RectangleArea.Name = "RectangleArea";
+            this.RectangleArea.Size = new System.Drawing.Size(230, 93);
+            this.RectangleArea.TabIndex = 14;
+            this.RectangleArea.UseSelectable = true;
+            // 
+            // SettingsPanel
+            // 
+            this.SettingsPanel.AutoScroll = true;
+            this.SettingsPanel.Controls.Add(this.LumaLabel);
+            this.SettingsPanel.Controls.Add(this.RectangleArea);
+            this.SettingsPanel.Controls.Add(this.ScalingComboBox);
+            this.SettingsPanel.Controls.Add(this.LumaComboBox);
+            this.SettingsPanel.Controls.Add(this.RotationLabel);
+            this.SettingsPanel.Controls.Add(this.ScalingLabel);
+            this.SettingsPanel.Controls.Add(this.RotationComboBox);
+            this.SettingsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SettingsPanel.HorizontalScrollbar = true;
+            this.SettingsPanel.HorizontalScrollbarBarColor = true;
+            this.SettingsPanel.HorizontalScrollbarHighlightOnWheel = false;
+            this.SettingsPanel.HorizontalScrollbarSize = 10;
+            this.SettingsPanel.Location = new System.Drawing.Point(20, 60);
+            this.SettingsPanel.Name = "SettingsPanel";
+            this.SettingsPanel.Size = new System.Drawing.Size(897, 128);
+            this.SettingsPanel.TabIndex = 15;
+            this.SettingsPanel.VerticalScrollbarBarColor = false;
+            this.SettingsPanel.VerticalScrollbarHighlightOnWheel = false;
+            this.SettingsPanel.VerticalScrollbarSize = 10;
             // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(687, 157);
-            this.Controls.Add(this.LumaLabel);
-            this.Controls.Add(this.RotationLabel);
-            this.Controls.Add(this.ScalingLabel);
-            this.Controls.Add(this.RotationComboBox);
-            this.Controls.Add(this.LumaComboBox);
-            this.Controls.Add(this.ScalingComboBox);
+            this.AutoSize = true;
+            this.BackLocation = MetroFramework.Forms.BackLocation.BottomLeft;
+            this.ClientSize = new System.Drawing.Size(937, 208);
+            this.Controls.Add(this.SettingsPanel);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.Movable = false;
             this.Name = "SettingsForm";
+            this.Opacity = 0D;
             this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Settings";
+            this.SettingsPanel.ResumeLayout(false);
+            this.SettingsPanel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -120,5 +156,7 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
         private MetroFramework.Controls.MetroLabel ScalingLabel;
         private MetroFramework.Controls.MetroLabel RotationLabel;
         private MetroFramework.Controls.MetroLabel LumaLabel;
+        private Controls.SelectedAreaControl RectangleArea;
+        private MetroFramework.Controls.MetroPanel SettingsPanel;
     }
 }

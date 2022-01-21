@@ -33,6 +33,7 @@ namespace ImageProcessing.App.UILayer.Forms.Transformation
 
             TopLevel = false;
             Dock = DockStyle.Fill;
+            AutoSize = false;
             Parent = _tab;
 
             _tab.Controls.Add(this);
