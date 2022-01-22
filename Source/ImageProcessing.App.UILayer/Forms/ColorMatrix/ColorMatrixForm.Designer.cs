@@ -28,20 +28,20 @@ namespace ImageProcessing.App.UILayer.Forms.ColorMatrix
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ErrorToolTip = new MetroFramework.Components.MetroToolTip();
-            this.ApplyCustomColorMatrixButton = new MetroFramework.Controls.MetroButton();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.SelectedArea = new ImageProcessing.App.UILayer.Controls.SelectedAreaControl();
+            this.ColorMatrixComboBox = new MetroFramework.Controls.MetroComboBox();
             this.CustomColorMatrix = new MetroFramework.Controls.MetroCheckBox();
+            this.ApplyCustomColorMatrixButton = new MetroFramework.Controls.MetroButton();
+            this.ApplyColorMatrixButton = new MetroFramework.Controls.MetroButton();
             this.ColorMatrixGrid = new MetroFramework.Controls.MetroGrid();
             this.j0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.j1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.j2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.j3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.j4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ApplyColorMatrixButton = new MetroFramework.Controls.MetroButton();
-            this.ColorMatrixComboBox = new MetroFramework.Controls.MetroComboBox();
-            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.selectedAreaControl1 = new ImageProcessing.App.UILayer.Controls.SelectedAreaControl();
-            ((System.ComponentModel.ISupportInitialize)(this.ColorMatrixGrid)).BeginInit();
             this.metroPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ColorMatrixGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // ErrorToolTip
@@ -50,25 +50,72 @@ namespace ImageProcessing.App.UILayer.Forms.ColorMatrix
             this.ErrorToolTip.StyleManager = null;
             this.ErrorToolTip.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
-            // ApplyCustomColorMatrixButton
+            // metroPanel1
             // 
-            this.ApplyCustomColorMatrixButton.Location = new System.Drawing.Point(320, 92);
-            this.ApplyCustomColorMatrixButton.Name = "ApplyCustomColorMatrixButton";
-            this.ApplyCustomColorMatrixButton.Size = new System.Drawing.Size(293, 36);
-            this.ApplyCustomColorMatrixButton.TabIndex = 15;
-            this.ApplyCustomColorMatrixButton.Text = "Apply";
-            this.ApplyCustomColorMatrixButton.UseSelectable = true;
-            this.ApplyCustomColorMatrixButton.Visible = false;
+            this.metroPanel1.Controls.Add(this.SelectedArea);
+            this.metroPanel1.Controls.Add(this.ColorMatrixComboBox);
+            this.metroPanel1.Controls.Add(this.CustomColorMatrix);
+            this.metroPanel1.Controls.Add(this.ApplyCustomColorMatrixButton);
+            this.metroPanel1.Controls.Add(this.ApplyColorMatrixButton);
+            this.metroPanel1.Controls.Add(this.ColorMatrixGrid);
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(23, 52);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(911, 197);
+            this.metroPanel1.TabIndex = 16;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
+            // SelectedArea
+            // 
+            this.SelectedArea.Location = new System.Drawing.Point(619, 29);
+            this.SelectedArea.Margin = new System.Windows.Forms.Padding(0);
+            this.SelectedArea.Name = "SelectedArea";
+            this.SelectedArea.Size = new System.Drawing.Size(267, 118);
+            this.SelectedArea.TabIndex = 22;
+            this.SelectedArea.UseSelectable = true;
+            // 
+            // ColorMatrixComboBox
+            // 
+            this.ColorMatrixComboBox.FormattingEnabled = true;
+            this.ColorMatrixComboBox.ItemHeight = 23;
+            this.ColorMatrixComboBox.Location = new System.Drawing.Point(323, 29);
+            this.ColorMatrixComboBox.Name = "ColorMatrixComboBox";
+            this.ColorMatrixComboBox.Size = new System.Drawing.Size(293, 29);
+            this.ColorMatrixComboBox.TabIndex = 17;
+            this.ColorMatrixComboBox.UseSelectable = true;
             // 
             // CustomColorMatrix
             // 
             this.CustomColorMatrix.AutoSize = true;
-            this.CustomColorMatrix.Location = new System.Drawing.Point(320, 71);
+            this.CustomColorMatrix.Location = new System.Drawing.Point(323, 64);
             this.CustomColorMatrix.Name = "CustomColorMatrix";
             this.CustomColorMatrix.Size = new System.Drawing.Size(134, 15);
-            this.CustomColorMatrix.TabIndex = 14;
+            this.CustomColorMatrix.TabIndex = 20;
             this.CustomColorMatrix.Text = "Custom Color Matrix";
             this.CustomColorMatrix.UseSelectable = true;
+            // 
+            // ApplyCustomColorMatrixButton
+            // 
+            this.ApplyCustomColorMatrixButton.Location = new System.Drawing.Point(323, 85);
+            this.ApplyCustomColorMatrixButton.Name = "ApplyCustomColorMatrixButton";
+            this.ApplyCustomColorMatrixButton.Size = new System.Drawing.Size(293, 36);
+            this.ApplyCustomColorMatrixButton.TabIndex = 21;
+            this.ApplyCustomColorMatrixButton.Text = "Apply";
+            this.ApplyCustomColorMatrixButton.UseSelectable = true;
+            this.ApplyCustomColorMatrixButton.Visible = false;
+            // 
+            // ApplyColorMatrixButton
+            // 
+            this.ApplyColorMatrixButton.Location = new System.Drawing.Point(323, 85);
+            this.ApplyColorMatrixButton.Name = "ApplyColorMatrixButton";
+            this.ApplyColorMatrixButton.Size = new System.Drawing.Size(293, 36);
+            this.ApplyColorMatrixButton.TabIndex = 18;
+            this.ApplyColorMatrixButton.Text = "Apply";
+            this.ApplyColorMatrixButton.UseSelectable = true;
             // 
             // ColorMatrixGrid
             // 
@@ -109,7 +156,7 @@ namespace ImageProcessing.App.UILayer.Forms.ColorMatrix
             this.ColorMatrixGrid.EnableHeadersVisualStyles = false;
             this.ColorMatrixGrid.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.ColorMatrixGrid.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.ColorMatrixGrid.Location = new System.Drawing.Point(21, 36);
+            this.ColorMatrixGrid.Location = new System.Drawing.Point(24, 29);
             this.ColorMatrixGrid.Name = "ColorMatrixGrid";
             this.ColorMatrixGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -124,8 +171,8 @@ namespace ImageProcessing.App.UILayer.Forms.ColorMatrix
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.ColorMatrixGrid.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.ColorMatrixGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ColorMatrixGrid.Size = new System.Drawing.Size(293, 145);
-            this.ColorMatrixGrid.TabIndex = 13;
+            this.ColorMatrixGrid.Size = new System.Drawing.Size(293, 138);
+            this.ColorMatrixGrid.TabIndex = 19;
             // 
             // j0
             // 
@@ -177,53 +224,6 @@ namespace ImageProcessing.App.UILayer.Forms.ColorMatrix
             this.j4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.j4.Width = 50;
             // 
-            // ApplyColorMatrixButton
-            // 
-            this.ApplyColorMatrixButton.Location = new System.Drawing.Point(320, 92);
-            this.ApplyColorMatrixButton.Name = "ApplyColorMatrixButton";
-            this.ApplyColorMatrixButton.Size = new System.Drawing.Size(293, 36);
-            this.ApplyColorMatrixButton.TabIndex = 12;
-            this.ApplyColorMatrixButton.Text = "Apply";
-            this.ApplyColorMatrixButton.UseSelectable = true;
-            // 
-            // ColorMatrixComboBox
-            // 
-            this.ColorMatrixComboBox.FormattingEnabled = true;
-            this.ColorMatrixComboBox.ItemHeight = 23;
-            this.ColorMatrixComboBox.Location = new System.Drawing.Point(320, 36);
-            this.ColorMatrixComboBox.Name = "ColorMatrixComboBox";
-            this.ColorMatrixComboBox.Size = new System.Drawing.Size(293, 29);
-            this.ColorMatrixComboBox.TabIndex = 8;
-            this.ColorMatrixComboBox.UseSelectable = true;
-            // 
-            // metroPanel1
-            // 
-            this.metroPanel1.Controls.Add(this.selectedAreaControl1);
-            this.metroPanel1.Controls.Add(this.ColorMatrixComboBox);
-            this.metroPanel1.Controls.Add(this.CustomColorMatrix);
-            this.metroPanel1.Controls.Add(this.ApplyCustomColorMatrixButton);
-            this.metroPanel1.Controls.Add(this.ApplyColorMatrixButton);
-            this.metroPanel1.Controls.Add(this.ColorMatrixGrid);
-            this.metroPanel1.HorizontalScrollbarBarColor = true;
-            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(23, 52);
-            this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(911, 197);
-            this.metroPanel1.TabIndex = 16;
-            this.metroPanel1.VerticalScrollbarBarColor = true;
-            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 10;
-            // 
-            // selectedAreaControl1
-            // 
-            this.selectedAreaControl1.Location = new System.Drawing.Point(620, 36);
-            this.selectedAreaControl1.Margin = new System.Windows.Forms.Padding(0);
-            this.selectedAreaControl1.Name = "selectedAreaControl1";
-            this.selectedAreaControl1.Size = new System.Drawing.Size(267, 118);
-            this.selectedAreaControl1.TabIndex = 16;
-            this.selectedAreaControl1.UseSelectable = true;
-            // 
             // ColorMatrixForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -237,27 +237,26 @@ namespace ImageProcessing.App.UILayer.Forms.ColorMatrix
             this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
             this.Text = "Color Matrix";
-            ((System.ComponentModel.ISupportInitialize)(this.ColorMatrixGrid)).EndInit();
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ColorMatrixGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
+        private MetroFramework.Components.MetroToolTip ErrorToolTip;
+        private MetroFramework.Controls.MetroPanel metroPanel1;
+        private Controls.SelectedAreaControl SelectedArea;
         private MetroFramework.Controls.MetroComboBox ColorMatrixComboBox;
-        private MetroFramework.Controls.MetroButton ApplyColorMatrixButton;
-        private MetroFramework.Controls.MetroGrid ColorMatrixGrid;
         private MetroFramework.Controls.MetroCheckBox CustomColorMatrix;
         private MetroFramework.Controls.MetroButton ApplyCustomColorMatrixButton;
-        private MetroFramework.Components.MetroToolTip ErrorToolTip;
+        private MetroFramework.Controls.MetroButton ApplyColorMatrixButton;
+        private MetroFramework.Controls.MetroGrid ColorMatrixGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn j0;
         private System.Windows.Forms.DataGridViewTextBoxColumn j1;
         private System.Windows.Forms.DataGridViewTextBoxColumn j2;
         private System.Windows.Forms.DataGridViewTextBoxColumn j3;
         private System.Windows.Forms.DataGridViewTextBoxColumn j4;
-        private MetroFramework.Controls.MetroPanel metroPanel1;
-        private Controls.SelectedAreaControl selectedAreaControl1;
     }
 }

@@ -9,6 +9,7 @@ using ImageProcessing.App.UILayer.FormControl.TrackBar;
 using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Main;
 using ImageProcessing.App.UILayer.Properties;
+using ImageProcessing.App.UILayer.UIModel.Factories.MenuState.Interface;
 using ImageProcessing.Utility.Interop.Wrapper;
 
 using MetroFramework.Controls;
@@ -20,34 +21,27 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         IMainFormExposer, IMainView
     {
         private readonly IMainFormEventBinder _binder;
+        private readonly IMenuStateFactory _state;
 
         private Image? _default;
         private Image? _srcCopy;
-        private Image? _dstCopy;
 
         public MainForm(
-            IMainFormEventBinder binder) : base()
+            IMainFormEventBinder binder,
+            IMenuStateFactory state) : base()
         {
             InitializeComponent();
 
+            _state = state;
             _binder = binder;
+            SetMenuState(MenuBtnState.ImageEmpty);
         }
 
         /// <inheritdoc/>
         public Image? SrcImage
         {
             get => SourceBox.Image;
-            set
-            {
-                if (value?.Tag is string tag &&
-                    tag == nameof(ImageIsDefault))
-                {
-                    _srcCopy = null; SourceBox.Image = null!;
-                    return;
-                }
-
-                SourceBox.Image = value;
-            }
+            set => SourceBox.Image = value;
         }
 
         /// <inheritdoc/>
@@ -59,15 +53,8 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         /// <inheritdoc/>
         public Image? SrcImageCopy
         {
-            get => _srcCopy ??= Default;
+            get => _srcCopy ?? Default;
             set => _srcCopy = value;
-        }
-
-        /// <inheritdoc/>
-        public Image? DstImageCopy
-        {
-            get => _dstCopy ??= Default;
-            set => _dstCopy = value;
         }
 
         /// <inheritdoc/>
@@ -136,7 +123,8 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         public System.Windows.Forms.Control.ControlCollection Control
             => Controls;
 
-        public MetroTabControl TabsCtrl => Tabs;
+        public MetroTabControl TabsCtrl
+            => Tabs;
 
         public ToolStripMenuItem RotationMenuButton
             => RotationMenu;
@@ -217,7 +205,10 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         /// <inheritdoc/>
         public void AddToUndoRedo(Bitmap cpy, UndoRedoAction action)
         {
-            if (ImageIsDefault()) { cpy.Tag = nameof(ImageIsDefault); }
+            if(ImageIsDefault())
+            {
+                cpy.Tag = nameof(ImageIsDefault);
+            }
 
             Write(() =>
             {
@@ -243,6 +234,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             {
                 switch(action)
                 {
+
                     case UndoRedoAction.Redo:
                         var redo = Src.Redo();
                         RedoButton.Enabled = !Src.RedoIsEmpty;
@@ -303,6 +295,27 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        public void SetMenuState(MenuBtnState state)
+        {
+            var menu = _state.Get(state);
+
+            Write(() =>
+            {
+                ConvolutionMenu.Enabled = menu.ConvolutionMenuState;
+                RgbMenu.Enabled = menu.RgbMenuState;
+                SetSourceButton.Enabled = menu.SetSourceImageState;
+                DistributionMenu.Enabled = menu.DistributionMenuState;
+                ScalingMenu.Enabled = menu.SettingsMenuState;
+                RotationMenu.Enabled = menu.RotationMenuState;
+                ScalingMenu.Enabled = menu.ScalingMenuState;
+                AffineTransformationMenu.Enabled = menu.TransformationMenuState;
+                SettingsMenu.Enabled = menu.SettingsMenuState;
+                MorphologyMenu.Enabled = menu.MorphologyMenuState;
+                RotationSrcTrackBar.Enabled = menu.RotationTrackBarState;
+                ZoomSrcTrackBar.Enabled = menu.ScalingTrackBarState;
+            });
         }
     }
 }

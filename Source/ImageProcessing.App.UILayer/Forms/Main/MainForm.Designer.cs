@@ -39,13 +39,13 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.AffineTransformationMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.RotationMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ScalingMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.morphologyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MorphologyMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.SettingsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
             this.ToolBarMenu = new System.Windows.Forms.ToolStrip();
             this.UndoBtn = new System.Windows.Forms.ToolStripButton();
             this.RedoBtn = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.SetSourceButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.PathToImage = new System.Windows.Forms.ToolStripLabel();
             this.SelectionBtn = new System.Windows.Forms.ToolStripButton();
@@ -71,7 +71,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.AffineTransformationMenu,
             this.RotationMenu,
             this.ScalingMenu,
-            this.morphologyToolStripMenuItem,
+            this.MorphologyMenu,
             this.SettingsMenu});
             this.MainMenu.Location = new System.Drawing.Point(20, 60);
             this.MainMenu.Name = "MainMenu";
@@ -148,11 +148,11 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.ScalingMenu.Size = new System.Drawing.Size(57, 20);
             this.ScalingMenu.Text = "Scaling";
             // 
-            // morphologyToolStripMenuItem
+            // MorphologyMenu
             // 
-            this.morphologyToolStripMenuItem.Name = "morphologyToolStripMenuItem";
-            this.morphologyToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
-            this.morphologyToolStripMenuItem.Text = "Morphology";
+            this.MorphologyMenu.Name = "MorphologyMenu";
+            this.MorphologyMenu.Size = new System.Drawing.Size(85, 20);
+            this.MorphologyMenu.Text = "Morphology";
             // 
             // SettingsMenu
             // 
@@ -179,7 +179,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.ToolBarMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.UndoBtn,
             this.RedoBtn,
-            this.toolStripButton1,
+            this.SetSourceButton,
             this.toolStripSeparator1,
             this.PathToImage,
             this.SelectionBtn});
@@ -209,14 +209,15 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.RedoBtn.Size = new System.Drawing.Size(24, 24);
             this.RedoBtn.ToolTipText = "Redo last transformation";
             // 
-            // toolStripButton1
+            // SetSourceButton
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton1.Text = "toolStripButton1";
+            this.SetSourceButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SetSourceButton.Enabled = false;
+            this.SetSourceButton.Image = global::ImageProcessing.App.UILayer.Properties.Resources.ReplaceSource_Image;
+            this.SetSourceButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SetSourceButton.Name = "SetSourceButton";
+            this.SetSourceButton.Size = new System.Drawing.Size(24, 24);
+            this.SetSourceButton.Text = "MainS";
             // 
             // toolStripSeparator1
             // 
@@ -349,7 +350,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         private ToolStripMenuItem AffineTransformationMenu;
         private ToolStripMenuItem RotationMenu;
         private ToolStripMenuItem ScalingMenu;
-        private ToolStripMenuItem morphologyToolStripMenuItem;
+        private ToolStripMenuItem MorphologyMenu;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripButton SelectionBtn;
         private FormControl.TrackBar.RotationTrackBar SrcRotation;
@@ -357,7 +358,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         private MetroFramework.Controls.MetroPanel MainContainer;
         private MetroFramework.Controls.MetroTabControl Tabs;
         private Controls.BitmapWithRulerControl Src;
-        private ToolStripButton toolStripButton1;
+        private ToolStripButton SetSourceButton;
     }
 }
 

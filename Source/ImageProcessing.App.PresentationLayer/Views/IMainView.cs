@@ -43,5 +43,11 @@ namespace ImageProcessing.App.PresentationLayer.Views
         /// Center a picturebox after a scaling.
         /// </summary>
         void SetImageCenter(Size size);
+
+        /// <summary>
+        /// Set the state for the main view buttons.
+        /// </summary>
+        /// <param name="state"></param>
+        void SetMenuState(MenuBtnState state);
     }
 }

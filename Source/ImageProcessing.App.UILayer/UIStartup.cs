@@ -31,6 +31,8 @@ using ImageProcessing.App.UILayer.Forms.Rotation;
 using ImageProcessing.App.UILayer.Forms.Scaling;
 using ImageProcessing.App.UILayer.Forms.Settings;
 using ImageProcessing.App.UILayer.Forms.Transformation;
+using ImageProcessing.App.UILayer.UIModel.Factories.MenuState.Implementation;
+using ImageProcessing.App.UILayer.UIModel.Factories.MenuState.Interface;
 using ImageProcessing.Microkernel.AppConfig;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
@@ -65,7 +67,8 @@ namespace ImageProcessing.App.UILayer
                 .RegisterTransient<ITransformationFormEventBinder, TransformationFormEventBinder>()
                 .RegisterTransient<IRotationFormEventBinder, RotationFormEventBinder>()
                 .RegisterTransient<IScalingFormEventBinder, ScalingFormEventBinder>()
-                .RegisterTransient<IMainFormEventBinder, MainFormEventBinder>();
-        }      
+                .RegisterTransient<IMainFormEventBinder, MainFormEventBinder>()
+                .RegisterTransient<IMenuStateFactory, MenuStateFactory>();
+        }
     }
 }

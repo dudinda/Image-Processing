@@ -153,6 +153,16 @@ namespace ImageProcessing.App.UILayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap ReplaceSource_Image {
+            get {
+                object obj = ResourceManager.GetObject("ReplaceSource.Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap SecondParamLabel_Image {
             get {
                 object obj = ResourceManager.GetObject("SecondParamLabel.Image", resourceCulture);

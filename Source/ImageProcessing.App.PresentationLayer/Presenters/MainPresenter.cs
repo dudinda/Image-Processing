@@ -72,13 +72,15 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                       ConfigurationManager.AppSettings[AppSettingsKeys.Filters]
                   ).ConfigureAwait(true);
 
-                  if (result.Image != null)
-                  {
-                      await Render(publisher,
-                          block: new PipelineBlock(result.Image)
-                              .Add<Bitmap>(
-                                  (bmp) => View.SetPathToFile(result.Path))
-                      ).ConfigureAwait(true);
+                if (result.Image != null)
+                {
+                    await Render(publisher,
+                        block: new PipelineBlock(result.Image)
+                            .Add<Bitmap>(
+                                (bmp) => View.SetPathToFile(result.Path))
+                    ).ConfigureAwait(true);
+
+                    View.SetMenuState(MenuBtnState.ImageLoaded);
                 }
             }
             catch(Exception ex)
@@ -332,11 +334,18 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             try
             {
                 var copy = View.TryUndoRedo(e.Action);
-
                 var action = e.Action == UndoRedoAction.Redo ?
                    UndoRedoAction.Undo : UndoRedoAction.Redo;
-                 
+
+                var tag = copy.Tag?.ToString() ?? string.Empty;
+
                 await Render(publisher, new PipelineBlock(copy), action).ConfigureAwait(true);
+
+                var state = tag.Equals(nameof(View.ImageIsDefault)) ?
+                    MenuBtnState.ImageEmpty : MenuBtnState.ImageLoaded;
+
+                View.SetMenuState(state);
+
 
                 Aggregator.PublishFromAll(publisher, new ContainerUpdatedEventArgs(copy));
             }
@@ -380,16 +389,23 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             lock (_dialog)
             {
-                View.AddToUndoRedo(new Bitmap(View.GetImageCopy()), action);
+                var tag = bmp.Tag?.ToString() ?? string.Empty;
+
+                View.AddToUndoRedo((Bitmap)View.GetImageCopy(), action);
                 View.SetImageCopy(new Bitmap(bmp));
                 View.SetImage(new Bitmap(bmp));
                 View.SetImageCenter(bmp.Size);
                 View.Refresh();
                 View.ResetTrackBarValue();
 
-                Aggregator.PublishFromAll(publisher,
-                    new ContainerUpdatedEventArgs(new Bitmap(View.GetImageCopy())));
-            }          
+                if(tag.Equals(nameof(View.ImageIsDefault)))
+                {
+                    View.GetImageCopy().Tag = bmp.Tag;
+                }
+
+                Aggregator.PublishFromAll(publisher, new ContainerUpdatedEventArgs(bmp));
+
+            }
         }
 
         private void PaintBlock(Bitmap bmp)
