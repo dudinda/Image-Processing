@@ -24,7 +24,7 @@
 <p>The original purpose was to research the possible advantages of grayscale images contrast optimization using a normal distribution regarding a uniform distribution. Two parameters such as the expectation and std allow to control relative luminance and contrast, respectively.</p>
 
 <p align="center">
-    <img src="https://i.imgur.com/aRBtlvJ.png" width="900" height = "800" alt="application window">
+    <img src="https://i.imgur.com/zY4w7OZ.png" width="900" height = "800" alt="application window">
     <p align="center">Fig. 1 - The main view and transient views as tabs. The opened settings tab is a singleton view. The frame is taken from "Thomas the Tank Engine" series.</p>
 </p>
 <br/><br/>
