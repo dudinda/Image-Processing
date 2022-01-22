@@ -62,7 +62,7 @@ namespace ImageProcessing.App.UILayer.Controls
 
                 if (yScroll < Padding.Top)
                 {
-                    for (var x = Padding.Left; x < Container.Image.Width - Padding.Right; ++x, ++step)
+                    for (var x = Padding.Left; x < Container.Width + Padding.Left; ++x, ++step)
                     {
                         if (step % 100 == 0)
                         {
@@ -89,7 +89,7 @@ namespace ImageProcessing.App.UILayer.Controls
 
                 if (xScroll < Padding.Left)
                 {
-                    for (var y = Padding.Top; y < Container.Image.Height - Padding.Bottom; ++y, ++step)
+                    for (var y = Padding.Top; y < Container.Height + Padding.Top; ++y, ++step)
                     {
                         if (step % 100 == 0)
                         {

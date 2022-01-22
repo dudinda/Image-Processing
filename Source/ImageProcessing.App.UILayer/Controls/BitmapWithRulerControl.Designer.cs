@@ -36,6 +36,7 @@ namespace ImageProcessing.App.UILayer.Controls
             // SourceContainer
             // 
             this.SourceContainer.Location = new System.Drawing.Point(40, 40);
+            this.SourceContainer.Margin = new System.Windows.Forms.Padding(0);
             this.SourceContainer.Name = "SourceContainer";
             this.SourceContainer.Size = new System.Drawing.Size(200, 200);
             this.SourceContainer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
