@@ -89,12 +89,26 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation
             {
                 case (Keys.Left):
 
-                   
+                    if (view.TabsCtrl.SelectedIndex > 0)
+                    {
+                        view.TabsCtrl.SelectedIndex--;
+                        return true;
+                    }
+
+                    view.TabsCtrl.SelectedIndex = view.TabsCtrl.TabCount - 1;
+
                     return true;
 
                 case (Keys.Right):
 
-                  
+                    if (view.TabsCtrl.SelectedIndex < view.TabsCtrl.TabCount - 1)
+                    {
+                        view.TabsCtrl.SelectedIndex++;
+                        return true;
+                    }
+
+                    view.TabsCtrl.SelectedIndex = 0;
+
                     return true;
 
                 case (Keys.Z | Keys.Control):

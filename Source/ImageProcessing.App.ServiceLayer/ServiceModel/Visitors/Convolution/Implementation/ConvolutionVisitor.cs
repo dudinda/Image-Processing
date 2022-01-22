@@ -30,7 +30,7 @@ namespace ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Convolution.Imp
                    ConvKernel.LaplacianOperator3x3);
 
         public Bitmap Operator(Bitmap bmp, ConvKernel filter)
-        => _convolution.Convolution(bmp, _factory.Get(filter)));
+        => _convolution.Convolution(bmp, _factory.Get(filter));
 
         public Bitmap SobelOverator3x3(Bitmap bmp)
         {

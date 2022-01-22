@@ -38,7 +38,7 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Rgb.Implementation
 
         /// <inheritdoc/>
         public Bitmap Apply(Bitmap bmp, ClrMatrix matrix)
-            => _service.Apply(bmp, _matrix.Get(matrix).Matrix));
+            => _service.Apply(bmp, _matrix.Get(matrix).Matrix);
 
         /// <inheritdoc/>
         public Bitmap Apply(Bitmap bmp, ReadOnly2DArray<double> matrix)
