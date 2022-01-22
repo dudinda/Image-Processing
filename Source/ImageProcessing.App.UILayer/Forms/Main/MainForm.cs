@@ -1,16 +1,13 @@
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.Control;
-using ImageProcessing.App.UILayer.FormCommands.Main;
 using ImageProcessing.App.UILayer.FormControl.TrackBar;
 using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Main;
-using ImageProcessing.App.UILayer.FormModel.Factory.MainFormRotation.Interface;
-using ImageProcessing.App.UILayer.FormModel.Factory.MainFormZoom.Interface;
-using ImageProcessing.App.UILayer.FormModel.MainFormUndoRedo.Interface;
 using ImageProcessing.App.UILayer.Properties;
 using ImageProcessing.Utility.Interop.Wrapper;
 
@@ -23,62 +20,33 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         IMainFormExposer, IMainView
     {
         private readonly IMainFormEventBinder _binder;
-        private readonly IMainFormContainerFactory _container;
-        private readonly IMainFormUndoRedoFactory _undoRedo;
-        private readonly IMainFormZoomFactory _zoom;
-        private readonly IMainFormRotationFactory _rotation;
 
         private Image? _default;
         private Image? _srcCopy;
         private Image? _dstCopy;
 
         public MainForm(
-            IMainFormEventBinder binder,
-            IMainFormContainerFactory container,
-            IMainFormUndoRedoFactory  undoRedo,
-            IMainFormZoomFactory zoom,
-            IMainFormRotationFactory rotation) : base()
+            IMainFormEventBinder binder) : base()
         {
             InitializeComponent();
-            
-            _zoom = zoom;
+
             _binder = binder;
-            _undoRedo = undoRedo;
-            _rotation = rotation;
-            _container = container;
         }
 
         /// <inheritdoc/>
         public Image? SrcImage
         {
-            get => Src.Image;
+            get => SourceBox.Image;
             set
             {
                 if (value?.Tag is string tag &&
                     tag == nameof(ImageIsDefault))
                 {
-                    _srcCopy = null; Src.Image = null!;
+                    _srcCopy = null; SourceBox.Image = null!;
                     return;
                 }
 
-                Src.Image = value;
-            }
-        }
-
-        /// <inheritdoc/>
-        public Image? DstImage
-        {
-            get => Dst.Image;
-            set
-            {
-                if (value?.Tag is string tag &&
-                    tag == nameof(ImageIsDefault))
-                {
-                    _dstCopy = null; Dst.Image = null!;
-                    return;
-                }
-
-                Dst.Image = value;
+                SourceBox.Image = value;
             }
         }
 
@@ -115,20 +83,8 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             => SaveFile;
 
         /// <inheritdoc/>
-        public ToolStripButton ReplaceSrcByDstButton
-            => ReplaceSrcByDst;
-
-        /// <inheritdoc/>
-        public ToolStripButton ReplaceDstBySrcButton
-            => ReplaceDstBySrc;
-
-        /// <inheritdoc/>
         public ScaleTrackBar ZoomSrcTrackBar
             => SrcZoom;
-
-        /// <inheritdoc/>
-        public ScaleTrackBar ZoomDstTrackBar
-            => DstZoom;
 
         /// <inheritdoc/>
         public ToolStripMenuItem ConvolutionMenuButton
@@ -146,21 +102,11 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         public ToolStripMenuItem DistributionMenuButton
             => DistributionMenu;
 
-        public UndoRedoSplitContainer SplitContainerCtr
-            => SplitContainer;
-
         /// <inheritdoc/>
         public Image? SourceImage
         {
             get => SrcImage;
             set => SrcImage = value;
-        }
-
-        /// <inheritdoc/>
-        public Image? DestinationImage
-        {
-            get => DstImage;
-            set => DstImage = value;
         }
 
         /// <inheritdoc/>
@@ -177,11 +123,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
 
         /// <inheritdoc/>
         public PictureBox SourceBox
-            => Src;
-
-        /// <inheritdoc/>
-        public PictureBox DestinationBox
-            => Dst;
+            => Src.Container;
 
         /// <inheritdoc/>
         public ToolStripMenuItem SettingsMenuButton
@@ -190,10 +132,6 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         /// <inheritdoc/>
         public RotationTrackBar RotationSrcTrackBar
             => SrcRotation;
-
-        /// <inheritdoc/>
-        public RotationTrackBar RotationDstTrackBar
-            => DstRotation;
 
         public System.Windows.Forms.Control.ControlCollection Control
             => Controls;
@@ -215,16 +153,16 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         }
 
         /// <inheritdoc/>
-        public void SetDefaultImage(ImageContainer container)
-            => _container.Get(container).OnElementExpose(this).SetImage(Default);
+        public void SetDefaultImage()
+            => SourceImage = Default;
 
         /// <inheritdoc/>
-        public double GetZoomFactor(ImageContainer container)
-            => _zoom.Get(container).OnElementExpose(this).GetFactor();
+        public double GetZoomFactor()
+            => ZoomSrcTrackBar.Factor;
 
         /// <inheritdoc/>
-        public double GetRotationFactor(ImageContainer container)
-            => _rotation.Get(container).OnElementExpose(this).GetFactor();
+        public double GetRotationFactor()
+            => RotationSrcTrackBar.Factor;
 
         /// <inheritdoc/>
         public string GetPathToFile()
@@ -240,51 +178,110 @@ namespace ImageProcessing.App.UILayer.Forms.Main
                 CursorPosition.GetCursorPosition()), 2000));
 
         /// <inheritdoc/>
-        public void ResetTrackBarValue(ImageContainer container, int value = 0)
+        public void ResetTrackBarValue(int value = 0)
             => Write(() =>
             {
-                _zoom.Get(container).OnElementExpose(this).ResetTrackBarValue(value);
-                _rotation.Get(container).OnElementExpose(this).ResetTrackBarValue(value);
+                RotationSrcTrackBar.TrackBarValue = value;
+                RotationSrcTrackBar.Enabled = SourceImage != null;
+                RotationSrcTrackBar.Focus();
+
+                ZoomSrcTrackBar.TrackBarValue = value;
+                ZoomSrcTrackBar.Enabled = SourceImage != null;
+                ZoomSrcTrackBar.Focus();
             });
 
         /// <inheritdoc/>
-        public Image GetImageCopy(ImageContainer container)
-            => Read<Image>(() =>_container.Get(container).OnElementExpose(this).GetCopy()!);
+        public Image GetImageCopy()
+            => Read<Image>(() => SrcImageCopy);
 
         /// <inheritdoc/>
-        public void SetImageCopy(ImageContainer container, Image copy)
-            => Write(() => _container.Get(container).OnElementExpose(this).SetCopy(copy));
+        public void SetImageCopy(Image copy)
+            => Write(() => SrcImageCopy = copy);
 
         /// <inheritdoc/>
-        public void SetImage(ImageContainer container, Image image)
-            => Write(() =>_container.Get(container).OnElementExpose(this).SetImage(image));
+        public void SetImage(Image image)
+            => Write(() => SourceImage = image);
 
         /// <inheritdoc/>
-        public bool ImageIsDefault(ImageContainer container)
-            => Read<bool>(() => _container.Get(container).OnElementExpose(this).ImageIsDefault());
+        public bool ImageIsDefault()
+            => Read<bool>(() => SrcImageCopy == DefaultImage);
 
         /// <inheritdoc/>
-        public void Refresh(ImageContainer container)
-            => Write(() => _container.Get(container).OnElementExpose(this).Refresh());
+        public void Refresh()
+            => Write(() => SourceBox.Refresh());
 
         /// <inheritdoc/>
         public void SetCursor(CursorType cursor)
             => Write(() => Application.UseWaitCursor = cursor == CursorType.Wait);
 
         /// <inheritdoc/>
-        public void AddToUndoRedo(ImageContainer to, Bitmap cpy, UndoRedoAction action)
+        public void AddToUndoRedo(Bitmap cpy, UndoRedoAction action)
         {
-            if (ImageIsDefault(to)) { cpy.Tag = nameof(ImageIsDefault); }
+            if (ImageIsDefault()) { cpy.Tag = nameof(ImageIsDefault); }
 
-            Write(() => _undoRedo.Get(action).OnElementExpose(this).Add(to, cpy));
+            Write(() =>
+            {
+                switch (action)
+                {
+                    case UndoRedoAction.Redo:
+                        Src.AddToRedo(cpy);
+                        RedoButton.Enabled = !Src.RedoIsEmpty;
+                        break;
+                    case UndoRedoAction.Undo:
+                        Src.AddToUndo(cpy);
+                        UndoButton.Enabled = !Src.UndoIsEmpty;
+                        break;
+
+                    default: throw new NotSupportedException(nameof(action));
+                }
+            });
         }
 
         /// <inheritdoc/>
-        public (Bitmap, ImageContainer) TryUndoRedo(UndoRedoAction action)
-            => Read<(Bitmap, ImageContainer)>(() => _undoRedo.Get(action).OnElementExpose(this).Pop());
+        public Bitmap TryUndoRedo(UndoRedoAction action)
+            => Read<Bitmap>(() =>
+            {
+                switch(action)
+                {
+                    case UndoRedoAction.Redo:
+                        var redo = Src.Redo();
+                        RedoButton.Enabled = !Src.RedoIsEmpty;
+                        return redo;
+                        break;
+                    case UndoRedoAction.Undo:
+                        var undo = Src.Undo();
+                        UndoButton.Enabled = !Src.UndoIsEmpty;
+                        return undo;
+                        break;
 
-        public void SetImageCenter(ImageContainer to, Size size)
-             => Write(() => _container.Get(to).OnElementExpose(this).SetImageCenter(size));
+                    default: throw new NotSupportedException(nameof(action));
+                }
+            });
+
+        public void SetImageCenter(Size size)
+             => Write(() =>
+             {
+                 if (SourceBox.Parent is Panel panel)
+                 {
+                     var newX = (panel.ClientSize.Width - size.Width) / 2;
+                     var newY = (panel.ClientSize.Height - size.Height) / 2;
+
+                     if (newX > 0 && newY > 0)
+                     {
+                         SourceBox.Location = new Point(newX, newY);
+                     }
+
+                     if (newX > 0 && newY < 0)
+                     {
+                         SourceBox.Location = new Point(newX, 0);
+                     }
+
+                     if (newX < 0 && newY > 0)
+                     {
+                         SourceBox.Location = new Point(0, newY);
+                     }
+                 }
+             });
 
         /// <summary>
         /// Used by the generated <see cref="Dispose(bool)"/> call.
@@ -307,11 +304,6 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
-        }
-
-        private void MainForm_Load(object sender, System.EventArgs e)
-        {
-
         }
     }
 }

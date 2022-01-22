@@ -46,36 +46,17 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.UndoBtn = new System.Windows.Forms.ToolStripButton();
             this.RedoBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.ReplaceSrcByDst = new System.Windows.Forms.ToolStripButton();
-            this.ReplaceDstBySrc = new System.Windows.Forms.ToolStripButton();
             this.PathToImage = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.SelectionBtn = new System.Windows.Forms.ToolStripButton();
-            this.PictureBoxSrcPanel = new System.Windows.Forms.Panel();
-            this.Src = new System.Windows.Forms.PictureBox();
-            this.TrackBarSrcPanel = new System.Windows.Forms.Panel();
-            this.SrcZoom = new ImageProcessing.App.UILayer.Control.ScaleTrackBar();
-            this.SrcRotation = new ImageProcessing.App.UILayer.FormControl.TrackBar.RotationTrackBar();
-            this.PictureBoxDstPanel = new System.Windows.Forms.Panel();
-            this.Dst = new System.Windows.Forms.PictureBox();
-            this.TrackBarDstPanel = new System.Windows.Forms.Panel();
-            this.DstZoom = new ImageProcessing.App.UILayer.Control.ScaleTrackBar();
-            this.DstRotation = new ImageProcessing.App.UILayer.FormControl.TrackBar.RotationTrackBar();
             this.ErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.SplitContainer = new ImageProcessing.App.UILayer.Control.UndoRedoSplitContainer();
+            this.SrcRotation = new ImageProcessing.App.UILayer.FormControl.TrackBar.RotationTrackBar();
+            this.SrcZoom = new ImageProcessing.App.UILayer.Control.ScaleTrackBar();
+            this.MainContainer = new MetroFramework.Controls.MetroPanel();
+            this.Src = new ImageProcessing.App.UILayer.Controls.BitmapWithRulerControl();
             this.Tabs = new MetroFramework.Controls.MetroTabControl();
             this.MainMenu.SuspendLayout();
             this.ToolBarMenu.SuspendLayout();
-            this.PictureBoxSrcPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Src)).BeginInit();
-            this.TrackBarSrcPanel.SuspendLayout();
-            this.PictureBoxDstPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Dst)).BeginInit();
-            this.TrackBarDstPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
-            this.SplitContainer.Panel1.SuspendLayout();
-            this.SplitContainer.Panel2.SuspendLayout();
-            this.SplitContainer.SuspendLayout();
+            this.MainContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainMenu
@@ -197,10 +178,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.UndoBtn,
             this.RedoBtn,
             this.toolStripSeparator1,
-            this.ReplaceSrcByDst,
-            this.ReplaceDstBySrc,
             this.PathToImage,
-            this.toolStripSeparator2,
             this.SelectionBtn});
             this.ToolBarMenu.Location = new System.Drawing.Point(20, 84);
             this.ToolBarMenu.Name = "ToolBarMenu";
@@ -233,36 +211,11 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
-            // ReplaceSrcByDst
-            // 
-            this.ReplaceSrcByDst.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ReplaceSrcByDst.Image = ((System.Drawing.Image)(resources.GetObject("ReplaceSrcByDst.Image")));
-            this.ReplaceSrcByDst.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ReplaceSrcByDst.Name = "ReplaceSrcByDst";
-            this.ReplaceSrcByDst.Size = new System.Drawing.Size(24, 24);
-            this.ReplaceSrcByDst.Tag = "Destination";
-            this.ReplaceSrcByDst.ToolTipText = "Replace source by destination";
-            // 
-            // ReplaceDstBySrc
-            // 
-            this.ReplaceDstBySrc.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ReplaceDstBySrc.Image = ((System.Drawing.Image)(resources.GetObject("ReplaceDstBySrc.Image")));
-            this.ReplaceDstBySrc.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ReplaceDstBySrc.Name = "ReplaceDstBySrc";
-            this.ReplaceDstBySrc.Size = new System.Drawing.Size(24, 24);
-            this.ReplaceDstBySrc.Tag = "Source";
-            this.ReplaceDstBySrc.ToolTipText = "Replace destination by source";
-            // 
             // PathToImage
             // 
             this.PathToImage.Name = "PathToImage";
             this.PathToImage.Size = new System.Drawing.Size(0, 24);
             this.PathToImage.Visible = false;
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
             // 
             // SelectionBtn
             // 
@@ -273,151 +226,70 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.SelectionBtn.Name = "SelectionBtn";
             this.SelectionBtn.Size = new System.Drawing.Size(24, 24);
             // 
-            // PictureBoxSrcPanel
-            // 
-            this.PictureBoxSrcPanel.AutoScroll = true;
-            this.PictureBoxSrcPanel.Controls.Add(this.Src);
-            this.PictureBoxSrcPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PictureBoxSrcPanel.Location = new System.Drawing.Point(0, 0);
-            this.PictureBoxSrcPanel.Name = "PictureBoxSrcPanel";
-            this.PictureBoxSrcPanel.Size = new System.Drawing.Size(353, 371);
-            this.PictureBoxSrcPanel.TabIndex = 4;
-            // 
-            // Src
-            // 
-            this.Src.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Src.InitialImage = ((System.Drawing.Image)(resources.GetObject("Src.InitialImage")));
-            this.Src.Location = new System.Drawing.Point(3, 3);
-            this.Src.Name = "Src";
-            this.Src.Size = new System.Drawing.Size(64, 64);
-            this.Src.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.Src.TabIndex = 2;
-            this.Src.TabStop = false;
-            this.Src.Tag = "Source";
-            // 
-            // TrackBarSrcPanel
-            // 
-            this.TrackBarSrcPanel.Controls.Add(this.SrcZoom);
-            this.TrackBarSrcPanel.Controls.Add(this.SrcRotation);
-            this.TrackBarSrcPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TrackBarSrcPanel.Location = new System.Drawing.Point(0, 371);
-            this.TrackBarSrcPanel.Name = "TrackBarSrcPanel";
-            this.TrackBarSrcPanel.Size = new System.Drawing.Size(353, 61);
-            this.TrackBarSrcPanel.TabIndex = 3;
-            // 
-            // SrcZoom
-            // 
-            this.SrcZoom.BackColor = System.Drawing.Color.Transparent;
-            this.SrcZoom.Dock = System.Windows.Forms.DockStyle.Top;
-            this.SrcZoom.Enabled = false;
-            this.SrcZoom.Location = new System.Drawing.Point(0, 0);
-            this.SrcZoom.Maximum = 200;
-            this.SrcZoom.Minimum = -200;
-            this.SrcZoom.Name = "SrcZoom";
-            this.SrcZoom.Size = new System.Drawing.Size(353, 31);
-            this.SrcZoom.TabIndex = 0;
-            this.SrcZoom.Tag = "Source";
-            this.SrcZoom.TrackBarValue = 0;
-            this.SrcZoom.Value = 0;
-            // 
             // SrcRotation
             // 
             this.SrcRotation.BackColor = System.Drawing.Color.Transparent;
             this.SrcRotation.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.SrcRotation.Enabled = false;
-            this.SrcRotation.Location = new System.Drawing.Point(0, 27);
+            this.SrcRotation.Location = new System.Drawing.Point(0, 367);
             this.SrcRotation.Maximum = 360;
             this.SrcRotation.Minimum = -360;
             this.SrcRotation.Name = "SrcRotation";
-            this.SrcRotation.Size = new System.Drawing.Size(353, 34);
+            this.SrcRotation.Size = new System.Drawing.Size(715, 34);
             this.SrcRotation.TabIndex = 1;
             this.SrcRotation.TrackBarValue = 0;
             this.SrcRotation.Value = 0;
             // 
-            // PictureBoxDstPanel
+            // SrcZoom
             // 
-            this.PictureBoxDstPanel.AutoScroll = true;
-            this.PictureBoxDstPanel.Controls.Add(this.Dst);
-            this.PictureBoxDstPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PictureBoxDstPanel.Location = new System.Drawing.Point(0, 0);
-            this.PictureBoxDstPanel.Name = "PictureBoxDstPanel";
-            this.PictureBoxDstPanel.Size = new System.Drawing.Size(358, 371);
-            this.PictureBoxDstPanel.TabIndex = 5;
+            this.SrcZoom.BackColor = System.Drawing.Color.Transparent;
+            this.SrcZoom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.SrcZoom.Enabled = false;
+            this.SrcZoom.Location = new System.Drawing.Point(0, 401);
+            this.SrcZoom.Maximum = 200;
+            this.SrcZoom.Minimum = -200;
+            this.SrcZoom.Name = "SrcZoom";
+            this.SrcZoom.Size = new System.Drawing.Size(715, 31);
+            this.SrcZoom.TabIndex = 0;
+            this.SrcZoom.Tag = "Source";
+            this.SrcZoom.TrackBarValue = 0;
+            this.SrcZoom.Value = 0;
             // 
-            // Dst
+            // MainContainer
             // 
-            this.Dst.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Dst.InitialImage = ((System.Drawing.Image)(resources.GetObject("Dst.InitialImage")));
-            this.Dst.Location = new System.Drawing.Point(3, 3);
-            this.Dst.Name = "Dst";
-            this.Dst.Size = new System.Drawing.Size(64, 64);
-            this.Dst.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.Dst.TabIndex = 3;
-            this.Dst.TabStop = false;
-            this.Dst.Tag = "Destination";
+            this.MainContainer.Controls.Add(this.Src);
+            this.MainContainer.Controls.Add(this.SrcRotation);
+            this.MainContainer.Controls.Add(this.SrcZoom);
+            this.MainContainer.Controls.Add(this.Tabs);
+            this.MainContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainContainer.HorizontalScrollbarBarColor = true;
+            this.MainContainer.HorizontalScrollbarHighlightOnWheel = false;
+            this.MainContainer.HorizontalScrollbarSize = 10;
+            this.MainContainer.Location = new System.Drawing.Point(20, 111);
+            this.MainContainer.Name = "MainContainer";
+            this.MainContainer.Size = new System.Drawing.Size(715, 678);
+            this.MainContainer.TabIndex = 16;
+            this.MainContainer.VerticalScrollbarBarColor = true;
+            this.MainContainer.VerticalScrollbarHighlightOnWheel = false;
+            this.MainContainer.VerticalScrollbarSize = 10;
             // 
-            // TrackBarDstPanel
+            // Src
             // 
-            this.TrackBarDstPanel.Controls.Add(this.DstZoom);
-            this.TrackBarDstPanel.Controls.Add(this.DstRotation);
-            this.TrackBarDstPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TrackBarDstPanel.Location = new System.Drawing.Point(0, 371);
-            this.TrackBarDstPanel.Name = "TrackBarDstPanel";
-            this.TrackBarDstPanel.Size = new System.Drawing.Size(358, 61);
-            this.TrackBarDstPanel.TabIndex = 4;
-            // 
-            // DstZoom
-            // 
-            this.DstZoom.BackColor = System.Drawing.Color.Transparent;
-            this.DstZoom.Dock = System.Windows.Forms.DockStyle.Top;
-            this.DstZoom.Enabled = false;
-            this.DstZoom.Location = new System.Drawing.Point(0, 0);
-            this.DstZoom.Maximum = 200;
-            this.DstZoom.Minimum = -200;
-            this.DstZoom.Name = "DstZoom";
-            this.DstZoom.Size = new System.Drawing.Size(358, 31);
-            this.DstZoom.TabIndex = 0;
-            this.DstZoom.Tag = "Destination";
-            this.DstZoom.TrackBarValue = 0;
-            this.DstZoom.Value = 0;
-            // 
-            // DstRotation
-            // 
-            this.DstRotation.BackColor = System.Drawing.Color.Transparent;
-            this.DstRotation.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.DstRotation.Enabled = false;
-            this.DstRotation.Location = new System.Drawing.Point(0, 27);
-            this.DstRotation.Maximum = 360;
-            this.DstRotation.Minimum = -360;
-            this.DstRotation.Name = "DstRotation";
-            this.DstRotation.Size = new System.Drawing.Size(358, 34);
-            this.DstRotation.TabIndex = 11;
-            this.DstRotation.TrackBarValue = 0;
-            this.DstRotation.Value = 0;
-            // 
-            // SplitContainer
-            // 
-            this.SplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SplitContainer.Location = new System.Drawing.Point(20, 111);
-            this.SplitContainer.Name = "SplitContainer";
-            // 
-            // SplitContainer.Panel1
-            // 
-            this.SplitContainer.Panel1.Controls.Add(this.PictureBoxSrcPanel);
-            this.SplitContainer.Panel1.Controls.Add(this.TrackBarSrcPanel);
-            // 
-            // SplitContainer.Panel2
-            // 
-            this.SplitContainer.Panel2.Controls.Add(this.PictureBoxDstPanel);
-            this.SplitContainer.Panel2.Controls.Add(this.TrackBarDstPanel);
-            this.SplitContainer.Size = new System.Drawing.Size(715, 432);
-            this.SplitContainer.SplitterDistance = 353;
-            this.SplitContainer.TabIndex = 10;
+            this.Src.AutoScroll = true;
+            this.Src.AutoSize = true;
+            this.Src.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Src.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Src.Location = new System.Drawing.Point(0, 0);
+            this.Src.Name = "Src";
+            this.Src.Padding = new System.Windows.Forms.Padding(40);
+            this.Src.Size = new System.Drawing.Size(715, 367);
+            this.Src.TabIndex = 2;
+            this.Src.UseSelectable = true;
             // 
             // Tabs
             // 
             this.Tabs.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.Tabs.Location = new System.Drawing.Point(20, 543);
+            this.Tabs.Location = new System.Drawing.Point(0, 432);
             this.Tabs.Name = "Tabs";
             this.Tabs.Size = new System.Drawing.Size(715, 246);
             this.Tabs.TabIndex = 14;
@@ -425,35 +297,22 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(755, 809);
-            this.Controls.Add(this.SplitContainer);
+            this.Controls.Add(this.MainContainer);
             this.Controls.Add(this.ToolBarMenu);
             this.Controls.Add(this.MainMenu);
-            this.Controls.Add(this.Tabs);
-            this.IsMdiContainer = true;
             this.MainMenuStrip = this.MainMenu;
             this.Name = "MainForm";
             this.Text = "Image Processing";
             this.TransparencyKey = System.Drawing.Color.Empty;
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.MainMenu.ResumeLayout(false);
             this.MainMenu.PerformLayout();
             this.ToolBarMenu.ResumeLayout(false);
             this.ToolBarMenu.PerformLayout();
-            this.PictureBoxSrcPanel.ResumeLayout(false);
-            this.PictureBoxSrcPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Src)).EndInit();
-            this.TrackBarSrcPanel.ResumeLayout(false);
-            this.PictureBoxDstPanel.ResumeLayout(false);
-            this.PictureBoxDstPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Dst)).EndInit();
-            this.TrackBarDstPanel.ResumeLayout(false);
-            this.SplitContainer.Panel1.ResumeLayout(false);
-            this.SplitContainer.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).EndInit();
-            this.SplitContainer.ResumeLayout(false);
+            this.MainContainer.ResumeLayout(false);
+            this.MainContainer.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -468,34 +327,24 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         private System.Windows.Forms.ToolStripMenuItem ConvolutionMenu;
         private System.Windows.Forms.ToolStrip miniToolStrip;
         private System.Windows.Forms.ToolStrip ToolBarMenu;
-        private System.Windows.Forms.PictureBox Dst;
-        private System.Windows.Forms.ToolStripButton ReplaceSrcByDst;
         private System.Windows.Forms.ToolStripButton UndoBtn;
         private System.Windows.Forms.ToolStripLabel PathToImage;
-        private System.Windows.Forms.ToolStripButton ReplaceDstBySrc;
         private System.Windows.Forms.ToolStripMenuItem SaveFile;
         private ToolTip ErrorToolTip;
-        private Panel PictureBoxSrcPanel;
-        private Panel TrackBarSrcPanel;
-        private Panel PictureBoxDstPanel;
-        private Panel TrackBarDstPanel;
-        private App.UILayer.Control.ScaleTrackBar SrcZoom;
-        private App.UILayer.Control.UndoRedoSplitContainer SplitContainer;
         private ToolStripButton RedoBtn;
-        private App.UILayer.Control.ScaleTrackBar DstZoom;
         private ToolStripMenuItem RgbMenu;
         private ToolStripMenuItem SettingsMenu;
         private ToolStripMenuItem AffineTransformationMenu;
-        private FormControl.TrackBar.RotationTrackBar SrcRotation;
-        private FormControl.TrackBar.RotationTrackBar DstRotation;
         private ToolStripMenuItem RotationMenu;
         private ToolStripMenuItem ScalingMenu;
         private ToolStripMenuItem morphologyToolStripMenuItem;
-        private PictureBox Src;
-        private MetroFramework.Controls.MetroTabControl Tabs;
         private ToolStripSeparator toolStripSeparator1;
-        private ToolStripSeparator toolStripSeparator2;
         private ToolStripButton SelectionBtn;
+        private FormControl.TrackBar.RotationTrackBar SrcRotation;
+        private Control.ScaleTrackBar SrcZoom;
+        private MetroFramework.Controls.MetroPanel MainContainer;
+        private MetroFramework.Controls.MetroTabControl Tabs;
+        private Controls.BitmapWithRulerControl Src;
     }
 }
 

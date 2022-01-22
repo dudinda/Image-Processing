@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.TransformationArgs;
 using ImageProcessing.App.PresentationLayer.Properties;
@@ -72,18 +71,15 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             try
             {
-                if (e.Container == ImageContainer.Source)
-                {            
-                    await _locker.LockOperationAsync(() =>
+                await _locker.LockOperationAsync(() =>
+                {
+                    lock (e.Bmp)
                     {
-                        lock (e.Bmp)
-                        {
-                            ViewModel.Source = new Bitmap(e.Bmp);
-                        }
-                    }).ConfigureAwait(true);
-                }
+                        ViewModel.Source = new Bitmap(e.Bmp);
+                    }
+                }).ConfigureAwait(true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 View.Tooltip(Errors.UpdatingViewModel);
                 _logger.WriteEntry(ex.Message, EventLogEntryType.Error);

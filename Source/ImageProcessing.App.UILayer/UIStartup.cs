@@ -2,7 +2,6 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.PresentationLayer;
 using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.UILayer.FormCommands.Main;
 using ImageProcessing.App.UILayer.FormEventBinders.ColorMatrix.Implementation;
 using ImageProcessing.App.UILayer.FormEventBinders.ColorMatrix.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Implementation;
@@ -21,13 +20,6 @@ using ImageProcessing.App.UILayer.FormEventBinders.Settings.Implementation;
 using ImageProcessing.App.UILayer.FormEventBinders.Settings.Interface;
 using ImageProcessing.App.UILayer.FormEventBinders.Transformation.Implementation;
 using ImageProcessing.App.UILayer.FormEventBinders.Transformation.Interface;
-using ImageProcessing.App.UILayer.FormModel.Factory.MainContainer.Implementation;
-using ImageProcessing.App.UILayer.FormModel.Factory.MainFormRotation.Implementation;
-using ImageProcessing.App.UILayer.FormModel.Factory.MainFormRotation.Interface;
-using ImageProcessing.App.UILayer.FormModel.Factory.MainFormUndoRedo.Implementation;
-using ImageProcessing.App.UILayer.FormModel.Factory.MainFormZoom.Implementation;
-using ImageProcessing.App.UILayer.FormModel.Factory.MainFormZoom.Interface;
-using ImageProcessing.App.UILayer.FormModel.MainFormUndoRedo.Interface;
 using ImageProcessing.App.UILayer.Forms.ColorMatrix;
 using ImageProcessing.App.UILayer.Forms.Convolution;
 using ImageProcessing.App.UILayer.Forms.Distribution;
@@ -73,11 +65,7 @@ namespace ImageProcessing.App.UILayer
                 .RegisterTransient<ITransformationFormEventBinder, TransformationFormEventBinder>()
                 .RegisterTransient<IRotationFormEventBinder, RotationFormEventBinder>()
                 .RegisterTransient<IScalingFormEventBinder, ScalingFormEventBinder>()
-                .RegisterTransient<IMainFormEventBinder, MainFormEventBinder>()
-                .RegisterTransient<IMainFormContainerFactory, MainFormContainerFactory>()
-                .RegisterTransient<IMainFormUndoRedoFactory, MainFormUndoRedoFactory>()
-                .RegisterTransient<IMainFormZoomFactory, MainFormZoomFactory>()
-                .RegisterTransient<IMainFormRotationFactory, MainFormRotationFactory>();
+                .RegisterTransient<IMainFormEventBinder, MainFormEventBinder>();
         }      
     }
 }

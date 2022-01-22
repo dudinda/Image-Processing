@@ -15,10 +15,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.Cache.Implementation
             = new CancellationTokenSource();
 
         private IMemoryCache _cache = new MemoryCache(
-            new MemoryCacheOptions() {
-                SizeLimit = 1 << 6
-            }
-        );
+            new MemoryCacheOptions() { SizeLimit = 32 });
 
         /// <inheritdoc/>
         public virtual TItem GetOrCreate(object key, Func<TItem> createItem)
@@ -28,15 +25,13 @@ namespace ImageProcessing.App.ServiceLayer.Services.Cache.Implementation
             {
                 cacheEntry = createItem();
 
-                var options = new MemoryCacheEntryOptions()
-                    .SetSize(1)
+                var options = new MemoryCacheEntryOptions().SetSize(1)
                     .SetPriority(CacheItemPriority.High)
                     .SetSlidingExpiration(TimeSpan.FromMinutes(10))
                     .SetAbsoluteExpiration(TimeSpan.FromMinutes(20));
 
                 options.AddExpirationToken(
-                    new CancellationChangeToken(_resetToken.Token)
-                );
+                    new CancellationChangeToken(_resetToken.Token));
                 
                 _cache.Set(key, cacheEntry, options);
             }

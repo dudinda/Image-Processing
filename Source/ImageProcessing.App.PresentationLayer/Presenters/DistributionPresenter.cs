@@ -168,16 +168,13 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             try
             {
-                if (e.Container == ImageContainer.Source)
+                await _locker.LockOperationAsync(() =>
                 {
-                    await _locker.LockOperationAsync(() =>
+                    lock (e.Bmp)
                     {
-                        lock (e.Bmp)
-                        {
-                            ViewModel.Source = new Bitmap(e.Bmp);
-                        }
-                    }).ConfigureAwait(true);
-                }
+                        ViewModel.Source = new Bitmap(e.Bmp);
+                    }
+                }).ConfigureAwait(true);
             }
             catch (Exception ex)
             {

@@ -20,11 +20,6 @@ namespace ImageProcessing.App.UILayer.FormExposers.Main
         Image? DefaultImage { get; }
 
         /// <summary>
-        /// Container with the images to undo/redo. 
-        /// </summary>
-        UndoRedoSplitContainer SplitContainerCtr { get; }
-
-        /// <summary>
         /// The destination image.
         /// </summary>
         Image SourceImage { get; set; }
@@ -35,24 +30,9 @@ namespace ImageProcessing.App.UILayer.FormExposers.Main
         Image SrcImageCopy { get; set; }
 
         /// <summary>
-        /// The source image.
-        /// </summary>
-        Image DestinationImage { get; set; }
-
-        /// <summary>
-        /// The destination image copy.
-        /// </summary>
-        Image DstImageCopy { get; set; }
-
-        /// <summary>
         /// The source picture box.
         /// </summary>
         PictureBox SourceBox { get; }
-
-        /// <summary>
-        /// The destination picture box.
-        /// </summary>
-        PictureBox DestinationBox { get; }
 
         /// <summary>
         /// Save as dialog.
@@ -70,34 +50,14 @@ namespace ImageProcessing.App.UILayer.FormExposers.Main
         ToolStripMenuItem SaveFileMenu { get; }
 
         /// <summary>
-        /// Replace a source container image by a destination. 
-        /// </summary>
-        ToolStripButton ReplaceSrcByDstButton { get; }
-
-        /// <summary>
-        /// Replace a destination container image by a source.
-        /// </summary>
-        ToolStripButton ReplaceDstBySrcButton { get; }
-
-        /// <summary>
         /// Zoom a source image.
         /// </summary>
         ScaleTrackBar ZoomSrcTrackBar { get; }
 
         /// <summary>
-        /// Zoom a destination image.
-        /// </summary>
-        ScaleTrackBar ZoomDstTrackBar { get; }
-
-        /// <summary>
         /// Rotate a source image.
         /// </summary>
         RotationTrackBar RotationSrcTrackBar { get; }
-
-        /// <summary>
-        /// Rotate a destination image.
-        /// </summary>
-        RotationTrackBar RotationDstTrackBar { get; }
 
         /// <summary>
         /// Show the convolution control panel.

@@ -70,17 +70,15 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
 
                 var container = ImageContainer.Source;
 
-                view.Received().GetImageCopy(container);
-                view.Received().AddToUndoRedo(container,
+                view.Received().GetImageCopy();
+                view.Received().AddToUndoRedo(
                     Arg.Is<Bitmap>(Res._1920x1080frame), UndoRedoAction.Undo);
-                view.Received().ImageIsDefault(container);
-                view.Received().SetImageCopy(container,
-                    Arg.Any<Bitmap>());
-                view.Received().SetImage(container,
-                    Arg.Any<Bitmap>());
-                view.SetImageCenter(container, Res._1920x1080frame.Size);
-                view.Received().Refresh(container);
-                view.Received().ResetTrackBarValue(container);
+                view.Received().ImageIsDefault();
+                view.Received().SetImageCopy(Arg.Any<Bitmap>());
+                view.Received().SetImage(Arg.Any<Bitmap>());
+                view.SetImageCenter(Res._1920x1080frame.Size);
+                view.Received().Refresh();
+                view.Received().ResetTrackBarValue();
 
                 _presenter.Cache.Received().Reset();
                 _presenter.Pipeline.Received().Any();
@@ -148,53 +146,5 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
                 Arg.Any<SaveWithoutFileDialogEventArgs>());
         }
 
-        [Test]
-        public void ReplaceDestinationImageClick()
-        {
-            _form.OpenFileMenu.PerformClick();
-            _form.ReplaceDstBySrcButton.PerformClick();
-
-            var container = ImageContainer.Source;
-
-            _presenter.Received().OnEventHandler(
-                Arg.Is<object>(arg => arg == _form),
-                Arg.Is<ReplaceImageEventArgs>(arg => arg.Container == container));
-
-            var destination = _form.DstImageCopy as Bitmap;
-            var source = _form.SrcImageCopy as Bitmap;
-
-            Assert.IsTrue(source != null);
-            Assert.IsTrue(destination != null);
-            Assert.IsTrue(_form.DestinationImage != null);
-            Assert.IsTrue(source.SameAs(destination));
-        }
-
-        [Test]
-        public void ReplaceSourceImageClick()
-        {
-            _form.OpenFileMenu.PerformClick();
-            _form.ReplaceDstBySrcButton.PerformClick();
-
-            var view = _form as IMainView;
-
-            var container = ImageContainer.Source;
-
-            view.SetImage(container, Res._2560x1440frame);
-            view.SetImageCopy(container, Res._2560x1440frame);
-
-            _form.ReplaceSrcByDstButton.PerformClick();
-
-            var destination = _form.DstImageCopy as Bitmap;
-            var source = _form.SrcImageCopy as Bitmap;
-
-            Assert.IsTrue(source != null);
-            Assert.IsTrue(destination != null);
-            Assert.IsTrue(_form.SourceImage != null);
-            Assert.IsTrue(source.SameAs(destination));
-
-            _presenter.Received().OnEventHandler(
-                Arg.Is<object>(arg => arg == _form),
-                Arg.Is<ReplaceImageEventArgs>(arg => arg.Container == container));
-        }
     }
 }

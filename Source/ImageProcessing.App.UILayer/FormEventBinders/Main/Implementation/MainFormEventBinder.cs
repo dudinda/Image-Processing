@@ -34,12 +34,6 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation
             source.SaveAsMenu.Click += (sender, args)
                 => _aggregator.PublishFrom(source, new SaveAsFileDialogEventArgs());
 
-            source.ReplaceSrcByDstButton.Click += (sender, args)
-                => _aggregator.PublishFrom(source, new ReplaceImageEventArgs(Destination));
-
-            source.ReplaceDstBySrcButton.Click += (sender, args)
-                => _aggregator.PublishFrom(source, new ReplaceImageEventArgs(Source));
-
             source.ZoomSrcTrackBar.MouseWheel += (sender, args)
                 => _aggregator.PublishFrom(source, new TrackBarEventArgs(Source));
 
@@ -57,24 +51,6 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation
 
             source.RotationSrcTrackBar.KeyPress += (sender, args)
                 => _aggregator.PublishFrom(source, new TrackBarEventArgs(Source));
-
-            source.ZoomDstTrackBar.MouseWheel += (sender, args)
-                => _aggregator.PublishFrom(source, new TrackBarEventArgs(Destination));
-
-            source.ZoomDstTrackBar.MouseUp += (sender, args)
-                => _aggregator.PublishFrom(source, new TrackBarEventArgs(Destination));
-
-            source.ZoomDstTrackBar.KeyPress += (sender, args)
-                => _aggregator.PublishFrom(source, new TrackBarEventArgs(Destination));
-
-            source.RotationDstTrackBar.MouseWheel += (sender, args)
-                => _aggregator.PublishFrom(source, new TrackBarEventArgs(Destination));
-
-            source.RotationDstTrackBar.MouseUp += (sender, args)
-                => _aggregator.PublishFrom(source, new TrackBarEventArgs(Destination));
-
-            source.RotationDstTrackBar.KeyPress += (sender, args)
-                => _aggregator.PublishFrom(source, new TrackBarEventArgs(Destination));
 
             source.RgbMenuButton.Click += (sender, args)
                 => _aggregator.PublishFrom(source, new ShowRgbMenuEventArgs());
@@ -113,12 +89,12 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation
             {
                 case (Keys.Left):
 
-                    view.ReplaceSrcByDstButton.PerformClick();
+                   
                     return true;
 
                 case (Keys.Right):
 
-                    view.ReplaceDstBySrcButton.PerformClick();
+                  
                     return true;
 
                 case (Keys.Z | Keys.Control):

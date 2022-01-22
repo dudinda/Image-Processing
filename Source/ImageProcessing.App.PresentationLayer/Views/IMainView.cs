@@ -15,9 +15,9 @@ namespace ImageProcessing.App.PresentationLayer.Views
         ITooltip, IBitmapContainer, ICursor, IDisposable
     {
         /// <summary>
-        /// Default an image inside an <see cref="ImageContainer"./>
+        /// Default an image inside a picturebox./>
         /// </summary>
-        void SetDefaultImage(ImageContainer container);
+        void SetDefaultImage();
 
         /// <summary>
         /// Set the path to the loaded image.
@@ -32,16 +32,16 @@ namespace ImageProcessing.App.PresentationLayer.Views
         /// <summary>
         /// Add the processed result of the <see cref="ImageContainer"/>.
         /// </summary>
-        void AddToUndoRedo(ImageContainer to, Bitmap bmp, UndoRedoAction action);
+        void AddToUndoRedo(Bitmap bmp, UndoRedoAction action);
 
         /// <summary>
         /// Undo/Redo the last operation.
         /// </summary>
-        (Bitmap, ImageContainer) TryUndoRedo(UndoRedoAction action);
+        Bitmap TryUndoRedo(UndoRedoAction action);
 
         /// <summary>
-        /// Center an <see cref="ImageContainer"/> after a scaling.
+        /// Center a picturebox after a scaling.
         /// </summary>
-        void SetImageCenter(ImageContainer to, Size size);
+        void SetImageCenter(Size size);
     }
 }

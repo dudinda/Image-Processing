@@ -1,7 +1,7 @@
-﻿
+
 namespace ImageProcessing.App.UILayer.Controls
 {
-    partial class BitmapWithRulerControl
+    sealed partial class BitmapWithRulerControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,39 +29,37 @@ namespace ImageProcessing.App.UILayer.Controls
         /// </summary>
         private void InitializeComponent()
         {
-            this.ParentPanel = new MetroFramework.Controls.MetroPanel();
+            this.SourceContainer = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.SourceContainer)).BeginInit();
             this.SuspendLayout();
             // 
-            // ParentPanel
+            // SourceContainer
             // 
-            this.ParentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ParentPanel.HorizontalScrollbarBarColor = true;
-            this.ParentPanel.HorizontalScrollbarHighlightOnWheel = false;
-            this.ParentPanel.HorizontalScrollbarSize = 10;
-            this.ParentPanel.Location = new System.Drawing.Point(40, 40);
-            this.ParentPanel.Margin = new System.Windows.Forms.Padding(0);
-            this.ParentPanel.Name = "ParentPanel";
-            this.ParentPanel.Padding = new System.Windows.Forms.Padding(30);
-            this.ParentPanel.Size = new System.Drawing.Size(620, 620);
-            this.ParentPanel.TabIndex = 0;
-            this.ParentPanel.VerticalScrollbarBarColor = true;
-            this.ParentPanel.VerticalScrollbarHighlightOnWheel = false;
-            this.ParentPanel.VerticalScrollbarSize = 10;
+            this.SourceContainer.Location = new System.Drawing.Point(43, 37);
+            this.SourceContainer.Name = "SourceContainer";
+            this.SourceContainer.Size = new System.Drawing.Size(200, 200);
+            this.SourceContainer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.SourceContainer.TabIndex = 4;
+            this.SourceContainer.TabStop = false;
             // 
             // BitmapWithRulerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.ParentPanel);
+            this.AutoScroll = true;
+            this.Controls.Add(this.SourceContainer);
+            this.DoubleBuffered = true;
             this.Name = "BitmapWithRulerControl";
             this.Padding = new System.Windows.Forms.Padding(40);
-            this.Size = new System.Drawing.Size(700, 700);
+            this.Size = new System.Drawing.Size(250, 100);
+            ((System.ComponentModel.ISupportInitialize)(this.SourceContainer)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private MetroFramework.Controls.MetroPanel ParentPanel;
+        private System.Windows.Forms.PictureBox SourceContainer;
     }
 }

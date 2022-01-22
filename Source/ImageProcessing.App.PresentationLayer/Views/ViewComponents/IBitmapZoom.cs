@@ -11,16 +11,16 @@ namespace ImageProcessing.App.PresentationLayer.Views.ViewComponents
         /// Reset trackbars values after
         /// an <see cref="ImageContainer"/> rendering. 
         /// </summary>
-        void ResetTrackBarValue(ImageContainer container, int value = 0);
+        void ResetTrackBarValue(int value = 0);
 
         /// <summary>
         /// Get a zoom factor value from the <see cref="ImageContainer"/>. 
         /// </summary>
-        double GetZoomFactor(ImageContainer container);
+        double GetZoomFactor();
 
         /// <summary>
         /// Get a rotation factor value from the <see cref="ImageContainer"/>. 
         /// </summary>
-        double GetRotationFactor(ImageContainer container);
+        double GetRotationFactor();
     }
 }

@@ -68,7 +68,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             this.PathToImage,
             this.ShuffleSrc,
             this.QualityMeasure});
-            this.ToolBarMenu.Location = new System.Drawing.Point(3, 35);
+            this.ToolBarMenu.Location = new System.Drawing.Point(3, 75);
             this.ToolBarMenu.Name = "ToolBarMenu";
             this.ToolBarMenu.Size = new System.Drawing.Size(478, 27);
             this.ToolBarMenu.Stretch = true;
@@ -196,7 +196,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             // 
             this.DistributionsComboBox.FormattingEnabled = true;
             this.DistributionsComboBox.ItemHeight = 23;
-            this.DistributionsComboBox.Location = new System.Drawing.Point(207, 3);
+            this.DistributionsComboBox.Location = new System.Drawing.Point(207, 43);
             this.DistributionsComboBox.MaxDropDownItems = 100;
             this.DistributionsComboBox.Name = "DistributionsComboBox";
             this.DistributionsComboBox.Size = new System.Drawing.Size(274, 29);
@@ -205,7 +205,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             // 
             // Transform
             // 
-            this.Transform.Location = new System.Drawing.Point(3, 3);
+            this.Transform.Location = new System.Drawing.Point(3, 43);
             this.Transform.Name = "Transform";
             this.Transform.Size = new System.Drawing.Size(201, 29);
             this.Transform.TabIndex = 1;
@@ -231,10 +231,10 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             // 
             // selectedAreaControl1
             // 
-            this.selectedAreaControl1.Location = new System.Drawing.Point(484, 3);
+            this.selectedAreaControl1.Location = new System.Drawing.Point(503, 0);
             this.selectedAreaControl1.Margin = new System.Windows.Forms.Padding(0);
             this.selectedAreaControl1.Name = "selectedAreaControl1";
-            this.selectedAreaControl1.Size = new System.Drawing.Size(267, 123);
+            this.selectedAreaControl1.Size = new System.Drawing.Size(267, 135);
             this.selectedAreaControl1.TabIndex = 7;
             this.selectedAreaControl1.UseSelectable = true;
             // 

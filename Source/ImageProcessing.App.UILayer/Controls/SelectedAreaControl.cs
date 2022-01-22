@@ -45,7 +45,7 @@ namespace ImageProcessing.App.UILayer.Controls
             var yCenter = (boxStart.Y + boxEnd.Y) / 2;
 
             e.Graphics.DrawRectangle(pen,
-                new Rectangle(xCenter, yCenter, TopRight.Location.X - boxStart.X, BottomLeft.Location.Y - boxStart.Y));
+                new Rectangle(xCenter, yCenter, BottomRight.Location.X - boxStart.X, BottomRight.Location.Y - boxStart.Y));
         }
     }
 }

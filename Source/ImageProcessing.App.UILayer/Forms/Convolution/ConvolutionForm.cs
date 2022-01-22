@@ -31,7 +31,6 @@ namespace ImageProcessing.App.UILayer.Forms.Convolution
 
             TopLevel = false;
             Dock = DockStyle.Fill;
-            AutoSize = false;
             Parent = _tab;
 
             _tab.Controls.Add(this);

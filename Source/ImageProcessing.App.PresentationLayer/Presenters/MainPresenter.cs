@@ -35,15 +35,14 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         ISubscriber<ShowSettingsMenuEventArgs>, ISubscriber<ShowTransformationMenuEventArgs>,
         ISubscriber<OpenFileDialogEventArgs>, ISubscriber<SaveAsFileDialogEventArgs>,
         ISubscriber<SaveWithoutFileDialogEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
-        ISubscriber<ReplaceImageEventArgs>, ISubscriber<TrackBarEventArgs>,
-        ISubscriber<UndoRedoEventArgs>, ISubscriber<FormIsClosedEventArgs>,
-        ISubscriber<ShowRotationMenuEventArgs>, ISubscriber<ShowScalingMenuEventArgs>
+        ISubscriber<TrackBarEventArgs>, ISubscriber<UndoRedoEventArgs>,
+        ISubscriber<FormIsClosedEventArgs>, ISubscriber<ShowRotationMenuEventArgs>,
+        ISubscriber<ShowScalingMenuEventArgs>
     {
         private readonly ILoggerService _logger;
         private readonly IScalingProvider _scale;
         private readonly IRotationProvider _rotation;
         private readonly IAwaitablePipeline _pipeline;
-        private readonly ICacheService<Bitmap> _cache;
         private readonly IAsyncOperationLocker _operation;
         private readonly INonBlockDialogService _dialog;
 
@@ -57,7 +56,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             ILoggerService logger)
         {
             _scale = scale;
-            _cache = cache;
             _logger = logger;
             _dialog = dialog;
             _rotation = rotation;
@@ -76,15 +74,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
 
                   if (result.Image != null)
                   {
-                      await Render(
+                      await Render(publisher,
                           block: new PipelineBlock(result.Image)
                               .Add<Bitmap>(
-                                  (bmp) => View.SetPathToFile(result.Path)),
-                          ImageContainer.Source
+                                  (bmp) => View.SetPathToFile(result.Path))
                       ).ConfigureAwait(true);
-
-                    Aggregator.PublishFromAll(publisher,
-                       new ContainerUpdatedEventArgs(ImageContainer.Source, result.Image));
                 }
             }
             catch(Exception ex)
@@ -99,9 +93,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             try
             {
-                if (!View.ImageIsDefault(ImageContainer.Source))
+                if (!View.ImageIsDefault())
                 {
-                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
+                    var copy = await GetImageCopy().ConfigureAwait(true);
 
                     await _dialog.NonBlockSaveAs(copy,
                          ConfigurationManager.AppSettings[AppSettingsKeys.Filters]
@@ -120,9 +114,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             try
             {
-                if (!View.ImageIsDefault(ImageContainer.Source))
+                if (!View.ImageIsDefault())
                 {
-                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
+                    var copy = await GetImageCopy().ConfigureAwait(true);
 
                     await Task.Run(
                         () => copy.SaveByPath(View.GetPathToFile())
@@ -141,9 +135,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             try
             {
-                if (!View.ImageIsDefault(ImageContainer.Source))
+                if (!View.ImageIsDefault())
                 {
-                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
+                    var copy = await GetImageCopy().ConfigureAwait(true);
 
                     Controller.Run<RgbPresenter, BitmapViewModel>(
                         new BitmapViewModel(copy));
@@ -161,9 +155,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             try
             {
-                if (!View.ImageIsDefault(ImageContainer.Source))
+                if (!View.ImageIsDefault())
                 {
-                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
+                    var copy = await GetImageCopy().ConfigureAwait(true);
 
                     Controller.Run<ScalingPresenter, BitmapViewModel>(
                         new BitmapViewModel(copy));
@@ -181,9 +175,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             try
             {
-                if (!View.ImageIsDefault(ImageContainer.Source))
+                if (!View.ImageIsDefault())
                 {
-                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
+                    var copy = await GetImageCopy().ConfigureAwait(true);
 
                     Controller.Run<RotationPresenter, BitmapViewModel>(
                         new BitmapViewModel(copy));
@@ -201,9 +195,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             try
             {
-                if (!View.ImageIsDefault(ImageContainer.Source))
+                if (!View.ImageIsDefault())
                 {
-                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
+                    var copy = await GetImageCopy().ConfigureAwait(true);
 
                     Controller.Run<DistributionPresenter, BitmapViewModel>(
                         new BitmapViewModel(copy));
@@ -221,9 +215,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             try
             {
-                if (!View.ImageIsDefault(ImageContainer.Source))
+                if (!View.ImageIsDefault())
                 {
-                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
+                    var copy = await GetImageCopy().ConfigureAwait(true);
 
                     Controller.Run<ConvolutionPresenter, BitmapViewModel>(
                         new BitmapViewModel(copy));
@@ -241,9 +235,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             try
             {
-                if (!View.ImageIsDefault(ImageContainer.Source))
+                if (!View.ImageIsDefault())
                 {
-                    var copy = await GetImageCopy(ImageContainer.Source).ConfigureAwait(true);
+                    var copy = await GetImageCopy().ConfigureAwait(true);
 
                     Controller.Run<TransformationPresenter, BitmapViewModel>(
                         new BitmapViewModel(copy));
@@ -277,9 +271,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             try
             {
-                if (!View.ImageIsDefault(ImageContainer.Source) && e.Block is IPipelineBlock block)
+                if (!View.ImageIsDefault() && e.Block is IPipelineBlock block)
                 {
-                    await Render(block).ConfigureAwait(true);
+                    await Render(publisher, block).ConfigureAwait(true);
 
                     Aggregator.PublishFrom(publisher, new RestoreFocusEventArgs());
                 }
@@ -296,37 +290,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             }
         }
 
-        /// <inheritdoc cref="ReplaceImageEventArgs"/>
-        public async Task OnEventHandler(object publisher, ReplaceImageEventArgs e)
-        {
-            try
-            {
-                var (to, from) = e.Container == ImageContainer.Source   ?
-                    (ImageContainer.Destination, ImageContainer.Source) :
-                    (ImageContainer.Source, ImageContainer.Destination);
-
-                if (!View.ImageIsDefault(from))
-                {
-                    var copy = await GetImageCopy(from).ConfigureAwait(true);
-
-                    await Render(new PipelineBlock(copy), to).ConfigureAwait(true);
-                  
-                    Aggregator.PublishFromAll(publisher,
-                        new ContainerUpdatedEventArgs(to, copy));
-                }
-            }
-            catch (OperationCanceledException ex)
-            {
-                OnError(publisher, Errors.CancelOperation);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Information);
-            }
-            catch (Exception ex)
-            {
-                OnError(publisher, Errors.ReplaceImage);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
-            }        
-        }
-
         /// <inheritdoc cref="TrackBarEventArgs"/>
         public async Task OnEventHandler(object publisher, TrackBarEventArgs e)
         {
@@ -336,26 +299,25 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             {
                 container = e.Container;
 
-                if (!View.ImageIsDefault(container))
+                if (!View.ImageIsDefault())
                 {
-                    var scale = View.GetZoomFactor(container);
-                    var rad   = View.GetRotationFactor(container);
+                    var scale = View.GetZoomFactor();
+                    var rad   = View.GetRotationFactor();
 
-                    var copy = await GetImageCopy(container).ConfigureAwait(true);
+                    var copy = await GetImageCopy().ConfigureAwait(true);
 
                     await Paint(
                         new PipelineBlock(copy)
                             .Add<Bitmap, Bitmap>(
                                 (bmp) => _scale.Scale(bmp, scale, scale))
                             .Add<Bitmap, Bitmap>(
-                                (bmp) => _rotation.Rotate(bmp, rad)),
-                        container
+                                (bmp) => _rotation.Rotate(bmp, rad))
                      ).ConfigureAwait(true);
                 }
             }
             catch(ArgumentException ex)
             {
-                View.SetDefaultImage(container);
+                View.SetDefaultImage();
             }
             catch(Exception ex)
             {
@@ -369,15 +331,14 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             try
             {
-                var (copy, to) = View.TryUndoRedo(e.Action);
+                var copy = View.TryUndoRedo(e.Action);
 
                 var action = e.Action == UndoRedoAction.Redo ?
                    UndoRedoAction.Undo : UndoRedoAction.Redo;
                  
-                await Render(new PipelineBlock(copy), to, action).ConfigureAwait(true);
+                await Render(publisher, new PipelineBlock(copy), action).ConfigureAwait(true);
 
-                Aggregator.PublishFromAll(publisher,
-                    new ContainerUpdatedEventArgs(to, copy));
+                Aggregator.PublishFromAll(publisher, new ContainerUpdatedEventArgs(copy));
             }
             catch (Exception ex)
             {
@@ -415,43 +376,45 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             return Task.CompletedTask;
         }
 
-        private void RenderBlock(Bitmap bmp, ImageContainer to, UndoRedoAction action)
+        private void RenderBlock(object publisher, Bitmap bmp, UndoRedoAction action)
         {
-            lock (_cache)
+            lock (_dialog)
             {
-                View.AddToUndoRedo(to, new Bitmap(View.GetImageCopy(to)), action);
-                View.SetImageCopy(to, new Bitmap(bmp));
-                View.SetImage(to, new Bitmap(bmp));
-                View.SetImageCenter(to, bmp.Size);
-                View.Refresh(to);
-                View.ResetTrackBarValue(to);
+                View.AddToUndoRedo(new Bitmap(View.GetImageCopy()), action);
+                View.SetImageCopy(new Bitmap(bmp));
+                View.SetImage(new Bitmap(bmp));
+                View.SetImageCenter(bmp.Size);
+                View.Refresh();
+                View.ResetTrackBarValue();
+
+                Aggregator.PublishFromAll(publisher,
+                    new ContainerUpdatedEventArgs(new Bitmap(View.GetImageCopy())));
             }          
         }
 
-        private void PaintBlock(Bitmap bmp, ImageContainer to)
+        private void PaintBlock(Bitmap bmp)
         {
             lock (_scale)
             {
                 var size = bmp.Size;
-                View.SetImage(to, bmp);
-                View.SetImageCenter(to, size);
-                View.Refresh(to);
+                View.SetImage(bmp);
+                View.SetImageCenter(size);
+                View.Refresh();
             }
         }
 
-        private async Task<Bitmap> GetImageCopy(ImageContainer container)
+        private async Task<Bitmap> GetImageCopy()
             => await _operation.LockOperationAsync(
-                () => new Bitmap(View.GetImageCopy(container))
+                () => new Bitmap(View.GetImageCopy())
             ).ConfigureAwait(true);
 
-        private async Task Paint(IPipelineBlock block,
-            ImageContainer container = ImageContainer.Destination)
+        private async Task Paint(IPipelineBlock block)
         {
             if (
                 !_pipeline
                     .Register(block
                         .Add<Bitmap>(
-                            (bmp) => PaintBlock(bmp, container)
+                            (bmp) => PaintBlock(bmp)
                          )
                      )
                  )
@@ -462,8 +425,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             await _pipeline.AwaitResult().ConfigureAwait(true);
         }
 
-        private async Task Render(IPipelineBlock block,
-            ImageContainer container = ImageContainer.Destination,
+        private async Task Render(object publisher, IPipelineBlock block,
             UndoRedoAction action    = UndoRedoAction.Undo)
         {
             View.SetCursor(CursorType.Wait);
@@ -472,7 +434,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 !_pipeline
                     .Register(block
                         .Add<Bitmap>(
-                            (bmp) => RenderBlock(bmp, container, action)
+                            (bmp) => RenderBlock(publisher, bmp, action)
                          )
                      )
                  )
@@ -482,11 +444,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
 
             await _pipeline.AwaitResult().ConfigureAwait(true);
 
-            if (container == ImageContainer.Source)
-            {
-                _cache.Reset();
-            }
-      
             if (!_pipeline.Any())
             {
                 View.SetCursor(CursorType.Default);

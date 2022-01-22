@@ -4,10 +4,6 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Main.Interface;
-using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.MainFormContainer.Interface;
-using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.MainFormRotation.Interface;
-using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.MainFormUndoRedo.Interface;
-using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.MainFormZoom.Interface;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.UILayer.Control;
 using ImageProcessing.App.UILayer.FormControl.TrackBar;
@@ -23,11 +19,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
         private class NonUIMainForm : MainForm
         {
             public NonUIMainForm(
-               IMainFormEventBinderWrapper binder,
-               IMainFormContainerFactoryWrapper container,
-               IMainFormUndoRedoFactoryWrapper undoRedo,
-               IMainFormZoomFactoryWrapper zoom,
-               IMainFormRotationFactoryWrapper rotation) : base(binder, container, undoRedo, zoom, rotation)
+               IMainFormEventBinderWrapper binder) : base(binder)
             {
              
             }
@@ -42,13 +34,9 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
         private readonly NonUIMainForm _form;
 
         public MainFormWrapper(
-            IMainFormEventBinderWrapper binder,
-            IMainFormContainerFactoryWrapper container,
-            IMainFormUndoRedoFactoryWrapper undoRedo,
-            IMainFormZoomFactoryWrapper zoom,
-            IMainFormRotationFactoryWrapper rotation)
+            IMainFormEventBinderWrapper binder)
         {
-            _form = new NonUIMainForm(binder, container, undoRedo, zoom, rotation);
+            _form = new NonUIMainForm(binder);
             _binder = binder;
         }
 
@@ -72,12 +60,6 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
             get => _form.SrcImage;
         }
 
-        public virtual Image DstImage
-        {
-            set => _form.DstImage = value;
-            get => _form.DstImage;
-        }
-
         public virtual Image SrcImageCopy
         {
             set => _form.SrcImageCopy = value;
@@ -93,26 +75,13 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
         public virtual Image DefaultImage
             => _form.DefaultImage;
 
-        public virtual UndoRedoSplitContainer SplitContainerCtr
-            => _form.SplitContainerCtr;
-
         public virtual Image SourceImage
         {
             set => _form.SourceImage = value;
             get => _form.SourceImage;
         }
-
-        public virtual Image DestinationImage
-        {
-            set => _form.DestinationImage = value;
-            get => _form.DestinationImage;
-        }
-
         public virtual PictureBox SourceBox
             => _form.SourceBox;
-
-        public virtual PictureBox DestinationBox
-            => _form.DestinationBox;
 
         public virtual ToolStripMenuItem SaveAsMenu
             => _form.SaveAsMenu;
@@ -123,23 +92,11 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
         public virtual ToolStripMenuItem SaveFileMenu
             => _form.SaveFileMenu;
 
-        public virtual ToolStripButton ReplaceSrcByDstButton
-            => _form.ReplaceSrcByDstButton;
-
-        public virtual ToolStripButton ReplaceDstBySrcButton
-            => _form.ReplaceDstBySrcButton;
-
         public virtual ScaleTrackBar ZoomSrcTrackBar
             => _form.ZoomSrcTrackBar;
 
-        public virtual ScaleTrackBar ZoomDstTrackBar
-            => _form.ZoomDstTrackBar;
-
         public virtual RotationTrackBar RotationSrcTrackBar
             => _form.RotationSrcTrackBar;
-
-        public virtual RotationTrackBar RotationDstTrackBar
-            => _form.RotationDstTrackBar;
 
         public virtual ToolStripMenuItem ConvolutionMenuButton
             => _form.ConvolutionMenuButton;
@@ -171,8 +128,8 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
         public MetroTabControl TabsCtrl
             => _form.TabsCtrl;
 
-        public virtual void SetDefaultImage(ImageContainer container)
-            => _form.SetDefaultImage(container);
+        public virtual void SetDefaultImage()
+            => _form.SetDefaultImage();
 
         public virtual void SetPathToFile(string path)
             => _form.SetPathToFile(path);
@@ -180,14 +137,14 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
         public virtual string GetPathToFile()
             => _form.GetPathToFile();
 
-        public virtual void AddToUndoRedo(ImageContainer to, Bitmap bmp, UndoRedoAction action)
-            => _form.AddToUndoRedo(to, bmp, action);
+        public virtual void AddToUndoRedo(Bitmap bmp, UndoRedoAction action)
+            => _form.AddToUndoRedo(bmp, action);
       
-        public virtual (Bitmap, ImageContainer) TryUndoRedo(UndoRedoAction action)
+        public virtual Bitmap TryUndoRedo(UndoRedoAction action)
             => _form.TryUndoRedo(action);
      
-        public virtual void SetImageCenter(ImageContainer to, Size size)
-            => _form.SetImageCenter(to, size);
+        public virtual void SetImageCenter(Size size)
+            => _form.SetImageCenter(size);
        
         public virtual void Close()
             => _form.Close();
@@ -195,32 +152,32 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
         public virtual bool Focus()
             => _form.Focus();
     
-        public virtual void ResetTrackBarValue(ImageContainer container, int value = 0)
-            => _form.ResetTrackBarValue(container, value);
+        public virtual void ResetTrackBarValue(int value = 0)
+            => _form.ResetTrackBarValue(value);
        
-        public virtual double GetZoomFactor(ImageContainer container)
-            => _form.GetZoomFactor(container);
+        public virtual double GetZoomFactor()
+            => _form.GetZoomFactor();
       
-        public virtual double GetRotationFactor(ImageContainer container)
-            => _form.GetRotationFactor(container);
+        public virtual double GetRotationFactor()
+            => _form.GetRotationFactor();
        
         public virtual void Tooltip(string message)
             => _form.Tooltip(message);
     
-        public virtual Image GetImageCopy(ImageContainer container)
-            => _form.GetImageCopy(container);
+        public virtual Image GetImageCopy()
+            => _form.GetImageCopy();
       
-        public virtual void SetImageCopy(ImageContainer container, Image copy)
-            => _form.SetImageCopy(container, copy);
+        public virtual void SetImageCopy(Image copy)
+            => _form.SetImageCopy(copy);
 
-        public virtual void SetImage(ImageContainer container, Image image)
-            => _form.SetImage(container, image);
+        public virtual void SetImage(Image image)
+            => _form.SetImage(image);
        
-        public virtual bool ImageIsDefault(ImageContainer container)
-            => _form.ImageIsDefault(container);
+        public virtual bool ImageIsDefault()
+            => _form.ImageIsDefault();
      
-        public virtual void Refresh(ImageContainer container)
-            => _form.Refresh(container);
+        public virtual void Refresh()
+            => _form.Refresh();
         
         public virtual void SetCursor(CursorType cursor)
             => _form.SetCursor(cursor);
