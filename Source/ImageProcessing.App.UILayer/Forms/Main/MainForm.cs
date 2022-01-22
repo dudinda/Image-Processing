@@ -51,7 +51,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         }
 
         /// <inheritdoc/>
-        public Image? Default
+        public virtual Image? Default
         {
             get => _default ??= Resources.DefaultImage;
         }
@@ -247,12 +247,11 @@ namespace ImageProcessing.App.UILayer.Forms.Main
                         var redo = Src.Redo();
                         RedoButton.Enabled = !Src.RedoIsEmpty;
                         return redo;
-                        break;
+
                     case UndoRedoAction.Undo:
                         var undo = Src.Undo();
                         UndoButton.Enabled = !Src.UndoIsEmpty;
                         return undo;
-                        break;
 
                     default: throw new NotSupportedException(nameof(action));
                 }

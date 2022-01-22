@@ -56,7 +56,7 @@ namespace ImageProcessing.App.UILayer.Controls
             // 
             // BottomLeft
             // 
-            this.BottomLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.BottomLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BottomLeft.Location = new System.Drawing.Point(122, 101);
             this.BottomLeft.Name = "BottomLeft";
             this.BottomLeft.Size = new System.Drawing.Size(68, 20);
@@ -90,6 +90,7 @@ namespace ImageProcessing.App.UILayer.Controls
             // 
             // WidthLabel
             // 
+            this.WidthLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.WidthLabel.AutoSize = true;
             this.WidthLabel.Location = new System.Drawing.Point(122, 79);
             this.WidthLabel.Name = "WidthLabel";
@@ -99,6 +100,7 @@ namespace ImageProcessing.App.UILayer.Controls
             // 
             // HeightLabel
             // 
+            this.HeightLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.HeightLabel.AutoSize = true;
             this.HeightLabel.Location = new System.Drawing.Point(196, 79);
             this.HeightLabel.Name = "HeightLabel";

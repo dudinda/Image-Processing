@@ -28,7 +28,6 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
             this.RotationComboBox = new MetroFramework.Controls.MetroComboBox();
             this.LumaComboBox = new MetroFramework.Controls.MetroComboBox();
             this.ScalingComboBox = new MetroFramework.Controls.MetroComboBox();
-            this.RectangleArea = new ImageProcessing.App.UILayer.Controls.SelectedAreaControl();
             this.SettingsPanel = new MetroFramework.Controls.MetroPanel();
             this.SettingsPanel.SuspendLayout();
             this.SuspendLayout();
@@ -93,20 +92,10 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
             this.ScalingComboBox.TabIndex = 8;
             this.ScalingComboBox.UseSelectable = true;
             // 
-            // RectangleArea
-            // 
-            this.RectangleArea.Location = new System.Drawing.Point(652, 14);
-            this.RectangleArea.Margin = new System.Windows.Forms.Padding(0);
-            this.RectangleArea.Name = "RectangleArea";
-            this.RectangleArea.Size = new System.Drawing.Size(230, 93);
-            this.RectangleArea.TabIndex = 14;
-            this.RectangleArea.UseSelectable = true;
-            // 
             // SettingsPanel
             // 
             this.SettingsPanel.AutoScroll = true;
             this.SettingsPanel.Controls.Add(this.LumaLabel);
-            this.SettingsPanel.Controls.Add(this.RectangleArea);
             this.SettingsPanel.Controls.Add(this.ScalingComboBox);
             this.SettingsPanel.Controls.Add(this.LumaComboBox);
             this.SettingsPanel.Controls.Add(this.RotationLabel);
@@ -121,6 +110,7 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
             this.SettingsPanel.Name = "SettingsPanel";
             this.SettingsPanel.Size = new System.Drawing.Size(897, 128);
             this.SettingsPanel.TabIndex = 15;
+            this.SettingsPanel.VerticalScrollbar = true;
             this.SettingsPanel.VerticalScrollbarBarColor = false;
             this.SettingsPanel.VerticalScrollbarHighlightOnWheel = false;
             this.SettingsPanel.VerticalScrollbarSize = 10;
@@ -156,7 +146,6 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
         private MetroFramework.Controls.MetroLabel ScalingLabel;
         private MetroFramework.Controls.MetroLabel RotationLabel;
         private MetroFramework.Controls.MetroLabel LumaLabel;
-        private Controls.SelectedAreaControl RectangleArea;
         private MetroFramework.Controls.MetroPanel SettingsPanel;
     }
 }

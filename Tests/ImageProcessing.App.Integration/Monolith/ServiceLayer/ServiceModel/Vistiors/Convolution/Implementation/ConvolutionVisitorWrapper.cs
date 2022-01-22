@@ -22,15 +22,13 @@ namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.Vis
         public ConvolutionVisitorWrapper(
             IConvolutionFactoryWrapper factory,
             IConvolutionServiceWrapper convolution,
-            IBitmapServiceWrapper service,
-            ICacheServiceWrapper cache)
+            IBitmapServiceWrapper service)
         {
             ConvolutionFactory = factory;
             ConvolutionService = convolution;
             BitmapService = service;
-            CacheService = cache;
 
-            _visitor = new ConvolutionVisitor(factory, convolution, service, cache);
+            _visitor = new ConvolutionVisitor(factory, convolution, service);
         }
 
         public virtual Bitmap LoGOperator3x3(Bitmap bmp)

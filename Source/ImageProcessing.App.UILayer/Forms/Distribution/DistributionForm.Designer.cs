@@ -234,7 +234,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             this.selectedAreaControl1.Location = new System.Drawing.Point(503, 0);
             this.selectedAreaControl1.Margin = new System.Windows.Forms.Padding(0);
             this.selectedAreaControl1.Name = "selectedAreaControl1";
-            this.selectedAreaControl1.Size = new System.Drawing.Size(267, 135);
+            this.selectedAreaControl1.Size = new System.Drawing.Size(267, 118);
             this.selectedAreaControl1.TabIndex = 7;
             this.selectedAreaControl1.UseSelectable = true;
             // 

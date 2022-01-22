@@ -45,6 +45,7 @@ namespace ImageProcessing.App.UILayer.Controls
             _undo = new FixedStackSafe<Bitmap>(10);
             _redo = new FixedStackSafe<Bitmap>(10);
             SourceContainer.Invalidated += (sender, args) => Invalidate();
+            SourceContainer.Location = new Point(Padding.Left, Padding.Top);
         }
 
         protected override void OnPaint(PaintEventArgs e)

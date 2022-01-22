@@ -5,10 +5,4 @@ namespace ImageProcessing.App.UILayer.FormExposers
     {
         void OnElementExpose(TExposer form);
     }
-
-    internal interface IFormExposer<in TExposer, out TModel>
-        where TExposer : class
-    {
-        TModel OnElementExpose(TExposer form);
-    }
 }

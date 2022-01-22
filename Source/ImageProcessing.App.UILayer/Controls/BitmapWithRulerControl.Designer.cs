@@ -35,7 +35,7 @@ namespace ImageProcessing.App.UILayer.Controls
             // 
             // SourceContainer
             // 
-            this.SourceContainer.Location = new System.Drawing.Point(43, 37);
+            this.SourceContainer.Location = new System.Drawing.Point(40, 40);
             this.SourceContainer.Name = "SourceContainer";
             this.SourceContainer.Size = new System.Drawing.Size(200, 200);
             this.SourceContainer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -51,7 +51,7 @@ namespace ImageProcessing.App.UILayer.Controls
             this.DoubleBuffered = true;
             this.Name = "BitmapWithRulerControl";
             this.Padding = new System.Windows.Forms.Padding(40);
-            this.Size = new System.Drawing.Size(250, 100);
+            this.Size = new System.Drawing.Size(465, 301);
             ((System.ComponentModel.ISupportInitialize)(this.SourceContainer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

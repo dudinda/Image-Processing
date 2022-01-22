@@ -45,6 +45,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.ToolBarMenu = new System.Windows.Forms.ToolStrip();
             this.UndoBtn = new System.Windows.Forms.ToolStripButton();
             this.RedoBtn = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.PathToImage = new System.Windows.Forms.ToolStripLabel();
             this.SelectionBtn = new System.Windows.Forms.ToolStripButton();
@@ -113,6 +114,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             // RgbMenu
             // 
             this.RgbMenu.Name = "RgbMenu";
+            this.RgbMenu.ShortcutKeyDisplayString = "R";
             this.RgbMenu.Size = new System.Drawing.Size(40, 20);
             this.RgbMenu.Text = "Rgb";
             // 
@@ -177,6 +179,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.ToolBarMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.UndoBtn,
             this.RedoBtn,
+            this.toolStripButton1,
             this.toolStripSeparator1,
             this.PathToImage,
             this.SelectionBtn});
@@ -205,6 +208,15 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.RedoBtn.Name = "RedoBtn";
             this.RedoBtn.Size = new System.Drawing.Size(24, 24);
             this.RedoBtn.ToolTipText = "Redo last transformation";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButton1.Text = "toolStripButton1";
             // 
             // toolStripSeparator1
             // 
@@ -345,6 +357,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         private MetroFramework.Controls.MetroPanel MainContainer;
         private MetroFramework.Controls.MetroTabControl Tabs;
         private Controls.BitmapWithRulerControl Src;
+        private ToolStripButton toolStripButton1;
     }
 }
 
