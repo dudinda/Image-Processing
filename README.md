@@ -25,7 +25,7 @@
 
 <p align="center">
     <img src="https://i.imgur.com/zY4w7OZ.png" width="900" height = "800" alt="application window">
-    <p align="center">Fig. 1 - The main view and transient views as tabs. The opened settings tab is a singleton view. The frame is taken from "Thomas the Tank Engine" series and processed with the Grayscale->Inversion->LoG5x5->Inversion algorithm chain.</p>
+    <p align="center">Fig. 1 - The main view and transient/signleton views as tabs. The opened rgb tab is a transient view. The settings tab is a singleton tab. The frame is taken from "Thomas the Tank Engine" series and processed with the Grayscale->Inversion->LoG5x5->Inversion algorithm chain.</p>
 </p>
 <br/><br/>
 <p> Initially, for experimental purposes was chosen a group of underexposed images. </p>
