@@ -81,6 +81,9 @@ namespace ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation
 
             source.FormClosed += (sender, args)
                 => _aggregator.PublishFrom(source, new FormIsClosedEventArgs());
+
+            source.SetSourceButton.Click += (sender, args)
+                => _aggregator.PublishFrom(source, new SetSourceEventArgs());
         }
 
         public bool ProcessCmdKey(IMainFormExposer view, Keys keyData)

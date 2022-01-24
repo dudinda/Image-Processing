@@ -27,6 +27,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
 
         private Image? _default;
         private Image? _srcCopy;
+        private Image? _loaded;
 
         public MainForm(
             IMainFormEventBinder binder,
@@ -40,6 +41,12 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             _undoredo = undoredo;
 
             SetMenuState(MenuBtnState.ImageEmpty);
+        }
+
+        public Image? LoadedImage
+        {
+            get => Read<Image>(() => _loaded);
+            set => Write(() => _loaded = value);
         }
 
         /// <inheritdoc/>
@@ -136,6 +143,9 @@ namespace ImageProcessing.App.UILayer.Forms.Main
 
         public ToolStripMenuItem ScalingMenuButton
             => ScalingMenu;
+
+        public ToolStripButton SetSourceButton
+            => SetSourceBtn;
 
         /// <inheritdoc/>
         public new void Show()
@@ -311,7 +321,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             {
                 ConvolutionMenu.Enabled = menu.ConvolutionMenuState;
                 RgbMenu.Enabled = menu.RgbMenuState;
-                SetSourceButton.Enabled = menu.SetSourceImageState;
+                SetSourceBtn.Enabled = menu.SetSourceImageState;
                 DistributionMenu.Enabled = menu.DistributionMenuState;
                 ScalingMenu.Enabled = menu.SettingsMenuState;
                 RotationMenu.Enabled = menu.RotationMenuState;

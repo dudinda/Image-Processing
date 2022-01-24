@@ -104,6 +104,11 @@ namespace ImageProcessing.App.UILayer.FormExposers.Main
         /// </summary>
         ToolStripButton RedoButton { get; }
 
+        /// <summary>
+        /// Set source image button.
+        /// </summary>
+        ToolStripButton SetSourceButton { get; }
+
         MetroTabControl TabsCtrl { get; }
 
         ///<inheritdoc cref="FormClosedEventHandler"/>

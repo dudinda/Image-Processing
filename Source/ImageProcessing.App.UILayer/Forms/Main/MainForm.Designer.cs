@@ -45,7 +45,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.ToolBarMenu = new System.Windows.Forms.ToolStrip();
             this.UndoBtn = new System.Windows.Forms.ToolStripButton();
             this.RedoBtn = new System.Windows.Forms.ToolStripButton();
-            this.SetSourceButton = new System.Windows.Forms.ToolStripButton();
+            this.SetSourceBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.PathToImage = new System.Windows.Forms.ToolStripLabel();
             this.SelectionBtn = new System.Windows.Forms.ToolStripButton();
@@ -179,7 +179,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.ToolBarMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.UndoBtn,
             this.RedoBtn,
-            this.SetSourceButton,
+            this.SetSourceBtn,
             this.toolStripSeparator1,
             this.PathToImage,
             this.SelectionBtn});
@@ -209,15 +209,14 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.RedoBtn.Size = new System.Drawing.Size(24, 24);
             this.RedoBtn.ToolTipText = "Redo last transformation";
             // 
-            // SetSourceButton
+            // SetSourceBtn
             // 
-            this.SetSourceButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SetSourceButton.Enabled = false;
-            this.SetSourceButton.Image = global::ImageProcessing.App.UILayer.Properties.Resources.ReplaceSource_Image;
-            this.SetSourceButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SetSourceButton.Name = "SetSourceButton";
-            this.SetSourceButton.Size = new System.Drawing.Size(24, 24);
-            this.SetSourceButton.Text = "MainS";
+            this.SetSourceBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SetSourceBtn.Enabled = false;
+            this.SetSourceBtn.Image = global::ImageProcessing.App.UILayer.Properties.Resources.ReplaceSource_Image;
+            this.SetSourceBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SetSourceBtn.Name = "SetSourceBtn";
+            this.SetSourceBtn.Size = new System.Drawing.Size(24, 24);
             // 
             // toolStripSeparator1
             // 
@@ -358,7 +357,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         private MetroFramework.Controls.MetroPanel MainContainer;
         private MetroFramework.Controls.MetroTabControl Tabs;
         private Controls.BitmapWithRulerControl Src;
-        private ToolStripButton SetSourceButton;
+        private ToolStripButton SetSourceBtn;
     }
 }
 
