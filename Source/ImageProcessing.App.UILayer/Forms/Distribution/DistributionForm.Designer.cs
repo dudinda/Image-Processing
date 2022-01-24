@@ -68,7 +68,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             this.PathToImage,
             this.ShuffleSrc,
             this.QualityMeasure});
-            this.ToolBarMenu.Location = new System.Drawing.Point(3, 75);
+            this.ToolBarMenu.Location = new System.Drawing.Point(3, 35);
             this.ToolBarMenu.Name = "ToolBarMenu";
             this.ToolBarMenu.Size = new System.Drawing.Size(478, 27);
             this.ToolBarMenu.Stretch = true;
@@ -196,7 +196,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             // 
             this.DistributionsComboBox.FormattingEnabled = true;
             this.DistributionsComboBox.ItemHeight = 23;
-            this.DistributionsComboBox.Location = new System.Drawing.Point(207, 43);
+            this.DistributionsComboBox.Location = new System.Drawing.Point(207, 3);
             this.DistributionsComboBox.MaxDropDownItems = 100;
             this.DistributionsComboBox.Name = "DistributionsComboBox";
             this.DistributionsComboBox.Size = new System.Drawing.Size(274, 29);
@@ -205,7 +205,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             // 
             // Transform
             // 
-            this.Transform.Location = new System.Drawing.Point(3, 43);
+            this.Transform.Location = new System.Drawing.Point(3, 3);
             this.Transform.Name = "Transform";
             this.Transform.Size = new System.Drawing.Size(201, 29);
             this.Transform.TabIndex = 1;
@@ -223,7 +223,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             this.metroPanel1.HorizontalScrollbarSize = 10;
             this.metroPanel1.Location = new System.Drawing.Point(23, 63);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(874, 131);
+            this.metroPanel1.Size = new System.Drawing.Size(776, 131);
             this.metroPanel1.TabIndex = 7;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
@@ -231,7 +231,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             // 
             // selectedAreaControl1
             // 
-            this.selectedAreaControl1.Location = new System.Drawing.Point(503, 0);
+            this.selectedAreaControl1.Location = new System.Drawing.Point(484, 3);
             this.selectedAreaControl1.Margin = new System.Windows.Forms.Padding(0);
             this.selectedAreaControl1.Name = "selectedAreaControl1";
             this.selectedAreaControl1.Size = new System.Drawing.Size(267, 118);
@@ -240,7 +240,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             // 
             // DistributionForm
             // 
-            this.ClientSize = new System.Drawing.Size(922, 214);
+            this.ClientSize = new System.Drawing.Size(823, 214);
             this.Controls.Add(this.metroPanel1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

@@ -39,7 +39,7 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
             // 
             // ApplyFilter
             // 
-            this.ApplyFilter.Location = new System.Drawing.Point(3, 47);
+            this.ApplyFilter.Location = new System.Drawing.Point(0, 48);
             this.ApplyFilter.Name = "ApplyFilter";
             this.ApplyFilter.Size = new System.Drawing.Size(235, 23);
             this.ApplyFilter.TabIndex = 8;
@@ -50,7 +50,7 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
             // 
             this.RgbFilterComboBox.FormattingEnabled = true;
             this.RgbFilterComboBox.ItemHeight = 23;
-            this.RgbFilterComboBox.Location = new System.Drawing.Point(3, 11);
+            this.RgbFilterComboBox.Location = new System.Drawing.Point(3, 14);
             this.RgbFilterComboBox.Name = "RgbFilterComboBox";
             this.RgbFilterComboBox.Size = new System.Drawing.Size(235, 29);
             this.RgbFilterComboBox.TabIndex = 7;
@@ -58,7 +58,7 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
             // 
             // ColorMatrixMenu
             // 
-            this.ColorMatrixMenu.Location = new System.Drawing.Point(3, 76);
+            this.ColorMatrixMenu.Location = new System.Drawing.Point(0, 77);
             this.ColorMatrixMenu.Name = "ColorMatrixMenu";
             this.ColorMatrixMenu.Size = new System.Drawing.Size(235, 23);
             this.ColorMatrixMenu.TabIndex = 6;
@@ -75,7 +75,7 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
             this.CheckboxColorGroup.HorizontalScrollbarSize = 10;
             this.CheckboxColorGroup.Location = new System.Drawing.Point(244, 11);
             this.CheckboxColorGroup.Name = "CheckboxColorGroup";
-            this.CheckboxColorGroup.Size = new System.Drawing.Size(135, 88);
+            this.CheckboxColorGroup.Size = new System.Drawing.Size(67, 110);
             this.CheckboxColorGroup.TabIndex = 0;
             this.CheckboxColorGroup.VerticalScrollbarBarColor = true;
             this.CheckboxColorGroup.VerticalScrollbarHighlightOnWheel = false;
@@ -84,7 +84,7 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
             // BlueColor
             // 
             this.BlueColor.AutoSize = true;
-            this.BlueColor.Location = new System.Drawing.Point(43, 57);
+            this.BlueColor.Location = new System.Drawing.Point(3, 45);
             this.BlueColor.Name = "BlueColor";
             this.BlueColor.Size = new System.Drawing.Size(46, 15);
             this.BlueColor.TabIndex = 4;
@@ -94,7 +94,7 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
             // GreenColor
             // 
             this.GreenColor.AutoSize = true;
-            this.GreenColor.Location = new System.Drawing.Point(43, 36);
+            this.GreenColor.Location = new System.Drawing.Point(3, 24);
             this.GreenColor.Name = "GreenColor";
             this.GreenColor.Size = new System.Drawing.Size(54, 15);
             this.GreenColor.TabIndex = 3;
@@ -104,7 +104,7 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
             // RedColor
             // 
             this.RedColor.AutoSize = true;
-            this.RedColor.Location = new System.Drawing.Point(43, 14);
+            this.RedColor.Location = new System.Drawing.Point(3, 3);
             this.RedColor.Name = "RedColor";
             this.RedColor.Size = new System.Drawing.Size(43, 15);
             this.RedColor.TabIndex = 2;
@@ -131,10 +131,10 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
             // 
             // selectedAreaControl1
             // 
-            this.selectedAreaControl1.Location = new System.Drawing.Point(382, 11);
+            this.selectedAreaControl1.Location = new System.Drawing.Point(314, 11);
             this.selectedAreaControl1.Margin = new System.Windows.Forms.Padding(0);
             this.selectedAreaControl1.Name = "selectedAreaControl1";
-            this.selectedAreaControl1.Size = new System.Drawing.Size(267, 118);
+            this.selectedAreaControl1.Size = new System.Drawing.Size(267, 110);
             this.selectedAreaControl1.TabIndex = 9;
             this.selectedAreaControl1.UseSelectable = true;
             // 

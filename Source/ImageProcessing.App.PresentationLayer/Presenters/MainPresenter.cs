@@ -16,12 +16,12 @@ using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Providers.Rotation.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Scaling.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
+using ImageProcessing.App.ServiceLayer.Services.UndoRedo.Interface;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions;
 using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
@@ -42,6 +42,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         private readonly ILoggerService _logger;
         private readonly IScalingProvider _scale;
         private readonly IRotationProvider _rotation;
+        private readonly IUndoRedoService<Bitmap> _undoredo;
         private readonly IAwaitablePipeline _pipeline;
         private readonly IAsyncOperationLocker _operation;
         private readonly INonBlockDialogService _dialog;
@@ -49,7 +50,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         public MainPresenter(
             INonBlockDialogService dialog,
             IAsyncOperationLocker operation,
-            ICacheService<Bitmap> cache,
+            IUndoRedoService<Bitmap> undoredo,
             IAwaitablePipeline pipeline,
             IRotationProvider rotation,
             IScalingProvider scale,
@@ -59,6 +60,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             _logger = logger;
             _dialog = dialog;
             _rotation = rotation;
+            _undoredo = undoredo;
             _pipeline = pipeline;
             _operation = operation;
         }
@@ -337,16 +339,16 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 var action = e.Action == UndoRedoAction.Redo ?
                    UndoRedoAction.Undo : UndoRedoAction.Redo;
 
-                var tag = copy.Tag?.ToString() ?? string.Empty;
+                Enum.TryParse<MenuBtnState>(copy.Tag?.ToString(), out var state);
 
                 await Render(publisher, new PipelineBlock(copy), action).ConfigureAwait(true);
 
-                var state = tag.Equals(nameof(View.ImageIsDefault)) ?
-                    MenuBtnState.ImageEmpty : MenuBtnState.ImageLoaded;
+                if(state != MenuBtnState.ImageEmpty)
+                {
+                    state = MenuBtnState.ImageLoaded;
+                }
 
                 View.SetMenuState(state);
-
-
                 Aggregator.PublishFromAll(publisher, new ContainerUpdatedEventArgs(copy));
             }
             catch (Exception ex)
@@ -389,7 +391,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             lock (_dialog)
             {
-                var tag = bmp.Tag?.ToString() ?? string.Empty;
+                Enum.TryParse<MenuBtnState>(bmp.Tag?.ToString(), out var tag);
 
                 View.AddToUndoRedo((Bitmap)View.GetImageCopy(), action);
                 View.SetImageCopy(new Bitmap(bmp));
@@ -398,9 +400,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 View.Refresh();
                 View.ResetTrackBarValue();
 
-                if(tag.Equals(nameof(View.ImageIsDefault)))
+                if(tag != MenuBtnState.Unknown)
                 {
-                    View.GetImageCopy().Tag = bmp.Tag;
+                    View.GetImageCopy().Tag = tag;
                 }
 
                 Aggregator.PublishFromAll(publisher, new ContainerUpdatedEventArgs(bmp));

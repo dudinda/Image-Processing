@@ -4,6 +4,7 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Views;
+using ImageProcessing.App.ServiceLayer.Services.UndoRedo.Interface;
 using ImageProcessing.App.UILayer.Control;
 using ImageProcessing.App.UILayer.FormControl.TrackBar;
 using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
@@ -22,18 +23,22 @@ namespace ImageProcessing.App.UILayer.Forms.Main
     {
         private readonly IMainFormEventBinder _binder;
         private readonly IMenuStateFactory _state;
+        private readonly IUndoRedoService<Bitmap> _undoredo;
 
         private Image? _default;
         private Image? _srcCopy;
 
         public MainForm(
             IMainFormEventBinder binder,
+            IUndoRedoService<Bitmap> undoredo,
             IMenuStateFactory state) : base()
         {
             InitializeComponent();
 
             _state = state;
             _binder = binder;
+            _undoredo = undoredo;
+
             SetMenuState(MenuBtnState.ImageEmpty);
         }
 
@@ -205,9 +210,9 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         /// <inheritdoc/>
         public void AddToUndoRedo(Bitmap cpy, UndoRedoAction action)
         {
-            if(ImageIsDefault())
+            if (ImageIsDefault())
             {
-                cpy.Tag = nameof(ImageIsDefault);
+                cpy.Tag = MenuBtnState.ImageEmpty;
             }
 
             Write(() =>
@@ -215,12 +220,13 @@ namespace ImageProcessing.App.UILayer.Forms.Main
                 switch (action)
                 {
                     case UndoRedoAction.Redo:
-                        Src.AddToRedo(cpy);
-                        RedoButton.Enabled = !Src.RedoIsEmpty;
+                        _undoredo.AddToRedo(cpy);
+                        RedoButton.Enabled = !_undoredo.RedoIsEmpty;
                         break;
+
                     case UndoRedoAction.Undo:
-                        Src.AddToUndo(cpy);
-                        UndoButton.Enabled = !Src.UndoIsEmpty;
+                        _undoredo.AddToUndo(cpy);
+                        UndoButton.Enabled = !_undoredo.UndoIsEmpty;
                         break;
 
                     default: throw new NotSupportedException(nameof(action));
@@ -232,17 +238,17 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         public Bitmap TryUndoRedo(UndoRedoAction action)
             => Read<Bitmap>(() =>
             {
-                switch(action)
+                switch (action)
                 {
 
                     case UndoRedoAction.Redo:
-                        var redo = Src.Redo();
-                        RedoButton.Enabled = !Src.RedoIsEmpty;
+                        var redo = _undoredo.Redo();
+                        RedoButton.Enabled = !_undoredo.RedoIsEmpty;
                         return redo;
 
                     case UndoRedoAction.Undo:
-                        var undo = Src.Undo();
-                        UndoButton.Enabled = !Src.UndoIsEmpty;
+                        var undo = _undoredo.Undo();
+                        UndoButton.Enabled = !_undoredo.UndoIsEmpty;
                         return undo;
 
                     default: throw new NotSupportedException(nameof(action));

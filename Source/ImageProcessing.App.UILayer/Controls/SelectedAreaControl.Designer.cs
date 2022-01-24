@@ -120,6 +120,7 @@ namespace ImageProcessing.App.UILayer.Controls
             this.Controls.Add(this.BottomLeft);
             this.Controls.Add(this.TopRight);
             this.Controls.Add(this.TopLeft);
+            this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "SelectedAreaControl";
             this.Size = new System.Drawing.Size(267, 124);

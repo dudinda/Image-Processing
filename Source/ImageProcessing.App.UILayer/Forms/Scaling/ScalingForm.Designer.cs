@@ -193,7 +193,7 @@ namespace ImageProcessing.App.UILayer.Forms.Scaling
             this.metroPanel3.HorizontalScrollbarSize = 10;
             this.metroPanel3.Location = new System.Drawing.Point(23, 63);
             this.metroPanel3.Name = "metroPanel3";
-            this.metroPanel3.Size = new System.Drawing.Size(587, 145);
+            this.metroPanel3.Size = new System.Drawing.Size(575, 145);
             this.metroPanel3.TabIndex = 9;
             this.metroPanel3.VerticalScrollbarBarColor = true;
             this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
@@ -212,7 +212,7 @@ namespace ImageProcessing.App.UILayer.Forms.Scaling
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(632, 222);
+            this.ClientSize = new System.Drawing.Size(624, 222);
             this.Controls.Add(this.metroPanel3);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

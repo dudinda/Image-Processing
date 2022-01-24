@@ -15,35 +15,12 @@ namespace ImageProcessing.App.UILayer.Controls
         private const int WM_VSCROLL = 0x115;
         private const int WM_MOUSEWHEEL = 0x20A;
 
-        private readonly IFixedStack<Bitmap> _undo;
-        private readonly IFixedStack<Bitmap> _redo;
-
-        public bool UndoIsEmpty
-            => _undo.IsEmpty;
-
-        public bool RedoIsEmpty
-            => _redo.IsEmpty;
-
-        public void AddToUndo(Bitmap bmp)
-            => _undo.Push(bmp);
-
-        public void AddToRedo(Bitmap bmp)
-           => _redo.Push(bmp);
-
-        public Bitmap Undo()
-            => _undo.Pop();
-
-        public Bitmap Redo()
-            => _redo.Pop();
-
         public PictureBox Container
             => SourceContainer;
 
         public BitmapWithRulerControl()
         {
             InitializeComponent();
-            _undo = new FixedStackSafe<Bitmap>(10);
-            _redo = new FixedStackSafe<Bitmap>(10);
             SourceContainer.Invalidated += (sender, args) => Invalidate();
             SourceContainer.Location = new Point(Padding.Left, Padding.Top);
         }

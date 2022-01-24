@@ -47,7 +47,6 @@ namespace ImageProcessing.App.PresentationLayer.Views
         /// <summary>
         /// Set the state for the main view buttons.
         /// </summary>
-        /// <param name="state"></param>
         void SetMenuState(MenuBtnState state);
     }
 }

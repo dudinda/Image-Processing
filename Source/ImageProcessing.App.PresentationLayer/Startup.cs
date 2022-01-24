@@ -67,6 +67,8 @@ using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Settings.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
 using ImageProcessing.App.ServiceLayer.Services.StaTask;
+using ImageProcessing.App.ServiceLayer.Services.UndoRedo.Implementation;
+using ImageProcessing.App.ServiceLayer.Services.UndoRedo.Interface;
 using ImageProcessing.App.ServiceLayer.Win.Builders.ChartBuilder.Implementation;
 using ImageProcessing.App.ServiceLayer.Win.Builders.ChartBuilder.Interface;
 using ImageProcessing.App.ServiceLayer.Win.NonBlockDialog.Implementation;
@@ -95,6 +97,7 @@ namespace ImageProcessing.App.PresentationLayer
                 .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
                 .RegisterSingleton<IStaTaskService, StaTaskService>()
                 .RegisterSingleton<ICacheService<Bitmap>, CacheService<Bitmap>>()
+                .RegisterSingleton<IUndoRedoService<Bitmap>, UndoRedoService>()
                 .RegisterTransient<IConvolutionFactory, ConvolutionFactory>()
                 .RegisterTransient<IMorphologyFactory, MorphologyFactory>()
                 .RegisterTransient<IStructuringElementFactory, StructuringElementFactory>()

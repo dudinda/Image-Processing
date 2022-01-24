@@ -55,7 +55,7 @@ namespace ImageProcessing.App.UILayer.Forms.Rotation
             // 
             // 
             this.DegreesTextBox.CustomButton.Image = null;
-            this.DegreesTextBox.CustomButton.Location = new System.Drawing.Point(236, 1);
+            this.DegreesTextBox.CustomButton.Location = new System.Drawing.Point(245, 1);
             this.DegreesTextBox.CustomButton.Name = "";
             this.DegreesTextBox.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.DegreesTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -73,7 +73,7 @@ namespace ImageProcessing.App.UILayer.Forms.Rotation
             this.DegreesTextBox.SelectionLength = 0;
             this.DegreesTextBox.SelectionStart = 0;
             this.DegreesTextBox.ShortcutsEnabled = true;
-            this.DegreesTextBox.Size = new System.Drawing.Size(258, 23);
+            this.DegreesTextBox.Size = new System.Drawing.Size(267, 23);
             this.DegreesTextBox.TabIndex = 3;
             this.DegreesTextBox.UseSelectable = true;
             this.DegreesTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -82,9 +82,9 @@ namespace ImageProcessing.App.UILayer.Forms.Rotation
             // DegreesText
             // 
             this.DegreesText.Image = ((System.Drawing.Image)(resources.GetObject("DegreesText.Image")));
-            this.DegreesText.Location = new System.Drawing.Point(6, 4);
+            this.DegreesText.Location = new System.Drawing.Point(3, 1);
             this.DegreesText.Name = "DegreesText";
-            this.DegreesText.Size = new System.Drawing.Size(10, 16);
+            this.DegreesText.Size = new System.Drawing.Size(10, 25);
             this.DegreesText.TabIndex = 2;
             this.DegreesText.TabStop = false;
             // 
