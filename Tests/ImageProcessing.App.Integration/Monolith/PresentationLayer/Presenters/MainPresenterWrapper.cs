@@ -1,7 +1,3 @@
-using System;
-using System.Configuration;
-using System.Diagnostics;
-using System.Drawing;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
@@ -12,19 +8,11 @@ using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Inte
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Pipeline.Interface;
-using ImageProcessing.App.PresentationLayer.Code.Constants;
-using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Container;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.FileDialog;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Show;
-using ImageProcessing.App.PresentationLayer.Presenters;
-using ImageProcessing.App.PresentationLayer.Properties;
-using ImageProcessing.App.PresentationLayer.ViewModels;
-using ImageProcessing.App.ServiceLayer.Services.Pipeline;
-using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
-using ImageProcessing.App.ServiceLayer.Win.Code.Extensions;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
@@ -36,7 +24,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         ISubscriber<ShowSettingsMenuEventArgs>, ISubscriber<ShowTransformationMenuEventArgs>,
         ISubscriber<OpenFileDialogEventArgs>, ISubscriber<SaveAsFileDialogEventArgs>,
         ISubscriber<SaveWithoutFileDialogEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
-        ISubscriber<ReplaceImageEventArgs>, ISubscriber<TrackBarEventArgs>,
+        ISubscriber<SetSourceEventArgs>, ISubscriber<TrackBarEventArgs>,
         ISubscriber<UndoRedoEventArgs>, ISubscriber<FormIsClosedEventArgs>,
         ISubscriber<ShowRotationMenuEventArgs>, ISubscriber<ShowScalingMenuEventArgs>
     {
@@ -131,8 +119,8 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
             return Task.CompletedTask;
         }
 
-        /// <inheritdoc cref="ReplaceImageEventArgs"/>
-        public virtual Task OnEventHandler(object publisher, ReplaceImageEventArgs e)
+        /// <inheritdoc cref="SetSourceEventArgs"/>
+        public virtual Task OnEventHandler(object publisher, SetSourceEventArgs e)
         {
             return Task.CompletedTask;
         }

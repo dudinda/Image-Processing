@@ -5,10 +5,13 @@ using System.Windows.Forms;
 using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Main.Interface;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Services.UndoRedo.Interface;
 using ImageProcessing.App.UILayer.Control;
 using ImageProcessing.App.UILayer.FormControl.TrackBar;
+using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Main;
 using ImageProcessing.App.UILayer.Forms.Main;
+using ImageProcessing.App.UILayer.UIModel.Factories.MenuState.Interface;
 
 using MetroFramework.Controls;
 
@@ -19,7 +22,9 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
         private class NonUIMainForm : MainForm
         {
             public NonUIMainForm(
-               IMainFormEventBinderWrapper binder) : base(binder)
+                IMainFormEventBinder binder,
+                IUndoRedoService<Bitmap> undoredo,
+                IMenuStateFactory state) : base(binder, undoredo, state)
             {
              
             }
@@ -34,9 +39,11 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
         private readonly NonUIMainForm _form;
 
         public MainFormWrapper(
-            IMainFormEventBinderWrapper binder)
+            IMainFormEventBinderWrapper binder,
+            IUndoRedoService<Bitmap> undoredo,
+            IMenuStateFactory state)
         {
-            _form = new NonUIMainForm(binder);
+            _form = new NonUIMainForm(binder, undoredo, state);
             _binder = binder;
         }
 
@@ -63,13 +70,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
         public virtual Image SrcImageCopy
         {
             set => _form.SrcImageCopy = value;
-            get => _form.DstImageCopy;
-        }
-
-        public virtual Image DstImageCopy
-        {
-            set => _form.DstImageCopy = value;
-            get => _form.DstImageCopy;
+            get => _form.SrcImageCopy;
         }
 
         public virtual Image DefaultImage
@@ -127,6 +128,10 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
 
         public MetroTabControl TabsCtrl
             => _form.TabsCtrl;
+
+        public Image LoadedImage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public ToolStripButton SetSourceButton => throw new NotImplementedException();
 
         public virtual void SetDefaultImage()
             => _form.SetDefaultImage();
@@ -190,5 +195,9 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
             _binder.OnElementExpose(this);
         }
 
+        public void SetMenuState(MenuBtnState state)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
