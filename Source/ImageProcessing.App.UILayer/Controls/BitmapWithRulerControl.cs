@@ -2,9 +2,6 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-using ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Safe;
-using ImageProcessing.Utility.DataStructure.FixedStackSrc.Interface;
-
 using MetroFramework.Controls;
 
 namespace ImageProcessing.App.UILayer.Controls
@@ -14,6 +11,8 @@ namespace ImageProcessing.App.UILayer.Controls
         private const int WM_HSCROLL = 0x114;
         private const int WM_VSCROLL = 0x115;
         private const int WM_MOUSEWHEEL = 0x20A;
+
+        public bool DrawRuler { get; set; } = true;
 
         public PictureBox Container
             => SourceContainer;
@@ -27,7 +26,7 @@ namespace ImageProcessing.App.UILayer.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (SourceContainer.Image != null)
+            if (SourceContainer.Image != null && DrawRuler)
             {
                 using var pen = new Pen(Color.Black, 1);
                 using var font = new Font("Times New Roman", 16, FontStyle.Regular, GraphicsUnit.Pixel);

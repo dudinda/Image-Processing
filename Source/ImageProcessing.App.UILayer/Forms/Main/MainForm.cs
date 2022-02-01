@@ -250,14 +250,16 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             {
                 switch (action)
                 {
-
+                    
                     case UndoRedoAction.Redo:
                         var redo = _undoredo.Redo();
+                        Src.DrawRuler = !Enum.TryParse<MenuBtnState>(redo.Tag?.ToString(), out var _);
                         RedoButton.Enabled = !_undoredo.RedoIsEmpty;
                         return redo;
 
                     case UndoRedoAction.Undo:
                         var undo = _undoredo.Undo();
+                        Src.DrawRuler = !Enum.TryParse<MenuBtnState>(undo.Tag?.ToString(), out var _);
                         UndoButton.Enabled = !_undoredo.UndoIsEmpty;
                         return undo;
 
