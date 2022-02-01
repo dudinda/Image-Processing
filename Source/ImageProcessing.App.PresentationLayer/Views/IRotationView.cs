@@ -6,7 +6,7 @@ using ImageProcessing.Microkernel.MVP.View;
 
 namespace ImageProcessing.App.PresentationLayer.Views
 {
-    public interface IRotationView : IView,
+    public interface IRotationView : IView, IFormState,
         IDisposable, IDropdown<RotationMethod>, ITooltip
     {
         double Radians { get; }

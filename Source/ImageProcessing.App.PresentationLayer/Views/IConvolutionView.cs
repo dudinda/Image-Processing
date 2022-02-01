@@ -10,7 +10,7 @@ namespace ImageProcessing.App.PresentationLayer.Views
     /// Represents the base behavior of a
     /// convolution kernel control panel.
     /// </summary>
-    public interface IConvolutionView : IView,
+    public interface IConvolutionView : IView, IFormState,
         ITooltip, IDisposable, IDropdown<ConvKernel>
     {
 

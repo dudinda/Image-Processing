@@ -74,5 +74,10 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
 
         public virtual void Tooltip(string message)
             => _form.Tooltip(message);
+
+        public void EnableControls(bool isEnabled)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

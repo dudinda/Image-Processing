@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 using MetroFramework.Controls;
 
-namespace ImageProcessing.App.UILayer.FormControl.TrackBar
+namespace ImageProcessing.App.UILayer.Controls
 {
     internal sealed class RotationTrackBar : MetroTrackBar
     {

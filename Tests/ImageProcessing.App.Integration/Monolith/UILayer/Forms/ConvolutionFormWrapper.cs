@@ -70,6 +70,11 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
 
         }
         public virtual void Tooltip(string message)
-            => _form.Tooltip(message);   
+            => _form.Tooltip(message);
+
+        public void EnableControls(bool isEnabled)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

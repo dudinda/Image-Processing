@@ -50,8 +50,8 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.PathToImage = new System.Windows.Forms.ToolStripLabel();
             this.SelectionBtn = new System.Windows.Forms.ToolStripButton();
             this.ErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.SrcRotation = new ImageProcessing.App.UILayer.FormControl.TrackBar.RotationTrackBar();
-            this.SrcZoom = new ImageProcessing.App.UILayer.Control.ScaleTrackBar();
+            this.SrcRotation = new ImageProcessing.App.UILayer.Controls.RotationTrackBar();
+            this.SrcZoom = new ImageProcessing.App.UILayer.Controls.ScaleTrackBar();
             this.MainContainer = new MetroFramework.Controls.MetroPanel();
             this.Src = new ImageProcessing.App.UILayer.Controls.BitmapWithRulerControl();
             this.Tabs = new MetroFramework.Controls.MetroTabControl();
@@ -352,8 +352,8 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         private ToolStripMenuItem MorphologyMenu;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripButton SelectionBtn;
-        private FormControl.TrackBar.RotationTrackBar SrcRotation;
-        private Control.ScaleTrackBar SrcZoom;
+        private Controls.RotationTrackBar SrcRotation;
+        private Controls.ScaleTrackBar SrcZoom;
         private MetroFramework.Controls.MetroPanel MainContainer;
         private MetroFramework.Controls.MetroTabControl Tabs;
         private Controls.BitmapWithRulerControl Src;

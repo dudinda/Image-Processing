@@ -39,7 +39,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             this.Entropy = new System.Windows.Forms.ToolStripButton();
             this.PathToImage = new System.Windows.Forms.ToolStripLabel();
             this.ShuffleSrc = new System.Windows.Forms.ToolStripButton();
-            this.QualityMeasure = new ImageProcessing.App.UILayer.Control.QualityMeasureToolStripButton();
+            this.QualityMeasure = new ImageProcessing.App.UILayer.Controls.QualityMeasureToolStripButton();
             this.DistributionsComboBox = new MetroFramework.Controls.MetroComboBox();
             this.Transform = new MetroFramework.Controls.MetroButton();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
@@ -274,7 +274,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
         private System.Windows.Forms.ToolStripButton Entropy;
         private System.Windows.Forms.ToolStripLabel PathToImage;
         private System.Windows.Forms.ToolStripButton ShuffleSrc;
-        private Control.QualityMeasureToolStripButton QualityMeasure;
+        private Controls.QualityMeasureToolStripButton QualityMeasure;
         private MetroFramework.Controls.MetroPanel metroPanel1;
         private Controls.SelectedAreaControl selectedAreaControl1;
     }

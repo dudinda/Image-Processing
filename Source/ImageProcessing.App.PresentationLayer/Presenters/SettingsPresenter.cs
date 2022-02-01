@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.SettingsArgs;
 using ImageProcessing.App.PresentationLayer.Views;
@@ -14,7 +15,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
 {
     internal sealed class SettingsPresenter : BasePresenter<ISettingsView>,
         ISubscriber<ChangeLumaEventArgs>, ISubscriber<ChangeRotationEventArgs>,
-        ISubscriber<ChangeScalingEventArgs>, ISubscriber<FormIsClosedEventArgs>
+        ISubscriber<ChangeScalingEventArgs>, ISubscriber<FormIsClosedEventArgs>,
+        ISubscriber<EnableControlEventArgs>
     {
         private readonly ILoggerService _logger;
         private readonly IAppSettings _settings;
@@ -77,6 +79,20 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             try
             {
                 View.Close();
+            }
+            catch (Exception ex)
+            {
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+            }
+
+            return Task.CompletedTask;
+        }
+
+        public Task OnEventHandler(object publisher, EnableControlEventArgs e)
+        {
+            try
+            {
+                View.EnableControls(e.State != MenuBtnState.ImageEmpty);
             }
             catch (Exception ex)
             {

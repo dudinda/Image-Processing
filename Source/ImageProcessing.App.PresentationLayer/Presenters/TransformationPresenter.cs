@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.TransformationArgs;
 using ImageProcessing.App.PresentationLayer.Properties;
@@ -19,7 +20,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
 {
     internal sealed class TransformationPresenter : BasePresenter<ITransformationView, BitmapViewModel>,
         ISubscriber<ApplyTransformationEventArgs>, ISubscriber<ContainerUpdatedEventArgs>,
-        ISubscriber<RestoreFocusEventArgs>, ISubscriber<FormIsClosedEventArgs>
+        ISubscriber<RestoreFocusEventArgs>, ISubscriber<FormIsClosedEventArgs>,
+        ISubscriber<EnableControlEventArgs>
     {
         private readonly ILoggerService _logger;
         private readonly IAsyncOperationLocker _locker;
@@ -106,6 +108,21 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             try
             {
                 View.Close();
+            }
+            catch (Exception ex)
+            {
+                View.Tooltip(Errors.UpdatingViewModel);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+            }
+
+            return Task.CompletedTask;
+        }
+
+        public Task OnEventHandler(object publisher, EnableControlEventArgs e)
+        {
+            try
+            {
+                View.EnableControls(e.State != MenuBtnState.ImageEmpty);
             }
             catch (Exception ex)
             {

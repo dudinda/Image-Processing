@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ImageProcessing.App.UILayer.Control
+namespace ImageProcessing.App.UILayer.Controls
 {
     public class QualityMeasureToolStripButton : ToolStripButton
     {

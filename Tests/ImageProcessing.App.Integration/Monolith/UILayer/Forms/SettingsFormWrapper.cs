@@ -82,5 +82,10 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
         {
             
         }
+
+        public void EnableControls(bool isEnabled)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

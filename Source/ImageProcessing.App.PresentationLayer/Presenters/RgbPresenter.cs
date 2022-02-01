@@ -24,7 +24,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         ISubscriber<ApplyRgbFilterEventArgs>, ISubscriber<ApplyRgbChannelFilterEventArgs>,
         ISubscriber<ContainerUpdatedEventArgs>, ISubscriber<ShowColorMatrixMenuEventArgs>,
         ISubscriber<ShowTooltipOnErrorEventArgs>, ISubscriber<RestoreFocusEventArgs>,
-        ISubscriber<FormIsClosedEventArgs>
+        ISubscriber<FormIsClosedEventArgs>, ISubscriber<EnableControlEventArgs>
     {
         private readonly IRgbProvider _provider;
         private readonly ILoggerService _logger;
@@ -176,6 +176,21 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             try
             {
                 View.Close();
+            }
+            catch (Exception ex)
+            {
+                View.Tooltip(Errors.UpdatingViewModel);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+            }
+
+            return Task.CompletedTask;
+        }
+
+        public Task OnEventHandler(object publisher, EnableControlEventArgs e)
+        {
+            try
+            {
+                View.EnableControls(e.State != MenuBtnState.ImageEmpty);
             }
             catch (Exception ex)
             {

@@ -418,6 +418,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                     View.GetImageCopy().Tag = tag;
                 }
 
+                Aggregator.PublishFromAll(publisher, new EnableControlEventArgs(tag));
                 Aggregator.PublishFromAll(publisher, new ContainerUpdatedEventArgs(bmp));
 
             }
