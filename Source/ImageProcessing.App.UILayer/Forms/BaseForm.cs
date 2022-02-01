@@ -4,6 +4,7 @@ using System.Threading;
 using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Extensions.EnumExt;
+using ImageProcessing.App.UILayer.Code.Extensions;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 using ImageProcessing.Microkernel.MVP.Controller.Implementation;
 using ImageProcessing.Microkernel.MVP.Controller.Interface;
@@ -88,6 +89,17 @@ namespace ImageProcessing.App.UILayer.Forms
 
             box.Items.AddRange(Array.ConvertAll(values, item => (object)item));
             box.SelectedIndex = 0;
+        }
+
+        public void EnableControls(bool isEnabled)
+        {
+            Write(() =>
+           {
+               foreach (Control c in Controls)
+               {
+                   c.Enable(isEnabled);
+               }
+           });
         }
     }
 }

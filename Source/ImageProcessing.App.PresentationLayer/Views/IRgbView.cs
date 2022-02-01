@@ -6,7 +6,7 @@ using ImageProcessing.Microkernel.MVP.View;
 
 namespace ImageProcessing.App.PresentationLayer.Views
 {
-    public interface IRgbView : IView,
+    public interface IRgbView : IView, IFormState,
         IDisposable, IDropdown<RgbFltr>, ITooltip
         
     {

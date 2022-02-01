@@ -26,7 +26,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         ISubscriber<BuildRandomVariableFunctionEventArgs>, ISubscriber<ShowQualityMeasureMenuEventArgs>,
         ISubscriber<GetRandomVariableInfoEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
         ISubscriber<RestoreFocusEventArgs>, ISubscriber<ContainerUpdatedEventArgs>,
-        ISubscriber<FormIsClosedEventArgs>
+        ISubscriber<FormIsClosedEventArgs>, ISubscriber<EnableControlEventArgs>
     {
         private readonly IBitmapService _service;
         private readonly ILoggerService _logger;
@@ -218,6 +218,21 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             try
             {
                 View.Close();
+            }
+            catch (Exception ex)
+            {
+                View.Tooltip(Errors.UpdatingViewModel);
+                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+            }
+
+            return Task.CompletedTask;
+        }
+
+        public Task OnEventHandler(object publisher, EnableControlEventArgs e)
+        {
+            try
+            {
+                View.EnableControls(e.State != MenuBtnState.ImageEmpty);
             }
             catch (Exception ex)
             {

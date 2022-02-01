@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 using MetroFramework.Controls;
 
-namespace ImageProcessing.App.UILayer.Control
+namespace ImageProcessing.App.UILayer.Controls
 {
     public class ScaleTrackBar : MetroTrackBar
     {

@@ -11,7 +11,7 @@ namespace ImageProcessing.App.PresentationLayer.Views
     /// settings for algorithms of the domain.
     /// </summary>
     public interface ISettingsView : IView, IDisposable,
-        IDropdown<RotationMethod, ScalingMethod, Luma>
+        IDropdown<RotationMethod, ScalingMethod, Luma>, IFormState
     {
 
     }

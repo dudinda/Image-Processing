@@ -12,7 +12,7 @@ namespace ImageProcessing.App.PresentationLayer.Views
     /// Represents a control panel which provides tools to
     /// get the information about a bitmap luminance.
     /// </summary>
-    public interface IDistributionView : IView,
+    public interface IDistributionView : IView, IFormState,
         IDisposable, ITooltip, IDropdown<PrDistribution>
     {
         /// <summary>

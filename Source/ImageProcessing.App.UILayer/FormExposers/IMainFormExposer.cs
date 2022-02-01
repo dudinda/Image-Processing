@@ -1,8 +1,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-using ImageProcessing.App.UILayer.Control;
-using ImageProcessing.App.UILayer.FormControl.TrackBar;
+using ImageProcessing.App.UILayer.Controls;
 using ImageProcessing.App.UILayer.Forms.Main;
 
 using MetroFramework.Controls;

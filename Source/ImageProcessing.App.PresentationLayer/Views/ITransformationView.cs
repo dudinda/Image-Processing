@@ -9,7 +9,7 @@ namespace ImageProcessing.App.PresentationLayer.Views
     /// control panel.
     /// </summary>
     public interface ITransformationView : IView,
-        IDropdown<AffTransform>, ITooltip
+        IDropdown<AffTransform>, ITooltip, IFormState
     {
 
     }

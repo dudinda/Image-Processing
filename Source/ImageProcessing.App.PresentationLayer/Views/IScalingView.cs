@@ -7,7 +7,7 @@ namespace ImageProcessing.App.PresentationLayer.Views
     /// <summary>
     /// Represents the base behavior of a scaling control panel.
     /// </summary>
-    public interface IScalingView : IView,
+    public interface IScalingView : IView, IFormState,
         IDropdown<ScalingMethod>, ITooltip
     {
         (string, string) Parameters { get; }
