@@ -4,6 +4,7 @@ using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions;
+using ImageProcessing.App.UILayer.Code.Extensions;
 using ImageProcessing.App.UILayer.FormEventBinders.Transformation.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Main;
 using ImageProcessing.App.UILayer.FormExposers.Transformation;
@@ -73,6 +74,11 @@ namespace ImageProcessing.App.UILayer.Forms.Transformation
             _main.TabsCtrl.TabPages.RemoveAt(idx);
 
             base.Close();
+        }
+
+        public void EnableControls(bool isEnabled)
+        {
+            Write(() => TransformationButtonPanel.Enable(isEnabled));
         }
 
         public MetroButton ApplyButton

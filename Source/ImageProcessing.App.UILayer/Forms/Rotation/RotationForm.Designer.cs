@@ -30,8 +30,10 @@ namespace ImageProcessing.App.UILayer.Forms.Rotation
             this.RotationComboBox = new MetroFramework.Controls.MetroComboBox();
             this.ApplyRotation = new MetroFramework.Controls.MetroButton();
             this.ShowToolTip = new MetroFramework.Components.MetroToolTip();
+            this.RotationButtonPanel = new MetroFramework.Controls.MetroPanel();
             this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DegreesText)).BeginInit();
+            this.RotationButtonPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroPanel1
@@ -41,7 +43,7 @@ namespace ImageProcessing.App.UILayer.Forms.Rotation
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(23, 98);
+            this.metroPanel1.Location = new System.Drawing.Point(3, 50);
             this.metroPanel1.Name = "metroPanel1";
             this.metroPanel1.Size = new System.Drawing.Size(286, 29);
             this.metroPanel1.TabIndex = 10;
@@ -92,7 +94,7 @@ namespace ImageProcessing.App.UILayer.Forms.Rotation
             // 
             this.RotationComboBox.FormattingEnabled = true;
             this.RotationComboBox.ItemHeight = 23;
-            this.RotationComboBox.Location = new System.Drawing.Point(23, 63);
+            this.RotationComboBox.Location = new System.Drawing.Point(3, 15);
             this.RotationComboBox.MaxDropDownItems = 100;
             this.RotationComboBox.Name = "RotationComboBox";
             this.RotationComboBox.Size = new System.Drawing.Size(286, 29);
@@ -101,7 +103,7 @@ namespace ImageProcessing.App.UILayer.Forms.Rotation
             // 
             // ApplyRotation
             // 
-            this.ApplyRotation.Location = new System.Drawing.Point(23, 133);
+            this.ApplyRotation.Location = new System.Drawing.Point(3, 85);
             this.ApplyRotation.Name = "ApplyRotation";
             this.ApplyRotation.Size = new System.Drawing.Size(286, 31);
             this.ApplyRotation.TabIndex = 9;
@@ -114,14 +116,28 @@ namespace ImageProcessing.App.UILayer.Forms.Rotation
             this.ShowToolTip.StyleManager = null;
             this.ShowToolTip.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
+            // RotationButtonPanel
+            // 
+            this.RotationButtonPanel.Controls.Add(this.RotationComboBox);
+            this.RotationButtonPanel.Controls.Add(this.metroPanel1);
+            this.RotationButtonPanel.Controls.Add(this.ApplyRotation);
+            this.RotationButtonPanel.HorizontalScrollbarBarColor = true;
+            this.RotationButtonPanel.HorizontalScrollbarHighlightOnWheel = false;
+            this.RotationButtonPanel.HorizontalScrollbarSize = 10;
+            this.RotationButtonPanel.Location = new System.Drawing.Point(23, 63);
+            this.RotationButtonPanel.Name = "RotationButtonPanel";
+            this.RotationButtonPanel.Size = new System.Drawing.Size(298, 119);
+            this.RotationButtonPanel.TabIndex = 11;
+            this.RotationButtonPanel.VerticalScrollbarBarColor = true;
+            this.RotationButtonPanel.VerticalScrollbarHighlightOnWheel = false;
+            this.RotationButtonPanel.VerticalScrollbarSize = 10;
+            // 
             // RotationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(323, 194);
-            this.Controls.Add(this.metroPanel1);
-            this.Controls.Add(this.RotationComboBox);
-            this.Controls.Add(this.ApplyRotation);
+            this.ClientSize = new System.Drawing.Size(356, 194);
+            this.Controls.Add(this.RotationButtonPanel);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
@@ -131,6 +147,7 @@ namespace ImageProcessing.App.UILayer.Forms.Rotation
             this.Text = "Rotation";
             this.metroPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DegreesText)).EndInit();
+            this.RotationButtonPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -142,5 +159,6 @@ namespace ImageProcessing.App.UILayer.Forms.Rotation
         private MetroFramework.Controls.MetroComboBox RotationComboBox;
         private MetroFramework.Controls.MetroButton ApplyRotation;
         private MetroFramework.Components.MetroToolTip ShowToolTip;
+        private MetroFramework.Controls.MetroPanel RotationButtonPanel;
     }
 }

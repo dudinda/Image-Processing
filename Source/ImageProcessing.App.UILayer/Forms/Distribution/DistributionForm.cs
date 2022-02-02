@@ -6,6 +6,7 @@ using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions;
+using ImageProcessing.App.UILayer.Code.Extensions;
 using ImageProcessing.App.UILayer.FormEventBinders.Distribution.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Distribution;
 using ImageProcessing.App.UILayer.FormExposers.Main;
@@ -130,6 +131,11 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             _main.TabsCtrl.TabPages.RemoveAt(idx);
 
             base.Close();
+        }
+
+        public void EnableControls(bool isEnabled)
+        {
+            Write(() => DistributionButtonPanel.Enable(isEnabled));
         }
 
         /// <summary>

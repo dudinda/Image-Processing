@@ -34,13 +34,13 @@ namespace ImageProcessing.App.UILayer.Forms.Transformation
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.TransformationComboBox = new MetroFramework.Controls.MetroComboBox();
             this.ApplyTransformation = new MetroFramework.Controls.MetroButton();
-            this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
-            this.selectedAreaControl1 = new ImageProcessing.App.UILayer.Controls.SelectedAreaControl();
+            this.TransformationButtonPanel = new MetroFramework.Controls.MetroPanel();
+            this.SelectedAreaControl = new ImageProcessing.App.UILayer.Controls.SelectedAreaControl();
             this.metroPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.YAxisLabel)).BeginInit();
             this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.metroPanel3.SuspendLayout();
+            this.TransformationButtonPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroPanel2
@@ -171,38 +171,38 @@ namespace ImageProcessing.App.UILayer.Forms.Transformation
             this.ApplyTransformation.Text = "Apply";
             this.ApplyTransformation.UseSelectable = true;
             // 
-            // metroPanel3
+            // TransformationButtonPanel
             // 
-            this.metroPanel3.Controls.Add(this.selectedAreaControl1);
-            this.metroPanel3.Controls.Add(this.metroPanel1);
-            this.metroPanel3.Controls.Add(this.metroPanel2);
-            this.metroPanel3.Controls.Add(this.ApplyTransformation);
-            this.metroPanel3.Controls.Add(this.TransformationComboBox);
-            this.metroPanel3.HorizontalScrollbarBarColor = true;
-            this.metroPanel3.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel3.HorizontalScrollbarSize = 10;
-            this.metroPanel3.Location = new System.Drawing.Point(23, 63);
-            this.metroPanel3.Name = "metroPanel3";
-            this.metroPanel3.Size = new System.Drawing.Size(586, 139);
-            this.metroPanel3.TabIndex = 4;
-            this.metroPanel3.VerticalScrollbarBarColor = true;
-            this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel3.VerticalScrollbarSize = 10;
+            this.TransformationButtonPanel.Controls.Add(this.SelectedAreaControl);
+            this.TransformationButtonPanel.Controls.Add(this.metroPanel1);
+            this.TransformationButtonPanel.Controls.Add(this.metroPanel2);
+            this.TransformationButtonPanel.Controls.Add(this.ApplyTransformation);
+            this.TransformationButtonPanel.Controls.Add(this.TransformationComboBox);
+            this.TransformationButtonPanel.HorizontalScrollbarBarColor = true;
+            this.TransformationButtonPanel.HorizontalScrollbarHighlightOnWheel = false;
+            this.TransformationButtonPanel.HorizontalScrollbarSize = 10;
+            this.TransformationButtonPanel.Location = new System.Drawing.Point(23, 63);
+            this.TransformationButtonPanel.Name = "TransformationButtonPanel";
+            this.TransformationButtonPanel.Size = new System.Drawing.Size(586, 139);
+            this.TransformationButtonPanel.TabIndex = 4;
+            this.TransformationButtonPanel.VerticalScrollbarBarColor = true;
+            this.TransformationButtonPanel.VerticalScrollbarHighlightOnWheel = false;
+            this.TransformationButtonPanel.VerticalScrollbarSize = 10;
             // 
-            // selectedAreaControl1
+            // SelectedAreaControl
             // 
-            this.selectedAreaControl1.Location = new System.Drawing.Point(292, 6);
-            this.selectedAreaControl1.Margin = new System.Windows.Forms.Padding(0);
-            this.selectedAreaControl1.Name = "selectedAreaControl1";
-            this.selectedAreaControl1.Size = new System.Drawing.Size(267, 101);
-            this.selectedAreaControl1.TabIndex = 4;
-            this.selectedAreaControl1.UseSelectable = true;
+            this.SelectedAreaControl.Location = new System.Drawing.Point(292, 6);
+            this.SelectedAreaControl.Margin = new System.Windows.Forms.Padding(0);
+            this.SelectedAreaControl.Name = "SelectedAreaControl";
+            this.SelectedAreaControl.Size = new System.Drawing.Size(267, 101);
+            this.SelectedAreaControl.TabIndex = 4;
+            this.SelectedAreaControl.UseSelectable = true;
             // 
             // TransformationForm
             // 
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(636, 225);
-            this.Controls.Add(this.metroPanel3);
+            this.Controls.Add(this.TransformationButtonPanel);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
@@ -215,7 +215,7 @@ namespace ImageProcessing.App.UILayer.Forms.Transformation
             ((System.ComponentModel.ISupportInitialize)(this.YAxisLabel)).EndInit();
             this.metroPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.metroPanel3.ResumeLayout(false);
+            this.TransformationButtonPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -230,7 +230,7 @@ namespace ImageProcessing.App.UILayer.Forms.Transformation
         private System.Windows.Forms.PictureBox YAxisLabel;
         private MetroFramework.Controls.MetroTextBox XScaleTextBox;
         private MetroFramework.Controls.MetroTextBox YScaleTextBox;
-        private MetroFramework.Controls.MetroPanel metroPanel3;
-        private Controls.SelectedAreaControl selectedAreaControl1;
+        private MetroFramework.Controls.MetroPanel TransformationButtonPanel;
+        private Controls.SelectedAreaControl SelectedAreaControl;
     }
 }

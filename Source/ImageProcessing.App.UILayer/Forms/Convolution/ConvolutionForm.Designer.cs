@@ -27,13 +27,15 @@ namespace ImageProcessing.App.UILayer.Forms.Convolution
             this.ErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.ConvolutionFilterComboBox = new MetroFramework.Controls.MetroComboBox();
             this.Apply = new MetroFramework.Controls.MetroButton();
+            this.ConvoltuionButtonPanel = new MetroFramework.Controls.MetroPanel();
+            this.ConvoltuionButtonPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // ConvolutionFilterComboBox
             // 
             this.ConvolutionFilterComboBox.FormattingEnabled = true;
             this.ConvolutionFilterComboBox.ItemHeight = 23;
-            this.ConvolutionFilterComboBox.Location = new System.Drawing.Point(23, 60);
+            this.ConvolutionFilterComboBox.Location = new System.Drawing.Point(3, 10);
             this.ConvolutionFilterComboBox.MaxDropDownItems = 100;
             this.ConvolutionFilterComboBox.Name = "ConvolutionFilterComboBox";
             this.ConvolutionFilterComboBox.Size = new System.Drawing.Size(254, 29);
@@ -42,19 +44,33 @@ namespace ImageProcessing.App.UILayer.Forms.Convolution
             // 
             // Apply
             // 
-            this.Apply.Location = new System.Drawing.Point(23, 95);
+            this.Apply.Location = new System.Drawing.Point(3, 45);
             this.Apply.Name = "Apply";
             this.Apply.Size = new System.Drawing.Size(254, 23);
             this.Apply.TabIndex = 1;
             this.Apply.Text = "Apply";
             this.Apply.UseSelectable = true;
             // 
+            // ConvoltuionButtonPanel
+            // 
+            this.ConvoltuionButtonPanel.Controls.Add(this.ConvolutionFilterComboBox);
+            this.ConvoltuionButtonPanel.Controls.Add(this.Apply);
+            this.ConvoltuionButtonPanel.HorizontalScrollbarBarColor = true;
+            this.ConvoltuionButtonPanel.HorizontalScrollbarHighlightOnWheel = false;
+            this.ConvoltuionButtonPanel.HorizontalScrollbarSize = 10;
+            this.ConvoltuionButtonPanel.Location = new System.Drawing.Point(23, 53);
+            this.ConvoltuionButtonPanel.Name = "ConvoltuionButtonPanel";
+            this.ConvoltuionButtonPanel.Size = new System.Drawing.Size(263, 76);
+            this.ConvoltuionButtonPanel.TabIndex = 2;
+            this.ConvoltuionButtonPanel.VerticalScrollbarBarColor = true;
+            this.ConvoltuionButtonPanel.VerticalScrollbarHighlightOnWheel = false;
+            this.ConvoltuionButtonPanel.VerticalScrollbarSize = 10;
+            // 
             // ConvolutionForm
             // 
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
-            this.ClientSize = new System.Drawing.Size(300, 130);
-            this.Controls.Add(this.ConvolutionFilterComboBox);
-            this.Controls.Add(this.Apply);
+            this.ClientSize = new System.Drawing.Size(319, 130);
+            this.Controls.Add(this.ConvoltuionButtonPanel);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
@@ -62,6 +78,7 @@ namespace ImageProcessing.App.UILayer.Forms.Convolution
             this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
             this.Text = "Convolution Kernel";
+            this.ConvoltuionButtonPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -70,5 +87,6 @@ namespace ImageProcessing.App.UILayer.Forms.Convolution
         private System.Windows.Forms.ToolTip ErrorToolTip;
         private MetroFramework.Controls.MetroComboBox ConvolutionFilterComboBox;
         private MetroFramework.Controls.MetroButton Apply;
+        private MetroFramework.Controls.MetroPanel ConvoltuionButtonPanel;
     }
 }
