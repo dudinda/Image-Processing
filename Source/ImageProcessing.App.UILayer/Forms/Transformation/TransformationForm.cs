@@ -41,6 +41,8 @@ namespace ImageProcessing.App.UILayer.Forms.Transformation
 
             _binder = binder;
             _binder.OnElementExpose(this);
+
+            BringToFront();
         }
 
         /// <inheritdoc/>

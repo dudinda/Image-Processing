@@ -38,6 +38,8 @@ namespace ImageProcessing.App.UILayer.Forms.Convolution
 
             _binder = binder;
             _binder.OnElementExpose(this);
+
+            BringToFront();
         }
 
         public new void Show()
