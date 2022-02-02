@@ -213,7 +213,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             // 
             this.SetSourceBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.SetSourceBtn.Enabled = false;
-            this.SetSourceBtn.Image = global::ImageProcessing.App.UILayer.Properties.Resources.ReplaceSource_Image;
+            this.SetSourceBtn.Image = ((System.Drawing.Image)(resources.GetObject("SetSourceBtn.Image")));
             this.SetSourceBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SetSourceBtn.Name = "SetSourceBtn";
             this.SetSourceBtn.Size = new System.Drawing.Size(24, 24);
@@ -291,6 +291,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.Src.AutoSize = true;
             this.Src.Cursor = System.Windows.Forms.Cursors.Default;
             this.Src.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Src.DrawRuler = true;
             this.Src.Location = new System.Drawing.Point(0, 0);
             this.Src.Name = "Src";
             this.Src.Padding = new System.Windows.Forms.Padding(40);
@@ -315,6 +316,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             this.Controls.Add(this.MainContainer);
             this.Controls.Add(this.ToolBarMenu);
             this.Controls.Add(this.MainMenu);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.MainMenu;
             this.Name = "MainForm";
             this.Text = "Image Processing";
