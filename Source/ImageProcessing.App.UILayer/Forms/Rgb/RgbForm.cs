@@ -27,7 +27,6 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
             IRgbFormEventBinder binder) : base()
         {
             InitializeComponent();
-
             PopulateComboBox<RgbFltr>(RgbFilterComboBox);
 
             _main = main as IMainFormExposer;
@@ -42,6 +41,8 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
 
             _binder = binder;
             _binder.OnElementExpose(this);
+
+            BringToFront();
         }
 
         /// <inheritdoc/>

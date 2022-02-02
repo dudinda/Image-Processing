@@ -24,37 +24,55 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
         {
             this.components = new System.ComponentModel.Container();
             this.ShowToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.ApplyFilter = new MetroFramework.Controls.MetroButton();
+            this.RgbButtonsPanel = new MetroFramework.Controls.MetroPanel();
             this.RgbFilterComboBox = new MetroFramework.Controls.MetroComboBox();
+            this.ApplyFilter = new MetroFramework.Controls.MetroButton();
             this.ColorMatrixMenu = new MetroFramework.Controls.MetroButton();
             this.CheckboxColorGroup = new MetroFramework.Controls.MetroPanel();
             this.BlueColor = new MetroFramework.Controls.MetroCheckBox();
             this.GreenColor = new MetroFramework.Controls.MetroCheckBox();
             this.RedColor = new MetroFramework.Controls.MetroCheckBox();
-            this.RgbButtonsPanel = new MetroFramework.Controls.MetroPanel();
-            this.selectedAreaControl1 = new ImageProcessing.App.UILayer.Controls.SelectedAreaControl();
-            this.CheckboxColorGroup.SuspendLayout();
+            this.selectedAreaControl2 = new ImageProcessing.App.UILayer.Controls.SelectedAreaControl();
             this.RgbButtonsPanel.SuspendLayout();
+            this.CheckboxColorGroup.SuspendLayout();
             this.SuspendLayout();
             // 
-            // ApplyFilter
+            // RgbButtonsPanel
             // 
-            this.ApplyFilter.Location = new System.Drawing.Point(0, 48);
-            this.ApplyFilter.Name = "ApplyFilter";
-            this.ApplyFilter.Size = new System.Drawing.Size(235, 23);
-            this.ApplyFilter.TabIndex = 8;
-            this.ApplyFilter.Text = "Apply ";
-            this.ApplyFilter.UseSelectable = true;
+            this.RgbButtonsPanel.Controls.Add(this.selectedAreaControl2);
+            this.RgbButtonsPanel.Controls.Add(this.RgbFilterComboBox);
+            this.RgbButtonsPanel.Controls.Add(this.ApplyFilter);
+            this.RgbButtonsPanel.Controls.Add(this.ColorMatrixMenu);
+            this.RgbButtonsPanel.Controls.Add(this.CheckboxColorGroup);
+            this.RgbButtonsPanel.HorizontalScrollbarBarColor = true;
+            this.RgbButtonsPanel.HorizontalScrollbarHighlightOnWheel = false;
+            this.RgbButtonsPanel.HorizontalScrollbarSize = 10;
+            this.RgbButtonsPanel.Location = new System.Drawing.Point(23, 63);
+            this.RgbButtonsPanel.Name = "RgbButtonsPanel";
+            this.RgbButtonsPanel.Size = new System.Drawing.Size(701, 146);
+            this.RgbButtonsPanel.TabIndex = 9;
+            this.RgbButtonsPanel.VerticalScrollbarBarColor = true;
+            this.RgbButtonsPanel.VerticalScrollbarHighlightOnWheel = false;
+            this.RgbButtonsPanel.VerticalScrollbarSize = 10;
             // 
             // RgbFilterComboBox
             // 
             this.RgbFilterComboBox.FormattingEnabled = true;
             this.RgbFilterComboBox.ItemHeight = 23;
-            this.RgbFilterComboBox.Location = new System.Drawing.Point(3, 14);
+            this.RgbFilterComboBox.Location = new System.Drawing.Point(0, 14);
             this.RgbFilterComboBox.Name = "RgbFilterComboBox";
             this.RgbFilterComboBox.Size = new System.Drawing.Size(235, 29);
             this.RgbFilterComboBox.TabIndex = 7;
             this.RgbFilterComboBox.UseSelectable = true;
+            // 
+            // ApplyFilter
+            // 
+            this.ApplyFilter.Location = new System.Drawing.Point(0, 49);
+            this.ApplyFilter.Name = "ApplyFilter";
+            this.ApplyFilter.Size = new System.Drawing.Size(235, 23);
+            this.ApplyFilter.TabIndex = 8;
+            this.ApplyFilter.Text = "Apply ";
+            this.ApplyFilter.UseSelectable = true;
             // 
             // ColorMatrixMenu
             // 
@@ -73,9 +91,9 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
             this.CheckboxColorGroup.HorizontalScrollbarBarColor = true;
             this.CheckboxColorGroup.HorizontalScrollbarHighlightOnWheel = false;
             this.CheckboxColorGroup.HorizontalScrollbarSize = 10;
-            this.CheckboxColorGroup.Location = new System.Drawing.Point(244, 11);
+            this.CheckboxColorGroup.Location = new System.Drawing.Point(241, 14);
             this.CheckboxColorGroup.Name = "CheckboxColorGroup";
-            this.CheckboxColorGroup.Size = new System.Drawing.Size(67, 110);
+            this.CheckboxColorGroup.Size = new System.Drawing.Size(67, 86);
             this.CheckboxColorGroup.TabIndex = 0;
             this.CheckboxColorGroup.VerticalScrollbarBarColor = true;
             this.CheckboxColorGroup.VerticalScrollbarHighlightOnWheel = false;
@@ -111,32 +129,14 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
             this.RedColor.Text = "Red";
             this.RedColor.UseSelectable = true;
             // 
-            // RgbButtonsPanel
+            // selectedAreaControl2
             // 
-            this.RgbButtonsPanel.Controls.Add(this.selectedAreaControl1);
-            this.RgbButtonsPanel.Controls.Add(this.RgbFilterComboBox);
-            this.RgbButtonsPanel.Controls.Add(this.ApplyFilter);
-            this.RgbButtonsPanel.Controls.Add(this.ColorMatrixMenu);
-            this.RgbButtonsPanel.Controls.Add(this.CheckboxColorGroup);
-            this.RgbButtonsPanel.HorizontalScrollbarBarColor = true;
-            this.RgbButtonsPanel.HorizontalScrollbarHighlightOnWheel = false;
-            this.RgbButtonsPanel.HorizontalScrollbarSize = 10;
-            this.RgbButtonsPanel.Location = new System.Drawing.Point(23, 63);
-            this.RgbButtonsPanel.Name = "RgbButtonsPanel";
-            this.RgbButtonsPanel.Size = new System.Drawing.Size(701, 146);
-            this.RgbButtonsPanel.TabIndex = 9;
-            this.RgbButtonsPanel.VerticalScrollbarBarColor = true;
-            this.RgbButtonsPanel.VerticalScrollbarHighlightOnWheel = false;
-            this.RgbButtonsPanel.VerticalScrollbarSize = 10;
-            // 
-            // selectedAreaControl1
-            // 
-            this.selectedAreaControl1.Location = new System.Drawing.Point(314, 11);
-            this.selectedAreaControl1.Margin = new System.Windows.Forms.Padding(0);
-            this.selectedAreaControl1.Name = "selectedAreaControl1";
-            this.selectedAreaControl1.Size = new System.Drawing.Size(267, 110);
-            this.selectedAreaControl1.TabIndex = 9;
-            this.selectedAreaControl1.UseSelectable = true;
+            this.selectedAreaControl2.Location = new System.Drawing.Point(311, 14);
+            this.selectedAreaControl2.Margin = new System.Windows.Forms.Padding(0);
+            this.selectedAreaControl2.Name = "selectedAreaControl2";
+            this.selectedAreaControl2.Size = new System.Drawing.Size(298, 86);
+            this.selectedAreaControl2.TabIndex = 9;
+            this.selectedAreaControl2.UseSelectable = true;
             // 
             // RgbForm
             // 
@@ -148,10 +148,11 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
             this.Name = "RgbForm";
             this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Rgb";
+            this.RgbButtonsPanel.ResumeLayout(false);
             this.CheckboxColorGroup.ResumeLayout(false);
             this.CheckboxColorGroup.PerformLayout();
-            this.RgbButtonsPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -167,5 +168,6 @@ namespace ImageProcessing.App.UILayer.Forms.Rgb
         private MetroFramework.Controls.MetroCheckBox RedColor;
         private MetroFramework.Controls.MetroPanel RgbButtonsPanel;
         private Controls.SelectedAreaControl selectedAreaControl1;
+        private Controls.SelectedAreaControl selectedAreaControl2;
     }
 }

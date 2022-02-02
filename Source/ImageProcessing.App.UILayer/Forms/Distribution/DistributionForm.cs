@@ -39,9 +39,11 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
 
             _tab.Controls.Add(this);
             _tab.Text = Text;
-
+            
             _binder = binder;
             _binder.OnElementExpose(this);
+
+            BringToFront();
         }
 
         /// <inheritdoc/>

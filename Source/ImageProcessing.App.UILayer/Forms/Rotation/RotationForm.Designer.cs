@@ -82,7 +82,7 @@ namespace ImageProcessing.App.UILayer.Forms.Rotation
             // DegreesText
             // 
             this.DegreesText.Image = ((System.Drawing.Image)(resources.GetObject("DegreesText.Image")));
-            this.DegreesText.Location = new System.Drawing.Point(3, 1);
+            this.DegreesText.Location = new System.Drawing.Point(0, 1);
             this.DegreesText.Name = "DegreesText";
             this.DegreesText.Size = new System.Drawing.Size(10, 25);
             this.DegreesText.TabIndex = 2;

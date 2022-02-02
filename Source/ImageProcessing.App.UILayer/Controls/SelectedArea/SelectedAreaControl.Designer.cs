@@ -41,15 +41,14 @@ namespace ImageProcessing.App.UILayer.Controls
             // 
             // TopLeft
             // 
-            this.TopLeft.Location = new System.Drawing.Point(3, 25);
+            this.TopLeft.Location = new System.Drawing.Point(3, 3);
             this.TopLeft.Name = "TopLeft";
             this.TopLeft.Size = new System.Drawing.Size(68, 20);
             this.TopLeft.TabIndex = 0;
             // 
             // TopRight
             // 
-            this.TopRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TopRight.Location = new System.Drawing.Point(77, 25);
+            this.TopRight.Location = new System.Drawing.Point(77, 3);
             this.TopRight.Name = "TopRight";
             this.TopRight.Size = new System.Drawing.Size(68, 20);
             this.TopRight.TabIndex = 1;
@@ -73,7 +72,7 @@ namespace ImageProcessing.App.UILayer.Controls
             // XLabel
             // 
             this.XLabel.AutoSize = true;
-            this.XLabel.Location = new System.Drawing.Point(3, 3);
+            this.XLabel.Location = new System.Drawing.Point(3, 26);
             this.XLabel.Name = "XLabel";
             this.XLabel.Size = new System.Drawing.Size(17, 19);
             this.XLabel.TabIndex = 4;
@@ -82,7 +81,7 @@ namespace ImageProcessing.App.UILayer.Controls
             // YLabel
             // 
             this.YLabel.AutoSize = true;
-            this.YLabel.Location = new System.Drawing.Point(77, 3);
+            this.YLabel.Location = new System.Drawing.Point(77, 26);
             this.YLabel.Name = "YLabel";
             this.YLabel.Size = new System.Drawing.Size(17, 19);
             this.YLabel.TabIndex = 5;

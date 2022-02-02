@@ -45,6 +45,8 @@ namespace ImageProcessing.App.UILayer.Forms.ColorMatrix
                 ColorMatrixGrid.Rows.Add(0, 0, 0, 0, 0);
                 ColorMatrixGrid.Rows[row].HeaderCell.Value = ColorMatrixGrid.Columns[row].HeaderCell.Value;
             }
+
+            BringToFront();
         }
           
         public ClrMatrix Dropdown

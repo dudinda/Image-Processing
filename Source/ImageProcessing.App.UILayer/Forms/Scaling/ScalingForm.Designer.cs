@@ -204,7 +204,7 @@ namespace ImageProcessing.App.UILayer.Forms.Scaling
             this.selectedAreaControl1.Location = new System.Drawing.Point(292, 3);
             this.selectedAreaControl1.Margin = new System.Windows.Forms.Padding(0);
             this.selectedAreaControl1.Name = "selectedAreaControl1";
-            this.selectedAreaControl1.Size = new System.Drawing.Size(267, 124);
+            this.selectedAreaControl1.Size = new System.Drawing.Size(267, 101);
             this.selectedAreaControl1.TabIndex = 9;
             this.selectedAreaControl1.UseSelectable = true;
             // 
