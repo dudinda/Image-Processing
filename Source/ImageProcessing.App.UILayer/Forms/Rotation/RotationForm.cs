@@ -5,6 +5,7 @@ using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions;
+using ImageProcessing.App.UILayer.Code.Extensions;
 using ImageProcessing.App.UILayer.FormEventBinders.Rotation.Interface;
 using ImageProcessing.App.UILayer.FormExposers;
 using ImageProcessing.App.UILayer.FormExposers.Main;
@@ -71,6 +72,11 @@ namespace ImageProcessing.App.UILayer.Forms.Rotation
             get => RotationComboBox
                 .SelectedItem.ToString()
                 .GetValueFromDescription<RotationMethod>();
+        }
+
+        public void EnableControls(bool isEnabled)
+        {
+            Write(() => RotationButtonPanel.Enable(isEnabled));
         }
 
         public MetroButton RotateButton

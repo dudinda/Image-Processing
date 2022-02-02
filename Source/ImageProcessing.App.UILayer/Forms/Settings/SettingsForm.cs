@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions;
+using ImageProcessing.App.UILayer.Code.Extensions;
 using ImageProcessing.App.UILayer.FormEventBinders.Settings.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Main;
 using ImageProcessing.App.UILayer.FormExposers.Settings;
@@ -97,6 +98,11 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
             _main.TabsCtrl.TabPages.RemoveAt(idx);
 
             base.Hide();
+        }
+
+        public void EnableControls(bool isEnabled)
+        {
+            Write(() => SettingsButtonPanel.Enable(isEnabled));
         }
 
         protected override void OnResize(System.EventArgs e)

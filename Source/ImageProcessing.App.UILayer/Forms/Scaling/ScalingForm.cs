@@ -4,6 +4,7 @@ using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions;
+using ImageProcessing.App.UILayer.Code.Extensions;
 using ImageProcessing.App.UILayer.FormEventBinders.Scaling.Interface;
 using ImageProcessing.App.UILayer.FormExposers;
 using ImageProcessing.App.UILayer.FormExposers.Main;
@@ -72,6 +73,11 @@ namespace ImageProcessing.App.UILayer.Forms.Scaling
             get => ScalingComboBox
                 .SelectedItem.ToString()
                 .GetValueFromDescription<ScalingMethod>();
+        }
+
+        public void EnableControls(bool isEnabled)
+        {
+            Write(() => ScaleButtonPanel.Enable(isEnabled));
         }
 
         /// <summary>

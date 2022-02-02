@@ -42,10 +42,10 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             this.QualityMeasure = new ImageProcessing.App.UILayer.Controls.QualityMeasureToolStripButton();
             this.DistributionsComboBox = new MetroFramework.Controls.MetroComboBox();
             this.Transform = new MetroFramework.Controls.MetroButton();
-            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.DistributionButtonPanel = new MetroFramework.Controls.MetroPanel();
             this.selectedAreaControl1 = new ImageProcessing.App.UILayer.Controls.SelectedAreaControl();
             this.ToolBarMenu.SuspendLayout();
-            this.metroPanel1.SuspendLayout();
+            this.DistributionButtonPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // ToolBarMenu
@@ -212,22 +212,22 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             this.Transform.Text = "Transform";
             this.Transform.UseSelectable = true;
             // 
-            // metroPanel1
+            // DistributionButtonPanel
             // 
-            this.metroPanel1.Controls.Add(this.selectedAreaControl1);
-            this.metroPanel1.Controls.Add(this.DistributionsComboBox);
-            this.metroPanel1.Controls.Add(this.ToolBarMenu);
-            this.metroPanel1.Controls.Add(this.Transform);
-            this.metroPanel1.HorizontalScrollbarBarColor = true;
-            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(23, 63);
-            this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(776, 131);
-            this.metroPanel1.TabIndex = 7;
-            this.metroPanel1.VerticalScrollbarBarColor = true;
-            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 10;
+            this.DistributionButtonPanel.Controls.Add(this.selectedAreaControl1);
+            this.DistributionButtonPanel.Controls.Add(this.DistributionsComboBox);
+            this.DistributionButtonPanel.Controls.Add(this.ToolBarMenu);
+            this.DistributionButtonPanel.Controls.Add(this.Transform);
+            this.DistributionButtonPanel.HorizontalScrollbarBarColor = true;
+            this.DistributionButtonPanel.HorizontalScrollbarHighlightOnWheel = false;
+            this.DistributionButtonPanel.HorizontalScrollbarSize = 10;
+            this.DistributionButtonPanel.Location = new System.Drawing.Point(23, 63);
+            this.DistributionButtonPanel.Name = "DistributionButtonPanel";
+            this.DistributionButtonPanel.Size = new System.Drawing.Size(776, 131);
+            this.DistributionButtonPanel.TabIndex = 7;
+            this.DistributionButtonPanel.VerticalScrollbarBarColor = true;
+            this.DistributionButtonPanel.VerticalScrollbarHighlightOnWheel = false;
+            this.DistributionButtonPanel.VerticalScrollbarSize = 10;
             // 
             // selectedAreaControl1
             // 
@@ -241,7 +241,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             // DistributionForm
             // 
             this.ClientSize = new System.Drawing.Size(823, 214);
-            this.Controls.Add(this.metroPanel1);
+            this.Controls.Add(this.DistributionButtonPanel);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
@@ -252,7 +252,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             this.TopMost = true;
             this.ToolBarMenu.ResumeLayout(false);
             this.ToolBarMenu.PerformLayout();
-            this.metroPanel1.ResumeLayout(false);
+            this.DistributionButtonPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -275,7 +275,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
         private System.Windows.Forms.ToolStripLabel PathToImage;
         private System.Windows.Forms.ToolStripButton ShuffleSrc;
         private Controls.QualityMeasureToolStripButton QualityMeasure;
-        private MetroFramework.Controls.MetroPanel metroPanel1;
+        private MetroFramework.Controls.MetroPanel DistributionButtonPanel;
         private Controls.SelectedAreaControl selectedAreaControl1;
     }
 }

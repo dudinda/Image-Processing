@@ -5,6 +5,7 @@ using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions;
+using ImageProcessing.App.UILayer.Code.Extensions;
 using ImageProcessing.App.UILayer.FormEventBinders.ColorMatrix.Interface;
 using ImageProcessing.App.UILayer.FormExposers.ColorMatrix;
 using ImageProcessing.App.UILayer.FormExposers.Main;
@@ -151,6 +152,11 @@ namespace ImageProcessing.App.UILayer.Forms.ColorMatrix
             _main.TabsCtrl.TabPages.RemoveAt(idx);
 
             base.Close();
+        }
+
+        public void EnableControls(bool isEnabled)
+        {
+            Write(() => ColorMatrixButtonPanel.Enable(isEnabled));
         }
 
         /// <summary>

@@ -90,16 +90,5 @@ namespace ImageProcessing.App.UILayer.Forms
             box.Items.AddRange(Array.ConvertAll(values, item => (object)item));
             box.SelectedIndex = 0;
         }
-
-        public void EnableControls(bool isEnabled)
-        {
-            Write(() =>
-           {
-               foreach (Control c in Controls)
-               {
-                   c.Enable(isEnabled);
-               }
-           });
-        }
     }
 }

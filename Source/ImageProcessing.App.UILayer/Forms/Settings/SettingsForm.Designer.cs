@@ -28,8 +28,8 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
             this.RotationComboBox = new MetroFramework.Controls.MetroComboBox();
             this.LumaComboBox = new MetroFramework.Controls.MetroComboBox();
             this.ScalingComboBox = new MetroFramework.Controls.MetroComboBox();
-            this.SettingsPanel = new MetroFramework.Controls.MetroPanel();
-            this.SettingsPanel.SuspendLayout();
+            this.SettingsButtonPanel = new MetroFramework.Controls.MetroPanel();
+            this.SettingsButtonPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // LumaLabel
@@ -92,28 +92,28 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
             this.ScalingComboBox.TabIndex = 8;
             this.ScalingComboBox.UseSelectable = true;
             // 
-            // SettingsPanel
+            // SettingsButtonPanel
             // 
-            this.SettingsPanel.AutoScroll = true;
-            this.SettingsPanel.Controls.Add(this.LumaLabel);
-            this.SettingsPanel.Controls.Add(this.ScalingComboBox);
-            this.SettingsPanel.Controls.Add(this.LumaComboBox);
-            this.SettingsPanel.Controls.Add(this.RotationLabel);
-            this.SettingsPanel.Controls.Add(this.ScalingLabel);
-            this.SettingsPanel.Controls.Add(this.RotationComboBox);
-            this.SettingsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SettingsPanel.HorizontalScrollbar = true;
-            this.SettingsPanel.HorizontalScrollbarBarColor = true;
-            this.SettingsPanel.HorizontalScrollbarHighlightOnWheel = false;
-            this.SettingsPanel.HorizontalScrollbarSize = 10;
-            this.SettingsPanel.Location = new System.Drawing.Point(20, 60);
-            this.SettingsPanel.Name = "SettingsPanel";
-            this.SettingsPanel.Size = new System.Drawing.Size(897, 128);
-            this.SettingsPanel.TabIndex = 15;
-            this.SettingsPanel.VerticalScrollbar = true;
-            this.SettingsPanel.VerticalScrollbarBarColor = false;
-            this.SettingsPanel.VerticalScrollbarHighlightOnWheel = false;
-            this.SettingsPanel.VerticalScrollbarSize = 10;
+            this.SettingsButtonPanel.AutoScroll = true;
+            this.SettingsButtonPanel.Controls.Add(this.LumaLabel);
+            this.SettingsButtonPanel.Controls.Add(this.ScalingComboBox);
+            this.SettingsButtonPanel.Controls.Add(this.LumaComboBox);
+            this.SettingsButtonPanel.Controls.Add(this.RotationLabel);
+            this.SettingsButtonPanel.Controls.Add(this.ScalingLabel);
+            this.SettingsButtonPanel.Controls.Add(this.RotationComboBox);
+            this.SettingsButtonPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SettingsButtonPanel.HorizontalScrollbar = true;
+            this.SettingsButtonPanel.HorizontalScrollbarBarColor = true;
+            this.SettingsButtonPanel.HorizontalScrollbarHighlightOnWheel = false;
+            this.SettingsButtonPanel.HorizontalScrollbarSize = 10;
+            this.SettingsButtonPanel.Location = new System.Drawing.Point(20, 60);
+            this.SettingsButtonPanel.Name = "SettingsButtonPanel";
+            this.SettingsButtonPanel.Size = new System.Drawing.Size(897, 128);
+            this.SettingsButtonPanel.TabIndex = 15;
+            this.SettingsButtonPanel.VerticalScrollbar = true;
+            this.SettingsButtonPanel.VerticalScrollbarBarColor = false;
+            this.SettingsButtonPanel.VerticalScrollbarHighlightOnWheel = false;
+            this.SettingsButtonPanel.VerticalScrollbarSize = 10;
             // 
             // SettingsForm
             // 
@@ -122,7 +122,7 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
             this.AutoSize = true;
             this.BackLocation = MetroFramework.Forms.BackLocation.BottomLeft;
             this.ClientSize = new System.Drawing.Size(937, 208);
-            this.Controls.Add(this.SettingsPanel);
+            this.Controls.Add(this.SettingsButtonPanel);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
@@ -132,8 +132,8 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Settings";
-            this.SettingsPanel.ResumeLayout(false);
-            this.SettingsPanel.PerformLayout();
+            this.SettingsButtonPanel.ResumeLayout(false);
+            this.SettingsButtonPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -146,6 +146,6 @@ namespace ImageProcessing.App.UILayer.Forms.Settings
         private MetroFramework.Controls.MetroLabel ScalingLabel;
         private MetroFramework.Controls.MetroLabel RotationLabel;
         private MetroFramework.Controls.MetroLabel LumaLabel;
-        private MetroFramework.Controls.MetroPanel SettingsPanel;
+        private MetroFramework.Controls.MetroPanel SettingsButtonPanel;
     }
 }

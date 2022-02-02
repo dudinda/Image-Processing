@@ -4,6 +4,7 @@ using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions;
+using ImageProcessing.App.UILayer.Code.Extensions;
 using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Convolution;
 using ImageProcessing.App.UILayer.FormExposers.Main;
@@ -69,6 +70,11 @@ namespace ImageProcessing.App.UILayer.Forms.Convolution
             get => ConvolutionFilterComboBox
                 .SelectedItem.ToString()
                 .GetValueFromDescription<ConvKernel>();
+        }
+
+        public void EnableControls(bool isEnabled)
+        {
+            Write(() => ConvoltuionButtonPanel.Enable(isEnabled));
         }
 
         public MetroButton ApplyButton
