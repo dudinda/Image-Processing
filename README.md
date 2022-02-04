@@ -25,7 +25,7 @@
 
 <p align="center">
     <img src="https://i.imgur.com/kOj7JZe.gif" width="900" height = "800" alt="application window">
-    <p align="center">Fig. 1 - The main view and transient/signleton views as tabs. The opened rgb tab is a transient view. The settings tab is a singleton view. The frame is taken from "Thomas the Tank Engine" series and processed with the Grayscale->Inversion->Laplacian Operator 5x5->Inversion->Shear Rotation 200°->Bicubic Interpolation (-0.3, -0.3)->Cyclic Affine Transform (33, 33) (hold) algorithm chain.</p>
+    <p align="center">Fig. 1 - The main view and transient/signleton views as tabs. The opened rgb tab is a transient view. The settings tab is a singleton view. The frame is taken from "Thomas the Tank Engine" series and processed with the Grayscale->Inversion->Laplacian Operator 5x5->Inversion->Shear Rotation 200°->Bicubic Interpolation (-0.3, -0.3)->Cyclic Translation (33, 33) (hold) algorithm chain.</p>
 </p>
 <br/><br/>
 <p> Initially, for experimental purposes was chosen a group of underexposed images. </p>
