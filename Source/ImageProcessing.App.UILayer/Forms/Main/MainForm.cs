@@ -205,7 +205,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
             => Write(() => SourceImage = image);
 
         /// <inheritdoc/>
-        public bool ImageIsDefault()
+        public bool ImageIsDefault
             => Read<bool>(() => SrcImageCopy == DefaultImage);
 
         /// <inheritdoc/>
@@ -219,7 +219,7 @@ namespace ImageProcessing.App.UILayer.Forms.Main
         /// <inheritdoc/>
         public void AddToUndoRedo(Bitmap cpy, UndoRedoAction action)
         {
-            if (ImageIsDefault())
+            if (ImageIsDefault)
             {
                 cpy.Tag = MenuBtnState.ImageEmpty;
             }

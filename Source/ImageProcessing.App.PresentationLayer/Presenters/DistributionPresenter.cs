@@ -12,6 +12,7 @@ using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
+using ImageProcessing.App.ServiceLayer.Services.BitmapCopyReference.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
@@ -30,10 +31,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
     {
         private readonly IBitmapService _service;
         private readonly ILoggerService _logger;
+        private readonly IBitmapCopyService _reference;
         private readonly IAsyncOperationLocker _locker;
         private readonly IBitmapLuminanceProvider _provider;
         
         public DistributionPresenter(
+            IBitmapCopyService reference,
             IBitmapLuminanceProvider provider,
             IAsyncOperationLocker locker,
             IBitmapService service,
@@ -43,6 +46,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             _logger = logger;
             _service = service;
             _provider = provider;
+            _reference = reference;
         }
 
         /// <inheritdoc cref="TransformHistogramEventArgs"/>
@@ -52,9 +56,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             {
                 var distribution = View.Dropdown;
 
-                var copy = await _locker.LockOperationAsync(
-                    () => new Bitmap(ViewModel.Source)
-                ).ConfigureAwait(true);
+                var copy = await _reference.GetCopy().ConfigureAwait(true);
 
                 copy.Tag = distribution.ToString();
 
@@ -82,9 +84,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             try
             {
-                var copy = await _locker.LockOperationAsync(
-                    () => new Bitmap(ViewModel.Source)
-                ).ConfigureAwait(true);
+                var copy = await _reference.GetCopy().ConfigureAwait(true);
 
                 Aggregator.PublishFromAll(publisher,
                     new AttachBlockToRendererEventArgs(
@@ -106,9 +106,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             try
             {
-                var copy = await _locker .LockOperationAsync(
-                    () => new Bitmap(ViewModel.Source)
-                ).ConfigureAwait(true);
+                var copy = await _reference.GetCopy().ConfigureAwait(true);
 
                 Controller.Run<HistogramPresenter, HistogramViewModel>(
                     new HistogramViewModel(copy, e.Action));
@@ -146,9 +144,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             {
                 var container = e.Container;
 
-                var copy = await _locker.LockOperationAsync(
-                    () => new Bitmap(ViewModel.Source)
-                ).ConfigureAwait(true);
+                var copy = await _reference.GetCopy().ConfigureAwait(true);
 
                 var result = await Task.Run(
                     () => _provider.GetInfo(copy, e.Action)
@@ -172,7 +168,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 {
                     lock (e.Bmp)
                     {
-                        ViewModel.Source = new Bitmap(e.Bmp);
+                        
                     }
                 }).ConfigureAwait(true);
             }

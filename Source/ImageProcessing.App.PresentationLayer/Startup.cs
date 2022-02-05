@@ -44,6 +44,8 @@ using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance.Imp
 using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance.Interface;
 using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Convolution.Implementation;
 using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Convolution.Interface;
+using ImageProcessing.App.ServiceLayer.Services.BitmapCopyReference.Implementation;
+using ImageProcessing.App.ServiceLayer.Services.BitmapCopyReference.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Implementation;
@@ -96,8 +98,9 @@ namespace ImageProcessing.App.PresentationLayer
                 .RegisterSingleton<ILoggerService, LoggerService>()
                 .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
                 .RegisterSingleton<IStaTaskService, StaTaskService>()
+                .RegisterSingleton<IBitmapCopyService, BitmapCopyService>()
                 .RegisterSingleton<ICacheService<Bitmap>, CacheService<Bitmap>>()
-                .RegisterSingleton<IUndoRedoService<Bitmap>, UndoRedoService>()
+                .RegisterTransient<IUndoRedoService<Bitmap>, UndoRedoService>()
                 .RegisterTransient<IConvolutionFactory, ConvolutionFactory>()
                 .RegisterTransient<IMorphologyFactory, MorphologyFactory>()
                 .RegisterTransient<IStructuringElementFactory, StructuringElementFactory>()

@@ -12,6 +12,7 @@ using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
+using ImageProcessing.App.ServiceLayer.Services.BitmapCopyReference.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
 using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
@@ -28,16 +29,19 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
     {
         private readonly IRgbProvider _provider;
         private readonly ILoggerService _logger;
+        private readonly IBitmapCopyService _reference;
         private readonly IColorMatrixFactory _factory;
         private readonly IAsyncOperationLocker _locker;
 
         public ColorMatrixPresenter(
+            IBitmapCopyService reference,
             IAsyncOperationLocker locker,
             IColorMatrixFactory factory,
             ILoggerService logger,
             IRgbProvider provider)
         {
             _provider = provider;
+            _reference = reference;
             _logger = logger;
             _factory = factory;
             _locker = locker;         
@@ -52,9 +56,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
 
                 if (filter != ClrMatrix.Unknown)
                 {
-                    var copy = await _locker.LockOperationAsync(
-                        () => new Bitmap(ViewModel.Source)
-                    ).ConfigureAwait(true);
+                    var copy = await _reference.GetCopy().ConfigureAwait(true);
 
                     Aggregator.PublishFromAll(publisher,
                         new AttachBlockToRendererEventArgs(
@@ -77,9 +79,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             try
             {
-                var copy = await _locker.LockOperationAsync(
-                    () => new Bitmap(ViewModel.Source)
-                ).ConfigureAwait(true);
+                var copy = await _reference.GetCopy().ConfigureAwait(true);
 
                 var matrix = View.GetGrid();
 
@@ -143,7 +143,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 {
                     lock (e.Bmp)
                     {
-                        ViewModel.Source = new Bitmap(e.Bmp);
+                        
                     }
                 }).ConfigureAwait(true);
             }

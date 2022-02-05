@@ -4,11 +4,11 @@ namespace ImageProcessing.App.PresentationLayer.ViewModels
 {
     internal sealed class BitmapViewModel
     {
-        public BitmapViewModel(Bitmap source)
+        public BitmapViewModel(Rectangle area)
         {
-            Source = source;
+            Area = area;
         }
 
-        public Bitmap Source { get; set; }
+        public Rectangle Area { get; set; }
     }
 }
