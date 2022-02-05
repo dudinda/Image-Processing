@@ -14,7 +14,6 @@ using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Services.BitmapCopyReference.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
-using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
 using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
@@ -32,17 +31,14 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         private readonly IBitmapService _service;
         private readonly ILoggerService _logger;
         private readonly IBitmapCopyService _reference;
-        private readonly IAsyncOperationLocker _locker;
         private readonly IBitmapLuminanceProvider _provider;
         
         public DistributionPresenter(
             IBitmapCopyService reference,
             IBitmapLuminanceProvider provider,
-            IAsyncOperationLocker locker,
             IBitmapService service,
             ILoggerService logger)
         {
-            _locker = locker;
             _logger = logger;
             _service = service;
             _provider = provider;
@@ -160,23 +156,19 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         }
 
         /// <inheritdoc cref="ContainerUpdatedEventArgs"/>
-        public async Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
+        public Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
         {
             try
             {
-                await _locker.LockOperationAsync(() =>
-                {
-                    lock (e.Bmp)
-                    {
-                        
-                    }
-                }).ConfigureAwait(true);
+                ViewModel.SelectedArea = e.Area;
             }
             catch (Exception ex)
             {
                 View.Tooltip(Errors.UpdatingViewModel);
                 _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
+
+            return Task.CompletedTask;
         }
 
         /// <inheritdoc cref="ShowTooltipOnErrorEventArgs"/>

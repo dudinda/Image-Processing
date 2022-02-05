@@ -9,12 +9,12 @@ namespace ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs
     {
         public ContainerUpdatedEventArgs(Bitmap bmp) : base()
         {
-            Bmp = bmp;
+            Area = new Rectangle(0, 0, bmp.Width, bmp.Height);
         }
 
         /// <summary>
         /// Updated bitmap.
         /// </summary>
-        public Bitmap Bmp { get; }
+        public Rectangle Area { get; }
     }
 }
