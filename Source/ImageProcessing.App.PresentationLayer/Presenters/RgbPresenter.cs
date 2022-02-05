@@ -13,7 +13,6 @@ using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
 using ImageProcessing.App.ServiceLayer.Services.BitmapCopyReference.Interface;
-using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
 using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
@@ -31,11 +30,9 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         private readonly ILoggerService _logger;
         private readonly IBitmapCopyService _reference;
         private readonly IRgbFilterFactory _factory;
-        private readonly IAsyncOperationLocker _locker;
 
         public RgbPresenter(
             IBitmapCopyService reference,
-            IAsyncOperationLocker locker,
             IRgbFilterFactory factory,
             ILoggerService logger,
             IRgbProvider provider) 
@@ -44,7 +41,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             _reference = reference;
             _factory = factory;
             _logger = logger;
-            _locker = locker;
         }
 
         /// <inheritdoc cref="ApplyRgbFilterEventArgs"/>
@@ -103,23 +99,19 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         }
 
         /// <inheritdoc cref="ContainerUpdatedEventArgs"/>
-        public async Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
+        public Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
         {
             try
             {
-                await _locker.LockOperationAsync(() =>
-                {
-                    lock (e.Bmp)
-                    {
-                        
-                    }
-                }).ConfigureAwait(true);
+                ViewModel.SelectedArea = e.Area;
             }
             catch (Exception ex)
             {
                 View.Tooltip(Errors.UpdatingViewModel);
                 _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
+
+            return Task.CompletedTask;
         }
 
         /// <inheritdoc cref="ShowColorMatrixMenuEventArgs"/>
