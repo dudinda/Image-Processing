@@ -24,7 +24,7 @@
 <p>The original purpose was to research the possible advantages of grayscale images contrast optimization using a normal distribution regarding a uniform distribution. Two parameters such as the expectation and std allow to control relative luminance and contrast, respectively.</p>
 
 <p align="center">
-    <img src="https://im6.ezgif.com/tmp/ezgif-6-9fe9c92c2e.gif" width="900" height = "800" alt="application window">
+    <img src="https://github.com/dudinda/Image-Processing/blob/master/Tests/ImageProcessing.App.Integration/Code/Resources/Static/demo.gif?raw=true" width="600" height = "600" alt="application window">
     <p align="center">Fig. 1 - The main view and transient/signleton views as tabs. The opened rgb tab is a transient view. The settings tab is a singleton view. The frame is taken from "Thomas the Tank Engine" series and processed with the Grayscale->Inversion->Laplacian Operator 5x5->Inversion->Shear Rotation 20°->Bicubic Interpolation (-0.2, -0.2)->Cyclic Translation (33, 33) (hold) algorithm chain.</p>
 </p>
 <br/><br/>
