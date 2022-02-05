@@ -10,6 +10,7 @@ using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Providers.Rotation.Interface;
+using ImageProcessing.App.ServiceLayer.Services.BitmapCopyReference.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
 using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
@@ -25,19 +26,21 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
 
     {
         private readonly ILoggerService _logger;
+        private readonly IBitmapCopyService _reference;
         private readonly IRotationProvider _provider;
         private readonly IAsyncOperationLocker _locker;
 
         public RotationPresenter(
+            IBitmapCopyService reference,
             IAsyncOperationLocker locker,
             IRotationProvider provider,
             ILoggerService logger)
         {
             _provider = provider;
+            _reference = reference;
             _logger = logger;
             _locker = locker;
         }
-
 
         /// <inheritdoc cref="RotateEventArgs"/>
         public async Task OnEventHandler(object publisher, RotateEventArgs e)
@@ -46,9 +49,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             {
                 var method = View.Dropdown;
 
-                var copy = await _locker.LockOperationAsync(
-                    () => new Bitmap(ViewModel.Source)
-                ).ConfigureAwait(true);
+                var copy = await _reference.GetCopy().ConfigureAwait(true);
 
                 var rad = View.Radians;
 
@@ -91,7 +92,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 {
                     lock (e.Bmp)
                     {
-                        ViewModel.Source = new Bitmap(e.Bmp);
+                       
                     }
                 }).ConfigureAwait(true);
             }

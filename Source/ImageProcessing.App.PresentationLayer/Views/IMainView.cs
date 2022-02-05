@@ -15,6 +15,7 @@ namespace ImageProcessing.App.PresentationLayer.Views
         ITooltip, IBitmapContainer, ICursor, IDisposable
     {
         Image LoadedImage { get; set; }
+
         /// <summary>
         /// Default an image inside a picturebox./>
         /// </summary>

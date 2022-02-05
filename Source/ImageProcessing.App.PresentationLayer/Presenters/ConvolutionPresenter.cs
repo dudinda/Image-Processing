@@ -11,6 +11,7 @@ using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Providers.Interface.Convolution;
+using ImageProcessing.App.ServiceLayer.Services.BitmapCopyReference.Interface;
 using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
 using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
@@ -25,10 +26,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
           ISubscriber<FormIsClosedEventArgs>, ISubscriber<EnableControlEventArgs>
     {
         private readonly ILoggerService _logger;
+        private readonly IBitmapCopyService _reference;
         private readonly IConvolutionProvider _provider;
         private readonly IAsyncOperationLocker _locker;
 
         public ConvolutionPresenter(
+            IBitmapCopyService reference,
             IAsyncOperationLocker locker,
             IConvolutionProvider provider,
             ILoggerService logger) 
@@ -36,6 +39,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             _provider = provider;
             _logger = logger;
             _locker = locker;
+            _reference = _reference;
         }
 
         /// <inheritdoc cref="ApplyConvolutionKernelEventArgs"/>
@@ -47,10 +51,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
 
                 if (filter != ConvKernel.Unknown)
                 {
-                    var copy = await _locker.LockOperationAsync(
-                        () => new Bitmap(ViewModel.Source)
-                    ).ConfigureAwait(true);
-               
+                    var copy = await _reference.GetCopy().ConfigureAwait(true);
+
                     Aggregator.PublishFromAll(publisher,
                         new AttachBlockToRendererEventArgs(
                            block: new PipelineBlock(copy)
@@ -77,7 +79,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 {
                     lock (e.Bmp)
                     {
-                        ViewModel.Source = new Bitmap(e.Bmp);
+                        
                     }
                 }).ConfigureAwait(true);
             }

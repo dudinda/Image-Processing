@@ -43,7 +43,7 @@ namespace ImageProcessing.App.PresentationLayer.Views.ViewComponents
         /// Check whether the specified image
         /// is null.
         /// </summary>
-        bool ImageIsDefault();
+        bool ImageIsDefault { get; }
 
         /// <summary>
         /// Refresh the specified <see cref="ImageContainer"/>.
