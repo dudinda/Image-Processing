@@ -39,7 +39,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             _provider = provider;
             _logger = logger;
             _locker = locker;
-            _reference = _reference;
+            _reference = reference;
         }
 
         /// <inheritdoc cref="ApplyConvolutionKernelEventArgs"/>
