@@ -71,7 +71,14 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Saf
             {
                 if (_stack.Count == Capacity)
                 {
+                    var last = _stack.Last as IDisposable;
+
                     _stack.RemoveLast();
+
+                    if(last != null)
+                    {
+                        last.Dispose();
+                    }
                 }
 
                 _stack.AddFirst(bmp);

@@ -22,7 +22,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.BitmapCopyReference.Implemen
         {
             var copy = await _locker.LockOperationAsync(
                 () => new Bitmap(_cpy)
-            ).ConfigureAwait(true);
+            ).ConfigureAwait(false);
 
             return copy;
         }
@@ -31,7 +31,7 @@ namespace ImageProcessing.App.ServiceLayer.Services.BitmapCopyReference.Implemen
         {
             var copy = await _locker.LockOperationAsync(
                 () => _cpy = new Bitmap(cpy)
-            ).ConfigureAwait(true);
+            ).ConfigureAwait(false);
         }
     }
 }

@@ -405,6 +405,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             lock (_dialog)
             {
+                _reference.SetCopy(new Bitmap(bmp)).Wait();
+
                 View.AddToUndoRedo((Bitmap)View.GetImageCopy(), action);
                 View.SetImageCopy(bmp);
                 View.SetImage(bmp);
@@ -416,7 +418,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 {
                     View.GetImageCopy().Tag = tag;
                 }
-                _reference.SetCopy(new Bitmap(bmp)).Wait();
+
                 Aggregator.PublishFromAll(publisher, new EnableControlEventArgs(tag));
                 Aggregator.PublishFromAll(publisher, new ContainerUpdatedEventArgs(bmp));
             }
@@ -435,14 +437,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
 
         private async Task Paint(IPipelineBlock block)
         {
-            if (
-                !_pipeline
-                    .Register(block
-                        .Add<Bitmap>(
-                            (bmp) => PaintBlock(bmp)
-                         )
-                     )
-                 )
+            if (!_pipeline.Register(block.Add<Bitmap>(
+                (bmp) => PaintBlock(bmp))))
             {
                 throw new InvalidOperationException(Errors.Pipeline);
             }
@@ -455,14 +451,8 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             View.SetCursor(CursorType.Wait);
 
-            if (
-                !_pipeline
-                    .Register(block
-                        .Add<Bitmap>(
-                            (bmp) => RenderBlock(publisher, bmp, action)
-                         )
-                     )
-                 )
+            if (!_pipeline.Register(block.Add<Bitmap>(
+                (bmp) => RenderBlock(publisher, bmp, action))))
             {
                 throw new InvalidOperationException(Errors.Pipeline);
             }
@@ -486,8 +476,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 View.SetCursor(CursorType.Wait);
             }
 
-            Aggregator.PublishFrom(publisher,
-                new ShowTooltipOnErrorEventArgs(error));
+            Aggregator.PublishFrom(publisher, new ShowTooltipOnErrorEventArgs(error));
         }
     }
 }
