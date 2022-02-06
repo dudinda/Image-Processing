@@ -177,8 +177,8 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
         public virtual void SetImage(Image image)
             => _form.SetImage(image);
        
-        public virtual bool ImageIsDefault()
-            => _form.ImageIsDefault();
+        public virtual bool ImageIsDefault
+            => _form.ImageIsDefault;
      
         public virtual void Refresh()
             => _form.Refresh();
@@ -196,7 +196,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
 
         public void SetMenuState(MenuBtnState state)
         {
-            throw new NotImplementedException();
+           
         }
     }
 }

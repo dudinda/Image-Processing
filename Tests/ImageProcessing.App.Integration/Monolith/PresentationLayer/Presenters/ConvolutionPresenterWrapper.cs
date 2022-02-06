@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Convolution.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.ConvolutionArgs;
@@ -22,19 +22,19 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
         private readonly ConvolutionPresenter _presenter;
 
         public IConvolutionProviderWrapper Provider { get; }
-        public IAsyncOperationLockerWrapper Locker { get; }
+        public IBitmapCopyServiceWrapper Copy { get; }
         public ILoggerServiceWrapper Logger { get; }
 
         public ConvolutionPresenterWrapper(
-            IAsyncOperationLockerWrapper locker,
+            IBitmapCopyServiceWrapper copy,
             IConvolutionProviderWrapper provider,
             ILoggerServiceWrapper logger)
         {
             Provider = provider;
-            Locker = locker;
+            Copy = copy;
             Logger = logger;
 
-            _presenter = new ConvolutionPresenter(locker, provider, logger);
+            _presenter = new ConvolutionPresenter(copy, provider, logger);
         }
 
         public override void Run(BitmapViewModel vm)

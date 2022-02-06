@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.BitmapLuminance.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
@@ -16,34 +17,30 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents.Wrappers.Presenters
 {
     internal class DistributionPresenterWrapper : BasePresenter<IDistributionView, BitmapViewModel>,
-        ISubscriber<TransformHistogramEventArgs>,
-        ISubscriber<ShuffleEventArgs>,
-        ISubscriber<BuildRandomVariableFunctionEventArgs>,
-        ISubscriber<ShowQualityMeasureMenuEventArgs>,
-        ISubscriber<GetRandomVariableInfoEventArgs>,
-        ISubscriber<ShowTooltipOnErrorEventArgs>,
-        ISubscriber<RestoreFocusEventArgs>,
-        ISubscriber<ContainerUpdatedEventArgs>
+        ISubscriber<TransformHistogramEventArgs>, ISubscriber<ShuffleEventArgs>,
+        ISubscriber<BuildRandomVariableFunctionEventArgs>, ISubscriber<ShowQualityMeasureMenuEventArgs>,
+        ISubscriber<GetRandomVariableInfoEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
+        ISubscriber<RestoreFocusEventArgs>, ISubscriber<ContainerUpdatedEventArgs>
     {
         private readonly DistributionPresenter _presenter;
 
-        public IAsyncOperationLockerWrapper Operation { get; }
+        public IBitmapCopyServiceWrapper Copy { get; }
         public IBitmapLuminanceProviderWrapper Provider { get; }
         public IBitmapServiceWrapper Service { get; }
         public ILoggerServiceWrapper Logger { get; }
 
         public DistributionPresenterWrapper(
             IBitmapLuminanceProviderWrapper provider,
-            IAsyncOperationLockerWrapper locker,
+            IBitmapCopyServiceWrapper copy,
             IBitmapServiceWrapper service,
             ILoggerServiceWrapper logger) 
         {
-            Operation = locker;
+            Copy = copy;
             Provider = provider;
             Service = service;
             Logger = logger;
 
-            _presenter = new DistributionPresenter(provider, locker, service, logger);
+            _presenter = new DistributionPresenter(copy, provider, service, logger);
         }
 
         public override void Run(BitmapViewModel vm)

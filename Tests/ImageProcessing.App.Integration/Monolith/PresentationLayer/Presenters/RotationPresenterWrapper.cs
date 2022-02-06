@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Rotation.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
@@ -14,29 +15,26 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
 {
     internal class RotationPresenterWrapper : BasePresenter<IRgbView, BitmapViewModel>,
-          ISubscriber<ApplyRgbFilterEventArgs>,
-          ISubscriber<ApplyRgbChannelFilterEventArgs>,
-          ISubscriber<ContainerUpdatedEventArgs>,
-          ISubscriber<ShowColorMatrixMenuEventArgs>,
-          ISubscriber<ShowTooltipOnErrorEventArgs>,
-          ISubscriber<RestoreFocusEventArgs>
+          ISubscriber<ApplyRgbFilterEventArgs>, ISubscriber<ApplyRgbChannelFilterEventArgs>,
+          ISubscriber<ContainerUpdatedEventArgs>, ISubscriber<ShowColorMatrixMenuEventArgs>,
+          ISubscriber<ShowTooltipOnErrorEventArgs>, ISubscriber<RestoreFocusEventArgs>
     {
         private readonly RotationPresenter _presenter;
 
         public IRotationProviderWrapper Provider { get; }
         public ILoggerServiceWrapper Logger { get; }
-        public IAsyncOperationLockerWrapper Locker { get; }
+        public IBitmapCopyServiceWrapper Copy { get; }
 
         public RotationPresenterWrapper(
-            IAsyncOperationLockerWrapper locker,
+            IBitmapCopyServiceWrapper copy,
             IRotationProviderWrapper provider,
             ILoggerServiceWrapper logger)
         {
             Provider = provider;
             Logger = logger;
-            Locker = locker;
+            Copy = copy;
 
-            _presenter = new RotationPresenter(locker, provider, logger);
+            _presenter = new RotationPresenter(copy, provider, logger);
         }
 
         public override void Run(BitmapViewModel vm)

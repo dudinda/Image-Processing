@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Rgb.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.ColorMatrixArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
@@ -15,32 +15,29 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
 {
     internal class ColorMatrixPresenterWrapper : BasePresenter<IColorMatrixView, BitmapViewModel>,
-        ISubscriber<ApplyColorMatrixEventArgs>,
-        ISubscriber<ContainerUpdatedEventArgs>,
-        ISubscriber<CustomColorMatrixEventArgs>,
-        ISubscriber<ChangeColorMatrixEventArgs>,
-        ISubscriber<ApplyCustomColorMatrixEventArgs>,
-        ISubscriber<RestoreFocusEventArgs>
+        ISubscriber<ApplyColorMatrixEventArgs>, ISubscriber<ContainerUpdatedEventArgs>,
+        ISubscriber<CustomColorMatrixEventArgs>, ISubscriber<ChangeColorMatrixEventArgs>,
+        ISubscriber<ApplyCustomColorMatrixEventArgs>, ISubscriber<RestoreFocusEventArgs>
     {
         private readonly ColorMatrixPresenter _presenter;
 
         public IRgbProviderWrapper Provider { get; }
-        public IAsyncOperationLockerWrapper Locker { get; }
+        public IBitmapCopyServiceWrapper Copy { get; }
         public IColorMatrixFactoryWrapper Factory { get; }
         public ILoggerServiceWrapper Logger { get; }
 
         public ColorMatrixPresenterWrapper(
-            IAsyncOperationLockerWrapper locker,
+            IBitmapCopyServiceWrapper copy,
             IColorMatrixFactoryWrapper factory,
             ILoggerServiceWrapper logger,
             IRgbProviderWrapper provider)
         {
             Provider = provider;
             Factory = factory;
-            Locker = locker;
+            Copy = copy;
             Logger = logger;
 
-            _presenter = new ColorMatrixPresenter(locker, factory, logger, provider);
+            _presenter = new ColorMatrixPresenter(copy, factory, logger, provider);
         }
 
         public override void Run(BitmapViewModel vm)

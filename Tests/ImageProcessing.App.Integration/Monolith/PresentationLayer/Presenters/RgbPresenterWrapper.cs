@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Rgb.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
@@ -15,32 +16,29 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents.Wrappers.Presenters
 {
     internal class RgbPresenterWrapper : BasePresenter<IRgbView, BitmapViewModel>,
-          ISubscriber<ApplyRgbFilterEventArgs>,
-          ISubscriber<ApplyRgbChannelFilterEventArgs>,
-          ISubscriber<ContainerUpdatedEventArgs>,
-          ISubscriber<ShowColorMatrixMenuEventArgs>,
-          ISubscriber<ShowTooltipOnErrorEventArgs>,
-          ISubscriber<RestoreFocusEventArgs>
+          ISubscriber<ApplyRgbFilterEventArgs>, ISubscriber<ApplyRgbChannelFilterEventArgs>,
+          ISubscriber<ContainerUpdatedEventArgs>, ISubscriber<ShowColorMatrixMenuEventArgs>,
+          ISubscriber<ShowTooltipOnErrorEventArgs>, ISubscriber<RestoreFocusEventArgs>
     {
         private readonly RgbPresenter _presenter;
 
         public IRgbProviderWrapper Provider { get; }
-        public IAsyncOperationLockerWrapper Operation { get; }
+        public IBitmapCopyServiceWrapper Copy { get; }
         public IRgbFactoryWrapper Factory { get; }
         public ILoggerServiceWrapper Logger { get; }
 
         public RgbPresenterWrapper(
-            IAsyncOperationLockerWrapper locker,
+            IBitmapCopyServiceWrapper copy,
             IRgbFactoryWrapper factory,
             ILoggerServiceWrapper logger,
             IRgbProviderWrapper provider)
         {
             Provider = provider;
             Factory = factory;
-            Operation = locker;
+            Copy = copy;
             Logger = logger;
 
-            _presenter = new RgbPresenter(locker, factory, logger, provider);
+            _presenter = new RgbPresenter(copy, factory, logger, provider);
         }
 
         public override void Run(BitmapViewModel vm)

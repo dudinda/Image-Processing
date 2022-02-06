@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Transformation.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.TransformationArgs;
@@ -14,26 +14,25 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
 {
     internal class TransformationPresenterWrapper : BasePresenter<ITransformationView, BitmapViewModel>,
-        ISubscriber<ApplyTransformationEventArgs>,
-        ISubscriber<ContainerUpdatedEventArgs>,
+        ISubscriber<ApplyTransformationEventArgs>, ISubscriber<ContainerUpdatedEventArgs>,
         ISubscriber<RestoreFocusEventArgs>
     {
         private readonly TransformationPresenter _presenter;
 
         public ILoggerServiceWrapper Logger { get; }
-        public IAsyncOperationLockerWrapper Locker { get; }
+        public IBitmapCopyServiceWrapper Copy { get; }
         public ITransformationProviderWrapper Provider { get; }
 
         public TransformationPresenterWrapper(
             ITransformationProviderWrapper provider,
-            IAsyncOperationLockerWrapper locker,
+            IBitmapCopyServiceWrapper copy,
             ILoggerServiceWrapper logger)
         {
             Logger = logger;
-            Locker = locker;
+            Copy = copy;
             Provider = provider;
 
-            _presenter = new TransformationPresenter(provider, locker, logger);
+            _presenter = new TransformationPresenter(copy, provider, logger);
         }
 
         public virtual Task OnEventHandler(object publisher, RestoreFocusEventArgs e)

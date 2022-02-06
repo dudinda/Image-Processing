@@ -25,6 +25,8 @@ using ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.Vistior
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.Vistiors.Convolution.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.Vistiors.Histogram.Implementation;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.Vistiors.Histogram.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Implementation;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Bmp.Implementation;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Cache.Implementation;
@@ -91,6 +93,9 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Servic
                 Substitute.ForPartsOf<ConvolutionServiceWrapper>())
                 .RegisterTransientInstance<IAsyncOperationLockerWrapper>(
                 Substitute.ForPartsOf<AsyncOperationLockerWrapper>())
+                .RegisterSingletonInstance<IBitmapCopyServiceWrapper>(
+                Substitute.ForPartsOf<BitmapCopyServiceWrapper>(
+                    builder.Resolve<IAsyncOperationLockerWrapper>()))
                 .RegisterTransientInstance<IRandomVariableServiceWrapper>(
                 Substitute.ForPartsOf<RandomVariableServiceWrapper>())
                 .RegisterTransientInstance<IBitmapLuminanceServiceWrapper>(
