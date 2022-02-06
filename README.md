@@ -68,7 +68,7 @@
 </p>
 
 <p align="center">
-   <img src="https://i.imgur.com/nThxUNR.png"  width="1400" height = "230" alt="metrics">
+   <img src="https://i.imgur.com/UBcybM9.png"  width="1400" height = "230" alt="metrics">
    <p align="center">Fig. 7 - The process code metrics.</p>
 </p>
 
