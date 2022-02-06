@@ -33,7 +33,7 @@ namespace ImageProcessing.Microkernel.MVP.Presenter.Implementation
         /// <summary>
         /// Access point to the UI layer components.
         /// </summary>
-        protected TView View
+        protected virtual TView View
         {
             get
             {
