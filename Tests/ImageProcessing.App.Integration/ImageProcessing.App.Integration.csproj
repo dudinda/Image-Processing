@@ -194,6 +194,8 @@
     <Compile Include="Monolith\ServiceLayer\ServiceModel\Vistiors\Histogram\Implementation\HistogramVisitorWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\ServiceModel\Vistiors\Histogram\Interface\IHistogramVisitorWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\ServiceStartup.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\BitmapCopy\Implementation\BitmapCopyServiceWrapper.cs" />
+    <Compile Include="Monolith\ServiceLayer\Services\BitmapCopy\Interface\IBitmapCopyServiceWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\Bmp\Implementation\BitmapServiceWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\Bmp\Interface\IBitmapServiceWrapper.cs" />
     <Compile Include="Monolith\ServiceLayer\Services\Cache\Implementation\CacheServiceWrapper.cs" />
@@ -280,6 +282,7 @@
   <ItemGroup>
     <Content Include="Code\Resources\Static\1920x1080frame.jpg" />
     <Content Include="Code\Resources\Static\2560x1440frame.jpg" />
+    <Content Include="Code\Resources\Static\demo.gif" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

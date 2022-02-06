@@ -73,7 +73,6 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
                 view.Received().GetImageCopy();
                 view.Received().AddToUndoRedo(
                     Arg.Is<Bitmap>(Res._1920x1080frame), UndoRedoAction.Undo);
-                view.Received().ImageIsDefault();
                 view.Received().SetImageCopy(Arg.Any<Bitmap>());
                 view.Received().SetImage(Arg.Any<Bitmap>());
                 view.SetImageCenter(Res._1920x1080frame.Size);

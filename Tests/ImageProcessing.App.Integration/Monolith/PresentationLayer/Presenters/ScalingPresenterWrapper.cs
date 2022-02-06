@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Scaling.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
@@ -14,27 +15,25 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
 {
     internal class ScalingPresenterWrapper : BasePresenter<IScalingView, BitmapViewModel>,
-        ISubscriber<ScaleEventArgs>,
-        ISubscriber<ShowTooltipOnErrorEventArgs>,
-        ISubscriber<ContainerUpdatedEventArgs>,
-        ISubscriber<RestoreFocusEventArgs>
+        ISubscriber<ScaleEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
+        ISubscriber<ContainerUpdatedEventArgs>, ISubscriber<RestoreFocusEventArgs>
     {
         private readonly ScalingPresenter _presenter;
 
-        public ILoggerServiceWrapper Logger { get; }
+        public IBitmapCopyServiceWrapper Copy { get; }
         public IScalingProviderWrapper Provider { get; }
-        public IAsyncOperationLockerWrapper Locker { get; }
+        public ILoggerServiceWrapper Logger { get; }
 
         public ScalingPresenterWrapper(
-            IAsyncOperationLockerWrapper locker,
+            IBitmapCopyServiceWrapper copy,
             IScalingProviderWrapper provider,
             ILoggerServiceWrapper logger)
         {
             Provider = provider;
             Logger = logger;
-            Locker = locker;
+            Copy = copy;
 
-            _presenter = new ScalingPresenter(locker, provider, logger);
+            _presenter = new ScalingPresenter(copy, provider, logger);
         }
 
         public override void Run(BitmapViewModel vm)
