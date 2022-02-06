@@ -9,15 +9,11 @@ using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Container;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.FileDialog;
-using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
-using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Show;
 using ImageProcessing.App.PresentationLayer.Properties;
-using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Providers.Rotation.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Scaling.Interface;
 using ImageProcessing.App.ServiceLayer.Services.BitmapCopyReference.Interface;
-using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
 using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
@@ -30,14 +26,11 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 namespace ImageProcessing.App.PresentationLayer.Presenters
 {
     internal sealed class MainPresenter : BasePresenter<IMainView>,
-        ISubscriber<AttachBlockToRendererEventArgs>, ISubscriber<ShowConvolutionMenuEventArgs>,
-        ISubscriber<ShowDistributionMenuEventArgs>, ISubscriber<ShowRgbMenuEventArgs>,
-        ISubscriber<ShowSettingsMenuEventArgs>, ISubscriber<ShowTransformationMenuEventArgs>,
-        ISubscriber<OpenFileDialogEventArgs>, ISubscriber<SaveAsFileDialogEventArgs>,
+        ISubscriber<AttachBlockToRendererEventArgs>, ISubscriber<OpenFileDialogEventArgs>,
+        ISubscriber<SaveAsFileDialogEventArgs>, ISubscriber<SetSourceEventArgs>,
         ISubscriber<SaveWithoutFileDialogEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
         ISubscriber<TrackBarEventArgs>, ISubscriber<UndoRedoEventArgs>,
-        ISubscriber<FormIsClosedEventArgs>, ISubscriber<ShowRotationMenuEventArgs>,
-        ISubscriber<ShowScalingMenuEventArgs>, ISubscriber<SetSourceEventArgs>
+        ISubscriber<FormIsClosedEventArgs>
     {
         private readonly ILoggerService _logger;
         private readonly IScalingProvider _scale;
@@ -60,6 +53,12 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             _rotation = rotation;
             _reference = reference;
             _pipeline = pipeline;
+        }
+
+        public override void Run()
+        {
+            Controller.Run<MainMenuPresenter>();
+            base.Run();
         }
 
         /// <inheritdoc cref="OpenFileDialogEventArgs"/>
@@ -131,142 +130,6 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
                 OnError(publisher, Errors.SaveFile);
                 _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
             }
-        }
-
-        /// <inheritdoc cref="ShowRgbMenuEventArgs"/>
-        public async Task OnEventHandler(object publisher, ShowRgbMenuEventArgs e)
-        {
-            try
-            {
-                if (!View.ImageIsDefault)
-                {
-                    var copy = await _reference.GetCopy().ConfigureAwait(true);
-
-                    Controller.Run<RgbPresenter, BitmapViewModel>(
-                        new BitmapViewModel(new Rectangle(0, 0, copy.Width, copy.Height)));
-                }
-            }
-            catch (Exception ex)
-            {
-                OnError(publisher, Errors.ShowRgbMenu);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
-            }
-        }
-
-        /// <inheritdoc cref="ShowScalingMenuEventArgs"/>
-        public async Task OnEventHandler(object publisher, ShowScalingMenuEventArgs e)
-        {
-            try
-            {
-                if (!View.ImageIsDefault)
-                {
-                    var copy = await _reference.GetCopy().ConfigureAwait(true);
-
-                    Controller.Run<ScalingPresenter, BitmapViewModel>(
-                        new BitmapViewModel(new Rectangle(0, 0, copy.Width, copy.Height)));
-                }
-            }
-            catch (Exception ex)
-            {
-                OnError(publisher, Errors.ShowRgbMenu);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
-            }
-        }
-
-        /// <inheritdoc cref="ShowRotationMenuEventArgs"/>
-        public async Task OnEventHandler(object publisher, ShowRotationMenuEventArgs e)
-        {
-            try
-            {
-                if (!View.ImageIsDefault)
-                {
-                    var copy = await _reference.GetCopy().ConfigureAwait(true);
-
-                    Controller.Run<RotationPresenter, BitmapViewModel>(
-                        new BitmapViewModel(new Rectangle(0, 0, copy.Width, copy.Height)));
-                }
-            }
-            catch (Exception ex)
-            {
-                OnError(publisher, Errors.ShowRgbMenu);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
-            }
-        }
-
-        /// <inheritdoc cref="ShowDistributionMenuEventArgs"/>
-        public async Task OnEventHandler(object publisher, ShowDistributionMenuEventArgs e)
-        {
-            try
-            {
-                if (!View.ImageIsDefault)
-                {
-                    var copy = await _reference.GetCopy().ConfigureAwait(true);
-
-                    Controller.Run<DistributionPresenter, BitmapViewModel>(
-                        new BitmapViewModel(new Rectangle(0, 0, copy.Width, copy.Height)));
-                }
-            }
-            catch (Exception ex)
-            {
-                OnError(publisher, Errors.ShowDistributionMenu);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
-            }
-        }
-
-        /// <inheritdoc cref="ShowConvolutionMenuEventArgs"/>
-        public async Task OnEventHandler(object publisher, ShowConvolutionMenuEventArgs e)
-        {
-            try
-            {
-                if (!View.ImageIsDefault)
-                {
-                    var copy = await _reference.GetCopy().ConfigureAwait(true);
-
-                    Controller.Run<ConvolutionPresenter, BitmapViewModel>(
-                        new BitmapViewModel(new Rectangle(0, 0, copy.Width, copy.Height)));
-                }
-            }
-            catch (Exception ex)
-            {
-                OnError(publisher, Errors.ShowConvolutionMenu);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
-            }
-        }
-
-        /// <inheritdoc cref="ShowTransformationMenuEventArgs"/>
-        public async Task OnEventHandler(object publisher, ShowTransformationMenuEventArgs e)
-        {
-            try
-            {
-                if (!View.ImageIsDefault)
-                {
-                    var copy = await _reference.GetCopy().ConfigureAwait(true);
-
-                    Controller.Run<TransformationPresenter, BitmapViewModel>(
-                        new BitmapViewModel(new Rectangle(0, 0, copy.Width, copy.Height)));
-                }
-            }
-            catch (Exception ex)
-            {
-                OnError(publisher, Errors.ShowTransformationMenu);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
-            }
-        }
-
-        /// <inheritdoc cref="ShowSettingsMenuEventArgs"/>
-        public Task OnEventHandler(object publisher, ShowSettingsMenuEventArgs e)
-        {
-            try
-            {
-                Controller.Run<SettingsPresenter>();
-            }
-            catch (Exception ex)
-            {
-                OnError(publisher, Errors.ShowSettingsMenu);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
-            }
-
-            return Task.CompletedTask;
         }
 
         /// <inheritdoc cref="AttachBlockToRendererEventArgs"/>
@@ -405,7 +268,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         {
             lock (_dialog)
             {
-                _reference.SetCopy(new Bitmap(bmp)).Wait();
+                _reference.SetCopy(bmp).Wait();
 
                 View.AddToUndoRedo((Bitmap)View.GetImageCopy(), action);
                 View.SetImageCopy(bmp);
@@ -447,7 +310,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         }
 
         private async Task Render(object publisher, IPipelineBlock block,
-            UndoRedoAction action    = UndoRedoAction.Undo)
+            UndoRedoAction action = UndoRedoAction.Undo)
         {
             View.SetCursor(CursorType.Wait);
 
