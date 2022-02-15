@@ -25,7 +25,7 @@
 
 <p align="center">
     <img src="https://github.com/dudinda/Image-Processing/blob/master/Tests/ImageProcessing.App.Integration/Code/Resources/Static/demo.gif?raw=true" width="600" height = "600" alt="application window">
-    <p align="center">Fig. 1 - The main view and transient/signleton views as tabs. The opened affine transformation tab is a transient view. The settings tab is a singleton view. The frame is taken from <a href="https://i.imgur.com/h57F8D7.jpg">"Thomas the Tank Engine"</a> series and processed with the Grayscale->Inversion->Laplacian Operator 5x5->Inversion->Shear Rotation 20°->Bicubic Interpolation (0.2, 0.2)->Cyclic Translation (33, 33) (hold) algorithm chain.</p>
+    <p align="center">Fig. 1 - The main view and transient/signleton views as tabs. The opened affine transformation tab is a transient view. The settings tab is a singleton view. The frame is taken from <a href="https://i.imgur.com/h57F8D7.jpg">"Thomas the Tank Engine"</a> series and processed with the Grayscale->Inversion->Laplacian Operator 5x5->Inversion->Shear Rotation 20°->Bicubic Interpolation (0.2, 0.2)->Cyclic Translation (33, 33) (hold) [cpu] algorithm chain.</p>
 </p>
 <br/><br/>
 <p> Initially, for experimental purposes was chosen a group of underexposed images. </p>
