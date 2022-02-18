@@ -11,7 +11,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
     /// <inheritdoc cref="IEventAggregator"/>
     public class EventAggregator : IEventAggregator
     {
-          private readonly object _sync = new object();
+        private readonly object _sync = new object();
 
         /// <summary>
         /// Partition a presenter with a subscriber interface cast and
