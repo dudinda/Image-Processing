@@ -149,44 +149,50 @@ namespace ImageProcessing.Microkernel.MVP.IoC.Implementation
         }
 
         /// <inheritdoc/>
-        public IComponentProvider RegisterTransientFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
+        public IComponentProvider RegisterTransient<TService, TArgument>(
+            Expression<Func<IComponentProvider, TService>> factory)
         {
-            _container.RegisterTransient(factory);
+            _container.RegisterTransient(factory.Compile()(this));
             return this;
         }
 
         /// <inheritdoc/>
-        public IComponentProvider RegisterScopedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
+        public IComponentProvider RegisterScoped<TService, TArgument>(
+            Expression<Func<IComponentProvider, TService>> factory)
         {
-            _container.RegisterScoped(factory);
+            _container.RegisterScoped(factory.Compile()(this));
             return this;
         }
 
         /// <inheritdoc/>
-        public IComponentProvider RegisterSingletonFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
+        public IComponentProvider RegisterSingleton<TService, TArgument>(
+            Expression<Func<IComponentProvider, TService>> factory)
         {
-            _container.RegisterSingleton(factory);
+            _container.RegisterSingleton(factory.Compile()(this));
             return this;
         }
 
         /// <inheritdoc/>
-        public IComponentProvider RegisterTransientNamedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name)
+        public IComponentProvider RegisterTransient<TService, TArgument>(
+            Expression<Func<IComponentProvider, TService>> factory, string name)
         {
-            _container.RegisterTransient(factory, name);
+            _container.RegisterTransient(factory.Compile()(this), name);
             return this;
         }
 
         /// <inheritdoc/>
-        public IComponentProvider RegisterScopedNamedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name)
+        public IComponentProvider RegisterScoped<TService, TArgument>(
+            Expression<Func<IComponentProvider, TService>> factory, string name)
         {
-            _container.RegisterScoped(factory, name);
+            _container.RegisterScoped(factory.Compile()(this), name);
             return this;
         }
 
         /// <inheritdoc/>
-        public IComponentProvider RegisterSingletonNamedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name)
+        public IComponentProvider RegisterSingleton<TService, TArgument>(
+            Expression<Func<IComponentProvider, TService>> factory, string name)
         {
-            _container.RegisterSingleton(factory, name);
+            _container.RegisterSingleton(factory.Compile()(this), name);
             return this;
         }
 

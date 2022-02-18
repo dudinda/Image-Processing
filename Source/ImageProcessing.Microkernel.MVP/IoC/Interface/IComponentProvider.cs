@@ -134,43 +134,37 @@ namespace ImageProcessing.Microkernel.MVP.IoC.Interface
         /// Registers the <typeparamref name="TService"/> as the factory that describes.
         /// the dependencies of the service with the transient scope.
         /// </summary>
-        [Obsolete("The implementation will not be provided. Will be removed.")]
-        IComponentProvider RegisterTransientFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory);
+        IComponentProvider RegisterTransient<TService, TArgument>(Expression<Func<IComponentProvider, TService>> factory);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes.
         /// the dependencies of the service with the caller-name scope.
         /// </summary>
-        [Obsolete("The implementation will not be provided. Will be removed.")]
-        IComponentProvider RegisterScopedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory);
+        IComponentProvider RegisterScoped<TService, TArgument>(Expression<Func<IComponentProvider, TService>> factory);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes
         /// the dependencies of the service with the singleton scope.
         /// </summary>
-        [Obsolete("The implementation will not be provided. Will be removed.")]
-        IComponentProvider RegisterSingletonFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory);
+        IComponentProvider RegisterSingleton<TService, TArgument>(Expression<Func<IComponentProvider, TService>> factory);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes
         /// the named dependencies of the service with the transient scope.
         /// </summary>
-        [Obsolete("The implementation will not be provided. Will be removed.")]
-        IComponentProvider RegisterTransientNamedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name);
+        IComponentProvider RegisterTransient<TService, TArgument>(Expression<Func<IComponentProvider, TService>> factory, string name);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes
         /// the named dependencies of the service with the caller-name scope.
         /// </summary>
-        [Obsolete("The implementation will not be provided. Will be removed.")]
-        IComponentProvider RegisterScopedNamedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name);
+        IComponentProvider RegisterScoped<TService, TArgument>(Expression<Func<IComponentProvider, TService>> factory, string name);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes
         /// the named dependencies of the service with the singleton scope.
         /// </summary>
-        [Obsolete("The implementation will not be provided. Will be removed.")]
-        IComponentProvider RegisterSingletonNamedFactory<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name);
+        IComponentProvider RegisterSingleton<TService, TArgument>(Expression<Func<IComponentProvider, TService>> factory, string name);
 
         /// <summary>
         /// Returns <b>true</b> if the container can create the requested service, otherwise <b>false</b>.
