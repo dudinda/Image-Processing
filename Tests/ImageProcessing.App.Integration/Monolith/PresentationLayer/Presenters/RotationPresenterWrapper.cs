@@ -2,10 +2,9 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Rotation.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
-using ImageProcessing.App.PresentationLayer.DomainEvents.RgbArgs;
+using ImageProcessing.App.PresentationLayer.DomainEvents.RotationArgs;
 using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
@@ -14,12 +13,15 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
 namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
 {
-    internal class RotationPresenterWrapper : BasePresenter<IRgbView, BitmapViewModel>,
-          ISubscriber<ApplyRgbFilterEventArgs>, ISubscriber<ApplyRgbChannelFilterEventArgs>,
-          ISubscriber<ContainerUpdatedEventArgs>, ISubscriber<ShowColorMatrixMenuEventArgs>,
-          ISubscriber<ShowTooltipOnErrorEventArgs>, ISubscriber<RestoreFocusEventArgs>
+    internal class RotationPresenterWrapper : BasePresenter<IRotationView, BitmapViewModel>,
+        ISubscriber<RotateEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
+        ISubscriber<ContainerUpdatedEventArgs>, ISubscriber<RestoreFocusEventArgs>,
+        ISubscriber<FormIsClosedEventArgs>, ISubscriber<EnableControlEventArgs>
     {
         private readonly RotationPresenter _presenter;
+
+        public override IRotationView View
+            => _presenter.View;
 
         public IRotationProviderWrapper Provider { get; }
         public ILoggerServiceWrapper Logger { get; }
@@ -43,32 +45,36 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
             _presenter.Run(vm);
         }
 
-        public virtual Task OnEventHandler(object publisher, ApplyRgbFilterEventArgs e)
+        /// <inheritdoc cref="RotateEventArgs"/>
+        public Task OnEventHandler(object publisher, RotateEventArgs e)
         {
             return Task.CompletedTask;
         }
 
-        public virtual Task OnEventHandler(object publisher, ApplyRgbChannelFilterEventArgs e)
+        /// <inheritdoc cref="ShowTooltipOnErrorEventArgs"/>
+        public Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
             return Task.CompletedTask;
         }
 
-        public virtual Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
+        /// <inheritdoc cref="ContainerUpdatedEventArgs"/>
+        public Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
         {
             return Task.CompletedTask;
         }
 
-        public virtual Task OnEventHandler(object publisher, ShowColorMatrixMenuEventArgs e)
+        /// <inheritdoc cref="RestoreFocusEventArgs"/>
+        public Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
         {
             return Task.CompletedTask;
         }
 
-        public virtual Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
+        public Task OnEventHandler(object publisher, FormIsClosedEventArgs e)
         {
             return Task.CompletedTask;
         }
 
-        public virtual Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
+        public Task OnEventHandler(object publisher, EnableControlEventArgs e)
         {
             return Task.CompletedTask;
         }

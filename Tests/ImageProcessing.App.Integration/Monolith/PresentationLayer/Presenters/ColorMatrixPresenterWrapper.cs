@@ -19,6 +19,9 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
         ISubscriber<CustomColorMatrixEventArgs>, ISubscriber<ChangeColorMatrixEventArgs>,
         ISubscriber<ApplyCustomColorMatrixEventArgs>, ISubscriber<RestoreFocusEventArgs>
     {
+        public override IColorMatrixView View
+            => _presenter.View;
+
         private readonly ColorMatrixPresenter _presenter;
 
         public IRgbProviderWrapper Provider { get; }
@@ -42,8 +45,8 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
 
         public override void Run(BitmapViewModel vm)
         {
-            base.Run(vm);
             _presenter.Run(vm);
+            base.Run(vm);
         }
 
         public virtual Task OnEventHandler(object publisher, ApplyColorMatrixEventArgs e)

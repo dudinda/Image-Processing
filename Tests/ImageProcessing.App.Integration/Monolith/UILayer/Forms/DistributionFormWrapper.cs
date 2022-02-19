@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Distribution.Interface;
+using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.FormExposers.Distribution;
 using ImageProcessing.App.UILayer.Forms.Distribution;
 
@@ -109,5 +110,8 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
            
         public virtual void Tooltip(string message)
             => _form.Tooltip(message);
+
+        public virtual void EnableControls(bool isEnabled)
+            => _form.EnableControls(isEnabled);
     }
 }

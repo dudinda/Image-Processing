@@ -2,7 +2,6 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Rgb.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.RgbArgs;
@@ -21,6 +20,9 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
           ISubscriber<ShowTooltipOnErrorEventArgs>, ISubscriber<RestoreFocusEventArgs>
     {
         private readonly RgbPresenter _presenter;
+
+        public override IRgbView View
+            => _presenter.View;
 
         public IRgbProviderWrapper Provider { get; }
         public IBitmapCopyServiceWrapper Copy { get; }
@@ -43,8 +45,8 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
 
         public override void Run(BitmapViewModel vm)
         {
-            base.Run(vm);
             _presenter.Run(vm);
+            base.Run(vm);
         }
 
         public virtual Task OnEventHandler(object publisher, ApplyRgbChannelFilterEventArgs e)

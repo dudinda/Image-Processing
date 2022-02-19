@@ -40,7 +40,7 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
             _pipeline = pipeline;
         }
 
-        protected override IMainView View
+        public override IMainView View
             => _view ??= Controller.IoC.Resolve<IMainView>();
 
         public override void Run()
