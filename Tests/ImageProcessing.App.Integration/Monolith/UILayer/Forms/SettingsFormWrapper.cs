@@ -2,8 +2,8 @@ using System;
 using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Settings.Interface;
+using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.FormExposers.Settings;
 using ImageProcessing.App.UILayer.Forms.Settings;
 
@@ -11,12 +11,12 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
 {
-    internal class SettingsFormWrapper : ISettingsViewWrapper, ISettingsFormExposer
+    internal class SettingsFormWrapper : ISettingsView, ISettingsFormExposer
     {
         private class NonUISettingsForm : SettingsForm
         {
             public NonUISettingsForm(
-                IMainViewWrapper main,
+                IMainView main,
                 ISettingsFormEventBinderWrapper binder) : base(main, binder)
             {
 
@@ -32,7 +32,7 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
         private readonly NonUISettingsForm _form;
 
         public SettingsFormWrapper(
-            IMainViewWrapper main,
+            IMainView main,
             ISettingsFormEventBinderWrapper binder)
         {
             _form = new NonUISettingsForm(main, binder);
@@ -83,9 +83,7 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
             
         }
 
-        public void EnableControls(bool isEnabled)
-        {
-            throw new NotImplementedException();
-        }
+        public virtual void EnableControls(bool isEnabled)
+             => _form.EnableControls(isEnabled);
     }
 }

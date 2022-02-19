@@ -2,8 +2,8 @@ using System;
 using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Scaling.Interface;
+using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.FormExposers;
 using ImageProcessing.App.UILayer.Forms.Scaling;
 
@@ -11,12 +11,12 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
 {
-    internal class ScalingFormWrapper : IScalingViewWrapper, IScalingFormExposer
+    internal class ScalingFormWrapper : IScalingView, IScalingFormExposer
     {
         private class NonUIScalingForm : ScalingForm
         {
             public NonUIScalingForm(
-                IMainViewWrapper main,
+                IMainView main,
                 IScalingFormEventBinderWrapper binder) : base(main, binder)
             {
 
@@ -32,7 +32,7 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
         private readonly NonUIScalingForm _form;
 
         public ScalingFormWrapper(
-            IMainViewWrapper main,
+            IMainView main,
             IScalingFormEventBinderWrapper binder)
         {
             _form = new NonUIScalingForm(main, binder);
@@ -73,9 +73,7 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
         public virtual void Tooltip(string message)
             => _form.Tooltip(message);
 
-        public void EnableControls(bool isEnabled)
-        {
-            throw new NotImplementedException();
-        }
+        public virtual void EnableControls(bool isEnabled)
+              => _form.EnableControls(isEnabled);
     }
 }

@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Distribution.Interface;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.FormExposers.Distribution;
@@ -14,12 +13,12 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Forms
 {
-    internal class DistributionFormWrapper : IDistributionFormExposer, IDistributionViewWrapper
+    internal class DistributionFormWrapper : IDistributionFormExposer, IDistributionView
     {
         private class NonUIDistributionForm : DistributionForm
         {
             public NonUIDistributionForm(
-                IMainViewWrapper main,
+                IMainView main,
                 IDistributionFormEventBinderWrapper wrapper) : base(main, wrapper)
             {
                 
@@ -34,7 +33,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         private readonly NonUIDistributionForm _form;
 
         public DistributionFormWrapper(
-           IMainViewWrapper main,
+           IMainView main,
            IDistributionFormEventBinderWrapper wrapper) 
         {
             _form = new NonUIDistributionForm(main, wrapper);

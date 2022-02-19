@@ -2,9 +2,9 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Main.Interface;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
+using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Services.UndoRedo.Interface;
 using ImageProcessing.App.UILayer.Controls;
 using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
@@ -16,7 +16,7 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
 {
-    internal partial class MainFormWrapper : IMainViewWrapper, IMainFormExposer
+    internal partial class MainFormWrapper : IMainView, IMainFormExposer
     {
         private class NonUIMainForm : MainForm
         {
@@ -25,7 +25,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
                 IUndoRedoService<Bitmap> undoredo,
                 IMenuStateFactory state) : base(binder, undoredo, state)
             {
-             
+               
             }
 
             protected override void Write(Action action)
@@ -44,6 +44,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
         {
             _form = new NonUIMainForm(binder, undoredo, state);
             _binder = binder;
+            _binder.OnElementExpose(this);
         }
 
 
@@ -128,9 +129,14 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
         public MetroTabControl TabsCtrl
             => _form.TabsCtrl;
 
-        public Image LoadedImage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public virtual Image LoadedImage
+        {
+            get => _form.LoadedImage;
+            set => _form.LoadedImage = value;
+        }
 
-        public ToolStripButton SetSourceButton => throw new NotImplementedException();
+        public virtual ToolStripButton SetSourceButton
+            => _form.SetSourceButton;
 
         public virtual void SetDefaultImage()
             => _form.SetDefaultImage();
@@ -191,12 +197,10 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
        
         public virtual void Show()
         {
-            _binder.OnElementExpose(this);
+            
         }
 
-        public void SetMenuState(MenuBtnState state)
-        {
-           
-        }
+        public virtual void SetMenuState(MenuBtnState state)
+            => _form.SetMenuState(state);
     }
 }

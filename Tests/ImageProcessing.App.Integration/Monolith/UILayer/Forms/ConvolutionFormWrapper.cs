@@ -2,7 +2,6 @@ using System;
 using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.FormExposers.Convolution;
@@ -17,7 +16,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         private class NonUIConvolutionForm : ConvolutionForm
         {
             public NonUIConvolutionForm(
-                IMainViewWrapper main,
+                IMainView main,
                 IConvolutionFormEventBinderWrapper wrapper) : base(main, wrapper)
             {
                
@@ -32,7 +31,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         private readonly NonUIConvolutionForm _form;
 
         public ConvolutionFormWrapper(
-            IMainViewWrapper main,
+            IMainView main,
             IConvolutionFormEventBinderWrapper wrapper) 
         {
             _form = new NonUIConvolutionForm(main, wrapper);
@@ -72,9 +71,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         public virtual void Tooltip(string message)
             => _form.Tooltip(message);
 
-        public void EnableControls(bool isEnabled)
-        {
-            throw new NotImplementedException();
-        }
+        public virtual void EnableControls(bool isEnabled)
+            => _form.EnableControls(isEnabled);
     }
 }

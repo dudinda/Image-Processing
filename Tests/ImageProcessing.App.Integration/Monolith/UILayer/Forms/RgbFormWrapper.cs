@@ -2,8 +2,8 @@ using System;
 using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Rgb.Interface;
+using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.FormExposers.Rgb;
 using ImageProcessing.App.UILayer.Forms.Rgb;
 
@@ -11,12 +11,12 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Forms
 {
-    internal class RgbFormWrapper : IRgbFormExposer, IRgbViewWrapper
+    internal class RgbFormWrapper : IRgbFormExposer, IRgbView
     {
         private class NonUIRgbForm : RgbForm
         {
             public NonUIRgbForm(
-                IMainViewWrapper main,
+                IMainView main,
                 IRgbFormEventBinderWrapper wrapper) : base(main, wrapper)
             {
                
@@ -31,7 +31,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         private readonly NonUIRgbForm _form;
 
         public RgbFormWrapper(
-            IMainViewWrapper main,
+            IMainView main,
             IRgbFormEventBinderWrapper wrapper)
         {
             _form = new NonUIRgbForm(main, wrapper);
@@ -88,14 +88,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         public virtual void Tooltip(string message)
             => _form.Tooltip(message);
 
-        public void EnableFormControls(bool isEnabled)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void EnableControls(bool isEnabled)
-        {
-            throw new NotImplementedException();
-        }
+        public virtual void EnableControls(bool isEnabled)
+             => _form.EnableControls(isEnabled);
     }
 }

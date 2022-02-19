@@ -1,5 +1,4 @@
 using ImageProcessing.App.Integration.Monolith.PresentationLayer;
-using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.ColorMatrix.Implementation;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.ColorMatrix.Interface;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Convolution.Implementation;
@@ -19,6 +18,7 @@ using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Settings
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Transformation.Implementation;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Transformation.Interface;
 using ImageProcessing.App.Integration.Monolith.UILayer.Forms;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form;
 using ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Forms;
@@ -43,7 +43,7 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer
     {
         public void Build(IComponentProvider builder)
         {
-            new PresentationStartup().Build(builder);
+            new ServiceStartup().Build(builder);
 
             builder
                 .RegisterTransient<IRgbFormEventBinder, RgbFormEventBinderWrapper>()
@@ -82,40 +82,40 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer
                 .RegisterTransientInstance<ISettingsFormEventBinderWrapper>(
                 Substitute.ForPartsOf<SettingsFormEventBinderWrapper>(
                     builder.Resolve<IEventAggregatorWrapper>()))
-                .RegisterSingletonInstance<IMainViewWrapper>(
+                .RegisterSingletonInstance<IMainView>(
                 Substitute.ForPartsOf<MainFormWrapper>(
                     builder.Resolve<IMainFormEventBinderWrapper>()))
-                .RegisterTransientInstance<IColorMatrixViewWrapper>(
+                .RegisterTransientInstance<IColorMatrixView>(
                 Substitute.ForPartsOf<ColorMatrixFormWrapper>(
-                    builder.Resolve<IMainViewWrapper>(),
+                    builder.Resolve<IMainView>(),
                     builder.Resolve<IColorMatrixFormEventBinderWrapper>()))
                 .RegisterTransientInstance<IConvolutionView>(
                 Substitute.ForPartsOf<ConvolutionFormWrapper>(
-                    builder.Resolve<IMainViewWrapper>(),
+                    builder.Resolve<IMainView>(),
                     builder.Resolve<IConvolutionFormEventBinderWrapper>()))
-                .RegisterTransientInstance<IDistributionViewWrapper>(
+                .RegisterTransientInstance<IDistributionView>(
                 Substitute.ForPartsOf<DistributionFormWrapper>(
-                    builder.Resolve<IMainViewWrapper>(),
+                    builder.Resolve<IMainView>(),
                     builder.Resolve<IDistributionFormEventBinderWrapper>()))
-                .RegisterTransientInstance<IRgbViewWrapper>(
+                .RegisterTransientInstance<IRgbView>(
                 Substitute.ForPartsOf<RgbFormWrapper>(
-                    builder.Resolve<IMainViewWrapper>(),
+                    builder.Resolve<IMainView>(),
                     builder.Resolve<IRgbFormEventBinderWrapper>()))
-                .RegisterTransientInstance<IRotationViewWrapper>(
+                .RegisterTransientInstance<IRotationView>(
                 Substitute.ForPartsOf<RotationFormWrapper>(
-                    builder.Resolve<IMainViewWrapper>(),
+                    builder.Resolve<IMainView>(),
                     builder.Resolve<IRotationFormEventBinderWrapper>()))
-                .RegisterTransientInstance<IScalingViewWrapper>(
+                .RegisterTransientInstance<IScalingView>(
                 Substitute.ForPartsOf<ScalingFormWrapper>(
-                    builder.Resolve<IMainViewWrapper>(),
+                    builder.Resolve<IMainView>(),
                     builder.Resolve<IScalingFormEventBinderWrapper>()))
-                .RegisterSingletonInstance<ISettingsViewWrapper>(
+                .RegisterSingletonInstance<ISettingsView>(
                 Substitute.ForPartsOf<SettingsFormWrapper>(
-                    builder.Resolve<IMainViewWrapper>(),
+                    builder.Resolve<IMainView>(),
                     builder.Resolve<ISettingsFormEventBinderWrapper>()))
-                .RegisterTransientInstance<ITransformationViewWrapper>(
+                .RegisterTransientInstance<ITransformationView>(
                 Substitute.ForPartsOf<TransformationFormWrapper>(
-                    builder.Resolve<IMainViewWrapper>(),
+                    builder.Resolve<IMainView>(),
                     builder.Resolve<ITransformationFormEventBinderWrapper>()));
         }
     }
