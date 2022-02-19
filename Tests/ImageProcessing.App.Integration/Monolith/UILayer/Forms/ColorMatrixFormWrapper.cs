@@ -2,7 +2,6 @@ using System;
 using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.ColorMatrix.Interface;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.FormExposers.ColorMatrix;
@@ -13,12 +12,12 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
 {
-    internal class ColorMatrixFormWrapper : IColorMatrixViewWrapper, IColorMatrixFormExposer
+    internal class ColorMatrixFormWrapper : IColorMatrixView, IColorMatrixFormExposer
     {
         private class NonUIColorMatrixForm : ColorMatrixForm
         {
             public NonUIColorMatrixForm(
-                IMainViewWrapper main,
+                IMainView main,
                 IColorMatrixFormEventBinderWrapper binder) : base(main, binder)
             {
                 
@@ -33,7 +32,7 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
         private readonly NonUIColorMatrixForm _form;
  
         public ColorMatrixFormWrapper(
-            IMainViewWrapper main,
+            IMainView main,
             IColorMatrixFormEventBinderWrapper binder)
         {
             _form = new NonUIColorMatrixForm(main, binder);
@@ -98,9 +97,7 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
         public virtual void Tooltip(string message)
             => _form.Tooltip(message);
 
-        public void EnableControls(bool isEnabled)
-        {
-            throw new NotImplementedException();
-        }
+        public virtual void EnableControls(bool isEnabled)
+            => _form.EnableControls(isEnabled);
     }
 }

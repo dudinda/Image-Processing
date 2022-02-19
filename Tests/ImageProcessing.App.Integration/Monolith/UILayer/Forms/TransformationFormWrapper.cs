@@ -2,7 +2,6 @@ using System;
 using System.Windows.Forms;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Transformation.Interface;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.FormExposers.Transformation;
@@ -12,12 +11,12 @@ using MetroFramework.Controls;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
 {
-    internal class TransformationFormWrapper : ITransformationViewWrapper, ITransformationFormExposer
+    internal class TransformationFormWrapper : ITransformationView, ITransformationFormExposer
     {
         private class NonUITransformationForm : TransformationForm
         {
             public NonUITransformationForm(
-                IMainViewWrapper main,
+                IMainView main,
                 ITransformationFormEventBinderWrapper binder) : base(main, binder)
             {
 
@@ -33,7 +32,7 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
         private readonly NonUITransformationForm _form;
 
         public TransformationFormWrapper(
-            IMainViewWrapper main,
+            IMainView main,
             ITransformationFormEventBinderWrapper binder)
         {
             _form = new NonUITransformationForm(main, binder);
@@ -74,9 +73,7 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
         public virtual void Tooltip(string message)
             => _form.Tooltip(message);
 
-        public void EnableControls(bool isEnabled)
-        {
-            throw new NotImplementedException();
-        }
+        public virtual void EnableControls(bool isEnabled)
+            => _form.EnableControls(isEnabled);
     }
 }

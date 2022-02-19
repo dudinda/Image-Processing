@@ -2,8 +2,7 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Rotation.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Scaling.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Cache.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Pipeline.Interface;
@@ -20,44 +19,40 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Presenters
 {
     internal class MainPresenterWrapper : BasePresenter<IMainView>,
-        ISubscriber<AttachBlockToRendererEventArgs>, ISubscriber<ShowConvolutionMenuEventArgs>,
-        ISubscriber<ShowDistributionMenuEventArgs>, ISubscriber<ShowRgbMenuEventArgs>,
-        ISubscriber<ShowSettingsMenuEventArgs>, ISubscriber<ShowTransformationMenuEventArgs>,
-        ISubscriber<OpenFileDialogEventArgs>, ISubscriber<SaveAsFileDialogEventArgs>,
+        ISubscriber<AttachBlockToRendererEventArgs>, ISubscriber<OpenFileDialogEventArgs>,
+        ISubscriber<SaveAsFileDialogEventArgs>, ISubscriber<SetSourceEventArgs>,
         ISubscriber<SaveWithoutFileDialogEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
-        ISubscriber<SetSourceEventArgs>, ISubscriber<TrackBarEventArgs>,
-        ISubscriber<UndoRedoEventArgs>, ISubscriber<FormIsClosedEventArgs>,
-        ISubscriber<ShowRotationMenuEventArgs>, ISubscriber<ShowScalingMenuEventArgs>
+        ISubscriber<TrackBarEventArgs>, ISubscriber<UndoRedoEventArgs>,
+        ISubscriber<FormIsClosedEventArgs>
     {
         private readonly MainPresenter _presenter;
 
         public override IMainView View
             => _presenter.View;
 
-        public ICacheServiceWrapper Cache { get; }
+        public IBitmapCopyServiceWrapper Reference { get; }
         public INonBlockDialogServiceWrapper Dialog { get; }
         public IAwaitablePipelineServiceWrapper Pipeline { get; }
-        public IAsyncOperationLockerWrapper Locker { get; }
         public IScalingProviderWrapper Scaling { get; }
         public IRotationProviderWrapper Rotation { get; }
         public ILoggerServiceWrapper Logger { get; }
 
         public MainPresenterWrapper(
-            ICacheServiceWrapper cache,
+            IBitmapCopyServiceWrapper reference,
             INonBlockDialogServiceWrapper dialog,
             IAwaitablePipelineServiceWrapper pipeline,
-            IAsyncOperationLockerWrapper locker,
             ILoggerServiceWrapper logger,
             IScalingProviderWrapper scaling,
             IRotationProviderWrapper rotation) 
         {
-            Cache = cache;
+            Reference = reference;
             Dialog = dialog;
             Pipeline = pipeline;
-            Locker = locker;
             Scaling = scaling;
             Logger = logger;
             Rotation = rotation;
+
+            _presenter = new MainPresenter(reference, dialog, pipeline, rotation, scaling, logger);
         }
 
         public virtual  Task OnEventHandler(object publisher, OpenFileDialogEventArgs e)
