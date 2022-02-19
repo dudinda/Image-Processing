@@ -2,7 +2,6 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Scaling.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.ScalingArgs;
@@ -16,9 +15,13 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
 {
     internal class ScalingPresenterWrapper : BasePresenter<IScalingView, BitmapViewModel>,
         ISubscriber<ScaleEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
-        ISubscriber<ContainerUpdatedEventArgs>, ISubscriber<RestoreFocusEventArgs>
+        ISubscriber<ContainerUpdatedEventArgs>, ISubscriber<RestoreFocusEventArgs>,
+        ISubscriber<FormIsClosedEventArgs>, ISubscriber<EnableControlEventArgs>
     {
         private readonly ScalingPresenter _presenter;
+
+        public override IScalingView View
+            => _presenter.View;
 
         public IBitmapCopyServiceWrapper Copy { get; }
         public IScalingProviderWrapper Provider { get; }
@@ -38,8 +41,8 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
 
         public override void Run(BitmapViewModel vm)
         {
-            base.Run(vm);
             _presenter.Run(vm);
+            base.Run(vm);
         }
 
         public virtual Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
@@ -58,6 +61,16 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
         }
 
         public virtual Task OnEventHandler(object publisher, ScaleEventArgs e)
+        {
+            return Task.CompletedTask;
+        }
+
+        public virtual Task OnEventHandler(object publisher, FormIsClosedEventArgs e)
+        {
+            return Task.CompletedTask;
+        }
+
+        public virtual Task OnEventHandler(object publisher, EnableControlEventArgs e)
         {
             return Task.CompletedTask;
         }

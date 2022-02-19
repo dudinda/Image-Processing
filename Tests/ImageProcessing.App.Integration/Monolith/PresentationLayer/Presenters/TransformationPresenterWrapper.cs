@@ -15,9 +15,13 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
 {
     internal class TransformationPresenterWrapper : BasePresenter<ITransformationView, BitmapViewModel>,
         ISubscriber<ApplyTransformationEventArgs>, ISubscriber<ContainerUpdatedEventArgs>,
-        ISubscriber<RestoreFocusEventArgs>
+        ISubscriber<RestoreFocusEventArgs>, ISubscriber<FormIsClosedEventArgs>,
+        ISubscriber<EnableControlEventArgs>
     {
         private readonly TransformationPresenter _presenter;
+
+        public override ITransformationView View
+            => _presenter.View;
 
         public ILoggerServiceWrapper Logger { get; }
         public IBitmapCopyServiceWrapper Copy { get; }
@@ -46,6 +50,16 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
         }
 
         public virtual Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task OnEventHandler(object publisher, FormIsClosedEventArgs e)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task OnEventHandler(object publisher, EnableControlEventArgs e)
         {
             return Task.CompletedTask;
         }

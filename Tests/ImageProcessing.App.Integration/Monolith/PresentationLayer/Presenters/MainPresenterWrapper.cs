@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Integration.Monolith.PresentationLayer.Views;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Rotation.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Scaling.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Cache.Interface;
@@ -13,12 +12,14 @@ using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Container;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.FileDialog;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Show;
+using ImageProcessing.App.PresentationLayer.Presenters;
+using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
 namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Presenters
 {
-    internal class MainPresenterWrapper : BasePresenter<IMainViewWrapper>,
+    internal class MainPresenterWrapper : BasePresenter<IMainView>,
         ISubscriber<AttachBlockToRendererEventArgs>, ISubscriber<ShowConvolutionMenuEventArgs>,
         ISubscriber<ShowDistributionMenuEventArgs>, ISubscriber<ShowRgbMenuEventArgs>,
         ISubscriber<ShowSettingsMenuEventArgs>, ISubscriber<ShowTransformationMenuEventArgs>,
@@ -28,6 +29,11 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
         ISubscriber<UndoRedoEventArgs>, ISubscriber<FormIsClosedEventArgs>,
         ISubscriber<ShowRotationMenuEventArgs>, ISubscriber<ShowScalingMenuEventArgs>
     {
+        private readonly MainPresenter _presenter;
+
+        public override IMainView View
+            => _presenter.View;
+
         public ICacheServiceWrapper Cache { get; }
         public INonBlockDialogServiceWrapper Dialog { get; }
         public IAwaitablePipelineServiceWrapper Pipeline { get; }

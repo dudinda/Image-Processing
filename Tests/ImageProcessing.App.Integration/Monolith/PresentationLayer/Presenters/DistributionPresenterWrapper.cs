@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.BitmapLuminance.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Bmp.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.DistributionArgs;
@@ -23,6 +22,9 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
         ISubscriber<RestoreFocusEventArgs>, ISubscriber<ContainerUpdatedEventArgs>
     {
         private readonly DistributionPresenter _presenter;
+
+        public override IDistributionView View
+            => _presenter.View;
 
         public IBitmapCopyServiceWrapper Copy { get; }
         public IBitmapLuminanceProviderWrapper Provider { get; }
@@ -45,8 +47,8 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents
 
         public override void Run(BitmapViewModel vm)
         {
-            base.Run(vm);
             _presenter.Run(vm);
+            base.Run(vm);
         }
 
         public virtual Task OnEventHandler(object publisher, TransformHistogramEventArgs e)
