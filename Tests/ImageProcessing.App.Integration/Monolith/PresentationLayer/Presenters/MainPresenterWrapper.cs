@@ -63,13 +63,13 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer.Presenters
             base.Run();
         }
 
-        public virtual  Task OnEventHandler(object publisher, OpenFileDialogEventArgs e)
+        public virtual Task OnEventHandler(object publisher, OpenFileDialogEventArgs e)
         {
             return Task.CompletedTask;
         }
 
         /// <inheritdoc cref="SaveAsFileDialogEventArgs"/>
-        public Task OnEventHandler(object publisher, SaveAsFileDialogEventArgs e)
+        public virtual Task OnEventHandler(object publisher, SaveAsFileDialogEventArgs e)
         {
             return Task.CompletedTask;
         }

@@ -32,7 +32,7 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Extensions
             }
 
             var resolution = bitmap.Width * bitmap.Height;
-            var ptrStep = Image.GetPixelFormatSize(PixelFormat.Format32bppArgb) / 8;
+            var ptrStep = Image.GetPixelFormatSize(bitmap.PixelFormat) / 8;
             var size = bitmap.Size;
 
             var options = new ParallelOptions()

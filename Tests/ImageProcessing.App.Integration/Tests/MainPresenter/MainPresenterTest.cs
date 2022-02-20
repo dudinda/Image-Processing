@@ -44,14 +44,14 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
 
             _presenter.Received().OnEventHandler(
                 Arg.Is<object>(arg => arg == _form),
-                Arg.Is(Arg.Any<OpenFileDialogEventArgs>()));
+                Arg.Any<OpenFileDialogEventArgs>());
 
-            _presenter.Dialog.Received().NonBlockOpen(Arg.Is(Arg.Any<string>()));
+            _presenter.Dialog.Received().NonBlockOpen(Arg.Any<string>());
             
             var image = _form.SourceImage as Bitmap;
 
             Assert.IsTrue(image != null);
-            Assert.IsTrue(image.SameAs(new Bitmap(Res._1920x1080frame)));
+            Assert.IsTrue(image.SameAs(Res._1920x1080frame));
         }
 
         [Test]
