@@ -11,7 +11,7 @@ using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
+namespace ImageProcessing.App.Integration.Monolith.PresentationLayer.Presenters
 {
     internal class TransformationPresenterWrapper : BasePresenter<ITransformationView, BitmapViewModel>,
         ISubscriber<ApplyTransformationEventArgs>, ISubscriber<ContainerUpdatedEventArgs>,

@@ -54,6 +54,8 @@ using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.QualityMeas
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.QualityMeasure.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.StaTask.Implementation;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.StaTask.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.UndoRedo.Implementation;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.UndoRedo.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.ColorMatrix.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Convolution.Interface;
@@ -81,6 +83,8 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Servic
             new DomainStartup().Build(builder);
 
             builder
+                .RegisterTransientInstance<IUndoRedoServiceWrapper>(
+                Substitute.ForPartsOf<UndoRedoServiceWrapper>())
                 .RegisterTransientInstance<IBitmapServiceWrapper>(
                 Substitute.ForPartsOf<BitmapServiceWrapper>())
                 .RegisterTransientInstance<IMorphologyServiceWrapper>(
@@ -123,8 +127,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Servic
                 Substitute.ForPartsOf<ConvolutionVisitorWrapper>(
                     builder.Resolve<IConvolutionFactoryWrapper>(),
                     builder.Resolve<IConvolutionServiceWrapper>(),
-                    builder.Resolve<IBitmapServiceWrapper>(),
-                    builder.Resolve<ICacheServiceWrapper>()))
+                    builder.Resolve<IBitmapServiceWrapper>()))
                 .RegisterTransientInstance<IHistogramVisitorWrapper>(
                 Substitute.ForPartsOf<HistogramVisitorWrapper>(
                     builder.Resolve<IBitmapLuminanceServiceWrapper>(),

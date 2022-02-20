@@ -16,7 +16,7 @@ using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
-namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Presenters
+namespace ImageProcessing.App.Integration.Monolith.PresentationLayer.Presenters
 {
     internal class MainPresenterWrapper : BasePresenter<IMainView>,
         ISubscriber<AttachBlockToRendererEventArgs>, ISubscriber<OpenFileDialogEventArgs>,
@@ -53,6 +53,14 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappe
             Rotation = rotation;
 
             _presenter = new MainPresenter(reference, dialog, pipeline, rotation, scaling, logger);
+        }
+
+        public override void Run()
+        {
+            _presenter.Run();
+            Controller.Run<MainMenuPresenterWrapper>();
+            Aggregator.Subscribe(this, View);
+            base.Run();
         }
 
         public virtual  Task OnEventHandler(object publisher, OpenFileDialogEventArgs e)

@@ -1,42 +1,42 @@
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Scaling.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Convolution.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
-using ImageProcessing.App.PresentationLayer.DomainEvents.ScalingArgs;
+using ImageProcessing.App.PresentationLayer.DomainEvents.ConvolutionArgs;
 using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
+namespace ImageProcessing.App.Integration.Monolith.PresentationLayer.Presenters
 {
-    internal class ScalingPresenterWrapper : BasePresenter<IScalingView, BitmapViewModel>,
-        ISubscriber<ScaleEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
-        ISubscriber<ContainerUpdatedEventArgs>, ISubscriber<RestoreFocusEventArgs>,
-        ISubscriber<FormIsClosedEventArgs>, ISubscriber<EnableControlEventArgs>
+    internal class ConvolutionPresenterWrapper : BasePresenter<IConvolutionView, BitmapViewModel>,
+          ISubscriber<ApplyConvolutionKernelEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
+          ISubscriber<ContainerUpdatedEventArgs>, ISubscriber<RestoreFocusEventArgs>,
+          ISubscriber<FormIsClosedEventArgs>, ISubscriber<EnableControlEventArgs>
     {
-        private readonly ScalingPresenter _presenter;
+        private readonly ConvolutionPresenter _presenter;
 
-        public override IScalingView View
+        public override IConvolutionView View
             => _presenter.View;
 
+        public IConvolutionProviderWrapper Provider { get; }
         public IBitmapCopyServiceWrapper Copy { get; }
-        public IScalingProviderWrapper Provider { get; }
         public ILoggerServiceWrapper Logger { get; }
 
-        public ScalingPresenterWrapper(
+        public ConvolutionPresenterWrapper(
             IBitmapCopyServiceWrapper copy,
-            IScalingProviderWrapper provider,
+            IConvolutionProviderWrapper provider,
             ILoggerServiceWrapper logger)
         {
             Provider = provider;
-            Logger = logger;
             Copy = copy;
+            Logger = logger;
 
-            _presenter = new ScalingPresenter(copy, provider, logger);
+            _presenter = new ConvolutionPresenter(copy, provider, logger);
         }
 
         public override void Run(BitmapViewModel vm)
@@ -45,7 +45,7 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
             base.Run(vm);
         }
 
-        public virtual Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
+        public virtual Task OnEventHandler(object publisher, ApplyConvolutionKernelEventArgs e)
         {
             return Task.CompletedTask;
         }
@@ -55,12 +55,12 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
             return Task.CompletedTask;
         }
 
-        public virtual Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
+        public virtual Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
         {
             return Task.CompletedTask;
         }
 
-        public virtual Task OnEventHandler(object publisher, ScaleEventArgs e)
+        public virtual Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
         {
             return Task.CompletedTask;
         }

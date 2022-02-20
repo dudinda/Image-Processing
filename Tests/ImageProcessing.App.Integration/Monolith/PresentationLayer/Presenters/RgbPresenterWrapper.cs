@@ -3,35 +3,35 @@ using System.Threading.Tasks;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Rgb.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
-using ImageProcessing.App.PresentationLayer.DomainEvents.ColorMatrixArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.ColorMatrix.Interface;
+using ImageProcessing.App.PresentationLayer.DomainEvents.RgbArgs;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Rgb.Interface;
 using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
+namespace ImageProcessing.App.Integration.Monolith.PresentationLayer.Presenters
 {
-    internal class ColorMatrixPresenterWrapper : BasePresenter<IColorMatrixView, BitmapViewModel>,
-        ISubscriber<ApplyColorMatrixEventArgs>, ISubscriber<ContainerUpdatedEventArgs>,
-        ISubscriber<CustomColorMatrixEventArgs>, ISubscriber<ChangeColorMatrixEventArgs>,
-        ISubscriber<ApplyCustomColorMatrixEventArgs>, ISubscriber<RestoreFocusEventArgs>
+    internal class RgbPresenterWrapper : BasePresenter<IRgbView, BitmapViewModel>,
+          ISubscriber<ApplyRgbFilterEventArgs>, ISubscriber<ApplyRgbChannelFilterEventArgs>,
+          ISubscriber<ContainerUpdatedEventArgs>, ISubscriber<ShowColorMatrixMenuEventArgs>,
+          ISubscriber<ShowTooltipOnErrorEventArgs>, ISubscriber<RestoreFocusEventArgs>
     {
-        public override IColorMatrixView View
-            => _presenter.View;
+        private readonly RgbPresenter _presenter;
 
-        private readonly ColorMatrixPresenter _presenter;
+        public override IRgbView View
+            => _presenter.View;
 
         public IRgbProviderWrapper Provider { get; }
         public IBitmapCopyServiceWrapper Copy { get; }
-        public IColorMatrixFactoryWrapper Factory { get; }
+        public IRgbFactoryWrapper Factory { get; }
         public ILoggerServiceWrapper Logger { get; }
 
-        public ColorMatrixPresenterWrapper(
+        public RgbPresenterWrapper(
             IBitmapCopyServiceWrapper copy,
-            IColorMatrixFactoryWrapper factory,
+            IRgbFactoryWrapper factory,
             ILoggerServiceWrapper logger,
             IRgbProviderWrapper provider)
         {
@@ -40,7 +40,7 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
             Copy = copy;
             Logger = logger;
 
-            _presenter = new ColorMatrixPresenter(copy, factory, logger, provider);
+            _presenter = new RgbPresenter(copy, factory, logger, provider);
         }
 
         public override void Run(BitmapViewModel vm)
@@ -49,7 +49,17 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
             base.Run(vm);
         }
 
-        public virtual Task OnEventHandler(object publisher, ApplyColorMatrixEventArgs e)
+        public virtual Task OnEventHandler(object publisher, ApplyRgbChannelFilterEventArgs e)
+        {
+            return Task.CompletedTask;
+        }
+
+        public virtual Task OnEventHandler(object publisher, ApplyRgbFilterEventArgs e)
+        {
+            return Task.CompletedTask;
+        }
+
+        public virtual Task OnEventHandler(object publisher, ShowColorMatrixMenuEventArgs e)
         {
             return Task.CompletedTask;
         }
@@ -59,17 +69,7 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
             return Task.CompletedTask;
         }
 
-        public virtual Task OnEventHandler(object publisher, CustomColorMatrixEventArgs e)
-        {
-            return Task.CompletedTask;
-        }
-
-        public virtual Task OnEventHandler(object publisher, ChangeColorMatrixEventArgs e)
-        {
-            return Task.CompletedTask;
-        }
-
-        public virtual Task OnEventHandler(object publisher, ApplyCustomColorMatrixEventArgs e)
+        public virtual Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
         {
             return Task.CompletedTask;
         }

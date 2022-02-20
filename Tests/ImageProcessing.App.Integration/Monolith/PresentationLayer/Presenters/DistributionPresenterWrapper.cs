@@ -13,7 +13,7 @@ using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents.Wrappers.Presenters
+namespace ImageProcessing.App.Integration.Monolith.PresentationLayer.Presenters
 {
     internal class DistributionPresenterWrapper : BasePresenter<IDistributionView, BitmapViewModel>,
         ISubscriber<TransformHistogramEventArgs>, ISubscriber<ShuffleEventArgs>,
