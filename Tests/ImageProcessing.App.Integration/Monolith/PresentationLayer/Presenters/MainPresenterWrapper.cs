@@ -9,8 +9,6 @@ using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Pipeline.In
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Container;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.FileDialog;
-using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
-using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Show;
 using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
@@ -30,6 +28,7 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer.Presenters
         public override IMainView View
             => _presenter.View;
 
+        public MainMenuPresenterWrapper MenuPresenter { get; }
         public IBitmapCopyServiceWrapper Reference { get; }
         public INonBlockDialogServiceWrapper Dialog { get; }
         public IAwaitablePipelineServiceWrapper Pipeline { get; }
@@ -51,14 +50,15 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer.Presenters
             Scaling = scaling;
             Logger = logger;
             Rotation = rotation;
+            MenuPresenter = Controller.IoC.Resolve<MainMenuPresenterWrapper>();
 
             _presenter = new MainPresenter(reference, dialog, pipeline, rotation, scaling, logger);
         }
 
         public override void Run()
         {
-            _presenter.Run();
-            Controller.Run<MainMenuPresenterWrapper>();
+            _presenter.Run();     
+            MenuPresenter.Run();
             Aggregator.Subscribe(this, View);
             base.Run();
         }
@@ -76,48 +76,6 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer.Presenters
 
         /// <inheritdoc cref="SaveWithoutFileDialogEventArgs"/>
         public virtual Task OnEventHandler(object publisher, SaveWithoutFileDialogEventArgs e)
-        {
-            return Task.CompletedTask;
-        }
-
-        /// <inheritdoc cref="ShowRgbMenuEventArgs"/>
-        public virtual Task OnEventHandler(object publisher, ShowRgbMenuEventArgs e)
-        {
-            return Task.CompletedTask;
-        }
-
-        /// <inheritdoc cref="ShowScalingMenuEventArgs"/>
-        public virtual Task OnEventHandler(object publisher, ShowScalingMenuEventArgs e)
-        {
-            return Task.CompletedTask;
-        }
-
-        /// <inheritdoc cref="ShowRotationMenuEventArgs"/>
-        public virtual Task OnEventHandler(object publisher, ShowRotationMenuEventArgs e)
-        {
-            return Task.CompletedTask;
-        }
-
-        /// <inheritdoc cref="ShowDistributionMenuEventArgs"/>
-        public virtual Task OnEventHandler(object publisher, ShowDistributionMenuEventArgs e)
-        {
-            return Task.CompletedTask;
-        }
-
-        /// <inheritdoc cref="ShowConvolutionMenuEventArgs"/>
-        public virtual Task OnEventHandler(object publisher, ShowConvolutionMenuEventArgs e)
-        {
-            return Task.CompletedTask;
-        }
-
-        /// <inheritdoc cref="ShowTransformationMenuEventArgs"/>
-        public virtual Task OnEventHandler(object publisher, ShowTransformationMenuEventArgs e)
-        {
-            return Task.CompletedTask;
-        }
-
-        /// <inheritdoc cref="ShowSettingsMenuEventArgs"/>
-        public virtual Task OnEventHandler(object publisher, ShowSettingsMenuEventArgs e)
         {
             return Task.CompletedTask;
         }
