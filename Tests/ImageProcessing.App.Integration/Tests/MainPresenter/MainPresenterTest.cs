@@ -1,8 +1,10 @@
+using System.Configuration;
 using System.Drawing;
 
 using ImageProcessing.App.Integration.Code.Resources;
 using ImageProcessing.App.Integration.Monolith.PresentationLayer.Presenters;
 using ImageProcessing.App.Integration.Monolith.UILayer;
+using ImageProcessing.App.PresentationLayer.Code.Constants;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.FileDialog;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
@@ -46,7 +48,8 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
                 Arg.Is<object>(arg => arg == _form),
                 Arg.Any<OpenFileDialogEventArgs>());
 
-            _presenter.Dialog.Received().NonBlockOpen(Arg.Any<string>());
+            _presenter.Dialog.Received().NonBlockOpen(
+                Arg.Any<string>());
             
             var image = _form.SourceImage as Bitmap;
 
@@ -59,27 +62,32 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
         {
             _form.OpenFileMenu.PerformClick();
             var view = _form as IMainView;
+
             Received.InOrder(() =>
             {
-                view.Received().SetCursor(CursorType.Wait);
-                _presenter.Pipeline.Received().Register(Arg.Is(Arg.Any<PipelineBlock>()));
-                _presenter.Pipeline.Received().AwaitResult();
+                view.Received().SetCursor(
+                    Arg.Is<CursorType>(arg => arg == CursorType.Wait));
 
-                var container = ImageContainer.Source;
+                _presenter.Pipeline.Received().Register(Arg.Any<PipelineBlock>());
+                _presenter.Pipeline.Received().AwaitResult();
+                _presenter.Reference.Received().SetCopy(
+                    Arg.Is<Bitmap>(arg => arg == Res._1920x1080frame));
 
                 view.Received().GetImageCopy();
                 view.Received().AddToUndoRedo(
-                    Arg.Is<Bitmap>(Res._1920x1080frame), UndoRedoAction.Undo);
-                view.Received().SetImageCopy(Arg.Is(Arg.Any<Bitmap>()));
-                view.Received().SetImage(Arg.Is(Arg.Any<Bitmap>()));
-                view.SetImageCenter(Res._1920x1080frame.Size);
+                    Arg.Is<Bitmap>(arg => arg == Res._1920x1080frame),
+                    Arg.Is<UndoRedoAction>(arg => arg == UndoRedoAction.Undo));
+                view.Received().SetImageCopy(Arg.Any<Bitmap>());
+                view.Received().SetImage(Arg.Any<Bitmap>());
+                view.SetImageCenter(
+                    Arg.Is<Size>(arg => arg == Res._1920x1080frame.Size));
                 view.Received().Refresh();
                 view.Received().ResetTrackBarValue();
 
-                _presenter.Reference.Received().SetCopy(Arg.Is(Arg.Any<Bitmap>()));
                 _presenter.Pipeline.Received().Any();
 
-                view.Received().SetCursor(CursorType.Default);
+                view.Received().SetCursor(
+                    Arg.Is<CursorType>(arg => arg == CursorType.Default));
             });
         }
 
@@ -91,10 +99,11 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
 
             _presenter.Received().OnEventHandler(
                 Arg.Is<object>(arg => arg == _form),
-                Arg.Is(Arg.Any<SaveAsFileDialogEventArgs>()));
+                Arg.Any<SaveAsFileDialogEventArgs>());
+            _presenter.Reference.Received().GetCopy();
             _presenter.Dialog.Received().NonBlockSaveAs(
-                Arg.Is<Bitmap>(bmp => bmp == _form.SrcImageCopy),
-                Arg.Is(Arg.Any<string>()));           
+                Arg.Any<Bitmap>(),
+                Arg.Any<string>());           
         }
 
 
@@ -104,9 +113,9 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
             _form.OpenFileMenu.PerformClick();
             _form.RgbMenuButton.PerformClick();
 
-            _presenter.OnEventHandler(
+            _presenter.MenuPresenter.Received().OnEventHandler(
                 Arg.Is<object>(arg => arg == _form),
-                Arg.Is(Arg.Any<ShowRgbMenuEventArgs>()));
+                Arg.Any<ShowRgbMenuEventArgs>());
         }
 
         [Test]
@@ -115,9 +124,9 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
             _form.OpenFileMenu.PerformClick();
             _form.ConvolutionMenuButton.PerformClick();
 
-            _presenter.OnEventHandler(
+            _presenter.MenuPresenter.Received().OnEventHandler(
                 Arg.Is<object>(arg => arg == _form),
-                Arg.Is(Arg.Any<ShowConvolutionMenuEventArgs>()));
+                Arg.Any<ShowConvolutionMenuEventArgs>());
         }
 
         [Test]
@@ -126,9 +135,9 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
             _form.OpenFileMenu.PerformClick();
             _form.DistributionMenuButton.PerformClick();
 
-            _presenter.OnEventHandler(
+            _presenter.MenuPresenter.Received().OnEventHandler(
                Arg.Is<object>(arg => arg == _form),
-               Arg.Is(Arg.Any<ShowDistributionMenuEventArgs>()));
+               Arg.Any<ShowDistributionMenuEventArgs>());
         }
 
         [Test]
@@ -140,7 +149,7 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
 
             _presenter.Received().OnEventHandler(
                 Arg.Is<object>(arg => arg == _form),
-                Arg.Is(Arg.Any<SaveWithoutFileDialogEventArgs>()));
+                Arg.Any<SaveWithoutFileDialogEventArgs>());
         }
 
     }

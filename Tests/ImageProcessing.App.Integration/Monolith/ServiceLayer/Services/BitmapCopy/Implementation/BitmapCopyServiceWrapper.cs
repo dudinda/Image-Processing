@@ -10,7 +10,7 @@ namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapC
     internal class BitmapCopyServiceWrapper : IBitmapCopyServiceWrapper
     {
         private readonly BitmapCopyService _service;
-
+   
         public IAsyncOperationLockerWrapper Locker { get; }
 
         public BitmapCopyServiceWrapper(
@@ -20,10 +20,16 @@ namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapC
             Locker = locker;
         }
 
-        public async Task<Bitmap> GetCopy()
-            => _service.GetCopy().Result;
+        public virtual Task<Bitmap> GetCopy()
+        {
+            return Task.FromResult(
+                _service.GetCopy().Result);
+        }
 
-        public async Task SetCopy(Bitmap bmp)
-            => _service.SetCopy(bmp).Wait();
+        public virtual Task SetCopy(Bitmap bmp)
+        {
+            _service.SetCopy(bmp).Wait();
+            return Task.CompletedTask;
+        }
     }
 }
