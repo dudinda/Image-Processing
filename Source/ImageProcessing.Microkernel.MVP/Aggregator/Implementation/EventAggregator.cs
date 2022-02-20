@@ -17,7 +17,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
         /// Partition a presenter with a subscriber interface cast and
         /// then queue it as a callback on the syncronization context.
         /// </summary>
-        private readonly Dictionary<Type, Dictionary<object, HashSet<object>>> _map
+        protected readonly Dictionary<Type, Dictionary<object, HashSet<object>>> _map
             = new Dictionary<Type, Dictionary<object, HashSet<object>>>();
 
         /// <inheritdoc cref="IEventAggregator.PublishFrom{TEventArgs}(object, TEventArgs)"/>
@@ -144,8 +144,7 @@ namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
         }
 
         private IEnumerable<Type> GetSubsciberTypes(Type subscriberType)
-            => subscriberType.GetInterfaces().Where(
-                i => i.IsGenericType &&
-                i.GetGenericTypeDefinition() == typeof(ISubscriber<>));
+            => subscriberType.GetInterfaces().Where(i => i.IsGenericType
+            && i.GetGenericTypeDefinition() == typeof(ISubscriber<>));
     }
 }

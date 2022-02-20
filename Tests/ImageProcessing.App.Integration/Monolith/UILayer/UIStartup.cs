@@ -1,3 +1,4 @@
+using ImageProcessing.App.Integration.Monolith.PresentationLayer;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.UndoRedo.Interface;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.ColorMatrix.Implementation;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.ColorMatrix.Interface;
@@ -20,7 +21,6 @@ using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Transfor
 using ImageProcessing.App.Integration.Monolith.UILayer.Forms;
 using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.Implementation;
 using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form;
 using ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Forms;
@@ -45,7 +45,7 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer
     {
         public void Build(IComponentProvider builder)
         {
-            new ServiceStartup().Build(builder);
+            new PresentationStartup().Build(builder);
 
             builder
                 .RegisterTransient<IRgbFormEventBinder, RgbFormEventBinderWrapper>()
