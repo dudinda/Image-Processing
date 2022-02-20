@@ -9,7 +9,7 @@ using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
+namespace ImageProcessing.App.Integration.Monolith.PresentationLayer.Presenters
 {
     internal class SettingsPresenterWrapper : BasePresenter<ISettingsView>,
         ISubscriber<ChangeLumaEventArgs>, ISubscriber<ChangeRotationEventArgs>,

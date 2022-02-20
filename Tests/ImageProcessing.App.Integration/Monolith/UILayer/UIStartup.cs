@@ -1,4 +1,4 @@
-using ImageProcessing.App.Integration.Monolith.PresentationLayer;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.UndoRedo.Interface;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.ColorMatrix.Implementation;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.ColorMatrix.Interface;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Convolution.Implementation;
@@ -18,6 +18,8 @@ using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Settings
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Transformation.Implementation;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Transformation.Interface;
 using ImageProcessing.App.Integration.Monolith.UILayer.Forms;
+using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.Implementation;
+using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form;
@@ -55,6 +57,8 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer
                 .RegisterTransient<IRotationFormEventBinder, RotationFormEventBinderWrapper>()
                 .RegisterTransient<IScalingFormEventBinder, ScalingFormEventBinderWrapper>()
                 .RegisterTransient<IMainFormEventBinder, MainFormEventBinderWrapper>()
+                .RegisterTransientInstance<IMenuStateFactoryWrapper>(
+                Substitute.ForPartsOf<MenuStateFactoryWrapper>())
                 .RegisterTransientInstance<IColorMatrixFormEventBinderWrapper>(
                 Substitute.ForPartsOf<ColorMatrixFormEventBinderWrapper>(
                     builder.Resolve<IEventAggregatorWrapper>()))
@@ -84,7 +88,9 @@ namespace ImageProcessing.App.Integration.Monolith.UILayer
                     builder.Resolve<IEventAggregatorWrapper>()))
                 .RegisterSingletonInstance<IMainView>(
                 Substitute.ForPartsOf<MainFormWrapper>(
-                    builder.Resolve<IMainFormEventBinderWrapper>()))
+                    builder.Resolve<IMainFormEventBinderWrapper>(),
+                    builder.Resolve<IUndoRedoServiceWrapper>(),
+                    builder.Resolve<IMenuStateFactoryWrapper>()))
                 .RegisterTransientInstance<IColorMatrixView>(
                 Substitute.ForPartsOf<ColorMatrixFormWrapper>(
                     builder.Resolve<IMainView>(),

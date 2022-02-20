@@ -2,7 +2,9 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.UndoRedo.Interface;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Main.Interface;
+using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.Interface;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Services.UndoRedo.Interface;
@@ -34,17 +36,15 @@ namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
                 => (TElement)func();
         }
 
-        private readonly IMainFormEventBinderWrapper _binder;
         private readonly NonUIMainForm _form;
 
         public MainFormWrapper(
             IMainFormEventBinderWrapper binder,
-            IUndoRedoService<Bitmap> undoredo,
-            IMenuStateFactory state)
+            IUndoRedoServiceWrapper undoredo,
+            IMenuStateFactoryWrapper state)
         {
             _form = new NonUIMainForm(binder, undoredo, state);
-            _binder = binder;
-            _binder.OnElementExpose(this);
+            binder.OnElementExpose(this);
         }
 
 

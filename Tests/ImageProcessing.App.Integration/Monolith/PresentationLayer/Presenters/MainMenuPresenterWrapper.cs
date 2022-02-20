@@ -1,8 +1,10 @@
 using System.Threading.Tasks;
 
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
+using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Pipeline.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Show;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.TestsComponents.Wrappers.Presenters;
 using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
@@ -16,6 +18,30 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer.Presenters
         ISubscriber<ShowTransformationMenuEventArgs>, ISubscriber<ShowRotationMenuEventArgs>,
         ISubscriber<ShowScalingMenuEventArgs>
     {
+        private IMainView? _view;
+
+        public override IMainView View
+           => _view ??= Controller.IoC.Resolve<IMainView>();
+
+        public override void Run()
+        {
+            Aggregator.Subscribe(this, View);
+        }
+
+        public ILoggerServiceWrapper Logger { get; }
+        public IBitmapCopyServiceWrapper Reference { get; }
+        public IAwaitablePipelineServiceWrapper Pipeline { get; }
+
+        public MainMenuPresenterWrapper(
+            IBitmapCopyServiceWrapper reference,
+            IAwaitablePipelineServiceWrapper pipeline,
+            ILoggerServiceWrapper logger)
+        {
+            Logger = logger;
+            Reference = reference;
+            Pipeline = pipeline;
+        }
+
         /// <inheritdoc cref="ShowRgbMenuEventArgs"/>
         public virtual Task OnEventHandler(object publisher, ShowRgbMenuEventArgs e)
         {

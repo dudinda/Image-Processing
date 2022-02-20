@@ -1,13 +1,13 @@
 using System.Drawing;
 
 using ImageProcessing.App.Integration.Code.Resources;
+using ImageProcessing.App.Integration.Monolith.PresentationLayer.Presenters;
 using ImageProcessing.App.Integration.Monolith.UILayer;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.FileDialog;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Show;
 using ImageProcessing.App.PresentationLayer.UnitTests.Extensions;
-using ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Presenters;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
 using ImageProcessing.App.UILayer.FormExposers.Main;
@@ -31,10 +31,10 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
 
         protected override void BeforeStart()
         {
-            _form = AppLifecycle.Controller.IoC.Resolve<IMainView>() as IMainFormExposer;
             _presenter = AppLifecycle.Controller.IoC.Resolve<MainPresenterWrapper>();
-
             _presenter.Run();
+
+            _form = _presenter.View as IMainFormExposer;
         }
 
         [Test]
