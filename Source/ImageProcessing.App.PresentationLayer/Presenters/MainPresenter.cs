@@ -18,7 +18,7 @@ using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Implementation;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions;
-using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
+using ImageProcessing.App.ServiceLayer.Win.Services.Logger;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 

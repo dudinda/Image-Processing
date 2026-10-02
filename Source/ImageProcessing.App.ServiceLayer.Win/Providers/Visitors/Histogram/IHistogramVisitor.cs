@@ -1,7 +1,7 @@
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
 
-namespace ImageProcessing.App.ServiceLayer.Win.ServiceModel.Visitors.Histogram.Interface
+namespace ImageProcessing.App.ServiceLayer.Win.Providers.Visitors.Histogram
 {
     public interface IHistogramVisitor 
     {

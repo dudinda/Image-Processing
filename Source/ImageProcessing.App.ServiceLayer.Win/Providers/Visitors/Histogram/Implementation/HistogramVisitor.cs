@@ -5,10 +5,9 @@ using System.Windows.Forms.DataVisualization.Charting;
 using ImageProcessing.App.DomainLayer.Code.Extensions.EnumExt;
 using ImageProcessing.App.ServiceLayer.Code.Enums;
 using ImageProcessing.App.ServiceLayer.Services.Distribution;
-using ImageProcessing.App.ServiceLayer.Win.Builders.ChartBuilder.Interface;
-using ImageProcessing.App.ServiceLayer.Win.ServiceModel.Visitors.Histogram.Interface;
+using ImageProcessing.App.ServiceLayer.Win.Services.Builders.ChartSeries;
 
-namespace ImageProcessing.App.ServiceLayer.Win.ServiceModel.Visitors.Histogram.Implementation
+namespace ImageProcessing.App.ServiceLayer.Win.Providers.Visitors.Histogram.Implementation
 {
     public sealed class HistogramVisitor : IHistogramVisitor
     {

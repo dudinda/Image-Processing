@@ -7,7 +7,7 @@ using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.SettingsArgs;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Models.AppSettings;
-using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
+using ImageProcessing.App.ServiceLayer.Win.Services.Logger;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 

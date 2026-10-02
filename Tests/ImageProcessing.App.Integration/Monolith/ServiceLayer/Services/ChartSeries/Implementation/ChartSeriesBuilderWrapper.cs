@@ -3,7 +3,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.ChartSeries.Interface;
 using ImageProcessing.App.ServiceLayer.Win.Builders.ChartBuilder.Implementation;
-using ImageProcessing.App.ServiceLayer.Win.Builders.ChartBuilder.Interface;
+using ImageProcessing.App.ServiceLayer.Win.Services.Builders.ChartSeries;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.ChartSeries.Implementation
 {

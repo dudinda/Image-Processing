@@ -3,7 +3,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.App.ServiceLayer.Services.Builders;
 
-namespace ImageProcessing.App.ServiceLayer.Win.Builders.ChartBuilder.Interface
+namespace ImageProcessing.App.ServiceLayer.Win.Services.Builders.ChartSeries
 {
     /// <summary>
     /// A builder for the <see cref="Series"/> components.

@@ -1,7 +1,7 @@
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
 
-using ImageProcessing.App.ServiceLayer.Win.Builders.ChartBuilder.Interface;
+using ImageProcessing.App.ServiceLayer.Win.Services.Builders.ChartSeries;
 
 namespace ImageProcessing.App.ServiceLayer.Win.Builders.ChartBuilder.Implementation
 {

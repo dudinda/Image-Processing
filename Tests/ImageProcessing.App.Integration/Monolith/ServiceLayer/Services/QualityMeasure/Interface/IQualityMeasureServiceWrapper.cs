@@ -1,4 +1,4 @@
-using ImageProcessing.App.ServiceLayer.Win.Services.QualityMeasure.Interface;
+using ImageProcessing.App.ServiceLayer.Win.Services.QualityMeasure;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.QualityMeasure.Interface
 {

@@ -4,7 +4,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.Vistiors.Histogram.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.ChartSeries.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
-using ImageProcessing.App.ServiceLayer.Win.ServiceModel.Visitors.Histogram.Implementation;
+using ImageProcessing.App.ServiceLayer.Win.Providers.Visitors.Histogram.Implementation;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.Vistiors.Histogram.Implementation
 {

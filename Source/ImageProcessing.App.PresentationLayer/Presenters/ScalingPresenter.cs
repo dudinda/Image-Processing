@@ -12,7 +12,7 @@ using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Providers.Scaling;
 using ImageProcessing.App.ServiceLayer.Services.BitmapCopyReference.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline.Implementation;
-using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
+using ImageProcessing.App.ServiceLayer.Win.Services.Logger;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 

@@ -1,4 +1,4 @@
-using ImageProcessing.App.ServiceLayer.Win.ServiceModel.VisitableFactory.Histogram.Interface;
+using ImageProcessing.App.ServiceLayer.Win.Providers.VisitableFactory.Histogram;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.VisitableFactory.Histogram.Interface
 {

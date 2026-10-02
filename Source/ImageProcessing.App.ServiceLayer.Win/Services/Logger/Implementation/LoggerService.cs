@@ -1,8 +1,6 @@
 using System;
 using System.Diagnostics;
 
-using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
-
 namespace ImageProcessing.App.ServiceLayer.Win.Services.Logger.Implementation
 {
     /// <inheritdoc cref="ILoggerService"/>

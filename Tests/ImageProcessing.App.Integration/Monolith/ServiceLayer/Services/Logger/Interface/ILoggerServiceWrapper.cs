@@ -1,4 +1,4 @@
-using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
+using ImageProcessing.App.ServiceLayer.Win.Services.Logger;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface
 {

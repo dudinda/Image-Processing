@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface
+namespace ImageProcessing.App.ServiceLayer.Win.Services.Logger
 {
     /// <summary>
     /// Wrapper around the <see cref="EventLog"/> class.
