@@ -7,9 +7,8 @@ using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions;
 using ImageProcessing.App.UILayer.Code.Extensions;
-using ImageProcessing.App.UILayer.FormEventBinders.Distribution.Interface;
-using ImageProcessing.App.UILayer.FormExposers.Distribution;
-using ImageProcessing.App.UILayer.FormExposers.Main;
+using ImageProcessing.App.UILayer.Services.FormEventBinders.Distribution;
+using ImageProcessing.App.UILayer.Services.FormExposers;
 using ImageProcessing.Utility.Interop.Wrapper;
 
 using MetroFramework.Controls;

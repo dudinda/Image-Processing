@@ -4,8 +4,8 @@ using System.Windows.Forms;
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.ColorMatrix.Interface;
 using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.UILayer.FormExposers.ColorMatrix;
 using ImageProcessing.App.UILayer.Forms.ColorMatrix;
+using ImageProcessing.App.UILayer.Services.FormExposers;
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
 using MetroFramework.Controls;

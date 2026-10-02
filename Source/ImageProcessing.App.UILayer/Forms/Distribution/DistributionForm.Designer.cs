@@ -1,3 +1,5 @@
+using ImageProcessing.App.UILayer.Models.Controls;
+
 namespace ImageProcessing.App.UILayer.Forms.Distribution
 { 
     partial class DistributionForm
@@ -39,7 +41,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
             this.Entropy = new System.Windows.Forms.ToolStripButton();
             this.PathToImage = new System.Windows.Forms.ToolStripLabel();
             this.ShuffleSrc = new System.Windows.Forms.ToolStripButton();
-            this.QualityMeasure = new ImageProcessing.App.UILayer.Controls.QualityMeasureToolStripButton();
+            this.QualityMeasure = new ImageProcessing.App.UILayer.Models.Controls.QualityMeasureToolStripButton();
             this.DistributionsComboBox = new MetroFramework.Controls.MetroComboBox();
             this.Transform = new MetroFramework.Controls.MetroButton();
             this.DistributionButtonPanel = new MetroFramework.Controls.MetroPanel();
@@ -274,7 +276,7 @@ namespace ImageProcessing.App.UILayer.Forms.Distribution
         private System.Windows.Forms.ToolStripButton Entropy;
         private System.Windows.Forms.ToolStripLabel PathToImage;
         private System.Windows.Forms.ToolStripButton ShuffleSrc;
-        private Controls.QualityMeasureToolStripButton QualityMeasure;
+        private QualityMeasureToolStripButton QualityMeasure;
         private MetroFramework.Controls.MetroPanel DistributionButtonPanel;
         private Controls.SelectedAreaControl selectedAreaControl1;
     }

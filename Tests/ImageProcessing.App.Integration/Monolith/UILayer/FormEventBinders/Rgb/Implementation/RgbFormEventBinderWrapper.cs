@@ -2,8 +2,8 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Rgb.Interface;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
-using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Implementation;
-using ImageProcessing.App.UILayer.FormExposers.Rgb;
+using ImageProcessing.App.UILayer.Services.FormEventBinders.Rgb.Implementation;
+using ImageProcessing.App.UILayer.Services.FormExposers;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Rgb.Implementation
 {

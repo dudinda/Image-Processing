@@ -4,8 +4,8 @@ using System.Windows.Forms;
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Rotation.Interface;
 using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.UILayer.FormExposers;
 using ImageProcessing.App.UILayer.Forms.Rotation;
+using ImageProcessing.App.UILayer.Services.FormExposers;
 
 using MetroFramework.Controls;
 

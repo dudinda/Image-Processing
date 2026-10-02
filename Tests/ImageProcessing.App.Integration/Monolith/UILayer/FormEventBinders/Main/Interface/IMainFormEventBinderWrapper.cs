@@ -1,4 +1,4 @@
-using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
+using ImageProcessing.App.UILayer.Services.FormEventBinders.Main;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Main.Interface
 {

@@ -2,8 +2,8 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Scaling.Interface;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
-using ImageProcessing.App.UILayer.FormEventBinders.Scaling.Implementation;
-using ImageProcessing.App.UILayer.FormExposers;
+using ImageProcessing.App.UILayer.Services.FormEventBinders.Scaling.Implementation;
+using ImageProcessing.App.UILayer.Services.FormExposers;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Scaling.Implementation
 {

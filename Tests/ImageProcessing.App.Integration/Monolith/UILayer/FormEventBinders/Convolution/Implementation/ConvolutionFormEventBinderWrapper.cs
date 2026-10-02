@@ -2,8 +2,8 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
-using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Implementation;
-using ImageProcessing.App.UILayer.FormExposers.Convolution;
+using ImageProcessing.App.UILayer.Services.FormEventBinders.Convolution.Implementation;
+using ImageProcessing.App.UILayer.Services.FormExposers;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Convolution.Implementation
 {

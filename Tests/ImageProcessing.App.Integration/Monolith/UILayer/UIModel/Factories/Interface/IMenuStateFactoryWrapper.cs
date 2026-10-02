@@ -1,5 +1,5 @@
 
-using ImageProcessing.App.UILayer.UIModel.Factories.MenuState.Interface;
+using ImageProcessing.App.UILayer.Services.Factories.MenuState;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.Interface
 {

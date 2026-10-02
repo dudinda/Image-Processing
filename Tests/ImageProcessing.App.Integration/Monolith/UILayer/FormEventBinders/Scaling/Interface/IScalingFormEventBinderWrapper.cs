@@ -1,4 +1,4 @@
-using ImageProcessing.App.UILayer.FormEventBinders.Scaling.Interface;
+using ImageProcessing.App.UILayer.Services.FormEventBinders.Scaling;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Scaling.Interface
 {

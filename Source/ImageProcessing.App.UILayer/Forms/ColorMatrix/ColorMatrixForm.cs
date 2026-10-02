@@ -6,9 +6,8 @@ using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions;
 using ImageProcessing.App.UILayer.Code.Extensions;
-using ImageProcessing.App.UILayer.FormEventBinders.ColorMatrix.Interface;
-using ImageProcessing.App.UILayer.FormExposers.ColorMatrix;
-using ImageProcessing.App.UILayer.FormExposers.Main;
+using ImageProcessing.App.UILayer.Services.FormEventBinders.ColorMatrix;
+using ImageProcessing.App.UILayer.Services.FormExposers;
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 using ImageProcessing.Utility.Interop.Wrapper;
 

@@ -5,9 +5,8 @@ using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Win.Code.Extensions;
 using ImageProcessing.App.UILayer.Code.Extensions;
-using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface;
-using ImageProcessing.App.UILayer.FormExposers.Main;
-using ImageProcessing.App.UILayer.FormExposers.Rgb;
+using ImageProcessing.App.UILayer.Services.FormEventBinders.Rgb;
+using ImageProcessing.App.UILayer.Services.FormExposers;
 using ImageProcessing.Utility.Interop.Wrapper;
 
 using MetroFramework.Controls;

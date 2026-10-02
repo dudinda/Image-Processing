@@ -2,9 +2,8 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.ColorMatrix.Interface;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
-using ImageProcessing.App.UILayer.FormEventBinders.ColorMatrix.Implementation;
-using ImageProcessing.App.UILayer.FormEventBinders.ColorMatrix.Interface;
-using ImageProcessing.App.UILayer.FormExposers.ColorMatrix;
+using ImageProcessing.App.UILayer.Services.FormEventBinders.ColorMatrix.Implementation;
+using ImageProcessing.App.UILayer.Services.FormExposers;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.ColorMatrix.Implementation
 {

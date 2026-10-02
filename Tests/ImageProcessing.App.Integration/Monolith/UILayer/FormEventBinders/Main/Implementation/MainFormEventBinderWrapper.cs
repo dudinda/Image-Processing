@@ -2,8 +2,8 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Main.Interface;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
-using ImageProcessing.App.UILayer.FormEventBinders.Main.Implementation;
-using ImageProcessing.App.UILayer.FormExposers.Main;
+using ImageProcessing.App.UILayer.Services.FormEventBinders.Main.Implementation;
+using ImageProcessing.App.UILayer.Services.FormExposers;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Main.Implementation
 {

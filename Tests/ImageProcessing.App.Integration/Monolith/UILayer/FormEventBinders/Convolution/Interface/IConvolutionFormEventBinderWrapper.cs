@@ -1,4 +1,4 @@
-using ImageProcessing.App.UILayer.FormEventBinders.Convolution.Interface;
+using ImageProcessing.App.UILayer.Services.FormEventBinders.Convolution;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Convolution.Interface
 {

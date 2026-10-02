@@ -1,4 +1,4 @@
-using ImageProcessing.App.UILayer.FormEventBinders.Rgb.Interface;
+using ImageProcessing.App.UILayer.Services.FormEventBinders.Rgb;
 
 namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Rgb.Interface
 {

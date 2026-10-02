@@ -5,11 +5,11 @@ using System.Windows.Forms;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Services.UndoRedo;
-using ImageProcessing.App.UILayer.Controls;
-using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
-using ImageProcessing.App.UILayer.FormExposers.Main;
+using ImageProcessing.App.UILayer.Models.Controls;
 using ImageProcessing.App.UILayer.Properties;
-using ImageProcessing.App.UILayer.UIModel.Factories.MenuState.Interface;
+using ImageProcessing.App.UILayer.Services.Factories.MenuState;
+using ImageProcessing.App.UILayer.Services.FormEventBinders.Main;
+using ImageProcessing.App.UILayer.Services.FormExposers;
 using ImageProcessing.Utility.Interop.Wrapper;
 
 using MetroFramework.Controls;

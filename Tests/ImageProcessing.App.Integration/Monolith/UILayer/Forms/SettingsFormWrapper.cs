@@ -4,8 +4,8 @@ using System.Windows.Forms;
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Settings.Interface;
 using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.UILayer.FormExposers.Settings;
 using ImageProcessing.App.UILayer.Forms.Settings;
+using ImageProcessing.App.UILayer.Services.FormExposers;
 
 using MetroFramework.Controls;
 
