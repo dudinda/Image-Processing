@@ -13,7 +13,7 @@ namespace ImageProcessing.App.UILayer
         {
             try
             {
-                AppLifecycle.Build<UIStartup>(DiContainer.Ninject);
+                AppLifecycle.Build<Startup>(DiContainer.Ninject);
                 AppLifecycle.Run<MainPresenter>();
             }
             catch(Exception ex)

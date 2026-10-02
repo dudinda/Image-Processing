@@ -1,6 +1,5 @@
 using System.Windows.Forms;
 
-using ImageProcessing.App.PresentationLayer;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.Forms.ColorMatrix;
 using ImageProcessing.App.UILayer.Forms.Convolution;
@@ -38,14 +37,14 @@ using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
 namespace ImageProcessing.App.UILayer
 {
-    public sealed class UIStartup : IStartup
+    public sealed class Startup : IStartup
     {
         public void Build(IComponentProvider builder)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            new Startup().Build(builder);
+            new PresentationLayer.Startup().Build(builder);
 
             builder
                 .RegisterSingleton<IMainView, MainForm>()
