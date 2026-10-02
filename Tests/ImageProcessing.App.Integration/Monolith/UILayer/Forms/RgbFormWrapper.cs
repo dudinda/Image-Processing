@@ -2,10 +2,10 @@ using System;
 using System.Windows.Forms;
 
 using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Rgb.Interface;
+using ImageProcessing.App.Integration.Monolith.UI.FormEventBinders.Rgb.Interface;
 using ImageProcessing.App.Presentation.Views;
-using ImageProcessing.App.UILayer.Forms.Rgb;
-using ImageProcessing.App.UILayer.Services.FormExposers;
+using ImageProcessing.App.UI.Forms.Rgb;
+using ImageProcessing.App.UI.Services.FormExposers;
 
 using MetroFramework.Controls;
 

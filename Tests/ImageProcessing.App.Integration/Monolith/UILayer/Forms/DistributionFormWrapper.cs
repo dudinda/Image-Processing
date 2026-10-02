@@ -4,10 +4,10 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Distribution.Interface;
+using ImageProcessing.App.Integration.Monolith.UI.FormEventBinders.Distribution.Interface;
 using ImageProcessing.App.Presentation.Views;
-using ImageProcessing.App.UILayer.Forms.Distribution;
-using ImageProcessing.App.UILayer.Services.FormExposers;
+using ImageProcessing.App.UI.Forms.Distribution;
+using ImageProcessing.App.UI.Services.FormExposers;
 
 using MetroFramework.Controls;
 

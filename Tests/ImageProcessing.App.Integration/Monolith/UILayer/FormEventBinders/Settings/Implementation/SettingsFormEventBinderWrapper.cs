@@ -1,9 +1,9 @@
-using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Settings.Interface;
+using ImageProcessing.App.Integration.Monolith.UI.FormEventBinders.Settings.Interface;
 using ImageProcessing.App.Presentation.UnitTests.Fakes.Components;
-using ImageProcessing.App.UILayer.Services.FormEventBinders.Settings.Implementation;
-using ImageProcessing.App.UILayer.Services.FormExposers;
+using ImageProcessing.App.UI.Services.FormEventBinders.Settings.Implementation;
+using ImageProcessing.App.UI.Services.FormExposers;
 
-namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Settings.Implementation
+namespace ImageProcessing.App.Integration.Monolith.UI.FormEventBinders.Settings.Implementation
 {
     internal class SettingsFormEventBinderWrapper : ISettingsFormEventBinderWrapper
     {

@@ -1,11 +1,11 @@
 using System.Windows.Forms;
 
-using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Convolution.Interface;
+using ImageProcessing.App.Integration.Monolith.UI.FormEventBinders.Convolution.Interface;
 using ImageProcessing.App.Presentation.UnitTests.Fakes.Components;
-using ImageProcessing.App.UILayer.Services.FormEventBinders.Convolution.Implementation;
-using ImageProcessing.App.UILayer.Services.FormExposers;
+using ImageProcessing.App.UI.Services.FormEventBinders.Convolution.Implementation;
+using ImageProcessing.App.UI.Services.FormExposers;
 
-namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Convolution.Implementation
+namespace ImageProcessing.App.Integration.Monolith.UI.FormEventBinders.Convolution.Implementation
 {
     internal class ConvolutionFormEventBinderWrapper
         : IConvolutionFormEventBinderWrapper

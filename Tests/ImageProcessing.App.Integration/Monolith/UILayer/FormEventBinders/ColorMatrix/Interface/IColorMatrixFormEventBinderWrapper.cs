@@ -1,6 +1,6 @@
-using ImageProcessing.App.UILayer.Services.FormEventBinders.ColorMatrix;
+using ImageProcessing.App.UI.Services.FormEventBinders.ColorMatrix;
 
-namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.ColorMatrix.Interface
+namespace ImageProcessing.App.Integration.Monolith.UI.FormEventBinders.ColorMatrix.Interface
 {
     internal interface IColorMatrixFormEventBinderWrapper : IColorMatrixFormEventBinder
     {

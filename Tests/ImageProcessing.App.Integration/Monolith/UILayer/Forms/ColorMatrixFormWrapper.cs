@@ -2,15 +2,15 @@ using System;
 using System.Windows.Forms;
 
 using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.ColorMatrix.Interface;
+using ImageProcessing.App.Integration.Monolith.UI.FormEventBinders.ColorMatrix.Interface;
 using ImageProcessing.App.Presentation.Views;
-using ImageProcessing.App.UILayer.Forms.ColorMatrix;
-using ImageProcessing.App.UILayer.Services.FormExposers;
+using ImageProcessing.App.UI.Forms.ColorMatrix;
+using ImageProcessing.App.UI.Services.FormExposers;
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
 using MetroFramework.Controls;
 
-namespace ImageProcessing.App.Integration.Monolith.UILayer.Forms
+namespace ImageProcessing.App.Integration.Monolith.UI.Forms
 {
     internal class ColorMatrixFormWrapper : IColorMatrixView, IColorMatrixFormExposer
     {

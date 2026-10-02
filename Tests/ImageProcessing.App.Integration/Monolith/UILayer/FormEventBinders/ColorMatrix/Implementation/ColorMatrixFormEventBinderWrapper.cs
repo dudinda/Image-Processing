@@ -1,11 +1,11 @@
 using System.Windows.Forms;
 
-using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.ColorMatrix.Interface;
+using ImageProcessing.App.Integration.Monolith.UI.FormEventBinders.ColorMatrix.Interface;
 using ImageProcessing.App.Presentation.UnitTests.Fakes.Components;
-using ImageProcessing.App.UILayer.Services.FormEventBinders.ColorMatrix.Implementation;
-using ImageProcessing.App.UILayer.Services.FormExposers;
+using ImageProcessing.App.UI.Services.FormEventBinders.ColorMatrix.Implementation;
+using ImageProcessing.App.UI.Services.FormExposers;
 
-namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.ColorMatrix.Implementation
+namespace ImageProcessing.App.Integration.Monolith.UI.FormEventBinders.ColorMatrix.Implementation
 {
     internal class ColorMatrixFormEventBinderWrapper : IColorMatrixFormEventBinderWrapper
     {

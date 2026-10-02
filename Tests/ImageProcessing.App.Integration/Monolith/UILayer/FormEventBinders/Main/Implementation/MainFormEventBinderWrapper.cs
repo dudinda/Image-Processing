@@ -1,11 +1,11 @@
 using System.Windows.Forms;
 
-using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Main.Interface;
+using ImageProcessing.App.Integration.Monolith.UI.FormEventBinders.Main.Interface;
 using ImageProcessing.App.Presentation.UnitTests.Fakes.Components;
-using ImageProcessing.App.UILayer.Services.FormEventBinders.Main.Implementation;
-using ImageProcessing.App.UILayer.Services.FormExposers;
+using ImageProcessing.App.UI.Services.FormEventBinders.Main.Implementation;
+using ImageProcessing.App.UI.Services.FormExposers;
 
-namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Main.Implementation
+namespace ImageProcessing.App.Integration.Monolith.UI.FormEventBinders.Main.Implementation
 {
     internal class MainFormEventBinderWrapper : IMainFormEventBinderWrapper
     {

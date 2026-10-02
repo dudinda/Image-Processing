@@ -1,6 +1,6 @@
-using ImageProcessing.App.UILayer.Services.FormEventBinders.Distribution;
+using ImageProcessing.App.UI.Services.FormEventBinders.Distribution;
 
-namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Distribution.Interface
+namespace ImageProcessing.App.Integration.Monolith.UI.FormEventBinders.Distribution.Interface
 {
     internal interface IDistributionFormEventBinderWrapper : IDistributionFormEventBinder
     {

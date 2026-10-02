@@ -1,7 +1,7 @@
 
-using ImageProcessing.App.UILayer.Services.Factories.MenuState;
+using ImageProcessing.App.UI.Services.Factories.MenuState;
 
-namespace ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.Interface
+namespace ImageProcessing.App.Integration.Monolith.UI.UIModel.Factories.Interface
 {
     internal interface IMenuStateFactoryWrapper : IMenuStateFactory
     {

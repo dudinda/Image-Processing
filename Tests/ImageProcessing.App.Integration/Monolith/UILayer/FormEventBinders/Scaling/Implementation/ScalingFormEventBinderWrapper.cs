@@ -1,11 +1,11 @@
 using System.Windows.Forms;
 
-using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Scaling.Interface;
+using ImageProcessing.App.Integration.Monolith.UI.FormEventBinders.Scaling.Interface;
 using ImageProcessing.App.Presentation.UnitTests.Fakes.Components;
-using ImageProcessing.App.UILayer.Services.FormEventBinders.Scaling.Implementation;
-using ImageProcessing.App.UILayer.Services.FormExposers;
+using ImageProcessing.App.UI.Services.FormEventBinders.Scaling.Implementation;
+using ImageProcessing.App.UI.Services.FormExposers;
 
-namespace ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Scaling.Implementation
+namespace ImageProcessing.App.Integration.Monolith.UI.FormEventBinders.Scaling.Implementation
 {
     internal class ScalingFormEventBinderWrapper : IScalingFormEventBinderWrapper
     {

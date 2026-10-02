@@ -298,9 +298,9 @@
       <Project>{c3a187f6-5cae-2147-b72c-97d2ef8f52db}</Project>
       <Name>ImageProcessing.App.Presentation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.UILayer\ImageProcessing.App.UILayer.csproj">
-      <Project>{588ad9f0-3ac2-49ce-99c8-bc5a341b91d5}</Project>
-      <Name>ImageProcessing.App.UILayer</Name>
+    <ProjectReference Include="..\..\Source\ImageProcessing.App.UI\ImageProcessing.App.UI.csproj">
+      <Project>{4f6224d0-16fc-9d45-4580-ccc6a79bc9e8}</Project>
+      <Name>ImageProcessing.App.UI</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.Microkernel.DIAdapter\ImageProcessing.Microkernel.DIAdapter.csproj">
       <Project>{987ad585-ab5e-4394-b8b1-a9f0655a939c}</Project>
