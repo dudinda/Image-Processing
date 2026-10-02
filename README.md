@@ -30,6 +30,11 @@
 </p>
 <br/><br/>
 
+### Hierarchy of modules
+<p align="center">
+   <img width="832" height="452" alt="hierarchy-of-modules" src="https://github.com/user-attachments/assets/9ac4e623-7adf-4124-8ba7-fe0828ad6152" />
+    <p align="center">Fig. 2 Hierarchy of modules.</p>
+</p>
 
 
 ## Managing Grayscale Images
@@ -37,18 +42,18 @@
 <p> Initially, for experimental purposes was chosen a group of underexposed images. </p>
 <p align="center">
     <img src="https://i.imgur.com/vvRrqaG.png" width="500" height = "400" alt="original underexposed image">
-    <p align="center">Fig. 2 - The original underexposed image.</p>
+    <p align="center">Fig. 3 - The original underexposed image.</p>
 </p>
 <p> After an optimization with a uniform distribution, there is a redundancy in bright areas of relative luminance. However, using a normal distribution it's possible to minimize this effect, achieving better details’ distinctiveness.</p>
 
 <p align="center">
    <img src="https://i.imgur.com/zFM5TZl.png"  width="500" height = "400" alt="image transformed by uniform distribution">
-   <p align="center">Fig. 3 - The histogram transformation by a uniform distribution.</p>
+   <p align="center">Fig. 4 - The histogram transformation by a uniform distribution.</p>
 </p>
 
 <p align="center">
     <img src="https://i.imgur.com/0txwVZ7.png" width="500" height = "400" alt="An image transformed by a normal distribution with the expectation = 90 and std = 60">
-    <p align="center">Fig. 4 - The histogram transformation by a normal distribution where µ = 90 and σ = 60.</p>
+    <p align="center">Fig. 5 - The histogram transformation by a normal distribution where µ = 90 and σ = 60.</p>
 </p>
 
 <p> To justify which image is better, regarding its contrast, one may use the definition of conditional variance: </p>
@@ -61,17 +66,10 @@
 
 <p align="center">
     <img src="https://i.imgur.com/OhGb6lI.png" alt="application window">
-     <p align="center">Fig. 5 - Using the definition of conditional variance on 16 intervals of relative luminance.</p>
+     <p align="center">Fig. 6 - Using the definition of conditional variance on 16 intervals of relative luminance.</p>
 </p>
 
 <p> Thus, one may conclude that a normal distribution may represent better result regarding a uniform distribution on a group of underexposed images.</p>
-
-
-<p align="center">
-   <img src="https://i.imgur.com/gWjiEET.png"  width="800" height = "800" alt="architecture">
-   <p align="center">Fig. 6 - The process architecture.</p>
-</p>
-
 
 
 ***
