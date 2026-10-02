@@ -22,8 +22,7 @@ using ImageProcessing.App.DomainLayer.Factories.Scaling.Implementation;
 using ImageProcessing.App.DomainLayer.Factories.Scaling.Interface;
 using ImageProcessing.App.DomainLayer.Factories.Transformation.Implementation;
 using ImageProcessing.App.DomainLayer.Factories.Transformation.Interface;
-using ImageProcessing.App.DomainLayer.Models.AppSettings.Implementation;
-using ImageProcessing.App.DomainLayer.Models.AppSettings.Interface;
+using ImageProcessing.App.ServiceLayer.Models.AppSettings;
 using ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistribution;
 using ImageProcessing.App.ServiceLayer.Providers.Implementation.Convolution;
 using ImageProcessing.App.ServiceLayer.Providers.Implementation.Morphology;
@@ -94,7 +93,7 @@ namespace ImageProcessing.App.PresentationLayer
         public void Build(IComponentProvider builder)
         {
             builder
-                .RegisterSingleton<IAppSettings, AppSettings>()
+                .RegisterSingleton<AppSettings>()
                 .RegisterSingleton<ILoggerService, LoggerService>()
                 .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
                 .RegisterSingleton<IStaTaskService, StaTaskService>()

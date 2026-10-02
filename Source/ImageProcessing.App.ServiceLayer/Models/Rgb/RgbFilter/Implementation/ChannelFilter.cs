@@ -4,8 +4,7 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.ServiceLayer.Code.Constants;
-using ImageProcessing.App.DomainLayer.Models.Rgb.Channel.Interface;
-using ImageProcessing.App.DomainLayer.Models.Rgb.RgbFilter.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Rgb;
 
 namespace ImageProcessing.App.DomainLayer.Models.Rgb.RgbFilter.Implementation
 {

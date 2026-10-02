@@ -1,6 +1,6 @@
 using System.Drawing;
 
-using ImageProcessing.App.DomainLayer.Models.Convolution.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Convolution;
 
 namespace ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interface
 {

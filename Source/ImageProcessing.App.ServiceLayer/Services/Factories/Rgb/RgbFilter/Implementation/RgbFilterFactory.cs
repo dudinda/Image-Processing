@@ -1,12 +1,12 @@
 using System;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Models.Rgb.RgbFilter.Implementation;
 using ImageProcessing.App.DomainLayer.Factories.Recommendation.Interface;
 using ImageProcessing.App.DomainLayer.Factories.Rgb.Channel.Interface;
 using ImageProcessing.App.DomainLayer.Factories.Rgb.RgbFilter.Interface;
-using ImageProcessing.App.DomainLayer.Models.AppSettings.Interface;
-using ImageProcessing.App.DomainLayer.Models.Rgb.RgbFilter.Interface;
+using ImageProcessing.App.DomainLayer.Models.Rgb.RgbFilter.Implementation;
+using ImageProcessing.App.ServiceLayer.Models.AppSettings;
+using ImageProcessing.App.ServiceLayer.Models.Rgb;
 
 namespace ImageProcessing.App.DomainLayer.Factories.Rgb.RgbFilter.Implementation
 {
@@ -16,12 +16,12 @@ namespace ImageProcessing.App.DomainLayer.Factories.Rgb.RgbFilter.Implementation
     {
         private readonly IChannelFactory _factory;
         private readonly IRecommendationFactory _rec;
-        private readonly IAppSettings _settings;
+        private readonly AppSettings _settings;
 
         public RgbFilterFactory(
             IRecommendationFactory rec,
             IChannelFactory factory,
-            IAppSettings settings)
+            AppSettings settings)
         {
             _rec = rec;
             _factory = factory;

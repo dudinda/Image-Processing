@@ -2,8 +2,8 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 
-using ImageProcessing.App.DomainLayer.Models.Morphology.Interface.Operator.UnaryOperator;
 using ImageProcessing.App.ServiceLayer.Code.Constants;
+using ImageProcessing.App.ServiceLayer.Models.Morphology;
 using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
 namespace ImageProcessing.App.DomainLayer.Models.Morphology.Implementation.Operator

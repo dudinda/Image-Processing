@@ -1,9 +1,9 @@
 using System.Drawing;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Models.AppSettings.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Scaling.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Scaling.Interface;
+using ImageProcessing.App.ServiceLayer.Models.AppSettings;
 using ImageProcessing.App.ServiceLayer.Providers.Scaling.Implementation;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Scaling.Implementation
@@ -13,11 +13,11 @@ namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Scalin
         private readonly ScalingProvider _provider;
 
         public IScalingFactoryWrapper ScalingFactory { get; }
-        public IAppSettings Settings { get; }
+        public AppSettings Settings { get; }
 
         public ScalingProviderWrapper(
             IScalingFactoryWrapper factory,
-            IAppSettings settings)
+            AppSettings settings)
         {
             ScalingFactory = factory;
             Settings = settings;

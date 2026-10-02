@@ -1,7 +1,7 @@
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Factories.Rgb.RgbFilter.Interface;
-using ImageProcessing.App.DomainLayer.Models.Rgb.RgbFilter.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Rgb.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Rgb;
 
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Rgb.Implementation
 {

@@ -1,8 +1,7 @@
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Factories.Morphology.Operator.Interface;
-using ImageProcessing.App.DomainLayer.Models.Morphology.Interface.Operator.BinaryOperator;
-using ImageProcessing.App.DomainLayer.Models.Morphology.Interface.Operator.UnaryOperator;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Morphology.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Morphology;
 
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Morphology.Implementation
 {

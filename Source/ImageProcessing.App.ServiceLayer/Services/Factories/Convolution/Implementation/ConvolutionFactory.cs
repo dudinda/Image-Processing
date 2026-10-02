@@ -9,7 +9,7 @@ using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.EdgeDete
 using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.Emboss;
 using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.Sharpen;
 using ImageProcessing.App.DomainLayer.Factories.Convolution.Interface;
-using ImageProcessing.App.DomainLayer.Models.Convolution.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Convolution;
 
 namespace ImageProcessing.App.DomainLayer.Factories.Convolution.Implementation
 {

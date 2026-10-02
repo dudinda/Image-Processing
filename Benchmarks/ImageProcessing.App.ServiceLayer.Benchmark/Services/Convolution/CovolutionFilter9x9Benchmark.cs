@@ -5,7 +5,7 @@ using System.IO;
 using BenchmarkDotNet.Attributes;
 
 using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.Blur.MotionBlur;
-using ImageProcessing.App.DomainLayer.Models.Convolution.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Convolution;
 using ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interface;
 

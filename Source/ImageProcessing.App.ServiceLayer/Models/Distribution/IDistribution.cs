@@ -1,4 +1,4 @@
-namespace ImageProcessing.App.DomainLayer.Models.Distribution.Interface
+namespace ImageProcessing.App.ServiceLayer.Models.Distribution
 {
     /// <summary>
     /// Specifies a model

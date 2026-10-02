@@ -1,4 +1,4 @@
-namespace ImageProcessing.App.DomainLayer.Models.Rgb.Channel.Interface
+namespace ImageProcessing.App.ServiceLayer.Models.Rgb
 {
     /// <summary>
     /// Specifies a channel of an RGB pixel.

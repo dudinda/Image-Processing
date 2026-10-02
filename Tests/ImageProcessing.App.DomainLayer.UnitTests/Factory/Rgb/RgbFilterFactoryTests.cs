@@ -1,12 +1,12 @@
 using System;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Factories.Rgb.RgbFilter.Implementation;
 using ImageProcessing.App.DomainLayer.Factories.Recommendation.Interface;
 using ImageProcessing.App.DomainLayer.Factories.Rgb.Channel.Interface;
+using ImageProcessing.App.DomainLayer.Factories.Rgb.RgbFilter.Implementation;
 using ImageProcessing.App.DomainLayer.Factories.Rgb.RgbFilter.Interface;
-using ImageProcessing.App.DomainLayer.Models.AppSettings.Interface;
 using ImageProcessing.App.DomainLayer.UnitTests.CaseFactory;
+using ImageProcessing.App.ServiceLayer.Models.AppSettings;
 
 using NSubstitute;
 
@@ -27,7 +27,7 @@ namespace ImageProcessing.App.DomainLayer.UnitTests.Factory.Rgb
             _rgbFilterFactory = new RgbFilterFactory(
                 Substitute.For<IRecommendationFactory>(),
                 Substitute.For<IChannelFactory>(),
-                Substitute.For<IAppSettings>()
+                Substitute.For<AppSettings>()
             );
         }
 

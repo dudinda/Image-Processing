@@ -1,6 +1,6 @@
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Factories;
-using ImageProcessing.App.DomainLayer.Models.Convolution.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Convolution;
 
 namespace ImageProcessing.App.DomainLayer.Factories.Convolution.Interface
 {

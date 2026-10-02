@@ -1,6 +1,6 @@
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Factories;
-using ImageProcessing.App.DomainLayer.Models.Morphology.Interface.StructuringElement;
+using ImageProcessing.App.ServiceLayer.Models.Morphology;
 
 namespace ImageProcessing.App.DomainLayer.Factories.Morphology.StructuringElement.Interface
 {

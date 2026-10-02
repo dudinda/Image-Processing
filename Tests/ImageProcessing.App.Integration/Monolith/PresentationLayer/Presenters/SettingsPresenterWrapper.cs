@@ -1,11 +1,11 @@
 using System.Threading.Tasks;
 
-using ImageProcessing.App.DomainLayer.Models.AppSettings.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.SettingsArgs;
 using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.Views;
+using ImageProcessing.App.ServiceLayer.Models.AppSettings;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
@@ -22,11 +22,11 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer.Presenters
             => _presenter.View;
 
         public ILoggerServiceWrapper Logger { get; }
-        public IAppSettings Settings { get; }
+        public AppSettings Settings { get; }
 
         public SettingsPresenterWrapper(
             ILoggerServiceWrapper logger,
-            IAppSettings settings)
+            AppSettings settings)
         {
             Settings = settings;
             Logger = logger;

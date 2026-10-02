@@ -3,7 +3,7 @@ using System.Drawing;
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
-namespace ImageProcessing.App.DomainLayer.Models.Morphology.Interface.Operator.UnaryOperator
+namespace ImageProcessing.App.ServiceLayer.Models.Morphology
 {
     /// <summary>
     /// Specifies the unary morphology operator.

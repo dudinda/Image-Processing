@@ -3,8 +3,7 @@ using System;
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Models.Morphology.Implementation.Operator;
 using ImageProcessing.App.DomainLayer.Factories.Morphology.Operator.Interface;
-using ImageProcessing.App.DomainLayer.Models.Morphology.Interface.Operator.BinaryOperator;
-using ImageProcessing.App.DomainLayer.Models.Morphology.Interface.Operator.UnaryOperator;
+using ImageProcessing.App.ServiceLayer.Models.Morphology;
 
 namespace ImageProcessing.App.DomainLayer.Factories.Morphology.Operator.Implementation
 {

@@ -2,7 +2,7 @@ using System.Drawing;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Factories.Scaling.Interface;
-using ImageProcessing.App.DomainLayer.Models.AppSettings.Interface;
+using ImageProcessing.App.ServiceLayer.Models.AppSettings;
 using ImageProcessing.App.ServiceLayer.Providers.Scaling.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Scaling.Implementation
@@ -10,11 +10,11 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Scaling.Implementation
     public sealed class ScalingProvider : IScalingProvider
     {
         private readonly IScalingFactory _factory;
-        private readonly IAppSettings _settings;
+        private readonly AppSettings _settings;
 
         public ScalingProvider( 
             IScalingFactory factory,
-            IAppSettings settings)
+            AppSettings settings)
         {
             _factory = factory;
             _settings = settings;

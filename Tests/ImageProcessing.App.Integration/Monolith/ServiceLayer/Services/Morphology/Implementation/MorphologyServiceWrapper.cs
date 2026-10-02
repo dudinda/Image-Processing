@@ -1,9 +1,8 @@
 using System;
 using System.Drawing;
 
-using ImageProcessing.App.DomainLayer.Models.Morphology.Interface.Operator.BinaryOperator;
-using ImageProcessing.App.DomainLayer.Models.Morphology.Interface.Operator.UnaryOperator;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Morphology.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Morphology;
 using ImageProcessing.App.ServiceLayer.Services.Morphology.Implementation;
 using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 

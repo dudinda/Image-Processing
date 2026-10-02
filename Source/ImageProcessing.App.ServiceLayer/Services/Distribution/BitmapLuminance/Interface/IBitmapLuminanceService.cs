@@ -1,6 +1,6 @@
 using System.Drawing;
 
-using ImageProcessing.App.DomainLayer.Models.Distribution.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Distribution;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Interface
 {

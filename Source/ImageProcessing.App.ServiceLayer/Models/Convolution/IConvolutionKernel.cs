@@ -1,6 +1,6 @@
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
-namespace ImageProcessing.App.DomainLayer.Models.Convolution.Interface
+namespace ImageProcessing.App.ServiceLayer.Models.Convolution
 {
     /// <summary>
     /// Specifies a convolution filter.

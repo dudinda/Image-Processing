@@ -3,7 +3,7 @@ using System;
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Models.Rgb.Channel.Implementation;
 using ImageProcessing.App.DomainLayer.Factories.Rgb.Channel.Interface;
-using ImageProcessing.App.DomainLayer.Models.Rgb.Channel.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Rgb;
 
 namespace ImageProcessing.App.DomainLayer.Factories.Rgb.Channel.Implementation
 {

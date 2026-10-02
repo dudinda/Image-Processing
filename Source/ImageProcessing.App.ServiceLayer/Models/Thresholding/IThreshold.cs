@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace ImageProcessing.App.DomainLayer.Models.Thresholding.Interface
+namespace ImageProcessing.App.ServiceLayer.Models.Thresholding
 {
     public interface IThreshold
     {

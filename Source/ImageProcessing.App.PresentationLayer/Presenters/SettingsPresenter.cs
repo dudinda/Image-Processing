@@ -2,11 +2,11 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.DomainLayer.Models.AppSettings.Interface;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.SettingsArgs;
 using ImageProcessing.App.PresentationLayer.Views;
+using ImageProcessing.App.ServiceLayer.Models.AppSettings;
 using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
@@ -19,11 +19,11 @@ namespace ImageProcessing.App.PresentationLayer.Presenters
         ISubscriber<EnableControlEventArgs>
     {
         private readonly ILoggerService _logger;
-        private readonly IAppSettings _settings;
+        private readonly AppSettings _settings;
 
         public SettingsPresenter(
             ILoggerService logger,
-            IAppSettings settings)
+            AppSettings settings)
         {
             _settings = settings;
             _logger = logger;

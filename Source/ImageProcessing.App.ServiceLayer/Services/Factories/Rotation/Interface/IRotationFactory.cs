@@ -1,6 +1,6 @@
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Factories;
-using ImageProcessing.App.DomainLayer.Models.Rotation.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Rotation;
 
 namespace ImageProcessing.App.DomainLayer.Factories.Rotation.Interface
 {

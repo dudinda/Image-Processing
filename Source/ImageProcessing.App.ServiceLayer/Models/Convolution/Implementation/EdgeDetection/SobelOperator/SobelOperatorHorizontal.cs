@@ -1,4 +1,4 @@
-using ImageProcessing.App.DomainLayer.Models.Convolution.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Convolution;
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
 namespace ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.EdgeDetection.SobelOperator

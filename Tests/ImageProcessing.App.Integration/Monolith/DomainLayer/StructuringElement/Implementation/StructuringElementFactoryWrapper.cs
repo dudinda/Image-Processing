@@ -1,8 +1,8 @@
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Factories.Morphology.StructuringElement.Implementation;
-using ImageProcessing.App.DomainLayer.Models.Morphology.Interface.StructuringElement;
 using ImageProcessing.App.Integration.Monolith.DomainLayer.StructuringElement.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Morphology;
 
 namespace ImageProcessing.App.Integration.Monolith.DomainLayer.StructuringElement.Implementation
 {

@@ -1,7 +1,7 @@
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Factories.Convolution.Interface;
-using ImageProcessing.App.DomainLayer.Models.Convolution.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Convolution.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Convolution;
 
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer
 {

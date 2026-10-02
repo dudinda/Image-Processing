@@ -2,7 +2,7 @@ using System.Drawing;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
 
-namespace ImageProcessing.App.DomainLayer.Models.Morphology.Interface.Operator.BinaryOperator
+namespace ImageProcessing.App.ServiceLayer.Models.Morphology
 {
     /// <summary>
     /// Specifies a binary morphology operator.

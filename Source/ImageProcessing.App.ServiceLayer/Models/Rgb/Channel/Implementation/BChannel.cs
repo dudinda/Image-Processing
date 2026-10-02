@@ -1,4 +1,4 @@
-using ImageProcessing.App.DomainLayer.Models.Rgb.Channel.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Rgb;
 
 namespace ImageProcessing.App.DomainLayer.Models.Rgb.Channel.Implementation
 {

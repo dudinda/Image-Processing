@@ -1,6 +1,6 @@
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Factories;
-using ImageProcessing.App.DomainLayer.Models.Distribution.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Distribution;
 
 namespace ImageProcessing.App.DomainLayer.Factories.Distribution.Interface
 {

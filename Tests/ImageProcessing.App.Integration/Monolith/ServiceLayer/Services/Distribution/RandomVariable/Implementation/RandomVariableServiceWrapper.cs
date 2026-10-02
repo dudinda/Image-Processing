@@ -1,5 +1,5 @@
-using ImageProcessing.App.DomainLayer.Models.Distribution.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distribution.RandomVariable.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Distribution;
 using ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Interface;
 

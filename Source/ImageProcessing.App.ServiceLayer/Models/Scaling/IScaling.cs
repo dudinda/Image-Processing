@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace ImageProcessing.App.DomainLayer.Models.Scaling.Interface
+namespace ImageProcessing.App.ServiceLayer.Models.Scaling
 {
     public interface IScaling
     {

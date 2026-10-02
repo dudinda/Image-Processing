@@ -1,4 +1,4 @@
-namespace ImageProcessing.App.DomainLayer.Models.Recommendation.Interface
+namespace ImageProcessing.App.ServiceLayer.Models.Recommendation
 {
     /// <summary>
     /// Forms luma (Y') using R'G'B' coefficients.

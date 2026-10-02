@@ -1,4 +1,3 @@
-using ImageProcessing.App.DomainLayer.Models.AppSettings.Interface;
 using ImageProcessing.App.Integration.Monolith.DomainLayer.StructuringElement.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.BitmapLuminance.Implementation;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.BitmapLuminance.Interface;
@@ -69,6 +68,7 @@ using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLaye
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Services.ColorMatrix.Implementation;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Services.ColorMatrix.Interface;
 using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Services;
+using ImageProcessing.App.ServiceLayer.Models.AppSettings;
 using ImageProcessing.Microkernel.AppConfig;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
@@ -166,11 +166,11 @@ namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Servic
                 .RegisterTransientInstance<IRotationProviderWrapper>(
                 Substitute.ForPartsOf<RotationProviderWrapper>(
                     builder.Resolve<IRotationFactoryWrapper>(),
-                    builder.Resolve<IAppSettings>()))
+                    builder.Resolve<AppSettings>()))
                 .RegisterTransientInstance <IScalingProviderWrapper>(
                 Substitute.ForPartsOf<ScalingProviderWrapper>(
                     builder.Resolve<IScalingFactoryWrapper>(),
-                    builder.Resolve<IAppSettings>()))
+                    builder.Resolve<AppSettings>()))
                 .RegisterTransientInstance<ITransformationProviderWrapper>(
                 Substitute.ForPartsOf<TransformationProviderWrapper>(
                     builder.Resolve<ITransformationFactoryWrapper>()));

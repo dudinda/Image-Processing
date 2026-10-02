@@ -1,10 +1,9 @@
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Models.AppSettings.Interface;
 
-namespace ImageProcessing.App.DomainLayer.Models.AppSettings.Implementation
+namespace ImageProcessing.App.ServiceLayer.Models.AppSettings
 {
     /// <inheritdoc cref="IAppSettings"/>
-    public sealed class AppSettings : IAppSettings
+    public sealed class AppSettings 
     {
         /// <inheritdoc />
         public RotationMethod Rotation { get; set; }

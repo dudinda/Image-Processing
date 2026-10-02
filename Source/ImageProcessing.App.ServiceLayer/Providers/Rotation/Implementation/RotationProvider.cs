@@ -1,7 +1,7 @@
 using System.Drawing;
 
 using ImageProcessing.App.DomainLayer.Factories.Rotation.Interface;
-using ImageProcessing.App.DomainLayer.Models.AppSettings.Interface;
+using ImageProcessing.App.ServiceLayer.Models.AppSettings;
 using ImageProcessing.App.ServiceLayer.Providers.Rotation.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Rotation.Implementation
@@ -9,11 +9,11 @@ namespace ImageProcessing.App.ServiceLayer.Providers.Rotation.Implementation
     public sealed class RotationProvider : IRotationProvider
     {
         private readonly IRotationFactory _rotation;
-        private readonly IAppSettings _settings;
+        private readonly AppSettings _settings;
 
         public RotationProvider(
             IRotationFactory rotation,
-            IAppSettings settings)
+            AppSettings settings)
         {
             _rotation = rotation;
             _settings = settings;

@@ -1,4 +1,3 @@
-using ImageProcessing.App.DomainLayer.Models.AppSettings.Interface;
 using ImageProcessing.App.Integration.Monolith.PresentationLayer.Presenters;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.BitmapLuminance.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Convolution.Interface;
@@ -14,6 +13,7 @@ using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Pipeline.In
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.ColorMatrix.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Rgb.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer;
+using ImageProcessing.App.ServiceLayer.Models.AppSettings;
 using ImageProcessing.Microkernel.AppConfig;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
@@ -72,7 +72,7 @@ namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
                 .RegisterTransientInstance(
                 Substitute.ForPartsOf<SettingsPresenterWrapper>(
                     builder.Resolve<ILoggerServiceWrapper>(),
-                    builder.Resolve<IAppSettings>()))
+                    builder.Resolve<AppSettings>()))
                 .RegisterTransientInstance(
                 Substitute.ForPartsOf<TransformationPresenterWrapper>(
                     builder.Resolve<ITransformationProviderWrapper>(),

@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.ServiceLayer.Code.Constants;
-using ImageProcessing.App.DomainLayer.Models.Morphology.Interface.Operator.BinaryOperator;
+using ImageProcessing.App.ServiceLayer.Models.Morphology;
 
 namespace ImageProcessing.App.DomainLayer.Models.Morphology.Implementation.Operator
 {

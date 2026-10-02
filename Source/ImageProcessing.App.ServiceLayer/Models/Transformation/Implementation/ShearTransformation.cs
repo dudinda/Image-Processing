@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.ServiceLayer.Code.Constants;
 using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
-using ImageProcessing.App.DomainLayer.Models.Transformation.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Transformation;
 
 namespace ImageProcessing.App.DomainLayer.Models.Transformation.Implementation
 {

@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace ImageProcessing.App.DomainLayer.Models.Transformation.Interface
+namespace ImageProcessing.App.ServiceLayer.Models.Transformation
 {
     public interface ITransformation
     {

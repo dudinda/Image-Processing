@@ -2,7 +2,7 @@ using System;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Code.Extensions.StringExt;
-using ImageProcessing.App.DomainLayer.Models.Distribution.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Distribution;
 using ImageProcessing.Utility.DecimalMath.Real;
 
 namespace ImageProcessing.App.DomainLayer.Models.Distribution.Implementation.TwoParameter

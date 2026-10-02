@@ -4,7 +4,7 @@ using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Models.Distribution.Implementation.OneParameter;
 using ImageProcessing.App.DomainLayer.Models.Distribution.Implementation.TwoParameter;
 using ImageProcessing.App.DomainLayer.Factories.Distribution.Interface;
-using ImageProcessing.App.DomainLayer.Models.Distribution.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Distribution;
 
 namespace ImageProcessing.App.DomainLayer.Factories.Distribution.Implementation
 {

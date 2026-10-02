@@ -1,7 +1,7 @@
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Factories.Scaling.Interface;
-using ImageProcessing.App.DomainLayer.Models.Scaling.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Scaling.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Scaling;
 
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Scaling.Implementation
 {

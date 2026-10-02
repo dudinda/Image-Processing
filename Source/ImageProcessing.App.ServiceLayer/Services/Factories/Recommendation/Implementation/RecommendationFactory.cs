@@ -3,7 +3,7 @@ using System;
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Models.Recommendation.Implementation;
 using ImageProcessing.App.DomainLayer.Factories.Recommendation.Interface;
-using ImageProcessing.App.DomainLayer.Models.Recommendation.Interface;
+using ImageProcessing.App.ServiceLayer.Models.Recommendation;
 
 namespace ImageProcessing.App.DomainLayer.Factories.Recommendation.Implementation
 {
