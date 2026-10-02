@@ -1,3 +1,5 @@
+***Disclaimer**: The software provided in this repository was developed without the use of generative AI. Generative AI may only be used to verify grammatical correctness and syntax.*
+
 <p>The application was originally developed as an R&D project between 2017 and 2019.</p> 
 <p>The original purpose was to investigate the potential advantages of optimizing the contrast of grayscale images using a normal distribution compared with a uniform distribution. Two parameters - the expectation and standard derivation - allow to the relative luminance and contrast, respectively, to be controlled.</p>
 
