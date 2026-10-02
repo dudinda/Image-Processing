@@ -1,10 +1,10 @@
 using System.Drawing;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.DomainLayer.Models.AppSettings.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Scaling.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Scaling.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Scaling.Implementation;
-using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Scaling.Implementation
 {

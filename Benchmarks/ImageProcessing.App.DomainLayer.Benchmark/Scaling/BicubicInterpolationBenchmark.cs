@@ -4,7 +4,7 @@ using System.IO;
 
 using BenchmarkDotNet.Attributes;
 
-using ImageProcessing.App.DomainLayer.DomainModel.Scaling.Implementation;
+using ImageProcessing.App.DomainLayer.Models.Scaling.Implementation;
 
 namespace ImageProcessing.App.DomainLayer.Benchmark.Rotation.AreaMapping
 {

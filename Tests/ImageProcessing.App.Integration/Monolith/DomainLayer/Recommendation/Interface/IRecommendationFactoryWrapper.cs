@@ -1,4 +1,4 @@
-using ImageProcessing.App.DomainLayer.DomainFactory.RgbFilters.Recommendation.Interface;
+using ImageProcessing.App.DomainLayer.Factories.Recommendation.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Recommendation.Interface
 {

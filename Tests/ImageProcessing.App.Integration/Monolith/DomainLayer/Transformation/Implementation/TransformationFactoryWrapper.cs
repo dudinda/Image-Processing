@@ -1,6 +1,6 @@
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.DomainFactory.Transformation.Interface;
-using ImageProcessing.App.DomainLayer.DomainModel.Transformation.Interface;
+using ImageProcessing.App.DomainLayer.Factories.Transformation.Interface;
+using ImageProcessing.App.DomainLayer.Models.Transformation.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Transformation.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Transformation.Implementation

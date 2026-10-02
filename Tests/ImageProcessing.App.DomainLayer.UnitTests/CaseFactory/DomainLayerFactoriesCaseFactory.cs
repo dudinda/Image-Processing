@@ -2,17 +2,17 @@ using System;
 using System.Collections.Generic;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Blur.BoxBlur;
-using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Blur.GaussianBlur;
-using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Blur.MotionBlur;
-using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.EdgeDetection.LaplacianOperator;
-using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.EdgeDetection.SobelOperator;
-using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Emboss;
-using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Sharpen;
-using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementation.OneParameter;
-using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Implementation.TwoParameter;
-using ImageProcessing.App.DomainLayer.DomainModel.Rgb.Channel.Implementation;
-using ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementation;
+using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.Blur.BoxBlur;
+using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.Blur.GaussianBlur;
+using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.Blur.MotionBlur;
+using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.EdgeDetection.LaplacianOperator;
+using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.EdgeDetection.SobelOperator;
+using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.Emboss;
+using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.Sharpen;
+using ImageProcessing.App.DomainLayer.Models.Distribution.Implementation.OneParameter;
+using ImageProcessing.App.DomainLayer.Models.Distribution.Implementation.TwoParameter;
+using ImageProcessing.App.DomainLayer.Models.Rgb.Channel.Implementation;
+using ImageProcessing.App.DomainLayer.Models.Rgb.RgbFilter.Implementation;
 
 namespace ImageProcessing.App.DomainLayer.UnitTests.CaseFactory
 {

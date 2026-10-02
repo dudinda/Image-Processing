@@ -1,3 +1,4 @@
+using ImageProcessing.App.DomainLayer.Models.AppSettings.Interface;
 using ImageProcessing.App.Integration.Monolith.PresentationLayer.Presenters;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.BitmapLuminance.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Convolution.Interface;
@@ -13,7 +14,6 @@ using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Pipeline.In
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.ColorMatrix.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Rgb.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer;
-using ImageProcessing.App.ServiceLayer.Services.Settings.Interface;
 using ImageProcessing.Microkernel.AppConfig;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
 

@@ -1,7 +1,7 @@
 using System.Drawing;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.DomainFactory.Transformation.Interface;
+using ImageProcessing.App.DomainLayer.Factories.Transformation.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Transformation.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Transformation.Implementation

@@ -1,0 +1,29 @@
+using ImageProcessing.App.DomainLayer.Models.Convolution.Interface;
+using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
+
+namespace ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.EdgeDetection.SobelOperator
+{
+    /// <summary>
+    /// Implements the <see cref="IConvolutionKernel"/>.
+    /// </summary>
+    public sealed class SobelOperatorVertical : IConvolutionKernel
+    {
+        /// <inheritdoc />
+        public double Bias { get; } = 0.0;
+
+        /// <inheritdoc />
+        public double Factor { get; } = 1.0;
+
+        /// <inheritdoc />
+        public string FilterName { get; } = nameof(SobelOperatorVertical);
+
+        /// <inheritdoc />
+        public ReadOnly2DArray<double> Kernel { get; }
+            = new ReadOnly2DArray<double>(
+                new double[,] {
+                    { -1, 0, 1 },
+                    { -2, 0, 2 },
+                    { -1, 0, 1 }
+                });
+    }
+}

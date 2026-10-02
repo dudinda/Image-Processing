@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Interface;
+using ImageProcessing.App.DomainLayer.Factories.Rgb.RgbFilter.Interface;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.RgbArgs;

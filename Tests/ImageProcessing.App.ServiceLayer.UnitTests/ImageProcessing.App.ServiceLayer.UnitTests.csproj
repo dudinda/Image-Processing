@@ -87,10 +87,6 @@
     <None Include="Resources\1920x1080frame.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.DomainLayer\ImageProcessing.App.DomainLayer.csproj">
-      <Project>{03943CD9-C3EC-494E-B3FB-1B8BE4AEF91B}</Project>
-      <Name>ImageProcessing.App.DomainLayer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.App.ServiceLayer\ImageProcessing.App.ServiceLayer.csproj">
       <Project>{94C3F770-5A06-4D18-AFF5-C4EB20CBB727}</Project>
       <Name>ImageProcessing.App.ServiceLayer</Name>

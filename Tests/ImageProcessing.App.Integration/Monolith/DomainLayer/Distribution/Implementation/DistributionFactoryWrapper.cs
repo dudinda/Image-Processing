@@ -1,6 +1,6 @@
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.DomainFactory.Distribution.Interface;
-using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
+using ImageProcessing.App.DomainLayer.Factories.Distribution.Interface;
+using ImageProcessing.App.DomainLayer.Models.Distribution.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Distribution.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Distribution.Implementation

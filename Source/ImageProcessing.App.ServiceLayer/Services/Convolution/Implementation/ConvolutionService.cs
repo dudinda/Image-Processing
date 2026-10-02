@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Interface;
+using ImageProcessing.App.DomainLayer.Models.Convolution.Interface;
 using ImageProcessing.App.ServiceLayer.Code.Constants;
 using ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interface;
 

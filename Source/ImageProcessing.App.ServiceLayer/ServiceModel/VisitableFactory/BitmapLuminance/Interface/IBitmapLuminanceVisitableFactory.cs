@@ -1,4 +1,4 @@
-using ImageProcessing.App.DomainLayer.DomainFactory;
+using ImageProcessing.App.DomainLayer.Factories;
 using ImageProcessing.App.ServiceLayer.Code.Enums;
 using ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.BitmapLuminance;
 

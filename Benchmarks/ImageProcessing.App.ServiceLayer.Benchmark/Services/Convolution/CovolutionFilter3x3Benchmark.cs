@@ -4,8 +4,8 @@ using System.IO;
 
 using BenchmarkDotNet.Attributes;
 
-using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Implemetation.Blur.BoxBlur;
-using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Interface;
+using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.Blur.BoxBlur;
+using ImageProcessing.App.DomainLayer.Models.Convolution.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation;
 using ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interface;
 
@@ -14,13 +14,13 @@ namespace ImageProcessing.App.ServiceLayer.Benchmark.Services.Convolution.Kernel
     [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
     public class CovolutionFilter5x5Benchmark : IDisposable
     {
-        private IConvolutionKernel filter3x3 = new BoxBlur3x3();
-        private IConvolutionService service = new ConvolutionService();
+        private IConvolutionKernel _filter3x3 = new BoxBlur3x3();
+        private IConvolutionService _service = new ConvolutionService();
 
         private Bitmap _frame1920x1080;
         private Bitmap _frame2560x1440;
 
-        private int frameRate = 60;
+        private int _frameRate = 60;
 
         [GlobalSetup]
         public void Setup()
@@ -38,27 +38,27 @@ namespace ImageProcessing.App.ServiceLayer.Benchmark.Services.Convolution.Kernel
 
         [Benchmark]
         public Bitmap Apply3x3ConvolutionTo1920x1080()
-            => service.Convolution(_frame1920x1080, filter3x3);
+            => _service.Convolution(_frame1920x1080, _filter3x3);
 
         [Benchmark]
         public void Apply3x3ConvoltuionTo1920x1080Frame60Fps()
         {
-            for (var start = 0; start < frameRate; ++start)
+            for (var start = 0; start < _frameRate; ++start)
             {
-                service.Convolution(_frame1920x1080, filter3x3);
+               _service.Convolution(_frame1920x1080, _filter3x3);
             }
         }
 
         [Benchmark]
         public Bitmap Apply3x3ConvolutionTo2560x1440()
-            => service.Convolution(_frame2560x1440, filter3x3);
+            => _service.Convolution(_frame2560x1440, _filter3x3);
 
         [Benchmark]
         public void Apply3x3ConvolutionTo2560x1440Frame60Fps()
         {
-            for (var start = 0; start < frameRate; ++start)
+            for (var start = 0; start < _frameRate; ++start)
             {
-                service.Convolution(_frame2560x1440, filter3x3);
+                _service.Convolution(_frame2560x1440, _filter3x3);
             }
         }
 

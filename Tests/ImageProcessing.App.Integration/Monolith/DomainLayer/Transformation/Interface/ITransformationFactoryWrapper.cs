@@ -1,4 +1,4 @@
-using ImageProcessing.App.DomainLayer.DomainFactory.Transformation.Interface;
+using ImageProcessing.App.DomainLayer.Factories.Transformation.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Transformation.Interface
 {

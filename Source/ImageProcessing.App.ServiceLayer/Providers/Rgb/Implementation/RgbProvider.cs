@@ -1,8 +1,8 @@
 using System.Drawing;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.DomainFactory.ColorMatrix.Interface;
-using ImageProcessing.App.DomainLayer.DomainFactory.Rgb.RgbFilter.Interface;
+using ImageProcessing.App.DomainLayer.Factories.ColorMatrix.Interface;
+using ImageProcessing.App.DomainLayer.Factories.Rgb.RgbFilter.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Interface;

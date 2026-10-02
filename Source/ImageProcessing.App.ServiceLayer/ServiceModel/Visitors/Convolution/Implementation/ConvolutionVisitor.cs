@@ -2,7 +2,7 @@ using System.Drawing;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.DomainFactory.Convolution.Interface;
+using ImageProcessing.App.DomainLayer.Factories.Convolution.Interface;
 using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Convolution.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interface;

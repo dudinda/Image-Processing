@@ -1,6 +1,6 @@
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.DomainFactory.Rotation.Interface;
-using ImageProcessing.App.DomainLayer.DomainModel.Rotation.Interface;
+using ImageProcessing.App.DomainLayer.Factories.Rotation.Interface;
+using ImageProcessing.App.DomainLayer.Models.Rotation.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Rotation.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Rotation.Implementation

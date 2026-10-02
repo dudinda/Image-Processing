@@ -5,7 +5,7 @@ using System.IO;
 
 using BenchmarkDotNet.Attributes;
 
-using ImageProcessing.App.DomainLayer.DomainModel.Rotation.Implementation;
+using ImageProcessing.App.DomainLayer.Models.Rotation.Implementation;
 
 namespace ImageProcessing.App.DomainLayer.Benchmark.Rotation.Shear
 {

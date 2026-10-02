@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.DomainFactory.ColorMatrix.Interface;
+using ImageProcessing.App.DomainLayer.Factories.ColorMatrix.Interface;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.DomainEvents.ColorMatrixArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;

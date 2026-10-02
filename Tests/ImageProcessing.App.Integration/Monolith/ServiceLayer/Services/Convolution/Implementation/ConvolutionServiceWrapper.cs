@@ -1,6 +1,6 @@
 using System.Drawing;
 
-using ImageProcessing.App.DomainLayer.DomainModel.Convolution.Interface;
+using ImageProcessing.App.DomainLayer.Models.Convolution.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Convolution.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation;
 

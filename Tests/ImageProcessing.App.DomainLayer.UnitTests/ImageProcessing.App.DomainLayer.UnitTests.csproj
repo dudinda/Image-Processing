@@ -76,9 +76,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.DomainLayer\ImageProcessing.App.DomainLayer.csproj">
-      <Project>{03943cd9-c3ec-494e-b3fb-1b8be4aef91b}</Project>
-      <Name>ImageProcessing.App.DomainLayer</Name>
+    <ProjectReference Include="..\..\Source\ImageProcessing.App.ServiceLayer\ImageProcessing.App.ServiceLayer.csproj">
+      <Project>{94c3f770-5a06-4d18-aff5-c4eb20cbb727}</Project>
+      <Name>ImageProcessing.App.ServiceLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.Microkernel.MVP\ImageProcessing.Microkernel.MVP.csproj">
       <Project>{E547BF84-7467-4AA0-A836-84BEAB772924}</Project>

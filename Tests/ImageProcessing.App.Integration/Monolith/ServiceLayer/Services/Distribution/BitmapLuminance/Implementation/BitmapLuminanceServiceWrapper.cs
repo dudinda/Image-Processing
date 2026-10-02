@@ -1,7 +1,7 @@
 
 using System.Drawing;
 
-using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
+using ImageProcessing.App.DomainLayer.Models.Distribution.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distribution.RandomVariable.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Implementation;

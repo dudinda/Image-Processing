@@ -1,4 +1,4 @@
-using ImageProcessing.App.DomainLayer.DomainModel.Distribution.Interface;
+using ImageProcessing.App.DomainLayer.Models.Distribution.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Distribution.RandomVariable.Interface
 {

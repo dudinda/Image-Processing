@@ -1,6 +1,6 @@
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.DomainFactory.RgbFilters.Recommendation.Interface;
-using ImageProcessing.App.DomainLayer.DomainModel.Recommendation.Interface;
+using ImageProcessing.App.DomainLayer.Factories.Recommendation.Interface;
+using ImageProcessing.App.DomainLayer.Models.Recommendation.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Recommendation.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Recommendation.Implementation

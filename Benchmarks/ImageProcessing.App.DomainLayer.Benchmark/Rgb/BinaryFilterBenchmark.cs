@@ -4,21 +4,20 @@ using System.IO;
 
 using BenchmarkDotNet.Attributes;
 
-using ImageProcessing.App.DomainLayer.DomainModel.Recommendation.Implementation;
-using ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Implementation;
-using ImageProcessing.App.DomainLayer.DomainModel.Rgb.RgbFilter.Interface;
+using ImageProcessing.App.DomainLayer.Models.Recommendation.Implementation;
+using ImageProcessing.App.DomainLayer.Models.Rgb.RgbFilter.Implementation;
 
 namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Binary
 {
     [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
     public class BinaryFilterBenchmark : IDisposable
     {
-        private BinaryFilter filter = new BinaryFilter(new Rec709());
+        private BinaryFilter _filter = new BinaryFilter(new Rec709());
 
         private Bitmap _frame1920x1080;
         private Bitmap _frame2560x1440;
 
-        private int frameRate = 60;
+        private int _frameRate = 60;
 
         [GlobalSetup]
         public void Setup()
@@ -36,27 +35,27 @@ namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Binary
 
         [Benchmark]
         public Bitmap ApplyBinaryFilterTo1920x1080()
-            => filter.Filter(_frame1920x1080);
+            => _filter.Filter(_frame1920x1080);
 
         [Benchmark]
         public void ApplyBinaryFilterTo1920x1080Frame60Fps()
         {
-            for(var start = 0; start < frameRate; ++start)
+            for(var start = 0; start < _frameRate; ++start)
             {
-                filter.Filter(_frame1920x1080);
+                _filter.Filter(_frame1920x1080);
             }
         }
 
         [Benchmark]
         public Bitmap ApplyBinaryFilterTo2560x1440()
-            => filter.Filter(_frame2560x1440);
+            => _filter.Filter(_frame2560x1440);
 
         [Benchmark]
         public void ApplyBinaryFilterTo2560x1440Frame60Fps()
         {
-            for (var start = 0; start < frameRate; ++start)
+            for (var start = 0; start < _frameRate; ++start)
             {
-                filter.Filter(_frame2560x1440);
+                _filter.Filter(_frame2560x1440);
             }
         }
 
