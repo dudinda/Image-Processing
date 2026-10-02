@@ -1,4 +1,4 @@
-using ImageProcessing.App.DomainLayer.Factories.Morphology.Operator.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Morphology;
 
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Morphology.Interface
 {

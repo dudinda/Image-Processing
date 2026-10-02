@@ -1,4 +1,4 @@
-using ImageProcessing.App.DomainLayer.Factories.ColorMatrix.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Factories.ColorMatrix;
 
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.ColorMatrix.Interface
 {

@@ -1,7 +1,6 @@
 using System.Drawing;
 
 using ImageProcessing.App.PresentationLayer.Code.Enums;
-using ImageProcessing.App.ServiceLayer.Services.UndoRedo.Interface;
 using ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Safe;
 using ImageProcessing.Utility.DataStructure.FixedStackSrc.Interface;
 

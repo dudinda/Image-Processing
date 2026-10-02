@@ -1,11 +1,11 @@
 using System.Drawing;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Factories.ColorMatrix.Interface;
-using ImageProcessing.App.DomainLayer.Factories.Rgb.RgbFilter.Interface;
-using ImageProcessing.App.ServiceLayer.Providers.Rgb.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
-using ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Interface;
+using ImageProcessing.App.ServiceLayer.Providers.Rgb;
+using ImageProcessing.App.ServiceLayer.Services.Cache;
+using ImageProcessing.App.ServiceLayer.Services.ColorMatrix;
+using ImageProcessing.App.ServiceLayer.Services.Factories.ColorMatrix;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Rgb;
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Rgb.Implementation

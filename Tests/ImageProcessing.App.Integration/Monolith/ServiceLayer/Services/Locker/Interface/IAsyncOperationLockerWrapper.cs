@@ -1,4 +1,4 @@
-using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Locker;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface
 {

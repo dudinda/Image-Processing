@@ -7,7 +7,7 @@ using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Main.Int
 using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.Interface;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.ServiceLayer.Services.UndoRedo.Interface;
+using ImageProcessing.App.ServiceLayer.Services.UndoRedo;
 using ImageProcessing.App.UILayer.Controls;
 using ImageProcessing.App.UILayer.FormEventBinders.Main.Interface;
 using ImageProcessing.App.UILayer.FormExposers.Main;

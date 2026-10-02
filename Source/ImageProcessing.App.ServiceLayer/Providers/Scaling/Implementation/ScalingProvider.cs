@@ -1,9 +1,9 @@
 using System.Drawing;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Factories.Scaling.Interface;
 using ImageProcessing.App.ServiceLayer.Models.AppSettings;
-using ImageProcessing.App.ServiceLayer.Providers.Scaling.Interface;
+using ImageProcessing.App.ServiceLayer.Providers.Scaling;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Scaling;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Scaling.Implementation
 {

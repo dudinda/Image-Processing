@@ -9,7 +9,7 @@ using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Convolution.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.VisitableFactory.Convolution.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.Vistiors.Convolution.Interface;
-using ImageProcessing.App.ServiceLayer.Providers.Implementation.Convolution;
+using ImageProcessing.App.ServiceLayer.Providers.Convolution.Implementation;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Convolution.Implementation
 {

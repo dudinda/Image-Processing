@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.ServiceLayer.Code.Constants;
 using ImageProcessing.App.ServiceLayer.Models.Convolution;
-using ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation
 {

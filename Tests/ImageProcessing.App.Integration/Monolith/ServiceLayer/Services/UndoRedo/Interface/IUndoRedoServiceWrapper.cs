@@ -1,6 +1,6 @@
 using System.Drawing;
 
-using ImageProcessing.App.ServiceLayer.Services.UndoRedo.Interface;
+using ImageProcessing.App.ServiceLayer.Services.UndoRedo;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.UndoRedo.Interface
 {

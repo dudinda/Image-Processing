@@ -1,8 +1,8 @@
 using System.Drawing;
 
-using ImageProcessing.App.DomainLayer.Factories.Rotation.Interface;
 using ImageProcessing.App.ServiceLayer.Models.AppSettings;
-using ImageProcessing.App.ServiceLayer.Providers.Rotation.Interface;
+using ImageProcessing.App.ServiceLayer.Providers.Rotation;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Rotation;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Rotation.Implementation
 {

@@ -11,7 +11,7 @@ using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Show;
 using ImageProcessing.App.PresentationLayer.UnitTests.Extensions;
 using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.ServiceLayer.Services.Pipeline.Block.Implementation;
+using ImageProcessing.App.ServiceLayer.Services.Pipeline.Implementation;
 using ImageProcessing.App.UILayer.FormExposers.Main;
 using ImageProcessing.Microkernel.EntryPoint;
 

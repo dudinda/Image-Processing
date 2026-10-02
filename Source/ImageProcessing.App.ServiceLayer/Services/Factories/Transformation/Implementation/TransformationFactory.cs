@@ -2,8 +2,8 @@ using System;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Models.Transformation.Implementation;
-using ImageProcessing.App.DomainLayer.Factories.Transformation.Interface;
 using ImageProcessing.App.ServiceLayer.Models.Transformation;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Transformation;
 
 namespace ImageProcessing.App.DomainLayer.Factories.Transformation.Implementation
 {

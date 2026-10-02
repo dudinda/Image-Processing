@@ -1,4 +1,4 @@
-using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Bmp;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Bmp.Interface
 {

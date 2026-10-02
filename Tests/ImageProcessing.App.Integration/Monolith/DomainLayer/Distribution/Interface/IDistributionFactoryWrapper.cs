@@ -1,4 +1,4 @@
-using ImageProcessing.App.DomainLayer.Factories.Distribution.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Distribution;
 
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Distribution.Interface
 {

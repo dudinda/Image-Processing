@@ -1,11 +1,3 @@
-using ImageProcessing.App.DomainLayer.Factories.ColorMatrix.Interface;
-using ImageProcessing.App.DomainLayer.Factories.Convolution.Interface;
-using ImageProcessing.App.DomainLayer.Factories.Distribution.Interface;
-using ImageProcessing.App.DomainLayer.Factories.Morphology.Operator.Interface;
-using ImageProcessing.App.DomainLayer.Factories.Rgb.RgbFilter.Interface;
-using ImageProcessing.App.DomainLayer.Factories.Rotation.Interface;
-using ImageProcessing.App.DomainLayer.Factories.Scaling.Interface;
-using ImageProcessing.App.DomainLayer.Factories.Transformation.Interface;
 using ImageProcessing.App.Integration.Monolith.DomainLayer.StructuringElement.Implementation;
 using ImageProcessing.App.Integration.Monolith.DomainLayer.StructuringElement.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.ColorMatrix.Implementation;
@@ -24,6 +16,14 @@ using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLaye
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Transformation.Implementation;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Transformation.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Microkernel.MVP;
+using ImageProcessing.App.ServiceLayer.Services.Factories.ColorMatrix;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Convolution;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Distribution;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Morphology;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Rgb;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Rotation;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Scaling;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Transformation;
 using ImageProcessing.Microkernel.AppConfig;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
 

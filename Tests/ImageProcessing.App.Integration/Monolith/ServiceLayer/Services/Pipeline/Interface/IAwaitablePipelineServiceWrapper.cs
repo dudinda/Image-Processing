@@ -1,4 +1,4 @@
-using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Pipeline;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Pipeline.Interface
 {

@@ -1,7 +1,7 @@
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.VisitableFactory.Convolution.Interface;
-using ImageProcessing.App.ServiceLayer.ServiceModel.Visitable.Convolution;
-using ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.Convolution.Implementation;
+using ImageProcessing.App.ServiceLayer.Providers.Visitable.Convolution;
+using ImageProcessing.App.ServiceLayer.Providers.VisitableFactory.Convolution.Implementation;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.VisitableFactory.Convolution.Implementation
 {

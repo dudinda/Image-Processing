@@ -1,4 +1,4 @@
-using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance.Interface;
+using ImageProcessing.App.ServiceLayer.Providers.Visitors.BitmapLuminance;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.Vistiors.BitmapLuminance.Interface
 {

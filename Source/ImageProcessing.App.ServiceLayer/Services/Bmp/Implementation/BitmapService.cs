@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.ServiceLayer.Code.Constants;
-using ImageProcessing.App.ServiceLayer.Services.Bmp.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation
 {

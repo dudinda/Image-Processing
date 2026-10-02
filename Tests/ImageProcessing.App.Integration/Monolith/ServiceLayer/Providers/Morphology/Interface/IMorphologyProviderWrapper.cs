@@ -1,4 +1,4 @@
-using ImageProcessing.App.ServiceLayer.Providers.Interface.Morphology;
+using ImageProcessing.App.ServiceLayer.Providers.Morphology;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Morphology.Interface
 {

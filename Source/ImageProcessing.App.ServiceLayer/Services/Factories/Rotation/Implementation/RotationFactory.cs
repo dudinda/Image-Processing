@@ -2,8 +2,8 @@ using System;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Models.Rotation.Implementation;
-using ImageProcessing.App.DomainLayer.Factories.Rotation.Interface;
 using ImageProcessing.App.ServiceLayer.Models.Rotation;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Rotation;
 
 namespace ImageProcessing.App.DomainLayer.Factories.Rotation.Implementation
 {

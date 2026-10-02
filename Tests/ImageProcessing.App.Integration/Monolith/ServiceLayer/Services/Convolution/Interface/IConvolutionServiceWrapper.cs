@@ -1,4 +1,4 @@
-using ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Convolution;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Convolution.Interface
 {

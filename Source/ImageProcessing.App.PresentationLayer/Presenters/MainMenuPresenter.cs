@@ -11,7 +11,7 @@ using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.ServiceLayer.Services.BitmapCopyReference.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Pipeline;
 using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Interface;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;

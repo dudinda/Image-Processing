@@ -1,4 +1,4 @@
-using ImageProcessing.App.DomainLayer.Factories.Scaling.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Scaling;
 
 namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Scaling.Interface
 {

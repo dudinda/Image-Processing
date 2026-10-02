@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Locker;
 
 namespace ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Implementation
 {

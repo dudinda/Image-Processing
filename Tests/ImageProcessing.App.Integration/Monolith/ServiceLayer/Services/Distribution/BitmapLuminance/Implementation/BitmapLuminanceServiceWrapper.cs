@@ -4,8 +4,7 @@ using System.Drawing;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distribution.RandomVariable.Interface;
 using ImageProcessing.App.ServiceLayer.Models.Distribution;
-using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Implementation;
-using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Distribution.Implementation;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distribution.BitmapLuminance.Implementation
 {

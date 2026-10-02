@@ -1,9 +1,9 @@
 using System;
 using System.Drawing;
 
-using ImageProcessing.App.DomainLayer.Factories.Rgb.RgbFilter.Interface;
+using ImageProcessing.App.ServiceLayer.Services.ColorMatrix;
 using ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Implementation;
-using ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Rgb;
 
 using NSubstitute;
 

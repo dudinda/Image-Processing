@@ -6,7 +6,7 @@ using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Morphology
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Morphology.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Morphology.Interface;
-using ImageProcessing.App.ServiceLayer.Providers.Implementation.Morphology;
+using ImageProcessing.App.ServiceLayer.Providers.Morphology.Implementation;
 using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Morphology.Implementation

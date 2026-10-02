@@ -1,8 +1,8 @@
 using System.Drawing;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Factories.Transformation.Interface;
-using ImageProcessing.App.ServiceLayer.Providers.Transformation.Interface;
+using ImageProcessing.App.ServiceLayer.Providers.Transformation;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Transformation;
 
 namespace ImageProcessing.App.ServiceLayer.Providers.Transformation.Implementation
 {

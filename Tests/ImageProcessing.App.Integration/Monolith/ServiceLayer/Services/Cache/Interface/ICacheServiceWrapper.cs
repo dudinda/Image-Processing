@@ -1,6 +1,6 @@
 using System.Drawing;
 
-using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Cache;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Cache.Interface
 {

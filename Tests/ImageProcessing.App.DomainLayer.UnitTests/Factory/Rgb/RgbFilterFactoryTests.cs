@@ -1,12 +1,11 @@
 using System;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Factories.Recommendation.Interface;
-using ImageProcessing.App.DomainLayer.Factories.Rgb.Channel.Interface;
-using ImageProcessing.App.DomainLayer.Factories.Rgb.RgbFilter.Implementation;
-using ImageProcessing.App.DomainLayer.Factories.Rgb.RgbFilter.Interface;
 using ImageProcessing.App.DomainLayer.UnitTests.CaseFactory;
 using ImageProcessing.App.ServiceLayer.Models.AppSettings;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Recommendation;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Rgb;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Rgb.Implementation;
 
 using NSubstitute;
 

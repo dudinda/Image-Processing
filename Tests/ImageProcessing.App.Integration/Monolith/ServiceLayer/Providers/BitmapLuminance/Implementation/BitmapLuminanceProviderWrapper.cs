@@ -7,7 +7,7 @@ using ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.Vistior
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Distribution.Interface;
 using ImageProcessing.App.ServiceLayer.Code.Enums;
-using ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistribution;
+using ImageProcessing.App.ServiceLayer.Providers.BitmapLuminance.Implementation;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.BitmapLuminance.Implementation
 {

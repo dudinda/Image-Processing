@@ -1,14 +1,14 @@
 using System.Drawing;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Factories.Distribution.Interface;
 using ImageProcessing.App.ServiceLayer.Code.Enums;
-using ImageProcessing.App.ServiceLayer.Providers.Interface.BitmapDistribution;
-using ImageProcessing.App.ServiceLayer.ServiceModel.VisitableFactory.BitmapLuminance.Interface;
-using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
+using ImageProcessing.App.ServiceLayer.Providers.BitmapLuminance;
+using ImageProcessing.App.ServiceLayer.Providers.VisitableFactory.BitmapLuminance;
+using ImageProcessing.App.ServiceLayer.Providers.Visitors.BitmapLuminance;
+using ImageProcessing.App.ServiceLayer.Services.Distribution;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Distribution;
 
-namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.BitmapDistribution
+namespace ImageProcessing.App.ServiceLayer.Providers.BitmapLuminance.Implementation
 {
     /// <inheritdoc cref="IBitmapLuminanceProvider"/>
     public sealed class BitmapLuminanceProvider

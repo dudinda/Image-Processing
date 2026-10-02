@@ -1,4 +1,4 @@
-using ImageProcessing.App.DomainLayer.Factories.Morphology.StructuringElement.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Morphology;
 
 namespace ImageProcessing.App.Integration.Monolith.DomainLayer.StructuringElement.Interface
 {

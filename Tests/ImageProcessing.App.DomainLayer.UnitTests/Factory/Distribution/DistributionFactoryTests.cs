@@ -2,8 +2,8 @@ using System;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
 using ImageProcessing.App.DomainLayer.Factories.Distribution.Implementation;
-using ImageProcessing.App.DomainLayer.Factories.Distribution.Interface;
 using ImageProcessing.App.DomainLayer.UnitTests.CaseFactory;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Distribution;
 
 using NUnit.Framework;
 

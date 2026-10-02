@@ -1,4 +1,4 @@
-using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.Convolution.Interface;
+using ImageProcessing.App.ServiceLayer.Providers.Visitors.Convolution;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.Vistiors.Convolution.Interface
 {

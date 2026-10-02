@@ -4,7 +4,6 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.ServiceLayer.Code.Constants;
-using ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Interface;
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
 namespace ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Implementation

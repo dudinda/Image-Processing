@@ -2,7 +2,7 @@ using System.Drawing;
 
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.Vistiors.BitmapLuminance.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
-using ImageProcessing.App.ServiceLayer.ServiceModel.Visitors.BitmapLuminance.Implementation;
+using ImageProcessing.App.ServiceLayer.Providers.Visitors.BitmapLuminance.Implementation;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.Vistiors.BitmapLuminance.Implementation
 {

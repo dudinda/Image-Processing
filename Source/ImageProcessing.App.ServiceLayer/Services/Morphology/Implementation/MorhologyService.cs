@@ -1,7 +1,6 @@
 using System.Drawing;
 
 using ImageProcessing.App.ServiceLayer.Models.Morphology;
-using ImageProcessing.App.ServiceLayer.Services.Morphology.Interface;
 using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Morphology.Implementation

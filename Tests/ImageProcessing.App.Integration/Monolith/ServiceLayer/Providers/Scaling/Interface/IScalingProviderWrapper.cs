@@ -1,4 +1,4 @@
-using ImageProcessing.App.ServiceLayer.Providers.Scaling.Interface;
+using ImageProcessing.App.ServiceLayer.Providers.Scaling;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Scaling.Interface
 {

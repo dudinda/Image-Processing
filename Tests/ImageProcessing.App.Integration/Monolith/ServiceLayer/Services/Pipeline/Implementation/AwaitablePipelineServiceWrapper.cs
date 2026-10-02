@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Pipeline.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Pipeline;
-using ImageProcessing.App.ServiceLayer.Services.Pipeline.Awaitable.Implementation;
+using ImageProcessing.App.ServiceLayer.Services.Pipeline.Implementation;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Pipeline.Implementation
 {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
 
-using ImageProcessing.App.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
+using ImageProcessing.App.ServiceLayer.Services.Distribution;
 using ImageProcessing.App.ServiceLayer.Win.Builders.ChartBuilder.Interface;
 using ImageProcessing.App.ServiceLayer.Win.Services.QualityMeasure.Interface;
 

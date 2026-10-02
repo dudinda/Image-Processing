@@ -6,8 +6,8 @@ using BenchmarkDotNet.Attributes;
 
 using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.Blur.GaussianBlur;
 using ImageProcessing.App.ServiceLayer.Models.Convolution;
+using ImageProcessing.App.ServiceLayer.Services.Convolution;
 using ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation;
-using ImageProcessing.App.ServiceLayer.Services.ConvolutionFilterServices.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Benchmark.Services.Convolution.Kernel5x5
 {

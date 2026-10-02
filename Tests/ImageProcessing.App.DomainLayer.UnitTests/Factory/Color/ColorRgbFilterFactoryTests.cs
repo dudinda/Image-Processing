@@ -1,9 +1,9 @@
 using System;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Factories.Rgb.Channel.Implementation;
-using ImageProcessing.App.DomainLayer.Factories.Rgb.Channel.Interface;
 using ImageProcessing.App.DomainLayer.UnitTests.CaseFactory;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Rgb;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Rgb.Implementation;
 
 using NUnit.Framework;
 

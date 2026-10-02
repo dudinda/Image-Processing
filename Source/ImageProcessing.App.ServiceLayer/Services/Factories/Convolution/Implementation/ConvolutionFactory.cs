@@ -8,8 +8,8 @@ using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.EdgeDete
 using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.EdgeDetection.SobelOperator;
 using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.Emboss;
 using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.Sharpen;
-using ImageProcessing.App.DomainLayer.Factories.Convolution.Interface;
 using ImageProcessing.App.ServiceLayer.Models.Convolution;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Convolution;
 
 namespace ImageProcessing.App.DomainLayer.Factories.Convolution.Implementation
 {

@@ -1,14 +1,13 @@
 using System.Drawing;
 
 using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Factories.Morphology.Operator.Interface;
-using ImageProcessing.App.DomainLayer.Factories.Morphology.StructuringElement.Interface;
-using ImageProcessing.App.ServiceLayer.Providers.Interface.Morphology;
-using ImageProcessing.App.ServiceLayer.Services.Cache.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Morphology.Interface;
+using ImageProcessing.App.ServiceLayer.Providers.Morphology;
+using ImageProcessing.App.ServiceLayer.Services.Cache;
+using ImageProcessing.App.ServiceLayer.Services.Factories.Morphology;
+using ImageProcessing.App.ServiceLayer.Services.Morphology;
 using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
-namespace ImageProcessing.App.ServiceLayer.Providers.Implementation.Morphology
+namespace ImageProcessing.App.ServiceLayer.Providers.Morphology.Implementation
 {
     /// <inheritdoc cref="IMorphologyProvider"/>
     public sealed class MorphologyProvider : IMorphologyProvider
