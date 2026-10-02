@@ -10,9 +10,9 @@ using ImageProcessing.App.UI.Properties;
 using ImageProcessing.App.UI.Services.Factories.MenuState;
 using ImageProcessing.App.UI.Services.FormEventBinders.Main;
 using ImageProcessing.App.UI.Services.FormExposers;
-using ImageProcessing.Utility.Interop.Wrapper;
 
 using MetroFramework.Controls;
+using ImageProcessing.Utility.Interop.Models.Wrapper;
 
 namespace ImageProcessing.App.UI.Forms.Main
 {

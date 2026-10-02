@@ -1,11 +1,11 @@
 using System;
 using System.Text;
 
-using ImageProcessing.Utility.Interop.Api;
 using ImageProcessing.Utility.Interop.Code.Enums;
 using ImageProcessing.Utility.Interop.Code.Extensions;
+using ImageProcessing.Utility.Interop.Services.Api;
 
-namespace ImageProcessing.Utility.Interop.Wrapper
+namespace ImageProcessing.Utility.Interop.Models.Wrapper
 {
     public static class Dialog
     {

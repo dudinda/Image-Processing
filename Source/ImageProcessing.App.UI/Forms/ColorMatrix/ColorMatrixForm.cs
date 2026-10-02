@@ -9,9 +9,9 @@ using ImageProcessing.App.UI.Code.Extensions;
 using ImageProcessing.App.UI.Services.FormEventBinders.ColorMatrix;
 using ImageProcessing.App.UI.Services.FormExposers;
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
-using ImageProcessing.Utility.Interop.Wrapper;
 
 using MetroFramework.Controls;
+using ImageProcessing.Utility.Interop.Models.Wrapper;
 
 namespace ImageProcessing.App.UI.Forms.ColorMatrix
 {

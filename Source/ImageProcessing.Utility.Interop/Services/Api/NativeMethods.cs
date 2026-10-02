@@ -4,7 +4,7 @@ using System.Text;
 
 using ImageProcessing.Utility.Interop.Code.Structs;
 
-namespace ImageProcessing.Utility.Interop.Api
+namespace ImageProcessing.Utility.Interop.Services.Api
 {
     /// <summary>
     /// Provides an API from windows kernel

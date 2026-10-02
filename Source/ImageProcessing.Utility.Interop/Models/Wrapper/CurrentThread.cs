@@ -1,6 +1,6 @@
-using ImageProcessing.Utility.Interop.Api;
+using ImageProcessing.Utility.Interop.Services.Api;
 
-namespace ImageProcessing.Utility.Interop.Wrapper
+namespace ImageProcessing.Utility.Interop.Models.Wrapper
 {
     /// <summary>
     /// Provides a wrapper over the native windows kernel

@@ -40,8 +40,7 @@
   </ItemGroup>
    
   <ItemGroup>
-    <ProjectReference Include="..\ImageProcessing.Utility.DataStructure\ImageProcessing.Utility.DataStructure.csproj" />
-    <ProjectReference Include="..\ImageProcessing.Utility.DecimalMath\ImageProcessing.Utility.DecimalMath.csproj" />
+    <ProjectReference Include="..\ImageProcessing.Utility\ImageProcessing.Utility.csproj" />
   </ItemGroup>
 
 </Project>

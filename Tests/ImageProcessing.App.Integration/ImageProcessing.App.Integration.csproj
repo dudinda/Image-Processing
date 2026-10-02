@@ -306,9 +306,9 @@
       <Project>{e547bf84-7467-4aa0-a836-84beab772924}</Project>
       <Name>ImageProcessing.Microkernel.MVP</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.Utility.DataStructure\ImageProcessing.Utility.DataStructure.csproj">
-      <Project>{a843b66d-ba38-4568-93f0-a6a577167273}</Project>
-      <Name>ImageProcessing.Utility.DataStructure</Name>
+    <ProjectReference Include="..\..\Source\ImageProcessing.Utility\ImageProcessing.Utility.csproj">
+      <Project>{CEE7A90A-78C5-4065-A76D-16DC7430C95A}</Project>
+      <Name>ImageProcessing.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

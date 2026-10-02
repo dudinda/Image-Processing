@@ -7,11 +7,11 @@ using ImageProcessing.App.Domain.Win.Code.Extensions;
 using ImageProcessing.App.UI.Code.Extensions;
 using ImageProcessing.App.UI.Services.FormEventBinders.Rgb;
 using ImageProcessing.App.UI.Services.FormExposers;
-using ImageProcessing.Utility.Interop.Wrapper;
 
 using MetroFramework.Controls;
 
 using static ImageProcessing.App.Domain.Code.Enums.RgbChannels;
+using ImageProcessing.Utility.Interop.Models.Wrapper;
 
 namespace ImageProcessing.App.UI.Forms.Rgb
 {
