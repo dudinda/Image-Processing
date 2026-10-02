@@ -1,9 +1,9 @@
 using System.Diagnostics;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
-using ImageProcessing.App.ServiceLayer.Win.Services.Logger.Implementation;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Logger.Interface;
+using ImageProcessing.App.Domain.Win.Services.Logger.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.Logger.Implementation
 {
     internal class LoggerServiceWrapper : ILoggerServiceWrapper
     {

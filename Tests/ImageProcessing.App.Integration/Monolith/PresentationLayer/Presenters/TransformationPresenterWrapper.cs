@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Transformation.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Providers.Transformation.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.TransformationArgs;
 using ImageProcessing.App.PresentationLayer.Presenters;

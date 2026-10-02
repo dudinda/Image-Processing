@@ -1,10 +1,10 @@
 using System;
 using System.Drawing;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.UndoRedo.Interface;
-using ImageProcessing.App.ServiceLayer.Services.UndoRedo.Implementation;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.UndoRedo.Interface;
+using ImageProcessing.App.Domain.Services.UndoRedo.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.UndoRedo.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.UndoRedo.Implementation
 {
     public class UndoRedoServiceWrapper : IUndoRedoServiceWrapper
     {

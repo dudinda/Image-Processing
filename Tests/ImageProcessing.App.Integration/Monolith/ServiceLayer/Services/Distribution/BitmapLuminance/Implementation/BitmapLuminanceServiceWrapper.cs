@@ -1,12 +1,12 @@
 
 using System.Drawing;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distribution.RandomVariable.Interface;
-using ImageProcessing.App.ServiceLayer.Models.Distribution;
-using ImageProcessing.App.ServiceLayer.Services.Distribution.Implementation;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Distribution.BitmapLuminance.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Distribution.RandomVariable.Interface;
+using ImageProcessing.App.Domain.Models.Distribution;
+using ImageProcessing.App.Domain.Services.Distribution.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distribution.BitmapLuminance.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.Distribution.BitmapLuminance.Implementation
 {
     internal class BitmapLuminanceServiceWrapper : IBitmapLuminanceServiceWrapper
     {

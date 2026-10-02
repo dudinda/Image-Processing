@@ -1,6 +1,6 @@
-using ImageProcessing.App.ServiceLayer.Services.StaTask;
+using ImageProcessing.App.Domain.Services.StaTask;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.StaTask.Interface
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.StaTask.Interface
 {
     internal interface IStaTaskServiceWrapper : IStaTaskService
     {

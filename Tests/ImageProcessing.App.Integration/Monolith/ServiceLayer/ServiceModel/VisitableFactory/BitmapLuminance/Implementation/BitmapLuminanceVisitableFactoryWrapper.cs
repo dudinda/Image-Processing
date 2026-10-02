@@ -1,9 +1,9 @@
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.VisitableFactory.BitmapLuminance.Interface;
-using ImageProcessing.App.ServiceLayer.Code.Enums;
-using ImageProcessing.App.ServiceLayer.Providers.Visitable.BitmapLuminance;
-using ImageProcessing.App.ServiceLayer.Providers.VisitableFactory.BitmapLuminance.Implementation;
+using ImageProcessing.App.Integration.Monolith.Domain.ServiceModel.VisitableFactory.BitmapLuminance.Interface;
+using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.Domain.Providers.Visitable.BitmapLuminance;
+using ImageProcessing.App.Domain.Providers.VisitableFactory.BitmapLuminance.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.VisitableFactory.BitmapLuminance.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.ServiceModel.VisitableFactory.BitmapLuminance.Implementation
 {
     internal class BitmapLuminanceVisitableFactoryWrapper : IBitmapLuminanceVisitableFactoryWrapper
     {

@@ -1,10 +1,10 @@
 using System;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.StaTask.Interface;
-using ImageProcessing.App.ServiceLayer.Services.StaTask;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.StaTask.Interface;
+using ImageProcessing.App.Domain.Services.StaTask;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.StaTask.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.StaTask.Implementation
 {
     internal class StaTaskServiceWrapper : IStaTaskServiceWrapper
     {

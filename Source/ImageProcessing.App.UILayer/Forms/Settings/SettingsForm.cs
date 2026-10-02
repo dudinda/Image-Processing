@@ -1,8 +1,8 @@
 using System.Windows.Forms;
 
-using ImageProcessing.App.ServiceLayer.Code.Enums;
+using ImageProcessing.App.Domain.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.ServiceLayer.Win.Code.Extensions;
+using ImageProcessing.App.Domain.Win.Code.Extensions;
 using ImageProcessing.App.UILayer.Code.Extensions;
 using ImageProcessing.App.UILayer.Services.FormEventBinders.Settings;
 using ImageProcessing.App.UILayer.Services.FormExposers;

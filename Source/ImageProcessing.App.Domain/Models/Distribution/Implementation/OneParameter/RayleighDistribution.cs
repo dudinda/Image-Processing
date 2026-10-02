@@ -1,0 +1,69 @@
+using System;
+
+using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.Domain.Code.Extensions.StringExt;
+using ImageProcessing.App.Domain.Models.Distribution;
+using ImageProcessing.Utility.DecimalMath.Real;
+
+namespace ImageProcessing.App.Domain.Models.Distribution.Implementation.OneParameter
+{
+    /// <summary>
+    /// Implements the <see cref="IDistribution"/>.
+    /// </summary>
+    public sealed class RayleighDistribution : IDistribution
+    {
+        private readonly DecimalReal _math = new DecimalReal();
+
+        private decimal _sigma;
+
+        public RayleighDistribution()
+        {
+
+        }
+
+        public RayleighDistribution(decimal sigma)
+        {
+            _sigma = sigma;
+        }
+
+        /// <inheritdoc/>
+        public string Name => nameof(PrDistribution.Rayleigh);
+
+        /// <inheritdoc/>
+        public decimal FirstParameter => _sigma;
+
+        /// <inheritdoc/>
+        public decimal SecondParameter => throw new NotSupportedException();
+
+        /// <inheritdoc/>
+        public decimal GetMean() => _sigma * _math.Sqrt(DecimalReal.PiOver2);
+
+        /// <inheritdoc/>
+        public decimal GetVariance() => (2M - DecimalReal.PiOver2) * _sigma * _sigma;
+
+        /// <inheritdoc/>
+        public bool Quantile(decimal p, out decimal quantile)
+        {
+            if (p >= 0 && p < 1)
+            {
+                quantile = _sigma * _math.Sqrt(-2M * _math.Log(1M - p));
+                return true;
+            }
+
+            quantile = 0;
+
+            return false;
+        }
+
+        /// <inheritdoc/>
+        public IDistribution SetParams((string First, string Second) parms)
+        {
+            if (!parms.First.TryParse(out _sigma))
+            {
+                throw new ArgumentException(nameof(parms.First));
+            }
+   
+            return this;
+        }
+    }
+}

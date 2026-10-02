@@ -1,6 +1,6 @@
-using ImageProcessing.App.ServiceLayer.Providers.Scaling;
+using ImageProcessing.App.Domain.Providers.Scaling;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Scaling.Interface
+namespace ImageProcessing.App.Integration.Monolith.Domain.Providers.Scaling.Interface
 {
     internal interface IScalingProviderWrapper : IScalingProvider
     {

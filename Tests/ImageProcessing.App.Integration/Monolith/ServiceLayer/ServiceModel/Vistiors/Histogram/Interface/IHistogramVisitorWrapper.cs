@@ -1,6 +1,6 @@
-using ImageProcessing.App.ServiceLayer.Win.Providers.Visitors.Histogram;
+using ImageProcessing.App.Domain.Win.Providers.Visitors.Histogram;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.Vistiors.Histogram.Interface
+namespace ImageProcessing.App.Integration.Monolith.Domain.ServiceModel.Vistiors.Histogram.Interface
 {
     internal interface IHistogramVisitorWrapper : IHistogramVisitor
     {

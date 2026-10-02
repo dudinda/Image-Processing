@@ -1,6 +1,6 @@
-using ImageProcessing.App.ServiceLayer.Win.Services.Histogram;
+using ImageProcessing.App.Domain.Win.Services.Histogram;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Histogram.Interface
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.Histogram.Interface
 {
     internal interface IHistogramServiceWrapper : IHistogramService
     {

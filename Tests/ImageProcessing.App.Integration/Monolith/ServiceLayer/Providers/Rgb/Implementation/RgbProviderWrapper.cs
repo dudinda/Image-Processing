@@ -1,16 +1,16 @@
 using System;
 using System.Drawing;
 
-using ImageProcessing.App.ServiceLayer.Code.Enums;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Rgb.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Cache.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.ColorMatrix.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Rgb.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Services.ColorMatrix.Interface;
-using ImageProcessing.App.ServiceLayer.Providers.Rgb.Implementation;
+using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.Integration.Monolith.Domain.Providers.Rgb.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Cache.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.ColorMatrix.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Rgb.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Services.ColorMatrix.Interface;
+using ImageProcessing.App.Domain.Providers.Rgb.Implementation;
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Rgb.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.Providers.Rgb.Implementation
 {
     internal class RgbProviderWrapper : IRgbProviderWrapper
     {

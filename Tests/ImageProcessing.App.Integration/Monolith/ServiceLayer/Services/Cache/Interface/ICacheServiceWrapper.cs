@@ -1,8 +1,8 @@
 using System.Drawing;
 
-using ImageProcessing.App.ServiceLayer.Services.Cache;
+using ImageProcessing.App.Domain.Services.Cache;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Cache.Interface
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.Cache.Interface
 {
     internal interface ICacheServiceWrapper : ICacheService<Bitmap>
     {

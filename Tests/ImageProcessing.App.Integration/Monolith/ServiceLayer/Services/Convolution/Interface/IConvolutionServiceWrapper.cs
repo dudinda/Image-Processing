@@ -1,6 +1,6 @@
-using ImageProcessing.App.ServiceLayer.Services.Convolution;
+using ImageProcessing.App.Domain.Services.Convolution;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Convolution.Interface
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.Convolution.Interface
 {
     internal interface IConvolutionServiceWrapper : IConvolutionService
     {

@@ -8,8 +8,8 @@ using ImageProcessing.App.UILayer.Services.FormExposers;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 
 using static ImageProcessing.App.PresentationLayer.Code.Enums.ImageContainer;
-using static ImageProcessing.App.ServiceLayer.Code.Enums.RndFunction;
-using static ImageProcessing.App.ServiceLayer.Code.Enums.RndInfo;
+using static ImageProcessing.App.Domain.Code.Enums.RndFunction;
+using static ImageProcessing.App.Domain.Code.Enums.RndInfo;
 
 namespace ImageProcessing.App.UILayer.Services.FormEventBinders.Distribution.Implementation
 {

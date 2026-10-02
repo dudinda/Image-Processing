@@ -1,11 +1,11 @@
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Rgb.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Providers.Rgb.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.ColorMatrixArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.ColorMatrix.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.ColorMatrix.Interface;
 using ImageProcessing.App.PresentationLayer.Presenters;
 using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;

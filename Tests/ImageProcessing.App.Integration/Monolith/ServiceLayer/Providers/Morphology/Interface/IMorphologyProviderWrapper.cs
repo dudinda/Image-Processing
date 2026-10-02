@@ -1,6 +1,6 @@
-using ImageProcessing.App.ServiceLayer.Providers.Morphology;
+using ImageProcessing.App.Domain.Providers.Morphology;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Morphology.Interface
+namespace ImageProcessing.App.Integration.Monolith.Domain.Providers.Morphology.Interface
 {
     internal interface IMorphologyProviderWrapper : IMorphologyProvider
     {

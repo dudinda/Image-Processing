@@ -1,11 +1,11 @@
 using System.Drawing;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
-using ImageProcessing.App.ServiceLayer.Services.BitmapCopyReference.Implementation;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Locker.Interface;
+using ImageProcessing.App.Domain.Services.BitmapCopyReference.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Implementation
 {
     internal class BitmapCopyServiceWrapper : IBitmapCopyServiceWrapper
     {

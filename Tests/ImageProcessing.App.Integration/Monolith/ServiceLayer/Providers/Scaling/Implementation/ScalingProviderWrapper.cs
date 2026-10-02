@@ -1,12 +1,12 @@
 using System.Drawing;
 
-using ImageProcessing.App.ServiceLayer.Code.Enums;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Scaling.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Scaling.Interface;
-using ImageProcessing.App.ServiceLayer.Models.AppSettings;
-using ImageProcessing.App.ServiceLayer.Providers.Scaling.Implementation;
+using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.Integration.Monolith.Domain.Providers.Scaling.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Scaling.Interface;
+using ImageProcessing.App.Domain.Models.AppSettings;
+using ImageProcessing.App.Domain.Providers.Scaling.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Scaling.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.Providers.Scaling.Implementation
 {
     internal class ScalingProviderWrapper : IScalingProviderWrapper
     {

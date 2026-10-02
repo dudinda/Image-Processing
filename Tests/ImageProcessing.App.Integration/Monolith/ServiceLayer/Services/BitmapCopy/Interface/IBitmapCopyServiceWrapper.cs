@@ -1,7 +1,7 @@
 
-using ImageProcessing.App.ServiceLayer.Services.BitmapCopyReference.Interface;
+using ImageProcessing.App.Domain.Services.BitmapCopyReference.Interface;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Interface
 {
     internal interface IBitmapCopyServiceWrapper : IBitmapCopyService
     {

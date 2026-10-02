@@ -11,11 +11,11 @@ using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.ServiceLayer.Providers.BitmapLuminance;
-using ImageProcessing.App.ServiceLayer.Services.BitmapCopyReference.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Bmp;
-using ImageProcessing.App.ServiceLayer.Services.Pipeline.Implementation;
-using ImageProcessing.App.ServiceLayer.Win.Services.Logger;
+using ImageProcessing.App.Domain.Providers.BitmapLuminance;
+using ImageProcessing.App.Domain.Services.BitmapCopyReference.Interface;
+using ImageProcessing.App.Domain.Services.Bmp;
+using ImageProcessing.App.Domain.Services.Pipeline.Implementation;
+using ImageProcessing.App.Domain.Win.Services.Logger;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 

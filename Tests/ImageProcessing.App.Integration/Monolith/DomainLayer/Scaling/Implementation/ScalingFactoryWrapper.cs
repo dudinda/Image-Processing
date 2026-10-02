@@ -1,9 +1,9 @@
-using ImageProcessing.App.ServiceLayer.Code.Enums;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Scaling.Interface;
-using ImageProcessing.App.ServiceLayer.Models.Scaling;
-using ImageProcessing.App.ServiceLayer.Services.Factories.Scaling;
+using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Scaling.Interface;
+using ImageProcessing.App.Domain.Models.Scaling;
+using ImageProcessing.App.Domain.Services.Factories.Scaling;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Scaling.Implementation
+namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Scaling.Implementation
 {
     internal class ScalingFactoryWrapper : IScalingFactoryWrapper
     {

@@ -1,0 +1,14 @@
+namespace ImageProcessing.App.Domain.Models.Rgb
+{
+    /// <summary>
+    /// Specifies a channel of an RGB pixel.
+    /// </summary>
+    public interface IChannel
+    {
+        /// <summary>
+        /// Change the source pixel rgb components.
+        /// </summary>
+        /// <param name="pixelPtr">The source pixel.</param>
+        unsafe void GetChannel(byte* pixelPtr);
+    }
+}

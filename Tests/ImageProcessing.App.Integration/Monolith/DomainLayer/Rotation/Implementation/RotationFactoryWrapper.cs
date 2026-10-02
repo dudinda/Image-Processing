@@ -1,9 +1,9 @@
-using ImageProcessing.App.ServiceLayer.Code.Enums;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Rotation.Interface;
-using ImageProcessing.App.ServiceLayer.Models.Rotation;
-using ImageProcessing.App.ServiceLayer.Services.Factories.Rotation;
+using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Rotation.Interface;
+using ImageProcessing.App.Domain.Models.Rotation;
+using ImageProcessing.App.Domain.Services.Factories.Rotation;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Rotation.Implementation
+namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Rotation.Implementation
 {
     internal class RotationFactoryWrapper : IRotationFactoryWrapper
     {

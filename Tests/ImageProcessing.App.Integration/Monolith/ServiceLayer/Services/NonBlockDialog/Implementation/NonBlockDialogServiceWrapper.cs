@@ -1,9 +1,9 @@
 using System.Drawing;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.FileDialog.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.NonBlockDialog.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.StaTask.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.FileDialog.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.NonBlockDialog.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.StaTask.Interface;
 
 namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Services
 {

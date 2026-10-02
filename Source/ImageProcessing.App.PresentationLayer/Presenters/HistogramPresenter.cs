@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.ServiceLayer.Win.Services.Histogram;
+using ImageProcessing.App.Domain.Win.Services.Histogram;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
 namespace ImageProcessing.App.PresentationLayer.Presenters

@@ -1,11 +1,11 @@
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Rotation.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Scaling.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.NonBlockDialog.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Pipeline.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Providers.Rotation.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Providers.Scaling.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Logger.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.NonBlockDialog.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Pipeline.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Container;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.FileDialog;

@@ -1,15 +1,15 @@
 using System.Drawing;
 
-using ImageProcessing.App.ServiceLayer.Code.Enums;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.StructuringElement.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Morphology.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Cache.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Morphology.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Morphology.Interface;
-using ImageProcessing.App.ServiceLayer.Providers.Morphology.Implementation;
+using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.Integration.Monolith.Domain.StructuringElement.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Providers.Morphology.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Cache.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Morphology.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Morphology.Interface;
+using ImageProcessing.App.Domain.Providers.Morphology.Implementation;
 using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Morphology.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.Providers.Morphology.Implementation
 {
     internal class MorphologyProviderWrapper : IMorphologyProviderWrapper
     {

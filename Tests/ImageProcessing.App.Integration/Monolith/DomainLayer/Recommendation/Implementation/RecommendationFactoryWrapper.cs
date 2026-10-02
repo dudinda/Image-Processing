@@ -1,9 +1,9 @@
-using ImageProcessing.App.ServiceLayer.Code.Enums;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Recommendation.Interface;
-using ImageProcessing.App.ServiceLayer.Models.Recommendation;
-using ImageProcessing.App.ServiceLayer.Services.Factories.Recommendation;
+using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Recommendation.Interface;
+using ImageProcessing.App.Domain.Models.Recommendation;
+using ImageProcessing.App.Domain.Services.Factories.Recommendation;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Recommendation.Implementation
+namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Recommendation.Implementation
 {
     internal class RecommendationFactoryWrapper : IRecommendationFactoryWrapper
     {

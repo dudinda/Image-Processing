@@ -1,12 +1,12 @@
 using System;
 using System.Drawing;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Morphology.Interface;
-using ImageProcessing.App.ServiceLayer.Models.Morphology;
-using ImageProcessing.App.ServiceLayer.Services.Morphology.Implementation;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Morphology.Interface;
+using ImageProcessing.App.Domain.Models.Morphology;
+using ImageProcessing.App.Domain.Services.Morphology.Implementation;
 using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Morphology.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.Morphology.Implementation
 {
     internal class MorphologyServiceWrapper : IMorphologyServiceWrapper
     {

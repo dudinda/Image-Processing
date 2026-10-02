@@ -1,10 +1,10 @@
 
-using ImageProcessing.App.ServiceLayer.Code.Enums;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.StructuringElement.Interface;
-using ImageProcessing.App.ServiceLayer.Models.Morphology;
-using ImageProcessing.App.ServiceLayer.Services.Factories.Morphology.Implementation;
+using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.Integration.Monolith.Domain.StructuringElement.Interface;
+using ImageProcessing.App.Domain.Models.Morphology;
+using ImageProcessing.App.Domain.Services.Factories.Morphology.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.StructuringElement.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.StructuringElement.Implementation
 {
     internal class StructuringElementFactoryWrapper : IStructuringElementFactoryWrapper
     {

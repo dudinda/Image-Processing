@@ -1,10 +1,10 @@
 using System;
 using System.Drawing;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Cache.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Cache.Implementation;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Cache.Interface;
+using ImageProcessing.App.Domain.Services.Cache.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Cache.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.Cache.Implementation
 {
     internal class CacheServiceWrapper : ICacheServiceWrapper
     {

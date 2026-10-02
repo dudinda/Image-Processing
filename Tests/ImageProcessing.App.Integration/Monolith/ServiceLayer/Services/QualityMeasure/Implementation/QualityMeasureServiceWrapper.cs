@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.ChartSeries.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.QualityMeasure.Interface;
-using ImageProcessing.App.ServiceLayer.Win.Services.QualityMeasure.Implementation;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.ChartSeries.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Distribution.BitmapLuminance.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.QualityMeasure.Interface;
+using ImageProcessing.App.Domain.Win.Services.QualityMeasure.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.QualityMeasure.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.QualityMeasure.Implementation
 {
     internal class QualityMeasureServiceWrapper : IQualityMeasureServiceWrapper
     {

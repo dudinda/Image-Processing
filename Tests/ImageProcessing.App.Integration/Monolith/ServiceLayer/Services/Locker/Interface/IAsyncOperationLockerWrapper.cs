@@ -1,6 +1,6 @@
-using ImageProcessing.App.ServiceLayer.Services.Locker;
+using ImageProcessing.App.Domain.Services.Locker;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.Locker.Interface
 {
     internal interface IAsyncOperationLockerWrapper : IAsyncOperationLocker
     {

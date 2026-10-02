@@ -1,6 +1,6 @@
-using ImageProcessing.App.ServiceLayer.Services.Factories.Convolution;
+using ImageProcessing.App.Domain.Services.Factories.Convolution;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Convolution.Interface
+namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Convolution.Interface
 {
     internal interface IConvolutionFactoryWrapper : IConvolutionFactory
     {

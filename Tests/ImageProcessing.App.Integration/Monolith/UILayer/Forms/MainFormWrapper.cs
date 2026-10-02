@@ -2,12 +2,12 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.UndoRedo.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.UndoRedo.Interface;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Main.Interface;
 using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.Interface;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.ServiceLayer.Services.UndoRedo;
+using ImageProcessing.App.Domain.Services.UndoRedo;
 using ImageProcessing.App.UILayer.Forms.Main;
 using ImageProcessing.App.UILayer.Models.Controls;
 using ImageProcessing.App.UILayer.Services.Factories.MenuState;

@@ -1,6 +1,6 @@
-using ImageProcessing.App.ServiceLayer.Win.Services.Logger;
+using ImageProcessing.App.Domain.Win.Services.Logger;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.Logger.Interface
 {
     internal interface ILoggerServiceWrapper : ILoggerService
     {

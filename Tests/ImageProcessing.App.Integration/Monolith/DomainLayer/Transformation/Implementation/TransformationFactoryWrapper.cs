@@ -1,9 +1,9 @@
-using ImageProcessing.App.ServiceLayer.Code.Enums;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Transformation.Interface;
-using ImageProcessing.App.ServiceLayer.Models.Transformation;
-using ImageProcessing.App.ServiceLayer.Services.Factories.Transformation;
+using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Transformation.Interface;
+using ImageProcessing.App.Domain.Models.Transformation;
+using ImageProcessing.App.Domain.Services.Factories.Transformation;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Transformation.Implementation
+namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Transformation.Implementation
 {
     internal class TransformationFactoryWrapper : ITransformationFactoryWrapper
     {

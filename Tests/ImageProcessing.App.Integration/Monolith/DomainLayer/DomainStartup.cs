@@ -1,35 +1,35 @@
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.StructuringElement.Implementation;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.StructuringElement.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.ColorMatrix.Implementation;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.ColorMatrix.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Convolution.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Distribution.Implementation;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Distribution.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Morphology.Implementation;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Morphology.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Rgb.Implementation;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Rgb.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Rotation.Implementation;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Rotation.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Scaling.Implementation;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Scaling.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Transformation.Implementation;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Transformation.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.StructuringElement.Implementation;
+using ImageProcessing.App.Integration.Monolith.Domain.StructuringElement.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.ColorMatrix.Implementation;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.ColorMatrix.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Convolution.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Distribution.Implementation;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Distribution.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Morphology.Implementation;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Morphology.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Rgb.Implementation;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Rgb.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Rotation.Implementation;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Rotation.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Scaling.Implementation;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Scaling.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Transformation.Implementation;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Transformation.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Microkernel.MVP;
-using ImageProcessing.App.ServiceLayer.Services.Factories.ColorMatrix;
-using ImageProcessing.App.ServiceLayer.Services.Factories.Convolution;
-using ImageProcessing.App.ServiceLayer.Services.Factories.Distribution;
-using ImageProcessing.App.ServiceLayer.Services.Factories.Morphology;
-using ImageProcessing.App.ServiceLayer.Services.Factories.Rgb;
-using ImageProcessing.App.ServiceLayer.Services.Factories.Rotation;
-using ImageProcessing.App.ServiceLayer.Services.Factories.Scaling;
-using ImageProcessing.App.ServiceLayer.Services.Factories.Transformation;
+using ImageProcessing.App.Domain.Services.Factories.ColorMatrix;
+using ImageProcessing.App.Domain.Services.Factories.Convolution;
+using ImageProcessing.App.Domain.Services.Factories.Distribution;
+using ImageProcessing.App.Domain.Services.Factories.Morphology;
+using ImageProcessing.App.Domain.Services.Factories.Rgb;
+using ImageProcessing.App.Domain.Services.Factories.Rotation;
+using ImageProcessing.App.Domain.Services.Factories.Scaling;
+using ImageProcessing.App.Domain.Services.Factories.Transformation;
 using ImageProcessing.Microkernel.AppConfig;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
 using NSubstitute;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer
+namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain
 {
     internal sealed class DomainStartup : IStartup
     {

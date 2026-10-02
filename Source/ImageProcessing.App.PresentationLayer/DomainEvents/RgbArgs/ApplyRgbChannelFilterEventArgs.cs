@@ -1,4 +1,4 @@
-using ImageProcessing.App.ServiceLayer.Code.Enums;
+using ImageProcessing.App.Domain.Code.Enums;
 
 namespace ImageProcessing.App.PresentationLayer.DomainEvents.RgbArgs
 {

@@ -1,6 +1,6 @@
-using ImageProcessing.App.ServiceLayer.Providers.VisitableFactory.Convolution;
+using ImageProcessing.App.Domain.Providers.VisitableFactory.Convolution;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.VisitableFactory.Convolution.Interface
+namespace ImageProcessing.App.Integration.Monolith.Domain.ServiceModel.VisitableFactory.Convolution.Interface
 {
     internal interface IConvolutionVisitableFactoryWrapper : ICovolutionVisitableFactory
     {

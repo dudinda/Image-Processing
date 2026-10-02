@@ -1,10 +1,10 @@
 using System.Drawing;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Convolution.Interface;
-using ImageProcessing.App.ServiceLayer.Models.Convolution;
-using ImageProcessing.App.ServiceLayer.Services.Convolution.Implementation;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Convolution.Interface;
+using ImageProcessing.App.Domain.Models.Convolution;
+using ImageProcessing.App.Domain.Services.Convolution.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Convolution.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.Convolution.Implementation
 {
     internal class ConvolutionServiceWrapper : IConvolutionServiceWrapper
     {

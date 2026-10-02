@@ -1,6 +1,6 @@
-using ImageProcessing.App.ServiceLayer.Services.Factories.Transformation;
+using ImageProcessing.App.Domain.Services.Factories.Transformation;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Transformation.Interface
+namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Transformation.Interface
 {
     internal interface ITransformationFactoryWrapper : ITransformationFactory
     {

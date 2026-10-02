@@ -1,10 +1,10 @@
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Histogram.Interface;
-using ImageProcessing.App.ServiceLayer.Code.Enums;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Histogram.Interface;
+using ImageProcessing.App.Domain.Code.Enums;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Histogram.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.Histogram.Implementation
 {
     internal class HistogramServiceWrapper : IHistogramServiceWrapper
     {

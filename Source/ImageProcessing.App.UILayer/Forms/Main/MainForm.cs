@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.ServiceLayer.Services.UndoRedo;
+using ImageProcessing.App.Domain.Services.UndoRedo;
 using ImageProcessing.App.UILayer.Models.Controls;
 using ImageProcessing.App.UILayer.Properties;
 using ImageProcessing.App.UILayer.Services.Factories.MenuState;

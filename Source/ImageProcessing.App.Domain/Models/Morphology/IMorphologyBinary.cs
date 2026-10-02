@@ -1,0 +1,18 @@
+using System.Drawing;
+
+using ImageProcessing.App.Domain.Code.Enums;
+
+namespace ImageProcessing.App.Domain.Models.Morphology
+{
+    /// <summary>
+    /// Specifies a binary morphology operator.
+    /// </summary>
+    public interface IMorphologyBinary 
+    {
+        /// <summary>
+        /// Get the result of a <see cref="MorphOperator.Addition" /> opertaion
+        /// or <see cref="MorphOperator.Subtraction"/>. 
+        /// </summary>
+        Bitmap Filter(Bitmap lvalue, Bitmap rvalue);
+    }
+}

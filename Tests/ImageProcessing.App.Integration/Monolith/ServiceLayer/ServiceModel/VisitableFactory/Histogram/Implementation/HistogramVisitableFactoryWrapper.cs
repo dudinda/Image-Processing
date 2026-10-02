@@ -1,9 +1,9 @@
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.VisitableFactory.Histogram.Interface;
-using ImageProcessing.App.ServiceLayer.Code.Enums;
-using ImageProcessing.App.ServiceLayer.Win.Providers.Visitable.Histogram;
-using ImageProcessing.App.ServiceLayer.Win.Providers.VisitableFactory.Histogram.Implementation;
+using ImageProcessing.App.Integration.Monolith.Domain.ServiceModel.VisitableFactory.Histogram.Interface;
+using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.Domain.Win.Providers.Visitable.Histogram;
+using ImageProcessing.App.Domain.Win.Providers.VisitableFactory.Histogram.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.VisitableFactory.Histogram.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.ServiceModel.VisitableFactory.Histogram.Implementation
 {
     internal class HistogramVisitableFactoryWrapper : IHistogramVisitableFactoryWrapper
     {

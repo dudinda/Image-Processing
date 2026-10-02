@@ -6,7 +6,7 @@ using ImageProcessing.App.UILayer.Services.FormEventBinders.Rgb;
 using ImageProcessing.App.UILayer.Services.FormExposers;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 
-using static ImageProcessing.App.ServiceLayer.Code.Enums.RgbChannels;
+using static ImageProcessing.App.Domain.Code.Enums.RgbChannels;
 
 namespace ImageProcessing.App.UILayer.Services.FormEventBinders.Rgb.Implementation
 {

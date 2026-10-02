@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.BitmapLuminance.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Bmp.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Providers.BitmapLuminance.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Bmp.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Logger.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.DistributionArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;

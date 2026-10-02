@@ -1,9 +1,9 @@
 using System.Drawing;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Bmp.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Bmp.Implementation;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Bmp.Interface;
+using ImageProcessing.App.Domain.Services.Bmp.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Bmp.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.Bmp.Implementation
 {
     internal class BitmapServiceWrapper : IBitmapServiceWrapper
     {

@@ -1,6 +1,6 @@
-using ImageProcessing.App.ServiceLayer.Services.Factories.Morphology;
+using ImageProcessing.App.Domain.Services.Factories.Morphology;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.StructuringElement.Interface
+namespace ImageProcessing.App.Integration.Monolith.Domain.StructuringElement.Interface
 {
     internal interface IStructuringElementFactoryWrapper : IStructuringElementFactory
     {

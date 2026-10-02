@@ -1,9 +1,9 @@
-using ImageProcessing.App.ServiceLayer.Code.Enums;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.VisitableFactory.Convolution.Interface;
-using ImageProcessing.App.ServiceLayer.Providers.Visitable.Convolution;
-using ImageProcessing.App.ServiceLayer.Providers.VisitableFactory.Convolution.Implementation;
+using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.Integration.Monolith.Domain.ServiceModel.VisitableFactory.Convolution.Interface;
+using ImageProcessing.App.Domain.Providers.Visitable.Convolution;
+using ImageProcessing.App.Domain.Providers.VisitableFactory.Convolution.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.VisitableFactory.Convolution.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.ServiceModel.VisitableFactory.Convolution.Implementation
 {
     internal class ConvolutionVisitableFactoryWrapper : IConvolutionVisitableFactoryWrapper
     {

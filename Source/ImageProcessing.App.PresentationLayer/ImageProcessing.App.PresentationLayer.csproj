@@ -56,7 +56,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ImageProcessing.App.ServiceLayer.Win\ImageProcessing.App.ServiceLayer.Win.csproj" />
+    <ProjectReference Include="..\ImageProcessing.App.Domain.Win\ImageProcessing.App.Domain.Win.csproj" />
     <ProjectReference Include="..\ImageProcessing.Microkernel.EntryPoint\ImageProcessing.Microkernel.EntryPoint.csproj" />
   </ItemGroup>
 </Project>

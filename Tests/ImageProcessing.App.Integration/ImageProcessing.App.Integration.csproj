@@ -286,17 +286,17 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Source\ImageProcessing.App.Domain.Win\ImageProcessing.App.Domain.Win.csproj">
+      <Project>{10952f91-a91a-1d87-0c3e-c5dd84e7b920}</Project>
+      <Name>ImageProcessing.App.Domain.Win</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\ImageProcessing.App.Domain\ImageProcessing.App.Domain.csproj">
+      <Project>{c5a26e22-4f93-d12b-4ac3-51cfcbb9d097}</Project>
+      <Name>ImageProcessing.App.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.App.PresentationLayer\ImageProcessing.App.PresentationLayer.csproj">
       <Project>{9e019576-0ee0-4213-a8e5-1da5a52457e1}</Project>
       <Name>ImageProcessing.App.PresentationLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.ServiceLayer.Win\ImageProcessing.App.ServiceLayer.Win.csproj">
-      <Project>{ff6d8de5-9811-4dd6-9cc4-14162e0b7991}</Project>
-      <Name>ImageProcessing.App.ServiceLayer.Win</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.ServiceLayer\ImageProcessing.App.ServiceLayer.csproj">
-      <Project>{94c3f770-5a06-4d18-aff5-c4eb20cbb727}</Project>
-      <Name>ImageProcessing.App.ServiceLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.App.UILayer\ImageProcessing.App.UILayer.csproj">
       <Project>{588ad9f0-3ac2-49ce-99c8-bc5a341b91d5}</Project>

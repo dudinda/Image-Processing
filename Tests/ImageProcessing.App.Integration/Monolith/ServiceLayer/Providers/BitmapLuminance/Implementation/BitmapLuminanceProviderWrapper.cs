@@ -1,15 +1,15 @@
 using System.Drawing;
 
-using ImageProcessing.App.ServiceLayer.Code.Enums;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.BitmapLuminance.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.VisitableFactory.BitmapLuminance.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.Vistiors.BitmapLuminance.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Distribution.BitmapLuminance.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Distribution.Interface;
-using ImageProcessing.App.ServiceLayer.Code.Enums;
-using ImageProcessing.App.ServiceLayer.Providers.BitmapLuminance.Implementation;
+using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.Integration.Monolith.Domain.Providers.BitmapLuminance.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.ServiceModel.VisitableFactory.BitmapLuminance.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.ServiceModel.Vistiors.BitmapLuminance.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Distribution.BitmapLuminance.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Distribution.Interface;
+using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.Domain.Providers.BitmapLuminance.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.BitmapLuminance.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.Providers.BitmapLuminance.Implementation
 {
     internal class BitmapLuminanceProviderWrapper : IBitmapLuminanceProviderWrapper
     {

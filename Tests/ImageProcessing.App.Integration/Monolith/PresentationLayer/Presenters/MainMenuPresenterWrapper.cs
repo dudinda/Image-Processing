@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.BitmapCopy.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Pipeline.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Logger.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Pipeline.Interface;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Show;
 using ImageProcessing.App.PresentationLayer.ViewModels;

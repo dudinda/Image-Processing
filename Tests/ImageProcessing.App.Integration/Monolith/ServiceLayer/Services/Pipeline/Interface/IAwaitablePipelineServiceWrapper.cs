@@ -1,6 +1,6 @@
-using ImageProcessing.App.ServiceLayer.Services.Pipeline;
+using ImageProcessing.App.Domain.Services.Pipeline;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Pipeline.Interface
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.Pipeline.Interface
 {
     interface IAwaitablePipelineServiceWrapper : IAwaitablePipeline
     {

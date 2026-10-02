@@ -1,11 +1,11 @@
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.ChartSeries.Interface;
-using ImageProcessing.App.ServiceLayer.Win.Builders.ChartBuilder.Implementation;
-using ImageProcessing.App.ServiceLayer.Win.Services.Builders.ChartSeries;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.ChartSeries.Interface;
+using ImageProcessing.App.Domain.Win.Builders.ChartBuilder.Implementation;
+using ImageProcessing.App.Domain.Win.Services.Builders.ChartSeries;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.ChartSeries.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.ChartSeries.Implementation
 {
     internal class ChartSeriesBuilderWrapper : IChartSeriesBuilderWrapper
     {

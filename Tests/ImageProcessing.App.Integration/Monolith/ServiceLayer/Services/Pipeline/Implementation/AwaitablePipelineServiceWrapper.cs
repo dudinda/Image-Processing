@@ -1,11 +1,11 @@
 using System;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Pipeline.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Pipeline;
-using ImageProcessing.App.ServiceLayer.Services.Pipeline.Implementation;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Pipeline.Interface;
+using ImageProcessing.App.Domain.Services.Pipeline;
+using ImageProcessing.App.Domain.Services.Pipeline.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Pipeline.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.Pipeline.Implementation
 {
     internal class AwaitablePipelineServiceWrapper : IAwaitablePipelineServiceWrapper
     {

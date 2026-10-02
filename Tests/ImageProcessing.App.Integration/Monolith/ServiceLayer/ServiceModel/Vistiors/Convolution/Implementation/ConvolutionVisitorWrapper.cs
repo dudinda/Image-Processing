@@ -1,14 +1,14 @@
 using System.Drawing;
 
-using ImageProcessing.App.ServiceLayer.Code.Enums;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.Vistiors.Convolution.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Bmp.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Cache.Interface;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Convolution.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Convolution.Interface;
-using ImageProcessing.App.ServiceLayer.Providers.Visitors.Convolution.Implementation;
+using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.Integration.Monolith.Domain.ServiceModel.Vistiors.Convolution.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Bmp.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Cache.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Convolution.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Convolution.Interface;
+using ImageProcessing.App.Domain.Providers.Visitors.Convolution.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.Vistiors.Convolution.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.ServiceModel.Vistiors.Convolution.Implementation
 {
     internal class ConvolutionVisitorWrapper : IConvolutionVisitorWrapper
     {

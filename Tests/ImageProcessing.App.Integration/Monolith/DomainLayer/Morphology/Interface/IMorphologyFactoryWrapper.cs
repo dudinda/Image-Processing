@@ -1,6 +1,6 @@
-using ImageProcessing.App.ServiceLayer.Services.Factories.Morphology;
+using ImageProcessing.App.Domain.Services.Factories.Morphology;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Morphology.Interface
+namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Morphology.Interface
 {
     internal interface IMorphologyFactoryWrapper : IMorphologyFactory
     {

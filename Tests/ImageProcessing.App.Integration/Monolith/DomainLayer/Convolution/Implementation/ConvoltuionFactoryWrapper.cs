@@ -1,9 +1,9 @@
-using ImageProcessing.App.ServiceLayer.Code.Enums;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Convolution.Interface;
-using ImageProcessing.App.ServiceLayer.Models.Convolution;
-using ImageProcessing.App.ServiceLayer.Services.Factories.Convolution;
+using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Convolution.Interface;
+using ImageProcessing.App.Domain.Models.Convolution;
+using ImageProcessing.App.Domain.Services.Factories.Convolution;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer
+namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain
 {
     internal class ConvoltuionFactoryWrapper : IConvolutionFactoryWrapper
     {

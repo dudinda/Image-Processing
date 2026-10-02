@@ -3,18 +3,18 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.ServiceLayer.Code.Enums;
+using ImageProcessing.App.Domain.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.DomainEvents.ColorMatrixArgs;
 using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
 using ImageProcessing.App.PresentationLayer.Properties;
 using ImageProcessing.App.PresentationLayer.ViewModels;
 using ImageProcessing.App.PresentationLayer.Views;
-using ImageProcessing.App.ServiceLayer.Providers.Rgb;
-using ImageProcessing.App.ServiceLayer.Services.BitmapCopyReference.Interface;
-using ImageProcessing.App.ServiceLayer.Services.Factories.ColorMatrix;
-using ImageProcessing.App.ServiceLayer.Services.Pipeline.Implementation;
-using ImageProcessing.App.ServiceLayer.Win.Services.Logger;
+using ImageProcessing.App.Domain.Providers.Rgb;
+using ImageProcessing.App.Domain.Services.BitmapCopyReference.Interface;
+using ImageProcessing.App.Domain.Services.Factories.ColorMatrix;
+using ImageProcessing.App.Domain.Services.Pipeline.Implementation;
+using ImageProcessing.App.Domain.Win.Services.Logger;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 

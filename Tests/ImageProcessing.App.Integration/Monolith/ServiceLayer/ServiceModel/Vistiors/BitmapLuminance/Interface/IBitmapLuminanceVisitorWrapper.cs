@@ -1,6 +1,6 @@
-using ImageProcessing.App.ServiceLayer.Providers.Visitors.BitmapLuminance;
+using ImageProcessing.App.Domain.Providers.Visitors.BitmapLuminance;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.Vistiors.BitmapLuminance.Interface
+namespace ImageProcessing.App.Integration.Monolith.Domain.ServiceModel.Vistiors.BitmapLuminance.Interface
 {
     internal interface IBitmapLuminanceVisitorWrapper : IBitmapLuminanceVisitor
     {

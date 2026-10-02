@@ -1,10 +1,10 @@
 using System;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Interface;
-using ImageProcessing.App.ServiceLayer.Services.LockerService.Operation.Implementation;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Locker.Interface;
+using ImageProcessing.App.Domain.Services.LockerService.Operation.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Locker.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.Locker.Implementation
 {
     internal class AsyncOperationLockerWrapper : IAsyncOperationLockerWrapper
     {

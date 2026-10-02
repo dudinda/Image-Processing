@@ -1,5 +1,5 @@
 using ImageProcessing.App.Integration.Monolith.PresentationLayer;
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.UndoRedo.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.UndoRedo.Interface;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.ColorMatrix.Implementation;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.ColorMatrix.Interface;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Convolution.Implementation;

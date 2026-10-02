@@ -1,10 +1,10 @@
 using System.Drawing;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.FileDialog.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.FileDialog.Interface;
 using ImageProcessing.App.Integration.Code.Resources;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.FileDialog.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.FileDialog.Implementation
 {
     internal class FileDialogServiceWrapper : IFileDialogServiceWrapper
     {

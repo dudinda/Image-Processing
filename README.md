@@ -76,9 +76,9 @@
 
 ## Benchmarks [CPU]
 
-[RGB Filters](https://github.com/Softenraged/Image-Processing/blob/master/Benchmarks/ImageProcessing.App.ServiceLayer.Benchmark/LocalBenchmark.md#rgb-filters)
+[RGB Filters](https://github.com/Softenraged/Image-Processing/blob/master/Benchmarks/ImageProcessing.App.Domain.Benchmark/LocalBenchmark.md#rgb-filters)
 
-[Convolution](https://github.com/Softenraged/Image-Processing/blob/master/Benchmarks/ImageProcessing.App.ServiceLayer.Benchmark/LocalBenchmark.md#convolution)
+[Convolution](https://github.com/Softenraged/Image-Processing/blob/master/Benchmarks/ImageProcessing.App.Domain.Benchmark/LocalBenchmark.md#convolution)
 
 ***
 

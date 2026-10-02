@@ -1,6 +1,6 @@
-using ImageProcessing.App.ServiceLayer.Services.NonBlockDialog;
+using ImageProcessing.App.Domain.Services.NonBlockDialog;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.NonBlockDialog.Interface
+namespace ImageProcessing.App.Integration.Monolith.Domain.Services.NonBlockDialog.Interface
 {
     internal interface INonBlockDialogServiceWrapper : INonBlockDialogService
     {

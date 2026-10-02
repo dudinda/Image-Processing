@@ -1,11 +1,11 @@
 using System.Drawing;
 
-using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Rotation.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Rotation.Interface;
-using ImageProcessing.App.ServiceLayer.Models.AppSettings;
-using ImageProcessing.App.ServiceLayer.Providers.Rotation.Implementation;
+using ImageProcessing.App.Integration.Monolith.Domain.Providers.Rotation.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Rotation.Interface;
+using ImageProcessing.App.Domain.Models.AppSettings;
+using ImageProcessing.App.Domain.Providers.Rotation.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Rotation.Implementation
+namespace ImageProcessing.App.Integration.Monolith.Domain.Providers.Rotation.Implementation
 {
     internal class RotationProviderWrapper : IRotationProviderWrapper
     {

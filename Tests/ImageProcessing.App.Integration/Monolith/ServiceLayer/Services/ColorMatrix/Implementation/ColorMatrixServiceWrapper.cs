@@ -1,11 +1,11 @@
 
 using System.Drawing;
 
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Services.ColorMatrix.Interface;
-using ImageProcessing.App.ServiceLayer.Services.ColorMatrix.Implementation;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Services.ColorMatrix.Interface;
+using ImageProcessing.App.Domain.Services.ColorMatrix.Implementation;
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Services.ColorMatrix.Implementation
+namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Services.ColorMatrix.Implementation
 {
     internal class ColorMatrixServiceWrapper : IColorMatrixServiceWrapper
     {
