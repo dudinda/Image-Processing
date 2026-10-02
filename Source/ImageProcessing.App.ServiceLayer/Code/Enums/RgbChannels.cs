@@ -1,6 +1,6 @@
 using System;
 
-namespace ImageProcessing.App.DomainLayer.Code.Enums
+namespace ImageProcessing.App.ServiceLayer.Code.Enums
 {
     /// <summary>
     /// A bit field, representing each channel of the RGB color space.

@@ -1,7 +1,7 @@
 using System;
 
-using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Models.Rgb.Channel.Implementation;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Models.Rgb.Channel.Implementation;
 using ImageProcessing.App.ServiceLayer.Models.Rgb;
 using ImageProcessing.App.ServiceLayer.Services.Factories.Rgb;
 

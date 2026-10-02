@@ -1,6 +1,6 @@
 using ImageProcessing.App.ServiceLayer.Services.Factories.Recommendation;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Recommendation.Interface
+namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Recommendation.Interface
 {
     interface IRecommendationFactoryWrapper : IRecommendationFactory
     {

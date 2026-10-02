@@ -1,4 +1,4 @@
-using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
 using ImageProcessing.App.ServiceLayer.Providers.Visitable.Convolution;
 using ImageProcessing.App.ServiceLayer.Providers.Visitable.Convolution.LoGOperator3x3;
 using ImageProcessing.App.ServiceLayer.Providers.Visitable.Convolution.Operator;

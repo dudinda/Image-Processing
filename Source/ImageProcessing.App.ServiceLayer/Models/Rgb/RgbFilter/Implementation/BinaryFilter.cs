@@ -9,7 +9,7 @@ using ImageProcessing.App.ServiceLayer.Code.Constants;
 using ImageProcessing.App.ServiceLayer.Models.Recommendation;
 using ImageProcessing.App.ServiceLayer.Models.Rgb;
 
-namespace ImageProcessing.App.DomainLayer.Models.Rgb.RgbFilter.Implementation
+namespace ImageProcessing.App.ServiceLayer.Models.Rgb.RgbFilter.Implementation
 {
     /// <summary>
     /// Implements the <see cref="IRgbFilter"/>.

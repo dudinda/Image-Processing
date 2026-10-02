@@ -1,15 +1,15 @@
 using System;
 
-using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.UnitTests.CaseFactory;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.UnitTests.CaseFactory;
 using ImageProcessing.App.ServiceLayer.Services.Factories.Rgb;
 using ImageProcessing.App.ServiceLayer.Services.Factories.Rgb.Implementation;
 
 using NUnit.Framework;
 
-using static ImageProcessing.App.DomainLayer.UnitTests.CaseFactory.DomainLayerFactoriesCaseFactory;
+using static ImageProcessing.App.ServiceLayer.UnitTests.CaseFactory.ServiceLayerFactoriesCaseFactory;
 
-namespace ImageProcessing.App.DomainLayer.UnitTests.Factory.Color
+namespace ImageProcessing.App.ServiceLayer.UnitTests.Factory.Color
 {
     [TestFixture]
     internal sealed class ColorRgbFilterFactoryTests
@@ -23,7 +23,7 @@ namespace ImageProcessing.App.DomainLayer.UnitTests.Factory.Color
         }
 
         [Test, TestCaseSource(
-            typeof(DomainLayerFactoriesCaseFactory),
+            typeof(ServiceLayerFactoriesCaseFactory),
             nameof(ColorFactoryTestCases))]
         public void FactoryReturnsRedColorOnRCombination((RgbChannels Input, Type Return) args)
             => Assert.That(_colorFactory.Get(args.Input), Is.TypeOf(args.Return));

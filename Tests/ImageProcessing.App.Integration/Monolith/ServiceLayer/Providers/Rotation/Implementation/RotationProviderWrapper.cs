@@ -1,7 +1,7 @@
 using System.Drawing;
 
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Rotation.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Rotation.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Rotation.Interface;
 using ImageProcessing.App.ServiceLayer.Models.AppSettings;
 using ImageProcessing.App.ServiceLayer.Providers.Rotation.Implementation;
 

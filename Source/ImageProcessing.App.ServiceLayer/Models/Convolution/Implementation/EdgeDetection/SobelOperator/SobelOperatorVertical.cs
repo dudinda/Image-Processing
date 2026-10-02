@@ -1,7 +1,7 @@
 using ImageProcessing.App.ServiceLayer.Models.Convolution;
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
-namespace ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.EdgeDetection.SobelOperator
+namespace ImageProcessing.App.ServiceLayer.Models.Convolution.Implementation.EdgeDetection.SobelOperator
 {
     /// <summary>
     /// Implements the <see cref="IConvolutionKernel"/>.

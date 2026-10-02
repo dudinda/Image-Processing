@@ -1,7 +1,7 @@
 using System;
 
-using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Models.Morphology.Implementation.Operator;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Models.Morphology.Implementation.Operator;
 using ImageProcessing.App.ServiceLayer.Models.Morphology;
 using ImageProcessing.App.ServiceLayer.Services.Factories.Morphology;
 

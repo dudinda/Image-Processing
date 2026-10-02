@@ -1,8 +1,8 @@
 using System.ComponentModel;
 
-using ImageProcessing.App.DomainLayer.Code.Attributes;
+using ImageProcessing.App.ServiceLayer.Code.Attributes;
 
-namespace ImageProcessing.App.DomainLayer.Code.Enums
+namespace ImageProcessing.App.ServiceLayer.Code.Enums
 {
     /// <summary>
     /// Specifies a probability distribution of a random variable.

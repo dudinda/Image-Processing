@@ -2,11 +2,11 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("ImageProcessing.App.DomainLayer.UnitTests")]
+[assembly: AssemblyTitle("ImageProcessing.App.ServiceLayer.UnitTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ImageProcessing.App.DomainLayer.UnitTests")]
+[assembly: AssemblyProduct("ImageProcessing.App.ServiceLayer.UnitTests")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

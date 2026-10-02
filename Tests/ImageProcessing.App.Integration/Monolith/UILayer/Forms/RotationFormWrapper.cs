@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 
-using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Rotation.Interface;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.Forms.Rotation;

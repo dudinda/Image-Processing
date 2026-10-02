@@ -4,11 +4,11 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.ServiceLayer.Code.Constants;
-using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
+using ImageProcessing.App.ServiceLayer.Code.Extensions.BitmapExt;
 using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 using ImageProcessing.App.ServiceLayer.Models.Morphology;
 
-namespace ImageProcessing.App.DomainLayer.Models.Morphology.Implementation.Operator
+namespace ImageProcessing.App.ServiceLayer.Models.Morphology.Implementation.Operator
 {
     /// <summary>
     /// Implements the <see cref="IMorphologyUnary"/>.

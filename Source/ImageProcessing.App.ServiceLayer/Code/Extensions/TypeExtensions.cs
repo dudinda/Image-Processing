@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace ImageProcessing.App.DomainLayer.Code.Extensions.TypeExt
+namespace ImageProcessing.App.ServiceLayer.Code.Extensions.TypeExt
 {
     /// <summary>
     /// Extension methods for a <see cref="Type"> class.

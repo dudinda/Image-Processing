@@ -6,7 +6,7 @@ using ImageProcessing.App.ServiceLayer.Code.Constants;
 using ImageProcessing.App.ServiceLayer.Models.Morphology;
 using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
-namespace ImageProcessing.App.DomainLayer.Models.Morphology.Implementation.Operator
+namespace ImageProcessing.App.ServiceLayer.Models.Morphology.Implementation.Operator
 {
     /// <summary>
     /// Implements the <see cref="IMorphologyUnary"/>.

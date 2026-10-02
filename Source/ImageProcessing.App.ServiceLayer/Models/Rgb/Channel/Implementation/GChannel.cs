@@ -1,6 +1,6 @@
 using ImageProcessing.App.ServiceLayer.Models.Rgb;
 
-namespace ImageProcessing.App.DomainLayer.Models.Rgb.Channel.Implementation
+namespace ImageProcessing.App.ServiceLayer.Models.Rgb.Channel.Implementation
 {
     /// <summary>
     /// Green. Implements the <see cref="IChannel"/>.

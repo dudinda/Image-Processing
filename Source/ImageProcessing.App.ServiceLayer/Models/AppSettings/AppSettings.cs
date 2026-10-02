@@ -1,4 +1,4 @@
-using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
 
 namespace ImageProcessing.App.ServiceLayer.Models.AppSettings
 {

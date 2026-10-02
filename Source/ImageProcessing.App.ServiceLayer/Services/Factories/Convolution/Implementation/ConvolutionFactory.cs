@@ -1,17 +1,17 @@
 using System;
 
-using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.Blur.BoxBlur;
-using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.Blur.GaussianBlur;
-using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.Blur.MotionBlur;
-using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.EdgeDetection.LaplacianOperator;
-using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.EdgeDetection.SobelOperator;
-using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.Emboss;
-using ImageProcessing.App.DomainLayer.Models.Convolution.Implementation.Sharpen;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Models.Convolution.Implementation.Blur.BoxBlur;
+using ImageProcessing.App.ServiceLayer.Models.Convolution.Implementation.Blur.GaussianBlur;
+using ImageProcessing.App.ServiceLayer.Models.Convolution.Implementation.Blur.MotionBlur;
+using ImageProcessing.App.ServiceLayer.Models.Convolution.Implementation.EdgeDetection.LaplacianOperator;
+using ImageProcessing.App.ServiceLayer.Models.Convolution.Implementation.EdgeDetection.SobelOperator;
+using ImageProcessing.App.ServiceLayer.Models.Convolution.Implementation.Emboss;
+using ImageProcessing.App.ServiceLayer.Models.Convolution.Implementation.Sharpen;
 using ImageProcessing.App.ServiceLayer.Models.Convolution;
 using ImageProcessing.App.ServiceLayer.Services.Factories.Convolution;
 
-namespace ImageProcessing.App.DomainLayer.Factories.Convolution.Implementation
+namespace ImageProcessing.App.ServiceLayer.Factories.Convolution.Implementation
 {
     /// <inheritdoc cref="IConvolutionFactory" />
     public sealed class ConvolutionFactory : IConvolutionFactory

@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Drawing;
 using System.Windows.Forms;
 
-using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Distribution.Interface;
 using ImageProcessing.App.PresentationLayer.Views;
 using ImageProcessing.App.UILayer.Forms.Distribution;

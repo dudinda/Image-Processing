@@ -2,7 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Drawing;
 
-using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
 using ImageProcessing.App.PresentationLayer.Views.ViewComponents;
 using ImageProcessing.Microkernel.MVP.View;
 

@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
 
-namespace ImageProcessing.App.DomainLayer.Code.Extensions.StringExt
+namespace ImageProcessing.App.ServiceLayer.Code.Extensions.StringExt
 {
     /// <summary>
     /// Extension methods for a <see cref="string"> class.

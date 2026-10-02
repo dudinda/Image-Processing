@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt
+namespace ImageProcessing.App.ServiceLayer.Code.Extensions.BitmapExt
 {
     /// <summary>
     /// Extension methods for a <see cref="Bitmap"> class.

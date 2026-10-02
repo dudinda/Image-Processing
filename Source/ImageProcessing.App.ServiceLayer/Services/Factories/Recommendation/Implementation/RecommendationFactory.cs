@@ -1,11 +1,11 @@
 using System;
 
-using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Models.Recommendation.Implementation;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Models.Recommendation.Implementation;
 using ImageProcessing.App.ServiceLayer.Models.Recommendation;
 using ImageProcessing.App.ServiceLayer.Services.Factories.Recommendation;
 
-namespace ImageProcessing.App.DomainLayer.Factories.Recommendation.Implementation
+namespace ImageProcessing.App.ServiceLayer.Factories.Recommendation.Implementation
 {
     public sealed class RecommendationFactory : IRecommendationFactory
     {

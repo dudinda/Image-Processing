@@ -1,7 +1,7 @@
-using ImageProcessing.App.DomainLayer.Models.ColorMatrix.Interface;
+using ImageProcessing.App.ServiceLayer.Models.ColorMatrix.Interface;
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
-namespace ImageProcessing.App.DomainLayer.Models.ColorMatrix.Implementation
+namespace ImageProcessing.App.ServiceLayer.Models.ColorMatrix.Implementation
 {
     public sealed class InversionColorMatrix : IColorMatrix
     {

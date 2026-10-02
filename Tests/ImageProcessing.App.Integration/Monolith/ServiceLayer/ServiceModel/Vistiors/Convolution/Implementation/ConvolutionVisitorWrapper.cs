@@ -1,11 +1,11 @@
 using System.Drawing;
 
-using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.Vistiors.Convolution.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Bmp.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Cache.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Convolution.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Convolution.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Convolution.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Visitors.Convolution.Implementation;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.ServiceModel.Vistiors.Convolution.Implementation

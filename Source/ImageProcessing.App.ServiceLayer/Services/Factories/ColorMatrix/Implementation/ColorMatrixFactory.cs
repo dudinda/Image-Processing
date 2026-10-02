@@ -1,11 +1,11 @@
 using System;
 
-using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Models.ColorMatrix.Implementation;
-using ImageProcessing.App.DomainLayer.Models.ColorMatrix.Interface;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Models.ColorMatrix.Implementation;
+using ImageProcessing.App.ServiceLayer.Models.ColorMatrix.Interface;
 using ImageProcessing.App.ServiceLayer.Services.Factories.ColorMatrix;
 
-namespace ImageProcessing.App.DomainLayer.Factories.ColorMatrix.Implementation
+namespace ImageProcessing.App.ServiceLayer.Factories.ColorMatrix.Implementation
 {
     public sealed class ColorMatrixFactory : IColorMatrixFactory
     {

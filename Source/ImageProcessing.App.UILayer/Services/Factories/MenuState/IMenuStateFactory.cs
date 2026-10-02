@@ -1,4 +1,4 @@
-using ImageProcessing.App.DomainLayer.Factories;
+using ImageProcessing.App.ServiceLayer.Factories;
 using ImageProcessing.App.PresentationLayer.Code.Enums;
 using ImageProcessing.App.UILayer.Models.MenuState;
 

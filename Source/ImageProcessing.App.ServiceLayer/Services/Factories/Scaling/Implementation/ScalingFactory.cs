@@ -1,11 +1,11 @@
 using System;
 
-using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Models.Scaling.Implementation;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Models.Scaling.Implementation;
 using ImageProcessing.App.ServiceLayer.Models.Scaling;
 using ImageProcessing.App.ServiceLayer.Services.Factories.Scaling;
 
-namespace ImageProcessing.App.DomainLayer.Factories.Scaling.Implementation
+namespace ImageProcessing.App.ServiceLayer.Factories.Scaling.Implementation
 {
     public sealed class ScalingFactory : IScalingFactory
     {

@@ -4,11 +4,11 @@ using System.IO;
 
 using BenchmarkDotNet.Attributes;
 
-using ImageProcessing.App.DomainLayer.Models.Recommendation.Implementation;
-using ImageProcessing.App.DomainLayer.Models.Rgb.RgbFilter.Implementation;
+using ImageProcessing.App.ServiceLayer.Models.Recommendation.Implementation;
+using ImageProcessing.App.ServiceLayer.Models.Rgb.RgbFilter.Implementation;
 using ImageProcessing.App.ServiceLayer.Benchmark.Frames;
 
-namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Binary
+namespace ImageProcessing.App.ServiceLayer.Benchmark.RgbFilter.Binary
 {
     [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
     public class BinaryFilterBenchmark : IDisposable
@@ -23,12 +23,12 @@ namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Binary
         [GlobalSetup]
         public void Setup()
         {
-            using (var ms = new MemoryStream(Frames._1920x1080frame))
+            using (var ms = new MemoryStream(Frames.Frames._1920x1080frame))
             {
                 _frame1920x1080 = new Bitmap(Image.FromStream(ms));
             }
 
-            using (var ms = new MemoryStream(Frames._2560x1440frame))
+            using (var ms = new MemoryStream(Frames.Frames._2560x1440frame))
             {
                 _frame2560x1440 = new Bitmap(Image.FromStream(ms));
             }

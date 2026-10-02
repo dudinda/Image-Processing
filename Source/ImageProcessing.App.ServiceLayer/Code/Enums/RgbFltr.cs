@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace ImageProcessing.App.DomainLayer.Code.Enums
+namespace ImageProcessing.App.ServiceLayer.Code.Enums
 {
     /// <summary>
     /// Specifies filters based on the RGB color space.

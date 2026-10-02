@@ -1,10 +1,10 @@
 using System;
 
-using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Code.Extensions.StringExt;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Code.Extensions.StringExt;
 using ImageProcessing.App.ServiceLayer.Models.Distribution;
 
-namespace ImageProcessing.App.DomainLayer.Models.Distribution.Implementation.TwoParameter
+namespace ImageProcessing.App.ServiceLayer.Models.Distribution.Implementation.TwoParameter
 {
     /// <summary>
     /// Implements the <see cref="IDistribution"/>.

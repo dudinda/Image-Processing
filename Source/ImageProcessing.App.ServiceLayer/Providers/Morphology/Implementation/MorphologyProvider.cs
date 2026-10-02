@@ -1,6 +1,6 @@
 using System.Drawing;
 
-using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
 using ImageProcessing.App.ServiceLayer.Providers.Morphology;
 using ImageProcessing.App.ServiceLayer.Services.Cache;
 using ImageProcessing.App.ServiceLayer.Services.Factories.Morphology;

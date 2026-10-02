@@ -1,12 +1,12 @@
 using System.Drawing;
 
-using ImageProcessing.App.DomainLayer.Factories.ColorMatrix.Implementation;
-using ImageProcessing.App.DomainLayer.Factories.Convolution.Implementation;
-using ImageProcessing.App.DomainLayer.Factories.Distribution.Implementation;
-using ImageProcessing.App.DomainLayer.Factories.Recommendation.Implementation;
-using ImageProcessing.App.DomainLayer.Factories.Rotation.Implementation;
-using ImageProcessing.App.DomainLayer.Factories.Scaling.Implementation;
-using ImageProcessing.App.DomainLayer.Factories.Transformation.Implementation;
+using ImageProcessing.App.ServiceLayer.Factories.ColorMatrix.Implementation;
+using ImageProcessing.App.ServiceLayer.Factories.Convolution.Implementation;
+using ImageProcessing.App.ServiceLayer.Factories.Distribution.Implementation;
+using ImageProcessing.App.ServiceLayer.Factories.Recommendation.Implementation;
+using ImageProcessing.App.ServiceLayer.Factories.Rotation.Implementation;
+using ImageProcessing.App.ServiceLayer.Factories.Scaling.Implementation;
+using ImageProcessing.App.ServiceLayer.Factories.Transformation.Implementation;
 using ImageProcessing.App.ServiceLayer.Models.AppSettings;
 using ImageProcessing.App.ServiceLayer.Providers.BitmapLuminance;
 using ImageProcessing.App.ServiceLayer.Providers.BitmapLuminance.Implementation;

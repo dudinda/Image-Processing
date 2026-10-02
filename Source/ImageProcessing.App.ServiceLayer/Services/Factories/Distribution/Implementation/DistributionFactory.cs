@@ -1,12 +1,12 @@
 using System;
 
-using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Models.Distribution.Implementation.OneParameter;
-using ImageProcessing.App.DomainLayer.Models.Distribution.Implementation.TwoParameter;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Models.Distribution.Implementation.OneParameter;
+using ImageProcessing.App.ServiceLayer.Models.Distribution.Implementation.TwoParameter;
 using ImageProcessing.App.ServiceLayer.Models.Distribution;
 using ImageProcessing.App.ServiceLayer.Services.Factories.Distribution;
 
-namespace ImageProcessing.App.DomainLayer.Factories.Distribution.Implementation
+namespace ImageProcessing.App.ServiceLayer.Factories.Distribution.Implementation
 {
     /// <inheritdoc cref="IDistributionFactory" />
     public sealed class DistributionFactory : IDistributionFactory

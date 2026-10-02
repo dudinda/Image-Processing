@@ -1,6 +1,6 @@
-using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Factories;
-using ImageProcessing.App.DomainLayer.Models.ColorMatrix.Interface;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Factories;
+using ImageProcessing.App.ServiceLayer.Models.ColorMatrix.Interface;
 
 namespace ImageProcessing.App.ServiceLayer.Services.Factories.ColorMatrix
 {

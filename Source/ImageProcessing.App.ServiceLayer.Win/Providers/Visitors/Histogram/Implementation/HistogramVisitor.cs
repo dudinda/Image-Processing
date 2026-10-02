@@ -2,7 +2,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms.DataVisualization.Charting;
 
-using ImageProcessing.App.DomainLayer.Code.Extensions.EnumExt;
+using ImageProcessing.App.ServiceLayer.Code.Extensions.EnumExt;
 using ImageProcessing.App.ServiceLayer.Code.Enums;
 using ImageProcessing.App.ServiceLayer.Services.Distribution;
 using ImageProcessing.App.ServiceLayer.Win.Services.Builders.ChartSeries;

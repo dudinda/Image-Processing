@@ -1,6 +1,6 @@
 using System.Drawing;
 
-using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
 using ImageProcessing.App.ServiceLayer.Providers.Convolution;
 using ImageProcessing.App.ServiceLayer.Providers.VisitableFactory.Convolution;
 using ImageProcessing.App.ServiceLayer.Providers.Visitors.Convolution;

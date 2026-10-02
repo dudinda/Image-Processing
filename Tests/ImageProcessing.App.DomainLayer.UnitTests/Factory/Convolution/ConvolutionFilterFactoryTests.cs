@@ -1,15 +1,15 @@
 using System;
 
-using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Factories.Convolution.Implementation;
-using ImageProcessing.App.DomainLayer.UnitTests.CaseFactory;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Factories.Convolution.Implementation;
+using ImageProcessing.App.ServiceLayer.UnitTests.CaseFactory;
 using ImageProcessing.App.ServiceLayer.Services.Factories.Convolution;
 
 using NUnit.Framework;
 
-using static ImageProcessing.App.DomainLayer.UnitTests.CaseFactory.DomainLayerFactoriesCaseFactory;
+using static ImageProcessing.App.ServiceLayer.UnitTests.CaseFactory.ServiceLayerFactoriesCaseFactory;
 
-namespace ImageProcessing.App.DomainLayer.UnitTests.Factory.Convolution
+namespace ImageProcessing.App.ServiceLayer.UnitTests.Factory.Convolution
 {
     [TestFixture]
     internal sealed class ConvolutionFilterFactoryTests
@@ -23,7 +23,7 @@ namespace ImageProcessing.App.DomainLayer.UnitTests.Factory.Convolution
         }
 
         [Test, TestCaseSource(
-               typeof(DomainLayerFactoriesCaseFactory),
+               typeof(ServiceLayerFactoriesCaseFactory),
                nameof(ConvolutionFactoryTestCases))]
         public void FactoryReturnsBoxBlur3x3ByEnumValue((ConvKernel Input, Type Result) args)
             => Assert.That(_convolutionFactory.Get(args.Input), Is.TypeOf(args.Result));

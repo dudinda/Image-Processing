@@ -1,6 +1,6 @@
 using System;
 
-namespace ImageProcessing.App.DomainLayer.Factories
+namespace ImageProcessing.App.ServiceLayer.Factories
 {
     /// <summary>
     /// A base factory method provider for all the types

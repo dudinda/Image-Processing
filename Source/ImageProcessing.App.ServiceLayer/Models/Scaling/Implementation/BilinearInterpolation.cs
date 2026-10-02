@@ -4,10 +4,10 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.ServiceLayer.Code.Constants;
-using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
+using ImageProcessing.App.ServiceLayer.Code.Extensions.BitmapExt;
 using ImageProcessing.App.ServiceLayer.Models.Scaling;
 
-namespace ImageProcessing.App.DomainLayer.Models.Scaling.Implementation
+namespace ImageProcessing.App.ServiceLayer.Models.Scaling.Implementation
 {
     public sealed class BilinearInterpolation : IScaling
     {

@@ -1,11 +1,11 @@
 using System;
 
-using ImageProcessing.App.DomainLayer.Code.Enums;
-using ImageProcessing.App.DomainLayer.Code.Extensions.StringExt;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Code.Extensions.StringExt;
 using ImageProcessing.App.ServiceLayer.Models.Distribution;
 using ImageProcessing.Utility.DecimalMath.Real;
 
-namespace ImageProcessing.App.DomainLayer.Models.Distribution.Implementation.OneParameter
+namespace ImageProcessing.App.ServiceLayer.Models.Distribution.Implementation.OneParameter
 {
     /// <summary>
     /// Implements the <see cref="IDistribution"/>.

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ImageProcessing.App.ServiceLayer.Code.Constants;
 using ImageProcessing.App.ServiceLayer.Models.Thresholding;
 
-namespace ImageProcessing.App.DomainLayer.Models.Thresholding.Implementation
+namespace ImageProcessing.App.ServiceLayer.Models.Thresholding.Implementation
 {
     public sealed class GrayscaleThreshold : IThreshold
     {

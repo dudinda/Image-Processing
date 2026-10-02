@@ -10,8 +10,8 @@ using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Bmp.Interfa
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Logger.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Services.Pipeline.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.ColorMatrix.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Rgb.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.ColorMatrix.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Rgb.Interface;
 using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer;
 using ImageProcessing.App.ServiceLayer.Models.AppSettings;
 using ImageProcessing.Microkernel.AppConfig;

@@ -5,7 +5,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.DomainLayer.Code.Extensions.BitmapExt;
+using ImageProcessing.App.ServiceLayer.Code.Extensions.BitmapExt;
 
 namespace ImageProcessing.App.PresentationLayer.UnitTests.Extensions
 {

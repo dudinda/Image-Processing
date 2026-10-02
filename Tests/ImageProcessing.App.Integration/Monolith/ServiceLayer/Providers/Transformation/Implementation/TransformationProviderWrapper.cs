@@ -1,8 +1,8 @@
 using System.Drawing;
 
-using ImageProcessing.App.DomainLayer.Code.Enums;
+using ImageProcessing.App.ServiceLayer.Code.Enums;
 using ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Transformation.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.DomainLayer.Transformation.Interface;
+using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.ServiceLayer.Transformation.Interface;
 using ImageProcessing.App.ServiceLayer.Providers.Transformation.Implementation;
 
 namespace ImageProcessing.App.Integration.Monolith.ServiceLayer.Providers.Transformation.Implementation

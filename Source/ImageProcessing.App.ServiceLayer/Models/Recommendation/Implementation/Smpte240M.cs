@@ -1,6 +1,6 @@
 using ImageProcessing.App.ServiceLayer.Models.Recommendation;
 
-namespace ImageProcessing.App.DomainLayer.Models.Recommendation.Implementation
+namespace ImageProcessing.App.ServiceLayer.Models.Recommendation.Implementation
 {
     /// <inheritdoc cref="IRecommendation"/>
     public sealed class Smpte240M : IRecommendation
