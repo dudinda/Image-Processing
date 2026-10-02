@@ -6,13 +6,14 @@ using BenchmarkDotNet.Attributes;
 
 using ImageProcessing.App.DomainLayer.Models.Recommendation.Implementation;
 using ImageProcessing.App.DomainLayer.Models.Rgb.RgbFilter.Implementation;
+using ImageProcessing.App.ServiceLayer.Benchmark.Frames;
 
-namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Grayscale
+namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Binary
 {
     [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
-    public class GrayscaleFilterBenchmark : IDisposable
+    public class BinaryFilterBenchmark : IDisposable
     {
-        private GrayscaleFilter _filter = new GrayscaleFilter(new Rec709());
+        private BinaryFilter _filter = new BinaryFilter(new Rec709());
 
         private Bitmap _frame1920x1080;
         private Bitmap _frame2560x1440;
@@ -22,37 +23,36 @@ namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Grayscale
         [GlobalSetup]
         public void Setup()
         {
-            using (var ms = new MemoryStream(Frames.Frames._1920x1080frame))
+            using (var ms = new MemoryStream(Frames._1920x1080frame))
             {
                 _frame1920x1080 = new Bitmap(Image.FromStream(ms));
             }
 
-            using (var ms = new MemoryStream(Frames.Frames._2560x1440frame))
+            using (var ms = new MemoryStream(Frames._2560x1440frame))
             {
                 _frame2560x1440 = new Bitmap(Image.FromStream(ms));
             }
-
         }
 
         [Benchmark]
-        public Bitmap ApplyGrayscaleFilterTo1920x1080Frame()
+        public Bitmap ApplyBinaryFilterTo1920x1080()
             => _filter.Filter(_frame1920x1080);
 
         [Benchmark]
-        public void ApplyGrayscaleFilterTo1920x1080Frame60Fps()
+        public void ApplyBinaryFilterTo1920x1080Frame60Fps()
         {
-            for (var start = 0; start < _frameRate; ++start)
+            for(var start = 0; start < _frameRate; ++start)
             {
                 _filter.Filter(_frame1920x1080);
             }
         }
 
         [Benchmark]
-        public Bitmap ApplyGrayscaleFilterTo2560x1440Frame()
+        public Bitmap ApplyBinaryFilterTo2560x1440()
             => _filter.Filter(_frame2560x1440);
 
         [Benchmark]
-        public void ApplyGrayscaleFilterTo2560x1440Frame60Fps()
+        public void ApplyBinaryFilterTo2560x1440Frame60Fps()
         {
             for (var start = 0; start < _frameRate; ++start)
             {

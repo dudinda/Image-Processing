@@ -1,13 +1,13 @@
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Running;
 
-namespace ImageProcessing.App.DomainLayer.Benchmark
+namespace ImageProcessing.Services.Benchmark
 {
-    internal sealed class StartBenchmarks
+    internal sealed class Program
     {
         static void Main(string[] args)
             => BenchmarkSwitcher
-                .FromAssembly(typeof(StartBenchmarks).Assembly)
+                .FromAssembly(typeof(Program).Assembly)
                 .Run(args, new DebugInProcessConfig());
     }
 }

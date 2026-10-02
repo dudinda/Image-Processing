@@ -4,31 +4,31 @@ using System.IO;
 
 using BenchmarkDotNet.Attributes;
 
-using ImageProcessing.App.DomainLayer.Models.Rotation.Implementation;
+using ImageProcessing.App.DomainLayer.Models.Rgb.Channel.Implementation;
+using ImageProcessing.App.DomainLayer.Models.Rgb.RgbFilter.Implementation;
+using ImageProcessing.App.ServiceLayer.Benchmark.Frames;
 
-namespace ImageProcessing.App.DomainLayer.Benchmark.Rotation.AreaMapping
+namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Channel
 {
     [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
-    public class AreaMappingRotationBenchmark
+    public class ColorFilterBenchmark : IDisposable
     {
-        private AreaMappingRotation _rotation = new AreaMappingRotation();
+        private ChannelFilter _filter = new ChannelFilter(new RGChannel());
 
         private Bitmap _frame1920x1080;
         private Bitmap _frame2560x1440;
-
-        private double _45degreesToRad = 45 * Math.PI / 180;
 
         private int _frameRate = 60;
 
         [GlobalSetup]
         public void Setup()
         {
-            using (var ms = new MemoryStream(Frames.Frames._1920x1080frame))
+            using (var ms = new MemoryStream(Frames._1920x1080frame))
             {
                 _frame1920x1080 = new Bitmap(Image.FromStream(ms));
             }
 
-            using (var ms = new MemoryStream(Frames.Frames._2560x1440frame))
+            using (var ms = new MemoryStream(Frames._2560x1440frame))
             {
                 _frame2560x1440 = new Bitmap(Image.FromStream(ms));
             }
@@ -36,28 +36,28 @@ namespace ImageProcessing.App.DomainLayer.Benchmark.Rotation.AreaMapping
         }
 
         [Benchmark]
-        public Bitmap Rotate45Degrees1920x1080Frame()
-            => _rotation.Rotate(_frame1920x1080, _45degreesToRad);
+        public Bitmap ApplyColorFilterTo1920x1080Frame()
+            => _filter.Filter(_frame1920x1080);
 
         [Benchmark]
-        public void Rotate45Degrees1920x1080Frame60Fps()
+        public void ApplyColorFilterTo1920x1080Frame60Fps()
         {
             for (var start = 0; start < _frameRate; ++start)
             {
-                _rotation.Rotate(_frame1920x1080, _45degreesToRad);
+                _filter.Filter(_frame1920x1080);
             }
         }
 
         [Benchmark]
-        public Bitmap Rotate45Degrees2560x1440Frame()
-          => _rotation.Rotate(_frame2560x1440, _45degreesToRad);
+        public Bitmap ApplyColorFilterTo2560x1440Frame()
+          => _filter.Filter(_frame2560x1440);
 
         [Benchmark]
-        public void Rotate45Degrees2560x1440Frame60Fps()
+        public void ApplyColorFilterTo2560x1440Frame60Fps()
         {
             for (var start = 0; start < _frameRate; ++start)
             {
-                _rotation.Rotate(_frame2560x1440, _45degreesToRad);
+                _filter.Filter(_frame2560x1440);
             }
         }
 

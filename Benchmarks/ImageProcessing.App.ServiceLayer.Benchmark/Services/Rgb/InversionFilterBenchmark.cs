@@ -4,15 +4,15 @@ using System.IO;
 
 using BenchmarkDotNet.Attributes;
 
-using ImageProcessing.App.DomainLayer.Models.Recommendation.Implementation;
 using ImageProcessing.App.DomainLayer.Models.Rgb.RgbFilter.Implementation;
+using ImageProcessing.App.ServiceLayer.Benchmark.Frames;
 
-namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Binary
+namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Inversion
 {
     [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
-    public class BinaryFilterBenchmark : IDisposable
+    public class InversionFilterBenchmark : IDisposable
     {
-        private BinaryFilter _filter = new BinaryFilter(new Rec709());
+        private InversionFilter _filter = new InversionFilter();
 
         private Bitmap _frame1920x1080;
         private Bitmap _frame2560x1440;
@@ -22,36 +22,36 @@ namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Binary
         [GlobalSetup]
         public void Setup()
         {
-            using (var ms = new MemoryStream(Frames.Frames._1920x1080frame))
+            using (var ms = new MemoryStream(Frames._1920x1080frame))
             {
                 _frame1920x1080 = new Bitmap(Image.FromStream(ms));
             }
 
-            using (var ms = new MemoryStream(Frames.Frames._2560x1440frame))
+            using (var ms = new MemoryStream(Frames._2560x1440frame))
             {
                 _frame2560x1440 = new Bitmap(Image.FromStream(ms));
             }
         }
 
         [Benchmark]
-        public Bitmap ApplyBinaryFilterTo1920x1080()
+        public Bitmap ApplyInversionFilterTo1920x1080Frame()
             => _filter.Filter(_frame1920x1080);
 
         [Benchmark]
-        public void ApplyBinaryFilterTo1920x1080Frame60Fps()
+        public void ApplyInversionFilterTo1920x1080Frame60Fps()
         {
-            for(var start = 0; start < _frameRate; ++start)
+            for (var start = 0; start < _frameRate; ++start)
             {
                 _filter.Filter(_frame1920x1080);
             }
         }
 
         [Benchmark]
-        public Bitmap ApplyBinaryFilterTo2560x1440()
+        public Bitmap ApplyInversionFilterTo2560x1440Frame()
             => _filter.Filter(_frame2560x1440);
 
         [Benchmark]
-        public void ApplyBinaryFilterTo2560x1440Frame60Fps()
+        public void ApplyInversionFilterTo2560x1440Frame60Fps()
         {
             for (var start = 0; start < _frameRate; ++start)
             {

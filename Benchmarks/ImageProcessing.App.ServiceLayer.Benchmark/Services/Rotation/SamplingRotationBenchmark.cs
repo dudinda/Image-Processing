@@ -4,57 +4,61 @@ using System.IO;
 
 using BenchmarkDotNet.Attributes;
 
-using ImageProcessing.App.DomainLayer.Models.Rgb.RgbFilter.Implementation;
+using ImageProcessing.App.DomainLayer.Models.Rotation.Implementation;
+using ImageProcessing.App.ServiceLayer.Benchmark.Frames;
 
-namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Inversion
+namespace ImageProcessing.App.DomainLayer.Benchmark.Rotation.Sampling
 {
     [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
-    public class InversionFilterBenchmark : IDisposable
+    public class SamplingRotationBenchmark
     {
-        private InversionFilter _filter = new InversionFilter();
+        private SamplingRotation _rotation = new SamplingRotation();
 
         private Bitmap _frame1920x1080;
         private Bitmap _frame2560x1440;
+
+        private double _45degreesToRad = 45 * Math.PI / 180;
 
         private int _frameRate = 60;
 
         [GlobalSetup]
         public void Setup()
         {
-            using (var ms = new MemoryStream(Frames.Frames._1920x1080frame))
+            using (var ms = new MemoryStream(Frames._1920x1080frame))
             {
                 _frame1920x1080 = new Bitmap(Image.FromStream(ms));
             }
 
-            using (var ms = new MemoryStream(Frames.Frames._2560x1440frame))
+            using (var ms = new MemoryStream(Frames._2560x1440frame))
             {
                 _frame2560x1440 = new Bitmap(Image.FromStream(ms));
             }
+
         }
 
         [Benchmark]
-        public Bitmap ApplyInversionFilterTo1920x1080Frame()
-            => _filter.Filter(_frame1920x1080);
+        public Bitmap Rotate45Degrees1920x1080Frame()
+            => _rotation.Rotate(_frame1920x1080, _45degreesToRad);
 
         [Benchmark]
-        public void ApplyInversionFilterTo1920x1080Frame60Fps()
+        public void Rotate45Degrees1920x1080Frame60Fps()
         {
             for (var start = 0; start < _frameRate; ++start)
             {
-                _filter.Filter(_frame1920x1080);
+                _rotation.Rotate(_frame1920x1080, _45degreesToRad);
             }
         }
 
         [Benchmark]
-        public Bitmap ApplyInversionFilterTo2560x1440Frame()
-            => _filter.Filter(_frame2560x1440);
+        public Bitmap Rotate45Degrees2560x1440Frame()
+          => _rotation.Rotate(_frame2560x1440, _45degreesToRad);
 
         [Benchmark]
-        public void ApplyInversionFilterTo2560x1440Frame60Fps()
+        public void Rotate45Degrees2560x1440Frame60Fps()
         {
             for (var start = 0; start < _frameRate; ++start)
             {
-                _filter.Filter(_frame2560x1440);
+                _rotation.Rotate(_frame2560x1440, _45degreesToRad);
             }
         }
 

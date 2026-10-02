@@ -4,32 +4,31 @@ using System.IO;
 
 using BenchmarkDotNet.Attributes;
 
-using ImageProcessing.App.DomainLayer.Models.Scaling.Implementation;
+using ImageProcessing.App.DomainLayer.Models.Recommendation.Implementation;
+using ImageProcessing.App.DomainLayer.Models.Rgb.RgbFilter.Implementation;
+using ImageProcessing.App.ServiceLayer.Benchmark.Frames;
 
-namespace ImageProcessing.App.DomainLayer.Benchmark.Rotation.AreaMapping
+namespace ImageProcessing.App.DomainLayer.Benchmark.RgbFilter.Grayscale
 {
     [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
-    public class ProximalInterpolationBenchmark
+    public class GrayscaleFilterBenchmark : IDisposable
     {
-        private ProximalInterpolation _scaling = new ProximalInterpolation();
+        private GrayscaleFilter _filter = new GrayscaleFilter(new Rec709());
 
         private Bitmap _frame1920x1080;
         private Bitmap _frame2560x1440;
-
-        private double _scaleX = 2;
-        private double _scaleY = 2;
 
         private int _frameRate = 60;
 
         [GlobalSetup]
         public void Setup()
         {
-            using (var ms = new MemoryStream(Frames.Frames._1920x1080frame))
+            using (var ms = new MemoryStream(Frames._1920x1080frame))
             {
                 _frame1920x1080 = new Bitmap(Image.FromStream(ms));
             }
 
-            using (var ms = new MemoryStream(Frames.Frames._2560x1440frame))
+            using (var ms = new MemoryStream(Frames._2560x1440frame))
             {
                 _frame2560x1440 = new Bitmap(Image.FromStream(ms));
             }
@@ -37,28 +36,28 @@ namespace ImageProcessing.App.DomainLayer.Benchmark.Rotation.AreaMapping
         }
 
         [Benchmark]
-        public Bitmap Rotate45Degrees1920x1080Frame()
-            => _scaling.Resize(_frame1920x1080, _scaleX, _scaleY);
+        public Bitmap ApplyGrayscaleFilterTo1920x1080Frame()
+            => _filter.Filter(_frame1920x1080);
 
         [Benchmark]
-        public void ApplyColorFilterTo1920x1080Frame60Fps()
+        public void ApplyGrayscaleFilterTo1920x1080Frame60Fps()
         {
             for (var start = 0; start < _frameRate; ++start)
             {
-                _scaling.Resize(_frame1920x1080, _scaleX, _scaleY);
+                _filter.Filter(_frame1920x1080);
             }
         }
 
         [Benchmark]
-        public Bitmap ApplyColorFilterTo2560x1440Frame()
-          => _scaling.Resize(_frame2560x1440, _scaleX, _scaleY);
+        public Bitmap ApplyGrayscaleFilterTo2560x1440Frame()
+            => _filter.Filter(_frame2560x1440);
 
         [Benchmark]
-        public void ApplyColorFilterTo2560x1440Frame60Fps()
+        public void ApplyGrayscaleFilterTo2560x1440Frame60Fps()
         {
             for (var start = 0; start < _frameRate; ++start)
             {
-                _scaling.Resize(_frame2560x1440, _scaleX, _scaleY);
+                _filter.Filter(_frame2560x1440);
             }
         }
 
