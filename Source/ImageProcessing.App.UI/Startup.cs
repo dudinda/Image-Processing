@@ -33,7 +33,7 @@ using ImageProcessing.App.UI.Services.FormEventBinders.Settings.Implementation;
 using ImageProcessing.App.UI.Services.FormEventBinders.Transformation;
 using ImageProcessing.App.UI.Services.FormEventBinders.Transformation.Implementation;
 using ImageProcessing.Microkernel.AppConfig;
-using ImageProcessing.Microkernel.MVP.IoC.Interface;
+using ImageProcessing.Microkernel.MVP.Services.IoC;
 
 namespace ImageProcessing.App.UI
 {

@@ -1,9 +1,8 @@
 using System;
 
-using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
-using ImageProcessing.Microkernel.MVP.Controller.Implementation;
-using ImageProcessing.Microkernel.MVP.Controller.Interface;
-using ImageProcessing.Microkernel.MVP.Presenter.Interface;
+using ImageProcessing.Microkernel.MVP.Services.Aggregator;
+using ImageProcessing.Microkernel.MVP.Services.Controller;
+using ImageProcessing.Microkernel.MVP.Services.Controller.Implementation;
 using ImageProcessing.Microkernel.MVP.View;
 
 namespace ImageProcessing.Microkernel.MVP.Presenter.Implementation

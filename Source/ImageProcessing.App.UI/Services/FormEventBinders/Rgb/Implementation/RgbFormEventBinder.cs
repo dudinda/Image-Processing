@@ -4,7 +4,7 @@ using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.RgbArgs;
 using ImageProcessing.App.UI.Services.FormEventBinders.Rgb;
 using ImageProcessing.App.UI.Services.FormExposers;
-using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
+using ImageProcessing.Microkernel.MVP.Services.Aggregator;
 
 using static ImageProcessing.App.Domain.Code.Enums.RgbChannels;
 

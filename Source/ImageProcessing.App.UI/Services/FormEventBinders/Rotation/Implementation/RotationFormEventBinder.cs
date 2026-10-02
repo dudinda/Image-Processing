@@ -4,7 +4,7 @@ using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.RotationArgs;
 using ImageProcessing.App.UI.Services.FormEventBinders.Rotation;
 using ImageProcessing.App.UI.Services.FormExposers;
-using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
+using ImageProcessing.Microkernel.MVP.Services.Aggregator;
 
 namespace ImageProcessing.App.UI.Services.FormEventBinders.Rotation.Implementation
 {

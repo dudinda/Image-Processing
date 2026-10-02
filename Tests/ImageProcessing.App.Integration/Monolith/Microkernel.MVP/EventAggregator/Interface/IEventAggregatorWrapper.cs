@@ -1,4 +1,4 @@
-using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
+using ImageProcessing.Microkernel.MVP.Services.Aggregator;
 
 namespace ImageProcessing.App.Presentation.UnitTests.Fakes.Components
 {

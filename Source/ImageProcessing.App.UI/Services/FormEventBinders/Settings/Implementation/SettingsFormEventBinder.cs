@@ -2,7 +2,7 @@ using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.SettingsArgs;
 using ImageProcessing.App.UI.Services.FormEventBinders.Settings;
 using ImageProcessing.App.UI.Services.FormExposers;
-using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
+using ImageProcessing.Microkernel.MVP.Services.Aggregator;
 
 namespace ImageProcessing.App.UI.Services.FormEventBinders.Settings.Implementation
 {

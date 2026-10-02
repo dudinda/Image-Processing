@@ -78,7 +78,7 @@ using ImageProcessing.App.Domain.Win.Services.Logger.Implementation;
 using ImageProcessing.App.Domain.Win.Services.QualityMeasure;
 using ImageProcessing.App.Domain.Win.Services.QualityMeasure.Implementation;
 using ImageProcessing.Microkernel.AppConfig;
-using ImageProcessing.Microkernel.MVP.IoC.Interface;
+using ImageProcessing.Microkernel.MVP.Services.IoC;
 
 namespace ImageProcessing.App.Presentation
 {

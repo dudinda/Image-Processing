@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.Domain.Code.Extensions.EnumExt;
 using ImageProcessing.App.UI.Code.Extensions;
-using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
-using ImageProcessing.Microkernel.MVP.Controller.Implementation;
-using ImageProcessing.Microkernel.MVP.Controller.Interface;
+using ImageProcessing.Microkernel.MVP.Services.Aggregator;
+using ImageProcessing.Microkernel.MVP.Services.Controller;
+using ImageProcessing.Microkernel.MVP.Services.Controller.Implementation;
 using ImageProcessing.Microkernel.MVP.View;
 
 using MetroFramework.Controls;

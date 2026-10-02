@@ -35,9 +35,9 @@ using ImageProcessing.App.UI.Services.FormEventBinders.Scaling;
 using ImageProcessing.App.UI.Services.FormEventBinders.Settings;
 using ImageProcessing.App.UI.Services.FormEventBinders.Transformation;
 using ImageProcessing.Microkernel.AppConfig;
-using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
 using NSubstitute;
+using ImageProcessing.Microkernel.MVP.Services.IoC;
 
 namespace ImageProcessing.App.Integration.Monolith.UI
 {

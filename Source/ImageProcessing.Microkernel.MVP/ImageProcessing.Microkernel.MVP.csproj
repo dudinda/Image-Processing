@@ -13,22 +13,25 @@
     <PackageProjectUrl>https://github.com/dudinda/Image-Processing</PackageProjectUrl>
     <RepositoryUrl>https://github.com/dudinda/Image-Processing</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Copyright>Copyright (c) 2018-2022 Daniil Dudin</Copyright>
-    <Version>1.1.0</Version>
+    <Copyright>Copyright (c) 2018-2026 Daniil Dudin</Copyright>
+    <Version>2.0.0</Version>
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE.TXT</PackageLicenseFile>
-    <AssemblyVersion>1.1.0.0</AssemblyVersion>
-    <FileVersion>1.1.0.0</FileVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
     <PackageIcon>icon.png</PackageIcon>
     <PackageReleaseNotes>-fixed closures capture inside the publish from all
 -exposed the Aggregator property inside the base presenter</PackageReleaseNotes>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
-
+  
   <ItemGroup>
-    <ProjectReference Include="..\ImageProcessing.Microkernel.DIAdapter\ImageProcessing.Microkernel.DIAdapter.csproj" />
+    <PackageReference Include="LightInject" Version="6.3.2" />
+    <PackageReference Include="Ninject" Version="3.3.4" />
+    <PackageReference Include="Ninject.Extensions.Factory" Version="3.3.2" />
+    <PackageReference Include="Ninject.Extensions.NamedScope" Version="3.3.0" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
       <_Parameter1>ImageProcessing.App.Integration</_Parameter1>
@@ -36,30 +39,27 @@
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
       <_Parameter1>DynamicProxyGenAssembly2</_Parameter1>
     </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>ImageProcessing.MVP.UnitTests</_Parameter1>
+    </AssemblyAttribute>
   </ItemGroup>
   
   <ItemGroup>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>ImageProcessing.Microkernel.EntryPoint</_Parameter1>
-    </AssemblyAttribute>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>ImageProcessing.App.Integration</_Parameter1>
-    </AssemblyAttribute>
+    <None Include="..\..\LICENSE.TXT" Link="LICENSE.TXT">
+      <PackagePath></PackagePath>
+      <Pack>True</Pack>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="icon.png" Link="icon.png">
+      <PackagePath></PackagePath>
+      <Pack>True</Pack>
+    </None>
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   
-  <ItemGroup>
-    <None Include="..\..\LICENSE.TXT">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="..\ImageProcessing.Microkernel.DIAdapter\icon.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
-
 </Project>

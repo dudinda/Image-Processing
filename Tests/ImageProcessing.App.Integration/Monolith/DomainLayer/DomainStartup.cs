@@ -25,9 +25,9 @@ using ImageProcessing.App.Domain.Services.Factories.Rotation;
 using ImageProcessing.App.Domain.Services.Factories.Scaling;
 using ImageProcessing.App.Domain.Services.Factories.Transformation;
 using ImageProcessing.Microkernel.AppConfig;
-using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
 using NSubstitute;
+using ImageProcessing.Microkernel.MVP.Services.IoC;
 
 namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain
 {

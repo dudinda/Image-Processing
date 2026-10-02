@@ -5,11 +5,11 @@ using ImageProcessing.App.Presentation.DomainEvents.DistributionArgs;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.UI.Services.FormEventBinders.Distribution;
 using ImageProcessing.App.UI.Services.FormExposers;
-using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 
 using static ImageProcessing.App.Presentation.Code.Enums.ImageContainer;
 using static ImageProcessing.App.Domain.Code.Enums.RndFunction;
 using static ImageProcessing.App.Domain.Code.Enums.RndInfo;
+using ImageProcessing.Microkernel.MVP.Services.Aggregator;
 
 namespace ImageProcessing.App.UI.Services.FormEventBinders.Distribution.Implementation
 {

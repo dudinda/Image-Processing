@@ -70,9 +70,9 @@ using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Services
 using ImageProcessing.App.Presentation.UnitTests.Fakes.Services;
 using ImageProcessing.App.Domain.Models.AppSettings;
 using ImageProcessing.Microkernel.AppConfig;
-using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
 using NSubstitute;
+using ImageProcessing.Microkernel.MVP.Services.IoC;
 
 namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain
 {

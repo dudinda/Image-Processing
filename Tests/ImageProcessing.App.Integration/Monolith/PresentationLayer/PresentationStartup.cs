@@ -15,9 +15,9 @@ using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Rgb.Inte
 using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain;
 using ImageProcessing.App.Domain.Models.AppSettings;
 using ImageProcessing.Microkernel.AppConfig;
-using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
 using NSubstitute;
+using ImageProcessing.Microkernel.MVP.Services.IoC;
 
 namespace ImageProcessing.App.Integration.Monolith.Presentation
 {

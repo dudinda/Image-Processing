@@ -302,14 +302,6 @@
       <Project>{4f6224d0-16fc-9d45-4580-ccc6a79bc9e8}</Project>
       <Name>ImageProcessing.App.UI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.Microkernel.DIAdapter\ImageProcessing.Microkernel.DIAdapter.csproj">
-      <Project>{987ad585-ab5e-4394-b8b1-a9f0655a939c}</Project>
-      <Name>ImageProcessing.Microkernel.DIAdapter</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.Microkernel.EntryPoint\ImageProcessing.Microkernel.EntryPoint.csproj">
-      <Project>{1e702994-3838-4acc-8a1d-cdaff18e39dd}</Project>
-      <Name>ImageProcessing.Microkernel.EntryPoint</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.Microkernel.MVP\ImageProcessing.Microkernel.MVP.csproj">
       <Project>{e547bf84-7467-4aa0-a836-84beab772924}</Project>
       <Name>ImageProcessing.Microkernel.MVP</Name>

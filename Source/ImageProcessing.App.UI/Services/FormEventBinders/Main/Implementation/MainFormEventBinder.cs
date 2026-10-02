@@ -7,7 +7,7 @@ using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Show;
 using ImageProcessing.App.UI.Services.FormEventBinders.Main;
 using ImageProcessing.App.UI.Services.FormExposers;
-using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
+using ImageProcessing.Microkernel.MVP.Services.Aggregator;
 
 using static ImageProcessing.App.Presentation.Code.Enums.ImageContainer;
 using static ImageProcessing.App.Presentation.Code.Enums.UndoRedoAction;
