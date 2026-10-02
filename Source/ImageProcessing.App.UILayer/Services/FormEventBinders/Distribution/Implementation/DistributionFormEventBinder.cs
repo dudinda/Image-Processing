@@ -1,13 +1,13 @@
 using System.Windows.Forms;
 
-using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
-using ImageProcessing.App.PresentationLayer.DomainEvents.DistributionArgs;
-using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
+using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
+using ImageProcessing.App.Presentation.DomainEvents.DistributionArgs;
+using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.UILayer.Services.FormEventBinders.Distribution;
 using ImageProcessing.App.UILayer.Services.FormExposers;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 
-using static ImageProcessing.App.PresentationLayer.Code.Enums.ImageContainer;
+using static ImageProcessing.App.Presentation.Code.Enums.ImageContainer;
 using static ImageProcessing.App.Domain.Code.Enums.RndFunction;
 using static ImageProcessing.App.Domain.Code.Enums.RndInfo;
 

@@ -1,6 +1,6 @@
 using System.Threading;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Fakes
+namespace ImageProcessing.App.Presentation.IntegrationTests.Fakes
 {
     internal class SynchronizationContextWrapper : SynchronizationContext
     {

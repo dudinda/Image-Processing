@@ -294,9 +294,9 @@
       <Project>{c5a26e22-4f93-d12b-4ac3-51cfcbb9d097}</Project>
       <Name>ImageProcessing.App.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.PresentationLayer\ImageProcessing.App.PresentationLayer.csproj">
-      <Project>{9e019576-0ee0-4213-a8e5-1da5a52457e1}</Project>
-      <Name>ImageProcessing.App.PresentationLayer</Name>
+    <ProjectReference Include="..\..\Source\ImageProcessing.App.Presentation\ImageProcessing.App.Presentation.csproj">
+      <Project>{c3a187f6-5cae-2147-b72c-97d2ef8f52db}</Project>
+      <Name>ImageProcessing.App.Presentation</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.App.UILayer\ImageProcessing.App.UILayer.csproj">
       <Project>{588ad9f0-3ac2-49ce-99c8-bc5a341b91d5}</Project>

@@ -1,7 +1,7 @@
 using System.Windows.Forms;
 
-using ImageProcessing.App.PresentationLayer.DomainEvents.ColorMatrixArgs;
-using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
+using ImageProcessing.App.Presentation.DomainEvents.ColorMatrixArgs;
+using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.UILayer.Services.FormEventBinders.ColorMatrix;
 using ImageProcessing.App.UILayer.Services.FormExposers;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;

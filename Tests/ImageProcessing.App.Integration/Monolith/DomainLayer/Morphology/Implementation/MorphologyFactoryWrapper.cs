@@ -1,9 +1,9 @@
 using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Morphology.Interface;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Morphology.Interface;
 using ImageProcessing.App.Domain.Models.Morphology;
 using ImageProcessing.App.Domain.Services.Factories.Morphology;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Morphology.Implementation
+namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Morphology.Implementation
 {
     internal class MorphologyFactoryWrapper : IMorphologyFactoryWrapper
     {

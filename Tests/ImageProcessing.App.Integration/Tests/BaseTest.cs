@@ -5,7 +5,7 @@ using ImageProcessing.Microkernel.EntryPoint;
 
 using NUnit.Framework;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
+namespace ImageProcessing.App.Presentation.IntegrationTests.Tests
 {
     [SetUpFixture]
     internal abstract class BaseTest<TStartup>

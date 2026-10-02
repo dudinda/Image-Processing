@@ -1,9 +1,9 @@
 using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Rgb.Interface;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Rgb.Interface;
 using ImageProcessing.App.Domain.Models.Rgb;
 using ImageProcessing.App.Domain.Services.Factories.Rgb;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Rgb.Implementation
+namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Rgb.Implementation
 {
     internal class RgbFactoryWrapper : IRgbFactoryWrapper
     {

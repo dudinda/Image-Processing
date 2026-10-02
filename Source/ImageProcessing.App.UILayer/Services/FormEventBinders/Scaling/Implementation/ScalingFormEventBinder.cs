@@ -1,7 +1,7 @@
 using System.Windows.Forms;
 
-using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
-using ImageProcessing.App.PresentationLayer.DomainEvents.ScalingArgs;
+using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
+using ImageProcessing.App.Presentation.DomainEvents.ScalingArgs;
 using ImageProcessing.App.UILayer.Services.FormEventBinders.Scaling;
 using ImageProcessing.App.UILayer.Services.FormExposers;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;

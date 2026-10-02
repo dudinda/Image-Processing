@@ -1,15 +1,15 @@
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Logger.Interface;
-using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
-using ImageProcessing.App.PresentationLayer.DomainEvents.SettingsArgs;
-using ImageProcessing.App.PresentationLayer.Presenters;
-using ImageProcessing.App.PresentationLayer.Views;
+using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
+using ImageProcessing.App.Presentation.DomainEvents.SettingsArgs;
+using ImageProcessing.App.Presentation.Presenters;
+using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.App.Domain.Models.AppSettings;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.PresentationLayer.Presenters
+namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
 {
     internal class SettingsPresenterWrapper : BasePresenter<ISettingsView>,
         ISubscriber<ChangeLumaEventArgs>, ISubscriber<ChangeRotationEventArgs>,

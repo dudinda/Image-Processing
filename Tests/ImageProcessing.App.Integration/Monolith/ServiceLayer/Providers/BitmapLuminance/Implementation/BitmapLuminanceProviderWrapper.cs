@@ -5,7 +5,7 @@ using ImageProcessing.App.Integration.Monolith.Domain.Providers.BitmapLuminance.
 using ImageProcessing.App.Integration.Monolith.Domain.ServiceModel.VisitableFactory.BitmapLuminance.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.ServiceModel.Vistiors.BitmapLuminance.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Distribution.BitmapLuminance.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Distribution.Interface;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Distribution.Interface;
 using ImageProcessing.App.Domain.Code.Enums;
 using ImageProcessing.App.Domain.Providers.BitmapLuminance.Implementation;
 

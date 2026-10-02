@@ -1,7 +1,7 @@
 using System.Windows.Forms;
 
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Transformation.Interface;
-using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
+using ImageProcessing.App.Presentation.UnitTests.Fakes.Components;
 using ImageProcessing.App.UILayer.Services.FormEventBinders.Transformation.Implementation;
 using ImageProcessing.App.UILayer.Services.FormExposers;
 

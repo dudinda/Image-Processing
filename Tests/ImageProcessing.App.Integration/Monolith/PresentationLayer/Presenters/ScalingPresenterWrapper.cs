@@ -3,15 +3,15 @@ using System.Threading.Tasks;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.Scaling.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Logger.Interface;
-using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
-using ImageProcessing.App.PresentationLayer.DomainEvents.ScalingArgs;
-using ImageProcessing.App.PresentationLayer.Presenters;
-using ImageProcessing.App.PresentationLayer.ViewModels;
-using ImageProcessing.App.PresentationLayer.Views;
+using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
+using ImageProcessing.App.Presentation.DomainEvents.ScalingArgs;
+using ImageProcessing.App.Presentation.Presenters;
+using ImageProcessing.App.Presentation.ViewModels;
+using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.PresentationLayer.Presenters
+namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
 {
     internal class ScalingPresenterWrapper : BasePresenter<IScalingView, BitmapViewModel>,
         ISubscriber<ScaleEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,

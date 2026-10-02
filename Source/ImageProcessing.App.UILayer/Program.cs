@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.App.PresentationLayer.Presenters;
+using ImageProcessing.App.Presentation.Presenters;
 using ImageProcessing.Microkernel.DIAdapter;
 using ImageProcessing.Microkernel.EntryPoint;
 

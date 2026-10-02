@@ -1,0 +1,10 @@
+namespace ImageProcessing.App.Presentation.DomainEvents.ColorMatrixArgs
+{
+    /// <summary>
+    /// Apply a custom color matrix.
+    /// </summary>
+    public sealed class ApplyCustomColorMatrixEventArgs : BaseEventArgs
+    {
+
+    }
+}

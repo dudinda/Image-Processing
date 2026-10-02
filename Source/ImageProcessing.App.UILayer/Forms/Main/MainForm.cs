@@ -2,8 +2,8 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-using ImageProcessing.App.PresentationLayer.Code.Enums;
-using ImageProcessing.App.PresentationLayer.Views;
+using ImageProcessing.App.Presentation.Code.Enums;
+using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.App.Domain.Services.UndoRedo;
 using ImageProcessing.App.UILayer.Models.Controls;
 using ImageProcessing.App.UILayer.Properties;

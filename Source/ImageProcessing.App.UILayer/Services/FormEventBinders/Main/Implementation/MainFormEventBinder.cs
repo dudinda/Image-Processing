@@ -1,16 +1,16 @@
 using System.Windows.Forms;
 
-using ImageProcessing.App.PresentationLayer.DomainEvents.CommonArgs;
-using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Container;
-using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.FileDialog;
-using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
-using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Show;
+using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
+using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Container;
+using ImageProcessing.App.Presentation.DomainEvents.MainArgs.FileDialog;
+using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Menu;
+using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Show;
 using ImageProcessing.App.UILayer.Services.FormEventBinders.Main;
 using ImageProcessing.App.UILayer.Services.FormExposers;
 using ImageProcessing.Microkernel.MVP.Aggregator.Interface;
 
-using static ImageProcessing.App.PresentationLayer.Code.Enums.ImageContainer;
-using static ImageProcessing.App.PresentationLayer.Code.Enums.UndoRedoAction;
+using static ImageProcessing.App.Presentation.Code.Enums.ImageContainer;
+using static ImageProcessing.App.Presentation.Code.Enums.UndoRedoAction;
 
 namespace ImageProcessing.App.UILayer.Services.FormEventBinders.Main.Implementation
 {

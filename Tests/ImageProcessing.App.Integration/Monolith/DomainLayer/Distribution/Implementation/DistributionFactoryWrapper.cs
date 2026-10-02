@@ -1,9 +1,9 @@
 using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Distribution.Interface;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Distribution.Interface;
 using ImageProcessing.App.Domain.Models.Distribution;
 using ImageProcessing.App.Domain.Services.Factories.Distribution;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Distribution.Implementation
+namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Distribution.Implementation
 {
     internal class DistributionFactoryWrapper : IDistributionFactoryWrapper
     {

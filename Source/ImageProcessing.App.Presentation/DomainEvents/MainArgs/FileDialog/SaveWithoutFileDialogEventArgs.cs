@@ -1,0 +1,10 @@
+namespace ImageProcessing.App.Presentation.DomainEvents.MainArgs.FileDialog
+{
+    /// <summary>
+    /// Save an image without the save as file dialog. 
+    /// </summary>
+    public sealed class SaveWithoutFileDialogEventArgs : BaseEventArgs
+    {
+
+    }
+}

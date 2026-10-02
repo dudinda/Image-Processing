@@ -1,7 +1,7 @@
 using System;
 
 using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.Interface;
-using ImageProcessing.App.PresentationLayer.Code.Enums;
+using ImageProcessing.App.Presentation.Code.Enums;
 using ImageProcessing.App.UILayer.Models.MenuState;
 using ImageProcessing.App.UILayer.Services.Factories.MenuState.Implementation;
 

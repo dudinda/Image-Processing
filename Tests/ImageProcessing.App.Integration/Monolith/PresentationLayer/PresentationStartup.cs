@@ -1,4 +1,4 @@
-using ImageProcessing.App.Integration.Monolith.PresentationLayer.Presenters;
+using ImageProcessing.App.Integration.Monolith.Presentation.Presenters;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.BitmapLuminance.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.Convolution.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.Rgb.Interface;
@@ -10,16 +10,16 @@ using ImageProcessing.App.Integration.Monolith.Domain.Services.Bmp.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Logger.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Pipeline.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.ColorMatrix.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Rgb.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.ColorMatrix.Interface;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Rgb.Interface;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain;
 using ImageProcessing.App.Domain.Models.AppSettings;
 using ImageProcessing.Microkernel.AppConfig;
 using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
 using NSubstitute;
 
-namespace ImageProcessing.App.Integration.Monolith.PresentationLayer
+namespace ImageProcessing.App.Integration.Monolith.Presentation
 {
     public class PresentationStartup : IStartup
     {

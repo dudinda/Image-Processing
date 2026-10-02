@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-using ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Components;
+using ImageProcessing.App.Presentation.UnitTests.Fakes.Components;
 using ImageProcessing.Microkernel.MVP.Aggregator.Implementation;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Fakes
+namespace ImageProcessing.App.Presentation.IntegrationTests.Fakes
 {
     internal sealed class EventAggregatorWrapper : EventAggregator, IEventAggregatorWrapper
     {

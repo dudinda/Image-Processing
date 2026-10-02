@@ -2,7 +2,7 @@ using System.Drawing;
 
 using ImageProcessing.App.Domain.Code.Enums;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.Transformation.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Transformation.Interface;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Transformation.Interface;
 using ImageProcessing.App.Domain.Providers.Transformation.Implementation;
 
 namespace ImageProcessing.App.Integration.Monolith.Domain.Providers.Transformation.Implementation

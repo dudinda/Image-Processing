@@ -5,7 +5,7 @@ using ImageProcessing.App.Integration.Monolith.Domain.ServiceModel.Vistiors.Conv
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Bmp.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Cache.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Convolution.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Convolution.Interface;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Convolution.Interface;
 using ImageProcessing.App.Domain.Providers.Visitors.Convolution.Implementation;
 
 namespace ImageProcessing.App.Integration.Monolith.Domain.ServiceModel.Vistiors.Convolution.Implementation

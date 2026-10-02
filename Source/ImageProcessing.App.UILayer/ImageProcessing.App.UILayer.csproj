@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ImageProcessing.App.PresentationLayer\ImageProcessing.App.PresentationLayer.csproj" />
+    <ProjectReference Include="..\ImageProcessing.App.Presentation\ImageProcessing.App.Presentation.csproj" />
   </ItemGroup>
 
   <ItemGroup>

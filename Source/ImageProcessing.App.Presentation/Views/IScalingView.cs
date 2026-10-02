@@ -1,0 +1,15 @@
+using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.Presentation.Views.ViewComponents;
+using ImageProcessing.Microkernel.MVP.View;
+
+namespace ImageProcessing.App.Presentation.Views
+{
+    /// <summary>
+    /// Represents the base behavior of a scaling control panel.
+    /// </summary>
+    public interface IScalingView : IView, IFormState,
+        IDropdown<ScalingMethod>, ITooltip
+    {
+        (string, string) Parameters { get; }
+    }
+}

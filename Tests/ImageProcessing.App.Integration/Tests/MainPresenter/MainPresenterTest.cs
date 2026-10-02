@@ -2,15 +2,15 @@ using System.Configuration;
 using System.Drawing;
 
 using ImageProcessing.App.Integration.Code.Resources;
-using ImageProcessing.App.Integration.Monolith.PresentationLayer.Presenters;
+using ImageProcessing.App.Integration.Monolith.Presentation.Presenters;
 using ImageProcessing.App.Integration.Monolith.UILayer;
-using ImageProcessing.App.PresentationLayer.Code.Constants;
-using ImageProcessing.App.PresentationLayer.Code.Enums;
-using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.FileDialog;
-using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
-using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Show;
-using ImageProcessing.App.PresentationLayer.UnitTests.Extensions;
-using ImageProcessing.App.PresentationLayer.Views;
+using ImageProcessing.App.Presentation.Code.Constants;
+using ImageProcessing.App.Presentation.Code.Enums;
+using ImageProcessing.App.Presentation.DomainEvents.MainArgs.FileDialog;
+using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Menu;
+using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Show;
+using ImageProcessing.App.Presentation.UnitTests.Extensions;
+using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.App.Domain.Services.Pipeline.Implementation;
 using ImageProcessing.App.UILayer.Services.FormExposers;
 using ImageProcessing.Microkernel.EntryPoint;
@@ -20,7 +20,7 @@ using NSubstitute.ReceivedExtensions;
 
 using NUnit.Framework;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Tests
+namespace ImageProcessing.App.Presentation.IntegrationTests.Tests
 {
     [TestFixture]
 #if !DEBUG

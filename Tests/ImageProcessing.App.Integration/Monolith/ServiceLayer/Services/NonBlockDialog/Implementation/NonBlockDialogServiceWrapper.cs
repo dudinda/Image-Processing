@@ -5,7 +5,7 @@ using ImageProcessing.App.Integration.Monolith.Domain.Services.FileDialog.Interf
 using ImageProcessing.App.Integration.Monolith.Domain.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.StaTask.Interface;
 
-namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Services
+namespace ImageProcessing.App.Presentation.UnitTests.Fakes.Services
 {
     internal class NonBlockDialogServiceWrapper : INonBlockDialogServiceWrapper
     {

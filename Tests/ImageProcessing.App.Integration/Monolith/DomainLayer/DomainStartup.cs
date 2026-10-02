@@ -1,21 +1,21 @@
 using ImageProcessing.App.Integration.Monolith.Domain.StructuringElement.Implementation;
 using ImageProcessing.App.Integration.Monolith.Domain.StructuringElement.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.ColorMatrix.Implementation;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.ColorMatrix.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Convolution.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Distribution.Implementation;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Distribution.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Morphology.Implementation;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Morphology.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Rgb.Implementation;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Rgb.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Rotation.Implementation;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Rotation.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Scaling.Implementation;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Scaling.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Transformation.Implementation;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Transformation.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Microkernel.MVP;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.ColorMatrix.Implementation;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.ColorMatrix.Interface;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Convolution.Interface;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Distribution.Implementation;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Distribution.Interface;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Morphology.Implementation;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Morphology.Interface;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Rgb.Implementation;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Rgb.Interface;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Rotation.Implementation;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Rotation.Interface;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Scaling.Implementation;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Scaling.Interface;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Transformation.Implementation;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Transformation.Interface;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Microkernel.MVP;
 using ImageProcessing.App.Domain.Services.Factories.ColorMatrix;
 using ImageProcessing.App.Domain.Services.Factories.Convolution;
 using ImageProcessing.App.Domain.Services.Factories.Distribution;
@@ -29,7 +29,7 @@ using ImageProcessing.Microkernel.MVP.IoC.Interface;
 
 using NSubstitute;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain
+namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain
 {
     internal sealed class DomainStartup : IStartup
     {

@@ -3,13 +3,13 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.Domain.Code.Enums;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Convolution.Interface;
-using ImageProcessing.App.PresentationLayer.Views;
+using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.App.UILayer.Forms.Convolution;
 using ImageProcessing.App.UILayer.Services.FormExposers;
 
 using MetroFramework.Controls;
 
-namespace ImageProcessing.App.PresentationLayer.UnitTests.TestsComponents.Wrappers.Forms
+namespace ImageProcessing.App.Presentation.UnitTests.TestsComponents.Wrappers.Forms
 {
     internal class ConvolutionFormWrapper : IConvolutionFormExposer, IConvolutionView
     {

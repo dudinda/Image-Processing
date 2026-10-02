@@ -1,6 +1,6 @@
 using System.Windows.Forms;
 
-using ImageProcessing.App.PresentationLayer.Views;
+using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.App.UILayer.Forms.ColorMatrix;
 using ImageProcessing.App.UILayer.Forms.Convolution;
 using ImageProcessing.App.UILayer.Forms.Distribution;
@@ -44,7 +44,7 @@ namespace ImageProcessing.App.UILayer
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            new PresentationLayer.Startup().Build(builder);
+            new Presentation.Startup().Build(builder);
 
             builder
                 .RegisterSingleton<IMainView, MainForm>()

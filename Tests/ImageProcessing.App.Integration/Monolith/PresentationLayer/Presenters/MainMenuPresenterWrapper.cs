@@ -3,14 +3,14 @@ using System.Threading.Tasks;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Logger.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Pipeline.Interface;
-using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Menu;
-using ImageProcessing.App.PresentationLayer.DomainEvents.MainArgs.Show;
-using ImageProcessing.App.PresentationLayer.ViewModels;
-using ImageProcessing.App.PresentationLayer.Views;
+using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Menu;
+using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Show;
+using ImageProcessing.App.Presentation.ViewModels;
+using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
-namespace ImageProcessing.App.Integration.Monolith.PresentationLayer.Presenters
+namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
 {
     internal class MainMenuPresenterWrapper : BasePresenter<IMainView>,
         ISubscriber<ShowConvolutionMenuEventArgs>, ISubscriber<ShowDistributionMenuEventArgs>,

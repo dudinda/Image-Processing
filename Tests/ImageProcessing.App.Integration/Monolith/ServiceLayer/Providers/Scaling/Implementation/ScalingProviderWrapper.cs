@@ -2,7 +2,7 @@ using System.Drawing;
 
 using ImageProcessing.App.Domain.Code.Enums;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.Scaling.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Scaling.Interface;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Scaling.Interface;
 using ImageProcessing.App.Domain.Models.AppSettings;
 using ImageProcessing.App.Domain.Providers.Scaling.Implementation;
 

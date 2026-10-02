@@ -1,9 +1,9 @@
 using ImageProcessing.App.Domain.Code.Enums;
 using ImageProcessing.App.Domain.Models.ColorMatrix.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.ColorMatrix.Interface;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.ColorMatrix.Interface;
 using ImageProcessing.App.Domain.Services.Factories.ColorMatrix;
 
-namespace ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.ColorMatrix.Implementation
+namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.ColorMatrix.Implementation
 {
     internal class ColorMatrixFactoryWrapper : IColorMatrixFactoryWrapper
     {

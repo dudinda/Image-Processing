@@ -5,7 +5,7 @@ using ImageProcessing.App.Integration.Monolith.Domain.StructuringElement.Interfa
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.Morphology.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Cache.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Morphology.Interface;
-using ImageProcessing.App.PresentationLayer.IntegrationTests.Monolith.Domain.Morphology.Interface;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Morphology.Interface;
 using ImageProcessing.App.Domain.Providers.Morphology.Implementation;
 using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 

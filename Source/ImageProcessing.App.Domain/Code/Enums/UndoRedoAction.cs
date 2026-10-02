@@ -1,4 +1,4 @@
-namespace ImageProcessing.App.PresentationLayer.Code.Enums
+namespace ImageProcessing.App.Presentation.Code.Enums
 {
     public enum UndoRedoAction
     {

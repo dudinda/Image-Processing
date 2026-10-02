@@ -5,8 +5,8 @@ using System.Windows.Forms;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.UndoRedo.Interface;
 using ImageProcessing.App.Integration.Monolith.UILayer.FormEventBinders.Main.Interface;
 using ImageProcessing.App.Integration.Monolith.UILayer.UIModel.Factories.Interface;
-using ImageProcessing.App.PresentationLayer.Code.Enums;
-using ImageProcessing.App.PresentationLayer.Views;
+using ImageProcessing.App.Presentation.Code.Enums;
+using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.App.Domain.Services.UndoRedo;
 using ImageProcessing.App.UILayer.Forms.Main;
 using ImageProcessing.App.UILayer.Models.Controls;
@@ -16,7 +16,7 @@ using ImageProcessing.App.UILayer.Services.FormExposers;
 
 using MetroFramework.Controls;
 
-namespace ImageProcessing.App.PresentationLayer.UnitTests.Fakes.Form
+namespace ImageProcessing.App.Presentation.UnitTests.Fakes.Form
 {
     internal partial class MainFormWrapper : IMainView, IMainFormExposer
     {

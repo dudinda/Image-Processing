@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.Domain.Code.Extensions.BitmapExt;
 
-namespace ImageProcessing.App.PresentationLayer.UnitTests.Extensions
+namespace ImageProcessing.App.Presentation.UnitTests.Extensions
 {
     public static class BitmapExtensions
     {
