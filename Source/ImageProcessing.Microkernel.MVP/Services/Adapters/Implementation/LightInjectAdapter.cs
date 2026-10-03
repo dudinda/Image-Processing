@@ -1,11 +1,8 @@
 using System;
-using System.Linq.Expressions;
-
-using ImageProcessing.Microkernel.MVP.Services.Adapters;
 
 using LightInject;
 
-namespace ImageProcessing.Microkernel.DIAdapter.Adapters.Implementation
+namespace ImageProcessing.Microkernel.MVP.Services.Adapters.Implementation
 {
     /// <summary>
     /// Provides access to the LightInject <see cref="ServiceContainer"/>
@@ -18,12 +15,12 @@ namespace ImageProcessing.Microkernel.DIAdapter.Adapters.Implementation
         /// <inheritdoc/>
         public void RegisterTransient<TService, TImplementation>()
             where TImplementation : TService
-            => _container.Register<TService, TImplementation>();
+            => _container.Register<TService, TImplementation>(new PerRequestLifeTime());
 
         /// <inheritdoc/>
         public void RegisterScoped<TService, TImplementation>()
             where TImplementation : TService
-            => throw new NotSupportedException();
+            => _container.Register<TService, TImplementation>(new PerScopeLifetime());
 
         /// <inheritdoc/>
         public void RegisterSingleton<TService, TImplementation>()
@@ -38,7 +35,7 @@ namespace ImageProcessing.Microkernel.DIAdapter.Adapters.Implementation
         /// <inheritdoc/>
         public void RegisterScoped<TService, TImplementation>(string name)
             where TImplementation : TService
-            => throw new NotSupportedException();
+            => _container.Register<TService, TImplementation>(name, new PerScopeLifetime());
 
         /// <inheritdoc/>
         public void RegisterSingleton<TService, TImplementation>(string name)
@@ -51,7 +48,7 @@ namespace ImageProcessing.Microkernel.DIAdapter.Adapters.Implementation
 
         /// <inheritdoc/>
         public void RegisterScoped<TService>()
-            => throw new NotSupportedException();
+            => _container.Register<TService>(new PerScopeLifetime());
 
         /// <inheritdoc/>
         public void RegisterSingleton<TService>()
@@ -59,51 +56,72 @@ namespace ImageProcessing.Microkernel.DIAdapter.Adapters.Implementation
 
         /// <inheritdoc/>
         public void RegisterTransient<TService>(TService instance)
-            => _container.RegisterInstance(instance);
+            => _container.Register<TService>(factory => instance, new PerRequestLifeTime());
 
         /// <inheritdoc/>
         public void RegisterScoped<TService>(TService instance)
-            => throw new NotSupportedException();
+            => _container.Register<TService>(factory => instance, new PerScopeLifetime());
 
         /// <inheritdoc/>
         public void RegisterSingleton<TService>(TService instance)
-             => throw new NotSupportedException();
+            => _container.RegisterInstance(typeof(TService), instance);
 
         /// <inheritdoc/>
         public void RegisterTransient<TService>(TService instance, string serviceName)
-            => _container.RegisterInstance(instance, serviceName: serviceName);
+            => _container.Register<TService>(factory => instance, serviceName: serviceName);
 
         /// <inheritdoc/>
         public void RegisterScoped<TService>(TService instance, string serviceName)
-            => throw new NotSupportedException();
+            => _container.Register<TService>(factory => instance, serviceName: serviceName);
 
         /// <inheritdoc/>
         public void RegisterSingleton<TService>(TService instance, string serviceName)
-            => throw new NotSupportedException();
+            => _container.RegisterInstance<TService>(instance, serviceName: serviceName);
 
         /// <inheritdoc/>
-        public void RegisterTransient<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
-            => _container.Register(serviceFactory => factory);
+        public void RegisterTransient<TService, TArgument>(Func<TArgument, TService> factory)
+            => _container.Register(serviceFactory =>
+            {
+                var arg = serviceFactory.GetInstance<TArgument>();
+                return factory(arg);
+            }, new PerRequestLifeTime());
 
         /// <inheritdoc/>
-        public void RegisterScoped<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
-            => throw new NotSupportedException();
+        public void RegisterScoped<TService, TArgument>(Func<TArgument, TService> factory)
+            => _container.Register(serviceFactory => {
+                var arg = serviceFactory.GetInstance<TArgument>();
+                return factory(arg);
+            }, new PerScopeLifetime());
 
         /// <inheritdoc/>
-        public void RegisterSingleton<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
-            => _container.Register(serviceFactory => factory, new PerContainerLifetime());
+        public void RegisterSingleton<TService, TArgument>(Func<TArgument, TService> factory)
+            => _container.Register(serviceFactory => {
+                var arg = serviceFactory.GetInstance<TArgument>();
+                return factory(arg);
+            }, new PerContainerLifetime());
 
         /// <inheritdoc/>
-        public void RegisterTransient<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string serviceName)
-            => _container.Register(serviceFactory => factory, serviceName);
+        public void RegisterTransient<TService, TArgument>(Func<TArgument, TService> factory, string serviceName)
+            => _container.Register(serviceFactory =>
+            {
+                var arg = serviceFactory.GetInstance<TArgument>();
+                return factory(arg);
+            }, serviceName);
 
         /// <inheritdoc/>
-        public void RegisterScoped<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string serviceName)
-            => throw new NotSupportedException();
+        public void RegisterScoped<TService, TArgument>(Func<TArgument, TService> factory, string serviceName)
+            => _container.Register(serviceFactory =>
+            {
+                var arg = serviceFactory.GetInstance<TArgument>();
+                return factory(arg);
+            }, serviceName, new PerScopeLifetime());
 
         /// <inheritdoc/>
-        public void RegisterSingleton<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string serviceName)
-            => _container.Register(serviceFactory => factory, serviceName, new PerContainerLifetime());
+        public void RegisterSingleton<TService, TArgument>(Func<TArgument, TService> factory, string serviceName)
+            => _container.Register(serviceFactory => {
+                var arg = serviceFactory.GetInstance<TArgument>();
+                return factory(arg);
+            }, serviceName, new PerContainerLifetime());
 
         /// <inheritdoc/>
         public TService Resolve<TService>()

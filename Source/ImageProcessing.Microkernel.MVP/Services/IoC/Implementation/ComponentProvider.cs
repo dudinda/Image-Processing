@@ -1,8 +1,6 @@
 using System;
-using System.Linq.Expressions;
 
 using ImageProcessing.Microkernel.MVP.Services.Adapters;
-using ImageProcessing.Microkernel.MVP.View;
 
 namespace ImageProcessing.Microkernel.MVP.Services.IoC.Implementation
 {
@@ -16,24 +14,7 @@ namespace ImageProcessing.Microkernel.MVP.Services.IoC.Implementation
         {
             _container = container ??
                 throw new ArgumentException(nameof(container));
-        }
-
-        /// <inheritdoc/>
-        public IComponentProvider RegisterTransientView<TView, TImplementation>()
-                where TImplementation : class, TView
-                where TView : IView
-        {
-            _container.RegisterTransient<TView, TImplementation>();
-            return this;
-        }
-
-        /// <inheritdoc/>
-        public IComponentProvider RegisterSingletonView<TView, TImplementation>()
-                where TImplementation : class, TView
-                where TView : IView, IDisposable
-        {
-            _container.RegisterSingleton<TView, TImplementation>();
-            return this;
+            _container.RegisterSingleton<IComponentProvider>(this);
         }
 
         /// <inheritdoc/>
@@ -148,50 +129,50 @@ namespace ImageProcessing.Microkernel.MVP.Services.IoC.Implementation
         }
 
         /// <inheritdoc/>
-        public IComponentProvider RegisterTransient<TService, TArgument>(
-            Expression<Func<IComponentProvider, TService>> factory)
+        public IComponentProvider RegisterTransient<TService>(
+            Func<IComponentProvider, TService> factory)
         {
-            _container.RegisterTransient(factory.Compile()(this));
+            _container.RegisterTransient(factory);
             return this;
         }
 
         /// <inheritdoc/>
-        public IComponentProvider RegisterScoped<TService, TArgument>(
-            Expression<Func<IComponentProvider, TService>> factory)
+        public IComponentProvider RegisterScoped<TService>(
+            Func<IComponentProvider, TService> factory)
         {
-            _container.RegisterScoped(factory.Compile()(this));
+            _container.RegisterScoped(factory);
             return this;
         }
 
         /// <inheritdoc/>
-        public IComponentProvider RegisterSingleton<TService, TArgument>(
-            Expression<Func<IComponentProvider, TService>> factory)
+        public IComponentProvider RegisterSingleton<TService>(
+            Func<IComponentProvider, TService> factory)
         {
-            _container.RegisterSingleton(factory.Compile()(this));
+            _container.RegisterSingleton(factory);
             return this;
         }
 
         /// <inheritdoc/>
-        public IComponentProvider RegisterTransient<TService, TArgument>(
-            Expression<Func<IComponentProvider, TService>> factory, string name)
+        public IComponentProvider RegisterTransient<TService>(
+            Func<IComponentProvider, TService> factory, string name)
         {
-            _container.RegisterTransient(factory.Compile()(this), name);
+            _container.RegisterTransient(factory, name);
             return this;
         }
 
         /// <inheritdoc/>
-        public IComponentProvider RegisterScoped<TService, TArgument>(
-            Expression<Func<IComponentProvider, TService>> factory, string name)
+        public IComponentProvider RegisterScoped<TService>(
+            Func<IComponentProvider, TService> factory, string name)
         {
-            _container.RegisterScoped(factory.Compile()(this), name);
+            _container.RegisterScoped(factory, name);
             return this;
         }
 
         /// <inheritdoc/>
-        public IComponentProvider RegisterSingleton<TService, TArgument>(
-            Expression<Func<IComponentProvider, TService>> factory, string name)
+        public IComponentProvider RegisterSingleton<TService>(
+            Func<IComponentProvider, TService> factory, string name)
         {
-            _container.RegisterSingleton(factory.Compile()(this), name);
+            _container.RegisterSingleton(factory, name);
             return this;
         }
 

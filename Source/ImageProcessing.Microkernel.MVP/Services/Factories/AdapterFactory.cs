@@ -1,7 +1,7 @@
 using System;
 
-using ImageProcessing.Microkernel.DIAdapter.Adapters.Implementation;
 using ImageProcessing.Microkernel.MVP.Services.Adapters;
+using ImageProcessing.Microkernel.MVP.Services.Adapters.Implementation;
 
 namespace ImageProcessing.Microkernel.DIAdapter.Factory
 {

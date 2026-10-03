@@ -1,12 +1,9 @@
 using System;
-using System.Linq.Expressions;
-
-using ImageProcessing.Microkernel.MVP.Services.Adapters;
 
 using Ninject;
 using Ninject.Extensions.NamedScope;
 
-namespace ImageProcessing.Microkernel.DIAdapter.Adapters.Implementation
+namespace ImageProcessing.Microkernel.MVP.Services.Adapters.Implementation
 {
     /// <summary>
     /// Provides access to the Ninject <see cref="StandardKernel"/>
@@ -89,16 +86,37 @@ namespace ImageProcessing.Microkernel.DIAdapter.Adapters.Implementation
                    .InSingletonScope();
 
         /// <inheritdoc/>
-        public void RegisterTransient<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
-            => throw new NotImplementedException(nameof(factory));
+        public void RegisterTransient<TService, TArgument>(Func<TArgument, TService> factory)
+            => _container
+                    .Bind<TService>()
+                    .ToMethod(context =>
+                    {
+                        var arg = context.Kernel.Get<TArgument>();
+                        return factory(arg);
+                    })
+                    .InTransientScope();
 
         /// <inheritdoc/>
-        public void RegisterScoped<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
-            => throw new NotImplementedException(nameof(factory));
+        public void RegisterScoped<TService, TArgument>(Func<TArgument, TService> factory)
+             => _container
+                    .Bind<TService>()
+                    .ToMethod(context =>
+                    {
+                        var arg = context.Kernel.Get<TArgument>();
+                        return factory(arg);
+                    })
+                    .InCallScope();
 
         /// <inheritdoc/>
-        public void RegisterSingleton<TService, TArgument>(Expression<Func<TArgument, TService>> factory)
-            => throw new NotImplementedException(nameof(factory));
+        public void RegisterSingleton<TService, TArgument>(Func<TArgument, TService> factory)
+            => _container
+                    .Bind<TService>()
+                    .ToMethod(context =>
+                    {
+                        var arg = context.Kernel.Get<TArgument>();
+                        return factory(arg);
+                    })
+                    .InSingletonScope();
 
         /// <inheritdoc/>
         public void RegisterTransient<TService>(TService instance)
@@ -146,16 +164,40 @@ namespace ImageProcessing.Microkernel.DIAdapter.Adapters.Implementation
                    .Named(serviceName);
 
         /// <inheritdoc/>
-        public void RegisterTransient<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name)
-            => throw new NotImplementedException(nameof(factory));
+        public void RegisterTransient<TService, TArgument>(Func<TArgument, TService> factory, string name)
+            => _container
+                    .Bind<TService>()
+                    .ToMethod(context =>
+                    {
+                        var arg = context.Kernel.Get<TArgument>();
+                        return factory(arg);
+                    })
+                    .InTransientScope()
+                    .Named(name);
 
         /// <inheritdoc/>
-        public void RegisterScoped<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name)
-            => throw new NotImplementedException(nameof(factory));
+        public void RegisterScoped<TService, TArgument>(Func<TArgument, TService> factory, string name)
+            => _container
+                    .Bind<TService>()
+                    .ToMethod(context =>
+                    {
+                        var arg = context.Kernel.Get<TArgument>();
+                        return factory(arg);
+                    })
+                    .InCallScope()
+                    .Named(name);
 
         /// <inheritdoc/>
-        public void RegisterSingleton<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name)
-            => throw new NotImplementedException(nameof(factory));
+        public void RegisterSingleton<TService, TArgument>(Func<TArgument, TService> factory, string name)
+             => _container
+                    .Bind<TService>()
+                    .ToMethod(context =>
+                    {
+                        var arg = context.Kernel.Get<TArgument>();
+                        return factory(arg);
+                    })
+                    .InSingletonScope()
+                    .Named(name);
 
         /// <inheritdoc/>
         public TService Resolve<TService>()

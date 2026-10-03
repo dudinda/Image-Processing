@@ -1,5 +1,4 @@
 using System;
-using System.Linq.Expressions;
 
 namespace ImageProcessing.Microkernel.MVP.Services.Adapters
 {
@@ -109,43 +108,37 @@ namespace ImageProcessing.Microkernel.MVP.Services.Adapters
         /// Registers the <typeparamref name="TService"/> as the factory that describes.
         /// the dependencies of the service with a transient scope.
         /// </summary>
-        [Obsolete("The implementation will not be provided. Will be removed.")]
-        void RegisterTransient<TService, TArgument>(Expression<Func<TArgument, TService>> factory);
+        void RegisterTransient<TService, TArgument>(Func<TArgument, TService> factory);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes.
         /// the dependencies of the service with the caller-name scope.
         /// </summary>
-        [Obsolete("The implementation will not be provided. Will be removed.")]
-        void RegisterScoped<TService, TArgument>(Expression<Func<TArgument, TService>> factory);
+        void RegisterScoped<TService, TArgument>(Func<TArgument, TService> factory);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes
         /// the dependencies of the service with a singleton scope.
         /// </summary>
-        [Obsolete("The implementation will not be provided. Will be removed.")]
-        void RegisterSingleton<TService, TArgument>(Expression<Func<TArgument, TService>> factory);
+        void RegisterSingleton<TService, TArgument>(Func<TArgument, TService> factory);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes
         /// the named dependencies of the service with a transient scope.
         /// </summary>
-        [Obsolete("The implementation will not be provided. Will be removed.")]
-        void RegisterTransient<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name);
+        void RegisterTransient<TService, TArgument>(Func<TArgument, TService> factory, string name);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes
         /// the named dependencies of the service with the caller-name scope.
         /// </summary>
-        [Obsolete("The implementation will not be provided. Will be removed.")]
-        void RegisterScoped<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name);
+        void RegisterScoped<TService, TArgument>(Func<TArgument, TService> factory, string name);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes
         /// the named dependencies of the service with a singleton scope.
         /// </summary>
-        [Obsolete("The implementation will not be provided. Will be removed.")]
-        void RegisterSingleton<TService, TArgument>(Expression<Func<TArgument, TService>> factory, string name);
+        void RegisterSingleton<TService, TArgument>(Func<TArgument, TService> factory, string name);
 
         /// <summary>
         /// Returns <b>true</b> if the container can create the requested service, otherwise <b>false</b>.
