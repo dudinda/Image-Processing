@@ -2,14 +2,14 @@
 
 ## RGB Filters
 
-### [Inversion filter](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.App.Domain/DomainModel/Rgb/RgbFilter/Implementation/InversionFilter.cs)
+### [Inversion filter](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.App.Domain/Models/Rgb/RgbFilter/Implementation/InversionFilter.cs)
 
 <p align="center">
     <img src="https://i.imgur.com/99AL4uB.png" width="700" height = "200" alt="inverse filter">
     <p align="center">Fig. 1 - Image processing with an inverse rgb filter.</p>
 </p>
 
-### [Color filter](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.App.Domain/DomainModel/Rgb/RgbFilter/Implementation/ColorFilter.cs)
+### [Color filter](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.App.Domain/Models/Rgb/Channel/Implementation/RGChannel.cs)
 
 <p align="center">
     <img src="https://i.imgur.com/pqcN41l.png" width="700" height = "200" alt="color filter">
@@ -17,7 +17,7 @@
 </p>
 
 
-### [Grayscale filter](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.App.Domain/DomainModel/Rgb/RgbFilter/Implementation/GrayscaleFilter.cs)
+### [Grayscale filter](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.App.Domain/Models/Rgb/RgbFilter/Implementation/GrayscaleFilter.cs)
 
 <p align="center">
     <img src="https://i.imgur.com/1E53wfX.png" width="700" height = "200" alt="grayscale filter">
@@ -25,7 +25,7 @@
 </p>
 
 
-### [Binary filter](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.App.Domain/DomainModel/Rgb/RgbFilter/Implementation/BinaryFilter.cs)
+### [Binary filter](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.App.Domain/Models/Rgb/RgbFilter/Implementation/BinaryFilter.cs)
 
 <p align="center">
     <img src="https://i.imgur.com/zBX2swh.png" width="700" height = "200" alt="binary filter">
@@ -35,7 +35,7 @@
 
 
 
-## [Convolution](https://github.com/Softenraged/Image-Processing/blob/master/Source/ImageProcessing.App.Domain/Services/Convolution/Implementation/ConvolutionFilterService.cs)
+## [Convolution](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.App.Domain/Services/Convolution/Implementation/ConvolutionService.cs)
 
 ### 3x3 Kernel
 <p align="center">
