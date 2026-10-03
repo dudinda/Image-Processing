@@ -26,12 +26,10 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="LightInject" Version="6.3.2" />
-    <PackageReference Include="MathNet.Numerics" Version="4.0.0" />
+    <PackageReference Include="LightInject" Version="7.1.1" />
     <PackageReference Include="Ninject" Version="3.3.4" />
     <PackageReference Include="Ninject.Extensions.Factory" Version="3.3.2" />
     <PackageReference Include="Ninject.Extensions.NamedScope" Version="3.3.0" />
-    <PackageReference Include="System.Runtime.Numerics" Version="4.0.0" />
   </ItemGroup>
   
   <ItemGroup>
@@ -54,7 +52,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="icon.png" Link="icon.png">
+    <None Include="..\..\icon.png" Link="icon.png">
       <PackagePath></PackagePath>
       <Pack>True</Pack>
     </None>
