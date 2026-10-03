@@ -58,8 +58,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fakes\MainPresenterFake.cs" />
-    <Compile Include="Fakes\StartupFake.cs" />
+    <Compile Include="Models\MainPresenterFake.cs" />
+    <Compile Include="Models\StartupFake.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\AppLifecycleIsNotBuiltStateTests.cs" />
     <Compile Include="Tests\AppLyfecycleIsBuiltStateTests.cs" />

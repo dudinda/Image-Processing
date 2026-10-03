@@ -26,7 +26,7 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Tests
 #if !DEBUG
     [Timeout(5000)]
 #endif
-    internal sealed class MainPresenterTest : BaseTest<UIStartup>
+    internal sealed class MainPresenterTest : BaseTest<Integration.Monolith.UI.Startup>
     {
         private MainPresenterWrapper _presenter;
         private IMainFormExposer _form;
