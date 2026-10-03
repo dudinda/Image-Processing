@@ -1,5 +1,6 @@
 using System.Drawing;
 
+
 using ImageProcessing.App.Domain.Factories.ColorMatrix.Implementation;
 using ImageProcessing.App.Domain.Factories.Convolution.Implementation;
 using ImageProcessing.App.Domain.Factories.Distribution.Implementation;
@@ -80,6 +81,8 @@ using ImageProcessing.App.Domain.Win.Services.QualityMeasure.Implementation;
 using ImageProcessing.Microkernel.AppConfig;
 using ImageProcessing.Microkernel.MVP.Services.IoC;
 
+using Microsoft.Extensions.Configuration;
+
 namespace ImageProcessing.App.Presentation
 {
     public sealed class Startup : IStartup
@@ -87,7 +90,17 @@ namespace ImageProcessing.App.Presentation
         public void Build(IComponentProvider builder)
         {
             builder
-                .RegisterSingleton<AppSettings>()
+                .RegisterSingleton<IConfiguration>((prov) =>
+                {
+                    var config = new ConfigurationBuilder()
+                        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                    return config.Build();
+                })
+                .RegisterSingleton<AppSettings>((prov) =>
+                {
+                    var config = prov.Resolve<IConfiguration>();
+                    return config.GetSection(nameof(AppSettings)).Get<AppSettings>();
+                })
                 .RegisterSingleton<ILoggerService, LoggerService>()
                 .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
                 .RegisterSingleton<IStaTaskService, StaTaskService>()
