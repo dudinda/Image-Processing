@@ -1,3 +1,4 @@
+<img width="612" height="392" alt="ImageProcessing" src="" />
 ***Disclaimer**: The software provided in this repository was developed without the use of generative AI. Generative AI may only be used to verify grammatical correctness and syntax.*
 
 <p>The application was originally developed as an R&D project between 2017 and 2019.</p> 
@@ -29,7 +30,7 @@
 
 ### Hierarchy of modules
 <p align="center">
-   <img width="832" height="452" alt="hierarchy-of-modules" src="https://github.com/user-attachments/assets/9ac4e623-7adf-4124-8ba7-fe0828ad6152" />
+   <img width="600" height="350" alt="hierarchy-of-modules" src="https://github.com/user-attachments/assets/d7dd6685-627f-492e-8105-8dfdb1692150" />
     <p align="center">Fig. 2 Hierarchy of modules.</p>
 </p>
 
