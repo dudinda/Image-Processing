@@ -1,4 +1,3 @@
-<img width="612" height="392" alt="ImageProcessing" src="" />
 ***Disclaimer**: The software provided in this repository was developed without the use of generative AI. Generative AI may only be used to verify grammatical correctness and syntax.*
 
 <p>The application was originally developed as an R&D project between 2017 and 2019.</p> 
