@@ -210,10 +210,6 @@ namespace ImageProcessing.Microkernel.MVP.Services.Adapter.Implementation
             => _container.Dispose();
 
         /// <inheritdoc/>
-        public void EnableAnnotatedConstructorInjection()
-            => throw new NotSupportedException();
-
-        /// <inheritdoc/>
         public bool IsRegistered<TService>()
             => _container.CanResolve<TService>();
     }
