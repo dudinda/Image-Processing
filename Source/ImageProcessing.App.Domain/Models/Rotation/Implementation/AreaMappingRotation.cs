@@ -4,8 +4,7 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Domain.Code.Constants;
-using ImageProcessing.App.Domain.Code.Extensions.BitmapExt;
-using ImageProcessing.App.Domain.Models.Rotation;
+using ImageProcessing.App.Domain.Code.Extensions;
 
 namespace ImageProcessing.App.Domain.Models.Rotation.Implementation
 {

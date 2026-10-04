@@ -1,13 +1,14 @@
 using System;
 using System.ComponentModel;
 
-namespace ImageProcessing.App.Domain.Code.Extensions.StringExt
+namespace ImageProcessing.App.Domain.Code.Extensions
 {
     /// <summary>
     /// Extension methods for a <see cref="string"> class.
     /// </summary>
     public static class StringExtensions
     {
+
         public static bool TryParse<TValue>(this string input, out TValue value)
             where TValue : struct
         {

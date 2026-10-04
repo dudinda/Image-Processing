@@ -1,8 +1,7 @@
 using System;
 
 using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.App.Domain.Code.Extensions.StringExt;
-using ImageProcessing.App.Domain.Models.Distribution;
+using ImageProcessing.App.Domain.Code.Extensions;
 
 namespace ImageProcessing.App.Domain.Models.Distribution.Implementation.TwoParameter
 {

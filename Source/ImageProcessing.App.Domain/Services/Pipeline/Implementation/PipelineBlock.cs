@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using System.Threading;
 
 using ImageProcessing.App.Domain.Code.Constants;
-using ImageProcessing.App.Domain.Code.Extensions.ExpressionExt;
+using ImageProcessing.App.Domain.Code.Extensions;
 
 namespace ImageProcessing.App.Domain.Services.Pipeline.Implementation
 {

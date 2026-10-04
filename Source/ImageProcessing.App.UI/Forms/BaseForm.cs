@@ -3,8 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
-using ImageProcessing.App.Domain.Code.Extensions.EnumExt;
-using ImageProcessing.App.UI.Code.Extensions;
+using ImageProcessing.App.Domain.Code.Extensions;
 using ImageProcessing.Microkernel.MVP.Services.Aggregator;
 using ImageProcessing.Microkernel.MVP.Services.Controller;
 using ImageProcessing.Microkernel.MVP.Services.Controller.Implementation;

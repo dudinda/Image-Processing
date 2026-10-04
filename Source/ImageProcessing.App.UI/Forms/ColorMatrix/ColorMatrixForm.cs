@@ -2,16 +2,16 @@ using System;
 using System.Windows.Forms;
 
 using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.Domain.Code.Extensions;
 using ImageProcessing.App.Presentation.Presenters;
 using ImageProcessing.App.Presentation.Views;
-using ImageProcessing.App.Domain.Win.Code.Extensions;
 using ImageProcessing.App.UI.Code.Extensions;
 using ImageProcessing.App.UI.Services.FormEventBinders.ColorMatrix;
 using ImageProcessing.App.UI.Services.FormExposers;
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
+using ImageProcessing.Utility.Interop.Models.Wrapper;
 
 using MetroFramework.Controls;
-using ImageProcessing.Utility.Interop.Models.Wrapper;
 
 namespace ImageProcessing.App.UI.Forms.ColorMatrix
 {

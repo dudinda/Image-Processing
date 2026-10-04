@@ -5,8 +5,6 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Domain.Code.Extensions.BitmapExt;
-
 namespace ImageProcessing.App.Presentation.UnitTests.Extensions
 {
     public static class BitmapExtensions
