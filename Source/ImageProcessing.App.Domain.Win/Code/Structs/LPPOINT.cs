@@ -1,7 +1,7 @@
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace ImageProcessing.Utility.Interop.Code.Structs
+namespace ImageProcessing.App.Domain.Win.Code.Structs
 {
     /// <summary>
     /// A struct, representing a point.

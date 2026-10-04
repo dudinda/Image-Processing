@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace ImageProcessing.App.SerivceLayer.Win.Code.Enums
+namespace ImageProcessing.App.Domain.Win.Code.Enums
 {
     /// <summary>
     /// Specifies an extension of an image.

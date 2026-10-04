@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-using ImageProcessing.Utility.Interop.Models.Wrapper;
+using ImageProcessing.App.Domain.Win.Models.Wrapper;
 
 namespace ImageProcessing.App.Domain.Services.StaTask
 {

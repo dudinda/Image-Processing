@@ -2,10 +2,10 @@ using System;
 using System.Text;
 
 using ImageProcessing.App.Domain.Code.Extensions;
-using ImageProcessing.Utility.Interop.Code.Enums;
+using ImageProcessing.App.Domain.Win.Code.Enums;
 using ImageProcessing.Utility.Interop.Services.Api;
 
-namespace ImageProcessing.Utility.Interop.Models.Wrapper
+namespace ImageProcessing.App.Domain.Win.Models.Wrapper
 {
     public static class Dialog
     {

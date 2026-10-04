@@ -2,7 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-using ImageProcessing.Utility.Interop.Code.Structs;
+using ImageProcessing.App.Domain.Win.Code.Structs;
 
 namespace ImageProcessing.Utility.Interop.Services.Api
 {

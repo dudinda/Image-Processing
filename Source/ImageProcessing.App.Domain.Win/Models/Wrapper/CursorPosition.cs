@@ -1,7 +1,6 @@
 using System;
 using System.Drawing;
 
-using ImageProcessing.Utility.Interop.Code.Structs;
 using ImageProcessing.Utility.Interop.Services.Api;
 
 namespace ImageProcessing.Utility.Interop.Models.Wrapper

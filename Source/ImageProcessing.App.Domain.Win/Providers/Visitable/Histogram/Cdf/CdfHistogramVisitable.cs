@@ -2,7 +2,6 @@ using System;
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
 
-using ImageProcessing.App.Domain.Win.Providers.Visitable.Histogram;
 using ImageProcessing.App.Domain.Win.Providers.Visitors.Histogram;
 
 namespace ImageProcessing.App.Domain.Win.Providers.Visitable.Histogram.Cdf

@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 using System.IO;
 
 using ImageProcessing.App.Domain.Code.Extensions;
-using ImageProcessing.App.SerivceLayer.Win.Code.Enums;
+using ImageProcessing.App.Domain.Win.Code.Enums;
 namespace ImageProcessing.App.Domain.Win.Code.Extensions
 {
     /// <summary>
