@@ -5,7 +5,6 @@ using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Container;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.FileDialog;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Show;
-using ImageProcessing.App.UI.Services.FormEventBinders.Main;
 using ImageProcessing.App.UI.Services.FormExposers;
 using ImageProcessing.Microkernel.MVP.Services.Aggregator;
 

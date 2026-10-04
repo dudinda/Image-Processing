@@ -4,13 +4,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Presentation.Code.Constants;
-using ImageProcessing.App.Presentation.Code.Enums;
-using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
-using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Container;
-using ImageProcessing.App.Presentation.DomainEvents.MainArgs.FileDialog;
-using ImageProcessing.App.Presentation.Properties;
-using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.App.Domain.Providers.Rotation;
 using ImageProcessing.App.Domain.Providers.Scaling;
 using ImageProcessing.App.Domain.Services.BitmapCopyReference.Interface;
@@ -19,6 +12,13 @@ using ImageProcessing.App.Domain.Services.Pipeline;
 using ImageProcessing.App.Domain.Services.Pipeline.Implementation;
 using ImageProcessing.App.Domain.Win.Code.Extensions;
 using ImageProcessing.App.Domain.Win.Services.Logger;
+using ImageProcessing.App.Presentation.Code.Constants;
+using ImageProcessing.App.Presentation.Code.Enums;
+using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
+using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Container;
+using ImageProcessing.App.Presentation.DomainEvents.MainArgs.FileDialog;
+using ImageProcessing.App.Presentation.Properties;
+using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
