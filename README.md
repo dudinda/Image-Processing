@@ -7,8 +7,6 @@
 
 [Microkernel Guide&Demo for WPF (SDI), Winforms (MDI/SDI/TDI) and Console processes](https://github.com/dudinda/MVPTemplate)
 
-
-
 1. [Overview](#overview)
    - [Hierarchy of modules](#hierarchy-of-modules)
    - [Navigation by using a DI container](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.Microkernel.MVP/Services/Controller/Implementation/AppController.cs#L45)
@@ -17,27 +15,23 @@
    - [Partial mocks substitution via a DI container to test the internal infrastructure](https://github.com/dudinda/Image-Processing/blob/master/Tests/ImageProcessing.App.Integration/Monolith/UI/Startup.cs#L61)
    - [Reference a microkernel from a presentation to move a domain between processes](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.App.Presentation/ImageProcessing.App.Presentation.csproj#L60)
 2. [Managing Grayscale Images](#managing-grayscale-images)
-3. [Benchmarks](#benchmarks-cpu)
-4. [NuGet](#nuget)
+3. [Created With](#created-with)
+4. [Benchmarks](#benchmarks-cpu)
+5. [NuGet](#nuget)
 ***
 
 ## Overview
-
-
 
 <p align="center">
     <img src="https://github.com/dudinda/Image-Processing/blob/master/Tests/ImageProcessing.App.Integration/Code/Resources/Static/demo.gif?raw=true" width="600" height = "600" alt="application window">
     <p align="center">Fig. 1 - The main view and transient/signleton views are displayed as tabs. The opened affine transformation tab is a transient view. The settings tab is a singleton view. The frame is taken from the <a href="https://i.imgur.com/h57F8D7.jpg">"Thomas the Tank Engine"</a> series and processed using the following algorithm chain: Grayscale->Inversion->Laplacian Operator 5x5->Inversion->Shear Rotation 20°->Bicubic Interpolation (0.2, 0.2)->Cyclic Translation (33, 33) (hold) [cpu].</p>
 </p>
 
-<br/><br/>
-
 ### Hierarchy of modules
 <p align="center">
    <img width="832" height="452" alt="hierarchy-of-modules" src="https://github.com/user-attachments/assets/9ac4e623-7adf-4124-8ba7-fe0828ad6152" />
     <p align="center">Fig. 2 Hierarchy of modules.</p>
 </p>
-
 
 ## Managing Grayscale Images
 
@@ -73,16 +67,22 @@
 
 <p> Thus, one may conclude that a normal distribution may produce better results than a uniform distribution for  a group of underexposed images.</p>
 
+## Created With
+[Windows Forms](https://github.com/dotnet/winforms)
 
-***
+[MetroModernUI](https://www.nuget.org/packages/metromodernui)
+
+[LightInject](https://www.nuget.org/packages/Lightinject/), [Ninject](https://www.nuget.org/packages/ninject/)
+
+[Microsoft.Extensions.Configuration](https://www.nuget.org/packages/microsoft.extensions.configuration/)
+
+[NUnit](https://www.nuget.org/packages/nunit/), [NSubstitute](https://www.nuget.org/packages/nsubstitute/)
 
 ## Benchmarks [CPU]
 
 [RGB Filters](https://github.com/Softenraged/Image-Processing/blob/master/Benchmarks/ImageProcessing.App.Domain.Benchmark/LocalBenchmark.md#rgb-filters)
 
 [Convolution](https://github.com/Softenraged/Image-Processing/blob/master/Benchmarks/ImageProcessing.App.Domain.Benchmark/LocalBenchmark.md#convolution)
-
-***
 
 ## NuGet
 
