@@ -33,7 +33,7 @@ using ImageProcessing.App.UI.Services.FormEventBinders.Rotation;
 using ImageProcessing.App.UI.Services.FormEventBinders.Scaling;
 using ImageProcessing.App.UI.Services.FormEventBinders.Settings;
 using ImageProcessing.App.UI.Services.FormEventBinders.Transformation;
-using ImageProcessing.Microkernel.Models.AppConfig;
+using ImageProcessing.Microkernel.MVP.Models;
 using ImageProcessing.Microkernel.MVP.Services.Providers;
 
 using NSubstitute;

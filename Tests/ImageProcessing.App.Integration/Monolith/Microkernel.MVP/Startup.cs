@@ -1,6 +1,6 @@
 using ImageProcessing.App.Presentation.IntegrationTests.Fakes;
 using ImageProcessing.App.Presentation.UnitTests.Fakes.Components;
-using ImageProcessing.Microkernel.Models.AppConfig;
+using ImageProcessing.Microkernel.MVP.Models;
 using ImageProcessing.Microkernel.MVP.Services.Controller;
 using ImageProcessing.Microkernel.MVP.Services.Providers;
 

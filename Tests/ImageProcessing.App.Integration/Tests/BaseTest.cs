@@ -1,7 +1,7 @@
 
 using ImageProcessing.Microkernel;
-using ImageProcessing.Microkernel.Models.AppConfig;
 using ImageProcessing.Microkernel.MVP.Code.Enums;
+using ImageProcessing.Microkernel.MVP.Models;
 
 using NUnit.Framework;
 

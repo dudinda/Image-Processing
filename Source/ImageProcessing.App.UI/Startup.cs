@@ -32,7 +32,7 @@ using ImageProcessing.App.UI.Services.FormEventBinders.Settings;
 using ImageProcessing.App.UI.Services.FormEventBinders.Settings.Implementation;
 using ImageProcessing.App.UI.Services.FormEventBinders.Transformation;
 using ImageProcessing.App.UI.Services.FormEventBinders.Transformation.Implementation;
-using ImageProcessing.Microkernel.Models.AppConfig;
+using ImageProcessing.Microkernel.MVP.Models;
 using ImageProcessing.Microkernel.MVP.Services.Providers;
 
 namespace ImageProcessing.App.UI

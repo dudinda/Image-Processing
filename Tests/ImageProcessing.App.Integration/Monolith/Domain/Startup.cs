@@ -84,7 +84,7 @@ using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Services
 using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Transformation.Implementation;
 using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Transformation.Interface;
 using ImageProcessing.App.Presentation.UnitTests.Fakes.Services;
-using ImageProcessing.Microkernel.Models.AppConfig;
+using ImageProcessing.Microkernel.MVP.Models;
 using ImageProcessing.Microkernel.MVP.Services.Providers;
 
 using NSubstitute;

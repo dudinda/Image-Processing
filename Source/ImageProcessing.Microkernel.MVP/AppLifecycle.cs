@@ -1,7 +1,7 @@
 using System;
 
-using ImageProcessing.Microkernel.Models.AppConfig;
 using ImageProcessing.Microkernel.MVP.Code.Enums;
+using ImageProcessing.Microkernel.MVP.Models;
 using ImageProcessing.Microkernel.MVP.Models.State;
 using ImageProcessing.Microkernel.MVP.Presenter;
 using ImageProcessing.Microkernel.MVP.Services.Controller;
@@ -14,7 +14,6 @@ namespace ImageProcessing.Microkernel
     /// </summary>
     public class AppLifecycle : IDisposable
     {
-
         public AppLifecycle()
         {
             Factory = new StateFactory(this);
