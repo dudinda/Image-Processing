@@ -1,15 +1,15 @@
 using System;
 using System.Text;
 
+using ImageProcessing.App.Domain.Win.Code.Extensions;
 using ImageProcessing.Utility.Interop.Code.Enums;
-using ImageProcessing.Utility.Interop.Code.Extensions;
 using ImageProcessing.Utility.Interop.Services.Api;
 
 namespace ImageProcessing.Utility.Interop.Models.Wrapper
 {
     public static class Dialog
     {
-        private static string ModalWindowClass
+        private static string _modalWindowClass
             = ClassOnlyForSystem.DialogBox.GetDescription();
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace ImageProcessing.Utility.Interop.Models.Wrapper
                 return false;
             }
 
-            if (builder.ToString() == ModalWindowClass)
+            if (builder.ToString() == _modalWindowClass)
             {
                 // Close it by sending WM_CLOSE to the window
                 NativeMethods.SendMessage(hWnd, 0x0010, IntPtr.Zero, IntPtr.Zero);
