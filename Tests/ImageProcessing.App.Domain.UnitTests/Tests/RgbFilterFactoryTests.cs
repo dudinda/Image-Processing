@@ -1,11 +1,12 @@
 using System;
 
 using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.App.Domain.UnitTests.CaseFactory;
 using ImageProcessing.App.Domain.Models.AppSettings;
+using ImageProcessing.App.Domain.Models.Recommendation.Implementation;
 using ImageProcessing.App.Domain.Services.Factories.Recommendation;
 using ImageProcessing.App.Domain.Services.Factories.Rgb;
 using ImageProcessing.App.Domain.Services.Factories.Rgb.Implementation;
+using ImageProcessing.App.Domain.UnitTests.CaseFactory;
 
 using NSubstitute;
 
@@ -23,8 +24,10 @@ namespace ImageProcessing.App.Domain.UnitTests.Factory.Rgb
         [SetUp]
         public void SetUp()
         {
+            var recommendation = Substitute.For<IRecommendationFactory>();
+            recommendation.Get(Arg.Any<Luma>()).Returns(new Rec601());
             _rgbFilterFactory = new RgbFilterFactory(
-                Substitute.For<IRecommendationFactory>(),
+                recommendation,
                 Substitute.For<IChannelFactory>(),
                 Substitute.For<AppSettings>()
             );
