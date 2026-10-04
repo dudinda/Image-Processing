@@ -1,6 +1,5 @@
 using System.Drawing;
 
-using ImageProcessing.App.Domain.Models.ColorMatrix.Interface;
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
 namespace ImageProcessing.App.Domain.Services.ColorMatrix

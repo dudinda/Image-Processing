@@ -1,6 +1,6 @@
 using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
-namespace ImageProcessing.App.Domain.Models.ColorMatrix.Interface
+namespace ImageProcessing.App.Domain.Models.ColorMatrix
 {
     public interface IColorMatrix
     {

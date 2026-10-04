@@ -1,8 +1,8 @@
 using System;
 
 using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.Domain.Models.ColorMatrix;
 using ImageProcessing.App.Domain.Models.ColorMatrix.Implementation;
-using ImageProcessing.App.Domain.Models.ColorMatrix.Interface;
 using ImageProcessing.App.Domain.Services.Factories.ColorMatrix;
 
 namespace ImageProcessing.App.Domain.Factories.ColorMatrix.Implementation
