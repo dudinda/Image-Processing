@@ -1,5 +1,3 @@
-using System;
-
 using ImageProcessing.Microkernel.MVP.Presenter;
 using ImageProcessing.Microkernel.MVP.Services.Adapter;
 using ImageProcessing.Microkernel.MVP.Services.Aggregator;
@@ -12,12 +10,10 @@ namespace ImageProcessing.Microkernel.MVP.Services.Controller.Implementation
     /// <inheritdoc cref="IAppController"/>
     public class AppController : IAppController
     {
-        private static AppController? _controller;
-
         public static AppController Controller
         {
-            get => _controller ?? throw new ArgumentNullException(nameof(_controller));
-            private set => _controller = value;
+            get;
+            private set => field  = value;
         }
 
         private AppController()
@@ -36,9 +32,10 @@ namespace ImageProcessing.Microkernel.MVP.Services.Controller.Implementation
         internal AppController(IContainer container)
         {
             IoC = new ComponentProvider(container);
+            Aggregator = new EventAggregator();
+            IoC.RegisterSingletonInstance(IoC);
+            IoC.RegisterSingletonInstance(Aggregator);
             IoC.RegisterSingletonInstance<IAppController>(Controller = this);
-            IoC.RegisterSingleton<IEventAggregator, EventAggregator>();
-            Aggregator = IoC.Resolve<IEventAggregator>();
         }
 
         /// <inheritdoc cref="IAppController.Run{TPresenter}"/>

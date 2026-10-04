@@ -5,7 +5,7 @@ using ImageProcessing.Microkernel.MVP.Services.Adapter;
 namespace ImageProcessing.Microkernel.MVP.Services.Providers.Implementation
 {
     /// <inheritdoc cref="IComponentProvider"/>
-    public sealed class ComponentProvider : IComponentProvider
+    public class ComponentProvider : IComponentProvider
     {
         /// <inheritdoc cref="IContainer"/>
         private readonly IContainer _container;
@@ -14,7 +14,6 @@ namespace ImageProcessing.Microkernel.MVP.Services.Providers.Implementation
         {
             _container = container ??
                 throw new ArgumentException(nameof(container));
-            _container.RegisterSingleton<IComponentProvider>(this);
         }
 
         /// <inheritdoc/>
