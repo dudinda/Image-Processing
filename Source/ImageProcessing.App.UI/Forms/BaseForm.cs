@@ -20,12 +20,10 @@ namespace ImageProcessing.App.UI.Forms
     /// </summary>
     internal class BaseForm : MetroForm, IView
     {
-        private IAppController? _controller;
-        private ApplicationContext? _context;
 
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller
-            => _controller ??= AppController.Controller;
+            => field ??= AppController.Controller;
 
         /// <inheritdoc cref="IEventAggregator"/>
         protected IEventAggregator Aggregator
@@ -36,7 +34,7 @@ namespace ImageProcessing.App.UI.Forms
         {
             get
             {
-                if(_context is null)
+                if(field is null)
                 {
                     var ioc = Controller.IoC;
 
@@ -45,10 +43,10 @@ namespace ImageProcessing.App.UI.Forms
                         ioc.RegisterSingleton<ApplicationContext>();
                     }
 
-                    _context = ioc.Resolve<ApplicationContext>();
+                    field = ioc.Resolve<ApplicationContext>();
                 }
 
-                return _context;
+                return field;
             }
         }
 
