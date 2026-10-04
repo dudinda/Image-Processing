@@ -1,14 +1,13 @@
 using System.Drawing;
 
 using ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Safe;
-using ImageProcessing.Utility.DataStructure.FixedStackSrc.Interface;
 
 namespace ImageProcessing.App.Domain.Services.UndoRedo.Implementation
 {
     public class UndoRedoService : IUndoRedoService<Bitmap>
     {
-        private readonly IFixedStack<Bitmap> _undo = new FixedStackSafe<Bitmap>(10);
-        private readonly IFixedStack<Bitmap> _redo = new FixedStackSafe<Bitmap>(10);
+        private readonly FixedStackSafe<Bitmap> _undo = new FixedStackSafe<Bitmap>(10);
+        private readonly FixedStackSafe<Bitmap> _redo = new FixedStackSafe<Bitmap>(10);
 
         public bool UndoIsEmpty
          => _undo.IsEmpty;

@@ -1,11 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
-using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Interface;
 
 namespace ImageProcessing.Utility.DataStructure.UnitTests.Fakes
 {
-    internal sealed class BitMatrixFake : IBitMatrix
+    internal sealed class BitMatrixFake : IEnumerable, ICloneable
     {
         public  BitMatrix Matrix { get; }
 

@@ -2,12 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Interface;
-
 namespace ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation
 {
-    /// <inheritdoc cref="IBitMatrix"/>
-    public sealed class BitMatrix : IBitMatrix
+    public sealed class BitMatrix : IEnumerable, ICloneable
     {
         private readonly byte[] _data;
 
@@ -37,7 +34,7 @@ namespace ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation
             _data = new byte[byteCount];
         }
 
-        public BitMatrix(IBitMatrix matrix)
+        public BitMatrix(BitMatrix matrix)
           : this(matrix.RowCount, matrix.ColumnCount)
         {
             for (var row = 0; row < RowCount; ++row)

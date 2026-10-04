@@ -2,11 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using ImageProcessing.Utility.DataStructure.FixedStackSrc.Interface;
-
 namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation
 {
-    public sealed class FixedStack<T> : IFixedStack<T>
+    public sealed class FixedStack<T> : IEnumerable<T>, ICloneable
     {
         private readonly LinkedList<T> _stack
             = new LinkedList<T>();
@@ -21,7 +19,7 @@ namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation
             Capacity = capacity;
         }
            
-        public FixedStack(IFixedStack<T> stack)
+        public FixedStack(FixedStack<T> stack)
             : this(stack.Capacity)
         {
             foreach(var item in stack)

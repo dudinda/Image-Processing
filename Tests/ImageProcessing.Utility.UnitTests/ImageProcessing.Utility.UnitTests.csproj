@@ -82,6 +82,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Source\ImageProcessing.App.Domain\ImageProcessing.App.Domain.csproj">
+      <Project>{C5A26E22-4F93-D12B-4AC3-51CFCBB9D097}</Project>
+      <Name>ImageProcessing.App.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Source\ImageProcessing.Utility\ImageProcessing.Utility.csproj">
       <Project>{cee7a90a-78c5-4065-a76d-16dc7430c95a}</Project>
       <Name>ImageProcessing.Utility</Name>

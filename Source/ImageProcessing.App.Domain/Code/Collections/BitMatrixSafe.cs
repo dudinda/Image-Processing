@@ -2,18 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Interface;
-
 namespace ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation.Safe
 {
-    /// <inheritdoc cref="IBitMatrix"/>
-    public sealed class BitMatrixSafe : IBitMatrix
+    public sealed class BitMatrixSafe : IEnumerable, ICloneable
     {
         private readonly object _sync = new object();
 
         private readonly byte[] _data;
 
-        public BitMatrixSafe(IBitMatrix matrix)
+        public BitMatrixSafe(BitMatrixSafe matrix)
             : this(matrix.RowCount, matrix.ColumnCount)
         {
             for(var row = 0; row < RowCount; ++row)

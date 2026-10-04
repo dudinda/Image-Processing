@@ -1,12 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 using ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation;
-using ImageProcessing.Utility.DataStructure.FixedStackSrc.Interface;
 
 namespace ImageProcessing.Utility.DataStructure.UnitTests.Fakes
 {
-    internal sealed class FixedStackFake<T> : IFixedStack<T>
+    internal sealed class FixedStackFake<T> : IEnumerable<T>, ICloneable
     {
         public FixedStack<T> Stack { get; }
 
