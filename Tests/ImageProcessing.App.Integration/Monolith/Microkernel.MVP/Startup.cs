@@ -11,9 +11,14 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Microkernel
         public void Build(IComponentProvider builder)
         {
             builder
-                .RegisterSingleton<IEventAggregatorWrapper, EventAggregatorWrapper>()
-                .Resolve<IAppController>().GetType().GetProperty(nameof(IAppController.Aggregator))
-                .SetValue(builder.Resolve<IAppController>(), builder.Resolve<IEventAggregatorWrapper>());
+                .RegisterSingleton<IEventAggregatorWrapper>(factory =>
+                {
+                    var aggregator = new EventAggregatorWrapper();
+                    var controller = factory.Resolve<IAppController>();
+                    var property = controller.GetType().GetProperty(nameof(IAppController.Aggregator));
+                    property.SetValue(controller, aggregator);
+                    return aggregator;
+                });
         }
     }
 }

@@ -27,56 +27,56 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation
             new App.Presentation.IntegrationTests.Monolith.Domain.Startup().Build(builder);
 
             builder
-                .RegisterTransientInstance(
-                Substitute.ForPartsOf<MainPresenterWrapper>(
-                    builder.Resolve<IBitmapCopyServiceWrapper>(),
-                    builder.Resolve<INonBlockDialogServiceWrapper>(),
-                    builder.Resolve<IAwaitablePipelineServiceWrapper>(),
-                    builder.Resolve<ILoggerServiceWrapper>(),
-                    builder.Resolve<IScalingProviderWrapper>(),
-                    builder.Resolve<IRotationProviderWrapper>()))
-                .RegisterTransientInstance(
-                Substitute.ForPartsOf<ColorMatrixPresenterWrapper>(
-                    builder.Resolve<IBitmapCopyServiceWrapper>(),
-                    builder.Resolve<IColorMatrixFactoryWrapper>(),
-                    builder.Resolve<ILoggerServiceWrapper>(),
-                    builder.Resolve<IRgbProviderWrapper>()))
-                .RegisterTransientInstance(
-                Substitute.ForPartsOf<ConvolutionPresenterWrapper>(
-                    builder.Resolve<IBitmapCopyServiceWrapper>(),
-                    builder.Resolve<IConvolutionProviderWrapper>(),
-                    builder.Resolve<ILoggerServiceWrapper>()))
-                .RegisterTransientInstance(
-                Substitute.ForPartsOf<DistributionPresenterWrapper>(
-                    builder.Resolve<IBitmapLuminanceProviderWrapper>(),
-                    builder.Resolve<IBitmapCopyServiceWrapper>(),
-                    builder.Resolve<IBitmapServiceWrapper>(),
-                    builder.Resolve<ILoggerServiceWrapper>()))
-                .RegisterTransientInstance(
-                Substitute.ForPartsOf<RgbPresenterWrapper>(
-                    builder.Resolve<IBitmapCopyServiceWrapper>(),
-                    builder.Resolve<IRgbFactoryWrapper>(),
-                    builder.Resolve<ILoggerServiceWrapper>(),
-                    builder.Resolve<IRgbProviderWrapper>()))
-                .RegisterTransientInstance(
-                Substitute.ForPartsOf<RotationPresenterWrapper>(
-                    builder.Resolve<IBitmapCopyServiceWrapper>(),
-                    builder.Resolve<IRotationProviderWrapper>(),
-                    builder.Resolve<ILoggerServiceWrapper>()))
-                .RegisterTransientInstance(
-                Substitute.ForPartsOf<ScalingPresenterWrapper>(
-                    builder.Resolve<IBitmapCopyServiceWrapper>(),
-                    builder.Resolve<IScalingProviderWrapper>(),
-                    builder.Resolve<ILoggerServiceWrapper>()))
-                .RegisterTransientInstance(
-                Substitute.ForPartsOf<SettingsPresenterWrapper>(
-                    builder.Resolve<ILoggerServiceWrapper>(),
-                    builder.Resolve<AppSettings>()))
-                .RegisterTransientInstance(
-                Substitute.ForPartsOf<TransformationPresenterWrapper>(
-                    builder.Resolve<ITransformationProviderWrapper>(),
-                    builder.Resolve<IBitmapCopyServiceWrapper>(),
-                    builder.Resolve<ILoggerServiceWrapper>()));
+                .RegisterTransient(factory =>
+                    Substitute.ForPartsOf<MainPresenterWrapper>(
+                        builder.Resolve<IBitmapCopyServiceWrapper>(),
+                        builder.Resolve<INonBlockDialogServiceWrapper>(),
+                        builder.Resolve<IAwaitablePipelineServiceWrapper>(),
+                        builder.Resolve<ILoggerServiceWrapper>(),
+                        builder.Resolve<IScalingProviderWrapper>(),
+                        builder.Resolve<IRotationProviderWrapper>()))
+                .RegisterTransient(factory =>
+                    Substitute.ForPartsOf<ColorMatrixPresenterWrapper>(
+                        builder.Resolve<IBitmapCopyServiceWrapper>(),
+                        builder.Resolve<IColorMatrixFactoryWrapper>(),
+                        builder.Resolve<ILoggerServiceWrapper>(),
+                        builder.Resolve<IRgbProviderWrapper>()))
+                .RegisterTransient(factory =>
+                    Substitute.ForPartsOf<ConvolutionPresenterWrapper>(
+                        builder.Resolve<IBitmapCopyServiceWrapper>(),
+                        builder.Resolve<IConvolutionProviderWrapper>(),
+                        builder.Resolve<ILoggerServiceWrapper>()))
+                .RegisterTransient(factory =>
+                    Substitute.ForPartsOf<DistributionPresenterWrapper>(
+                        builder.Resolve<IBitmapLuminanceProviderWrapper>(),
+                        builder.Resolve<IBitmapCopyServiceWrapper>(),
+                        builder.Resolve<IBitmapServiceWrapper>(),
+                        builder.Resolve<ILoggerServiceWrapper>()))
+                .RegisterTransient(factory =>
+                    Substitute.ForPartsOf<RgbPresenterWrapper>(
+                        builder.Resolve<IBitmapCopyServiceWrapper>(),
+                        builder.Resolve<IRgbFactoryWrapper>(),
+                        builder.Resolve<ILoggerServiceWrapper>(),
+                        builder.Resolve<IRgbProviderWrapper>()))
+                .RegisterTransient(factory =>
+                    Substitute.ForPartsOf<RotationPresenterWrapper>(
+                        builder.Resolve<IBitmapCopyServiceWrapper>(),
+                        builder.Resolve<IRotationProviderWrapper>(),
+                        builder.Resolve<ILoggerServiceWrapper>()))
+                .RegisterTransient(factory =>
+                    Substitute.ForPartsOf<ScalingPresenterWrapper>(
+                        builder.Resolve<IBitmapCopyServiceWrapper>(),
+                        builder.Resolve<IScalingProviderWrapper>(),
+                        builder.Resolve<ILoggerServiceWrapper>()))
+                .RegisterTransient(factory =>
+                    Substitute.ForPartsOf<SettingsPresenterWrapper>(
+                        builder.Resolve<ILoggerServiceWrapper>(),
+                        builder.Resolve<AppSettings>()))
+                .RegisterTransient(factory =>
+                    Substitute.ForPartsOf<TransformationPresenterWrapper>(
+                        builder.Resolve<ITransformationProviderWrapper>(),
+                        builder.Resolve<IBitmapCopyServiceWrapper>(),
+                        builder.Resolve<ILoggerServiceWrapper>()));
         }
     }
 }

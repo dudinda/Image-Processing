@@ -99,125 +99,125 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain
             new Startup().Build(builder);
 
             builder
-                .RegisterTransientInstance<IColorMatrixFactoryWrapper>(
-                Substitute.ForPartsOf<ColorMatrixFactoryWrapper>(
-                    builder.Resolve<IColorMatrixFactory>()))
-                .RegisterTransientInstance<IStructuringElementFactoryWrapper>(
-                Substitute.ForPartsOf<StructuringElementFactoryWrapper>())
-                .RegisterTransientInstance<IConvolutionFactoryWrapper>(
-                Substitute.ForPartsOf<ConvoltuionFactoryWrapper>(
-                    builder.Resolve<IConvolutionFactory>()))
-                .RegisterTransientInstance<IDistributionFactoryWrapper>(
-                Substitute.ForPartsOf<DistributionFactoryWrapper>(
-                    builder.Resolve<IDistributionFactory>()))
-                .RegisterTransientInstance<IMorphologyFactoryWrapper>(
-                Substitute.ForPartsOf<MorphologyFactoryWrapper>(
-                    builder.Resolve<IMorphologyFactory>()))
-                .RegisterTransientInstance<IRgbFactoryWrapper>(
-                Substitute.ForPartsOf<RgbFactoryWrapper>(
-                    builder.Resolve<IRgbFilterFactory>()))
-                .RegisterTransientInstance<IRotationFactoryWrapper>(
-                Substitute.ForPartsOf<RotationFactoryWrapper>(
-                    builder.Resolve<IRotationFactory>()))
-                .RegisterTransientInstance<IScalingFactoryWrapper>(
-                Substitute.ForPartsOf<ScalingFactoryWrapper>(
-                    builder.Resolve<IScalingFactory>()))
-                .RegisterTransientInstance<ITransformationFactoryWrapper>(
-                Substitute.ForPartsOf<TransformationFactoryWrapper>(
-                    builder.Resolve<ITransformationFactory>()));
+                .RegisterTransient<IColorMatrixFactoryWrapper>(provider =>
+                    Substitute.ForPartsOf<ColorMatrixFactoryWrapper>(
+                        builder.Resolve<IColorMatrixFactory>()))
+                .RegisterTransient<IStructuringElementFactoryWrapper>(provider=>
+                    Substitute.ForPartsOf<StructuringElementFactoryWrapper>())
+                .RegisterTransient<IConvolutionFactoryWrapper>(provider =>
+                    Substitute.ForPartsOf<ConvoltuionFactoryWrapper>(
+                        builder.Resolve<IConvolutionFactory>()))
+                .RegisterTransient<IDistributionFactoryWrapper>(provider =>
+                    Substitute.ForPartsOf<DistributionFactoryWrapper>(
+                        builder.Resolve<IDistributionFactory>()))
+                .RegisterTransient<IMorphologyFactoryWrapper>(provider =>
+                    Substitute.ForPartsOf<MorphologyFactoryWrapper>(
+                        builder.Resolve<IMorphologyFactory>()))
+                .RegisterTransient<IRgbFactoryWrapper>(provider =>
+                    Substitute.ForPartsOf<RgbFactoryWrapper>(
+                        builder.Resolve<IRgbFilterFactory>()))
+                .RegisterTransient<IRotationFactoryWrapper>(provider =>
+                    Substitute.ForPartsOf<RotationFactoryWrapper>(
+                        builder.Resolve<IRotationFactory>()))
+                .RegisterTransient<IScalingFactoryWrapper>(provider =>
+                    Substitute.ForPartsOf<ScalingFactoryWrapper>(
+                        builder.Resolve<IScalingFactory>()))
+                .RegisterTransient<ITransformationFactoryWrapper>(provider =>
+                    Substitute.ForPartsOf<TransformationFactoryWrapper>(
+                        builder.Resolve<ITransformationFactory>()));
 
             builder
-               .RegisterTransientInstance<IUndoRedoServiceWrapper>(
-               Substitute.ForPartsOf<UndoRedoServiceWrapper>())
-               .RegisterTransientInstance<IBitmapServiceWrapper>(
-               Substitute.ForPartsOf<BitmapServiceWrapper>())
-               .RegisterTransientInstance<IMorphologyServiceWrapper>(
-               Substitute.ForPartsOf<MorphologyServiceWrapper>())
-               .RegisterSingletonInstance<ICacheServiceWrapper>(
-               Substitute.ForPartsOf<CacheServiceWrapper>())
-               .RegisterTransientInstance<IColorMatrixServiceWrapper>(
-               Substitute.ForPartsOf<ColorMatrixServiceWrapper>())
-               .RegisterTransientInstance<IConvolutionServiceWrapper>(
-               Substitute.ForPartsOf<ConvolutionServiceWrapper>())
-               .RegisterTransientInstance<IAsyncOperationLockerWrapper>(
-               Substitute.ForPartsOf<AsyncOperationLockerWrapper>())
-               .RegisterSingletonInstance<IBitmapCopyServiceWrapper>(
-               Substitute.ForPartsOf<BitmapCopyServiceWrapper>(
-                   builder.Resolve<IAsyncOperationLockerWrapper>()))
-               .RegisterTransientInstance<IRandomVariableServiceWrapper>(
-               Substitute.ForPartsOf<RandomVariableServiceWrapper>())
-               .RegisterTransientInstance<IBitmapLuminanceServiceWrapper>(
-               Substitute.ForPartsOf<BitmapLuminanceServiceWrapper>(
-                   builder.Resolve<IRandomVariableServiceWrapper>()))
-               .RegisterTransientInstance<IFileDialogServiceWrapper>(
-               Substitute.ForPartsOf<FileDialogServiceWrapper>())
-               .RegisterSingletonInstance<IStaTaskServiceWrapper>(
-               Substitute.ForPartsOf<StaTaskServiceWrapper>())
-               .RegisterTransientInstance<INonBlockDialogServiceWrapper>(
-               Substitute.ForPartsOf<NonBlockDialogServiceWrapper>(
-                   builder.Resolve<IFileDialogServiceWrapper>(),
-                   builder.Resolve<IStaTaskServiceWrapper>()))
-               .RegisterTransientInstance<IChartSeriesBuilderWrapper>(
-               Substitute.ForPartsOf<ChartSeriesBuilderWrapper>())
-               .RegisterSingletonInstance<IAwaitablePipelineServiceWrapper>(
-               Substitute.ForPartsOf<AwaitablePipelineServiceWrapper>())
-               .RegisterSingletonInstance<ILoggerServiceWrapper>(
-               Substitute.ForPartsOf<LoggerServiceWrapper>())
-               .RegisterTransientInstance<IQualityMeasureServiceWrapper>(
-               Substitute.ForPartsOf<QualityMeasureServiceWrapper>(
-                   builder.Resolve<IBitmapLuminanceServiceWrapper>(),
-                   builder.Resolve<IChartSeriesBuilderWrapper>()))
-               .RegisterTransientInstance<IConvolutionVisitorWrapper>(
-               Substitute.ForPartsOf<ConvolutionVisitorWrapper>(
-                   builder.Resolve<IConvolutionFactoryWrapper>(),
-                   builder.Resolve<IConvolutionServiceWrapper>(),
-                   builder.Resolve<IBitmapServiceWrapper>()))
-               .RegisterTransientInstance<IHistogramVisitorWrapper>(
-               Substitute.ForPartsOf<HistogramVisitorWrapper>(
-                   builder.Resolve<IBitmapLuminanceServiceWrapper>(),
-                   builder.Resolve<IChartSeriesBuilderWrapper>()))
-               .RegisterTransientInstance<IBitmapLuminanceVisitorWrapper>(
-               Substitute.ForPartsOf<BitmapLuminanceVisitorWrapper>(
-                   builder.Resolve<IBitmapLuminanceServiceWrapper>()))
-               .RegisterTransientInstance<IBitmapLuminanceVisitableFactoryWrapper>(
-               Substitute.ForPartsOf<BitmapLuminanceVisitableFactoryWrapper>())
-               .RegisterTransientInstance<IConvolutionVisitableFactoryWrapper>(
-               Substitute.ForPartsOf<ConvolutionVisitableFactoryWrapper>())
-               .RegisterTransientInstance<IHistogramVisitableFactoryWrapper>(
-               Substitute.ForPartsOf<HistogramVisitableFactoryWrapper>())
-               .RegisterTransientInstance<IBitmapLuminanceProviderWrapper>(
-               Substitute.ForPartsOf<BitmapLuminanceProviderWrapper>(
-                   builder.Resolve<IBitmapLuminanceServiceWrapper>(),
-                   builder.Resolve<IBitmapLuminanceVisitableFactoryWrapper>(),
-                   builder.Resolve<IBitmapLuminanceVisitorWrapper>(),
-                   builder.Resolve<IDistributionFactoryWrapper>()))
-               .RegisterTransientInstance<IConvolutionProviderWrapper>(
-               Substitute.ForPartsOf<ConvolutionProviderWrapper>(
-                   builder.Resolve<IConvolutionVisitableFactoryWrapper>(),
-                   builder.Resolve<IConvolutionVisitorWrapper>()))
-               .RegisterTransientInstance<IMorphologyProviderWrapper>(
-               Substitute.ForPartsOf<MorphologyProviderWrapper>(
-                   builder.Resolve<IMorphologyServiceWrapper>(),
-                   builder.Resolve<IMorphologyFactoryWrapper>(),
-                   builder.Resolve<ICacheServiceWrapper>(),
-                   builder.Resolve<IStructuringElementFactoryWrapper>()))
-               .RegisterTransientInstance<IRgbProviderWrapper>(
-               Substitute.ForPartsOf<RgbProviderWrapper>(
-                   builder.Resolve<IRgbFactoryWrapper>(),
-                   builder.Resolve<IColorMatrixServiceWrapper>(),
-                   builder.Resolve<IColorMatrixFactoryWrapper>(),
-                   builder.Resolve<ICacheServiceWrapper>()))
-               .RegisterTransientInstance<IRotationProviderWrapper>(
-               Substitute.ForPartsOf<RotationProviderWrapper>(
-                   builder.Resolve<IRotationFactoryWrapper>(),
-                   builder.Resolve<AppSettings>()))
-               .RegisterTransientInstance<IScalingProviderWrapper>(
-               Substitute.ForPartsOf<ScalingProviderWrapper>(
-                   builder.Resolve<IScalingFactoryWrapper>(),
-                   builder.Resolve<AppSettings>()))
-               .RegisterTransientInstance<ITransformationProviderWrapper>(
-               Substitute.ForPartsOf<TransformationProviderWrapper>(
-                   builder.Resolve<ITransformationFactoryWrapper>()));
+               .RegisterTransient<IUndoRedoServiceWrapper>(provider =>
+                    Substitute.ForPartsOf<UndoRedoServiceWrapper>())
+               .RegisterTransient<IBitmapServiceWrapper>(provider =>
+                    Substitute.ForPartsOf<BitmapServiceWrapper>())
+               .RegisterTransient<IMorphologyServiceWrapper>(provider =>
+                    Substitute.ForPartsOf<MorphologyServiceWrapper>())
+               .RegisterSingleton<ICacheServiceWrapper>(provider =>
+                    Substitute.ForPartsOf<CacheServiceWrapper>())
+               .RegisterTransient<IColorMatrixServiceWrapper>(provider =>
+                    Substitute.ForPartsOf<ColorMatrixServiceWrapper>())
+               .RegisterTransient<IConvolutionServiceWrapper>(provider =>
+                    Substitute.ForPartsOf<ConvolutionServiceWrapper>())
+               .RegisterTransient<IAsyncOperationLockerWrapper>(provider =>
+                    Substitute.ForPartsOf<AsyncOperationLockerWrapper>())
+               .RegisterSingleton<IBitmapCopyServiceWrapper>(provider =>
+                    Substitute.ForPartsOf<BitmapCopyServiceWrapper>(
+                        builder.Resolve<IAsyncOperationLockerWrapper>()))
+               .RegisterTransient<IRandomVariableServiceWrapper>(provider =>
+                    Substitute.ForPartsOf<RandomVariableServiceWrapper>())
+               .RegisterTransient<IBitmapLuminanceServiceWrapper>(provider =>
+                    Substitute.ForPartsOf<BitmapLuminanceServiceWrapper>(
+                        builder.Resolve<IRandomVariableServiceWrapper>()))
+               .RegisterTransient<IFileDialogServiceWrapper>(provider =>
+                    Substitute.ForPartsOf<FileDialogServiceWrapper>())
+               .RegisterSingleton<IStaTaskServiceWrapper>(provider =>
+                    Substitute.ForPartsOf<StaTaskServiceWrapper>())
+               .RegisterTransient<INonBlockDialogServiceWrapper>(provider =>
+                    Substitute.ForPartsOf<NonBlockDialogServiceWrapper>(
+                        builder.Resolve<IFileDialogServiceWrapper>(),
+                        builder.Resolve<IStaTaskServiceWrapper>()))
+               .RegisterTransient<IChartSeriesBuilderWrapper>(provider =>
+                    Substitute.ForPartsOf<ChartSeriesBuilderWrapper>())
+               .RegisterSingleton<IAwaitablePipelineServiceWrapper>(provider =>
+                    Substitute.ForPartsOf<AwaitablePipelineServiceWrapper>())
+               .RegisterSingleton<ILoggerServiceWrapper>(provider =>
+                    Substitute.ForPartsOf<LoggerServiceWrapper>())
+               .RegisterTransient<IQualityMeasureServiceWrapper>(provider =>
+                    Substitute.ForPartsOf<QualityMeasureServiceWrapper>(
+                        builder.Resolve<IBitmapLuminanceServiceWrapper>(),
+                        builder.Resolve<IChartSeriesBuilderWrapper>()))
+               .RegisterTransient<IConvolutionVisitorWrapper>(provider =>
+                    Substitute.ForPartsOf<ConvolutionVisitorWrapper>(
+                        builder.Resolve<IConvolutionFactoryWrapper>(),
+                        builder.Resolve<IConvolutionServiceWrapper>(),
+                         builder.Resolve<IBitmapServiceWrapper>()))
+               .RegisterTransient<IHistogramVisitorWrapper>(provider =>
+                    Substitute.ForPartsOf<HistogramVisitorWrapper>(
+                        builder.Resolve<IBitmapLuminanceServiceWrapper>(),
+                        builder.Resolve<IChartSeriesBuilderWrapper>()))
+               .RegisterTransient<IBitmapLuminanceVisitorWrapper>(provider =>
+                    Substitute.ForPartsOf<BitmapLuminanceVisitorWrapper>(
+                        builder.Resolve<IBitmapLuminanceServiceWrapper>()))
+               .RegisterTransient<IBitmapLuminanceVisitableFactoryWrapper>(provider =>
+                    Substitute.ForPartsOf<BitmapLuminanceVisitableFactoryWrapper>())
+               .RegisterTransient<IConvolutionVisitableFactoryWrapper>(provider =>
+                    Substitute.ForPartsOf<ConvolutionVisitableFactoryWrapper>())
+               .RegisterTransient<IHistogramVisitableFactoryWrapper>(provider =>
+                    Substitute.ForPartsOf<HistogramVisitableFactoryWrapper>())
+               .RegisterTransient<IBitmapLuminanceProviderWrapper>(provider =>
+                    Substitute.ForPartsOf<BitmapLuminanceProviderWrapper>(
+                        builder.Resolve<IBitmapLuminanceServiceWrapper>(),
+                         builder.Resolve<IBitmapLuminanceVisitableFactoryWrapper>(),
+                         builder.Resolve<IBitmapLuminanceVisitorWrapper>(),
+                         builder.Resolve<IDistributionFactoryWrapper>()))
+               .RegisterTransient<IConvolutionProviderWrapper>(provider =>
+                    Substitute.ForPartsOf<ConvolutionProviderWrapper>(
+                        builder.Resolve<IConvolutionVisitableFactoryWrapper>(),
+                        builder.Resolve<IConvolutionVisitorWrapper>()))
+               .RegisterTransient<IMorphologyProviderWrapper>(provider =>
+                    Substitute.ForPartsOf<MorphologyProviderWrapper>(
+                        builder.Resolve<IMorphologyServiceWrapper>(),
+                        builder.Resolve<IMorphologyFactoryWrapper>(),
+                        builder.Resolve<ICacheServiceWrapper>(),
+                        builder.Resolve<IStructuringElementFactoryWrapper>()))
+               .RegisterTransient<IRgbProviderWrapper>(provider =>
+                    Substitute.ForPartsOf<RgbProviderWrapper>(
+                        builder.Resolve<IRgbFactoryWrapper>(),
+                        builder.Resolve<IColorMatrixServiceWrapper>(),
+                        builder.Resolve<IColorMatrixFactoryWrapper>(),
+                        builder.Resolve<ICacheServiceWrapper>()))
+               .RegisterTransient<IRotationProviderWrapper>(provider =>
+                    Substitute.ForPartsOf<RotationProviderWrapper>(
+                        builder.Resolve<IRotationFactoryWrapper>(),
+                        builder.Resolve<AppSettings>()))
+               .RegisterTransient<IScalingProviderWrapper>(provider =>
+                    Substitute.ForPartsOf<ScalingProviderWrapper>(
+                        builder.Resolve<IScalingFactoryWrapper>(),
+                        builder.Resolve<AppSettings>()))
+               .RegisterTransient<ITransformationProviderWrapper>(provider =>
+                    Substitute.ForPartsOf<TransformationProviderWrapper>(
+                        builder.Resolve<ITransformationFactoryWrapper>()));
         }
     }
 }
