@@ -5,9 +5,7 @@ using ImageProcessing.Microkernel.MVP.Code.Constants;
 using ImageProcessing.Microkernel.MVP.Code.Enums;
 using ImageProcessing.Microkernel.MVP.Presenter;
 using ImageProcessing.Microkernel.MVP.Services.Controller.Implementation;
-
-using static ImageProcessing.Microkernel.MVP.Services.Factories.AdapterFactory;
-using static ImageProcessing.Microkernel.MVP.Services.Factories.StateFactory;
+using ImageProcessing.Microkernel.MVP.Services.Factories;
 
 namespace ImageProcessing.Microkernel.MVP.Models.State.Implementation
 {
@@ -16,15 +14,22 @@ namespace ImageProcessing.Microkernel.MVP.Models.State.Implementation
     /// </summary>
     internal sealed class AppIsNotBuilt : IAppState
     {
+        private readonly AppLifecycle _app;
+        private readonly AdapterFactory _adapter = new AdapterFactory();
+
+        public AppIsNotBuilt(AppLifecycle app)
+        {
+            _app = app;
+        }
         /// <inheritdoc/>
         public void Build<TStartup>(DiContainer container)
             where TStartup : class, IStartup
         {
             try
             {
-                AppLifecycle.Controller = new AppController(GetAdapter(container));
+                _app.Controller = new AppController(_adapter.GetAdapter(container));
 
-                var ioc = AppLifecycle.Controller.IoC;
+                var ioc = _app.Controller.IoC;
 
                 if (ioc.IsRegistered<TStartup>())
                 {
@@ -35,11 +40,11 @@ namespace ImageProcessing.Microkernel.MVP.Models.State.Implementation
                 ioc.RegisterSingleton<TStartup>()
                    .Resolve<TStartup>().Build(ioc);
 
-                AppLifecycle.State = GetState(AppState.IsBuilt);
+                _app.State = _app.Factory.GetState(AppState.IsBuilt);
             }
             catch(Exception ex)
             {
-                AppLifecycle.State = GetState(AppState.EndWork);
+                _app.State = _app.Factory.GetState(AppState.EndWork);
                 throw;
             }
      

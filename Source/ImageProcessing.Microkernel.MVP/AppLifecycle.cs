@@ -1,3 +1,5 @@
+using System;
+
 using ImageProcessing.Microkernel.Models.AppConfig;
 using ImageProcessing.Microkernel.MVP.Code.Enums;
 using ImageProcessing.Microkernel.MVP.Models.State;
@@ -10,27 +12,39 @@ namespace ImageProcessing.Microkernel
     /// <summary>
     /// The entry point into an application lifecycle.
     /// </summary>
-    public static class AppLifecycle
+    public class AppLifecycle : IDisposable
     {
+
+        public AppLifecycle()
+        {
+            Factory = new StateFactory(this);
+            State = Factory.GetState(AppState.IsNotBuilt);
+        }
         /// <inheritdoc cref="IAppController"/>
-        internal static IAppController? Controller { get; set; }
+        internal IAppController? Controller { get; set; }
 
         /// <inheritdoc cref="IAppState"/>
-        internal static IAppState State { get; set; }
-            = StateFactory.GetState(AppState.IsNotBuilt);
+        internal IAppState State { get; set; }
+
+        internal StateFactory Factory { get; }
 
         /// <inheritdoc cref="IAppState.Build{TStartup}(DiContainer)"/>
-        public static void Build<TStartup>(DiContainer container)
+        public void Build<TStartup>(DiContainer container)
             where TStartup : class, IStartup
             => State.Build<TStartup>(container);
 
         /// <inheritdoc cref="IAppState.Run{TMainPresenter}"/>
-        public static void Run<TMainPresenter>()
+        public void Run<TMainPresenter>()
             where TMainPresenter : class, IPresenter
             => State.Run<TMainPresenter>();
 
         /// <inheritdoc cref="IAppState.Exit"/>
-        public static void Exit()
+        public void Exit()
             => State.Exit();
+
+        public void Dispose()
+        {
+            Exit();
+        }
     }
 }

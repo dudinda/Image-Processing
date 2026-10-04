@@ -11,17 +11,20 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Tests
     internal abstract class BaseTest<TStartup>
         where TStartup : class, IStartup
     {
+        private AppLifecycle _app;
+
         [SetUp]
         public void SetUp()
         {
-            AppLifecycle.Build<TStartup>(DiContainer.Ninject);
+            _app = new AppLifecycle();
+            _app.Build<TStartup>(DiContainer.Ninject);
             BeforeStart();
         }
 
         [TearDown]
         public void TearDown()
         {
-            AppLifecycle.Exit();
+            _app.Dispose();
         }
 
         protected abstract void BeforeStart();

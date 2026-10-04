@@ -10,23 +10,28 @@ namespace ImageProcessing.Microkernel.MVP.Services.Factories
     /// A factory method for all the types
     /// implementing the <see cref="IAppState"/>.
     /// </summary>
-    internal static class StateFactory
+    internal class StateFactory
     {
+        private readonly AppLifecycle _app;
+        public StateFactory(AppLifecycle app)
+        {
+            _app = app;
+        }
         /// <summary>
         /// Get the specified <see cref="AppState"/>.
         /// </summary>
-        internal static IAppState GetState(AppState state)
+        internal IAppState GetState(AppState state)
             => state
         switch
         {
             AppState.IsBuilt
-                => new AppIsBuilt(),
+                => new AppIsBuilt(_app),
             AppState.IsNotBuilt
-                => new AppIsNotBuilt(),
+                => new AppIsNotBuilt(_app),
             AppState.StartWork
-                => new AppStartWork(),
+                => new AppStartWork(_app),
             AppState.EndWork
-                => new AppEndWork(),
+                => new AppEndWork(_app),
 
             _ => throw new NotImplementedException(nameof(state))
         };

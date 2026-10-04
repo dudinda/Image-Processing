@@ -11,17 +11,20 @@ namespace ImageProcessing.MVP.UnitTests.Tests
     [TestFixture]
     internal sealed class AppLyfecycleIsBuiltStateTests : IDisposable
     {
+        private AppLifecycle _app;
+
         [SetUp]
         public void SetUp()
         {
-            AppLifecycle.State = StateFactory.GetState(AppState.IsBuilt);
+            _app = new AppLifecycle();
+            _app.State = _app.Factory.GetState(AppState.IsBuilt);
         }
 
 
         [TearDown]
         public void Dispose()
         {
-            AppLifecycle.State = StateFactory.GetState(AppState.IsNotBuilt);
+            _app.Dispose();
         }
     }
 }

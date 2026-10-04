@@ -5,8 +5,6 @@ using ImageProcessing.Microkernel.MVP.Code.Constants;
 using ImageProcessing.Microkernel.MVP.Code.Enums;
 using ImageProcessing.Microkernel.MVP.Presenter;
 
-using static ImageProcessing.Microkernel.MVP.Services.Factories.StateFactory;
-
 namespace ImageProcessing.Microkernel.MVP.Models.State.Implementation
 {
     /// <summary>
@@ -14,6 +12,12 @@ namespace ImageProcessing.Microkernel.MVP.Models.State.Implementation
     /// </summary>
     internal sealed class AppEndWork : IAppState
     {
+        private readonly AppLifecycle _app;
+
+        public AppEndWork(AppLifecycle app)
+        {
+            _app = app;
+        }
         /// <inheritdoc/>
         public void Build<TStartup>(DiContainer container)
             where TStartup : class, IStartup
@@ -23,8 +27,8 @@ namespace ImageProcessing.Microkernel.MVP.Models.State.Implementation
         /// <inheritdoc/>
         public void Exit()
         {
-            AppLifecycle.Controller.Dispose();
-            AppLifecycle.State = GetState(AppState.IsNotBuilt);
+            _app.Controller.Dispose();
+            _app.State = _app.Factory.GetState(AppState.IsNotBuilt);
         }
            
         /// <inheritdoc/>

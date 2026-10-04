@@ -1,25 +1,10 @@
-using System;
-
 using ImageProcessing.App.Presentation.Presenters;
+using ImageProcessing.App.UI;
 using ImageProcessing.Microkernel;
 using ImageProcessing.Microkernel.MVP.Code.Enums;
 
-namespace ImageProcessing.App.UI
+using (var app = new AppLifecycle())
 {
-    internal static class Program
-    {    
-        [STAThread]
-        internal static void Main()
-        {
-            try
-            {
-                AppLifecycle.Build<Startup>(DiContainer.Ninject);
-                AppLifecycle.Run<MainPresenter>();
-            }
-            catch(Exception ex)
-            {
-                AppLifecycle.Exit();
-            }
-        }
-    }
+    app.Build<Startup>(DiContainer.LightInject);
+    app.Run<MainPresenter>();
 }
