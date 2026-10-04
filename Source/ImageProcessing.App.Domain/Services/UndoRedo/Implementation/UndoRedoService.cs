@@ -1,6 +1,6 @@
 using System.Drawing;
 
-using ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation.Safe;
+using ImageProcessing.App.Domain.Code.Collections;
 
 namespace ImageProcessing.App.Domain.Services.UndoRedo.Implementation
 {

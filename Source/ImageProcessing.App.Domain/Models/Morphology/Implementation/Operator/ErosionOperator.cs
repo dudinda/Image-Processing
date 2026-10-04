@@ -3,9 +3,9 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.Domain.Code.Collections;
 using ImageProcessing.App.Domain.Code.Constants;
 using ImageProcessing.App.Domain.Code.Extensions;
-using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
 namespace ImageProcessing.App.Domain.Models.Morphology.Implementation.Operator
 {

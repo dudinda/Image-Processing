@@ -1,13 +1,13 @@
 using System.Drawing;
 
+using ImageProcessing.App.Domain.Code.Collections;
 using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.App.Integration.Monolith.Domain.StructuringElement.Interface;
+using ImageProcessing.App.Domain.Providers.Morphology.Implementation;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.Morphology.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Cache.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Morphology.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.StructuringElement.Interface;
 using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Morphology.Interface;
-using ImageProcessing.App.Domain.Providers.Morphology.Implementation;
-using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
 namespace ImageProcessing.App.Integration.Monolith.Domain.Providers.Morphology.Implementation
 {

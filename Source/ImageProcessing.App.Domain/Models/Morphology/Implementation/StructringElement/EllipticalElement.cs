@@ -1,7 +1,6 @@
 using System;
 
-using ImageProcessing.App.Domain.Models.Morphology;
-using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
+using ImageProcessing.App.Domain.Code.Collections;
 
 namespace ImageProcessing.App.Domain.Models.Morphology.Implementation.StructringElement
 {

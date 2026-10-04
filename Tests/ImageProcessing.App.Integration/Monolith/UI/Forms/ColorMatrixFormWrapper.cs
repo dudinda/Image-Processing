@@ -1,12 +1,12 @@
 using System;
 using System.Windows.Forms;
 
+using ImageProcessing.App.Domain.Code.Collections;
 using ImageProcessing.App.Domain.Code.Enums;
 using ImageProcessing.App.Integration.Monolith.UI.FormEventBinders.ColorMatrix.Interface;
 using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.App.UI.Forms.ColorMatrix;
 using ImageProcessing.App.UI.Services.FormExposers;
-using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
 using MetroFramework.Controls;
 

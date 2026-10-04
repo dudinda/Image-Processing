@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation.Safe
+namespace ImageProcessing.App.Domain.Code.Collections
 {
     public sealed class BitMatrixSafe : IEnumerable, ICloneable
     {

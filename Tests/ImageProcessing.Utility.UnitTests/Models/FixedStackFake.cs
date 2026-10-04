@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation;
+using ImageProcessing.App.Domain.Code.Collections;
 
 namespace ImageProcessing.Utility.DataStructure.UnitTests.Fakes
 {

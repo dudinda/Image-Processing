@@ -1,11 +1,10 @@
 using System.Drawing;
 
+using ImageProcessing.App.Domain.Code.Collections;
 using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.App.Domain.Providers.Morphology;
 using ImageProcessing.App.Domain.Services.Cache;
 using ImageProcessing.App.Domain.Services.Factories.Morphology;
 using ImageProcessing.App.Domain.Services.Morphology;
-using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
 namespace ImageProcessing.App.Domain.Providers.Morphology.Implementation
 {

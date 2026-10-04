@@ -1,7 +1,7 @@
 using System.Drawing;
 
+using ImageProcessing.App.Domain.Code.Collections;
 using ImageProcessing.App.Domain.Models.Morphology;
-using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
 
 namespace ImageProcessing.App.Domain.Services.Morphology.Implementation
 {

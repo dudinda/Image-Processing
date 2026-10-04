@@ -1,4 +1,4 @@
-using ImageProcessing.Utility.DataStructure.BitMatrixSrc.Implementation;
+using ImageProcessing.App.Domain.Code.Collections;
 
 namespace ImageProcessing.App.Domain.Models.Morphology
 {

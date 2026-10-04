@@ -1,8 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation
+namespace ImageProcessing.App.Domain.Code.Collections
 {
     public sealed class ReadOnly2DArray<T> : IReadOnlyCollection<T>
     {

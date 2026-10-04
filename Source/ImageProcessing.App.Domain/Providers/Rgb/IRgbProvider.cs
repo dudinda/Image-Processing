@@ -1,7 +1,7 @@
 using System.Drawing;
 
+using ImageProcessing.App.Domain.Code.Collections;
 using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
 namespace ImageProcessing.App.Domain.Providers.Rgb
 {

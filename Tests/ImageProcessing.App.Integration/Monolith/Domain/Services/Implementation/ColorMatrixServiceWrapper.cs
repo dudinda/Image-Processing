@@ -1,9 +1,9 @@
 
 using System.Drawing;
 
-using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Services.ColorMatrix.Interface;
+using ImageProcessing.App.Domain.Code.Collections;
 using ImageProcessing.App.Domain.Services.ColorMatrix.Implementation;
-using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
+using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Services.ColorMatrix.Interface;
 
 namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Services.ColorMatrix.Implementation
 {

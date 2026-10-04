@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ImageProcessing.Utility.DataStructure.FixedStackSrc.Implementation
+namespace ImageProcessing.App.Domain.Code.Collections
 {
     public sealed class FixedStack<T> : IEnumerable<T>, ICloneable
     {

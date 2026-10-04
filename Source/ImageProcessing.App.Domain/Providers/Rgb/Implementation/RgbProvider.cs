@@ -1,12 +1,11 @@
 using System.Drawing;
 
+using ImageProcessing.App.Domain.Code.Collections;
 using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.App.Domain.Providers.Rgb;
 using ImageProcessing.App.Domain.Services.Cache;
 using ImageProcessing.App.Domain.Services.ColorMatrix;
 using ImageProcessing.App.Domain.Services.Factories.ColorMatrix;
 using ImageProcessing.App.Domain.Services.Factories.Rgb;
-using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
 namespace ImageProcessing.App.Domain.Providers.Rgb.Implementation
 {

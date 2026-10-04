@@ -3,8 +3,8 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.Domain.Code.Collections;
 using ImageProcessing.App.Domain.Code.Constants;
-using ImageProcessing.Utility.DataStructure.ReadOnly2DArray.Implementation;
 
 namespace ImageProcessing.App.Domain.Services.ColorMatrix.Implementation
 {
