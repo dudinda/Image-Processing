@@ -20,6 +20,7 @@ namespace ImageProcessing.Microkernel.MVP.Models.State.Implementation
         {
             _app = app;
         }
+
         /// <inheritdoc/>
         public void Build<TStartup>(DiContainer container)
             where TStartup : class, IStartup

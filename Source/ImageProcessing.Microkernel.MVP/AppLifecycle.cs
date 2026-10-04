@@ -19,6 +19,7 @@ namespace ImageProcessing.Microkernel
             Factory = new StateFactory(this);
             State = Factory.GetState(AppState.IsNotBuilt);
         }
+
         /// <inheritdoc cref="IAppController"/>
         internal IAppController? Controller { get; set; }
 
@@ -42,8 +43,6 @@ namespace ImageProcessing.Microkernel
             => State.Exit();
 
         public void Dispose()
-        {
-            Exit();
-        }
+            => Exit();
     }
 }

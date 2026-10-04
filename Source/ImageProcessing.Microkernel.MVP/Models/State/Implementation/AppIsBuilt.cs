@@ -12,10 +12,12 @@ namespace ImageProcessing.Microkernel.MVP.Models.State.Implementation
     internal sealed class AppIsBuilt : IAppState
     {
         private readonly AppLifecycle _app;
+
         public AppIsBuilt(AppLifecycle app)
         {
             _app = app;
         }
+
         /// <inheritdoc/>
         public void Build<TStartup>(DiContainer container)
             where TStartup : class, IStartup
