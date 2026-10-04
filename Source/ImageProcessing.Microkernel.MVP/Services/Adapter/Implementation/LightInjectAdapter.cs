@@ -15,7 +15,7 @@ namespace ImageProcessing.Microkernel.MVP.Services.Adapter.Implementation
         /// <inheritdoc/>
         public void RegisterTransient<TService, TImplementation>()
             where TImplementation : TService
-            => _container.Register<TService, TImplementation>(new PerRequestLifeTime());
+            => _container.Register<TService, TImplementation>();
 
         /// <inheritdoc/>
         public void RegisterScoped<TService, TImplementation>()
@@ -56,7 +56,7 @@ namespace ImageProcessing.Microkernel.MVP.Services.Adapter.Implementation
 
         /// <inheritdoc/>
         public void RegisterTransient<TService>(TService instance)
-            => _container.Register<TService>(factory => instance, new PerRequestLifeTime());
+            => _container.Register<TService>(factory => instance, lifetime: null);
 
         /// <inheritdoc/>
         public void RegisterScoped<TService>(TService instance)
@@ -84,7 +84,7 @@ namespace ImageProcessing.Microkernel.MVP.Services.Adapter.Implementation
             {
                 var arg = serviceFactory.GetInstance<TArgument>();
                 return factory(arg);
-            }, new PerRequestLifeTime());
+            }, lifetime: null);
 
         /// <inheritdoc/>
         public void RegisterScoped<TService, TArgument>(Func<TArgument, TService> factory)
