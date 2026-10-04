@@ -20,8 +20,11 @@
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <FileVersion>2.0.0.0</FileVersion>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReleaseNotes>-fixed closures capture inside the publish from all
--exposed the Aggregator property inside the base presenter</PackageReleaseNotes>
+    <PackageReleaseNotes>
+      -merged microkernel modules into one
+      -added support for dependency injection factories
+      -made application lifecycle non-static
+    </PackageReleaseNotes>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   
