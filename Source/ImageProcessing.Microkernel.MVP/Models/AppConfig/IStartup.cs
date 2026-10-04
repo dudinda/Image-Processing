@@ -1,6 +1,6 @@
-using ImageProcessing.Microkernel.MVP.Services.IoC;
+using ImageProcessing.Microkernel.MVP.Services.Providers;
 
-namespace ImageProcessing.Microkernel.AppConfig
+namespace ImageProcessing.Microkernel.Models.AppConfig
 {
     /// <summary>
     /// It is used to create the

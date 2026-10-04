@@ -1,11 +1,11 @@
 using System;
 
-using ImageProcessing.Microkernel.MVP.Aggregator.Implementation;
 using ImageProcessing.Microkernel.MVP.Presenter;
-using ImageProcessing.Microkernel.MVP.Services.Adapters;
+using ImageProcessing.Microkernel.MVP.Services.Adapter;
 using ImageProcessing.Microkernel.MVP.Services.Aggregator;
-using ImageProcessing.Microkernel.MVP.Services.IoC;
-using ImageProcessing.Microkernel.MVP.Services.IoC.Implementation;
+using ImageProcessing.Microkernel.MVP.Services.Aggregator.Implementation;
+using ImageProcessing.Microkernel.MVP.Services.Providers;
+using ImageProcessing.Microkernel.MVP.Services.Providers.Implementation;
 
 namespace ImageProcessing.Microkernel.MVP.Services.Controller.Implementation
 {

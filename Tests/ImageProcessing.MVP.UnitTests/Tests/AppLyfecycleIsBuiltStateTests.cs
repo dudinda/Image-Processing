@@ -1,8 +1,8 @@
 using System;
 
-using ImageProcessing.Microkernel.EntryPoint;
+using ImageProcessing.Microkernel;
 using ImageProcessing.Microkernel.MVP.Code.Enums;
-using ImageProcessing.Microkernel.MVP.Factory;
+using ImageProcessing.Microkernel.MVP.Services.Factories;
 
 using NUnit.Framework;
 

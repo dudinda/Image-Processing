@@ -1,8 +1,8 @@
 using System;
 
 using ImageProcessing.App.Presentation.Presenters;
-using ImageProcessing.Microkernel.DIAdapter;
-using ImageProcessing.Microkernel.EntryPoint;
+using ImageProcessing.Microkernel;
+using ImageProcessing.Microkernel.MVP.Code.Enums;
 
 namespace ImageProcessing.App.UI
 {

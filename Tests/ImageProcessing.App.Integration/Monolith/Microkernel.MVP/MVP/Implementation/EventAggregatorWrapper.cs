@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading;
 
 using ImageProcessing.App.Presentation.UnitTests.Fakes.Components;
-using ImageProcessing.Microkernel.MVP.Aggregator.Implementation;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
+using ImageProcessing.Microkernel.MVP.Services.Aggregator.Implementation;
 
 namespace ImageProcessing.App.Presentation.IntegrationTests.Fakes
 {

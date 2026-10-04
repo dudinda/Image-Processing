@@ -2,7 +2,7 @@ using System;
 
 using LightInject;
 
-namespace ImageProcessing.Microkernel.MVP.Services.Adapters.Implementation
+namespace ImageProcessing.Microkernel.MVP.Services.Adapter.Implementation
 {
     /// <summary>
     /// Provides access to the LightInject <see cref="ServiceContainer"/>

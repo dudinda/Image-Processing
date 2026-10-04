@@ -1,144 +1,146 @@
 using System;
 
-namespace ImageProcessing.Microkernel.MVP.Services.Adapters
+using ImageProcessing.Microkernel.MVP.Services.Controller.Implementation;
+
+namespace ImageProcessing.Microkernel.MVP.Services.Providers
 {
     /// <summary>
     /// Provides access to the specified
-    /// DI container.
+    /// DI container within the <seealso cref="AppController"/>.
     /// </summary>
-    public interface IContainer : IDisposable
+    public interface IComponentProvider : IDisposable
     {
         /// <summary>
         /// Registers the <typeparamref name="TService"/>  as <typeparamref name="TImplementation"/>
-        /// with a transient scope.
+        /// with the transient scope.
         /// </summary>
-        void RegisterTransient<TService, TImplementation>()
+        IComponentProvider RegisterTransient<TService, TImplementation>()
             where TImplementation : TService;
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/>  as <typeparamref name="TImplementation"/>
         /// with the caller-name scope.
         /// </summary>
-        void RegisterScoped<TService, TImplementation>()
+        IComponentProvider RegisterScoped<TService, TImplementation>()
             where TImplementation : TService;
 
         /// <summary>
         /// Registers the signleton <typeparamref name="TService"/>  as <typeparamref name="TImplementation"/>
-        /// with a singleton scope.
+        /// with the singleton scope.
         /// </summary>
-        void RegisterSingleton<TService, TImplementation>()
+        IComponentProvider RegisterSingleton<TService, TImplementation>()
             where TImplementation : TService;
 
         /// <summary>
         /// Registers a concrete type as a service
-        /// with a transient scope.
+        /// with the transient scope.
         /// </summary>
-        void RegisterTransient<TService>();
+        IComponentProvider RegisterTransient<TService>();
 
         /// <summary>
         /// Registers a concrete type as a service
-        /// with a singleton scope.
+        /// with the singleton scope.
         /// </summary>
-        void RegisterSingleton<TService>();
+        IComponentProvider RegisterSingleton<TService>();
 
         /// <summary>
         /// Registers a concrete type as a service with
         /// the caller-name scope.
         /// </summary>
-        void RegisterScoped<TService>();
+        IComponentProvider RegisterScoped<TService>();
 
         /// <summary>
-        /// Registers the named singleton <typeparamref name="TService"/> as a named
-        /// <typeparamref name="TImplementation"/> with a transient scope.
+        /// Registers the named signleton <typeparamref name="TService"/> as a named
+        /// <typeparamref name="TImplementation"/> with the transient scope.
         /// </summary>
-        void RegisterTransient<TService, TImplementation>(string serviceName)
+        IComponentProvider RegisterNamedTransient<TService, TImplementation>(string serviceName)
             where TImplementation : TService;
 
         /// <summary>
-        /// Registers the named singleton <typeparamref name="TService"/> as a named
+        /// Registers the named signleton <typeparamref name="TService"/> as a named
         /// <typeparamref name="TImplementation"/>  with the caller-name scope.
         ///</summary>
-        void RegisterScoped<TService, TImplementation>(string serviceName)
+        IComponentProvider RegisterNamedScoped<TService, TImplementation>(string serviceName)
             where TImplementation : TService;
 
         /// <summary>
         /// Registers the named signleton <typeparamref name="TService"/>  as a named
-        /// <typeparamref name="TImplementation"/> with a singleton scope.
+        /// <typeparamref name="TImplementation"/> with the singleton scope.
         /// </summary>
-        void RegisterSingleton<TService, TImplementation>(string serviceName)
+        IComponentProvider RegisterNamedSingleton<TService, TImplementation>(string serviceName)
             where TImplementation : TService;
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> instance
-        /// with a transient scope.
+        /// with the transient scope.
         /// </summary>
-        void RegisterTransient<TService>(TService instance);
+        IComponentProvider RegisterTransientInstance<TService>(TService instance);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> instance
         /// with the caller-name scope.
         /// </summary>
-        void RegisterScoped<TService>(TService instance);
+        IComponentProvider RegisterScopedInstance<TService>(TService instance);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> instance
-        /// with a singleton scope.
+        /// with the singleton scope.
         /// </summary>
-        void RegisterSingleton<TService>(TService instance);
+        IComponentProvider RegisterSingletonInstance<TService>(TService instance);
 
         /// <summary>
         /// Registers the named <typeparamref name="TService"/> instance
-        /// with a transient scope.
+        /// with the transient scope.
         /// </summary>
-        void RegisterTransient<TService>(TService instance, string serviceName);
+        IComponentProvider RegisterTransientNamedInstance<TService>(TService instance, string serviceName);
 
         /// <summary>
         /// Registers the named <typeparamref name="TService"/> instance
         /// with the caller-name scope.
         /// </summary>
-        void RegisterScoped<TService>(TService instance, string serviceName);
+        IComponentProvider RegisterScopedNamedInstance<TService>(TService instance, string serviceName);
 
         /// <summary>
         /// Registers the named <typeparamref name="TService"/> instance
-        /// with a singleton scope.
+        /// with the singleton scope.
         /// </summary>
-        void RegisterSingleton<TService>(TService instance, string serviceName);
+        IComponentProvider RegisterSingletonNamedInstance<TService>(TService instance, string serviceName);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes.
-        /// the dependencies of the service with a transient scope.
+        /// the dependencies of the service with the transient scope.
         /// </summary>
-        void RegisterTransient<TService, TArgument>(Func<TArgument, TService> factory);
+        IComponentProvider RegisterTransient<TService>(Func<IComponentProvider, TService> factory);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes.
         /// the dependencies of the service with the caller-name scope.
         /// </summary>
-        void RegisterScoped<TService, TArgument>(Func<TArgument, TService> factory);
+        IComponentProvider RegisterScoped<TService>(Func<IComponentProvider, TService> factory);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes
-        /// the dependencies of the service with a singleton scope.
+        /// the dependencies of the service with the singleton scope.
         /// </summary>
-        void RegisterSingleton<TService, TArgument>(Func<TArgument, TService> factory);
+        IComponentProvider RegisterSingleton<TService>(Func<IComponentProvider, TService> factory);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes
-        /// the named dependencies of the service with a transient scope.
+        /// the named dependencies of the service with the transient scope.
         /// </summary>
-        void RegisterTransient<TService, TArgument>(Func<TArgument, TService> factory, string name);
+        IComponentProvider RegisterTransient<TService>(Func<IComponentProvider, TService> factory, string name);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes
         /// the named dependencies of the service with the caller-name scope.
         /// </summary>
-        void RegisterScoped<TService, TArgument>(Func<TArgument, TService> factory, string name);
+        IComponentProvider RegisterScoped<TService>(Func<IComponentProvider, TService> factory, string name);
 
         /// <summary>
         /// Registers the <typeparamref name="TService"/> as the factory that describes
-        /// the named dependencies of the service with a singleton scope.
+        /// the named dependencies of the service with the singleton scope.
         /// </summary>
-        void RegisterSingleton<TService, TArgument>(Func<TArgument, TService> factory, string name);
+        IComponentProvider RegisterSingleton<TService>(Func<IComponentProvider, TService> factory, string name);
 
         /// <summary>
         /// Returns <b>true</b> if the container can create the requested service, otherwise <b>false</b>.
@@ -150,5 +152,4 @@ namespace ImageProcessing.Microkernel.MVP.Services.Adapters
         /// </summary>
         TService Resolve<TService>();
     }
-
 }

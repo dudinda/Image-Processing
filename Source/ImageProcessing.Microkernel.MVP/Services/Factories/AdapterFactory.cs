@@ -1,9 +1,10 @@
 using System;
 
-using ImageProcessing.Microkernel.MVP.Services.Adapters;
-using ImageProcessing.Microkernel.MVP.Services.Adapters.Implementation;
+using ImageProcessing.Microkernel.MVP.Code.Enums;
+using ImageProcessing.Microkernel.MVP.Services.Adapter;
+using ImageProcessing.Microkernel.MVP.Services.Adapter.Implementation;
 
-namespace ImageProcessing.Microkernel.DIAdapter.Factory
+namespace ImageProcessing.Microkernel.MVP.Services.Factories
 {
     /// <summary>
     /// A factory method for all the types

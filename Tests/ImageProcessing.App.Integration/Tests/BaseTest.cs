@@ -1,7 +1,7 @@
 
-using ImageProcessing.Microkernel.AppConfig;
-using ImageProcessing.Microkernel.DIAdapter;
-using ImageProcessing.Microkernel.EntryPoint;
+using ImageProcessing.Microkernel;
+using ImageProcessing.Microkernel.Models.AppConfig;
+using ImageProcessing.Microkernel.MVP.Code.Enums;
 
 using NUnit.Framework;
 

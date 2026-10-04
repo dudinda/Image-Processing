@@ -1,8 +1,8 @@
 using System;
 
-using ImageProcessing.Microkernel.MVP.Services.Adapters;
+using ImageProcessing.Microkernel.MVP.Services.Adapter;
 
-namespace ImageProcessing.Microkernel.MVP.Services.IoC.Implementation
+namespace ImageProcessing.Microkernel.MVP.Services.Providers.Implementation
 {
     /// <inheritdoc cref="IComponentProvider"/>
     public sealed class ComponentProvider : IComponentProvider

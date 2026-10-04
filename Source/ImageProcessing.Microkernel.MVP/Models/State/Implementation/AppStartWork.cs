@@ -1,16 +1,13 @@
 using System;
 
-using ImageProcessing.Microkernel.AppConfig;
-using ImageProcessing.Microkernel.DI.MVP.State.Interface;
-using ImageProcessing.Microkernel.DIAdapter;
-using ImageProcessing.Microkernel.EntryPoint;
+using ImageProcessing.Microkernel.Models.AppConfig;
 using ImageProcessing.Microkernel.MVP.Code.Constants;
 using ImageProcessing.Microkernel.MVP.Code.Enums;
 using ImageProcessing.Microkernel.MVP.Presenter;
 
-using static ImageProcessing.Microkernel.MVP.Factory.StateFactory;
+using static ImageProcessing.Microkernel.MVP.Services.Factories.StateFactory;
 
-namespace ImageProcessing.Microkernel.MVP.State.Implementation
+namespace ImageProcessing.Microkernel.MVP.Models.State.Implementation
 {
     /// <summary>
     /// An application starts its work state.

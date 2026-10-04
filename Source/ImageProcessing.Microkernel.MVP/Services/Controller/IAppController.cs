@@ -2,7 +2,7 @@ using System;
 
 using ImageProcessing.Microkernel.MVP.Presenter;
 using ImageProcessing.Microkernel.MVP.Services.Aggregator;
-using ImageProcessing.Microkernel.MVP.Services.IoC;
+using ImageProcessing.Microkernel.MVP.Services.Providers;
 
 namespace ImageProcessing.Microkernel.MVP.Services.Controller
 {

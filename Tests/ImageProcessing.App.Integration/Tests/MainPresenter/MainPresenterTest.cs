@@ -1,19 +1,16 @@
-using System.Configuration;
 using System.Drawing;
 
+using ImageProcessing.App.Domain.Services.Pipeline.Implementation;
 using ImageProcessing.App.Integration.Code.Resources;
 using ImageProcessing.App.Integration.Monolith.Presentation.Presenters;
-using ImageProcessing.App.Integration.Monolith.UI;
-using ImageProcessing.App.Presentation.Code.Constants;
 using ImageProcessing.App.Presentation.Code.Enums;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.FileDialog;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Show;
 using ImageProcessing.App.Presentation.UnitTests.Extensions;
 using ImageProcessing.App.Presentation.Views;
-using ImageProcessing.App.Domain.Services.Pipeline.Implementation;
 using ImageProcessing.App.UI.Services.FormExposers;
-using ImageProcessing.Microkernel.EntryPoint;
+using ImageProcessing.Microkernel;
 
 using NSubstitute;
 using NSubstitute.ReceivedExtensions;

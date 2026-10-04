@@ -1,8 +1,8 @@
 using ImageProcessing.App.Presentation.IntegrationTests.Fakes;
 using ImageProcessing.App.Presentation.UnitTests.Fakes.Components;
-using ImageProcessing.Microkernel.AppConfig;
+using ImageProcessing.Microkernel.Models.AppConfig;
 using ImageProcessing.Microkernel.MVP.Services.Controller;
-using ImageProcessing.Microkernel.MVP.Services.IoC;
+using ImageProcessing.Microkernel.MVP.Services.Providers;
 
 namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Microkernel.MVP
 {

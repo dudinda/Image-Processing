@@ -1,18 +1,15 @@
 using System;
 
-using ImageProcessing.Microkernel.AppConfig;
-using ImageProcessing.Microkernel.DI.MVP.State.Interface;
-using ImageProcessing.Microkernel.DIAdapter;
-using ImageProcessing.Microkernel.EntryPoint;
+using ImageProcessing.Microkernel.Models.AppConfig;
 using ImageProcessing.Microkernel.MVP.Code.Constants;
 using ImageProcessing.Microkernel.MVP.Code.Enums;
 using ImageProcessing.Microkernel.MVP.Presenter;
 using ImageProcessing.Microkernel.MVP.Services.Controller.Implementation;
 
-using static ImageProcessing.Microkernel.DIAdapter.Factory.AdapterFactory;
-using static ImageProcessing.Microkernel.MVP.Factory.StateFactory;
+using static ImageProcessing.Microkernel.MVP.Services.Factories.AdapterFactory;
+using static ImageProcessing.Microkernel.MVP.Services.Factories.StateFactory;
 
-namespace ImageProcessing.Microkernel.MVP.State.Implementation
+namespace ImageProcessing.Microkernel.MVP.Models.State.Implementation
 {
     /// <summary>
     /// An application has not been built state.

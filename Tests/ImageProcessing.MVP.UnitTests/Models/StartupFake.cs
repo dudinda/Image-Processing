@@ -1,5 +1,5 @@
-using ImageProcessing.Microkernel.AppConfig;
-using ImageProcessing.Microkernel.MVP.Services.IoC;
+using ImageProcessing.Microkernel.Models.AppConfig;
+using ImageProcessing.Microkernel.MVP.Services.Providers;
 
 namespace ImageProcessing.MVP.UnitTests.Fakes
 {

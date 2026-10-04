@@ -1,8 +1,8 @@
-using ImageProcessing.Microkernel.AppConfig;
-using ImageProcessing.Microkernel.DIAdapter;
+using ImageProcessing.Microkernel.Models.AppConfig;
+using ImageProcessing.Microkernel.MVP.Code.Enums;
 using ImageProcessing.Microkernel.MVP.Presenter;
 
-namespace ImageProcessing.Microkernel.DI.MVP.State.Interface
+namespace ImageProcessing.Microkernel.MVP.Models.State
 {
     /// <summary>
     /// Represents a state of the application.

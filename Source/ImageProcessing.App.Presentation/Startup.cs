@@ -78,8 +78,8 @@ using ImageProcessing.App.Domain.Win.Services.Logger;
 using ImageProcessing.App.Domain.Win.Services.Logger.Implementation;
 using ImageProcessing.App.Domain.Win.Services.QualityMeasure;
 using ImageProcessing.App.Domain.Win.Services.QualityMeasure.Implementation;
-using ImageProcessing.Microkernel.AppConfig;
-using ImageProcessing.Microkernel.MVP.Services.IoC;
+using ImageProcessing.Microkernel.Models.AppConfig;
+using ImageProcessing.Microkernel.MVP.Services.Providers;
 
 using Microsoft.Extensions.Configuration;
 

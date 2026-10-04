@@ -11,11 +11,10 @@ using ImageProcessing.App.Integration.Monolith.Domain.Services.Logger.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Pipeline.Interface;
 using ImageProcessing.App.Integration.Monolith.Presentation.Presenters;
-using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain;
 using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.ColorMatrix.Interface;
 using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Rgb.Interface;
-using ImageProcessing.Microkernel.AppConfig;
-using ImageProcessing.Microkernel.MVP.Services.IoC;
+using ImageProcessing.Microkernel.Models.AppConfig;
+using ImageProcessing.Microkernel.MVP.Services.Providers;
 
 using NSubstitute;
 

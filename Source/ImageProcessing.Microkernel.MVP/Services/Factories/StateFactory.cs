@@ -1,10 +1,10 @@
 using System;
 
-using ImageProcessing.Microkernel.DI.MVP.State.Interface;
 using ImageProcessing.Microkernel.MVP.Code.Enums;
-using ImageProcessing.Microkernel.MVP.State.Implementation;
+using ImageProcessing.Microkernel.MVP.Models.State;
+using ImageProcessing.Microkernel.MVP.Models.State.Implementation;
 
-namespace ImageProcessing.Microkernel.MVP.Factory
+namespace ImageProcessing.Microkernel.MVP.Services.Factories
 {
     /// <summary>
     /// A factory method for all the types

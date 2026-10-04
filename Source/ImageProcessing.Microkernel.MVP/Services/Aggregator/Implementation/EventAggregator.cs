@@ -4,9 +4,8 @@ using System.Linq;
 using System.Threading;
 
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
-using ImageProcessing.Microkernel.MVP.Services.Aggregator;
 
-namespace ImageProcessing.Microkernel.MVP.Aggregator.Implementation
+namespace ImageProcessing.Microkernel.MVP.Services.Aggregator.Implementation
 {
     /// <inheritdoc cref="IEventAggregator"/>
     public class EventAggregator : IEventAggregator

@@ -1,12 +1,11 @@
-using ImageProcessing.Microkernel.AppConfig;
-using ImageProcessing.Microkernel.DI.MVP.State.Interface;
-using ImageProcessing.Microkernel.DIAdapter;
+using ImageProcessing.Microkernel.Models.AppConfig;
 using ImageProcessing.Microkernel.MVP.Code.Enums;
-using ImageProcessing.Microkernel.MVP.Factory;
+using ImageProcessing.Microkernel.MVP.Models.State;
 using ImageProcessing.Microkernel.MVP.Presenter;
 using ImageProcessing.Microkernel.MVP.Services.Controller;
+using ImageProcessing.Microkernel.MVP.Services.Factories;
 
-namespace ImageProcessing.Microkernel.EntryPoint
+namespace ImageProcessing.Microkernel
 {
     /// <summary>
     /// The entry point into an application lifecycle.

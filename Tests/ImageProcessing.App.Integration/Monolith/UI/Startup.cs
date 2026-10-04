@@ -1,4 +1,3 @@
-using ImageProcessing.App.Integration.Monolith.Presentation;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.UndoRedo.Interface;
 using ImageProcessing.App.Integration.Monolith.UI.FormEventBinders.ColorMatrix.Implementation;
 using ImageProcessing.App.Integration.Monolith.UI.FormEventBinders.ColorMatrix.Interface;
@@ -34,10 +33,10 @@ using ImageProcessing.App.UI.Services.FormEventBinders.Rotation;
 using ImageProcessing.App.UI.Services.FormEventBinders.Scaling;
 using ImageProcessing.App.UI.Services.FormEventBinders.Settings;
 using ImageProcessing.App.UI.Services.FormEventBinders.Transformation;
-using ImageProcessing.Microkernel.AppConfig;
+using ImageProcessing.Microkernel.Models.AppConfig;
+using ImageProcessing.Microkernel.MVP.Services.Providers;
 
 using NSubstitute;
-using ImageProcessing.Microkernel.MVP.Services.IoC;
 
 namespace ImageProcessing.App.Integration.Monolith.UI
 {

@@ -1,10 +1,10 @@
 using System;
 
-using ImageProcessing.MVP.UnitTests.Fakes;
-using ImageProcessing.Microkernel.EntryPoint;
+using ImageProcessing.Microkernel;
 using ImageProcessing.Microkernel.MVP.Code.Constants;
 using ImageProcessing.Microkernel.MVP.Code.Enums;
-using ImageProcessing.Microkernel.MVP.Factory;
+using ImageProcessing.Microkernel.MVP.Services.Factories;
+using ImageProcessing.MVP.UnitTests.Fakes;
 
 using NUnit.Framework;
 
