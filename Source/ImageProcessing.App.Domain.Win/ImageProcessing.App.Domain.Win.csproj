@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net4.8</TargetFramework>
@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ImageProcessing.App.Domain\ImageProcessing.App.Domain.csproj" />
-    <ProjectReference Include="..\ImageProcessing.Utility.Interop\ImageProcessing.Utility.Interop.csproj" />
   </ItemGroup>
 
   <ItemGroup>
