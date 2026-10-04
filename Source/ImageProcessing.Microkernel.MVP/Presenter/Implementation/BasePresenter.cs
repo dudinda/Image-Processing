@@ -18,12 +18,10 @@ namespace ImageProcessing.Microkernel.MVP.Presenter.Implementation
     public abstract class BasePresenter<TView> : IPresenter
 		where TView : class, IView
 	{
-        private TView? _view;
-        private IAppController? _controller;
 
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller
-            => _controller ??= AppController.Controller;
+            => field ??= AppController.Controller;
 
         /// <inheritdoc cref="IEventAggregator"/>
         protected IEventAggregator Aggregator
@@ -36,16 +34,16 @@ namespace ImageProcessing.Microkernel.MVP.Presenter.Implementation
         {
             get
             {
-                if(_view is null)
+                if(field is null)
                 {
-                    _view = Controller.IoC.Resolve<TView>();
+                    field = Controller.IoC.Resolve<TView>();
 
                     Controller
                         .Aggregator
-                        .Subscribe(this, _view);
+                        .Subscribe(this, field);
                 }
 
-                return _view;
+                return field;
             }
         }
 
@@ -67,13 +65,10 @@ namespace ImageProcessing.Microkernel.MVP.Presenter.Implementation
 		where TView : class, IView
 		where TViewModel : class
 	{
-        private TView? _view;
-        private TViewModel? _vm;
-        private IAppController? _controller;
 
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller
-            => _controller ??= AppController.Controller;
+            => field ??= AppController.Controller;
 
         /// <inheritdoc cref="IEventAggregator"/>
         protected IEventAggregator Aggregator
@@ -86,16 +81,16 @@ namespace ImageProcessing.Microkernel.MVP.Presenter.Implementation
         {
             get
             {
-                if (_view is null)
+                if (field is null)
                 {
-                    _view = Controller.IoC.Resolve<TView>();
+                    field = Controller.IoC.Resolve<TView>();
 
                     Controller
                         .Aggregator
-                        .Subscribe(this, _view);
+                        .Subscribe(this, field);
                 }
 
-                return _view;
+                return field;
             }
         }
 
@@ -104,8 +99,8 @@ namespace ImageProcessing.Microkernel.MVP.Presenter.Implementation
         /// </summary>
         protected TViewModel ViewModel
         {
-            get => _vm ?? throw new ArgumentNullException(nameof(_vm));
-            private set => _vm = value;        
+            get => field ?? throw new ArgumentNullException(nameof(ViewModel));
+            private set => field = value;        
         }
 
         /// <inheritdoc/>
