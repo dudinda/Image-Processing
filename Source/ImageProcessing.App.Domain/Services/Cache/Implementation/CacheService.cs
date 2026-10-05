@@ -9,14 +9,17 @@ namespace ImageProcessing.App.Domain.Services.Cache.Implementation
     /// <inheritdoc cref="ICacheService{TItem}"/>
     public class CacheService<TItem> : ICacheService<TItem>
     {
-        private static CancellationTokenSource _resetToken
-            = new CancellationTokenSource();
+        private readonly IMemoryCache _cache ;
 
-        private IMemoryCache _cache = new MemoryCache(
-            new MemoryCacheOptions() { SizeLimit = 32 });
+        private CancellationTokenSource _resetToken = new();
 
+        public CacheService(MemoryCacheOptions options)
+        {
+            _cache = new MemoryCache(options);
+        }
+        
         /// <inheritdoc/>
-        public virtual TItem GetOrCreate(object key, Func<TItem> createItem)
+        public TItem GetOrCreate(object key, Func<TItem> createItem)
         {
             // Look for a cache key.
             if (!_cache.TryGetValue(key, out var cacheEntry))
@@ -38,7 +41,7 @@ namespace ImageProcessing.App.Domain.Services.Cache.Implementation
         }
 
         /// <inheritdoc/>
-        public virtual void Reset()
+        public void Reset()
         {
             if (_resetToken != null &&
                !_resetToken.IsCancellationRequested &&

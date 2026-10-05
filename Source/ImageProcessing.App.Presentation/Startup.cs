@@ -82,6 +82,7 @@ using ImageProcessing.App.Domain.Win.Services.QualityMeasure.Implementation;
 using ImageProcessing.Microkernel.MVP.Models;
 using ImageProcessing.Microkernel.MVP.Services.Providers;
 
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 
 namespace ImageProcessing.App.Presentation
@@ -111,7 +112,12 @@ namespace ImageProcessing.App.Presentation
                     return new StaTaskService(options);
                 })
                 .RegisterSingleton<IBitmapCopyService, BitmapCopyService>()
-                .RegisterSingleton<ICacheService<Bitmap>, CacheService<Bitmap>>()
+                .RegisterSingleton<ICacheService<Bitmap>>(prov =>
+                {
+                    var config = prov.Resolve<IConfiguration>();
+                    var options = config.GetSection(nameof(MemoryCacheOptions)).Get<MemoryCacheOptions>();
+                    return new CacheService<Bitmap>(options);
+                })
                 .RegisterTransient<IUndoRedoService<Bitmap>>((prov) =>
                 {
                     var config = prov.Resolve<IConfiguration>();

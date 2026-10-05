@@ -88,6 +88,8 @@ using ImageProcessing.App.Presentation.UnitTests.Fakes.Services;
 using ImageProcessing.Microkernel.MVP.Models;
 using ImageProcessing.Microkernel.MVP.Services.Providers;
 
+using Microsoft.Extensions.Caching.Memory;
+
 using NSubstitute;
 
 namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain
@@ -136,7 +138,8 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain
                .RegisterTransient<IMorphologyServiceWrapper>(provider =>
                     Substitute.ForPartsOf<MorphologyServiceWrapper>())
                .RegisterSingleton<ICacheServiceWrapper>(provider =>
-                    Substitute.ForPartsOf<CacheServiceWrapper>())
+                    Substitute.ForPartsOf<CacheServiceWrapper>(
+                        builder.Resolve<MemoryCacheOptions>()))
                .RegisterTransient<IColorMatrixServiceWrapper>(provider =>
                     Substitute.ForPartsOf<ColorMatrixServiceWrapper>())
                .RegisterTransient<IConvolutionServiceWrapper>(provider =>
