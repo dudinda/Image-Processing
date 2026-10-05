@@ -3,6 +3,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.Domain.Services.BitmapCopyReference.Interface;
+using ImageProcessing.App.Domain.Services.Pipeline;
+using ImageProcessing.App.Domain.Win.Services.Logger;
 using ImageProcessing.App.Presentation.Code.Enums;
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Menu;
@@ -10,9 +13,6 @@ using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Show;
 using ImageProcessing.App.Presentation.Properties;
 using ImageProcessing.App.Presentation.ViewModels;
 using ImageProcessing.App.Presentation.Views;
-using ImageProcessing.App.Domain.Services.BitmapCopyReference.Interface;
-using ImageProcessing.App.Domain.Services.Pipeline;
-using ImageProcessing.App.Domain.Win.Services.Logger;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
@@ -23,12 +23,13 @@ namespace ImageProcessing.App.Presentation.Presenters
         ISubscriber<ShowRgbMenuEventArgs>, ISubscriber<ShowSettingsMenuEventArgs>,
         ISubscriber<ShowTransformationMenuEventArgs>, ISubscriber<ShowRotationMenuEventArgs>,
         ISubscriber<ShowScalingMenuEventArgs>
-    { 
+    {
+        public override IMainView View
+            => field ??= Controller.IoC.Resolve<IMainView>();
+
         private readonly ILoggerService _logger;
         private readonly IBitmapCopyService _reference;
         private readonly IAwaitablePipeline _pipeline;
-
-        private IMainView? _view;
 
         public MainMenuPresenter(
             IBitmapCopyService reference,
@@ -39,9 +40,6 @@ namespace ImageProcessing.App.Presentation.Presenters
             _reference = reference;
             _pipeline = pipeline;
         }
-
-        public override IMainView View
-            => _view ??= Controller.IoC.Resolve<IMainView>();
 
         public override void Run()
         {
