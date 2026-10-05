@@ -1,13 +1,20 @@
 using System.Drawing;
 
 using ImageProcessing.App.Domain.Code.Collections;
+using ImageProcessing.App.Domain.Models.Options;
 
 namespace ImageProcessing.App.Domain.Services.UndoRedo.Implementation
 {
     public class UndoRedoService : IUndoRedoService<Bitmap>
     {
-        private readonly FixedStackSafe<Bitmap> _undo = new FixedStackSafe<Bitmap>(10);
-        private readonly FixedStackSafe<Bitmap> _redo = new FixedStackSafe<Bitmap>(10);
+        private readonly FixedStackSafe<Bitmap> _undo;
+        private readonly FixedStackSafe<Bitmap> _redo;
+
+        public UndoRedoService(UndoRedoOptions options)
+        {
+            _undo = new FixedStackSafe<Bitmap>(options.MaxUndoCount);
+            _redo = new FixedStackSafe<Bitmap>(options.MaxRedoCount);
+        }
 
         public bool UndoIsEmpty
          => _undo.IsEmpty;

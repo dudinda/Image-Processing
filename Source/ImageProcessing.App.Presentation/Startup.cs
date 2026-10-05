@@ -9,6 +9,7 @@ using ImageProcessing.App.Domain.Factories.Rotation.Implementation;
 using ImageProcessing.App.Domain.Factories.Scaling.Implementation;
 using ImageProcessing.App.Domain.Factories.Transformation.Implementation;
 using ImageProcessing.App.Domain.Models.AppSettings;
+using ImageProcessing.App.Domain.Models.Options;
 using ImageProcessing.App.Domain.Providers.BitmapLuminance;
 using ImageProcessing.App.Domain.Providers.BitmapLuminance.Implementation;
 using ImageProcessing.App.Domain.Providers.Convolution;
@@ -106,7 +107,12 @@ namespace ImageProcessing.App.Presentation
                 .RegisterSingleton<IStaTaskService, StaTaskService>()
                 .RegisterSingleton<IBitmapCopyService, BitmapCopyService>()
                 .RegisterSingleton<ICacheService<Bitmap>, CacheService<Bitmap>>()
-                .RegisterTransient<IUndoRedoService<Bitmap>, UndoRedoService>()
+                .RegisterTransient<IUndoRedoService<Bitmap>>((prov) =>
+                {
+                    var config = prov.Resolve<IConfiguration>();
+                    var options = config.GetSection(nameof(UndoRedoOptions)).Get<UndoRedoOptions>();
+                    return new UndoRedoService(options);
+                })
                 .RegisterTransient<IConvolutionFactory, ConvolutionFactory>()
                 .RegisterTransient<IMorphologyFactory, MorphologyFactory>()
                 .RegisterTransient<IStructuringElementFactory, StructuringElementFactory>()

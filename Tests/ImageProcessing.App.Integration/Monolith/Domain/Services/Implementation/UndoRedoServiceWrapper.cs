@@ -8,7 +8,7 @@ namespace ImageProcessing.App.Integration.Monolith.Domain.Services.UndoRedo.Impl
 {
     public class UndoRedoServiceWrapper : IUndoRedoServiceWrapper
     {
-        private readonly UndoRedoService _service = new UndoRedoService();
+        private readonly UndoRedoService _service = new UndoRedoService(new App.Domain.Models.Options.UndoRedoOptions());
 
         public virtual bool UndoIsEmpty
             => _service.UndoIsEmpty;
