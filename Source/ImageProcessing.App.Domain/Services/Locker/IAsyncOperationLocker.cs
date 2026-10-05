@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ImageProcessing.App.Domain.Services.Locker
@@ -14,11 +15,11 @@ namespace ImageProcessing.App.Domain.Services.Locker
         /// Lock async during the specified work.
         /// Returns the <typeparamref name="TResult"/>.
         /// </summary>
-        Task<TResult> LockOperationAsync<TResult>(Func<TResult> worker);
+        Task<TResult> LockOperationAsync<TResult>(Func<TResult> worker, CancellationToken token);
 
         /// <summary>
         /// Lock async during the specified action.
         /// </summary>
-        Task LockOperationAsync(Action worker);
+        Task LockOperationAsync(Action worker, CancellationToken token);
     }
 }

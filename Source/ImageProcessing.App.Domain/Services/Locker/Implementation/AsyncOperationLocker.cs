@@ -12,12 +12,12 @@ namespace ImageProcessing.App.Domain.Services.LockerService.Operation.Implementa
         private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
 
         /// <inheritdoc />
-        public async Task<TResult> LockOperationAsync<TResult>(Func<TResult> worker)
+        public async Task<TResult> LockOperationAsync<TResult>(Func<TResult> worker, CancellationToken token)
         {
             await _semaphore.WaitAsync().ConfigureAwait(false);
             try
             {
-                return await Task.Run(() => worker()).ConfigureAwait(false);
+                return await Task.Run(() => { return worker(); }, token).ConfigureAwait(false);
             }
             catch
             {
@@ -30,12 +30,12 @@ namespace ImageProcessing.App.Domain.Services.LockerService.Operation.Implementa
         }
 
         /// <inheritdoc />
-        public async Task LockOperationAsync(Action worker)
+        public async Task LockOperationAsync(Action worker, CancellationToken token)
         {
             await _semaphore.WaitAsync().ConfigureAwait(false);
             try
             {
-                await Task.Run(() => worker()).ConfigureAwait(false);
+                await Task.Run(() => worker(), token).ConfigureAwait(false);
             }
             catch
             {

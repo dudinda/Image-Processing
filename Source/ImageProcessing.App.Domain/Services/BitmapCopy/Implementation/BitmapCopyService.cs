@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Threading;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Domain.Services.BitmapCopyReference.Interface;
@@ -21,7 +22,7 @@ namespace ImageProcessing.App.Domain.Services.BitmapCopyReference.Implementation
         public async Task<Bitmap> GetCopy()
         {
             var copy = await _locker.LockOperationAsync(
-                () => new Bitmap(_cpy)
+                () => new Bitmap(_cpy), CancellationToken.None
             ).ConfigureAwait(false);
 
             return copy;
@@ -30,7 +31,7 @@ namespace ImageProcessing.App.Domain.Services.BitmapCopyReference.Implementation
         public async Task SetCopy(Bitmap cpy)
         {
             var copy = await _locker.LockOperationAsync(
-                () => _cpy = new Bitmap(cpy)
+                () => _cpy = new Bitmap(cpy), CancellationToken.None
             ).ConfigureAwait(false);
         }
     }
