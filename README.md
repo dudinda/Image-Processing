@@ -76,7 +76,11 @@
 
 [Microsoft.Extensions.Configuration](https://www.nuget.org/packages/microsoft.extensions.configuration/)
 
+[Microsoft.Extensions.Caching.Memory](https://www.nuget.org/packages/microsoft.extensions.caching.memory/)
+
 [NUnit](https://www.nuget.org/packages/nunit/), [NSubstitute](https://www.nuget.org/packages/nsubstitute/)
+
+[MessageLoop.Common](https://www.nuget.org/packages/messageloop.common/)
 
 ## Benchmarks [CPU]
 
