@@ -66,6 +66,7 @@ using ImageProcessing.App.Domain.Services.StaTask;
 using ImageProcessing.App.Domain.Services.UndoRedo;
 using ImageProcessing.App.Domain.Services.UndoRedo.Implementation;
 using ImageProcessing.App.Domain.Win.Builders.ChartBuilder.Implementation;
+using ImageProcessing.App.Domain.Win.Models.Options;
 using ImageProcessing.App.Domain.Win.NonBlockDialog.Implementation;
 using ImageProcessing.App.Domain.Win.Providers.VisitableFactory.Histogram;
 using ImageProcessing.App.Domain.Win.Providers.VisitableFactory.Histogram.Implementation;
@@ -103,7 +104,12 @@ namespace ImageProcessing.App.Presentation
                 })
                 .RegisterSingleton<ILoggerService, LoggerService>()
                 .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
-                .RegisterSingleton<IStaTaskService, StaTaskService>()
+                .RegisterSingleton<IStaTaskService>((prov) =>
+                {
+                    var config = prov.Resolve<IConfiguration>();
+                    var options = config.GetSection(nameof(StaTaskOptions)).Get<StaTaskOptions>();
+                    return new StaTaskService(options);
+                })
                 .RegisterSingleton<IBitmapCopyService, BitmapCopyService>()
                 .RegisterSingleton<ICacheService<Bitmap>, CacheService<Bitmap>>()
                 .RegisterTransient<IUndoRedoService<Bitmap>>((prov) =>

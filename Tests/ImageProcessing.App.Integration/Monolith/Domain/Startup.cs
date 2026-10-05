@@ -7,6 +7,7 @@ using ImageProcessing.App.Domain.Services.Factories.Rgb;
 using ImageProcessing.App.Domain.Services.Factories.Rotation;
 using ImageProcessing.App.Domain.Services.Factories.Scaling;
 using ImageProcessing.App.Domain.Services.Factories.Transformation;
+using ImageProcessing.App.Domain.Win.Models.Options;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.BitmapLuminance.Implementation;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.BitmapLuminance.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.Convolution.Implementation;
@@ -96,7 +97,7 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain
         public void Build(IComponentProvider builder)
         {
             new Microkernel.MVP.Startup().Build(builder);
-            new Startup().Build(builder);
+            new ImageProcessing.App.UI.Startup().Build(builder);
 
             builder
                 .RegisterTransient<IColorMatrixFactoryWrapper>(provider =>
@@ -153,7 +154,8 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain
                .RegisterTransient<IFileDialogServiceWrapper>(provider =>
                     Substitute.ForPartsOf<FileDialogServiceWrapper>())
                .RegisterSingleton<IStaTaskServiceWrapper>(provider =>
-                    Substitute.ForPartsOf<StaTaskServiceWrapper>())
+                    Substitute.ForPartsOf<StaTaskServiceWrapper>(
+                        builder.Resolve<StaTaskOptions>()))
                .RegisterTransient<INonBlockDialogServiceWrapper>(provider =>
                     Substitute.ForPartsOf<NonBlockDialogServiceWrapper>(
                         builder.Resolve<IFileDialogServiceWrapper>(),

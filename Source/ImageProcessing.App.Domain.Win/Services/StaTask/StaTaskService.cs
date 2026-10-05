@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.Domain.Win.Models.Options;
 using ImageProcessing.App.Domain.Win.Models.Wrapper;
 
 namespace ImageProcessing.App.Domain.Services.StaTask
@@ -10,25 +11,21 @@ namespace ImageProcessing.App.Domain.Services.StaTask
     /// <inheritdoc cref="IStaTaskService"/>
     public sealed class StaTaskService : IStaTaskService
     {
-        private readonly int _maxNumberOfModals;
+        private readonly StaTaskOptions _options;
 
         /// <summary>
         /// Contains threads' ids which hold modal windows.
         /// </summary>
         private static HashSet<int> _pool = new HashSet<int>();
 
-        public StaTaskService() : this(4) { } 
-
-        public StaTaskService(int maxNumberOfModals = 4)
+        public StaTaskService(StaTaskOptions options)
         {
-            if(maxNumberOfModals <= 0)
+            if (options.MaxNumberOfModals <= 0)
             {
-                throw new ArgumentException(nameof(maxNumberOfModals));
+                throw new ArgumentException(nameof(options.MaxNumberOfModals));
             }
-
-            _maxNumberOfModals = maxNumberOfModals;
+            _options = options;
         }
-
 
         /// <inheritdoc/>
         public Task<TArg> StartSTATask<TArg>(Func<TArg> func)
@@ -57,7 +54,7 @@ namespace ImageProcessing.App.Domain.Services.StaTask
 
             thread.SetApartmentState(ApartmentState.STA);
            
-            if(_pool.Count > _maxNumberOfModals)
+            if(_pool.Count > _options.MaxNumberOfModals)
             {
                 tcs.SetResult(default(TArg)!);
                 return tcs.Task;
@@ -94,7 +91,7 @@ namespace ImageProcessing.App.Domain.Services.StaTask
 
             thread.SetApartmentState(ApartmentState.STA);
 
-            if (_pool.Count > _maxNumberOfModals)
+            if (_pool.Count > _options.MaxNumberOfModals)
             {
                 tcs.SetResult(null!);
                 return tcs.Task;
@@ -107,8 +104,7 @@ namespace ImageProcessing.App.Domain.Services.StaTask
 
         /// <summary>
         /// Close all modal windows belonging
-        /// to the pool on disposing. Used by a DI-container
-        /// in a singleton scope.
+        /// to the pool.
         /// </summary>
         public void Dispose()
         {
