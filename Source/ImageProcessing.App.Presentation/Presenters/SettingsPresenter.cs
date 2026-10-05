@@ -6,10 +6,10 @@ using ImageProcessing.App.Presentation.Code.Enums;
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.SettingsArgs;
 using ImageProcessing.App.Presentation.Views;
-using ImageProcessing.App.Domain.Models.AppSettings;
 using ImageProcessing.App.Domain.Win.Services.Logger;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
+using ImageProcessing.App.Domain.Models.Options;
 
 namespace ImageProcessing.App.Presentation.Presenters
 {
@@ -19,11 +19,11 @@ namespace ImageProcessing.App.Presentation.Presenters
         ISubscriber<EnableControlEventArgs>
     {
         private readonly ILoggerService _logger;
-        private readonly AppSettings _settings;
+        private readonly AppOptions _settings;
 
         public SettingsPresenter(
             ILoggerService logger,
-            AppSettings settings)
+            AppOptions settings)
         {
             _settings = settings;
             _logger = logger;

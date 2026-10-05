@@ -3,8 +3,8 @@ using System.Drawing;
 using ImageProcessing.App.Domain.Code.Enums;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.Scaling.Interface;
 using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Scaling.Interface;
-using ImageProcessing.App.Domain.Models.AppSettings;
 using ImageProcessing.App.Domain.Providers.Scaling.Implementation;
+using ImageProcessing.App.Domain.Models.Options;
 
 namespace ImageProcessing.App.Integration.Monolith.Domain.Providers.Scaling.Implementation
 {
@@ -13,11 +13,11 @@ namespace ImageProcessing.App.Integration.Monolith.Domain.Providers.Scaling.Impl
         private readonly ScalingProvider _provider;
 
         public IScalingFactoryWrapper ScalingFactory { get; }
-        public AppSettings Settings { get; }
+        public AppOptions Settings { get; }
 
         public ScalingProviderWrapper(
             IScalingFactoryWrapper factory,
-            AppSettings settings)
+            AppOptions settings)
         {
             ScalingFactory = factory;
             Settings = settings;

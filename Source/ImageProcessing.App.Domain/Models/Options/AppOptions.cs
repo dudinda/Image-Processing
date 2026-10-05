@@ -1,9 +1,9 @@
 using ImageProcessing.App.Domain.Code.Enums;
 
-namespace ImageProcessing.App.Domain.Models.AppSettings
+namespace ImageProcessing.App.Domain.Models.Options
 {
     /// <inheritdoc cref="IAppSettings"/>
-    public class AppSettings 
+    public class AppOptions 
     {
         /// <inheritdoc />
         public RotationMethod Rotation { get; set; }

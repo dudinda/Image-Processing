@@ -1,4 +1,4 @@
-using ImageProcessing.App.Domain.Models.AppSettings;
+using ImageProcessing.App.Domain.Models.Options;
 using ImageProcessing.App.Domain.Services.Factories.ColorMatrix;
 using ImageProcessing.App.Domain.Services.Factories.Convolution;
 using ImageProcessing.App.Domain.Services.Factories.Distribution;
@@ -210,11 +210,11 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain
                .RegisterTransient<IRotationProviderWrapper>(provider =>
                     Substitute.ForPartsOf<RotationProviderWrapper>(
                         builder.Resolve<IRotationFactoryWrapper>(),
-                        builder.Resolve<AppSettings>()))
+                        builder.Resolve<AppOptions>()))
                .RegisterTransient<IScalingProviderWrapper>(provider =>
                     Substitute.ForPartsOf<ScalingProviderWrapper>(
                         builder.Resolve<IScalingFactoryWrapper>(),
-                        builder.Resolve<AppSettings>()))
+                        builder.Resolve<AppOptions>()))
                .RegisterTransient<ITransformationProviderWrapper>(provider =>
                     Substitute.ForPartsOf<TransformationProviderWrapper>(
                         builder.Resolve<ITransformationFactoryWrapper>()));

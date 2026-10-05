@@ -8,7 +8,6 @@ using ImageProcessing.App.Domain.Factories.Recommendation.Implementation;
 using ImageProcessing.App.Domain.Factories.Rotation.Implementation;
 using ImageProcessing.App.Domain.Factories.Scaling.Implementation;
 using ImageProcessing.App.Domain.Factories.Transformation.Implementation;
-using ImageProcessing.App.Domain.Models.AppSettings;
 using ImageProcessing.App.Domain.Models.Options;
 using ImageProcessing.App.Domain.Providers.BitmapLuminance;
 using ImageProcessing.App.Domain.Providers.BitmapLuminance.Implementation;
@@ -97,10 +96,10 @@ namespace ImageProcessing.App.Presentation
                         .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
                     return config.Build();
                 })
-                .RegisterSingleton<AppSettings>((prov) =>
+                .RegisterSingleton<AppOptions>((prov) =>
                 {
                     var config = prov.Resolve<IConfiguration>();
-                    return config.GetSection(nameof(AppSettings)).Get<AppSettings>();
+                    return config.GetSection(nameof(AppOptions)).Get<AppOptions>();
                 })
                 .RegisterSingleton<ILoggerService, LoggerService>()
                 .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()

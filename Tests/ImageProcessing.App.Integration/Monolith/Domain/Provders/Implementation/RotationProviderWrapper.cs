@@ -2,8 +2,8 @@ using System.Drawing;
 
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.Rotation.Interface;
 using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Rotation.Interface;
-using ImageProcessing.App.Domain.Models.AppSettings;
 using ImageProcessing.App.Domain.Providers.Rotation.Implementation;
+using ImageProcessing.App.Domain.Models.Options;
 
 namespace ImageProcessing.App.Integration.Monolith.Domain.Providers.Rotation.Implementation
 {
@@ -12,11 +12,11 @@ namespace ImageProcessing.App.Integration.Monolith.Domain.Providers.Rotation.Imp
         private readonly RotationProvider _provider;
 
         public IRotationFactoryWrapper Rotation { get; }
-        public AppSettings Settings { get; }
+        public AppOptions Settings { get; }
 
         public RotationProviderWrapper(
             IRotationFactoryWrapper rotation,
-            AppSettings settings)
+            AppOptions settings)
         {
             Rotation = rotation;
             Settings = settings;

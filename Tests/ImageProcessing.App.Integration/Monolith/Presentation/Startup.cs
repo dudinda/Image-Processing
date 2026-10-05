@@ -1,4 +1,4 @@
-using ImageProcessing.App.Domain.Models.AppSettings;
+using ImageProcessing.App.Domain.Models.Options;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.BitmapLuminance.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.Convolution.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.Rgb.Interface;
@@ -71,7 +71,7 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation
                 .RegisterTransient(factory =>
                     Substitute.ForPartsOf<SettingsPresenterWrapper>(
                         builder.Resolve<ILoggerServiceWrapper>(),
-                        builder.Resolve<AppSettings>()))
+                        builder.Resolve<AppOptions>()))
                 .RegisterTransient(factory =>
                     Substitute.ForPartsOf<TransformationPresenterWrapper>(
                         builder.Resolve<ITransformationProviderWrapper>(),

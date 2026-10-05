@@ -1,7 +1,7 @@
 using System;
 
 using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.App.Domain.Models.AppSettings;
+using ImageProcessing.App.Domain.Models.Options;
 using ImageProcessing.App.Domain.Models.Recommendation.Implementation;
 using ImageProcessing.App.Domain.Services.Factories.Recommendation;
 using ImageProcessing.App.Domain.Services.Factories.Rgb;
@@ -29,7 +29,7 @@ namespace ImageProcessing.App.Domain.UnitTests.Factory.Rgb
             _rgbFilterFactory = new RgbFilterFactory(
                 recommendation,
                 Substitute.For<IChannelFactory>(),
-                Substitute.For<AppSettings>()
+                Substitute.For<AppOptions>()
             );
         }
 

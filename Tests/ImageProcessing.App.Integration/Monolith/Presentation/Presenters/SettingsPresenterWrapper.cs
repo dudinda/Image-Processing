@@ -5,9 +5,9 @@ using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.SettingsArgs;
 using ImageProcessing.App.Presentation.Presenters;
 using ImageProcessing.App.Presentation.Views;
-using ImageProcessing.App.Domain.Models.AppSettings;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
+using ImageProcessing.App.Domain.Models.Options;
 
 namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
 {
@@ -22,11 +22,11 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
             => _presenter.View;
 
         public ILoggerServiceWrapper Logger { get; }
-        public AppSettings Settings { get; }
+        public AppOptions Settings { get; }
 
         public SettingsPresenterWrapper(
             ILoggerServiceWrapper logger,
-            AppSettings settings)
+            AppOptions settings)
         {
             Settings = settings;
             Logger = logger;
