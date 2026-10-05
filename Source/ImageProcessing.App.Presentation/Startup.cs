@@ -1,6 +1,5 @@
 using System.Drawing;
 
-
 using ImageProcessing.App.Domain.Factories.ColorMatrix.Implementation;
 using ImageProcessing.App.Domain.Factories.Convolution.Implementation;
 using ImageProcessing.App.Domain.Factories.Distribution.Implementation;
@@ -82,6 +81,10 @@ using ImageProcessing.App.Domain.Win.Services.QualityMeasure.Implementation;
 using ImageProcessing.Microkernel.MVP.Models;
 using ImageProcessing.Microkernel.MVP.Services.Providers;
 
+using MessageLoop.Common.Models.LongRun;
+using MessageLoop.Common.Services.LongRun;
+using MessageLoop.Common.Services.LongRun.Implementation;
+
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 
@@ -118,6 +121,7 @@ namespace ImageProcessing.App.Presentation
                     var options = config.GetSection(nameof(MemoryCacheOptions)).Get<MemoryCacheOptions>();
                     return new CacheService<Bitmap>(options);
                 })
+                .RegisterSingleton<ILongRunService<LongRunItem>, LongRunService<LongRunItem>>()
                 .RegisterTransient<IUndoRedoService<Bitmap>>((prov) =>
                 {
                     var config = prov.Resolve<IConfiguration>();
