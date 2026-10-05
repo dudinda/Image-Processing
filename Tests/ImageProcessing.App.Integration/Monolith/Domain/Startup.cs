@@ -128,7 +128,8 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain
 
             builder
                .RegisterTransient<IUndoRedoServiceWrapper>(provider =>
-                    Substitute.ForPartsOf<UndoRedoServiceWrapper>())
+                    Substitute.ForPartsOf<UndoRedoServiceWrapper>(
+                        builder.Resolve<UndoRedoOptions>()))
                .RegisterTransient<IBitmapServiceWrapper>(provider =>
                     Substitute.ForPartsOf<BitmapServiceWrapper>())
                .RegisterTransient<IMorphologyServiceWrapper>(provider =>
