@@ -61,26 +61,21 @@ namespace ImageProcessing.App.Presentation.UnitTests.Fakes.Form
         }
 
 
-        public virtual Image SrcImage
-        {
-            set => _form.SrcImage = value;
-            get => _form.SrcImage;
-        }
-
-        public virtual Image SrcImageCopy
-        {
-            set => _form.SrcImageCopy = value;
-            get => _form.SrcImageCopy;
-        }
-
-        public virtual Image DefaultImage
-            => _form.DefaultImage;
-
         public virtual Image SourceImage
         {
             set => _form.SourceImage = value;
             get => _form.SourceImage;
         }
+
+        public virtual Image SourceImageCopy
+        {
+            set => _form.SourceImageCopy = value;
+            get => _form.SourceImageCopy;
+        }
+
+        public virtual Image DefaultImage
+            => _form.DefaultImage;
+
         public virtual PictureBox SourceBox
             => _form.SourceBox;
 

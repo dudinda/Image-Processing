@@ -24,10 +24,6 @@ namespace ImageProcessing.App.UI.Forms.Main
         private readonly IMenuStateFactory _state;
         private readonly IUndoRedoService<Bitmap> _undoredo;
 
-        private Image? _default;
-        private Image? _srcCopy;
-        private Image? _loaded;
-
         public MainForm(
             IMainFormEventBinder binder,
             IUndoRedoService<Bitmap> undoredo,
@@ -44,28 +40,32 @@ namespace ImageProcessing.App.UI.Forms.Main
 
         public Image? LoadedImage
         {
-            get => Read<Image>(() => _loaded);
-            set => Write(() => _loaded = value);
+            get => Read<Image>(() => field);
+            set => Write(() => field = value);
         }
 
         /// <inheritdoc/>
-        public Image? SrcImage
+        public PictureBox SourceBox
+            => Src.Container;
+
+        /// <inheritdoc/>
+        public Image? SourceImage
         {
             get => SourceBox.Image;
             set => SourceBox.Image = value;
         }
 
         /// <inheritdoc/>
-        public virtual Image? Default
+        public virtual Image? DefaultImage
         {
-            get => _default ??= Resources.DefaultImage;
+            get => field ??= Resources.DefaultImage;
         }
 
         /// <inheritdoc/>
-        public Image? SrcImageCopy
+        public Image? SourceImageCopy
         {
-            get => _srcCopy ?? Default;
-            set => _srcCopy = value;
+            get => field ?? DefaultImage;
+            set => field = value;
         }
 
         /// <inheritdoc/>
@@ -101,27 +101,12 @@ namespace ImageProcessing.App.UI.Forms.Main
             => DistributionMenu;
 
         /// <inheritdoc/>
-        public Image? SourceImage
-        {
-            get => SrcImage;
-            set => SrcImage = value;
-        }
-
-        /// <inheritdoc/>
         public ToolStripButton UndoButton
             => UndoBtn;
 
         /// <inheritdoc/>
         public ToolStripButton RedoButton
             => RedoBtn;
-
-        /// <inheritdoc/>
-        public Image? DefaultImage
-            => Default;
-
-        /// <inheritdoc/>
-        public PictureBox SourceBox
-            => Src.Container;
 
         /// <inheritdoc/>
         public ToolStripMenuItem SettingsMenuButton
@@ -156,7 +141,7 @@ namespace ImageProcessing.App.UI.Forms.Main
 
         /// <inheritdoc/>
         public void SetDefaultImage()
-            => SourceImage = Default;
+            => SourceImage = DefaultImage;
 
         /// <inheritdoc/>
         public double GetZoomFactor()
@@ -194,11 +179,11 @@ namespace ImageProcessing.App.UI.Forms.Main
 
         /// <inheritdoc/>
         public Image GetImageCopy()
-            => Read<Image>(() => SrcImageCopy);
+            => Read<Image>(() => SourceImageCopy);
 
         /// <inheritdoc/>
         public void SetImageCopy(Image copy)
-            => Write(() => SrcImageCopy = copy);
+            => Write(() => SourceImageCopy = copy);
 
         /// <inheritdoc/>
         public void SetImage(Image image)
@@ -206,7 +191,7 @@ namespace ImageProcessing.App.UI.Forms.Main
 
         /// <inheritdoc/>
         public bool ImageIsDefault
-            => Read<bool>(() => SrcImageCopy == DefaultImage);
+            => Read<bool>(() => SourceImageCopy == DefaultImage);
 
         /// <inheritdoc/>
         public void Refresh()

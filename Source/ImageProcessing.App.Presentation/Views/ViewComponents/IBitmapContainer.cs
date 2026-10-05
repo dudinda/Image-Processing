@@ -13,13 +13,13 @@ namespace ImageProcessing.App.Presentation.Views.ViewComponents
         /// A rendered image at the
         /// <see cref="ImageContainer.Source"/>.
         /// </summary>
-        Image? SrcImage { get; set; }
+        Image? SourceImage { get; set; }
 
         /// <summary>
         /// A copy of a rendered image at the
         /// <see cref="ImageContainer.Source"/>.
         /// </summary>
-        Image? SrcImageCopy { get; set; }
+        Image? SourceImageCopy { get; set; }
 
         /// <summary>
         /// Get the specified image copy from

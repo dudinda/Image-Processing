@@ -26,7 +26,7 @@ namespace ImageProcessing.App.UI.Services.FormExposers
         /// <summary>
         /// The source image copy.
         /// </summary>
-        Image SrcImageCopy { get; set; }
+        Image SourceImageCopy { get; set; }
 
         /// <summary>
         /// The source picture box.
