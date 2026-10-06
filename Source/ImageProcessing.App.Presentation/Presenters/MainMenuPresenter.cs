@@ -29,11 +29,11 @@ namespace ImageProcessing.App.Presentation.Presenters
 
         private readonly ILogger<MainMenuPresenter> _logger;
         private readonly IBitmapCopyService _reference;
-        private readonly IAwaitablePipeline _pipeline;
+        private readonly IRenderPipeline _pipeline;
 
         public MainMenuPresenter(
             IBitmapCopyService reference,
-            IAwaitablePipeline pipeline,
+            IRenderPipeline pipeline,
             ILogger<MainMenuPresenter> logger)
         {
             _logger = logger;

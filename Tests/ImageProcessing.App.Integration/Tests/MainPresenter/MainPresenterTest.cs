@@ -70,7 +70,7 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Tests
                     Arg.Is<CursorType>(arg => arg == CursorType.Wait));
 
                 _presenter.Pipeline.Received().Register(Arg.Any<PipelineBlock>());
-                _presenter.Pipeline.Received().AwaitResult();
+                _presenter.Pipeline.Received().Render();
                 _presenter.Reference.Received().SetCopy(
                     Arg.Is<Bitmap>(arg => arg == Res._1920x1080frame));
 

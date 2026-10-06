@@ -33,13 +33,13 @@ namespace ImageProcessing.App.Presentation.Presenters
         private readonly IScalingProvider _scale;
         private readonly IRotationProvider _rotation;
         private readonly IBitmapCopyService _reference;
-        private readonly IAwaitablePipeline _pipeline;
+        private readonly IRenderPipeline _pipeline;
         private readonly INonBlockDialogService _dialog;
 
         public MainPresenter(
             IBitmapCopyService reference,
             INonBlockDialogService dialog,
-            IAwaitablePipeline pipeline,
+            IRenderPipeline pipeline,
             IRotationProvider rotation,
             IScalingProvider scale,
             ILogger<MainPresenter> logger)
@@ -289,13 +289,11 @@ namespace ImageProcessing.App.Presentation.Presenters
 
         private async Task Paint(IPipelineBlock block)
         {
-            if (!_pipeline.Register(block.Add<Bitmap>(
-                (bmp) => PaintBlock(bmp))))
-            {
-                throw new InvalidOperationException(Errors.Pipeline);
-            }
+            _pipeline.Register(
+                block.Add<Bitmap>(
+                    (bmp) => PaintBlock(bmp)));
 
-            await _pipeline.AwaitResult().ConfigureAwait(true);
+            await _pipeline.Render().ConfigureAwait(true);
         }
 
         private async Task Render(object publisher, IPipelineBlock block,
@@ -303,13 +301,11 @@ namespace ImageProcessing.App.Presentation.Presenters
         {
             View.SetCursor(CursorType.Wait);
 
-            if (!_pipeline.Register(block.Add<Bitmap>(
-                (bmp) => RenderBlock(publisher, bmp, action))))
-            {
-                throw new InvalidOperationException(Errors.Pipeline);
-            }
+            _pipeline.Register(
+                block.Add<Bitmap>(
+                    (bmp) => RenderBlock(publisher, bmp, action)));
 
-            await _pipeline.AwaitResult().ConfigureAwait(true);
+            await _pipeline.Render().ConfigureAwait(true);
 
             if (!_pipeline.Any())
             {

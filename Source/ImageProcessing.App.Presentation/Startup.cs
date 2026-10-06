@@ -1,4 +1,6 @@
 using System.Drawing;
+using System.Threading.Channels;
+using System.Threading.Tasks;
 
 using ImageProcessing.App.Domain.Factories.ColorMatrix.Implementation;
 using ImageProcessing.App.Domain.Factories.Convolution.Implementation;
@@ -82,6 +84,8 @@ using ImageProcessing.Microkernel.MVP.Services.Providers;
 using MessageLoop.Common.Models.LongRun;
 using MessageLoop.Common.Services.LongRun;
 using MessageLoop.Common.Services.LongRun.Implementation;
+using MessageLoop.Service.Services.Message;
+using MessageLoop.Service.Services.Message.Implementation;
 
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
@@ -108,14 +112,12 @@ namespace ImageProcessing.App.Presentation
                     var config = prov.Resolve<IConfiguration>();
                     return config.GetSection(nameof(SettingsOptions)).Get<SettingsOptions>();
                 })
-                .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
                 .RegisterSingleton<IStaTaskService>((prov) =>
                 {
                     var config = prov.Resolve<IConfiguration>();
                     var options = config.GetSection(nameof(StaTaskOptions)).Get<StaTaskOptions>();
                     return new StaTaskService(options);
                 })
-                .RegisterSingleton<IBitmapCopyService, BitmapCopyService>()
                 .RegisterSingleton<ICacheService<Bitmap>>(prov =>
                 {
                     var config = prov.Resolve<IConfiguration>();
@@ -147,6 +149,15 @@ namespace ImageProcessing.App.Presentation
                      var logger = factory.CreateLogger<LongRunService<LongRunItem>>();
                      return new LongRunService<LongRunItem>(logger, ctx);
                  })
+                .RegisterSingleton<IBitmapCopyService, BitmapCopyService>()
+                .RegisterSingleton<BoundedChannelOptions>(prov =>
+                {
+                    var config = prov.Resolve<IConfiguration>();
+                    var options = config.GetSection(nameof(BoundedChannelOptions)).Get<BoundedChannelOptions>();
+                    return options;
+                })
+                .RegisterSingleton<IRenderPipeline, RenderPipeline>()
+                .RegisterSingleton<IMessageService<Task<object>>, MessageService<Task<object>>>()
                 .RegisterTransient<IFileDialogService>(prov =>
                 {
                     var config = prov.Resolve<IConfiguration>();
