@@ -68,7 +68,7 @@
 <p> Thus, one may conclude that a normal distribution may produce better results than a uniform distribution for  a group of underexposed images.</p>
 
 ## Created With
-[.NET 4.8](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48), [netstandard2.0]([netstandard2.0](https://learn.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-0))
+[.NET 4.8](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48), [netstandard2.0](https://learn.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-0)
 
 [Windows Forms](https://github.com/dotnet/winforms)
 
