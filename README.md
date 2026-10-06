@@ -74,6 +74,8 @@
 
 [LightInject](https://www.nuget.org/packages/Lightinject/), [Ninject](https://www.nuget.org/packages/ninject/)
 
+[Serilog](https://www.nuget.org/packages/serilog/), [Microsoft.Extensions.Logging](https://www.nuget.org/packages/microsoft.extensions.logging/)
+
 [Microsoft.Extensions.Configuration](https://www.nuget.org/packages/microsoft.extensions.configuration/)
 
 [Microsoft.Extensions.Caching.Memory](https://www.nuget.org/packages/microsoft.extensions.caching.memory/)
