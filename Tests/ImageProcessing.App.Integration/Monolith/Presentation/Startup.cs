@@ -73,7 +73,7 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation
                 .RegisterTransient(factory =>
                     Substitute.ForPartsOf<SettingsPresenterWrapper>(
                         builder.Resolve<ILogger<SettingsPresenter>>(),
-                        builder.Resolve<AppOptions>()))
+                        builder.Resolve<SettingsOptions>()))
                 .RegisterTransient(factory =>
                     Substitute.ForPartsOf<TransformationPresenterWrapper>(
                         builder.Resolve<ITransformationProviderWrapper>(),

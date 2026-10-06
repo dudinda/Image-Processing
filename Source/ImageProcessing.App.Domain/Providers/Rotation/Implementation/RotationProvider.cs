@@ -9,11 +9,11 @@ namespace ImageProcessing.App.Domain.Providers.Rotation.Implementation
     public sealed class RotationProvider : IRotationProvider
     {
         private readonly IRotationFactory _rotation;
-        private readonly AppOptions _settings;
+        private readonly SettingsOptions _settings;
 
         public RotationProvider(
             IRotationFactory rotation,
-            AppOptions settings)
+            SettingsOptions settings)
         {
             _rotation = rotation;
             _settings = settings;

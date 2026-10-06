@@ -19,11 +19,11 @@ namespace ImageProcessing.App.Presentation.Presenters
         ISubscriber<EnableControlEventArgs>
     {
         private readonly ILogger<SettingsPresenter> _logger;
-        private readonly AppOptions _settings;
+        private readonly SettingsOptions _settings;
 
         public SettingsPresenter(
             ILogger<SettingsPresenter> logger,
-            AppOptions settings)
+            SettingsOptions settings)
         {
             _settings = settings;
             _logger = logger;

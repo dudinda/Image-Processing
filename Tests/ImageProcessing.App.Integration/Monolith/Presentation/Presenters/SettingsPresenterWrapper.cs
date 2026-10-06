@@ -23,11 +23,11 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
             => _presenter.View;
 
         public ILogger<SettingsPresenter> Logger { get; }
-        public AppOptions Settings { get; }
+        public SettingsOptions Settings { get; }
 
         public SettingsPresenterWrapper(
             ILogger<SettingsPresenter> logger,
-            AppOptions settings)
+            SettingsOptions settings)
         {
             Settings = settings;
             Logger = logger;

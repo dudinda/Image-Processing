@@ -14,12 +14,12 @@ namespace ImageProcessing.App.Domain.Services.Factories.Rgb.Implementation
     {
         private readonly IChannelFactory _factory;
         private readonly IRecommendationFactory _rec;
-        private readonly AppOptions _settings;
+        private readonly SettingsOptions _settings;
 
         public RgbFilterFactory(
             IRecommendationFactory rec,
             IChannelFactory factory,
-            AppOptions settings)
+            SettingsOptions settings)
         {
             _rec = rec;
             _factory = factory;

@@ -29,7 +29,7 @@ namespace ImageProcessing.App.Domain.UnitTests.Factory.Rgb
             _rgbFilterFactory = new RgbFilterFactory(
                 recommendation,
                 Substitute.For<IChannelFactory>(),
-                Substitute.For<AppOptions>()
+                Substitute.For<SettingsOptions>()
             );
         }
 

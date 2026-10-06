@@ -103,10 +103,10 @@ namespace ImageProcessing.App.Presentation
                         .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
                     return config.Build();
                 })
-                .RegisterSingleton<AppOptions>((prov) =>
+                .RegisterSingleton<SettingsOptions>((prov) =>
                 {
                     var config = prov.Resolve<IConfiguration>();
-                    return config.GetSection(nameof(AppOptions)).Get<AppOptions>();
+                    return config.GetSection(nameof(SettingsOptions)).Get<SettingsOptions>();
                 })
                 .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
                 .RegisterSingleton<IStaTaskService>((prov) =>

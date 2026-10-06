@@ -13,11 +13,11 @@ namespace ImageProcessing.App.Integration.Monolith.Domain.Providers.Scaling.Impl
         private readonly ScalingProvider _provider;
 
         public IScalingFactoryWrapper ScalingFactory { get; }
-        public AppOptions Settings { get; }
+        public SettingsOptions Settings { get; }
 
         public ScalingProviderWrapper(
             IScalingFactoryWrapper factory,
-            AppOptions settings)
+            SettingsOptions settings)
         {
             ScalingFactory = factory;
             Settings = settings;

@@ -12,11 +12,11 @@ namespace ImageProcessing.App.Integration.Monolith.Domain.Providers.Rotation.Imp
         private readonly RotationProvider _provider;
 
         public IRotationFactoryWrapper Rotation { get; }
-        public AppOptions Settings { get; }
+        public SettingsOptions Settings { get; }
 
         public RotationProviderWrapper(
             IRotationFactoryWrapper rotation,
-            AppOptions settings)
+            SettingsOptions settings)
         {
             Rotation = rotation;
             Settings = settings;

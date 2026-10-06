@@ -3,7 +3,7 @@ using ImageProcessing.App.Domain.Code.Enums;
 namespace ImageProcessing.App.Domain.Models.Options
 {
     /// <inheritdoc cref="IAppSettings"/>
-    public class AppOptions 
+    public class SettingsOptions 
     {
         /// <inheritdoc />
         public RotationMethod Rotation { get; set; }

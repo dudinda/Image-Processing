@@ -9,11 +9,11 @@ namespace ImageProcessing.App.Domain.Providers.Scaling.Implementation
     public sealed class ScalingProvider : IScalingProvider
     {
         private readonly IScalingFactory _factory;
-        private readonly AppOptions _settings;
+        private readonly SettingsOptions _settings;
 
         public ScalingProvider( 
             IScalingFactory factory,
-            AppOptions settings)
+            SettingsOptions settings)
         {
             _factory = factory;
             _settings = settings;

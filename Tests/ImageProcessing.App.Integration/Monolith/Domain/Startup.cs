@@ -213,11 +213,11 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain
                .RegisterTransient<IRotationProviderWrapper>(provider =>
                     Substitute.ForPartsOf<RotationProviderWrapper>(
                         builder.Resolve<IRotationFactoryWrapper>(),
-                        builder.Resolve<AppOptions>()))
+                        builder.Resolve<SettingsOptions>()))
                .RegisterTransient<IScalingProviderWrapper>(provider =>
                     Substitute.ForPartsOf<ScalingProviderWrapper>(
                         builder.Resolve<IScalingFactoryWrapper>(),
-                        builder.Resolve<AppOptions>()))
+                        builder.Resolve<SettingsOptions>()))
                .RegisterTransient<ITransformationProviderWrapper>(provider =>
                     Substitute.ForPartsOf<TransformationProviderWrapper>(
                         builder.Resolve<ITransformationFactoryWrapper>()));
