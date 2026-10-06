@@ -1,5 +1,4 @@
 using System;
-using System.Configuration;
 using System.Drawing;
 using System.Threading.Tasks;
 
@@ -10,7 +9,6 @@ using ImageProcessing.App.Domain.Services.NonBlockDialog;
 using ImageProcessing.App.Domain.Services.Pipeline;
 using ImageProcessing.App.Domain.Services.Pipeline.Implementation;
 using ImageProcessing.App.Domain.Win.Code.Extensions;
-using ImageProcessing.App.Presentation.Code.Constants;
 using ImageProcessing.App.Presentation.Code.Enums;
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Container;
@@ -65,9 +63,7 @@ namespace ImageProcessing.App.Presentation.Presenters
         {
             try
             {
-                  var result = await _dialog.NonBlockOpen(
-                      ConfigurationManager.AppSettings[AppSettingsKeys.Filters]
-                  ).ConfigureAwait(true);
+                  var result = await _dialog.OpenFileDialog().ConfigureAwait(true);
 
                 if (result.Image != null)
                 {
@@ -97,10 +93,7 @@ namespace ImageProcessing.App.Presentation.Presenters
                 if (!View.ImageIsDefault)
                 {
                     var copy = await _reference.GetCopy().ConfigureAwait(true);
-
-                    await _dialog.NonBlockSaveAs(copy,
-                         ConfigurationManager.AppSettings[AppSettingsKeys.Filters]
-                    ).ConfigureAwait(true);
+                    await _dialog.SaveFileAsDialog(copy).ConfigureAwait(true);
                 }
             }
             catch(Exception ex)
@@ -118,10 +111,7 @@ namespace ImageProcessing.App.Presentation.Presenters
                 if (!View.ImageIsDefault)
                 {
                     var copy = await _reference.GetCopy().ConfigureAwait(true);
-
-                    await Task.Run(
-                        () => copy.SaveByPath(View.GetPathToFile())
-                    ).ConfigureAwait(true);
+                    await Task.Run(() => copy.SaveByPath(View.GetPathToFile())).ConfigureAwait(true);
                 }
             }
             catch(Exception ex)

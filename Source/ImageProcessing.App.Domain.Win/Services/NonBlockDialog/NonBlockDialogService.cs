@@ -22,20 +22,20 @@ namespace ImageProcessing.App.Domain.Win.NonBlockDialog.Implementation
         }
 
         /// <inheritdoc/>
-        public async Task<(Bitmap? Image, string Path)> NonBlockOpen(string? filters)
+        public async Task<(Bitmap? Image, string Path)> OpenFileDialog()
         {
             var result = await _sta.StartSTATask(
-                () => _dialog.OpenFileDialog(filters)
+                () => _dialog.OpenFileDialog()
             ).ConfigureAwait(false);
 
             return await result.ConfigureAwait(false);
         }
 
         /// <inheritdoc/>
-        public async Task NonBlockSaveAs(Bitmap src, string filters)
+        public async Task SaveFileAsDialog(Bitmap src)
         {
             await _sta.StartSTATask(
-                 () => _dialog.SaveFileAsDialog(src, filters)
+                 () => _dialog.SaveFileAsDialog(src)
             ).ConfigureAwait(false);
         }
     }

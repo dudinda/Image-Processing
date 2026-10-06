@@ -11,11 +11,11 @@ namespace ImageProcessing.App.Domain.Services.FileDialog
         /// <summary>
         /// Init the <see cref="System.Windows.Forms.OpenFileDialog"/>.
         /// </summary>
-        Task<(Bitmap? Image, string Path)> OpenFileDialog(string? filters);
+        Task<(Bitmap? Image, string Path)> OpenFileDialog();
 
         /// <summary>
         /// Init the <see cref="System.Windows.Forms.SaveFileDialog"/>.
         /// </summary>
-        Task SaveFileAsDialog(Bitmap src, string? filters);
+        Task SaveFileAsDialog(Bitmap src);
     }
 }

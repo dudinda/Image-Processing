@@ -50,8 +50,7 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Tests
                 Arg.Is<object>(arg => arg == _form),
                 Arg.Any<OpenFileDialogEventArgs>());
 
-            _presenter.Dialog.Received().NonBlockOpen(
-                Arg.Any<string>());
+            _presenter.Dialog.Received().OpenFileDialog();
             
             var image = _form.SourceImage as Bitmap;
 
@@ -103,9 +102,8 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Tests
                 Arg.Is<object>(arg => arg == _form),
                 Arg.Any<SaveAsFileDialogEventArgs>());
             _presenter.Reference.Received().GetCopy();
-            _presenter.Dialog.Received().NonBlockSaveAs(
-                Arg.Any<Bitmap>(),
-                Arg.Any<string>());           
+            _presenter.Dialog.Received().SaveFileAsDialog(
+                Arg.Any<Bitmap>());
         }
 
 

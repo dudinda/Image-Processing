@@ -140,14 +140,19 @@ namespace ImageProcessing.App.Presentation
                         builder.AddProvider(new SerilogLoggerProvider(serilog));
                     });
                 })
-                .RegisterSingleton<LongRunContext>()
                 .RegisterSingleton<ILongRunService<LongRunItem>>((prov) =>
                  {
-                     var ctx = prov.Resolve<LongRunContext>();
+                     var ctx = new LongRunContext();
                      var factory = prov.Resolve<ILoggerFactory>();
                      var logger = factory.CreateLogger<LongRunService<LongRunItem>>();
                      return new LongRunService<LongRunItem>(logger, ctx);
                  })
+                .RegisterTransient<IFileDialogService>(prov =>
+                {
+                    var config = prov.Resolve<IConfiguration>();
+                    var options = config.GetSection(nameof(OpenDialogOptions)).Get<OpenDialogOptions>();
+                    return new FileDialogService(options);
+                })
                 .RegisterTransient<IConvolutionFactory, ConvolutionFactory>()
                 .RegisterTransient<IMorphologyFactory, MorphologyFactory>()
                 .RegisterTransient<IStructuringElementFactory, StructuringElementFactory>()
@@ -164,7 +169,6 @@ namespace ImageProcessing.App.Presentation
                 .RegisterTransient<IBitmapService, BitmapService>()
                 .RegisterTransient<IRandomVariableService, RandomVariableService>()
                 .RegisterTransient<IBitmapLuminanceService, BitmapLuminanceService>()
-                .RegisterTransient<IFileDialogService, FileDialogService>()
                 .RegisterTransient<INonBlockDialogService, NonBlockDialogService>()
                 .RegisterTransient<IColorMatrixService, ColorMatrixService>()
                 .RegisterTransient<IAsyncOperationLocker, AsyncOperationLocker>()
