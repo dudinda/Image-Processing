@@ -255,36 +255,30 @@ namespace ImageProcessing.App.Presentation.Presenters
 
         private void RenderBlock(object publisher, Bitmap bmp, UndoRedoAction action)
         {
-            lock (_dialog)
+            _reference.SetCopy(bmp).Wait();
+
+            View.AddToUndoRedo((Bitmap)View.GetImageCopy(), action);
+            View.SetImageCopy(bmp);
+            View.SetImage(bmp);
+            View.SetImageCenter(bmp.Size);
+            View.Refresh();
+            View.ResetTrackBarValue();
+
+            if (Enum.TryParse<MenuBtnState>(bmp.Tag?.ToString(), out var tag))
             {
-                _reference.SetCopy(bmp).Wait();
-
-                View.AddToUndoRedo((Bitmap)View.GetImageCopy(), action);
-                View.SetImageCopy(bmp);
-                View.SetImage(bmp);
-                View.SetImageCenter(bmp.Size);
-                View.Refresh();
-                View.ResetTrackBarValue();
-
-                if(Enum.TryParse<MenuBtnState>(bmp.Tag?.ToString(), out var tag))
-                {
-                    View.GetImageCopy().Tag = tag;
-                }
-
-                Aggregator.PublishFromAll(publisher, new EnableControlEventArgs(tag));
-                Aggregator.PublishFromAll(publisher, new ContainerUpdatedEventArgs(bmp));
+                View.GetImageCopy().Tag = tag;
             }
+
+            Aggregator.PublishFromAll(publisher, new EnableControlEventArgs(tag));
+            Aggregator.PublishFromAll(publisher, new ContainerUpdatedEventArgs(bmp));
         }
 
         private void PaintBlock(Bitmap bmp)
         {
-            lock (_scale)
-            {
-                var size = bmp.Size;
-                View.SetImage(bmp);
-                View.SetImageCenter(size);
-                View.Refresh();
-            }
+            var size = bmp.Size;
+            View.SetImage(bmp);
+            View.SetImageCenter(size);
+            View.Refresh();
         }
 
         private async Task Paint(IPipelineBlock block)
