@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 
+using ImageProcessing.App.Domain.Win.Services.Histogram;
 using ImageProcessing.App.Presentation.ViewModels;
 using ImageProcessing.App.Presentation.Views;
-using ImageProcessing.App.Domain.Win.Services.Histogram;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
 namespace ImageProcessing.App.Presentation.Presenters

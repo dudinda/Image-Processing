@@ -2,7 +2,6 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.Rotation.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Interface;
-using ImageProcessing.App.Integration.Monolith.Domain.Services.Logger.Interface;
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.RotationArgs;
 using ImageProcessing.App.Presentation.Presenters;
@@ -10,6 +9,8 @@ using ImageProcessing.App.Presentation.ViewModels;
 using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
+
+using Microsoft.Extensions.Logging;
 
 namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
 {
@@ -24,13 +25,13 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
             => _presenter.View;
 
         public IRotationProviderWrapper Provider { get; }
-        public ILoggerServiceWrapper Logger { get; }
+        public ILogger<RotationPresenter> Logger { get; }
         public IBitmapCopyServiceWrapper Copy { get; }
 
         public RotationPresenterWrapper(
             IBitmapCopyServiceWrapper copy,
             IRotationProviderWrapper provider,
-            ILoggerServiceWrapper logger)
+            ILogger<RotationPresenter> logger)
         {
             Provider = provider;
             Logger = logger;

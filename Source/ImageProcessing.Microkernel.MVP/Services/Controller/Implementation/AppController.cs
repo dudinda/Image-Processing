@@ -5,6 +5,8 @@ using ImageProcessing.Microkernel.MVP.Services.Aggregator.Implementation;
 using ImageProcessing.Microkernel.MVP.Services.Providers;
 using ImageProcessing.Microkernel.MVP.Services.Providers.Implementation;
 
+using Microsoft.Extensions.Logging;
+
 namespace ImageProcessing.Microkernel.MVP.Services.Controller.Implementation
 {
     /// <inheritdoc cref="IAppController"/>
@@ -42,6 +44,12 @@ namespace ImageProcessing.Microkernel.MVP.Services.Controller.Implementation
         public void Run<TPresenter>()
            where TPresenter : class, IPresenter
         {
+            if(IoC.IsRegistered<ILoggerFactory>())
+            {
+                var factory = IoC.Resolve<ILoggerFactory>();
+                IoC.RegisterTransientInstance(factory.CreateLogger<TPresenter>());
+            }
+
             if (!IoC.IsRegistered<TPresenter>())
             {
                 IoC.RegisterTransient<TPresenter>();
@@ -55,6 +63,12 @@ namespace ImageProcessing.Microkernel.MVP.Services.Controller.Implementation
             where TPresenter : class, IPresenter<TViewModel>
             where TViewModel : class
         {
+            if (IoC.IsRegistered<ILoggerFactory>())
+            {
+                var factory = IoC.Resolve<ILoggerFactory>();
+                IoC.RegisterTransientInstance(factory.CreateLogger<TPresenter>());
+            }
+
             if (!IoC.IsRegistered<TPresenter>())
             {
                 IoC.RegisterTransient<TPresenter>();

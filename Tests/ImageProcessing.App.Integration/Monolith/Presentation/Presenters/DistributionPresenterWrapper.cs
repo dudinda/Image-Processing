@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.BitmapLuminance.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Bmp.Interface;
-using ImageProcessing.App.Integration.Monolith.Domain.Services.Logger.Interface;
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.DistributionArgs;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Menu;
@@ -12,6 +11,8 @@ using ImageProcessing.App.Presentation.ViewModels;
 using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
+
+using Microsoft.Extensions.Logging;
 
 namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
 {
@@ -29,13 +30,13 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
         public IBitmapCopyServiceWrapper Copy { get; }
         public IBitmapLuminanceProviderWrapper Provider { get; }
         public IBitmapServiceWrapper Service { get; }
-        public ILoggerServiceWrapper Logger { get; }
+        public ILogger<DistributionPresenter> Logger { get; }
 
         public DistributionPresenterWrapper(
             IBitmapLuminanceProviderWrapper provider,
             IBitmapCopyServiceWrapper copy,
             IBitmapServiceWrapper service,
-            ILoggerServiceWrapper logger) 
+            ILogger<DistributionPresenter> logger) 
         {
             Copy = copy;
             Provider = provider;

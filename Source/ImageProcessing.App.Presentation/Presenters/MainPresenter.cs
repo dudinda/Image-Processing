@@ -1,6 +1,5 @@
 using System;
 using System.Configuration;
-using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 
@@ -11,7 +10,6 @@ using ImageProcessing.App.Domain.Services.NonBlockDialog;
 using ImageProcessing.App.Domain.Services.Pipeline;
 using ImageProcessing.App.Domain.Services.Pipeline.Implementation;
 using ImageProcessing.App.Domain.Win.Code.Extensions;
-using ImageProcessing.App.Domain.Win.Services.Logger;
 using ImageProcessing.App.Presentation.Code.Constants;
 using ImageProcessing.App.Presentation.Code.Enums;
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
@@ -22,6 +20,8 @@ using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
+using Microsoft.Extensions.Logging;
+
 namespace ImageProcessing.App.Presentation.Presenters
 {
     internal sealed class MainPresenter : BasePresenter<IMainView>,
@@ -31,7 +31,7 @@ namespace ImageProcessing.App.Presentation.Presenters
         ISubscriber<TrackBarEventArgs>, ISubscriber<UndoRedoEventArgs>,
         ISubscriber<FormIsClosedEventArgs>
     {
-        private readonly ILoggerService _logger;
+        private readonly ILogger<MainPresenter> _logger;
         private readonly IScalingProvider _scale;
         private readonly IRotationProvider _rotation;
         private readonly IBitmapCopyService _reference;
@@ -44,7 +44,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             IAwaitablePipeline pipeline,
             IRotationProvider rotation,
             IScalingProvider scale,
-            ILoggerService logger)
+            ILogger<MainPresenter> logger)
         {
             _scale = scale;
             _logger = logger;
@@ -85,7 +85,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch(Exception ex)
             {
                 OnError(publisher, Errors.OpenFile);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
         }
 
@@ -106,7 +106,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch(Exception ex)
             {
                 OnError(publisher, Errors.SaveFile);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
         }
 
@@ -127,7 +127,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch(Exception ex)
             {
                 OnError(publisher, Errors.SaveFile);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
         }
 
@@ -146,12 +146,12 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch (OperationCanceledException ex)
             {
                 OnError(publisher, Errors.CancelOperation);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Information);
+                _logger.LogInformation(ex.Message);
             }
             catch (Exception ex)
             {
                 OnError(publisher, Errors.Pipeline);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
         }
 
@@ -187,7 +187,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch(Exception ex)
             {
                 OnError(publisher, Errors.Zoom);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
         }
 
@@ -215,7 +215,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch (Exception ex)
             {
                 OnError(publisher, Errors.UndoRedo);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
         }
 
@@ -228,7 +228,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
             catch(Exception ex)
             {
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
             
             return Task.CompletedTask;
@@ -245,7 +245,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch (Exception ex)
             {
                 OnError(publisher, Errors.UndoRedo);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
         }
 
@@ -257,7 +257,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
             catch(Exception ex)
             {
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
 
             return Task.CompletedTask;

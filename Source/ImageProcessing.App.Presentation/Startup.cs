@@ -74,8 +74,6 @@ using ImageProcessing.App.Domain.Win.Providers.Visitors.Histogram.Implementation
 using ImageProcessing.App.Domain.Win.Services.Builders.ChartSeries;
 using ImageProcessing.App.Domain.Win.Services.Histogram;
 using ImageProcessing.App.Domain.Win.Services.Histogram.Implementation;
-using ImageProcessing.App.Domain.Win.Services.Logger;
-using ImageProcessing.App.Domain.Win.Services.Logger.Implementation;
 using ImageProcessing.App.Domain.Win.Services.QualityMeasure;
 using ImageProcessing.App.Domain.Win.Services.QualityMeasure.Implementation;
 using ImageProcessing.Microkernel.MVP.Models;
@@ -87,6 +85,10 @@ using MessageLoop.Common.Services.LongRun.Implementation;
 
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+
+using Serilog;
+using Serilog.Extensions.Logging;
 
 namespace ImageProcessing.App.Presentation
 {
@@ -106,7 +108,6 @@ namespace ImageProcessing.App.Presentation
                     var config = prov.Resolve<IConfiguration>();
                     return config.GetSection(nameof(AppOptions)).Get<AppOptions>();
                 })
-                .RegisterSingleton<ILoggerService, LoggerService>()
                 .RegisterSingleton<IAwaitablePipeline, AwaitablePipeline>()
                 .RegisterSingleton<IStaTaskService>((prov) =>
                 {
@@ -121,13 +122,32 @@ namespace ImageProcessing.App.Presentation
                     var options = config.GetSection(nameof(MemoryCacheOptions)).Get<MemoryCacheOptions>();
                     return new CacheService<Bitmap>(options);
                 })
-                .RegisterSingleton<ILongRunService<LongRunItem>, LongRunService<LongRunItem>>()
+
                 .RegisterTransient<IUndoRedoService<Bitmap>>((prov) =>
                 {
                     var config = prov.Resolve<IConfiguration>();
                     var options = config.GetSection(nameof(UndoRedoOptions)).Get<UndoRedoOptions>();
                     return new UndoRedoService(options);
                 })
+                .RegisterSingleton<ILoggerFactory>(prov =>
+                {
+                    var conf = prov.Resolve<IConfiguration>();
+                    var serilog = new LoggerConfiguration()
+                    .ReadFrom.Configuration(conf).CreateLogger();
+                    return LoggerFactory.Create(builder =>
+                    {
+                        builder.ClearProviders();
+                        builder.AddProvider(new SerilogLoggerProvider(serilog));
+                    });
+                })
+                .RegisterSingleton<LongRunContext>()
+                .RegisterSingleton<ILongRunService<LongRunItem>>((prov) =>
+                 {
+                     var ctx = prov.Resolve<LongRunContext>();
+                     var factory = prov.Resolve<ILoggerFactory>();
+                     var logger = factory.CreateLogger<LongRunService<LongRunItem>>();
+                     return new LongRunService<LongRunItem>(logger, ctx);
+                 })
                 .RegisterTransient<IConvolutionFactory, ConvolutionFactory>()
                 .RegisterTransient<IMorphologyFactory, MorphologyFactory>()
                 .RegisterTransient<IStructuringElementFactory, StructuringElementFactory>()

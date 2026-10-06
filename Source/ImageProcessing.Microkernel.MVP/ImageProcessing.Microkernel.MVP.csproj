@@ -30,6 +30,7 @@
   
   <ItemGroup>
     <PackageReference Include="LightInject" Version="7.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.12" />
     <PackageReference Include="Ninject" Version="3.3.4" />
     <PackageReference Include="Ninject.Extensions.Factory" Version="3.3.2" />
     <PackageReference Include="Ninject.Extensions.NamedScope" Version="3.3.0" />

@@ -1,20 +1,20 @@
 using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.Domain.Providers.Rotation;
+using ImageProcessing.App.Domain.Services.BitmapCopyReference.Interface;
+using ImageProcessing.App.Domain.Services.Pipeline.Implementation;
 using ImageProcessing.App.Presentation.Code.Enums;
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.RotationArgs;
 using ImageProcessing.App.Presentation.Properties;
 using ImageProcessing.App.Presentation.ViewModels;
 using ImageProcessing.App.Presentation.Views;
-using ImageProcessing.App.Domain.Providers.Rotation;
-using ImageProcessing.App.Domain.Services.BitmapCopyReference.Interface;
-using ImageProcessing.App.Domain.Services.Pipeline.Implementation;
-using ImageProcessing.App.Domain.Win.Services.Logger;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
+
+using Microsoft.Extensions.Logging;
 
 namespace ImageProcessing.App.Presentation.Presenters
 {
@@ -24,14 +24,14 @@ namespace ImageProcessing.App.Presentation.Presenters
         ISubscriber<FormIsClosedEventArgs>, ISubscriber<EnableControlEventArgs>
 
     {
-        private readonly ILoggerService _logger;
+        private readonly ILogger<RotationPresenter> _logger;
         private readonly IBitmapCopyService _reference;
         private readonly IRotationProvider _provider;
 
         public RotationPresenter(
             IBitmapCopyService reference,
             IRotationProvider provider,
-            ILoggerService logger)
+            ILogger<RotationPresenter> logger)
         {
             _provider = provider;
             _reference = reference;
@@ -60,7 +60,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch (Exception ex)
             {
                 View.Tooltip(Errors.ApplyCustomColorMatrix);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
         }
 
@@ -73,7 +73,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
             catch(Exception ex)
             {
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
 
             return Task.CompletedTask;
@@ -89,7 +89,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch (Exception ex)
             {
                 View.Tooltip(Errors.UpdatingViewModel);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
 
             return Task.CompletedTask;
@@ -104,7 +104,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
             catch(Exception ex)
             {
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
 
             return Task.CompletedTask;
@@ -119,7 +119,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch (Exception ex)
             {
                 View.Tooltip(Errors.UpdatingViewModel);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
 
             return Task.CompletedTask;
@@ -134,7 +134,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch (Exception ex)
             {
                 View.Tooltip(Errors.UpdatingViewModel);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
 
             return Task.CompletedTask;

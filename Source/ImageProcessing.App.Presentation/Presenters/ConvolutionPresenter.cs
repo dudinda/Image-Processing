@@ -1,21 +1,21 @@
 using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.Domain.Providers.Convolution;
+using ImageProcessing.App.Domain.Services.BitmapCopyReference.Interface;
+using ImageProcessing.App.Domain.Services.Pipeline.Implementation;
 using ImageProcessing.App.Presentation.Code.Enums;
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.ConvolutionArgs;
 using ImageProcessing.App.Presentation.Properties;
 using ImageProcessing.App.Presentation.ViewModels;
 using ImageProcessing.App.Presentation.Views;
-using ImageProcessing.App.Domain.Providers.Convolution;
-using ImageProcessing.App.Domain.Services.BitmapCopyReference.Interface;
-using ImageProcessing.App.Domain.Services.Pipeline.Implementation;
-using ImageProcessing.App.Domain.Win.Services.Logger;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
+
+using Microsoft.Extensions.Logging;
 
 namespace ImageProcessing.App.Presentation.Presenters
 {
@@ -24,14 +24,14 @@ namespace ImageProcessing.App.Presentation.Presenters
           ISubscriber<ContainerUpdatedEventArgs>, ISubscriber<RestoreFocusEventArgs>,
           ISubscriber<FormIsClosedEventArgs>, ISubscriber<EnableControlEventArgs>
     {
-        private readonly ILoggerService _logger;
+        private readonly ILogger<ConvolutionPresenter> _logger;
         private readonly IBitmapCopyService _reference;
         private readonly IConvolutionProvider _provider;
 
         public ConvolutionPresenter(
             IBitmapCopyService reference,
             IConvolutionProvider provider,
-            ILoggerService logger) 
+            ILogger<ConvolutionPresenter> logger) 
         {
             _provider = provider;
             _logger = logger;
@@ -62,7 +62,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch(Exception ex)
             {
                 View.Tooltip(Errors.ApplyConvolutionFilter);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
         }
 
@@ -76,7 +76,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch (Exception ex)
             {
                 View.Tooltip(Errors.UpdatingViewModel);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
 
             return Task.CompletedTask;
@@ -91,7 +91,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
             catch(Exception ex)
             {
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
 
             return Task.CompletedTask;
@@ -106,7 +106,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
             catch(Exception ex)
             {
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
 
             return Task.CompletedTask;
@@ -121,7 +121,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch(Exception ex)
             {
                 View.Tooltip(Errors.UpdatingViewModel);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
 
             return Task.CompletedTask;
@@ -136,7 +136,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch (Exception ex)
             {
                 View.Tooltip(Errors.UpdatingViewModel);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
 
             return Task.CompletedTask;

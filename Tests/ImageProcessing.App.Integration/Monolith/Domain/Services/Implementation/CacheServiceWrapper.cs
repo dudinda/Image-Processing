@@ -1,10 +1,8 @@
 using System;
 using System.Drawing;
 
-using ImageProcessing.App.Integration.Monolith.Domain.Services.Cache.Interface;
 using ImageProcessing.App.Domain.Services.Cache.Implementation;
-
-using Microsoft.Extensions.Caching.Memory;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Cache.Interface;
 
 namespace ImageProcessing.App.Integration.Monolith.Domain.Services.Cache.Implementation
 {
@@ -12,9 +10,9 @@ namespace ImageProcessing.App.Integration.Monolith.Domain.Services.Cache.Impleme
     {
         private readonly CacheService<Bitmap> _cache;
 
-        public CacheServiceWrapper(MemoryCacheOptions options)
+        public CacheServiceWrapper(CacheService<Bitmap> cache)
         {
-            _cache = new CacheService<Bitmap>(options);
+            _cache = _cache;
         }
 
         public virtual Bitmap GetOrCreate(object key, Func<Bitmap> createItem)

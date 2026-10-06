@@ -1,15 +1,15 @@
 using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.Domain.Models.Options;
 using ImageProcessing.App.Presentation.Code.Enums;
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.SettingsArgs;
 using ImageProcessing.App.Presentation.Views;
-using ImageProcessing.App.Domain.Win.Services.Logger;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
-using ImageProcessing.App.Domain.Models.Options;
+
+using Microsoft.Extensions.Logging;
 
 namespace ImageProcessing.App.Presentation.Presenters
 {
@@ -18,11 +18,11 @@ namespace ImageProcessing.App.Presentation.Presenters
         ISubscriber<ChangeScalingEventArgs>, ISubscriber<FormIsClosedEventArgs>,
         ISubscriber<EnableControlEventArgs>
     {
-        private readonly ILoggerService _logger;
+        private readonly ILogger<SettingsPresenter> _logger;
         private readonly AppOptions _settings;
 
         public SettingsPresenter(
-            ILoggerService logger,
+            ILogger<SettingsPresenter> logger,
             AppOptions settings)
         {
             _settings = settings;
@@ -38,7 +38,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
             catch(Exception ex)
             {
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
 
             return Task.CompletedTask;
@@ -53,7 +53,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
             catch (Exception ex)
             {
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
 
             return Task.CompletedTask;
@@ -68,7 +68,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
             catch(Exception ex)
             {
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
 
             return Task.CompletedTask;
@@ -82,7 +82,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
             catch (Exception ex)
             {
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
 
             return Task.CompletedTask;
@@ -96,7 +96,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
             catch (Exception ex)
             {
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
 
             return Task.CompletedTask;

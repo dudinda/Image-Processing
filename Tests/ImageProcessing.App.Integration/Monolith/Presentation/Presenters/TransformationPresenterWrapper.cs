@@ -2,7 +2,6 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.Transformation.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Interface;
-using ImageProcessing.App.Integration.Monolith.Domain.Services.Logger.Interface;
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.TransformationArgs;
 using ImageProcessing.App.Presentation.Presenters;
@@ -10,6 +9,8 @@ using ImageProcessing.App.Presentation.ViewModels;
 using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
+
+using Microsoft.Extensions.Logging;
 
 namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
 {
@@ -23,14 +24,14 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
         public override ITransformationView View
             => _presenter.View;
 
-        public ILoggerServiceWrapper Logger { get; }
+        public ILogger<TransformationPresenter> Logger { get; }
         public IBitmapCopyServiceWrapper Copy { get; }
         public ITransformationProviderWrapper Provider { get; }
 
         public TransformationPresenterWrapper(
             ITransformationProviderWrapper provider,
             IBitmapCopyServiceWrapper copy,
-            ILoggerServiceWrapper logger)
+            ILogger<TransformationPresenter> logger)
         {
             Logger = logger;
             Copy = copy;

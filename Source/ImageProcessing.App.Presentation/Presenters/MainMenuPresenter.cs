@@ -1,11 +1,9 @@
 using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Domain.Services.BitmapCopyReference.Interface;
 using ImageProcessing.App.Domain.Services.Pipeline;
-using ImageProcessing.App.Domain.Win.Services.Logger;
 using ImageProcessing.App.Presentation.Code.Enums;
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Menu;
@@ -15,6 +13,8 @@ using ImageProcessing.App.Presentation.ViewModels;
 using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
+
+using Microsoft.Extensions.Logging;
 
 namespace ImageProcessing.App.Presentation.Presenters
 {
@@ -27,14 +27,14 @@ namespace ImageProcessing.App.Presentation.Presenters
         public override IMainView View
             => field ??= Controller.IoC.Resolve<IMainView>();
 
-        private readonly ILoggerService _logger;
+        private readonly ILogger<MainMenuPresenter> _logger;
         private readonly IBitmapCopyService _reference;
         private readonly IAwaitablePipeline _pipeline;
 
         public MainMenuPresenter(
             IBitmapCopyService reference,
             IAwaitablePipeline pipeline,
-            ILoggerService logger)
+            ILogger<MainMenuPresenter> logger)
         {
             _logger = logger;
             _reference = reference;
@@ -62,7 +62,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch (Exception ex)
             {
                 OnError(publisher, Errors.ShowRgbMenu);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
         }
 
@@ -82,7 +82,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch (Exception ex)
             {
                 OnError(publisher, Errors.ShowRgbMenu);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
         }
 
@@ -102,7 +102,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch (Exception ex)
             {
                 OnError(publisher, Errors.ShowRgbMenu);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
         }
 
@@ -122,7 +122,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch (Exception ex)
             {
                 OnError(publisher, Errors.ShowDistributionMenu);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
         }
 
@@ -142,7 +142,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch (Exception ex)
             {
                 OnError(publisher, Errors.ShowConvolutionMenu);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
         }
 
@@ -162,7 +162,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch (Exception ex)
             {
                 OnError(publisher, Errors.ShowTransformationMenu);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
         }
 
@@ -176,7 +176,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             catch (Exception ex)
             {
                 OnError(publisher, Errors.ShowSettingsMenu);
-                _logger.WriteEntry(ex.Message, EventLogEntryType.Error);
+                _logger.LogError(ex.Message);
             }
 
             return Task.CompletedTask;

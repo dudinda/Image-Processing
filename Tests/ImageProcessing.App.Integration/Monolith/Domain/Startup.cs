@@ -1,4 +1,7 @@
+using System.Drawing;
+
 using ImageProcessing.App.Domain.Models.Options;
+using ImageProcessing.App.Domain.Services.Cache.Implementation;
 using ImageProcessing.App.Domain.Services.Factories.ColorMatrix;
 using ImageProcessing.App.Domain.Services.Factories.Convolution;
 using ImageProcessing.App.Domain.Services.Factories.Distribution;
@@ -52,8 +55,6 @@ using ImageProcessing.App.Integration.Monolith.Domain.Services.FileDialog.Implem
 using ImageProcessing.App.Integration.Monolith.Domain.Services.FileDialog.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Locker.Implementation;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Locker.Interface;
-using ImageProcessing.App.Integration.Monolith.Domain.Services.Logger.Implementation;
-using ImageProcessing.App.Integration.Monolith.Domain.Services.Logger.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Morphology.Implementation;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Morphology.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.NonBlockDialog.Interface;
@@ -87,8 +88,6 @@ using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Transfor
 using ImageProcessing.App.Presentation.UnitTests.Fakes.Services;
 using ImageProcessing.Microkernel.MVP.Models;
 using ImageProcessing.Microkernel.MVP.Services.Providers;
-
-using Microsoft.Extensions.Caching.Memory;
 
 using NSubstitute;
 
@@ -139,7 +138,7 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain
                     Substitute.ForPartsOf<MorphologyServiceWrapper>())
                .RegisterSingleton<ICacheServiceWrapper>(provider =>
                     Substitute.ForPartsOf<CacheServiceWrapper>(
-                        builder.Resolve<MemoryCacheOptions>()))
+                        builder.Resolve<CacheService<Bitmap>>()))
                .RegisterTransient<IColorMatrixServiceWrapper>(provider =>
                     Substitute.ForPartsOf<ColorMatrixServiceWrapper>())
                .RegisterTransient<IConvolutionServiceWrapper>(provider =>
@@ -167,8 +166,6 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain
                     Substitute.ForPartsOf<ChartSeriesBuilderWrapper>())
                .RegisterSingleton<IAwaitablePipelineServiceWrapper>(provider =>
                     Substitute.ForPartsOf<AwaitablePipelineServiceWrapper>())
-               .RegisterSingleton<ILoggerServiceWrapper>(provider =>
-                    Substitute.ForPartsOf<LoggerServiceWrapper>())
                .RegisterTransient<IQualityMeasureServiceWrapper>(provider =>
                     Substitute.ForPartsOf<QualityMeasureServiceWrapper>(
                         builder.Resolve<IBitmapLuminanceServiceWrapper>(),

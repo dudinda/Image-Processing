@@ -2,7 +2,6 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.Rgb.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Interface;
-using ImageProcessing.App.Integration.Monolith.Domain.Services.Logger.Interface;
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.RgbArgs;
 using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Rgb.Interface;
@@ -11,6 +10,8 @@ using ImageProcessing.App.Presentation.ViewModels;
 using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
+
+using Microsoft.Extensions.Logging;
 
 namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
 {
@@ -27,12 +28,12 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
         public IRgbProviderWrapper Provider { get; }
         public IBitmapCopyServiceWrapper Copy { get; }
         public IRgbFactoryWrapper Factory { get; }
-        public ILoggerServiceWrapper Logger { get; }
+        public ILogger<RgbPresenter> Logger { get; }
 
         public RgbPresenterWrapper(
             IBitmapCopyServiceWrapper copy,
             IRgbFactoryWrapper factory,
-            ILoggerServiceWrapper logger,
+            ILogger<RgbPresenter> logger,
             IRgbProviderWrapper provider)
         {
             Provider = provider;

@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.Rotation.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.Scaling.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Interface;
-using ImageProcessing.App.Integration.Monolith.Domain.Services.Logger.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Pipeline.Interface;
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
@@ -13,6 +12,8 @@ using ImageProcessing.App.Presentation.Presenters;
 using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
+
+using Microsoft.Extensions.Logging;
 
 namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
 {
@@ -34,13 +35,13 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
         public IAwaitablePipelineServiceWrapper Pipeline { get; }
         public IScalingProviderWrapper Scaling { get; }
         public IRotationProviderWrapper Rotation { get; }
-        public ILoggerServiceWrapper Logger { get; }
+        public ILogger<MainPresenter> Logger { get; }
 
         public MainPresenterWrapper(
             IBitmapCopyServiceWrapper reference,
             INonBlockDialogServiceWrapper dialog,
             IAwaitablePipelineServiceWrapper pipeline,
-            ILoggerServiceWrapper logger,
+            ILogger<MainPresenter> logger,
             IScalingProviderWrapper scaling,
             IRotationProviderWrapper rotation) 
         {
