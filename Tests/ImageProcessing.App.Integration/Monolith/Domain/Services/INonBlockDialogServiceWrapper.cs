@@ -1,4 +1,4 @@
-using ImageProcessing.App.Domain.Services.NonBlockDialog;
+using ImageProcessing.App.Domain.Services.FileDialog;
 
 namespace ImageProcessing.App.Integration.Monolith.Domain.Services.NonBlockDialog.Interface
 {

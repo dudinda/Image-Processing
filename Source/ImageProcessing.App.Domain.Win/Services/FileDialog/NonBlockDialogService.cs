@@ -2,10 +2,9 @@ using System.Drawing;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Domain.Services.FileDialog;
-using ImageProcessing.App.Domain.Services.NonBlockDialog;
 using ImageProcessing.App.Domain.Services.StaTask;
 
-namespace ImageProcessing.App.Domain.Win.NonBlockDialog.Implementation
+namespace ImageProcessing.App.Domain.Win.Services.FileDialog
 {
     /// <inheritdoc cref="INonBlockDialogService"/>
     public sealed class NonBlockDialogService : INonBlockDialogService

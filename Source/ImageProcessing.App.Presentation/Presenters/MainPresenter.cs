@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using ImageProcessing.App.Domain.Providers.Rotation;
 using ImageProcessing.App.Domain.Providers.Scaling;
 using ImageProcessing.App.Domain.Services.BitmapCopyReference.Interface;
-using ImageProcessing.App.Domain.Services.NonBlockDialog;
+using ImageProcessing.App.Domain.Services.FileDialog;
 using ImageProcessing.App.Domain.Services.Pipeline;
 using ImageProcessing.App.Domain.Services.Pipeline.Implementation;
 using ImageProcessing.App.Domain.Win.Code.Extensions;
