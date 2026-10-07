@@ -27,7 +27,7 @@ namespace ImageProcessing.Microkernel.MVP.Services.Controller.Implementation
         public IComponentProvider IoC { get; }
 
         /// <inheritdoc/>
-        public IEventAggregator Aggregator { get; private set; }
+        public IEventAggregator Aggregator { get; internal set; }
 
         /// It is declared with the internal to restrict a client
         /// to create an instance from the application side.
