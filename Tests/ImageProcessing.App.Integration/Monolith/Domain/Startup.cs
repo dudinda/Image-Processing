@@ -99,10 +99,11 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain
         public void Build(IComponentProvider builder)
         {
             new Microkernel.MVP.Startup().Build(builder);
-            new ImageProcessing.App.UI.Startup().Build(builder);
+            new ImageProcessing.App.Presentation.Startup().Build(builder);
 
             builder.RegisterTransient<StaTaskOptions>();
-            
+            builder.RegisterTransient<UndoRedoOptions>();
+
             builder
                 .RegisterTransient<IColorMatrixFactoryWrapper>(provider =>
                     Substitute.ForPartsOf<ColorMatrixFactoryWrapper>(

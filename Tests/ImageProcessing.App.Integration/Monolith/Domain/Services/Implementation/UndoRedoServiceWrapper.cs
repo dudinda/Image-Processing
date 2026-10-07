@@ -1,14 +1,19 @@
-using System;
 using System.Drawing;
 
-using ImageProcessing.App.Integration.Monolith.Domain.Services.UndoRedo.Interface;
+using ImageProcessing.App.Domain.Models.Options;
 using ImageProcessing.App.Domain.Services.UndoRedo.Implementation;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.UndoRedo.Interface;
 
 namespace ImageProcessing.App.Integration.Monolith.Domain.Services.UndoRedo.Implementation
 {
     public class UndoRedoServiceWrapper : IUndoRedoServiceWrapper
     {
-        private readonly UndoRedoService _service = new UndoRedoService(new App.Domain.Models.Options.UndoRedoOptions());
+        private readonly UndoRedoService _service;
+
+        public UndoRedoServiceWrapper(UndoRedoOptions options)
+        {
+            _service = new UndoRedoService(options); 
+        }
 
         public virtual bool UndoIsEmpty
             => _service.UndoIsEmpty;

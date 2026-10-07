@@ -39,6 +39,11 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation
                         builder.Resolve<IScalingProviderWrapper>(),
                         builder.Resolve<IRotationProviderWrapper>()))
                 .RegisterTransient(factory =>
+                    Substitute.ForPartsOf<MainMenuPresenterWrapper>(
+                        builder.Resolve<IBitmapCopyServiceWrapper>(),
+                        builder.Resolve<IAwaitablePipelineServiceWrapper>(),
+                        builder.Resolve<ILoggerFactory>()))
+                .RegisterTransient(factory =>
                     Substitute.ForPartsOf<ColorMatrixPresenterWrapper>(
                         builder.Resolve<IBitmapCopyServiceWrapper>(),
                         builder.Resolve<IColorMatrixFactoryWrapper>(),
