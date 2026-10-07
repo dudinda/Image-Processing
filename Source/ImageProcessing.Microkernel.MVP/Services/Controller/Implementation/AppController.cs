@@ -31,7 +31,7 @@ namespace ImageProcessing.Microkernel.MVP.Services.Controller.Implementation
 
         /// It is declared with the internal to restrict a client
         /// to create an instance from the application side.
-        internal AppController(IContainer container)
+        internal AppController(IContainerAdapter container)
         {
             IoC = new ComponentProvider(container);
             Aggregator = new EventAggregator();

@@ -151,5 +151,10 @@ namespace ImageProcessing.Microkernel.MVP.Services.Providers
         /// Get an instance of the given <typeparamref name="TService"/> type.
         /// </summary>
         TService Resolve<TService>();
+
+        /// <summary>
+        /// Begin a new scope for resolving servicesto manage the lifetime of scoped services.
+        /// </summary>
+        IDisposable BeginScope();
     }
 }

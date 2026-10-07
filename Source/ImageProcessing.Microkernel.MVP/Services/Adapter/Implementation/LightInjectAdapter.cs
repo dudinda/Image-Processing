@@ -6,9 +6,9 @@ namespace ImageProcessing.Microkernel.MVP.Services.Adapter.Implementation
 {
     /// <summary>
     /// Provides access to the LightInject <see cref="ServiceContainer"/>
-    /// via the <see cref="IContainer"/>.
+    /// via the <see cref="IContainerAdapter"/>.
     /// </summary>
-    internal sealed class LightInjectAdapter : IContainer
+    internal sealed class LightInjectAdapter : IContainerAdapter
     {
         private readonly ServiceContainer _container = new ServiceContainer();
 
@@ -136,6 +136,16 @@ namespace ImageProcessing.Microkernel.MVP.Services.Adapter.Implementation
         /// </summary>
         public void Dispose()
             => _container.Dispose();
+
+        public IDisposable BeginScope()
+        {
+            if (_container == null)
+            {
+                throw new ObjectDisposedException(nameof(LightInjectAdapter));
+            }
+
+            return _container.BeginScope();
+        }
     }
 }
 

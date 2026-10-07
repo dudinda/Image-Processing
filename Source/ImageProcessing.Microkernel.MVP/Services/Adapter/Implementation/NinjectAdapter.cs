@@ -7,9 +7,9 @@ namespace ImageProcessing.Microkernel.MVP.Services.Adapter.Implementation
 {
     /// <summary>
     /// Provides access to the Ninject <see cref="StandardKernel"/>
-    /// via the <see cref="IContainer"/>.
+    /// via the <see cref="IContainerAdapter"/>.
     /// </summary>
-    internal sealed class NinjectAdapter : IContainer
+    internal sealed class NinjectAdapter : IContainerAdapter
     {
         private readonly StandardKernel _container = new StandardKernel();
     
@@ -160,7 +160,7 @@ namespace ImageProcessing.Microkernel.MVP.Services.Adapter.Implementation
             => _container
                    .Bind<TService>()
                    .ToConstant(instance)
-                   .InSingletonScope()
+                   .InCallScope()
                    .Named(serviceName);
 
         /// <inheritdoc/>
@@ -212,5 +212,15 @@ namespace ImageProcessing.Microkernel.MVP.Services.Adapter.Implementation
         /// <inheritdoc/>
         public bool IsRegistered<TService>()
             => _container.CanResolve<TService>();
+
+        public IDisposable BeginScope()
+        {
+            if (_container == null)
+            {
+                throw new ArgumentNullException(nameof(_container));
+            }
+
+            return _container.BeginBlock();
+        }
     }
 }

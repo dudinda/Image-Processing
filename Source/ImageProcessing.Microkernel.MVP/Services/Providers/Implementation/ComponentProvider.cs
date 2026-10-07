@@ -7,10 +7,10 @@ namespace ImageProcessing.Microkernel.MVP.Services.Providers.Implementation
     /// <inheritdoc cref="IComponentProvider"/>
     public class ComponentProvider : IComponentProvider
     {
-        /// <inheritdoc cref="IContainer"/>
-        private readonly IContainer _container;
+        /// <inheritdoc cref="IContainerAdapter"/>
+        private readonly IContainerAdapter _container;
 
-        public ComponentProvider(IContainer container)
+        public ComponentProvider(IContainerAdapter container)
         {
             _container = container ??
                 throw new ArgumentException(nameof(container));
@@ -185,9 +185,12 @@ namespace ImageProcessing.Microkernel.MVP.Services.Providers.Implementation
 
         /// <summary>
         /// Performs the disposing of the specified
-        /// <see cref="IContainer"/>.
+        /// <see cref="IContainerAdapter"/>.
         /// </summary>
         public void Dispose()
             => _container.Dispose();
+
+        public IDisposable BeginScope()
+            => _container.BeginScope();
     }
 }

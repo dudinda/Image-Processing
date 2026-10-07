@@ -6,7 +6,7 @@ namespace ImageProcessing.Microkernel.MVP.Services.Adapter
     /// Provides access to the specified
     /// DI container.
     /// </summary>
-    public interface IContainer : IDisposable
+    public interface IContainerAdapter : IDisposable
     {
         /// <summary>
         /// Registers the <typeparamref name="TService"/>  as <typeparamref name="TImplementation"/>
@@ -149,6 +149,11 @@ namespace ImageProcessing.Microkernel.MVP.Services.Adapter
         /// Get an instance of the given <typeparamref name="TService"/> type.
         /// </summary>
         TService Resolve<TService>();
+
+        /// <summary>
+        /// Begin a new scope for resolving servicesto manage the lifetime of scoped services.
+        /// </summary>
+        IDisposable BeginScope();
     }
 
 }
