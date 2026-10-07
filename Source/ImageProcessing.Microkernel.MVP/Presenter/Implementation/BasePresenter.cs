@@ -18,7 +18,6 @@ namespace ImageProcessing.Microkernel.MVP.Presenter.Implementation
     public abstract class BasePresenter<TView> : IPresenter
 		where TView : class, IView
 	{
-
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller
             => field ??= AppController.Controller;
@@ -65,7 +64,6 @@ namespace ImageProcessing.Microkernel.MVP.Presenter.Implementation
 		where TView : class, IView
 		where TViewModel : class
 	{
-
         /// <inheritdoc cref="IAppController"/>
         protected IAppController Controller
             => field ??= AppController.Controller;

@@ -10,7 +10,7 @@ namespace ImageProcessing.Microkernel.MVP.Services.Factories
     /// A factory method for all the types
     /// implementing the <see cref="IContainerAdapter"/>.
     /// </summary>
-    public  class AdapterFactory
+    public class AdapterFactory
     {
         /// <summary>
         /// Get the adapter for the specified <see cref="DiContainer"/>.

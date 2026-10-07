@@ -13,10 +13,12 @@ namespace ImageProcessing.Microkernel.MVP.Services.Factories
     internal class StateFactory
     {
         private readonly AppLifecycle _app;
+
         public StateFactory(AppLifecycle app)
         {
             _app = app;
         }
+
         /// <summary>
         /// Get the specified <see cref="AppState"/>.
         /// </summary>
