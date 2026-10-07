@@ -9,7 +9,8 @@
     <Platforms>AnyCPU;x64;x86</Platforms>
     <LangVersion>14.0</LangVersion>
     <Nullable>enable</Nullable>
-      <UseWindowsForms>true</UseWindowsForms>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
