@@ -40,11 +40,11 @@ using NSubstitute;
 
 namespace ImageProcessing.App.Integration.Monolith.UI
 {
-    internal sealed class Startup : IStartup
+    public class Startup : IStartup
     {
         public void Build(IComponentProvider builder)
         {
-            new Startup().Build(builder);
+            new Presentation.Startup().Build(builder);
 
             builder
                 .RegisterTransient<IRgbFormEventBinder, RgbFormEventBinderWrapper>()

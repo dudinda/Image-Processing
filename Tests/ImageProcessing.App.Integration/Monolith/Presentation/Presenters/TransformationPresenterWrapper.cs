@@ -24,20 +24,20 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
         public override ITransformationView View
             => _presenter.View;
 
-        public ILogger<TransformationPresenter> Logger { get; }
+        public ILoggerFactory Logger { get; }
         public IBitmapCopyServiceWrapper Copy { get; }
         public ITransformationProviderWrapper Provider { get; }
 
         public TransformationPresenterWrapper(
             ITransformationProviderWrapper provider,
             IBitmapCopyServiceWrapper copy,
-            ILogger<TransformationPresenter> logger)
+            ILoggerFactory logger)
         {
             Logger = logger;
             Copy = copy;
             Provider = provider;
 
-            _presenter = new TransformationPresenter(copy, provider, logger);
+            _presenter = new TransformationPresenter(copy, provider, logger.CreateLogger<TransformationPresenter>());
         }
 
         public virtual Task OnEventHandler(object publisher, RestoreFocusEventArgs e)

@@ -35,13 +35,13 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
         public IAwaitablePipelineServiceWrapper Pipeline { get; }
         public IScalingProviderWrapper Scaling { get; }
         public IRotationProviderWrapper Rotation { get; }
-        public ILogger<MainPresenter> Logger { get; }
+        public ILoggerFactory Logger { get; }
 
         public MainPresenterWrapper(
             IBitmapCopyServiceWrapper reference,
             INonBlockDialogServiceWrapper dialog,
             IAwaitablePipelineServiceWrapper pipeline,
-            ILogger<MainPresenter> logger,
+            ILoggerFactory logger,
             IScalingProviderWrapper scaling,
             IRotationProviderWrapper rotation) 
         {
@@ -53,7 +53,7 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
             Rotation = rotation;
             MenuPresenter = Controller.IoC.Resolve<MainMenuPresenterWrapper>();
 
-            _presenter = new MainPresenter(reference, dialog, pipeline, rotation, scaling, logger);
+            _presenter = new MainPresenter(reference, dialog, pipeline, rotation, scaling, logger.CreateLogger<MainPresenter>());
         }
 
         public override void Run()

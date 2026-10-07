@@ -26,18 +26,18 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
 
         public IBitmapCopyServiceWrapper Copy { get; }
         public IScalingProviderWrapper Provider { get; }
-        public ILogger<ScalingPresenter> Logger { get; }
+        public ILoggerFactory Logger { get; }
 
         public ScalingPresenterWrapper(
             IBitmapCopyServiceWrapper copy,
             IScalingProviderWrapper provider,
-            ILogger<ScalingPresenter> logger)
+            ILoggerFactory logger)
         {
             Provider = provider;
             Logger = logger;
             Copy = copy;
 
-            _presenter = new ScalingPresenter(copy, provider, logger);
+            _presenter = new ScalingPresenter(copy, provider, logger.CreateLogger<ScalingPresenter>());
         }
 
         public override void Run(BitmapViewModel vm)

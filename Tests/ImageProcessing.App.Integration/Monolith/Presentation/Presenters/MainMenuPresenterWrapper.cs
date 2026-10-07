@@ -30,14 +30,14 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
             Aggregator.Subscribe(this, View);
         }
 
-        public ILogger<DistributionPresenter> Logger { get; }
+        public ILoggerFactory Logger { get; }
         public IBitmapCopyServiceWrapper Reference { get; }
         public IAwaitablePipelineServiceWrapper Pipeline { get; }
 
         public MainMenuPresenterWrapper(
             IBitmapCopyServiceWrapper reference,
             IAwaitablePipelineServiceWrapper pipeline,
-            ILogger<DistributionPresenter> logger)
+            ILoggerFactory logger)
         {
             Logger = logger;
             Reference = reference;

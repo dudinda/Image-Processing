@@ -25,19 +25,19 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
             => _presenter.View;
 
         public IRotationProviderWrapper Provider { get; }
-        public ILogger<RotationPresenter> Logger { get; }
+        public ILoggerFactory Logger { get; }
         public IBitmapCopyServiceWrapper Copy { get; }
 
         public RotationPresenterWrapper(
             IBitmapCopyServiceWrapper copy,
             IRotationProviderWrapper provider,
-            ILogger<RotationPresenter> logger)
+            ILoggerFactory logger)
         {
             Provider = provider;
             Logger = logger;
             Copy = copy;
 
-            _presenter = new RotationPresenter(copy, provider, logger);
+            _presenter = new RotationPresenter(copy, provider, logger.CreateLogger<RotationPresenter>());
         }
 
         public override void Run(BitmapViewModel vm)

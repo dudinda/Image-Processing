@@ -5,11 +5,11 @@ using ImageProcessing.App.Integration.Monolith.Domain.Services.Pipeline.Interfac
 
 namespace ImageProcessing.App.Integration.Monolith.Domain.Services.Pipeline.Implementation
 {
-    internal class AwaitablePipelineServiceWrapper : IAwaitablePipelineServiceWrapper
+    internal class RenderPipelineServiceWrapper : IAwaitablePipelineServiceWrapper
     {
         private readonly IRenderPipeline _service;
 
-        public AwaitablePipelineServiceWrapper(IRenderPipeline service)
+        public RenderPipelineServiceWrapper(IRenderPipeline service)
         {
             _service = service;
         }

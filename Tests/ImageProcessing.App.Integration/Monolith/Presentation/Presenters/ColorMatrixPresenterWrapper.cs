@@ -28,12 +28,12 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
         public IRgbProviderWrapper Provider { get; }
         public IBitmapCopyServiceWrapper Copy { get; }
         public IColorMatrixFactoryWrapper Factory { get; }
-        public ILogger<ColorMatrixPresenter> Logger { get; }
+        public ILoggerFactory Logger { get; }
 
         public ColorMatrixPresenterWrapper(
             IBitmapCopyServiceWrapper copy,
             IColorMatrixFactoryWrapper factory,
-            ILogger<ColorMatrixPresenter> logger,
+            ILoggerFactory logger,
             IRgbProviderWrapper provider)
         {
             Provider = provider;
@@ -41,7 +41,7 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
             Copy = copy;
             Logger = logger;
 
-            _presenter = new ColorMatrixPresenter(copy, factory, logger, provider);
+            _presenter = new ColorMatrixPresenter(copy, factory, logger.CreateLogger<ColorMatrixPresenter>(), provider);
         }
 
         public override void Run(BitmapViewModel vm)

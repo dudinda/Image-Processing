@@ -28,57 +28,58 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation
         {
             new App.Presentation.IntegrationTests.Monolith.Domain.Startup().Build(builder);
 
+
             builder
                 .RegisterTransient(factory =>
                     Substitute.ForPartsOf<MainPresenterWrapper>(
                         builder.Resolve<IBitmapCopyServiceWrapper>(),
                         builder.Resolve<INonBlockDialogServiceWrapper>(),
                         builder.Resolve<IAwaitablePipelineServiceWrapper>(),
-                        builder.Resolve<ILogger<MainPresenter>>(),
+                        builder.Resolve<ILoggerFactory>(),
                         builder.Resolve<IScalingProviderWrapper>(),
                         builder.Resolve<IRotationProviderWrapper>()))
                 .RegisterTransient(factory =>
                     Substitute.ForPartsOf<ColorMatrixPresenterWrapper>(
                         builder.Resolve<IBitmapCopyServiceWrapper>(),
                         builder.Resolve<IColorMatrixFactoryWrapper>(),
-                        builder.Resolve<ILogger<ColorMatrixPresenter>>(),
+                        builder.Resolve<ILoggerFactory>(),
                         builder.Resolve<IRgbProviderWrapper>()))
                 .RegisterTransient(factory =>
                     Substitute.ForPartsOf<ConvolutionPresenterWrapper>(
                         builder.Resolve<IBitmapCopyServiceWrapper>(),
                         builder.Resolve<IConvolutionProviderWrapper>(),
-                        builder.Resolve<ILogger<ConvolutionPresenter>>()))
+                        builder.Resolve<ILoggerFactory>()))
                 .RegisterTransient(factory =>
                     Substitute.ForPartsOf<DistributionPresenterWrapper>(
                         builder.Resolve<IBitmapLuminanceProviderWrapper>(),
                         builder.Resolve<IBitmapCopyServiceWrapper>(),
                         builder.Resolve<IBitmapServiceWrapper>(),
-                        builder.Resolve<ILogger<DistributionPresenter>>()))
+                        builder.Resolve<ILoggerFactory>()))
                 .RegisterTransient(factory =>
                     Substitute.ForPartsOf<RgbPresenterWrapper>(
                         builder.Resolve<IBitmapCopyServiceWrapper>(),
                         builder.Resolve<IRgbFactoryWrapper>(),
-                        builder.Resolve<ILogger<RgbPresenter>>(),
+                        builder.Resolve<ILoggerFactory>(),
                         builder.Resolve<IRgbProviderWrapper>()))
                 .RegisterTransient(factory =>
                     Substitute.ForPartsOf<RotationPresenterWrapper>(
                         builder.Resolve<IBitmapCopyServiceWrapper>(),
                         builder.Resolve<IRotationProviderWrapper>(),
-                        builder.Resolve<ILogger<RotationPresenter>>()))
+                        builder.Resolve<ILoggerFactory>()))
                 .RegisterTransient(factory =>
                     Substitute.ForPartsOf<ScalingPresenterWrapper>(
                         builder.Resolve<IBitmapCopyServiceWrapper>(),
                         builder.Resolve<IScalingProviderWrapper>(),
-                        builder.Resolve<ILogger<ScalingPresenter>>()))
+                        builder.Resolve<ILoggerFactory>()))
                 .RegisterTransient(factory =>
                     Substitute.ForPartsOf<SettingsPresenterWrapper>(
-                        builder.Resolve<ILogger<SettingsPresenter>>(),
+                        builder.Resolve<ILoggerFactory>(),
                         builder.Resolve<SettingsOptions>()))
                 .RegisterTransient(factory =>
                     Substitute.ForPartsOf<TransformationPresenterWrapper>(
                         builder.Resolve<ITransformationProviderWrapper>(),
                         builder.Resolve<IBitmapCopyServiceWrapper>(),
-                        builder.Resolve<ILogger<TransformationPresenter>>()));
+                        builder.Resolve<ILoggerFactory>()));
         }
     }
 }

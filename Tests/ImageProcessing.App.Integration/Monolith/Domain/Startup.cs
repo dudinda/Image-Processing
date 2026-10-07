@@ -10,6 +10,7 @@ using ImageProcessing.App.Domain.Services.Factories.Rgb;
 using ImageProcessing.App.Domain.Services.Factories.Rotation;
 using ImageProcessing.App.Domain.Services.Factories.Scaling;
 using ImageProcessing.App.Domain.Services.Factories.Transformation;
+using ImageProcessing.App.Domain.Services.Pipeline;
 using ImageProcessing.App.Domain.Win.Models.Options;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.BitmapLuminance.Implementation;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.BitmapLuminance.Interface;
@@ -100,6 +101,8 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain
             new Microkernel.MVP.Startup().Build(builder);
             new ImageProcessing.App.UI.Startup().Build(builder);
 
+            builder.RegisterTransient<StaTaskOptions>();
+            
             builder
                 .RegisterTransient<IColorMatrixFactoryWrapper>(provider =>
                     Substitute.ForPartsOf<ColorMatrixFactoryWrapper>(
@@ -165,7 +168,8 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain
                .RegisterTransient<IChartSeriesBuilderWrapper>(provider =>
                     Substitute.ForPartsOf<ChartSeriesBuilderWrapper>())
                .RegisterSingleton<IAwaitablePipelineServiceWrapper>(provider =>
-                    Substitute.ForPartsOf<AwaitablePipelineServiceWrapper>())
+                    Substitute.ForPartsOf<RenderPipelineServiceWrapper>(
+                        builder.Resolve<IRenderPipeline>()))
                .RegisterTransient<IQualityMeasureServiceWrapper>(provider =>
                     Substitute.ForPartsOf<QualityMeasureServiceWrapper>(
                         builder.Resolve<IBitmapLuminanceServiceWrapper>(),

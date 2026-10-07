@@ -26,18 +26,18 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
 
         public IConvolutionProviderWrapper Provider { get; }
         public IBitmapCopyServiceWrapper Copy { get; }
-        public ILogger<ConvolutionPresenter> Logger { get; }
+        public ILoggerFactory Logger { get; }
 
         public ConvolutionPresenterWrapper(
             IBitmapCopyServiceWrapper copy,
             IConvolutionProviderWrapper provider,
-            ILogger<ConvolutionPresenter> logger)
+            ILoggerFactory logger)
         {
             Provider = provider;
             Copy = copy;
             Logger = logger;
 
-            _presenter = new ConvolutionPresenter(copy, provider, logger);
+            _presenter = new ConvolutionPresenter(copy, provider, logger.CreateLogger<ConvolutionPresenter>());
         }
 
         public override void Run(BitmapViewModel vm)

@@ -22,17 +22,17 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
         public override ISettingsView View
             => _presenter.View;
 
-        public ILogger<SettingsPresenter> Logger { get; }
+        public ILoggerFactory Logger { get; }
         public SettingsOptions Settings { get; }
 
         public SettingsPresenterWrapper(
-            ILogger<SettingsPresenter> logger,
+            ILoggerFactory logger,
             SettingsOptions settings)
         {
             Settings = settings;
             Logger = logger;
 
-            _presenter = new SettingsPresenter(logger, settings);
+            _presenter = new SettingsPresenter(logger.CreateLogger<SettingsPresenter>(), settings);
         }
 
         public override void Run()

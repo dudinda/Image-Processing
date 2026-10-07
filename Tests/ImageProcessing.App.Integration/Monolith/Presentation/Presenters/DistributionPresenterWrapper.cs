@@ -30,20 +30,20 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
         public IBitmapCopyServiceWrapper Copy { get; }
         public IBitmapLuminanceProviderWrapper Provider { get; }
         public IBitmapServiceWrapper Service { get; }
-        public ILogger<DistributionPresenter> Logger { get; }
+        public ILoggerFactory Logger { get; }
 
         public DistributionPresenterWrapper(
             IBitmapLuminanceProviderWrapper provider,
             IBitmapCopyServiceWrapper copy,
             IBitmapServiceWrapper service,
-            ILogger<DistributionPresenter> logger) 
+            ILoggerFactory logger) 
         {
             Copy = copy;
             Provider = provider;
             Service = service;
             Logger = logger;
 
-            _presenter = new DistributionPresenter(copy, provider, service, logger);
+            _presenter = new DistributionPresenter(copy, provider, service, logger.CreateLogger<DistributionPresenter>());
         }
 
         public override void Run(BitmapViewModel vm)

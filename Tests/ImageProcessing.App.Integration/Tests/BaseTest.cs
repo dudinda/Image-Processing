@@ -8,25 +8,23 @@ using NUnit.Framework;
 namespace ImageProcessing.App.Presentation.IntegrationTests.Tests
 {
     [SetUpFixture]
-    internal abstract class BaseTest<TStartup>
+    public class BaseTest<TStartup>
         where TStartup : class, IStartup
     {
-        private AppLifecycle _app;
+        protected AppLifecycle _app;
 
-        [SetUp]
-        public void SetUp()
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
         {
             _app = new AppLifecycle();
-            _app.Build<TStartup>(DiContainer.Ninject);
-            BeforeStart();
+            _app.Build<TStartup>(DiContainer.LightInject);
         }
 
-        [TearDown]
-        public void TearDown()
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
         {
             _app.Dispose();
         }
 
-        protected abstract void BeforeStart();
     }
 }

@@ -9,8 +9,7 @@ namespace ImageProcessing.App.Integration.Monolith.Domain.Services.Locker.Implem
 {
     internal class AsyncOperationLockerWrapper : IAsyncOperationLockerWrapper
     {
-        private readonly AsyncOperationLocker _locker
-            = new AsyncOperationLocker();
+        private readonly AsyncOperationLocker _locker = new();
 
         public async Task<TResult> LockOperationAsync<TResult>(Func<TResult> worker, CancellationToken token)
             => await _locker.LockOperationAsync(worker, token).ConfigureAwait(false);

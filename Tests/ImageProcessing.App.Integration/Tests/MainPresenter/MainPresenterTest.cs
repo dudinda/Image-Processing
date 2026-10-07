@@ -4,15 +4,12 @@ using ImageProcessing.App.Domain.Services.Pipeline.Implementation;
 using ImageProcessing.App.Integration.Code.Resources;
 using ImageProcessing.App.Integration.Monolith.Presentation.Presenters;
 using ImageProcessing.App.Presentation.Code.Enums;
-using ImageProcessing.App.Presentation.DomainEvents.ColorMatrixArgs;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.FileDialog;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Show;
 using ImageProcessing.App.Presentation.UnitTests.Extensions;
 using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.App.UI.Services.FormExposers;
-using ImageProcessing.Microkernel;
-using ImageProcessing.Microkernel.MVP.Code.Enums;
 
 using NSubstitute;
 using NSubstitute.ReceivedExtensions;
@@ -22,22 +19,16 @@ using NUnit.Framework;
 namespace ImageProcessing.App.Presentation.IntegrationTests.Tests
 {
     [TestFixture]
-#if !DEBUG
-    [Timeout(5000)]
-#endif
-    internal sealed class MainPresenterTest : BaseTest<Integration.Monolith.UI.Startup>
+    public class MainPresenterTest : BaseTest<Integration.Monolith.UI.Startup>
     {
         private MainPresenterWrapper _presenter;
         private IMainFormExposer _form;
-        private AppLifecycle _app;
 
-        protected override void BeforeStart()
+        [SetUp]
+        public void SetUp()
         {
-            _app = new AppLifecycle();
-            _app.Build<Integration.Monolith.UI.Startup>(DiContainer.LightInject);
             _presenter = _app.Controller.IoC.Resolve<MainPresenterWrapper>();
             _presenter.Run();
-
             _form = _presenter.View as IMainFormExposer;
         }
 
