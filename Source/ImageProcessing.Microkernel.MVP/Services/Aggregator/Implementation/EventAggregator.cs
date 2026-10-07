@@ -11,14 +11,17 @@ namespace ImageProcessing.Microkernel.MVP.Services.Aggregator.Implementation
     /// <inheritdoc cref="IEventAggregator"/>
     public class EventAggregator : IEventAggregator
     {
-        protected MonitorScope _lock = new MonitorScope(true);
+        /// <summary>
+        /// Used to synchronize access to the internal data structures of the event aggregator.
+        /// The false is used to run tests synchronously in the integration tests.
+        /// </summary>
+        protected MonitorScope _lock = new(true);
 
         /// <summary>
         /// Partition a presenter with a subscriber interface cast and
         /// then queue it as a callback on the syncronization context.
         /// </summary>
-        private readonly Dictionary<Type, Dictionary<object, HashSet<object>>> _map
-            = new Dictionary<Type, Dictionary<object, HashSet<object>>>();
+        private readonly Dictionary<Type, Dictionary<object, HashSet<object>>> _map = new();
 
         /// <inheritdoc cref="IEventAggregator.PublishFrom{TEventArgs}(object, TEventArgs)"/>
         public void PublishFrom<TEventArgs>(object publisher, TEventArgs args)
