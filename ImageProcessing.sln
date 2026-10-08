@@ -34,7 +34,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing.App.Present
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing.App.UI", "Source\ImageProcessing.App.UI\ImageProcessing.App.UI.csproj", "{4F6224D0-16FC-9D45-4580-CCC6A79BC9E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing.MVP.UnitTests", "Tests\ImageProcessing.MVP.UnitTests\ImageProcessing.MVP.UnitTests.csproj", "{77725913-B5A8-479A-8191-4F74F67FD09B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing.MVP.UnitTests", "Tests\ImageProcessing.Microkernel.MVP.UnitTests\ImageProcessing.MVP.UnitTests.csproj", "{77725913-B5A8-479A-8191-4F74F67FD09B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
