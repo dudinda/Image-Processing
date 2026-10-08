@@ -190,6 +190,7 @@ namespace ImageProcessing.Microkernel.MVP.Services.Providers.Implementation
         public void Dispose()
             => _container.Dispose();
 
+        /// <inheritdoc/>
         public IDisposable BeginScope()
             => _container.BeginScope();
     }

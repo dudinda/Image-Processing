@@ -213,14 +213,9 @@ namespace ImageProcessing.Microkernel.MVP.Services.Adapter.Implementation
         public bool IsRegistered<TService>()
             => _container.CanResolve<TService>();
 
+        /// <inheritdoc/>
         public IDisposable BeginScope()
-        {
-            if (_container == null)
-            {
-                throw new ArgumentNullException(nameof(_container));
-            }
-
-            return _container.BeginBlock();
-        }
+             => _container?.BeginBlock()
+                ?? throw new ObjectDisposedException(nameof(_container));
     }
 }

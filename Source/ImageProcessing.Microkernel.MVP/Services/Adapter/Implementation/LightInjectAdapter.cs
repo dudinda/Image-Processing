@@ -137,15 +137,10 @@ namespace ImageProcessing.Microkernel.MVP.Services.Adapter.Implementation
         public void Dispose()
             => _container.Dispose();
 
+        /// <inheritdoc/>
         public IDisposable BeginScope()
-        {
-            if (_container == null)
-            {
-                throw new ObjectDisposedException(nameof(LightInjectAdapter));
-            }
-
-            return _container.BeginScope();
-        }
+             => _container?.BeginScope()
+                ?? throw new ObjectDisposedException(nameof(_container));
     }
 }
 
