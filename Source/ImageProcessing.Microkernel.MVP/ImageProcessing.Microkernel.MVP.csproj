@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>14.0</LangVersion>
@@ -22,8 +21,14 @@
     <PackageIcon>icon.png</PackageIcon>
     <PackageReleaseNotes>
       -merged microkernel modules into one
+      -renamed IContainer to IContainerAdapter
       -added support for dependency injection factories
-      -made application lifecycle non-static
+      -added BeginScope support to IComponentProvider
+      -added the ILoggerFactory in the app controller to generate loggers for presenters,
+         and provide a custom implementation at the application level
+      -made the application lifecycle non-static
+      -added a monitor scope to adapt aggregator for integration tests
+      -made the aggregator setter inside the controller public to allow integration tests to set it up
     </PackageReleaseNotes>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
@@ -37,13 +42,10 @@
   
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>ImageProcessing.App.Integration</_Parameter1>
-    </AssemblyAttribute>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
       <_Parameter1>DynamicProxyGenAssembly2</_Parameter1>
     </AssemblyAttribute>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>ImageProcessing.MVP.UnitTests</_Parameter1>
+      <_Parameter1>$(MSBuildProjectName).UnitTests</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
   
