@@ -27,7 +27,7 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Tests
         [SetUp]
         public void SetUp()
         {
-            _presenter = _app.Controller.IoC.Resolve<MainPresenterWrapper>();
+            _presenter = _ioc.Resolve<MainPresenterWrapper>();
             _presenter.Run();
             _form = _presenter.View as IMainFormExposer;
         }
