@@ -1,7 +1,7 @@
 using System.Drawing;
 
 using ImageProcessing.App.Domain.Models.Options;
-using ImageProcessing.App.Domain.Services.Cache.Implementation;
+using ImageProcessing.App.Domain.Services.Cache;
 using ImageProcessing.App.Domain.Services.Factories.ColorMatrix;
 using ImageProcessing.App.Domain.Services.Factories.Convolution;
 using ImageProcessing.App.Domain.Services.Factories.Distribution;
@@ -142,7 +142,7 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain
                     Substitute.ForPartsOf<MorphologyServiceWrapper>())
                .RegisterSingleton<ICacheServiceWrapper>(provider =>
                     Substitute.ForPartsOf<CacheServiceWrapper>(
-                        builder.Resolve<CacheService<Bitmap>>()))
+                        builder.Resolve<ICacheService<Bitmap>>()))
                .RegisterTransient<IColorMatrixServiceWrapper>(provider =>
                     Substitute.ForPartsOf<ColorMatrixServiceWrapper>())
                .RegisterTransient<IConvolutionServiceWrapper>(provider =>
@@ -179,7 +179,7 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain
                     Substitute.ForPartsOf<ConvolutionVisitorWrapper>(
                         builder.Resolve<IConvolutionFactoryWrapper>(),
                         builder.Resolve<IConvolutionServiceWrapper>(),
-                         builder.Resolve<IBitmapServiceWrapper>()))
+                        builder.Resolve<IBitmapServiceWrapper>()))
                .RegisterTransient<IHistogramVisitorWrapper>(provider =>
                     Substitute.ForPartsOf<HistogramVisitorWrapper>(
                         builder.Resolve<IBitmapLuminanceServiceWrapper>(),
@@ -196,9 +196,9 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain
                .RegisterTransient<IBitmapLuminanceProviderWrapper>(provider =>
                     Substitute.ForPartsOf<BitmapLuminanceProviderWrapper>(
                         builder.Resolve<IBitmapLuminanceServiceWrapper>(),
-                         builder.Resolve<IBitmapLuminanceVisitableFactoryWrapper>(),
-                         builder.Resolve<IBitmapLuminanceVisitorWrapper>(),
-                         builder.Resolve<IDistributionFactoryWrapper>()))
+                        builder.Resolve<IBitmapLuminanceVisitableFactoryWrapper>(),
+                        builder.Resolve<IBitmapLuminanceVisitorWrapper>(),
+                        builder.Resolve<IDistributionFactoryWrapper>()))
                .RegisterTransient<IConvolutionProviderWrapper>(provider =>
                     Substitute.ForPartsOf<ConvolutionProviderWrapper>(
                         builder.Resolve<IConvolutionVisitableFactoryWrapper>(),
