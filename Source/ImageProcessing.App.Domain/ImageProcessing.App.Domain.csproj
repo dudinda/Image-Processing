@@ -19,7 +19,7 @@
   
   <ItemGroup>
     <PackageReference Include="MessageLoop.Common" Version="1.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="10.0.0" />
     <PackageReference Include="System.Drawing.Common" Version="10.0.12" />
   </ItemGroup>
    
