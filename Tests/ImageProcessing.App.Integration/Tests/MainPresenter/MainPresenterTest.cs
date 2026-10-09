@@ -8,7 +8,6 @@ using ImageProcessing.App.Presentation.DomainEvents.MainArgs.FileDialog;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Show;
 using ImageProcessing.App.Presentation.UnitTests.Extensions;
-using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.App.UI.Services.FormExposers;
 
 using NSubstitute;
@@ -53,34 +52,33 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Tests
         public void RendererRecieveBlockTest()
         {
             _form.OpenFileMenu.PerformClick();
-            var view = _form as IMainView;
+            var view = _presenter.View;
 
-            Received.InOrder(() =>
-            {
-                view.Received().SetCursor(
-                    Arg.Is<CursorType>(arg => arg == CursorType.Wait));
+            view.Received().SetCursor(
+                Arg.Is<CursorType>(arg => arg == CursorType.Wait));
 
-                _presenter.Pipeline.Received().Register(Arg.Any<PipelineBlock>());
-                _presenter.Pipeline.Received().Render();
-                _presenter.Reference.Received().SetCopy(
-                    Arg.Is<Bitmap>(arg => arg == Res._1920x1080frame));
+            _presenter.Pipeline.Received().Register(Arg.Any<PipelineBlock>());
+            _presenter.Pipeline.Received().Render();
+            _presenter.Reference.Received().SetCopy(
+                Arg.Is<Bitmap>(arg => arg.SameAs(Res._1920x1080frame)));
 
-                view.Received().GetImageCopy();
-                view.Received().AddToUndoRedo(
-                    Arg.Is<Bitmap>(arg => arg == Res._1920x1080frame),
-                    Arg.Is<UndoRedoAction>(arg => arg == UndoRedoAction.Undo));
-                view.Received().SetImageCopy(Arg.Any<Bitmap>());
-                view.Received().SetImage(Arg.Any<Bitmap>());
-                view.SetImageCenter(
-                    Arg.Is<Size>(arg => arg == Res._1920x1080frame.Size));
-                view.Received().Refresh();
-                view.Received().ResetTrackBarValue();
+            view.Received().GetImageCopy();
+            view.Received().AddToUndoRedo(
+                Arg.Is<Bitmap>(arg => arg.SameAs(UI.Properties.Resources.DefaultImage)),
+                Arg.Is<UndoRedoAction>(arg => arg == UndoRedoAction.Undo));
+            view.Received().SetImageCopy(
+                Arg.Is<Bitmap>(arg => arg.SameAs(Res._1920x1080frame)));
+            view.Received().SetImage(
+                Arg.Is<Bitmap>(arg => arg.SameAs(Res._1920x1080frame)));
+            view.Received().SetImageCenter(
+                Arg.Is<Size>(arg => arg == Res._1920x1080frame.Size));
+            view.Received().Refresh();
+            view.Received().ResetTrackBarValue();
 
-                _presenter.Pipeline.Received().Any();
+            _presenter.Pipeline.Received().Any();
 
-                view.Received().SetCursor(
-                    Arg.Is<CursorType>(arg => arg == CursorType.Default));
-            });
+            view.Received().SetCursor(
+                Arg.Is<CursorType>(arg => arg == CursorType.Default));
         }
 
         [Test]
@@ -142,6 +140,5 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Tests
                 Arg.Is<object>(arg => arg == _form),
                 Arg.Any<SaveWithoutFileDialogEventArgs>());
         }
-
     }
 }
