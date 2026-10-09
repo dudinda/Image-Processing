@@ -1,8 +1,8 @@
 using System;
 
 using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.App.Domain.Models.Scaling.Implementation;
 using ImageProcessing.App.Domain.Models.Scaling;
+using ImageProcessing.App.Domain.Models.Scaling.Implementation;
 using ImageProcessing.App.Domain.Services.Factories.Scaling;
 
 namespace ImageProcessing.App.Domain.Factories.Scaling.Implementation

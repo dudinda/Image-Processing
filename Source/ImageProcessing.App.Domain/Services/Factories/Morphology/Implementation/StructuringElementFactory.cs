@@ -1,9 +1,8 @@
 using System;
 
 using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.App.Domain.Models.Morphology.Implementation.StructringElement;
 using ImageProcessing.App.Domain.Models.Morphology;
-using ImageProcessing.App.Domain.Services.Factories.Morphology;
+using ImageProcessing.App.Domain.Models.Morphology.Implementation.StructringElement;
 
 namespace ImageProcessing.App.Domain.Services.Factories.Morphology.Implementation
 {

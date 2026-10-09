@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-using static ImageProcessing.Utility.DecimalMath.Real.DecimalReal;
+using static ImageProcessing.App.Domain.Services.DecimalMath.Real.DecimalReal;
 
 namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
 {

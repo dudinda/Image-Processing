@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-using ImageProcessing.Utility.DecimalMath.Real;
+using ImageProcessing.App.Domain.Services.DecimalMath.Real;
 
-namespace ImageProcessing.Utility.DecimalMath.Complex
+namespace ImageProcessing.App.Domain.Services.DecimalMath.Complex
 {
     public class DecimalComplex
     {

@@ -2,7 +2,6 @@ using System.Drawing;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.App.Domain.Providers.Visitors.Convolution;
 using ImageProcessing.App.Domain.Services.Bmp;
 using ImageProcessing.App.Domain.Services.Convolution;
 using ImageProcessing.App.Domain.Services.Factories.Convolution;

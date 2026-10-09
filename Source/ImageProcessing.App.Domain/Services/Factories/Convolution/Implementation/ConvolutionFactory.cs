@@ -1,6 +1,7 @@
 using System;
 
 using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.Domain.Models.Convolution;
 using ImageProcessing.App.Domain.Models.Convolution.Implementation.Blur.BoxBlur;
 using ImageProcessing.App.Domain.Models.Convolution.Implementation.Blur.GaussianBlur;
 using ImageProcessing.App.Domain.Models.Convolution.Implementation.Blur.MotionBlur;
@@ -8,7 +9,6 @@ using ImageProcessing.App.Domain.Models.Convolution.Implementation.EdgeDetection
 using ImageProcessing.App.Domain.Models.Convolution.Implementation.EdgeDetection.SobelOperator;
 using ImageProcessing.App.Domain.Models.Convolution.Implementation.Emboss;
 using ImageProcessing.App.Domain.Models.Convolution.Implementation.Sharpen;
-using ImageProcessing.App.Domain.Models.Convolution;
 using ImageProcessing.App.Domain.Services.Factories.Convolution;
 
 namespace ImageProcessing.App.Domain.Factories.Convolution.Implementation

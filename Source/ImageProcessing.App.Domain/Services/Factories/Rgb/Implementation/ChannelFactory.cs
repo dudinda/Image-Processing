@@ -1,9 +1,8 @@
 using System;
 
 using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.App.Domain.Models.Rgb.Channel.Implementation;
 using ImageProcessing.App.Domain.Models.Rgb;
-using ImageProcessing.App.Domain.Services.Factories.Rgb;
+using ImageProcessing.App.Domain.Models.Rgb.Channel.Implementation;
 
 namespace ImageProcessing.App.Domain.Services.Factories.Rgb.Implementation
 {

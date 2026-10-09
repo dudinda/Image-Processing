@@ -1,7 +1,6 @@
 using System.Drawing;
 
 using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.App.Domain.Code.Enums;
 
 namespace ImageProcessing.App.Domain.Providers.BitmapLuminance
 {

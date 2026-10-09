@@ -1,13 +1,11 @@
+using ImageProcessing.App.Domain.Services.DecimalMath.Real;
 
-using ImageProcessing.Utility.DecimalMath.Complex;
-using ImageProcessing.Utility.DecimalMath.Real;
-
-namespace ImageProcessing.Utility.DecimalMath.Complex
+namespace ImageProcessing.App.Domain.Services.DecimalMath.Complex
 {
     internal sealed class ComplexOperator
     {
-        private static readonly DecimalComplex _complex  = new DecimalComplex();
-        private static readonly DecimalReal _real = new DecimalReal();
+        private static readonly DecimalComplex _complex  = new();
+        private static readonly DecimalReal _real = new();
 
         internal (decimal Re, decimal Im) Z { get; }
 

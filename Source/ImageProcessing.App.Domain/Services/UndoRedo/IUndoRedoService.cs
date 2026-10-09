@@ -1,5 +1,3 @@
-using System.Drawing;
-
 namespace ImageProcessing.App.Domain.Services.UndoRedo
 {
     public interface IUndoRedoService<TValue>

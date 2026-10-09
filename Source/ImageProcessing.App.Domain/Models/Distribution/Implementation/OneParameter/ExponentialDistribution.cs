@@ -2,7 +2,7 @@ using System;
 
 using ImageProcessing.App.Domain.Code.Enums;
 using ImageProcessing.App.Domain.Code.Extensions;
-using ImageProcessing.Utility.DecimalMath.Real;
+using ImageProcessing.App.Domain.Services.DecimalMath.Real;
 
 namespace ImageProcessing.App.Domain.Models.Distribution.Implementation.OneParameter
 {
@@ -11,7 +11,7 @@ namespace ImageProcessing.App.Domain.Models.Distribution.Implementation.OneParam
     /// </summary>
     public sealed class ExponentialDistribution : IDistribution
     {
-        private readonly DecimalReal _math  = new DecimalReal();
+        private readonly DecimalReal _math  = new();
 
         private decimal _lambda;
 

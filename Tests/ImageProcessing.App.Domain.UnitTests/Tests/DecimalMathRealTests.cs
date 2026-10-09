@@ -1,6 +1,6 @@
 using System;
 
-using ImageProcessing.Utility.DecimalMath.Real;
+using ImageProcessing.App.Domain.Services.DecimalMath.Real;
 using ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory;
 
 using NUnit.Framework;
@@ -13,7 +13,7 @@ namespace ImageProcessing.Tests.Utility
     [TestFixture]
     public class DecimalMathRealTests
     {
-        private readonly DecimalReal _real = new DecimalReal();
+        private readonly DecimalReal _real = new();
 
         [Test, TestCaseSource(
             typeof(RealDomainCasesFactory),

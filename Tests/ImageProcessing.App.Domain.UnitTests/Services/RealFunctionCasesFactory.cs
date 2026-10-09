@@ -1,14 +1,15 @@
 using System.Collections.Generic;
 
+using ImageProcessing.App.Domain.Services.DecimalMath.Real;
+
+using static ImageProcessing.App.Domain.Services.DecimalMath.Real.DecimalReal;
 using static ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory.RealDomainCasesFactory;
-using static ImageProcessing.Utility.DecimalMath.Real.DecimalReal;
-using ImageProcessing.Utility.DecimalMath.Real;
 
 namespace ImageProcessing.Utility.DecimalMath.UnitTests.CaseFactory
 {
     public static class RealFunctionCasesFactory
     {
-        private static readonly DecimalReal _real = new DecimalReal();
+        private static readonly DecimalReal _real = new();
 
         public static IEnumerable<decimal>  GetArccotValues()
         {

@@ -10,9 +10,7 @@ namespace ImageProcessing.App.Domain.Services.Pipeline.Implementation
 {
     public sealed class PipelineBlock : IPipelineBlock
     {
-        private readonly ConcurrentQueue<IBlockItem> _block
-            = new ConcurrentQueue<IBlockItem>();
-
+        private readonly ConcurrentQueue<IBlockItem> _block = new();
         private readonly object _blockInputValue;
 
         public PipelineBlock(object blockInputValue)

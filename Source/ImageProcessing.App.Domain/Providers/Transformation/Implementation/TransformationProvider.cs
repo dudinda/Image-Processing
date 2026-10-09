@@ -1,7 +1,6 @@
 using System.Drawing;
 
 using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.App.Domain.Providers.Transformation;
 using ImageProcessing.App.Domain.Services.Factories.Transformation;
 
 namespace ImageProcessing.App.Domain.Providers.Transformation.Implementation

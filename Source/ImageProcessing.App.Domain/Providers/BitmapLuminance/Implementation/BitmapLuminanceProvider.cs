@@ -1,8 +1,6 @@
 using System.Drawing;
 
 using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.App.Domain.Providers.BitmapLuminance;
 using ImageProcessing.App.Domain.Providers.VisitableFactory.BitmapLuminance;
 using ImageProcessing.App.Domain.Providers.Visitors.BitmapLuminance;
 using ImageProcessing.App.Domain.Services.Distribution;

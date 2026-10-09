@@ -1,7 +1,6 @@
 using System.Drawing;
 
 using ImageProcessing.App.Domain.Models.Options;
-using ImageProcessing.App.Domain.Providers.Rotation;
 using ImageProcessing.App.Domain.Services.Factories.Rotation;
 
 namespace ImageProcessing.App.Domain.Providers.Rotation.Implementation

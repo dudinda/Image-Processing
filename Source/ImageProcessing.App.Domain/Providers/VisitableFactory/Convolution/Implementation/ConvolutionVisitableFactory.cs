@@ -1,8 +1,6 @@
 using ImageProcessing.App.Domain.Code.Enums;
 using ImageProcessing.App.Domain.Providers.Visitable.Convolution;
-using ImageProcessing.App.Domain.Providers.Visitable.Convolution.LoGOperator3x3;
-using ImageProcessing.App.Domain.Providers.Visitable.Convolution.Operator;
-using ImageProcessing.App.Domain.Providers.Visitable.Convolution.SobelOperator3x3;
+using ImageProcessing.App.Domain.Providers.Visitable.Convolution.Implementation;
 
 namespace ImageProcessing.App.Domain.Providers.VisitableFactory.Convolution.Implementation
 {

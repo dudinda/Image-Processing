@@ -3,9 +3,9 @@ using System.Linq;
 
 using ImageProcessing.App.Domain.Code.Constants;
 using ImageProcessing.App.Domain.Models.Distribution;
-using ImageProcessing.Utility.DecimalMath.Real;
+using ImageProcessing.App.Domain.Services.DecimalMath.Real;
 
-using static ImageProcessing.Utility.DecimalMath.Real.DecimalReal;
+using static ImageProcessing.App.Domain.Services.DecimalMath.Real.DecimalReal;
 
 namespace ImageProcessing.App.Domain.Services.Distribution.Implementation
 {

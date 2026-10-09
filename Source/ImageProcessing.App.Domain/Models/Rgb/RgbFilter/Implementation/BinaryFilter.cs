@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.Domain.Code.Constants;
 using ImageProcessing.App.Domain.Models.Recommendation;
-using ImageProcessing.App.Domain.Models.Rgb;
 
 namespace ImageProcessing.App.Domain.Models.Rgb.RgbFilter.Implementation
 {

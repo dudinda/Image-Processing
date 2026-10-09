@@ -1,8 +1,8 @@
 using System;
 
 using ImageProcessing.App.Domain.Code.Enums;
-using ImageProcessing.App.Domain.Models.Recommendation.Implementation;
 using ImageProcessing.App.Domain.Models.Recommendation;
+using ImageProcessing.App.Domain.Models.Recommendation.Implementation;
 using ImageProcessing.App.Domain.Services.Factories.Recommendation;
 
 namespace ImageProcessing.App.Domain.Factories.Recommendation.Implementation

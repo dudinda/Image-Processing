@@ -1,6 +1,6 @@
 using System;
 
-namespace ImageProcessing.Utility.DecimalMath.Real
+namespace ImageProcessing.App.Domain.Services.DecimalMath.Real
 {
     /// <summary>
     /// The class contains functions of a real variable,

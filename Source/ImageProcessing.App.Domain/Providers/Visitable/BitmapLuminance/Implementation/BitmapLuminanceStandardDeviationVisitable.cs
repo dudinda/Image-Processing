@@ -1,12 +1,11 @@
 using System;
 using System.Drawing;
 
-using ImageProcessing.App.Domain.Providers.Visitable.BitmapLuminance;
 using ImageProcessing.App.Domain.Providers.Visitors.BitmapLuminance;
 
-namespace ImageProcessing.App.Domain.Providers.Visitable.BitmapLuminance.Expectation
+namespace ImageProcessing.App.Domain.Providers.Visitable.BitmapLuminance.Implementation
 {
-    internal sealed class BitmapLuminanceExpectationVisitable : IBitmapLuminanceVisitable
+    internal sealed class BitmapLuminanceStandardDeviationVisitable : IBitmapLuminanceVisitable
     {
         private IBitmapLuminanceVisitor? _visitor;
 
@@ -15,9 +14,9 @@ namespace ImageProcessing.App.Domain.Providers.Visitable.BitmapLuminance.Expecta
             _visitor = visitor;
             return this;
         }
-        
+             
         public decimal GetInfo(Bitmap bmp)
-            => _visitor?.GetExpectation(bmp)
+            => _visitor?.GetStandardDeviation(bmp)
                 ?? throw new ArgumentNullException(nameof(_visitor));
     }
 }

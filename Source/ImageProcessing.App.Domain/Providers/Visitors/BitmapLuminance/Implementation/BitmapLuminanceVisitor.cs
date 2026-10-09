@@ -1,6 +1,5 @@
 using System.Drawing;
 
-using ImageProcessing.App.Domain.Providers.Visitors.BitmapLuminance;
 using ImageProcessing.App.Domain.Services.Distribution;
 
 namespace ImageProcessing.App.Domain.Providers.Visitors.BitmapLuminance.Implementation

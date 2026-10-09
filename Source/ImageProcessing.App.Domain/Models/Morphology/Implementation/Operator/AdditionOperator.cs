@@ -4,7 +4,6 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Domain.Code.Constants;
-using ImageProcessing.App.Domain.Models.Morphology;
 
 namespace ImageProcessing.App.Domain.Models.Morphology.Implementation.Operator
 {
@@ -14,7 +13,7 @@ namespace ImageProcessing.App.Domain.Models.Morphology.Implementation.Operator
     internal sealed class AdditionOperator : IMorphologyBinary
     {
         /// <inheritdoc />
-        public Bitmap Filter(Bitmap lvalue, Bitmap rvalue)
+        public Bitmap Filter(Bitmap lvalue, Bitmap rvalue) 
         {
             if (lvalue is null) { throw new ArgumentNullException(nameof(lvalue)); }
             if (rvalue is null) { throw new ArgumentNullException(nameof(rvalue)); }

@@ -4,7 +4,6 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Domain.Code.Constants;
-using ImageProcessing.App.Domain.Models.Thresholding;
 
 namespace ImageProcessing.App.Domain.Models.Thresholding.Implementation
 {

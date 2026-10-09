@@ -1,9 +1,9 @@
 using System;
 
 using ImageProcessing.App.Domain.Code.Enums;
+using ImageProcessing.App.Domain.Models.Distribution;
 using ImageProcessing.App.Domain.Models.Distribution.Implementation.OneParameter;
 using ImageProcessing.App.Domain.Models.Distribution.Implementation.TwoParameter;
-using ImageProcessing.App.Domain.Models.Distribution;
 using ImageProcessing.App.Domain.Services.Factories.Distribution;
 
 namespace ImageProcessing.App.Domain.Factories.Distribution.Implementation

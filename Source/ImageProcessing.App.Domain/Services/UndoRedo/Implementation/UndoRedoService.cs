@@ -12,12 +12,12 @@ namespace ImageProcessing.App.Domain.Services.UndoRedo.Implementation
 
         public UndoRedoService(UndoRedoOptions options)
         {
-            _undo = new FixedStackSafe<Bitmap>(options.MaxUndoCount);
-            _redo = new FixedStackSafe<Bitmap>(options.MaxRedoCount);
+            _undo = new(options.MaxUndoCount);
+            _redo = new(options.MaxRedoCount);
         }
 
         public bool UndoIsEmpty
-         => _undo.IsEmpty;
+            => _undo.IsEmpty;
 
         public bool RedoIsEmpty
             => _redo.IsEmpty;

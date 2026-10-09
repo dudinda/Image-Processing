@@ -2,10 +2,7 @@ using System;
 
 using ImageProcessing.App.Domain.Code.Enums;
 using ImageProcessing.App.Domain.Providers.Visitable.BitmapLuminance;
-using ImageProcessing.App.Domain.Providers.Visitable.BitmapLuminance.Entropy;
-using ImageProcessing.App.Domain.Providers.Visitable.BitmapLuminance.Expectation;
-using ImageProcessing.App.Domain.Providers.Visitable.BitmapLuminance.StandardDeviation;
-using ImageProcessing.App.Domain.Providers.Visitable.BitmapLuminance.Variance;
+using ImageProcessing.App.Domain.Providers.Visitable.BitmapLuminance.Implementation;
 
 namespace ImageProcessing.App.Domain.Providers.VisitableFactory.BitmapLuminance.Implementation
 {

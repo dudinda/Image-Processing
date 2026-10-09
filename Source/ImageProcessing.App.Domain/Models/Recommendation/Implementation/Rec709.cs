@@ -1,5 +1,3 @@
-using ImageProcessing.App.Domain.Models.Recommendation;
-
 namespace ImageProcessing.App.Domain.Models.Recommendation.Implementation
 {
     /// <inheritdoc cref="IRecommendation"/>

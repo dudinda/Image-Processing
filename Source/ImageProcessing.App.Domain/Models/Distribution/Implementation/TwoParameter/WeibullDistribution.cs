@@ -2,8 +2,8 @@ using System;
 
 using ImageProcessing.App.Domain.Code.Enums;
 using ImageProcessing.App.Domain.Code.Extensions;
-using ImageProcessing.Utility.DecimalMath.Real;
-using ImageProcessing.Utility.DecimalMath.SpecialFunctions;
+using ImageProcessing.App.Domain.Services.DecimalMath.Real;
+using ImageProcessing.App.Domain.Services.DecimalMath.Special;
 
 namespace ImageProcessing.App.Domain.Models.Distribution.Implementation.TwoParameter
 {
@@ -12,8 +12,8 @@ namespace ImageProcessing.App.Domain.Models.Distribution.Implementation.TwoParam
     /// </summary>
     public sealed class WeibullDistribution : IDistribution
     {
-        private readonly DecimalSpecial _special = new DecimalSpecial();
-        private readonly DecimalReal _real = new DecimalReal();
+        private readonly DecimalSpecial _special = new();
+        private readonly DecimalReal _real = new();
 
         private decimal _lambda;
         private decimal _k;

@@ -1,11 +1,11 @@
 
-using ImageProcessing.Utility.DecimalMath.Complex;
-using ImageProcessing.Utility.DecimalMath.Real;
+using ImageProcessing.App.Domain.Services.DecimalMath.Complex;
+using ImageProcessing.App.Domain.Services.DecimalMath.Real;
 using ImageProcessing.Utility.DecimalMath.UnitTests.CasesFactory;
 
 using NUnit.Framework;
 
-using static ImageProcessing.Utility.DecimalMath.Real.DecimalReal;
+using static ImageProcessing.App.Domain.Services.DecimalMath.Real.DecimalReal;
 using static ImageProcessing.Utility.DecimalMath.UnitTests.CasesFactory.ComplexDomainCasesFactory;
 
 using ComplexNumber = System.Numerics.Complex;
@@ -15,8 +15,8 @@ namespace ImageProcessing.Utility.DecimalMath.UnitTests.ComplexNumbers
     [TestFixture]
     public class DecimalMathComplexTests
     {
-        private readonly DecimalComplex _complex = new DecimalComplex();
-        private readonly DecimalReal _real = new DecimalReal();
+        private readonly DecimalComplex _complex = new();
+        private readonly DecimalReal _real = new();
 
         [Test, TestCaseSource(
              typeof(ComplexDomainCasesFactory),

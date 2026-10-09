@@ -1,11 +1,11 @@
 using System;
 
-using ImageProcessing.Utility.DecimalMath.Complex;
-using ImageProcessing.Utility.DecimalMath.Real;
+using ImageProcessing.App.Domain.Services.DecimalMath.Complex;
+using ImageProcessing.App.Domain.Services.DecimalMath.Real;
 
-using static ImageProcessing.Utility.DecimalMath.Real.DecimalReal;
+using static ImageProcessing.App.Domain.Services.DecimalMath.Real.DecimalReal;
 
-namespace ImageProcessing.Utility.DecimalMath.SpecialFunctions
+namespace ImageProcessing.App.Domain.Services.DecimalMath.Special
 {
     public class DecimalSpecial
     {

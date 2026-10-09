@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using ImageProcessing.App.Domain.Code.Constants;
 using ImageProcessing.App.Domain.Models.Distribution;
-using ImageProcessing.Utility.DecimalMath.Real;
+using ImageProcessing.App.Domain.Services.DecimalMath.Real;
 
 namespace ImageProcessing.App.Domain.Services.Distribution.Implementation
 {

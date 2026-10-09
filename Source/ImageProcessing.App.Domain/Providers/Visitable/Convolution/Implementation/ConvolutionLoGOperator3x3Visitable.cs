@@ -1,10 +1,9 @@
 using System;
 using System.Drawing;
 
-using ImageProcessing.App.Domain.Providers.Visitable.Convolution;
 using ImageProcessing.App.Domain.Providers.Visitors.Convolution;
 
-namespace ImageProcessing.App.Domain.Providers.Visitable.Convolution.LoGOperator3x3
+namespace ImageProcessing.App.Domain.Providers.Visitable.Convolution.Implementation
 {
     internal sealed class ConvolutionLoGOperator3x3Visitable : IConvolutionVisitable
     {
