@@ -1,260 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{917AC26D-ECBD-4968-83D0-4D29B692D8B9}</ProjectGuid>
+    <TargetFramework>net48</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ImageProcessing.App.Integration</RootNamespace>
     <AssemblyName>ImageProcessing.App.Integration</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
-    <IsCodedUITest>False</IsCodedUITest>
-    <TestProjectType>UnitTest</TestProjectType>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <LangVersion>14.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <IsTestProject>true</IsTestProject>
+    <IsPackable>false</IsPackable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <LangVersion>14.0</LangVersion>
-    <Nullable>enable</Nullable>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <LangVersion>14.0</LangVersion>
-    <Nullable>enable</Nullable>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Runtime" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ValueTuple" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Forms.DataVisualization" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Monolith\Domain\Factories\Implementation\ColorMatrixFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Factories\IColorMatrixFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Factories\Implementation\ConvoltuionFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Factories\IConvolutionFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Factories\Implementation\DistributionFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Factories\IDistributionFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Startup.cs" />
-    <Compile Include="Monolith\Domain\Factories\Implementation\MorphologyFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Factories\IMorphologyFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Factories\Implementation\RecommendationFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Factories\IRecommendationFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Factories\Implementation\RgbFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Factories\IRgbFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Factories\Implementation\RotationFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Factories\IRotationFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Factories\Implementation\ScalingFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Factories\IScalingFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Factories\Implementation\StructuringElementFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Factories\IStructuringElementFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Factories\Implementation\TransformationFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Factories\ITransformationFactoryWrapper.cs" />
-    <Compile Include="Monolith\Microkernel.MVP\Startup.cs" />
-    <Compile Include="Monolith\Presentation\Startup.cs" />
-    <Compile Include="Monolith\Presentation\Presenters\ColorMatrixPresenterWrapper.cs" />
-    <Compile Include="Monolith\Presentation\Presenters\ConvolutionPresenterWrapper.cs" />
-    <Compile Include="Monolith\Presentation\Presenters\DistributionPresenterWrapper.cs" />
-    <Compile Include="Monolith\Presentation\Presenters\MainMenuPresenterWrapper.cs" />
-    <Compile Include="Monolith\Presentation\Presenters\MainPresenterWrapper.cs" />
-    <Compile Include="Monolith\Presentation\Presenters\RgbPresenterWrapper.cs" />
-    <Compile Include="Monolith\Presentation\Presenters\RotationPresenterWrapper.cs" />
-    <Compile Include="Monolith\Presentation\Presenters\ScalingPresenterWrapper.cs" />
-    <Compile Include="Monolith\Presentation\Presenters\SettingsPresenterWrapper.cs" />
-    <Compile Include="Monolith\Presentation\Presenters\TransformationPresenterWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\Implementation\BitmapLuminanceProviderWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\IBitmapLuminanceProviderWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\Implementation\ConvolutionProviderWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\IConvolutionProviderWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\Implementation\MorphologyProviderWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\IMorphologyProviderWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\Implementation\RgbProviderWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\IRgbProviderWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\Implementation\RotationProviderWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\IRotationProviderWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\Implementation\ScalingProviderWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\IScalingProviderWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\Implementation\TransformationProviderWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\ITransformationProviderWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\Implementation\BitmapLuminanceVisitableFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\IBitmapLuminanceVisitableFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\Implementation\ConvolutionVisitableFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\IConvolutionVisitableFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\Implementation\HistogramVisitableFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\IHistogramVisitableFactoryWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\Implementation\BitmapLuminanceVisitorWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\IBitmapLuminanceVisitorWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\Implementation\ConvolutionVisitorWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\IConvolutionVisitorWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\Implementation\HistogramVisitorWrapper.cs" />
-    <Compile Include="Monolith\Domain\Provders\IHistogramVisitorWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\Implementation\BitmapCopyServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\IBitmapCopyServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\Implementation\BitmapServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\IBitmapServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\Implementation\CacheServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\ICacheServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\Implementation\ChartSeriesBuilderWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\IChartSeriesBuilderWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\Implementation\ColorMatrixServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\IColorMatrixServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\Implementation\ConvolutionServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\IConvolutionServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\Implementation\BitmapLuminanceServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\IBitmapLuminanceServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\Implementation\RandomVariableServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\IRandomVariableServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\Implementation\FileDialogServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\IFileDialogServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\Implementation\HistogramServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\IHistogramServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\Implementation\AsyncOperationLockerWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\IAsyncOperationLockerWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\Implementation\MorphologyServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\IMorphologyServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\INonBlockDialogServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\Implementation\RenderPipelineServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\IAwaitablePipelineServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\Implementation\QualityMeasureServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\IQualityMeasureServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\Implementation\StaTaskServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\IStaTaskServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\Implementation\UndoRedoServiceWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\IUndoRedoServiceWrapper.cs" />
-    <Compile Include="Monolith\UI\Services\Implementation\ColorMatrixFormEventBinderWrapper.cs" />
-    <Compile Include="Monolith\UI\Services\IColorMatrixFormEventBinderWrapper.cs" />
-    <Compile Include="Monolith\UI\Services\Implementation\ConvolutionFormEventBinderWrapper.cs" />
-    <Compile Include="Monolith\UI\Services\IConvolutionFormEventBinderWrapper.cs" />
-    <Compile Include="Monolith\UI\Services\Implementation\DistributionFormEventBinderWrapper.cs" />
-    <Compile Include="Monolith\UI\Services\IDistributionFormEventBinderWrapper.cs" />
-    <Compile Include="Monolith\UI\Services\Implementation\MainFormEventBinderWrapper.cs" />
-    <Compile Include="Monolith\UI\Services\IMainFormEventBinderWrapper.cs" />
-    <Compile Include="Monolith\UI\Services\Implementation\RgbFormEventBinderWrapper.cs" />
-    <Compile Include="Monolith\UI\Services\IRgbFormEventBinderWrapper.cs" />
-    <Compile Include="Monolith\UI\Services\Implementation\RotationFormEventBinderWrapper.cs" />
-    <Compile Include="Monolith\UI\Services\IRotationFormEventBinderWrapper.cs" />
-    <Compile Include="Monolith\UI\Services\Implementation\ScalingFormEventBinderWrapper.cs" />
-    <Compile Include="Monolith\UI\Services\IScalingFormEventBinderWrapper.cs" />
-    <Compile Include="Monolith\UI\Services\Implementation\SettingsFormEventBinderWrapper.cs" />
-    <Compile Include="Monolith\UI\Services\ISettingsFormEventBinderWrapper.cs" />
-    <Compile Include="Monolith\UI\Services\Implementation\TransformationFormEventBinderWrapper.cs" />
-    <Compile Include="Monolith\UI\Services\ITransformationFormEventBinderWrapper.cs" />
-    <Compile Include="Monolith\UI\Forms\ColorMatrixFormWrapper.cs" />
-    <Compile Include="Monolith\UI\Forms\RotationFormWrapper.cs" />
-    <Compile Include="Monolith\UI\Forms\ScalingFormWrapper.cs" />
-    <Compile Include="Monolith\UI\Forms\SettingsFormWrapper.cs" />
-    <Compile Include="Monolith\UI\Forms\TransformationFormWrapper.cs" />
-    <Compile Include="Monolith\UI\Factories\Implementation\MenuStateFactoryWrapper.cs" />
-    <Compile Include="Monolith\UI\Factories\IMenuStateFactoryWrapper.cs" />
-    <Compile Include="Monolith\UI\Startup.cs" />
-    <Compile Include="Code\Extensions\BitmapExtensions.cs" />
-    <Compile Include="Monolith\UI\Forms\ConvolutionFormWrapper.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Monolith\UI\Forms\DistributionFormWrapper.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Monolith\UI\Forms\RgbFormWrapper.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Monolith\Microkernel.MVP\MVP\Implementation\EventAggregatorWrapper.cs" />
-    <Compile Include="Monolith\Microkernel.MVP\MVP\IEventAggregatorWrapper.cs" />
-    <Compile Include="Monolith\UI\Forms\MainFormWrapper.cs" />
-    <Compile Include="Monolith\Microkernel.MVP\MVP\Implementation\SynchronizationContextWrapper.cs" />
-    <Compile Include="Monolith\Domain\Services\Implementation\NonBlockDialogServiceWrapper.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Code\Resources\Res.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Res.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Tests\BaseTest.cs" />
-    <Compile Include="Tests\MainPresenter\MainPresenterTest.cs" />
-  </ItemGroup>
   <ItemGroup>
     <Content Include="Code\Resources\Static\1920x1080frame.jpg" />
     <Content Include="Code\Resources\Static\2560x1440frame.jpg" />
     <Content Include="Code\Resources\Static\demo.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Code\Resources\Res.resx">
+    <EmbeddedResource Update="Code\Resources\Res.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Res.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.Domain.Win\ImageProcessing.App.Domain.Win.csproj">
-      <Project>{10952f91-a91a-1d87-0c3e-c5dd84e7b920}</Project>
-      <Name>ImageProcessing.App.Domain.Win</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.Domain\ImageProcessing.App.Domain.csproj">
-      <Project>{c5a26e22-4f93-d12b-4ac3-51cfcbb9d097}</Project>
-      <Name>ImageProcessing.App.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.Presentation\ImageProcessing.App.Presentation.csproj">
-      <Project>{c3a187f6-5cae-2147-b72c-97d2ef8f52db}</Project>
-      <Name>ImageProcessing.App.Presentation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.UI\ImageProcessing.App.UI.csproj">
-      <Project>{4f6224d0-16fc-9d45-4580-ccc6a79bc9e8}</Project>
-      <Name>ImageProcessing.App.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\ImageProcessing.Microkernel.MVP\ImageProcessing.Microkernel.MVP.csproj">
-      <Project>{e547bf84-7467-4aa0-a836-84beab772924}</Project>
-      <Name>ImageProcessing.Microkernel.MVP</Name>
-    </ProjectReference>
+    <None Update="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Castle.Core">
-      <Version>5.1.1</Version>
-    </PackageReference>
-    <PackageReference Include="NSubstitute">
-      <Version>6.2.0</Version>
-    </PackageReference>
-    <PackageReference Include="NUnit">
-      <Version>5.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="NUnit3TestAdapter">
-      <Version>6.3.0</Version>
-    </PackageReference>
+    <ProjectReference Include="..\..\Source\ImageProcessing.App.UI\ImageProcessing.App.UI.csproj" />
   </ItemGroup>
-  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\packages\Serilog.4.3.0\build\Serilog.targets" Condition="Exists('..\..\packages\Serilog.4.3.0\build\Serilog.targets')" />
+  <ItemGroup>
+    <PackageReference Include="Castle.Core" Version="5.1.1" />
+    <PackageReference Include="NSubstitute" Version="6.2.0" />
+    <PackageReference Include="NUnit" Version="5.0.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="6.3.0" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+  </ItemGroup>
 </Project>
