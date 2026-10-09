@@ -2,8 +2,7 @@ using System;
 
 using ImageProcessing.App.Domain.Code.Enums;
 using ImageProcessing.App.Domain.Win.Providers.Visitable.Histogram;
-using ImageProcessing.App.Domain.Win.Providers.Visitable.Histogram.Cdf;
-using ImageProcessing.App.Domain.Win.Providers.Visitable.Histogram.Pmf;
+using ImageProcessing.App.Domain.Win.Providers.Visitable.Histogram.Implementation;
 
 namespace ImageProcessing.App.Domain.Win.Providers.VisitableFactory.Histogram.Implementation
 {

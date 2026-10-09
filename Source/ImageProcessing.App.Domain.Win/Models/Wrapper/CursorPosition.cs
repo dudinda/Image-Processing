@@ -1,9 +1,9 @@
 using System;
 using System.Drawing;
 
-using ImageProcessing.Utility.Interop.Services.Api;
+using ImageProcessing.App.Domain.Win.Services.Api;
 
-namespace ImageProcessing.Utility.Interop.Models.Wrapper
+namespace ImageProcessing.App.Domain.Win.Models.Wrapper
 {
     /// <summary>
     /// Provides a wrapper over the native windows kernel

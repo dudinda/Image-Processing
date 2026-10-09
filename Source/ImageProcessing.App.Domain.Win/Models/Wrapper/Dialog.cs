@@ -3,7 +3,7 @@ using System.Text;
 
 using ImageProcessing.App.Domain.Code.Extensions;
 using ImageProcessing.App.Domain.Win.Code.Enums;
-using ImageProcessing.Utility.Interop.Services.Api;
+using ImageProcessing.App.Domain.Win.Services.Api;
 
 namespace ImageProcessing.App.Domain.Win.Models.Wrapper
 {

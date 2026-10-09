@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net4.8</TargetFramework>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>14.0</LangVersion>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>

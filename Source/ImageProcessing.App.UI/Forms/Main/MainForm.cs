@@ -2,9 +2,10 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
+using ImageProcessing.App.Domain.Services.UndoRedo;
+using ImageProcessing.App.Domain.Win.Models.Wrapper;
 using ImageProcessing.App.Presentation.Code.Enums;
 using ImageProcessing.App.Presentation.Views;
-using ImageProcessing.App.Domain.Services.UndoRedo;
 using ImageProcessing.App.UI.Models.Controls;
 using ImageProcessing.App.UI.Properties;
 using ImageProcessing.App.UI.Services.Factories.MenuState;
@@ -12,7 +13,6 @@ using ImageProcessing.App.UI.Services.FormEventBinders.Main;
 using ImageProcessing.App.UI.Services.FormExposers;
 
 using MetroFramework.Controls;
-using ImageProcessing.Utility.Interop.Models.Wrapper;
 
 namespace ImageProcessing.App.UI.Forms.Main
 {

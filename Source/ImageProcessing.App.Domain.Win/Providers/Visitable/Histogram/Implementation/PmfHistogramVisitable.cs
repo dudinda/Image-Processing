@@ -4,9 +4,9 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.App.Domain.Win.Providers.Visitors.Histogram;
 
-namespace ImageProcessing.App.Domain.Win.Providers.Visitable.Histogram.Cdf
+namespace ImageProcessing.App.Domain.Win.Providers.Visitable.Histogram.Implementation
 {
-    public sealed class CdfHistogramVisitable : IHistogramVisitable
+    public sealed class PmfHistogramVisitable : IHistogramVisitable
     {
         private IHistogramVisitor? _visitor;
 
@@ -17,6 +17,6 @@ namespace ImageProcessing.App.Domain.Win.Providers.Visitable.Histogram.Cdf
         }
 
         public (Series Series, decimal Max) BuildHistogram(Bitmap bmp)
-            => _visitor?.BuildCdf(bmp) ?? throw new ArgumentException(nameof(_visitor));
+            => _visitor?.BuildPmf(bmp) ?? throw new ArgumentNullException(nameof(_visitor));   
     }
 }

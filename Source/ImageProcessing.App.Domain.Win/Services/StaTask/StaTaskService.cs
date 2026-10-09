@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
+using ImageProcessing.App.Domain.Services.StaTask;
 using ImageProcessing.App.Domain.Win.Models.Options;
 using ImageProcessing.App.Domain.Win.Models.Wrapper;
 
-namespace ImageProcessing.App.Domain.Services.StaTask
+namespace ImageProcessing.App.Domain.Win.Services.StaTask
 {
     /// <inheritdoc cref="IStaTaskService"/>
     public sealed class StaTaskService : IStaTaskService

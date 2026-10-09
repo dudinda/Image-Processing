@@ -1,9 +1,9 @@
 using System;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Integration.Monolith.Domain.Services.StaTask.Interface;
-using ImageProcessing.App.Domain.Services.StaTask;
 using ImageProcessing.App.Domain.Win.Models.Options;
+using ImageProcessing.App.Domain.Win.Services.StaTask;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.StaTask.Interface;
 
 namespace ImageProcessing.App.Integration.Monolith.Domain.Services.StaTask.Implementation
 {

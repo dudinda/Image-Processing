@@ -1,4 +1,4 @@
-using ImageProcessing.Utility.Interop.Services.Api;
+using ImageProcessing.App.Domain.Win.Services.Api;
 
 namespace ImageProcessing.App.Domain.Win.Models.Wrapper
 {

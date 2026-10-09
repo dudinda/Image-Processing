@@ -77,6 +77,7 @@ using ImageProcessing.App.Domain.Win.Services.Histogram;
 using ImageProcessing.App.Domain.Win.Services.Histogram.Implementation;
 using ImageProcessing.App.Domain.Win.Services.QualityMeasure;
 using ImageProcessing.App.Domain.Win.Services.QualityMeasure.Implementation;
+using ImageProcessing.App.Domain.Win.Services.StaTask;
 using ImageProcessing.Microkernel.MVP.Models;
 using ImageProcessing.Microkernel.MVP.Services.Providers;
 
