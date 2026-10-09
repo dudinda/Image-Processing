@@ -92,7 +92,7 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Tests
                 Arg.Any<SaveAsFileDialogEventArgs>());
             _presenter.Reference.Received().GetCopy();
             _presenter.Dialog.Received().SaveFileAsDialog(
-                Arg.Any<Bitmap>());
+                Arg.Is<Bitmap>(arg => arg.SameAs(Res._1920x1080frame)));
         }
 
 

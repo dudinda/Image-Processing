@@ -24,10 +24,10 @@ namespace ImageProcessing.App.Presentation.UnitTests.Fakes.Services
 
         public virtual Task<(Bitmap Image, string Path)> OpenFileDialog()
         {
-            var args = Sta.StartSTATask(() =>
+            var args = Sta.StartSTATask(async () =>
             {
-                var args = Service.OpenFileDialog().Result;
-                return Task.FromResult(args);
+                var args = await Service.OpenFileDialog();
+                return args;
             });
 
             return args.Result;
@@ -35,10 +35,9 @@ namespace ImageProcessing.App.Presentation.UnitTests.Fakes.Services
 
         public virtual Task SaveFileAsDialog(Bitmap src)
         {
-            var task = Sta.StartSTATask(() =>
+            var task = Sta.StartSTATask(async () =>
             {
-                Service.SaveFileAsDialog(src);
-                return Task.CompletedTask;
+                await  Service.SaveFileAsDialog(src);
             });
 
             return task.Result;
