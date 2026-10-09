@@ -55,31 +55,55 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Tests
             _form.OpenFileMenu.PerformClick();
             var view = _form as IMainView;
 
+            view.Received().SetCursor(
+                Arg.Is<CursorType>(arg => arg == CursorType.Wait));
+
+            _presenter.Pipeline.Received().Register(Arg.Any<PipelineBlock>());
+            _presenter.Pipeline.Received().Render();
+            _presenter.Reference.Received().SetCopy(
+                Arg.Is<Bitmap>(arg => arg.SameAs(Res._1920x1080frame)));
+
+            view.Received().GetImageCopy();
+            view.Received().AddToUndoRedo(
+                Arg.Is<Bitmap>(arg => arg.SameAs(UI.Properties.Resources.DefaultImage)),
+                Arg.Is<UndoRedoAction>(arg => arg == UndoRedoAction.Undo));
+            view.Received().SetImageCopy(
+                Arg.Is<Bitmap>(arg => arg.SameAs(Res._1920x1080frame)));
+            view.Received().SetImage(
+                Arg.Is<Bitmap>(arg => arg.SameAs(Res._1920x1080frame)));
+            view.Received().SetImageCenter(
+                Arg.Is<Size>(arg => arg == Res._1920x1080frame.Size));
+            view.Received().Refresh();
+            view.Received().ResetTrackBarValue();
+
+            _presenter.Pipeline.Received().Any();
+
+            view.Received().SetCursor(
+                Arg.Is<CursorType>(arg => arg == CursorType.Default));
+
+        }
+
+        [Test]
+        public void RendererRecieveBlockOrderTest()
+        {
+            _form.OpenFileMenu.PerformClick();
+            var view = _form as IMainView;
+
             Received.InOrder(() =>
             {
-                view.Received().SetCursor(
-                    Arg.Is<CursorType>(arg => arg == CursorType.Wait));
-
-                _presenter.Pipeline.Received().Register(Arg.Any<PipelineBlock>());
-                _presenter.Pipeline.Received().Render();
-                _presenter.Reference.Received().SetCopy(
-                    Arg.Is<Bitmap>(arg => arg == Res._1920x1080frame));
-
-                view.Received().GetImageCopy();
-                view.Received().AddToUndoRedo(
-                    Arg.Is<Bitmap>(arg => arg == Res._1920x1080frame),
-                    Arg.Is<UndoRedoAction>(arg => arg == UndoRedoAction.Undo));
-                view.Received().SetImageCopy(Arg.Any<Bitmap>());
-                view.Received().SetImage(Arg.Any<Bitmap>());
-                view.SetImageCenter(
-                    Arg.Is<Size>(arg => arg == Res._1920x1080frame.Size));
-                view.Received().Refresh();
-                view.Received().ResetTrackBarValue();
-
-                _presenter.Pipeline.Received().Any();
-
-                view.Received().SetCursor(
-                    Arg.Is<CursorType>(arg => arg == CursorType.Default));
+                view.SetCursor(Arg.Any<CursorType>());
+                _presenter.Pipeline.Register(Arg.Any<PipelineBlock>());
+                _presenter.Pipeline.Render();
+                _presenter.Reference.SetCopy(Arg.Any<Bitmap>());
+                view.GetImageCopy();
+                view.AddToUndoRedo(Arg.Any<Bitmap>(), Arg.Any<UndoRedoAction>());
+                view.SetImageCopy(Arg.Any<Bitmap>());
+                view.SetImage(Arg.Any<Bitmap>());
+                view.SetImageCenter(Arg.Any<Size>());
+                view.Refresh();
+                view.ResetTrackBarValue();
+                _presenter.Pipeline.Any();
+                view.SetCursor(Arg.Any<CursorType>());
             });
         }
 
