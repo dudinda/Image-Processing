@@ -74,7 +74,6 @@ namespace ImageProcessing.App.Presentation.Presenters
                             (bmp) => PaintBlock(bmp));
 
                     _pipeline.Register(block);
-                    await _pipeline.Render().ConfigureAwait(true);
                     
                 }
             }

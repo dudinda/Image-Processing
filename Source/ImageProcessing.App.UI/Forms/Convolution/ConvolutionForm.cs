@@ -63,6 +63,9 @@ namespace ImageProcessing.App.UI.Forms.Convolution
             base.Close();
         }
 
+        public new bool Focus()
+           => Read<bool>(() => base.Focus());
+
         /// <inheritdoc/>
         public ConvKernel Dropdown
         {

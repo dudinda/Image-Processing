@@ -153,6 +153,9 @@ namespace ImageProcessing.App.UI.Forms.ColorMatrix
             base.Close();
         }
 
+        public new bool Focus()
+           => Read<bool>(() => base.Focus());
+
         public void EnableControls(bool isEnabled)
         {
             Write(() => ColorMatrixButtonPanel.Enable(isEnabled));

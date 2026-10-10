@@ -17,8 +17,9 @@ namespace ImageProcessing.App.Integration.Monolith.Domain.Services.Pipeline.Impl
         public virtual bool Any()
             => _service.Any();
 
-        public virtual Task<object> Render()
-            => Task.FromResult(_service.Render().Result);
+        public virtual void BeginRender()
+            => _service.BeginRender();
+      
 
         public virtual void Dispose()
             => _service.Dispose();

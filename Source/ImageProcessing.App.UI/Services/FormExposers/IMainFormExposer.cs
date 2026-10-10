@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -112,5 +113,7 @@ namespace ImageProcessing.App.UI.Services.FormExposers
 
         ///<inheritdoc cref="FormClosedEventHandler"/>
         event FormClosedEventHandler FormClosed;
+
+        event EventHandler Load;
     }
 }

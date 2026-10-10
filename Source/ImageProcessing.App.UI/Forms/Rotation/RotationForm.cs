@@ -66,6 +66,9 @@ namespace ImageProcessing.App.UI.Forms.Rotation
             base.Close();
         }
 
+        public new bool Focus()
+           => Read<bool>(() => base.Focus());
+
         public RotationMethod Dropdown
         {
             get => RotationComboBox

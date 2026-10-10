@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 
 namespace ImageProcessing.App.Domain.Services.Pipeline
 {
@@ -7,6 +6,6 @@ namespace ImageProcessing.App.Domain.Services.Pipeline
     {
         void Register(IPipelineBlock block);
         bool Any();
-        Task<object> Render();
+        void BeginRender();
     }
 }

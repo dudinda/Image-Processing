@@ -64,6 +64,9 @@ namespace ImageProcessing.App.UI.Forms.Scaling
             base.Close();
         }
 
+        public new bool Focus()
+           => Read<bool>(() => base.Focus());
+
         public (string, string) Parameters
             => (XScaleTextBox.Text, YScaleTextBox.Text);
 

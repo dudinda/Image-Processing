@@ -116,6 +116,9 @@ namespace ImageProcessing.App.UI.Forms.Rgb
             base.Close();
         }
 
+        public new bool Focus()
+           => Read<bool>(() => base.Focus());
+
         public void EnableControls(bool isEnabled)
         {
             Write(() => RgbButtonsPanel.Enable(isEnabled));

@@ -24,7 +24,8 @@ namespace ImageProcessing.App.Presentation.Presenters
         ISubscriber<AttachBlockToRendererEventArgs>, ISubscriber<OpenFileDialogEventArgs>,
         ISubscriber<SaveAsFileDialogEventArgs>, ISubscriber<SetSourceEventArgs>,
         ISubscriber<SaveWithoutFileDialogEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
-        ISubscriber<UndoRedoEventArgs>, ISubscriber<FormIsClosedEventArgs>
+        ISubscriber<UndoRedoEventArgs>, ISubscriber<FormIsClosedEventArgs>,
+        ISubscriber<FormIsLoadedEventArgs>
     {
         private readonly ILogger<MainPresenter> _logger;
         private readonly IBitmapCopyService _reference;
@@ -41,6 +42,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             _dialog = dialog;
             _reference = reference;
             _pipeline = pipeline;
+            _pipeline.BeginRender();
         }
 
         public override void Run()
@@ -60,12 +62,13 @@ namespace ImageProcessing.App.Presentation.Presenters
                 if (result.Image != null)
                 {
                     View.LoadedImage = result.Image;
-
-                    await Render(publisher,
-                        block: new PipelineBlock(result.Image)
+                    View.SetCursor(CursorType.Wait);
+                    _pipeline.Register(
+                        new PipelineBlock(result.Image)
                             .Add<Bitmap>(
                                 (bmp) => View.SetPathToFile(result.Path))
-                    ).ConfigureAwait(true);
+                            .Add<Bitmap>(
+                                (bmp) => RenderBlock(publisher, bmp)));
 
                     View.SetMenuState(MenuBtnState.ImageLoaded);
                 }
@@ -120,9 +123,10 @@ namespace ImageProcessing.App.Presentation.Presenters
             {
                 if (!View.ImageIsDefault && e.Block is IPipelineBlock block)
                 {
-                    await Render(publisher, block).ConfigureAwait(true);
-
-                    Aggregator.PublishFrom(publisher, new RestoreFocusEventArgs());
+                    View.SetCursor(CursorType.Wait);
+                    _pipeline.Register(block
+                            .Add<Bitmap>(
+                                (bmp) => RenderBlock(publisher, bmp)));
                 }
             }
             catch (OperationCanceledException ex)
@@ -149,7 +153,11 @@ namespace ImageProcessing.App.Presentation.Presenters
 
                 Enum.TryParse<MenuBtnState>(copy.Tag?.ToString(), out var state);
 
-                await Render(publisher, new PipelineBlock(copy), action).ConfigureAwait(true);
+                View.SetCursor(CursorType.Wait);
+                _pipeline.Register(
+                        new PipelineBlock(copy)
+                            .Add<Bitmap>(
+                                (bmp) => RenderBlock(publisher, bmp)));
 
                 if(state != MenuBtnState.ImageEmpty)
                 {
@@ -185,9 +193,11 @@ namespace ImageProcessing.App.Presentation.Presenters
         {
             try
             {
-                await Render(publisher,
-                        block: new PipelineBlock(new Bitmap(View.LoadedImage))
-                ).ConfigureAwait(true);
+                View.SetCursor(CursorType.Wait);
+                _pipeline.Register(
+                    new PipelineBlock(new Bitmap(View.LoadedImage))
+                        .Add<Bitmap>(
+                            (bmp) => RenderBlock(publisher, bmp)));
             }
             catch (Exception ex)
             {
@@ -210,9 +220,23 @@ namespace ImageProcessing.App.Presentation.Presenters
             return Task.CompletedTask;
         }
 
-        private void RenderBlock(object publisher, Bitmap bmp, UndoRedoAction action)
+        public Task OnEventHandler(object publisher, FormIsLoadedEventArgs e)
         {
-            _reference.SetCopy(bmp).Wait();
+            try
+            {
+                _pipeline.BeginRender();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+
+            return Task.CompletedTask;
+        }
+
+        private async Task RenderBlock(object publisher, Bitmap bmp, UndoRedoAction action = UndoRedoAction.Undo)
+        {
+            await _reference.SetCopy(bmp);
 
             View.AddToUndoRedo((Bitmap)View.GetImageCopy(), action);
             View.SetImageCopy(bmp);
@@ -226,25 +250,14 @@ namespace ImageProcessing.App.Presentation.Presenters
                 View.GetImageCopy().Tag = tag;
             }
 
-            Aggregator.PublishFromAll(publisher, new EnableControlEventArgs(tag));
-            Aggregator.PublishFromAll(publisher, new ContainerUpdatedEventArgs(bmp));
-        }
-
-        private async Task Render(object publisher, IPipelineBlock block,
-            UndoRedoAction action = UndoRedoAction.Undo)
-        {
-            View.SetCursor(CursorType.Wait);
-
-            _pipeline.Register(
-                block.Add<Bitmap>(
-                    (bmp) => RenderBlock(publisher, bmp, action)));
-
-            await _pipeline.Render().ConfigureAwait(true);
-
-            if (!_pipeline.Any())
+            if(!_pipeline.Any())
             {
                 View.SetCursor(CursorType.Default);
             }
+
+            Aggregator.PublishFromAll(publisher, new EnableControlEventArgs(tag));
+            Aggregator.PublishFromAll(publisher, new ContainerUpdatedEventArgs(bmp));
+            Aggregator.PublishFrom(publisher, new RestoreFocusEventArgs());
         }
 
         private void OnError(object publisher, string error)

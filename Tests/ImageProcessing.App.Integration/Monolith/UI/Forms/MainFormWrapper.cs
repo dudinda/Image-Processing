@@ -60,6 +60,18 @@ namespace ImageProcessing.App.Presentation.UnitTests.Fakes.Form
             }
         }
 
+        public virtual event EventHandler Load
+        {
+            add
+            {
+                _form.Load += value;
+            }
+            remove
+            {
+                _form.Load -= value;
+            }
+        }
+
 
         public virtual Image SourceImage
         {

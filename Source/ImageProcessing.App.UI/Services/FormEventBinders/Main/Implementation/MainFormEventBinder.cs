@@ -83,6 +83,9 @@ namespace ImageProcessing.App.UI.Services.FormEventBinders.Main.Implementation
 
             source.SetSourceButton.Click += (sender, args)
                 => _aggregator.PublishFrom(source, new SetSourceEventArgs());
+
+            source.Load += (sender, args)
+                 => _aggregator.PublishFrom(source, new FormIsLoadedEventArgs());
         }
 
         public bool ProcessCmdKey(IMainFormExposer view, Keys keyData)

@@ -1,4 +1,6 @@
 using System.Drawing;
+using System.Threading;
+using System.Threading.Tasks;
 
 using ImageProcessing.App.Domain.Services.Pipeline.Implementation;
 using ImageProcessing.App.Integration.Code.Resources;
@@ -32,34 +34,42 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Tests
         }
 
         [Test]
-        public void FileOpenMenuClick()
+        [Timeout(5000)]
+        public async Task FileOpenMenuClick()
         {
             _form.OpenFileMenu.PerformClick();
-
-            _presenter.Received().OnEventHandler(
+            var view = _presenter.View;
+            await _presenter.Received().OnEventHandler(
                 Arg.Is<object>(arg => arg == _form),
                 Arg.Any<OpenFileDialogEventArgs>());
 
-            _presenter.Dialog.Received().OpenFileDialog();
-            
-            var image = _form.SourceImage as Bitmap;
+            await _presenter.Dialog.Received().OpenFileDialog();
+
+            while(view.SourceImage == null)
+            {
+                await Task.Delay(300);
+            }
+            var image = view.SourceImage as Bitmap;
 
             Assert.IsTrue(image != null);
             Assert.IsTrue(image.SameAs(Res._1920x1080frame));
         }
 
         [Test]
-        public void RendererRecieveBlockTest()
+        [Timeout(5000)]
+        public async Task RendererRecieveBlockTest()
         {
             _form.OpenFileMenu.PerformClick();
             var view = _presenter.View;
-
+            while (view.SourceImage == null)
+            {
+                await Task.Delay(300);
+            }
             view.Received().SetCursor(
                 Arg.Is<CursorType>(arg => arg == CursorType.Wait));
 
             _presenter.Pipeline.Received().Register(Arg.Any<PipelineBlock>());
-            _presenter.Pipeline.Received().Render();
-            _presenter.Reference.Received().SetCopy(
+            await _presenter.Reference.Received().SetCopy(
                 Arg.Is<Bitmap>(arg => arg.SameAs(Res._1920x1080frame)));
 
             view.Received().GetImageCopy();

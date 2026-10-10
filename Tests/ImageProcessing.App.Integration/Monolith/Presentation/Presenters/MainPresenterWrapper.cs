@@ -19,7 +19,8 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
         ISubscriber<AttachBlockToRendererEventArgs>, ISubscriber<OpenFileDialogEventArgs>,
         ISubscriber<SaveAsFileDialogEventArgs>, ISubscriber<SetSourceEventArgs>,
         ISubscriber<SaveWithoutFileDialogEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
-        ISubscriber<UndoRedoEventArgs>, ISubscriber<FormIsClosedEventArgs>
+        ISubscriber<UndoRedoEventArgs>, ISubscriber<FormIsClosedEventArgs>,
+        ISubscriber<FormIsLoadedEventArgs>
     {
         private readonly MainPresenter _presenter;
 
@@ -104,6 +105,11 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
         }
 
         public virtual Task OnEventHandler(object publisher, FormIsClosedEventArgs e)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task OnEventHandler(object publisher, FormIsLoadedEventArgs e)
         {
             return Task.CompletedTask;
         }

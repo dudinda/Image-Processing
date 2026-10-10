@@ -75,6 +75,9 @@ namespace ImageProcessing.App.UI.Forms.Transformation
             base.Close();
         }
 
+        public new bool Focus()
+           => Read<bool>(() => base.Focus());
+
         public void EnableControls(bool isEnabled)
         {
             Write(() => TransformationButtonPanel.Enable(isEnabled));

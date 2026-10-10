@@ -1,26 +1,33 @@
-using System;
 using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 
+using MessageLoop.Common.Models.LongRun;
+using MessageLoop.Common.Services.LongRun;
 using MessageLoop.Service.Services.Message;
 
 namespace ImageProcessing.App.Domain.Services.Pipeline.Implementation
 {
     public class RenderPipeline : IRenderPipeline
     {
+        private readonly ILongRunService<LongRunItem> _service;
         private readonly IMessageService<Task<object>> _message;
         private readonly Channel<Task<object>> _channel;
         private readonly CancellationTokenSource _source = new ();
 
         public RenderPipeline(
             IMessageService<Task<object>> message,
+            ILongRunService<LongRunItem> service,
             BoundedChannelOptions options)
         {
             _message = message;
             _channel = Channel.CreateBounded<Task<object>>(options);
             _message.Add(nameof(RenderPipeline), _channel);
+            _service = service;
         }
+
+        public bool Any()
+            => _channel.Reader.Count > 0;
 
         public void Register(IPipelineBlock output)
         {
@@ -29,24 +36,24 @@ namespace ImageProcessing.App.Domain.Services.Pipeline.Implementation
             _message.SendMessage(nameof(RenderPipeline), task);
         }
 
-        public async Task<object> Render()
+        public void BeginRender()
         {
-            if (_channel.Reader.TryRead(out var task))
+            _service.PutTask(async (token) =>
             {
-                return await task.ConfigureAwait(false);
-            }
+                var source = CancellationTokenSource.CreateLinkedTokenSource(_source.Token);
+                await foreach(var task in _channel.Reader.ReadAllAsync(source.Token))
+                {
+                    await task.ConfigureAwait(false);
+                }
 
-            throw new InvalidOperationException();
+                return Task.CompletedTask;
+            });
         }
-
-        public bool Any()
-            => _channel.Reader.Count > 0;
 
         public void Dispose()
         {
-            _source.Cancel();
-            _message.Dispose();
             _source.Dispose();
+            _message.Dispose();
         }
     }
 }

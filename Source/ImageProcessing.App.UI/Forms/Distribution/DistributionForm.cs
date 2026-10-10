@@ -132,6 +132,9 @@ namespace ImageProcessing.App.UI.Forms.Distribution
             base.Close();
         }
 
+        public new bool Focus()
+           => Read<bool>(() => base.Focus());
+
         public void EnableControls(bool isEnabled)
         {
             Write(() => DistributionButtonPanel.Enable(isEnabled));
