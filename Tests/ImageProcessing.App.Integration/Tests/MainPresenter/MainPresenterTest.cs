@@ -59,6 +59,7 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Tests
         [Timeout(5000)]
         public async Task RendererRecieveBlockTest()
         {
+            _presenter.Pipeline.BeginRender();
             _form.OpenFileMenu.PerformClick();
             var view = _presenter.View;
             while (view.SourceImage == null)

@@ -20,7 +20,6 @@ namespace ImageProcessing.App.Integration.Monolith.Domain.Services.Pipeline.Impl
         public virtual void BeginRender()
             => _service.BeginRender();
       
-
         public virtual void Dispose()
             => _service.Dispose();
 

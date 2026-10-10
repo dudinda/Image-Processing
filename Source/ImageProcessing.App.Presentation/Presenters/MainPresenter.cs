@@ -42,7 +42,6 @@ namespace ImageProcessing.App.Presentation.Presenters
             _dialog = dialog;
             _reference = reference;
             _pipeline = pipeline;
-            _pipeline.BeginRender();
         }
 
         public override void Run()
