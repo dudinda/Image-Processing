@@ -32,7 +32,12 @@ namespace ImageProcessing.App.Domain.Win.Services.FileDialog
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     var fileName = dialog.FileName;
-                    return await Task.Run(() =>(new Bitmap(fileName), fileName)).ConfigureAwait(false);
+                    return await Task.Run(() =>{
+                        using var stream = new MemoryStream(File.ReadAllBytes(fileName));
+                        using var bitmap = new Bitmap(stream);
+                        var copy = new Bitmap(bitmap);
+                        return (copy, fileName);
+                    }).ConfigureAwait(false);
                 }
 
                 return await Task.FromResult<(Bitmap?, string)>(default).ConfigureAwait(false);
