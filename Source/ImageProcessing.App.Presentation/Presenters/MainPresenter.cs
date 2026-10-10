@@ -2,8 +2,6 @@ using System;
 using System.Drawing;
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Domain.Providers.Rotation;
-using ImageProcessing.App.Domain.Providers.Scaling;
 using ImageProcessing.App.Domain.Services.BitmapCopyReference.Interface;
 using ImageProcessing.App.Domain.Services.FileDialog;
 using ImageProcessing.App.Domain.Services.Pipeline;
@@ -26,12 +24,9 @@ namespace ImageProcessing.App.Presentation.Presenters
         ISubscriber<AttachBlockToRendererEventArgs>, ISubscriber<OpenFileDialogEventArgs>,
         ISubscriber<SaveAsFileDialogEventArgs>, ISubscriber<SetSourceEventArgs>,
         ISubscriber<SaveWithoutFileDialogEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
-        ISubscriber<TrackBarEventArgs>, ISubscriber<UndoRedoEventArgs>,
-        ISubscriber<FormIsClosedEventArgs>
+        ISubscriber<UndoRedoEventArgs>, ISubscriber<FormIsClosedEventArgs>
     {
         private readonly ILogger<MainPresenter> _logger;
-        private readonly IScalingProvider _scale;
-        private readonly IRotationProvider _rotation;
         private readonly IBitmapCopyService _reference;
         private readonly IRenderPipeline _pipeline;
         private readonly INonBlockDialogService _dialog;
@@ -40,14 +35,10 @@ namespace ImageProcessing.App.Presentation.Presenters
             IBitmapCopyService reference,
             INonBlockDialogService dialog,
             IRenderPipeline pipeline,
-            IRotationProvider rotation,
-            IScalingProvider scale,
             ILogger<MainPresenter> logger)
         {
-            _scale = scale;
             _logger = logger;
             _dialog = dialog;
-            _rotation = rotation;
             _reference = reference;
             _pipeline = pipeline;
         }
@@ -55,6 +46,7 @@ namespace ImageProcessing.App.Presentation.Presenters
         public override void Run()
         {
             Controller.Run<MainMenuPresenter>();
+            Controller.Run<MainTrackbarPresenter>();
             base.Run();
         }
 
@@ -145,41 +137,6 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
         }
 
-        /// <inheritdoc cref="TrackBarEventArgs"/>
-        public async Task OnEventHandler(object publisher, TrackBarEventArgs e)
-        {
-            var container = ImageContainer.Unknown;
-
-            try
-            {
-                container = e.Container;
-
-                if (!View.ImageIsDefault)
-                {
-                    var scale = View.GetZoomFactor();
-                    var rad   = View.GetRotationFactor();
-
-                    var copy = await _reference.GetCopy().ConfigureAwait(true);
-
-                    await Paint(
-                        new PipelineBlock(copy)
-                            .Add<Bitmap, Bitmap>(
-                                (bmp) => _scale.Scale(bmp, scale, scale))
-                            .Add<Bitmap, Bitmap>(
-                                (bmp) => _rotation.Rotate(bmp, rad))
-                     ).ConfigureAwait(true);
-                }
-            }
-            catch(ArgumentException ex)
-            {
-                View.SetDefaultImage();
-            }
-            catch(Exception ex)
-            {
-                OnError(publisher, Errors.Zoom);
-                _logger.LogError(ex.Message);
-            }
-        }
 
         /// <inheritdoc cref="UndoRedoEventArgs"/>
         public async Task OnEventHandler(object publisher, UndoRedoEventArgs e)
@@ -271,23 +228,6 @@ namespace ImageProcessing.App.Presentation.Presenters
 
             Aggregator.PublishFromAll(publisher, new EnableControlEventArgs(tag));
             Aggregator.PublishFromAll(publisher, new ContainerUpdatedEventArgs(bmp));
-        }
-
-        private void PaintBlock(Bitmap bmp)
-        {
-            var size = bmp.Size;
-            View.SetImage(bmp);
-            View.SetImageCenter(size);
-            View.Refresh();
-        }
-
-        private async Task Paint(IPipelineBlock block)
-        {
-            _pipeline.Register(
-                block.Add<Bitmap>(
-                    (bmp) => PaintBlock(bmp)));
-
-            await _pipeline.Render().ConfigureAwait(true);
         }
 
         private async Task Render(object publisher, IPipelineBlock block,

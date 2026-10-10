@@ -12,7 +12,6 @@ using ImageProcessing.App.Integration.Monolith.Domain.Services.Pipeline.Interfac
 using ImageProcessing.App.Integration.Monolith.Presentation.Presenters;
 using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.ColorMatrix.Interface;
 using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Rgb.Interface;
-using ImageProcessing.App.Presentation.Presenters;
 using ImageProcessing.Microkernel.MVP.Models;
 using ImageProcessing.Microkernel.MVP.Services.Providers;
 
@@ -35,14 +34,19 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation
                         builder.Resolve<IBitmapCopyServiceWrapper>(),
                         builder.Resolve<INonBlockDialogServiceWrapper>(),
                         builder.Resolve<IAwaitablePipelineServiceWrapper>(),
-                        builder.Resolve<ILoggerFactory>(),
-                        builder.Resolve<IScalingProviderWrapper>(),
-                        builder.Resolve<IRotationProviderWrapper>()))
+                        builder.Resolve<ILoggerFactory>()))
                 .RegisterTransient(factory =>
                     Substitute.ForPartsOf<MainMenuPresenterWrapper>(
                         builder.Resolve<IBitmapCopyServiceWrapper>(),
                         builder.Resolve<IAwaitablePipelineServiceWrapper>(),
                         builder.Resolve<ILoggerFactory>()))
+                .RegisterTransient(factory =>
+                    Substitute.ForPartsOf<MainTrackbarPresenterWrapper>(
+                        builder.Resolve<ILoggerFactory>(),
+                        builder.Resolve<IBitmapCopyServiceWrapper>(),
+                        builder.Resolve<IAwaitablePipelineServiceWrapper>(),
+                        builder.Resolve<IScalingProviderWrapper>(),
+                        builder.Resolve<IRotationProviderWrapper>()))
                 .RegisterTransient(factory =>
                     Substitute.ForPartsOf<ColorMatrixPresenterWrapper>(
                         builder.Resolve<IBitmapCopyServiceWrapper>(),

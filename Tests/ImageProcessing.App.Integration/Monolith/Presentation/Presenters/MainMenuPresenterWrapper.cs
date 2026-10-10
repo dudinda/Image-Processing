@@ -4,7 +4,6 @@ using ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Interf
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Pipeline.Interface;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Show;
-using ImageProcessing.App.Presentation.Presenters;
 using ImageProcessing.App.Presentation.ViewModels;
 using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
@@ -20,10 +19,8 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
         ISubscriber<ShowTransformationMenuEventArgs>, ISubscriber<ShowRotationMenuEventArgs>,
         ISubscriber<ShowScalingMenuEventArgs>
     {
-        private IMainView? _view;
-
         public override IMainView View
-           => _view ??= Controller.IoC.Resolve<IMainView>();
+           => field ??= Controller.IoC.Resolve<IMainView>();
 
         public override void Run()
         {
