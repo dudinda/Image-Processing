@@ -25,12 +25,19 @@
 
 ## Overview
 
+The application consists of a desktop window with a main viewport implemented as a `Picturebox` where the sequentially transformed images are rendered. The menu above allows users to generate views, which are appended to the bottom. The toolbar below the viewport allows to undo or redo transformations, restore the originally loaded image, and capture a custom area within the viewport. Two trackbars apply rotation or scaling transformations without rendering an image. 
+
+Each generated view produces a tab below the viewport, allowing users to apply transformations or manage related parameters.
+
 <p align="center">
     <img src="https://github.com/dudinda/Image-Processing/blob/master/Tests/ImageProcessing.App.Integration/Code/Resources/Static/demo.gif?raw=true" width="600" height = "600" alt="application window">
-    <p align="center">Fig. 1 - The main view and transient/signleton views are displayed as tabs. The opened affine transformation tab is a transient view. The settings tab is a singleton view. The frame is taken from the <a href="https://i.imgur.com/h57F8D7.jpg">"Thomas the Tank Engine"</a> series and processed using the following algorithm chain: Grayscale->Inversion->Laplacian Operator 5x5->Inversion->Shear Rotation 20°->Bicubic Interpolation (0.2, 0.2)->Cyclic Translation (33, 33) (hold) [cpu].</p>
+    <p align="center">Fig. 1 - The main view and transient/singleton views are displayed as tabs. The opened affine transformation tab is a transient view. The settings tab is a singleton view. The frame is taken from the <a href="https://i.imgur.com/h57F8D7.jpg">"Thomas the Tank Engine"</a> series and processed using the following algorithm chain: <code>Grayscale->Inversion->Laplacian Operator 5x5->Inversion->Shear Rotation 20°->Bicubic Interpolation (0.2, 0.2)->Cyclic Translation (33, 33)</code> (hold) [cpu].</p>
 </p>
 
+
 ### Hierarchy of modules
+
+The project is built around two major namespaces: `Microkernel` and `App` .  As discussed below, this hierarchy allows an application to scale vertically, from views to presenters to service/provider/factory components, and horizontally, by adding subsystems within these categories. Decoupling the UI does not limit the application to static forms; it also allows to apply XML/XAML-based interfaces or console applications to use the same set of event handlers and domain modules. Additionally, as demonstrated in this application, the hierarchy supports comprehensive integration testing of any component, including the verification of incoming arguments and function calls.
 
 <p align="center">
    <img width="600" height="350" alt="hierarchy-of-modules" src="https://github.com/user-attachments/assets/d7dd6685-627f-492e-8105-8dfdb1692150" />
@@ -75,8 +82,8 @@
     <img src="https://i.imgur.com/qa6QE4v.png" width="350" height = "150"">
 </p>
 
-<p> where [z1, z2] is an interval of relative luminance.</p>
-<p> By splitting the interval [0, 255] to 16 subintervals, we can  use the definition above. Since contrast is defined as statistical scattering,  conditional variance can be used to measure the level of contrast within each specified interval.</p>
+<p> where <code>[z1, z2]</code> is an interval of relative luminance.</p>
+<p> By splitting the interval `[0, 255]` to 16 subintervals, we can  use the definition above. Since contrast is defined as statistical scattering,  conditional variance can be used to measure the level of contrast within each specified interval.</p>
 
 <p align="center">
     <img src="https://i.imgur.com/OhGb6lI.png" alt="application window">
