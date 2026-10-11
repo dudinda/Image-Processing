@@ -3,21 +3,24 @@
 <p>The application was originally developed as an R&D project between 2017 and 2019.</p> 
 <p>The original purpose was to investigate the potential advantages of optimizing the contrast of grayscale images using a normal distribution compared with a uniform distribution. Two parameters - the expectation and standard derivation - allow to the relative luminance and contrast, respectively, to be controlled.</p>
 
-# Image-Processing 
-
 [Microkernel Guide&Demo for WPF (SDI), Winforms (MDI/SDI/TDI) and Console processes](https://github.com/dudinda/MVPTemplate)
+
+# Image-Processing 
 
 1. [Overview](#overview)
    - [Hierarchy of modules](#hierarchy-of-modules)
-   - [Navigation by using a DI container](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.Microkernel.MVP/Services/Controller/Implementation/AppController.cs#L45)
-   - [Closures propagation by using a pipeline and event aggregator](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.App.Presentation/Presenters/RgbPresenter.cs#L53)
-   - [Linking a transient presenter and a view](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.Microkernel.MVP/Presenter/Implementation/BasePresenter.cs#L36)
-   - [Partial mocks substitution via a DI container to test the internal infrastructure](https://github.com/dudinda/Image-Processing/blob/master/Tests/ImageProcessing.App.Integration/Monolith/UI/Startup.cs#L61)
-   - [Reference a microkernel from a presentation to move a domain between processes](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.App.Presentation/ImageProcessing.App.Presentation.csproj#L60)
-2. [Managing Grayscale Images](#managing-grayscale-images)
-3. [Created With](#created-with)
-4. [Benchmarks](#benchmarks-cpu)
-5. [NuGet](#nuget)
+2. [Microkernel](#microkernel)
+   - [Navigation by using a DI container](#navigation-by-using-a-di-container)
+   - [Linking a transient presenter and a view](#linking-a-transient-presenter-and-a-view)
+3. [Application](#application)
+   - [Closures propagation by using a pipeline and event aggregator](#closures-propagation-by-using-a-pipeline-and-event-aggregator)
+   - [Reference a microkernel from a presentation to move a domain](#reference-a-microkernel-from-a-presentation-to-move-a-domain)
+4. [Integration tests](#integration-tests)
+   - [Partial mocks and a DI container](#partials-mocks-and-a-di-container)
+5. [Managing Grayscale Images](#managing-grayscale-images)
+6. [Created With](#created-with)
+7. [Benchmarks](#benchmarks-cpu)
+8. [NuGet](#nuget)
 ***
 
 ## Overview
@@ -32,6 +35,19 @@
    <img width="600" height="350" alt="hierarchy-of-modules" src="https://github.com/user-attachments/assets/d7dd6685-627f-492e-8105-8dfdb1692150" />
     <p align="center">Fig. 2 Hierarchy of modules.</p>
 </p>
+## Microkernel
+
+### Navigation by using a DI Container
+### Linking a Transient Presenter and a View
+
+## Application
+
+### Closures Propagation by using a Pipeline and Event Aggregator
+### Reference a Microkernel from a Presentation  to Move a Domain
+
+## Integration tests
+
+### Partials Mocks and a DI Container
 
 ## Managing Grayscale Images
 
