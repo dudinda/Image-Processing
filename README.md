@@ -31,10 +31,12 @@
 </p>
 
 ### Hierarchy of modules
+
 <p align="center">
    <img width="600" height="350" alt="hierarchy-of-modules" src="https://github.com/user-attachments/assets/d7dd6685-627f-492e-8105-8dfdb1692150" />
     <p align="center">Fig. 2 Hierarchy of modules.</p>
 </p>
+
 ## Microkernel
 
 ### Navigation by using a DI Container
