@@ -25,9 +25,9 @@
 
 ## Overview
 
-The application consists of a desktop window with a main viewport implemented as a `Picturebox` where the sequentially transformed images are rendered. The menu above allows users to generate views, which are appended to the bottom. The toolbar below the viewport allows to undo or redo transformations, restore the originally loaded image, and capture a custom area within the viewport. Two trackbars apply rotation or scaling transformations without rendering an image. 
+The application consists of a desktop window with a main viewport implemented as a `PictureBox` where the sequentially transformed images are rendered. The menu on the top allows users to generate views, which are appended to the bottom. The toolbar below the menu allows to undo or redo transformations, restore the originally loaded image, and capture a custom area within the viewport. Two trackbars apply rotation or scaling transformations without rendering an image. 
 
-Each generated view produces a tab below the viewport, allowing users to apply transformations or manage related parameters.
+Each generated view produces a tab below the viewport, allowing users to apply algorithms or manage related parameters.
 
 <p align="center">
     <img src="https://github.com/dudinda/Image-Processing/blob/master/Tests/ImageProcessing.App.Integration/Code/Resources/Static/demo.gif?raw=true" width="600" height = "600" alt="application window">
