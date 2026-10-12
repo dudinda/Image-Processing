@@ -2,6 +2,7 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.Domain.Code.Enums;
 using ImageProcessing.App.Domain.Code.Extensions;
+using ImageProcessing.App.Presentation.Presenters;
 using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.App.UI.Code.Extensions;
 using ImageProcessing.App.UI.Services.FormEventBinders.Settings;
@@ -20,7 +21,7 @@ namespace ImageProcessing.App.UI.Forms.Settings
 
         public SettingsForm(
             IMainView main,
-            ISettingsFormEventBinder binder) : base()
+            ISettingsFormEventBinder binder) 
         {
             InitializeComponent();
 
@@ -96,17 +97,16 @@ namespace ImageProcessing.App.UI.Forms.Settings
 
             _main.TabsCtrl.TabPages.RemoveAt(idx);
 
+            Controller
+               .Aggregator
+               .Unsubscribe(typeof(ScalingPresenter), this);
+
             base.Hide();
         }
 
         public void EnableControls(bool isEnabled)
         {
             Write(() => SettingsButtonPanel.Enable(isEnabled));
-        }
-
-        protected override void OnResize(System.EventArgs e)
-        {
-            base.OnResize(e);
         }
 
         /// <summary>
@@ -122,21 +122,12 @@ namespace ImageProcessing.App.UI.Forms.Settings
             base.Dispose(true);
         }
 
-        /// <summary>
-        /// Restrict the generated <see cref="Dispose(bool)"/> call
-        /// on a non-context form closing.
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            Hide();
-            e.Cancel = true;
-        }
-
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             switch (keyData)
             {
                 case Keys.Escape:
-                    base.Close();
+                    Hide();
                     break;
             }
 

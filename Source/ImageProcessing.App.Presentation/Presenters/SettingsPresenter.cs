@@ -16,7 +16,7 @@ namespace ImageProcessing.App.Presentation.Presenters
     internal sealed class SettingsPresenter : BasePresenter<ISettingsView>,
         ISubscriber<ChangeLumaEventArgs>, ISubscriber<ChangeRotationEventArgs>,
         ISubscriber<ChangeScalingEventArgs>, ISubscriber<FormIsClosedEventArgs>,
-        ISubscriber<EnableControlEventArgs>
+        ISubscriber<EnableControlEventArgs>, ISubscriber<RestoreFocusEventArgs>
     {
         private readonly ILogger<SettingsPresenter> _logger;
         private readonly SettingsOptions _settings;
@@ -93,6 +93,20 @@ namespace ImageProcessing.App.Presentation.Presenters
             try
             {
                 View.EnableControls(e.State != MenuBtnState.ImageEmpty);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+
+            return Task.CompletedTask;
+        }
+
+        public Task OnEventHandler(object publisher, RestoreFocusEventArgs e)
+        {
+            try
+            {
+                View.Focus();
             }
             catch (Exception ex)
             {
