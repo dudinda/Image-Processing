@@ -37,6 +37,7 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Tests
         [Timeout(5000)]
         public async Task FileOpenMenuClick()
         {
+            _presenter.Pipeline.BeginRender();
             _form.OpenFileMenu.PerformClick();
             var view = _presenter.View;
             await _presenter.Received().OnEventHandler(
@@ -95,6 +96,7 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Tests
         [Test]
         public void FileSaveAsMenuClick()
         {
+            _presenter.Pipeline.BeginRender();
             _form.OpenFileMenu.PerformClick();
             _form.SaveAsMenu.PerformClick();
 
