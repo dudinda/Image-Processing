@@ -2,7 +2,6 @@ using System.Windows.Forms;
 
 using ImageProcessing.App.Presentation.DomainEvents.ColorMatrixArgs;
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
-using ImageProcessing.App.UI.Services.FormEventBinders.ColorMatrix;
 using ImageProcessing.App.UI.Services.FormExposers;
 using ImageProcessing.Microkernel.MVP.Services.Aggregator;
 

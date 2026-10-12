@@ -116,7 +116,6 @@ namespace ImageProcessing.App.UI.Forms.Distribution
             _main.TabsCtrl.TabPages.Add(_tab);
             _main.TabsCtrl.SelectedTab = _tab;
             base.Show();
-            Focus();
         }
 
         public new void Close()

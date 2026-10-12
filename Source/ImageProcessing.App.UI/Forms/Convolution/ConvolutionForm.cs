@@ -32,7 +32,6 @@ namespace ImageProcessing.App.UI.Forms.Convolution
             TopLevel = false;
             Dock = DockStyle.Fill;
             Parent = _tab;
-            _tab.GotFocus += (sender, args) => _tab.FindForm().Focus();
             _tab.Controls.Add(this);
             _tab.Text = Text;
 
@@ -49,7 +48,6 @@ namespace ImageProcessing.App.UI.Forms.Convolution
             _main.TabsCtrl.SelectedTab = _tab;
 
             base.Show();
-            Focus();
         }
 
         public new void Close()

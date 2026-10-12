@@ -136,7 +136,6 @@ namespace ImageProcessing.App.UI.Forms.ColorMatrix
             _main.TabsCtrl.SelectedTab = _tab;
         
             base.Show();
-            Focus();
         }
 
         public new void Close()
