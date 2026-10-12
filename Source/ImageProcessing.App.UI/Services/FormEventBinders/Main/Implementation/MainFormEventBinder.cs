@@ -96,6 +96,15 @@ namespace ImageProcessing.App.UI.Services.FormEventBinders.Main.Implementation
                     _aggregator.PublishFrom(view, new RestoreFocusEventArgs());
                 }
             };
+            source.TabsCtrl.ControlAdded += (sender, args) =>
+            {
+                var view = args.Control.Controls[0] as IView;
+                if (view != null)
+                {
+                    _aggregator.PublishFrom(view, new RestoreFocusEventArgs());
+                }
+            };
+
         }
 
         public bool ProcessCmdKey(IMainFormExposer view, Keys keyData)
