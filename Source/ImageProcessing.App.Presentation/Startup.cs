@@ -142,9 +142,10 @@ namespace ImageProcessing.App.Presentation
                         builder.AddProvider(new SerilogLoggerProvider(serilog));
                     });
                 })
+                .RegisterSingleton<LongRunContext>()
                 .RegisterSingleton<ILongRunService<LongRunItem>>((prov) =>
                  {
-                     var ctx = new LongRunContext();
+                     var ctx = prov.Resolve<LongRunContext>();
                      var factory = prov.Resolve<ILoggerFactory>();
                      var logger = factory.CreateLogger<LongRunService<LongRunItem>>();
                      return new LongRunService<LongRunItem>(logger, ctx);

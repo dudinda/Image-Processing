@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
@@ -13,17 +14,22 @@ namespace ImageProcessing.App.Domain.Services.Pipeline.Implementation
         private readonly ILongRunService<LongRunItem> _service;
         private readonly IMessageService<Task<object>> _message;
         private readonly Channel<Task<object>> _channel;
-        private readonly CancellationTokenSource _source = new ();
+        private readonly LongRunContext _context;
+        private HashSet<LongRunToken> _renders = new();
+  
 
         public RenderPipeline(
             IMessageService<Task<object>> message,
             ILongRunService<LongRunItem> service,
+            LongRunContext context,
             BoundedChannelOptions options)
         {
             _message = message;
+            _context = context;
+            _service = service;
             _channel = Channel.CreateBounded<Task<object>>(options);
             _message.Add(nameof(RenderPipeline), _channel);
-            _service = service;
+            _context.Cancellation?.Value = new CancellationTokenSource();
         }
 
         public bool Any()
@@ -31,28 +37,32 @@ namespace ImageProcessing.App.Domain.Services.Pipeline.Implementation
 
         public void Register(IPipelineBlock output)
         {
-            var task = new Task<object>(() => output.Process(_source.Token), _source.Token);
-            task.Start();
+            var token = _context.Cancellation.Value.Token;
+            var task = new Task<object>(() => output.Process(token), token);
             _message.SendMessage(nameof(RenderPipeline), task);
         }
 
         public void BeginRender()
         {
-            _service.PutTask(async (token) =>
+            var token = _service.PutTask(async (token) =>
             {
-                var source = CancellationTokenSource.CreateLinkedTokenSource(_source.Token);
-                await foreach(var task in _channel.Reader.ReadAllAsync(source.Token))
+                await foreach(var task in _channel.Reader.ReadAllAsync(token))
                 {
+                    task.Start();
                     await task.ConfigureAwait(false);
                 }
 
                 return Task.CompletedTask;
             });
+            _renders.Add(token);
         }
 
         public void Dispose()
         {
-            _source.Dispose();
+            foreach(var render in _renders)
+            {
+                _service.Abort(render);
+            }
             _message.Dispose();
         }
     }
