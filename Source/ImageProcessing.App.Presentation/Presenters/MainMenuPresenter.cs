@@ -3,9 +3,12 @@ using System.Drawing;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Domain.Services.BitmapCopyReference.Interface;
-using ImageProcessing.App.Domain.Services.Pipeline;
+using ImageProcessing.App.Domain.Services.FileDialog;
+using ImageProcessing.App.Domain.Services.Pipeline.Implementation;
+using ImageProcessing.App.Domain.Win.Code.Extensions;
 using ImageProcessing.App.Presentation.Code.Enums;
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
+using ImageProcessing.App.Presentation.DomainEvents.MainArgs.FileDialog;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Show;
 using ImageProcessing.App.Presentation.Properties;
@@ -22,28 +25,93 @@ namespace ImageProcessing.App.Presentation.Presenters
         ISubscriber<ShowConvolutionMenuEventArgs>, ISubscriber<ShowDistributionMenuEventArgs>,
         ISubscriber<ShowRgbMenuEventArgs>, ISubscriber<ShowSettingsMenuEventArgs>,
         ISubscriber<ShowTransformationMenuEventArgs>, ISubscriber<ShowRotationMenuEventArgs>,
-        ISubscriber<ShowScalingMenuEventArgs>
+        ISubscriber<ShowScalingMenuEventArgs>, ISubscriber<OpenFileDialogEventArgs>,
+        ISubscriber<SaveAsFileDialogEventArgs>, ISubscriber<SaveWithoutFileDialogEventArgs>
     {
         public override IMainView View
-            => field ??= Controller.IoC.Resolve<IMainView>();
+          => field ??= Controller.IoC.Resolve<IMainView>();
 
         private readonly ILogger<MainMenuPresenter> _logger;
         private readonly IBitmapCopyService _reference;
-        private readonly IRenderPipeline _pipeline;
+        private readonly INonBlockDialogService _dialog;
 
         public MainMenuPresenter(
             IBitmapCopyService reference,
-            IRenderPipeline pipeline,
+            INonBlockDialogService dialog,
             ILogger<MainMenuPresenter> logger)
         {
             _logger = logger;
             _reference = reference;
-            _pipeline = pipeline;
+            _dialog = dialog;
         }
 
         public override void Run()
         {
             Aggregator.Subscribe(this, View);
+        }
+
+        /// <inheritdoc cref="OpenFileDialogEventArgs"/>
+        public async Task OnEventHandler(object publisher, OpenFileDialogEventArgs e)
+        {
+            try
+            {
+                var result = await _dialog.OpenFileDialog().ConfigureAwait(true);
+
+                if (result.Image != null)
+                {
+                    View.LoadedImage = result.Image;
+                    Aggregator.PublishFromAll(publisher,
+                        new AttachBlockToRendererEventArgs(
+                            block: new PipelineBlock(result.Image)
+                                .Add<Bitmap>(
+                                    (bmp) => View.SetPathToFile(result.Path))
+                        )
+                     );
+
+                    View.SetMenuState(MenuBtnState.ImageLoaded);
+                }
+            }
+            catch (Exception ex)
+            {
+                View.Tooltip(Errors.OpenFile);
+                _logger.LogError(ex.Message);
+            }
+        }
+
+        /// <inheritdoc cref="SaveAsFileDialogEventArgs"/>
+        public async Task OnEventHandler(object publisher, SaveAsFileDialogEventArgs e)
+        {
+            try
+            {
+                if (!View.ImageIsDefault)
+                {
+                    var copy = await _reference.GetCopy().ConfigureAwait(true);
+                    await _dialog.SaveFileAsDialog(copy).ConfigureAwait(true);
+                }
+            }
+            catch (Exception ex)
+            {
+                View.Tooltip(Errors.SaveFile);
+                _logger.LogError(ex.Message);
+            }
+        }
+
+        /// <inheritdoc cref="SaveWithoutFileDialogEventArgs"/>
+        public async Task OnEventHandler(object publisher, SaveWithoutFileDialogEventArgs e)
+        {
+            try
+            {
+                if (!View.ImageIsDefault)
+                {
+                    var copy = await _reference.GetCopy().ConfigureAwait(true);
+                    await Task.Run(() => copy.SaveByPath(View.GetPathToFile())).ConfigureAwait(true);
+                }
+            }
+            catch (Exception ex)
+            {
+                View.Tooltip(Errors.SaveFile);
+                _logger.LogError(ex.Message);
+            }
         }
 
         /// <inheritdoc cref="ShowRgbMenuEventArgs"/>
@@ -61,7 +129,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
             catch (Exception ex)
             {
-                OnError(publisher, Errors.ShowRgbMenu);
+                View.Tooltip(Errors.ShowRgbMenu);
                 _logger.LogError(ex.Message);
             }
         }
@@ -81,7 +149,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
             catch (Exception ex)
             {
-                OnError(publisher, Errors.ShowRgbMenu);
+                View.Tooltip(Errors.ShowRgbMenu);
                 _logger.LogError(ex.Message);
             }
         }
@@ -101,7 +169,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
             catch (Exception ex)
             {
-                OnError(publisher, Errors.ShowRgbMenu);
+                View.Tooltip(Errors.ShowRgbMenu);
                 _logger.LogError(ex.Message);
             }
         }
@@ -121,7 +189,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
             catch (Exception ex)
             {
-                OnError(publisher, Errors.ShowDistributionMenu);
+                View.Tooltip(Errors.ShowDistributionMenu);
                 _logger.LogError(ex.Message);
             }
         }
@@ -141,7 +209,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
             catch (Exception ex)
             {
-                OnError(publisher, Errors.ShowConvolutionMenu);
+                View.Tooltip(Errors.ShowConvolutionMenu);
                 _logger.LogError(ex.Message);
             }
         }
@@ -161,7 +229,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
             catch (Exception ex)
             {
-                OnError(publisher, Errors.ShowTransformationMenu);
+                View.Tooltip(Errors.ShowTransformationMenu);
                 _logger.LogError(ex.Message);
             }
         }
@@ -175,25 +243,11 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
             catch (Exception ex)
             {
-                OnError(publisher, Errors.ShowSettingsMenu);
+                View.Tooltip(Errors.ShowSettingsMenu);
                 _logger.LogError(ex.Message);
             }
 
             return Task.CompletedTask;
-        }
-
-        private void OnError(object publisher, string error)
-        {
-            if (!_pipeline.Any())
-            {
-                View.SetCursor(CursorType.Default);
-            }
-            else
-            {
-                View.SetCursor(CursorType.Wait);
-            }
-
-            Aggregator.PublishFrom(publisher, new ShowTooltipOnErrorEventArgs(error));
         }
     }
 }

@@ -1,19 +1,17 @@
+using ImageProcessing.App.Presentation.Code.Enums;
+
 namespace ImageProcessing.App.Presentation.DomainEvents.CommonArgs
 {
     /// <summary>
     /// Attach a sequence of closures to the renderer.
     /// </summary>
-    public sealed class AttachBlockToRendererEventArgs : BaseEventArgs
+    public sealed class AttachBlockToRendererEventArgs : AttachBlockToPaintEventArgs
     {
-        public AttachBlockToRendererEventArgs(object block)
-            : base()
+        public AttachBlockToRendererEventArgs(object block, UndoRedoAction action = UndoRedoAction.Undo) : base(block)
         {
-            Block = block;
+            Action = action;
         }
 
-        /// <summary>
-        /// A pipeline functional block.
-        /// </summary>
-        public object Block { get; }
+        public UndoRedoAction Action { get; }
     }
 }

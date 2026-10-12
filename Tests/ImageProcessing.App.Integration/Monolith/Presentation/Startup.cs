@@ -5,8 +5,10 @@ using ImageProcessing.App.Integration.Monolith.Domain.Providers.Rgb.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.Rotation.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.Scaling.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.Transformation.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Bmp.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.FileDialog.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Pipeline.Interface;
 using ImageProcessing.App.Integration.Monolith.Presentation.Presenters;
@@ -32,14 +34,14 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation
                 .RegisterTransient(factory =>
                     Substitute.ForPartsOf<MainPresenterWrapper>(
                         builder.Resolve<IBitmapCopyServiceWrapper>(),
-                        builder.Resolve<INonBlockDialogServiceWrapper>(),
+                        builder.Resolve<IDrawServiceWrapper>(),
                         builder.Resolve<IAwaitablePipelineServiceWrapper>(),
                         builder.Resolve<ILoggerFactory>()))
                 .RegisterTransient(factory =>
                     Substitute.ForPartsOf<MainMenuPresenterWrapper>(
+                        builder.Resolve<ILoggerFactory>(),
                         builder.Resolve<IBitmapCopyServiceWrapper>(),
-                        builder.Resolve<IAwaitablePipelineServiceWrapper>(),
-                        builder.Resolve<ILoggerFactory>()))
+                        builder.Resolve<INonBlockDialogServiceWrapper>()))
                 .RegisterTransient(factory =>
                     Substitute.ForPartsOf<MainTrackbarPresenterWrapper>(
                         builder.Resolve<ILoggerFactory>(),
@@ -47,6 +49,9 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation
                         builder.Resolve<IAwaitablePipelineServiceWrapper>(),
                         builder.Resolve<IScalingProviderWrapper>(),
                         builder.Resolve<IRotationProviderWrapper>()))
+                .RegisterTransient(factory =>
+                    Substitute.ForPartsOf<MainToolbarPresenterWrapper>(
+                        builder.Resolve<ILoggerFactory>()))
                 .RegisterTransient(factory =>
                     Substitute.ForPartsOf<ColorMatrixPresenterWrapper>(
                         builder.Resolve<IBitmapCopyServiceWrapper>(),

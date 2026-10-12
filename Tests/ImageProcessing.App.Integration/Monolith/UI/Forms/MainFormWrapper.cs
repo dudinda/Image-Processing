@@ -2,12 +2,12 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
+using ImageProcessing.App.Domain.Services.UndoRedo;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.UndoRedo.Interface;
 using ImageProcessing.App.Integration.Monolith.UI.FormEventBinders.Main.Interface;
 using ImageProcessing.App.Integration.Monolith.UI.UIModel.Factories.Interface;
 using ImageProcessing.App.Presentation.Code.Enums;
 using ImageProcessing.App.Presentation.Views;
-using ImageProcessing.App.Domain.Services.UndoRedo;
 using ImageProcessing.App.UI.Forms.Main;
 using ImageProcessing.App.UI.Models.Controls;
 using ImageProcessing.App.UI.Services.Factories.MenuState;
@@ -192,7 +192,10 @@ namespace ImageProcessing.App.Presentation.UnitTests.Fakes.Form
        
         public virtual bool ImageIsDefault
             => _form.ImageIsDefault;
-     
+
+        public virtual bool IsCaptureRegion
+            => _form.IsCaptureRegion;
+
         public virtual void Refresh()
             => _form.Refresh();
         
@@ -209,5 +212,9 @@ namespace ImageProcessing.App.Presentation.UnitTests.Fakes.Form
 
         public virtual void SetMenuState(MenuBtnState state)
             => _form.SetMenuState(state);
+
+        public virtual bool IsLeftPressed()
+            => _form.IsLeftPressed();
+        
     }
 }

@@ -11,5 +11,10 @@ namespace ImageProcessing.App.Presentation.Views.ViewComponents
         /// Set the specified <see cref="CursorType"/>.
         /// </summary>
         void SetCursor(CursorType cursor);
+
+        /// <summary>
+        /// Left mouse button is pressed.
+        /// </summary>
+        bool IsLeftPressed();
     }
 }

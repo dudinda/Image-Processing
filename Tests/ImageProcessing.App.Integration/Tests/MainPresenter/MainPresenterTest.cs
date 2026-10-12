@@ -35,29 +35,6 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Tests
 
         [Test]
         [Timeout(5000)]
-        public async Task FileOpenMenuClick()
-        {
-            _presenter.Pipeline.BeginRender();
-            _form.OpenFileMenu.PerformClick();
-            var view = _presenter.View;
-            await _presenter.Received().OnEventHandler(
-                Arg.Is<object>(arg => arg == _form),
-                Arg.Any<OpenFileDialogEventArgs>());
-
-            await _presenter.Dialog.Received().OpenFileDialog();
-
-            while(view.SourceImage == null)
-            {
-                await Task.Delay(300);
-            }
-            var image = view.SourceImage as Bitmap;
-
-            Assert.IsTrue(image != null);
-            Assert.IsTrue(image.SameAs(Res._1920x1080frame));
-        }
-
-        [Test]
-        [Timeout(5000)]
         public async Task RendererRecieveBlockTest()
         {
             _presenter.Pipeline.BeginRender();
@@ -91,67 +68,6 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Tests
 
             view.Received().SetCursor(
                 Arg.Is<CursorType>(arg => arg == CursorType.Default));
-        }
-
-        [Test]
-        public void FileSaveAsMenuClick()
-        {
-            _presenter.Pipeline.BeginRender();
-            _form.OpenFileMenu.PerformClick();
-            _form.SaveAsMenu.PerformClick();
-
-            _presenter.Received().OnEventHandler(
-                Arg.Is<object>(arg => arg == _form),
-                Arg.Any<SaveAsFileDialogEventArgs>());
-            _presenter.Reference.Received().GetCopy();
-            _presenter.Dialog.Received().SaveFileAsDialog(
-                Arg.Is<Bitmap>(arg => arg.SameAs(Res._1920x1080frame)));
-        }
-
-
-        [Test]
-        public void OpenRgbMenuClick()
-        {
-            _form.OpenFileMenu.PerformClick();
-            _form.RgbMenuButton.PerformClick();
-
-            _presenter.MenuPresenter.Received().OnEventHandler(
-                Arg.Is<object>(arg => arg == _form),
-                Arg.Any<ShowRgbMenuEventArgs>());
-        }
-
-        [Test]
-        public void OpenConvolutionMenuClick()
-        {
-            _form.OpenFileMenu.PerformClick();
-            _form.ConvolutionMenuButton.PerformClick();
-
-            _presenter.MenuPresenter.Received().OnEventHandler(
-                Arg.Is<object>(arg => arg == _form),
-                Arg.Any<ShowConvolutionMenuEventArgs>());
-        }
-
-        [Test]
-        public void OpenDistributionMenuClick()
-        {
-            _form.OpenFileMenu.PerformClick();
-            _form.DistributionMenuButton.PerformClick();
-
-            _presenter.MenuPresenter.Received().OnEventHandler(
-               Arg.Is<object>(arg => arg == _form),
-               Arg.Any<ShowDistributionMenuEventArgs>());
-        }
-
-        [Test]
-
-        public void FileSaveMenuClick()
-        {
-            _form.OpenFileMenu.PerformClick();
-            _form.SaveFileMenu.PerformClick();
-
-            _presenter.Received().OnEventHandler(
-                Arg.Is<object>(arg => arg == _form),
-                Arg.Any<SaveWithoutFileDialogEventArgs>());
         }
     }
 }

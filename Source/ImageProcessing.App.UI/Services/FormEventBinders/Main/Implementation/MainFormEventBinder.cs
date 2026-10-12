@@ -5,6 +5,7 @@ using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Container;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.FileDialog;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Show;
+using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Toolbar;
 using ImageProcessing.App.UI.Services.FormExposers;
 using ImageProcessing.Microkernel.MVP.Services.Aggregator;
 using ImageProcessing.Microkernel.MVP.View;
@@ -116,6 +117,15 @@ namespace ImageProcessing.App.UI.Services.FormEventBinders.Main.Implementation
                     _aggregator.PublishFrom(view, new RestoreFocusEventArgs());
                 }
             };
+
+            source.SourceBox.MouseDown += (sender, args)
+                => _aggregator.PublishFrom(source, new MouseDownEventArgs(args.Location));
+
+            source.SourceBox.MouseMove += (sender, args)
+                => _aggregator.PublishFrom(source, new MouseMoveEventArgs(args.Location));
+
+            source.SourceBox.MouseUp += (sender, args)
+                => _aggregator.PublishFrom(source, new MouseUpEventArgs(args.Location));
         }
 
         public bool ProcessCmdKey(IMainFormExposer view, Keys keyData)

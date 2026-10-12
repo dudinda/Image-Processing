@@ -12,10 +12,9 @@ namespace ImageProcessing.App.Presentation.Views
     /// of the main window.
     /// </summary>
     public interface IMainView : IView, ITrackBarContainer,
-        ITooltip, IBitmapContainer, ICursor, IDisposable
+        ITooltip, IBitmapContainer, IToolbarContainer,
+        ICursor, IDisposable
     {
-        Image LoadedImage { get; set; }
-
         /// <summary>
         /// Default an image inside a picturebox./>
         /// </summary>
@@ -30,16 +29,6 @@ namespace ImageProcessing.App.Presentation.Views
         /// Get the path of the loaded image.
         /// </summary>
         string GetPathToFile();
-
-        /// <summary>
-        /// Add the processed result of the <see cref="ImageContainer"/>.
-        /// </summary>
-        void AddToUndoRedo(Bitmap bmp, UndoRedoAction action);
-
-        /// <summary>
-        /// Undo/Redo the last operation.
-        /// </summary>
-        Bitmap TryUndoRedo(UndoRedoAction action);
 
         /// <summary>
         /// Center a picturebox after a scaling.

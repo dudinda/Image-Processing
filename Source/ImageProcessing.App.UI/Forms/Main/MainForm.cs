@@ -194,6 +194,9 @@ namespace ImageProcessing.App.UI.Forms.Main
         public bool ImageIsDefault
             => Read<bool>(() => SourceImageCopy == DefaultImage);
 
+        public bool IsCaptureRegion
+            => SelectionBtn.Checked;
+
         /// <inheritdoc/>
         public void Refresh()
             => Write(() => SourceBox.Refresh());
@@ -320,5 +323,8 @@ namespace ImageProcessing.App.UI.Forms.Main
                 ZoomSrcTrackBar.Enabled = menu.ScalingTrackBarState;
             });
         }
+
+        public bool IsLeftPressed()
+            => MouseButtons.HasFlag(MouseButtons.Left);
     }
 }

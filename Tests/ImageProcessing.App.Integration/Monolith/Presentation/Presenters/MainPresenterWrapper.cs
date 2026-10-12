@@ -1,11 +1,12 @@
 using System.Threading.Tasks;
 
+using ImageProcessing.App.Integration.Monolith.Domain.Services;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Interface;
-using ImageProcessing.App.Integration.Monolith.Domain.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Pipeline.Interface;
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Container;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.FileDialog;
+using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Toolbar;
 using ImageProcessing.App.Presentation.Presenters;
 using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
@@ -16,11 +17,10 @@ using Microsoft.Extensions.Logging;
 namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
 {
     internal class MainPresenterWrapper : BasePresenter<IMainView>,
-        ISubscriber<AttachBlockToRendererEventArgs>, ISubscriber<OpenFileDialogEventArgs>,
-        ISubscriber<SaveAsFileDialogEventArgs>, ISubscriber<SetSourceEventArgs>,
-        ISubscriber<SaveWithoutFileDialogEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
-        ISubscriber<UndoRedoEventArgs>, ISubscriber<FormIsClosedEventArgs>,
-        ISubscriber<FormIsLoadedEventArgs>
+         ISubscriber<AttachBlockToRendererEventArgs>, ISubscriber<AttachBlockToPaintEventArgs>,
+        ISubscriber<ShowTooltipOnErrorEventArgs>, ISubscriber<FormIsClosedEventArgs>,
+        ISubscriber<FormIsLoadedEventArgs>, ISubscriber<MouseDownEventArgs>,
+        ISubscriber<MouseMoveEventArgs>, ISubscriber<MouseUpEventArgs>
     {
         private readonly MainPresenter _presenter;
 
@@ -29,27 +29,29 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
 
         public MainMenuPresenterWrapper MenuPresenter { get; }
         public MainTrackbarPresenterWrapper TrackBarPresenter { get; }
+        public MainToolbarPresenterWrapper ToolBarPresenter { get; }
 
         public IBitmapCopyServiceWrapper Reference { get; }
-        public INonBlockDialogServiceWrapper Dialog { get; }
+        public IDrawServiceWrapper Draw { get; }
         public IAwaitablePipelineServiceWrapper Pipeline { get; }
         public ILoggerFactory Logger { get; }
 
         public MainPresenterWrapper(
             IBitmapCopyServiceWrapper reference,
-            INonBlockDialogServiceWrapper dialog,
+            IDrawServiceWrapper draw,
             IAwaitablePipelineServiceWrapper pipeline,
             ILoggerFactory logger) 
         {
             Reference = reference;
-            Dialog = dialog;
+            Draw = draw;
             Pipeline = pipeline;
             Logger = logger;
 
             MenuPresenter = Controller.IoC.Resolve<MainMenuPresenterWrapper>();
             TrackBarPresenter = Controller.IoC.Resolve<MainTrackbarPresenterWrapper>();
+            ToolBarPresenter = Controller.IoC.Resolve<MainToolbarPresenterWrapper>();
 
-            _presenter = new MainPresenter(reference, dialog, pipeline, logger.CreateLogger<MainPresenter>());
+            _presenter = new MainPresenter(reference, draw, pipeline, logger.CreateLogger<MainPresenter>());
         }
 
         public override void Run()
@@ -109,7 +111,27 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
             return Task.CompletedTask;
         }
 
-        public Task OnEventHandler(object publisher, FormIsLoadedEventArgs e)
+        public virtual Task OnEventHandler(object publisher, FormIsLoadedEventArgs e)
+        {
+            return Task.CompletedTask;
+        }
+
+        public virtual Task OnEventHandler(object publisher, AttachBlockToPaintEventArgs e)
+        {
+            return Task.CompletedTask;
+        }
+
+        public virtual Task OnEventHandler(object publisher, MouseDownEventArgs e)
+        {
+            return Task.CompletedTask;
+        }
+
+        public virtual Task OnEventHandler(object publisher, MouseMoveEventArgs e)
+        {
+            return Task.CompletedTask;
+        }
+
+        public virtual Task OnEventHandler(object publisher, MouseUpEventArgs e)
         {
             return Task.CompletedTask;
         }
