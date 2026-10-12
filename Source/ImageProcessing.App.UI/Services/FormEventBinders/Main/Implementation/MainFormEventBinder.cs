@@ -7,6 +7,7 @@ using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Show;
 using ImageProcessing.App.UI.Services.FormExposers;
 using ImageProcessing.Microkernel.MVP.Services.Aggregator;
+using ImageProcessing.Microkernel.MVP.View;
 
 using static ImageProcessing.App.Presentation.Code.Enums.ImageContainer;
 using static ImageProcessing.App.Presentation.Code.Enums.UndoRedoAction;
@@ -86,6 +87,15 @@ namespace ImageProcessing.App.UI.Services.FormEventBinders.Main.Implementation
 
             source.Load += (sender, args)
                  => _aggregator.PublishFrom(source, new FormIsLoadedEventArgs());
+
+            source.TabsCtrl.Selected += (sender, args) =>
+            {
+                var view = args.TabPage?.Controls[0] as IView;
+                if (view != null)
+                {
+                    _aggregator.PublishFrom(view, new RestoreFocusEventArgs());
+                }
+            };
         }
 
         public bool ProcessCmdKey(IMainFormExposer view, Keys keyData)

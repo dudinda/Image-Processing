@@ -20,7 +20,7 @@ namespace ImageProcessing.App.UI.Forms.Rgb
     {
         private readonly IRgbFormEventBinder _binder;
         private readonly IMainFormExposer _main;
-        private readonly MetroTabPage _tab = new MetroTabPage();
+        private readonly MetroTabPage _tab = new();
 
         public RgbForm(
             IMainView main,
@@ -83,9 +83,18 @@ namespace ImageProcessing.App.UI.Forms.Rgb
         {
             var result = Unknown;
 
-            if (RedButton.Checked) { result |= Red; }
-            if (BlueButton.Checked) { result |= Blue; }
-            if (GreenButton.Checked) { result |= Green; }
+            if (RedButton.Checked)
+            {
+                result |= Red;
+            }
+            if (BlueButton.Checked)
+            {
+                result |= Blue;
+            }
+            if (GreenButton.Checked)
+            {
+                result |= Green;
+            }
 
             if (result == Unknown)
             {
@@ -146,6 +155,13 @@ namespace ImageProcessing.App.UI.Forms.Rgb
             if(_binder.ProcessCmdKey(this, keyData))
             {
                 return true;
+            }
+
+            switch(keyData)
+            {
+                case Keys.Escape:
+                    base.Close();
+                    break;
             }
 
             return base.ProcessCmdKey(ref msg, keyData);

@@ -19,7 +19,7 @@ namespace ImageProcessing.App.UI.Forms.Transformation
     {
         private readonly ITransformationFormEventBinder _binder;
         private readonly IMainFormExposer _main;
-        private readonly MetroTabPage _tab = new MetroTabPage();
+        private readonly MetroTabPage _tab = new();
 
         public TransformationForm(
             IMainView main,
@@ -116,6 +116,13 @@ namespace ImageProcessing.App.UI.Forms.Transformation
             if (_binder.ProcessCmdKey(this, keyData))
             {
                 return true;
+            }
+
+            switch (keyData)
+            {
+                case Keys.Escape:
+                    base.Close();
+                    break;
             }
 
             return base.ProcessCmdKey(ref msg, keyData);

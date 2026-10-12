@@ -19,7 +19,7 @@ namespace ImageProcessing.App.UI.Forms.Rotation
     {
         private readonly IRotationFormEventBinder _binder;
         private readonly IMainFormExposer _main;
-        private readonly MetroTabPage _tab = new MetroTabPage();
+        private readonly MetroTabPage _tab = new();
 
         public RotationForm(
             IMainView main,
@@ -48,8 +48,8 @@ namespace ImageProcessing.App.UI.Forms.Rotation
         {
             _main.TabsCtrl.TabPages.Add(_tab);
             _main.TabsCtrl.SelectedTab = _tab;
-
             base.Show();
+            Focus();
         }
 
         public new void Close()
@@ -108,5 +108,21 @@ namespace ImageProcessing.App.UI.Forms.Rotation
             base.Dispose(true);
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (_binder.ProcessCmdKey(this, keyData))
+            {
+                return true;
+            }
+
+            switch (keyData)
+            {
+                case Keys.Escape:
+                    base.Close();
+                    break;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
     }
 }

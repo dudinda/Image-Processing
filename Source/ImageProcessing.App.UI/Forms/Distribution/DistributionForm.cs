@@ -21,7 +21,7 @@ namespace ImageProcessing.App.UI.Forms.Distribution
     {
         private readonly IDistributionFormEventBinder _binder;
         private readonly IMainFormExposer _main;
-        private readonly MetroTabPage _tab = new MetroTabPage();
+        private readonly MetroTabPage _tab = new();
 
         public DistributionForm(
             IMainView main,
@@ -116,6 +116,7 @@ namespace ImageProcessing.App.UI.Forms.Distribution
             _main.TabsCtrl.TabPages.Add(_tab);
             _main.TabsCtrl.SelectedTab = _tab;
             base.Show();
+            Focus();
         }
 
         public new void Close()
@@ -162,6 +163,13 @@ namespace ImageProcessing.App.UI.Forms.Distribution
             if (_binder.ProcessCmdKey(this, keyData))
             {
                 return true;
+            }
+
+            switch (keyData)
+            {
+                case Keys.Escape:
+                    base.Close();
+                    break;
             }
 
             return base.ProcessCmdKey(ref msg, keyData);

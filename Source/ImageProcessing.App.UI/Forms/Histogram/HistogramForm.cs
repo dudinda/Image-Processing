@@ -1,3 +1,4 @@
+using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
 using ImageProcessing.App.Presentation.Presenters;
@@ -46,6 +47,18 @@ namespace ImageProcessing.App.UI.Forms.Histogram
                .Unsubscribe(typeof(HistogramPresenter), this);
 
             base.Dispose(true);
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Escape:
+                    base.Close();
+                    break;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

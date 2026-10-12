@@ -20,7 +20,7 @@ namespace ImageProcessing.App.UI.Forms.ColorMatrix
     {
         private readonly IColorMatrixFormEventBinder _binder;
         private readonly IMainFormExposer _main;
-        private readonly MetroTabPage _tab = new MetroTabPage();
+        private readonly MetroTabPage _tab = new();
 
         public ColorMatrixForm(
             IMainView main,
@@ -28,7 +28,6 @@ namespace ImageProcessing.App.UI.Forms.ColorMatrix
         {
             InitializeComponent();  
             PopulateComboBox<ClrMatrix>(ColorMatrixComboBox);
-            _main = main as IMainFormExposer;
 
             TopLevel = false;
             Dock = DockStyle.Fill;
@@ -37,7 +36,7 @@ namespace ImageProcessing.App.UI.Forms.ColorMatrix
 
             _tab.Controls.Add(this);
             _tab.Text = Text;
-
+         
             _binder = binder;
   
             for (var row = 0; row < ColorMatrixGrid.ColumnCount; ++row)
@@ -47,6 +46,7 @@ namespace ImageProcessing.App.UI.Forms.ColorMatrix
             }
 
             BringToFront();
+            _main = main as IMainFormExposer;
         }
           
         public ClrMatrix Dropdown
@@ -132,11 +132,11 @@ namespace ImageProcessing.App.UI.Forms.ColorMatrix
         public new void Show()
         {
             _binder.OnElementExpose(this);
-
             _main.TabsCtrl.TabPages.Add(_tab);
             _main.TabsCtrl.SelectedTab = _tab;
-
+        
             base.Show();
+            Focus();
         }
 
         public new void Close()
@@ -176,6 +176,23 @@ namespace ImageProcessing.App.UI.Forms.ColorMatrix
                .Unsubscribe(typeof(ColorMatrixPresenter), this);
 
             base.Dispose(true);
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (_binder.ProcessCmdKey(this, keyData))
+            {
+                return true;
+            }
+
+            switch(keyData)
+            {
+                case Keys.Escape:
+                    base.Close();
+                    return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

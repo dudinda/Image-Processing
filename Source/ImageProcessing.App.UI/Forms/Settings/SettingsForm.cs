@@ -16,7 +16,7 @@ namespace ImageProcessing.App.UI.Forms.Settings
     {
         private readonly ISettingsFormEventBinder _binder;
         private readonly IMainFormExposer _main;
-        private readonly MetroTabPage _tab = new MetroTabPage();
+        private readonly MetroTabPage _tab = new();
 
         public SettingsForm(
             IMainView main,
@@ -129,6 +129,18 @@ namespace ImageProcessing.App.UI.Forms.Settings
         {
             Hide();
             e.Cancel = true;
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Escape:
+                    base.Close();
+                    break;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

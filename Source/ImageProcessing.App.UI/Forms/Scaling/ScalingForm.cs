@@ -17,7 +17,7 @@ namespace ImageProcessing.App.UI.Forms.Scaling
     {
         private readonly IMainFormExposer _main;
         private readonly IScalingFormEventBinder _binder;
-        private readonly MetroTabPage _tab = new MetroTabPage();
+        private readonly MetroTabPage _tab = new();
 
         public ScalingForm(
             IMainView main,
@@ -105,6 +105,23 @@ namespace ImageProcessing.App.UI.Forms.Scaling
         public void Tooltip(string message)
         {
             throw new System.NotImplementedException();
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (_binder.ProcessCmdKey(this, keyData))
+            {
+                return true;
+            }
+
+            switch (keyData)
+            {
+                case Keys.Escape:
+                    base.Close();
+                    break;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

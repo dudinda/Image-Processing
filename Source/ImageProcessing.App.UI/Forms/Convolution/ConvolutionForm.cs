@@ -19,7 +19,7 @@ namespace ImageProcessing.App.UI.Forms.Convolution
     {
         private readonly IConvolutionFormEventBinder _binder;
         private readonly IMainFormExposer _main;
-        private readonly MetroTabPage _tab = new MetroTabPage();
+        private readonly MetroTabPage _tab = new();
 
         public ConvolutionForm(
             IMainView main,
@@ -32,7 +32,7 @@ namespace ImageProcessing.App.UI.Forms.Convolution
             TopLevel = false;
             Dock = DockStyle.Fill;
             Parent = _tab;
-
+            _tab.GotFocus += (sender, args) => _tab.FindForm().Focus();
             _tab.Controls.Add(this);
             _tab.Text = Text;
 
@@ -44,15 +44,18 @@ namespace ImageProcessing.App.UI.Forms.Convolution
 
         public new void Show()
         {
+
             _main.TabsCtrl.TabPages.Add(_tab);
             _main.TabsCtrl.SelectedTab = _tab;
+
             base.Show();
+            Focus();
         }
 
         public new void Close()
         {
             var idx = _main.TabsCtrl.SelectedIndex;
-
+        
             if (_main.TabsCtrl.SelectedIndex != 0)
             {
                 _main.TabsCtrl.SelectedTab = _main.TabsCtrl.TabPages[idx - 1];
@@ -109,6 +112,13 @@ namespace ImageProcessing.App.UI.Forms.Convolution
             if (_binder.ProcessCmdKey(this, keyData))
             {
                 return true;
+            }
+
+            switch (keyData)
+            {
+                case Keys.Escape:
+                    base.Close();
+                    break;
             }
 
             return base.ProcessCmdKey(ref msg, keyData);

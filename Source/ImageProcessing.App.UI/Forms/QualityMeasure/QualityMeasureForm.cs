@@ -43,6 +43,18 @@ namespace ImageProcessing.App.UI.Forms.QualityMeasure
             Hide();
             e.Cancel = true;
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Escape:
+                    base.Close();
+                    break;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
     }
 }
 
