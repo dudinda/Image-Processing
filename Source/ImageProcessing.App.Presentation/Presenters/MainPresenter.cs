@@ -177,8 +177,12 @@ namespace ImageProcessing.App.Presentation.Presenters
                 if(View.IsCaptureRegion)
                 {
                     var copy = await _reference.GetCopy().ConfigureAwait(true);
-                    View.SetImage(copy);
-                    View.Refresh();
+                    _pipeline.Register(
+                        new PipelineBlock(copy)
+                            .Add<Bitmap>(
+                                (bmp) => PaintBlock(bmp)
+                             )
+                         );
                 } 
             }
             catch (Exception ex)
