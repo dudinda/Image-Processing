@@ -9,6 +9,8 @@ using ImageProcessing.App.UI.Services.FormExposers;
 using ImageProcessing.Microkernel.MVP.Services.Aggregator;
 using ImageProcessing.Microkernel.MVP.View;
 
+using MetroFramework.Controls;
+
 using static ImageProcessing.App.Presentation.Code.Enums.ImageContainer;
 using static ImageProcessing.App.Presentation.Code.Enums.UndoRedoAction;
 
@@ -88,9 +90,19 @@ namespace ImageProcessing.App.UI.Services.FormEventBinders.Main.Implementation
             source.Load += (sender, args)
                  => _aggregator.PublishFrom(source, new FormIsLoadedEventArgs());
 
-            source.TabsCtrl.Selected += (sender, args) =>
+            source.TabsCtrl.SelectedIndexChanged += (sender, args) =>
             {
-                var view = args.TabPage?.Controls[0] as IView;
+                var tab = (sender as MetroTabControl)?.SelectedTab;
+                var view = tab?.Controls[0] as IView;
+                if (view != null)
+                {
+                    _aggregator.PublishFrom(view, new RestoreFocusEventArgs());
+                }
+            };
+            source.TabsCtrl.MouseClick += (sender, args) =>
+            {
+                var tab = (sender as MetroTabControl)?.SelectedTab;
+                var view = tab?.Controls[0] as IView;
                 if (view != null)
                 {
                     _aggregator.PublishFrom(view, new RestoreFocusEventArgs());
@@ -104,7 +116,6 @@ namespace ImageProcessing.App.UI.Services.FormEventBinders.Main.Implementation
                     _aggregator.PublishFrom(view, new RestoreFocusEventArgs());
                 }
             };
-
         }
 
         public bool ProcessCmdKey(IMainFormExposer view, Keys keyData)
