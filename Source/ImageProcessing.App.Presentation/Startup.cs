@@ -72,6 +72,7 @@ using ImageProcessing.App.Domain.Win.Providers.VisitableFactory.Histogram.Implem
 using ImageProcessing.App.Domain.Win.Providers.Visitors.Histogram;
 using ImageProcessing.App.Domain.Win.Providers.Visitors.Histogram.Implementation;
 using ImageProcessing.App.Domain.Win.Services.Builders.ChartSeries;
+using ImageProcessing.App.Domain.Win.Services.Draw;
 using ImageProcessing.App.Domain.Win.Services.FileDialog;
 using ImageProcessing.App.Domain.Win.Services.Histogram;
 using ImageProcessing.App.Domain.Win.Services.Histogram.Implementation;
@@ -164,6 +165,12 @@ namespace ImageProcessing.App.Presentation
                     var config = prov.Resolve<IConfiguration>();
                     var options = config.GetSection(nameof(OpenDialogOptions)).Get<OpenDialogOptions>();
                     return new FileDialogService(options);
+                })
+                .RegisterTransient<IDrawService>((prov) =>
+                {
+                    var config = prov.Resolve<IConfiguration>();
+                    var options = config.GetSection(nameof(PenOptions)).Get<PenOptions>();
+                    return new DrawService(options);
                 })
                 .RegisterTransient<IConvolutionFactory, ConvolutionFactory>()
                 .RegisterTransient<IMorphologyFactory, MorphologyFactory>()

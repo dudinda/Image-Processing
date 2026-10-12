@@ -12,6 +12,7 @@ using ImageProcessing.App.Domain.Services.Factories.Scaling;
 using ImageProcessing.App.Domain.Services.Factories.Transformation;
 using ImageProcessing.App.Domain.Services.Pipeline;
 using ImageProcessing.App.Domain.Win.Models.Options;
+using ImageProcessing.App.Domain.Win.Services.Draw;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.BitmapLuminance.Implementation;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.BitmapLuminance.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Providers.Convolution.Implementation;
@@ -38,6 +39,7 @@ using ImageProcessing.App.Integration.Monolith.Domain.ServiceModel.Vistiors.Conv
 using ImageProcessing.App.Integration.Monolith.Domain.ServiceModel.Vistiors.Convolution.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.ServiceModel.Vistiors.Histogram.Implementation;
 using ImageProcessing.App.Integration.Monolith.Domain.ServiceModel.Vistiors.Histogram.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Implementation;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Bmp.Implementation;
@@ -54,6 +56,7 @@ using ImageProcessing.App.Integration.Monolith.Domain.Services.Distribution.Rand
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Distribution.RandomVariable.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.FileDialog.Implementation;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.FileDialog.Interface;
+using ImageProcessing.App.Integration.Monolith.Domain.Services.Implementation;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Locker.Implementation;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Locker.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.Morphology.Implementation;
@@ -133,6 +136,9 @@ namespace ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain
                         builder.Resolve<ITransformationFactory>()));
 
             builder
+               .RegisterTransient<IDrawServiceWrapper>(provider =>
+                    Substitute.ForPartsOf<DrawServiceWrapper>(
+                        builder.Resolve<IDrawService>()))
                .RegisterTransient<IUndoRedoServiceWrapper>(provider =>
                     Substitute.ForPartsOf<UndoRedoServiceWrapper>(
                         builder.Resolve<UndoRedoOptions>()))
