@@ -112,5 +112,11 @@ namespace ImageProcessing.App.Presentation.UnitTests.TestsComponents.Wrappers.Fo
 
         public virtual void EnableControls(bool isEnabled)
             => _form.EnableControls(isEnabled);
+
+        public virtual Rectangle GetArea()
+            => _form.GetArea();
+
+        public virtual void SetArea(Rectangle area)
+            => _form.SetArea(area);
     }
 }

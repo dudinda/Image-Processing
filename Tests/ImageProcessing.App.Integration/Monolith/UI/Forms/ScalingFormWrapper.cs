@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 using ImageProcessing.App.Domain.Code.Enums;
@@ -75,5 +76,11 @@ namespace ImageProcessing.App.Integration.Monolith.UI.Forms
 
         public virtual void EnableControls(bool isEnabled)
               => _form.EnableControls(isEnabled);
+
+        public virtual Rectangle GetArea()
+            => _form.GetArea();
+
+        public virtual void SetArea(Rectangle area)
+            => _form.SetArea(area);
     }
 }
