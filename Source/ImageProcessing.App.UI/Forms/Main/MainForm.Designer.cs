@@ -78,7 +78,7 @@ namespace ImageProcessing.App.UI.Forms.Main
             this.MainMenu.Location = new System.Drawing.Point(20, 60);
             this.MainMenu.Name = "MainMenu";
             this.MainMenu.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.MainMenu.Size = new System.Drawing.Size(715, 24);
+            this.MainMenu.Size = new System.Drawing.Size(802, 24);
             this.MainMenu.TabIndex = 1;
             // 
             // FileMenu
@@ -135,7 +135,7 @@ namespace ImageProcessing.App.UI.Forms.Main
             // AffineTransformationMenu
             // 
             this.AffineTransformationMenu.Name = "AffineTransformationMenu";
-            this.AffineTransformationMenu.Size = new System.Drawing.Size(134, 20);
+            this.AffineTransformationMenu.Size = new System.Drawing.Size(135, 20);
             this.AffineTransformationMenu.Text = "Affine Transformation";
             // 
             // RotationMenu
@@ -187,7 +187,7 @@ namespace ImageProcessing.App.UI.Forms.Main
             this.SelectionBtn});
             this.ToolBarMenu.Location = new System.Drawing.Point(20, 84);
             this.ToolBarMenu.Name = "ToolBarMenu";
-            this.ToolBarMenu.Size = new System.Drawing.Size(715, 27);
+            this.ToolBarMenu.Size = new System.Drawing.Size(802, 27);
             this.ToolBarMenu.Stretch = true;
             this.ToolBarMenu.TabIndex = 5;
             // 
@@ -249,7 +249,7 @@ namespace ImageProcessing.App.UI.Forms.Main
             this.SrcRotation.Maximum = 360;
             this.SrcRotation.Minimum = -360;
             this.SrcRotation.Name = "SrcRotation";
-            this.SrcRotation.Size = new System.Drawing.Size(715, 34);
+            this.SrcRotation.Size = new System.Drawing.Size(802, 34);
             this.SrcRotation.TabIndex = 1;
             this.SrcRotation.TrackBarValue = 0;
             this.SrcRotation.Value = 0;
@@ -263,7 +263,7 @@ namespace ImageProcessing.App.UI.Forms.Main
             this.SrcZoom.Maximum = 200;
             this.SrcZoom.Minimum = -200;
             this.SrcZoom.Name = "SrcZoom";
-            this.SrcZoom.Size = new System.Drawing.Size(715, 31);
+            this.SrcZoom.Size = new System.Drawing.Size(802, 31);
             this.SrcZoom.TabIndex = 0;
             this.SrcZoom.Tag = "Source";
             this.SrcZoom.TrackBarValue = 0;
@@ -281,7 +281,7 @@ namespace ImageProcessing.App.UI.Forms.Main
             this.MainContainer.HorizontalScrollbarSize = 10;
             this.MainContainer.Location = new System.Drawing.Point(20, 111);
             this.MainContainer.Name = "MainContainer";
-            this.MainContainer.Size = new System.Drawing.Size(715, 678);
+            this.MainContainer.Size = new System.Drawing.Size(802, 678);
             this.MainContainer.TabIndex = 16;
             this.MainContainer.VerticalScrollbarBarColor = true;
             this.MainContainer.VerticalScrollbarHighlightOnWheel = false;
@@ -297,7 +297,7 @@ namespace ImageProcessing.App.UI.Forms.Main
             this.Src.Location = new System.Drawing.Point(0, 0);
             this.Src.Name = "Src";
             this.Src.Padding = new System.Windows.Forms.Padding(40);
-            this.Src.Size = new System.Drawing.Size(715, 367);
+            this.Src.Size = new System.Drawing.Size(802, 367);
             this.Src.TabIndex = 2;
             this.Src.UseSelectable = true;
             // 
@@ -306,7 +306,7 @@ namespace ImageProcessing.App.UI.Forms.Main
             this.Tabs.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.Tabs.Location = new System.Drawing.Point(0, 432);
             this.Tabs.Name = "Tabs";
-            this.Tabs.Size = new System.Drawing.Size(715, 246);
+            this.Tabs.Size = new System.Drawing.Size(802, 246);
             this.Tabs.TabIndex = 14;
             this.Tabs.UseSelectable = true;
             // 
@@ -314,7 +314,7 @@ namespace ImageProcessing.App.UI.Forms.Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(755, 809);
+            this.ClientSize = new System.Drawing.Size(842, 809);
             this.Controls.Add(this.MainContainer);
             this.Controls.Add(this.ToolBarMenu);
             this.Controls.Add(this.MainMenu);
