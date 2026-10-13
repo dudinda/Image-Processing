@@ -84,7 +84,7 @@ namespace ImageProcessing.App.Presentation.Presenters
                 var copy = await _reference.GetCopy().ConfigureAwait(true);
 
                 Aggregator.PublishFromAll(publisher,
-                    new AttachBlockToRendererEventArgs(
+                    new AttachBlockToPaintEventArgs(
                         block: new PipelineBlock(copy)
                             .Add<Bitmap, Bitmap>(
                                 (bmp) => _provider.Apply(bmp, color))
