@@ -4,12 +4,14 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Domain.Code.Constants;
-using ImageProcessing.App.Domain.Code.Extensions;
+using ImageProcessing.App.Domain.Models.Rgb.Background;
 
 namespace ImageProcessing.App.Domain.Models.Scaling.Implementation
 {
     public sealed class ProximalInterpolation : IScaling
     {
+        private readonly BackgroundFilter _background = new();
+
         public Bitmap Resize(Bitmap src, double xScale, double yScale)
         {
             if (src is null) { throw new ArgumentNullException(nameof(src)); }
@@ -28,8 +30,7 @@ namespace ImageProcessing.App.Domain.Models.Scaling.Implementation
             if (dstWidth <= 0) { throw new ArgumentException(nameof(xScale)); }
             if (dstHeight <= 0) { throw new ArgumentException(nameof(yScale)); }
 
-            var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
-                .DrawFilledRectangle(Brushes.White);
+            var dst = _background.Filter(new Bitmap(dstWidth, dstHeight, src.PixelFormat), Color.White);
 
             var srcData = src.LockBits(
                 new Rectangle(0, 0, srcWidth, srcHeight),

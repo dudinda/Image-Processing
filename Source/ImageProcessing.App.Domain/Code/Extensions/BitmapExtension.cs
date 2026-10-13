@@ -9,17 +9,6 @@ namespace ImageProcessing.App.Domain.Code.Extensions
     {
         extension(Bitmap bmp)
         {
-            public Bitmap DrawFilledRectangle(Brush brush)
-            {
-                using (var graph = Graphics.FromImage(bmp))
-                {
-                    Rectangle ImageSize = new Rectangle(0, 0, bmp.Width, bmp.Height);
-                    graph.FillRectangle(brush, ImageSize);
-                }
-
-                return bmp;
-            }
-
             /// <summary>
             /// Adjust an image border by the <paramref name="numberOfPixels"/>.
             /// </summary>

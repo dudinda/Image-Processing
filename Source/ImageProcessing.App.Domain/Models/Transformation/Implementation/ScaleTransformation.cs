@@ -4,12 +4,14 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Domain.Code.Constants;
-using ImageProcessing.App.Domain.Code.Extensions;
+using ImageProcessing.App.Domain.Models.Rgb.Background;
 
 namespace ImageProcessing.App.Domain.Models.Transformation.Implementation
 {
     public sealed class ScaleTransformation : ITransformation
     {
+        private readonly BackgroundFilter _background = new();
+
         public Bitmap Transform(Bitmap src, double sx, double sy)
         {
             if (src is null) { throw new ArgumentNullException(nameof(src)); }
@@ -25,8 +27,7 @@ namespace ImageProcessing.App.Domain.Models.Transformation.Implementation
             if (dstWidth <= 0) { throw new ArgumentException(nameof(sx)); }
             if (dstHeight <= 0) { throw new ArgumentException(nameof(sy)); }
 
-            var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
-                .DrawFilledRectangle(Brushes.White);
+            var dst = _background.Filter(new Bitmap(dstWidth, dstHeight, src.PixelFormat), Color.White);
 
             var srcData = src.LockBits(
                 new Rectangle(0, 0, src.Width, src.Height),

@@ -4,12 +4,14 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Domain.Code.Constants;
-using ImageProcessing.App.Domain.Code.Extensions;
+using ImageProcessing.App.Domain.Models.Rgb.Background;
 
 namespace ImageProcessing.App.Domain.Models.Rotation.Implementation
 {
     public sealed class SamplingRotation : IRotation
     {
+        private readonly BackgroundFilter _background = new();
+
         public Bitmap Rotate(Bitmap src, double rad)
         {
             if (src is null) { throw new ArgumentNullException(nameof(src)); }
@@ -36,8 +38,7 @@ namespace ImageProcessing.App.Domain.Models.Rotation.Implementation
             var (dstHeight, dstWidth) = ((int)(yMax - yMin), (int)(xMax - xMin));
             var (dSrcWidth, dSrcHeight) = ((double)srcWidth, (double)srcHeight);
 
-            var dst = new Bitmap(dstWidth, dstHeight, src.PixelFormat)
-                .DrawFilledRectangle(Brushes.White);
+            var dst = _background.Filter(new Bitmap(dstWidth, dstHeight, src.PixelFormat), Color.White);
 
             var (xCenter, yCenter) = ((dstWidth - 1) / 2.0, (dstHeight - 1) / 2.0);
             var (xSrcCenter, ySrcCenter) = ((srcWidth - 1) / 2.0, (srcHeight - 1) / 2.0);

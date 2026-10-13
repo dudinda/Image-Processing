@@ -4,12 +4,14 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 using ImageProcessing.App.Domain.Code.Constants;
-using ImageProcessing.App.Domain.Code.Extensions;
+using ImageProcessing.App.Domain.Models.Rgb.Background;
 
 namespace ImageProcessing.App.Domain.Models.Transformation.Implementation
 {
     public sealed class TranslationTransformation : ITransformation
     {
+        private readonly BackgroundFilter _background = new();
+
         public Bitmap Transform(Bitmap src, double tx, double ty)
         {
             if (src is null) { throw new ArgumentNullException(nameof(src)); }
@@ -23,8 +25,7 @@ namespace ImageProcessing.App.Domain.Models.Transformation.Implementation
             var (srcWidth, srcHeight) = (src.Width, src.Height);
             var (dSrcWidth, dSrcHeight) = ((double)srcWidth, (double)srcHeight);
 
-            var dst = new Bitmap(srcWidth, srcHeight, src.PixelFormat)
-              .DrawFilledRectangle(Brushes.White);
+            var dst = _background.Filter(new Bitmap(srcWidth, srcHeight, src.PixelFormat), Color.White);
 
             var srcData = src.LockBits(
               new Rectangle(0, 0, srcWidth, srcHeight),
