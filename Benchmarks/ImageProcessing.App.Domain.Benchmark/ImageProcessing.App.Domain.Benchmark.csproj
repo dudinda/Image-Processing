@@ -1,16 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.12.0" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.15.8" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Source\ImageProcessing.App.Domain\ImageProcessing.App.Domain.csproj" />
-    <ProjectReference Include="..\..\Source\ImageProcessing.App.ServiceLayer\ImageProcessing.App.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
