@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -177,11 +177,17 @@
   <data name="ShowSettingsMenu" xml:space="preserve">
     <value>Ошибка при открытии меню настроек.</value>
   </data>
+  <data name="ShowTransformationMenu" xml:space="preserve">
+    <value>Ошибка при октрыии меню афинных преобразований.</value>
+  </data>
   <data name="Shuffle" xml:space="preserve">
     <value>Ошибка при перемешивании изображения.</value>
   </data>
   <data name="TransformHistogram" xml:space="preserve">
     <value>Ошибка при преобразовании гистограммы.</value>
+  </data>
+  <data name="UndoRedo" xml:space="preserve">
+    <value>Ошибка при отмене/возврате последней опреации</value>
   </data>
   <data name="UpdateColorMatrix" xml:space="preserve">
     <value>Ошибка при обновлении матрицы цвета.</value>
