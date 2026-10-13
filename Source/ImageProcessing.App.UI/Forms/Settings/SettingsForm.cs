@@ -104,6 +104,11 @@ namespace ImageProcessing.App.UI.Forms.Settings
             base.Hide();
         }
 
+        public new void Close()
+        {
+            Hide();
+        }
+
         public void EnableControls(bool isEnabled)
         {
             Write(() => SettingsButtonPanel.Enable(isEnabled));
