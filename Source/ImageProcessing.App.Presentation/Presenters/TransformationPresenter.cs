@@ -19,7 +19,7 @@ using Microsoft.Extensions.Logging;
 namespace ImageProcessing.App.Presentation.Presenters
 {
     internal sealed class TransformationPresenter : BasePresenter<ITransformationView, BitmapViewModel>,
-        ISubscriber<ApplyTransformationEventArgs>, ISubscriber<ContainerUpdatedEventArgs>,
+        ISubscriber<ApplyTransformationEventArgs>, ISubscriber<AreaSelectedEventArgs>,
         ISubscriber<RestoreFocusEventArgs>, ISubscriber<FormIsClosedEventArgs>,
         ISubscriber<EnableControlEventArgs>
     {
@@ -66,12 +66,13 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
         }
 
-        /// <inheritdoc cref="ContainerUpdatedEventArgs"/>
-        public Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
+        /// <inheritdoc cref="AreaSelectedEventArgs"/>
+        public Task OnEventHandler(object publisher, AreaSelectedEventArgs e)
         {
             try
             {
-                ViewModel.SelectedArea = e.Area;
+                View.SetArea(e.Area);
+
             }
             catch (Exception ex)
             {

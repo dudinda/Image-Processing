@@ -21,7 +21,7 @@ using Microsoft.Extensions.Logging;
 namespace ImageProcessing.App.Presentation.Presenters
 {
     internal sealed class ColorMatrixPresenter : BasePresenter<IColorMatrixView, BitmapViewModel>,
-        ISubscriber<ApplyColorMatrixEventArgs>, ISubscriber<ContainerUpdatedEventArgs>,
+        ISubscriber<ApplyColorMatrixEventArgs>, ISubscriber<AreaSelectedEventArgs>,
         ISubscriber<CustomColorMatrixEventArgs>, ISubscriber<ChangeColorMatrixEventArgs>,
         ISubscriber<ApplyCustomColorMatrixEventArgs>, ISubscriber<RestoreFocusEventArgs>,
         ISubscriber<FormIsClosedEventArgs>, ISubscriber<EnableControlEventArgs>
@@ -130,12 +130,13 @@ namespace ImageProcessing.App.Presentation.Presenters
             return Task.CompletedTask;
         }
 
-        /// <inheritdoc cref="ContainerUpdatedEventArgs"/>
-        public Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
+        /// <inheritdoc cref="AreaSelectedEventArgs"/>
+        public Task OnEventHandler(object publisher, AreaSelectedEventArgs e)
         {
             try
             {
-                ViewModel.SelectedArea = e.Area;
+                View.SetArea(e.Area);
+
             }
             catch (Exception ex)
             {

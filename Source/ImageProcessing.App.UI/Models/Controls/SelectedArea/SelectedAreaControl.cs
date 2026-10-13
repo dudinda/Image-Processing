@@ -34,6 +34,23 @@ namespace ImageProcessing.App.UI.Controls
             get => _penWidth;
         }
 
+        public Rectangle GetArea()
+        {
+            int.TryParse(TopLeft.Text, out var x);
+            int.TryParse(TopRight.Text, out var y);
+            int.TryParse(BottomLeft.Text, out var width);
+            int.TryParse(BottomRight.Text, out var height);
+            return new Rectangle(x, y, width, height);
+        }
+
+        public void SetArea(Rectangle area)
+        {
+            TopLeft.Text = area.X.ToString();
+            TopRight.Text = area.Y.ToString();
+            BottomLeft.Text = area.Width.ToString();
+            BottomRight.Text = area.Height.ToString();
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);

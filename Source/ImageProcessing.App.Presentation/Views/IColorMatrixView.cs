@@ -10,7 +10,8 @@ namespace ImageProcessing.App.Presentation.Views
     /// a predefined and custom color matrix.
     /// </summary>
     public interface IColorMatrixView : IView,
-        IDropdown<ClrMatrix>, ITooltip, IFormState
+        IDropdown<ClrMatrix>, ITooltip, IFormState,
+        ISelectedArea
     {
         /// <summary>
         /// Set a color matrix.

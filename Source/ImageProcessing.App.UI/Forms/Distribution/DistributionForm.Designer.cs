@@ -45,7 +45,7 @@ namespace ImageProcessing.App.UI.Forms.Distribution
             this.DistributionsComboBox = new MetroFramework.Controls.MetroComboBox();
             this.Transform = new MetroFramework.Controls.MetroButton();
             this.DistributionButtonPanel = new MetroFramework.Controls.MetroPanel();
-            this.selectedAreaControl1 = new ImageProcessing.App.UI.Controls.SelectedAreaControl();
+            this.SelectedArea = new ImageProcessing.App.UI.Controls.SelectedAreaControl();
             this.ToolBarMenu.SuspendLayout();
             this.DistributionButtonPanel.SuspendLayout();
             this.SuspendLayout();
@@ -231,7 +231,7 @@ namespace ImageProcessing.App.UI.Forms.Distribution
             // DistributionButtonPanel
             // 
             this.DistributionButtonPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.DistributionButtonPanel.Controls.Add(this.selectedAreaControl1);
+            this.DistributionButtonPanel.Controls.Add(this.SelectedArea);
             this.DistributionButtonPanel.Controls.Add(this.DistributionsComboBox);
             this.DistributionButtonPanel.Controls.Add(this.ToolBarMenu);
             this.DistributionButtonPanel.Controls.Add(this.Transform);
@@ -247,16 +247,16 @@ namespace ImageProcessing.App.UI.Forms.Distribution
             this.DistributionButtonPanel.VerticalScrollbarHighlightOnWheel = false;
             this.DistributionButtonPanel.VerticalScrollbarSize = 10;
             // 
-            // selectedAreaControl1
+            // SelectedArea
             // 
-            this.selectedAreaControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.selectedAreaControl1.AutoSize = true;
-            this.selectedAreaControl1.Location = new System.Drawing.Point(509, 0);
-            this.selectedAreaControl1.Margin = new System.Windows.Forms.Padding(0);
-            this.selectedAreaControl1.Name = "selectedAreaControl1";
-            this.selectedAreaControl1.Size = new System.Drawing.Size(267, 131);
-            this.selectedAreaControl1.TabIndex = 7;
-            this.selectedAreaControl1.UseSelectable = true;
+            this.SelectedArea.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SelectedArea.AutoSize = true;
+            this.SelectedArea.Location = new System.Drawing.Point(509, 0);
+            this.SelectedArea.Margin = new System.Windows.Forms.Padding(0);
+            this.SelectedArea.Name = "SelectedArea";
+            this.SelectedArea.Size = new System.Drawing.Size(267, 131);
+            this.SelectedArea.TabIndex = 7;
+            this.SelectedArea.UseSelectable = true;
             // 
             // DistributionForm
             // 
@@ -297,6 +297,6 @@ namespace ImageProcessing.App.UI.Forms.Distribution
         private System.Windows.Forms.ToolStripButton ShuffleSrc;
         private QualityMeasureToolStripButton QualityMeasure;
         private MetroFramework.Controls.MetroPanel DistributionButtonPanel;
-        private Controls.SelectedAreaControl selectedAreaControl1;
+        private Controls.SelectedAreaControl SelectedArea;
     }
 }

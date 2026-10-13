@@ -34,7 +34,7 @@ namespace ImageProcessing.App.UI.Forms.Scaling
             this.ResizeButton = new MetroFramework.Controls.MetroButton();
             this.ScalingComboBox = new MetroFramework.Controls.MetroComboBox();
             this.ScaleButtonPanel = new MetroFramework.Controls.MetroPanel();
-            this.selectedAreaControl1 = new ImageProcessing.App.UI.Controls.SelectedAreaControl();
+            this.SelectedArea = new ImageProcessing.App.UI.Controls.SelectedAreaControl();
             this.metroPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.YAxisLabel)).BeginInit();
             this.metroPanel1.SuspendLayout();
@@ -182,31 +182,35 @@ namespace ImageProcessing.App.UI.Forms.Scaling
             // 
             // ScaleButtonPanel
             // 
-            this.ScaleButtonPanel.Controls.Add(this.selectedAreaControl1);
+            this.ScaleButtonPanel.Controls.Add(this.SelectedArea);
             this.ScaleButtonPanel.Controls.Add(this.metroPanel2);
             this.ScaleButtonPanel.Controls.Add(this.ScalingComboBox);
             this.ScaleButtonPanel.Controls.Add(this.ResizeButton);
             this.ScaleButtonPanel.Controls.Add(this.metroPanel1);
             this.ScaleButtonPanel.Controls.Add(this.ScaleComboBox);
+            this.ScaleButtonPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ScaleButtonPanel.HorizontalScrollbarBarColor = true;
             this.ScaleButtonPanel.HorizontalScrollbarHighlightOnWheel = false;
             this.ScaleButtonPanel.HorizontalScrollbarSize = 10;
-            this.ScaleButtonPanel.Location = new System.Drawing.Point(23, 63);
+            this.ScaleButtonPanel.Location = new System.Drawing.Point(20, 60);
             this.ScaleButtonPanel.Name = "ScaleButtonPanel";
-            this.ScaleButtonPanel.Size = new System.Drawing.Size(575, 145);
+            this.ScaleButtonPanel.Size = new System.Drawing.Size(584, 142);
             this.ScaleButtonPanel.TabIndex = 9;
             this.ScaleButtonPanel.VerticalScrollbarBarColor = true;
             this.ScaleButtonPanel.VerticalScrollbarHighlightOnWheel = false;
             this.ScaleButtonPanel.VerticalScrollbarSize = 10;
             // 
-            // selectedAreaControl1
+            // SelectedArea
             // 
-            this.selectedAreaControl1.Location = new System.Drawing.Point(292, 3);
-            this.selectedAreaControl1.Margin = new System.Windows.Forms.Padding(0);
-            this.selectedAreaControl1.Name = "selectedAreaControl1";
-            this.selectedAreaControl1.Size = new System.Drawing.Size(267, 101);
-            this.selectedAreaControl1.TabIndex = 9;
-            this.selectedAreaControl1.UseSelectable = true;
+            this.SelectedArea.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SelectedArea.AutoSize = true;
+            this.SelectedArea.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.SelectedArea.Location = new System.Drawing.Point(317, 3);
+            this.SelectedArea.Margin = new System.Windows.Forms.Padding(0);
+            this.SelectedArea.Name = "SelectedArea";
+            this.SelectedArea.Size = new System.Drawing.Size(267, 101);
+            this.SelectedArea.TabIndex = 9;
+            this.SelectedArea.UseSelectable = true;
             // 
             // ScalingForm
             // 
@@ -226,6 +230,7 @@ namespace ImageProcessing.App.UI.Forms.Scaling
             this.metroPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ScaleButtonPanel.ResumeLayout(false);
+            this.ScaleButtonPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -242,6 +247,6 @@ namespace ImageProcessing.App.UI.Forms.Scaling
         private MetroFramework.Controls.MetroButton ResizeButton;
         private MetroFramework.Controls.MetroComboBox ScalingComboBox;
         private MetroFramework.Controls.MetroPanel ScaleButtonPanel;
-        private Controls.SelectedAreaControl selectedAreaControl1;
+        private Controls.SelectedAreaControl SelectedArea;
     }
 }

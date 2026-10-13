@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 using ImageProcessing.App.Domain.Code.Collections;
@@ -128,6 +129,12 @@ namespace ImageProcessing.App.UI.Forms.ColorMatrix
 
             return new ReadOnly2DArray<double>(matrix);
         }
+
+        public Rectangle GetArea()
+            => SelectedArea.GetArea();
+
+        public void SetArea(Rectangle area)
+            => SelectedArea.SetArea(area);
 
         public new void Show()
         {

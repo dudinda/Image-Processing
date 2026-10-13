@@ -22,11 +22,11 @@ namespace ImageProcessing.App.UI.Forms.ColorMatrix
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ErrorToolTip = new MetroFramework.Components.MetroToolTip();
             this.ColorMatrixButtonPanel = new MetroFramework.Controls.MetroPanel();
             this.SelectedArea = new ImageProcessing.App.UI.Controls.SelectedAreaControl();
@@ -60,13 +60,14 @@ namespace ImageProcessing.App.UI.Forms.ColorMatrix
             this.ColorMatrixButtonPanel.Controls.Add(this.ApplyCustomColorMatrixButton);
             this.ColorMatrixButtonPanel.Controls.Add(this.ApplyColorMatrixButton);
             this.ColorMatrixButtonPanel.Controls.Add(this.ColorMatrixGrid);
+            this.ColorMatrixButtonPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ColorMatrixButtonPanel.HorizontalScrollbar = true;
             this.ColorMatrixButtonPanel.HorizontalScrollbarBarColor = true;
             this.ColorMatrixButtonPanel.HorizontalScrollbarHighlightOnWheel = false;
             this.ColorMatrixButtonPanel.HorizontalScrollbarSize = 10;
-            this.ColorMatrixButtonPanel.Location = new System.Drawing.Point(23, 52);
+            this.ColorMatrixButtonPanel.Location = new System.Drawing.Point(20, 60);
             this.ColorMatrixButtonPanel.Name = "ColorMatrixButtonPanel";
-            this.ColorMatrixButtonPanel.Size = new System.Drawing.Size(911, 197);
+            this.ColorMatrixButtonPanel.Size = new System.Drawing.Size(917, 192);
             this.ColorMatrixButtonPanel.TabIndex = 16;
             this.ColorMatrixButtonPanel.VerticalScrollbar = true;
             this.ColorMatrixButtonPanel.VerticalScrollbarBarColor = true;
@@ -75,10 +76,12 @@ namespace ImageProcessing.App.UI.Forms.ColorMatrix
             // 
             // SelectedArea
             // 
-            this.SelectedArea.Location = new System.Drawing.Point(619, 29);
+            this.SelectedArea.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SelectedArea.AutoSize = true;
+            this.SelectedArea.Location = new System.Drawing.Point(650, 8);
             this.SelectedArea.Margin = new System.Windows.Forms.Padding(0);
             this.SelectedArea.Name = "SelectedArea";
-            this.SelectedArea.Size = new System.Drawing.Size(267, 118);
+            this.SelectedArea.Size = new System.Drawing.Size(267, 139);
             this.SelectedArea.TabIndex = 22;
             this.SelectedArea.UseSelectable = true;
             // 
@@ -86,7 +89,7 @@ namespace ImageProcessing.App.UI.Forms.ColorMatrix
             // 
             this.ColorMatrixComboBox.FormattingEnabled = true;
             this.ColorMatrixComboBox.ItemHeight = 23;
-            this.ColorMatrixComboBox.Location = new System.Drawing.Point(323, 29);
+            this.ColorMatrixComboBox.Location = new System.Drawing.Point(302, 9);
             this.ColorMatrixComboBox.Name = "ColorMatrixComboBox";
             this.ColorMatrixComboBox.Size = new System.Drawing.Size(293, 29);
             this.ColorMatrixComboBox.TabIndex = 17;
@@ -95,16 +98,16 @@ namespace ImageProcessing.App.UI.Forms.ColorMatrix
             // CustomColorMatrix
             // 
             this.CustomColorMatrix.AutoSize = true;
-            this.CustomColorMatrix.Location = new System.Drawing.Point(323, 64);
+            this.CustomColorMatrix.Location = new System.Drawing.Point(302, 71);
             this.CustomColorMatrix.Name = "CustomColorMatrix";
-            this.CustomColorMatrix.Size = new System.Drawing.Size(134, 15);
+            this.CustomColorMatrix.Size = new System.Drawing.Size(133, 15);
             this.CustomColorMatrix.TabIndex = 20;
             this.CustomColorMatrix.Text = "Custom Color Matrix";
             this.CustomColorMatrix.UseSelectable = true;
             // 
             // ApplyCustomColorMatrixButton
             // 
-            this.ApplyCustomColorMatrixButton.Location = new System.Drawing.Point(323, 85);
+            this.ApplyCustomColorMatrixButton.Location = new System.Drawing.Point(302, 111);
             this.ApplyCustomColorMatrixButton.Name = "ApplyCustomColorMatrixButton";
             this.ApplyCustomColorMatrixButton.Size = new System.Drawing.Size(293, 36);
             this.ApplyCustomColorMatrixButton.TabIndex = 21;
@@ -114,7 +117,7 @@ namespace ImageProcessing.App.UI.Forms.ColorMatrix
             // 
             // ApplyColorMatrixButton
             // 
-            this.ApplyColorMatrixButton.Location = new System.Drawing.Point(323, 85);
+            this.ApplyColorMatrixButton.Location = new System.Drawing.Point(302, 111);
             this.ApplyColorMatrixButton.Name = "ApplyColorMatrixButton";
             this.ApplyColorMatrixButton.Size = new System.Drawing.Size(293, 36);
             this.ApplyColorMatrixButton.TabIndex = 18;
@@ -127,20 +130,20 @@ namespace ImageProcessing.App.UI.Forms.ColorMatrix
             this.ColorMatrixGrid.AllowUserToDeleteRows = false;
             this.ColorMatrixGrid.AllowUserToResizeColumns = false;
             this.ColorMatrixGrid.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.ColorMatrixGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.White;
+            this.ColorMatrixGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
             this.ColorMatrixGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ColorMatrixGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ColorMatrixGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.ColorMatrixGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ColorMatrixGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColorMatrixGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.ColorMatrixGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ColorMatrixGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.j0,
@@ -148,32 +151,32 @@ namespace ImageProcessing.App.UI.Forms.ColorMatrix
             this.j2,
             this.j3,
             this.j4});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ColorMatrixGrid.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColorMatrixGrid.DefaultCellStyle = dataGridViewCellStyle18;
             this.ColorMatrixGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.ColorMatrixGrid.EnableHeadersVisualStyles = false;
             this.ColorMatrixGrid.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.ColorMatrixGrid.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.ColorMatrixGrid.Location = new System.Drawing.Point(24, 29);
+            this.ColorMatrixGrid.Location = new System.Drawing.Point(3, 9);
             this.ColorMatrixGrid.Name = "ColorMatrixGrid";
             this.ColorMatrixGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ColorMatrixGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle19.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle19.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColorMatrixGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
             this.ColorMatrixGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ColorMatrixGrid.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColorMatrixGrid.RowsDefaultCellStyle = dataGridViewCellStyle20;
             this.ColorMatrixGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ColorMatrixGrid.Size = new System.Drawing.Size(293, 138);
             this.ColorMatrixGrid.TabIndex = 19;

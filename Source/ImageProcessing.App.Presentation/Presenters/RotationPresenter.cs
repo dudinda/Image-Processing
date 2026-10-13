@@ -20,8 +20,8 @@ namespace ImageProcessing.App.Presentation.Presenters
 {
     internal sealed class RotationPresenter : BasePresenter<IRotationView, BitmapViewModel>,
         ISubscriber<RotateEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
-        ISubscriber<ContainerUpdatedEventArgs>, ISubscriber<RestoreFocusEventArgs>,
-        ISubscriber<FormIsClosedEventArgs>, ISubscriber<EnableControlEventArgs>
+        ISubscriber<RestoreFocusEventArgs>, ISubscriber<FormIsClosedEventArgs>,
+        ISubscriber<EnableControlEventArgs>
 
     {
         private readonly ILogger<RotationPresenter> _logger;
@@ -73,22 +73,6 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
             catch(Exception ex)
             {
-                _logger.LogError(ex.Message);
-            }
-
-            return Task.CompletedTask;
-        }
-
-        /// <inheritdoc cref="ContainerUpdatedEventArgs"/>
-        public Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
-        {
-            try
-            {
-                ViewModel.SelectedArea = e.Area;
-            }
-            catch (Exception ex)
-            {
-                View.Tooltip(Errors.UpdatingViewModel);
                 _logger.LogError(ex.Message);
             }
 

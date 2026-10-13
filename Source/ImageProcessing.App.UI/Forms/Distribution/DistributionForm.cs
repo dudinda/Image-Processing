@@ -7,6 +7,7 @@ using ImageProcessing.App.Domain.Code.Extensions;
 using ImageProcessing.App.Domain.Win.Models.Wrapper;
 using ImageProcessing.App.Presentation.Presenters;
 using ImageProcessing.App.Presentation.Views;
+using ImageProcessing.App.Presentation.Views.ViewComponents;
 using ImageProcessing.App.UI.Code.Extensions;
 using ImageProcessing.App.UI.Services.FormEventBinders.Distribution;
 using ImageProcessing.App.UI.Services.FormExposers;
@@ -174,5 +175,11 @@ namespace ImageProcessing.App.UI.Forms.Distribution
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+        public Rectangle GetArea()
+            => SelectedArea.GetArea();
+
+        public void SetArea(Rectangle area)
+            => SelectedArea.SetArea(area);
+        
     }
 }

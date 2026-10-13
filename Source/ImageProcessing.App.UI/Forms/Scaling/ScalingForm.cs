@@ -1,3 +1,4 @@
+using System.Drawing;
 using System.Windows.Forms;
 
 using ImageProcessing.App.Domain.Code.Enums;
@@ -106,6 +107,12 @@ namespace ImageProcessing.App.UI.Forms.Scaling
         {
             throw new System.NotImplementedException();
         }
+
+        public Rectangle GetArea()
+            => SelectedArea.GetArea();
+
+        public void SetArea(Rectangle area)
+            => SelectedArea.SetArea(area);
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {

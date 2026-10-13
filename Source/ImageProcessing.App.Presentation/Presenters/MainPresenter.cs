@@ -177,12 +177,14 @@ namespace ImageProcessing.App.Presentation.Presenters
                 if(View.IsCaptureRegion)
                 {
                     var copy = await _reference.GetCopy().ConfigureAwait(true);
+                    var area = _draw.GetRectangle(e.Position);
                     _pipeline.Register(
                         new PipelineBlock(copy)
                             .Add<Bitmap>(
                                 (bmp) => PaintBlock(bmp)
                              )
                          );
+                    Aggregator.PublishFromAll(publisher, new AreaSelectedEventArgs(area));
                 } 
             }
             catch (Exception ex)

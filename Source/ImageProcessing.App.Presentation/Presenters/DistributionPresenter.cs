@@ -25,7 +25,7 @@ namespace ImageProcessing.App.Presentation.Presenters
         ISubscriber<TransformHistogramEventArgs>, ISubscriber<ShuffleEventArgs>,
         ISubscriber<BuildRandomVariableFunctionEventArgs>, ISubscriber<ShowQualityMeasureMenuEventArgs>,
         ISubscriber<GetRandomVariableInfoEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
-        ISubscriber<RestoreFocusEventArgs>, ISubscriber<ContainerUpdatedEventArgs>,
+        ISubscriber<RestoreFocusEventArgs>, ISubscriber<AreaSelectedEventArgs>,
         ISubscriber<FormIsClosedEventArgs>, ISubscriber<EnableControlEventArgs>
     {
         private readonly IBitmapService _service;
@@ -155,12 +155,13 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
         }
 
-        /// <inheritdoc cref="ContainerUpdatedEventArgs"/>
-        public Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
+        /// <inheritdoc cref="AreaSelectedEventArgs"/>
+        public Task OnEventHandler(object publisher, AreaSelectedEventArgs e)
         {
             try
             {
-                ViewModel.SelectedArea = e.Area;
+                View.SetArea(e.Area);
+
             }
             catch (Exception ex)
             {

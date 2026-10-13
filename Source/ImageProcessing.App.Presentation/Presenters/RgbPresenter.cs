@@ -22,7 +22,7 @@ namespace ImageProcessing.App.Presentation.Presenters
 {
     internal sealed class RgbPresenter : BasePresenter<IRgbView, BitmapViewModel>,
         ISubscriber<ApplyRgbFilterEventArgs>, ISubscriber<ApplyRgbChannelFilterEventArgs>,
-        ISubscriber<ContainerUpdatedEventArgs>, ISubscriber<ShowColorMatrixMenuEventArgs>,
+        ISubscriber<AreaSelectedEventArgs>, ISubscriber<ShowColorMatrixMenuEventArgs>,
         ISubscriber<ShowTooltipOnErrorEventArgs>, ISubscriber<RestoreFocusEventArgs>,
         ISubscriber<FormIsClosedEventArgs>, ISubscriber<EnableControlEventArgs>
     {
@@ -98,12 +98,13 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
         }
 
-        /// <inheritdoc cref="ContainerUpdatedEventArgs"/>
-        public Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
+        /// <inheritdoc cref="AreaSelectedEventArgs"/>
+        public Task OnEventHandler(object publisher, AreaSelectedEventArgs e)
         {
             try
             {
-                ViewModel.SelectedArea = e.Area;
+                View.SetArea(e.Area);
+
             }
             catch (Exception ex)
             {

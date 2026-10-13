@@ -21,8 +21,8 @@ namespace ImageProcessing.App.Presentation.Presenters
 {
     internal sealed class ConvolutionPresenter : BasePresenter<IConvolutionView, BitmapViewModel>,
           ISubscriber<ApplyConvolutionKernelEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
-          ISubscriber<ContainerUpdatedEventArgs>, ISubscriber<RestoreFocusEventArgs>,
-          ISubscriber<FormIsClosedEventArgs>, ISubscriber<EnableControlEventArgs>
+          ISubscriber<RestoreFocusEventArgs>, ISubscriber<FormIsClosedEventArgs>,
+        ISubscriber<EnableControlEventArgs>
     {
         private readonly ILogger<ConvolutionPresenter> _logger;
         private readonly IBitmapCopyService _reference;
@@ -66,21 +66,6 @@ namespace ImageProcessing.App.Presentation.Presenters
             }
         }
 
-        /// <inheritdoc cref="ContainerUpdatedEventArgs"/>
-        public Task OnEventHandler(object publisher, ContainerUpdatedEventArgs e)
-        {
-            try
-            {
-                ViewModel.SelectedArea = e.Area;
-            }
-            catch (Exception ex)
-            {
-                View.Tooltip(Errors.UpdatingViewModel);
-                _logger.LogError(ex.Message);
-            }
-
-            return Task.CompletedTask;
-        }
 
         /// <inheritdoc cref="ShowTooltipOnErrorEventArgs"/>
         public Task OnEventHandler(object publisher, ShowTooltipOnErrorEventArgs e)
