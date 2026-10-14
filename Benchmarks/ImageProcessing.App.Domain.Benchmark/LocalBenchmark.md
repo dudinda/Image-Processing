@@ -40,20 +40,27 @@
 ### 3x3 Kernel
 <p align="center">
     <img src="https://i.imgur.com/29hHdtD.png" width="700" height = "200" alt="3x3 kernel">
-    <p align="center">Fig. 1 - Image processing with a convolution filter with the 3x3 kernel.</p>
+    <p align="center">Fig. 5 - Image processing with a convolution filter with the 3x3 kernel.</p>
 </p>
 
 ### 5x5 Kernel
 <p align="center">
     <img src="https://i.imgur.com/kInSZFT.png" width="700" height = "200" alt="5x5 kernel">
-    <p align="center">Fig. 2 - Image processing with a convolution filter with the 5x5 kernel.</p>
+    <p align="center">Fig. 6 - Image processing with a convolution filter with the 5x5 kernel.</p>
 </p>
 
 ### 9x9 Kernel
 <p align="center">
     <img src="https://i.imgur.com/zMqE66a.png" width="700" height = "200" alt="9x9 kernel">
-    <p align="center">Fig. 3 - Image processing with a convolution filter with the 9x9 kernel.</p>
+    <p align="center">Fig. 7 - Image processing with a convolution filter with the 9x9 kernel.</p>
 </p>
+
+## [Affine Transformations](https://github.com/dudinda/Image-Processing/blob/master/Source/ImageProcessing.App.Domain/Models/Transformation/Implementation/TranslationTransformation.cs)
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/0f313d4c-0fe6-43b2-9662-72cfe72acc96" width="700" height = "200" alt="affine transformations">
+    <p align="center">Fig. 8 - Image processing with a translation transformation.</p>
+</p>
+
 
 
 
