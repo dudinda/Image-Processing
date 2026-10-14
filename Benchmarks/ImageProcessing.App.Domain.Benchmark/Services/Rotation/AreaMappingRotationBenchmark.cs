@@ -5,19 +5,19 @@ using System.IO;
 using BenchmarkDotNet.Attributes;
 
 using ImageProcessing.App.Domain.Models.Rotation.Implementation;
-using ImageProcessing.App.Domain.Benchmark.Frames;
 
 namespace ImageProcessing.App.Domain.Benchmark.Rotation.AreaMapping
 {
     [SimpleJob(launchCount: 3, warmupCount: 10, iterationCount: 30)]
     public class AreaMappingRotationBenchmark
     {
-        private AreaMappingRotation _rotation = new AreaMappingRotation();
+        private AreaMappingRotation _rotation = new();
 
         private Bitmap _frame1920x1080;
         private Bitmap _frame2560x1440;
 
         private double _45degreesToRad = 45 * Math.PI / 180;
+        private float _45degrees = 45f;
 
         private int _frameRate = 60;
 
@@ -33,34 +33,42 @@ namespace ImageProcessing.App.Domain.Benchmark.Rotation.AreaMapping
             {
                 _frame2560x1440 = new Bitmap(Image.FromStream(ms));
             }
+        }
 
+        [Benchmark]
+        public Bitmap GraphicsRotate45Degrees1920x1080Frame()
+        {
+            var bmp = new Bitmap(_frame1920x1080.Width, _frame1920x1080.Height);
+            using var graphics = Graphics.FromImage(bmp);
+            graphics.Clear(Color.White);
+            graphics.RotateTransform(_45degrees);
+            graphics.DrawImageUnscaled(_frame1920x1080, 0, 0);
+            return bmp;
         }
 
         [Benchmark]
         public Bitmap Rotate45Degrees1920x1080Frame()
-            => _rotation.Rotate(_frame1920x1080, _45degreesToRad);
+        {
+            return _rotation.Rotate(_frame1920x1080, _45degreesToRad);
+        }
 
         [Benchmark]
-        public void Rotate45Degrees1920x1080Frame60Fps()
+        public Bitmap GraphicsRotate45Degrees2560x1440Frame()
         {
-            for (var start = 0; start < _frameRate; ++start)
-            {
-                _rotation.Rotate(_frame1920x1080, _45degreesToRad);
-            }
+            var bmp = new Bitmap(_frame2560x1440.Width, _frame2560x1440.Height);
+            using var graphics = Graphics.FromImage(bmp);
+            graphics.Clear(Color.White);
+            graphics.RotateTransform(_45degrees);
+            graphics.DrawImageUnscaled(_frame2560x1440, 0, 0);
+            return bmp;
         }
 
         [Benchmark]
         public Bitmap Rotate45Degrees2560x1440Frame()
-          => _rotation.Rotate(_frame2560x1440, _45degreesToRad);
-
-        [Benchmark]
-        public void Rotate45Degrees2560x1440Frame60Fps()
         {
-            for (var start = 0; start < _frameRate; ++start)
-            {
-                _rotation.Rotate(_frame2560x1440, _45degreesToRad);
-            }
+            return _rotation.Rotate(_frame2560x1440, _45degreesToRad);
         }
+
 
         [GlobalCleanup]
         public void Dispose()
