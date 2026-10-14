@@ -95,22 +95,21 @@ namespace ImageProcessing.App.UI.Forms.Main
             // 
             this.OpenFile.Name = "OpenFile";
             this.OpenFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.OpenFile.Size = new System.Drawing.Size(186, 22);
+            this.OpenFile.Size = new System.Drawing.Size(180, 22);
             this.OpenFile.Text = "Open";
             // 
             // SaveFile
             // 
             this.SaveFile.Name = "SaveFile";
             this.SaveFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.SaveFile.Size = new System.Drawing.Size(186, 22);
+            this.SaveFile.Size = new System.Drawing.Size(180, 22);
             this.SaveFile.Text = "Save";
             // 
             // SaveFileAs
             // 
             this.SaveFileAs.Name = "SaveFileAs";
-            this.SaveFileAs.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.S)));
-            this.SaveFileAs.Size = new System.Drawing.Size(186, 22);
+            this.SaveFileAs.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.SaveFileAs.Size = new System.Drawing.Size(180, 22);
             this.SaveFileAs.Text = "Save As";
             // 
             // RgbMenu

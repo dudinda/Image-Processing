@@ -165,6 +165,21 @@ namespace ImageProcessing.App.UI.Services.FormEventBinders.Main.Implementation
 
                     view.RedoButton.PerformClick();
                     return true;
+
+                case (Keys.N | Keys.Control):
+
+                    view.OpenFileMenu.PerformClick();
+                    return true;
+
+                case (Keys.S | Keys.Control):
+
+                    view.SaveFileMenu.PerformClick();
+                    return true;
+
+                case (Keys.A | Keys.Control):
+
+                    view.SaveAsMenu.PerformClick();
+                    return true;
             }
 
             return false;
