@@ -10,7 +10,7 @@ using ImageProcessing.App.Domain.Benchmark.Frames;
 
 namespace ImageProcessing.App.Domain.Benchmark.Rotation.Shear
 {
-    [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
+    [SimpleJob(launchCount: 3, warmupCount: 10, iterationCount: 30)]
     public class ShearRotationBenchmark
     {
         private ShearRotation _rotation = new ShearRotation();

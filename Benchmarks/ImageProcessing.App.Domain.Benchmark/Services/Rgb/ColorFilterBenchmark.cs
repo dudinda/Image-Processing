@@ -10,7 +10,7 @@ using ImageProcessing.App.Domain.Benchmark.Frames;
 
 namespace ImageProcessing.App.Domain.Benchmark.RgbFilter.Channel
 {
-    [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
+    [SimpleJob(launchCount: 3, warmupCount: 10, iterationCount: 30)]
     public class ColorFilterBenchmark : IDisposable
     {
         private ChannelFilter _filter = new ChannelFilter(new RGChannel());

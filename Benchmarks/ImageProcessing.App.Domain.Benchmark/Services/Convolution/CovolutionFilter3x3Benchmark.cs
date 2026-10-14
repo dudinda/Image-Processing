@@ -11,7 +11,7 @@ using ImageProcessing.App.Domain.Services.Convolution.Implementation;
 
 namespace ImageProcessing.App.Domain.Benchmark.Services.Convolution.Kernel3x3
 {
-    [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
+    [SimpleJob(launchCount: 3, warmupCount: 10, iterationCount: 30)]
     public class CovolutionFilter5x5Benchmark : IDisposable
     {
         private IConvolutionKernel _filter3x3 = new BoxBlur3x3();

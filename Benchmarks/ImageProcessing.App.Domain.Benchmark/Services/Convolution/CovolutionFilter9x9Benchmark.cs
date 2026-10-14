@@ -11,7 +11,7 @@ using ImageProcessing.App.Domain.Services.Convolution.Implementation;
 
 namespace ImageProcessing.App.Domain.Benchmark.Services.Convolution.Kernel9x9
 {
-    [SimpleJob(launchCount: 3, warmupCount: 10, targetCount: 30)]
+    [SimpleJob(launchCount: 3, warmupCount: 10, iterationCount: 30)]
     public class CovolutionFilter9x9Benchmark : IDisposable
     {
         private IConvolutionKernel _filter9x9 = new MotionBlur9x9();
