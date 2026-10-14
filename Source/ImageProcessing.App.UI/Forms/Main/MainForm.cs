@@ -11,7 +11,6 @@ using ImageProcessing.App.UI.Properties;
 using ImageProcessing.App.UI.Services.Factories.MenuState;
 using ImageProcessing.App.UI.Services.FormEventBinders.Main;
 using ImageProcessing.App.UI.Services.FormExposers;
-using ImageProcessing.Microkernel.MVP.View;
 
 using MetroFramework.Controls;
 
