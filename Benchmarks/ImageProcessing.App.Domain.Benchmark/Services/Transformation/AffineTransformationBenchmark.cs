@@ -31,37 +31,20 @@ namespace ImageProcessing.App.Domain.Benchmark.Rotation.AreaMapping
         }
 
         [Benchmark]
-        public void GraphicsTransformTo2560x1440Frame()
+        public Bitmap GraphicsTransformTo2560x1440Frame()
         {
-            using var graphics = Graphics.FromImage(_frame2560x1440);
+            var bmp = new Bitmap(_frame2560x1440.Width, _frame2560x1440.Height);
+            using var graphics = Graphics.FromImage(bmp);
             graphics.Clear(Color.White);
             graphics.TranslateTransform((int)_tx, (int)_ty);
+            graphics.DrawImageUnscaled(_frame2560x1440, 0, 0);
+            return bmp;
         }
 
         [Benchmark]
-        public void GraphicsTransformTo2560x1440Frame60Fps()
+        public Bitmap TransformTo2560x1440Frame()
         {
-            using var graphics = Graphics.FromImage(_frame2560x1440);
-            for (var start = 0; start < _frameRate; ++start)
-            {
-                graphics.Clear(Color.White);
-                graphics.TranslateTransform((int)_tx, (int)_ty);
-            }
-        }
-
-        [Benchmark]
-        public void TransformTo2560x1440Frame()
-        {
-            _transformation.Transform(_frame2560x1440, _tx, _ty);
-        }
-
-        [Benchmark]
-        public void Transform2560x1440Frame60Fps()
-        {
-            for (var start = 0; start < _frameRate; ++start)
-            {
-                _transformation.Transform(_frame2560x1440, _tx, _ty);
-            }
+            return _transformation.Transform(_frame2560x1440, _tx, _ty);
         }
 
         [GlobalCleanup]
