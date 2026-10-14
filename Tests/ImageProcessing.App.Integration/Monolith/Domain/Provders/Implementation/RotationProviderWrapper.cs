@@ -4,6 +4,7 @@ using ImageProcessing.App.Integration.Monolith.Domain.Providers.Rotation.Interfa
 using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Rotation.Interface;
 using ImageProcessing.App.Domain.Providers.Rotation.Implementation;
 using ImageProcessing.App.Domain.Models.Options;
+using ImageProcessing.App.Domain.Code.Enums;
 
 namespace ImageProcessing.App.Integration.Monolith.Domain.Providers.Rotation.Implementation
 {
@@ -26,5 +27,8 @@ namespace ImageProcessing.App.Integration.Monolith.Domain.Providers.Rotation.Imp
 
         public virtual Bitmap Rotate(Bitmap bmp, double angle)
             => _provider.Rotate(bmp, angle);
+
+        public Bitmap Rotate(Bitmap bmp, double angle, RotationMethod method)
+            => _provider.Rotate(bmp, angle, method);
     }
 }
