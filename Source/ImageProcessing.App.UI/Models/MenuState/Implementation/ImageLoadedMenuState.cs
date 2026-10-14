@@ -1,5 +1,3 @@
-using ImageProcessing.App.UI.Models.MenuState;
-
 namespace ImageProcessing.App.UI.Models.MenuState.Implementation
 {
     public sealed class ImageLoadedMenuState : IMainMenuState
@@ -25,5 +23,7 @@ namespace ImageProcessing.App.UI.Models.MenuState.Implementation
         public bool RotationTrackBarState => true;
 
         public bool ScalingTrackBarState => true;
+
+        public bool SelectAreaState => true;
     }
 }
