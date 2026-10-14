@@ -1,5 +1,6 @@
 using System.Drawing;
 
+using ImageProcessing.App.Domain.Code.Enums;
 using ImageProcessing.App.Domain.Models.Options;
 using ImageProcessing.App.Domain.Services.Factories.Rotation;
 
@@ -19,5 +20,8 @@ namespace ImageProcessing.App.Domain.Providers.Rotation.Implementation
         }
         public Bitmap Rotate(Bitmap bmp, double angle)
             => _rotation.Get(_settings.Rotation).Rotate(bmp, angle);
+
+        public Bitmap Rotate(Bitmap bmp, double angle, RotationMethod method)
+            => _rotation.Get(method).Rotate(bmp, angle);
     }
 }
