@@ -43,17 +43,18 @@ namespace ImageProcessing.App.Presentation.Presenters
         {
             try
             {
-                var method = View.Dropdown;
+               
 
                 var copy = await _reference.GetCopy().ConfigureAwait(true);
 
                 var rad = View.Radians;
+                var method = View.Dropdown;
 
                 Aggregator.PublishFromAll(publisher,
                     new AttachBlockToRendererEventArgs(
                         block: new PipelineBlock(copy)
                             .Add<Bitmap, Bitmap>(
-                                (bmp) => _provider.Rotate(bmp, rad))
+                                (bmp) => _provider.Rotate(bmp, rad, method))
                     )
                  );
             }
