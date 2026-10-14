@@ -95,59 +95,64 @@ namespace ImageProcessing.App.UI.Forms.Main
             // 
             this.OpenFile.Name = "OpenFile";
             this.OpenFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.OpenFile.Size = new System.Drawing.Size(180, 22);
+            this.OpenFile.Size = new System.Drawing.Size(156, 22);
             this.OpenFile.Text = "Open";
             // 
             // SaveFile
             // 
             this.SaveFile.Name = "SaveFile";
             this.SaveFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.SaveFile.Size = new System.Drawing.Size(180, 22);
+            this.SaveFile.Size = new System.Drawing.Size(156, 22);
             this.SaveFile.Text = "Save";
             // 
             // SaveFileAs
             // 
             this.SaveFileAs.Name = "SaveFileAs";
             this.SaveFileAs.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.SaveFileAs.Size = new System.Drawing.Size(180, 22);
+            this.SaveFileAs.Size = new System.Drawing.Size(156, 22);
             this.SaveFileAs.Text = "Save As";
             // 
             // RgbMenu
             // 
             this.RgbMenu.Name = "RgbMenu";
             this.RgbMenu.ShortcutKeyDisplayString = "R";
-            this.RgbMenu.Size = new System.Drawing.Size(40, 20);
-            this.RgbMenu.Text = "Rgb";
+            this.RgbMenu.Size = new System.Drawing.Size(48, 20);
+            this.RgbMenu.Text = "[R]gb";
             // 
             // ConvolutionMenu
             // 
             this.ConvolutionMenu.Name = "ConvolutionMenu";
-            this.ConvolutionMenu.Size = new System.Drawing.Size(85, 20);
-            this.ConvolutionMenu.Text = "Convolution";
+            this.ConvolutionMenu.ShortcutKeyDisplayString = "C";
+            this.ConvolutionMenu.Size = new System.Drawing.Size(93, 20);
+            this.ConvolutionMenu.Text = "[C]onvolution";
             // 
             // DistributionMenu
             // 
             this.DistributionMenu.Name = "DistributionMenu";
-            this.DistributionMenu.Size = new System.Drawing.Size(81, 20);
-            this.DistributionMenu.Text = "Distribution";
+            this.DistributionMenu.ShortcutKeyDisplayString = "D";
+            this.DistributionMenu.Size = new System.Drawing.Size(89, 20);
+            this.DistributionMenu.Text = "[D]istribution";
             // 
             // AffineTransformationMenu
             // 
             this.AffineTransformationMenu.Name = "AffineTransformationMenu";
-            this.AffineTransformationMenu.Size = new System.Drawing.Size(135, 20);
-            this.AffineTransformationMenu.Text = "Affine Transformation";
+            this.AffineTransformationMenu.ShortcutKeyDisplayString = "A";
+            this.AffineTransformationMenu.Size = new System.Drawing.Size(143, 20);
+            this.AffineTransformationMenu.Text = "[A]ffine Transformation";
             // 
             // RotationMenu
             // 
             this.RotationMenu.Name = "RotationMenu";
-            this.RotationMenu.Size = new System.Drawing.Size(64, 20);
-            this.RotationMenu.Text = "Rotation";
+            this.RotationMenu.ShortcutKeyDisplayString = "T";
+            this.RotationMenu.Size = new System.Drawing.Size(72, 20);
+            this.RotationMenu.Text = "Ro[t]ation";
             // 
             // ScalingMenu
             // 
             this.ScalingMenu.Name = "ScalingMenu";
-            this.ScalingMenu.Size = new System.Drawing.Size(57, 20);
-            this.ScalingMenu.Text = "Scaling";
+            this.ScalingMenu.ShortcutKeyDisplayString = "S";
+            this.ScalingMenu.Size = new System.Drawing.Size(65, 20);
+            this.ScalingMenu.Text = "[S]caling";
             // 
             // MorphologyMenu
             // 
@@ -158,8 +163,9 @@ namespace ImageProcessing.App.UI.Forms.Main
             // SettingsMenu
             // 
             this.SettingsMenu.Name = "SettingsMenu";
-            this.SettingsMenu.Size = new System.Drawing.Size(61, 20);
-            this.SettingsMenu.Text = "Settings";
+            this.SettingsMenu.ShortcutKeyDisplayString = "E";
+            this.SettingsMenu.Size = new System.Drawing.Size(69, 20);
+            this.SettingsMenu.Text = "S[e]ttings";
             // 
             // miniToolStrip
             // 

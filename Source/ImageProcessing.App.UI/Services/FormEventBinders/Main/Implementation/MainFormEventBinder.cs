@@ -180,6 +180,40 @@ namespace ImageProcessing.App.UI.Services.FormEventBinders.Main.Implementation
 
                     view.SaveAsMenu.PerformClick();
                     return true;
+
+                case Keys.R:
+
+                    view.RgbMenuButton.PerformClick();
+                    return true;
+
+                case Keys.C:
+
+                    view.ConvolutionMenuButton.PerformClick();
+                    return true;
+
+                case Keys.D:
+
+                    view.DistributionMenuButton.PerformClick();
+                    return true;
+
+                case Keys.A:
+
+                    view.AffineTransformationMenuButton.PerformClick();
+                    return true;
+
+                case Keys.T:
+
+                    view.RotationMenuButton.PerformClick();
+                    return true;
+
+                case Keys.E:
+
+                    view.SettingsMenuButton.PerformClick();
+                    return true;
+
+                case Keys.S:
+                    view.ScalingMenuButton.PerformClick();
+                    return true;
             }
 
             return false;
