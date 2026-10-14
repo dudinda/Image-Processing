@@ -194,7 +194,7 @@ namespace ImageProcessing.App.UI.Forms.Main
             => Read<bool>(() => SourceImageCopy == DefaultImage);
 
         public bool IsCaptureRegion
-            => SelectionBtn.Checked;
+            => SelectAreaButton.Checked;
 
         /// <inheritdoc/>
         public void Refresh()
@@ -320,6 +320,7 @@ namespace ImageProcessing.App.UI.Forms.Main
                 MorphologyMenu.Enabled = menu.MorphologyMenuState;
                 RotationSrcTrackBar.Enabled = menu.RotationTrackBarState;
                 ZoomSrcTrackBar.Enabled = menu.ScalingTrackBarState;
+                SelectAreaButton.Enabled = menu.SelectAreaState;
             });
         }
 

@@ -50,7 +50,7 @@ namespace ImageProcessing.App.UI.Forms.Main
             this.SetSourceBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.PathToImage = new System.Windows.Forms.ToolStripLabel();
-            this.SelectionBtn = new System.Windows.Forms.ToolStripButton();
+            this.SelectAreaButton = new System.Windows.Forms.ToolStripButton();
             this.ErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SrcRotation = new ImageProcessing.App.UI.Models.Controls.RotationTrackBar();
             this.SrcZoom = new ImageProcessing.App.UI.Models.Controls.ScaleTrackBar();
@@ -189,7 +189,7 @@ namespace ImageProcessing.App.UI.Forms.Main
             this.SetSourceBtn,
             this.toolStripSeparator1,
             this.PathToImage,
-            this.SelectionBtn});
+            this.SelectAreaButton});
             this.ToolBarMenu.Location = new System.Drawing.Point(20, 84);
             this.ToolBarMenu.Name = "ToolBarMenu";
             this.ToolBarMenu.Size = new System.Drawing.Size(802, 27);
@@ -236,14 +236,15 @@ namespace ImageProcessing.App.UI.Forms.Main
             this.PathToImage.Size = new System.Drawing.Size(0, 24);
             this.PathToImage.Visible = false;
             // 
-            // SelectionBtn
+            // SelectAreaButton
             // 
-            this.SelectionBtn.CheckOnClick = true;
-            this.SelectionBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SelectionBtn.Image = ((System.Drawing.Image)(resources.GetObject("SelectionBtn.Image")));
-            this.SelectionBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SelectionBtn.Name = "SelectionBtn";
-            this.SelectionBtn.Size = new System.Drawing.Size(24, 24);
+            this.SelectAreaButton.CheckOnClick = true;
+            this.SelectAreaButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SelectAreaButton.Enabled = false;
+            this.SelectAreaButton.Image = ((System.Drawing.Image)(resources.GetObject("SelectAreaButton.Image")));
+            this.SelectAreaButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SelectAreaButton.Name = "SelectAreaButton";
+            this.SelectAreaButton.Size = new System.Drawing.Size(24, 24);
             // 
             // SrcRotation
             // 
@@ -360,7 +361,7 @@ namespace ImageProcessing.App.UI.Forms.Main
         private ToolStripMenuItem ScalingMenu;
         private ToolStripMenuItem MorphologyMenu;
         private ToolStripSeparator toolStripSeparator1;
-        private ToolStripButton SelectionBtn;
+        private ToolStripButton SelectAreaButton;
         private RotationTrackBar SrcRotation;
         private ScaleTrackBar SrcZoom;
         private MetroFramework.Controls.MetroPanel MainContainer;

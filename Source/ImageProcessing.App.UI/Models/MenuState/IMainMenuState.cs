@@ -45,16 +45,21 @@ namespace ImageProcessing.App.UI.Models.MenuState
         /// <summary>
         /// State of the convolution menu button.
         /// </summary>
-        bool SetSourceImageState { get; }
-
-        /// <summary>
-        /// State of the convolution menu button.
-        /// </summary>
         bool RotationTrackBarState { get; }
 
         /// <summary>
         /// State of the convolution menu button.
         /// </summary>
         bool ScalingTrackBarState { get; }
+
+        /// <summary>
+        /// State of the select area toobar button.
+        /// </summary>
+        public bool SelectAreaState { get; }
+
+        /// <summary>
+        /// State of the restore source image toolbar button.
+        /// </summary>
+        bool SetSourceImageState { get; }
     }
 }

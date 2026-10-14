@@ -25,5 +25,7 @@ namespace ImageProcessing.App.UI.Models.MenuState.Implementation
         public bool RotationTrackBarState => false;
 
         public bool ScalingTrackBarState => false;
+
+        public bool SelectAreaState => false;
     }
 }
