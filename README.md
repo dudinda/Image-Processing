@@ -43,6 +43,7 @@ The project is built around two major namespaces: `Microkernel` and `App` .  As 
    <img width="600" height="350" alt="hierarchy-of-modules" src="https://github.com/user-attachments/assets/d7dd6685-627f-492e-8105-8dfdb1692150" />
     <p align="center">Fig. 2 Hierarchy of modules.</p>
 </p>
+
 ## Microkernel
 
 Following the microkernel concept, the first step is to introduce a registry that manages the lifecycle of its components and resolves them on demand. In a programming language, a dependency injection (DI) container can serve as this registry, mapping specific implementations to their interfaces or base classes. Since multiple container implementations may be available, the namespace introduces `IContainerAdapter`, which provides access to the APIs of the underlying microkernel implementations.
