@@ -43,11 +43,22 @@ The project is built around two major namespaces: `Microkernel` and `App` .  As 
    <img width="600" height="350" alt="hierarchy-of-modules" src="https://github.com/user-attachments/assets/d7dd6685-627f-492e-8105-8dfdb1692150" />
     <p align="center">Fig. 2 Hierarchy of modules.</p>
 </p>
-
 ## Microkernel
 
+Following the microkernel concept, the first step is to introduce a registry that manages the lifecycle of its components and resolves them on demand. In a programming language, a dependency injection (DI) container can serve as this registry, mapping specific implementations to their interfaces or base classes. Since multiple container implementations may be available, the namespace introduces `IContainerAdapter`, which provides access to the APIs of the underlying microkernel implementations.
+
+Furthermore, the module provides a fluent `IComponentProvider` builder that allows clients to register components at the application level within the `IStartup` implementation. The `IAppController` interface is exposed as a singleton through the static property. Additionally, the application controller composes the `IComponentProvider`, and `IEventAggregator` . During initialization, The component provider registers itself, the event aggregator, and the application controller. The aggregator connects presenters and views, providing a mechanism of publishing domain events using a unicast and broadcast messaging.
+
 ### Navigation by using a DI Container
+
+To build a fluent workflow with desktop forms, it is convenient to provide a common routing mechanism. The router acts as a generator, resolving the dependency tree for specific components.
+
+The first generator is `ILoggerFactory`, from the `Microsoft.Extensions.Logging.Abstractions` namespace, which creates logging categories for a transient presenter. This presenter, which assembles the services and logger, is a base class implementing the `IPresenter` interface.
+
+
+
 ### Linking a Transient Presenter and a View
+
 
 ## Application
 
