@@ -30,7 +30,7 @@ The application consists of a desktop window with a main viewport implemented as
 Each generated view produces a tab below the viewport, allowing users to apply algorithms or manage related parameters.
 
 <p align="center">
-    <img src="https://github.com/dudinda/Image-Processing/blob/master/Tests/ImageProcessing.App.Integration/Code/Resources/Static/demo.gif?raw=true" width="600" height = "600" alt="application window">
+    <img src="https://github.com/user-attachments/assets/20614a0b-2b1b-43cc-aff7-792dd48df21a?raw=true" width="600" height = "600" alt="application window">
     <p align="center">Fig. 1 - The main view and transient/singleton views are displayed as tabs. The opened affine transformation tab is a transient view. The settings tab is a singleton view. The frame is taken from the <a href="https://i.imgur.com/h57F8D7.jpg">"Thomas the Tank Engine"</a> series and processed using the following algorithm chain: <code>Grayscale->Inversion->Laplacian Operator 5x5->Inversion->Shear Rotation 20°->Bicubic Interpolation (0.2, 0.2)->Cyclic Translation (33, 33)</code> (hold) [cpu].</p>
 </p>
 
@@ -56,15 +56,13 @@ To build a fluent workflow with desktop forms, it is convenient to provide a com
 
 The first generator is `ILoggerFactory`, from the `Microsoft.Extensions.Logging.Abstractions` namespace, which creates logging categories for a transient presenter. This presenter, which assembles the services and logger, is a base class implementing the `IPresenter` interface.
 
-
-
 ### Linking a Transient Presenter and a View
-
 
 ## Application
 
 ### Closures Propagation by using a Pipeline and Event Aggregator
-### Reference a Microkernel from a Presentation  to Move a Domain
+
+### Reference a Microkernel from a Presentation to Move a Domain
 
 ## Integration tests
 
