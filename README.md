@@ -30,8 +30,8 @@ The application consists of a desktop window with a main viewport implemented as
 Each generated view produces a tab below the viewport, allowing users to apply algorithms or manage related parameters.
 
 <p align="center">
-    <img src="https://github.com/dudinda/Image-Processing/blob/master/Tests/ImageProcessing.App.Integration/Code/Resources/Static/demo.gif?raw=true" width="600" height = "600" alt="application window">
-    <p align="center">Fig. 1 - The main view and transient/singleton views are displayed as tabs. The opened affine transformation tab is a transient view. The settings tab is a singleton view. The frame is taken from the <a href="https://i.imgur.com/h57F8D7.jpg">"Thomas the Tank Engine"</a> series and processed using the following algorithm chain: <code>Grayscale->Inversion->Laplacian Operator 5x5->Inversion->Shear Rotation 20°->Bicubic Interpolation (0.2, 0.2)->Cyclic Translation (33, 33)</code> (hold) [cpu].</p>
+    <img src="https://i.imgur.com/uNE8eAk.gif" width="600" height = "600" alt="application window">
+    <p align="center">Fig. 1 - The main view and transient/singleton views are displayed as tabs. The opened affine transformation tab is a transient view. The settings tab is a singleton view. The frame is taken from the <a href="https://i.imgur.com/h57F8D7.jpg">"Thomas the Tank Engine"</a> series and processed on CPU using the following algorithm chain: <code>Grayscale->Inversion->Laplacian Operator 5x5->Inversion->Shear Rotation 20°->Bicubic Interpolation (0.2, 0.2)->Cyclic Translation (20, 20)</code>.</p>
 </p>
 
 
