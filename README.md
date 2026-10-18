@@ -60,6 +60,11 @@ The second generator is `ILoggerFactory` from the `Microsoft.Extensions.Logging.
 
 ### Linking a Transient Presenter and a View
 
+<p align="center">
+    <img width="330" height="300" alt="presenters" src="https://github.com/user-attachments/assets/c660e60f-a317-4ca8-ba82-65a84abbed3e" />
+    <p align="center">Fig. 3 Hierarchy of modules.</p>
+</p>
+
 ## Application
 
 ### Closures Propagation by using a Pipeline and Event Aggregator
@@ -75,18 +80,18 @@ The second generator is `ILoggerFactory` from the `Microsoft.Extensions.Logging.
 <p> Initially,  a group of underexposed images was chosen for experimental puproses. </p>
 <p align="center">
     <img src="https://i.imgur.com/vvRrqaG.png" width="500" height = "400" alt="original underexposed image">
-    <p align="center">Fig. 3 - The original underexposed image.</p>
+    <p align="center">Fig. 4 - The original underexposed image.</p>
 </p>
 <p> After optimization using  a uniform distribution, there is redundancy in bright areas of the relative luminance. However, using a normal distribution it's possible to minimize this effect and achieve better detail distinctiveness.</p>
 
 <p align="center">
    <img src="https://i.imgur.com/zFM5TZl.png"  width="500" height = "400" alt="image transformed by uniform distribution">
-   <p align="center">Fig. 4 - Histogram transformation using a uniform distribution.</p>
+   <p align="center">Fig. 5 - Histogram transformation using a uniform distribution.</p>
 </p>
 
 <p align="center">
     <img src="https://i.imgur.com/0txwVZ7.png" width="500" height = "400" alt="An image transformed by a normal distribution with the expectation = 90 and std = 60">
-    <p align="center">Fig. 5 - Histogram transformation using a normal distribution, where µ = 90 and σ = 60.</p>
+    <p align="center">Fig. 6 - Histogram transformation using a normal distribution, where <code>µ = 90</code> and <code>σ = 60</code>.</p>
 </p>
 
 <p> To determine  which image has better contrast, one may use the definition of conditional variance: </p>
@@ -95,11 +100,11 @@ The second generator is `ILoggerFactory` from the `Microsoft.Extensions.Logging.
 </p>
 
 <p> where <code>[z1, z2]</code> is an interval of relative luminance.</p>
-<p> By splitting the interval `[0, 255]` to 16 subintervals, we can  use the definition above. Since contrast is defined as statistical scattering,  conditional variance can be used to measure the level of contrast within each specified interval.</p>
+<p> By splitting the interval <code>[0, 255]</code> to 16 subintervals, we can  use the definition above. Since contrast is defined as statistical scattering,  conditional variance can be used to measure the level of contrast within each specified interval.</p>
 
 <p align="center">
     <img src="https://i.imgur.com/OhGb6lI.png" alt="application window">
-     <p align="center">Fig. 6 - Using the definition of conditional variance over 16 intervals of relative luminance.</p>
+     <p align="center">Fig. 7 - Using the definition of conditional variance over 16 intervals of relative luminance.</p>
 </p>
 
 <p> Thus, one may conclude that a normal distribution may produce better results than a uniform distribution for  a group of underexposed images.</p>
