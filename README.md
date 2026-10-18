@@ -60,10 +60,17 @@ The second generator is `ILoggerFactory` from the `Microsoft.Extensions.Logging.
 
 ### Linking a Transient Presenter and a View
 
+It is possible to control the scope of a view. The UI module provides a second `Startup` instance, which allows a static or XML/XAML form to be linked to the interface declared at the presentation level. When the `View` property is accessed for the first time, the form is elevated to the presentation level through its interface, providing access to UI components at the presenter level.
+
+At the UI level, the `IEventAggregator` instance is accessed through the static `AppController` property, allowing a view to unsubscribe when `Dispose` or `Hide` is called, depending on whether the view has a transient or singleton scope.
+
+If a view has a singleton scope, it is possible to associate multiple presenters with it. The virtual `Run` method can be used to compose multiple presenters through calls to the base implementation, allowing them to subscribe to the same view:
+
 <p align="center">
     <img width="330" height="300" alt="presenters" src="https://github.com/user-attachments/assets/c660e60f-a317-4ca8-ba82-65a84abbed3e" />
-    <p align="center">Fig. 3 Hierarchy of modules.</p>
+    <p align="center">Fig. 3 Mapping several presenters to a singleton view via the <code>Run</code> composition.</p>
 </p>
+
 
 ## Application
 
