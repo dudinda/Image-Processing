@@ -82,13 +82,21 @@ The presentation layer prolongs the synchronization context from the UI module t
 
 ### Closures Propagation by using a Pipeline and Event Aggregator
 
-The render is built using the `MessageLoop.Common` module and composes the long-running operation and messaging services. The domain services injected into the presenter are used to create a render block containing a chain of closures. The block is published through the event aggregator to the main form, where it is registered for rendering. The dedicated channel reads incoming tasks, starts them, and awaits their completion one by one.
+The render is built using the `MessageLoop.Common` module from the [Message-Loop](https://github.com/dudinda/Message-Loop) project and composes the long-running operation and messaging services. The domain services injected into the presenter are used to create a render block containing a chain of closures. The block is published through the event aggregator to the main form, where it is registered for rendering. The dedicated channel reads incoming tasks, starts them, and awaits their completion one by one.
 
 ### Reference a Microkernel from a Presentation to Move a Domain
 
 ## Integration tests
 
+The integration follows the same principle as the main application, introducing the `AppLifecycle` class with a custom DI container within the base test class definition. The `Monolith` namespace contains startup modules that are combined to reproduce the exact hierarchy of the application. Since the testing module does not have access to the synchronization context of the UI application, the event aggregator is replaced with the `EventAggregatorWrapper` implementation, which replaces the original synchronization context and makes asynchronous calls synchronous.
+
+Additionally, each form contains a private class with a non-UI form definition, overriding the base form properties to make `Read` and `Write` calls synchronous.
+
+The automated script is implemented at the presentation layer. Once the `View` property is resolved and linked to its presenter, each integration test is initiated by calling `PerformClick` on the relevant UI button.
+
 ### Partials Mocks and a DI Container
+
+
 
 ## Managing Grayscale Images
 
@@ -151,4 +159,4 @@ The render is built using the `MessageLoop.Common` module and composes the long-
 
 ## NuGet
 
-[ImageProcessing.Microkernel.MVP](https://www.nuget.org/packages/ImageProcessing.Microkernel.MVP/)
+[ImageProcessing.MicrokeRrnel.MVP](https://www.nuget.org/packages/ImageProcessing.Microkernel.MVP/)
