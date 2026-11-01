@@ -80,6 +80,11 @@ Most forms in the UI module are reduced to passive views, with minimal behavior 
 
 The presentation layer prolongs the synchronization context from the UI module to the handlers. The views used to communicate with a form are combined through interface inheritance, and the `PublishFromAll` method of the event aggregator allows messages to be sent from one presenter to another.
 
+<p align="center">
+    <img width="600" height="300" alt="Broadcast" src="https://github.com/user-attachments/assets/2ca71df3-f76f-4847-a61e-a17d66c13bfe" />
+    <p align="center">Fig. 4. Broadcasting <code>AreaSelectedEventArgs</code> from the main presenter using the event aggregator's <code>PublishFromAll</code> method.</p>
+</p>
+
 ### Closures Propagation by using a Pipeline and Event Aggregator
 
 The render is built using the `MessageLoop.Common` module from the [Message-Loop](https://github.com/dudinda/Message-Loop) project and composes the long-running operation and messaging services. The domain services injected into the presenter are used to create a render block containing a chain of closures. The block is published through the event aggregator to the main form, where it is registered for rendering. The dedicated channel reads incoming tasks, starts them, and awaits their completion one by one.
@@ -103,18 +108,18 @@ The automated script is implemented at the presentation layer. Once the `View` p
 <p> Initially,  a group of underexposed images was chosen for experimental puproses. </p>
 <p align="center">
     <img src="https://i.imgur.com/vvRrqaG.png" width="500" height = "400" alt="original underexposed image">
-    <p align="center">Fig. 4 - The original underexposed image.</p>
+    <p align="center">Fig. 5 - The original underexposed image.</p>
 </p>
 <p> After optimization using  a uniform distribution, there is redundancy in bright areas of the relative luminance. However, using a normal distribution it's possible to minimize this effect and achieve better detail distinctiveness.</p>
 
 <p align="center">
    <img src="https://i.imgur.com/zFM5TZl.png"  width="500" height = "400" alt="image transformed by uniform distribution">
-   <p align="center">Fig. 5 - Histogram transformation using a uniform distribution.</p>
+   <p align="center">Fig. 6 - Histogram transformation using a uniform distribution.</p>
 </p>
 
 <p align="center">
     <img src="https://i.imgur.com/0txwVZ7.png" width="500" height = "400" alt="An image transformed by a normal distribution with the expectation = 90 and std = 60">
-    <p align="center">Fig. 6 - Histogram transformation using a normal distribution, where <code>µ = 90</code> and <code>σ = 60</code>.</p>
+    <p align="center">Fig. 7 - Histogram transformation using a normal distribution, where <code>µ = 90</code> and <code>σ = 60</code>.</p>
 </p>
 
 <p> To determine  which image has better contrast, one may use the definition of conditional variance: </p>
@@ -127,7 +132,7 @@ The automated script is implemented at the presentation layer. Once the `View` p
 
 <p align="center">
     <img src="https://i.imgur.com/OhGb6lI.png" alt="application window">
-     <p align="center">Fig. 7 - Using the definition of conditional variance over 16 intervals of relative luminance.</p>
+     <p align="center">Fig. 8 - Using the definition of conditional variance over 16 intervals of relative luminance.</p>
 </p>
 
 <p> Thus, one may conclude that a normal distribution may produce better results than a uniform distribution for  a group of underexposed images.</p>
