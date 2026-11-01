@@ -81,7 +81,7 @@ Most forms in the UI module are reduced to passive views, with minimal behavior 
 The presentation layer prolongs the synchronization context from the UI module to the handlers. The views used to communicate with a form are combined through interface inheritance, and the `PublishFromAll` method of the event aggregator allows messages to be sent from one presenter to another.
 
 <p align="center">
-    <img width="600" height="250" alt="Broadcast" src="https://github.com/user-attachments/assets/e5d9acaa-2757-4b89-86e8-8393b8eb5a21" />
+    <img width="600" height="250" alt="Broadcast" src="https://github.com/user-attachments/assets/83115e79-8320-48c4-bfe9-cc298340aa64" />
     <p align="center">Fig. 4. Example of broadcasting <code>AreaSelectedEventArgs</code> from the main presenter using the event aggregator's <code>PublishFromAll</code> method.</p>
 </p>
 
