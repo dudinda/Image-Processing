@@ -52,7 +52,7 @@ Furthermore, the module provides a fluent `IComponentProvider` builder that allo
 
 ### Navigation by using a DI Container
 
-To build a fluent workflow with desktop forms, it is convenient to provide a common routing mechanism. The router acts as a generator, resolving the dependency tree for a specific component.
+To build a fluent workflow with desktop forms, it is convenient to provide a common routing mechanism. The router acts as a generator, resolving the dependency tree on a specific component.
 
 The first generator is built around the `BasePresenter<TView, TViewModel>` abstract class. It provides access to the UI layer through the `IView` virtual property and allows a concrete presenter to be executed via the `Run` method. To navigate to a presenter, the `IComponentProvider` checks whether a transient instance is registered in the DI container and, if not, registers it. Afterwards, it resolves a new presenter and executes it through the relevant method call.
 
@@ -82,8 +82,9 @@ The presentation layer prolongs the synchronization context from the UI module t
 
 <p align="center">
     <img width="600" height="250" alt="Broadcast" src="https://github.com/user-attachments/assets/e5d9acaa-2757-4b89-86e8-8393b8eb5a21" />
-    <p align="center">Fig. 4. Broadcasting <code>AreaSelectedEventArgs</code> from the main presenter using the event aggregator's <code>PublishFromAll</code> method.</p>
+    <p align="center">Fig. 4. Example of broadcasting <code>AreaSelectedEventArgs</code> from the main presenter using the event aggregator's <code>PublishFromAll</code> method.</p>
 </p>
+
 
 ### Closures Propagation by using a Pipeline and Event Aggregator
 
@@ -101,6 +102,28 @@ The automated script is implemented at the presentation layer. Once the `View` p
 
 ### Partials Mocks and a DI Container
 
+ which allows to track incoming arguments and receieved calls using virtual wrappers.
+
+ ```c#
+public void Build(IComponentProvider builder)
+{
+     builder
+        .RegisterTransient<IColorMatrixFactoryWrapper>(provider =>
+            Substitute.ForPartsOf<ColorMatrixFactoryWrapper>(
+                builder.Resolve<IColorMatrixFactory>()))
+        .RegisterTransient<IStructuringElementFactoryWrapper>(provider=>
+            Substitute.ForPartsOf<StructuringElementFactoryWrapper>())
+        .RegisterTransient<IConvolutionFactoryWrapper>(provider =>
+            Substitute.ForPartsOf<ConvoltuionFactoryWrapper>(
+                builder.Resolve<IConvolutionFactory>()))
+        .RegisterTransient<IDistributionFactoryWrapper>(provider =>
+            Substitute.ForPartsOf<DistributionFactoryWrapper>(
+                builder.Resolve<IDistributionFactory>()))
+    ...
+}
+```
+
+<p align="center">Fig. 5 - Example of utilizing the fluent builder to register partial mocks in <code>Startup</code>.</p>
 
 
 ## Managing Grayscale Images
@@ -108,18 +131,18 @@ The automated script is implemented at the presentation layer. Once the `View` p
 <p> Initially,  a group of underexposed images was chosen for experimental puproses. </p>
 <p align="center">
     <img src="https://i.imgur.com/vvRrqaG.png" width="500" height = "400" alt="original underexposed image">
-    <p align="center">Fig. 5 - The original underexposed image.</p>
+    <p align="center">Fig. 6 - The original underexposed image.</p>
 </p>
 <p> After optimization using  a uniform distribution, there is redundancy in bright areas of the relative luminance. However, using a normal distribution it's possible to minimize this effect and achieve better detail distinctiveness.</p>
 
 <p align="center">
    <img src="https://i.imgur.com/zFM5TZl.png"  width="500" height = "400" alt="image transformed by uniform distribution">
-   <p align="center">Fig. 6 - Histogram transformation using a uniform distribution.</p>
+   <p align="center">Fig. 7 - Histogram transformation using a uniform distribution.</p>
 </p>
 
 <p align="center">
     <img src="https://i.imgur.com/0txwVZ7.png" width="500" height = "400" alt="An image transformed by a normal distribution with the expectation = 90 and std = 60">
-    <p align="center">Fig. 7 - Histogram transformation using a normal distribution, where <code>µ = 90</code> and <code>σ = 60</code>.</p>
+    <p align="center">Fig. 8 - Histogram transformation using a normal distribution, where <code>µ = 90</code> and <code>σ = 60</code>.</p>
 </p>
 
 <p> To determine  which image has better contrast, one may use the definition of conditional variance: </p>
@@ -132,7 +155,7 @@ The automated script is implemented at the presentation layer. Once the `View` p
 
 <p align="center">
     <img src="https://i.imgur.com/OhGb6lI.png" alt="application window">
-     <p align="center">Fig. 8 - Using the definition of conditional variance over 16 intervals of relative luminance.</p>
+     <p align="center">Fig. 9 - Using the definition of conditional variance over 16 intervals of relative luminance.</p>
 </p>
 
 <p> Thus, one may conclude that a normal distribution may produce better results than a uniform distribution for  a group of underexposed images.</p>
@@ -164,4 +187,4 @@ The automated script is implemented at the presentation layer. Once the `View` p
 
 ## NuGet
 
-[ImageProcessing.MicrokeRrnel.MVP](https://www.nuget.org/packages/ImageProcessing.Microkernel.MVP/)
+[ImageProcessing.Microkernel.MVP](https://www.nuget.org/packages/ImageProcessing.Microkernel.MVP/)
