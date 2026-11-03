@@ -139,7 +139,8 @@ namespace ImageProcessing.App.Presentation.Presenters
         {
             try
             {
-                _draw.Capture(e.Start);
+                var copy = await _reference.GetCopy().ConfigureAwait(true);
+                _draw.Capture(e.Start, copy);
             }
             catch (Exception ex)
             {
@@ -154,11 +155,12 @@ namespace ImageProcessing.App.Presentation.Presenters
             {
                 if (View.IsCaptureRegion && View.IsLeftPressed())
                 {
-                    var copy = await _reference.GetCopy().ConfigureAwait(true);
-                    var block = new PipelineBlock(copy);
+                    var block = new PipelineBlock(View.GetImageCopy());
                     _pipeline.Register(block
+                        .Add<Bitmap>(
+                            (bmp) => _draw.Clear())
                         .Add<Bitmap, Bitmap>(
-                            (bmp) => _draw.DrawRectangle(bmp, e.Position))
+                            (bmp) => _draw.DrawRectangle(e.Position))
                         .Add<Bitmap>(
                             (bmp) => PaintBlock(bmp)));
                 }
@@ -174,16 +176,17 @@ namespace ImageProcessing.App.Presentation.Presenters
         {
             try
             {
-                if(View.IsCaptureRegion)
+                if(View.IsCaptureRegion && !View.IsLeftPressed())
                 {
-                    var copy = await _reference.GetCopy().ConfigureAwait(true);
-                    var area = _draw.GetRectangle(e.Position);
-                    _pipeline.Register(
-                        new PipelineBlock(copy)
-                            .Add<Bitmap>(
-                                (bmp) => PaintBlock(bmp)
-                             )
-                         );
+                    using var draw = _draw;
+
+                    var block = new PipelineBlock(draw.Source);
+                    var area = draw.GetRectangle(e.Position);
+        
+                    _pipeline.Register(block
+                        .Add<Bitmap>(
+                            (bmp) => PaintBlock(bmp)));
+
                     Aggregator.PublishFromAll(publisher, new AreaSelectedEventArgs(area));
                 } 
             }

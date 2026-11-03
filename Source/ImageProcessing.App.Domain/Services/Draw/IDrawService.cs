@@ -1,11 +1,14 @@
+using System;
 using System.Drawing;
 
 namespace ImageProcessing.App.Domain.Win.Services.Draw
 {
-    public interface IDrawService
+    public interface IDrawService : IDisposable
     {
-        void Capture(Point start);
-        Bitmap DrawRectangle(Bitmap bitmap, Point position);
+        public Bitmap Source { get; }
+        void Capture(Point start, Bitmap bitmap);
+        Bitmap DrawRectangle(Point position);
         Rectangle GetRectangle(Point position);
+        void Clear();
     }
 }
