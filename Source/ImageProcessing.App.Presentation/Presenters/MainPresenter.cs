@@ -153,7 +153,7 @@ namespace ImageProcessing.App.Presentation.Presenters
         {
             try
             {
-                if (View.IsCaptureRegion && View.IsLeftPressed())
+                if (View.IsCaptureRegion && View.IsLeftPressed() && _draw.Source != null)
                 {
                     var block = new PipelineBlock(View.GetImageCopy());
                     _pipeline.Register(block
@@ -176,7 +176,7 @@ namespace ImageProcessing.App.Presentation.Presenters
         {
             try
             {
-                if(View.IsCaptureRegion && !View.IsLeftPressed())
+                if(View.IsCaptureRegion && !View.IsLeftPressed() && _draw.Source != null)
                 {
                     using var draw = _draw;
 
