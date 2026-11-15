@@ -7,8 +7,7 @@ using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
 
 namespace ImageProcessing.App.Presentation.Presenters
 {
-    internal sealed class HistogramPresenter
-        : BasePresenter<IHistogramView, HistogramViewModel>
+    internal sealed class HistogramPresenter: BasePresenter<IHistogramView, HistogramViewModel>
     {
         private readonly IHistogramService _service;
 

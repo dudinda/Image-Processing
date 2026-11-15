@@ -7,7 +7,6 @@ using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.DistributionArgs;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.Presentation.Presenters;
-using ImageProcessing.App.Presentation.ViewModels;
 using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
@@ -16,7 +15,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
 {
-    internal class DistributionPresenterWrapper : BasePresenter<IDistributionView, BitmapViewModel>,
+    internal class DistributionPresenterWrapper : BasePresenter<IDistributionView>,
         ISubscriber<TransformHistogramEventArgs>, ISubscriber<ShuffleEventArgs>,
         ISubscriber<BuildRandomVariableFunctionEventArgs>, ISubscriber<ShowQualityMeasureMenuEventArgs>,
         ISubscriber<GetRandomVariableInfoEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
@@ -46,10 +45,10 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
             _presenter = new DistributionPresenter(copy, provider, service, logger.CreateLogger<DistributionPresenter>());
         }
 
-        public override void Run(BitmapViewModel vm)
+        public override void Run()
         {
-            _presenter.Run(vm);
-            base.Run(vm);
+            _presenter.Run();
+            base.Run();
         }
 
         public virtual Task OnEventHandler(object publisher, TransformHistogramEventArgs e)

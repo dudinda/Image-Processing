@@ -12,7 +12,6 @@ using ImageProcessing.App.Presentation.DomainEvents.MainArgs.FileDialog;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Show;
 using ImageProcessing.App.Presentation.Properties;
-using ImageProcessing.App.Presentation.ViewModels;
 using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
@@ -121,10 +120,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             {
                 if (!View.ImageIsDefault)
                 {
-                    var copy = await _reference.GetCopy().ConfigureAwait(true);
-
-                    Controller.Run<RgbPresenter, BitmapViewModel>(
-                        new BitmapViewModel(new Rectangle(0, 0, copy.Width, copy.Height)));
+                    Controller.Run<RgbPresenter>();
                 }
             }
             catch (Exception ex)
@@ -141,10 +137,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             {
                 if (!View.ImageIsDefault)
                 {
-                    var copy = await _reference.GetCopy().ConfigureAwait(true);
-
-                    Controller.Run<ScalingPresenter, BitmapViewModel>(
-                        new BitmapViewModel(new Rectangle(0, 0, copy.Width, copy.Height)));
+                    Controller.Run<ScalingPresenter>();
                 }
             }
             catch (Exception ex)
@@ -161,10 +154,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             {
                 if (!View.ImageIsDefault)
                 {
-                    var copy = await _reference.GetCopy().ConfigureAwait(true);
-
-                    Controller.Run<RotationPresenter, BitmapViewModel>(
-                        new BitmapViewModel(new Rectangle(0, 0, copy.Width, copy.Height)));
+                    Controller.Run<RotationPresenter>();
                 }
             }
             catch (Exception ex)
@@ -181,10 +171,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             {
                 if (!View.ImageIsDefault)
                 {
-                    var copy = await _reference.GetCopy().ConfigureAwait(true);
-
-                    Controller.Run<DistributionPresenter, BitmapViewModel>(
-                        new BitmapViewModel(new Rectangle(0, 0, copy.Width, copy.Height)));
+                    Controller.Run<DistributionPresenter>();
                 }
             }
             catch (Exception ex)
@@ -201,10 +188,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             {
                 if (!View.ImageIsDefault)
                 {
-                    var copy = await _reference.GetCopy().ConfigureAwait(true);
-
-                    Controller.Run<ConvolutionPresenter, BitmapViewModel>(
-                        new BitmapViewModel(new Rectangle(0, 0, copy.Width, copy.Height)));
+                    Controller.Run<ConvolutionPresenter>();
                 }
             }
             catch (Exception ex)
@@ -221,10 +205,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             {
                 if (!View.ImageIsDefault)
                 {
-                    var copy = await _reference.GetCopy().ConfigureAwait(true);
-
-                    Controller.Run<TransformationPresenter, BitmapViewModel>(
-                        new BitmapViewModel(new Rectangle(0, 0, copy.Width, copy.Height)));
+                    Controller.Run<TransformationPresenter>();
                 }
             }
             catch (Exception ex)

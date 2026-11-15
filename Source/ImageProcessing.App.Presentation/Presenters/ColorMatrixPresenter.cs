@@ -11,7 +11,6 @@ using ImageProcessing.App.Presentation.Code.Enums;
 using ImageProcessing.App.Presentation.DomainEvents.ColorMatrixArgs;
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.Properties;
-using ImageProcessing.App.Presentation.ViewModels;
 using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
@@ -20,7 +19,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ImageProcessing.App.Presentation.Presenters
 {
-    internal sealed class ColorMatrixPresenter : BasePresenter<IColorMatrixView, BitmapViewModel>,
+    internal sealed class ColorMatrixPresenter : BasePresenter<IColorMatrixView>,
         ISubscriber<ApplyColorMatrixEventArgs>, ISubscriber<AreaSelectedEventArgs>,
         ISubscriber<CustomColorMatrixEventArgs>, ISubscriber<ChangeColorMatrixEventArgs>,
         ISubscriber<ApplyCustomColorMatrixEventArgs>, ISubscriber<RestoreFocusEventArgs>,

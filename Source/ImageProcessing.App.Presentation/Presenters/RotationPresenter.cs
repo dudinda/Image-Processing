@@ -9,7 +9,6 @@ using ImageProcessing.App.Presentation.Code.Enums;
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.RotationArgs;
 using ImageProcessing.App.Presentation.Properties;
-using ImageProcessing.App.Presentation.ViewModels;
 using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
@@ -18,11 +17,10 @@ using Microsoft.Extensions.Logging;
 
 namespace ImageProcessing.App.Presentation.Presenters
 {
-    internal sealed class RotationPresenter : BasePresenter<IRotationView, BitmapViewModel>,
+    internal sealed class RotationPresenter : BasePresenter<IRotationView>,
         ISubscriber<RotateEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
         ISubscriber<RestoreFocusEventArgs>, ISubscriber<FormIsClosedEventArgs>,
         ISubscriber<EnableControlEventArgs>
-
     {
         private readonly ILogger<RotationPresenter> _logger;
         private readonly IBitmapCopyService _reference;

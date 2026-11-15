@@ -6,7 +6,6 @@ using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.RgbArgs;
 using ImageProcessing.App.Presentation.IntegrationTests.Monolith.Domain.Rgb.Interface;
 using ImageProcessing.App.Presentation.Presenters;
-using ImageProcessing.App.Presentation.ViewModels;
 using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
@@ -15,7 +14,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
 {
-    internal class RgbPresenterWrapper : BasePresenter<IRgbView, BitmapViewModel>,
+    internal class RgbPresenterWrapper : BasePresenter<IRgbView>,
           ISubscriber<ApplyRgbFilterEventArgs>, ISubscriber<ApplyRgbChannelFilterEventArgs>,
           ISubscriber<ContainerUpdatedEventArgs>, ISubscriber<ShowColorMatrixMenuEventArgs>,
           ISubscriber<ShowTooltipOnErrorEventArgs>, ISubscriber<RestoreFocusEventArgs>
@@ -44,10 +43,10 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
             _presenter = new RgbPresenter(copy, factory, logger.CreateLogger<RgbPresenter>(), provider);
         }
 
-        public override void Run(BitmapViewModel vm)
+        public override void Run()
         {
-            _presenter.Run(vm);
-            base.Run(vm);
+            _presenter.Run();
+            base.Run();
         }
 
         public virtual Task OnEventHandler(object publisher, ApplyRgbChannelFilterEventArgs e)

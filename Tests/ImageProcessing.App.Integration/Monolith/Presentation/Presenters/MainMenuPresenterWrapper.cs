@@ -1,14 +1,11 @@
 using System.Threading.Tasks;
 
-using ImageProcessing.App.Domain.Services.FileDialog;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Interface;
-using ImageProcessing.App.Integration.Monolith.Domain.Services.FileDialog.Interface;
 using ImageProcessing.App.Integration.Monolith.Domain.Services.NonBlockDialog.Interface;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.FileDialog;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Menu;
 using ImageProcessing.App.Presentation.DomainEvents.MainArgs.Show;
 using ImageProcessing.App.Presentation.Presenters;
-using ImageProcessing.App.Presentation.ViewModels;
 using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
@@ -56,8 +53,7 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
         /// <inheritdoc cref="ShowRgbMenuEventArgs"/>
         public virtual Task OnEventHandler(object publisher, ShowRgbMenuEventArgs e)
         {
-            Controller.Run<RgbPresenterWrapper, BitmapViewModel>(
-                new BitmapViewModel(new System.Drawing.Rectangle()));
+            Controller.Run<RgbPresenterWrapper>();
 
             return Task.CompletedTask;
         }
@@ -65,8 +61,7 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
         /// <inheritdoc cref="ShowScalingMenuEventArgs"/>
         public virtual Task OnEventHandler(object publisher, ShowScalingMenuEventArgs e)
         {
-            Controller.Run<ScalingPresenterWrapper, BitmapViewModel>(
-               new BitmapViewModel(new System.Drawing.Rectangle()));
+            Controller.Run<ScalingPresenterWrapper>();
 
             return Task.CompletedTask;
         }
@@ -74,8 +69,7 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
         /// <inheritdoc cref="ShowRotationMenuEventArgs"/>
         public virtual Task OnEventHandler(object publisher, ShowRotationMenuEventArgs e)
         {
-            Controller.Run<RotationPresenterWrapper, BitmapViewModel>(
-               new BitmapViewModel(new System.Drawing.Rectangle()));
+            Controller.Run<RotationPresenterWrapper>();
 
             return Task.CompletedTask;
         }
@@ -83,8 +77,7 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
         /// <inheritdoc cref="ShowDistributionMenuEventArgs"/>
         public virtual Task OnEventHandler(object publisher, ShowDistributionMenuEventArgs e)
         {
-            Controller.Run<DistributionPresenterWrapper, BitmapViewModel>(
-               new BitmapViewModel(new System.Drawing.Rectangle()));
+            Controller.Run<DistributionPresenterWrapper>();
 
             return Task.CompletedTask;
         }
@@ -92,8 +85,7 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
         /// <inheritdoc cref="ShowConvolutionMenuEventArgs"/>
         public virtual Task OnEventHandler(object publisher, ShowConvolutionMenuEventArgs e)
         {
-            Controller.Run<ConvolutionPresenterWrapper, BitmapViewModel>(
-               new BitmapViewModel(new System.Drawing.Rectangle()));
+            Controller.Run<ConvolutionPresenterWrapper>();
 
             return Task.CompletedTask;
         }
@@ -101,8 +93,7 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
         /// <inheritdoc cref="ShowTransformationMenuEventArgs"/>
         public virtual Task OnEventHandler(object publisher, ShowTransformationMenuEventArgs e)
         {
-            Controller.Run<TransformationPresenterWrapper, BitmapViewModel>(
-               new BitmapViewModel(new System.Drawing.Rectangle()));
+            Controller.Run<TransformationPresenterWrapper>();
 
             return Task.CompletedTask;
         }

@@ -5,7 +5,6 @@ using ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Interf
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.ConvolutionArgs;
 using ImageProcessing.App.Presentation.Presenters;
-using ImageProcessing.App.Presentation.ViewModels;
 using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
@@ -14,7 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
 {
-    internal class ConvolutionPresenterWrapper : BasePresenter<IConvolutionView, BitmapViewModel>,
+    internal class ConvolutionPresenterWrapper : BasePresenter<IConvolutionView>,
           ISubscriber<ApplyConvolutionKernelEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,
           ISubscriber<ContainerUpdatedEventArgs>, ISubscriber<RestoreFocusEventArgs>,
           ISubscriber<FormIsClosedEventArgs>, ISubscriber<EnableControlEventArgs>
@@ -40,10 +39,10 @@ namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
             _presenter = new ConvolutionPresenter(copy, provider, logger.CreateLogger<ConvolutionPresenter>());
         }
 
-        public override void Run(BitmapViewModel vm)
+        public override void Run()
         {
-            _presenter.Run(vm);
-            base.Run(vm);
+            _presenter.Run();
+            base.Run();
         }
 
         public virtual Task OnEventHandler(object publisher, ApplyConvolutionKernelEventArgs e)

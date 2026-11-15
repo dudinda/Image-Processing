@@ -9,7 +9,6 @@ using ImageProcessing.App.Presentation.Code.Enums;
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.TransformationArgs;
 using ImageProcessing.App.Presentation.Properties;
-using ImageProcessing.App.Presentation.ViewModels;
 using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
@@ -18,7 +17,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ImageProcessing.App.Presentation.Presenters
 {
-    internal sealed class TransformationPresenter : BasePresenter<ITransformationView, BitmapViewModel>,
+    internal sealed class TransformationPresenter : BasePresenter<ITransformationView>,
         ISubscriber<ApplyTransformationEventArgs>, ISubscriber<AreaSelectedEventArgs>,
         ISubscriber<RestoreFocusEventArgs>, ISubscriber<FormIsClosedEventArgs>,
         ISubscriber<EnableControlEventArgs>

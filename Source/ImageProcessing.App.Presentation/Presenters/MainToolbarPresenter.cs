@@ -37,7 +37,6 @@ namespace ImageProcessing.App.Presentation.Presenters
         {
             try
             {
-                View.SetCursor(CursorType.Wait);
                 Aggregator.PublishFromAll(publisher,
                     new AttachBlockToRendererEventArgs(
                        block: new PipelineBlock(View.LoadedImage)

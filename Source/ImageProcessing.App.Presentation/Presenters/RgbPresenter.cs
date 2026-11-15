@@ -11,7 +11,6 @@ using ImageProcessing.App.Presentation.Code.Enums;
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.RgbArgs;
 using ImageProcessing.App.Presentation.Properties;
-using ImageProcessing.App.Presentation.ViewModels;
 using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
@@ -20,7 +19,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ImageProcessing.App.Presentation.Presenters
 {
-    internal sealed class RgbPresenter : BasePresenter<IRgbView, BitmapViewModel>,
+    internal sealed class RgbPresenter : BasePresenter<IRgbView>,
         ISubscriber<ApplyRgbFilterEventArgs>, ISubscriber<ApplyRgbChannelFilterEventArgs>,
         ISubscriber<AreaSelectedEventArgs>, ISubscriber<ShowColorMatrixMenuEventArgs>,
         ISubscriber<ShowTooltipOnErrorEventArgs>, ISubscriber<RestoreFocusEventArgs>,
@@ -122,8 +121,7 @@ namespace ImageProcessing.App.Presentation.Presenters
             {
                 var copy = await _reference.GetCopy().ConfigureAwait(true);
 
-                Controller.Run<ColorMatrixPresenter, BitmapViewModel>(
-                   new BitmapViewModel(new Rectangle(0, 0, copy.Width, copy.Height)));
+                Controller.Run<ColorMatrixPresenter>();
             }
             catch(Exception ex)
             {

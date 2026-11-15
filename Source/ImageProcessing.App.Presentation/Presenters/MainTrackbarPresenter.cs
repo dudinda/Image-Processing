@@ -28,7 +28,6 @@ namespace ImageProcessing.App.Presentation.Presenters
         private readonly IRotationProvider _rotation;
         private readonly IBitmapCopyService _reference;
 
-
         public MainTrackbarPresenter(
             ILogger<MainTrackbarPresenter> logger,
             IBitmapCopyService reference,

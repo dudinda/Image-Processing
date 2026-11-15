@@ -21,7 +21,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ImageProcessing.App.Presentation.Presenters
 {
-    internal sealed class DistributionPresenter : BasePresenter<IDistributionView, BitmapViewModel>,
+    internal sealed class DistributionPresenter : BasePresenter<IDistributionView>,
         ISubscriber<TransformHistogramEventArgs>, ISubscriber<ShuffleEventArgs>,
         ISubscriber<BuildRandomVariableFunctionEventArgs>, ISubscriber<ShowQualityMeasureMenuEventArgs>,
         ISubscriber<GetRandomVariableInfoEventArgs>, ISubscriber<ShowTooltipOnErrorEventArgs>,

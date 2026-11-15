@@ -5,7 +5,6 @@ using ImageProcessing.App.Integration.Monolith.Domain.Services.BitmapCopy.Interf
 using ImageProcessing.App.Presentation.DomainEvents.CommonArgs;
 using ImageProcessing.App.Presentation.DomainEvents.TransformationArgs;
 using ImageProcessing.App.Presentation.Presenters;
-using ImageProcessing.App.Presentation.ViewModels;
 using ImageProcessing.App.Presentation.Views;
 using ImageProcessing.Microkernel.MVP.Aggregator.Subscriber;
 using ImageProcessing.Microkernel.MVP.Presenter.Implementation;
@@ -14,7 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ImageProcessing.App.Integration.Monolith.Presentation.Presenters
 {
-    internal class TransformationPresenterWrapper : BasePresenter<ITransformationView, BitmapViewModel>,
+    internal class TransformationPresenterWrapper : BasePresenter<ITransformationView>,
         ISubscriber<ApplyTransformationEventArgs>, ISubscriber<ContainerUpdatedEventArgs>,
         ISubscriber<RestoreFocusEventArgs>, ISubscriber<FormIsClosedEventArgs>,
         ISubscriber<EnableControlEventArgs>
