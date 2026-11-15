@@ -22,6 +22,8 @@ using ImageProcessing.App.UI.Services.FormEventBinders.Distribution;
 using ImageProcessing.App.UI.Services.FormEventBinders.Distribution.Implementation;
 using ImageProcessing.App.UI.Services.FormEventBinders.Main;
 using ImageProcessing.App.UI.Services.FormEventBinders.Main.Implementation;
+using ImageProcessing.App.UI.Services.FormEventBinders.QualityMeasure;
+using ImageProcessing.App.UI.Services.FormEventBinders.QualityMeasure.Implementation;
 using ImageProcessing.App.UI.Services.FormEventBinders.Rgb;
 using ImageProcessing.App.UI.Services.FormEventBinders.Rgb.Implementation;
 using ImageProcessing.App.UI.Services.FormEventBinders.Rotation;
@@ -62,6 +64,7 @@ namespace ImageProcessing.App.UI
                 .RegisterTransient<IColorMatrixFormEventBinder, ColorMatrixFormEventBinder>()
                 .RegisterTransient<IConvolutionFormEventBinder, ConvolutionFormEventBinder>()
                 .RegisterTransient<IDistributionFormEventBinder, DistributionFormEventBinder>()
+                .RegisterTransient<IQualityMeasureEventBinder, QualityMeasureEventBinder>()
                 .RegisterTransient<ISettingsFormEventBinder, SettingsFormEventBinder>()
                 .RegisterTransient<ITransformationFormEventBinder, TransformationFormEventBinder>()
                 .RegisterTransient<IRotationFormEventBinder, RotationFormEventBinder>()

@@ -1,25 +1,44 @@
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
+using ImageProcessing.App.Presentation.Presenters;
 using ImageProcessing.App.Presentation.Views;
+using ImageProcessing.App.UI.Services.FormEventBinders.QualityMeasure;
+using ImageProcessing.App.UI.Services.FormExposers;
 
 namespace ImageProcessing.App.UI.Forms.QualityMeasure
 {
     internal partial class QualityMeasureForm : BaseForm,
-        IQualityMeasureView
+        IQualityMeasureView, IQualityMeasureExposer
     {
-        public QualityMeasureForm() : base()
+        public QualityMeasureForm(IQualityMeasureEventBinder binder) : base()
         {
             InitializeComponent();
+            binder.OnElementExpose(this);
+            BringToFront();
         }
         
         public Chart DataChart
-            => Histogram;
+            => Read<Chart>(() => Histogram);
 
         public new void Show()
         {
             Focus();
             base.Show();
+        }
+
+        public new void Hide()
+        {
+            Controller
+               .Aggregator
+               .Unsubscribe(typeof(QualityMeasurePresenter), this);
+
+            base.Hide();
+        }
+
+        public new void Close()
+        {
+            Hide();
         }
 
         /// <summary>
@@ -35,21 +54,13 @@ namespace ImageProcessing.App.UI.Forms.QualityMeasure
             base.Dispose(true);
         }
 
-        /// <summary>
-        /// Restrict the generated <see cref="Dispose(bool)"/> call
-        /// on a non-context form closing.
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            Hide();
-            e.Cancel = true;
-        }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             switch (keyData)
             {
                 case Keys.Escape:
-                    base.Close();
+                    Hide();
                     break;
             }
 
