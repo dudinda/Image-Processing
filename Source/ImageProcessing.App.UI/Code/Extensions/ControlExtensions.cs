@@ -4,18 +4,19 @@ namespace ImageProcessing.App.UI.Code.Extensions
 {
     public static class ControlExtensions
     {
-        public static void Enable(this Control con, bool isEnabled)
+        extension(Control control)
         {
-            if (con != null)
+            public void Enable(bool isEnabled)
             {
-                foreach (Control c in con.Controls)
+                if (control != null)
                 {
-                    c.Enable(isEnabled);
+                    foreach (Control c in control.Controls)
+                    {
+                        c.Enable(isEnabled);
+                    }
+                    control.Enabled = isEnabled;
                 }
-
-                con.Enabled = isEnabled;
             }
         }
-
     }
 }
