@@ -321,6 +321,8 @@ namespace ImageProcessing.App.UI.Forms.Main
                 RotationSrcTrackBar.Enabled = menu.RotationTrackBarState;
                 ZoomSrcTrackBar.Enabled = menu.ScalingTrackBarState;
                 SelectAreaButton.Enabled = menu.SelectAreaState;
+                SaveFileMenu.Enabled = menu.FileSaveState;
+                SaveAsMenu.Enabled = menu.FileSaveAsState;
             });
         }
 

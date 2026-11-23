@@ -61,5 +61,17 @@ namespace ImageProcessing.App.UI.Models.MenuState
         /// State of the restore source image toolbar button.
         /// </summary>
         bool SetSourceImageState { get; }
+
+        /// <summary>
+        /// State of the save button inside the file menu.
+        /// </summary>
+        bool FileSaveState { get; }
+
+        /// <summary>
+        /// State of the save as button inside the file menu.
+        /// </summary>
+        bool FileSaveAsState { get; }
+
+
     }
 }

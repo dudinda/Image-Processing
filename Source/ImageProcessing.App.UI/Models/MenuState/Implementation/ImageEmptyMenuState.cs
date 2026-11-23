@@ -1,5 +1,3 @@
-using ImageProcessing.App.UI.Models.MenuState;
-
 namespace ImageProcessing.App.UI.Models.MenuState.Implementation
 {
     public class ImageEmptyMenuState : IMainMenuState
@@ -27,5 +25,9 @@ namespace ImageProcessing.App.UI.Models.MenuState.Implementation
         public bool ScalingTrackBarState => false;
 
         public bool SelectAreaState => false;
+
+        public bool FileSaveState => false;
+
+        public bool FileSaveAsState => false;
     }
 }

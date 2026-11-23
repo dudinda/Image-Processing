@@ -25,5 +25,9 @@ namespace ImageProcessing.App.UI.Models.MenuState.Implementation
         public bool ScalingTrackBarState => true;
 
         public bool SelectAreaState => true;
+
+        public bool FileSaveState => true;
+
+        public bool FileSaveAsState => true;
     }
 }
