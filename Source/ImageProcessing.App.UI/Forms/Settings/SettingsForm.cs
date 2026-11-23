@@ -81,6 +81,7 @@ namespace ImageProcessing.App.UI.Forms.Settings
             {
                 _main.TabsCtrl.TabPages.Add(_tab);
                 _main.TabsCtrl.SelectedTab = _tab;
+                _main.SettingsMenuButton.Enabled = false;
             }
 
             base.Show();
@@ -102,6 +103,7 @@ namespace ImageProcessing.App.UI.Forms.Settings
                .Unsubscribe(typeof(ScalingPresenter), this);
 
             base.Hide();
+            _main.SettingsMenuButton.Enabled = true;
         }
 
         public new void Close()
